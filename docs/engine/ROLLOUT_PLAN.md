@@ -22,7 +22,7 @@
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.293 live-observing, engine.104 ready
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
 - [[../plans/2026-10-19-discord-voices-connected]]: research.30 live-observing
-- [[../plans/2026-10-19-bay-tribune-master-index]]: pipeline.84 ready
+- [[../plans/2026-10-19-bay-tribune-master-index]]: pipeline.84 live-observing
 - [[../plans/2026-07-31-citizen-memory-perception]]: engine.94 live-observing
 - [[../plans/2026-10-06-supermemory-v5-migration]]: infrastructure.10 blocked
 - [[../plans/2026-05-07-chaos-cars-engine]]: engine.11 live-observing
@@ -75,12 +75,12 @@
 |---|------|-------|----------|---------|
 | civic.43 | School board: T1 + T3 LIVE. T2 seating HELD (builder 2026-10-07): schools half built (hood school data, no schools in hoods); deep review first, then the canon-name fix | needs-info | research-build / engine-sheet | [[../plans/2026-10-04-school-board]] §Builder's words (2026-10-07) |
 | research.30 | Discord voices connected (builder 2026-10-19): brief, search first, Paulson bonds, talk recorder LIVE. Read 2026-10-25: first Cycle drain of DISCORD rows (C113) | live-observing | research-build | [[../plans/2026-10-19-discord-voices-connected]] |
-| pipeline.84 | Bay Tribune master index + assignment-time pre-check (builder 2026-10-19): scope, front door and pre-check ruled; Jax–Varek bond minted. Ready to build from the plan | ready | research-build | [[../plans/2026-10-19-bay-tribune-master-index]] |
 
 ## 2. Waiting on a fire — dated or organic
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| pipeline.84 | Organic: the next unattended Jax assignment that names a citizen he already covered carries the earlier-coverage section (Varek: C95, The Heat Shield C100, the C102 profile). Built and live 2026-10-20: 21 Drive-only pieces landed, 866-row index, dashboard `author=`/`citizen=` live, Saturday rebuild wired. The godworld MCP needs the builder's reconnect for `search_articles(author, citizen)` | live-observing | research-build / engine-sheet | [[../plans/2026-10-19-bay-tribune-master-index]] |
 | engine.208 | C111: 0 fan lines (off-season). C112 (Oaks open, W1): `11 named, 10 staff, 4 fan line(s)`, ripple reached 21 citizens, `fandom seeded 12`, franchise weight Oaks 0.35 → 0.3831 (weeks 1, fans 4). Band open; read the spread over C113–C114 | live-observing | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §Changelog 2026-10-08 |
 | engine.206 | C112, first live home week (Oaks 1 home win): game-day-crowds seed reached the civic lane only (desk_signal_c112 civic[43]); business dynamics moved 10 bars 0.07 pp but no game-week seed reached any desk. Trace the SPORTS_WEEK ripple before C113 Sun 2026-10-25 | live-observing | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 6 |
 | engine.94 | B.3 v3 LIVE (PROD `e87362b4`). C111 read 2026-10-11: 131 phases, 615 bonds certified, 10 seats held at 60–69, 0 campaign notes/hooks. C115 B.2 bars; open sim call on challenger appeal → holder approval awaits the builder | live-observing | engine-sheet / research-build | [[../plans/2026-07-31-citizen-memory-perception]] §Status log engine.94 B.3 v3 live reads |

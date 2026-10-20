@@ -409,7 +409,8 @@ function buildJaxSlice(cycle, opts) {
 
   const citizens = collectCitizens(top, signal, ledger);
   // pipeline.84 Task 5: what Jax already filed on these citizens and the pieces since that name them both — shown, never forced
-  const priorCoverage = require(path.join(__dirname, 'buildArticleIndex')).priorCoverage('Jax Caldera', citizens, { beforeCycle: Number(cycle) });
+  let priorCoverage = [];
+  try { priorCoverage = require(path.join(__dirname, 'buildArticleIndex')).priorCoverage('Jax Caldera', citizens, { beforeCycle: Number(cycle) }); } catch (e) { /* the index is context only: never block the assignment */ }
 
   const auditPattern = auditPatternForRef(root, cycle, top.ref);
 

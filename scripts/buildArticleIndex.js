@@ -206,9 +206,11 @@ const BYL = [
   /^([A-Z][A-Za-z.' ]{3,30}?) [—–-] (?:Civic|Sports|Culture|Business|Investigations|Public|Health|Education|Arts|Food|Faith|Transit|Weather|Human|Lifestyle|Opinion|Voices|International|Data|Statcast|Cultural|Senior|Editor|Beat|Managing|Chief)/,
 ];
 function headerByline(text) {
-  for (const l of text.split('\n').map(x => x.trim()).filter(Boolean).slice(0, 14)) {
-    for (const rx of BYL) { const m = rx.exec(l); if (m) { const v = m[1].replace(/\*/g, '').trim(); return /^[A-Z]{3,}/.test(v) && v === v.toUpperCase() ? titleCase(v) : v; } }
-  }
+  const lines = text.split('\n').map(x => x.trim()).filter(Boolean).slice(0, 14);
+  const fix = v => (/^[A-Z]{3,}/.test(v) && v === v.toUpperCase() ? titleCase(v) : v);
+  // an explicit "By X" / "Byline:" / italic name line anywhere in the header outranks the "NAME - Role" banner form
+  for (const rx of BYL.slice(0, 3)) for (const l of lines) { const m = rx.exec(l); if (m) return fix(m[1].replace(/\*/g, '').trim()); }
+  for (const l of lines) { const m = BYL[3].exec(l); if (m && !DESK_BYLINE.test(m[1].trim())) return fix(m[1].trim()); }
   return null;
 }
 function headerTitle(text, fallback) {

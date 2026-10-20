@@ -1,0 +1,24 @@
+{
+  "claimSet": "jax-varek-cut-c112",
+  "cycle": 112,
+  "producedBy": "research-build (S580), builder 2026-10-19: Jax Caldera and Elias Varek, from the Heat Shield column the builder pointed at (Drive canon file jax_varek_column.md, Supermemory bay-tribune Edition 100 record).",
+  "note": "expectedPopA/expectedPopB are ADVISORY ONLY. The intake resolves POPIDs by name against the live Simulation_Ledger and flags any mismatch loudly; it never uses a supplied id.",
+  "sources": [
+    "Jax Caldera, 'The Heat Shield' (Bay Tribune Opinion) — Drive canon jax_varek_column.md; bay-tribune Edition 100 record",
+    "Jax Caldera, 'The Call That Hasn't Come' — Cycle Pulse Edition 95",
+    "Varek profile (bay-tribune): Varek asked about Caldera's 'heat shield' accusation"
+  ],
+  "claims": [
+    {
+      "a": "Jax Caldera",
+      "b": "Elias Varek",
+      "expectedPopA": "POP-00799",
+      "expectedPopB": "POP-00789",
+      "bondType": "rivalry",
+      "intensity": 7,
+      "domainTag": "CIVIC",
+      "nature": "The Tribune's accountability writer and the man who owns the Oaks and the city's data. Jax pressed Varek on the call he promised Paulson, then in The Heat Shield called Paulson his shield while Varek runs the zoning board and called the Baylight recusal protocol a hall pass; Varek answered by name: Jax Caldera writes for readers who want a villain. One-sided pressure, answered in print.",
+      "evidence": "The Heat Shield (Drive canon jax_varek_column.md; bay-tribune Edition 100 record); The Call That Hasn't Come (Edition 95); Varek profile quote on Caldera's heat shield accusation"
+    }
+  ]
+}

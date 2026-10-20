@@ -62,7 +62,7 @@ Pre-check state: none in production. `priorArcRequirement.js` and the NotebookLM
 | 3 | Master index builder — one row per article, copies folded (repo path, Drive id, Supermemory customId); staged pieces that missed the Saturday gate listed and flagged unpublished; rebuilt each Saturday after the sweep | rb | not started |
 | 4 | MCP `search_articles` passes `author` and `citizen`; writers' `canon_search` and the bots read the index | rb / es | not started |
 | 5 | Assignment-time pre-check, Jax first: byline POPID x the slice's citizens -> that journalist's earlier pieces on them and the replies printed to them, shown in the assignment as context (not forced); widen to every seat once it reads well | rb (+ es for the slice builders) | not started |
-| 6 | Jax–Varek rivalry canon bond (`mintCanonBonds.js`) — one-sided, as Varek–Paulson | rb | waiting on the builder's article |
+| 6 | Jax–Varek rivalry canon bond (`mintCanonBonds.js`) — rivalry 7, CIVIC, one-sided as Varek–Paulson; from The Heat Shield, Edition 95 and Varek's named reply | rb | done, live, read back (BondId `b6edvstz`) |
 
 ## Acceptance
 
@@ -83,3 +83,4 @@ None open. Answered 2026-10-19: scope = published pieces only; front door = Driv
 
 - 2026-10-19 (research-build) — Created from the BACKLOG entry and the retrieval, index and Drive measurements taken while building research.30. Nothing built.
 - 2026-10-19 (research-build) — Builder answered scope (published only), front door (Drive), pre-check (Jax first, shown not forced); unpublished staged pieces indexed and flagged (rb call). Row pipeline.84 stays needs-info until Task 2 is picked up.
+- 2026-10-19 (research-build) — Task 6 done: Jax–Varek rivalry 7 minted live from the Heat Shield the builder pointed at (the Drive file); rb had wrongly held it for a further article.

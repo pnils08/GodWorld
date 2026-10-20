@@ -91,7 +91,7 @@ Off at C112: retail 7 of 22, trajectory (growth/decay × momentum) 10, migration
 
 - **A. Which live number tests the boom claim.** Default: retail (the strip). Alternatives: trajectory, where Temescal reads above its character every Cycle on record; migration, where West Oakland holds at C112 and Chinatown is above 4. A composite would need hand weights. Not proposed.
 - **B. How many Cycles below before coverage may say "used to be".** Default 4. Under it, Adams Point (5 below) already qualifies at C112.
-- **C. Baylight and Brooklyn, which never held on record.** Reading 1: the seed is the promise and the data is the story ("the anchor hasn't shown up on the strip yet"); this leans on the ruling's "even if it does get debunked it doesn't change that it was the boom town". Reading 2: BoomIndex 1.0 / 0.8 measures a stadium-and-new-build promise, not a strip, and the fix is a sheet edit (engine.214 D2: character changes are sheet edits). Default until ruled: reading 1, worded "not yet living up to its character", never "used to be".
+- **C. Baylight and Brooklyn, which never held on record.** RULED 2026-10-20 (Baylight): INIT-006 is in construction (Phase II remediation, milestone review C115, $2.1B undisbursed); the tech HQs listed under Baylight stay there (relocated; "they aren't there realistically until it's built"). Baylight reads "under construction", keyed to the tracker phase, until it opens; no standing line before then. Brooklyn still open (new-build, never held).
 
 ## Tasks
 
@@ -139,4 +139,5 @@ Off at C112: retail 7 of 22, trajectory (growth/decay × momentum) 10, migration
 
 ## Changelog
 
+- 2026-10-20 — Builder ruled Baylight (call C): under construction, tech stays filed there; West Oakland's tech footprint goes to engine.306 (sim-created firms). Brooklyn, A and B still open.
 - 2026-10-20 — Plan written (rb). Probe on C105–C112: retail measure, gap 6, 7 of 22 off; Baylight and Brooklyn never held. Builds wait on builder calls A/B/C.

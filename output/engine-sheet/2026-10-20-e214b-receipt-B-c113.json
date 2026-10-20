@@ -1,0 +1,415 @@
+{
+ "cycle": 113,
+ "label": "B",
+ "lifeHistoryRows": 2309,
+ "linesSha256": "395893d8f51dd3c374bf7fc658083ef55f0fcf9cd753606147282c3239943fb3",
+ "notMeasured": "whole-pool weight per citizen; recent-text filter availability (per-citizen memory)",
+ "hoods": {
+  "Downtown": {
+   "trajectory": "growth",
+   "momentum": 10,
+   "mi": 1,
+   "activeCitizens": 87,
+   "baseOfferPerCitizen": 10.5,
+   "bEffectiveOfferMean": 10.772,
+   "withDialState": 87,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 69,
+   "generatorLines": 162,
+   "drawn": {
+    "brag": 2,
+    "complain": 2,
+    "humble": 2
+   },
+   "drawnBySign": {
+    "up": 4,
+    "down": 2
+   },
+   "drawnByBand": {
+    "brag sociability:2": 1,
+    "brag sociability:0": 1,
+    "complain composure:0": 2,
+    "humble warmth:0": 2
+   },
+   "graded": {
+    "Up": 4,
+    "Down": 2,
+    "other": 0
+   },
+   "sentimentSaved": 0.12
+  },
+  "West Oakland": {
+   "trajectory": "growth",
+   "momentum": 6,
+   "mi": 0.2,
+   "activeCitizens": 115,
+   "baseOfferPerCitizen": 3.78,
+   "bEffectiveOfferMean": 3.873,
+   "withDialState": 115,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 108,
+   "generatorLines": 255,
+   "drawn": {
+    "humble": 1
+   },
+   "drawnBySign": {
+    "up": 1,
+    "down": 0
+   },
+   "drawnByBand": {
+    "humble warmth:0": 1
+   },
+   "graded": {
+    "Up": 1,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.23
+  },
+  "Fruitvale": {
+   "trajectory": "growth",
+   "momentum": 10,
+   "mi": 1,
+   "activeCitizens": 102,
+   "baseOfferPerCitizen": 10.5,
+   "bEffectiveOfferMean": 10.706,
+   "withDialState": 102,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 91,
+   "generatorLines": 186,
+   "drawn": {
+    "complain": 4,
+    "humble": 5,
+    "brag": 1
+   },
+   "drawnBySign": {
+    "up": 6,
+    "down": 4
+   },
+   "drawnByBand": {
+    "complain composure:1": 1,
+    "humble warmth:0": 5,
+    "complain composure:0": 3,
+    "brag sociability:0": 1
+   },
+   "graded": {
+    "Up": 6,
+    "Down": 4,
+    "other": 0
+   },
+   "sentimentSaved": 0.21
+  },
+  "Jack London": {
+   "trajectory": "growth",
+   "momentum": 10,
+   "mi": 1,
+   "activeCitizens": 76,
+   "baseOfferPerCitizen": 10.5,
+   "bEffectiveOfferMean": 10.73,
+   "withDialState": 76,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 65,
+   "generatorLines": 136,
+   "drawn": {
+    "brag": 4,
+    "complain": 2
+   },
+   "drawnBySign": {
+    "up": 4,
+    "down": 2
+   },
+   "drawnByBand": {
+    "brag sociability:1": 1,
+    "complain composure:0": 2,
+    "brag sociability:0": 3
+   },
+   "graded": {
+    "Up": 4,
+    "Down": 2,
+    "other": 0
+   },
+   "sentimentSaved": 0.15
+  },
+  "Adams Point": {
+   "trajectory": "decay",
+   "momentum": 2,
+   "mi": 0.6,
+   "activeCitizens": 8,
+   "baseOfferPerCitizen": 7.14,
+   "bEffectiveOfferMean": 7.14,
+   "withDialState": 8,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 5,
+   "generatorLines": 11,
+   "drawn": {},
+   "drawnBySign": {
+    "up": 0,
+    "down": 0
+   },
+   "drawnByBand": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": -0.1
+  },
+  "Chinatown": {
+   "trajectory": "growth",
+   "momentum": 6,
+   "mi": 0.2,
+   "activeCitizens": 66,
+   "baseOfferPerCitizen": 3.78,
+   "bEffectiveOfferMean": 3.852,
+   "withDialState": 66,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 52,
+   "generatorLines": 118,
+   "drawn": {
+    "complain": 3,
+    "brag": 1
+   },
+   "drawnBySign": {
+    "up": 1,
+    "down": 3
+   },
+   "drawnByBand": {
+    "complain composure:0": 3,
+    "brag sociability:0": 1
+   },
+   "graded": {
+    "Up": 1,
+    "Down": 3,
+    "other": 0
+   },
+   "sentimentSaved": -0.1
+  },
+  "Brooklyn": {
+   "trajectory": "decay",
+   "momentum": 3,
+   "mi": 0.4,
+   "activeCitizens": 9,
+   "baseOfferPerCitizen": 5.46,
+   "bEffectiveOfferMean": 5.409,
+   "withDialState": 9,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 7,
+   "generatorLines": 14,
+   "drawn": {
+    "complain": 1
+   },
+   "drawnBySign": {
+    "up": 0,
+    "down": 1
+   },
+   "drawnByBand": {
+    "complain composure:0": 1
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 1,
+    "other": 0
+   },
+   "sentimentSaved": -0.11
+  },
+  "Eastlake": {
+   "trajectory": "decay",
+   "momentum": 4,
+   "mi": 0.2,
+   "activeCitizens": 8,
+   "baseOfferPerCitizen": 3.78,
+   "bEffectiveOfferMean": 3.78,
+   "withDialState": 8,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 7,
+   "generatorLines": 18,
+   "drawn": {
+    "complain": 2
+   },
+   "drawnBySign": {
+    "up": 0,
+    "down": 2
+   },
+   "drawnByBand": {
+    "complain composure:0": 2
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 2,
+    "other": 0
+   },
+   "sentimentSaved": -0.06
+  },
+  "Glenview": {
+   "trajectory": "decay",
+   "momentum": 0,
+   "mi": 1,
+   "activeCitizens": 9,
+   "baseOfferPerCitizen": 10.5,
+   "bEffectiveOfferMean": 10.5,
+   "withDialState": 9,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 6,
+   "generatorLines": 14,
+   "drawn": {
+    "complain": 1
+   },
+   "drawnBySign": {
+    "up": 0,
+    "down": 1
+   },
+   "drawnByBand": {
+    "complain composure:0": 1
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 1,
+    "other": 0
+   },
+   "sentimentSaved": -0.04
+  },
+  "Ivy Hill": {
+   "trajectory": "decay",
+   "momentum": 2,
+   "mi": 0.6,
+   "activeCitizens": 9,
+   "baseOfferPerCitizen": 7.14,
+   "bEffectiveOfferMean": 7.14,
+   "withDialState": 9,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 7,
+   "generatorLines": 13,
+   "drawn": {
+    "complain": 2
+   },
+   "drawnBySign": {
+    "up": 0,
+    "down": 2
+   },
+   "drawnByBand": {
+    "complain composure:0": 2
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 2,
+    "other": 0
+   },
+   "sentimentSaved": -0.17
+  },
+  "San Antonio": {
+   "trajectory": "decay",
+   "momentum": 2,
+   "mi": 0.6,
+   "activeCitizens": 10,
+   "baseOfferPerCitizen": 7.14,
+   "bEffectiveOfferMean": 7.14,
+   "withDialState": 10,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 7,
+   "generatorLines": 14,
+   "drawn": {},
+   "drawnBySign": {
+    "up": 0,
+    "down": 0
+   },
+   "drawnByBand": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": -0.05
+  },
+  "KONO": {
+   "trajectory": "growth",
+   "momentum": 6,
+   "mi": 0.2,
+   "activeCitizens": 17,
+   "baseOfferPerCitizen": 3.78,
+   "bEffectiveOfferMean": 3.799,
+   "withDialState": 17,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 12,
+   "generatorLines": 29,
+   "drawn": {},
+   "drawnBySign": {
+    "up": 0,
+    "down": 0
+   },
+   "drawnByBand": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.03
+  },
+  "Uptown": {
+   "trajectory": "growth",
+   "momentum": 10,
+   "mi": 1,
+   "activeCitizens": 82,
+   "baseOfferPerCitizen": 10.5,
+   "bEffectiveOfferMean": 10.927,
+   "withDialState": 82,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 80,
+   "generatorLines": 174,
+   "drawn": {
+    "humble": 2,
+    "brag": 3,
+    "complain": 3
+   },
+   "drawnBySign": {
+    "up": 5,
+    "down": 3
+   },
+   "drawnByBand": {
+    "humble warmth:0": 1,
+    "brag sociability:1": 1,
+    "brag sociability:2": 1,
+    "complain composure:1": 1,
+    "humble warmth:1": 1,
+    "brag sociability:0": 1,
+    "complain composure:0": 2
+   },
+   "graded": {
+    "Up": 5,
+    "Down": 3,
+    "other": 0
+   },
+   "sentimentSaved": -0.01
+  },
+  "Baylight District": {
+   "trajectory": "decay",
+   "momentum": 0,
+   "mi": 1,
+   "activeCitizens": 10,
+   "baseOfferPerCitizen": 10.5,
+   "bEffectiveOfferMean": 10.412,
+   "withDialState": 10,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 8,
+   "generatorLines": 20,
+   "drawn": {
+    "complain": 3,
+    "humble": 1
+   },
+   "drawnBySign": {
+    "up": 1,
+    "down": 3
+   },
+   "drawnByBand": {
+    "complain composure:1": 1,
+    "complain composure:0": 2,
+    "humble warmth:0": 1
+   },
+   "graded": {
+    "Up": 1,
+    "Down": 3,
+    "other": 0
+   },
+   "sentimentSaved": -0.02
+  }
+ }
+}

@@ -1,0 +1,386 @@
+{
+ "cycle": 113,
+ "label": "A",
+ "lifeHistoryRows": 2300,
+ "linesSha256": "d83857fd755752be6656db75a3cf59d6f1f454d42d7ddf6c1bf510109c022c4b",
+ "notMeasured": "whole-pool weight per citizen; recent-text filter availability (per-citizen memory)",
+ "hoods": {
+  "Downtown": {
+   "trajectory": "growth",
+   "momentum": 10,
+   "mi": 1,
+   "activeCitizens": 87,
+   "baseOfferPerCitizen": 10.5,
+   "bEffectiveOfferMean": 10.772,
+   "withDialState": 87,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 72,
+   "generatorLines": 168,
+   "drawn": {
+    "brag": 4,
+    "A:new-spot": 1
+   },
+   "drawnBySign": {
+    "up": 5,
+    "down": 0
+   },
+   "drawnByBand": {
+    "brag sociability:1": 1,
+    "brag sociability:0": 3
+   },
+   "graded": {
+    "Up": 5,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.13
+  },
+  "West Oakland": {
+   "trajectory": "growth",
+   "momentum": 6,
+   "mi": 0.2,
+   "activeCitizens": 115,
+   "baseOfferPerCitizen": 3.78,
+   "bEffectiveOfferMean": 3.873,
+   "withDialState": 115,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 99,
+   "generatorLines": 222,
+   "drawn": {
+    "A:new-spot": 3,
+    "brag": 2
+   },
+   "drawnBySign": {
+    "up": 5,
+    "down": 0
+   },
+   "drawnByBand": {
+    "brag sociability:0": 2
+   },
+   "graded": {
+    "Up": 5,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.25
+  },
+  "Fruitvale": {
+   "trajectory": "growth",
+   "momentum": 10,
+   "mi": 1,
+   "activeCitizens": 102,
+   "baseOfferPerCitizen": 10.5,
+   "bEffectiveOfferMean": 10.706,
+   "withDialState": 102,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 92,
+   "generatorLines": 202,
+   "drawn": {
+    "brag": 3,
+    "A:new-spot": 2
+   },
+   "drawnBySign": {
+    "up": 5,
+    "down": 0
+   },
+   "drawnByBand": {
+    "brag sociability:2": 2,
+    "brag sociability:0": 1
+   },
+   "graded": {
+    "Up": 5,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.2
+  },
+  "Jack London": {
+   "trajectory": "growth",
+   "momentum": 10,
+   "mi": 1,
+   "activeCitizens": 76,
+   "baseOfferPerCitizen": 10.5,
+   "bEffectiveOfferMean": 10.73,
+   "withDialState": 76,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 65,
+   "generatorLines": 133,
+   "drawn": {
+    "brag": 1
+   },
+   "drawnBySign": {
+    "up": 1,
+    "down": 0
+   },
+   "drawnByBand": {
+    "brag sociability:0": 1
+   },
+   "graded": {
+    "Up": 1,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.17
+  },
+  "Adams Point": {
+   "trajectory": "decay",
+   "momentum": 2,
+   "mi": 0.6,
+   "activeCitizens": 8,
+   "baseOfferPerCitizen": 7.14,
+   "bEffectiveOfferMean": 7.14,
+   "withDialState": 8,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 7,
+   "generatorLines": 16,
+   "drawn": {
+    "A:storefront": 1
+   },
+   "drawnBySign": {
+    "up": 0,
+    "down": 1
+   },
+   "drawnByBand": {},
+   "graded": {
+    "Up": 0,
+    "Down": 1,
+    "other": 0
+   },
+   "sentimentSaved": -0.08
+  },
+  "Chinatown": {
+   "trajectory": "growth",
+   "momentum": 6,
+   "mi": 0.2,
+   "activeCitizens": 66,
+   "baseOfferPerCitizen": 3.78,
+   "bEffectiveOfferMean": 3.852,
+   "withDialState": 66,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 56,
+   "generatorLines": 122,
+   "drawn": {
+    "brag": 3,
+    "A:new-spot": 2
+   },
+   "drawnBySign": {
+    "up": 5,
+    "down": 0
+   },
+   "drawnByBand": {
+    "brag sociability:0": 3
+   },
+   "graded": {
+    "Up": 5,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": -0.07
+  },
+  "Brooklyn": {
+   "trajectory": "decay",
+   "momentum": 3,
+   "mi": 0.4,
+   "activeCitizens": 9,
+   "baseOfferPerCitizen": 5.46,
+   "bEffectiveOfferMean": 5.409,
+   "withDialState": 9,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 7,
+   "generatorLines": 12,
+   "drawn": {},
+   "drawnBySign": {
+    "up": 0,
+    "down": 0
+   },
+   "drawnByBand": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": -0.11
+  },
+  "Eastlake": {
+   "trajectory": "decay",
+   "momentum": 4,
+   "mi": 0.2,
+   "activeCitizens": 8,
+   "baseOfferPerCitizen": 3.78,
+   "bEffectiveOfferMean": 3.78,
+   "withDialState": 8,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 7,
+   "generatorLines": 16,
+   "drawn": {},
+   "drawnBySign": {
+    "up": 0,
+    "down": 0
+   },
+   "drawnByBand": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0
+  },
+  "Glenview": {
+   "trajectory": "decay",
+   "momentum": 0,
+   "mi": 1,
+   "activeCitizens": 9,
+   "baseOfferPerCitizen": 10.5,
+   "bEffectiveOfferMean": 10.5,
+   "withDialState": 9,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 8,
+   "generatorLines": 22,
+   "drawn": {
+    "A:storefront": 1
+   },
+   "drawnBySign": {
+    "up": 0,
+    "down": 1
+   },
+   "drawnByBand": {},
+   "graded": {
+    "Up": 0,
+    "Down": 1,
+    "other": 0
+   },
+   "sentimentSaved": -0.02
+  },
+  "Ivy Hill": {
+   "trajectory": "decay",
+   "momentum": 2,
+   "mi": 0.6,
+   "activeCitizens": 9,
+   "baseOfferPerCitizen": 7.14,
+   "bEffectiveOfferMean": 7.14,
+   "withDialState": 9,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 8,
+   "generatorLines": 20,
+   "drawn": {
+    "A:block-energy": 1,
+    "A:storefront": 1
+   },
+   "drawnBySign": {
+    "up": 0,
+    "down": 2
+   },
+   "drawnByBand": {},
+   "graded": {
+    "Up": 0,
+    "Down": 2,
+    "other": 0
+   },
+   "sentimentSaved": -0.09
+  },
+  "San Antonio": {
+   "trajectory": "decay",
+   "momentum": 2,
+   "mi": 0.6,
+   "activeCitizens": 10,
+   "baseOfferPerCitizen": 7.14,
+   "bEffectiveOfferMean": 7.14,
+   "withDialState": 10,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 8,
+   "generatorLines": 13,
+   "drawn": {},
+   "drawnBySign": {
+    "up": 0,
+    "down": 0
+   },
+   "drawnByBand": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": -0.04
+  },
+  "KONO": {
+   "trajectory": "growth",
+   "momentum": 6,
+   "mi": 0.2,
+   "activeCitizens": 17,
+   "baseOfferPerCitizen": 3.78,
+   "bEffectiveOfferMean": 3.799,
+   "withDialState": 17,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 11,
+   "generatorLines": 31,
+   "drawn": {},
+   "drawnBySign": {
+    "up": 0,
+    "down": 0
+   },
+   "drawnByBand": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0
+  },
+  "Uptown": {
+   "trajectory": "growth",
+   "momentum": 10,
+   "mi": 1,
+   "activeCitizens": 82,
+   "baseOfferPerCitizen": 10.5,
+   "bEffectiveOfferMean": 10.927,
+   "withDialState": 82,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 76,
+   "generatorLines": 169,
+   "drawn": {
+    "A:new-spot": 5,
+    "brag": 6
+   },
+   "drawnBySign": {
+    "up": 11,
+    "down": 0
+   },
+   "drawnByBand": {
+    "brag sociability:1": 4,
+    "brag sociability:2": 2
+   },
+   "graded": {
+    "Up": 11,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.02
+  },
+  "Baylight District": {
+   "trajectory": "decay",
+   "momentum": 0,
+   "mi": 1,
+   "activeCitizens": 10,
+   "baseOfferPerCitizen": 10.5,
+   "bEffectiveOfferMean": 10.412,
+   "withDialState": 10,
+   "aReflectiveTextBoostCitizens": 0,
+   "generatorCitizens": 9,
+   "generatorLines": 21,
+   "drawn": {
+    "A:storefront": 2
+   },
+   "drawnBySign": {
+    "up": 0,
+    "down": 2
+   },
+   "drawnByBand": {},
+   "graded": {
+    "Up": 0,
+    "Down": 2,
+    "other": 0
+   },
+   "sentimentSaved": 0.08
+  }
+ }
+}

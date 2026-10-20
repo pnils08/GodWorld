@@ -687,6 +687,54 @@ console.log('═══ C8 — engine.214 8a Cut B: the trajectory as dial-gated 
     for (const [rx, txts] of Object.entries(RX[hood])) out[rx] = txts.reduce((n, t) => n + all.split(t).length - 1, 0);
     return out;
   };
+  // Post-T5 effective weights on the real path (codex tests recheck: a one-sided complain multiplier escaped C8e):
+  // the generator source with a read-only tap right after the engine.32 T5 dial loop, one Cycle, citizens at each
+  // dial's extremes. Every react: entry must weigh exactly its base share x its own dial, computed here from the
+  // citizen's bands (not through hoodReactionMult_), and each multiplier must be seen at both 0.5 and 1.5.
+  {
+    const TAP_AT = '    // engine.94 Task 3: grief biases the already-built ordinary pool once per';
+    const genSrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/generateCitizensEvents.js'), 'utf8');
+    if (genSrc.split(TAP_AT).length !== 2) throw new Error('C8f: post-T5 anchor not found exactly once');
+    const tappedGen = new Function(SCOPE_SRC + '\n' + genSrc.replace(TAP_AT, '    if (global.__c8PoolTap) global.__c8PoolTap(pool, dialBands);\n' + TAP_AT) +
+      '\nreturn generateCitizensEvents_;')();
+    const M = pw(1.1, 0.6) + pw(1.0, 0.6); // both fixture trajectory hoods sit at mi 0.6 (Rockridge 8, Fruitvale 2)
+    const DIAL_OF = { brag: 'sociability', defend: 'sociability', humble: 'warmth', complain: 'composure' };
+    const seen = { brag: new Set(), defend: new Set(), humble: new Set(), complain: new Set() };
+    const effMiss = []; let reactEntries = 0;
+    global.__c8PoolTap = (pool, bands) => {
+      for (const e of pool) {
+        const rt = (e.tags || []).find(t => t.indexOf('react:') === 0); if (!rt) continue;
+        reactEntries++;
+        const rx = rt.slice(6), up = e.tags.indexOf('dial:outabout:up') >= 0, growth = e.tags.indexOf('state:trajectory-up') >= 0;
+        const base = M * (up === growth ? 1 / 3 : 1 / 6);
+        const raw = bands ? bands.mult[DIAL_OF[rx]] : 1;
+        const mult = bands ? (rx === 'complain' ? 2 - raw : raw) : 1;
+        seen[rx].add(mult);
+        if (Math.abs(e.weight - Math.min(6, base * mult)) > 1e-9) effMiss.push(rx + ' ' + e.weight + ' want ' + base * mult);
+      }
+    };
+    rngImpl = mulberry32(2141);
+    const rows = [];
+    for (const [hood, dials] of [['Fruitvale', ['composure', 'sociability', 'warmth']], ['Rockridge', ['composure', 'sociability', 'warmth']]]) {
+      for (const dial of dials) {
+        for (const v of [5, 95]) {
+          const r = buildLedger([hood], 1)[0];
+          r[0] = r[0] + dial.slice(0, 3) + v; r[HEADERS.indexOf('DialState')] = dialState({ [dial]: v });
+          rows.push(r);
+        }
+      }
+    }
+    const ss = memSS({
+      'Neighborhood_Map': memSheet('Neighborhood_Map', seedLoaderMapData()),
+      'LifeHistory_Log': memSheet('LifeHistory_Log', [['Timestamp', 'Cycle', 'POPID', 'Name', 'Event', 'Tag']])
+    });
+    tappedGen(makeCtx(95, rows, ss));
+    delete global.__c8PoolTap;
+    const both = Object.keys(seen).filter(rx => !(seen[rx].has(0.5) && seen[rx].has(1.5)));
+    console.log('   post-T5 react entries checked: ' + reactEntries + '; multipliers seen ' + JSON.stringify(Object.fromEntries(Object.entries(seen).map(([k, v]) => [k, [...v].sort()]))));
+    assert('C8f real path, post-T5: every react: entry weighs base share x its own dial, and each reaction is seen at both 0.5 and 1.5 (two-sided)',
+      reactEntries > 0 && effMiss.length === 0 && both.length === 0, effMiss.slice(0, 3).join(' | ') + ' one-sided: ' + both.join(','));
+  }
   const share = (o, rx) => o[rx] / Math.max(1, Object.values(o).reduce((a, b) => a + b, 0));
   const CASES = [['Fruitvale', 'composure', 'complain', 'low'], ['Rockridge', 'sociability', 'brag', 'high'],
     ['Rockridge', 'warmth', 'humble', 'high'], ['Fruitvale', 'sociability', 'defend', 'high']];

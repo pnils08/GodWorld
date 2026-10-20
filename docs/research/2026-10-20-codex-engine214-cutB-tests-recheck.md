@@ -1,0 +1,11 @@
+# Engine.214 Cut B tests recheck — commit `9b5b4281`
+
+Scope: task `2026-10-20-engine214-cutB-tests-recheck-TASK.md`; read-only source review and Node test runs. `node scripts/testNeighborhoodLoop.js`: **45 passed, 0 failed**. No bench, Sheet, clasp, cron, or live verification.
+
+| Item | Verdict | Evidence |
+| --- | --- | --- |
+| 1. C8a | **SHIP** | `scripts/testNeighborhoodLoop.js:618-641` fixes the ordered reaction/sign/share array for both trajectories and checks every entry's exact ordered tags, `M/3` or `M/6` weight, total `M`, and `weight × 1.5 ≤ 6` at mi 0/.2/.4/.6/1. A swapped sign, shifted mass between entries on the same side, or reaction tag moved to the other side fails. This matches the source entries at `phase05-citizens/generateCitizensEvents.js:164-193`. |
+| 2. C8e | **FIX** | `scripts/testNeighborhoodLoop.js:667-699` runs each of four dial/reaction cases through the real generator and T5 with 20 citizens × 60 Cycles, seed 214, at dial 5 and 95. `:661-665` independently checks the helper's two-sided mapping, so a wrong dial in `hoodReactionMult_` fails. Observed target shares: complain 131/174 vs 45/96; brag 20/134 vs 103/239; humble 29/149 vs 88/195; defend 15/127 vs 41/187. None is a near tie in this seed, though one seed does not prove distribution. Disabling the T5 `react:` branch in memory (`generateCitizensEvents.js:3374-3387`) failed 3 C8e cases; brag still passed because other sociability-sensitive paths change draws. **A one-sided T5 complain multiplier escapes:** an in-memory mutation that uses 1 at composure ≥1 passed all 45 tests, with low/high complain counts 131/96. The assertion checks direction of drawn share, not effective weight at both extremes. Add a direct post-T5 effective-weight check for both sides before claiming two-sided real-path coverage. |
+| 3. C2g3 | **SHIP** | `scripts/testNeighborhoodLoop.js:347-375` matches exact reaction text or its ` near <venue>` prefix, checks each matched line's `Neighborhood-Outabout-Up|Down-[SML]` grade, and requires `signSuffixed > 0`. The clean run therefore checked at least one suffixed line; the suffix writer is `generateCitizensEvents.js:3569-3577`. |
+
+**Final gate: FIX item 2's real-path coverage; items 1 and 3 SHIP.** The separate same-baseline A/B bench receipts remain outside this recheck.

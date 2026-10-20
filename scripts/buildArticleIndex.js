@@ -133,7 +133,9 @@ function splitPieces(text, defaultCycle) {
     const m = matchBy(L);
     if (m) marks.push({ i, author: m.author, desk: m.desk });
   }
+  const WRAPPER_LABEL = /^THE WEEK'S REPORTING$/i; // the cron wrapper's section label, never a headline
   const isLabel = k => {
+    if (WRAPPER_LABEL.test(lines[k].trim())) return true;
     let a = k - 1; while (a >= 0 && !lines[a].trim()) a--;
     let b = k + 1; while (b < lines.length && !lines[b].trim()) b++;
     return a >= 0 && b < lines.length && RULE.test(lines[a]) && RULE.test(lines[b]);
@@ -210,7 +212,26 @@ function headerByline(text) {
   const fix = v => (/^[A-Z]{3,}/.test(v) && v === v.toUpperCase() ? titleCase(v) : v);
   // an explicit "By X" / "Byline:" / italic name line anywhere in the header outranks the "NAME - Role" banner form
   for (const rx of BYL.slice(0, 3)) for (const l of lines) { const m = rx.exec(l); if (m) return fix(m[1].replace(/\*/g, '').trim()); }
+  for (const l of lines) { const m = /^(?:Column|Reporter|Author|Writer):\s*(.+)/i.exec(l); const r = m && resolveByline(m[1]); if (r && !DESK_BYLINE.test(r)) return r; }
   for (const l of lines) { const m = BYL[3].exec(l); if (m && !DESK_BYLINE.test(m[1].trim())) return fix(m[1].trim()); }
+  // "INVESTIGATIONS - Luis Navarro": a DESK - Reporter banner in the first three lines of a short, single-reporter file.
+  // Compilations (several banners, several reporters) and working docs about a reporter are not credited to one.
+  if (wordsOf(text) <= 2500) {
+    const deskish = x => /^[A-Z0-9 &'’.\/-]{3,40}$/.test(x) || /^bay tribune/i.test(x);
+    const person = l => {
+      if (l.length > 90) return null;
+      const parts = l.split(/\s[—–-]\s/);
+      if (parts.length !== 2) return null;
+      for (const [nm, other] of [[parts[0], parts[1]], [parts[1], parts[0]]]) {
+        const name = nm.replace(/^by\s+/i, '').trim().toLowerCase();
+        if (KNOWN_NAMES.includes(name) && (deskish(other.trim()) || /^by\s/i.test(nm))) return resolveByline(name);
+      }
+      return null;
+    };
+    const first = lines.slice(0, 3).map(person).find(Boolean);
+    const all = new Set(text.split('\n').map(x => person(x.trim())).filter(Boolean));
+    if (first && all.size === 1) return first;
+  }
   return null;
 }
 function headerTitle(text, fallback) {

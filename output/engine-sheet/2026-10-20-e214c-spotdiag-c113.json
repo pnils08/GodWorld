@@ -1,0 +1,25 @@
+{
+ "citizens": 915,
+ "offeredCitizens": 148,
+ "offered": {
+  "lift": 135,
+  "quiet": 13,
+  "shed": 4
+ },
+ "offeredMass": 262.5,
+ "poolMassWithSpot": 39594.777924222435,
+ "slots": 2351,
+ "slotsWithSpot": 368,
+ "spotAvail": 659,
+ "usableMassWithSpot": 97581.85169341727,
+ "filteredOut": 2,
+ "drawn": {
+  "quiet": 1
+ },
+ "drawnByHood": {
+  "Baylight District:quiet": 1
+ },
+ "firstDraw": 0,
+ "pulse": {},
+ "pulseHood": {}
+}

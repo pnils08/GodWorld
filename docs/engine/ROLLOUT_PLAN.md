@@ -5,11 +5,11 @@
 **Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. The plan list below is regenerated at every session close; any wait whose date has passed is named at close too. One line per job; the detail is in the plan the row names. Live Cycle C112 (fired Sun 2026-10-18 evening; engine.299 readback 22:16 CDT: 2,344 lines, 250 s); next live fire C113, Sunday 2026-10-25.
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
-**Plans in motion (54)** — each plan, its rows and the state each is in:
+**Plans in motion (52)** — each plan, its rows and the state each is in:
 
 - [[../plans/2026-10-11-media-extension]]: pipeline.83 live-observing, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.76 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing, pipeline.80 live-observing
 - [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, pipeline.71 ready, engine.287 live-observing, engine.288 live-observing, engine.289 blocked, engine.305 live-observing, engine.306 ready
-- [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.209 done-pending-archive, engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing
+- [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing, engine.298 live-observing
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.98 in-progress, engine.264 needs-info, engine.261 ready
 - [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]: pipeline.81 live-observing, engine.296 live-observing, engine.297 ready
@@ -31,11 +31,9 @@
 - [[../plans/2026-08-29-employment-system-cascade]]: civic.33 live-observing
 - [[../plans/2026-07-31-platform-ceiling-resilience]]: engine.95 live-observing
 - [[../plans/2026-09-29-sim-holiday-calendar]]: engine.273 in-progress
-- [[../plans/2026-10-03-citizen-pages-drive-canon]]: pipeline.70 done-pending-archive
 - [[../plans/2026-07-11-agent-exchange-engine]]: engine.53 live-observing
 - [[../plans/2026-08-07-spacemolt-game-show]]: research.27 live-observing
 - [[../plans/2026-07-06-citizen-loop-deepening]]: engine.48 live-observing
-- [[../plans/2026-08-09-citizen-day-digest]]: pipeline.53 done-pending-archive
 - [[../plans/2026-09-13-run-cycle-packages-the-world]]: pipeline.69 in-progress
 - [[../plans/2026-08-29-boot-doc-consolidation]]: governance.51 in-progress
 - [[../plans/2026-08-16-city-hall-nine-seat-table]]: civic.24 ready
@@ -84,7 +82,6 @@
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.208 | C111: 0 fan lines (off-season). C112 (Oaks open, W1): `11 named, 10 staff, 4 fan line(s)`, ripple reached 21 citizens, `fandom seeded 12`, franchise weight Oaks 0.35 → 0.3831 (weeks 1, fans 4). Band open; read the spread over C113–C114 | live-observing | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §Changelog 2026-10-08 |
-| engine.209 | C112 read (execution_log_c112): the Oaks' first logged game week (1 home win) drifted the carry w 0.35 → 0.3831, weeks 1, fans 4; the off-season A's held w 1. Drift on results confirmed live | done-pending-archive | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 9–10 |
 | engine.206 | C112, first live home week (Oaks 1 home win): game-day-crowds seed reached the civic lane only (desk_signal_c112 civic[43]); business dynamics moved 10 bars 0.07 pp but no game-week seed reached any desk. Trace the SPORTS_WEEK ripple before C113 Sun 2026-10-25 | live-observing | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 6 |
 | engine.94 | B.3 v3 LIVE (PROD `e87362b4`). C111 read 2026-10-11: 131 phases, 615 bonds certified, 10 seats held at 60–69, 0 campaign notes/hooks. C115 B.2 bars; open sim call on challenger appeal → holder approval awaits the builder | live-observing | engine-sheet / research-build | [[../plans/2026-07-31-citizen-memory-perception]] §Status log engine.94 B.3 v3 live reads |
 | engine.254 | C119: Phase10-CareJusticeCensus timing, point 2 of 2 (1,243 ms at C110); Task 9 review with it | live-observing | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §Task 10 handoff |
@@ -111,12 +108,10 @@
 | engine.281 | Sports-week ladder + venue (a–d) LIVE since 2026-10-06. (e) the column surface folds into the engine.204/205 ripple + option-sync review (2026-10-07) | in-progress | engine-sheet / research-build | [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] §5 |
 | engine.273 | Holidays LIVE; first Second Dawn C131. Open Court Week LIVE PROD `ae9278aa` (position 6, citywide, First Friday week; first live C162; unit-proven). Meaning sentences approved as working lines (rb carries to desks); running-on-its-own week held until it happens | in-progress | engine-sheet / research-build | [[../plans/2026-09-29-sim-holiday-calendar]] §Builder's words (2026-10-07) |
 | engine.193 | Adversity tiers LIVE; (b) settle LIVE `ae9278aa`. C111: self-armed, 7 of 9 toward norm, magnitude unverified, AC Transit / City flat — add per-institution settle log line, read C112 (G-EC50). Then (a) public-employer budget squeeze; then CAT-layer design for the builder | in-progress | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §engine.193 Builder's words (2026-10-07) |
-| pipeline.70 | Citizen pages as a canon source: 10-19 fan-out read — six C112 pieces staged, Rhea PASS all; first unattended Opus business write 923 words, score 4; `[pages]` pulse built. Page-line reach in a packet unconfirmed from the artifacts (plan changelog 2026-10-19) | done-pending-archive | research-build | [[../plans/2026-10-03-citizen-pages-drive-canon]]  |
 | engine.53 | Organic: the first exchange-line candidate in a street pool. Mon 2026-10-05 fanout read 2026-10-08: none, because no transcript sentence named that day's highlights (fog, Oaks; 0 of 66 turns) | live-observing | research-build | [[../plans/2026-07-11-agent-exchange-engine]] |
 |  research.27 | Organic: a flight since the 2026-10-18 landing closes a contract and its credits reach the feed row + board (§3.2). Stations Bayline 6 / Oakland 12 minted, seats open until the pipeline.73 reporter walk (builder 2026-10-12) | live-observing | research-build | [[../plans/2026-08-07-spacemolt-game-show]] §3.2 + §Post-ship (e)  |
 | engine.48 | Organic: the first T8 tension-seed result off the cron; none recorded yet | live-observing | research-build | [[../plans/2026-07-06-citizen-loop-deepening]] |
 | engine.201 | Fixed-cohort proof: 48 citizens drawn at C110 (output/engine201). C111 resnap 2026-10-11, C112 resnap 2026-10-18 (48/48; run `--resnap` only after Step 5 writes the world summary — it reads its Cycle from there); resnap after C113; trace at the C113 fire, Sun 2026-10-25, codex leading | live-observing | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §BUILD SPEC |
-| pipeline.53 | Citizen day digest: audio-direction rebalance LANDED 2026-10-17 (`af3c1f57`, rb) — Citizens & neighborhoods 50 / the newsroom's reports 30 / the day around them 20 (the plan asked 60/20/20; the newsroom tier is the middle). Row was stale | done-pending-archive | engine-sheet | [[../plans/2026-08-09-citizen-day-digest]] |
 | pipeline.69 | Run-cycle packages the world: T1 texture by hood, T2 wake tells a citizen their seed, T3 seed floor, T5 C108 slice readback | in-progress | engine-sheet | [[../plans/2026-09-13-run-cycle-packages-the-world]] |
 | governance.51 | Boot docs: T3 memory-file dedup (proposal ready, builder-reviewed deletes) and T8 | in-progress | engine-sheet | [[../plans/2026-08-29-boot-doc-consolidation]] |
 | civic.24 | Sunday nine-seat table: Task 10 sheet tab | ready | engine-sheet | [[../plans/2026-08-16-city-hall-nine-seat-table]] |

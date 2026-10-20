@@ -973,6 +973,16 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S582 Archive Pass (2026-10-19, engine-sheet) — post-S581 closures sweep
+
+3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.* + 2 pipeline.*.
+
+- **engine.209** [engine-sheet] — C112 read (execution_log_c112): the Oaks' first logged game week (1 home win) drifted the carry w 0.35 → 0.3831, weeks 1, fans 4; the off-season A's held w 1. Drift on results confirmed live **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 9–10
+- **pipeline.70** [research-build] — Citizen pages as a canon source: 10-19 fan-out read — six C112 pieces staged, Rhea PASS all; first unattended Opus business write 923 words, score 4; `[pages]` pulse built. Page-line reach in a packet unconfirmed from the artifacts (plan changelog 2026-10-19) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-03-citizen-pages-drive-canon]]
+- **pipeline.53** [engine-sheet] — Citizen day digest: audio-direction rebalance LANDED 2026-10-17 (`af3c1f57`, rb) — Citizens & neighborhoods 50 / the newsroom's reports 30 / the day around them 20 (the plan asked 60/20/20; the newsroom tier is the middle). Row was stale **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-09-citizen-day-digest]]
+
+This pass: 3 rows — engine.209 + pipeline.70 + pipeline.53. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S580 Archive Pass (2026-10-19, research-build) — post-S579 closures sweep
 
 3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 pipeline.* + 1 engine.*.

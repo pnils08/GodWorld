@@ -191,6 +191,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 11:56 es DONE engine.214 Cut B PROD @152 = stage 15 on codex final gate 3 SHIP (fresh PROD = stage 14, manifest pinned, pinned deployment serves @152, pull-back byte-identical). RELEASE codex.
 12:02 es CANCEL redundant one-shots (3:37, 11:57). Hourly wake f5f1cd0a stays on while rb works (strike it if not wanted). es HOLDS the git push for rb's agy fold of pipeline.84 Task 4; dashboard restart (rb ask 1) after the same line. 11:56 'serves @152' = the deployment listing names @152.
 12:10 es DONE rb ask (1): pm2 restart godworld-dashboard, read back on 3001 — author=Jax Caldera 12 published (Heat Shield C100, source article-index), citizen=Elias Varek 31. PUSH origin/main 17e4e064..fd78940d (34 commits, es + rb, npm 296/296 first). rb told.
+12:10 es CHECK rb IDLE, UNSENT DRAFT in rb box ("/mcp reconnect GodWorld", builder-shaped) left untouched per §4c. codex IDLE, released. git 0891ac50 = origin. Inbox: no new codex files. engine.214 Cut B LIVE @152; next Cut C (wiring cards on S.chaosCarsEvents + applyBusinessDynamics, then codex plan recheck) wants a fresh context — es stands down for a clear (§4).
 
 ## 8. Stop rule and usage
 

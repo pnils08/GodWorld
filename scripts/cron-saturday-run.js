@@ -316,8 +316,12 @@ function postDocument(doc) {
 // 2026-08-15: sweep upserted Elliot Graye's wrong-venue Claire Ashford piece
 // to Supermemory before this fix landed; deleted by hand, see session record.
 function loadStagedSetExcludingCanonViolations(cycle) {
-  const set = loadStagedSet(cycle);
-  const scorecard = readJsonSafe(path.join(ROOT, 'output', 'eic_scorecard_c' + cycle + '.json'));
+  return excludeCanonViolations(loadStagedSet(cycle),
+    readJsonSafe(path.join(ROOT, 'output', 'eic_scorecard_c' + cycle + '.json')));
+}
+
+// Pure: the staged set minus the EIC audit's canon-violation stems.
+function excludeCanonViolations(set, scorecard) {
   if (!scorecard) return set; // no audit run yet — nothing to exclude by
   const violations = new Set(scorecard.articles.filter(a => a.verdict === 'canon-violation').map(a => a.stem));
   return set.filter(e => !violations.has(e.stem));
@@ -333,16 +337,14 @@ function stepIndex() {
 }
 
 async function stepSweep(cycle) {
-  console.log('--- step 5: Supermemory sweep (per-article, PUBLISHED set only) ---');
-  // Builder ruling 2026-09-07 (S433): published articles are canon. Before this
-  // the sweep upserted EVERY staged article (35 over the last 14 days) while the
-  // edition carried ~9 — paying to canonize copy nobody reads. Scope = the
-  // curated/published stems; a missing curation file fails loud, never widens.
-  const curation = readJsonSafe(path.join(ROOT, 'output', 'edition_curation_c' + cycle + '.json'));
-  if (!curation || !Array.isArray(curation.selected)) throw new Error('no edition_curation_c' + cycle + '.json — run --step curate first (sweep is published-only)');
-  const published = new Set(curation.selected);
-  const set = loadStagedSetExcludingCanonViolations(cycle).filter(e => published.has(e.stem));
-  if (!set.length) { console.log('no published articles for c' + cycle); return { swept: 0 }; }
+  console.log('--- step 5: Supermemory sweep (per-article, every gate-passed article) ---');
+  // Canon is every article that passed the Rhea gate, minus the EIC audit's
+  // canon-violations (builder correction 2026-10-20, verbatim in the 09-07 plan
+  // Task 7c). The Saturday print pick is grades, the highlight and MEDIA usage —
+  // never a canon gate. The S433 cut that scoped this to the curated stems was a
+  // misread and is reverted; the sweep no longer reads edition_curation at all.
+  const set = loadStagedSetExcludingCanonViolations(cycle);
+  if (!set.length) { console.log('no gate-passed articles for c' + cycle); return { swept: 0 }; }
   if (!API_KEY && APPLY) throw new Error('SUPERMEMORY_CC_API_KEY missing');
   let swept = 0;
   for (const entry of set) {
@@ -1377,7 +1379,7 @@ if (require.main === module) {
   main().catch(err => { console.error('[saturday] Fatal: ' + err.message); process.exit(1); });
 }
 
-module.exports = { loadStagedSet, loadArcSeeds, articleCustomId, articleDoc, usageRowsFor, printedStems, printedOnly, citationSnippet, ROLE_TO_USAGE,
+module.exports = { loadStagedSet, loadArcSeeds, excludeCanonViolations, stepSweep, articleCustomId, articleDoc, usageRowsFor, printedStems, printedOnly, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
   isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves,
   auditOne, loadLedgerProfiles, worldSummaryText, deskSystem, crossoverCitizens, printedCrossovers, reserveDigestSeat, undockedGroundTruth, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE, curationScore };

@@ -316,5 +316,22 @@ console.log('Test 6: mergeStorylineLedger');
   try { fs.unlinkSync(receipt(C)); } catch (_) {}
 })();
 
-console.log(`\n${passed} passed, ${failed} failed`);
-process.exit(failed ? 1 : 0);
+// Builder correction 2026-10-20 (09-07 plan Task 7c): canon = every Rhea-passed article minus the
+// EIC canon-violations; the print pick never gates the sweep.
+(async function () {
+  const fs = require('fs'), path = require('path');
+  const { excludeCanonViolations, stepSweep } = require('./cron-saturday-run');
+  const set = [{ stem: 'printed' }, { stem: 'unprinted' }, { stem: 'audit-failed' }];
+  const card = { articles: [{ stem: 'audit-failed', verdict: 'canon-violation' }, { stem: 'unprinted', verdict: 'pass' }] };
+  assert('canon keeps the unprinted gate-passed draft, drops the canon-violation',
+    excludeCanonViolations(set, card).map(e => e.stem).join() === 'printed,unprinted');
+  assert('no EIC scorecard -> nothing excluded', excludeCanonViolations(set, null).length === 3);
+  const C = 990002; // a cycle no run will ever write
+  const curation = path.join(path.resolve(__dirname, '..'), 'output', 'edition_curation_c' + C + '.json');
+  try { fs.unlinkSync(curation); } catch (_) {}
+  let threw = null, res = null;
+  try { res = await stepSweep(C); } catch (e) { threw = e; }
+  assert('sweep needs no print pick (no edition_curation file, dry run)', !threw && res && res.swept === 0, threw && threw.message);
+  console.log(`\n${passed} passed, ${failed} failed`);
+  process.exit(failed ? 1 : 0);
+})();

@@ -340,3 +340,24 @@ Reporters brief changes: not "cover this policy" but "show us what 2041 Oakland 
 
 ### 2026-09-02 (2026-09-02T20:23:30.956Z)
 - C105 stories are in-progress investigation mode, not published yet — need to clarify with Mike what's actually run vs. what's still in development
+
+### 2026-10-19 (2026-10-19T22:19:53.936Z)
+- Mike asked a casual family question with no search needed. The search_world result for that query came back empty, which is normal for conversational questions. Answered from the persona file and recent journal entries.
+
+### 2026-10-19 (2026-10-19T22:25:01.935Z)
+- Street-level reaction search returned no results for this query. Need to verify whether citizen sentiment after the championship is indexed anywhere; pointed Mike to letters and prior reporting instead of fabricating quotes.
+
+### 2026-10-19 (2026-10-19T22:26:16.658Z)
+- KONO health search returned only one low-severity cycle-108 spike and no current clinic data. Flagging for a follow-up on KONO clinic access and any post-c108 health entries before anything runs.
+
+### 2026-10-19 (2026-10-19T22:27:04.117Z)
+- Mike asked for Mags' opinion on UNDOCKED. Mags' stance: skeptical of the undisclosed cash reward and the Taveras instruction discrepancy; wants producers on record. Follow up with reporting on who received revised instructions.
+
+### 2026-10-19 (2026-10-19T22:28:45.040Z)
+- Deacon Seymour "pilot" reporting not found in search. Mike asked whether it reached Mags; answered no record found. Need the actual piece or desk packet to verify. Also flagging that Seymour's manager role in the records is a discrepancy to check against the new pilot assignment.
+
+### 2026-10-19 (2026-10-19T22:29:52.783Z)
+- Corrected my earlier claim that Seymour was a first-year skipper with no managed games. Mike says he has won games and managed the latest World Series, but neither that nor the pilot assignment is verified in search. Treat as unconfirmed rumor; need a source before any reporting.
+
+### 2026-10-19 (2026-10-19T22:30:52.621Z)
+- Taveras popularity query returned no results. Mags' stance: hold judgment until the driver of the attention is identified. Possible drivers to check: UNDOCKED leaderboard, recent game performance, Derby legacy. Need the actual coverage or metrics.

@@ -208,7 +208,7 @@ const BYL = [
   /^([A-Z][A-Za-z.' ]{3,30}?) [—–-] (?:Civic|Sports|Culture|Business|Investigations|Public|Health|Education|Arts|Food|Faith|Transit|Weather|Human|Lifestyle|Opinion|Voices|International|Data|Statcast|Cultural|Senior|Editor|Beat|Managing|Chief)/,
 ];
 function headerByline(text) {
-  const lines = text.split('\n').map(x => x.trim()).filter(Boolean).slice(0, 14);
+  const lines = text.split('\n').map(x => x.trim().replace(/^#+\s*/, '')).filter(Boolean).slice(0, 14);
   const fix = v => (/^[A-Z]{3,}/.test(v) && v === v.toUpperCase() ? titleCase(v) : v);
   // an explicit "By X" / "Byline:" / italic name line anywhere in the header outranks the "NAME - Role" banner form
   for (const rx of BYL.slice(0, 3)) for (const l of lines) { const m = rx.exec(l); if (m) return fix(m[1].replace(/\*/g, '').trim()); }
@@ -317,6 +317,26 @@ function build() {
     if (text.trim().length < 100) continue;
     push({ title: headerTitle(text, f.replace(/\.txt$/, '').replace(/_/g, ' ')), byline: resolveByline(headerByline(text)), cycle: cycleFromName(f), body: text.trim(), names: [], source: 'profile', type: 'profile', published: true, era: cycleFromName(f) == null ? 'pre-cycle' : undefined }, p, 'profile');
   }
+  // lore deep-dives: canon once /lore-ingest passes them (Rhea read, then NotebookLM + bay-tribune). The record of a pass is a
+  // lore-classified decision in notebooklmCanonSources.json; a quarantine file counts when its name is in one of those titles,
+  // and the title's Y<n>C<m> tag places it (engine cycle = (n-1)*52 + m). Failed or unread pieces are not in the index.
+  const loreDir = path.join(ROOT, 'output/lore-quarantine');
+  const decisionsPath = path.join(ROOT, 'scripts/notebooklmCanonSources.json');
+  if (fs.existsSync(loreDir) && fs.existsSync(decisionsPath)) {
+    const key = t => t.toLowerCase().replace(/[^a-z0-9]+/g, '-').split('-').filter(x => x && x !== 'lore').join('-');
+    const passed = Object.values(JSON.parse(fs.readFileSync(decisionsPath, 'utf8')).decisions || {})
+      .filter(d => d.classification === 'lore').map(d => ({ k: key(d.title), tag: /\(Y(\d+)C(\d+)\)/.exec(d.title) }));
+    const walkLore = d => fs.readdirSync(d, { withFileTypes: true }).flatMap(e => e.isDirectory() ? (e.name.startsWith('.') ? [] : walkLore(path.join(d, e.name))) : /\.md$/.test(e.name) && !/^AUTOSAVE-/.test(e.name) ? [path.join(d, e.name)] : []);
+    for (const abs of walkLore(loreDir).sort()) {
+      const rel = path.relative(ROOT, abs), base = key(path.basename(abs, '.md'));
+      const hit = passed.find(x => x.k.includes(base));
+      if (!hit) continue;
+      const text = read(rel);
+      if (text.trim().length < 100) continue;
+      const cyc = hit.tag ? (parseInt(hit.tag[1], 10) - 1) * 52 + parseInt(hit.tag[2], 10) : null;
+      push({ title: headerTitle(text, path.basename(abs, '.md')), byline: resolveByline(headerByline(text)), cycle: cyc, body: text.trim(), names: [], source: 'lore', type: 'lore', desk: 'Lore', published: false, canon: true, stage: 'lore-passed-gate' }, rel, 'lore');
+    }
+  }
   // archive/editions bundles (supplemental and old editions); PDFs and mirrors of already-split editions are skipped by type
   for (const f of fs.readdirSync(path.join(ROOT, 'archive/editions')).filter(n => n.endsWith('.txt')).sort()) {
     const p = 'archive/editions/' + f, text = read(p);
@@ -363,7 +383,7 @@ function build() {
   }
 
   // fold copies by fingerprint (editions first, then archive, profile, archive-edition)
-  const rank = { edition: 0, archive: 1, profile: 2, 'archive-edition': 3, 'shelf-only': 4 };
+  const rank = { edition: 0, archive: 1, profile: 2, 'archive-edition': 3, 'shelf-only': 4, lore: 5 };
   rows.sort((a, b) => rank[a.source] - rank[b.source]);
   const byFp = new Map(), out = [];
   for (const r of rows) {

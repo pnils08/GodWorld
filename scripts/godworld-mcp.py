@@ -599,7 +599,7 @@ def _format_article_results(raw: str) -> str:
             f"C{r.get('cycle') if r.get('cycle') is not None else '?'} | {r.get('author') or '-'} | "
             f"{(r.get('title') or '')[:110]} | {r.get('file') or ''}"
             + (f" | names: {names}" if names else '')
-            + ('' if r.get('printed', True) else ' | NOT PRINTED (passed the gate)')
+            + (' | LORE' if r.get('type') == 'lore' else '' if r.get('printed', True) else ' | NOT PRINTED (passed the gate)')
         )
     return '\n'.join(lines)[:6000]
 

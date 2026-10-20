@@ -110,6 +110,8 @@ Drive walked live with the read-only service account; all 746 text-or-doc files 
 
 None open. Answered 2026-10-19: scope = published pieces only; front door = Drive; pre-check = Jax first, shown not forced. rb call: unpublished staged pieces are indexed and flagged.
 
+Known limit (rb, not a question): a piece that arrives in Drive after 2026-10-20 reaches the disk only when someone runs `node scripts/syncDriveArticles.js`, which lists it as `missing`, and adds its filename, cycle, desk and byline to the OVERRIDES table in that script. Nothing guesses a name. The index and the dashboard see it once it is landed and the Saturday rebuild runs.
+
 Answered 2026-10-20 (builder): the Heat Shield is a standalone article written in C100, so it lands as its own piece at cycle 100 and the local Edition 100 file stays as it is. Nothing open.
 
 ## Changelog

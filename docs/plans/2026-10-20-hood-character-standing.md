@@ -18,6 +18,8 @@ pointers:
 
 # Hood Character Standing Plan (pipeline.71 — each hood read against its own canon)
 
+> **SUPERSEDED DESIGN — needs rewrite (builder 2026-10-20: "Nothing is measured vs a 'boom' you’re misinterpreting that").** This plan collapsed each hood's canon character into one tech-boom score (BoomIndex rank) measured against one live column. The ruling is per hood: each hood's INSTITUTIONS character is its own baseline, and its own numbers say whether it lives up to it (Temescal: behind, health strain; Lake Merritt: old money, settled; Chinatown: holding against replacement; Dimond: living down a name; West Oakland: where the tech boom started). Which numbers express each character is a sim call with the builder. Kept below for the probe data and the delivery path (D4, D6, D7), which still stand; D1–D3, D5 and the builder calls A–C do not.
+
 **Builder's words (2026-10-10), on the map:** "Agree the institutions.md is 'hand written character', and more importantly what all future cycles compare themselves to in media. Since a lot of the data tells the media what happened this cycle there isn't a lot of what is the expected data supposed to be, what historically is 'average' for the data points. The institutions.md sets the base of the sim like the A's set the sports. All sports stories frame it off the A's success. The institutions.md does this for the hoods. West Oakland was the boom town, it gives the media, crons, engine the coded essence of what it is vs what this cycle data says. Otherwise there is no way to know if things are up or down."
 
 **Builder's words (2026-10-10), the ruling:** "West Oakland will always be the boom town, that doesn't mean at any point in the future it remains that. The data and crons will decide, but even if it does get debunked it doesn't change that it was the boom town, and all future coverage will say that it used to be a boom town, if it goes that way. So canon is permanent, that's the point."
@@ -139,6 +141,7 @@ Off at C112: retail 7 of 22, trajectory (growth/decay × momentum) 10, migration
 
 ## Changelog
 
+- 2026-10-20 — Design superseded: per-hood character baselines, not one tech-boom axis (builder). Rewrite next; probe and delivery path kept.
 - 2026-10-20 — Axis named the tech boom in every writer-facing line (builder).
 - 2026-10-20 — Builder ruled Baylight (call C): under construction, tech stays filed there; West Oakland's tech footprint goes to engine.306 (sim-created firms). Brooklyn, A and B still open.
 - 2026-10-20 — Plan written (rb). Probe on C105–C112: retail measure, gap 6, 7 of 22 off; Baylight and Brooklyn never held. Builds wait on builder calls A/B/C.

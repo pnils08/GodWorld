@@ -102,7 +102,7 @@ pointers:
 | A1 | Clusters are outdated; mood is per hood from the hood's authored row; the INSTITUTIONS seed is the permanent referent | builder · rb · codex · agy | parent §engine.214 ruling (2026-10-10); codex Result; agy Result |
 | A2 | Districts read hood data for the civic side and never generate mood | builder · rb | parent §engine.214 pushback 3, uncontested |
 | A3 | PROD after the C112 readback; first fire C113 | rb (pushback 8, uncontested) | parent §engine.214 |
-| A4 | The media's hood-vs-seed read is a separate job, not this plan | builder · rb | ROLLOUT pipeline.71 → [[2026-10-20-hood-character-standing]] |
+| A4 | The media's hood-vs-seed read is a separate job, not this plan | builder · rb | ROLLOUT pipeline.71 |
 | A5 | No production reader of cluster output outside the file; the test readers are enumerated in D11 | rb · codex 1 · agy 1 | codex review F1; agy F1 |
 | A6 | The `:1477` live-Sentiment read is a first-carry bootstrap, kept and stated (D1) | codex 5 · agy 3 · rb | codex F5; agy F3 |
 | A7 | One city path per cause: the initiative/approval city scalar adds go, the hood mean carries them (D10) | codex 2 · rb | codex F2; `applyInitiativeImplementationEffects.js:713`, `applyCityDynamics.js:1812` |

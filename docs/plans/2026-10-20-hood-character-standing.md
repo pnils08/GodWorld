@@ -32,7 +32,7 @@ Prev-Cycle delta only: `lib/neighborhoodSlice.js` hands `{value, delta}` against
 
 ## Design
 
-**D1. The referent is the authored row, never re-derived.** `Neighborhood_Map.BoomIndex` (rank among the 22) is the number; `BoomExposure` is the canon word for it (born, anchor, new-build, refused, skipped, behind, …; every word comes from INSTITUTIONS §Neighborhoods). The slice carries the word, not the paragraph; the paragraph stays the writer's deep canon via search. No rolling average: the ruling read closed it ("No rolling-average mechanism is asked for"). The prev-Cycle delta already on the slice plus this standing is the whole read.
+**D1. The referent is the authored row, never re-derived.** The axis is the tech boom: how far it reached each hood. Anything a writer reads says "tech boom" ("born in the tech boom", "left behind by the tech boom"), never a bare "boom"; `BoomIndex` / `BoomExposure` are the sheet's column names only (builder 2026-10-20: "It’s a tech boom city, not sure why you keep saying boom"). `Neighborhood_Map.BoomIndex` (rank among the 22) is the number; `BoomExposure` is the canon word for it (born, anchor, new-build, refused, skipped, behind, …; every word comes from INSTITUTIONS §Neighborhoods). The slice carries the word, not the paragraph; the paragraph stays the writer's deep canon via search. No rolling average: the ruling read closed it ("No rolling-average mechanism is asked for"). The prev-Cycle delta already on the slice plus this standing is the whole read.
 
 **D2. One axis built: the boom. A second axis is one table row.** An `AXES` const `{axis, seedCol, wordCol, liveCol}`, one row today. Wealth is not built: `MedianIncome` drifts only with trajectory (`neighborhoodTrajectoryEngine.js:254-269`) and at C112 it stays bounded by `IncomeTier` across all 22 hoods (tier 2's highest, $81,590, sits under tier 3's lowest, $82,328), so comparing the two would compare the seed to itself.
 
@@ -139,5 +139,6 @@ Off at C112: retail 7 of 22, trajectory (growth/decay × momentum) 10, migration
 
 ## Changelog
 
+- 2026-10-20 — Axis named the tech boom in every writer-facing line (builder).
 - 2026-10-20 — Builder ruled Baylight (call C): under construction, tech stays filed there; West Oakland's tech footprint goes to engine.306 (sim-created firms). Brooklyn, A and B still open.
 - 2026-10-20 — Plan written (rb). Probe on C105–C112: retail measure, gap 6, 7 of 22 off; Baylight and Brooklyn never held. Builds wait on builder calls A/B/C.

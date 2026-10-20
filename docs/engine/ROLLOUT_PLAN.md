@@ -75,7 +75,7 @@
 |---|------|-------|----------|---------|
 | civic.43 | School board: T1 + T3 LIVE. T2 seating HELD (builder 2026-10-07): schools half built (hood school data, no schools in hoods); deep review first, then the canon-name fix | needs-info | research-build / engine-sheet | [[../plans/2026-10-04-school-board]] §Builder's words (2026-10-07) |
 | research.30 | Discord voices connected (builder 2026-10-19): brief, search first, Paulson bonds, talk recorder LIVE. Read 2026-10-25: first Cycle drain of DISCORD rows (C113) | live-observing | research-build | [[../plans/2026-10-19-discord-voices-connected]] |
-| pipeline.71 | Each hood read against its own canon: boom standing (holds / above / below / used to be) on every hood-scoped slice. Spec + C105–C112 probe written 2026-10-20; build (es) waits builder calls A measure, B Cycles to "used to be", C Baylight/Brooklyn never held | needs-info | research-build / engine-sheet | [[../plans/2026-10-20-hood-character-standing]] §Builder calls |
+| pipeline.71 | Each hood read against its own canon: tech-boom standing (holds / above / below / used to be) on every hood-scoped slice. Spec + C105–C112 probe written 2026-10-20; build (es) waits builder calls A measure of the tech boom, B Cycles to "used to be", C Baylight/Brooklyn never held | needs-info | research-build / engine-sheet | [[../plans/2026-10-20-hood-character-standing]] §Builder calls |
 
 ## 2. Waiting on a fire — dated or organic
 

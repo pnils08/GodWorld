@@ -13,6 +13,7 @@ PRE=3ed34b61
 FILES="phase05-citizens/applyBusinessDynamics.js phase05-citizens/generateCitizensEvents.js"
 [ -f "$MAN" ] || { echo "no benched manifest $MAN — stop"; exit 1; }
 [ "$(realpath "$MAN")" = "$OUT/stage16-e214c.sha256" ] || { echo "manifest must be the benched stage16-e214c.sha256 — stop"; exit 1; } # codex final gate 2026-10-20
+git ls-files --error-unmatch "$MAN" >/dev/null 2>&1 && git diff --quiet HEAD -- "$MAN" || { echo "manifest $MAN is not committed as-is — stop"; exit 1; } # codex Cut C final gate: the path is pinned, its bytes must be too
 W=$(mktemp -d); mkdir -p "$W/stage" "$W/pullback"
 ( cd "$W/stage" && printf '{"scriptId":"%s","rootDir":""}' "$PROD_ID" > .clasp.json && "$CLASP" pull >/dev/null )
 ( cd "$W/stage" && find . -type f ! -name .clasp.json | sort | xargs sha256sum ) | diff -q - "$OUT/stage15-e214b.sha256" >/dev/null \

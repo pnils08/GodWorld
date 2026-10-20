@@ -88,6 +88,16 @@ function shelfRank(p) {
 }
 const PRIMARY = p => shelfRank(p) <= 3;
 
+// what a shelf-only file is: piece (an article or profile that sits on the wrong shelf), data, mirror, index, template, assignment
+function shelfClass(p) {
+  if (p.startsWith('archive/non-articles/mirrors/')) return 'mirror';
+  if (p.startsWith('archive/non-articles/indexes/')) return 'index';
+  if (p.startsWith('archive/non-articles/templates/')) return 'template';
+  if (p.startsWith('archive/non-articles/assignments/')) return 'assignment';
+  if (p.startsWith('archive/non-articles/data/')) return /STATCAST PLAYER CARD|^Savant_/i.test(path.basename(p)) ? 'data' : 'piece';
+  return 'piece';
+}
+
 function diskIndex() {
   const out = [];
   const walk = d => {
@@ -180,6 +190,8 @@ async function main() {
   const byFp = {};
   for (const [id, r] of Object.entries(manifest)) (byFp[r.fp] = byFp[r.fp] || []).push(id);
   for (const ids of Object.values(byFp)) if (ids.length > 1) for (const id of ids) manifest[id].sameAs = ids.filter(x => x !== id);
+  // shelf-only rows: say what the file is, so the index reads the pieces and leaves the rest
+  for (const r of Object.values(manifest)) if (r.status === 'shelf-only') r.class = shelfClass(r.disk);
   // a copy with no home of its own takes its twin's: same body, different Drive file
   for (const [id, r] of Object.entries(manifest)) {
     if (r.status !== 'missing' || !r.sameAs) continue;
@@ -215,7 +227,7 @@ async function main() {
     delete r.landPending;
   }
   const sorted = Object.keys(manifest).sort((a, b) => (manifest[a].drivePath + manifest[a].name).localeCompare(manifest[b].drivePath + manifest[b].name));
-  const head = { version: 1, builtBy: 'scripts/syncDriveArticles.js', note: 'Drive file id -> disk path -> fingerprint. status: on-disk | shelf-only | landed | copy | variant | draft | not-article | in-bundle | missing. Supermemory is not written by this file.', counts: count };
+  const head = { version: 1, builtBy: 'scripts/syncDriveArticles.js', note: 'Drive file id -> disk path -> fingerprint. status: on-disk | shelf-only (class: piece | data | mirror | index | template | assignment) | landed | copy | variant | draft | not-article | in-bundle | missing. Supermemory is not written by this file.', counts: count };
   const lines = sorted.map(id => '  ' + JSON.stringify(id) + ': ' + JSON.stringify(manifest[id]));
   fs.writeFileSync(MANIFEST, '{\n' + Object.entries(head).map(([k, v]) => ' ' + JSON.stringify(k) + ': ' + JSON.stringify(v) + ',').join('\n') + '\n "files": {\n' + lines.join(',\n') + '\n }\n}\n');
   console.log('wrote ' + pending.length + ' file(s) and ' + path.relative(ROOT, MANIFEST));

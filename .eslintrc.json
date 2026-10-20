@@ -46,7 +46,6 @@
     {
       "files": [
         "scripts/buildPlayerIndex.js",
-        "scripts/buildArticleIndex.js",
         "scripts/reorganizeArchive.js",
         "dashboard/server.js",
         "dashboard/vite.config.js",

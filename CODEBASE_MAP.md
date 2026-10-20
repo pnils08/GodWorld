@@ -322,7 +322,8 @@ The largest and most complex phase; simulates individual citizen lifecycles each
 | `buildWorldSummary.js` (~30 KB) | World state summary document |
 | `buildNeighborhoodCards.js` (~27 KB) | Neighbourhood info cards |
 | `buildInitiativePackets.js` (~27 KB) | Initiative status packets — run each cycle (civic.14) |
-| `buildArticleIndex.js` (~23 KB) | Bay Tribune article index |
+| `buildArticleIndex.js` (~26 KB) | Bay Tribune master index: one row per piece into `archive/ARTICLE_INDEX.jsonl` (pipeline.84); `priorCoverage` for the assignment pre-check |
+| `syncDriveArticles.js` (~16 KB) | Drive-to-disk landing of published pieces + `archive/drive-manifest.json` (pipeline.84) |
 | `buildBusinessCards.js` (~19 KB) | Business entity cards |
 | `buildFaithCards.js` (~25 KB) | Faith community cards |
 | `buildCulturalCards.js` (~22 KB) | Cultural institution cards |

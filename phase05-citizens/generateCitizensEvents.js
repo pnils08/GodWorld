@@ -3685,7 +3685,9 @@ function generateCitizensEvents_(ctx) {
     // scale those metrics with texture volume and confound the live G-EC33
     // uniformity watch + the engine.38 convergence concern. Once-per-citizen
     // holds the metric grain at exactly today's rate.
-    if (ev === 0 && typeof recordPulse_ === 'function') recordPulse_(S, neighborhood, lineKind, tags, pick);
+    // engine.305: the pulse follows the written line's grade — a Neighborhood line graded Down
+    // pulses Neighborhood-Down (pulseKindForLine_, same file as recordPulse_).
+    if (ev === 0 && typeof recordPulse_ === 'function') recordPulse_(S, neighborhood, pulseKindForLine_(lineKind, primaryTag), tags, pick);
 
     // engine.47 Hop 4: attribution — this citizen actually drew tonight's game.
     if (tags.indexOf("gameNight") >= 0) gameNightDrawn.push(String(popId));

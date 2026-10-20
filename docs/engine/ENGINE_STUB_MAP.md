@@ -4489,6 +4489,8 @@
   Reads: S.neighborhoodPulse
   Writes: S.neighborhoodPulse
 
+- **pulseKindForLine_(lineKind, writtenTag)**
+
 ### neighborhoodPulseMap.test.js
 - **check(name, cond)**
 
@@ -4788,4 +4790,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1729
+**Functions mapped:** 1730

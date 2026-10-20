@@ -28,6 +28,9 @@ var PULSE_MAP = {
   // --- Community / neighborhood life ---
   'Community':          { sentiment: 2, attractiveness: 1 },
   'Neighborhood':       { sentiment: 1 },
+  // engine.305: a Neighborhood-kind line graded Down (crime watch, rent, decay, a down texture line)
+  // lowers the hood instead of lifting it — pulseKindForLine_ picks this kind from the written tag.
+  'Neighborhood-Down':  { sentiment: -1 },
   // engine.286 Task 6: an official's public hood moment, graded by the roll
   'CivicRole-Up-S':     { sentiment: 1 },
   'CivicRole-Up-M':     { sentiment: 2 },
@@ -133,9 +136,22 @@ function recordPulse_(S, neighborhood, tag, tags, text) {
   p.events += 1;
 }
 
+/**
+ * engine.305: pulseKindForLine_(lineKind, writtenTag) -> the kind recordPulse_ is
+ * given for one drawn citizen line. The generator grades every Neighborhood-kind
+ * line before writing it (<Kind>-<Dial>-<Up|Down>-<Band>, gradedTag_), but the
+ * pulse took the ungraded kind, so a down line lifted the hood +1. A Neighborhood
+ * line whose written tag grades Down pulses Neighborhood-Down; every other kind
+ * passes through unchanged (the LifeHistory tag is never touched here).
+ */
+function pulseKindForLine_(lineKind, writtenTag) {
+  if (lineKind === 'Neighborhood' && /-Down-[SML]$/.test(String(writtenTag || ''))) return 'Neighborhood-Down';
+  return lineKind;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     PULSE_MAP: PULSE_MAP, TAG_RULES: TAG_RULES, PULSE_CONTENT_RULES: PULSE_CONTENT_RULES,
-    pulseForEvent_: pulseForEvent_, recordPulse_: recordPulse_
+    pulseForEvent_: pulseForEvent_, recordPulse_: recordPulse_, pulseKindForLine_: pulseKindForLine_
   };
 }

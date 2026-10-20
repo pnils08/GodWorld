@@ -55,6 +55,7 @@ global.conductCohortRow_ = C.conductCohortRow_; // engine.272 shared cohort pred
 const P = require('../utilities/neighborhoodPulseMap.js');
 global.recordPulse_ = P.recordPulse_;
 global.pulseForEvent_ = P.pulseForEvent_;
+global.pulseKindForLine_ = P.pulseKindForLine_; // engine.305
 
 function mulberry32(seed) {
   return function () {
@@ -515,6 +516,50 @@ console.log('═══ C6 — G-EC33: per-hood sentiment breaks citywide lockste
   // Fallback: a hood with NO neighborhoodDynamics entry still writes a finite sentiment.
   const F = sentRun(555, 0.40, dynA);
   assert('C6d hood with no dynamics entry falls back to citywide scalar (finite)', isFinite(F['Temescal']), String(F['Temescal']));
+}
+
+// ═══════════════════════════════════════════════════════════════════════════
+console.log('═══ C7 — engine.305: the hood pulse follows the written line\'s sign');
+{
+  const K = P.pulseKindForLine_;
+  assert('C7a Neighborhood line graded Down -> Neighborhood-Down', K('Neighborhood', 'Neighborhood-Outabout-Down-S') === 'Neighborhood-Down');
+  assert('C7b Neighborhood line graded Up -> Neighborhood', K('Neighborhood', 'Neighborhood-Outabout-Up-M') === 'Neighborhood');
+  assert('C7c other kinds pass through (Lifestyle / Community / Faith, graded or not)',
+    K('Lifestyle', 'Lifestyle-Outabout-Down-S') === 'Lifestyle' && K('Community', 'Community-Sociability-Up-S') === 'Community' && K('Faith', 'Faith') === 'Faith');
+  assert('C7d Neighborhood-Down pulses sentiment -1', JSON.stringify(P.pulseForEvent_('Neighborhood-Down', [], '')) === '{"sentiment":-1}');
+  const S0 = {};
+  P.recordPulse_(S0, 'Fruitvale', 'Neighborhood-Down', [], 'a down line');
+  P.recordPulse_(S0, 'Fruitvale', 'Neighborhood', [], 'an up line');
+  assert('C7e a down + an up line: sentiment 0 over 2 events (events count kept)',
+    S0.neighborhoodPulse.Fruitvale.sentiment === 0 && S0.neighborhoodPulse.Fruitvale.events === 2, JSON.stringify(S0.neighborhoodPulse.Fruitvale));
+
+  // The real generator on the four-hood city: every first-draw hood-state pulse, by its fact tag.
+  const DOWN_FACTS = ['state:trajectory-down', 'state:watchful', 'state:housing', 'state:mood-down', 'state:retail-low'];
+  const UP_FACTS = ['state:trajectory-up', 'state:mood-up'];
+  const realPulse = global.recordPulse_;
+  const seen = { down: 0, up: 0, downAsUp: 0, upAsDown: 0 };
+  global.recordPulse_ = (S, hood, kind, tags, text) => {
+    if (tags && tags.indexOf('source:nbhdState') >= 0) {
+      const isDown = tags.some(t => DOWN_FACTS.indexOf(t) >= 0), isUp = tags.some(t => UP_FACTS.indexOf(t) >= 0);
+      if (isDown) { seen.down++; if (kind !== 'Neighborhood-Down') seen.downAsUp++; }
+      if (isUp) { seen.up++; if (kind !== 'Neighborhood') seen.upAsDown++; }
+    }
+    return realPulse(S, hood, kind, tags, text);
+  };
+  rngImpl = mulberry32(305);
+  const rows = buildLedger(HOODS, 20);
+  for (let cy = 1; cy <= 60; cy++) {
+    const ss = memSS({
+      'Neighborhood_Map': memSheet('Neighborhood_Map', seedLoaderMapData()),
+      'LifeHistory_Log': memSheet('LifeHistory_Log', [['Timestamp', 'Cycle', 'POPID', 'Name', 'Event', 'Tag']])
+    });
+    generateCitizensEvents_(makeCtx(94 + cy, rows, ss));
+  }
+  global.recordPulse_ = realPulse;
+  console.log('   hood-state first-draw pulses: ' + seen.down + ' down-fact, ' + seen.up + ' up-fact');
+  assert('C7f the generator path reaches hood-state down lines (Fruitvale decay / rent / crime watch)', seen.down > 0, JSON.stringify(seen));
+  assert('C7g no hood-state down line pulses Neighborhood +1', seen.downAsUp === 0, JSON.stringify(seen));
+  assert('C7h no hood-state up line pulses Neighborhood-Down', seen.upAsDown === 0, JSON.stringify(seen));
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

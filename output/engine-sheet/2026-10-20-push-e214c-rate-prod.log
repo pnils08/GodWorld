@@ -1,0 +1,5 @@
+fresh PROD pull = stage 16 (no drift)
+stage = the benched tree (output/engine-sheet/stage17-e214c-rate.sha256), byte for byte
+└─ utilities/writeIntents.js
+pinned deployment AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ serves @154
+pull-back 167 js + manifest byte-identical to output/engine-sheet/stage17-e214c-rate.sha256

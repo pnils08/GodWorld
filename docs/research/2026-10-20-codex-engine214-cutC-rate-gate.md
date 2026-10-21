@@ -1,0 +1,33 @@
+---
+title: Engine.214 Cut C stage 17 rate gate
+created: 2026-10-20
+updated: 2026-10-20
+type: reference
+tags: [engine, citizens, review]
+sources:
+  - docs/research/2026-10-20-engine214-cutC-rate-gate-TASK.md
+  - docs/plans/2026-10-10-engine-214-mood-per-hood.md
+  - output/engine-sheet/2026-10-20-e214c-rate.log
+---
+
+# Engine.214 Cut C rate gate
+
+Read-only source and saved-receipt review. No test, model, Sheet, bench, clasp, cron, commit, or push run here.
+
+| Hunt | Verdict | Finding |
+| --- | --- | --- |
+| 1. Diff | **HOLD on the equal-weight contract** | The isolated generator diff changes only spot weight and venue guard, but the existing archetype pass can multiply a spot line by 1.15 when its business name contains `work`, `noticed`, or `coordinated`. The full commit range spans 41 paths, so it cannot be pushed as a whole. |
+| 2. Rate | **SHIP for C113 calibration** | The tapped v2 fire estimates 13.503 spot draws / 147 offered holder-facts = 0.0919 per fact; by fact: lift 0.0902, quiet 0.1036, shed 0.1131. This is a one-Cycle conditional estimate, not a demonstrated long-run frequency. |
+| 3. Bench | **SHIP within observed facts** | V2: 8 lift draws, all graded Up, 0 wrong-spot or stray lines, 0 spot venue appends; 4 first-draw pulses are Up on Jack London. V2 draws no Down fact; v1's unchanged fact tags yielded 2 quiet and 2 shed draws, all Down. |
+| 4. Push script | **SHIP for guarded inputs** | Fresh PROD must equal stage 16; its generator must equal `72dacd68`; the built 167-file tree must equal the committed stage-17 manifest before push. Served version and pull-back are checked afterward. These are script guards, not executed proof here. |
+| 5. PROD | **HOLD** | Exclude spot entries from the archetype text boosts, then recheck the exact candidate and rate gate. On a later authorized C113 push, require typed line/spot/grade/pulse and persistence readback; re-measure after 8b changes the pool. Roll back only `generateCitizensEvents.js` from `72dacd68` for this cut. |
+
+## Evidence and limits
+
+1. **Scope and weight.** The file-scoped diff adds `spotTag_`, sets `SPOT_LINE_WEIGHT_ = 11`, and changes each spot fact's weight argument without changing its text, tags, eligibility, pick, or pulse (`phase05-citizens/generateCitizensEvents.js:231-266,2826-2831,3641-3650,3801-3811`). `makeEntry` preserves 11 (`:1057-1063`). The archetype pass tests the **whole rendered text** for `coordinated`, `noticed`, or `work` and multiplies by 1.15 for qualifying traits (`:3409-3433`); a food or retail name such as a synthetic `Clockwork Cafe` contains lowercase `work`, so its fact weight can reach `pickWeighted_` as 12.65. None of the 82 C113 receipt spots has these substrings, so this bench does not exercise the exception (`output/engine-sheet/2026-10-20-e214c-receipt-Brate-c113.json:14-1078`). C9b checks other names, not this case (`scripts/testNeighborhoodLoop.js:766-779`). T5 only touches `react:` and other named sources, and caps only reactions (`phase05-citizens/generateCitizensEvents.js:3436-3460`); grief and continuity do not match spot tags (`:134-154,3467-3482`); ECL balancing touches only `eclPoolKey` entries (`:57-86`). Recent-text and within-Cycle filters can exclude a spot entry (`:3503-3524`), which is availability rather than weight rescaling.
+2. **Venue and test.** The guard checks `spotTag_` before `chanceHit(0.12)` (`phase05-citizens/generateCitizensEvents.js:3641-3650`), so a drawn spot line skips that RNG roll and changes later RNG draws; this is the intended wording fix. C9d checks at least 30 spot draws and zero `spotEnd + " near "` matches across 39 synthetic Cycles (`scripts/testNeighborhoodLoop.js:823-856`); the prior v1 receipt shows the exact quiet-line mutation it catches (`output/engine-sheet/2026-10-20-e214c-v1-receipt-Brate-c113.lines.tsv:2125`). This is finite coverage, not proof for every possible spot name.
+3. **Estimator.** The diagnostic reads the balanced usable pool immediately before `pickWeighted_` and sums each slot's spot weight / total weight (`git diff 80ce64a2 ab198c16`, `phase05-citizens/generateCitizensEvents.js:3503-3537,1299-1309`). That is the conditional expected number of spot draws along the observed pool path; no-repeat makes one fact's expected count its hit probability for this Cycle. Recent-text exclusion, grief-reserved slots, and the fallback pool are handled at that tap. The tap adds a bench-only `Spot_Diag` write, but no selection mutation; clean and tapped v2 receipts both have 2,322 rows and SHA `13046273…` (`output/engine-sheet/2026-10-20-e214c-receipt-Brate-c113.json:2-6`; `…-Bratediag-c113.json:2-6`; `…-ratediag-c113.json:2-35`). Their saved `.lines.tsv` files also compare byte-identical. The rate log records both resets and PASS fires (`output/engine-sheet/2026-10-20-e214c-rate.log:9-36`).
+4. **Fact and pulse.** The v2 receipt's collector reconstructs holder spots and grades from saved rows; it reports no wrong spot or stray (`output/engine-sheet/2026-10-20-e214c-receipt.js:43-96`; `…-receipt-Brate-c113.json:2-13`). The v1 receipt totals 11 Up lift, 2 Down shed, 2 Down quiet (`output/engine-sheet/2026-10-20-e214c-v1-ratediag-c113.json:22-39`; v1 line TSV `:2118,2125`). V2's diagnostic reports four first draws and four `Neighborhood … Up` pulses on Jack London (`output/engine-sheet/2026-10-20-e214c-ratediag-c113.json:22-35`); the parent-hood call and sign mapping are in `phase05-citizens/generateCitizensEvents.js:3801-3811` and `utilities/neighborhoodPulseMap.js:147-150`. No typed post-write hood pulse readback was produced by this rate bench.
+5. **Tree and live boundary.** Stage 16 and stage 17 manifests differ only at the generator hash, `00807385…` to `0817cb4c…`, matching `git show 72dacd68` and `git show 80ce64a2` (`output/engine-sheet/stage16-e214c.sha256:49`; `…/stage17-e214c-rate.sha256:49`). Both manifest and push script are tracked and clean. The script pins manifest path and committed bytes, checks the fresh stage-16 preimage and whole built tree, then verifies the pinned served version and pull-back (`output/engine-sheet/2026-10-20-push-e214c-rate-prod.sh:12-42`). A post-push mismatch still requires operator rollback. C113 watch inherits stage 16's typed readback triggers, but this rate cut's rollback preimage is the single generator file from `72dacd68` (`docs/reference/DEPLOY_HISTORY.md:171-173`). No PROD action or live Cycle was observed in this review.
+
+**Final PROD gate: HOLD.** The saved C113 rate is close to 0.10, but the candidate does not enforce one weight for every spot fact. Live deployment, first-fire persistence, and sustained per-fact rate remain unverified.

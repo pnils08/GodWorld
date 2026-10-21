@@ -68,6 +68,47 @@ Rent: 684 LifeHistory lines, 0 debits. No door scales with wealth: a $100M citiz
 | 5 | **Heritage gates and ladder.** What "Rockefeller presence" means in this city — money, time held, homes, businesses, generations — and rewrite Doors A/B/C and the standing bands from that, so the door and the ladder agree (today Door A admits $1.2M lines; Door C admits $50M that scores 17 of Dynasty's 70). Rule what happens to the nine existing lines. Builder re-raised 2026-10-21 (verbatim in [[2026-10-10-engine-214-mood-per-hood]] step 8, engine.309): "50M may be too low as that amount of money doesnt necesarrly make a person affluent in a city." engine.309 (off-heritage ascent) ends at this door and takes its number from here. | rb + builder | not started |
 | 6 | **Build order.** From Tasks 1–5, the engine.* rows in sequence with their acceptance checks, each as its own plan or a section here; engine-sheet picks them up from ROLLOUT. | rb → es | not started |
 
+### Task 5 design — the heritage doors (research-build + builder, 2026-10-21 afternoon)
+
+**Builder (verbatim), the nine lines:** "if they dont belong on this type of ledger than a reread is likely the answer." **The gates:** "lets adress the heritage gates , whos in, who needs to be removed, what gates should exist, networth above 150m can be the cash gate or even higher if creates a relaistic gap, but maybe just being super rich isnt the only way in, perhaps a fame score added to a lower net worth, this is why its in the "game" build as this ledger is essentially you are winning ht egame of life and maintaining your place on this ledger is "winning the game". so gating a net worth matters but other combinations could allow entry as well." Earlier the same day: $50M too low, ~$150M, "money I dont believe is the only factor."
+
+**The read (live Heritage_Ledger C112 + Simulation_Ledger snapshot C112 + `generationalWealthEngine.js`):**
+
+| Line | Door in | NW | Standing | Tier | Members / gens | Home | Biz | Fame |
+|---|---|---|---|---|---|---|---|---|
+| Varek | B | $10.0B | 48 | Established | 1 / 1 | 0 | 1 | 0 |
+| Keane | B | $450M | 37.5 | Established | 2 / 1 | 0 | 1 | 1 |
+| Dillon | A | $397M | 36 | Established | 3 / 2 | 0 | 1 | 1 |
+| Kelley | B | $375M | 34.7 | Established | 1 / 1 | 1 | 1 | 1 |
+| Horn | C | $90M | 24.5 | Founding | 1 / 1 | 1 | 0 | 1 |
+| Paulson | C | $76M | 23.8 | Founding | 1 / 1 | 1 | 0 | 1 |
+| Reaves | C | $50M | 22 | Founding | 1 / 1 | 1 | 0 | 1 |
+| Corliss | A | $2.5M | 10 | Founding | 4 / 2 | 0 | 0 | 1 |
+| Villanueva | A | $1.2M | 3.8 | Founding | 4 / 2 | 0 | 0 | 0 |
+
+- Doors today (`:2541-2551`): A = 3 living members + $1M combined; B = one member $350M; C = one member $50M **+ an owned home**. Nobody is Prominent (50) or Dynasty (70); a $150M line scores ~22 on wealth alone (Founding).
+- **Off the ledger at ≥ $150M, eight citizens** — Skenes $245M, Conrad $240M, Aitken $225M, Richards $180M, Bubic $180M, Achebe $169M, Davis $160M, Miller $160M. None has an owned home; the home, not the money, is what Door C holds them out with. A pure cash door at $150M admits all eight the first Cycle. $50M–$150M off-line: Salcedo $133M, Rivas $100M, Kerkering $100M, Rushing $90M, Zavala $88M, Voss-Adeyemi $72M, Bautista $64M, Raman $54M.
+- **Fame exists twice already (FIX, not ADD).** (1) `UsageCount` on the Simulation_Ledger = press mentions; the standing formula's fame term counts members at ≥5 (83 citizens clear it — too wide for a door); ≥10 = 36, ≥20 = 7 (Keane 63, Dillon 62, Paulson 39, Aitken 30, Kelley 30, Miller 23, Raines 20). (2) `Cultural_Ledger.FameScore` — 50 rows, every one linked to a POPID via UniverseLinks, decays each Cycle (`decayCulturalFame_`), +5 per sighting; ≥50 = 13, ≥75 = 7, ≥100 = 3 (Marin Tao 153, Rico Valez 116, Jade Orion 104). **Every FameScore ≥ 50 citizen holds under $1M.** The A's stars and Paulson are on the Cultural_Ledger but under 50. A fame door therefore admits nobody today unless its money term is small, and its entrants will rise and fall with the decay — which is the game the builder named.
+- **Why Corliss/Villanueva never fall off** (`:3122`): the low-standing clock runs only on a line whose PeakTier was ever Established (`heritageRank_(peakTier) >= 1`). Founding lines are exempt by construction; the only exit for them is "empty" (no living member, 4 Cycles).
+
+**Proposed shape — combination doors, re-read every Cycle. Every number in brackets is the builder's to set.**
+
+| Door | Clears when | Admits today (off-line) | Keeps today (on-line) |
+|---|---|---|---|
+| **Fortune** | one living member NetWorth ≥ **[$150M]** (replaces B $350M and C $50M) — **[with / without] an owned home** | with home: nobody; without: the eight above | Varek, Keane, Dillon, Kelley |
+| **Fame** | a living member with Cultural_Ledger FameScore ≥ **[75]** (7 today) **or** UsageCount ≥ **[20]** (7 today), AND combined NetWorth ≥ **[$5M]** | nobody today at $5M; at [$0.5M]: Dax Monroe, Tara Ellison | Paulson (usage 39, $76M); Keane/Dillon/Kelley also clear |
+| **Roots** | **[3]** living members across **[2]** generations AND combined NetWorth ≥ **[$25M]** AND **[1]** owned home (replaces A $1M) | nobody today | Dillon already in on Fortune |
+| **Civic** (optional, "combinations" plural) | a living member CIV=yes AND combined NetWorth ≥ **[$25M]** | not read yet (53 CIV citizens; join pending the builder wanting this door) | — |
+
+- **Who is removed under this shape:** Horn ($90M, usage 16), Reaves ($50M), Corliss ($2.5M), Villanueva ($1.2M) clear no door → dormant after the grace below. Paulson stays by Fame only. That is 4 of 9 lines out, 5 kept, 8 in by Fortune (without the home) or 0 (with it).
+- **Re-read = the per-Cycle door check, not a sweep** (drift over static backfill). Fix shape for es: the `lowC` trigger at `:3122` becomes "clears no door this Cycle" for **every** line (drop the PeakTier guard), with `HERITAGE_LOW_CYCLES` re-bracketed from 52 to **[4]** as the grace; the dormant row, the readers' skip, the household fallback and the revival path (`:3112-3119`, the line's own members clear a door again) are untouched. "Maintaining your place" is then a real loop: clear a door every Cycle or go quiet, come back when you do.
+- **Ladder.** Founding 0 / Established 30 / Prominent 50 / Dynasty 70 stay the ladder; a Fortune entrant at $150M lands Founding (22), Varek tops out Established (48). If the door is the Rockefeller bar, the bands sit too high for the ledger it admits: proposal **[Founding 0 / Established 25 / Prominent 40 / Dynasty 60]**, or leave them and let the city grow into them. Builder's call; either way the door and the ladder are the same formula components.
+- **Alternative considered, not proposed:** one door = standing ≥ [30], the formula re-weighted so fame can carry it (today fame caps at 9 points, so no famous-and-poor citizen could enter). Rejected because the builder asked for combinations and the formula's fame term is the wide UsageCount ≥5 bar.
+- **Stays separate:** engine.308 (cap/cooldown) and engine.309 (ascent/crash) are untouched by this; 309's door number = the Fortune door here, per the morning ruling.
+
+**Builder's calls on this shape:** (1) Fortune door with or without the owned home — swings who's-in by eight names; (2) which fame measure and bar (Cultural FameScore [75] / UsageCount [20]) and the money under it [$5M]; (3) Roots door kept as written or dropped; (4) Civic door yes/no; (5) the bands. Outside check on the spec: agy §Review (builder 2026-10-21: es and codex are on a separate build).
+
+
 ## Acceptance
 
 1. Every loss door for the wealthy is written with a trigger, a rate, a size and an aftermath — no door "that can't fire".
@@ -105,12 +146,13 @@ Rent: 684 LifeHistory lines, 0 debits. No door scales with wealth: a $100M citiz
 ## Open questions
 
 - Does Coastline Construction hold the Baylight contract? — blocks Task 3; for the builder (canon).
-- Do the nine existing heritage lines keep their standing under a rewritten gate, or are the small ones (Corliss, Villanueva) re-read? — blocks Task 5; for the builder.
+- ~~Do the nine existing heritage lines keep their standing under a rewritten gate, or are the small ones (Corliss, Villanueva) re-read?~~ **Ruled 2026-10-21 (builder): a re-read** — every line clears a door every Cycle or goes dormant; design in Task 5 above.
 - **Builder 2026-10-21 (verbatim), on falling off:** "only those that clear the gate go onto the heritage ledger, not sure if it already has the mechanism to disband once you fall below. that another aspect of the heritage ledger, once your on you stay or once you go below your out, but the ripple of if someone fell off would it break the sim logic or would they just fall back to a household." **What exists (rb read, `generationalWealthEngine.js:3102-3134`, engine.156/157):** the row is never deleted — a line goes DORMANT (Status dormant, tier blank, DormantSince stamped) on two clocks: no living member for 4 Cycles, or standing under 10 for 52 straight Cycles — and only for a line that was ever Established (`heritageRank_(peakTier) >= 1`); a Founding line never goes dormant for low money. Dormancy is NOT the door: a $50M solo line scores 17 and would have to fall to under 10 (≈ $3M) for a year. The tier itself moves up and down every Cycle with no hysteresis (standing is recomputed from what the family holds now). Ripple = safe by design: `heritageTierByPop_` skips dormant lines (`:2625`), so every reader (phase-4 birth boost, estate rate `:1362`, owner draw `:1138-1142` → paid as off-heritage, the business roll `:3172`, the intake door, maneuver engine) treats a dormant member as no line; the citizen keeps LineageId, their Household_Ledger row and job untouched — they fall back to a household. Revival: the line's own members clear a door again under the same LineageId; tenure resets, PeakTier remembers. **Open for Task 5:** whether "below the door" should be the dormancy bar (today the bar is 10, the door scores 17–30+), and how long below before out (today 52 Cycles).
 - Does a divorce or a lawsuit exist as an event in the engine today? — blocks Task 1; es code read before the session.
 
 ## Changelog
 
+- 2026-10-21 (research-build) — Task 5 design session with the builder: re-read ruled; the heritage doors read live (nine lines, eight off-line at ≥$150M held out by the home, fame exists twice and every famous cultural citizen is under $1M); combination doors proposed with the numbers bracketed; five builder calls named; agy takes the §Review.
 - 2026-10-21 (research-build) — Builder asks whether a line disbands when it falls below the gate; read recorded: dormancy exists (empty 4 / standing <10 for 52, Established+ only), row kept, readers skip dormant lines, citizens fall back to households; the bar vs the door is open for Task 5.
 - 2026-10-21 (research-build) — Task 5 re-raised by the builder ($50M too low); engine.308/309 filed under the engine-214 plan cross-link here; 309 ascent waits on this door number.
 - 2026-10-16 (engine-sheet) — Created from the money read with the builder; engine.295 re-scoped to this doc; rulings S1–S5 verbatim; Tasks 1–6 for the research-build session.

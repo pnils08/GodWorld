@@ -127,6 +127,19 @@ console.log('\n1. the pool — who can draw:');
   check('institution by size, by sector, by name, blank books, a filled seat, no room, no profit — all out', !pool.some(p => /00025|00001|00017|00099|00052|00200|00201/.test(p.id)));
   const w2 = world({ cfg: { bizOwnerMintP: 0.2, bizOwnerMaxStaff: 250, bizOwnerMinAge: 35, bizOwnerMinProfit: 5000000 } });
   check('the profit floor is the one knob that drops the shop tail', E.buildOwnerDoorPool_(w2.ctx, w2.ctx.config).map(p => p.id).join() === 'BIZ-00056,BIZ-00029');
+  // engine.306: the five Tier-1 landmarks at their intake seeds — out on the Sector marker alone
+  const LANDMARKS = [
+    ['BIZ-00187','Heinold\'s First and Last Chance Saloon','Bar / Saloon / Historic Landmark','Jack London',11,48000,720000,3,''],
+    ['BIZ-00188','Paramount Theatre','Theater / Historic Landmark','Uptown',9,55000,800000,3,''],
+    ['BIZ-00189','Fox Theater Oakland','Theater / Historic Landmark','KONO',9,55000,800000,3,''],
+    ['BIZ-00190','Oakland Asian Cultural Center','Cultural Center / Community / Historic Landmark','Chinatown',6,45000,500000,2,''],
+    ['BIZ-00191','Oakland Coliseum','Stadium / Historic Landmark','East Oakland',6,45000,500000,2,''],
+  ];
+  const w3 = world({ biz: BIZ.concat(LANDMARKS) });
+  check('the five landmarks never enter the pool', E.buildOwnerDoorPool_(w3.ctx, CFG).map(p => p.id).join() === 'BIZ-00056,BIZ-00029,BIZ-00068');
+  const bare = LANDMARKS.slice(0, 3).map(r => { const c = r.slice(); c[2] = c[2].replace(' / Historic Landmark', ''); return c; });
+  const w4 = world({ biz: BIZ.concat(bare) });
+  check('without the marker the Bar and the two Theaters would draw an owner (the gate is the marker)', E.buildOwnerDoorPool_(w4.ctx, CFG).filter(p => /0018[789]/.test(p.id)).length === 3);
   let err = null; try { E.ownerDoorConfig_({ config: { bizOwnerMintP: 0.2 } }); } catch (e) { err = e; }
   check('missing keys fail loud, naming them', !!err && /bizOwnerMaxStaff, bizOwnerMinAge, bizOwnerMinProfit/.test(err.message), err && err.message);
 }

@@ -2205,7 +2205,10 @@ var OWNER_DOOR_REQUIRED_KEYS = ['bizOwnerMintP', 'bizOwnerMaxStaff', 'bizOwnerMi
 // Institutions, public bodies, faith, and the real-world vendors on the ledger
 // never draw an owner — an explicit denylist on Sector and Name, not an income
 // cut (a hospital out-earns every contractor). File-scoped on purpose.
-var OWNER_DOOR_INST_SECTOR_RE = /public|municipal|government|transit|utilit|education|school|legal|judicial|safety|police|fire|port|logistic|faith|church|synagogue|mosque|temple|community|housing|social|workforce|stadium|franchise|sports|media|journalism|platform|cloud|research|agent|science|development|authority|corporate|civic/i;
+// engine.306: a Tier-1 real-name landmark (INSTITUTIONS) carries "Historic Landmark"
+// in its Sector — Heinold's, the Paramount and the Fox are a Bar / a Theater to every
+// other reader, and the door must never author an owner for them.
+var OWNER_DOOR_INST_SECTOR_RE = /public|municipal|government|transit|utilit|education|school|legal|judicial|safety|police|fire|port|logistic|faith|church|synagogue|mosque|temple|community|housing|social|workforce|stadium|franchise|sports|media|journalism|platform|cloud|research|agent|science|development|authority|corporate|civic|landmark/i;
 var OWNER_DOOR_INST_NAME_RE = /authority|department|county|city of|unified|public|district$/i;
 var OWNER_QUEUE_COLS_ = ['BirthYear', 'Neighborhood', 'EmployerBizId', 'OwnerOfBizId', 'Gender'];
 

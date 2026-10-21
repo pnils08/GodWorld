@@ -3411,6 +3411,7 @@ function generateCitizensEvents_(ctx) {
       for (var awi = 0; awi < pool.length; awi++) {
         var awEntry = pool[awi];
         var awTags = awEntry.tags || [];
+        if (spotTag_(awTags)) continue; // engine.214 Cut C: one weight for every spot fact — a business name is not a trait word
         var weightMod = 1.0;
 
         // Check tags for category matches and apply archetype weights

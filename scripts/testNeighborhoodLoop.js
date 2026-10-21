@@ -868,6 +868,38 @@ console.log('═══ C9 — engine.214 8a Cut C: the citizen\'s spot');
   assert('C9e every first-draw spot pulse follows its sign (down → Neighborhood-Down, up → Neighborhood) and lands on a parent hood (Claremont folds to Rockridge)',
     pulses.length > 0 && pulseMiss.length === 0 && pulses.some(p => p.kind === 'Neighborhood-Down') && pulses.some(p => p.kind === 'Neighborhood'),
     JSON.stringify(pulseMiss.slice(0, 2)));
+
+  // One rate for every fact (builder 2026-10-20, "1 every 10 cycles"): on the real path, after the archetype pass
+  // and the T5 dial loop, every spot entry still weighs SPOT_LINE_WEIGHT_ — even when the business name carries
+  // the archetype text-boost words and the citizen has every trait that boosts them (codex rate gate).
+  {
+    const TAP_AT = '    // engine.94 Task 3: grief biases the already-built ordinary pool once per';
+    const genSrc = fs.readFileSync(path.resolve(__dirname, GEN), 'utf8');
+    if (genSrc.split(TAP_AT).length !== 2) throw new Error('C9f: post-T5 anchor not found exactly once');
+    const tappedGen = new Function(SCOPE_SRC + '\n' + genSrc.replace(TAP_AT, '    if (global.__c9PoolTap) global.__c9PoolTap(pool, SPOT_LINE_WEIGHT_);\n' + TAP_AT) +
+      '\nreturn generateCitizensEvents_;')();
+    let spotEntries = 0; const wMiss = [];
+    global.__c9PoolTap = (pool, W) => {
+      for (const e of pool) {
+        if (!(e.tags || []).some(t => t.indexOf('spot:') === 0)) continue;
+        spotEntries++;
+        if (e.weight !== W) wMiss.push(e.text + ' = ' + e.weight);
+      }
+    };
+    rngImpl = mulberry32(2215);
+    const fRows = buildLedger(['Fruitvale'], 8);
+    fRows.forEach(r => { r[HEADERS.indexOf('TraitProfile')] = 'Archetype:Striver|social:0.9|reflective:0.9|driven:0.9'; });
+    const ss = memSS({
+      'Neighborhood_Map': memSheet('Neighborhood_Map', seedLoaderMapData()),
+      'LifeHistory_Log': memSheet('LifeHistory_Log', [['Timestamp', 'Cycle', 'POPID', 'Name', 'Event', 'Tag']])
+    });
+    const ctx = makeCtx(96, fRows, ss);
+    ctx.summary.hoodSpots = { Fruitvale: [sp({ id: 'BIZ-W', name: 'Clockwork Noticed Coordinated Cafe', streak: 3, prevStreak: 2, shed: 1, lift: true, chaos: ['minor_fire'] })] };
+    tappedGen(ctx);
+    delete global.__c9PoolTap;
+    assert('C9f real path, post-archetype and post-T5: every spot entry weighs SPOT_LINE_WEIGHT_, a name with "work" / "noticed" / "coordinated" included (' + spotEntries + ' entries)',
+      spotEntries >= 8 && wMiss.length === 0, wMiss.slice(0, 3).join(' | '));
+  }
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

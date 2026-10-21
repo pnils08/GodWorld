@@ -1,7 +1,7 @@
 {
  "target": "bench",
- "mode": "recover",
- "at": "2026-10-21T07:40:37.178Z",
+ "mode": "fresh",
+ "at": "2026-10-21T16:54:17.303Z",
  "start": "BIZ-00187",
  "end": "BIZ-00289",
  "mark": 289,
@@ -10,7 +10,7 @@
  "drift": [],
  "checks": [
   [
-   "intake row i ↔ ledger row 182+i: promoted, ID BIZ-00187+i, nine typed cells = the seed, one ledger row per name",
+   "intake row i ↔ ledger row 182+i: A:F staged as written, promoted, ID BIZ-00187+i, nine typed cells = the seed, one ledger row per name",
    true
   ],
   [

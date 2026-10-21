@@ -1,0 +1,82 @@
+AIM = BENCH (script read the bench marker)
+bench project = stage 17 outside the engine.306 files
+stage = stage 17 + 1 engine.306 files at 2896c46c; manifest output/engine-sheet/stage18-e306.sha256
+Script is already up to date.
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @89
+pull-back 167 js + manifest byte-identical to output/engine-sheet/stage18-e306.sha256
+== leg A2 (stage 18, no rows)
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 86 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+bench Business_Intake tab deleted
+version cut; waiting 74 s more for /exec propagation
+leg A2 C113 fire rc=0 "verdict": "PASS" "wallS": 218
+A2 C113: LifeHistory 2322 sha 130462736b782fbe, Career-Hired 1, ledger 180 rows (0 new), employer moves 11 (0 to new rows), chaos business hits 4 (0 new), owner-door queue 0 → /root/GodWorld/output/engine-sheet/2026-10-21-e306-readers-A2-c113.json
+A2 C113: 2322 LifeHistory rows, sha 130462736b782fbe, spot lines drawn 8 {"lift":8}, eligible citizens {"quiet":13,"shed":4}, not their spot 0, strays 0
+== leg B2 (stage 18 + the 103 rows + realign)
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C113
+waiting 65 s: the reset's write quota clears before the intake writes
+ok   roster rows = 103
+ok   0 non-canon hoods
+ok   0 blank roster fields
+ok   Business_Archive holds no BIZ-00039
+ok   BIZ-00039 at row 40
+ok   ledger rows = 180
+ok   bizIdHighWater = 186
+ok   max active = mark
+ok   0 dup names ()
+ok   BIZ-00039 D = Downtown
+ok   data/employer_mapping.json holds none of BIZ-00187..BIZ-00289 ()
+mode fresh | preimage /root/GodWorld/output/engine-sheet/2026-10-21-e306-preimage-bench.json | roster sha 2fea8d2d51bc228f | IDs BIZ-00187..BIZ-00289
+Business_Intake staged 103 rows, every cell read back
+processBusinessIntake rc=0 (log /root/GodWorld/output/engine-sheet/2026-10-21-e306-intake-bench.log)
+bench: data/employer_mapping.json restored
+realign BIZ-00039 row 40 D Downtown → Uptown
+ok   intake row i ↔ ledger row 182+i: A:F staged as written, promoted, ID BIZ-00187+i, nine typed cells = the seed, one ledger row per name
+ok   the original 180 rows A:I = the preimage except D40 = Uptown
+ok   bizIdHighWater = 289
+ok   ledger rows = 283
+ok   data/employer_mapping.json byte-identical to before
+RECEIPT PASS
+leg B2 C113 fire rc=0 "verdict": "PASS" "wallS": 192
+B2 C113: LifeHistory 2290 sha bb0ac98b0284f1cd, Career-Hired 1, ledger 284 rows (104 new), employer moves 12 (2 to new rows), chaos business hits 4 (0 new), owner-door queue 0 → /root/GodWorld/output/engine-sheet/2026-10-21-e306-readers-B2-c113.json
+B2 C113: 2290 LifeHistory rows, sha bb0ac98b0284f1cd, spot lines drawn 10 {"forced_temporary_closure":1,"lift":8,"shed":1}, eligible citizens {"quiet":13,"forced_temporary_closure":8,"shed":4}, not their spot 0, strays 0
+bench Business_Intake tab deleted
+LifeHistory A2 2322 sha 130462736b782fbe | B2 2290 sha bb0ac98b0284f1cd
+ledger rows the baseline lacks: 104; off the roster: [{"id":"BIZ-00290","name":"Varek Fellowship","sector":"Community Organization","hood":"West Oakland"}]
+hood	+rows	RV A→B	Event A→B	LH lines A/B	chaos A2	chaos B2
+Adams Point	4	5.85→5.87 (0.02)	3→2 (-1)	19/19	-	-
+Baylight District	0	5→5.25 (0.25)	4.5→2 (-2.5)	19/18	-	-
+Brooklyn	4	5.21→4.32 (-0.89)	3→2 (-1)	19/16	neighborhood dumping_cleared Sentiment -0.05	neighborhood dumping_cleared Sentiment -0.05
+Chinatown	5	9.15→8.03 (-1.12)	7.43→4.31 (-3.12)	148/138	neighborhood medical_emergency Sentiment -0.07	Golden Lotus Market lost_contract_notice Growth_Rate -1.25; neighborhood medical_emergency Sentiment -0.07; Heritage Bakehouse forced_temporary_closure Growth_Rate -2
+Dimond	5	8.09→8.13 (0.04)	4→3 (-1)	21/22	-	-
+Downtown	4	11.56→12.87 (1.31)	6.23→4.32 (-1.91)	169/162	-	-
+East Oakland	7	6.18→6.45 (0.27)	4→3.25 (-0.75)	31/39	neighborhood welfare_check Sentiment 0.1; Masjid An-Nur Oakland forced_temporary_closure Growth_Rate -2	neighborhood welfare_check Sentiment 0.1
+Eastlake	4	6.33→5.91 (-0.42)	5.11→3.11 (-2)	18/17	-	-
+Fruitvale	8	10.56→10.58 (0.02)	6.21→4.19 (-2.02)	207/206	-	-
+Glenview	0	4.38→4.56 (0.18)	3→2 (-1)	15/15	-	-
+Grand Lake	5	10.34→9.59 (-0.75)	7→4 (-3)	20/26	-	Marquee Grocer new_contract_letter Growth_Rate 1
+Ivy Hill	0	4.09→4.98 (0.89)	3.25→2 (-1.25)	17/14	-	-
+Jack London	8	14.13→14.19 (0.06)	8.16→5.08 (-3.08)	146/152	-	-
+KONO	5	7.53→8.13 (0.6)	7→5 (-2)	32/33	-	-
+Lake Merritt	7	7.92→7.67 (-0.25)	3.5→2.43 (-1.07)	185/187	Ridgeline Ventures overdue_payment_arrives Growth_Rate 0.5	-
+Laurel	6	6.49→6.97 (0.48)	5→3 (-2)	123/119	Nino's lost_contract_notice Growth_Rate -1.25	-
+Piedmont Ave	9	11.07→11.93 (0.86)	4.24→2.13 (-2.11)	136/146	-	-
+Rockridge	4	12.4→13.1 (0.7)	5→3.19 (-1.81)	184/181	neighborhood parking_ticket RetailVitality 2.74; neighborhood stalled_train TransitDelay 0.1	neighborhood parking_ticket RetailVitality 2.74; neighborhood stalled_train TransitDelay 0.1
+San Antonio	4	5.43→4.94 (-0.49)	5→3 (-2)	19/16	-	-
+Temescal	5	5.14→5.52 (0.38)	5.22→4.22 (-1)	126/118	-	-
+Uptown	5	11.78→12.5 (0.72)	8.24→5.21 (-3.03)	186/179	-	-
+West Oakland	5	9.41→9.89 (0.48)	5.16→3.17 (-1.99)	277/263	West Oakland Stabilization Fund new_contract_letter Growth_Rate 1	-
+→ /root/GodWorld/output/engine-sheet/2026-10-21-e306-attrib-A2-B2.json
+bench = leg B2 (2896c46c + rows)
+PAIR2 DONE
+exit 0

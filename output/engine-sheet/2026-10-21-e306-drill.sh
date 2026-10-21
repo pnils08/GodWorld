@@ -5,6 +5,8 @@
 #   3. damage the bench the way the C113 quota halt did (2026-10-21-e306-legB-halt1.log): Status G63:G104 back to `staged`
 #      (61 of 103 promoted), plus the mark back to 186 and D40 back to Downtown (the lagging-mark and skipped-realign branches)
 #   4. dry run without --recover → mode recover, STOP on the flag  5. --recover --apply → RECEIPT PASS
+#   (codex diff gate 2 item 2) 6. un-land as if the processor never ran: ledger rows 182..284 deleted, mark 186, G2:G104 `staged`,
+#   D40 Downtown  7. one old cell edited (E10 +1) → restage refuses on the original-preimage gate; E10 put back  8. restage → RECEIPT PASS
 # No fire. Bench left at the drill's end state; the next leg resets it.
 # (Header of 2026-10-21-e306-legB.sh kept below for the shared functions.)
 #: C113 from BASELINE-1004-C112b + the bench MaritalStatus migration + the Generic_Citizens
@@ -69,5 +71,41 @@ const id = '1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA';
 " 2>&1 | grep -v "injected env"
 echo "== 4. dry, no --recover"; node $D --target bench --apply 2>&1 | grep -v "injected env" | tail -4
 echo "== 5. recover"; node $D --target bench --apply --recover 2>&1 | grep -v "injected env"; [ ${PIPESTATUS[0]} -eq 0 ] || { echo "HALT recover"; exit 8; }
+git diff --quiet -- data/employer_mapping.json || { echo "HALT data/employer_mapping.json changed"; exit 7; }
+bench_edit() {   # bench_edit <js body using api, id, ledgerSheetId, hw>
+  node -e "
+require('/root/GodWorld/lib/env');
+const { google } = require('/root/GodWorld/node_modules/googleapis');
+const id = '1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA';
+(async () => {
+  const api = google.sheets({ version: 'v4', auth: new google.auth.GoogleAuth({ keyFile: process.env.GOOGLE_APPLICATION_CREDENTIALS, scopes: ['https://www.googleapis.com/auth/spreadsheets'] }) });
+  const m = (await api.spreadsheets.get({ spreadsheetId: id, fields: 'properties.title,sheets.properties' })).data;
+  if (m.properties.title !== 'Sandox_104_c109-live_Simulation_Narrative') throw new Error('not the bench');
+  const ledgerSheetId = m.sheets.find(s => s.properties.title === 'Business_Ledger').properties.sheetId;
+  const wc = (await api.spreadsheets.values.get({ spreadsheetId: id, range: 'World_Config!A:A' })).data.values;
+  const hw = wc.findIndex(r => String(r[0]).trim() === 'bizIdHighWater') + 1;
+  $1
+})().catch(e => { console.error(e.message); process.exit(1); });
+" 2>&1 | grep -v "injected env"
+}
+echo "== 6. un-land (bench only): the processor never ran — ledger rows 182..284 deleted, mark 186, G2:G104 staged, D40 Downtown"
+bench_edit "
+  await api.spreadsheets.batchUpdate({ spreadsheetId: id, requestBody: { requests: [{ deleteDimension: { range: { sheetId: ledgerSheetId, dimension: 'ROWS', startIndex: 181, endIndex: 284 } } }] } });
+  await api.spreadsheets.values.batchUpdate({ spreadsheetId: id, requestBody: { valueInputOption: 'RAW', data: [
+    { range: 'Business_Intake!G2:G104', values: Array.from({ length: 103 }, () => ['staged']) },
+    { range: 'World_Config!B' + hw, values: [[186]] }, { range: 'Business_Ledger!D40', values: [['Downtown']] } ] } });
+  console.log('un-landed: rows 182..284 deleted, G2:G104 staged, mark 186 (row ' + hw + '), D40 Downtown');"
+echo "== 7. an old row edited since the fresh run (E10 +1) → restage must refuse"
+bench_edit "
+  const v = (await api.spreadsheets.values.get({ spreadsheetId: id, range: 'Business_Ledger!E10', valueRenderOption: 'UNFORMATTED_VALUE' })).data.values[0][0];
+  await api.spreadsheets.values.update({ spreadsheetId: id, range: 'Business_Ledger!E10', valueInputOption: 'RAW', requestBody: { values: [[Number(v) + 1]] } });
+  require('fs').writeFileSync('$TMP.e10', String(v)); console.log('E10 ' + v + ' → ' + (Number(v) + 1));"
+node $D --target bench --apply 2>&1 | grep -v "injected env" | grep -E "^FAIL|^mode|^STOP"; [ ${PIPESTATUS[0]} -eq 2 ] || { echo "HALT restage did not refuse the edited old row"; exit 9; }
+bench_edit "
+  const v = require('fs').readFileSync('$TMP.e10', 'utf8');
+  await api.spreadsheets.values.update({ spreadsheetId: id, range: 'Business_Ledger!E10', valueInputOption: 'RAW', requestBody: { values: [[Number(v)]] } });
+  console.log('E10 back to ' + v);"
+echo "waiting 65 s: steps 4-7 spent the minute's read quota (drill2 run 1: the processor's first read failed)"; sleep 65
+echo "== 8. restage"; node $D --target bench --apply 2>&1 | grep -v "injected env"; [ ${PIPESTATUS[0]} -eq 0 ] || { echo "HALT restage"; exit 10; }
 git diff --quiet -- data/employer_mapping.json || { echo "HALT data/employer_mapping.json changed"; exit 7; }
 echo "DRILL DONE"

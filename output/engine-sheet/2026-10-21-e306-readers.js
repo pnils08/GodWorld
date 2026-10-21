@@ -2,7 +2,8 @@
 // after a C113 fire — per hood saved RetailVitality / Sentiment / Nightlife / EventAttractiveness and Neighborhood_Demographics
 // Unemployed; Business_Ledger rows, stated jobs and revenue; employer moves vs BASELINE-1004-C112b (who changed EmployerBizId, to
 // which row, new rows marked); Career-Hired lines; business-scoped chaos targets; owner-door queue rows; TreasuryPost business tax;
-// the Cycle's LifeHistory line-set sha (same method as the e214c receipt). Writes nothing to any sheet.
+// the Cycle's LifeHistory line-set sha (same method as the e214c receipt); per hood, this Cycle's chaos rows and LifeHistory lines;
+// the ledger rows the baseline does not hold, by name (codex diff gate 2 item 3). Writes nothing to any sheet.
 // usage: node 2026-10-21-e306-readers.js <cycle> <label>  → output/engine-sheet/2026-10-21-e306-readers-<label>-c<cycle>.json
 require('/root/GodWorld/lib/env');
 const BENCH = '1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA', BASE = '1Mbz-sE13iu1RU4qo-rzsczjjPRKAU-KSfnQnrJNXCgA';
@@ -48,6 +49,19 @@ const col = (t, n) => t[0].indexOf(n);
   const hits = cc.slice(1).filter(r => num(r[col(cc, 'CycleId')]) === cyc && r[col(cc, 'TargetScope')] === 'business')
     .map(r => ({ id: r[col(cc, 'TargetId')], name: bizName[r[col(cc, 'TargetId')]] || '', outcome: r[col(cc, 'DiceOutcome')], newRow: !baseIds.has(String(r[col(cc, 'TargetId')]).trim()) }));
   out.chaosBusinessHits = { total: hits.length, onNewRows: hits.filter(h => h.newRow).length, list: hits };
+  // codex diff gate 2 item 3 — row-specific: every chaos row this Cycle placed in its hood (business → the row's Neighborhood),
+  // this Cycle's LifeHistory lines per hood (the pulse-fold input), and the ledger rows the baseline does not hold, by name.
+  const bizHood = {}; bl.slice(1).forEach(r => { bizHood[String(r[0]).trim()] = r[col(bl, 'Neighborhood')]; });
+  out.chaosByHood = {};
+  cc.slice(1).filter(r => num(r[col(cc, 'CycleId')]) === cyc).forEach(r => {
+    const scope = r[col(cc, 'TargetScope')], tid = String(r[col(cc, 'TargetId')]).trim();
+    const hood = scope === 'business' ? (bizHood[tid] || '(unknown)') : scope === 'neighborhood' ? tid : '(' + scope + ')';
+    (out.chaosByHood[hood] = out.chaosByHood[hood] || []).push({ scope, id: tid, name: bizName[tid] || '', vehicle: r[col(cc, 'VehicleType')],
+      outcome: r[col(cc, 'DiceOutcome')], metric: r[col(cc, 'PrimaryMetric')], magnitude: r[col(cc, 'MetricMagnitude')] });
+  });
+  const iN = col(lh, 'Neighborhood');
+  out.lifeHistoryByHood = {}; rows.forEach(r => { const h = r[iN] || '(none)'; out.lifeHistoryByHood[h] = (out.lifeHistoryByHood[h] || 0) + 1; });
+  out.newLedgerRows = bl.slice(1).filter(r => !baseIds.has(String(r[0]).trim())).map(r => ({ id: r[0], name: r[1], sector: r[2], hood: r[3] }));
   const adv = await tab(BENCH, 'Advancement_Intake1');
   const iOwn = adv ? col(adv, 'OwnerOfBizId') : -1;
   out.ownerDoorQueue = iOwn < 0 ? [] : adv.slice(1).filter(r => String(r[iOwn] || '').trim()).map(r => ({ first: r[0], last: r[2], owns: r[iOwn], name: bizName[String(r[iOwn]).trim()] || '', newRow: !baseIds.has(String(r[iOwn]).trim()) }));

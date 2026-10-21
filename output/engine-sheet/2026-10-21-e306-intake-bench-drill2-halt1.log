@@ -1,0 +1,6 @@
+◇ injected env (31) from ../.config/godworld/.env // tip: ◈ secrets for agents [www.dotenvx.com]
+=== processBusinessIntake.js ===
+Mode: LIVE
+
+ERROR: Business_Intake sheet not found.
+Create it with headers: Name | Sector | Neighborhood | Description | SourceEdition | SourceCycle | Status

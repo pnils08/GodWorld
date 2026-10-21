@@ -58,7 +58,7 @@ async function main() {
   try {
     intakeRows = await sheets.getSheetAsObjects('Business_Intake');
   } catch (e) {
-    console.log('ERROR: Business_Intake sheet not found.');
+    console.log('ERROR: Business_Intake could not be read (' + (e && e.message) + ').');
     console.log('Create it with headers: Name | Sector | Neighborhood | Description | SourceEdition | SourceCycle | Status');
     process.exit(1);
   }

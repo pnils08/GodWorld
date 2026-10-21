@@ -65,7 +65,7 @@ Rent: 684 LifeHistory lines, 0 debits. No door scales with wealth: a $100M citiz
 | 2 | **Owner's fortune vs the firm's fate.** Rule whether an owner's NetWorth rides the firm (revenue falls → fortune falls; closure → what is lost), or only the draw does. Today only Income moves. | rb + builder | not started |
 | 3 | **Where a firm's revenue comes from.** The AwardedFirm concept: a contractor column on Initiative_Tracker (distinct from `BizID`), the boost to the awarded firm's books while the initiative runs, and the loss when it stalls, is defunded or completes. Name the Baylight contractor (canon call) or rule the mint firms' revenue rebased to a per-head scale. | rb + builder | not started |
 | 4 | **The ordinary household's loss side.** Is the treadmill (median NetWorth +0.02% over five Cycles) the intended feel, or should living cost something — and if so, as an event (a rent year that outran the raise) rather than a weekly debit. | rb + builder | not started |
-| 5 | **Heritage gates and ladder.** What "Rockefeller presence" means in this city — money, time held, homes, businesses, generations — and rewrite Doors A/B/C and the standing bands from that, so the door and the ladder agree (today Door A admits $1.2M lines; Door C admits $50M that scores 17 of Dynasty's 70). Rule what happens to the nine existing lines. | rb + builder | not started |
+| 5 | **Heritage gates and ladder.** What "Rockefeller presence" means in this city — money, time held, homes, businesses, generations — and rewrite Doors A/B/C and the standing bands from that, so the door and the ladder agree (today Door A admits $1.2M lines; Door C admits $50M that scores 17 of Dynasty's 70). Rule what happens to the nine existing lines. Builder re-raised 2026-10-21 (verbatim in [[2026-10-10-engine-214-mood-per-hood]] step 8, engine.309): "50M may be too low as that amount of money doesnt necesarrly make a person affluent in a city." engine.309 (off-heritage ascent) ends at this door and takes its number from here. | rb + builder | not started |
 | 6 | **Build order.** From Tasks 1–5, the engine.* rows in sequence with their acceptance checks, each as its own plan or a section here; engine-sheet picks them up from ROLLOUT. | rb → es | not started |
 
 ## Acceptance
@@ -110,4 +110,5 @@ Rent: 684 LifeHistory lines, 0 debits. No door scales with wealth: a $100M citiz
 
 ## Changelog
 
+- 2026-10-21 (research-build) — Task 5 re-raised by the builder ($50M too low); engine.308/309 filed under the engine-214 plan cross-link here; 309 ascent waits on this door number.
 - 2026-10-16 (engine-sheet) — Created from the money read with the builder; engine.295 re-scoped to this doc; rulings S1–S5 verbatim; Tasks 1–6 for the research-build session.

@@ -1,0 +1,19 @@
+---
+title: Engine.306 post-landing gate 3 review
+created: 2026-10-21
+updated: 2026-10-21
+type: reference
+tags: [engine, business, review]
+sources:
+  - docs/research/2026-10-21-engine306-diff-gate3-TASK.md
+---
+
+# Engine.306 post-landing gate 3
+
+**1. Driver fold — SHIP.** Restage now requires the saved fresh 180 A:I cell for cell plus the fresh max-ID, normalized-name, mark, D40 and live mapping gates; the drill refuses an altered old cell, then passes restage after restoring it (`output/engine-sheet/2026-10-21-e306-intake.js:81-99`; `output/engine-sheet/2026-10-21-e306-drill2.log:64-98`). Receipt rechecks intake A:F/Status and exactly one correct mapping entry per new ID (`output/engine-sheet/2026-10-21-e306-intake.js:157-190`). The first restage halt was a failed processor read before append, not a PASS or a double append (`output/engine-sheet/2026-10-21-e306-drill2-halt1.log:72-90`; `output/engine-sheet/2026-10-21-e306-intake-bench-drill2-halt1.log:2-6`). No source-supported wrong-state PASS remains for the audited fresh landing.
+
+**2. Live landing — SHIP.** PROD pullback is byte-identical to stage 18 @155; live fresh mode reports 103 staged/promoted rows, BIZ-00187…00289 in order, original 180 A:I unchanged except BIZ-00039 D40 Uptown, mark 289, 283 rows, and one matching mapping entry per new ID (`output/engine-sheet/2026-10-21-push-e306-prod.log:1-5`; `output/engine-sheet/2026-10-21-e306-landing-live.log:1-21`; `output/engine-sheet/2026-10-21-e306-receipt-live.json:1-33`). The independent 283-row beat dump agrees with the 103 new A:I values (`output/beats/Business_Ledger.jsonl:39,181-283`). This receipt covers landing-time Business_Ledger, Intake, high water and the local mapping file; it does not prove later C113 effects, archive/other-sheet invariance, or that another process loaded the updated mapping (`output/engine-sheet/2026-10-21-e306-intake.js:157-190`; `scripts/linkCitizensToEmployers.js:53-57,317-318`).
+
+**3. Attribution — FIX.** A2 equals A and B2 equals B by C113 LifeHistory hash; B2's off-roster BIZ-00290 is named Varek Fellowship (`output/engine-sheet/2026-10-21-e306-pair2.log:50-55`; `output/engine-sheet/2026-10-21-e306-attrib-A2-B2.json:635-648`). The 22 hood EventAttractiveness declines, including Baylight/Glenview/Ivy Hill with zero new rows, are consistent with a changed citywide base, but the writer also adds per-hood pulse and chaos folds (`output/engine-sheet/2026-10-21-e306-attrib-A2-B2.json:682-692,1017-1027,1089-1099`; `phase08-v3-chicago/v3NeighborhoodWriter.js:368-400,513-541`). Pair 2 records LifeHistory counts and chaos rows, not the contributing `S.worldEvents`, `S.storySeeds`, `S.storyHooks`, base count, or pulse folds; it cannot rule out an upstream structural reduction or assign the drop to dice (`output/engine-sheet/2026-10-21-e306-attrib.js:15-26`; `phase07-evening-media/applyStorySeeds.js:1022-1045,1445-1449`). Repair the causal claim with a typed A2/B2 component receipt before treating the all-hood drop as expected; the historic C103–C112 totals do not identify C113's cause (`docs/reference/DEPLOY_HISTORY.md:170`).
+
+**4. C113 watch — FIX.** The documented watch checks PASS/errors, rows, employed moves, landmarks, and spot identity, but omits pre/post business IDs and high water (a heritage birth can make 284/BIZ-00290), typed new-row dynamics/closures or archive moves, per-hood spot eligibility and holder shifts, and the EventAttractiveness input components (`docs/reference/DEPLOY_HISTORY.md:170-173`; `phase05-citizens/applyBusinessDynamics.js:664-705,712-749`; `phase05-citizens/generationalWealthEngine.js:3203-3241`). Add those C113 readbacks and compare to the live preimage plus the paired receipts; investigate any unexplained all-hood drop before calling the fire accepted. No live fire or revert was performed in this review.

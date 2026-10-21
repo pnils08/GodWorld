@@ -106,6 +106,27 @@ Rent: 684 LifeHistory lines, 0 debits. No door scales with wealth: a $100M citiz
 - **Alternative considered, not proposed:** one door = standing ≥ [30], the formula re-weighted so fame can carry it (today fame caps at 9 points, so no famous-and-poor citizen could enter). Rejected because the builder asked for combinations and the formula's fame term is the wide UsageCount ≥5 bar.
 - **Stays separate:** engine.308 (cap/cooldown) and engine.309 (ascent/crash) are untouched by this; 309's door number = the Fortune door here, per the morning ruling.
 
+**agy §Review 2026-10-21 — HOLD** (`output/antigravity/2026-10-21-review-money-game-task5-heritage-doors.md`, every number re-verified against live Heritage_Ledger / Household_Ledger / Business_Ledger / Cultural_Ledger + the C112 snapshot). Corrections folded here; the table above is superseded where they conflict.
+
+*Facts the table got wrong:*
+- **Biz counts read the wrong column.** Standing counts every Business_Ledger firm a member owns (Key_Personnel), not just heritage-minted ones. Keane owns 2 (academy + Keane Mercantile), hence 37.5. Varek owned 2 at C112 (Civis Systems, Oaks) and opened Varek Systems the same Cycle: at C113 he scores **52 = Prominent** under the current bands. "Nobody is Prominent" is wrong from C113.
+- **Homes.** Keane's household is owned (HomesOwned=0 on the heritage row is a seeding gap: `foundLine_:2802` stamps a home only for Door C founders). **Varek rents.** Dillon rents. So Fortune-with-home keeps Kelley and Keane only, and **removes Varek ($10B)**; Roots does not keep Dillon.
+- **Fame door at [$5M] admits Aitken ($225M, usage 30) and Miller ($160M, usage 23)**, not nobody — they are off-line and clear it even when Fortune needs a home. At [$0.5M] it adds Raines, and neither Dax Monroe ($487K) nor Tara Ellison (usage 2, FameScore under 75) qualifies.
+- **Civic door admits nobody**: the richest CIV=yes citizen is Ashford at $12M; no on-line family has a CIV member.
+- Net: removed = Horn, Reaves, Corliss, Villanueva, **plus Varek if the home is on Fortune**; admitted = 8 (Fortune, no home) or 2–3 (Fame only).
+
+*The fame door as written does not do what the builder asked (H4, the weakest assumption):* UsageCount is a lifetime counter that never decays, so anyone in by it can never fall off; Cultural FameScore decays but the standing formula ignores it (counts UsageCount ≥5 only), so a cultural entrant sits at standing 0 forever; and every FameScore ≥75 citizen holds under $0.5M with ~$15k/yr savings, so no money floor above that ever opens. **Fix shape (rb):** the Fame door reads Cultural FameScore only, and the standing formula gains a FameScore term [FameScore/25, capped 6] so the ladder sees what the door saw; the money floor on it is then the builder's call between [$0 — fame is the whole ticket] and [$0.5M]. Under this, Paulson/Aitken/Miller enter or stay only if their cultural FameScore clears the bar (all three are under 50 today) or they clear Fortune.
+
+*Build defects es must carry with the trigger change (H2/H3, file:line in the review):*
+1. Revival (`:3117-3120`) hardcodes the old doors — with the new `lowC` alone, the four removed lines revive on Cycle t+5 via old Door A/C and oscillate forever. One shared `lineClearsAnyDoor_` predicate for both revive and `lowC`.
+2. The maneuver engine gives a dormant member the goal `revive` before `home`/`establish`, which zeroes their home-purchase climb multiplier and writes "the name to bring back" into their wakes — wrong for a family removed because it never belonged. A dormant-for-"no door" line should fall through to the household goals.
+3. Pre-existing: revival clears DormantSince at `:3123` before the hook reads it at `:3317` — every revival hook prints "dormant since C?". Drop the `:3123` clear.
+4. The dormant LifeHistory line and hook (`:3291, :3297`) say "the money that made it is gone / standing under 10" — wrong text for Horn/Reaves/a decayed-fame line; reason text per door.
+5. During the [4]-Cycle grace, tenure and the heritage business roll keep running (`:3133-3138, :3172`) — freeze both while `lowC > 0`.
+6. `foundLine_:2802` seeds HomesOwned only for `door === 'C'`; the LifeHistory/hook branches at `:2805-2809, :2823-2826` test B/C by name; `scripts/householdReconcile.test.js:455-491` asserts the letters. A door rename needs all three moved to "any founding member in ownedHomePops" + per-door copy + test update. FoundedDoor itself has no runtime reader.
+
+*Separate from this task, found by the review:* Varek crosses to Prominent at C113 on the business roll alone — read it in the C113 edition watch.
+
 **Builder's calls on this shape:** (1) Fortune door with or without the owned home — swings who's-in by eight names; (2) which fame measure and bar (Cultural FameScore [75] / UsageCount [20]) and the money under it [$5M]; (3) Roots door kept as written or dropped; (4) Civic door yes/no; (5) the bands. Outside check on the spec: agy §Review (builder 2026-10-21: es and codex are on a separate build).
 
 
@@ -152,6 +173,7 @@ Rent: 684 LifeHistory lines, 0 debits. No door scales with wealth: a $100M citiz
 
 ## Changelog
 
+- 2026-10-21 (research-build) — agy §Review HOLD folded: biz counts and homes corrected (Varek rents, Prominent at C113; Keane owns; Dillon rents), Fame door admits Aitken + Miller at $5M, the fame door as written cannot fall (UsageCount never decays) or climb (standing ignores FameScore) — fix shape: FameScore-only door + a FameScore term in standing; six build defects for es listed with file:line.
 - 2026-10-21 (research-build) — Task 5 design session with the builder: re-read ruled; the heritage doors read live (nine lines, eight off-line at ≥$150M held out by the home, fame exists twice and every famous cultural citizen is under $1M); combination doors proposed with the numbers bracketed; five builder calls named; agy takes the §Review.
 - 2026-10-21 (research-build) — Builder asks whether a line disbands when it falls below the gate; read recorded: dormancy exists (empty 4 / standing <10 for 52, Established+ only), row kept, readers skip dormant lines, citizens fall back to households; the bar vs the door is open for Task 5.
 - 2026-10-21 (research-build) — Task 5 re-raised by the builder ($50M too low); engine.308/309 filed under the engine-214 plan cross-link here; 309 ascent waits on this door number.

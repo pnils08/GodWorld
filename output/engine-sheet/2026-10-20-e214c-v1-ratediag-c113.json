@@ -1,0 +1,40 @@
+{
+ "expDraws": 14.533839225479154,
+ "expByEv": {
+  "lift": 12.606214251833936,
+  "quiet": 1.4921318594244632,
+  "shed": 0.43549311422075004
+ },
+ "citizens": 925,
+ "offeredCitizens": 147,
+ "offered": {
+  "lift": 134,
+  "quiet": 13,
+  "shed": 4
+ },
+ "offeredMass": 1661,
+ "poolMassWithSpot": 41340.49047168926,
+ "slots": 2341,
+ "slotsWithSpot": 358,
+ "spotAvail": 4048,
+ "usableMassWithSpot": 100926.35962215897,
+ "filteredOut": 11,
+ "drawn": {
+  "lift": 11,
+  "shed": 2,
+  "quiet": 2
+ },
+ "drawnByHood": {
+  "Jack London:lift": 5,
+  "Downtown:lift": 6,
+  "Ivy Hill:shed": 2,
+  "Ivy Hill:quiet": 2
+ },
+ "firstDraw": 2,
+ "pulse": {
+  "Neighborhood Neighborhood-Outabout-Up-S": 2
+ },
+ "pulseHood": {
+  "Jack London": 2
+ }
+}

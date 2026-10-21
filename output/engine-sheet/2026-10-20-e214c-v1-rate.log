@@ -1,0 +1,37 @@
+AIM = BENCH (script read the bench marker)
+== leg Bratediag (stage 16 + generateCitizensEvents.js at d853678947b3c0e02b79dbacc82f1c209aedf4e3)
+bench project = stage 15 outside the Cut C files
+stage = stage 15 + 2 Cut C files at d853678947b3c0e02b79dbacc82f1c209aedf4e3; manifest /tmp/claude-0/-root-GodWorld/1278dd4d-7ce3-4acf-826a-759a4fe124c9/scratchpad/rate-Bratediag.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @82
+pull-back 167 js + manifest byte-identical to /tmp/claude-0/-root-GodWorld/1278dd4d-7ce3-4acf-826a-759a4fe124c9/scratchpad/rate-Bratediag.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C113
+version cut; waiting 98 s more for /exec propagation
+leg Bratediag C113 fire rc=0 "verdict": "PASS" "wallS": 168
+Bratediag C113: 2344 LifeHistory rows, sha a0a9ee9f1fdda513, spot lines drawn 15 {"lift":11,"shed":2,"quiet":2}, eligible citizens {"quiet":13,"shed":4}, not their spot 0, strays 0
+Spot_Diag C113 rows 2 {"expDraws":14.533839225479154,"expByEv":{"lift":12.606214251833936,"quiet":1.4921318594244632,"shed":0.43549311422075004},"citizens":925,"offeredCitizens":147,"offered":{"lift":134,"quiet":13,"shed":4},"offeredMass":1661,"poolMassWithSpot":41340.49047168926,"slots":2341,"slotsWithSpot":358,"spotAvail":4048,"usableMassWithSpot":100926.35962215897,"filteredOut":11,"drawn":{"lift":11,"shed":2,"quiet":2},"drawnByHood":{"Jack London:lift":5,"Downtown:lift":6,"Ivy Hill:shed":2,"Ivy Hill:quiet":2},"firstDraw":2,"pulse":{"Neighborhood Neighborhood-Outabout-Up-S":2},"pulseHood":{"Jack London":2}}
+== leg Brate (stage 16 + generateCitizensEvents.js at ab85b32f)
+bench project = stage 15 outside the Cut C files
+stage = stage 15 + 2 Cut C files at ab85b32f; manifest /tmp/claude-0/-root-GodWorld/1278dd4d-7ce3-4acf-826a-759a4fe124c9/scratchpad/rate-Brate.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @83
+pull-back 167 js + manifest byte-identical to /tmp/claude-0/-root-GodWorld/1278dd4d-7ce3-4acf-826a-759a4fe124c9/scratchpad/rate-Brate.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C113
+version cut; waiting 106 s more for /exec propagation
+leg Brate C113 fire rc=0 "verdict": "PASS" "wallS": 163
+Brate C113: 2344 LifeHistory rows, sha a0a9ee9f1fdda513, spot lines drawn 15 {"lift":11,"shed":2,"quiet":2}, eligible citizens {"quiet":13,"shed":4}, not their spot 0, strays 0
+bench = Brate (ab85b32f)
+RATE DONE
+exit 0

@@ -1908,6 +1908,8 @@
 
 - **spotRank_(popId, bizId)**
 
+- **spotTag_(tags)**
+
 - **citizenSpotFor_(hoodSpots, popId)**
 
 - **citizenSpotLines_(spot)**
@@ -4800,4 +4802,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1735
+**Functions mapped:** 1736

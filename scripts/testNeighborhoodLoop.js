@@ -849,6 +849,11 @@ console.log('═══ C9 — engine.214 8a Cut C: the citizen\'s spot');
   const count = (txt, s) => txt.split(s).length - 1;
   const fv = lifeOf('POP-Frui'), rr = rows.filter(r => r[iHood] === 'Rockridge').map(r => r[iLife] || '').join('\n'),
     cl = rows.filter(r => r[iHood] === 'Claremont').map(r => r[iLife] || '').join('\n'), wo = lifeOf('POP-West');
+  const spotEnd = /(after the win|go quiet lately|let some staff go|steadier again|small fire this week|fire this week — contained|when a transformer blew|pending an inspection)/g;
+  const spotLinesAll = (fv + '\n' + rr + '\n' + cl).match(spotEnd) || [];
+  const spotNear = (fv + '\n' + rr + '\n' + cl).match(new RegExp(spotEnd.source + ' near ', 'g')) || [];
+  assert('C9d a spot line names its own place — the 12% "near <venue>" append skips it (' + spotLinesAll.length + ' spot lines drawn)',
+    spotLinesAll.length >= 30 && spotNear.length === 0, spotNear.slice(0, 3).join(' | '));
   console.log('   spot lines drawn over 39 Cycles — Fruitvale ' + count(fv, 'Corner Shop') + ', Rockridge ' + count(rr, 'Taco Spot') +
     ', Claremont ' + count(cl, 'Taco Spot') + ', West Oakland ' + (count(wo, 'Corner Shop') + count(wo, 'Taco Spot')) + '; spot pulses ' + pulses.length);
   assert('C9d the Cycle with no spot map neither throws nor offers a spot line',

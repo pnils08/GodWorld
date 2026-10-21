@@ -228,6 +228,11 @@ function spotRank_(popId, bizId) {
   return (h ^ (h >>> 16)) >>> 0;
 }
 
+function spotTag_(tags) {
+  for (var i = 0; i < (tags || []).length; i++) if (String(tags[i]).indexOf('spot:') === 0) return true;
+  return false;
+}
+
 function citizenSpotFor_(hoodSpots, popId) {
   if (!hoodSpots || !hoodSpots.length || !popId) return null;
   var best = null, bestRank = -1;
@@ -3633,10 +3638,11 @@ function generateCitizensEvents_(ctx) {
       }
       if (contact && contact.popId) tags = mergeTags(tags, ["contactPopId:" + contact.popId]);
       if (chosenVenue) tags = mergeTags(tags, ["venue:local"]);
-    } else if (neighborhood && !chosenVenue && chanceHit(0.12)) {
+    } else if (neighborhood && !chosenVenue && !spotTag_(tags) && chanceHit(0.12)) {
       // !chosenVenue: a ledger line that filled $VENUE already carries its
       // venue — don't append a second one. "" for every other non-template
-      // line, so pre-ledger rng sequence is unchanged (Task 11).
+      // line, so pre-ledger rng sequence is unchanged (Task 11). A spot line
+      // (engine.214 Cut C) names its own place too.
       chosenVenue = pickVenue_(neighborhood);
       if (chosenVenue) {
         pick = pick + " near " + chosenVenue;

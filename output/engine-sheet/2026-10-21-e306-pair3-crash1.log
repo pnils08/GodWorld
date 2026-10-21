@@ -1,0 +1,15 @@
+AIM = BENCH (script read the bench marker)
+bench project = stage 17 outside the engine.306 files
+stage = stage 17 + 3 engine.306 files at a59ffe87151587be5f97af0adf4b978b1d7c34dc; manifest /tmp/claude-0/-root-GodWorld/9492d79f-059f-4c0f-b0d9-253c7b976fb5/scratchpad/stage18-eatap.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @90
+pull-back 167 js + manifest byte-identical to /tmp/claude-0/-root-GodWorld/9492d79f-059f-4c0f-b0d9-253c7b976fb5/scratchpad/stage18-eatap.sha256
+== leg A2t (stage 18 + EA tap, no rows)
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C113
+version cut; waiting 93 s more for /exec propagation

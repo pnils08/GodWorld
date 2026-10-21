@@ -1,0 +1,1080 @@
+{
+ "cycle": 113,
+ "label": "A2t",
+ "lifeHistoryRows": 2322,
+ "linesSha256": "130462736b782fbed21733d1f6bd28844977a5bf633d4e754d1f4da0becf5bfa",
+ "spotLinesDrawn": 8,
+ "spotLinesOutsideAKnownCitizen": [],
+ "chaosOnSpotsThisCycle": {
+  "BIZ-00079": [
+   "forced_temporary_closure"
+  ]
+ },
+ "notObservable": "game-week lift eligibility (barTerm not persisted); whole-pool weight per citizen (see the draw probe)",
+ "hoods": {
+  "Adams Point": {
+   "activeCitizens": 8,
+   "spots": [
+    {
+     "id": "BIZ-00108",
+     "name": "Lakeshore Cafe",
+     "cls": "food",
+     "holders": 5,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00109",
+     "name": "Vernon Street Market",
+     "cls": "retail",
+     "holders": 1,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00111",
+     "name": "Lakeside Cycles",
+     "cls": "retail",
+     "holders": 2,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": -0.08
+  },
+  "Baylight District": {
+   "activeCitizens": 10,
+   "spots": [
+    {
+     "id": "BIZ-00100",
+     "name": "Oakland Casino Town",
+     "cls": "food",
+     "holders": 4,
+     "streak": 3,
+     "prevStreak": 2,
+     "events": [
+      "quiet"
+     ]
+    },
+    {
+     "id": "BIZ-00104",
+     "name": "Bubic Burgers",
+     "cls": "food",
+     "holders": 6,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {
+    "quiet": 4
+   },
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0
+  },
+  "Brooklyn": {
+   "activeCitizens": 9,
+   "spots": [
+    {
+     "id": "BIZ-00113",
+     "name": "Quay Coffee",
+     "cls": "food",
+     "holders": 2,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00114",
+     "name": "Basin Grocer",
+     "cls": "retail",
+     "holders": 2,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00116",
+     "name": "Slip Street Kitchen",
+     "cls": "food",
+     "holders": 4,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00117",
+     "name": "Brooklyn Pharmacy",
+     "cls": "retail",
+     "holders": 1,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": -0.13
+  },
+  "Chinatown": {
+   "activeCitizens": 66,
+   "spots": [
+    {
+     "id": "BIZ-00042",
+     "name": "Dragon Gate Lounge",
+     "cls": "food",
+     "holders": 13,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00119",
+     "name": "Ninth Street Kitchen",
+     "cls": "food",
+     "holders": 14,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00120",
+     "name": "Golden Lotus Market",
+     "cls": "retail",
+     "holders": 14,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00122",
+     "name": "Lantern Pharmacy",
+     "cls": "retail",
+     "holders": 14,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00123",
+     "name": "Heritage Bakehouse",
+     "cls": "food",
+     "holders": 11,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": -0.05
+  },
+  "Dimond": {
+   "activeCitizens": 10,
+   "spots": [
+    {
+     "id": "BIZ-00075",
+     "name": "Romano's",
+     "cls": "food",
+     "holders": 3,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00124",
+     "name": "Sausal Creek Cafe",
+     "cls": "food",
+     "holders": 1,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00125",
+     "name": "Village Lock and Hardware",
+     "cls": "retail",
+     "holders": 3,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00126",
+     "name": "Dimond Pharmacy",
+     "cls": "retail",
+     "holders": 1,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00127",
+     "name": "Two Tables Kitchen",
+     "cls": "food",
+     "holders": 2,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": -0.15
+  },
+  "Downtown": {
+   "activeCitizens": 87,
+   "spots": [
+    {
+     "id": "BIZ-00037",
+     "name": "Temple Lounge",
+     "cls": "food",
+     "holders": 24,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00039",
+     "name": "Pulse District",
+     "cls": "food",
+     "holders": 15,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00047",
+     "name": "Miso Metro",
+     "cls": "food",
+     "holders": 17,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00049",
+     "name": "Midnight Bistro",
+     "cls": "food",
+     "holders": 16,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00051",
+     "name": "SpeedyBurger",
+     "cls": "food",
+     "holders": 15,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {
+    "lift": 2
+   },
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 2,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.13
+  },
+  "East Oakland": {
+   "activeCitizens": 17,
+   "spots": [
+    {
+     "id": "BIZ-00129",
+     "name": "Eastside Family Market",
+     "cls": "retail",
+     "holders": 6,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00130",
+     "name": "Sunrise Cafe",
+     "cls": "food",
+     "holders": 6,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00132",
+     "name": "Foothill Kitchen",
+     "cls": "food",
+     "holders": 5,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.19
+  },
+  "Eastlake": {
+   "activeCitizens": 8,
+   "spots": [
+    {
+     "id": "BIZ-00133",
+     "name": "Eastlake Corner Market",
+     "cls": "retail",
+     "holders": 1,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00134",
+     "name": "Eastlake Kitchen",
+     "cls": "food",
+     "holders": 2,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00136",
+     "name": "Parkedge Diner",
+     "cls": "food",
+     "holders": 2,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00137",
+     "name": "Eastlake Pharmacy",
+     "cls": "retail",
+     "holders": 3,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": -0.07
+  },
+  "Fruitvale": {
+   "activeCitizens": 102,
+   "spots": [
+    {
+     "id": "BIZ-00045",
+     "name": "Fruitvale Diner",
+     "cls": "food",
+     "holders": 56,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00068",
+     "name": "Marigold Cafe",
+     "cls": "food",
+     "holders": 46,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.2
+  },
+  "Glenview": {
+   "activeCitizens": 9,
+   "spots": [
+    {
+     "id": "BIZ-00139",
+     "name": "Hillside Family Market",
+     "cls": "retail",
+     "holders": 1,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00140",
+     "name": "Glenview Cafe",
+     "cls": "food",
+     "holders": 1,
+     "streak": 1,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00143",
+     "name": "Slopeview Hardware",
+     "cls": "retail",
+     "holders": 4,
+     "streak": 1,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00144",
+     "name": "Glenview Kitchen",
+     "cls": "food",
+     "holders": 3,
+     "streak": 1,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0
+  },
+  "Grand Lake": {
+   "activeCitizens": 9,
+   "spots": [
+    {
+     "id": "BIZ-00076",
+     "name": "Port Grind",
+     "cls": "food",
+     "holders": 1,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00145",
+     "name": "Marquee Grocer",
+     "cls": "retail",
+     "holders": 1,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00146",
+     "name": "Intermission Cafe",
+     "cls": "food",
+     "holders": 2,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00147",
+     "name": "Grand Lake Books",
+     "cls": "retail",
+     "holders": 1,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00148",
+     "name": "Market Day Kitchen",
+     "cls": "food",
+     "holders": 1,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00149",
+     "name": "Lakeshore Outfitters",
+     "cls": "retail",
+     "holders": 2,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00185",
+     "name": "Keane Mercantile",
+     "cls": "retail",
+     "holders": 1,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0
+  },
+  "Ivy Hill": {
+   "activeCitizens": 9,
+   "spots": [
+    {
+     "id": "BIZ-00150",
+     "name": "Ivy Hill Market",
+     "cls": "retail",
+     "holders": 4,
+     "streak": 6,
+     "prevStreak": 5,
+     "events": [
+      "quiet",
+      "shed"
+     ]
+    },
+    {
+     "id": "BIZ-00151",
+     "name": "Ivy Hill Cafe",
+     "cls": "food",
+     "holders": 3,
+     "streak": 4,
+     "prevStreak": 3,
+     "events": [
+      "quiet"
+     ]
+    },
+    {
+     "id": "BIZ-00154",
+     "name": "Hillcrest Kitchen",
+     "cls": "food",
+     "holders": 2,
+     "streak": 4,
+     "prevStreak": 3,
+     "events": [
+      "quiet"
+     ]
+    }
+   ],
+   "eligibleByEvent": {
+    "quiet": 9,
+    "shed": 4
+   },
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": -0.11
+  },
+  "Jack London": {
+   "activeCitizens": 76,
+   "spots": [
+    {
+     "id": "BIZ-00033",
+     "name": "Jack London Square Markets",
+     "cls": "retail",
+     "holders": 10,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00036",
+     "name": "Blue Lantern Bar",
+     "cls": "food",
+     "holders": 16,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00041",
+     "name": "Green & Gold Tavern",
+     "cls": "food",
+     "holders": 23,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00044",
+     "name": "Harborline Grill",
+     "cls": "food",
+     "holders": 7,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00050",
+     "name": "Dockhouse BBQ",
+     "cls": "food",
+     "holders": 20,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {
+    "lift": 6
+   },
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 6,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.16
+  },
+  "KONO": {
+   "activeCitizens": 17,
+   "spots": [
+    {
+     "id": "BIZ-00046",
+     "name": "KONO Kitchen",
+     "cls": "food",
+     "holders": 3,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00091",
+     "name": "KONO Hardware",
+     "cls": "retail",
+     "holders": 8,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00156",
+     "name": "Northgate Kitchen",
+     "cls": "food",
+     "holders": 3,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00158",
+     "name": "The Northgate Bar",
+     "cls": "food",
+     "holders": 1,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00159",
+     "name": "Twentieth Street Gallery",
+     "cls": "retail",
+     "holders": 2,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.08
+  },
+  "Lake Merritt": {
+   "activeCitizens": 96,
+   "spots": [
+    {
+     "id": "BIZ-00040",
+     "name": "Merritt Club",
+     "cls": "food",
+     "holders": 96,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.05
+  },
+  "Laurel": {
+   "activeCitizens": 58,
+   "spots": [
+    {
+     "id": "BIZ-00077",
+     "name": "Nino's",
+     "cls": "food",
+     "holders": 12,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00160",
+     "name": "Laurel Market",
+     "cls": "retail",
+     "holders": 13,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00161",
+     "name": "Schoolgate Cafe",
+     "cls": "food",
+     "holders": 13,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00162",
+     "name": "Laurel Pharmacy",
+     "cls": "retail",
+     "holders": 12,
+     "streak": 1,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00163",
+     "name": "MacArthur Kitchen",
+     "cls": "food",
+     "holders": 8,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.01
+  },
+  "Piedmont Ave": {
+   "activeCitizens": 57,
+   "spots": [
+    {
+     "id": "BIZ-00166",
+     "name": "Piedmont Avenue Clothiers",
+     "cls": "retail",
+     "holders": 27,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00167",
+     "name": "Piedmont Avenue Pharmacy",
+     "cls": "retail",
+     "holders": 30,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.03
+  },
+  "Rockridge": {
+   "activeCitizens": 87,
+   "spots": [
+    {
+     "id": "BIZ-00043",
+     "name": "OakHouse",
+     "cls": "food",
+     "holders": 12,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00168",
+     "name": "Canopy Market",
+     "cls": "retail",
+     "holders": 17,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00169",
+     "name": "Claremont Table",
+     "cls": "food",
+     "holders": 23,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00171",
+     "name": "Rockridge Pharmacy",
+     "cls": "retail",
+     "holders": 13,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00180",
+     "name": "Kelley Mercantile",
+     "cls": "retail",
+     "holders": 22,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.02
+  },
+  "San Antonio": {
+   "activeCitizens": 10,
+   "spots": [
+    {
+     "id": "BIZ-00172",
+     "name": "Shift Change Kitchen",
+     "cls": "food",
+     "holders": 3,
+     "streak": 1,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00173",
+     "name": "Twelfth Avenue Market",
+     "cls": "retail",
+     "holders": 3,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00175",
+     "name": "San Antonio Pharmacy",
+     "cls": "retail",
+     "holders": 2,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00176",
+     "name": "Park Boulevard Cafe",
+     "cls": "food",
+     "holders": 2,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": -0.03
+  },
+  "Temescal": {
+   "activeCitizens": 58,
+   "spots": [
+    {
+     "id": "BIZ-00038",
+     "name": "OakTown Social",
+     "cls": "food",
+     "holders": 32,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00062",
+     "name": "Dario's Bar",
+     "cls": "food",
+     "holders": 26,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.04
+  },
+  "Uptown": {
+   "activeCitizens": 82,
+   "spots": [
+    {
+     "id": "BIZ-00064",
+     "name": "Art Walk Cafe",
+     "cls": "food",
+     "holders": 20,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00066",
+     "name": "Gallery Night Lounge",
+     "cls": "food",
+     "holders": 20,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00178",
+     "name": "First Lamp Club",
+     "cls": "food",
+     "holders": 17,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00179",
+     "name": "Night Walk Records",
+     "cls": "retail",
+     "holders": 25,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.05
+  },
+  "West Oakland": {
+   "activeCitizens": 115,
+   "spots": [
+    {
+     "id": "BIZ-00048",
+     "name": "West Side Cafe",
+     "cls": "food",
+     "holders": 60,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    },
+    {
+     "id": "BIZ-00070",
+     "name": "Vance's Vintage",
+     "cls": "retail",
+     "holders": 55,
+     "streak": 0,
+     "prevStreak": 0,
+     "events": []
+    }
+   ],
+   "eligibleByEvent": {},
+   "drawnByEvent": {},
+   "drawnNotTheirSpot": 0,
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "sentimentSaved": 0.24
+  }
+ }
+}

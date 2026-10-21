@@ -1,4 +1,4 @@
-◇ injected env (31) from ../.config/godworld/.env // tip: ⌁ auth for agents [www.vestauth.com]
+◇ injected env (31) from ../.config/godworld/.env // tip: ⌘ enable debugging { debug: true }
 === processBusinessIntake.js ===
 Mode: LIVE
 
@@ -117,6 +117,6 @@ Writing 103 rows to Business_Ledger...
 Updating Business_Intake statuses...
   -> Business_Intake statuses updated (103 rows).
 Updating employer_mapping.json...
-  -> employer_mapping.json updated (145 total entries).
+  -> employer_mapping.json updated (248 total entries).
 
 Done. 103 businesses promoted to Business_Ledger.

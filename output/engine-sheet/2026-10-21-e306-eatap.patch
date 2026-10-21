@@ -1,0 +1,141 @@
+commit a59ffe87151587be5f97af0adf4b978b1d7c34dc
+Author: GodWorld <godworld@local>
+Date:   Wed Oct 21 13:09:52 2026 -0500
+
+    bench-only diagnostic (never merged): engine.306 gate-3 FIX EA tap — per-phase rng draws + list lengths, Phase-5 event snapshot, EA components per hood -> EA_Diag row
+
+diff --git a/phase01-config/godWorldEngine2.js b/phase01-config/godWorldEngine2.js
+index 657f12a1..0f568d0b 100644
+--- a/phase01-config/godWorldEngine2.js
++++ b/phase01-config/godWorldEngine2.js
+@@ -158,17 +158,47 @@ function computeShortHash_(input) {
+  */
+ function safePhaseCall_(ctx, phaseName, fn) {
+   var t0 = new Date().getTime();
++  var __eaM = eaDiagPre_(ctx, phaseName);   // BENCH-ONLY DIAGNOSTIC (engine.306 gate-3 FIX), never merged
+   try {
+     fn();
+     recordPhaseTiming_(ctx, phaseName, new Date().getTime() - t0, true);
++    eaDiagPost_(ctx, __eaM);
+     return true;
+   } catch (e) {
+     recordPhaseTiming_(ctx, phaseName, new Date().getTime() - t0, false);
+     logEngineError_(ctx, phaseName, e);
++    eaDiagPost_(ctx, __eaM);
+     return false;
+   }
+ }
+ 
++// BENCH-ONLY DIAGNOSTIC (engine.306 gate-3 FIX), never merged: read-only per-phase marks — ctx.rng.draws (the
++// generator's own counter, cycleModes.js seededRng_) and S.worldEvents / storySeeds / storyHooks lengths before and
++// after each phase; the S.worldEvents identity list as Phase5-BusinessDynamics opens. Writes ctx.__eaMarks /
++// ctx.__eaPre5 only (never ctx.summary); a tap fault is swallowed so it cannot fail a phase.
++function eaDiagEventId_(e) {
++  e = e || {};
++  return [e.domain || '', e.subdomain || '', e.source || '', e.neighborhood || '', e.severity || '',
++    String(e.description || e.summary || e.title || '').slice(0, 60)].join('|');
++}
++function eaDiagPre_(ctx, phaseName) {
++  try {
++    var S = ctx && ctx.summary;
++    var we = S && S.worldEvents;
++    if (phaseName === 'Phase5-BusinessDynamics' && we) ctx.__eaPre5 = we.map(eaDiagEventId_);
++    return [phaseName, ctx && ctx.rng && typeof ctx.rng.draws === 'number' ? ctx.rng.draws : null, we ? we.length : null];
++  } catch (eaE) { return [phaseName, 'tap-error']; }
++}
++function eaDiagPost_(ctx, m) {
++  try {
++    var S = ctx && ctx.summary;
++    m.push(ctx && ctx.rng && typeof ctx.rng.draws === 'number' ? ctx.rng.draws : null,
++      S && S.worldEvents ? S.worldEvents.length : null, S && S.storySeeds ? S.storySeeds.length : null,
++      S && S.storyHooks ? S.storyHooks.length : null);
++    (ctx.__eaMarks = ctx.__eaMarks || []).push(m);
++  } catch (eaE) {}
++}
++
+ /**
+  * engine.95 Task 2: per-phase timing collection (observation only).
+  * Accumulates {phase, ms, ok} into ctx.summary.phaseTimings. In-memory
+diff --git a/phase08-v3-chicago/v3NeighborhoodWriter.js b/phase08-v3-chicago/v3NeighborhoodWriter.js
+index 54911b41..de7e1fb9 100644
+--- a/phase08-v3-chicago/v3NeighborhoodWriter.js
++++ b/phase08-v3-chicago/v3NeighborhoodWriter.js
+@@ -399,6 +399,32 @@ function saveV3NeighborhoodMap_(ctx) {
+     }
+   }
+ 
++  // BENCH-ONLY DIAGNOSTIC (engine.306 gate-3 FIX), never merged: read-only EventAttractiveness components — every
++  // contributing event / seed / hook with its identity, the field and term that hit (same tests as the loops above),
++  // and per hood the mods, the three stage values and the raw pulse / chaos inputs. One EA_Diag row via the intent queue.
++  var __ea = { base: baseEventAttract, n: { worldEvents: worldEvents.length, storySeeds: storySeeds.length, storyHooks: storyHooks.length },
++    hits: { evDomain: 0, evText: 0, seed: 0, hook: 0 }, contrib: [], hoods: {} };
++  (function() {
++    var firstTerm = function(t, terms) { for (var k = 0; k < terms.length; k++) if (t.indexOf(terms[k]) >= 0) return terms[k]; return ''; };
++    var EV = ['festival', 'concert', 'art', 'celebration', 'parade', 'market'], SH = ['community', 'culture', 'festival', 'art'];
++    for (var i = 0; i < worldEvents.length; i++) {
++      var e = worldEvents[i], dm = (e.domain || '').toString().toLowerCase(), tt = firstTerm(eventText(e), EV);
++      var dh = dm === 'culture' || dm === 'community' || dm === 'holiday' || dm === 'festival';
++      if (dh) __ea.hits.evDomain++;
++      if (tt) __ea.hits.evText++;
++      if (dh || tt) __ea.contrib.push(['ev', i, dh ? dm : '', tt, eaDiagEventId_(e)]);
++    }
++    for (var j = 0; j < storySeeds.length; j++) {
++      var s = storySeeds[j], sf = s.seed ? 'seed' : (s.text ? 'text' : ''), st = firstTerm((s.seed || s.text || '').toString().toLowerCase(), SH);
++      if (st) { __ea.hits.seed++; __ea.contrib.push(['seed', j, sf, st, [s.domain || '', s.priority || '', s.neighborhood || '', String(s.seed || s.text || '').slice(0, 80)].join('|')]); }
++    }
++    for (var k2 = 0; k2 < storyHooks.length; k2++) {
++      var h = storyHooks[k2], hf = h.hook ? 'hook' : (h.text ? 'text' : ''), ht = firstTerm((h.hook || h.text || '').toString().toLowerCase(), SH);
++      if (ht) { __ea.hits.hook++; __ea.contrib.push(['hook', k2, hf, ht, [h.hookType || '', h.domain || '', h.neighborhood || '', String(h.hook || h.text || '').slice(0, 80)].join('|')]); }
++    }
++    __ea.residual = baseEventAttract - (__ea.hits.evDomain + __ea.hits.evText + __ea.hits.seed + __ea.hits.hook);
++  })();
++
+   // Retail vitality from dynamics
+   var baseRetail = Math.round((Number(dynamics.retail || 1) * 5) + (Number(dynamics.publicSpaces || 1) * 3));
+ 
+@@ -523,6 +549,7 @@ function saveV3NeighborhoodMap_(ctx) {
+ 
+     // engine.33 pulse fold — this cycle's emitted citizen events for this hood
+     var pulse = (S.neighborhoodPulse && S.neighborhoodPulse[name]) || null;
++    var __eaV0 = eventAttract;   // BENCH-ONLY DIAGNOSTIC (engine.306 gate-3 FIX), never merged
+     if (pulse) {
+       crime = round2(Math.max(0, crime + pulseFoldDelta_(pulse, 'crime')));                   // engine.33 pulse fold
+       retail = round2(Math.max(0, retail + pulseFoldDelta_(pulse, 'vitality')));              // engine.33 pulse fold
+@@ -535,6 +562,7 @@ function saveV3NeighborhoodMap_(ctx) {
+     // the writer's Math.max(0)+round2 guards (§S265). Distinct from the pulse fold: this carries
+     // across cycles (negative swings linger; AC#6) where the pulse is this-cycle only.
+     var cFold = (S.chaosNeighborhoodFold && S.chaosNeighborhoodFold[name]) || null;
++    var __eaV1 = eventAttract;   // BENCH-ONLY DIAGNOSTIC (engine.306 gate-3 FIX), never merged
+     if (cFold) {
+       crime = round2(Math.max(0, crime + (cFold.CrimeIndex || 0)));
+       retail = round2(Math.max(0, retail + (cFold.RetailVitality || 0)));
+@@ -552,6 +580,13 @@ function saveV3NeighborhoodMap_(ctx) {
+     // cluster inherits) pushed four hoods past 1.0 at C105 and the momentum carry read the
+     // fall-back at C106 as decay. The holiday is the world; the unbounded save was the defect.
+     sent = round2(Math.max(-1, Math.min(1, sent)));
++    try {   // BENCH-ONLY DIAGNOSTIC (engine.306 gate-3 FIX), never merged
++      __ea.hoods[name] = { label: hoodLabelOf_(name, S), sportsZone: (S.sportsZones || []).indexOf(name) >= 0,
++        holiday: holiday, profileMod: profile.eventMod, holidayMod: hMod.eventMod || 1, mod: effectiveEventMod,
++        v0: __eaV0, pulseAttr: pulse ? Number(pulse.attractiveness || 0) : null, pulseEvents: pulse ? Number(pulse.events || 0) : null,
++        pulseDelta: pulse ? pulseFoldDelta_(pulse, 'attractiveness') : null, v1: __eaV1,
++        chaosEA: cFold ? (cFold.EventAttractiveness || 0) : null, saved: eventAttract };
++    } catch (eaE) { __ea.hoods[name] = { tapError: String(eaE) }; }
+ 
+     var demoLabel = getDemographicMarkerV35_(name, hoodDemoLabel_(name), arcByNeighborhood, S, holiday, isFirstFriday, isCreationDay);
+ 
+@@ -579,6 +614,15 @@ function saveV3NeighborhoodMap_(ctx) {
+     }
+   }
+ 
++  // BENCH-ONLY DIAGNOSTIC (engine.306 gate-3 FIX), never merged: one EA_Diag row (Phase 10 intent queue).
++  if (typeof queueEnsureTabIntent_ === 'function' && typeof queueAppendIntent_ === 'function') {
++    var __eaCell = function(v) { var t = JSON.stringify(v); return t.length > 49000 ? t.slice(0, 49000) + '…TRUNCATED' : t; };
++    queueEnsureTabIntent_(ctx, 'EA_Diag', ['Cycle', 'Totals', 'Contrib', 'Hoods', 'Marks', 'Pre5Events'], 'bench-only engine.306 EA diagnostic', 'content-telemetry');
++    queueAppendIntent_(ctx, 'EA_Diag', [S.cycleId || 0,
++      __eaCell({ base: __ea.base, n: __ea.n, hits: __ea.hits, residual: __ea.residual }), __eaCell(__ea.contrib), __eaCell(__ea.hoods),
++      __eaCell(ctx.__eaMarks || []), __eaCell(ctx.__eaPre5 || null)], 'bench-only engine.306 EA diagnostic row', 'content-telemetry');
++  }
++
+   // Write texture rows 2:N (cols A–O only)
+   sheet.getRange(2, 1, out.length, TEXTURE_COL_COUNT).setValues(out);
+ 

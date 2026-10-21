@@ -1,0 +1,58 @@
+AIM = BENCH (script read the bench marker)
+bench project = stage 17 outside the engine.306 files
+stage = stage 17 + 3 engine.306 files at a59ffe87151587be5f97af0adf4b978b1d7c34dc; manifest /tmp/claude-0/-root-GodWorld/9492d79f-059f-4c0f-b0d9-253c7b976fb5/scratchpad/stage18-eatap.sha256
+Script is already up to date.
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @91
+pull-back 167 js + manifest byte-identical to /tmp/claude-0/-root-GodWorld/9492d79f-059f-4c0f-b0d9-253c7b976fb5/scratchpad/stage18-eatap.sha256
+== leg A2t (stage 18 + EA tap, no rows)
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 86 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C113
+bench EA_Diag tab deleted
+version cut; waiting 87 s more for /exec propagation
+leg A2t C113 fire rc=2 "verdict": "HALT" "wallS": 176
+HALT leg A2t
+   "Sheet LifeHistory_Log: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Business_Ledger: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Casino_Ledger: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Simulation_Calendar: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Ripple_Ledger: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Transit_Metrics: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Crime_Metrics: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Faith_Ledger: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Chaos_Cars: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Civic_Office_Ledger: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Content_Telemetry: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Undocked_Draw: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Neighborhood_Map: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Cultural_Ledger: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet World_Population: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Riley_Digest: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Cycle_Weather: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet WorldEvents_Ledger: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet WorldEvents_V3_Ledger: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet EA_Diag: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Domain_Tracker: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Story_Seed_Deck: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Story_Hook_Deck: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Texture_Trigger_Log: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Media_Ledger: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Simulation_Ledger: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA.",
+   "Sheet Cycle_Seeds: Service Spreadsheets timed out while accessing document with id 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA."
+  ]
+ },
+ "post": {
+  "bench": 112,
+  "live": 112,
+  "ee": 4,
+  "rileyLast": 112,
+  "checkpoint": null
+ },
+ "newEE": [],
+ "verdict": "HALT",
+ "why": "bench advanced 0 (want exactly 1)"
+}

@@ -1,0 +1,447 @@
+{
+ "cycle": 113,
+ "label": "A2t",
+ "hoods": {
+  "Downtown": {
+   "retail": 11.56,
+   "sentiment": 0.13,
+   "nightlife": 0.85,
+   "event": 6.23,
+   "unemployed": 62
+  },
+  "Temescal": {
+   "retail": 5.14,
+   "sentiment": 0.04,
+   "nightlife": 0.81,
+   "event": 5.22,
+   "unemployed": 173
+  },
+  "Laurel": {
+   "retail": 6.49,
+   "sentiment": 0.01,
+   "nightlife": 0.73,
+   "event": 5,
+   "unemployed": 89
+  },
+  "West Oakland": {
+   "retail": 9.41,
+   "sentiment": 0.24,
+   "nightlife": 0.8,
+   "event": 5.16,
+   "unemployed": 47
+  },
+  "Fruitvale": {
+   "retail": 10.56,
+   "sentiment": 0.2,
+   "nightlife": 0.86,
+   "event": 6.21,
+   "unemployed": 63
+  },
+  "Jack London": {
+   "retail": 14.13,
+   "sentiment": 0.16,
+   "nightlife": 1.19,
+   "event": 8.16,
+   "unemployed": 67
+  },
+  "Rockridge": {
+   "retail": 12.4,
+   "sentiment": 0.02,
+   "nightlife": 0.86,
+   "event": 5,
+   "unemployed": 51
+  },
+  "Adams Point": {
+   "retail": 5.85,
+   "sentiment": -0.08,
+   "nightlife": 0.49,
+   "event": 3,
+   "unemployed": 84
+  },
+  "Grand Lake": {
+   "retail": 10.34,
+   "sentiment": 0,
+   "nightlife": 0.89,
+   "event": 7,
+   "unemployed": 73
+  },
+  "Piedmont Ave": {
+   "retail": 11.07,
+   "sentiment": 0.03,
+   "nightlife": 0.63,
+   "event": 4.24,
+   "unemployed": 41
+  },
+  "Chinatown": {
+   "retail": 9.15,
+   "sentiment": -0.05,
+   "nightlife": 0.92,
+   "event": 7.43,
+   "unemployed": 86
+  },
+  "Brooklyn": {
+   "retail": 5.21,
+   "sentiment": -0.13,
+   "nightlife": 0.54,
+   "event": 3,
+   "unemployed": 53
+  },
+  "Eastlake": {
+   "retail": 6.33,
+   "sentiment": -0.07,
+   "nightlife": 0.76,
+   "event": 5.11,
+   "unemployed": 96
+  },
+  "Glenview": {
+   "retail": 4.38,
+   "sentiment": 0,
+   "nightlife": 0.51,
+   "event": 3,
+   "unemployed": 100
+  },
+  "Dimond": {
+   "retail": 8.09,
+   "sentiment": -0.15,
+   "nightlife": 0.64,
+   "event": 4,
+   "unemployed": 101
+  },
+  "Ivy Hill": {
+   "retail": 4.09,
+   "sentiment": -0.11,
+   "nightlife": 0.52,
+   "event": 3.25,
+   "unemployed": 93
+  },
+  "San Antonio": {
+   "retail": 5.43,
+   "sentiment": -0.03,
+   "nightlife": 0.91,
+   "event": 5,
+   "unemployed": 109
+  },
+  "KONO": {
+   "retail": 7.53,
+   "sentiment": 0.08,
+   "nightlife": 0.92,
+   "event": 7,
+   "unemployed": 22
+  },
+  "Lake Merritt": {
+   "retail": 7.92,
+   "sentiment": 0.05,
+   "nightlife": 0.56,
+   "event": 3.5,
+   "unemployed": 16
+  },
+  "Uptown": {
+   "retail": 11.78,
+   "sentiment": 0.05,
+   "nightlife": 1.05,
+   "event": 8.24,
+   "unemployed": 19
+  },
+  "Baylight District": {
+   "retail": 5,
+   "sentiment": 0,
+   "nightlife": 0.46,
+   "event": 4.5,
+   "unemployed": 9
+  },
+  "East Oakland": {
+   "retail": 6.18,
+   "sentiment": 0.19,
+   "nightlife": 0.69,
+   "event": 4,
+   "unemployed": 96
+  }
+ },
+ "business": {
+  "rows": 180,
+  "newRows": 0,
+  "statedJobs": 30089,
+  "revenue": 9328651419
+ },
+ "employerMoves": {
+  "total": 11,
+  "toNewRows": 0,
+  "list": [
+   {
+    "pop": "POP-00183",
+    "from": "BIZ-00028",
+    "to": "BIZ-00094",
+    "toName": "West Oakland Stabilization Fund",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01216",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01217",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01218",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01219",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01220",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01221",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01222",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01223",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01224",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01225",
+    "from": "(new citizen)",
+    "to": "BIZ-00146",
+    "toName": "Intermission Cafe",
+    "toNewRow": false
+   }
+  ]
+ },
+ "lifeHistory": {
+  "rows": 2322,
+  "linesSha256": "130462736b782fbed21733d1f6bd28844977a5bf633d4e754d1f4da0becf5bfa",
+  "careerHired": 1
+ },
+ "chaosBusinessHits": {
+  "total": 4,
+  "onNewRows": 0,
+  "list": [
+   {
+    "id": "BIZ-00077",
+    "name": "Nino's",
+    "outcome": "lost_contract_notice",
+    "newRow": false
+   },
+   {
+    "id": "BIZ-00094",
+    "name": "West Oakland Stabilization Fund",
+    "outcome": "new_contract_letter",
+    "newRow": false
+   },
+   {
+    "id": "BIZ-00079",
+    "name": "Masjid An-Nur Oakland",
+    "outcome": "forced_temporary_closure",
+    "newRow": false
+   },
+   {
+    "id": "BIZ-00007",
+    "name": "Ridgeline Ventures",
+    "outcome": "overdue_payment_arrives",
+    "newRow": false
+   }
+  ]
+ },
+ "chaosByHood": {
+  "Rockridge": [
+   {
+    "scope": "neighborhood",
+    "id": "Rockridge",
+    "name": "",
+    "vehicle": "street_sweeper",
+    "outcome": "parking_ticket",
+    "metric": "RetailVitality",
+    "magnitude": "2.74"
+   },
+   {
+    "scope": "neighborhood",
+    "id": "Rockridge",
+    "name": "",
+    "vehicle": "bart_train",
+    "outcome": "stalled_train",
+    "metric": "TransitDelay",
+    "magnitude": "0.1"
+   }
+  ],
+  "Laurel": [
+   {
+    "scope": "business",
+    "id": "BIZ-00077",
+    "name": "Nino's",
+    "vehicle": "mail_truck",
+    "outcome": "lost_contract_notice",
+    "metric": "Growth_Rate",
+    "magnitude": "-1.25"
+   }
+  ],
+  "(citizen)": [
+   {
+    "scope": "citizen",
+    "id": "POP-01160",
+    "name": "",
+    "vehicle": "bart_train",
+    "outcome": "signal_failure",
+    "metric": "TransitDelay",
+    "magnitude": "0.06"
+   },
+   {
+    "scope": "citizen",
+    "id": "POP-00787",
+    "name": "",
+    "vehicle": "mail_truck",
+    "outcome": "vital_document_delivered",
+    "metric": "Friction",
+    "magnitude": "0"
+   },
+   {
+    "scope": "citizen",
+    "id": "POP-00494",
+    "name": "",
+    "vehicle": "street_sweeper",
+    "outcome": "parking_ticket",
+    "metric": "Setback",
+    "magnitude": "0"
+   },
+   {
+    "scope": "citizen",
+    "id": "POP-00518",
+    "name": "",
+    "vehicle": "bart_train",
+    "outcome": "medical_hold_on_board",
+    "metric": "TransitDelay",
+    "magnitude": "0.05"
+   }
+  ],
+  "West Oakland": [
+   {
+    "scope": "business",
+    "id": "BIZ-00094",
+    "name": "West Oakland Stabilization Fund",
+    "vehicle": "mail_truck",
+    "outcome": "new_contract_letter",
+    "metric": "Growth_Rate",
+    "magnitude": "1"
+   }
+  ],
+  "East Oakland": [
+   {
+    "scope": "neighborhood",
+    "id": "East Oakland",
+    "name": "",
+    "vehicle": "oari_van",
+    "outcome": "welfare_check",
+    "metric": "Sentiment",
+    "magnitude": "0.1"
+   },
+   {
+    "scope": "business",
+    "id": "BIZ-00079",
+    "name": "Masjid An-Nur Oakland",
+    "vehicle": "building_inspector",
+    "outcome": "forced_temporary_closure",
+    "metric": "Growth_Rate",
+    "magnitude": "-2"
+   }
+  ],
+  "Brooklyn": [
+   {
+    "scope": "neighborhood",
+    "id": "Brooklyn",
+    "name": "",
+    "vehicle": "garbage_truck",
+    "outcome": "dumping_cleared",
+    "metric": "Sentiment",
+    "magnitude": "-0.05"
+   }
+  ],
+  "Chinatown": [
+   {
+    "scope": "neighborhood",
+    "id": "Chinatown",
+    "name": "",
+    "vehicle": "ambulance",
+    "outcome": "medical_emergency",
+    "metric": "Sentiment",
+    "magnitude": "-0.07"
+   }
+  ],
+  "Lake Merritt": [
+   {
+    "scope": "business",
+    "id": "BIZ-00007",
+    "name": "Ridgeline Ventures",
+    "vehicle": "mail_truck",
+    "outcome": "overdue_payment_arrives",
+    "metric": "Growth_Rate",
+    "magnitude": "0.5"
+   }
+  ]
+ },
+ "lifeHistoryByHood": {
+  "Downtown": 169,
+  "KONO": 32,
+  "West Oakland": 277,
+  "Fruitvale": 207,
+  "Jack London": 146,
+  "Uptown": 186,
+  "Piedmont Ave": 136,
+  "Chinatown": 148,
+  "Grand Lake": 20,
+  "Lake Merritt": 185,
+  "Laurel": 123,
+  "Rockridge": 184,
+  "Temescal": 126,
+  "Baylight District": 19,
+  "East Oakland": 31,
+  "Adams Point": 19,
+  "Brooklyn": 19,
+  "Dimond": 21,
+  "San Antonio": 19,
+  "Ivy Hill": 17,
+  "Glenview": 15,
+  "Eastlake": 18,
+  "(none)": 205
+ },
+ "newLedgerRows": [],
+ "ownerDoorQueue": [],
+ "treasuryBusinessTax": "no TreasuryPost tab"
+}

@@ -878,13 +878,15 @@ console.log('═══ C9 — engine.214 8a Cut C: the citizen\'s spot');
     if (genSrc.split(TAP_AT).length !== 2) throw new Error('C9f: post-T5 anchor not found exactly once');
     const tappedGen = new Function(SCOPE_SRC + '\n' + genSrc.replace(TAP_AT, '    if (global.__c9PoolTap) global.__c9PoolTap(pool, SPOT_LINE_WEIGHT_);\n' + TAP_AT) +
       '\nreturn generateCitizensEvents_;')();
-    let spotEntries = 0; const wMiss = [];
+    let spotEntries = 0, spotPools = 0; const wMiss = [], countMiss = [];
     global.__c9PoolTap = (pool, W) => {
+      let n = 0;
       for (const e of pool) {
         if (!(e.tags || []).some(t => t.indexOf('spot:') === 0)) continue;
-        spotEntries++;
+        n++;
         if (e.weight !== W) wMiss.push(e.text + ' = ' + e.weight);
       }
+      if (n) { spotPools++; spotEntries += n; if (n !== 4) countMiss.push(n); }
     };
     rngImpl = mulberry32(2215);
     const fRows = buildLedger(['Fruitvale'], 8);
@@ -894,11 +896,13 @@ console.log('═══ C9 — engine.214 8a Cut C: the citizen\'s spot');
       'LifeHistory_Log': memSheet('LifeHistory_Log', [['Timestamp', 'Cycle', 'POPID', 'Name', 'Event', 'Tag']])
     });
     const ctx = makeCtx(96, fRows, ss);
-    ctx.summary.hoodSpots = { Fruitvale: [sp({ id: 'BIZ-W', name: 'Clockwork Noticed Coordinated Cafe', streak: 3, prevStreak: 2, shed: 1, lift: true, chaos: ['minor_fire'] })] };
+    // The boosts are case-sensitive substring checks: the name carries all three words in lowercase. Facts: quiet,
+    // shed, lift, minor_fire = 4 entries in every pool that offers the spot.
+    ctx.summary.hoodSpots = { Fruitvale: [sp({ id: 'BIZ-W', name: 'Clockwork Cafe, noticed and coordinated', streak: 3, prevStreak: 2, shed: 1, lift: true, chaos: ['minor_fire'] })] };
     tappedGen(ctx);
     delete global.__c9PoolTap;
-    assert('C9f real path, post-archetype and post-T5: every spot entry weighs SPOT_LINE_WEIGHT_, a name with "work" / "noticed" / "coordinated" included (' + spotEntries + ' entries)',
-      spotEntries >= 8 && wMiss.length === 0, wMiss.slice(0, 3).join(' | '));
+    assert('C9f real path, post-archetype and post-T5: every spot entry weighs SPOT_LINE_WEIGHT_, a name with "work" / "noticed" / "coordinated" included (' + spotPools + ' pools, ' + spotEntries + ' entries, 4 facts each)',
+      spotPools >= 4 && countMiss.length === 0 && wMiss.length === 0, wMiss.slice(0, 3).join(' | ') + (countMiss.length ? ' counts ' + countMiss.join(',') : ''));
   }
 }
 

@@ -89,6 +89,7 @@
 | engine.271 | C120: first property-tax day. Fines, court and tickets proven at C110 | live-observing | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §engine.271 read-before and design |
 | engine.272 | ~C139: first citizen worn down far enough to reach the conduct-crime gate. Wear proven at C110 (35 of 35) | live-observing | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §engine.272 cut |
 | infrastructure.10 | Sun 2026-11-01: Supermemory v5 migration session, not before (builder 2026-10-07). Vendor cutoff ~2027-01-06 | blocked | engine-sheet | [[../plans/2026-10-06-supermemory-v5-migration]] |
+| civic.45 | Fri 2026-10-30: did D9 (Uptown) or D2 (Downtown) pick up HousingPressure 9 over C113's civic week, unprompted (builder 2026-10-20)? Pickup = a move or referral, a tracker row, or an INIT-006 phase change; baseline and wiring in the gap log | live-observing | engine-sheet | `output/production_log_run_cycle_c112_gaps.md` §G-EC41 |
 | engine.11 | Organic: the first real Tier-1 chaos-car hit runs the civic cascade on live (T5.3). Synthetic shape proven | live-observing | engine-sheet / research-build | [[../plans/2026-05-07-chaos-cars-engine]] |
 | engine.108 | Organic: the first generic citizen reaching EmergenceCount 3 gets promoted (max is 2) | live-observing | engine-sheet | [[../plans/2026-08-16-new-life-intake]] §2-3.1 |
 | engine.238 | Organic: the chief's first live patrol move lands in World_Config at a close | live-observing | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |

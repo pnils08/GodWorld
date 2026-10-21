@@ -755,13 +755,13 @@ console.log('═══ C9 — engine.214 8a Cut C: the citizen\'s spot');
   const sp = (o) => Object.assign({ id: 'BIZ-1', name: 'Taco Spot', cls: 'food', streak: 0, prevStreak: 0, shed: 0, lift: false, chaos: [] }, o);
   const evs = (s) => JSON.stringify(citizenSpotLines_(s).map(e => e.tags[1].slice(5) + ':' + e.tags[2].split(':')[2] + ':' + e.weight));
   assert('C9a an all-steady spot, and no spot, offer nothing', citizenSpotLines_(sp({})).length === 0 && citizenSpotLines_(null).length === 0);
-  const cases = [[{ streak: 1 }, '[]'], [{ streak: 2 }, '["quiet:down:2"]'], [{ streak: 3 }, '["quiet:down:3"]'],
-    [{ streak: 8, shed: 2 }, '["quiet:down:5","shed:down:2"]'], [{ prevStreak: 2 }, '["recovery:up:2"]'],
-    [{ prevStreak: 1 }, '[]'], [{ prevStreak: 3, streak: 1 }, '[]'], [{ lift: true }, '["lift:up:1.5"]'],
-    [{ chaos: ['minor_fire', 'transformer_blowout', 'missed_pickup'] }, '["minor_fire:down:3","transformer_blowout:down:3"]'],
-    [{ chaos: ['major_blaze_contained', 'forced_temporary_closure'] }, '["major_blaze_contained:down:3","forced_temporary_closure:down:3"]']];
+  const cases = [[{ streak: 1 }, '[]'], [{ streak: 2 }, '["quiet:down:11"]'], [{ streak: 3 }, '["quiet:down:11"]'],
+    [{ streak: 8, shed: 2 }, '["quiet:down:11","shed:down:11"]'], [{ prevStreak: 2 }, '["recovery:up:11"]'],
+    [{ prevStreak: 1 }, '[]'], [{ prevStreak: 3, streak: 1 }, '[]'], [{ lift: true }, '["lift:up:11"]'],
+    [{ chaos: ['minor_fire', 'transformer_blowout', 'missed_pickup'] }, '["minor_fire:down:11","transformer_blowout:down:11"]'],
+    [{ chaos: ['major_blaze_contained', 'forced_temporary_closure'] }, '["major_blaze_contained:down:11","forced_temporary_closure:down:11"]']];
   const caseMiss = cases.filter(([o, want]) => evs(sp(o)) !== want).map(([o, want]) => JSON.stringify(o) + ' → ' + evs(sp(o)) + ' want ' + want);
-  assert('C9a each fact offers only its own line, signed (outabout) and weighed — quiet 2 / 3 / 5 by streak, recovery needs ≥ 2 then 0',
+  assert('C9a each fact offers only its own line, signed (outabout), one weight for every fact (builder: 1 in 10), recovery needs ≥ 2 then 0',
     caseMiss.length === 0, caseMiss.slice(0, 3).join(' | '));
   const allFacts = sp({ streak: 6, shed: 1, prevStreak: 0, lift: true, chaos: ['minor_fire', 'major_blaze_contained', 'transformer_blowout', 'forced_temporary_closure'] });
   const textMiss = [];

@@ -238,23 +238,27 @@ function citizenSpotFor_(hoodSpots, popId) {
   return best;
 }
 
-// Quiet weighs like the state pool's pw(1.0, (streak − 1) / 4): 2 at a two-week streak, 5 from five.
+// Builder 2026-10-20: "change the ratio to happen 1 every 10 cycles" — every spot fact weighs the same, sized so a
+// holder draws its line about 1 Cycle in 10 against the C113 bench pool (≈ 263 usable mass a slot, ≈ 2.5 slots;
+// receipt in plan engine.214 step 8). Above the state pool's cap 6 by the builder's rate; re-measure if the pool's size moves.
+var SPOT_LINE_WEIGHT_ = 11;
+
 function citizenSpotLines_(spot) {
   if (!spot) return [];
   var out = [];
-  var line = function(text, ev, up, weight) {
+  var line = function(text, ev, up) {
     out.push({ text: text.replace('<Name>', function() { return spot.name; }),
-      tags: ['source:nbhdState', 'spot:' + ev, 'dial:outabout:' + (up ? 'up' : 'down')], weight: weight });
+      tags: ['source:nbhdState', 'spot:' + ev, 'dial:outabout:' + (up ? 'up' : 'down')], weight: SPOT_LINE_WEIGHT_ });
   };
   var chaos = spot.chaos || [];
   for (var c = 0; c < chaos.length; c++) {
-    if (SPOT_CHAOS_LINES_.hasOwnProperty(chaos[c])) line(SPOT_CHAOS_LINES_[chaos[c]], chaos[c], false, 3.0);
+    if (SPOT_CHAOS_LINES_.hasOwnProperty(chaos[c])) line(SPOT_CHAOS_LINES_[chaos[c]], chaos[c], false);
   }
   var streak = Number(spot.streak) || 0;
-  if (streak >= 2) line('has watched <Name> go quiet lately', 'quiet', false, Math.min(6, 1 + 4 * Math.min(1, (streak - 1) / 4)));
-  if (Number(spot.shed) > 0) line('heard <Name> let some staff go', 'shed', false, 2.0);
-  if ((Number(spot.prevStreak) || 0) >= 2 && streak === 0) line('was glad to see <Name> steadier again', 'recovery', true, 2.0);
-  if (spot.lift) line('felt a lift at <Name> after the win', 'lift', true, 1.5);
+  if (streak >= 2) line('has watched <Name> go quiet lately', 'quiet', false);
+  if (Number(spot.shed) > 0) line('heard <Name> let some staff go', 'shed', false);
+  if ((Number(spot.prevStreak) || 0) >= 2 && streak === 0) line('was glad to see <Name> steadier again', 'recovery', true);
+  if (spot.lift) line('felt a lift at <Name> after the win', 'lift', true);
   return out;
 }
 

@@ -1,0 +1,1070 @@
+{
+ "target": "bench",
+ "at": "2026-10-21T07:24:12.607Z",
+ "start": "BIZ-00187",
+ "end": "BIZ-00289",
+ "mark": 289,
+ "rows": 283,
+ "promoted": 61,
+ "realignCell": [
+  "BIZ-00039",
+  "Pulse District",
+  "Nightlife & Entertainment",
+  "Downtown"
+ ],
+ "fails": [],
+ "checks": [
+  [
+   "every roster row = one ledger row, IDs BIZ-00187.. in roster order, nine typed cells = the seed",
+   true
+  ],
+  [
+   "intake Status promoted x103",
+   false
+  ],
+  [
+   "bizIdHighWater = 289",
+   true
+  ],
+  [
+   "ledger rows = 283",
+   true
+  ],
+  [
+   "BIZ-00039 D = Uptown",
+   false
+  ]
+ ],
+ "newRows": [
+  [
+   "BIZ-00187",
+   "Prescott Foundry Labs",
+   "Tech / Applied Robotics",
+   "West Oakland",
+   45,
+   120000,
+   9000000,
+   8
+  ],
+  [
+   "BIZ-00188",
+   "Mandela Data Works",
+   "Tech / Data Infrastructure",
+   "West Oakland",
+   45,
+   120000,
+   9000000,
+   8
+  ],
+  [
+   "BIZ-00189",
+   "Hoover Street Software",
+   "Tech / Software",
+   "West Oakland",
+   45,
+   120000,
+   9000000,
+   8
+  ],
+  [
+   "BIZ-00190",
+   "Seventh Street Rail Supply",
+   "Industrial Supply / Services",
+   "West Oakland",
+   6,
+   45000,
+   500000,
+   2
+  ],
+  [
+   "BIZ-00191",
+   "Heinold's First and Last Chance Saloon",
+   "Bar / Saloon / Historic Landmark",
+   "Jack London",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00192",
+   "Embarcadero Music Hall",
+   "Music Venue",
+   "Jack London",
+   9,
+   55000,
+   800000,
+   3
+  ],
+  [
+   "BIZ-00193",
+   "Loading Dock Studios",
+   "Design Studio",
+   "Jack London",
+   9,
+   55000,
+   800000,
+   3
+  ],
+  [
+   "BIZ-00194",
+   "Estuary Oyster House",
+   "Restaurant & Dining",
+   "Jack London",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00195",
+   "Dockside Comedy Club",
+   "Comedy Club",
+   "Jack London",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00196",
+   "Warehouse Nine Brewing",
+   "Brewery",
+   "Jack London",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00197",
+   "The Hold",
+   "Dance Club / Nightlife & Entertainment",
+   "Jack London",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00198",
+   "Third Street Late Kitchen",
+   "Late-Night Restaurant & Dining",
+   "Jack London",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00199",
+   "Broadway Mutual Bank",
+   "Finance & Banking",
+   "Downtown",
+   26,
+   95000,
+   6200000,
+   4
+  ],
+  [
+   "BIZ-00200",
+   "Clay Street Law Group",
+   "Law Firm",
+   "Downtown",
+   26,
+   95000,
+   6200000,
+   4
+  ],
+  [
+   "BIZ-00201",
+   "Fourteenth Street Capital",
+   "Wealth Management / Finance",
+   "Downtown",
+   26,
+   95000,
+   6200000,
+   4
+  ],
+  [
+   "BIZ-00202",
+   "Tower Commercial Property",
+   "Real Estate Finance",
+   "Downtown",
+   26,
+   95000,
+   6200000,
+   4
+  ],
+  [
+   "BIZ-00203",
+   "Oakland Asian Cultural Center",
+   "Cultural Center / Community / Historic Landmark",
+   "Chinatown",
+   6,
+   45000,
+   500000,
+   2
+  ],
+  [
+   "BIZ-00204",
+   "Eight Treasures Dim Sum House",
+   "Restaurant & Dining",
+   "Chinatown",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00205",
+   "Wong Family Seafood & Produce",
+   "Wholesale Grocery",
+   "Chinatown",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00206",
+   "Lucky Harbor Herbalist & Tea",
+   "Herbalist & Tea Shop",
+   "Chinatown",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00207",
+   "Harrison Street Chinese School",
+   "Education",
+   "Chinatown",
+   15,
+   62000,
+   1200000,
+   2
+  ],
+  [
+   "BIZ-00208",
+   "Paramount Theatre",
+   "Theater / Historic Landmark",
+   "Uptown",
+   9,
+   55000,
+   800000,
+   3
+  ],
+  [
+   "BIZ-00209",
+   "Uptown Playhouse",
+   "Theater Company / Performance Space",
+   "Uptown",
+   9,
+   55000,
+   800000,
+   3
+  ],
+  [
+   "BIZ-00210",
+   "Nineteenth Street Gallery",
+   "Art Gallery",
+   "Uptown",
+   9,
+   55000,
+   800000,
+   3
+  ],
+  [
+   "BIZ-00211",
+   "Telegraph Supper Club",
+   "Restaurant & Dining",
+   "Uptown",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00212",
+   "Neon Alley Cocktails",
+   "Bar / Lounge",
+   "Uptown",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00213",
+   "Fox Theater Oakland",
+   "Theater / Historic Landmark",
+   "KONO",
+   9,
+   55000,
+   800000,
+   3
+  ],
+  [
+   "BIZ-00214",
+   "Han River BBQ",
+   "Korean Restaurant",
+   "KONO",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00215",
+   "Seoul Corner Market",
+   "Korean Grocery",
+   "KONO",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00216",
+   "Telegraph Studio Collective",
+   "Artist Studios",
+   "KONO",
+   9,
+   55000,
+   800000,
+   3
+  ],
+  [
+   "BIZ-00217",
+   "Midnight Norae Karaoke",
+   "Karaoke Bar",
+   "KONO",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00218",
+   "Temescal Urgent Care",
+   "Urgent Care Clinic",
+   "Temescal",
+   38,
+   85000,
+   4000000,
+   3
+  ],
+  [
+   "BIZ-00219",
+   "Longfellow Pharmacy",
+   "Pharmacy / Retail",
+   "Temescal",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00220",
+   "North Oakland Home Health",
+   "Home Health Agency",
+   "Temescal",
+   38,
+   85000,
+   4000000,
+   3
+  ],
+  [
+   "BIZ-00221",
+   "Shafter Street Coffee",
+   "Cafe",
+   "Temescal",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00222",
+   "Telegraph Mutual Aid Kitchen",
+   "Community Kitchen",
+   "Temescal",
+   6,
+   45000,
+   500000,
+   2
+  ],
+  [
+   "BIZ-00223",
+   "College Avenue Medical Group",
+   "Medical Specialists",
+   "Rockridge",
+   38,
+   85000,
+   4000000,
+   3
+  ],
+  [
+   "BIZ-00224",
+   "Claremont Advisory Partners",
+   "Management Consulting",
+   "Rockridge",
+   26,
+   95000,
+   6200000,
+   4
+  ],
+  [
+   "BIZ-00225",
+   "Rockridge Wine Merchants",
+   "Wine Shop",
+   "Rockridge",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00226",
+   "Hillside Preparatory",
+   "Private School",
+   "Rockridge",
+   15,
+   62000,
+   1200000,
+   2
+  ],
+  [
+   "BIZ-00227",
+   "Piedmont Avenue Bistro",
+   "Restaurant & Dining",
+   "Piedmont Ave",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00228",
+   "Montclair Patisserie",
+   "Bakery / Patisserie",
+   "Piedmont Ave",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00229",
+   "Avenue Florist",
+   "Florist Shop",
+   "Piedmont Ave",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00230",
+   "Glass & Frame Optometry",
+   "Optometry Clinic",
+   "Piedmont Ave",
+   38,
+   85000,
+   4000000,
+   3
+  ],
+  [
+   "BIZ-00231",
+   "Lakeview Salon",
+   "Hair Salon / Services",
+   "Piedmont Ave",
+   6,
+   45000,
+   500000,
+   2
+  ],
+  [
+   "BIZ-00232",
+   "Marguerite's",
+   "Women's Boutique",
+   "Piedmont Ave",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00233",
+   "Pleasant Valley Menswear",
+   "Men's Clothing Store",
+   "Piedmont Ave",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00234",
+   "Little Avenue",
+   "Children's Boutique",
+   "Piedmont Ave",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00235",
+   "Linden Street Jewelers",
+   "Jewelry Store",
+   "Piedmont Ave",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00236",
+   "Lakeside Rowing Club",
+   "Private Club",
+   "Lake Merritt",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00237",
+   "Grand Avenue Trust & Estate",
+   "Estate Law",
+   "Lake Merritt",
+   26,
+   95000,
+   6200000,
+   4
+  ],
+  [
+   "BIZ-00238",
+   "The Pergola Cafe",
+   "Cafe",
+   "Lake Merritt",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00239",
+   "Lakeshore Market",
+   "Grocery",
+   "Lake Merritt",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00240",
+   "Adams & Daughters Antiques",
+   "Antiques Shop",
+   "Lake Merritt",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00241",
+   "Lakeshore Cigar Club",
+   "Cigar Lounge",
+   "Lake Merritt",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00242",
+   "Grand Avenue Wine Bar",
+   "Wine Bar",
+   "Lake Merritt",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00243",
+   "Perkins Street Taqueria",
+   "Restaurant & Dining",
+   "Adams Point",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00244",
+   "Point Climbing Gym",
+   "Climbing Gym / Services",
+   "Adams Point",
+   6,
+   45000,
+   500000,
+   2
+  ],
+  [
+   "BIZ-00245",
+   "Bellevue Coffee Roasters",
+   "Coffee Roaster",
+   "Adams Point",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00246",
+   "Lakeside Paws",
+   "Veterinary Clinic",
+   "Adams Point",
+   38,
+   85000,
+   4000000,
+   3
+  ],
+  [
+   "BIZ-00247",
+   "Lakeshore Grand Theatre",
+   "Movie Theater",
+   "Grand Lake",
+   9,
+   55000,
+   800000,
+   3
+  ],
+  [
+   "BIZ-00248",
+   "Grand Lake Saturday Market",
+   "Farmers Market",
+   "Grand Lake",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00249",
+   "Splash Pad Toys",
+   "Toy Store",
+   "Grand Lake",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00250",
+   "Lakeshore Creamery",
+   "Ice Cream / Dessert Cafe",
+   "Grand Lake",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00251",
+   "Grand Slice",
+   "Pizzeria / Restaurant & Dining",
+   "Grand Lake",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00252",
+   "Lakeshore Pho House",
+   "Vietnamese Restaurant",
+   "Eastlake",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00253",
+   "Eastlake Tap Room",
+   "Bar",
+   "Eastlake",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00254",
+   "Eastlake Community Credit Union",
+   "Credit Union / Finance",
+   "Eastlake",
+   26,
+   95000,
+   6200000,
+   4
+  ],
+  [
+   "BIZ-00255",
+   "East Lake Garden Supply",
+   "Garden Center / Retail",
+   "Eastlake",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00256",
+   "Basin Residential Management",
+   "Property Management / Real Estate",
+   "Brooklyn",
+   6,
+   45000,
+   500000,
+   2
+  ],
+  [
+   "BIZ-00257",
+   "Estuary Pediatrics",
+   "Pediatric Clinic",
+   "Brooklyn",
+   38,
+   85000,
+   4000000,
+   3
+  ],
+  [
+   "BIZ-00258",
+   "Shoreline Kayak & Paddle",
+   "Outdoor Rental / Services",
+   "Brooklyn",
+   6,
+   45000,
+   500000,
+   2
+  ],
+  [
+   "BIZ-00259",
+   "Ninth Avenue Bottle Shop",
+   "Wine & Spirits Shop",
+   "Brooklyn",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00260",
+   "International Boulevard Staffing",
+   "Staffing Agency / Professional Services",
+   "San Antonio",
+   26,
+   95000,
+   6200000,
+   4
+  ],
+  [
+   "BIZ-00261",
+   "Early Shift Childcare",
+   "Preschool & Early Education",
+   "San Antonio",
+   15,
+   62000,
+   1200000,
+   2
+  ],
+  [
+   "BIZ-00262",
+   "Panadería La Doce",
+   "Bakery",
+   "San Antonio",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00263",
+   "San Antonio Transmission & Tire",
+   "Auto Repair / Services",
+   "San Antonio",
+   6,
+   45000,
+   500000,
+   2
+  ],
+  [
+   "BIZ-00264",
+   "Mercado Fruitvale",
+   "Mexican Grocery",
+   "Fruitvale",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00265",
+   "Taquería El Andén",
+   "Taquería / Restaurant",
+   "Fruitvale",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00266",
+   "Boutique Reina",
+   "Quinceañera & Formalwear Boutique",
+   "Fruitvale",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00267",
+   "Platform Brunch",
+   "Brunch Restaurant",
+   "Fruitvale",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00268",
+   "International Cycle Works",
+   "Bike Shop",
+   "Fruitvale",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00269",
+   "Taco Fusion",
+   "Fusion Restaurant",
+   "Fruitvale",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00270",
+   "Hub Ramen",
+   "Ramen Bar",
+   "Fruitvale",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00271",
+   "Masa & Vine",
+   "Small Plates & Natural Wine Bar",
+   "Fruitvale",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00272",
+   "Coliseum Way Builders",
+   "Construction",
+   "East Oakland",
+   30,
+   80000,
+   8000000,
+   5
+  ],
+  [
+   "BIZ-00273",
+   "Hegenberger Concrete & Steel",
+   "Construction Supply",
+   "East Oakland",
+   30,
+   80000,
+   8000000,
+   5
+  ],
+  [
+   "BIZ-00274",
+   "Coliseum Corner Sports Bar",
+   "Sports Bar & Grill",
+   "East Oakland",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00275",
+   "Flatlands Soul Kitchen",
+   "Restaurant & Dining",
+   "East Oakland",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00276",
+   "Eastside Braids & Barbers",
+   "Hair Salon / Services",
+   "East Oakland",
+   6,
+   45000,
+   500000,
+   2
+  ],
+  [
+   "BIZ-00277",
+   "Stabilization Fund East Oakland Disbursement Office",
+   "Community Development",
+   "East Oakland",
+   6,
+   45000,
+   500000,
+   2
+  ],
+  [
+   "BIZ-00278",
+   "Oakland Coliseum",
+   "Stadium / Historic Landmark",
+   "East Oakland",
+   6,
+   45000,
+   500000,
+   2
+  ],
+  [
+   "BIZ-00279",
+   "MacArthur Tutoring Center",
+   "Tutoring",
+   "Laurel",
+   15,
+   62000,
+   1200000,
+   2
+  ],
+  [
+   "BIZ-00280",
+   "Maxwell Park Youth League",
+   "Youth Recreation / Community",
+   "Laurel",
+   6,
+   45000,
+   500000,
+   2
+  ],
+  [
+   "BIZ-00281",
+   "Laurel Music School",
+   "Music School",
+   "Laurel",
+   9,
+   55000,
+   800000,
+   3
+  ],
+  [
+   "BIZ-00282",
+   "High Street Hardware",
+   "Hardware Store",
+   "Laurel",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00283",
+   "Laurel Family Realty",
+   "Real Estate",
+   "Laurel",
+   6,
+   45000,
+   500000,
+   2
+  ],
+  [
+   "BIZ-00284",
+   "Oakland City College — Laurel Campus",
+   "Education",
+   "Laurel",
+   15,
+   62000,
+   1200000,
+   2
+  ],
+  [
+   "BIZ-00285",
+   "Fruitvale Avenue Social Club",
+   "Social Club",
+   "Dimond",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00286",
+   "Dimond Billiards",
+   "Pool Hall & Bar",
+   "Dimond",
+   11,
+   48000,
+   720000,
+   3
+  ],
+  [
+   "BIZ-00287",
+   "Sausal Creek Pawn & Jewelry",
+   "Pawn & Jewelry Shop",
+   "Dimond",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00288",
+   "Old Dimond Butcher",
+   "Butcher Shop",
+   "Dimond",
+   4,
+   42000,
+   380000,
+   2
+  ],
+  [
+   "BIZ-00289",
+   "Tops n Tassels",
+   "Gentlemen's Club / Adult Entertainment",
+   "Dimond",
+   11,
+   48000,
+   720000,
+   3
+  ]
+ ]
+}

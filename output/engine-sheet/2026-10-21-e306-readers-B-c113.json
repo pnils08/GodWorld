@@ -1,0 +1,293 @@
+{
+ "cycle": 113,
+ "label": "B",
+ "hoods": {
+  "Downtown": {
+   "retail": 12.87,
+   "sentiment": 0.11,
+   "nightlife": 0.79,
+   "event": 4.32,
+   "unemployed": 62
+  },
+  "Temescal": {
+   "retail": 5.52,
+   "sentiment": 0.02,
+   "nightlife": 0.73,
+   "event": 4.22,
+   "unemployed": 173
+  },
+  "Laurel": {
+   "retail": 6.97,
+   "sentiment": 0.03,
+   "nightlife": 0.72,
+   "event": 3,
+   "unemployed": 89
+  },
+  "West Oakland": {
+   "retail": 9.89,
+   "sentiment": 0.24,
+   "nightlife": 0.8,
+   "event": 3.17,
+   "unemployed": 47
+  },
+  "Fruitvale": {
+   "retail": 10.58,
+   "sentiment": 0.16,
+   "nightlife": 0.9,
+   "event": 4.19,
+   "unemployed": 63
+  },
+  "Jack London": {
+   "retail": 14.19,
+   "sentiment": 0.17,
+   "nightlife": 1.26,
+   "event": 5.08,
+   "unemployed": 67
+  },
+  "Rockridge": {
+   "retail": 13.1,
+   "sentiment": 0,
+   "nightlife": 0.85,
+   "event": 3.19,
+   "unemployed": 51
+  },
+  "Adams Point": {
+   "retail": 5.87,
+   "sentiment": -0.09,
+   "nightlife": 0.56,
+   "event": 2,
+   "unemployed": 84
+  },
+  "Grand Lake": {
+   "retail": 9.59,
+   "sentiment": -0.03,
+   "nightlife": 0.82,
+   "event": 4,
+   "unemployed": 73
+  },
+  "Piedmont Ave": {
+   "retail": 11.93,
+   "sentiment": 0.05,
+   "nightlife": 0.65,
+   "event": 2.13,
+   "unemployed": 41
+  },
+  "Chinatown": {
+   "retail": 8.03,
+   "sentiment": -0.08,
+   "nightlife": 0.91,
+   "event": 4.31,
+   "unemployed": 86
+  },
+  "Brooklyn": {
+   "retail": 4.32,
+   "sentiment": -0.1,
+   "nightlife": 0.57,
+   "event": 2,
+   "unemployed": 53
+  },
+  "Eastlake": {
+   "retail": 5.91,
+   "sentiment": -0.05,
+   "nightlife": 0.75,
+   "event": 3.11,
+   "unemployed": 96
+  },
+  "Glenview": {
+   "retail": 4.56,
+   "sentiment": -0.04,
+   "nightlife": 0.56,
+   "event": 2,
+   "unemployed": 100
+  },
+  "Dimond": {
+   "retail": 8.13,
+   "sentiment": -0.11,
+   "nightlife": 0.72,
+   "event": 3,
+   "unemployed": 102
+  },
+  "Ivy Hill": {
+   "retail": 4.98,
+   "sentiment": -0.11,
+   "nightlife": 0.49,
+   "event": 2,
+   "unemployed": 93
+  },
+  "San Antonio": {
+   "retail": 4.94,
+   "sentiment": -0.04,
+   "nightlife": 0.8,
+   "event": 3,
+   "unemployed": 109
+  },
+  "KONO": {
+   "retail": 8.13,
+   "sentiment": 0.05,
+   "nightlife": 0.93,
+   "event": 5,
+   "unemployed": 22
+  },
+  "Lake Merritt": {
+   "retail": 7.67,
+   "sentiment": 0.05,
+   "nightlife": 0.55,
+   "event": 2.43,
+   "unemployed": 15
+  },
+  "Uptown": {
+   "retail": 12.5,
+   "sentiment": 0.08,
+   "nightlife": 1.23,
+   "event": 5.21,
+   "unemployed": 18
+  },
+  "Baylight District": {
+   "retail": 5.25,
+   "sentiment": 0.03,
+   "nightlife": 0.4,
+   "event": 2,
+   "unemployed": 9
+  },
+  "East Oakland": {
+   "retail": 6.45,
+   "sentiment": 0.2,
+   "nightlife": 0.69,
+   "event": 3.25,
+   "unemployed": 96
+  }
+ },
+ "business": {
+  "rows": 284,
+  "newRows": 104,
+  "statedJobs": 31442,
+  "revenue": 9499588916
+ },
+ "employerMoves": {
+  "total": 12,
+  "toNewRows": 2,
+  "list": [
+   {
+    "pop": "POP-00183",
+    "from": "BIZ-00028",
+    "to": "BIZ-00094",
+    "toName": "West Oakland Stabilization Fund",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01216",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01217",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01218",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01219",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01220",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01221",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01222",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01223",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01224",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01225",
+    "from": "(new citizen)",
+    "to": "BIZ-00260",
+    "toName": "International Boulevard Staffing",
+    "toNewRow": true
+   },
+   {
+    "pop": "POP-01226",
+    "from": "(new citizen)",
+    "to": "BIZ-00199",
+    "toName": "Broadway Mutual Bank",
+    "toNewRow": true
+   }
+  ]
+ },
+ "lifeHistory": {
+  "rows": 2290,
+  "linesSha256": "bb0ac98b0284f1cd18978a7b1f7c5d06064a75602d09680ead3fb7b000efedfa",
+  "careerHired": 1
+ },
+ "chaosBusinessHits": {
+  "total": 4,
+  "onNewRows": 0,
+  "list": [
+   {
+    "id": "BIZ-00120",
+    "name": "Golden Lotus Market",
+    "outcome": "lost_contract_notice",
+    "newRow": false
+   },
+   {
+    "id": "BIZ-00145",
+    "name": "Marquee Grocer",
+    "outcome": "new_contract_letter",
+    "newRow": false
+   },
+   {
+    "id": "BIZ-00123",
+    "name": "Heritage Bakehouse",
+    "outcome": "forced_temporary_closure",
+    "newRow": false
+   },
+   {
+    "id": "BIZ-00010",
+    "name": "Portside Bio",
+    "outcome": "overdue_payment_arrives",
+    "newRow": false
+   }
+  ]
+ },
+ "ownerDoorQueue": [],
+ "treasuryBusinessTax": "no TreasuryPost tab"
+}

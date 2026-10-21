@@ -183,7 +183,7 @@ async function main() {
   await sheets.setBizIdHighWater(nextBizNum - 1);
   console.log('  -> bizIdHighWater = ' + (nextBizNum - 1));
 
-  // 5. Update Business_Intake statuses via updateRangeByPosition
+  // 5. Update Business_Intake statuses (one column write)
   // Get header row to find Status column index
   console.log('Updating Business_Intake statuses...');
 
@@ -210,10 +210,15 @@ async function main() {
         }
       }
 
-      // Write each status update
+      // engine.306 (2026-10-21): one write for the whole Status column. A write per row hit the
+      // Sheets 60-writes-a-minute quota at 103 rows — after the ledger append and the mark had
+      // landed, so the batch died half-recorded (bench 1004).
+      var statusColumn = rawIntake.slice(1).map(function(row) { return [row[statusCol] !== undefined ? row[statusCol] : '']; });
       for (var u = 0; u < statusUpdates.length; u++) {
-        await sheets.updateRangeByPosition('Business_Intake', statusUpdates[u].row, statusCol, [[statusUpdates[u].value]]);
+        while (statusColumn.length < statusUpdates[u].row - 1) statusColumn.push(['']);
+        statusColumn[statusUpdates[u].row - 2] = [statusUpdates[u].value];
       }
+      if (statusColumn.length) await sheets.updateRangeByPosition('Business_Intake', 2, statusCol, statusColumn);
 
       console.log('  -> Business_Intake statuses updated (' + statusUpdates.length + ' rows).');
     }

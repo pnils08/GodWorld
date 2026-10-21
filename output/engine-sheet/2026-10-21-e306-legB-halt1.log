@@ -1,0 +1,36 @@
+AIM = BENCH (script read the bench marker)
+== leg B (stage 17 + phase05-citizens/processAdvancementIntake.js at 2896c46c + the 103 rows + realign)
+bench project = stage 17 outside the engine.306 files
+stage = stage 17 + 1 engine.306 files at 2896c46c; manifest output/engine-sheet/stage18-e306.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @87
+pull-back 167 js + manifest byte-identical to output/engine-sheet/stage18-e306.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C113
+ok   ledger rows = 180
+ok   bizIdHighWater = 186
+ok   max active = mark
+ok   roster rows = 103
+ok   0 dup names
+ok   0 non-canon hoods
+ok   0 blank roster fields
+ok   BIZ-00039 D = Downtown
+ok   Business_Archive holds no BIZ-00039
+ok   Business_Intake absent
+preimage /root/GodWorld/output/engine-sheet/2026-10-21-e306-preimage-bench.json | roster sha 2fea8d2d51bc228f | IDs BIZ-00187..BIZ-00289 | realign row 40
+Business_Intake staged 103 rows, read back
+processBusinessIntake rc=1 (log /root/GodWorld/output/engine-sheet/2026-10-21-e306-intake-bench.log)
+bench: data/employer_mapping.json restored
+ok   every roster row = one ledger row, IDs BIZ-00187.. in roster order, nine typed cells = the seed
+FAIL intake Status promoted x103
+ok   bizIdHighWater = 289
+ok   ledger rows = 283
+FAIL BIZ-00039 D = Uptown
+RECEIPT FAIL — read /root/GodWorld/output/engine-sheet/2026-10-21-e306-receipt-bench.json; follow the partial-retry rule
+HALT intake on bench
+exit 6

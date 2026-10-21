@@ -1,6 +1,7 @@
 {
  "cycle": 112,
  "vs": 111,
+ "hold": [],
  "bizAdded": [],
  "bizRemoved": [],
  "highWater": [
@@ -9,9 +10,12 @@
  ],
  "archiveAdded": [],
  "removedNotArchived": [],
+ "bizAddedUnexplained": [],
  "newRowChanges": {},
  "newRowDyn": {},
  "employerMoves": [],
+ "employerMovesNewRows": [],
+ "citizensGone": [],
  "newCitizensAtNewRows": [],
  "spots": {
   "Jack London": {
@@ -20,7 +24,8 @@
     11
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Downtown": {
    "eligible": [
@@ -28,7 +33,8 @@
     4
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Temescal": {
    "eligible": [
@@ -36,7 +42,8 @@
     4
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Uptown": {
    "eligible": [
@@ -44,7 +51,8 @@
     7
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Lake Merritt": {
    "eligible": [
@@ -52,7 +60,8 @@
     7
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Chinatown": {
    "eligible": [
@@ -60,7 +69,8 @@
     8
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Rockridge": {
    "eligible": [
@@ -68,7 +78,8 @@
     6
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Fruitvale": {
    "eligible": [
@@ -76,7 +87,8 @@
     10
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "KONO": {
    "eligible": [
@@ -84,7 +96,8 @@
     8
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "West Oakland": {
    "eligible": [
@@ -92,7 +105,8 @@
     2
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Dimond": {
    "eligible": [
@@ -100,7 +114,8 @@
     10
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Grand Lake": {
    "eligible": [
@@ -108,7 +123,8 @@
     11
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Laurel": {
    "eligible": [
@@ -116,7 +132,8 @@
     6
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Baylight District": {
    "eligible": [
@@ -124,7 +141,8 @@
     2
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Adams Point": {
    "eligible": [
@@ -132,7 +150,8 @@
     5
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Brooklyn": {
    "eligible": [
@@ -140,7 +159,8 @@
     5
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "East Oakland": {
    "eligible": [
@@ -148,7 +168,8 @@
     5
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Eastlake": {
    "eligible": [
@@ -156,7 +177,8 @@
     7
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Glenview": {
    "eligible": [
@@ -164,7 +186,8 @@
     4
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Ivy Hill": {
    "eligible": [
@@ -172,7 +195,8 @@
     3
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "Piedmont Ave": {
    "eligible": [
@@ -180,7 +204,8 @@
     9
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   },
   "San Antonio": {
    "eligible": [
@@ -188,12 +213,19 @@
     5
    ],
    "lost": [],
-   "gained": []
+   "gained": [],
+   "holdersMoved": 0
   }
  },
  "holderShift": {
   "citizensWithSpotBoth": 1000,
   "moved": 0
+ },
+ "spotLines": {
+  "drawn": 0,
+  "byFact": {},
+  "notTheirSpot": [],
+  "strays": []
  },
  "ea": {
   "Downtown": [
@@ -327,8 +359,9 @@
    "seedCount": 35,
    "baseLow": 2,
    "baseHigh": 37
-  }
+  },
+  "note": "live EA unknown: seeds bounded 0..StorySeedCount, hook hits a lower bound, pulse + chaos fold unobserved"
  },
  "eaAllDown": false,
- "eaHold": false
+ "verdict": "ACCEPT-CANDIDATE"
 }

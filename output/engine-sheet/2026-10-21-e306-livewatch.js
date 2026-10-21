@@ -72,12 +72,23 @@ async function read(c) {
     if (best) { best.holders++; s.citizenSpot[pop] = best.id; }
   });
   s.spots = {}; Object.keys(spots).forEach(h => { s.spots[h] = spots[h].map(x => [x.id, x.holders]); });
-  const rdg = await getSheetData('Riley_Digest'), rh = rdg[0];
-  const rr = rdg.slice(1).filter(r => num(r[rh.indexOf('Cycle')]) === c);
-  s.riley = { rows: rr.length, worldEvents: rr.length ? JSON.parse(rr[rr.length - 1][rh.indexOf('WorldEvents')] || '[]') : null,
-    storySeeds: rr.length ? rr[rr.length - 1][rh.findIndex(x => /seed/i.test(x))] : null };
-  const hk = await getSheetData('Story_Hook_Deck'), hh = hk[0];
-  s.hookText = hk.slice(1).filter(r => num(r[hh.indexOf('Cycle')]) === c).map(r => String(r[hh.indexOf('HookText')] || ''));
+  s.fold = { canon, child };
+  s.missing = [];   // codex gate 4 item 4: a missing input is a HOLD, never a silent zero
+  const rdg = await getSheetData('Riley_Digest'), rh = rdg[0] || [];
+  const riC = rh.indexOf('Cycle'), riW = rh.indexOf('WorldEvents'), riS = rh.indexOf('StorySeedCount');
+  if (riC < 0 || riW < 0 || riS < 0) s.missing.push('Riley_Digest header ' + JSON.stringify([riC, riW, riS]));
+  const rr = riC < 0 ? [] : rdg.slice(1).filter(r => num(r[riC]) === c);
+  if (rr.length !== 1) s.missing.push('Riley_Digest C' + c + ' rows ' + rr.length);
+  const last = rr[rr.length - 1] || [];
+  let wev = null; try { wev = riW >= 0 && String(last[riW] || '') !== '' ? JSON.parse(last[riW]) : null; } catch (e) { wev = null; }
+  if (!Array.isArray(wev)) s.missing.push('Riley_Digest C' + c + ' WorldEvents not a JSON list');
+  const seedRaw = riS >= 0 ? last[riS] : '';
+  if (String(seedRaw).trim() === '' || !isFinite(Number(seedRaw))) s.missing.push('Riley_Digest C' + c + ' StorySeedCount blank');
+  s.riley = { rows: rr.length, worldEvents: wev, storySeeds: seedRaw };
+  const hk = await getSheetData('Story_Hook_Deck'), hh = hk[0] || [];
+  const hkC = hh.indexOf('Cycle'), hkT = hh.indexOf('HookText');
+  if (hkC < 0 || hkT < 0) s.missing.push('Story_Hook_Deck header ' + JSON.stringify([hkC, hkT]));
+  s.hookText = hkC < 0 ? [] : hk.slice(1).filter(r => num(r[hkC]) === c).map(r => String(r[hkT] || ''));
   return s;
 }
 
@@ -105,13 +116,22 @@ function components(s) {   // v3NeighborhoodWriter.js:368-400 tests on what the 
     ' | EA base bounds ' + s.components.baseLow + '..' + s.components.baseHigh + ' ' + JSON.stringify(s.components));
   if (mode === 'snap') return;
   const p = JSON.parse(fs.readFileSync(O + 'c' + (cyc - 1) + '.json', 'utf8'));
-  const d = { cycle: cyc, vs: cyc - 1 };
+  const d = { cycle: cyc, vs: cyc - 1, hold: [] };
+  s.missing.concat(p.missing || []).forEach(m => d.hold.push('missing input: ' + m));
   const ids = Object.keys(s.biz), pids = Object.keys(p.biz);
+  const idNum = i => Number(String(i).replace(/^BIZ-0*/, ''));
   d.bizAdded = ids.filter(i => !p.biz[i]); d.bizRemoved = pids.filter(i => !s.biz[i]);
   d.highWater = [p.highWater, s.highWater];
   d.archiveAdded = s.archiveIds.filter(i => p.archiveIds.indexOf(i) < 0);
-  d.removedNotArchived = d.bizRemoved.filter(i => s.archiveIds.indexOf(i) < 0);
-  const bh = s.bizHeader;
+  // a removed ID must be archived THIS fire (codex gate 4 item 4: not merely present in the archive from before)
+  d.removedNotArchived = d.bizRemoved.filter(i => d.archiveAdded.indexOf(i) < 0);
+  const bh = s.bizHeader, iKP = bh.indexOf('Key_Personnel');
+  // the engine's only add path is the heritage birth (generationalWealthEngine.js:3203-3241): ID above the old mark, a "(founder)" owner
+  d.bizAddedUnexplained = d.bizAdded.filter(i => !(idNum(i) > p.highWater && iKP >= 0 && /\(founder\)/.test(String(s.biz[i][iKP] || ''))));
+  const wantMark = Math.max(p.highWater, ...d.bizAdded.map(idNum));
+  if (d.bizAddedUnexplained.length) d.hold.push('business rows added without a heritage birth: ' + JSON.stringify(d.bizAddedUnexplained));
+  if (d.removedNotArchived.length) d.hold.push('business rows removed without an archive row this Cycle: ' + JSON.stringify(d.removedNotArchived));
+  if (s.highWater !== wantMark) d.hold.push('high water ' + p.highWater + ' → ' + s.highWater + ', want ' + wantMark);
   d.newRowChanges = {};
   pids.filter(NEW).forEach(id => {
     if (!s.biz[id]) { d.newRowChanges[id] = 'gone' + (s.archiveIds.indexOf(id) >= 0 ? ' (archived)' : ' (NOT archived)'); return; }
@@ -119,31 +139,67 @@ function components(s) {   // v3NeighborhoodWriter.js:368-400 tests on what the 
     if (Object.keys(ch).length) d.newRowChanges[id] = ch;
   });
   d.newRowDyn = {}; pids.filter(NEW).forEach(id => { if (s.dyn[id]) d.newRowDyn[id] = s.dyn[id]; });
+  // every EmployerBizId change, blank → job included (codex gate 4 item 4); one touching a 103 row is read before acceptance
   d.employerMoves = [];
   Object.keys(p.citizens).forEach(pop => {
-    const a = p.citizens[pop], b = s.citizens[pop]; if (!b || !a[2] || a[2] === b[2]) return;
-    d.employerMoves.push([pop, a[2], b[2], NEW(b[2]) ? 'TO-NEW-ROW' : '']);
+    const a = p.citizens[pop], b = s.citizens[pop]; if (!b || a[2] === b[2]) return;
+    d.employerMoves.push([pop, a[2] || '(none)', b[2] || '(none)', NEW(b[2]) ? 'TO-NEW-ROW' : NEW(a[2]) ? 'FROM-NEW-ROW' : '']);
   });
+  d.employerMovesNewRows = d.employerMoves.filter(m => m[3]);
+  d.citizensGone = Object.keys(p.citizens).filter(pop => !s.citizens[pop]);
+  if (d.citizensGone.length) d.hold.push('ledger rows gone: ' + JSON.stringify(d.citizensGone.slice(0, 10)));
+  if (d.employerMovesNewRows.length) d.hold.push('employment moves touching a 103 row (read each): ' + JSON.stringify(d.employerMovesNewRows));
   d.newCitizensAtNewRows = Object.keys(s.citizens).filter(pop => !p.citizens[pop] && NEW(s.citizens[pop][2])).map(pop => [pop, s.citizens[pop][2]]);
   d.spots = {};
   new Set(Object.keys(p.spots).concat(Object.keys(s.spots))).forEach(h => {
     const a = p.spots[h] || [], b = s.spots[h] || [];
     const ai = a.map(x => x[0]), bi = b.map(x => x[0]);
-    d.spots[h] = { eligible: [ai.length, bi.length], lost: ai.filter(i => bi.indexOf(i) < 0), gained: bi.filter(i => ai.indexOf(i) < 0) };
+    d.spots[h] = { eligible: [ai.length, bi.length], lost: ai.filter(i => bi.indexOf(i) < 0), gained: bi.filter(i => ai.indexOf(i) < 0), holdersMoved: 0 };
   });
+  const foldP = h => { const k = String(h || '').trim().toLowerCase(); return s.fold.canon[k] || s.fold.child[k] || String(h || ''); };
   const moved = Object.keys(p.citizenSpot).filter(pop => s.citizenSpot[pop] && s.citizenSpot[pop] !== p.citizenSpot[pop]);
+  moved.forEach(pop => { const h = foldP(p.citizens[pop][1]); if (d.spots[h]) d.spots[h].holdersMoved++; });
   d.holderShift = { citizensWithSpotBoth: Object.keys(p.citizenSpot).filter(pop => s.citizenSpot[pop]).length, moved: moved.length };
+  // spot lines (spots.js:81-88): the Cycle's spot-fact lines must name the citizen's own spot — pre-fire citizen + hood
+  // (Phase5-CitizenEvents runs before migration) × this Cycle's eligible spots, the generator's own spotRank_
+  const EVENTS = [['had a small fire this week', 'minor_fire'], ['had a fire this week — contained', 'major_blaze_contained'],
+    ['went dark when a transformer blew', 'transformer_blowout'], ['was temporarily shut pending an inspection', 'forced_temporary_closure'],
+    ['go quiet lately', 'quiet'], ['let some staff go', 'shed'], ['steadier again', 'recovery'], ['felt a lift at ', 'lift']];
+  const iNm = bh.indexOf('Name'), spotAt = {};
+  Object.keys(p.citizens).forEach(pop => {
+    const [status, nb] = p.citizens[pop]; if (status !== 'Active') return;
+    let best = null, br = -1;
+    for (const [sid] of s.spots[foldP(nb)] || []) { const rk = spotRank_(pop, sid); if (rk > br || (rk === br && sid < best)) { best = sid; br = rk; } }
+    if (best) spotAt[pop] = String(s.biz[best][iNm] || '').trim();
+  });
+  const lh = await getSheetData('LifeHistory_Log'), lhh = lh[0] || [];
+  const lC = lhh.indexOf('Cycle'), lX = lhh.indexOf('EventText'), lP = lhh.indexOf('POPID');
+  if (lC < 0 || lX < 0 || lP < 0) d.hold.push('missing input: LifeHistory_Log header');
+  const lrows = lC < 0 ? [] : lh.slice(1).filter(r => num(r[lC]) === cyc);
+  if (!lrows.length) d.hold.push('missing input: no LifeHistory_Log C' + cyc + ' rows');
+  d.spotLines = { drawn: 0, byFact: {}, notTheirSpot: [], strays: [] };
+  lrows.forEach(r => {
+    const text = String(r[lX] || ''), hit = EVENTS.find(([n]) => text.indexOf(n) >= 0); if (!hit) return;
+    d.spotLines.drawn++; d.spotLines.byFact[hit[1]] = (d.spotLines.byFact[hit[1]] || 0) + 1;
+    const want = spotAt[r[lP]];
+    if (!want) d.spotLines.strays.push(r[lP] + ' ' + text); else if (text.indexOf(want) < 0) d.spotLines.notTheirSpot.push(r[lP] + ' ' + text);
+  });
+  if (d.spotLines.notTheirSpot.length || d.spotLines.strays.length) d.hold.push('spot lines not on the citizen\'s own spot: ' + (d.spotLines.notTheirSpot.length + d.spotLines.strays.length));
+  // EventAttractiveness on live is UNKNOWN, not explained: seeds are on no sheet, HookText is h.text only (the writer reads
+  // h.hook || h.text), pulse and the PropertiesService chaos fold are not observable (codex gate 4 item 4). Components are
+  // shown for reading; an all-hood decline holds acceptance until a tapped bench replay of the Cycle explains it.
   d.ea = {}; let down = 0, total = 0;
   Object.keys(s.hoods).forEach(h => { const a = p.hoods[h], b = s.hoods[h]; if (!a) return; total++; if (b.event < a.event) down++; d.ea[h] = [a.event, b.event, Math.round((b.event - a.event) * 100) / 100]; });
-  d.eaComponents = { [cyc - 1]: p.components, [cyc]: s.components };
+  d.eaComponents = { [cyc - 1]: p.components, [cyc]: s.components, note: 'live EA unknown: seeds bounded 0..StorySeedCount, hook hits a lower bound, pulse + chaos fold unobserved' };
   d.eaAllDown = down === total && total > 0;
-  // HOLD when every hood falls and even the widest observable base bound fell — the drop has no observable cause in the components
-  d.eaHold = d.eaAllDown && s.components.baseHigh < p.components.baseLow;
+  if (d.eaAllDown) d.hold.push('EventAttractiveness fell in all ' + total + ' hoods — replay C' + cyc + ' on the bench with the EA tap before accepting');
+  d.verdict = d.hold.length ? 'HOLD' : 'ACCEPT-CANDIDATE';
   fs.writeFileSync(O + 'diff-c' + cyc + '.json', JSON.stringify(d, null, 1));
-  console.log('BIZ added ' + JSON.stringify(d.bizAdded) + ' removed ' + JSON.stringify(d.bizRemoved) + ' (not archived ' + JSON.stringify(d.removedNotArchived) + ') high water ' + d.highWater.join('→'));
+  console.log('BIZ added ' + JSON.stringify(d.bizAdded) + ' removed ' + JSON.stringify(d.bizRemoved) + ' (archived this Cycle ' + JSON.stringify(d.archiveAdded) + ') high water ' + d.highWater.join('→'));
   console.log('103 rows changed ' + Object.keys(d.newRowChanges).length + ', dynamics entries ' + Object.keys(d.newRowDyn).length + '; employer moves ' + d.employerMoves.length +
-    ' (to new rows ' + d.employerMoves.filter(m => m[3]).length + '); new citizens placed at new rows ' + d.newCitizensAtNewRows.length);
-  console.log('spot holders moved ' + d.holderShift.moved + ' of ' + d.holderShift.citizensWithSpotBoth + '; EA hoods down ' + down + '/' + total +
-    ' | components ' + JSON.stringify(d.eaComponents) + (d.eaHold ? ' | HOLD: all-hood EA drop not explained by the observable components' : ''));
+    ' (touching new rows ' + d.employerMovesNewRows.length + '); new citizens placed at new rows ' + d.newCitizensAtNewRows.length + '; ledger rows gone ' + d.citizensGone.length);
+  console.log('spot holders moved ' + d.holderShift.moved + ' of ' + d.holderShift.citizensWithSpotBoth + '; spot lines ' + d.spotLines.drawn + ' ' + JSON.stringify(d.spotLines.byFact) +
+    ', not their spot ' + d.spotLines.notTheirSpot.length + ', strays ' + d.spotLines.strays.length + '; EA hoods down ' + down + '/' + total);
+  console.log('VERDICT ' + d.verdict + (d.hold.length ? '\n  ' + d.hold.join('\n  ') : ''));
   console.log('→ ' + O + 'diff-c' + cyc + '.json');
 })().catch(e => { console.error(e.message); process.exit(1); });

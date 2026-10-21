@@ -73,6 +73,7 @@ When filling a tier-2 canon substitute, pick something that fits the prosperity-
 
 - **Oakland City Schools** — K-12 public district | ledger: BIZ-00016 | MOU: INIT-007 C76 | older text saying "OUSD"/"Oakland Unified" means this institution
 - **Oakland Community College District** — community-college district | ledger: Peralta row | MOU: INIT-007 C78 | older text saying "Peralta CCD" means this institution; "Peralta" as a street name stays valid
+  - **Oakland City College — Laurel Campus** — the district's first named campus, in Laurel (the family belt; the campus the people who work in the prosperity economy without living inside it send their kids to) | ledger: Business_Ledger row minted under engine.306 (builder's call) | the district row above stays city-wide
 - **UC Berkeley** — out-of-Oakland; backstory/credential references only; never an in-world actor
 
 ### Tier 2 — Canon-substitute required
@@ -323,7 +324,7 @@ Iconic Oakland landmarks and cultural venues. These are public-geographic functi
 - **Chabot Space & Science Center** — public-affiliated science museum, Oakland Hills.
 - **Lake Merritt pergola** — public landmark, east shore (DJ LENS §Vantage Points).
 - **Jack London Square** — public waterfront district (DJ LENS §Vantage Points).
-- **Oakland Coliseum** — public-municipal stadium, A's home venue (DJ LENS §Vantage Points). A's branding inside the frame is canon — see Sports §Tier 1 Oakland Athletics.
+- **Oakland Coliseum** — public-municipal stadium, A's home venue until the move to Baylight (DJ LENS §Vantage Points). A's branding inside the frame is canon — see Sports §Tier 1 Oakland Athletics. **After the A's leave, whether the Coliseum remains or something else is built on the site is an open story the sim decides** (builder ruling, engine.306 walk); Coliseum District Development (BIZ-00029) is the redevelopment entity on the ledger. Carries its own Business_Ledger row (Stadium, East Oakland) from engine.306.
 - **Lake Merritt** — public lake, civic center.
 - **Telegraph Avenue** — public street, KONO/Temescal corridor.
 - **Coliseum tunnel** — public-municipal access (DJ LENS §Vantage Points).
@@ -390,7 +391,7 @@ The district the boom passed over, and the only one that was passed over for a *
 
 #### D5 — Janae Rivers (OPP)
 
-- **East Oakland** — the flatlands. Twenty years of boom reached here last and is arriving fast: the Coliseum sits here, and so does the Stabilization Fund's disbursement office. The city's most contested square — the ground that has to hold while the money arrives. **Council district anchor: D5 (Janae Rivers, OPP)** — canonized S374. Baylight is not Rivers's district (D2, corrected S525). Demographics character: east flatlands, arriving frontier.
+- **East Oakland** — the flatlands. Twenty years of boom reached here last and is arriving fast: the Coliseum sits here (the A's are leaving it for Baylight, and what the site becomes is an open story — see §Arts, Oakland Coliseum), and so does the Stabilization Fund's disbursement office (its own Business_Ledger row from engine.306; the fund's main office stays in West Oakland). The city's most contested square — the ground that has to hold while the money arrives. **Council district anchor: D5 (Janae Rivers, OPP)** — canonized S374. Baylight is not Rivers's district (D2, corrected S525). Demographics character: east flatlands, arriving frontier.
 
 #### D6 — Elliott Crane (CRC)
 

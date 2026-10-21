@@ -152,6 +152,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 ## Changelog
 
+- 2026-10-21 (research-build) — [[2026-10-21-engine306-mint-plan-TASK]] — codex plan review of engine.306 (103 business mints for hood character, roster `output/engine306-mint-roster.tsv`); review lands in `docs/for-claude-review/2026-10-21-codex-engine306-mint-plan-review.md`.
 - 2026-10-08 (engine-sheet) — Accepted [[2026-10-08-codex-engine95-design]] and [[2026-10-08-codex-engine95-review2]] from the review inbox; both folded into the engine.95 plan §Build notes Revision 2.
 - 2026-10-08 (engine-sheet) — Accepted [[2026-10-08-codex-engine94-b3-v3-diff-review]] from the review inbox; F1-F7 folded into engine.94 B.3 v3 (e87362b4), bench-proven, PROD.
 - 2026-09-20 (engine-sheet) — Accepted [[2026-09-20-codex-civic38-game-loop-review]] out of the review inbox into `docs/research/`; reconciled into [[../plans/2026-09-19-civic-wake-game-loop]].

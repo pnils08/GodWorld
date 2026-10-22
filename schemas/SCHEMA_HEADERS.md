@@ -854,7 +854,7 @@ pointers:
 ## Heritage_Ledger
 
 - **Rows:** 10
-- **Columns:** 23
+- **Columns:** 24 (X `LastBizOpenedCycle` = engine.308, appended by `ensureHeritageSchema_` on the first fire of stage 21)
 
 | Col | Header |
 |-----|--------|
@@ -881,6 +881,7 @@ pointers:
 | U | DormantSince |
 | V | EmptyCycles |
 | W | LowCycles |
+| X | LastBizOpenedCycle |
 
 ---
 

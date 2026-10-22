@@ -526,6 +526,82 @@ console.log('engine.96 T11 the heritage roll mints in the family\'s field at the
   assert('the BIZ-ID high-water mark advances to 180 through the cache write', hwWrites.some(w => w[0] === 'World_Config' && w[3] === 180) && ctx.config.bizIdHighWater === 180, JSON.stringify(hwWrites));
 }
 
+// ═══ engine.308 — the heritage roll's cap + cadence (builder 2026-10-22) ═══
+console.log('engine.308 a line opens within its cap (living members + tier step), a citizen at 2 firms never stakes, 12 cycles between openings');
+{
+  const R2 = (rel) => fs.readFileSync(path.resolve(__dirname, rel), 'utf8');
+  const SRC = CAL_SRC + '\n' + R2('../phase05-citizens/educationCareerEngine.js') + '\n' + R2('../phase05-citizens/runCareerEngine.js') + '\n' + R2('../phase05-citizens/applyBusinessDynamics.js') + '\n' + R2('../phase05-citizens/generationalWealthEngine.js');
+  const load = (appended) => new Function('Logger', 'queueAppendIntent_', 'safeRand_', 'inWorldStamp_', 'recordHookRipple_', 'parseJSON', 'economicParameters_',
+    SRC + '\nreturn { updateHeritage_: updateHeritage_, heritageLineBizCap_: heritageLineBizCap_, heritageLastOpenedFromLife_: heritageLastOpenedFromLife_ };')(
+    { log() {} }, (ctx, tab, row, reason) => appended.push({ tab, row, reason }), (ctx) => ctx.rng, () => 'Y3C110', () => {}, (v, f) => { try { return JSON.parse(v); } catch (e) { return f; } }, () => JSON.parse(R2('../data/economic_parameters.json')));
+  const fx = load([]);
+  const HDR = SL_HEADER.concat(['Tier', 'LineageId', 'SpouseId', 'UsageCount', 'CIV (y/n)', 'LifeHistory', 'SkillTags', 'RoleType']);
+  const hi = (n) => HDR.indexOf(n);
+  const person = (popid, first, last, nw, line, life) => cit(popid, first, last, 'Rockridge', 90000, { netWorth: nw }).concat([1, line, '', 0, '', life || 'Y2C1 — born', 'Retail', 'Store Owner']);
+  const HL24 = ['LineageId', 'FamilyName', 'FounderPopId', 'FoundedCycle', 'FoundedDoor', 'Generations', 'LivingMembers', 'MembersList', 'HeritageScore', 'HeritageTier', 'TotalNetWorth', 'HomesOwned', 'BusinessesOwned', 'CivicMembers', 'FameMembers', 'LastUpdated',
+    'TenureCycles', 'TierTenure', 'PeakTier', 'Status', 'DormantSince', 'EmptyCycles', 'LowCycles', 'LastBizOpenedCycle'];
+  const BIZ_HDR = ['BIZ_ID', 'Name', 'Sector', 'Neighborhood', 'Employee_Count', 'Avg_Salary', 'Annual_Revenue', 'Growth_Rate', 'Key_Personnel'];
+  const lineRow = (id, fam, members, tier, biz, lastOpen) => [id, fam, members[0], 103, 'A', 1, members.length, JSON.stringify(members), 34, tier, 0, 0, JSON.stringify(biz), 0, 0, 110, 5, 2, tier, 'active', '', 0, 0, lastOpen === undefined ? '' : lastOpen];
+  const run = (people, hl, biz, cyc) => {
+    const appended = [];
+    const u = load(appended);
+    const sheets = {
+      Heritage_Ledger: mockSheet([HL24.slice(), hl]),
+      Business_Ledger: mockSheet([BIZ_HDR.slice()].concat(biz)),
+      Household_Ledger: mockSheet([HH_HEADER.slice()]),
+      Family_Relationships: mockSheet([['RelationshipId', 'Citizen1', 'Citizen2', 'RelationshipType', 'SinceCycle', 'Status']])
+    };
+    const ctx = { ss: { getSheetByName: (n) => sheets[n] || null }, ledger: { headers: HDR.slice(), rows: people, dirty: false }, summary: { cycleId: cyc, storyHooks: [] }, config: { cycleCount: cyc, bizIdHighWater: 300 }, rng: () => 0.01, now: 'Y3C' + cyc, _sheets: sheets,
+      cache: { getData: () => ({ exists: true, values: [['Key', 'Value'], ['bizIdHighWater', 300]] }), queueWrite: () => {} } };
+    const res = u.updateHeritage_(ctx.ss, ctx, cyc);
+    const hdr = sheets.Heritage_Ledger._values[0], out = sheets.Heritage_Ledger._values[1];
+    return { res, opened: appended.filter(a => a.tab === 'Business_Ledger'), get: (n) => out[hdr.indexOf(n)] };
+  };
+  const bizRow = (id, name, kp) => [id, name, 'Retail', 'Rockridge', 4, 42000, 380000, 2, kp];
+
+  assert('the cap: living members + the tier step, floor 1 — a couple 2, a couple with four kids 6 (Prominent 7, Dynasty 8), an empty line 1',
+    fx.heritageLineBizCap_(2, 'Established') === 2 && fx.heritageLineBizCap_(6, 'Established') === 6 && fx.heritageLineBizCap_(6, 'Prominent') === 7 && fx.heritageLineBizCap_(6, 'Dynasty') === 8 && fx.heritageLineBizCap_(0, 'Established') === 1 && fx.heritageLineBizCap_(2, 'Dynasty') === 4);
+  assert('the LifeHistory stamp reads as a cycle — the latest of several (Y3C7 = 111, Y3C9 = 113); none → null',
+    fx.heritageLastOpenedFromLife_('Y3C7 — [Heritage] opened Keane Mercantile in Grand Lake\nY3C9 — [Heritage] opened Keane Books in Grand Lake') === 113 && fx.heritageLastOpenedFromLife_('Y2C1 — born') === null && fx.heritageLastOpenedFromLife_('') === null);
+
+  // Varek: one living member, three firms (Civis + the Oaks + Varek Systems), Prominent on standing 52 — the old gate (1 minted < max 2) rolled; the cap (1 + 1 = 2) holds him
+  {
+    const people = [person('POP-00789', 'Elias', 'Varek', 10001870196, 'LIN-00005', 'Y3C8 — [Heritage] opened Varek Systems in West Oakland — the family has a storefront now')];
+    const t = run(people, lineRow('LIN-00005', 'Varek', ['POP-00789'], 'Established', ['BIZ-00186']), [
+      bizRow('BIZ-00052', 'Civis Systems', 'POP-00789 Elias Varek (founder)'), bizRow('BIZ-00074', 'Oakland Oaks', 'POP-00789 (Elias Varek, Owner)'), bizRow('BIZ-00186', 'Varek Systems', 'POP-00789 Elias Varek (founder)')], 125);
+    assert('Varek at three firms, Prominent, rng a sure hit: opens nothing (3 ≥ cap 2)', t.get('HeritageTier') === 'Prominent' && t.res.businessesOpened === 0 && t.opened.length === 0, JSON.stringify([t.get('HeritageTier'), t.res]));
+    assert('the blank cooldown seeds from his own [Heritage] opened stamp (Y3C8 = 112)', t.get('LastBizOpenedCycle') === 112, String(t.get('LastBizOpenedCycle')));
+  }
+  // a couple, Established, one firm: the cooldown holds 11 cycles after the last opening, opens on the 12th and stamps the cycle
+  {
+    const mk = () => [person('POP-00401', 'Ana', 'Mims', 1000000000, 'LIN-00010'), person('POP-00402', 'Rui', 'Mims', 500000, 'LIN-00010')];
+    const bz = [bizRow('BIZ-00250', 'Mims Mercantile', 'POP-00401 Ana Mims (founder)')];
+    const t11 = run(mk(), lineRow('LIN-00010', 'Mims', ['POP-00401', 'POP-00402'], 'Established', ['BIZ-00250'], 100), bz, 111);
+    assert('inside the cooldown (opened C100, now C111): nothing opens, the clock stays 100', t11.res.businessesOpened === 0 && t11.opened.length === 0 && Number(t11.get('LastBizOpenedCycle')) === 100, JSON.stringify(t11.res));
+    const t12 = run(mk(), lineRow('LIN-00010', 'Mims', ['POP-00401', 'POP-00402'], 'Established', ['BIZ-00250'], 100), bz, 112);
+    assert('the 12th cycle (C112): one firm opens (1 < cap 2) and the clock reads 112', t12.res.businessesOpened === 1 && t12.opened.length === 1 && t12.get('LastBizOpenedCycle') === 112, JSON.stringify([t12.res, t12.get('LastBizOpenedCycle')]));
+    const tFull = run(mk(), lineRow('LIN-00010', 'Mims', ['POP-00401', 'POP-00402'], 'Established', ['BIZ-00250', 'BIZ-00251'], 90),
+      bz.concat([bizRow('BIZ-00251', 'Mims Books', 'POP-00402 Rui Mims (founder)')]), 112);
+    assert('a couple at two firms is at its cap: nothing opens however long the wait', tFull.res.businessesOpened === 0 && tFull.opened.length === 0, JSON.stringify(tFull.res));
+    const tSeed = run([person('POP-00401', 'Ana', 'Mims', 1000000000, 'LIN-00010', 'Y3C5 — [Heritage] opened Mims Mercantile in Rockridge — the family has a storefront now'), person('POP-00402', 'Rui', 'Mims', 500000, 'LIN-00010')],
+      lineRow('LIN-00010', 'Mims', ['POP-00401', 'POP-00402'], 'Established', ['BIZ-00250']), bz, 113);
+    assert('a blank clock seeds from the stamp (Y3C5 = 109) and holds at C113', tSeed.res.businessesOpened === 0 && tSeed.get('LastBizOpenedCycle') === 109, JSON.stringify([tSeed.res, tSeed.get('LastBizOpenedCycle')]));
+  }
+  // three living, the wealthiest already owns two firms: the stake passes to the next member over $100k
+  {
+    const people = [person('POP-00501', 'Lena', 'Ortiz', 1000000000, 'LIN-00011'), person('POP-00502', 'Cal', 'Ortiz', 5000000, 'LIN-00011'), person('POP-00503', 'Ivy', 'Ortiz', 20000, 'LIN-00011')];
+    const t = run(people, lineRow('LIN-00011', 'Ortiz', ['POP-00501', 'POP-00502', 'POP-00503'], 'Established', []), [
+      bizRow('BIZ-00260', 'Ortiz Hardware', 'POP-00501 Lena Ortiz (Owner)'), bizRow('BIZ-00261', 'Ortiz Freight', 'POP-00501 Lena Ortiz (founder)')], 120);
+    const kp = t.opened.length ? String(t.opened[0].row[8]) : '';
+    assert('Lena at two firms never stakes; Cal stakes the third (2 < cap 3)', t.res.businessesOpened === 1 && /^POP-00502 Cal Ortiz \(founder\)$/.test(kp), JSON.stringify([t.res, kp]));
+    assert('Lena\'s NetWorth is untouched; Cal pays the stake', Number(people[0][hi('NetWorth')]) === 1000000000 && Number(people[1][hi('NetWorth')]) < 5000000);
+    const allCapped = run([person('POP-00501', 'Lena', 'Ortiz', 1000000000, 'LIN-00011'), person('POP-00502', 'Cal', 'Ortiz', 50000, 'LIN-00011'), person('POP-00503', 'Ivy', 'Ortiz', 20000, 'LIN-00011')],
+      lineRow('LIN-00011', 'Ortiz', ['POP-00501', 'POP-00502', 'POP-00503'], 'Established', []), [
+        bizRow('BIZ-00260', 'Ortiz Hardware', 'POP-00501 Lena Ortiz (Owner)'), bizRow('BIZ-00261', 'Ortiz Freight', 'POP-00501 Lena Ortiz (founder)')], 120);
+    assert('no member under the citizen cap with $100k: the line opens nothing', allCapped.res.businessesOpened === 0 && allCapped.opened.length === 0, JSON.stringify(allCapped.res));
+  }
+}
+
 // ═══ engine.156 (S415) — cut 8: heritage loss — standing + tenure, dormancy + revival ═══
 console.log('engine.156 heritage loss: standing is what the family holds now, tenure counts, an empty line goes dormant, a door revives it');
 {
@@ -598,7 +674,7 @@ console.log('engine.156 heritage loss: standing is what the family holds now, te
       ['BIZ-00074', 'Oakland Oaks', 'Sports', 'Downtown', 200, 90000, 300000000, 3, 'POP-00789 (Elias Varek, Owner); POP-00527 (Mike Paulson, Basketball Ops)'],
       ['BIZ-00103', 'Firehouse 29 West Oakland Baseball Academy', 'Education', 'West Oakland', 6, 52000, 600000, 2, 'POP-00001 Vinnie Keane']
     ] });
-    assert('the seven standing/tenure columns arm on the 16-column tab in the same cycle; every row is written at the new width', t.hdr.length === 23 && t.hdr.slice(16).join() === 'TenureCycles,TierTenure,PeakTier,Status,DormantSince,EmptyCycles,LowCycles' && t.hl.every(r => r.length === 23), JSON.stringify(t.hdr));
+    assert('the seven standing/tenure columns (+ engine.308 LastBizOpenedCycle) arm on the 16-column tab in the same cycle; every row is written at the new width', t.hdr.length === 24 && t.hdr.slice(16).join() === 'TenureCycles,TierTenure,PeakTier,Status,DormantSince,EmptyCycles,LowCycles,LastBizOpenedCycle' && t.hl.every(r => r.length === 24), JSON.stringify(t.hdr));
     const order = t.hl.slice().sort((a, b) => Number(b[8]) - Number(a[8])).map(r => r[1]);
     assert('Varek leads his own ledger: 48 (40 wealth + Civis + the Oaks by Key_Personnel), Keane 33.5 (the Academy counts), Dillon 32, Kelley 30.7, Corliss 10',
       order[0] === 'Varek' && order[4] === 'Corliss' && t.get('LIN-00005', 'HeritageScore') === 48 && t.get('LIN-00003', 'HeritageScore') === 33.5 && t.get('LIN-00002', 'HeritageScore') === 32 && t.get('LIN-00004', 'HeritageScore') === 30.7 && t.get('LIN-00001', 'HeritageScore') === 10, JSON.stringify(t.hl.map(r => [r[1], r[8], r[9]])));

@@ -2556,11 +2556,36 @@ var HERITAGE_DOOR_C_FAMILY_NETWORTH = 50000000; // two or more, combined
 
 // Tier-scaled business roll: chance per cycle that a line with an open slot
 // stakes a storefront. Odds, not guarantees — a Dynasty roll can still miss.
+// engine.308 (builder 2026-10-22): the slot is the line's cap = living members
+// + the tier's step (floor 1) against every firm the standing counts; a citizen
+// owning HERITAGE_BIZ_CITIZEN_CAP firms never stakes; a line waits
+// HERITAGE_BIZ_COOLDOWN cycles between openings.
 var HERITAGE_BIZ_ROLL = {
-  'Established': { p: 0.15, max: 1 },
-  'Prominent':   { p: 0.25, max: 2 },
-  'Dynasty':     { p: 0.40, max: 3 }
+  'Established': { p: 0.15, step: 0 },
+  'Prominent':   { p: 0.25, step: 1 },
+  'Dynasty':     { p: 0.40, step: 2 }
 };
+var HERITAGE_BIZ_CITIZEN_CAP = 2;
+var HERITAGE_BIZ_COOLDOWN = 12;
+
+// engine.308: a line's business cap — one per living member plus the tier's
+// step, never below 1 (a couple at Established = 2, a couple with four kids = 6).
+function heritageLineBizCap_(livingN, tier) {
+  var cfg = HERITAGE_BIZ_ROLL[tier];
+  return Math.max(1, (Number(livingN) || 0) + (cfg ? cfg.step : 0));
+}
+
+// engine.308: the latest `[Heritage] opened` stamp in a LifeHistory text, as a
+// cycle (Y<n>C<m> → (n−1)·52 + m), or null. Seeds a blank LastBizOpenedCycle
+// the way a blank TenureCycles is inferred from FoundedCycle.
+function heritageLastOpenedFromLife_(lifeText) {
+  var re = /Y(\d+)C(\d+) — \[Heritage\] opened /g, m, best = null;
+  while ((m = re.exec(String(lifeText || ''))) !== null) {
+    var c = (Number(m[1]) - 1) * 52 + Number(m[2]);
+    if (best === null || c > best) best = c;
+  }
+  return best;
+}
 
 // Tier-scaled birth-odds multiplier consumed by checkBirth_ (phase 4 reads
 // last cycle's Heritage_Ledger — durable state, not per-cycle signal).
@@ -2578,7 +2603,9 @@ var HERITAGE_HEADERS = [
   // current tier; PeakTier = the best tier ever held; Status active|dormant;
   // EmptyCycles / LowCycles = the two dormancy clocks.
   'TenureCycles', 'TierTenure', 'PeakTier', 'Status', 'DormantSince',
-  'EmptyCycles', 'LowCycles'
+  'EmptyCycles', 'LowCycles',
+  // engine.308 — the cycle the line last opened a business (the cooldown clock).
+  'LastBizOpenedCycle'
 ];
 
 // engine.156 — the standing formula, one place. Returns tenths.
@@ -2736,8 +2763,9 @@ function updateHeritage_(ss, ctx, cycle) {
       hBiz = hIdx('BusinessesOwned'), hCiv = hIdx('CivicMembers'), hFame = hIdx('FameMembers'),
       hUpd = hIdx('LastUpdated'),
       hTen = hIdx('TenureCycles'), hTierTen = hIdx('TierTenure'), hPeak = hIdx('PeakTier'),
-      hStat = hIdx('Status'), hDorm = hIdx('DormantSince'), hEmpty = hIdx('EmptyCycles'), hLow = hIdx('LowCycles');
-  if (hTen < 0 || hTierTen < 0 || hPeak < 0 || hStat < 0 || hDorm < 0 || hEmpty < 0 || hLow < 0) {
+      hStat = hIdx('Status'), hDorm = hIdx('DormantSince'), hEmpty = hIdx('EmptyCycles'), hLow = hIdx('LowCycles'),
+      hLastOpen = hIdx('LastBizOpenedCycle');
+  if (hTen < 0 || hTierTen < 0 || hPeak < 0 || hStat < 0 || hDorm < 0 || hEmpty < 0 || hLow < 0 || hLastOpen < 0) {
     throw new Error('updateHeritage_ engine.156: Heritage_Ledger is missing a standing/tenure column after the schema arm');
   }
 
@@ -3173,12 +3201,35 @@ function updateHeritage_(ss, ctx, cycle) {
     // their NetWorth (min $50k, needs $100k+). Business lands in
     // Business_Ledger via write-intent (Phase 10 commits); runCareerEngine's
     // live pool picks it up next cycle, so the family firm starts hiring.
+    // engine.308: the slot gate counts what the standing counts (bizCount —
+    // minted ∪ every firm a living member owns), the cap grows with the living
+    // family, and a line opens at most once per HERITAGE_BIZ_COOLDOWN cycles.
+    // A blank LastBizOpenedCycle is seeded once from the members' own
+    // `[Heritage] opened` stamps; a line with none has no clock running.
+    var lastOpen = (hl[hLastOpen] === '' || hl[hLastOpen] === null || hl[hLastOpen] === undefined) ? null : Number(hl[hLastOpen]);
+    if (lastOpen === null || isNaN(lastOpen)) {
+      lastOpen = null;
+      for (var lo = 0; lo < memberIds.length; lo++) {
+        var loRow = rowOrArchived(memberIds[lo]);
+        var loC = loRow ? heritageLastOpenedFromLife_(loRow[iLife]) : null;
+        if (loC !== null && (lastOpen === null || loC > lastOpen)) lastOpen = loC;
+      }
+      if (lastOpen !== null) hl[hLastOpen] = lastOpen;
+    }
     var bizCfg = status === 'active' ? HERITAGE_BIZ_ROLL[newTier] : null; // engine.156: a dormant line rolls nothing
-    if (bizCfg && bizList.length < bizCfg.max && rng() < bizCfg.p) {
+    var lineCap = bizCfg ? heritageLineBizCap_(livingN, newTier) : 0;
+    var cooled = lastOpen === null || cycle - lastOpen >= HERITAGE_BIZ_COOLDOWN;
+    // engine.308: a citizen at HERITAGE_BIZ_CITIZEN_CAP firms (owned or founded, by Key_Personnel) never stakes
+    var ownedN = function (row) {
+      var ids = bizOwnedByPop[String(row[iPop]).trim()] || [], seenB = {}, n = 0;
+      for (var oi = 0; oi < ids.length; oi++) if (!seenB[ids[oi]]) { seenB[ids[oi]] = true; n++; }
+      return n;
+    };
+    if (bizCfg && bizCount < lineCap && cooled && rng() < bizCfg.p) {
       var stakePop = null, stakeRow = null, stakeNW = 0;
       for (var s1 = 0; s1 < members.length; s1++) {
         var sRow = members[s1];
-        if (!living(sRow)) continue;
+        if (!living(sRow) || ownedN(sRow) >= HERITAGE_BIZ_CITIZEN_CAP) continue;
         var sNW = nwOf(sRow);
         if (sNW > stakeNW) { stakeNW = sNW; stakeRow = sRow; stakePop = String(sRow[iPop]).trim(); }
       }
@@ -3190,7 +3241,7 @@ function updateHeritage_(ss, ctx, cycle) {
         var challengers = [];
         for (var s2 = 0; s2 < members.length; s2++) {
           var cRow = members[s2];
-          if (cRow === stakeRow || !living(cRow) || nwOf(cRow) < 100000) continue;
+          if (cRow === stakeRow || !living(cRow) || nwOf(cRow) < 100000 || ownedN(cRow) >= HERITAGE_BIZ_CITIZEN_CAP) continue;
           challengers.push(cRow);
         }
         challengers.sort(function (a, b) { return String(a[iPop]) < String(b[iPop]) ? -1 : 1; });
@@ -3243,6 +3294,8 @@ function updateHeritage_(ss, ctx, cycle) {
             'engine.65 heritage business roll (' + linId + ') — engine.96 T11 birth in the family\'s field (' + fieldPick.field + ', ' + fieldPick.source + ')', 'COMMUNITY', 70);
           bizList.push(bizId);
           hl[hBiz] = JSON.stringify(bizList);
+          hl[hLastOpen] = cycle; // engine.308: the cooldown clock starts
+          (bizOwnedByPop[stakePop] = bizOwnedByPop[stakePop] || []).push(bizId); // the staker's own count this cycle
           var openLife = String(stakeRow[iLife] || '');
           if (openLife.indexOf(stamp + ' — [Heritage] opened') < 0) {
             stakeRow[iLife] = (openLife ? openLife + '\n' : '') + stamp +

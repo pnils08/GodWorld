@@ -2118,6 +2118,10 @@
 
 - **executeOwnerMove_(ctx, plan, household, memberRows, destHood, cycle)**
 
+- **heritageLineBizCap_(livingN, tier)**
+
+- **heritageLastOpenedFromLife_(lifeText)**
+
 - **heritageStanding_(totalNW, generations, civ, fame, businesses, homes, scandal)**
 
 - **heritageTierFor_(score)**
@@ -4807,4 +4811,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1738
+**Functions mapped:** 1740

@@ -92,6 +92,8 @@ async function read(c) {
   return s;
 }
 
+// Stage 19 (engine.310) is live from C113: these are the old substring rule's components, display only for C113 —
+// the EA read for C113 is 2026-10-21-e310-c114watch.js diff 113.
 function components(s) {   // v3NeighborhoodWriter.js:368-400 tests on what the sheets keep
   const EV = ['festival', 'concert', 'art', 'celebration', 'parade', 'market'], SH = ['community', 'culture', 'festival', 'art'];
   const evText = e => [e.subdomain, e.subtype, e.description, e.summary, e.title].filter(Boolean).join(' ').toLowerCase();   // eventText :353-361, no domain

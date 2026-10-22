@@ -1,0 +1,50 @@
+{
+ "cycle": 112,
+ "at": "2026-10-22T07:05:40.080Z",
+ "missing": [],
+ "ea": {
+  "Downtown": 6.38,
+  "Temescal": 5.3,
+  "Laurel": 5.1,
+  "West Oakland": 5.21,
+  "Fruitvale": 6.16,
+  "Jack London": 8.18,
+  "Rockridge": 5.25,
+  "Adams Point": 3.26,
+  "Grand Lake": 7.25,
+  "Piedmont Ave": 4.27,
+  "Chinatown": 7.74,
+  "Brooklyn": 3.25,
+  "Eastlake": 5.22,
+  "Glenview": 3,
+  "Dimond": 4.25,
+  "Ivy Hill": 3,
+  "San Antonio": 5.25,
+  "KONO": 7,
+  "Lake Merritt": 3.16,
+  "Uptown": 8.06,
+  "Baylight District": 4,
+  "East Oakland": 4
+ },
+ "inputs": {
+  "staged": 4,
+  "stagedNames": [
+   "Downtown Volunteer Boost Rally",
+   "Chinatown Winter Lights",
+   "Jack London Waterfront Stroll",
+   "Temescal Street Vendors Block"
+  ],
+  "worldEvents": 11,
+  "evDomain": 0,
+  "evText": 0,
+  "storySeedCount": "35",
+  "hookRows": 48,
+  "hookHits": 1,
+  "baseEstimate": 5
+ },
+ "eaSum": 114.29,
+ "eaRange": [
+  3,
+  8.18
+ ]
+}

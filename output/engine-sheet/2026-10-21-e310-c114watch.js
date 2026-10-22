@@ -1,6 +1,7 @@
-// engine.310 C114 live watch (codex diff gate 2026-10-21 item 4). Read-only on LIVE; writes only its own JSON.
-// usage: node 2026-10-21-e310-c114watch.js snap 113   (after the C113 read, before the stage-19 push)
-//        node 2026-10-21-e310-c114watch.js diff 114   (after C114 fires — engine.310's first live Cycle)
+// engine.310 live watch (codex diff gate 2026-10-21 item 4). Read-only on LIVE; writes only its own JSON.
+// Stage 19 landed before C113 on the builder's go 2026-10-22, so C113 is engine.310's first live Cycle:
+// usage: node 2026-10-21-e310-c114watch.js snap 112   (done 2026-10-22, before the push)
+//        node 2026-10-21-e310-c114watch.js diff 113   (after C113 fires)
 // snap / read: per hood saved EventAttractiveness, and the persisted EA inputs for the Cycle under the engine.310 rule (the PROD
 //   writer's own regexes): Riley_Digest CityEvents count (col Q, each staged event once), WorldEvents domain + whole-word hits,
 //   StorySeedCount (seed hits unobservable: seeds are on no sheet), Story_Hook_Deck HookText whole-word hits (a conditional bound
@@ -11,7 +12,7 @@
 //   DIAGNOSE — every hood moved the same way, or the EA sum left 0.5×..2× of the prior Cycle's. Read it against the staged count
 //              and the hook / event hits before attributing anything to engine.310 (live sums ran 114–704 over C103–C112).
 //   CLEAN    — otherwise.
-// C115 follow-up (not automated): migration drift and trajectory read the C114 saved map — read their C115 moves against C114 EA.
+// C114 follow-up (not automated): migration drift and trajectory read the C113 saved map — read their C114 moves against C113 EA.
 require('/root/GodWorld/lib/env');
 const LIVE = process.env.GODWORLD_SHEET_ID;
 const BENCH = '1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA', BASE = '1Mbz-sE13iu1RU4qo-rzsczjjPRKAU-KSfnQnrJNXCgA';

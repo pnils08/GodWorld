@@ -217,6 +217,7 @@ function ctxWith(rows, cycle) {
     row2({ POPID: 'F18', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00177', RoleType: 'Xyzzy' }),        // unplaceable → the employer average stands
     row2({ POPID: 'F19', age: 35, CareerStage: 'mid-career', Income: 120000, EmployerBizId: 'BIZ-00177', RoleType: 'Taxi driver' }), // out-of-sector, above the band → untouched (raise-only)
     row2({ POPID: 'F20', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00170', RoleType: 'Registered Nurse' }), // out-of-sector, band ABOVE the employer → the employer average (the lower signal)
+    row2({ POPID: 'F21', age: 35, CareerStage: 'mid-career', Income: 30000, EmployerBizId: 'BIZ-00005', RoleType: 'Retail Clerk' }), // engine.307: a team-store clerk is in the A's field now — still never the athlete average
   ];
   const ctx = { ledger: { headers: H2.slice(), rows: rows.map(r => r.slice()), dirty: false }, summary: { cycleId: CYCLE }, config: {},
     ss: { getSheetByName: n => n === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => BL.map(r => r.slice()) }) } : null } };
@@ -235,6 +236,7 @@ function ctxWith(rows, cycle) {
   assert('D3 deceased: no floor', inc('F11') === 30000, inc('F11'));
   assert('D3 unknown employer id: no floor', inc('F12') === 30000, inc('F12'));
   assert('D3 sports-franchise employer sets no floor for an ENGINE row', inc('F13') === 30000, inc('F13'));
+  assert('engine.307 a sports org hires, its floor stays off: an in-field Retail Clerk at the A\'s keeps 30000, not 3.3M', inc('F21') === 30000, inc('F21'));
   // engine.162: a city-hall clerk and a newsroom staffer are paid what their
   // employer pays, same floor as everyone else. GAME (F9) still is not.
   assert('D3 CIVIC row gets the floor', inc('F14') === 45000, inc('F14'));

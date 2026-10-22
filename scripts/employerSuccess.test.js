@@ -16,9 +16,10 @@
  *       stampPromotion_ writes the [Promotion] line + LifeHistory_Log intent.
  *     — layoff: victim = lowest [CareerState] level → lowest Income → POPID;
  *       Income −12–20%; employer cleared; Career-Layoff log row; businessDelta.
- *     — outside: SELF_EMPLOYED / UNTRACKED / blank employers, sports orgs,
+ *     — outside: SELF_EMPLOYED / UNTRACKED / blank employers,
  *       GAME/CIVIC/MEDIA rows, Tier 1–2, SPORTS_OVERRIDE, non-Active, blank
- *       Growth_Rate.
+ *       Growth_Rate. A sports org's ENGINE staff are inside (engine.307); its
+ *       athletes stay out by their own row (GAME clock / SPORTS_OVERRIDE).
  *   maybeTransition_ / careerMoveText_ / resolveNewBizId_ — gone.
  */
 const fs = require('fs');
@@ -148,7 +149,8 @@ const bl = rows => [BLH].concat(rows);
     row({ POPID: 'S1', EmployerBizId: 'SELF_EMPLOYED' }),
     row({ POPID: 'S2', EmployerBizId: 'UNTRACKED' }),
     row({ POPID: 'S3', EmployerBizId: '' }),
-    row({ POPID: 'S4', EmployerBizId: 'BIZ-SPORT' }),
+    row({ POPID: 'S4', EmployerBizId: 'BIZ-SPORT', ClockMode: 'GAME' }),
+    row({ POPID: 'S4b', EmployerBizId: 'BIZ-SPORT', EconomicProfileKey: 'SPORTS_OVERRIDE' }), // the live ENGINE|SPORTS_OVERRIDE edge
     row({ POPID: 'S5', ClockMode: 'GAME' }),
     row({ POPID: 'S6', ClockMode: 'CIVIC' }),
     row({ POPID: 'S7', Tier: 2 }),
@@ -165,6 +167,27 @@ const bl = rows => [BLH].concat(rows);
   const out = applyEmployerSuccess_(ctx, CYCLE, roll, log, S, 1);
   assert('nobody outside the scope is touched', out.promotions === 0 && out.layoffs === 0 && intents.length === 0 && log.length === 0, JSON.stringify(out));
   assert('rows unchanged', ctx.ledger.rows.every(r => Number(r[I('Income')]) === (r[I('POPID')] === 'S10' ? 0 : 60000)));
+}
+
+// ── engine.307: a sports org's staff are inside, its athletes are not ───────
+{
+  const rows = [
+    row({ POPID: 'A1', EmployerBizId: 'BIZ-SPORT', ClockMode: 'GAME', LastPromotionCycle: 0 }),
+    row({ POPID: 'A2', EmployerBizId: 'BIZ-SPORT', EconomicProfileKey: 'SPORTS_OVERRIDE', LastPromotionCycle: 0 }),
+    row({ POPID: 'A3', EmployerBizId: 'BIZ-SPORT', Tier: 1, LastPromotionCycle: 0 }),
+    row({ POPID: 'T1', EmployerBizId: 'BIZ-SPORT', RoleType: 'Retail Clerk', EconomicProfileKey: 'Retail Clerk', LastPromotionCycle: 100 }),
+  ];
+  const BL = bl([['BIZ-SPORT', 'Oakland Athletics', 'Sports Franchise', 'Baylight District', 520, 3342924, 0, 50]]);
+  const book = sandbox.careerEmployerBook_({ ledger: { headers: H.slice(), rows: rows.map(r => r.slice()) },
+    ss: { getSheetByName: n => n === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => BL.map(r => r.slice()) }) } : null } });
+  const staff = book && book.biz['BIZ-SPORT'] ? book.biz['BIZ-SPORT'].staff.map(i => rows[i][I('POPID')]) : null;
+  assert('engine.307 the sports org is in the employer book; only its ENGINE Tier 3–4 staff are on the list', JSON.stringify(staff) === '["T1"]', JSON.stringify(staff));
+  const { ctx, roll } = ctxWith(rows, BL, [0, 0.5]);
+  const S = makeS(); const log = []; intents.length = 0;
+  const out = applyEmployerSuccess_(ctx, CYCLE, roll, log, S, 1);
+  const g = p => ctx.ledger.rows.find(r => r[I('POPID')] === p);
+  assert('engine.307 the team-store clerk can be promoted; the athletes never move', out.promotions === 1 && Number(g('T1')[I('Income')]) > 60000 &&
+    ['A1', 'A2', 'A3'].every(p => Number(g(p)[I('Income')]) === 60000 && g(p)[I('EmployerBizId')] === 'BIZ-SPORT'), JSON.stringify(out));
 }
 
 // ── engine.144: the credential is ONE cause among others (never a gate) ────

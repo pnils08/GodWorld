@@ -772,7 +772,8 @@ function applyTrackedEmployerFloor_(ctx) {
     var sal = Number(bizData[b][bSal]) || 0;
     // Sports-franchise employers set no floor: their Avg_Salary is athlete
     // pay (Oakland Athletics 3.3M), and a front-office ENGINE row would be
-    // floored at it. Same regex sectorCategory_ uses to keep hires out.
+    // floored at it. Kept when engine.307 let sports orgs hire: their staff
+    // keep their own pay or the role's reference pay, never the floor.
     var sector = bSec >= 0 ? String(bizData[b][bSec] || '') : '';
     if (/sports|stadium|franchise|athletic/i.test(sector)) continue;
     if (id && sal > 0) { salaryById[id] = sal; sectorById[id] = (typeof sectorCategory_ === 'function') ? sectorCategory_(sector, true) : null; growthById[id] = bGrow >= 0 ? Number(bizData[b][bGrow]) : null; }

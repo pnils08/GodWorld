@@ -131,6 +131,9 @@ function bizHoodMix_(ctx, hood) {
       var h = v[0], iS = h.indexOf('Sector'), iH = h.indexOf('Neighborhood');
       for (var r = 1; r < v.length && iS >= 0 && iH >= 0; r++) {
         if (String(v[r][iH] || '').trim() !== hood) continue;
+        // engine.307 fielded the sports rows for hiring; the market a family opens into is
+        // unchanged — a sports row weighs nothing here, as before.
+        if (/sports|stadium|franchise|athletic/i.test(String(v[r][iS] || ''))) continue;
         var cat = (typeof sectorCategory_ === 'function') ? sectorCategory_(v[r][iS], true) : null;
         if (cat && BIZ_FIELD_BIRTH[cat]) mix[cat] = (mix[cat] || 0) + 1;
       }

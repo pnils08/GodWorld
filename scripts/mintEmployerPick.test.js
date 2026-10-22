@@ -50,10 +50,10 @@ const pick = (role, hood, clock, seed, p, rm) => E.pickMintEmployer_(role, hood,
 
 console.log('\n1. the pool — each business under its field, with its hood:');
 check('1.1 a business is filed under the field its Sector reads as', fieldOfBiz('BIZ-E') === 'Construction & Baylight' && fieldOfBiz('BIZ-00015') === 'Healthcare' && fieldOfBiz('BIZ-G') === 'Food & Culture' && fieldOfBiz('BIZ-I') === 'Small Business' && fieldOfBiz('BIZ-A') === 'Government & Civic', JSON.stringify(Object.keys(pool.byField)));
-check('1.2 a sports business and a Sector with no field sit in no pool', fieldOfBiz('BIZ-00005') === null && fieldOfBiz('BIZ-L') === null);
+check('1.2 a Sector with no field sits in no pool; a sports team is fielded (engine.307)', fieldOfBiz('BIZ-L') === null && fieldOfBiz('BIZ-00005') === 'Small Business');
 check('1.3 the hood rides with the business', pool.byField['Construction & Baylight'].find(b => b.id === 'BIZ-F').hood === 'Temescal');
 check('1.4 the four keyword buckets are gone', pool.pools === undefined);
-check('1.4b each business\'s field is readable by id (the tag stamp reads it)', pool.fieldById['BIZ-00024'] === 'Government & Civic' && pool.fieldById['BIZ-00005'] === undefined);
+check('1.4b each business\'s field is readable by id (the tag stamp reads it)', pool.fieldById['BIZ-00024'] === 'Government & Civic' && pool.fieldById['BIZ-00005'] === 'Small Business' && pool.fieldById['BIZ-L'] === undefined);
 check('1.5 stated headcount is kept for the room test; a blank count reads as no room', pool.statedById['BIZ-I'] === 6 &&
   E.buildMintBizPool_(ssOf([BIZ[0], ['BIZ-Z', 'Blank Co', 'Retail', 'Temescal', '']])).statedById['BIZ-Z'] === null);
 check('1.6 a missing Business_Ledger gives no pool', E.buildMintBizPool_({ getSheetByName: () => null }) === null);
@@ -116,7 +116,8 @@ check('5b.4 a named organisation with no room falls to the field, not to a queue
 const ff = pick('Firefighter', 'Temescal');
 check('5b.5 a named organisation that is not on the ledger falls to the field', E.mintNamedEmployer_('Firefighter') === 'BIZ-00023' && pool.statedById['BIZ-00023'] === undefined && fieldOfBiz(ff.bizId) === 'Government & Civic', JSON.stringify(ff));
 const scout = pick("Scout, Oakland A's", 'Jack London');
-check('5b.6 a sports organisation is never picked, named or not', E.mintNamedEmployer_("Scout, Oakland A's") === 'BIZ-00005' && scout.bizId !== 'BIZ-00005', JSON.stringify(scout));
+check('5b.6 engine.307: a title naming the team lands there on the ENGINE clock; the GAME clock still gets nothing', E.mintNamedEmployer_("Scout, Oakland A's") === 'BIZ-00005' && scout.bizId === 'BIZ-00005' && ((g) => !g.bizId && !g.sentinel && !g.seeking)(pick("Scout, Oakland A's", 'Jack London', 'GAME')), JSON.stringify(scout));
+check('5b.6b …and only with room: a full team falls to the field', pick("Scout, Oakland A's", 'Jack London', 'ENGINE', 's', pool, (id) => id !== 'BIZ-00005' && room(id)).bizId !== 'BIZ-00005');
 check('5b.7 the first keyword rule in the mapping\'s order decides', E.mintNamedEmployer_('Deputy Mayor') === 'BIZ-00017' && E.mintNamedEmployer_('School Nurse') === E.MINT_KEYWORD_RULES.find(r => 'School Nurse'.indexOf(r[0]) !== -1)[1]);
 
 console.log('\n6. no job, no field, no ledger:');

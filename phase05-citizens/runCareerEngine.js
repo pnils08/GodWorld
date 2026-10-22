@@ -12,7 +12,8 @@
  *   growers hiring 1 on a deterministic row-phased cadence. Same-field first
  *   (SkillTags ∋ business category via sectorCategory_); cross-field only when
  *   a window finds zero same-field candidates AND (cycle+row)%4==0, logged as
- *   Career-FieldChange. Sports orgs are opted out (Paulson's domain).
+ *   Career-FieldChange. Sports orgs hire their building staff (engine.307);
+ *   athletes stay out by their own row (GAME clock, SPORTS_OVERRIDE).
  * - Settlement (educationCareerEngine v2.2) + mint (processAdvancementIntake)
  *   stamp SkillTags at citizen creation so new citizens are matchable day one.
  *
@@ -74,7 +75,6 @@
  */
 function sectorCategory_(sector, strict) {
   var s = String(sector || '').toLowerCase();
-  if (/sports|stadium|franchise|athletic/.test(s)) return null; // FIRST: Paulson's domain — never route hires into sports orgs, whatever else matches
   if (/\bport\b|logistic|longshore/.test(s)) return 'Port & Labor'; // \b — 'Sports' contains 'port'
   if (/construction|contractor|builder|baylight/.test(s)) return 'Construction & Baylight';
   if (/\bbiotech\b|\bhealth\b|healthcare|medical|clinic|\bhospital\b/.test(s)) return 'Healthcare'; // \bhospital\b — 'Hospitality' contains 'hospital'
@@ -88,6 +88,11 @@ function sectorCategory_(sector, strict) {
   if (/retail/.test(s)) return 'Small Business'; // before food: 'Retail & Food' is a shop, not a kitchen (matches Task 8's seed table)
   if (/restaurant|dining|cafe|coffee|bakery|food|bar\b|pub|brewery|lounge|club|market|hospitality/.test(s)) return 'Food & Culture';
   if (/shop|store|boutique|grocery|services|real estate|development/.test(s)) return 'Small Business';
+  // engine.307 (builder 2026-10-21: "the sports teams have staff that run the building"): a
+  // team, franchise or stadium hires the team store, ticket window, security and grounds —
+  // last, so 'Sports Analytics' stays tech and a sports bar stays a kitchen. Athletes are
+  // kept out by their own row (GAME clock, SPORTS_OVERRIDE), never by the employer's sector.
+  if (/sports|stadium|franchise|athletic/.test(s)) return 'Small Business';
   return strict ? null : 'Small Business';
 }
 
@@ -106,7 +111,8 @@ function sectorCategory_(sector, strict) {
  * stampPromotion_ narrative (its one caller since E1). Layoff: Income −12–20%,
  * employer cleared, Career-Layoff log, businessDelta lost. Nothing free: no
  * employer, no employer event (SELF_EMPLOYED / UNTRACKED / blank are outside).
- * Sports orgs, GAME/CIVIC/MEDIA rows, Tier 1–2 and the sports layer are outside.
+ * GAME/CIVIC/MEDIA rows, Tier 1–2 and the sports layer are outside; a sports org's
+ * ENGINE staff are inside (engine.307).
  */
 var RARE_EVENT_SCALE = 0.1; // engine.135 doctrine point 21 — see applyEmployerSuccess_
 
@@ -371,7 +377,9 @@ function applyCustodyDismissals_(ctx, cycle, S, logRows) {
 
 // engine.286 Task 2: the tracked employers and their eligible staff — the one boundary both
 // the business budget (applyEmployerSuccess_) and the promotion die (applyPromotionDie_) read:
-// sports orgs, GAME/CIVIC/MEDIA rows, Tier 1–2, SPORTS_OVERRIDE and no income are outside.
+// GAME/CIVIC/MEDIA rows (ENGINE clock only), Tier 1–2, SPORTS_OVERRIDE and no income are
+// outside. Those row tests are what keep an athlete out — a sports org's ENGINE staff are in
+// (engine.307 lifted the employer-sector skip).
 // Built fresh per caller on purpose: the die's layoffs clear employers, so the budget must not
 // see a staff list from before them.
 function careerEmployerBook_(ctx) {
@@ -399,7 +407,6 @@ function careerEmployerBook_(ctx) {
   for (var r = 1; r < data.length; r++) {
     var id = String(data[r][bId] || '').trim();
     if (!id) continue;
-    if (bSec >= 0 && /sports|stadium|franchise|athletic/i.test(String(data[r][bSec] || ''))) continue; // Paulson's domain
     var rawG = data[r][bGrow];
     if (rawG === '' || rawG === null || rawG === undefined) continue; // blank growth = no signal, no event
     var g = Number(rawG);
@@ -1676,8 +1683,7 @@ function runCareerEngine_(ctx) {
       var growth = Number(bizData[br3][bGrow]);
       if ((isNaN(stated) || isNaN(growth) || growth <= 0 || stated <= 0) && !civicSlot) continue;
       if (!bizId2) continue;
-      var cat = sectorCategory_(bSec >= 0 ? bizData[br3][bSec] : '');
-      if (!cat) continue; // sports orgs opted out
+      var cat = sectorCategory_(bSec >= 0 ? bizData[br3][bSec] : ''); // never null unstrict; a sports org hires (engine.307)
 
       // engine.135 E2: dial-steered, unless the business also carries a civic
       // opening. A civic window bypasses gapFactor (a req, not attractor odds)

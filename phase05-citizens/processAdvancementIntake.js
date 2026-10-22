@@ -1593,8 +1593,8 @@ var DRIP_PARENT_AGE_MAX = 45;
 // for the mint's employer pick. engine.278 (Task 9): each business is filed
 // under its field (sectorCategory_, strict — the same map the rehire matcher
 // reads) with its hood, replacing the four keyword buckets. A business whose
-// Sector reads as no field (sports, 'Corporate', 'Science', 'Talent
-// Management') takes no mint. Returns null on any read failure; the mint then
+// Sector reads as no field ('Corporate', 'Science', 'Talent Management')
+// takes no mint; a sports org reads as its field since engine.307. Returns null on any read failure; the mint then
 // records seeking-work instead of throwing.
 function buildMintBizPool_(ss) {
   try {
@@ -1726,8 +1726,10 @@ function mintNamedEmployer_(role) {
 //   a field with no room, or a role with no field → UNTRACKED (a mint arrives
 //     with a job and its pay: employed off the tracked ledger, not seeking);
 //   an unreadable Business_Ledger → seeking: true (the caller writes the line).
-// A business whose Sector reads as no field (sports first among them — the
-// sports world places its own) is never picked, named or not.
+// A business whose Sector reads as no field is never picked, named or not.
+// engine.307: a sports org is fielded, so a title naming the team ("Scout,
+// Oakland A's") lands there — the GAME-clock return above is the athlete gate:
+// an ENGINE-clock arrival is staff by the clock's say-so.
 // Pure: no rng, no sheet. Returns { bizId, sentinel, seeking }.
 function pickMintEmployer_(roleType, hood, clockMode, seed, pool, hasRoom) {
   var out = { bizId: '', sentinel: '', seeking: false };

@@ -1,0 +1,50 @@
+AIM = BENCH (script read the bench marker)
+== leg B7p (stage 19 + engine.307 at d86cdaeb, the 103 rows + realign)
+stage = stage 19 + 4 files at d86cdaeb; manifest output/engine-sheet/stage19-e307-B7.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @99
+pull-back 167 js + manifest byte-identical to output/engine-sheet/stage19-e307-B7.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C116
+waiting 65 s: the reset's write quota clears before the intake writes
+ok   roster rows = 103
+ok   0 non-canon hoods
+ok   0 blank roster fields
+ok   Business_Archive holds no BIZ-00039
+ok   BIZ-00039 at row 40
+ok   ledger rows = 180
+ok   bizIdHighWater = 186
+ok   max active = mark
+ok   0 dup names ()
+ok   BIZ-00039 D = Downtown
+mode fresh | preimage /root/GodWorld/output/engine-sheet/2026-10-21-e306-preimage-bench.json | roster sha 2fea8d2d51bc228f | IDs BIZ-00187..BIZ-00289
+Business_Intake staged 103 rows, every cell read back
+processBusinessIntake rc=0 (log /root/GodWorld/output/engine-sheet/2026-10-21-e306-intake-bench.log)
+bench: data/employer_mapping.json restored
+realign BIZ-00039 row 40 D Downtown → Uptown
+ok   intake row i ↔ ledger row 182+i: A:F staged as written, promoted, ID BIZ-00187+i, nine typed cells = the seed, one ledger row per name
+ok   the original 180 rows A:I = the preimage except D40 = Uptown
+ok   bizIdHighWater = 289
+ok   ledger rows = 283
+ok   data/employer_mapping.json byte-identical to before
+RECEIPT PASS
+probe POP-00972 (Waterfront Resident, Downtown) Simulation_Ledger!BB803 = Small Business, read back
+probe POP-01085 (Line cook, Downtown) Simulation_Ledger!BB915 = Small Business, read back
+leg B7p C113 fire rc=0 "verdict": "PASS" "wallS": 220
+B7p C113: LifeHistory 2299 sha c81a0bebb22f56b2, Career-Hired 1, ledger 283 rows (103 new), employer moves 13 (1 to new rows), chaos business hits 4 (0 new), owner-door queue 0 → /root/GodWorld/output/engine-sheet/2026-10-21-e306-readers-B7p-c113.json
+B7p C113: 2299 LifeHistory rows, sha c81a0bebb22f56b2, spot lines drawn 11 {"forced_temporary_closure":1,"lift":8,"shed":2}, eligible citizens {"quiet":13,"forced_temporary_closure":8,"shed":4}, not their spot 0, strays 0
+C113 B7p: onto sports 1, off sports 0, sports career lines 1, elsewhere {"Promotion":10,"Career-Hired":1,"Career-FieldChange":1}, athlete career moves 0 (income-only 0) — athlete guard PASS
+bench Business_Intake tab deleted
+== restore bench code to stage 19
+stage = stage 19 + 4 files at ffad3bf8; manifest /tmp/claude-0/-root-GodWorld/a725df2c-536e-4a81-bd5c-126e074e188f/scratchpad/stage19-restore-e307.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @100
+pull-back 167 js + manifest byte-identical to /tmp/claude-0/-root-GodWorld/a725df2c-536e-4a81-bd5c-126e074e188f/scratchpad/stage19-restore-e307.sha256
+bench code = stage 19 manifest
+engine.307 bench done
+exit 0

@@ -6,7 +6,7 @@
 # 2026-10-22-e307-check.js as label `ctl` (2026-10-22, before this leg). After each fire: e306 readers + spots (C113) and the e307
 # check (every Cycle; halts on an athlete career move). End: bench code restored to stage 19 (manifest must equal stage18-e310-B3.sha256),
 # intake tab deleted, bench data left on B7 C116. Reset + shared functions copied from 2026-10-21-e310-pair.sh. Halts on the first non-PASS.
-#   usage: 2026-10-22-e307-bench.sh <commit> [probe]
+#   usage: 2026-10-22-e307-bench.sh <commit> [probe|roll] [<label>]   (label default B7 / B7p)
 # probe (B7p): the B7 roll filled no sports window — the bench pool held no unemployed Small Business candidate. After the intake,
 # 2026-10-22-e307-probe-tag.js tags two blank-tag unemployed rows 'Small Business' (bench only), then C113 only, no roll.
 set -uo pipefail
@@ -39,7 +39,7 @@ const id = '1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA';
 " 2>&1 | grep -v "injected env"
 }
 wait_cut() { local left=$(( 300 - ($(date +%s) - CUT) )); [ $left -gt 0 ] && { echo "version cut; waiting $left s more for /exec propagation"; sleep $left; }; }
-SRC=${1:?commit}; MODE=${2:-}; L=B7; [ "$MODE" = probe ] && L=B7p
+SRC=${1:?commit}; MODE=${2:-}; L=${3:-B7}; [ "$MODE" = probe ] && L=${3:-B7p}
 AIM=$(node $O/2026-10-19-aimcheck.js 2>&1 | grep -v "injected env"); echo "$AIM" | tail -1
 echo "$AIM" | grep -q "^AIM = BENCH" || { echo "HALT aim not proven"; exit 5; }
 fire() {   # fire <expect> <label>
@@ -48,7 +48,7 @@ fire() {   # fire <expect> <label>
   if [ $rc -ne 0 ]; then echo "HALT leg $2"; grep -v "injected env" $TMP | tail -40; exit 2; fi
 }
 echo "== leg $L (stage 19 + engine.307 at $SRC, the 103 rows + realign)"
-bash $O/2026-10-22-push-e307-bench.sh "$SRC" $O/stage19-e307-B7.sha256 "$FILES" "$SRC^" || exit 4
+bash $O/2026-10-22-push-e307-bench.sh "$SRC" $O/stage19-e307-$L.sha256 "$FILES" d86cdaeb^ || exit 4   # base = the parent of the first engine.307 commit
 CUT=$(date +%s)
 reset_leg; drop_tab Business_Intake; drop_tab EA_Diag
 echo "waiting 65 s: the reset's write quota clears before the intake writes"; sleep 65

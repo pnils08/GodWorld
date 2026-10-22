@@ -1,0 +1,18 @@
+[
+ {
+  "row": 803,
+  "pop": "POP-00972",
+  "role": "Waterfront Resident",
+  "hood": "Downtown",
+  "tier": "4",
+  "income": "33440"
+ },
+ {
+  "row": 915,
+  "pop": "POP-01085",
+  "role": "Line cook",
+  "hood": "Downtown",
+  "tier": "4",
+  "income": "60000"
+ }
+]

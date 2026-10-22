@@ -1,7 +1,7 @@
 #!/bin/bash
 # engine.307 PROD push (stage 20): PROD (stage 19, @156, manifest stage18-e310-B3.sha256) + the 4 engine.307 files at <commit> (sports
 # orgs hire their building staff, never a player or coach row), which must equal the benched stage byte for byte (<manifest>:
-# stage19-e307-B11.sha256, leg B11). Lands before C113. The live fire is manual (no cron fires it), so the push can race a person:
+# stage19-e307-B12.sha256, leg B12). Lands before C113. The live fire is manual (no cron fires it), so the push can race a person:
 # codex diff gate 2 item 5 — the live fire state (World_Config cycleCount, every Neighborhood_Map Cycle, Riley_Digest's last Cycle,
 # the _CycleCheckpoint manifest cell) must read 112 / empty right before the push, right after the pull-back, and again 8 minutes
 # later (~2× the longest bench fire, 250 s on B11). Apps Script runs an execution on the version it started with, so a fire admitted
@@ -17,7 +17,7 @@ OUT=/root/GodWorld/output/engine-sheet
 PRE=d86cdaeb^   # the parent of the first engine.307 commit: its copies of FILES are stage 19's
 FILES="phase05-citizens/runCareerEngine.js phase05-citizens/generationalWealthEngine.js phase05-citizens/processAdvancementIntake.js phase05-citizens/applyBusinessDynamics.js"
 [ -f "$MAN" ] || { echo "no benched manifest $MAN — stop"; exit 1; }
-[ "$(realpath "$MAN")" = "$OUT/stage19-e307-B11.sha256" ] || { echo "manifest must be the benched stage19-e307-B11.sha256 — stop"; exit 1; }
+[ "$(realpath "$MAN")" = "$OUT/stage19-e307-B12.sha256" ] || { echo "manifest must be the benched stage19-e307-B12.sha256 — stop"; exit 1; }
 git ls-files --error-unmatch "$MAN" >/dev/null 2>&1 && git diff --quiet HEAD -- "$MAN" || { echo "manifest $MAN is not committed as-is — stop"; exit 1; }
 W=$(mktemp -d); mkdir -p "$W/stage" "$W/pullback"
 ( cd "$W/stage" && printf '{"scriptId":"%s","rootDir":""}' "$PROD_ID" > .clasp.json && "$CLASP" pull >/dev/null )

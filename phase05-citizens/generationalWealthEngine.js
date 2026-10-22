@@ -875,6 +875,9 @@ function roleSectorCategory_(roleText) {
   var t = String(roleText || '');
   if (!t) return null;
   for (var i = 0; i < ROLE_SECTOR_HINTS_.length; i++) if (ROLE_SECTOR_HINTS_[i][0].test(t)) return ROLE_SECTOR_HINTS_[i][1];
+  // engine.307 (codex diff gate 5): sectorCategory_ fields a sports BUSINESS now; a sports word in ROLE
+  // text still reads as no field, exactly as before ("Shooting Guard, Oakland Oaks (Sports)" is not retail).
+  if (/sports|stadium|franchise|athletic/i.test(t)) return null;
   return (typeof sectorCategory_ === 'function') ? sectorCategory_(t, true) : null;
 }
 

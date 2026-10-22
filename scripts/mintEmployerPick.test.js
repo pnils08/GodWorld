@@ -128,7 +128,8 @@ check('5b.6e engine.307 gate 3: a carried sports BIZ stands for a GAME row, not 
   E.mintCarriedAllowed_('BIZ-I', 'Pitcher', 'ENGINE', pool));
 check('5b.6f engine.307 gate 4: no live sports-layer title lands at the team on the ENGINE clock — named, carried or by field',
   ["Power Forward, Oakland Oaks", "PG / The Oaks", "C / The Oaks", "SP / Oakland A's", "Left Fielder, Oakland A's", "Designated Hitter, Oakland A's Legend",
-   "First Baseman, Oakland A's Legend — Player Rep, Community Liaison", "Hall of Famer from old basketball league MUBA"].every(t =>
+   "First Baseman, Oakland A's Legend — Player Rep, Community Liaison", "Hall of Famer from old basketball league MUBA",
+   "Shooting Guard, Oakland Oaks (Sports)", "Stadium Athlete Liaison"].every(t =>
     !E.mintSportsAllowed_('Sports', t, '') && !E.mintSportsAllowed_('Sports Franchise', t, 'ENGINE') && E.mintSportsAllowed_('Sports Franchise', t, 'GAME') &&
     pick(t, 'Jack London').bizId !== 'BIZ-00005' && !E.mintCarriedAllowed_('BIZ-00005', t, 'ENGINE', pool)));
 check('5b.6g …while a civilian job stands at the team and any title stands elsewhere', E.mintSportsAllowed_('Sports Franchise', "A's Marketing Director", 'ENGINE') &&

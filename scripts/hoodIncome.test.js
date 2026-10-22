@@ -100,6 +100,8 @@ const ref = (med, factor, seed) => Math.round(med * factor * jit(seed) / 100) * 
   assert('engine.307 team / stadium → Small Business either way', ['Sports Franchise', 'Sports', 'As Stadium', 'Stadium / Historic Landmark'].every(x => sectorCategory_(x) === 'Small Business' && sectorCategory_(x, true) === 'Small Business'));
   assert('engine.307 sports analytics stays tech, a sports bar stays a kitchen', sectorCategory_('Sports Analytics', true) === 'Tech & Innovation' && sectorCategory_('Sports Bar & Dining', true) === 'Food & Culture' && sectorCategory_('Sports Bar & Grill', true) === 'Food & Culture');
   assert('engine.307 athlete role text still prices nowhere', roleSectorCategory_('Athlete') === null && roleSectorCategory_('Sports Analytics Engineer (Gridiron)') === null);
+  assert('engine.307 gate 5: a sports word in ROLE text reads as no field, as before (the business map is not the role map)',
+    ['Shooting Guard, Oakland Oaks (Sports)', 'Sports Marketing Lead', 'Stadium Usher', 'Franchise Liaison'].every(t => roleSectorCategory_(t) === null));
   assert('legal → Professional', sectorCategory_('Legal Services') === 'Professional');
   assert('role hint: attorney → Professional', roleSectorCategory_('Immigration Attorney') === 'Professional');
   assert('role hint: line cook → Food & Culture', roleSectorCategory_('Line cook') === 'Food & Culture');

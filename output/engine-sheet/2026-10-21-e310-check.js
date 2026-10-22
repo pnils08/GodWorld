@@ -21,7 +21,7 @@ const J = JSON.stringify;
 const fails = [];
 const out = {};
 
-const diffKeys = (a, b, what) => Object.keys(a).forEach(k => { if (J(a[k]) !== J(b[k])) fails.push(`${what}.${k} differs`); });
+const diffKeys = (a, b, what) => [...new Set(Object.keys(a).concat(Object.keys(b)))].forEach(k => { if (J(a[k]) !== J(b[k])) fails.push(`${what}.${k} differs`); });   // two-sided (codex diff gate item 3)
 const pick = f => J([f.verdict, f.resp && f.resp.ok, f.resp && f.resp.state, f.resp && f.resp.persistErrors, f.newEE,
   f.resp && f.resp.carryForward, f.post]);
 
@@ -58,6 +58,8 @@ if (J(t3.marks) !== J(t2.marks)) {
   const i = t3.marks.findIndex((m, k) => J(m) !== J(t2.marks[k]));
   fails.push('B3t draw marks differ from B2t at ' + J(t3.marks[i]) + ' vs ' + J(t2.marks[i]));
 }
+if (J(t3.pre5) !== J(t2.pre5)) fails.push('B3t Phase-5 event snapshot differs from B2t');   // codex diff gate item 3
+if (J(Object.keys(t3.hoods).sort()) !== J(Object.keys(rB3.hoods).sort())) fails.push('B3t tap hood set != sheet hood set');
 const SAME = ['label', 'sportsZone', 'holiday', 'profileMod', 'holidayMod', 'mod', 'pulseAttr', 'pulseEvents', 'pulseDelta', 'chaosEA'];
 const stages = (base, x) => {
   const v0 = Math.max(0, Math.round(base * x.mod));

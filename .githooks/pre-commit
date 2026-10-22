@@ -70,7 +70,7 @@ fi
 # anyway. That happened TWICE in S335. A validator that cannot stop the action is
 # not enforcement. This is the gate; --gate exits non-zero.
 # ---------------------------------------------------------------------------
-if git diff --cached --name-only | grep -q 'docs/engine/archive/ROLLOUT_PLAN\.md'; then
+if git diff --cached --name-only | grep -q '^docs/engine/ROLLOUT_PLAN\.md$'; then
   if ! lint_out="$(node scripts/docLoopStatus.js --gate 2>&1)"; then
     echo "" >&2
     echo "BLOCKED — ROLLOUT_PLAN.md has non-conforming rows (S335 gate):" >&2

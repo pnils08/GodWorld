@@ -289,6 +289,8 @@ console.log('═══ 6 — engine.307: the real rehire matcher at a sports org
     jobless('SP-PLAYER', { RoleType: 'basketball player', Income: 10000 }),
     jobless('SP-COACH', { RoleType: 'Youth Basketball Coach', Income: 11000 }),
     jobless('SP-GAME', { RoleType: 'Retail Clerk', ClockMode: 'GAME', Income: 12000 }),
+    jobless('SP-Game', { RoleType: 'Retail Clerk', ClockMode: 'Game', Income: 12500 }),           // codex gate 7: intake mints write 'Game'
+    jobless('SP-CENTER', { RoleType: 'Oakland Oaks - Center', Income: 13000 }),
     jobless('SP-CLERK', { RoleType: 'Retail Clerk', Income: 20000 }),
     jobless('SP-GUARD', { RoleType: 'Security Guard', Income: 21000 }),
   ];
@@ -298,8 +300,9 @@ console.log('═══ 6 — engine.307: the real rehire matcher at a sports org
   w.runCareerEngine_(ctx);
   const emp = id => ctx.ledger.rows.find(r => r[I('POPID')] === id)[I('EmployerBizId')];
   assert('6.1 the staff are hired at the sports franchise', emp('SP-CLERK') === 'BIZ-SPORT' && emp('SP-GUARD') === 'BIZ-SPORT', emp('SP-CLERK') + '/' + emp('SP-GUARD'));
-  assert('6.2 the player, the coach and the GAME row stay jobless though poorer (first in the need order)', emp('SP-PLAYER') === '' && emp('SP-COACH') === '' && emp('SP-GAME') === '',
-    [emp('SP-PLAYER'), emp('SP-COACH'), emp('SP-GAME')].join('/'));
+  assert('6.2 the player, the coach, the center and the GAME / Game rows stay jobless though poorer (first in the need order)',
+    ['SP-PLAYER', 'SP-COACH', 'SP-GAME', 'SP-Game', 'SP-CENTER'].every(p => emp(p) === ''),
+    ['SP-PLAYER', 'SP-COACH', 'SP-GAME', 'SP-Game', 'SP-CENTER'].map(emp).join('/'));
   assert('6.3 the hire lines name the franchise', writes.filter(x => /Hired at Oakland Athletics|hired at Oakland Athletics/.test(String(x.row[4]))).length === 2,
     JSON.stringify(writes.filter(x => /Career-/.test(String(x.row[3]))).map(x => x.row[1] + ' ' + x.row[4])));
 })();

@@ -194,7 +194,8 @@ const bl = rows => [BLH].concat(rows);
   assert('engine.307 sportsHireBars_: a player or coach row is barred at a sports org, by tag or by role',
     B('Sports Franchise', 'Waterfront Resident', ['athlete']) && B('Sports', 'basketball player', '') && B('As Stadium', 'Youth Basketball Coach', 'Education') && B('Sports Bar & Grill', 'Scout', '') &&
     B('Sports', 'General Manager, Oakland Oaks', '') && B('Sports Franchise', "Manager, Oakland A's", '') && !B('As Stadium', 'Stadium Operations Manager', '') &&
-    B('Sports', 'Shooting Guard, Oakland Oaks — Community Liaison', 'Faith & Community') && B('Sports', 'Left Fielder, Oakland A\'s', ''));
+    B('Sports', 'Shooting Guard, Oakland Oaks — Community Liaison', 'Faith & Community') && B('Sports', 'Left Fielder, Oakland A\'s', '') &&
+    B('Sports', 'Oakland Oaks - Center', '') && B('Sports', 'Oakland Oaks - Power Forward', ''));
   assert('engine.307 sportsHireBars_: staff pass, and nothing is barred outside sports', !B('Sports Franchise', 'Retail Clerk', 'Small Business') &&
     !B('Sports Analytics', 'Sports Analytics Engineer (Gridiron)', 'Tech & Innovation') && !B('Bakery', 'basketball player', ['athlete']) && !B('Sports', '', ''));
   assert('engine.307 the rehire matcher bars at all three candidate lists (same-field, willing, civic movers)',

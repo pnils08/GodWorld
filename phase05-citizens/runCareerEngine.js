@@ -106,7 +106,7 @@ var SPORTS_SECTOR_RE_ = /sports|stadium|franchise|athletic/i;
 // are the live sports layer's own titles (codex gate 4: "Left Fielder", "Third Baseman", "Designated
 // Hitter", "Power Forward"); a player word anywhere in a mixed title bars it. The mint keeps sports orgs
 // out of its pool entirely (processAdvancementIntake.js buildMintBizPool_), so this bar is the hire's.
-var SPORTS_PLAYER_ROLE_RE_ = /\b(athlete|player|pitcher|catcher|infielder|outfielder|fielder|baseman|hitter|shortstop|closer|point guard|shooting guard|forward|quarterback|coach|scout|hall of famer)\b|\bmanager, oakland\b/i;
+var SPORTS_PLAYER_ROLE_RE_ = /\b(athlete|player|pitcher|catcher|infielder|outfielder|fielder|baseman|hitter|shortstop|closer|point guard|shooting guard|forward|center|quarterback|coach|scout|hall of famer)\b|\bmanager, oakland\b/i;
 function sportsHireBars_(sector, role, tags) {
   if (!SPORTS_SECTOR_RE_.test(String(sector || ''))) return false;
   var t = Array.isArray(tags) ? tags : String(tags || '').split('|');
@@ -1608,7 +1608,7 @@ function runCareerEngine_(ctx) {
     for (var ur = 0; ur < rows.length; ur++) {
       var uRow = rows[ur];
       if (safeStr(uRow[iStatus]).trim() !== 'Active') continue;
-      if (safeStr(uRow[iClock]).trim() === 'GAME') continue;
+      if (safeStr(uRow[iClock]).trim().toUpperCase() === 'GAME') continue; // engine.307 (codex gate 7): intake mints write 'Game'
       // engine.135 E3 (S401, builder direction points 5/14 — every old system
       // forcing employment ends): only a citizen WITHOUT a job is a candidate.
       // UNTRACKED means employed at an off-ledger business — the S357 rule that
@@ -1648,7 +1648,7 @@ function runCareerEngine_(ctx) {
       for (var mr = 0; mr < rows.length; mr++) {
         var mRow = rows[mr];
         if (safeStr(mRow[iStatus]).trim() !== 'Active') continue;
-        if (safeStr(mRow[iClock]).trim() === 'GAME') continue;
+        if (safeStr(mRow[iClock]).trim().toUpperCase() === 'GAME') continue;
         if (iEconKey >= 0 && safeStr(mRow[iEconKey]).trim() === 'SPORTS_OVERRIDE') continue;
         var mEmp = safeStr(mRow[iEmployerBizId]).trim();
         if (!mEmp) continue; // the unemployed pool above already covers no-employer citizens

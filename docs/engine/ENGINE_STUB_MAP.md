@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-10-21 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-10-22 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -2442,6 +2442,10 @@
 
 - **mintNamedEmployer_(role)**
 
+- **mintSportsAllowed_(sector, roleType, clockMode)**
+
+- **mintCarriedAllowed_(carried, roleType, clockMode, pool)**
+
 - **pickMintEmployer_(roleType, hood, clockMode, seed, pool, hasRoom)**
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -2524,6 +2528,8 @@
 
 ### runCareerEngine.js
 - **sectorCategory_(sector, strict)**
+
+- **sportsHireBars_(sector, role, tags)**
 
 - **tagsInCategory_(tags, cat)**
 
@@ -4805,4 +4811,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1737
+**Functions mapped:** 1740

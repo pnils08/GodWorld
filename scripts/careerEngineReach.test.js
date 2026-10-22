@@ -278,5 +278,31 @@ console.log('═══ 5 — the conduct engine draws exactly as before');
   assert('5.2 ...and the same number of RNG draws every Cycle', a.draws.join(',') === b.draws.join(','));
 })();
 
+// ---------------------------------------------------------------------------
+console.log('═══ 6 — engine.307: the real rehire matcher at a sports org (codex diff gate 2 item 3)');
+(function () {
+  // One hiring sports franchise (520 × 50% / 52 ≈ 5 openings) and four jobless Small Business candidates, poorest first:
+  // a 'basketball player' (ENGINE, the live POP-01058 shape), a coach, a GAME-clock row, then two staff. Only the staff are hired.
+  const SBL = [BL[0], ['BIZ-SPORT', 'Oakland Athletics', 'Sports Franchise', 'Baylight District', 520, 3342924, 50000000, 50]];
+  const jobless = (id, o) => row(Object.assign({ POPID: id, EmployerBizId: '', SkillTags: 'Small Business', LifeHistory: SEED_LINE }, o));
+  const rows = [
+    jobless('SP-PLAYER', { RoleType: 'basketball player', Income: 10000 }),
+    jobless('SP-COACH', { RoleType: 'Youth Basketball Coach', Income: 11000 }),
+    jobless('SP-GAME', { RoleType: 'Retail Clerk', ClockMode: 'GAME', Income: 12000 }),
+    jobless('SP-CLERK', { RoleType: 'Retail Clerk', Income: 20000 }),
+    jobless('SP-GUARD', { RoleType: 'Security Guard', Income: 21000 }),
+  ];
+  writes.length = 0; errors.length = 0;
+  const ctx = makeCtx(rows, 201, mulberry32(307));
+  ctx.ss = { getSheetByName: tab => tab === 'Business_Ledger' ? { getDataRange: () => ({ getValues: () => SBL.map(r => r.slice()) }) } : null };
+  w.runCareerEngine_(ctx);
+  const emp = id => ctx.ledger.rows.find(r => r[I('POPID')] === id)[I('EmployerBizId')];
+  assert('6.1 the staff are hired at the sports franchise', emp('SP-CLERK') === 'BIZ-SPORT' && emp('SP-GUARD') === 'BIZ-SPORT', emp('SP-CLERK') + '/' + emp('SP-GUARD'));
+  assert('6.2 the player, the coach and the GAME row stay jobless though poorer (first in the need order)', emp('SP-PLAYER') === '' && emp('SP-COACH') === '' && emp('SP-GAME') === '',
+    [emp('SP-PLAYER'), emp('SP-COACH'), emp('SP-GAME')].join('/'));
+  assert('6.3 the hire lines name the franchise', writes.filter(x => /Hired at Oakland Athletics|hired at Oakland Athletics/.test(String(x.row[4]))).length === 2,
+    JSON.stringify(writes.filter(x => /Career-/.test(String(x.row[3]))).map(x => x.row[1] + ' ' + x.row[4])));
+})();
+
 console.log('\n' + passed + ' passed, ' + failed + ' failed');
 process.exit(failed ? 1 : 0);

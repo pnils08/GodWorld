@@ -116,8 +116,11 @@ check('5b.4 a named organisation with no room falls to the field, not to a queue
 const ff = pick('Firefighter', 'Temescal');
 check('5b.5 a named organisation that is not on the ledger falls to the field', E.mintNamedEmployer_('Firefighter') === 'BIZ-00023' && pool.statedById['BIZ-00023'] === undefined && fieldOfBiz(ff.bizId) === 'Government & Civic', JSON.stringify(ff));
 const scout = pick("Scout, Oakland A's", 'Jack London');
-check('5b.6 engine.307: a title naming the team lands there on the ENGINE clock; the GAME clock still gets nothing', E.mintNamedEmployer_("Scout, Oakland A's") === 'BIZ-00005' && scout.bizId === 'BIZ-00005' && ((g) => !g.bizId && !g.sentinel && !g.seeking)(pick("Scout, Oakland A's", 'Jack London', 'GAME')), JSON.stringify(scout));
-check('5b.6b …and only with room: a full team falls to the field', pick("Scout, Oakland A's", 'Jack London', 'ENGINE', 's', pool, (id) => id !== 'BIZ-00005' && room(id)).bizId !== 'BIZ-00005');
+check('5b.6 engine.307: a staff title naming the team lands there; a player or coach title never does (the bar), and the GAME clock gets nothing',
+  pick("A's Marketing Coordinator", 'Jack London').bizId === 'BIZ-00005' && E.mintNamedEmployer_("Scout, Oakland A's") === 'BIZ-00005' && scout.bizId !== 'BIZ-00005' &&
+  pick('Coach, Oakland A\'s', 'Jack London').bizId !== 'BIZ-00005' && ((g) => !g.bizId && !g.sentinel && !g.seeking)(pick("A's Marketing Coordinator", 'Jack London', 'GAME')), JSON.stringify(scout));
+check('5b.6b …a staff title with no room falls to the field', pick("A's Marketing Coordinator", 'Jack London', 'ENGINE', 's', pool, (id) => id !== 'BIZ-00005' && room(id)).bizId !== 'BIZ-00005');
+check('5b.6c …and the field pick never draws a sports org for a player role that has a field', E.pickMintEmployer_('Retail Clerk and basketball player', 'Jack London', 'ENGINE', 'p1', pool, room).bizId !== 'BIZ-00005');
 check('5b.7 the first keyword rule in the mapping\'s order decides', E.mintNamedEmployer_('Deputy Mayor') === 'BIZ-00017' && E.mintNamedEmployer_('School Nurse') === E.MINT_KEYWORD_RULES.find(r => 'School Nurse'.indexOf(r[0]) !== -1)[1]);
 
 console.log('\n6. no job, no field, no ledger:');

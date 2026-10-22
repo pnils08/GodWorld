@@ -1612,22 +1612,23 @@ function buildMintBizPool_(ss) {
     }
     if (bId < 0 || bSector < 0) return null;
     var catFn = (typeof sectorCategory_ === 'function') ? sectorCategory_ : null;
-    var byField = {}, fieldById = {};
+    var byField = {}, fieldById = {}, sectorById = {};
     var statedById = {};
     for (var r = 1; r < bizData.length; r++) {
       var id = String(bizData[r][bId] || '').trim();
       if (!id) continue;
       var field = catFn ? catFn(bizData[r][bSector], true) : null;
+      sectorById[id] = String(bizData[r][bSector] || '');
       if (field) {
         if (!byField[field]) byField[field] = [];
-        byField[field].push({ id: id, hood: bHood >= 0 ? String(bizData[r][bHood] || '').trim() : '' });
+        byField[field].push({ id: id, hood: bHood >= 0 ? String(bizData[r][bHood] || '').trim() : '', sector: sectorById[id] });
         fieldById[id] = field;
       }
       var rawCount = bCount >= 0 ? bizData[r][bCount] : '';
       statedById[id] = (rawCount === '' || rawCount === null || rawCount === undefined || isNaN(Number(rawCount)))
         ? null : Number(rawCount);
     }
-    return { byField: byField, fieldById: fieldById, statedById: statedById };
+    return { byField: byField, fieldById: fieldById, statedById: statedById, sectorById: sectorById };
   } catch (e) {
     Logger.log('buildMintBizPool_: Business_Ledger read failed (' + e.message + ') — mint employer skipped');
     return null;
@@ -1727,9 +1728,10 @@ function mintNamedEmployer_(role) {
 //     with a job and its pay: employed off the tracked ledger, not seeking);
 //   an unreadable Business_Ledger → seeking: true (the caller writes the line).
 // A business whose Sector reads as no field is never picked, named or not.
-// engine.307: a sports org is fielded, so a title naming the team ("Scout,
-// Oakland A's") lands there — the GAME-clock return above is the athlete gate:
-// an ENGINE-clock arrival is staff by the clock's say-so.
+// engine.307: a sports org is fielded, so a staff title naming the team ("A's
+// Marketing") lands there; a player or coach title ("Scout, Oakland A's") never
+// does, named or by field (sportsHireBars_, runCareerEngine.js — the same bar
+// the hire and the employer book read; codex diff gate 2). GAME returns above.
 // Pure: no rng, no sheet. Returns { bizId, sentinel, seeking }.
 function pickMintEmployer_(roleType, hood, clockMode, seed, pool, hasRoom) {
   var out = { bizId: '', sentinel: '', seeking: false };
@@ -1738,12 +1740,14 @@ function pickMintEmployer_(roleType, hood, clockMode, seed, pool, hasRoom) {
   if (!role || MINT_NO_EMPLOYMENT_ROLE.test(role)) return out;
   var named = mintNamedEmployer_(role);
   if (named === 'SELF_EMPLOYED') { out.sentinel = 'SELF_EMPLOYED'; return out; }
-  if (named && pool && pool.fieldById && pool.fieldById[named] && hasRoom(named)) { out.bizId = named; return out; }
+  var barFn = (typeof sportsHireBars_ === 'function') ? sportsHireBars_ : null; // engine.307
+  var barred = function (sector) { return !!(barFn && barFn(sector, role, '')); };
+  if (named && pool && pool.fieldById && pool.fieldById[named] && hasRoom(named) && !barred(pool.sectorById && pool.sectorById[named])) { out.bizId = named; return out; }
   var cat = (typeof roleFieldOf_ === 'function') ? roleFieldOf_(role) : null;
   var field = (cat && typeof skillTagField_ === 'function') ? skillTagField_(cat) : null;
   if (!field) { out.sentinel = 'UNTRACKED'; return out; }
   if (!pool || !pool.byField) { out.seeking = true; return out; }
-  var open = (pool.byField[field] || []).filter(function (b) { return hasRoom(b.id); });
+  var open = (pool.byField[field] || []).filter(function (b) { return hasRoom(b.id) && !barred(b.sector); });
   var h = String(hood || '').trim();
   var near = h ? open.filter(function (b) { return b.hood === h || b.hood === 'City-wide'; }) : [];
   var from = near.length ? near : open;

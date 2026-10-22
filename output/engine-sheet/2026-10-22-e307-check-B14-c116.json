@@ -1,0 +1,30 @@
+{
+ "cycle": 116,
+ "label": "B14",
+ "prev": "B14",
+ "ontoSports": [],
+ "offSports": [],
+ "athleteGuard": {
+  "careerMoves": [],
+  "incomeOnly": 0
+ },
+ "log": {
+  "sports": [],
+  "elsewhere": {
+   "Promotion": 5,
+   "Career-FieldChange": 1,
+   "Career-Hired": 1,
+   "Career-Layoff": 1
+  }
+ },
+ "statedSports": {
+  "BIZ-00005": "520",
+  "BIZ-00008": "20",
+  "BIZ-00041": "30",
+  "BIZ-00063": "110",
+  "BIZ-00074": "250",
+  "BIZ-00103": "20",
+  "BIZ-00274": "11",
+  "BIZ-00278": "6"
+ }
+}

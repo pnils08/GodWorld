@@ -1,0 +1,7 @@
+fresh PROD pull = stage 18 (no drift)
+stage = the benched tree (output/engine-sheet/stage18-e310-B3.sha256), byte for byte
+◇ injected env (31) from ../.config/godworld/.env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+live Neighborhood_Map = Cycle 112 (C113 not yet fired)
+└─ utilities/writeIntents.js
+pinned deployment AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ serves @156
+pull-back 167 js + manifest byte-identical to output/engine-sheet/stage18-e310-B3.sha256

@@ -1,0 +1,741 @@
+{
+ "names": [
+  {
+   "name": "Lake Merritt Blossom Walk",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Temescal Spring Arts Pop-Up",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Rockridge Garden Market",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Fruitvale Community Bloom Festival",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Uptown Spring Gallery Opening",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "KONO Flower Market",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Jack London Estuary Jazz Fest",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Concert Series",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Fruitvale Street Food Carnival",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "West Oakland Waterfront Night Market",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Uptown Summer Block Party",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Piedmont Ave Sidewalk Sale",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Temescal Harvest Fair",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Rockridge Autumn Walk",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Laurel District Craft Expo",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Downtown Oakland Arts Month",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "KONO Fall Festival",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Chinatown Autumn Moon Festival",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Lantern Parade",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Downtown Winter Festival",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Jack London Cozy Nights Film Series",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Temescal Holiday Market",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Piedmont Ave Winter Walk",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Chinatown Winter Lights",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Downtown Plaza Noon Music Session",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Open-Air Book Market",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Temescal Street Vendors Block",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Jack London Waterfront Stroll",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Uptown Outdoor Gallery",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Rockridge Heated Tent Pop-Up Cafe",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Downtown Indoor Arts Night",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Temescal Shelter-Hub Spoken Word",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Jack London Warehouse Gallery Opening",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "KONO Rainy Day Art Walk",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Fog Walk Photography Tour",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Jack London Misty Morning Coffee Club",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "West Oakland Industrial Fog Art Exhibit",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Laurel Fireside Reading Night",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Rockridge Candlelit Wine Tasting",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Temescal Cozy Crafts Workshop",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Picnic Festival",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Jack London Outdoor Yoga Session",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Temescal Street Fair",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Downtown Thanksgiving Parade",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Gratitude Gathering",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Fruitvale Community Feast",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "West Oakland Turkey Trot",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Downtown Holiday Tree Lighting",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Festival of Lights",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Rockridge Holiday Stroll",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Temescal Winter Wonderland",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Jack London Holiday Market",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Downtown Oakland Countdown",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Jack London Waterfront Fireworks",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Midnight Celebration",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Uptown New Year's Eve Party",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Polar Plunge",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Downtown New Year's Day Parade",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Temescal Resolution Run",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Sweetheart Stroll",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Rockridge Romance Walk",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Jack London Couples Cruise",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Easter Egg Hunt",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Rockridge Spring Celebration",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Fruitvale Easter Festival",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Rockridge Mother's Day Brunch Walk",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Family Picnic",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Piedmont Ave Mother's Day Market",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Father's Day BBQ",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Jack London Dad's Day Out",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Temescal Father-Child Festival",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Ghost Walk",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Temescal Trick-or-Treat Street",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Jack London Halloween Haunted Pier",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Rockridge Costume Parade",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Laurel District Spooky Stroll",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Uptown First Friday Art Walk",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "KONO First Friday Gallery Hop",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Temescal First Friday Art Stroll",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Jack London First Friday Waterfront",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Downtown First Friday Live Music",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt First Friday Art Market",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Downtown Oakland Founders Day Ceremony",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Creation Day Gathering",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "West Oakland Heritage Walk",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Fruitvale Oakland Roots Festival",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Jack London History Tour",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Jack London Pre-Game Block Party",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Downtown Sports Bar Crawl",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Tailgate Gathering",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Downtown Championship Watch Party",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Jack London Championship Rally",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Title Celebration",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Uptown Championship Fever",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Jack London Playoff Tailgate",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Downtown Playoff Watch Zone",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Fan Gathering",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Uptown Cultural Showcase",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "KONO Arts District Celebration",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Downtown Cultural Festival",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "Lake Merritt Community Circle",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "West Oakland Neighborhood Assembly",
+   "old": 0,
+   "new": 1
+  },
+  {
+   "name": "Fruitvale Community Action Day",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "name": "The ",
+   "old": 0,
+   "new": 1
+  }
+ ],
+ "namesOldCount": 27,
+ "tapped": [
+  {
+   "leg": "A2t",
+   "kind": "seed",
+   "idx": 6,
+   "term": "community",
+   "text": "Cluster of city events sparking broader community reactions. Pattern emerging?",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "leg": "A2t",
+   "kind": "seed",
+   "idx": 13,
+   "term": "art",
+   "text": "[CITY EVENT] The Paulson Family Block Party",
+   "old": 1,
+   "new": 0
+  },
+  {
+   "leg": "A2t",
+   "kind": "seed",
+   "idx": 15,
+   "term": "art",
+   "text": "[CITY EVENT] The Kelley Family Block Party",
+   "old": 1,
+   "new": 0
+  },
+  {
+   "leg": "A2t",
+   "kind": "seed",
+   "idx": 17,
+   "term": "art",
+   "text": "Famous around town this cycle: Arturo Ramos, Mike Paulson, Brody Kale",
+   "old": 1,
+   "new": 0
+  },
+  {
+   "leg": "A2t",
+   "kind": "seed",
+   "idx": 22,
+   "term": "community",
+   "text": "Colder evenings influence community activity",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "leg": "A2t",
+   "kind": "hook",
+   "idx": 29,
+   "term": "art",
+   "text": "Arturo Ramos moved from Laurel to West Oakland — moving up from Laurel",
+   "old": 1,
+   "new": 0
+  },
+  {
+   "leg": "B2t",
+   "kind": "seed",
+   "idx": 6,
+   "term": "community",
+   "text": "Cluster of city events sparking broader community reactions. Pattern emerging?",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "leg": "B2t",
+   "kind": "seed",
+   "idx": 14,
+   "term": "art",
+   "text": "[CITY EVENT] The Dillon Family Block Party",
+   "old": 1,
+   "new": 0
+  },
+  {
+   "leg": "B2t",
+   "kind": "seed",
+   "idx": 21,
+   "term": "community",
+   "text": "Colder evenings influence community activity",
+   "old": 1,
+   "new": 1
+  },
+  {
+   "leg": "B2t",
+   "kind": "hook",
+   "idx": 18,
+   "term": "art",
+   "text": "Denise Carter has not advanced in 56 years",
+   "old": 1,
+   "new": 0
+  }
+ ],
+ "words": {
+  "party": {
+   "story": 0,
+   "event": 0
+  },
+  "parties": {
+   "story": 0,
+   "event": 0
+  },
+  "start": {
+   "story": 0,
+   "event": 0
+  },
+  "starting": {
+   "story": 0,
+   "event": 0
+  },
+  "participated": {
+   "story": 0,
+   "event": 0
+  },
+  "article": {
+   "story": 0,
+   "event": 0
+  },
+  "partner": {
+   "story": 0,
+   "event": 0
+  },
+  "department": {
+   "story": 0,
+   "event": 0
+  },
+  "apartment": {
+   "story": 0,
+   "event": 0
+  },
+  "apartments": {
+   "story": 0,
+   "event": 0
+  },
+  "bart": {
+   "story": 0,
+   "event": 0
+  },
+  "macarthur": {
+   "story": 0,
+   "event": 0
+  },
+  "heart": {
+   "story": 0,
+   "event": 0
+  },
+  "sweetheart": {
+   "story": 0,
+   "event": 0
+  },
+  "smart": {
+   "story": 0,
+   "event": 0
+  },
+  "carter": {
+   "story": 0,
+   "event": 0
+  },
+  "arturo": {
+   "story": 0,
+   "event": 0
+  },
+  "martinez": {
+   "story": 0,
+   "event": 0
+  },
+  "artist": {
+   "story": 0,
+   "event": 0
+  },
+  "artists": {
+   "story": 0,
+   "event": 0
+  },
+  "artistic": {
+   "story": 0,
+   "event": 0
+  },
+  "artwork": {
+   "story": 0,
+   "event": 0
+  },
+  "marketing": {
+   "story": 0,
+   "event": 0
+  },
+  "supermarket": {
+   "story": 0,
+   "event": 0
+  },
+  "communitylife": {
+   "story": 0,
+   "event": 0
+  },
+  "agriculture": {
+   "story": 0,
+   "event": 0
+  },
+  "concerted": {
+   "story": 0,
+   "event": 0
+  }
+ },
+ "b2": {
+  "old": 4,
+  "new": {
+   "base": 5,
+   "hits": {
+    "city": 3,
+    "evDomain": 0,
+    "evText": 0,
+    "seed": 2,
+    "hook": 0
+   }
+  }
+ },
+ "fails": []
+}

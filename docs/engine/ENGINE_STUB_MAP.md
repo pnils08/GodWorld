@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-10-20 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-10-21 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -3399,8 +3399,11 @@
 
 - **pulseFoldDelta_(pulse, key)**
 
+- **eventAttractBase_(S)**
+  Reads: S.cityEvents, S.storyHooks, S.storySeeds, S.worldEvents
+
 - **saveV3NeighborhoodMap_(ctx)**
-  Reads: S.chaosNeighborhoodFold, S.cityDynamics, S.crimeMetrics, S.cycleId, S.demographicDrift, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.neighborhoodDynamics, S.neighborhoodMigration, S.neighborhoodPulse, S.sportsSeason, S.sportsWeek, S.sportsZones, S.storyHooks, S.storySeeds, S.v3Arcs, S.weather, S.worldEvents
+  Reads: S.chaosNeighborhoodFold, S.cityDynamics, S.crimeMetrics, S.cycleId, S.demographicDrift, S.eventArcs, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.migrationDrift, S.neighborhoodDynamics, S.neighborhoodMigration, S.neighborhoodPulse, S.sportsSeason, S.sportsWeek, S.sportsZones, S.v3Arcs, S.weather
   Config: ctx.config.cycleCount
   Sheets: Neighborhood_Map
   RNG: ctx.rng / safeRand_(ctx)
@@ -4802,4 +4805,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1736
+**Functions mapped:** 1737

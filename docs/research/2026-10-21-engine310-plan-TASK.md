@@ -65,3 +65,17 @@ Per hood, :514 computes `max(0, round(base × profile.eventMod × hMod.eventMod)
 - **H6** Do the B start and the expected-base derivation (B2 col Q + the tapped contributor list; whole-word hits are a subset of substring hits) hold?
 
 Done = the md exists.
+
+## Codex plan review — folded (`docs/research/2026-10-21-codex-engine310-plan.md`, gate FIX on steps 1 / 3 / 4)
+
+- **Step 1 / H1 — defined, no change to the producer.** `buildCityEvents.js:630-633` publishes the names before the ripple loop (:655-675). If a ripple throws, the names stay in `S.cityEvents` and the phase is recorded as failed. They count: the selection finished, and every other reader already treats that list as the Cycle's staged events (Riley_Digest col Q `godWorldEngine2.js:2008`, `cityEveningSystems.js:161,216,347`, `buildMediaPacket.js:310`, the seed path `applyStorySeeds.js:1415`). An atomic publish would drop events the other readers carry. The comment in `eventAttractBase_` says so.
+- **Step 3 — fixtures as asked** (`output/engine-sheet/2026-10-21-e310-fixtures.js` → `.json`, PASS):
+  - each of the 104 names alone → base 1; the old rule, cut by marker from `50d433b7`, counts 27;
+  - the 10 tapped lines, old vs new, per line;
+  - 27 false words → 0 in the story and event loops; admitted forms → 1;
+  - empty entries skipped; a city-event seed alone → 0; a seed plus its name → 1;
+  - B2 is labelled an analytical fixture (col Q + the tap's hits, by the subset argument): old 4 (matches the tap) → new 5.
+- **Step 4 — acceptance widened.**
+  - Compare B3t's `mod` / `pulseDelta` / `chaosEA` per hood with B2t's; don't assume them. The chaos-fold loader takes a prior-Cycle PropertiesService value before the ring (`loadPreviousEvening.js:159-174`).
+  - Require B3's saved EA = B3t's saved EA per hood.
+  - The tap is rebased onto `eventAttractBase_` (`hits.city` plus whole-word contributor records).

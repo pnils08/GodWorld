@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-10-20 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-10-21 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1736 · **S.* fields:** 379 · **Sheets:** 61
+**Files scanned:** 180 · **Functions mapped:** 1737 · **S.* fields:** 379 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -77,7 +77,7 @@
 | `S.cityDynamicsCapacity` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | `phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_` | 1 | 1 |
 | `S.cityDynamicsLag` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | 1 | 1 |
 | `S.cityEventDetails` | `phase04-events/buildCityEvents.js::buildCityEvents_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase04-events/buildCityEvents.js::buildCityEvents_`, `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_`, `phase09-digest/finalizeCycleState.js::snapshotEveningForCarryForward_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 2 | 5 |
-| `S.cityEvents` | `phase04-events/buildCityEvents.js::buildCityEvents_` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase01-config/godWorldEngine2.js::writeDigest_`, `phase04-events/buildCityEvents.js::buildCityEvents_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_` | 1 | 6 |
+| `S.cityEvents` | `phase04-events/buildCityEvents.js::buildCityEvents_` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase01-config/godWorldEngine2.js::writeDigest_`, `phase04-events/buildCityEvents.js::buildCityEvents_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_`, …(+1 more) | 1 | 7 |
 | `S.cityEventsCalendarContext` | `phase04-events/buildCityEvents.js::buildCityEvents_` | _(none)_ | 1 | 0 |
 | `S.civicCampaigns` | `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | `phase05-citizens/updateCivicApprovalRatings.js::updateCivicApprovalRatings_` | 1 | 1 |
 | `S.civicDemographicContext` | `phase05-citizens/civicInitiativeEngine.js::runCivicInitiativeEngine_` | _(none)_ | 1 | 0 |

@@ -1,8 +1,8 @@
 {
-  "generated": "2026-10-20",
+  "generated": "2026-10-21",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1736,
+  "functionsMapped": 1737,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -937,7 +937,8 @@
         "phase01-config/godWorldEngine2.js::writeDigest_",
         "phase04-events/buildCityEvents.js::buildCityEvents_",
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
-        "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_"
+        "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::eventAttractBase_"
       ]
     },
     "contractSeeds": {
@@ -1143,7 +1144,7 @@
         "phase07-evening-media/storyHook.js::storyHookEngine_",
         "phase08-v3-chicago/applyCycleRecovery.js::applyCycleRecovery_",
         "phase08-v3-chicago/v3DomainWriter.js::deriveDomainPresenceV34_",
-        "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::eventAttractBase_",
         "phase08-v3-chicago/v3StoryHookWriter.js::saveV3Hooks_",
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
@@ -1430,7 +1431,7 @@
         "phase08-v3-chicago/applyCycleRecovery.js::applyCycleRecovery_",
         "phase08-v3-chicago/applyDomainCooldowns.js::applyDomainCooldowns_",
         "phase08-v3-chicago/v3DomainWriter.js::deriveDomainPresenceV34_",
-        "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::eventAttractBase_",
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",
@@ -1687,7 +1688,7 @@
         "phase07-evening-media/applyStorySeeds.js::applyStorySeeds_",
         "phase07-evening-media/applyStorySeeds.js::renderStorySeedsForUI_",
         "phase08-v3-chicago/v3DomainWriter.js::deriveDomainPresenceV34_",
-        "phase08-v3-chicago/v3NeighborhoodWriter.js::saveV3NeighborhoodMap_",
+        "phase08-v3-chicago/v3NeighborhoodWriter.js::eventAttractBase_",
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
         "phase09-digest/applyCompressionDigestSummary.js::applyCompressedDigestSummary_",
         "phase09-digest/applyCycleWeight.js::applyCycleWeight_",

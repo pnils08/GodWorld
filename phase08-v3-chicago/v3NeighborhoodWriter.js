@@ -286,6 +286,60 @@ function pulseFoldDelta_(pulse, key) {
   return raw;
 }
 
+// engine.310 (builder 2026-10-21) — the event-draw base. Every event the city
+// staged this Cycle counts once; world events, story seeds and hooks count on
+// whole words only (optional plural: `arts` and `markets` count, `party`,
+// `Arturo` and `Carter` don't). The old substring test let `art` fire on names,
+// and 77 of the 104 named city events never counted at all.
+var EVENT_ATTRACT_EVENT_WORDS = /\b(?:festival|concert|art|celebration|parade|market)s?\b/;
+var EVENT_ATTRACT_STORY_WORDS = /\b(?:community|culture|festival|art)s?\b/;
+
+function eventAttractBase_(S) {
+  var hits = { city: 0, evDomain: 0, evText: 0, seed: 0, hook: 0 };
+
+  // Staged events as published by buildCityEvents_ — the same list Riley_Digest,
+  // the evening systems and the seed layer read, even if its ripples later throw.
+  var cityEvents = S.cityEvents || [];
+  for (var ci = 0; ci < cityEvents.length; ci++) {
+    if (cityEvents[ci]) hits.city++;
+  }
+
+  var worldEvents = S.worldEvents || [];
+  for (var we = 0; we < worldEvents.length; we++) {
+    var ev = worldEvents[we];
+    var domain = (ev.domain || '').toString().toLowerCase();
+    if (domain === 'culture' || domain === 'community' || domain === 'holiday' || domain === 'festival') {
+      hits.evDomain++;
+    }
+    var parts = [];
+    if (ev.subdomain) parts.push(ev.subdomain);
+    if (ev.subtype) parts.push(ev.subtype);
+    if (ev.description) parts.push(ev.description);
+    if (ev.summary) parts.push(ev.summary);
+    if (ev.title) parts.push(ev.title);
+    if (EVENT_ATTRACT_EVENT_WORDS.test(parts.join(' ').toLowerCase())) hits.evText++;
+  }
+
+  // City-event seeds restate S.cityEvents (applyStorySeeds.js) — counted above.
+  var storySeeds = S.storySeeds || [];
+  for (var si = 0; si < storySeeds.length; si++) {
+    var s = storySeeds[si];
+    if (s.seedType === 'city-event') continue;
+    if (EVENT_ATTRACT_STORY_WORDS.test((s.seed || s.text || '').toString().toLowerCase())) hits.seed++;
+  }
+
+  var storyHooks = S.storyHooks || [];
+  for (var hi = 0; hi < storyHooks.length; hi++) {
+    var h = storyHooks[hi];
+    if (EVENT_ATTRACT_STORY_WORDS.test((h.hook || h.text || '').toString().toLowerCase())) hits.hook++;
+  }
+
+  return {
+    base: hits.city + hits.evDomain + hits.evText + hits.seed + hits.hook,
+    hits: hits
+  };
+}
+
 // civic.18 Task 4a — NEIGHBORHOOD_DISTRICT_MAP REMOVED. This writer no longer
 // owns the District column.
 //
@@ -337,9 +391,6 @@ function saveV3NeighborhoodMap_(ctx) {
   // Pull simulation signals
   var dynamics = S.cityDynamics || {};
   var weather = S.weather || {};
-  var worldEvents = S.worldEvents || [];
-  var storySeeds = S.storySeeds || [];
-  var storyHooks = S.storyHooks || [];
   var eventArcs = S.eventArcs || S.v3Arcs || [];
 
   // Base values
@@ -349,55 +400,13 @@ function saveV3NeighborhoodMap_(ctx) {
   var baseNoise = ((Number(dynamics.traffic || 1) * 5) +
     ((Number(weather.impact || 1) - 1) * 3));
 
-  // Robust event text extraction
-  function eventText(ev) {
-    var parts = [];
-    if (ev.subdomain) parts.push(ev.subdomain);
-    if (ev.subtype) parts.push(ev.subtype);
-    if (ev.description) parts.push(ev.description);
-    if (ev.summary) parts.push(ev.summary);
-    if (ev.title) parts.push(ev.title);
-    return parts.join(' ').toString().toLowerCase();
-  }
-
   // engine.72 G-EC56: SAFETY-event crime counting RETIRED — CrimeIndex now
   // derives from Crime_Metrics per-hood physics (see the crime derivation in
   // the row loop). Crime_Metrics already ingests chaos/safety events as
   // factors, so event pressure reaches CrimeIndex through the real engine.
 
-  // Event attractiveness: culture/community/holiday/festival + story seeds/hooks
-  var baseEventAttract = 0;
-  for (var we2 = 0; we2 < worldEvents.length; we2++) {
-    var ev2 = worldEvents[we2];
-    var domain2 = (ev2.domain || '').toString().toLowerCase();
-    var text2 = eventText(ev2);
-
-    if (domain2 === 'culture' || domain2 === 'community' || domain2 === 'holiday' || domain2 === 'festival') {
-      baseEventAttract++;
-    }
-    if (text2.indexOf('festival') >= 0 || text2.indexOf('concert') >= 0 || text2.indexOf('art') >= 0 ||
-        text2.indexOf('celebration') >= 0 || text2.indexOf('parade') >= 0 || text2.indexOf('market') >= 0) {
-      baseEventAttract++;
-    }
-  }
-
-  for (var si = 0; si < storySeeds.length; si++) {
-    var s = storySeeds[si];
-    var seedText = (s.seed || s.text || '').toString().toLowerCase();
-    if (seedText.indexOf('community') >= 0 || seedText.indexOf('culture') >= 0 ||
-        seedText.indexOf('festival') >= 0 || seedText.indexOf('art') >= 0) {
-      baseEventAttract++;
-    }
-  }
-
-  for (var hi = 0; hi < storyHooks.length; hi++) {
-    var h = storyHooks[hi];
-    var hookText = (h.hook || h.text || '').toString().toLowerCase();
-    if (hookText.indexOf('community') >= 0 || hookText.indexOf('culture') >= 0 ||
-        hookText.indexOf('festival') >= 0 || hookText.indexOf('art') >= 0) {
-      baseEventAttract++;
-    }
-  }
+  // Event attractiveness: staged city events + whole-word hits (engine.310)
+  var baseEventAttract = eventAttractBase_(S).base;
 
   // Retail vitality from dynamics
   var baseRetail = Math.round((Number(dynamics.retail || 1) * 5) + (Number(dynamics.publicSpaces || 1) * 3));

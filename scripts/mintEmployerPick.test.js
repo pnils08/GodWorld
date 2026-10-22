@@ -14,7 +14,7 @@ const src = ['utilities/citizenDerivation.js', 'phase05-citizens/runCareerEngine
   'phase05-citizens/educationCareerEngine.js', 'phase05-citizens/processAdvancementIntake.js'].map(R).join('\n');
 const E = new Function('ECONOMIC_PARAMETERS', 'Logger', src +
   '\nreturn { pickMintEmployer_, buildMintBizPool_, mintNamedEmployer_, roleFieldOf_, skillTagField_, sectorCategory_,' +
-  ' MINT_PARENTHETICAL, MINT_KEYWORD_RULES, MINT_SELF_EMPLOYED_PATTERNS, MINT_NO_EMPLOYMENT_ROLE };')(
+  ' MINT_PARENTHETICAL, MINT_KEYWORD_RULES, MINT_SELF_EMPLOYED_PATTERNS, MINT_NO_EMPLOYMENT_ROLE, mintCarriedAllowed_, sportsHireBars_ };')(
   JSON.parse(R('data/economic_parameters.json')), { log(m) { logs.push(String(m)); } });
 
 let pass = 0, fail = 0;
@@ -119,6 +119,13 @@ const scout = pick("Scout, Oakland A's", 'Jack London');
 check('5b.6 engine.307: a staff title naming the team lands there; a player or coach title never does (the bar), and the GAME clock gets nothing',
   pick("A's Marketing Coordinator", 'Jack London').bizId === 'BIZ-00005' && E.mintNamedEmployer_("Scout, Oakland A's") === 'BIZ-00005' && scout.bizId !== 'BIZ-00005' &&
   pick('Coach, Oakland A\'s', 'Jack London').bizId !== 'BIZ-00005' && ((g) => !g.bizId && !g.sentinel && !g.seeking)(pick("A's Marketing Coordinator", 'Jack London', 'GAME')), JSON.stringify(scout));
+check('5b.6d engine.307 gate 3: the team seat "Manager, Oakland A\'s" on the ENGINE clock never lands at the team; a stadium operations manager is staff',
+  pick("Manager, Oakland A's", 'Jack London').bizId !== 'BIZ-00005' && pick('General Manager, Oakland Oaks', 'Jack London').bizId !== 'BIZ-00005' &&
+  !E.sportsHireBars_('Sports Franchise', 'Stadium Operations Manager', ''));
+check('5b.6e engine.307 gate 3: a carried sports BIZ stands for a GAME row, not for an ENGINE player or seat; staff and other employers stand',
+  E.mintCarriedAllowed_('BIZ-00005', 'Pitcher', 'GAME', pool) && !E.mintCarriedAllowed_('BIZ-00005', 'Pitcher', 'ENGINE', pool) &&
+  !E.mintCarriedAllowed_('BIZ-00005', "Manager, Oakland A's", '', pool) && E.mintCarriedAllowed_('BIZ-00005', "A's Marketing Coordinator", 'ENGINE', pool) &&
+  E.mintCarriedAllowed_('BIZ-I', 'Pitcher', 'ENGINE', pool));
 check('5b.6b …a staff title with no room falls to the field', pick("A's Marketing Coordinator", 'Jack London', 'ENGINE', 's', pool, (id) => id !== 'BIZ-00005' && room(id)).bizId !== 'BIZ-00005');
 check('5b.6c …and the field pick never draws a sports org for a player role that has a field', E.pickMintEmployer_('Retail Clerk and basketball player', 'Jack London', 'ENGINE', 'p1', pool, room).bizId !== 'BIZ-00005');
 check('5b.7 the first keyword rule in the mapping\'s order decides', E.mintNamedEmployer_('Deputy Mayor') === 'BIZ-00017' && E.mintNamedEmployer_('School Nurse') === E.MINT_KEYWORD_RULES.find(r => 'School Nurse'.indexOf(r[0]) !== -1)[1]);

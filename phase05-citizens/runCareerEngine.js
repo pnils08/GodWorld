@@ -101,7 +101,9 @@ function sectorCategory_(sector, strict) {
 // catches an ENGINE-clock row whose own role or tags say athlete (live: a "basketball player",
 // SkillTags `athlete`), so a "hired at Oakland Oaks" line is never a signing. Pure.
 var SPORTS_SECTOR_RE_ = /sports|stadium|franchise|athletic/i;
-var SPORTS_PLAYER_ROLE_RE_ = /\b(athlete|player|pitcher|catcher|infielder|outfielder|shortstop|closer|point guard|quarterback|coach|scout)\b/i;
+// `manager, oakland` is the team seat ("Manager, Oakland A's", "General Manager, Oakland Oaks") — a
+// bare 'manager' would bar a stadium operations manager (codex diff gate 3 item 1).
+var SPORTS_PLAYER_ROLE_RE_ = /\b(athlete|player|pitcher|catcher|infielder|outfielder|shortstop|closer|point guard|quarterback|coach|scout)\b|\bmanager, oakland\b/i;
 function sportsHireBars_(sector, role, tags) {
   if (!SPORTS_SECTOR_RE_.test(String(sector || ''))) return false;
   var t = Array.isArray(tags) ? tags : String(tags || '').split('|');

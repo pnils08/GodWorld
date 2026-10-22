@@ -1030,7 +1030,7 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
           var st = mintBizPool.statedById[bid];
           return st !== null && st !== undefined && st > (mintTrackedByBiz[bid] || 0);
         };
-        if (carried.indexOf('BIZ-') === 0 && mintRoom(carried)) {
+        if (carried.indexOf('BIZ-') === 0 && mintRoom(carried) && mintCarriedAllowed_(carried, newRoleType, clockMode, mintBizPool)) {
           mintedBiz = carried; // born into the tracked job the pool assigned — and it has room
         } else if (carried === 'SELF_EMPLOYED' || carried === 'UNTRACKED') {
           mintSentinel = carried; // an authored row that says so keeps it
@@ -1733,6 +1733,16 @@ function mintNamedEmployer_(role) {
 // does, named or by field (sportsHireBars_, runCareerEngine.js — the same bar
 // the hire and the employer book read; codex diff gate 2). GAME returns above.
 // Pure: no rng, no sheet. Returns { bizId, sentinel, seeking }.
+// engine.307 (codex diff gate 3 item 1): a carried employer obeys the same bar as the pick. A GAME row's
+// carried sports BIZ is the sports world placing its own and stands; an ENGINE row carrying a sports org
+// with a player / coach / team-seat title does not land there (it falls to pickMintEmployer_, which bars
+// it too). Pure.
+function mintCarriedAllowed_(carried, roleType, clockMode, pool) {
+  if (String(clockMode || '').trim().toUpperCase() === 'GAME') return true;
+  if (typeof sportsHireBars_ !== 'function' || !pool || !pool.sectorById) return true;
+  return !sportsHireBars_(pool.sectorById[carried], String(roleType || ''), '');
+}
+
 function pickMintEmployer_(roleType, hood, clockMode, seed, pool, hasRoom) {
   var out = { bizId: '', sentinel: '', seeking: false };
   var role = String(roleType || '').trim();

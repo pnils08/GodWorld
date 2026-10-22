@@ -96,6 +96,19 @@ function sectorCategory_(sector, strict) {
   return strict ? null : 'Small Business';
 }
 
+// engine.307 (codex diff gate 2026-10-22 item 2): a sports org never takes a row that reads as a
+// player or a coach. GAME clock and SPORTS_OVERRIDE keep the sports layer out of every pool; this
+// catches an ENGINE-clock row whose own role or tags say athlete (live: a "basketball player",
+// SkillTags `athlete`), so a "hired at Oakland Oaks" line is never a signing. Pure.
+var SPORTS_SECTOR_RE_ = /sports|stadium|franchise|athletic/i;
+var SPORTS_PLAYER_ROLE_RE_ = /\b(athlete|player|pitcher|catcher|infielder|outfielder|shortstop|closer|point guard|quarterback|coach|scout)\b/i;
+function sportsHireBars_(sector, role, tags) {
+  if (!SPORTS_SECTOR_RE_.test(String(sector || ''))) return false;
+  var t = Array.isArray(tags) ? tags : String(tags || '').split('|');
+  for (var i = 0; i < t.length; i++) if (String(t[i]).trim().toLowerCase() === 'athlete') return true;
+  return SPORTS_PLAYER_ROLE_RE_.test(String(role || ''));
+}
+
 /**
  * engine.135 E2 (S399, builder point 15): BUSINESS SUCCESS IS THE CAUSATION.
  * Per tracked business per cycle: its Growth_Rate (%/yr — the same signal that
@@ -379,7 +392,8 @@ function applyCustodyDismissals_(ctx, cycle, S, logRows) {
 // the business budget (applyEmployerSuccess_) and the promotion die (applyPromotionDie_) read:
 // GAME/CIVIC/MEDIA rows (ENGINE clock only), Tier 1–2, SPORTS_OVERRIDE and no income are
 // outside. Those row tests are what keep an athlete out — a sports org's ENGINE staff are in
-// (engine.307 lifted the employer-sector skip).
+// (engine.307 lifted the employer-sector skip), never a row that reads as a player or coach
+// (sportsHireBars_).
 // Built fresh per caller on purpose: the die's layoffs clear employers, so the budget must not
 // see a staff list from before them.
 function careerEmployerBook_(ctx) {
@@ -390,7 +404,8 @@ function careerEmployerBook_(ctx) {
     iPop: idx('POPID'), iFirst: idx('First'), iLast: idx('Last'), iNb: idx('Neighborhood'), iRole: idx('RoleType'),
     iIncome: idx('Income'), iEmp: idx('EmployerBizId'), iStatus: idx('Status'), iTier: idx('Tier'), iClock: idx('ClockMode'),
     iEcon: idx('EconomicProfileKey'), iLastPromo: idx('LastPromotionCycle'), iYears: idx('YearsInCareer'),
-    iLife: idx('LifeHistory'), iLastUpd: idx('LastUpdated'), iEdu: idx('EducationLevel'), iDS: idx('DialState')
+    iLife: idx('LifeHistory'), iLastUpd: idx('LastUpdated'), iEdu: idx('EducationLevel'), iDS: idx('DialState'),
+    iTags: idx('SkillTags')
   };
   if (cols.iIncome < 0 || cols.iEmp < 0) return null;
   var sheet = ctx.ss ? ctx.ss.getSheetByName('Business_Ledger') : null;
@@ -411,7 +426,7 @@ function careerEmployerBook_(ctx) {
     if (rawG === '' || rawG === null || rawG === undefined) continue; // blank growth = no signal, no event
     var g = Number(rawG);
     if (isNaN(g)) continue;
-    biz[id] = { name: String(bNm >= 0 ? (data[r][bNm] || id) : id), growth: g, staff: [] };
+    biz[id] = { name: String(bNm >= 0 ? (data[r][bNm] || id) : id), growth: g, staff: [], sector: bSec >= 0 ? String(data[r][bSec] || '') : '' };
   }
   for (var i = 0; i < rows.length; i++) {
     var row = rows[i];
@@ -425,6 +440,7 @@ function careerEmployerBook_(ctx) {
     if (tier === 1 || tier === 2) continue;
     if (cols.iEcon >= 0 && String(row[cols.iEcon] || '').trim() === 'SPORTS_OVERRIDE') continue;
     if ((Number(row[cols.iIncome]) || 0) <= 0) continue;
+    if (sportsHireBars_(biz[emp].sector, cols.iRole >= 0 ? row[cols.iRole] : '', cols.iTags >= 0 ? row[cols.iTags] : '')) continue; // engine.307
     biz[emp].staff.push(i);
   }
   return { rows: rows, biz: biz, cols: cols };
@@ -1699,9 +1715,12 @@ function runCareerEngine_(ctx) {
       if (openings < 1) continue;
 
       // same-field candidates first: SkillTags carry the business's category
+      var bizSector = bSec >= 0 ? bizData[br3][bSec] : '';
+      var barred = function (r0, tags0) { return sportsHireBars_(bizSector, iRoleM >= 0 ? rows[r0][iRoleM] : '', tags0); }; // engine.307
       var sameField = [];
       for (var pi = 0; pi < pool.length; pi++) {
         if (taken[pi]) continue;
+        if (barred(pool[pi].r, pool[pi].tags)) continue;
         if (tagsInCategory_(pool[pi].tags, cat)) sameField.push(pi); // engine.145: aliased catalog tags count
       }
       // engine.144: poorest band first, then the credential (one cause, not a gate)
@@ -1733,6 +1752,7 @@ function runCareerEngine_(ctx) {
         var willing = [];
         for (var wi = 0; wi < pool.length; wi++) {
           if (taken[wi]) continue;
+          if (barred(pool[wi].r, pool[wi].tags)) continue;
           if (maneuverWillingCrossField_(ctx, rows[pool[wi].r][iPopID])) willing.push(wi);
         }
         willing.sort(function (a, b5) { return hireSlotOrder_(pool[a], pool[b5]); });
@@ -1808,6 +1828,7 @@ function runCareerEngine_(ctx) {
           for (var cm = 0; cm < civicMovers.length; cm++) {
             if (civicTaken[cm]) continue;
             if (civicMovers[cm].oldBizId === bizId2) continue; // already works here
+            if (barred(civicMovers[cm].r, civicMovers[cm].tags)) continue;
             if (tagsInCategory_(civicMovers[cm].tags, cat)) civicCandidates.push(cm);
           }
           civicCandidates.sort(function (a, b6) { return hireSlotOrder_(civicMovers[a], civicMovers[b6]); });

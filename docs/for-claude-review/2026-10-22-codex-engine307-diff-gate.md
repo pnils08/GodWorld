@@ -1,0 +1,23 @@
+---
+title: Engine.307 diff gate review
+created: 2026-10-22
+updated: 2026-10-22
+type: reference
+tags: [engine, business, review]
+sources:
+  - docs/research/2026-10-22-engine307-diff-gate-TASK.md
+---
+
+# Engine.307 diff gate — `d86cdaeb`
+
+**1. Diff — HOLD.** Sports sector maps last to Small Business after analytics/bar; the employer-book skip and rehire null skip are gone. Mint and settlement inherit the new field, hood counts include it, while the heritage mix and tracked-employer salary floor still exclude sports (`phase05-citizens/runCareerEngine.js:76-96,407-428,1680-1705`; `phase05-citizens/processAdvancementIntake.js:1614-1625`; `phase05-citizens/educationCareerEngine.js:818-835`; `phase05-citizens/applyBusinessDynamics.js:123-138`; `phase05-citizens/generationalWealthEngine.js:770-779`).
+The resulting hire path keys on ClockMode, override and SkillTags, not an athlete role: an ENGINE athlete carrying a Small Business tag can take a sports opening and have RoleType rewritten to a staff job (`phase05-citizens/runCareerEngine.js:1584-1605,1701-1706,1747-1769`). The sports Avg_Salary cannot enter `applyTrackedEmployerFloor_`, but a hire can receive role reference pay and a 0.95–1.10 multiplier; no athlete-average salary path found in this cut (`phase05-citizens/generationalWealthEngine.js:773-804`; `phase05-citizens/runCareerEngine.js:1758-1775`). The plan's eight-row/0-of-1044 live diff is a saved assertion, not reproduced by this review (`docs/plans/2026-10-10-engine-214-mood-per-hood.md:248`).
+
+**2. Athlete guard — HOLD.** Unemployed and civic mover pools exclude GAME and SPORTS_OVERRIDE; the employer book excludes non-ENGINE, Tier 1–2 and override; settlement uses `isSportsLayerRow_`; direct mint pick returns empty for GAME (`phase05-citizens/runCareerEngine.js:1584-1605,1627-1643,416-428`; `phase05-citizens/educationCareerEngine.js:1141-1156`; `phase05-citizens/processAdvancementIntake.js:1734-1741`).
+The saved C113 control snapshot has POP-01058, RoleType `basketball player`, Active, ENGINE, Tier 3, blank override and employer; the roster calls that row unmatched and the cultural ledger calls it an athlete. Its SkillTags are absent from this snapshot, so actual hire eligibility is unverified, but this is a real athlete row shape the two-marker claim misses (`output/engine-sheet/2026-10-22-e307-snap-ctl-c113.json:1`; `output/beats/Employment_Roster.jsonl:832`; `output/beats/prev/Cultural_Ledger.jsonl:15`). Also, the intake's carried BIZ_ID branch precedes the GAME-only pick guard, so a carried GAME mint with room bypasses that guard; this pre-existing path defeats an absolute mint guarantee (`phase05-citizens/processAdvancementIntake.js:1026-1042`).
+
+**3. Tests — HOLD.** The new employer-book and mint assertions detect the parent sports exclusion, and the old sports-null test was intentionally replaced (`scripts/employerSuccess.test.js:172-190`; `scripts/mintEmployerPick.test.js:53-56,118-120`; `scripts/hoodIncome.test.js:97-108`). The new Retail Clerk floor assertion passes on the parent code because the sports salary skip already existed, and it repeats the existing F13 pin; no new test exercises the real unmatched athlete row or the carried-GAME mint bypass (`scripts/careerStage.test.js:211,220,238-239`; `phase05-citizens/generationalWealthEngine.js:773-779`; `phase05-citizens/processAdvancementIntake.js:1026-1042`). `296/296` is reported in the plan; tests were not run in this read-only review (`docs/plans/2026-10-10-engine-214-mood-per-hood.md:248`).
+
+**4. Bench — HOLD.** The script pins stage 19 plus four changed engine files, resets the baseline, applies the 103-row intake and plans C113–C116 with a stage-19 restore; the push helper compares manifests and pullback (`output/engine-sheet/2026-10-22-e307-bench.sh:2-8,48-67`; `output/engine-sheet/2026-10-22-push-e307-bench.sh:19-35`). The saved log ends after reset at C113: no B7 fire/check/readers exist yet, so the B3/control result cannot be compared with B7 (`output/engine-sheet/2026-10-22-e307-bench.log:1-13`; `output/engine-sheet/2026-10-22-e307-check-ctl-c113.json:1-27`). The checker calls PASS despite athlete income-only changes and recognizes athletes only by GAME/override, so a PASS alone cannot close the row-shape gap (`output/engine-sheet/2026-10-22-e307-check.js:45-54,67-72`).
+
+**Final — HOLD for PROD.** Close the athlete-row and carried-mint gates with targeted assertions, then compare completed B7 C113–C116 typed receipts against B3/control, including sports hires, displaced Small Business windows, and athlete career changes. No PROD or live proof was performed here.

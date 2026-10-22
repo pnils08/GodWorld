@@ -175,6 +175,8 @@ const bl = rows => [BLH].concat(rows);
     row({ POPID: 'A1', EmployerBizId: 'BIZ-SPORT', ClockMode: 'GAME', LastPromotionCycle: 0 }),
     row({ POPID: 'A2', EmployerBizId: 'BIZ-SPORT', EconomicProfileKey: 'SPORTS_OVERRIDE', LastPromotionCycle: 0 }),
     row({ POPID: 'A3', EmployerBizId: 'BIZ-SPORT', Tier: 1, LastPromotionCycle: 0 }),
+    row({ POPID: 'A4', EmployerBizId: 'BIZ-SPORT', RoleType: 'basketball player', SkillTags: 'athlete', Tier: 3, LastPromotionCycle: 0 }), // codex gate item 2: the live ENGINE-clock shape
+    row({ POPID: 'A5', EmployerBizId: 'BIZ-SPORT', RoleType: 'Youth Basketball Coach', SkillTags: 'Education', LastPromotionCycle: 0 }),
     row({ POPID: 'T1', EmployerBizId: 'BIZ-SPORT', RoleType: 'Retail Clerk', EconomicProfileKey: 'Retail Clerk', LastPromotionCycle: 100 }),
   ];
   const BL = bl([['BIZ-SPORT', 'Oakland Athletics', 'Sports Franchise', 'Baylight District', 520, 3342924, 0, 50]]);
@@ -187,7 +189,15 @@ const bl = rows => [BLH].concat(rows);
   const out = applyEmployerSuccess_(ctx, CYCLE, roll, log, S, 1);
   const g = p => ctx.ledger.rows.find(r => r[I('POPID')] === p);
   assert('engine.307 the team-store clerk can be promoted; the athletes never move', out.promotions === 1 && Number(g('T1')[I('Income')]) > 60000 &&
-    ['A1', 'A2', 'A3'].every(p => Number(g(p)[I('Income')]) === 60000 && g(p)[I('EmployerBizId')] === 'BIZ-SPORT'), JSON.stringify(out));
+    ['A1', 'A2', 'A3', 'A4', 'A5'].every(p => Number(g(p)[I('Income')]) === 60000 && g(p)[I('EmployerBizId')] === 'BIZ-SPORT'), JSON.stringify(out));
+  const B = sandbox.sportsHireBars_;
+  assert('engine.307 sportsHireBars_: a player or coach row is barred at a sports org, by tag or by role',
+    B('Sports Franchise', 'Waterfront Resident', ['athlete']) && B('Sports', 'basketball player', '') && B('As Stadium', 'Youth Basketball Coach', 'Education') && B('Sports Bar & Grill', 'Scout', ''));
+  assert('engine.307 sportsHireBars_: staff pass, and nothing is barred outside sports', !B('Sports Franchise', 'Retail Clerk', 'Small Business') &&
+    !B('Sports Analytics', 'Sports Analytics Engineer (Gridiron)', 'Tech & Innovation') && !B('Bakery', 'basketball player', ['athlete']) && !B('Sports', '', ''));
+  assert('engine.307 the rehire matcher bars at all three candidate lists (same-field, willing, civic movers)',
+    /if \(barred\(pool\[pi\]\.r, pool\[pi\]\.tags\)\) continue;/.test(src) && /if \(barred\(pool\[wi\]\.r, pool\[wi\]\.tags\)\) continue;/.test(src) &&
+    /if \(barred\(civicMovers\[cm\]\.r, civicMovers\[cm\]\.tags\)\) continue;/.test(src));
 }
 
 // ── engine.144: the credential is ONE cause among others (never a gate) ────

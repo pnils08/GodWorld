@@ -2442,10 +2442,6 @@
 
 - **mintNamedEmployer_(role)**
 
-- **mintSportsAllowed_(sector, roleType, clockMode)**
-
-- **mintCarriedAllowed_(carried, roleType, clockMode, pool)**
-
 - **pickMintEmployer_(roleType, hood, clockMode, seed, pool, hasRoom)**
   RNG: ctx.rng / safeRand_(ctx)
 
@@ -4811,4 +4807,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1740
+**Functions mapped:** 1738

@@ -104,8 +104,9 @@ var SPORTS_SECTOR_RE_ = /sports|stadium|franchise|athletic/i;
 // `manager, oakland` is the team seat ("Manager, Oakland A's", "General Manager, Oakland Oaks") — a
 // bare 'manager' would bar a stadium operations manager (codex diff gate 3 item 1). The position words
 // are the live sports layer's own titles (codex gate 4: "Left Fielder", "Third Baseman", "Designated
-// Hitter", "Power Forward"); abbreviations ("PG / The Oaks") carry no field, which the mint also reads.
-var SPORTS_PLAYER_ROLE_RE_ = /\b(athlete|player|pitcher|catcher|infielder|outfielder|fielder|baseman|hitter|shortstop|closer|point guard|forward|quarterback|coach|scout|hall of famer)\b|\bmanager, oakland\b/i;
+// Hitter", "Power Forward"); a player word anywhere in a mixed title bars it. The mint keeps sports orgs
+// out of its pool entirely (processAdvancementIntake.js buildMintBizPool_), so this bar is the hire's.
+var SPORTS_PLAYER_ROLE_RE_ = /\b(athlete|player|pitcher|catcher|infielder|outfielder|fielder|baseman|hitter|shortstop|closer|point guard|shooting guard|forward|quarterback|coach|scout|hall of famer)\b|\bmanager, oakland\b/i;
 function sportsHireBars_(sector, role, tags) {
   if (!SPORTS_SECTOR_RE_.test(String(sector || ''))) return false;
   var t = Array.isArray(tags) ? tags : String(tags || '').split('|');

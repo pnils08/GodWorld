@@ -14,7 +14,7 @@ const src = ['utilities/citizenDerivation.js', 'phase05-citizens/runCareerEngine
   'phase05-citizens/educationCareerEngine.js', 'phase05-citizens/processAdvancementIntake.js'].map(R).join('\n');
 const E = new Function('ECONOMIC_PARAMETERS', 'Logger', src +
   '\nreturn { pickMintEmployer_, buildMintBizPool_, mintNamedEmployer_, roleFieldOf_, skillTagField_, sectorCategory_,' +
-  ' MINT_PARENTHETICAL, MINT_KEYWORD_RULES, MINT_SELF_EMPLOYED_PATTERNS, MINT_NO_EMPLOYMENT_ROLE, mintCarriedAllowed_, mintSportsAllowed_, sportsHireBars_ };')(
+  ' MINT_PARENTHETICAL, MINT_KEYWORD_RULES, MINT_SELF_EMPLOYED_PATTERNS, MINT_NO_EMPLOYMENT_ROLE };')(
   JSON.parse(R('data/economic_parameters.json')), { log(m) { logs.push(String(m)); } });
 
 let pass = 0, fail = 0;
@@ -50,10 +50,10 @@ const pick = (role, hood, clock, seed, p, rm) => E.pickMintEmployer_(role, hood,
 
 console.log('\n1. the pool — each business under its field, with its hood:');
 check('1.1 a business is filed under the field its Sector reads as', fieldOfBiz('BIZ-E') === 'Construction & Baylight' && fieldOfBiz('BIZ-00015') === 'Healthcare' && fieldOfBiz('BIZ-G') === 'Food & Culture' && fieldOfBiz('BIZ-I') === 'Small Business' && fieldOfBiz('BIZ-A') === 'Government & Civic', JSON.stringify(Object.keys(pool.byField)));
-check('1.2 a Sector with no field sits in no pool; a sports team is fielded (engine.307)', fieldOfBiz('BIZ-L') === null && fieldOfBiz('BIZ-00005') === 'Small Business');
+check('1.2 a sports business and a Sector with no field sit in no pool', fieldOfBiz('BIZ-00005') === null && fieldOfBiz('BIZ-L') === null);
 check('1.3 the hood rides with the business', pool.byField['Construction & Baylight'].find(b => b.id === 'BIZ-F').hood === 'Temescal');
 check('1.4 the four keyword buckets are gone', pool.pools === undefined);
-check('1.4b each business\'s field is readable by id (the tag stamp reads it)', pool.fieldById['BIZ-00024'] === 'Government & Civic' && pool.fieldById['BIZ-00005'] === 'Small Business' && pool.fieldById['BIZ-L'] === undefined);
+check('1.4b each business\'s field is readable by id (the tag stamp reads it)', pool.fieldById['BIZ-00024'] === 'Government & Civic' && pool.fieldById['BIZ-00005'] === undefined);
 check('1.5 stated headcount is kept for the room test; a blank count reads as no room', pool.statedById['BIZ-I'] === 6 &&
   E.buildMintBizPool_(ssOf([BIZ[0], ['BIZ-Z', 'Blank Co', 'Retail', 'Temescal', '']])).statedById['BIZ-Z'] === null);
 check('1.6 a missing Business_Ledger gives no pool', E.buildMintBizPool_({ getSheetByName: () => null }) === null);
@@ -116,26 +116,11 @@ check('5b.4 a named organisation with no room falls to the field, not to a queue
 const ff = pick('Firefighter', 'Temescal');
 check('5b.5 a named organisation that is not on the ledger falls to the field', E.mintNamedEmployer_('Firefighter') === 'BIZ-00023' && pool.statedById['BIZ-00023'] === undefined && fieldOfBiz(ff.bizId) === 'Government & Civic', JSON.stringify(ff));
 const scout = pick("Scout, Oakland A's", 'Jack London');
-check('5b.6 engine.307: a staff title naming the team lands there; a player or coach title never does (the bar), and the GAME clock gets nothing',
-  pick("A's Marketing Coordinator", 'Jack London').bizId === 'BIZ-00005' && E.mintNamedEmployer_("Scout, Oakland A's") === 'BIZ-00005' && scout.bizId !== 'BIZ-00005' &&
-  pick('Coach, Oakland A\'s', 'Jack London').bizId !== 'BIZ-00005' && ((g) => !g.bizId && !g.sentinel && !g.seeking)(pick("A's Marketing Coordinator", 'Jack London', 'GAME')), JSON.stringify(scout));
-check('5b.6d engine.307 gate 3: the team seat "Manager, Oakland A\'s" on the ENGINE clock never lands at the team; a stadium operations manager is staff',
-  pick("Manager, Oakland A's", 'Jack London').bizId !== 'BIZ-00005' && pick('General Manager, Oakland Oaks', 'Jack London').bizId !== 'BIZ-00005' &&
-  !E.sportsHireBars_('Sports Franchise', 'Stadium Operations Manager', ''));
-check('5b.6e engine.307 gate 3: a carried sports BIZ stands for a GAME row, not for an ENGINE player or seat; staff and other employers stand',
-  E.mintCarriedAllowed_('BIZ-00005', 'Pitcher', 'GAME', pool) && !E.mintCarriedAllowed_('BIZ-00005', 'Pitcher', 'ENGINE', pool) &&
-  !E.mintCarriedAllowed_('BIZ-00005', "Manager, Oakland A's", '', pool) && E.mintCarriedAllowed_('BIZ-00005', "A's Marketing Coordinator", 'ENGINE', pool) &&
-  E.mintCarriedAllowed_('BIZ-I', 'Pitcher', 'ENGINE', pool));
-check('5b.6f engine.307 gate 4: no live sports-layer title lands at the team on the ENGINE clock — named, carried or by field',
-  ["Power Forward, Oakland Oaks", "PG / The Oaks", "C / The Oaks", "SP / Oakland A's", "Left Fielder, Oakland A's", "Designated Hitter, Oakland A's Legend",
-   "First Baseman, Oakland A's Legend — Player Rep, Community Liaison", "Hall of Famer from old basketball league MUBA",
-   "Shooting Guard, Oakland Oaks (Sports)", "Stadium Athlete Liaison"].every(t =>
-    !E.mintSportsAllowed_('Sports', t, '') && !E.mintSportsAllowed_('Sports Franchise', t, 'ENGINE') && E.mintSportsAllowed_('Sports Franchise', t, 'GAME') &&
-    pick(t, 'Jack London').bizId !== 'BIZ-00005' && !E.mintCarriedAllowed_('BIZ-00005', t, 'ENGINE', pool)));
-check('5b.6g …while a civilian job stands at the team and any title stands elsewhere', E.mintSportsAllowed_('Sports Franchise', "A's Marketing Director", 'ENGINE') &&
-  E.mintSportsAllowed_('As Stadium', 'Groundskeeper', '') && E.mintSportsAllowed_('Bakery', 'PG / The Oaks', 'ENGINE'));
-check('5b.6b …a staff title with no room falls to the field', pick("A's Marketing Coordinator", 'Jack London', 'ENGINE', 's', pool, (id) => id !== 'BIZ-00005' && room(id)).bizId !== 'BIZ-00005');
-check('5b.6c …and the field pick never draws a sports org for a player role that has a field', E.pickMintEmployer_('Retail Clerk and basketball player', 'Jack London', 'ENGINE', 'p1', pool, room).bizId !== 'BIZ-00005');
+check('5b.6 a sports organisation is never picked, named or not', E.mintNamedEmployer_("Scout, Oakland A's") === 'BIZ-00005' && scout.bizId !== 'BIZ-00005', JSON.stringify(scout));
+check('5b.6b engine.307: sectorCategory_ fields the A\'s for hiring, yet the mint pool still holds no sports org — no title the mint reads lands there (codex gates 1–6)',
+  E.sectorCategory_('Sports Franchise', true) === 'Small Business' && pool.fieldById['BIZ-00005'] === undefined &&
+  ["A's Marketing Coordinator", "Scout, Oakland A's", "Manager, Oakland A's", 'Power Forward, Oakland Oaks', 'Shooting Guard, Oakland Oaks — Community Liaison', 'Retail Clerk']
+    .every(t => pick(t, 'Jack London').bizId !== 'BIZ-00005'));
 check('5b.7 the first keyword rule in the mapping\'s order decides', E.mintNamedEmployer_('Deputy Mayor') === 'BIZ-00017' && E.mintNamedEmployer_('School Nurse') === E.MINT_KEYWORD_RULES.find(r => 'School Nurse'.indexOf(r[0]) !== -1)[1]);
 
 console.log('\n6. no job, no field, no ledger:');

@@ -14,7 +14,7 @@ const src = ['utilities/citizenDerivation.js', 'phase05-citizens/runCareerEngine
   'phase05-citizens/educationCareerEngine.js', 'phase05-citizens/processAdvancementIntake.js'].map(R).join('\n');
 const E = new Function('ECONOMIC_PARAMETERS', 'Logger', src +
   '\nreturn { pickMintEmployer_, buildMintBizPool_, mintNamedEmployer_, roleFieldOf_, skillTagField_, sectorCategory_,' +
-  ' MINT_PARENTHETICAL, MINT_KEYWORD_RULES, MINT_SELF_EMPLOYED_PATTERNS, MINT_NO_EMPLOYMENT_ROLE, mintCarriedAllowed_, sportsHireBars_ };')(
+  ' MINT_PARENTHETICAL, MINT_KEYWORD_RULES, MINT_SELF_EMPLOYED_PATTERNS, MINT_NO_EMPLOYMENT_ROLE, mintCarriedAllowed_, mintSportsAllowed_, sportsHireBars_ };')(
   JSON.parse(R('data/economic_parameters.json')), { log(m) { logs.push(String(m)); } });
 
 let pass = 0, fail = 0;
@@ -126,6 +126,13 @@ check('5b.6e engine.307 gate 3: a carried sports BIZ stands for a GAME row, not 
   E.mintCarriedAllowed_('BIZ-00005', 'Pitcher', 'GAME', pool) && !E.mintCarriedAllowed_('BIZ-00005', 'Pitcher', 'ENGINE', pool) &&
   !E.mintCarriedAllowed_('BIZ-00005', "Manager, Oakland A's", '', pool) && E.mintCarriedAllowed_('BIZ-00005', "A's Marketing Coordinator", 'ENGINE', pool) &&
   E.mintCarriedAllowed_('BIZ-I', 'Pitcher', 'ENGINE', pool));
+check('5b.6f engine.307 gate 4: no live sports-layer title lands at the team on the ENGINE clock — named, carried or by field',
+  ["Power Forward, Oakland Oaks", "PG / The Oaks", "C / The Oaks", "SP / Oakland A's", "Left Fielder, Oakland A's", "Designated Hitter, Oakland A's Legend",
+   "First Baseman, Oakland A's Legend — Player Rep, Community Liaison", "Hall of Famer from old basketball league MUBA"].every(t =>
+    !E.mintSportsAllowed_('Sports', t, '') && !E.mintSportsAllowed_('Sports Franchise', t, 'ENGINE') && E.mintSportsAllowed_('Sports Franchise', t, 'GAME') &&
+    pick(t, 'Jack London').bizId !== 'BIZ-00005' && !E.mintCarriedAllowed_('BIZ-00005', t, 'ENGINE', pool)));
+check('5b.6g …while a civilian job stands at the team and any title stands elsewhere', E.mintSportsAllowed_('Sports Franchise', "A's Marketing Director", 'ENGINE') &&
+  E.mintSportsAllowed_('As Stadium', 'Groundskeeper', '') && E.mintSportsAllowed_('Bakery', 'PG / The Oaks', 'ENGINE'));
 check('5b.6b …a staff title with no room falls to the field', pick("A's Marketing Coordinator", 'Jack London', 'ENGINE', 's', pool, (id) => id !== 'BIZ-00005' && room(id)).bizId !== 'BIZ-00005');
 check('5b.6c …and the field pick never draws a sports org for a player role that has a field', E.pickMintEmployer_('Retail Clerk and basketball player', 'Jack London', 'ENGINE', 'p1', pool, room).bizId !== 'BIZ-00005');
 check('5b.7 the first keyword rule in the mapping\'s order decides', E.mintNamedEmployer_('Deputy Mayor') === 'BIZ-00017' && E.mintNamedEmployer_('School Nurse') === E.MINT_KEYWORD_RULES.find(r => 'School Nurse'.indexOf(r[0]) !== -1)[1]);

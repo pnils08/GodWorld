@@ -1733,14 +1733,22 @@ function mintNamedEmployer_(role) {
 // does, named or by field (sportsHireBars_, runCareerEngine.js — the same bar
 // the hire and the employer book read; codex diff gate 2). GAME returns above.
 // Pure: no rng, no sheet. Returns { bizId, sentinel, seeking }.
-// engine.307 (codex diff gate 3 item 1): a carried employer obeys the same bar as the pick. A GAME row's
-// carried sports BIZ is the sports world placing its own and stands; an ENGINE row carrying a sports org
-// with a player / coach / team-seat title does not land there (it falls to pickMintEmployer_, which bars
-// it too). Pure.
-function mintCarriedAllowed_(carried, roleType, clockMode, pool) {
+// engine.307 (codex diff gates 3–4): an ENGINE-clock arrival lands at a sports org only with a civilian
+// job — a title that reads as a field (roleFieldOf_) and is not a player / coach / seat title
+// (sportsHireBars_). Either alone misses live sports-layer titles: 40 of 42 carry no field; the word
+// list catches the other 2 ("Designated Hitter … Legend" reads as arts by 'design'). A GAME row's
+// carried sports BIZ is the sports world placing its own and stands. Pure.
+function mintSportsAllowed_(sector, roleType, clockMode) {
   if (String(clockMode || '').trim().toUpperCase() === 'GAME') return true;
-  if (typeof sportsHireBars_ !== 'function' || !pool || !pool.sectorById) return true;
-  return !sportsHireBars_(pool.sectorById[carried], String(roleType || ''), '');
+  if (typeof sportsHireBars_ !== 'function') return true;
+  var role = String(roleType || '');
+  if (sportsHireBars_(sector, role, '')) return false;
+  if (!SPORTS_SECTOR_RE_.test(String(sector || ''))) return true;
+  return !!((typeof roleFieldOf_ === 'function') ? roleFieldOf_(role) : null);
+}
+function mintCarriedAllowed_(carried, roleType, clockMode, pool) {
+  if (!pool || !pool.sectorById) return true;
+  return mintSportsAllowed_(pool.sectorById[carried], roleType, clockMode);
 }
 
 function pickMintEmployer_(roleType, hood, clockMode, seed, pool, hasRoom) {
@@ -1750,8 +1758,7 @@ function pickMintEmployer_(roleType, hood, clockMode, seed, pool, hasRoom) {
   if (!role || MINT_NO_EMPLOYMENT_ROLE.test(role)) return out;
   var named = mintNamedEmployer_(role);
   if (named === 'SELF_EMPLOYED') { out.sentinel = 'SELF_EMPLOYED'; return out; }
-  var barFn = (typeof sportsHireBars_ === 'function') ? sportsHireBars_ : null; // engine.307
-  var barred = function (sector) { return !!(barFn && barFn(sector, role, '')); };
+  var barred = function (sector) { return !mintSportsAllowed_(sector, role, clockMode); }; // engine.307
   if (named && pool && pool.fieldById && pool.fieldById[named] && hasRoom(named) && !barred(pool.sectorById && pool.sectorById[named])) { out.bizId = named; return out; }
   var cat = (typeof roleFieldOf_ === 'function') ? roleFieldOf_(role) : null;
   var field = (cat && typeof skillTagField_ === 'function') ? skillTagField_(cat) : null;

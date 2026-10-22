@@ -20,6 +20,7 @@
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 in-progress, engine.281 in-progress
 - [[../reference/DEPLOY_HISTORY]]: engine.213 in-progress, engine.294 live-observing
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.293 live-observing, engine.104 ready
+- [[../DEPLOY_HISTORY]]: engine.303 ready, engine.310 live-observing
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
 - [[../plans/2026-10-19-discord-voices-connected]]: research.30 live-observing
 - [[../plans/2026-10-20-hood-character-standing]]: pipeline.71 needs-info
@@ -60,7 +61,6 @@
 - [[../plans/2026-09-19-civic-wake-game-loop]]: engine.253 ready
 - [[../plans/2026-10-18-event-engines-move-dials]]: engine.299 live-observing
 - `output/antigravity/2026-10-19-review-engine214-prod-candidate.md`: engine.301 ready
-- [[../DEPLOY_HISTORY]]: engine.303 ready
 <!-- /generated -->
 
 ## Pull order (builder, 2026-09-29; trued 2026-10-07)

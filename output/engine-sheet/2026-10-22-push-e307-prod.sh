@@ -4,7 +4,7 @@
 # stage19-e307-B11.sha256, leg B11). Lands before C113. The live fire is manual (no cron fires it), so the push can race a person:
 # codex diff gate 2 item 5 — the live fire state (World_Config cycleCount, every Neighborhood_Map Cycle, Riley_Digest's last Cycle,
 # the _CycleCheckpoint manifest cell) must read 112 / empty right before the push, right after the pull-back, and again 8 minutes
-# later (> 2× the longest bench fire, 224 s). Apps Script runs an execution on the version it started with, so a fire admitted
+# later (~2× the longest bench fire, 250 s on B11). Apps Script runs an execution on the version it started with, so a fire admitted
 # before the deploy runs stage 19 whole; a C113 that persists inside the window is reported as straddling the deploy (STOP, exit 3).
 # Copied from 2026-10-21-push-e310-prod.sh.
 #   bash output/engine-sheet/2026-10-22-push-e307-prod.sh <commit> <manifest> [--dry-run]

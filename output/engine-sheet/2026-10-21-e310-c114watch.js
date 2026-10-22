@@ -5,7 +5,7 @@
 //   writer's own regexes): Riley_Digest CityEvents count (col Q, each staged event once), WorldEvents domain + whole-word hits,
 //   StorySeedCount (seed hits unobservable: seeds are on no sheet), Story_Hook_Deck HookText whole-word hits (a conditional bound
 //   only: the writer reads h.hook || h.text, and an h.hook can override the saved text). Base estimate = staged + domain + word +
-//   hook hits. The rule is the deployed one: regexes come from the writer at ffad3bf8 (git), not the working tree.
+//   hook hits — an observed estimate, not a bound. The rule is the deployed one: regexes come from the writer at ffad3bf8 (git), not the working tree.
 // diff: VERDICT
 //   HOLD     — a missing input, or an Engine_Errors row for the Cycle naming Phase10 / NeighborhoodMap / persist.
 //   DIAGNOSE — every hood moved the same way, or the EA sum left 0.5×..2× of the prior Cycle's. Read it against the staged count
@@ -26,7 +26,7 @@ if (!/^(snap|diff)$/.test(mode || '') || !cyc) throw new Error('usage: snap <cyc
 const num = v => Number(String(v).replace(/^C/, ''));
 
 async function read(c) {
-  const s = { cycle: c, at: new Date().toISOString(), missing: [] };
+  const s = { cycle: c, at: new Date().toISOString(), missing: [], ea: {}, inputs: {}, eaSum: null, eaRange: null };   // complete shape even on an early HOLD
   const nm = await getSheetData('Neighborhood_Map'), nh = nm[0];
   const iN = nh.indexOf('Neighborhood'), iE = nh.indexOf('EventAttractiveness'), iC = nh.indexOf('Cycle');
   if ([iN, iE, iC].some(i => i < 0)) { s.missing.push('Neighborhood_Map header ' + JSON.stringify([iN, iE, iC])); return s; }
@@ -50,7 +50,8 @@ async function read(c) {
   const staged = String(row[rQ] || '').split(', ').filter(Boolean);
   let wev = []; try { wev = JSON.parse(row[rW]); } catch (e) { s.missing.push('Riley_Digest WorldEvents not JSON'); }
   if (!Array.isArray(wev)) { s.missing.push('Riley_Digest WorldEvents not a list'); wev = []; }
-  if (String(row[rS] === undefined ? '' : row[rS]).trim() === '' || !isFinite(Number(row[rS]))) s.missing.push('Riley_Digest StorySeedCount blank / not a number');
+  const seedRaw = row[rS];   // codex diff gate 3 item 2: null / blank / negative are missing, never zero
+  if (seedRaw === null || seedRaw === undefined || String(seedRaw).trim() === '' || !isFinite(Number(seedRaw)) || Number(seedRaw) < 0) s.missing.push('Riley_Digest StorySeedCount missing / not a count: ' + JSON.stringify(seedRaw));
   let evDomain = 0, evText = 0;
   (Array.isArray(wev) ? wev : []).forEach(e => {
     const d = String(e.domain || '').toLowerCase();
@@ -64,8 +65,9 @@ async function read(c) {
   const hooks = hk.slice(1).filter(r => num(r[hC]) === c).map(r => String(r[hT] || ''));
   const hookHits = hooks.filter(t => W.EVENT_ATTRACT_STORY_WORDS.test(t.toLowerCase())).length;
   s.inputs = { staged: staged.length, stagedNames: staged, worldEvents: wev.length, evDomain, evText, storySeedCount: row[rS],
-    hookRows: hooks.length, hookHits, baseLow: staged.length + evDomain + evText + hookHits };
+    hookRows: hooks.length, hookHits, baseEstimate: staged.length + evDomain + evText + hookHits };
   const vals = Object.values(s.ea);
+  if (!vals.length) return s;
   s.eaSum = Math.round(vals.reduce((a, b) => a + b, 0) * 100) / 100;
   s.eaRange = [Math.min(...vals), Math.max(...vals)];
   return s;

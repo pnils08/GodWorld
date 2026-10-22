@@ -1,6 +1,6 @@
 {
  "cycle": 112,
- "at": "2026-10-22T04:41:15.333Z",
+ "at": "2026-10-22T04:51:40.617Z",
  "missing": [],
  "ea": {
   "Downtown": 6.38,
@@ -40,7 +40,7 @@
   "storySeedCount": "35",
   "hookRows": 48,
   "hookHits": 1,
-  "baseLow": 5
+  "baseEstimate": 5
  },
  "eaSum": 114.29,
  "eaRange": [

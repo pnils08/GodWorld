@@ -33,8 +33,15 @@ if [ "$DRY" = "--dry-run" ]; then echo "dry run: stopping before the push ($W/st
 [ -f "$WATCH" ] || { echo "no C113 live-watch diff ($WATCH) — read C113 first — stop"; exit 1; }
 node -e '   // codex diff gate 2 item 1: the right Cycle, an empty hold list, the read-back fields present — not the verdict string alone
 const d = require(process.argv[1]);
-const need = ["ea", "eaComponents", "bizAdded", "employerMoves", "spotLines", "highWater"];
-const ok = d.cycle === 113 && d.vs === 112 && Array.isArray(d.hold) && d.hold.length === 0 && d.verdict === "ACCEPT-CANDIDATE" && need.every(k => k in d);
+// codex diff gate 3 item 1: typed, non-empty read-backs — a field present as null proves nothing
+const fin = v => typeof v === "number" && isFinite(v), obj = v => !!v && typeof v === "object" && !Array.isArray(v);
+const ea = obj(d.ea) ? Object.values(d.ea) : [];
+const typed = ea.length === 22 && ea.every(v => Array.isArray(v) && v.length === 3 && v.every(fin)) &&
+  obj(d.eaComponents) && obj(d.eaComponents["112"]) && obj(d.eaComponents["113"]) &&
+  Array.isArray(d.bizAdded) && Array.isArray(d.employerMoves) &&
+  obj(d.spotLines) && fin(d.spotLines.drawn) && Array.isArray(d.spotLines.notTheirSpot) && Array.isArray(d.spotLines.strays) &&
+  Array.isArray(d.highWater) && d.highWater.length === 2 && d.highWater.every(fin);
+const ok = d.cycle === 113 && d.vs === 112 && Array.isArray(d.hold) && d.hold.length === 0 && d.verdict === "ACCEPT-CANDIDATE" && typed;
 process.exit(ok ? 0 : 1);' "$WATCH" || { echo "C113 live watch is not a clean C112→C113 ACCEPT-CANDIDATE — clear it first — stop"; exit 1; }
 echo "C113 live watch = ACCEPT-CANDIDATE"
 DEP=$(grep -o '"deploymentId": "[^"]*"' /root/GodWorld/.clasp.json | cut -d'"' -f4)

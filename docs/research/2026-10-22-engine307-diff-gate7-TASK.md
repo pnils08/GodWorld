@@ -1,0 +1,11 @@
+# TASK — codex: engine.307 diff gate 7 (final; gate-6 item 1 closed structurally)
+
+Read-only: code + docs + `output/` dumps; no cron, model, Sheet, bench, clasp, commit or push. Write to `docs/for-claude-review/2026-10-22-codex-engine307-diff-gate7.md`, one SHIP / HOLD per item and one final SHIP / HOLD for PROD, file:line evidence, under ~12 lines. Report in one line when done. The push (gate 4 item 2) and bench method SHIPped — do not reopen them.
+
+**Scope (es, the substrate gate):** engine.307 is the HIRE. The mint is now byte-for-byte stage 19's behaviour; a hole that stage 19 already had for every employer is out of scope.
+
+1. **Mint (gate 6 item 1)** — `git diff d86cdaeb^ 60a055c6 -- phase05-citizens/processAdvancementIntake.js`: the stage-19 file + one line in `buildMintBizPool_` that keeps every `/sports|stadium|franchise|athletic/i` Sector out of the pool (comments aside). `scripts/mintEmployerPick.test.js` = stage 19's + 5b.6b (the A's is fielded by `sectorCategory_` yet absent from the mint pool; six team-naming titles incl. your gate-4/6 examples never land at BIZ-00005); fails on 028a21e9. Confirm the mint now matches stage 19 for every input; the carried branch is authored placement you SHIPped as pre-existing at gate 2.
+2. **Hire bar** — `sportsHireBars_` (+ `shooting guard`; a player word anywhere in a mixed title bars it) at the matcher's three lists and the employer book. Live jobless ENGINE pool: one athlete-shaped row (POP-01058), caught; the 42 sports-layer titles are GAME / SPORTS_OVERRIDE rows that no pool admits. es accepts as residual an ENGINE jobless row whose title carries a player word the list lacks; the e307 check flags any hire onto a sports org with a player-shaped prior role on every live Cycle. Judge only a hole in the hire path that the residual statement does not name.
+3. **Bench** — `output/engine-sheet/2026-10-22-e307-bench-B13.log` (B13 = `60a055c6`, manifest `stage19-e307-B13.sha256`); C113–C115 PASS; C116 advanced to 116 but the Riley_Digest append hit a Sheets service error (engine.275 partial-write report, `exit 2`) — es read the C116 ledger and restored stage 19 in `-bench-B13-resume.log`. es compare: C113–C116 snapshots = B12's, 0 differing rows each (the mint pool change moved no placement).
+
+Done = the md exists.

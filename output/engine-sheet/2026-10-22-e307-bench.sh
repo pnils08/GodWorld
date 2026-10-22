@@ -61,8 +61,8 @@ node $O/2026-10-21-e306-readers.js 113 $L 2>&1 | grep -v "injected env" || exit 
 node $O/2026-10-21-e306-spots.js 113 $L 2>&1 | grep -v "injected env" || exit 3
 node $O/2026-10-22-e307-check.js 113 $L 2>&1 | grep -v "injected env"; [ ${PIPESTATUS[0]} -eq 0 ] || { echo "HALT e307 check C113"; exit 3; }
 [ "$MODE" = probe ] || for c in 113 114 115; do
-  fire $c B7
-  node $O/2026-10-22-e307-check.js $(( c + 1 )) B7 B7 2>&1 | grep -v "injected env"; [ ${PIPESTATUS[0]} -eq 0 ] || { echo "HALT e307 check C$(( c + 1 ))"; exit 3; }
+  fire $c $L
+  node $O/2026-10-22-e307-check.js $(( c + 1 )) $L $L 2>&1 | grep -v "injected env"; [ ${PIPESTATUS[0]} -eq 0 ] || { echo "HALT e307 check C$(( c + 1 ))"; exit 3; }
 done
 drop_tab Business_Intake
 echo "== restore bench code to stage 19"

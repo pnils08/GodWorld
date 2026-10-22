@@ -1,0 +1,1077 @@
+{
+ "cycle": 113,
+ "label": "B8",
+ "hoods": {
+  "Downtown": {
+   "retail": 12.87,
+   "sentiment": 0.11,
+   "nightlife": 0.79,
+   "event": 5.32,
+   "unemployed": 62
+  },
+  "Temescal": {
+   "retail": 5.52,
+   "sentiment": 0.02,
+   "nightlife": 0.73,
+   "event": 5.22,
+   "unemployed": 173
+  },
+  "Laurel": {
+   "retail": 6.97,
+   "sentiment": 0.03,
+   "nightlife": 0.72,
+   "event": 4,
+   "unemployed": 89
+  },
+  "West Oakland": {
+   "retail": 9.89,
+   "sentiment": 0.24,
+   "nightlife": 0.8,
+   "event": 4.17,
+   "unemployed": 47
+  },
+  "Fruitvale": {
+   "retail": 10.58,
+   "sentiment": 0.16,
+   "nightlife": 0.9,
+   "event": 5.19,
+   "unemployed": 63
+  },
+  "Jack London": {
+   "retail": 14.19,
+   "sentiment": 0.17,
+   "nightlife": 1.26,
+   "event": 7.08,
+   "unemployed": 67
+  },
+  "Rockridge": {
+   "retail": 13.1,
+   "sentiment": 0,
+   "nightlife": 0.85,
+   "event": 4.2,
+   "unemployed": 51
+  },
+  "Adams Point": {
+   "retail": 5.87,
+   "sentiment": -0.09,
+   "nightlife": 0.56,
+   "event": 3,
+   "unemployed": 84
+  },
+  "Grand Lake": {
+   "retail": 9.59,
+   "sentiment": -0.03,
+   "nightlife": 0.82,
+   "event": 6,
+   "unemployed": 73
+  },
+  "Piedmont Ave": {
+   "retail": 11.93,
+   "sentiment": 0.05,
+   "nightlife": 0.65,
+   "event": 3.13,
+   "unemployed": 41
+  },
+  "Chinatown": {
+   "retail": 8.03,
+   "sentiment": -0.08,
+   "nightlife": 0.91,
+   "event": 6.31,
+   "unemployed": 86
+  },
+  "Brooklyn": {
+   "retail": 4.32,
+   "sentiment": -0.1,
+   "nightlife": 0.57,
+   "event": 3,
+   "unemployed": 53
+  },
+  "Eastlake": {
+   "retail": 5.91,
+   "sentiment": -0.05,
+   "nightlife": 0.75,
+   "event": 4.11,
+   "unemployed": 96
+  },
+  "Glenview": {
+   "retail": 4.56,
+   "sentiment": -0.04,
+   "nightlife": 0.56,
+   "event": 3,
+   "unemployed": 100
+  },
+  "Dimond": {
+   "retail": 8.13,
+   "sentiment": -0.11,
+   "nightlife": 0.72,
+   "event": 4,
+   "unemployed": 102
+  },
+  "Ivy Hill": {
+   "retail": 4.98,
+   "sentiment": -0.11,
+   "nightlife": 0.49,
+   "event": 3,
+   "unemployed": 93
+  },
+  "San Antonio": {
+   "retail": 4.94,
+   "sentiment": -0.04,
+   "nightlife": 0.8,
+   "event": 4,
+   "unemployed": 109
+  },
+  "KONO": {
+   "retail": 8.13,
+   "sentiment": 0.05,
+   "nightlife": 0.93,
+   "event": 6,
+   "unemployed": 22
+  },
+  "Lake Merritt": {
+   "retail": 7.67,
+   "sentiment": 0.05,
+   "nightlife": 0.55,
+   "event": 3.43,
+   "unemployed": 15
+  },
+  "Uptown": {
+   "retail": 12.5,
+   "sentiment": 0.08,
+   "nightlife": 1.23,
+   "event": 7.2,
+   "unemployed": 18
+  },
+  "Baylight District": {
+   "retail": 5.25,
+   "sentiment": 0.03,
+   "nightlife": 0.4,
+   "event": 3,
+   "unemployed": 9
+  },
+  "East Oakland": {
+   "retail": 6.45,
+   "sentiment": 0.2,
+   "nightlife": 0.69,
+   "event": 4.25,
+   "unemployed": 96
+  }
+ },
+ "business": {
+  "rows": 284,
+  "newRows": 104,
+  "statedJobs": 31442,
+  "revenue": 9499588916
+ },
+ "employerMoves": {
+  "total": 12,
+  "toNewRows": 2,
+  "list": [
+   {
+    "pop": "POP-00183",
+    "from": "BIZ-00028",
+    "to": "BIZ-00094",
+    "toName": "West Oakland Stabilization Fund",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01216",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01217",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01218",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01219",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01220",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01221",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01222",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01223",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01224",
+    "from": "(new citizen)",
+    "to": "",
+    "toName": "",
+    "toNewRow": false
+   },
+   {
+    "pop": "POP-01225",
+    "from": "(new citizen)",
+    "to": "BIZ-00260",
+    "toName": "International Boulevard Staffing",
+    "toNewRow": true
+   },
+   {
+    "pop": "POP-01226",
+    "from": "(new citizen)",
+    "to": "BIZ-00199",
+    "toName": "Broadway Mutual Bank",
+    "toNewRow": true
+   }
+  ]
+ },
+ "lifeHistory": {
+  "rows": 2292,
+  "linesSha256": "5e746b04a9f85cb1cd8debf9a217e963715cdbd08f52d72d218c61ad83411296",
+  "careerHired": 1
+ },
+ "chaosBusinessHits": {
+  "total": 4,
+  "onNewRows": 0,
+  "list": [
+   {
+    "id": "BIZ-00120",
+    "name": "Golden Lotus Market",
+    "outcome": "lost_contract_notice",
+    "newRow": false
+   },
+   {
+    "id": "BIZ-00145",
+    "name": "Marquee Grocer",
+    "outcome": "new_contract_letter",
+    "newRow": false
+   },
+   {
+    "id": "BIZ-00123",
+    "name": "Heritage Bakehouse",
+    "outcome": "forced_temporary_closure",
+    "newRow": false
+   },
+   {
+    "id": "BIZ-00010",
+    "name": "Portside Bio",
+    "outcome": "overdue_payment_arrives",
+    "newRow": false
+   }
+  ]
+ },
+ "chaosByHood": {
+  "Rockridge": [
+   {
+    "scope": "neighborhood",
+    "id": "Rockridge",
+    "name": "",
+    "vehicle": "street_sweeper",
+    "outcome": "parking_ticket",
+    "metric": "RetailVitality",
+    "magnitude": "2.74"
+   },
+   {
+    "scope": "neighborhood",
+    "id": "Rockridge",
+    "name": "",
+    "vehicle": "bart_train",
+    "outcome": "stalled_train",
+    "metric": "TransitDelay",
+    "magnitude": "0.1"
+   }
+  ],
+  "Chinatown": [
+   {
+    "scope": "business",
+    "id": "BIZ-00120",
+    "name": "Golden Lotus Market",
+    "vehicle": "mail_truck",
+    "outcome": "lost_contract_notice",
+    "metric": "Growth_Rate",
+    "magnitude": "-1.25"
+   },
+   {
+    "scope": "neighborhood",
+    "id": "Chinatown",
+    "name": "",
+    "vehicle": "ambulance",
+    "outcome": "medical_emergency",
+    "metric": "Sentiment",
+    "magnitude": "-0.07"
+   },
+   {
+    "scope": "business",
+    "id": "BIZ-00123",
+    "name": "Heritage Bakehouse",
+    "vehicle": "building_inspector",
+    "outcome": "forced_temporary_closure",
+    "metric": "Growth_Rate",
+    "magnitude": "-2"
+   }
+  ],
+  "(citizen)": [
+   {
+    "scope": "citizen",
+    "id": "POP-01160",
+    "name": "",
+    "vehicle": "bart_train",
+    "outcome": "signal_failure",
+    "metric": "TransitDelay",
+    "magnitude": "0.06"
+   },
+   {
+    "scope": "citizen",
+    "id": "POP-00787",
+    "name": "",
+    "vehicle": "mail_truck",
+    "outcome": "vital_document_delivered",
+    "metric": "Friction",
+    "magnitude": "0"
+   },
+   {
+    "scope": "citizen",
+    "id": "POP-00494",
+    "name": "",
+    "vehicle": "street_sweeper",
+    "outcome": "parking_ticket",
+    "metric": "Setback",
+    "magnitude": "0"
+   },
+   {
+    "scope": "citizen",
+    "id": "POP-00518",
+    "name": "",
+    "vehicle": "bart_train",
+    "outcome": "medical_hold_on_board",
+    "metric": "TransitDelay",
+    "magnitude": "0.05"
+   }
+  ],
+  "Grand Lake": [
+   {
+    "scope": "business",
+    "id": "BIZ-00145",
+    "name": "Marquee Grocer",
+    "vehicle": "mail_truck",
+    "outcome": "new_contract_letter",
+    "metric": "Growth_Rate",
+    "magnitude": "1"
+   }
+  ],
+  "East Oakland": [
+   {
+    "scope": "neighborhood",
+    "id": "East Oakland",
+    "name": "",
+    "vehicle": "oari_van",
+    "outcome": "welfare_check",
+    "metric": "Sentiment",
+    "magnitude": "0.1"
+   }
+  ],
+  "Brooklyn": [
+   {
+    "scope": "neighborhood",
+    "id": "Brooklyn",
+    "name": "",
+    "vehicle": "garbage_truck",
+    "outcome": "dumping_cleared",
+    "metric": "Sentiment",
+    "magnitude": "-0.05"
+   }
+  ],
+  "Brooklyn Basin": [
+   {
+    "scope": "business",
+    "id": "BIZ-00010",
+    "name": "Portside Bio",
+    "vehicle": "mail_truck",
+    "outcome": "overdue_payment_arrives",
+    "metric": "Growth_Rate",
+    "magnitude": "0.5"
+   }
+  ]
+ },
+ "lifeHistoryByHood": {
+  "Downtown": 163,
+  "KONO": 33,
+  "West Oakland": 259,
+  "Fruitvale": 207,
+  "Jack London": 154,
+  "Uptown": 181,
+  "Piedmont Ave": 147,
+  "Temescal": 118,
+  "Rockridge": 182,
+  "Laurel": 119,
+  "Grand Lake": 26,
+  "Lake Merritt": 185,
+  "Chinatown": 136,
+  "Baylight District": 18,
+  "East Oakland": 39,
+  "Adams Point": 19,
+  "Brooklyn": 15,
+  "Dimond": 22,
+  "San Antonio": 17,
+  "Ivy Hill": 14,
+  "Glenview": 14,
+  "Eastlake": 17,
+  "(none)": 207
+ },
+ "newLedgerRows": [
+  {
+   "id": "BIZ-00187",
+   "name": "Prescott Foundry Labs",
+   "sector": "Tech / Applied Robotics",
+   "hood": "West Oakland"
+  },
+  {
+   "id": "BIZ-00188",
+   "name": "Mandela Data Works",
+   "sector": "Tech / Data Infrastructure",
+   "hood": "West Oakland"
+  },
+  {
+   "id": "BIZ-00189",
+   "name": "Hoover Street Software",
+   "sector": "Tech / Software",
+   "hood": "West Oakland"
+  },
+  {
+   "id": "BIZ-00190",
+   "name": "Seventh Street Rail Supply",
+   "sector": "Industrial Supply / Services",
+   "hood": "West Oakland"
+  },
+  {
+   "id": "BIZ-00191",
+   "name": "Heinold's First and Last Chance Saloon",
+   "sector": "Bar / Saloon / Historic Landmark",
+   "hood": "Jack London"
+  },
+  {
+   "id": "BIZ-00192",
+   "name": "Embarcadero Music Hall",
+   "sector": "Music Venue",
+   "hood": "Jack London"
+  },
+  {
+   "id": "BIZ-00193",
+   "name": "Loading Dock Studios",
+   "sector": "Design Studio",
+   "hood": "Jack London"
+  },
+  {
+   "id": "BIZ-00194",
+   "name": "Estuary Oyster House",
+   "sector": "Restaurant & Dining",
+   "hood": "Jack London"
+  },
+  {
+   "id": "BIZ-00195",
+   "name": "Dockside Comedy Club",
+   "sector": "Comedy Club",
+   "hood": "Jack London"
+  },
+  {
+   "id": "BIZ-00196",
+   "name": "Warehouse Nine Brewing",
+   "sector": "Brewery",
+   "hood": "Jack London"
+  },
+  {
+   "id": "BIZ-00197",
+   "name": "The Hold",
+   "sector": "Dance Club / Nightlife & Entertainment",
+   "hood": "Jack London"
+  },
+  {
+   "id": "BIZ-00198",
+   "name": "Third Street Late Kitchen",
+   "sector": "Late-Night Restaurant & Dining",
+   "hood": "Jack London"
+  },
+  {
+   "id": "BIZ-00199",
+   "name": "Broadway Mutual Bank",
+   "sector": "Finance & Banking",
+   "hood": "Downtown"
+  },
+  {
+   "id": "BIZ-00200",
+   "name": "Clay Street Law Group",
+   "sector": "Law Firm",
+   "hood": "Downtown"
+  },
+  {
+   "id": "BIZ-00201",
+   "name": "Fourteenth Street Capital",
+   "sector": "Wealth Management / Finance",
+   "hood": "Downtown"
+  },
+  {
+   "id": "BIZ-00202",
+   "name": "Tower Commercial Property",
+   "sector": "Real Estate Finance",
+   "hood": "Downtown"
+  },
+  {
+   "id": "BIZ-00203",
+   "name": "Oakland Asian Cultural Center",
+   "sector": "Cultural Center / Community / Historic Landmark",
+   "hood": "Chinatown"
+  },
+  {
+   "id": "BIZ-00204",
+   "name": "Eight Treasures Dim Sum House",
+   "sector": "Restaurant & Dining",
+   "hood": "Chinatown"
+  },
+  {
+   "id": "BIZ-00205",
+   "name": "Wong Family Seafood & Produce",
+   "sector": "Wholesale Grocery",
+   "hood": "Chinatown"
+  },
+  {
+   "id": "BIZ-00206",
+   "name": "Lucky Harbor Herbalist & Tea",
+   "sector": "Herbalist & Tea Shop",
+   "hood": "Chinatown"
+  },
+  {
+   "id": "BIZ-00207",
+   "name": "Harrison Street Chinese School",
+   "sector": "Education",
+   "hood": "Chinatown"
+  },
+  {
+   "id": "BIZ-00208",
+   "name": "Paramount Theatre",
+   "sector": "Theater / Historic Landmark",
+   "hood": "Uptown"
+  },
+  {
+   "id": "BIZ-00209",
+   "name": "Uptown Playhouse",
+   "sector": "Theater Company / Performance Space",
+   "hood": "Uptown"
+  },
+  {
+   "id": "BIZ-00210",
+   "name": "Nineteenth Street Gallery",
+   "sector": "Art Gallery",
+   "hood": "Uptown"
+  },
+  {
+   "id": "BIZ-00211",
+   "name": "Telegraph Supper Club",
+   "sector": "Restaurant & Dining",
+   "hood": "Uptown"
+  },
+  {
+   "id": "BIZ-00212",
+   "name": "Neon Alley Cocktails",
+   "sector": "Bar / Lounge",
+   "hood": "Uptown"
+  },
+  {
+   "id": "BIZ-00213",
+   "name": "Fox Theater Oakland",
+   "sector": "Theater / Historic Landmark",
+   "hood": "KONO"
+  },
+  {
+   "id": "BIZ-00214",
+   "name": "Han River BBQ",
+   "sector": "Korean Restaurant",
+   "hood": "KONO"
+  },
+  {
+   "id": "BIZ-00215",
+   "name": "Seoul Corner Market",
+   "sector": "Korean Grocery",
+   "hood": "KONO"
+  },
+  {
+   "id": "BIZ-00216",
+   "name": "Telegraph Studio Collective",
+   "sector": "Artist Studios",
+   "hood": "KONO"
+  },
+  {
+   "id": "BIZ-00217",
+   "name": "Midnight Norae Karaoke",
+   "sector": "Karaoke Bar",
+   "hood": "KONO"
+  },
+  {
+   "id": "BIZ-00218",
+   "name": "Temescal Urgent Care",
+   "sector": "Urgent Care Clinic",
+   "hood": "Temescal"
+  },
+  {
+   "id": "BIZ-00219",
+   "name": "Longfellow Pharmacy",
+   "sector": "Pharmacy / Retail",
+   "hood": "Temescal"
+  },
+  {
+   "id": "BIZ-00220",
+   "name": "North Oakland Home Health",
+   "sector": "Home Health Agency",
+   "hood": "Temescal"
+  },
+  {
+   "id": "BIZ-00221",
+   "name": "Shafter Street Coffee",
+   "sector": "Cafe",
+   "hood": "Temescal"
+  },
+  {
+   "id": "BIZ-00222",
+   "name": "Telegraph Mutual Aid Kitchen",
+   "sector": "Community Kitchen",
+   "hood": "Temescal"
+  },
+  {
+   "id": "BIZ-00223",
+   "name": "College Avenue Medical Group",
+   "sector": "Medical Specialists",
+   "hood": "Rockridge"
+  },
+  {
+   "id": "BIZ-00224",
+   "name": "Claremont Advisory Partners",
+   "sector": "Management Consulting",
+   "hood": "Rockridge"
+  },
+  {
+   "id": "BIZ-00225",
+   "name": "Rockridge Wine Merchants",
+   "sector": "Wine Shop",
+   "hood": "Rockridge"
+  },
+  {
+   "id": "BIZ-00226",
+   "name": "Hillside Preparatory",
+   "sector": "Private School",
+   "hood": "Rockridge"
+  },
+  {
+   "id": "BIZ-00227",
+   "name": "Piedmont Avenue Bistro",
+   "sector": "Restaurant & Dining",
+   "hood": "Piedmont Ave"
+  },
+  {
+   "id": "BIZ-00228",
+   "name": "Montclair Patisserie",
+   "sector": "Bakery / Patisserie",
+   "hood": "Piedmont Ave"
+  },
+  {
+   "id": "BIZ-00229",
+   "name": "Avenue Florist",
+   "sector": "Florist Shop",
+   "hood": "Piedmont Ave"
+  },
+  {
+   "id": "BIZ-00230",
+   "name": "Glass & Frame Optometry",
+   "sector": "Optometry Clinic",
+   "hood": "Piedmont Ave"
+  },
+  {
+   "id": "BIZ-00231",
+   "name": "Lakeview Salon",
+   "sector": "Hair Salon / Services",
+   "hood": "Piedmont Ave"
+  },
+  {
+   "id": "BIZ-00232",
+   "name": "Marguerite's",
+   "sector": "Women's Boutique",
+   "hood": "Piedmont Ave"
+  },
+  {
+   "id": "BIZ-00233",
+   "name": "Pleasant Valley Menswear",
+   "sector": "Men's Clothing Store",
+   "hood": "Piedmont Ave"
+  },
+  {
+   "id": "BIZ-00234",
+   "name": "Little Avenue",
+   "sector": "Children's Boutique",
+   "hood": "Piedmont Ave"
+  },
+  {
+   "id": "BIZ-00235",
+   "name": "Linden Street Jewelers",
+   "sector": "Jewelry Store",
+   "hood": "Piedmont Ave"
+  },
+  {
+   "id": "BIZ-00236",
+   "name": "Lakeside Rowing Club",
+   "sector": "Private Club",
+   "hood": "Lake Merritt"
+  },
+  {
+   "id": "BIZ-00237",
+   "name": "Grand Avenue Trust & Estate",
+   "sector": "Estate Law",
+   "hood": "Lake Merritt"
+  },
+  {
+   "id": "BIZ-00238",
+   "name": "The Pergola Cafe",
+   "sector": "Cafe",
+   "hood": "Lake Merritt"
+  },
+  {
+   "id": "BIZ-00239",
+   "name": "Lakeshore Market",
+   "sector": "Grocery",
+   "hood": "Lake Merritt"
+  },
+  {
+   "id": "BIZ-00240",
+   "name": "Adams & Daughters Antiques",
+   "sector": "Antiques Shop",
+   "hood": "Lake Merritt"
+  },
+  {
+   "id": "BIZ-00241",
+   "name": "Lakeshore Cigar Club",
+   "sector": "Cigar Lounge",
+   "hood": "Lake Merritt"
+  },
+  {
+   "id": "BIZ-00242",
+   "name": "Grand Avenue Wine Bar",
+   "sector": "Wine Bar",
+   "hood": "Lake Merritt"
+  },
+  {
+   "id": "BIZ-00243",
+   "name": "Perkins Street Taqueria",
+   "sector": "Restaurant & Dining",
+   "hood": "Adams Point"
+  },
+  {
+   "id": "BIZ-00244",
+   "name": "Point Climbing Gym",
+   "sector": "Climbing Gym / Services",
+   "hood": "Adams Point"
+  },
+  {
+   "id": "BIZ-00245",
+   "name": "Bellevue Coffee Roasters",
+   "sector": "Coffee Roaster",
+   "hood": "Adams Point"
+  },
+  {
+   "id": "BIZ-00246",
+   "name": "Lakeside Paws",
+   "sector": "Veterinary Clinic",
+   "hood": "Adams Point"
+  },
+  {
+   "id": "BIZ-00247",
+   "name": "Lakeshore Grand Theatre",
+   "sector": "Movie Theater",
+   "hood": "Grand Lake"
+  },
+  {
+   "id": "BIZ-00248",
+   "name": "Grand Lake Saturday Market",
+   "sector": "Farmers Market",
+   "hood": "Grand Lake"
+  },
+  {
+   "id": "BIZ-00249",
+   "name": "Splash Pad Toys",
+   "sector": "Toy Store",
+   "hood": "Grand Lake"
+  },
+  {
+   "id": "BIZ-00250",
+   "name": "Lakeshore Creamery",
+   "sector": "Ice Cream / Dessert Cafe",
+   "hood": "Grand Lake"
+  },
+  {
+   "id": "BIZ-00251",
+   "name": "Grand Slice",
+   "sector": "Pizzeria / Restaurant & Dining",
+   "hood": "Grand Lake"
+  },
+  {
+   "id": "BIZ-00252",
+   "name": "Lakeshore Pho House",
+   "sector": "Vietnamese Restaurant",
+   "hood": "Eastlake"
+  },
+  {
+   "id": "BIZ-00253",
+   "name": "Eastlake Tap Room",
+   "sector": "Bar",
+   "hood": "Eastlake"
+  },
+  {
+   "id": "BIZ-00254",
+   "name": "Eastlake Community Credit Union",
+   "sector": "Credit Union / Finance",
+   "hood": "Eastlake"
+  },
+  {
+   "id": "BIZ-00255",
+   "name": "East Lake Garden Supply",
+   "sector": "Garden Center / Retail",
+   "hood": "Eastlake"
+  },
+  {
+   "id": "BIZ-00256",
+   "name": "Basin Residential Management",
+   "sector": "Property Management / Real Estate",
+   "hood": "Brooklyn"
+  },
+  {
+   "id": "BIZ-00257",
+   "name": "Estuary Pediatrics",
+   "sector": "Pediatric Clinic",
+   "hood": "Brooklyn"
+  },
+  {
+   "id": "BIZ-00258",
+   "name": "Shoreline Kayak & Paddle",
+   "sector": "Outdoor Rental / Services",
+   "hood": "Brooklyn"
+  },
+  {
+   "id": "BIZ-00259",
+   "name": "Ninth Avenue Bottle Shop",
+   "sector": "Wine & Spirits Shop",
+   "hood": "Brooklyn"
+  },
+  {
+   "id": "BIZ-00260",
+   "name": "International Boulevard Staffing",
+   "sector": "Staffing Agency / Professional Services",
+   "hood": "San Antonio"
+  },
+  {
+   "id": "BIZ-00261",
+   "name": "Early Shift Childcare",
+   "sector": "Preschool & Early Education",
+   "hood": "San Antonio"
+  },
+  {
+   "id": "BIZ-00262",
+   "name": "Panadería La Doce",
+   "sector": "Bakery",
+   "hood": "San Antonio"
+  },
+  {
+   "id": "BIZ-00263",
+   "name": "San Antonio Transmission & Tire",
+   "sector": "Auto Repair / Services",
+   "hood": "San Antonio"
+  },
+  {
+   "id": "BIZ-00264",
+   "name": "Mercado Fruitvale",
+   "sector": "Mexican Grocery",
+   "hood": "Fruitvale"
+  },
+  {
+   "id": "BIZ-00265",
+   "name": "Taquería El Andén",
+   "sector": "Taquería / Restaurant",
+   "hood": "Fruitvale"
+  },
+  {
+   "id": "BIZ-00266",
+   "name": "Boutique Reina",
+   "sector": "Quinceañera & Formalwear Boutique",
+   "hood": "Fruitvale"
+  },
+  {
+   "id": "BIZ-00267",
+   "name": "Platform Brunch",
+   "sector": "Brunch Restaurant",
+   "hood": "Fruitvale"
+  },
+  {
+   "id": "BIZ-00268",
+   "name": "International Cycle Works",
+   "sector": "Bike Shop",
+   "hood": "Fruitvale"
+  },
+  {
+   "id": "BIZ-00269",
+   "name": "Taco Fusion",
+   "sector": "Fusion Restaurant",
+   "hood": "Fruitvale"
+  },
+  {
+   "id": "BIZ-00270",
+   "name": "Hub Ramen",
+   "sector": "Ramen Bar",
+   "hood": "Fruitvale"
+  },
+  {
+   "id": "BIZ-00271",
+   "name": "Masa & Vine",
+   "sector": "Small Plates & Natural Wine Bar",
+   "hood": "Fruitvale"
+  },
+  {
+   "id": "BIZ-00272",
+   "name": "Coliseum Way Builders",
+   "sector": "Construction",
+   "hood": "East Oakland"
+  },
+  {
+   "id": "BIZ-00273",
+   "name": "Hegenberger Concrete & Steel",
+   "sector": "Construction Supply",
+   "hood": "East Oakland"
+  },
+  {
+   "id": "BIZ-00274",
+   "name": "Coliseum Corner Sports Bar",
+   "sector": "Sports Bar & Grill",
+   "hood": "East Oakland"
+  },
+  {
+   "id": "BIZ-00275",
+   "name": "Flatlands Soul Kitchen",
+   "sector": "Restaurant & Dining",
+   "hood": "East Oakland"
+  },
+  {
+   "id": "BIZ-00276",
+   "name": "Eastside Braids & Barbers",
+   "sector": "Hair Salon / Services",
+   "hood": "East Oakland"
+  },
+  {
+   "id": "BIZ-00277",
+   "name": "Stabilization Fund East Oakland Disbursement Office",
+   "sector": "Community Development",
+   "hood": "East Oakland"
+  },
+  {
+   "id": "BIZ-00278",
+   "name": "Oakland Coliseum",
+   "sector": "Stadium / Historic Landmark",
+   "hood": "East Oakland"
+  },
+  {
+   "id": "BIZ-00279",
+   "name": "MacArthur Tutoring Center",
+   "sector": "Tutoring",
+   "hood": "Laurel"
+  },
+  {
+   "id": "BIZ-00280",
+   "name": "Maxwell Park Youth League",
+   "sector": "Youth Recreation / Community",
+   "hood": "Laurel"
+  },
+  {
+   "id": "BIZ-00281",
+   "name": "Laurel Music School",
+   "sector": "Music School",
+   "hood": "Laurel"
+  },
+  {
+   "id": "BIZ-00282",
+   "name": "High Street Hardware",
+   "sector": "Hardware Store",
+   "hood": "Laurel"
+  },
+  {
+   "id": "BIZ-00283",
+   "name": "Laurel Family Realty",
+   "sector": "Real Estate",
+   "hood": "Laurel"
+  },
+  {
+   "id": "BIZ-00284",
+   "name": "Oakland City College — Laurel Campus",
+   "sector": "Education",
+   "hood": "Laurel"
+  },
+  {
+   "id": "BIZ-00285",
+   "name": "Fruitvale Avenue Social Club",
+   "sector": "Social Club",
+   "hood": "Dimond"
+  },
+  {
+   "id": "BIZ-00286",
+   "name": "Dimond Billiards",
+   "sector": "Pool Hall & Bar",
+   "hood": "Dimond"
+  },
+  {
+   "id": "BIZ-00287",
+   "name": "Sausal Creek Pawn & Jewelry",
+   "sector": "Pawn & Jewelry Shop",
+   "hood": "Dimond"
+  },
+  {
+   "id": "BIZ-00288",
+   "name": "Old Dimond Butcher",
+   "sector": "Butcher Shop",
+   "hood": "Dimond"
+  },
+  {
+   "id": "BIZ-00289",
+   "name": "Tops n Tassels",
+   "sector": "Gentlemen's Club / Adult Entertainment",
+   "hood": "Dimond"
+  },
+  {
+   "id": "BIZ-00290",
+   "name": "Varek Fellowship",
+   "sector": "Community Organization",
+   "hood": "West Oakland"
+  }
+ ],
+ "ownerDoorQueue": [],
+ "treasuryBusinessTax": "no TreasuryPost tab"
+}

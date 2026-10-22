@@ -1,0 +1,241 @@
+{
+ "hoods": {
+  "Downtown": {
+   "mod": 1.0361989516397272,
+   "B2": 4.32,
+   "B3": 5.32,
+   "predicted": 5.32
+  },
+  "Temescal": {
+   "mod": 0.9,
+   "B2": 4.22,
+   "B3": 5.22,
+   "predicted": 5.22
+  },
+  "Laurel": {
+   "mod": 0.8,
+   "B2": 3,
+   "B3": 4,
+   "predicted": 4
+  },
+  "West Oakland": {
+   "mod": 0.8,
+   "B2": 3.17,
+   "B3": 4.17,
+   "predicted": 4.17
+  },
+  "Fruitvale": {
+   "mod": 1,
+   "B2": 4.19,
+   "B3": 5.19,
+   "predicted": 5.19
+  },
+  "Jack London": {
+   "mod": 1.3470586371316453,
+   "B2": 5.08,
+   "B3": 7.08,
+   "predicted": 7.08
+  },
+  "Rockridge": {
+   "mod": 0.85,
+   "B2": 3.19,
+   "B3": 4.19,
+   "predicted": 4.19
+  },
+  "Adams Point": {
+   "mod": 0.55,
+   "B2": 2,
+   "B3": 3,
+   "predicted": 3
+  },
+  "Grand Lake": {
+   "mod": 1.1,
+   "B2": 4,
+   "B3": 6,
+   "predicted": 6
+  },
+  "Piedmont Ave": {
+   "mod": 0.6,
+   "B2": 2.13,
+   "B3": 3.13,
+   "predicted": 3.13
+  },
+  "Chinatown": {
+   "mod": 1.1,
+   "B2": 4.31,
+   "B3": 6.31,
+   "predicted": 6.31
+  },
+  "Brooklyn": {
+   "mod": 0.55,
+   "B2": 2,
+   "B3": 3,
+   "predicted": 3
+  },
+  "Eastlake": {
+   "mod": 0.75,
+   "B2": 3.11,
+   "B3": 4.11,
+   "predicted": 4.11
+  },
+  "Glenview": {
+   "mod": 0.55,
+   "B2": 2,
+   "B3": 3,
+   "predicted": 3
+  },
+  "Dimond": {
+   "mod": 0.7,
+   "B2": 3,
+   "B3": 4,
+   "predicted": 4
+  },
+  "Ivy Hill": {
+   "mod": 0.55,
+   "B2": 2,
+   "B3": 3,
+   "predicted": 3
+  },
+  "San Antonio": {
+   "mod": 0.8,
+   "B2": 3,
+   "B3": 4,
+   "predicted": 4
+  },
+  "KONO": {
+   "mod": 1.2,
+   "B2": 5,
+   "B3": 6,
+   "predicted": 6
+  },
+  "Lake Merritt": {
+   "mod": 0.55,
+   "B2": 2.43,
+   "B3": 3.43,
+   "predicted": 3.43
+  },
+  "Uptown": {
+   "mod": 1.3,
+   "B2": 5.21,
+   "B3": 7.21,
+   "predicted": 7.21
+  },
+  "Baylight District": {
+   "mod": 0.6,
+   "B2": 2,
+   "B3": 3,
+   "predicted": 3
+  },
+  "East Oakland": {
+   "mod": 0.7,
+   "B2": 3.25,
+   "B3": 4.25,
+   "predicted": 4.25
+  }
+ },
+ "totals": {
+  "B2t": {
+   "base": 4,
+   "n": {
+    "worldEvents": 11,
+    "storySeeds": 28,
+    "storyHooks": 38
+   },
+   "hits": {
+    "evDomain": 0,
+    "evText": 0,
+    "seed": 3,
+    "hook": 1
+   },
+   "residual": 0
+  },
+  "B3t": {
+   "base": 5,
+   "n": {
+    "cityEvents": 3,
+    "worldEvents": 11,
+    "storySeeds": 28,
+    "storyHooks": 38
+   },
+   "hits": {
+    "city": 3,
+    "evDomain": 0,
+    "evText": 0,
+    "seed": 2,
+    "hook": 0
+   },
+   "residual": 0
+  }
+ },
+ "contrib": {
+  "B2t": [
+   [
+    "seed",
+    6,
+    "text",
+    "community",
+    "GENERAL|2||Cluster of city events sparking broader community reactions. Pattern emerging?"
+   ],
+   [
+    "seed",
+    14,
+    "text",
+    "art",
+    "CULTURE|2||[CITY EVENT] The Dillon Family Block Party"
+   ],
+   [
+    "seed",
+    21,
+    "text",
+    "community",
+    "COMMUNITY|1||Colder evenings influence community activity"
+   ],
+   [
+    "hook",
+    18,
+    "text",
+    "art",
+    "CAREER_STAGNATION|BUSINESS||Denise Carter has not advanced in 56 years"
+   ]
+  ],
+  "B3t": [
+   [
+    "city",
+    0,
+    "",
+    "",
+    "Jack London Neighborhood Stabilization Panel"
+   ],
+   [
+    "city",
+    1,
+    "",
+    "",
+    "Jack London Cozy Nights Film Series"
+   ],
+   [
+    "city",
+    2,
+    "",
+    "",
+    "The Dillon Family Block Party"
+   ],
+   [
+    "seed",
+    6,
+    "text",
+    "community",
+    "GENERAL|2||Cluster of city events sparking broader community reactions. Pattern emerging?"
+   ],
+   [
+    "seed",
+    21,
+    "text",
+    "community",
+    "COMMUNITY|1||Colder evenings influence community activity"
+   ]
+  ]
+ },
+ "fails": [],
+ "accept": true
+}

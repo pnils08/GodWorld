@@ -1,0 +1,12 @@
+== resume B9 at C115 (the C115 pre-read hit a Sheets 500 on the checkpoint cell; nothing fired)
+leg B9 C115 fire rc=0 "verdict": "PASS" "wallS": 169
+C115 B9: onto sports 0, off sports 0, sports career lines 0, elsewhere {"Promotion":8,"Career-Hired":1}, athlete career moves 0 (income-only 0) — athlete guard PASS
+leg B9 C116 fire rc=0 "verdict": "PASS" "wallS": 183
+C116 B9: onto sports 0, off sports 0, sports career lines 0, elsewhere {"Promotion":5,"Career-FieldChange":1,"Career-Hired":1,"Career-Layoff":1}, athlete career moves 0 (income-only 0) — athlete guard PASS
+== restore bench code to stage 19
+stage = stage 19 + 4 files at ffad3bf8; manifest /tmp/claude-0/-root-GodWorld/a725df2c-536e-4a81-bd5c-126e074e188f/scratchpad/stage19-restore-e307.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @107
+pull-back 167 js + manifest byte-identical to /tmp/claude-0/-root-GodWorld/a725df2c-536e-4a81-bd5c-126e074e188f/scratchpad/stage19-restore-e307.sha256
+bench code = stage 19 manifest
+exit 0

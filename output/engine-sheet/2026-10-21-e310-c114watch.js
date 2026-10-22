@@ -3,8 +3,9 @@
 //        node 2026-10-21-e310-c114watch.js diff 114   (after C114 fires — engine.310's first live Cycle)
 // snap / read: per hood saved EventAttractiveness, and the persisted EA inputs for the Cycle under the engine.310 rule (the PROD
 //   writer's own regexes): Riley_Digest CityEvents count (col Q, each staged event once), WorldEvents domain + whole-word hits,
-//   StorySeedCount (seed hits unobservable: seeds are on no sheet), Story_Hook_Deck HookText whole-word hits (a lower bound: the
-//   writer reads h.hook || h.text). Base lower bound = staged + domain + word + hook hits.
+//   StorySeedCount (seed hits unobservable: seeds are on no sheet), Story_Hook_Deck HookText whole-word hits (a conditional bound
+//   only: the writer reads h.hook || h.text, and an h.hook can override the saved text). Base estimate = staged + domain + word +
+//   hook hits. The rule is the deployed one: regexes come from the writer at ffad3bf8 (git), not the working tree.
 // diff: VERDICT
 //   HOLD     — a missing input, or an Engine_Errors row for the Cycle naming Phase10 / NeighborhoodMap / persist.
 //   DIAGNOSE — every hood moved the same way, or the EA sum left 0.5×..2× of the prior Cycle's. Read it against the staged count
@@ -17,8 +18,8 @@ const BENCH = '1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA', BASE = '1Mbz-sE13i
 if (!LIVE || LIVE === BENCH || LIVE === BASE) throw new Error('env does not point at live');
 const fs = require('fs');
 const { getSheetData } = require('/root/GodWorld/lib/sheets');
-const W = new Function(fs.readFileSync('/root/GodWorld/phase08-v3-chicago/v3NeighborhoodWriter.js', 'utf8') +
-  '\nreturn { EVENT_ATTRACT_EVENT_WORDS, EVENT_ATTRACT_STORY_WORDS };')();
+const W = new Function(require('child_process').execSync('git -C /root/GodWorld show ffad3bf8:phase08-v3-chicago/v3NeighborhoodWriter.js',
+  { encoding: 'utf8' }) + '\nreturn { EVENT_ATTRACT_EVENT_WORDS, EVENT_ATTRACT_STORY_WORDS };')();   // codex diff gate 2 item 2: pinned
 const O = '/root/GodWorld/output/engine-sheet/2026-10-21-e310-c114watch-';
 const [mode, cycArg] = process.argv.slice(2), cyc = Number(cycArg);
 if (!/^(snap|diff)$/.test(mode || '') || !cyc) throw new Error('usage: snap <cycle> | diff <cycle>');
@@ -28,8 +29,14 @@ async function read(c) {
   const s = { cycle: c, at: new Date().toISOString(), missing: [] };
   const nm = await getSheetData('Neighborhood_Map'), nh = nm[0];
   const iN = nh.indexOf('Neighborhood'), iE = nh.indexOf('EventAttractiveness'), iC = nh.indexOf('Cycle');
+  if ([iN, iE, iC].some(i => i < 0)) { s.missing.push('Neighborhood_Map header ' + JSON.stringify([iN, iE, iC])); return s; }
   s.ea = {};
-  nm.slice(1).forEach(r => { if (r[iN]) s.ea[String(r[iN]).trim()] = Number(r[iE]); });
+  nm.slice(1).forEach(r => {
+    if (!r[iN]) return;
+    const v = String(r[iE]).trim() === '' ? NaN : Number(r[iE]);
+    if (!isFinite(v)) s.missing.push('Neighborhood_Map EA not a number for ' + r[iN] + ': ' + JSON.stringify(r[iE]));
+    s.ea[String(r[iN]).trim()] = v;
+  });
   const mapCycles = [...new Set(nm.slice(1).filter(r => r[iN]).map(r => num(r[iC])))];
   if (mapCycles.length !== 1 || mapCycles[0] !== c) s.missing.push('Neighborhood_Map Cycle ' + JSON.stringify(mapCycles) + ' != ' + c);
   if (Object.keys(s.ea).length !== 22) s.missing.push('Neighborhood_Map hoods ' + Object.keys(s.ea).length);
@@ -41,7 +48,9 @@ async function read(c) {
   if (rr.length !== 1) s.missing.push('Riley_Digest C' + c + ' rows ' + rr.length);
   const row = rr[0] || [];
   const staged = String(row[rQ] || '').split(', ').filter(Boolean);
-  let wev = []; try { wev = JSON.parse(row[rW] || '[]'); } catch (e) { s.missing.push('Riley_Digest WorldEvents not JSON'); }
+  let wev = []; try { wev = JSON.parse(row[rW]); } catch (e) { s.missing.push('Riley_Digest WorldEvents not JSON'); }
+  if (!Array.isArray(wev)) { s.missing.push('Riley_Digest WorldEvents not a list'); wev = []; }
+  if (String(row[rS] === undefined ? '' : row[rS]).trim() === '' || !isFinite(Number(row[rS]))) s.missing.push('Riley_Digest StorySeedCount blank / not a number');
   let evDomain = 0, evText = 0;
   (Array.isArray(wev) ? wev : []).forEach(e => {
     const d = String(e.domain || '').toLowerCase();
@@ -73,11 +82,14 @@ async function read(c) {
   const p = JSON.parse(fs.readFileSync(O + 'c' + (cyc - 1) + '.json', 'utf8'));
   const d = { cycle: cyc, vs: cyc - 1, hold: [], diagnose: [], prev: p, now: s, perHood: {} };
   p.missing.concat(s.missing).forEach(m => d.hold.push('missing: ' + m));
+  if (p.cycle !== cyc - 1) d.hold.push('prior snapshot is C' + p.cycle + ', not C' + (cyc - 1));   // codex diff gate 2 item 2
+  if (JSON.stringify(Object.keys(p.ea || {}).sort()) !== JSON.stringify(Object.keys(s.ea || {}).sort())) d.hold.push('hood set changed between snapshots');
   const ee = await getSheetData('Engine_Errors'), eh = ee[0] || [];
   const eC = eh.indexOf('Cycle');
   if (eC < 0) d.hold.push('missing: Engine_Errors Cycle column');
-  d.engineErrors = ee.slice(1).filter(r => num(r[eC]) === cyc).map(r => r.join(' | ').slice(0, 300));
-  d.engineErrors.filter(t => /Phase10|NeighborhoodMap|persist/i.test(t)).forEach(t => d.hold.push('Engine_Errors: ' + t));
+  const errRows = ee.slice(1).filter(r => num(r[eC]) === cyc).map(r => r.join(' | '));
+  errRows.filter(t => /Phase10|NeighborhoodMap|persist/i.test(t)).forEach(t => d.hold.push('Engine_Errors: ' + t.slice(0, 300)));   // scan full text
+  d.engineErrors = errRows.map(t => t.slice(0, 300));
   let up = 0, down = 0;
   Object.keys(s.ea).forEach(h => {
     const a = p.ea[h], b = s.ea[h];

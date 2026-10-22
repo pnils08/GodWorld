@@ -18,3 +18,20 @@ Read-only: code + docs + `output/` files; no cron, model, Sheet, bench, clasp, c
 3. **Judge rerun** — `2026-10-21-e310-check.{js,json}`: is the two-sided key compare plus the pre5 and hood-set checks enough for your item-3 note?
 
 Done = the md exists.
+
+## Codex diff gate 2 — folded (`docs/research/2026-10-21-codex-engine310-diff-gate2.md`: push FIX, watch FIX, judge SHIP)
+
+- **Push.** The C113 gate now requires all of: `cycle === 113`, `vs === 112`, an empty `hold` list, `verdict === 'ACCEPT-CANDIDATE'`, and the read-back fields `ea`, `eaComponents`, `bizAdded`, `employerMoves`, `spotLines`, `highWater`.
+  - Exercised exactly as the script runs it (`node -e` + file):
+    - the C112 dry-run file → refused;
+    - a C113-shaped file → passes;
+    - the same file with one hold → refused.
+  - Rollback stays the stage-18 manifest with the `2896c46c` writer.
+- **Watch.** A missing input is now HOLD, never a silent zero or NaN:
+  - the Neighborhood_Map header and every EA must be finite;
+  - WorldEvents must parse to a list; StorySeedCount must be a number;
+  - the prior snapshot must be Cycle − 1 with the same hood set.
+  - Engine_Errors is scanned on the full row text before any truncation.
+  - The regexes come from `git show ffad3bf8`, the deployed rule.
+  - HookText is documented as a conditional bound.
+  - Re-run on live: `snap 112` clean; `diff 113` before C113 exists → HOLD on four missing inputs (test files moved to scratch).

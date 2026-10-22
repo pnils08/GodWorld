@@ -31,7 +31,11 @@ echo "stage = the benched tree ($MAN), byte for byte"
 if [ "$DRY" = "--dry-run" ]; then echo "dry run: stopping before the push ($W/stage)"; exit 0; fi
 # The C113 gate sits after the dry run so the build check can be proven before Sunday; the push itself never runs without it.
 [ -f "$WATCH" ] || { echo "no C113 live-watch diff ($WATCH) — read C113 first — stop"; exit 1; }
-node -e 'process.exit(require(process.argv[1]).verdict === "ACCEPT-CANDIDATE" ? 0 : 1)' "$WATCH" || { echo "C113 live watch is not ACCEPT-CANDIDATE — clear the HOLD first — stop"; exit 1; }
+node -e '   // codex diff gate 2 item 1: the right Cycle, an empty hold list, the read-back fields present — not the verdict string alone
+const d = require(process.argv[1]);
+const need = ["ea", "eaComponents", "bizAdded", "employerMoves", "spotLines", "highWater"];
+const ok = d.cycle === 113 && d.vs === 112 && Array.isArray(d.hold) && d.hold.length === 0 && d.verdict === "ACCEPT-CANDIDATE" && need.every(k => k in d);
+process.exit(ok ? 0 : 1);' "$WATCH" || { echo "C113 live watch is not a clean C112→C113 ACCEPT-CANDIDATE — clear it first — stop"; exit 1; }
 echo "C113 live watch = ACCEPT-CANDIDATE"
 DEP=$(grep -o '"deploymentId": "[^"]*"' /root/GodWorld/.clasp.json | cut -d'"' -f4)
 [ -n "$DEP" ] || { echo "no pinned deploymentId in the repo .clasp.json — STOP"; exit 1; }

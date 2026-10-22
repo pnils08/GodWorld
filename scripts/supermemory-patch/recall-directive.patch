@@ -1,8 +1,8 @@
 --- a/recall-directive.js
 +++ b/recall-directive.js
 @@ -119,10 +119,11 @@
-     const text = resultText(r).replace(/\s+/g, ' ').slice(0, MAX_RESULT_CHARS);
-     const title = typeof r.title === 'string' && r.title.trim() ? r.title.trim() : null;
+     const title =
+       typeof r.title === 'string' && r.title.trim() ? r.title.trim() : null;
      const prefix = title && !text.startsWith(title) ? `${title} — ` : '';
 -    return `- ◪ ${prefix}${text}${typeof r.filepath === 'string' && r.filepath ? ` (${r.filepath})` : ''}`;
 +    const when = String(r.createdAt || r.updatedAt || r.system?.createdAt || r.metadata?.createdAt || '').slice(0, 10);
@@ -13,22 +13,25 @@
 +◪ Recalled from supermemory for this prompt (relevance-ranked; each line is history as of its date — check the file before stating it as current):
  ${lines.join('\n')}
  
- When one of these shapes your answer, credit it naturally with the ◪ prefix (e.g. "◪ earlier you decided X"); if you name the source, say "from supermemory" — never "from memory". For deeper history, call the supermemory search_memory tool — it defaults to this project's container (${containerTag}). Pass containerTag only to search a different space. Or launch the context-gatherer agent.
-@@ -163,15 +164,56 @@
+ When one of these shapes your answer, credit it naturally with the ◪ prefix (e.g. "◪ earlier you decided X"); if you name the source, say "from supermemory" — never "from memory". For deeper history, call the supermemory search_memory tool — it defaults to this project's container (${namespace}). Pass containerTag only to search a different space. Or launch the context-gatherer agent.
+@@ -163,18 +164,57 @@
      }
  
-     const containerTag = getContainerTag(cwd);
--    const response = await getProfile(
+     const namespace = getNamespace(cwd);
+-    const response = await searchMemories(
 -      getBaseUrl(cwd, projectConfig),
 -      apiKey,
--      containerTag,
+-      namespace,
 -      prompt.slice(0, MAX_QUERY_LENGTH),
--      { timeoutMs: SEARCH_TIMEOUT_MS },
+-      {
+-        timeoutMs: SEARCH_TIMEOUT_MS,
+-        apiVersion: getApiVersion(cwd, projectConfig),
+-      },
 -    );
 -
--    const results = (response?.searchResults?.results || [])
+-    const results = (response || [])
 +    // GodWorld patch 2026-09-23: recall from the shared hand-write container
-+    // (sl-godworld) AND the auto-save container, merged by similarity.
++    // (sl-godworld) AND the rules mirror, merged by similarity.
 +    // sl-rules = live mirror of memory files, SIM_DOCTRINE, ADRs (brainSearch.js --sync);
 +    // its hits are tagged [rule] so they read as current law, not history.
 +    // sl-rules is searched hybrid (/v4/search) because the value is the rule TEXT — memory
@@ -60,7 +63,7 @@
 +        .catch(() => [])
 +        .finally(() => clearTimeout(timer));
 +    };
-+    // GodWorld patch 2026-10-07: the auto-save container (containerTag) is no longer
++    // GodWorld patch 2026-10-07: the auto-save container (namespace) is no longer
 +    // recalled per prompt — its captures go stale (a reused row ID made a 09-27
 +    // capture read as current fact on 10-07). It is still written by capture.js and
 +    // searched on purpose through scripts/brainSearch.js.
@@ -68,9 +71,10 @@
 +    const responses = await Promise.all([
 +      searchRules(),
 +      ...recallTags.map((tag) =>
-+        getProfile(baseUrl, apiKey, tag, q, { timeoutMs: SEARCH_TIMEOUT_MS })
-+          .then((r) => r?.searchResults?.results || [])
-+          .catch(() => []),
++        searchMemories(baseUrl, apiKey, tag, q, {
++          timeoutMs: SEARCH_TIMEOUT_MS,
++          apiVersion: getApiVersion(cwd, projectConfig),
++        }).catch(() => []),
 +      ),
 +    ]);
 +
@@ -78,5 +82,5 @@
 +      .flat()
 +      .sort((a, b) => (b.similarity || 0) - (a.similarity || 0))
        .filter((r) => resultText(r))
-       .filter((r) => !Number.isFinite(r.similarity) || r.similarity >= MIN_SIMILARITY)
-       .slice(0, MAX_RESULTS);
+       .filter(
+         (r) => !Number.isFinite(r.similarity) || r.similarity >= MIN_SIMILARITY,

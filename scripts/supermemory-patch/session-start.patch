@@ -1,6 +1,6 @@
 --- a/session-start.js
 +++ b/session-start.js
-@@ -153,6 +153,13 @@
+@@ -165,6 +165,13 @@
  
      const statuslineCleanupNotice = removeLegacyStatusline();
      pruneState();
@@ -11,6 +11,6 @@
 +      writeOutput({ continue: true, suppressOutput: true });
 +      return;
 +    }
-     writeState(sessionId, 'context', { status: 'loading', memoryItemsLoaded: 0 });
- 
-     const projectConfig = loadProjectConfig(cwd);
+     writeState(sessionId, 'context', {
+       status: 'loading',
+       memoryItemsLoaded: 0,

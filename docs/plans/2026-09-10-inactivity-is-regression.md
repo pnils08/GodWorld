@@ -464,6 +464,14 @@ mean 0.341, range 0.21–0.46, **0 at 1.00**, spread 0.25; city 0.52. The bench 
 the old 20/22 pin could not recur here regardless — the proof is the lift size and intact spread.
 Ships after the current stack's live fire (second ship), not inside it.
 
+### engine.201 — status (drained from ROLLOUT, 2026-10-22 / S592)
+
+Fixed-cohort proof: 48 citizens drawn at C110 (output/engine201). C111 resnap 2026-10-11, C112 resnap 2026-10-18 (48/48; run `--resnap` only after Step 5 writes the world summary — it reads its Cycle from there); resnap after C113; trace at the C113 fire, Sun 2026-10-25, codex leading
+
+### engine.197 — status (drained from ROLLOUT, 2026-10-22 / S592)
+
+Dial drift: events reach 93% of citizens (961/1,032 mood ≠ 0 at C111) but base barely moves — 656 (63.6%) all-neutral, 9/48 cohort base moves C110→C111, max 1.33. Cause = the mood→base conversion (fade ×0.8/cycle, hardens only after 3 same-way cycles, 40% sticks), not event reach; the rate numbers are the builder's call (agy 2026-10-17). Future-stamp guard LIVE PROD @144; 13-spouse repair codex HOLD
+
 ## Dial read 2026-10-17 (engine-sheet, live C111, read only)
 
 Builder: "safe to say the dials are completely broken." Measured on live Simulation_Ledger + LifeHistory_Log + Reflection_Intake.

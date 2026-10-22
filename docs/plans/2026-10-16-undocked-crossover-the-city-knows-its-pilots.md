@@ -109,6 +109,12 @@ Original questions kept for the record:
 4. Move 5 (next week, with the sports/civic slice builders).
 5. Move 4 engine token on es's bench with 214 → C113 10-25 → rows retagged after readback.
 
+## Status log
+
+### engine.291 — status (drained from ROLLOUT, 2026-10-22 / S592)
+
+UNDOCKED rows name the pilot: `$PILOT`/`$PILOTROLE`/`$LEADER`. LIVE PROD @138 (stage 4g, `stage4g-e291fix.sha256`) with fixes a6bdf1de ($LEADER not on the leader) + ebd0091a (a/an before $PILOTROLE); bench 1004 @33. rb releases its 9 held rows. C112 read: 46 Undocked-Audience + 4 Reputation lines, pilots named in text, 0 raw tokens — pass
+
 ## Changelog
 - 2026-10-16 (rb, S561): plan written from the codex read, every claim verified against the files; builder's three rulings recorded verbatim; held for go.
 - 2026-10-16 (es, S562): Move 4 built and unit-proven as engine.291 — see Move 4 "es, as built"; the multi-pilot rule (equal weight over the night's pilots) and the `$LEADER` source (the feed tab, standings rule) are es's calls, published here. Bench pending; nothing to PROD before the C112 readback.

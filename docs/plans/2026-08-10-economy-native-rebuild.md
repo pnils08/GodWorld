@@ -169,6 +169,10 @@ D2 proof before D1 activation; refreshed audit figures.
 
 Mint economy: arrivals born right. Mint paths take job titles from lists outside the Economic_Parameters job table — the generic-citizen generator's own 32 titles (15 not in the table), the intake fallback pool (22 of 65), adulthood settlement; 453/988 Active RoleTypes are not in the table, 43 of them students (the 545 was against role_mapping.json). Revision still owes legacy mutating-path disposition + D2 proof (agy 2026-10-17)
 
+### engine.293 — status (drained from ROLLOUT, 2026-10-22 / S592)
+
+Arrivals born wrong: (1) promotion-door pay (`checkForPromotions_` priced by `lookupIncome_` alone → flat $60k for 18 wave arrivals) now runs the intake's job rule — LIVE PROD @139 stage 4h `bdcfb5c4`, bench @33 vs @34 differs only in 6 arrivals' pay; unmapped titles still land at 60000 until mapped (audit: an arrival at exactly 60000); (2) owner pay = `applyOwnerDraw_` ½ × (revenue − payroll) per cycle, margins 33–90% — builder's call §6 2026-10-16. Read Sun C112: wave arrivals priced by job
+
 ## Changelog
 
 - 2026-08-10 — Written S364 from the live-session audit; awaiting S362 vet.

@@ -137,6 +137,12 @@ Sign skews up (≈ .6 / .4) except where the fact's direction is known, which de
 
 ## Open questions
 
+## Status log
+
+### engine.299 — status (drained from ROLLOUT, 2026-10-22 / S592)
+
+Every hardcoded event moves a dial, no real-Oakland premise. LIVE PROD @147 stage 4p = 4o + Task 13 caps lifted. **C112 live readback PASS (2026-10-18 22:16 CDT): 0 inert, acceptanceEmpty true, 2,344 lines = bench @54, 250 s, 0 raw tokens** (`output/engine299/offenders_c112_live.txt`). On main, not PROD: unsigned chaos line out of the pool, rb's 22 bespoke up lines, the Estuary truck rename — ride the engine.214 wave. Storefront line on a real hood fact: NOT built (live fires it on trajectory decay alone, `generateCitizensEvents.js:1713`); cut 8a of the wave
+
 ## Changelog
 
 - 2026-10-18 14:07 (engine-sheet) — Task 13 LIVE: PROD @147 = stage 4p (4 files over 4o). Bench 1004 @54 C112: 192 s, 2,344 lines, 0 inert, acceptanceEmpty true. Detail: Task 13 row; DEPLOY_HISTORY §stage 4p.

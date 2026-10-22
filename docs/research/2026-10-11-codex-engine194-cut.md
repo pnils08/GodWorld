@@ -174,6 +174,12 @@ The automated card had incorrect scheduler pointers (SportsFeed `791`/`2488`, Ci
 
 Engine-sheet owns review, application, bench, and any later production approval. The bench should inspect signed C109-like disappointment, the C110-like title cap, mixed-franchise totals, a quiet following Cycle, and game-night weight with aftermath present. Local tests and snapshot arithmetic prove no live citizen outcome, Sheet persistence, deployment, or post-Phase-9 weight readback. No plan status was marked shipped and no rollout row was changed. This completed inbox payload is for Claude registration under the inbox README; only the two task-named deliverables were created in the repository.
 
+## Status log
+
+### engine.194 — status (drained from ROLLOUT, 2026-10-22 / S592)
+
+Record-driven sentiment + game-night intensity LIVE PROD `ae9278aa` (codex cut: share = 0.5 × signed result vs expectation × reach, ±0.10; parser 72/72). C112 first priced week: Oaks W1 (exp 0.4, surprise 1, signed 0.03, reach 0.25) → games row +0.004 — share formula holds. Read the first loss
+
 ## Changelog
 
 - 2026-10-11 (codex) — Authored engine.194 patch, local replay/calibration, targeted tests, full-suite comparison, and verified wiring card for engine-sheet review; no commits or deployment.

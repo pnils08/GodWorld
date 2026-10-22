@@ -83,3 +83,9 @@ Business tests: 103 passed / 0 failed. CitizenArchive: 12 / 0. MediaRoomIntake: 
 New adverse behavior: fresh-exit loss under stale/missing return evidence; same-Cycle retry duplication; broader unmarked-success window across routing targets; and conditional loss of a reissued BIZ_ID's new closure snapshot. No new valid-row sort, same-execution retry overwrite, or deliberately-empty-tab break was found. **FIX before claiming hazards 2–6 fully closed**, with CitizenArchive's destructive inference the first blocker. Follow-up changes and regression tests belong to the authorized engine-sheet lane; none were applied here.
 
 **Reconciled in:** `fe348e1d` (engine-sheet, 2026-10-16) — every finding verified against code and accepted: CitizenArchive and BusinessArchive identity moved to an identical copy already on the archive (no stamp or high-water trust), routing marks per target, the two intake readers write then mark, the retry comment corrected, the missing test file committed. Not taken: restoreCitizen.js stale-cycle validation (the mover no longer reads ReturnedCycle); exactly-once routing → engine.95 receipts. Dispatch: [[2026-10-16-engine285-hazards2-6-review-TASK]].
+
+## Status log
+
+### engine.285 — status (drained from ROLLOUT, 2026-10-22 / S592)
+
+Phase-11 + executor kill hazards (6): all LIVE — 1 @140, 2–6 @141 stage 4j. 2, 3, 5, 6 closed; 4 narrowed: exactly-once routing across a kill needs engine.95 Phase-11 receipts. Dormant intake tabs + header drift left as is. C112 read: no checkpoint row, `_CycleCheckpoint` empty, LifeHistory trim 45.7 s 0 errors — clean

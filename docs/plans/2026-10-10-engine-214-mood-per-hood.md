@@ -325,6 +325,12 @@ Procedure:
 - **Citywide seed lift (Task 16a, codex impl F2):** should a seed with no hood lift every hood, and by how much? `citywideWeighted` has never had a reader; the count-relative gate in `applyObservedFeedback_` is the only citywide seed path. A magnitude is a rate — builder. Five-line build once named.
 - **Builder's words (2026-10-10, on the stadium question):** "when games went for the casino A:L, I'd say take the teams first or last or combined total to determine if home or away". Read: home vs away for the lift comes from the week's games record — the combined total is what the engine already does (`utilities/sportsWeekRecord.js:11–18` parses H/A per game; `:292` `venueShare = homeGames / games`; the lift is `unsigned × venueShare`). "First or last game" variants are not built and not asked for beyond this line. Adjacent hoods: not ruled; Task 4 ships venue-direct. Held open only if the builder wants the first/last reading.
 
+## Status log
+
+### engine.306 — status (drained from ROLLOUT, 2026-10-22 / S592)
+
+Business mints for hood character (builder 2026-10-19). Walk complete 2026-10-21: 103 rows + Pulse District → Uptown (C92 print already says Uptown), roster `output/engine306-mint-roster.tsv`. Codex plan review HOLD 2026-10-21, all 7 folded: es = Business_Intake tab + processBusinessIntake with typed A:I readback/receipt, landmark owner-door exclusion, bench the expanded reader set; builder = Sports Bar vs Game-Day Bar name. LANDED 2026-10-21 on the builder's go: PROD stage 18 @155 (landmark owner-door term) + the 103 rows + realign on live, RECEIPT PASS; first live fire C113 (watch DEPLOY_HISTORY §PROD stage 18); codex gate 3 audits after
+
 ## Changelog
 
 - 2026-10-21 (research-build) — Builder: the $50M heritage door may be too low; checked — already money-game Task 5 (engine.295), not folded; 309 cites it for the ascent number, 308 independent.

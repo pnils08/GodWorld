@@ -1053,6 +1053,10 @@ Rollback: `git checkout 799fd841 -- <the 7 files>` in a staging dir, push, bump;
 
 Crisis arcs carry a NAME minted at onset from the dominant detected channel; peak + resolved now emit `S.worldEvents` (`crisis-lifecycle`, skipped by the engine.212 crime gate); 6-deep city memory of ended crises cited on the next onset. Bench-proven C112–C114, **LIVE PROD @103**; open until the live C108 smoke names `CRISIS-105-WESTOAKL`
 
+### engine.294 — status (drained from ROLLOUT, 2026-10-22 / S592)
+
+Raw "$MOOD" in LifeHistory C104–C111 (96 lines): live ECL R291 MOOD fragment Text "$MOOD" (engine.49 drafter). Fixed 71637c7a (loader skips token fragments; composer drops raw tokens), LIVE PROD @138. **R291 flipped Active=no 2026-10-16 on the builder's word** (`undockedEclPoolApply --active no --match '^\$MOOD$' --apply`, read back 1/1). The 96 printed lines stand as lived. C112 read: 0 raw lines in 2,344 — pass
+
 ## Changelog
 
 - 2026-09-04 (S418, research-build) — Created. Relocated the full sandbox + PROD narrative out of DEPLOY.md verbatim, per Mike-direct tonight: DEPLOY.md stays protocol + current pointers, this file carries the trail.

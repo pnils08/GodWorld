@@ -79,6 +79,16 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 - **codex 2026-10-16** (`docs/archive/for-claude-review/2026-10-16-codex-celeste-usage-legends-review.md`; TASK beside it) — **FIX landed:** pipeline.81 one-cycle baseline / provenance / athlete-and-official eligibility (`01cb95aa`); print-credit tests moved above the suite's exit + receipt fixtures + integration check (`dcb767cb`). **SHIP accepted:** engine.296 source change; cap revert clean; Saturday main order publish → coverage → sweep → sheets. **HOLD carried:** engine.296 never seen in a fire (→ Task 9 bench rung); the non-sports pools (ruled 2026-10-17 → Task 9); the publisher silently omits a missing staged entry while the receipt records every selected stem (not built — hardening, builder's call whether it matters); first-live print-credit claims (Sat 10-17 16:00 run).
 
+## Status log
+
+### engine.296 — status (drained from ROLLOUT, 2026-10-22 / S592)
+
+SPORTS_LEGENDS → retired MLB-origin ledger rows, no literal fallback (builder 2026-10-16). LIVE PROD @143 (stage 4l); Davis predicate (retired OR RoleType legend, 01ea836f, codex SHIP) LIVE PROD @144 (stage 4m) 2026-10-17; three template Cultural_Ledger rows Inactive on live; C112 read: 0 literal legend names in LifeHistory / WorldEvents, evening famous all ledger citizens; Celeste Fri 10-23
+
+### engine.297 — status (drained from ROLLOUT, 2026-10-22 / S592)
+
+Fame sightings draw from the Cultural_Ledger (builder 2026-10-17: "the fame sightings and event Injection should come from there") — the twelve literal pools in `buildEveningFamous.js:92–172` become buckets filled from Active Cultural_Ledger rows by FameCategory/RoleType; context weighting and the sightings shape unchanged; an empty bucket is an empty bucket; bench carries the codex HOLD (synthetic playoff rung so legends are seen in a fire). A's players keep seeding from Simulation_Ledger and the fame seam stays as written (rb call 2026-10-17; plan §Open). Codex builds the patch (builder 2026-10-17: "Ask codex"); es benches + PROD when the builder routes
+
 ## Changelog
 
 - 2026-10-17 (research-build) — builder's fame-ledger ruling recorded verbatim → Task 9 / engine.297 (ready; codex builds the patch on "Ask codex"); the two side readings decided at rb as keep-as-is (the builder declined them); codex 2026-10-16 review reconciled and archived.

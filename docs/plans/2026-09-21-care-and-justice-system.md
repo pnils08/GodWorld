@@ -1417,6 +1417,12 @@ Commit: Income, `careerRecordLayoff_` with "Dismissed by <business> after <n> we
 
 **Proof.** Suites green: buildWorldSummary 255/255, buildCivicDomainSlice, buildSimonSlice, buildTanyaSlice, buildHal/Anthony/PSlayer, beatSlices. Read-only C111 replay from live Sheets (scratch, canon file untouched): only the two hospital lines, the version and the time-dependent city-hall pointer differ — `Hospital: 37 admissions, 75 in care at the close (0 tracked), 75 beds occupied`. Simon C111 replay: `Last week the A's playoff series stood at 4-1.` / `Last week the A's had won 3 straight.`; Tanya C111 unchanged (the parade row). **Live proof:** the C112 summary's hospital segment equals the health slice's citywide census line; Simon's C112 slice states any record with its season and tense; the Sat 10-24 audit fails no piece on either.
 
+## Status log
+
+### engine.298 — status (drained from ROLLOUT, 2026-10-22 / S592)
+
+World summary and sports slices hand the desks one number per fact (C111 failure review, three honest pieces failed): (1) the summary's hospital segment counted tracked Hospital_Ledger rows ("0 in care") — now the cycle's Care_Justice_Census city row in the care trail's words ("37 admissions, 75 in care at the close (0 tracked), 75 beds occupied"), no load % (census vs tracked-scale beds); civic-domain slice reads the new segment; (2) the summary's sports line was literal (C110, playoffs) — the present-tense "The A's record is 4-1." was minted in Simon's slice; Simon and Tanya now state a record with its season and tense (`sportsSubstrate.recordSentence`). Live proof C112: summary hospital reads "36 admissions, 73 in care at the close (0 tracked), 73 beds occupied" — census line, pass; Sat 10-24 audit fails no piece on either
+
 ## Changelog
 - 2026-10-18 (engine-sheet) — engine.298 (§engine.298): summary hospital segment = the city census row in the care trail's words, no load %; civic-domain slice reads it; Simon and Tanya state a feed record with its season and tense (`sportsSubstrate.recordSentence`/`streakSentence`). Live on main for the C112 run.
 - 2026-10-02 (research-build) — Hood illness spike built in the health slice (§A hood illness spike…): share off `Neighborhood_Demographics`, 6% bar or up a quarter on prev/, two tracked residents of the top hood as neighbours (never patients), one share fact, record count untouched; suite green; live C109 adds two Chinatown neighbours and nothing else. Rides the next daily slice run.

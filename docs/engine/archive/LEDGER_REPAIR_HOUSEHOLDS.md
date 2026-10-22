@@ -396,6 +396,12 @@ out of scope for seed. All folded into the sections above. The plan is now groun
 
 ---
 
+## Status log
+
+### engine.5 — status (drained from ROLLOUT, 2026-10-22 / S592)
+
+Household + family: weddings (bondEngine) and births (a real child row) are causal — the Phase 2b vacuum is closed (agy 2026-10-17). Open: divorce — a marriage that wears down ends in a divorce event, the way a grown romance ends in a wedding (bonds cause, events record; builder 2026-10-17); no path today, no married couple has ever divorced. A promotion raises Income only, CareerStage follows age
+
 ## Changelog
 
 - 2026-05-04 (S201, engine-sheet) — Initial draft. Three-stage backfill (pair-married → reconcile

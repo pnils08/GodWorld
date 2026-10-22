@@ -1,0 +1,12 @@
+# TASK — codex: engine.307 diff gate 3 (your gate-2 HOLD folded)
+
+Read-only: code + docs + `output/` dumps; no cron, model, Sheet, bench, clasp, commit or push. Write to `docs/for-claude-review/2026-10-22-codex-engine307-diff-gate3.md`, one SHIP / HOLD per item and one final SHIP / HOLD for PROD, file:line evidence, under ~20 lines. Report in one line when done.
+
+**Your gate 2** (`docs/for-claude-review/2026-10-22-codex-engine307-diff-gate2.md`, HOLD), es fold `1f93d235`:
+
+1. **Mint (item 1)** — `pickMintEmployer_` reads `sportsHireBars_` on the named path and the field path (`buildMintBizPool_` carries `sectorById` and each entry's `sector`). Staff title naming the team lands there; `Scout / Coach / Manager, Oakland A` never does (pre-307 outcome: no field → UNTRACKED). Hunt: any mint path to a sports org the bar misses; `Manager, Oakland A` — `manager` is not in the bar's regex (it would bar "Stadium Operations Manager"). es live read 2026-10-22: all 13 team-seat titles on Simulation_Ledger (coaches, scouts, POP-00528 Manager, both GMs, Oaks head coach) are GAME clock — the mint's GAME return stops them before the named path; the ENGINE ones are "A's Marketing Director" (staff) and "Former Manager, Oakland A's" (T1, not a mint); Generic_Citizens holds 0 occupations naming either team. Judge whether that leaves a reachable path.
+2. **Tests (item 3)** — `scripts/careerEngineReach.test.js` §6: the real `runCareerEngine_` with a hiring franchise and five jobless Small Business rows; player / coach / GAME stay jobless, clerk + guard hired; fails on d86cdaeb and on stage 19. `scripts/mintEmployerPick.test.js` 5b.6 / 5b.6b / 5b.6c fail on 29d3a4c2. `npm test` 296/296.
+3. **Push race (item 5)** — `output/engine-sheet/2026-10-22-push-e307-prod.sh` `fire_state`: live cycleCount, every Neighborhood_Map Cycle, Riley_Digest last Cycle, `_CycleCheckpoint` A1 must read 112 / empty before the push, after the pull-back, and 480 s later; else exit 3 "straddled". The live fire is manual (no crontab line fires it). Residual es accepts: a fire admitted before the deploy runs its starting version whole (Apps Script); one still running past 480 s would be missed — the longest bench fire is 224 s. Judge the residual.
+4. **Bench** — `output/engine-sheet/2026-10-22-e307-bench-B9.log` (B9 = `1f93d235`, C113–C116). Expect: every Cycle's e307 snapshot equals B8r's on the shared fields (B8r = 0 differing rows vs B7), athlete guard PASS, manifest `stage19-e307-B9.sha256`. If the log does not end `exit 0`, HOLD.
+
+Done = the md exists.

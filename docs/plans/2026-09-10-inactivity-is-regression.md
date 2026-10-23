@@ -566,6 +566,7 @@ Not built. Rev 1 → codex HOLD (`docs/archive/for-claude-review/2026-10-17-code
 
 ## Changelog
 
+- 2026-10-22 (engine-sheet, rollout stale check) — engine.197 is not waiting on the builder: he ruled 2026-10-17 that the rates stand (no HARDEN_STREAK / MOOD_DECAY change, §Builder rulings) and that citizens react to the city (→ engine.299, LIVE @147). What is left is engine-sheet's: the wakes-no-rules build (W1/W2 lottery, M1/M2 Mags's nightly journal, W3 Corliss in the pools — builder (b) "Yes that is allowed", under-7, Elias in the lottery) sits finished and codex-SHIP on branch `engine197-wakes-no-rules` (13 commits off 7d84c084), never merged after the C112 readback as planned. Next: merge onto main (engine.302/304 touched citizen-wake.js since), suite, then the first live proof = the next scheduled wake log + 19:00 nightly row + Cycle drain. ROLLOUT engine.197 → ready.
 - 2026-10-17 (engine-sheet S570) — Builder: Elias back in the lottery, journal unchanged (`58953a74`). Wake rulings all settled; merge the whole branch after the C112 readback.
 - 2026-10-17 (engine-sheet S570) — Builder: under-7s out of the wake draw (`6656ffeb`, live dry run pool 1018, 13 out). Elias's wakes beyond the journal open with the builder. Merge the whole branch after the C112 readback.
 - 2026-10-17 (engine-sheet S570) — Builder follow-up: Vinnie/Benji/Deacon in the lottery, Elias out on his own cadence (`c7e417b2`, dry run vs live: pool 1031 of 1032, own cadence 1); W3 allowed — merge the whole branch after the C112 readback. Age floor still the builder's call.

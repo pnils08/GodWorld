@@ -197,6 +197,10 @@ iv. **Authored economy columns — RULED as proposed:** **delete `EconomicFootpr
 
 **Reading:** the §4(iv) delete and the `HomeNeighborhood` removal (§2.6) are HELD. Before any column comes off: (1) a ripple map of what each feed column touches downstream; (2) the option gap — values the dashboard intake offers and values the code recognises, against the sheet's dropdowns. The 04:45 CommunityInvestment carrier question (overnight §6) waits on the same review.
 
+### Builder ruling 2026-10-22 — the held review answered
+
+Asked (engine-sheet, from §5): HomeNeighborhood and EconomicFootprint move no number (display text only); FranchiseStability and CommunityInvestment, kept by §4(iv), move nothing today (their parsers have no caller); dashboard and sheet offer one value list, but the dashboard form cannot enter WeekRecord or 11 of 17 EventTypes; 62 of 237 feed rows carry off-list EventTrigger words the engine ignores (breaking-news, awards, draft, pre-season…). **Builder chose "All three (Recommended)" (verbatim option):** "Remove HomeNeighborhood + EconomicFootprint; wire FranchiseStability and CommunityInvestment so they move numbers as you ruled; add the week record + missing event types to the dashboard and make the common ignored trigger words real hooks." Read as: (1) delete the two columns (the §4(iv) delete + §2.6, released; readers that quote HomeNeighborhood as text move to the franchise venue); (2) FranchiseStability → engine.209's authored drift input, CommunityInvestment → venue community-program pressure, each moving a number off the franchise key (§4(iv) as ruled); (3) dashboard intake gains a WeekRecord control and the 11 sheet-only EventTypes; the off-list triggers that recur become hooks (§5.3 counts). Mechanism is engine-sheet's; codex review before PROD.
+
 ## 5. Ripple map and option sync (engine-sheet subagent, 2026-10-07)
 
 Read-only measurement for the held review (§4 Builder's words 2026-10-07). Source: engine phase files, `utilities/sportsWeekRecord.js`, `scripts/sportsFeedContract.js`, `dashboard/`, and the live-feed dump `output/beats/Oakland_Sports_Feed.jsonl` (237 rows, C30–C110). Not measured: the live sheet's data-validation rules (needs a sheet read or the menu re-run). Tab = 19 columns today (`sportsFeedContract.js:17-39`, VideoGame pair deleted).
@@ -311,6 +315,7 @@ engine.204/205 follow-ups: (a) phase-word tests outside the 204/205 census — *
 
 ## Changelog
 
+- 2026-10-22 (engine-sheet) — Builder answered the held review: all three (remove HomeNeighborhood + EconomicFootprint; wire FranchiseStability + CommunityInvestment; dashboard WeekRecord + EventTypes, common off-list triggers become hooks). Recorded under §4; ROLLOUT engine.204 / 205 / 281 → ready.
 - 2026-10-07 (engine-sheet, S536) — engine.281 (e) (the column surface: which readers carry HomeNeighborhood / EconomicFootprint / CommunityInvestment / FranchiseStability) is the same work as the held engine.204/205 removal; folded into that review, no separate builder call. §5 maps every reader. ROLLOUT engine.281 → section 3.
 - 2026-10-07 (engine-sheet, S536) — §5 ripple map + option-sync table added for the builder's held review.
 - 2026-10-07 (engine-sheet, S536) — Builder held the HomeNeighborhood/EconomicFootprint removal and the CommunityInvestment carrier for a ripple + option-sync review (verbatim under §4 Builder's words 2026-10-07). ROLLOUT engine.204/205 → section 3.

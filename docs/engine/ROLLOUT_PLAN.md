@@ -13,7 +13,7 @@
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing, engine.298 live-observing
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.264 needs-info, engine.261 ready
 - [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]: pipeline.81 live-observing, engine.296 live-observing, engine.297 ready
-- [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 in-progress, engine.201 live-observing, engine.197 ready
+- [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 in-progress, engine.201 live-observing, engine.197 live-observing
 - [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing, engine.302 live-observing, engine.304 live-observing
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 ready
 - [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]: research.29 live-observing, engine.291 live-observing
@@ -124,7 +124,7 @@
 | engine.91 | Canon ingest: the wiki ingesters carry no customId | in-progress | engine-sheet | [[../plans/2026-07-31-canon-ingest-backfill]] §S502 |
 | engine.99 | Hood truth-source: ~49 files of hood literals, migrated as each is touched | in-progress | engine-sheet | [[../plans/2026-08-02-neighborhood-truth-source-migration]] |
 | engine.116 | Spreadsheet weight: T2 code repoint, T3 archives out, T5 dead-tab prune | in-progress | engine-sheet | [[../plans/2026-08-17-sheet-weight-reduction]] |
-| engine.197 | Dial drift: rates ruled (stand) and reactions live (engine.299). Left: merge the finished wakes-no-rules build (branch engine197-wakes-no-rules, codex SHIP 2026-10-17, never merged) | ready | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §Changelog 2026-10-22 |
+| engine.197 | Wakes have no rules MERGED to main 2026-10-22 (codex SHIP 10-17, suite 297/297): one lottery over the whole pool, under 7 out, Corliss in, Mags's journal → one Reflection_Intake row a night. First proof Fri 2026-10-23: 07:30 wake pool line, 19:00 nightly row; C113 drain | live-observing | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §Changelog 2026-10-22 |
 | engine.202 | Sports WeekRecord: trigger-word hooks, dashboard input (3b), 3c | in-progress | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 1 |
 | engine.213 | Approval reads the city. Both opens superseded (stale check 2026-10-22): the sawtooth by the approval hood-mood EMA (engine.213d) + engine.214 mood per hood (clusters gone, PROD @148, read C113); the datawakes by civic.38 (Initiative_Tracker LIVE WRITE C110) | done-pending-archive | engine-sheet | `phase05-citizens/updateCivicApprovalRatings.js`, [[../reference/DEPLOY_HISTORY]] §PROD @84 |
 | engine.27 | Card auto-invalidation Phase B (cycle-end marker hook); Phase A daemon live | ready | engine-sheet | [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]] |

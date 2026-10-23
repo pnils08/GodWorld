@@ -4,7 +4,7 @@
 
 **Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. The plan list below is regenerated at every session close; any wait whose date has passed is named at close too. One line per job; the detail is in the plan the row names. Live Cycle C112 (fired Sun 2026-10-18 evening; engine.299 readback 22:16 CDT: 2,344 lines, 250 s); next live fire C113, Sunday 2026-10-25.
 
-**Working order (builder 2026-10-22, "work through this list how you lay it out"):** ship what is already paid for (finished, reviewed code) first; then clear the builder's decisions; then builds ranked by "does it give the citizens a life", grouped by the file they touch; plumbing only when a build already has the file open; nothing that muddles a pending live read (e.g. the C113 smoke) goes live before it.
+**Working order (builder 2026-10-22, "work through this list how you lay it out"):** ship what is already paid for (finished, reviewed code) first; then clear the builder's decisions; then builds ranked by "does it give the citizens a life", grouped by the file they touch; plumbing only when a build already has the file open. Nothing waits on the live fire (TERMINAL.md: the bench is the gate; a bench-proven change goes live the same session).
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
 **Plans in motion (50)** — each plan, its rows and the state each is in:
@@ -14,6 +14,7 @@
 - [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]: engine.312 ready, pipeline.81 live-observing, engine.296 live-observing, engine.297 live-observing
 - [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.206 live-observing, engine.205 ready, engine.202 in-progress, engine.203d live-observing
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing, engine.298 live-observing
+- [[../DEPLOY_HISTORY]]: engine.313 ready, engine.303 ready, engine.310 live-observing
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.264 needs-info, engine.261 ready
 - [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 in-progress, engine.201 live-observing, engine.197 live-observing
 - [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing, engine.302 live-observing, engine.304 live-observing
@@ -21,7 +22,6 @@
 - [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]: research.29 live-observing, engine.291 live-observing
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 ready, engine.281 ready
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.293 live-observing, engine.104 ready
-- [[../DEPLOY_HISTORY]]: engine.303 ready, engine.310 live-observing
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
 - [[../plans/2026-10-19-discord-voices-connected]]: research.30 live-observing
 - [[../plans/2026-10-20-hood-character-standing]]: pipeline.71 needs-info
@@ -77,6 +77,7 @@
 | research.30 | Discord voices connected (builder 2026-10-19): brief, search first, Paulson bonds, talk recorder LIVE. Read 2026-10-25: first Cycle drain of DISCORD rows (C113) | live-observing | research-build | [[../plans/2026-10-19-discord-voices-connected]] |
 | pipeline.71 | Each hood read against its own canon: every hood's INSTITUTIONS character is its own baseline and its own numbers say whether it lives up to it (builder 2026-10-20; the one-axis tech-boom design is superseded). Rewrite with the builder: which numbers express each hood's character | needs-info | research-build / engine-sheet | [[../plans/2026-10-20-hood-character-standing]] |
 | engine.312 | Fame score is broken (builder 2026-10-23): fame tracked sightings of the old literal names, not the paper. Ruled: fame rises when a citizen is named in a published piece, a sighting adds 1, re-base from the record, fading stays, ceiling 100 | ready | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.312 |
+| engine.313 | Fame bridge mints a duplicate Cultural_Ledger row: a citizen admitted at FameScore ≥ 25 is registered under their Simulation_Ledger name, so a row named differently (Muralist Dante Reyes → new Dante Reyes) doubles. Found on bench F1 + control 2026-10-22 | ready | engine-sheet | DEPLOY_HISTORY §PROD stage 22 |
 
 ## 2. Waiting on a fire — dated or organic
 

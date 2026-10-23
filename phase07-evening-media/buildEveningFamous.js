@@ -13,7 +13,7 @@
  * - Phase 15.5: Real A's players from Simulation_Ledger replace generic athletes
  * - Tier 1-2 active MLB GAME citizens pulled dynamically
  * - Player neighborhoods and TraitProfile included in sighting output
- * - Falls back to generic ATHLETES if ledger unavailable
+ * - engine.297: Active Cultural_Ledger buckets; no generic athlete fallback
  *
  * v2.3 Changes:
  * - ES5 compatible (var instead of const/let, no arrow functions)
@@ -41,6 +41,58 @@
  *
  * ============================================================================
  */
+
+// engine.297: committed Cultural_Ledger rows, cached once per ctx; no writes or RNG draws.
+function culturalSightingBuckets_(ctx) {
+  if (ctx._culturalSightingBuckets) return ctx._culturalSightingBuckets;
+  var buckets = { ACTORS: [], MUSICIANS: [], ATHLETES: [], INFLUENCERS: [], JOURNALISTS: [],
+    CHEFS: [], STREAMERS: [], AUTHORS: [], CIVIC: [], BUSINESS: [], ARTISTS: [], CULTURAL_LEADERS: [] };
+  ctx._culturalSightingBuckets = buckets;
+  var category = { actor: 'ACTORS', musician: 'MUSICIANS', athlete: 'ATHLETES',
+    'sports-figure': 'ATHLETES', influencer: 'INFLUENCERS', journalist: 'JOURNALISTS',
+    chef: 'CHEFS', streamer: 'STREAMERS', author: 'AUTHORS', 'civic-figure': 'CIVIC',
+    activist: 'CIVIC', 'business-figure': 'BUSINESS', artist: 'ARTISTS', curator: 'ARTISTS',
+    dancer: 'ARTISTS', 'community-leader': 'CULTURAL_LEADERS', 'cultural-leader': 'CULTURAL_LEADERS',
+    'cultural-figure': 'CULTURAL_LEADERS' };
+  try {
+    var sheet = ctx.ss ? ctx.ss.getSheetByName('Cultural_Ledger') : null;
+    if (!sheet || sheet.getLastRow() < 2) return buckets;
+    var rows = sheet.getDataRange().getValues(), h = rows[0];
+    var iName = h.indexOf('Name'), iRole = h.indexOf('RoleType'), iCat = h.indexOf('FameCategory');
+    var iStatus = h.indexOf('Status'), iLink = h.indexOf('UniverseLinks'), iHood = h.indexOf('Neighborhood');
+    if (iName < 0 || iStatus < 0) throw new Error('Cultural_Ledger missing Name/Status');
+    var ledger = ctx.ledger || { headers: [], rows: [] }, lh = ledger.headers;
+    var iPop = lh.indexOf('POPID'), iNh = lh.indexOf('Neighborhood'), iLSt = lh.indexOf('Status'), byPop = {};
+    for (var p = 0; p < ledger.rows.length; p++) {
+      byPop[String(ledger.rows[p][iPop] || '').trim().toUpperCase()] = ledger.rows[p];
+    }
+    for (var r = 1; r < rows.length; r++) {
+      var row = rows[r];
+      if (String(row[iStatus] || '').trim().toLowerCase() !== 'active') continue;
+      var name = String(row[iName] || '').trim(), role = String(row[iRole] || '').trim();
+      // 'unknown' is the classifier's miss at registration, not an authored category: re-read the role,
+      // then the role words themselves ("cultural leader" → cultural-leader), so no Active row is unsightable.
+      var cat = String(row[iCat] || '').trim().toLowerCase();
+      if (!cat || cat === 'unknown') cat = classifyRole(role).cat;
+      var key = category[cat] || category[role.toLowerCase().replace(/\s+/g, '-')];
+      if (!name || !key || !Object.prototype.hasOwnProperty.call(buckets, key)) continue;
+      var link = String(row[iLink] || '').trim().toUpperCase();
+      // A linked citizen is out on the town only while living on the ledger (active or retired): a row
+      // whose citizen died, left, or lies in hospital — or is off the ledger (archived) — is not sighted.
+      if (link.indexOf('POP-') === 0) {
+        var cit = byPop[link];
+        if (!cit) continue;
+        if (iLSt >= 0 && !/^(active|retired)$/i.test(String(cit[iLSt] || '').trim())) continue;
+      }
+      var home = link.indexOf('POP-') === 0 ? String(byPop[link][iNh] || '') : String(row[iHood] || '');
+      buckets[key].push({ name: name, role: role, homeNeighborhood: home });
+    }
+  } catch (e) {
+    Logger.log('culturalSightingBuckets_: read failed — ' + e.message);
+  }
+  return buckets;
+}
+
 
 function buildEveningFamous_(ctx) {
   decayCulturalFame_(ctx); // engine.68 — quiet fame fades before tonight's sightings register
@@ -89,87 +141,11 @@ function buildEveningFamous_(ctx) {
   // CULTURAL POOLS (with categories)
   // ═══════════════════════════════════════════════════════════════════════════
 
-  var ACTORS = [
-    { name: "Lena Cross", role: "actor" },
-    { name: "Evan Morello", role: "actor" },
-    { name: "Sage Vienta", role: "actor" },
-    { name: "Marcus Duval", role: "actor" },
-    { name: "Nina Reyes", role: "actress" }
-  ];
-
-  var MUSICIANS = [
-    { name: "Rico Valez", role: "musician" },
-    { name: "Marin Tao", role: "musician" },
-    { name: "Jade Orion", role: "musician" },
-    { name: "Theo Banks", role: "rapper" },
-    { name: "Celeste Moon", role: "singer" }
-  ];
-
-  var ATHLETES = [
-    { name: "Dax Monroe", role: "athlete" },
-    { name: "Kato Rivers", role: "athlete" },
-    { name: "Nila James", role: "athlete" },
-    { name: "Jordan Steele", role: "basketball player" },
-    { name: "Malik Torres", role: "football player" }
-  ];
-
-  var INFLUENCERS = [
-    { name: "Sienna Vale", role: "influencer" },
-    { name: "Brody Kale", role: "influencer" },
-    { name: "Lumi Crest", role: "influencer" },
-    { name: "Zara Kim", role: "tiktoker" }
-  ];
-
-  var JOURNALISTS = [
-    { name: "Tara Ellison", role: "journalist" },
-    { name: "Rowan Pierce", role: "journalist" },
-    { name: "Derek Obi", role: "reporter" }
-  ];
-
-  var CHEFS = [
-    { name: "Carmen Dreel", role: "chef" },
-    { name: "Mason Tril", role: "chef" },
-    { name: "Sofia Nguyen", role: "restaurateur" }
-  ];
-
-  var STREAMERS = [
-    { name: "Pixel Pete", role: "streamer" },
-    { name: "GameGirl Gia", role: "streamer" },
-    { name: "NightOwl Nate", role: "gamer" }
-  ];
-
-  var AUTHORS = [
-    { name: "Claire Ashford", role: "author" },
-    { name: "Marcus Webb", role: "novelist" }
-  ];
-
-  var CIVIC = [
-    { name: "Councilwoman Rivera", role: "civic leader" },
-    { name: "Advocate Simmons", role: "activist" },
-    { name: "Community Director Hayes", role: "community leader" }
-  ];
-
-  var BUSINESS = [
-    { name: "Tech CEO Warren", role: "entrepreneur" },
-    { name: "Venture Kate Lin", role: "investor" }
-  ];
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // NEW POOLS (v2.2)
-  // ═══════════════════════════════════════════════════════════════════════════
-
-  var ARTISTS = [
-    { name: "Gallery Owner Mei Chen", role: "gallery curator" },
-    { name: "Muralist Dante Reyes", role: "artist" },
-    { name: "Sculptor Alma Vasquez", role: "sculptor" },
-    { name: "Photographer Kai Tanaka", role: "artist" }
-  ];
-
-  var CULTURAL_LEADERS = [
-    { name: "Heritage Director Rosa Martinez", role: "cultural leader" },
-    { name: "Festival Organizer James Williams", role: "community organizer" },
-    { name: "Cultural Ambassador Li Wei", role: "cultural figure" }
-  ];
+  var buckets = culturalSightingBuckets_(ctx);
+  var ACTORS = buckets.ACTORS, MUSICIANS = buckets.MUSICIANS, ATHLETES = buckets.ATHLETES;
+  var INFLUENCERS = buckets.INFLUENCERS, JOURNALISTS = buckets.JOURNALISTS, CHEFS = buckets.CHEFS;
+  var STREAMERS = buckets.STREAMERS, AUTHORS = buckets.AUTHORS, CIVIC = buckets.CIVIC;
+  var BUSINESS = buckets.BUSINESS, ARTISTS = buckets.ARTISTS, CULTURAL_LEADERS = buckets.CULTURAL_LEADERS;
 
   // engine.296 (builder 2026-10-16): no hardcoded famous names. SPORTS_LEGENDS is the ledger's
   // retired MLB-origin citizens, filled in the ledger read below; no literal fallback — an empty pool
@@ -180,7 +156,7 @@ function buildEveningFamous_(ctx) {
   // REAL A'S PLAYERS FROM SIMULATION_LEDGER (Phase 15.5)
   // ═══════════════════════════════════════════════════════════════════════════
   // Tier 1-2 active MLB GAME citizens replace generic ATHLETES pool.
-  // Falls back to generic ATHLETES if ledger unavailable.
+  // No generic athlete fallback (engine.297).
 
   // Phase 42 §5.6: read SL via shared ctx.ledger so Phase 7 sees post-phase05 mutations.
   var REAL_PLAYERS = [];
@@ -271,8 +247,8 @@ function buildEveningFamous_(ctx) {
         }
   }
 
-  // Use real players when available, keep generic as fallback
-  var athletePool = (REAL_PLAYERS.length > 0) ? REAL_PLAYERS : ATHLETES;
+  // The A's seed path stays separate pending the builder's ruling; no generic fallback.
+  var athletePool = REAL_PLAYERS;
 
   // ═══════════════════════════════════════════════════════════════════════════
   // WORLD-AWARE SELECTION LOGIC
@@ -588,18 +564,19 @@ function buildEveningFamous_(ctx) {
  * ============================================================================
  *
  * CELEBRITY POOLS:
- * - ACTORS (5), MUSICIANS (5), ATHLETES (5 generic fallback)
+ * - ACTORS, MUSICIANS, ATHLETES: Active Cultural_Ledger rows by FameCategory
  * - REAL_PLAYERS (dynamic from Simulation_Ledger, Tier 1-2 MLB) - v2.5
- * - INFLUENCERS (4), JOURNALISTS (3), CHEFS (3)
- * - STREAMERS (3), AUTHORS (2), CIVIC (3), BUSINESS (2)
- * - ARTISTS (4) - v2.2
- * - CULTURAL_LEADERS (3) - v2.2
+ * - INFLUENCERS, JOURNALISTS, CHEFS, STREAMERS, AUTHORS, CIVIC, BUSINESS,
+ *   ARTISTS, CULTURAL_LEADERS: same ledger; blank category uses classifyRole.
+ * - Linked homeNeighborhood comes from ctx.ledger; unlinked from the cultural row.
+ * - One cached bucket read per ctx; empty categories have no literal fallback.
+ * - ATHLETES is populated but not concatenated: athletePool stays REAL_PLAYERS.
  * - SPORTS_LEGENDS (dynamic from Simulation_Ledger: OriginGame MLB and Status Retired or a RoleType naming a legend) - engine.296
  *
  * REAL PLAYER INTEGRATION (v2.5):
  * - Reads Simulation_Ledger for ClockMode=GAME, Status=active, OriginGame=MLB
  * - Filters to Tier 1-2 only (superstars and regulars)
- * - Replaces generic ATHLETES pool when real players available
+ * - athletePool = REAL_PLAYERS, possibly empty; seed eligibility unchanged
  * - Includes homeNeighborhood (50% chance sighted there)
  * - Includes traitProfile and tier in sighting output
  *

@@ -2,7 +2,7 @@
   "generated": "2026-10-22",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1740,
+  "functionsMapped": 1742,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -5201,6 +5201,7 @@
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/processAdvancementIntake.js::culturalFameOf_",
         "phase05-citizens/processAdvancementIntake.js::dimCulturalFame_",
+        "phase07-evening-media/buildEveningFamous.js::culturalSightingBuckets_",
         "phase07-evening-media/culturalLedger.js::culturalStatusByPop_",
         "phase07-evening-media/culturalLedger.js::decayCulturalFame_",
         "phase07-evening-media/culturalLedger.js::registerCulturalEntity_",

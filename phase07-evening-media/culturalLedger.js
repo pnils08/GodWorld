@@ -129,6 +129,56 @@ function culturalStatusByPop_(ctx) {
   return map;
 }
 
+// Shared by registration and the engine.297 sighting buckets; classification is unchanged.
+function classifyRole(role) {
+  if (!role) return { cat: "unknown", dom: "Other" };
+
+  var r = role.toLowerCase().trim();
+
+  // Arts
+  if (r.indexOf("actor") !== -1 || r.indexOf("actress") !== -1) return { cat: "actor", dom: "Arts" };
+  if (r.indexOf("singer") !== -1 || r.indexOf("musician") !== -1 || r.indexOf("rapper") !== -1) return { cat: "musician", dom: "Arts" };
+  if (r.indexOf("band") !== -1 || r.indexOf("dj") !== -1 || r.indexOf("producer") !== -1) return { cat: "musician", dom: "Arts" };
+  if (r.indexOf("artist") !== -1 || r.indexOf("painter") !== -1 || r.indexOf("sculptor") !== -1) return { cat: "artist", dom: "Arts" };
+  if (r.indexOf("dancer") !== -1 || r.indexOf("choreograph") !== -1) return { cat: "dancer", dom: "Arts" };
+  if (r.indexOf("gallery") !== -1 || r.indexOf("curator") !== -1) return { cat: "curator", dom: "Arts" };
+
+  // Sports
+  if (r.indexOf("athlete") !== -1 || r.indexOf("player") !== -1 || r.indexOf("sports") !== -1) return { cat: "athlete", dom: "Sports" };
+  if (r.indexOf("basketball") !== -1 || r.indexOf("football") !== -1 || r.indexOf("baseball") !== -1) return { cat: "athlete", dom: "Sports" };
+  if (r.indexOf("soccer") !== -1 || r.indexOf("tennis") !== -1 || r.indexOf("golf") !== -1) return { cat: "athlete", dom: "Sports" };
+  if (r.indexOf("coach") !== -1 || r.indexOf("manager") !== -1) return { cat: "sports-figure", dom: "Sports" };
+
+  // Media
+  if (r.indexOf("journalist") !== -1 || r.indexOf("reporter") !== -1 || r.indexOf("anchor") !== -1) return { cat: "journalist", dom: "Media" };
+  if (r.indexOf("influencer") !== -1 || r.indexOf("creator") !== -1 || r.indexOf("youtuber") !== -1) return { cat: "influencer", dom: "Media" };
+  if (r.indexOf("tiktoker") !== -1 || r.indexOf("instagram") !== -1) return { cat: "influencer", dom: "Media" };
+  if (r.indexOf("streamer") !== -1 || r.indexOf("twitch") !== -1 || r.indexOf("gamer") !== -1) return { cat: "streamer", dom: "Media" };
+  if (r.indexOf("podcast") !== -1 || r.indexOf("host") !== -1) return { cat: "media-personality", dom: "Media" };
+
+  // Civic
+  if (r.indexOf("civic") !== -1 || r.indexOf("politic") !== -1 || r.indexOf("council") !== -1) return { cat: "civic-figure", dom: "Civic" };
+  if (r.indexOf("mayor") !== -1 || r.indexOf("governor") !== -1 || r.indexOf("senator") !== -1) return { cat: "civic-figure", dom: "Civic" };
+  if (r.indexOf("activist") !== -1 || r.indexOf("advocate") !== -1) return { cat: "activist", dom: "Civic" };
+  if (r.indexOf("community") !== -1 || r.indexOf("organizer") !== -1) return { cat: "community-leader", dom: "Civic" };
+
+  // Culinary
+  if (r.indexOf("chef") !== -1 || r.indexOf("cook") !== -1 || r.indexOf("restaurateur") !== -1) return { cat: "chef", dom: "Culinary" };
+
+  // Literature
+  if (r.indexOf("author") !== -1 || r.indexOf("writer") !== -1 || r.indexOf("novelist") !== -1) return { cat: "author", dom: "Literature" };
+  if (r.indexOf("poet") !== -1 || r.indexOf("playwright") !== -1) return { cat: "author", dom: "Literature" };
+
+  // Fashion
+  if (r.indexOf("model") !== -1 || r.indexOf("fashion") !== -1 || r.indexOf("designer") !== -1) return { cat: "model", dom: "Fashion" };
+
+  // Business
+  if (r.indexOf("ceo") !== -1 || r.indexOf("founder") !== -1 || r.indexOf("entrepreneur") !== -1) return { cat: "business-figure", dom: "Business" };
+  if (r.indexOf("executive") !== -1 || r.indexOf("investor") !== -1) return { cat: "business-figure", dom: "Business" };
+
+  return { cat: "unknown", dom: "Other" };
+}
+
 function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborhood) {
 
   // Defensive guard
@@ -164,54 +214,6 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   // ═══════════════════════════════════════════════════════════════════════════
   // ROLE CLASSIFICATION
   // ═══════════════════════════════════════════════════════════════════════════
-  function classifyRole(role) {
-    if (!role) return { cat: "unknown", dom: "Other" };
-
-    var r = role.toLowerCase().trim();
-
-    // Arts
-    if (r.indexOf("actor") !== -1 || r.indexOf("actress") !== -1) return { cat: "actor", dom: "Arts" };
-    if (r.indexOf("singer") !== -1 || r.indexOf("musician") !== -1 || r.indexOf("rapper") !== -1) return { cat: "musician", dom: "Arts" };
-    if (r.indexOf("band") !== -1 || r.indexOf("dj") !== -1 || r.indexOf("producer") !== -1) return { cat: "musician", dom: "Arts" };
-    if (r.indexOf("artist") !== -1 || r.indexOf("painter") !== -1 || r.indexOf("sculptor") !== -1) return { cat: "artist", dom: "Arts" };
-    if (r.indexOf("dancer") !== -1 || r.indexOf("choreograph") !== -1) return { cat: "dancer", dom: "Arts" };
-    if (r.indexOf("gallery") !== -1 || r.indexOf("curator") !== -1) return { cat: "curator", dom: "Arts" };
-
-    // Sports
-    if (r.indexOf("athlete") !== -1 || r.indexOf("player") !== -1 || r.indexOf("sports") !== -1) return { cat: "athlete", dom: "Sports" };
-    if (r.indexOf("basketball") !== -1 || r.indexOf("football") !== -1 || r.indexOf("baseball") !== -1) return { cat: "athlete", dom: "Sports" };
-    if (r.indexOf("soccer") !== -1 || r.indexOf("tennis") !== -1 || r.indexOf("golf") !== -1) return { cat: "athlete", dom: "Sports" };
-    if (r.indexOf("coach") !== -1 || r.indexOf("manager") !== -1) return { cat: "sports-figure", dom: "Sports" };
-
-    // Media
-    if (r.indexOf("journalist") !== -1 || r.indexOf("reporter") !== -1 || r.indexOf("anchor") !== -1) return { cat: "journalist", dom: "Media" };
-    if (r.indexOf("influencer") !== -1 || r.indexOf("creator") !== -1 || r.indexOf("youtuber") !== -1) return { cat: "influencer", dom: "Media" };
-    if (r.indexOf("tiktoker") !== -1 || r.indexOf("instagram") !== -1) return { cat: "influencer", dom: "Media" };
-    if (r.indexOf("streamer") !== -1 || r.indexOf("twitch") !== -1 || r.indexOf("gamer") !== -1) return { cat: "streamer", dom: "Media" };
-    if (r.indexOf("podcast") !== -1 || r.indexOf("host") !== -1) return { cat: "media-personality", dom: "Media" };
-
-    // Civic
-    if (r.indexOf("civic") !== -1 || r.indexOf("politic") !== -1 || r.indexOf("council") !== -1) return { cat: "civic-figure", dom: "Civic" };
-    if (r.indexOf("mayor") !== -1 || r.indexOf("governor") !== -1 || r.indexOf("senator") !== -1) return { cat: "civic-figure", dom: "Civic" };
-    if (r.indexOf("activist") !== -1 || r.indexOf("advocate") !== -1) return { cat: "activist", dom: "Civic" };
-    if (r.indexOf("community") !== -1 || r.indexOf("organizer") !== -1) return { cat: "community-leader", dom: "Civic" };
-
-    // Culinary
-    if (r.indexOf("chef") !== -1 || r.indexOf("cook") !== -1 || r.indexOf("restaurateur") !== -1) return { cat: "chef", dom: "Culinary" };
-
-    // Literature
-    if (r.indexOf("author") !== -1 || r.indexOf("writer") !== -1 || r.indexOf("novelist") !== -1) return { cat: "author", dom: "Literature" };
-    if (r.indexOf("poet") !== -1 || r.indexOf("playwright") !== -1) return { cat: "author", dom: "Literature" };
-
-    // Fashion
-    if (r.indexOf("model") !== -1 || r.indexOf("fashion") !== -1 || r.indexOf("designer") !== -1) return { cat: "model", dom: "Fashion" };
-
-    // Business
-    if (r.indexOf("ceo") !== -1 || r.indexOf("founder") !== -1 || r.indexOf("entrepreneur") !== -1) return { cat: "business-figure", dom: "Business" };
-    if (r.indexOf("executive") !== -1 || r.indexOf("investor") !== -1) return { cat: "business-figure", dom: "Business" };
-
-    return { cat: "unknown", dom: "Other" };
-  }
 
   // === If roleType missing, attempt auto-inference ===
   if (!roleType || roleType.trim() === "") {

@@ -360,5 +360,74 @@ console.log('7. engine.281 (a2) — sportsRung_ and the ladder sites');
     !empty.some(p => p.role === "A's legend" || /legend/i.test(String(p.role))), empty.map(p => p.name + '/' + p.role).join(', '));
 }
 
+console.log('engine.297 — synthetic, non-canon Cultural_Ledger buckets');
+{
+  const cats = ['actor', 'musician', 'athlete', 'influencer', 'journalist', 'chef', 'streamer',
+    'author', 'civic-figure', 'business-figure', 'artist', 'community-leader'];
+  const keys = ['ACTORS', 'MUSICIANS', 'ATHLETES', 'INFLUENCERS', 'JOURNALISTS', 'CHEFS',
+    'STREAMERS', 'AUTHORS', 'CIVIC', 'BUSINESS', 'ARTISTS', 'CULTURAL_LEADERS'];
+  const rows = cats.map((c, i) => ['Synthetic Fame ' + i, c, c, 'Active', '', 'Downtown']);
+  const headers = ['Name', 'RoleType', 'FameCategory', 'Status', 'UniverseLinks', 'Neighborhood'];
+  let reads = 0, picked = [], ripples = [], registered = [];
+  const sb = vm.createContext({ Logger: { log: () => {} }, Math, String, Number, Array, Object, JSON,
+    safeRand_: ctx => ctx.rng, getCoreSimNeighborhoods_: () => ['Downtown'],
+    hoodNamesWithScene_: () => ['Downtown'], culturalStatusByPop_: () => ({}),
+    recordRipple_: (ctx, r) => ripples.push(r), registerCulturalEntity_: (ctx, n) => registered.push(n),
+    pickRandomSet_: (pool, count) => { picked = pool; return pool.slice(0, count); } });
+  load(sb, 'utilities/sportsWeekRecord.js');
+  load(sb, 'phase07-evening-media/culturalLedger.js');
+  sb.decayCulturalFame_ = () => {};
+  sb.culturalStatusByPop_ = () => ({});
+  sb.registerCulturalEntity_ = (ctx, n) => registered.push(n);
+  load(sb, 'phase07-evening-media/buildEveningFamous.js');
+  const make = data => ({ rng: () => 0.5, config: {}, summary: { cycleId: 112, season: 'Summer',
+    sportsCity: { band: 'top' }, sportsSeason: 'championship', isCreationDay: true, isFirstFriday: true,
+    holiday: 'Thanksgiving', worldEvents: ['synthetic'], economicMood: 70,
+    cityDynamics: { sentiment: 0.5, culturalActivity: 1.5, communityEngagement: 1.5 } },
+    ledger: { headers: ['POPID', 'Neighborhood'], rows: [['POP-99001', 'Temescal']] },
+    ss: { getSheetByName: name => name === 'Cultural_Ledger' ? {
+      getLastRow: () => data.length + 1, getDataRange: () => ({ getValues: () => { reads++; return [headers, ...data]; } })
+    } : null } });
+  const ctx = make(rows);
+  sb.buildEveningFamous_(ctx);
+  const buckets = sb.culturalSightingBuckets_(ctx);
+  check('engine.297: all twelve Active categories enter their bucket', keys.every((k, i) => buckets[k].length === 1 && buckets[k][0].name === rows[i][0]));
+  check('engine.297: sightings, registration and ripples use only ledger names', ctx.summary.famousSightings.length === 4 &&
+    ctx.summary.famousPeople.every(n => rows.some(r => r[0] === n)) &&
+    registered.join() === ctx.summary.famousPeople.join() && ripples.every(r => registered.includes(r.causeId)));
+  check('engine.297: unchanged weighting admits eleven buckets; cultural ATHLETES is not a generic fallback',
+    picked.length === 11 && !picked.some(p => p.name === rows[2][0]));
+  check('engine.297: bucket read is cached per ctx', reads === 1 && sb.culturalSightingBuckets_(ctx) === buckets);
+  const sparse = make([['Synthetic Fallback', 'chef', '', 'Active', 'POP-99001', 'Wrong hood'],
+    ['Synthetic Excluded', 'actor', 'actor', 'Inactive', '', 'Downtown'],
+    ['Synthetic Override', 'chef', 'author', 'Active', '', 'Rockridge'],
+    ['Synthetic Missing Link', 'actor', 'actor', 'Active', 'POP-99002', 'Wrong hood']]);
+  const b = sb.culturalSightingBuckets_(sparse);
+  check('engine.297: blank category uses shared classifier and linked current hood', b.CHEFS[0].homeNeighborhood === 'Temescal');
+  check('engine.297: explicit category wins; unlinked uses row hood; inactive is excluded',
+    b.AUTHORS[0].homeNeighborhood === 'Rockridge' && !b.ACTORS.some(e => e.name === 'Synthetic Excluded'));
+  check('engine.297: a POP link off the ledger (archived / deceased) is not sighted, never a stale cultural hood', b.ACTORS.length === 0);
+  const life = make([['Synthetic Living', 'actor', 'actor', 'Active', 'POP-99001', ''], ['Synthetic Retired', 'author', 'author', 'Active', 'POP-99003', ''],
+    ['Synthetic Gone', 'actor', 'actor', 'Active', 'POP-99004', ''], ['Synthetic Ward', 'actor', 'actor', 'Active', 'POP-99005', '']]);
+  life.ledger = { headers: ['POPID', 'Neighborhood', 'Status'], rows: [['POP-99001', 'Temescal', 'Active'], ['POP-99003', 'Fruitvale', 'Retired'],
+    ['POP-99004', 'Downtown', 'Deceased'], ['POP-99005', 'Downtown', 'Hospitalized']] };
+  const lb = sb.culturalSightingBuckets_(life);
+  check('engine.297: only a living linked citizen (active or retired) is sighted; deceased / hospitalized rows stay home',
+    lb.ACTORS.map(e => e.name).join() === 'Synthetic Living' && lb.AUTHORS.map(e => e.name + '/' + e.homeNeighborhood).join() === 'Synthetic Retired/Fruitvale');
+  const unk = sb.culturalSightingBuckets_(make([['Synthetic Leader', 'cultural leader', 'unknown', 'Active', '', 'Downtown'],
+    ['Synthetic Figure', 'cultural figure', '', 'Active', '', 'Downtown'], ['Synthetic Model', 'model', 'model', 'Active', '', 'Downtown']]));
+  check('engine.297: an unknown category re-reads the role words (live Rosa Martinez / Li Wei shape); a bucketless category stays out',
+    unk.CULTURAL_LEADERS.map(e => e.name).join() === 'Synthetic Leader,Synthetic Figure' &&
+    !Object.keys(unk).some(k => unk[k].some(e => e.name === 'Synthetic Model')));
+  sb.buildEveningFamous_(sparse);
+  check('engine.297: empty musician bucket contributes no name', b.MUSICIANS.length === 0 && !picked.some(p => p.role === 'musician'));
+  const empty = make([]);
+  sb.buildEveningFamous_(empty);
+  check('engine.297: empty ledger has no literal fallback', empty.summary.famousSightings.length === 0);
+  const oldNames = ["Lena Cross","Evan Morello","Sage Vienta","Marcus Duval","Nina Reyes","Rico Valez","Marin Tao","Jade Orion","Theo Banks","Celeste Moon","Dax Monroe","Kato Rivers","Nila James","Jordan Steele","Malik Torres","Sienna Vale","Brody Kale","Lumi Crest","Zara Kim","Tara Ellison","Rowan Pierce","Derek Obi","Carmen Dreel","Mason Tril","Sofia Nguyen","Pixel Pete","GameGirl Gia","NightOwl Nate","Claire Ashford","Marcus Webb","Councilwoman Rivera","Advocate Simmons","Community Director Hayes","Tech CEO Warren","Venture Kate Lin","Gallery Owner Mei Chen","Muralist Dante Reyes","Sculptor Alma Vasquez","Photographer Kai Tanaka","Heritage Director Rosa Martinez","Festival Organizer James Williams","Cultural Ambassador Li Wei"];
+  const source = fs.readFileSync(path.join(ROOT, 'phase07-evening-media/buildEveningFamous.js'), 'utf8');
+  check('engine.297: none of the ' + oldNames.length + ' former literal names survives in source', oldNames.every(n => !source.includes(n)));
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) process.exitCode = 1;

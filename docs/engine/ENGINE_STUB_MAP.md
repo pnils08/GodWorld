@@ -3065,6 +3065,9 @@
 - **fakeSS(rows, extraSheets)**
 
 ### buildEveningFamous.js
+- **culturalSightingBuckets_(ctx)**
+  Sheets: Cultural_Ledger
+
 - **buildEveningFamous_(ctx)**
   Reads: S.cityDynamics, S.cycleId, S.economicMood, S.eveningSports, S.famousPeople, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsCity, S.sportsSeason, S.sportsZones, S.weather, S.weatherMood, S.worldEvents
   Writes: S.famousPeople, S.famousSightings, S.famousSightingsContext
@@ -3123,6 +3126,8 @@
 
 - **culturalStatusByPop_(ctx)**
   Sheets: Cultural_Ledger
+
+- **classifyRole(role)**
 
 - **registerCulturalEntity_(ctx, name, roleType, journalistName, neighborhood)**
   Reads: S.cityDynamics, S.culturalEntityCreates, S.culturalEntityUpdates, S.culturalRegistry, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsCity, S.sportsSeason
@@ -4811,4 +4816,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1740
+**Functions mapped:** 1742

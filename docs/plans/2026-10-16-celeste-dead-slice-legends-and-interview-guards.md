@@ -81,6 +81,14 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 - **Task 9 (engine.297) LIVE PROD @159 = stage 22** (2026-10-22): codex patch landed `486ea61e` with two es fixes (an `unknown` category re-reads the role words — live Rosa Martinez / Li Wei; a POP-linked row is sighted only while its citizen lives on the ledger). Bench 1004 F1 C113–C116 PASS beside the stage-21 control (DEPLOY_HISTORY §PROD stage 22). The engine.296 legend HOLD stays carried: it clears on the first live playoff / championship week (the legends path is byte-identical in this stage).
 
+## engine.312 — the fame score is broken (builder 2026-10-23)
+
+**Builder, verbatim (2026-10-23, on the fame rate after engine.297 went live):** asked how fame should grow per sighting (+5 base today, plus holiday / economy extras, no ceiling): **"1 point a sighting"**. Asked whether fame stops at 100 (Marin Tao 153, Rico Valez 116, Jade Orion 104): **"Over 100?"** then **"Never heard of any of them so the fame score is broken"**.
+
+**Measured on live (2026-10-23, Cultural_Ledger × Simulation_Ledger by UniverseLinks):** 48 of 50 rows were minted by the sighting path (`FirstRefSource` SystemEngine — the retired literal pools), 2 by engine.118. FameScore tracks sightings, not the record: rows at FameScore ≥ 50 average 0.8 paper mentions (`UsageCount`), rows under 50 average 9.0. Top: Marin Tao 153 (25 sightings, 1 mention, Tier 4), Rico Valez 116 (19, 1, T4), Jade Orion 104 (18, 0, T2), Lena Cross 93 (17, 0), Sage Vienta 90 (17, 0). A sighting adds +5 + calendar/economy extras (`culturalLedger.js` registerCulturalEntity_ :266), fading only after 10 quiet Cycles (−1/Cycle, :71–93); no ceiling. Distribution: <25: 25 · 25–49: 12 · 50–74: 6 · 75–99: 4 · 100+: 3.
+
+**Ruled:** a sighting is worth 1 point (read flat — the extras ride the paper path, not sightings). **Open with the builder:** what fame is earned from (the reading engine-sheet brings: being named in the published record — Citizen_Media_Usage / UsageCount, the engine.118 mark at 25 mentions — with a sighting the consequence of fame, 1 point), whether today's scores are re-based from that record, and a ceiling. Not built; the 1-point rule rides the same build.
+
 ## Status log
 
 ### engine.296 — status (drained from ROLLOUT, 2026-10-22 / S592)
@@ -93,6 +101,7 @@ Fame sightings draw from the Cultural_Ledger (builder 2026-10-17: "the fame sigh
 
 ## Changelog
 
+- 2026-10-23 (engine-sheet) — engine.312 filed: builder "1 point a sighting", then "Never heard of any of them so the fame score is broken"; live measure recorded under §engine.312.
 - 2026-10-22 (engine-sheet) — Task 9 / engine.297 LIVE PROD @159 (stage 22) after the rollout stale check found the codex patch unapplied since 10-17; build notes above.
 
 - 2026-10-17 (research-build) — builder's fame-ledger ruling recorded verbatim → Task 9 / engine.297 (ready; codex builds the patch on "Ask codex"); the two side readings decided at rb as keep-as-is (the builder declined them); codex 2026-10-16 review reconciled and archived.

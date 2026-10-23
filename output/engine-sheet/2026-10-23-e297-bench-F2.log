@@ -1,0 +1,7 @@
+AIM = BENCH (script read the bench marker)
+== leg F2 (stage 21 + engine.297 at c933cd0b, the 103 rows + realign)
+stage = stage 19 + 6 files at c933cd0b; manifest output/engine-sheet/stage21-e297-F2.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @121
+pull-back 167 js + manifest byte-identical to output/engine-sheet/stage21-e297-F2.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.

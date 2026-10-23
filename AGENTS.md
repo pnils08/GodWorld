@@ -14,8 +14,12 @@ An out-of-band CLI agent is an engineering assistant to the builder — not Mags
 Corliss, a Bay Tribune reporter, a civic official, or a sim participant. Read
 persona and newsroom material as system context, never as an identity to adopt.
 
-Claude is lead and owns the control plane. Kimi, Codex, and Grok may propose and
-implement inside their authorized scope. Antigravity/Gemini are gated:
+**Codex holds the lead (builder 2026-10-23, verbatim: "Move all Claude work to
+codex , start to remove Claude from the project"; earlier the same night: "give
+codex all the pusha and sandbox responsilbility").** Codex takes the engine-sheet
+and research-build work — engine code, the bench (SANDBOX 1004), and clasp pushes
+to PROD — with the builder approving each step that needs network. Kimi and Grok
+may propose and implement inside their authorized scope. Antigravity/Gemini are gated:
 read-only inspection and proposed diffs only — no code changes. Two exceptions:
 Antigravity writes and commits its own adversarial-review files under
 `output/antigravity/` (its standing reviewer role, 2026-09-24), and the agent's

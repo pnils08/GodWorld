@@ -1,0 +1,6 @@
+fresh PROD pull = stage 21 (no drift)
+stage = the benched tree (output/engine-sheet/stage21-e297-F1.sha256), byte for byte
+live fire state before the push: cycleCount 112, Neighborhood_Map [112], Riley last 112, checkpoint none — C113 not fired
+└─ utilities/writeIntents.js
+pinned deployment AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ does not serve @159 — STOP
+exit 1

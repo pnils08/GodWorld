@@ -7,7 +7,8 @@
 // to a citizen who is not living on the ledger now; or (end of a roll, --final) no pre-existing non-athlete row was sighted at
 // all. FameCategory / Neighborhood rewrites are the registration's own refresh (culturalLedger.js :270/:275) — not judged.
 // Writes nothing to any sheet; saves output/engine-sheet/2026-10-22-e297-check-<label>-c<cycle>.json.
-// usage: node 2026-10-22-e297-check.js <cycle> <label> [--from <first>] [--final]   (label `ctl`/`H<n>` read the bench; `live` live)
+// usage: node 2026-10-22-e297-check.js <cycle> <label> [--from <first>] [--final] [--base <file.json>]   (label `ctl`/`F<n>` read the bench;
+//        `live` reads live — pass --base output/engine-sheet/2026-10-22-e297-live-cultural-c112.json, the live pre-C113 snapshot)
 require('/root/GodWorld/lib/env');
 const LIVE = process.env.GODWORLD_SHEET_ID;
 const BENCH = '1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA', BASE = '1Mbz-sE13iu1RU4qo-rzsczjjPRKAU-KSfnQnrJNXCgA';
@@ -27,7 +28,9 @@ async function tab(id, name) {
 }
 const BUCKETED = /^(actor|musician|influencer|journalist|chef|streamer|author|civic-figure|activist|business-figure|artist|curator|dancer|community-leader|cultural-leader|cultural-figure)$/;
 (async () => {
-  const base = await tab(BASE, 'Cultural_Ledger'), now = await tab(SHEET, 'Cultural_Ledger'), led = await tab(SHEET, 'Simulation_Ledger');
+  // --base <file.json>: a saved Cultural_Ledger (e.g. the live C112 snapshot 2026-10-22-e297-live-cultural-c112.json) instead of the bench baseline sheet
+  const bi = process.argv.indexOf('--base');
+  const base = bi > 0 ? JSON.parse(fs.readFileSync(process.argv[bi + 1], 'utf8')) : await tab(BASE, 'Cultural_Ledger'), now = await tab(SHEET, 'Cultural_Ledger'), led = await tab(SHEET, 'Simulation_Ledger');
   const bh = base[0], h = now[0], c = n => h.indexOf(n), L = led[0], lc = n => L.indexOf(n);
   const seen = v => Number(String(v || '').replace(/[^0-9]/g, '')) || 0;
   const baseById = {};

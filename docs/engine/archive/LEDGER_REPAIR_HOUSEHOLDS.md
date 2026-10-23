@@ -418,3 +418,4 @@ Household + family: weddings (bondEngine) and births (a real child row) are caus
   (§Current state & multi-session roadmap) as the self-contained handoff. NO code/deploy this
   session by design — Phase 2 kill-shot (instrument → deploy → fire cycle → fix) is next session's
   focused work. Full diagnosis: ENGINE_REPAIR Row 23.
+- 2026-10-22 (engine-sheet, rollout stale check) — engine.5 closed: the last open item, divorce as an event, was built by engine.302 (`processDivorces_` in `householdFormationEngine.js`, called from the household phase; `[Divorce]` LifeHistory lines; PROD @149 stage 9, 2026-10-19). The 2026-10-22 status block above was drained verbatim from a row written before that build. ROLLOUT engine.5 → done-pending-archive.

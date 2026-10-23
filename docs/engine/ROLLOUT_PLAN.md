@@ -1,6 +1,6 @@
 # GodWorld — Rollout Plan
 
-**Current work and waits only.** A row is here because someone is working it now, because it waits on a dated fire or a named builder call, or because it is ruled and next in the queue. Closed work → [[ROLLOUT_ARCHIVE]]. Parked work and external watches → [[../plans/BACKLOG]] §Parked ideas and external watches. Row contract, states and the sweep → [[rollout-rules]]. Sim lens before touching a mechanic → [[SIM_DOCTRINE]] §15. Last trued 2026-10-07 (engine-sheet, against the C110 smoke, PROD `f2a61e5e` and codex's row chase [[../research/2026-10-07-codex-rollout-chase]]).
+**Current work and waits only.** A row is here because someone is working it now, because it waits on a dated fire or a named builder call, or because it is ruled and next in the queue. Closed work → [[ROLLOUT_ARCHIVE]]. Parked work and external watches → [[../plans/BACKLOG]] §Parked ideas and external watches. Row contract, states and the sweep → [[rollout-rules]]. Sim lens before touching a mechanic → [[SIM_DOCTRINE]] §15. Last trued 2026-10-07 (engine-sheet, against the C110 smoke, PROD `f2a61e5e` and codex's row chase [[../research/2026-10-07-codex-rollout-chase]]); engine-lane stale check 2026-10-22 (each ready / in-progress engine-sheet row read against the code and later builds; superseded rows closed with the superseding build named in their plan).
 
 **Reading this file:** section 1 is the builder's list. Sections 2–4 are the lanes'. The plan list below is regenerated at every session close; any wait whose date has passed is named at close too. One line per job; the detail is in the plan the row names. Live Cycle C112 (fired Sun 2026-10-18 evening; engine.299 readback 22:16 CDT: 2,344 lines, 250 s); next live fire C113, Sunday 2026-10-25.
 
@@ -9,16 +9,16 @@
 
 - [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, engine.308 live-observing, engine.287 live-observing, engine.288 live-observing, engine.289 blocked, engine.305 live-observing, engine.306 live-observing, engine.307 live-observing, engine.309 needs-info, engine.311 needs-info
 - [[../plans/2026-10-11-media-extension]]: pipeline.83 live-observing, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.76 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing, pipeline.80 live-observing
-- [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing
+- [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.205 needs-info, engine.206 live-observing, engine.202 in-progress, engine.203d live-observing
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing, engine.298 live-observing
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.98 in-progress, engine.264 needs-info, engine.261 ready
 - [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]: pipeline.81 live-observing, engine.296 live-observing, engine.297 ready
 - [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 in-progress, engine.201 live-observing, engine.197 needs-info
 - [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing, engine.302 live-observing, engine.304 live-observing
+- [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 needs-info, engine.281 in-progress
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 ready
 - [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]: research.29 live-observing, engine.291 live-observing
-- [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 in-progress, engine.281 in-progress
-- [[../reference/DEPLOY_HISTORY]]: engine.213 in-progress, engine.294 live-observing
+- [[../reference/DEPLOY_HISTORY]]: engine.213 done-pending-archive, engine.294 live-observing
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.293 live-observing, engine.104 ready
 - [[../DEPLOY_HISTORY]]: engine.303 ready, engine.310 live-observing
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
@@ -41,7 +41,7 @@
 - [[../plans/2026-08-29-boot-doc-consolidation]]: governance.51 in-progress
 - [[../plans/2026-08-16-city-hall-nine-seat-table]]: civic.24 ready
 - [[../canon/INSTITUTIONS]]: canon.5 in-progress
-- [[../engine/archive/LEDGER_REPAIR_HOUSEHOLDS]]: engine.5 in-progress
+- [[../engine/archive/LEDGER_REPAIR_HOUSEHOLDS]]: engine.5 done-pending-archive
 - [[../plans/2026-06-24-engine-output-canon-coverage]]: engine.41 ready
 - [[../plans/2026-07-07-citizen-intake-unification]]: engine.51 ready
 - [[../plans/2026-07-31-canon-ingest-backfill]]: engine.91 in-progress
@@ -58,7 +58,7 @@
 - [[../plans/2026-05-22-engine-regulatory-friction]]: engine.20d ready
 - [[../plans/2026-09-22-initiative-budget-disbursement]]: engine.257 ready
 - [[../research/2026-09-10-kimi-faith-lane-routing]]: engine.248 ready
-- [[../plans/2026-09-19-civic-wake-game-loop]]: engine.253 ready
+- [[../plans/2026-09-19-civic-wake-game-loop]]: engine.253 done-pending-archive
 - [[../plans/2026-10-18-event-engines-move-dials]]: engine.299 live-observing
 - `output/antigravity/2026-10-19-review-engine214-prod-candidate.md`: engine.301 ready
 <!-- /generated -->
@@ -77,6 +77,8 @@
 |---|------|-------|----------|---------|
 | civic.43 | School board: T1 + T3 LIVE. T2 seating HELD (builder 2026-10-07): schools half built (hood school data, no schools in hoods); deep review first, then the canon-name fix | needs-info | research-build / engine-sheet | [[../plans/2026-10-04-school-board]] §Builder's words (2026-10-07) |
 | research.30 | Discord voices connected (builder 2026-10-19): brief, search first, Paulson bonds, talk recorder LIVE. Read 2026-10-25: first Cycle drain of DISCORD rows (C113) | live-observing | research-build | [[../plans/2026-10-19-discord-voices-connected]] |
+| engine.204 | Game-day city impact LIVE since 2026-10-06. Column removal HELD (builder 2026-10-07) for a ripple + option-sync review; the ripple map and option-sync table were delivered 2026-10-07 (read-before §5) and wait on the builder's read. The CommunityInvestment carrier waits on it | needs-info | engine-sheet | [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] §4 Builder's words (2026-10-07), §5 |
+| engine.205 | Weekly game economy LIVE since 2026-10-06. Held with engine.204 for the same review (§5 delivered 2026-10-07, waits on the builder) | needs-info | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 4, 10 |
 | pipeline.71 | Each hood read against its own canon: every hood's INSTITUTIONS character is its own baseline and its own numbers say whether it lives up to it (builder 2026-10-20; the one-axis tech-boom design is superseded). Rewrite with the builder: which numbers express each hood's character | needs-info | research-build / engine-sheet | [[../plans/2026-10-20-hood-character-standing]] |
 
 ## 2. Waiting on a fire — dated or organic
@@ -107,8 +109,6 @@
 |  research.29 | UNDOCKED crossover: Moves 1–5 live (engine.291 on PROD @138). C112 live readback 2026-10-19: 46 audience lines, 15 name a C112 pilot, 0 raw tokens, 0 self-naming. Next: 2026-10-24 digest crossover block | live-observing | research-build | [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]  |
 | engine.214 | Mood per hood + 287/288 LIVE @148 (stage 5); 8a Cut A = engine.305 @151; Cut B (hood reactions) @152; **Cut C LIVE @153, rate 1-in-10 @154 = stage 17** (2026-10-20). First live fire C113 Sun 2026-10-25; next 8b `$VENUE` draws the citizen's spot | live-observing | engine-sheet / research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] |
 | engine.95 | Checkpoint/resume LIVE, gate 330000/60000/6000. C112: 131 phases, 250 s, no checkpoint; Phase11-MaintainLifeHistoryLog 25.4 → 45.7 s vs tailReserveMs 60000 (bench C123 308 s). Read C113 Sun 2026-10-25; grow tailReserveMs if that phase nears 60 s | live-observing | engine-sheet | [[../plans/2026-07-31-platform-ceiling-resilience]] §Changelog bench steps 0–5 |
-| engine.204 | Game-day city impact LIVE since 2026-10-06. Column removal HELD (builder 2026-10-07): ripple map of every feed column + dashboard/sheet/code option-sync audit first; the CommunityInvestment carrier waits on it | in-progress | engine-sheet | [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] §4 Builder's words (2026-10-07) |
-| engine.205 | Weekly game economy LIVE since 2026-10-06. Held with engine.204 for the same ripple + option-sync review | in-progress | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 4, 10 |
 | engine.281 | Sports-week ladder + venue (a–d) LIVE since 2026-10-06. (e) the column surface folds into the engine.204/205 ripple + option-sync review (2026-10-07) | in-progress | engine-sheet / research-build | [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] §5 |
 | engine.273 | Holidays LIVE; first Second Dawn C131. Open Court Week LIVE PROD `ae9278aa` (position 6, citywide, First Friday week; first live C162; unit-proven). Meaning sentences approved as working lines (rb carries to desks); running-on-its-own week held until it happens | in-progress | engine-sheet / research-build | [[../plans/2026-09-29-sim-holiday-calendar]] §Builder's words (2026-10-07) |
 | engine.193 | Adversity tiers LIVE; (b) settle LIVE `ae9278aa`. C111: self-armed, 7 of 9 toward norm, magnitude unverified, AC Transit / City flat — add per-institution settle log line, read C112 (G-EC50). Then (a) public-employer budget squeeze; then CAT-layer design for the builder | in-progress | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §engine.193 Builder's words (2026-10-07) |
@@ -120,7 +120,7 @@
 | governance.51 | Boot docs: T3 memory-file dedup (proposal ready, builder-reviewed deletes) and T8 | in-progress | engine-sheet | [[../plans/2026-08-29-boot-doc-consolidation]] |
 | civic.24 | Sunday nine-seat table: Task 10 sheet tab | ready | engine-sheet | [[../plans/2026-08-16-city-hall-nine-seat-table]] |
 | canon.5 | Sheet renames LANDED live 2026-10-12: BIZ-00016 → Oakland City Schools, BIZ-00035 → Oakland Community College District, INIT-007 Notes (read back). Open: the Employer-column sweep (tied to engine.191 roster mismatch) | in-progress | engine-sheet | [[canon/INSTITUTIONS]] §Education |
-| engine.5 | Household + family: weddings and births are causal; open: divorce as an event | in-progress | engine-sheet | [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] |
+| engine.5 | Household + family: weddings and births are causal; divorce as an event superseded by engine.302 (`processDivorces_`, PROD @149, stale check 2026-10-22) | done-pending-archive | engine-sheet | [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]] |
 | engine.41 | Engine output to canon: build Wire 1b (SuggestedCitizenVoices, column cleared 2026-09-27), then re-verify Wire 3 | ready | engine-sheet | [[../plans/2026-06-24-engine-output-canon-coverage]] |
 | engine.51 | Citizen intake T8 extraction: bench --apply (bench fires need no ask) | ready | research-build / engine-sheet | [[../plans/2026-07-07-citizen-intake-unification]] |
 | engine.91 | Canon ingest: the wiki ingesters carry no customId | in-progress | engine-sheet | [[../plans/2026-07-31-canon-ingest-backfill]] §S502 |
@@ -128,9 +128,9 @@
 | engine.116 | Spreadsheet weight: T2 code repoint, T3 archives out, T5 dead-tab prune | in-progress | engine-sheet | [[../plans/2026-08-17-sheet-weight-reduction]] |
 | engine.197 | Dial drift: events reach citizens but base mood barely moves (the mood-to-base conversion) — needs a builder call | needs-info | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §Acceptance results |
 | engine.202 | Sports WeekRecord: trigger-word hooks, dashboard input (3b), 3c | in-progress | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 1 |
-| engine.213 | Approval reads the city: the mood sawtooth. (The Mon–Thu datawakes reaching no sheet is closed: civic.38 move ledger → Sunday fold → Initiative_Tracker LIVE WRITE C110, civic-cron.log 2026-10-04) | in-progress | engine-sheet | `phase05-citizens/updateCivicApprovalRatings.js`, [[../reference/DEPLOY_HISTORY]] §PROD @84 |
+| engine.213 | Approval reads the city. Both opens superseded (stale check 2026-10-22): the sawtooth by the approval hood-mood EMA (engine.213d) + engine.214 mood per hood (clusters gone, PROD @148, read C113); the datawakes by civic.38 (Initiative_Tracker LIVE WRITE C110) | done-pending-archive | engine-sheet | `phase05-citizens/updateCivicApprovalRatings.js`, [[../reference/DEPLOY_HISTORY]] §PROD @84 |
 | engine.27 | Card auto-invalidation Phase B (cycle-end marker hook); Phase A daemon live | ready | engine-sheet | [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]] |
-| infrastructure.6 | Sim-health observability: /api/sim-health + dashboard panel; 11 ghost tab refs + tab-reference test | ready | engine-sheet | [[../plans/2026-07-31-engine-observability-integrity]] |
+| infrastructure.6 | Sim-health observability: /api/sim-health + dashboard panel (Track A, not built). Track B ghost tabs + tab-reference test done (`c3fe1780`, `86f43999`, `1240a80a`; test 273 refs PASS 2026-10-22) | ready | engine-sheet | [[../plans/2026-07-31-engine-observability-integrity]] |
 | pipeline.83 | Failure review: when a piece fails, whose failure was it. C111 pass done; open: first live UNDOCKED digest seat 2026-10-24 | live-observing | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.83 |
 | engine.308 | Heritage business cap + cadence (builder 2026-10-22): cap 2 per citizen, line cap = living members + tier step, 12-Cycle line cooldown. `c88b5012` bench H1 PASS, codex SHIP; PROD @158 2026-10-22, first live C113, first possible opening Dillon C121 | live-observing | engine-sheet | DEPLOY_HISTORY §PROD stage 21; [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8, engine.308 design |
 
@@ -167,7 +167,7 @@
 | engine.104 | Mint economy: arrivals born right. Mint paths take job titles from lists outside the Economic_Parameters job table; revision owes legacy mutating-path disposition + D2 proof (agy 2026-10-17) | ready | research-build | [[../plans/2026-08-10-economy-native-rebuild]] §Read 2026-10-16 |
 | engine.257 | How people lose money — what a household makes vs spends (builder 2026-09-27). One-off losses (bills, debt, default, property tax, forced sale, casino) are live (agy 2026-10-17) | ready | engine-sheet | [[../plans/2026-09-22-initiative-budget-disbursement]] §Data reality, call 8 |
 | engine.248 | Faith orgs get a sim role: membership, a slight dial nudge, faith-life events | ready | engine-sheet | [[../research/2026-09-10-kimi-faith-lane-routing]] |
-| engine.253 | Transit as its own system: ridership and station load from hood canon | ready | engine-sheet | [[../plans/2026-09-19-civic-wake-game-loop]] §Rulings (g) |
+| engine.253 | Transit as its own system: ridership and station load from hood canon — superseded by engine.290 (`transitStationShares_`: residents, inbound workers, retail hot spots; LIVE stage 4d), stale check 2026-10-22 | done-pending-archive | engine-sheet | [[../plans/2026-09-19-civic-wake-game-loop]] §Rulings (g) |
 | engine.261 | Firm agents: three business owners get a wake slice to run their business | ready | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
 | engine.298 | World summary and sports slices hand the desks one number per fact — LIVE; re-read on C113 (Sun 2026-10-25) | live-observing | engine-sheet | [[../plans/2026-09-21-care-and-justice-system]] §engine.298; [[../plans/2026-10-11-media-extension]] §pipeline.83 |
 | engine.299 | Every hardcoded event moves a dial, no real-Oakland premise — LIVE @147 stage 4p, C112 readback PASS | live-observing | engine-sheet | [[../plans/2026-10-18-event-engines-move-dials]] |

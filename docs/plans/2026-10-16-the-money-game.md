@@ -287,6 +287,7 @@ Rent: 684 LifeHistory lines, 0 debits. No door scales with wealth: a $100M citiz
 - Does a divorce or a lawsuit exist as an event in the engine today? — blocks Task 1; es code read before the session.
 
 ## Changelog
+- 2026-10-22 (research-build) — Household map written ([[2026-10-22-household-to-heritage-map]]). Round 3's 10 married was by SpouseId — by MaritalStatus 111; $5M/$10M names stand. Open: mint principals under any-roof Roots; CIV on Roots (#3 vs #6).
 - 2026-10-22 (research-build) — round 9: the Roots rung tally withdrawn (the rungs are the ascent, the door reads home + spouse + floor); open = the floor [$10M] and the Famous-stamp reading.
 - 2026-10-21 (research-build) — agy review 2 (HOLD) folded: its citizen numbers/names were wrong against live and are not used; verified code findings kept (Famous stamp vs decaying FameScore, rung columns, [Heritage] stamps, owner-draw Tier 1/2 skip, business roll at Established); the record rewritten to rounds 5–8; Roots tally live: nobody clears 6+, Mims 4.
 - 2026-10-21 (research-build) — Task 5 round 6: Engine fame and Roots are distinct gates (famous vs not); disbanded lines are deleted with no record (the ledger was not working right); the tiers are the builder's engine.65 design, not new — they stay.

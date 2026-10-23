@@ -36,7 +36,7 @@ Two things on two sheets — the money-game plan's line 76 rule, confirmed in co
 
 A household carries no bloodline; a line carries no address. The Corliss four live at three addresses (plan line 76). Every citizen type can hold a household — the formation pass reads Active, Retired and Recovering (builder S322); only Traded never forms.
 
-**Live, C112 (read 2026-10-22):** 1,000 Active citizens · 625 active households · 694 citizens under a roof (546 renting, 148 owning) · by shape: couple/rented 321, couple/owned 112, solo/rented 143, family/rented 34, family/owned 12, single/rented 2, solo/owned 1.
+**Live, C112 (read 2026-10-22):** 1,000 Active citizens · 625 active households · 694 citizens under a roof (546 renting, 148 owning) · by shape: couple/rented 321, couple/owned 112, solo/rented 143, family/rented 34, family/owned 12, single/rented 2, solo/owned 1. The hop counts in §2 are over the 1,000 Active; **the door reads *living* = not deceased (`generationalWealthEngine.js:2740`) — 1,044, the Active plus 44 Retired** — so the §4 door counts are over 1,044.
 
 ## 2. How a household forms, holds and breaks — the hops the engine runs
 
@@ -58,7 +58,7 @@ Traced backwards from the ledger, written in the order a citizen lives it. Each 
 - **Writes:** MaritalStatus = married on both rows; SpouseId (ID + name) on both; the household — if either partner already heads a roof with other members (their kids), the spouse **joins** it (engine.59, the Jessup fix: no child left alone in the family home), otherwise a couple household forms.
 - **The formation engine's own `processMarriages_` (:996) is a TODO stub returning [].** Not a defect in what fires — marriage lives in the bond engine by the builder's ruling — but the household engine does not own this hop.
 - **Live:** **500 married** of 1,000; 488 under a roof (129 owning, 359 renting).
-- **Defect, door-side:** **SpouseId is set on 38 of the 500 married and blank on 462.** The column landed late (*"column exists on sandbox; prod no-ops until rollout rename"*, :2355) and only weddings since fill it. **MaritalStatus is the ledger's truth** — `checkBirth_` already reads it that way (engine.57 P6: *"the LEDGER is the truth"*). The Task 5 build shape (money-game Settled #10) names `SpouseId` for the Roots door; read that way the door misses 92% of married citizens. → §6 call 2.
+- **Defect, door-side:** **SpouseId is set on 38 of the 500 married and blank on 462.** Why most are blank is not traced here and does not need to be: a married citizen whose spouse is off the ledger is design (1:443 — the untracked spouse is the rule, not a gap), and the engine's own comment says the column reached PROD late (:2355). Either way the fact stands and the consequence follows. **MaritalStatus is the ledger's truth** — `checkBirth_` already reads it that way (engine.57 P6: *"the LEDGER is the truth"*). The Task 5 build shape (money-game Settled #10) names `SpouseId` for the Roots door; read that way the door misses 92% of married citizens. → §6 call 2.
 
 ### Hop 3 — a home: owning
 
@@ -111,16 +111,22 @@ The doors as the live engine runs them today, and as the builder ruled them in T
 
 ### The Roots counts — the question in one table
 
-Living citizens, unflagged, not Famous, not on a line, married (by MaritalStatus), C112 live:
+Living citizens (1,044 — Active + Retired, as the door reads them), not Famous, not on a line, not on the Cultural_Ledger (checked: none of the ≥ $1M names below are), married by MaritalStatus, C112 live:
 
-| Floor | …in an **owned** household (round 10 wording) | …under **any** roof (2026-10-22 wording) |
-|---|---|---|
-| no floor | **107** | **395** |
-| ≥ $1M | 30 | 90 |
-| ≥ $5M | 1 | 8 |
-| ≥ $10M — the ruled bracket | **1** | **8** |
+| Floor | **owned** household, unflagged (round 10 wording) | owned, unflagged **+ CIV** (Settled #3) | **any** roof, unflagged (2026-10-22 wording) | any roof **+ CIV** |
+|---|---|---|---|---|
+| no floor | **111** | 119 | **410** | 444 |
+| ≥ $1M | 33 | 38 | 103 | 113 |
+| ≥ $5M | **2** — Mims $12.8M, Necklar $6.4M | 2 | 9 | 11 |
+| ≥ $10M — the ruled bracket | **1** — Gregory Mims (POP-00023) | 1 | **8** | 9 |
 
-**Read:** the household path is well-walked — 107 owning married families, 395 under any roof. The money floor removes 99 of every 100. Nothing in hops 1–5 moves a citizen's NetWorth toward it: rent is paid, a home returns only its down share, a spouse's pay is the household's not the citizen's, kids cost nothing and earn nothing. The plan's own number stands — the top ordinary saver needs 525 years to $150M. **A household opens every life door and none of the money doors.** Whether that is the game (Roots is meant to be rare) or the gap (a household should *earn*) is the builder's call — Task 4's question, now with its numbers (§6 call 4).
+**Who the 8 are at $10M under any roof:** Mims — and **seven of the eight mint principals** (POP-01092–01099: Achebe $168.6M, Salcedo $132.6M, Zavala $87.7M, Voss-Adeyemi $71.9M, Lindqvist $37.8M, Castellanos $25.9M, Price $16.3M — all unflagged, all married, **all renting**; Raman $54.1M is single with no roof). They are the money-game plan's "eight principals … NetWorth seeded at mint, all seven households rent" and its "eight off-line citizens ≥ $150M held out by Door C's home, not its money." **So the door's household term (§6 call 1) is not one family vs eight — it is whether seeded mint money walks Roots.** Owned keeps it out; any roof lets it in. With CIV counted (Settled #3), the +1 at $10M is **Warren Ashford** ($12.0M, Tier 1, renting); Mayor Santana ($6.5M) clears $5M — §6 call 6.
+
+**Johhny Necklar** (POP-00509): Retired, ENGINE, **unflagged** (UNI = no), Tier 2, $6.37M, married, owns his home, no line — Roots-eligible as round 4 said; he drops out only at the $10M floor. The door reads him (Retired is living).
+
+**Reconciled with the money-game plan's round 3** ("152 in an owned household, 10 married with no line; at $5M Mims + Necklar; at $10M Mims"): the $5M and $10M names agree exactly. The "10 married" was read by SpouseId (set on 38 of 500 married); by MaritalStatus the same set is 111. Round 3's 152 owned was over Active; this table is over living. Nothing in the plan's door design changes; its count line is corrected in its changelog.
+
+**Read:** the household path is well-walked — 111 owning married families, 410 under any roof. The money floor removes all but one or two of them, and the ones "any roof" lets back in are seeded fortunes, not families that climbed. Nothing in hops 1–5 moves a citizen's NetWorth toward it: rent is paid, a home returns only its down share, a spouse's pay is the household's not the citizen's, kids cost nothing and earn nothing. The plan's own number stands — the top ordinary saver needs 525 years to $150M. **A household opens every life door and none of the money doors.** Whether that is the game (Roots is meant to be rare) or the gap (a household should *earn*) is the builder's call — Task 4's question, now with its numbers (§6 call 4).
 
 ## 5. Real vs. thin — the honest list
 
@@ -129,7 +135,7 @@ Living citizens, unflagged, not Famous, not on a line, married (by MaritalStatus
 | # | Finding | Where | Kind |
 |---|---|---|---|
 | 1 | The first roof has **no income gate** — a 15% roll for any single aged 22–28 | householdFormationEngine.js:889-896 | thin: the comment says the term was never wired |
-| 2 | **SpouseId blank on 462 of 500 married.** The ledger's truth is MaritalStatus; the Task 5 Roots build shape names SpouseId | bondEngine.js:2355; money-game Settled #10 | defect in the door spec, not the engine — read MaritalStatus, as checkBirth_ does |
+| 2 | **SpouseId blank on 462 of 500 married** — most will be off-ledger spouses (design, 1:443); the column reached PROD late (:2355); the cause is not traced and does not change the consequence. The ledger's truth is MaritalStatus; the Task 5 Roots build shape names SpouseId | bondEngine.js:2355; money-game Settled #10 | defect in the door spec, not the engine — read MaritalStatus, as checkBirth_ does |
 | 3 | `processMarriages_` and `generateBirths_` in the formation engine are TODO stubs | householdFormationEngine.js:985-1027 | dead code, not a gap — the hops fire in bondEngine / Phase 4; es may delete the stubs |
 | 4 | HomesOwned on a line counts purchases **after** founding plus a Door C founding home; a Door A/B founder's earlier home never reaches standing (Keane owns; the row says 0) | generationalWealthEngine.js:2834; agy 2026-10-21 | thin on the standing term; the Task 5 build shape already moves the seed to `ownedHomePops` |
 | 5 | Ownership is a lever (owned > rented > none on courtship odds), never a gate — **builder 2026-10-22: correct as built** | bondEngine.js:716-728 | real, as intended |
@@ -139,12 +145,14 @@ Living citizens, unflagged, not Famous, not on a line, married (by MaritalStatus
 
 ## 6. Open — the builder's calls, in his words
 
-1. **The Roots door's household term.** Round 10 (2026-10-22): *"the owned household with a spouse, at the money floor."* The same day, on the path: *"whether you need to own a home I guess isn't necessarily a requirement as I was meaning more that you need a line on household ledger."* Both are the builder's; they read the door two ways — owned (1 at $10M) or any roof (8 at $10M). Which does the door read?
+1. **The Roots door's household term.** Round 10 (2026-10-22): *"the owned household with a spouse, at the money floor."* The same day, on the path: *"whether you need to own a home I guess isn't necessarily a requirement as I was meaning more that you need a line on household ledger."* Both are the builder's; they read the door two ways. **Owned** at $10M = Mims alone. **Any roof** at $10M = Mims + seven renting mint principals whose fortunes were seeded, not climbed (§4). Which does the door read — and is seeded mint money meant to walk Roots?
 2. **The Roots door reads MaritalStatus, not SpouseId** (finding 2) — confirm, so es builds it that way.
 3. **Does the first roof read Income** (finding 1), or is the 15% roll the feel?
 4. **Task 4, with its numbers:** a household opens every life door and none of the money doors. Is Roots meant to be that rare, or should a household *earn* — and if so, as events (the plan's own shape: a rent year that outran the raise; a spouse's promotion that lands on NetWorth), never a weekly debit?
 5. *"Using some rungs isn't a terrible idea if we need other elements"* — which, if any, beyond the roof / spouse / home / kids already on the path, and for which gate? (Not a tally at the door — round 9 stands.)
+6. **Does CIV walk Roots?** The money-game plan says both. Settled #3, from round 3 verbatim (*"CIVIC + Approval"*): *"CIV: Fame at $35M (+Approval where the citizen holds office) and Roots."* Settled #6, rb's consolidation: *"Roots = unflagged."* Live case: Warren Ashford — CIV, $12.0M, Tier 1, married, renting — in under any-roof Roots if CIV walks it, out if not; Mayor Santana ($6.5M) behind him. Which line stands?
 
 ## Changelog
 
-- 2026-10-22 (research-build) — Map written with the builder: the household as the engine runs it (roof vs. blood; five hops; the loss side), Tier → events and attention, the four gates and what a household moves at each, the Roots counts at every floor (owned 107 / 30 / 1 / 1; any roof 395 / 90 / 8 / 8), eight real-vs-thin findings, five calls for the builder. Supersedes the September "needs a house for a wife and kids" rule → a Household_Ledger row, ownership a lever (builder 2026-10-22). Absorbs money-game Task 4 + ROLLOUT engine.257.
+- 2026-10-22 (research-build) — Map written: the household as the engine runs it, Tier → events and attention, the four gates and what a household moves at each, Roots counts, eight findings, builder calls; supersedes the September needs-a-house rule.
+- 2026-10-22 (research-build) — advisor pass folded: base = living (1,044), CIV columns, $5M/$10M names, Cultural_Ledger none, Necklar eligible, round 3 reconciled (SpouseId → MaritalStatus), call 6 added (CIV on Roots); six calls open.

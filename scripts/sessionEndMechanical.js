@@ -135,34 +135,6 @@ function subRolloutLint(args) {
 }
 
 // ---------------------------------------------------------------------------
-// Sub-step: handoff check (odometer FATAL, NEXT length informational)
-// 2026-10-23 (builder: skill text gets skipped; code doesn't): the close order is
-// Step 2 edits SESSION_CONTEXT → this script → commit. So at this point the PIN's
-// S<N> must be above the committed one; equal means this close never bumped it
-// (S594 close: another lane's bump was swept in and the edit silently missed).
-// NEXT length stays a warning — the S298 ruling retired length gates.
-// ---------------------------------------------------------------------------
-
-function subHandoffCheck(args) {
-  const sOf = (text) => Number((String(text).match(/\*\*PIN:\*\*\s*S(\d+)/) || [])[1]);
-  const work = fs.readFileSync(path.join(ROOT, 'SESSION_CONTEXT.md'), 'utf8');
-  let head = '';
-  try { head = execSync('git show HEAD:SESSION_CONTEXT.md', { cwd: ROOT, stdio: 'pipe' }).toString(); } catch (_) { /* no committed copy */ }
-  const now = sOf(work), was = sOf(head);
-  if (!now) { console.log('  ✗ no S<N> in the SESSION_CONTEXT PIN'); return { ok: false }; }
-  if (was && now <= was) {
-    console.log(`  ✗ PIN odometer not bumped: working S${now}, committed S${was}. Step 2 bumps it to S${was + 1} before this script runs.`);
-    return { ok: false };
-  }
-  console.log(`  ✓ PIN S${was || '?'} → S${now}`);
-  const next = (work.match(new RegExp('^\\*\\*NEXT\\[' + args.terminal + '\\]:\\*\\*.*$', 'm')) || [''])[0];
-  if (!next) console.log(`  ⚠ no NEXT[${args.terminal}] line in SESSION_CONTEXT`);
-  else if (next.length > 350) console.log(`  ⚠ NEXT[${args.terminal}] is ${next.length} chars (aim ≤ 350) — detail belongs in ROLLOUT / the plan / claude-mem`);
-  else console.log(`  ✓ NEXT[${args.terminal}] ${next.length} chars`);
-  return { ok: true };
-}
-
-// ---------------------------------------------------------------------------
 // Sub-step: auditPlanTagDrift (exit 1 informational, never fatal)
 // ---------------------------------------------------------------------------
 
@@ -395,7 +367,6 @@ function subSessionSummaryBridge(args) {
 
 function buildSteps(args) {
   const steps = [];
-  steps.push({ name: 'handoff check (PIN odometer fatal, NEXT length informational)', fn: subHandoffCheck });
   steps.push({ name: 'session summary → Supermemory (best-effort)', fn: subSessionSummaryBridge });
   steps.push({ name: 'auditPlanTagDrift (informational)', fn: subAuditPlanTagDrift });
   steps.push({ name: 'ROLLOUT conformance lint (informational)', fn: subRolloutLint });

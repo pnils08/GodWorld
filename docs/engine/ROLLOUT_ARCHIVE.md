@@ -973,6 +973,17 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S593 Archive Pass (2026-10-23, research-build) — post-S592 closures sweep
+
+4 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 4 engine.*.
+
+- **engine.5** [engine-sheet] — Household + family: weddings and births are causal; divorce as an event superseded by engine.302 (`processDivorces_`, PROD @149, stale check 2026-10-22) **State at archive:** done-pending-archive. Pointer: [[engine/archive/LEDGER_REPAIR_HOUSEHOLDS]]
+- **engine.213** [engine-sheet] — Approval reads the city. Both opens superseded (stale check 2026-10-22): the sawtooth by the approval hood-mood EMA (engine.213d) + engine.214 mood per hood (clusters gone, PROD @148, read C113); the datawakes by civic.38 (Initiative_Tracker LIVE WRITE C110) **State at archive:** done-pending-archive. Pointer: `phase05-citizens/updateCivicApprovalRatings.js`, [[../reference/DEPLOY_HISTORY]] §PROD @84
+- **engine.257** [engine-sheet] — How people lose money — what a household makes vs spends (builder 2026-09-27). One-off losses live (agy 2026-10-17); mechanism ruled (money-game A1: by event only); the open question is money-game Task 4, absorbed into the household map (stale check 2026-10-22, rb) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-22-household-to-heritage-map]] §2 hop 5, §6 call 4
+- **engine.253** [engine-sheet] — Transit as its own system: ridership and station load from hood canon — superseded by engine.290 (`transitStationShares_`: residents, inbound workers, retail hot spots; LIVE stage 4d), stale check 2026-10-22 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-19-civic-wake-game-loop]] §Rulings (g)
+
+This pass: 4 rows — engine.5 + engine.213 + engine.257 + engine.253. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S582 Archive Pass (2026-10-19, engine-sheet) — post-S581 closures sweep
 
 3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.* + 2 pipeline.*.

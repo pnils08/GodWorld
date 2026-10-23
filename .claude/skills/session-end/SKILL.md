@@ -79,7 +79,7 @@ node scripts/sessionEndMechanical.js --terminal=<name> > output/session_end_run.
 
 Redirect it — the run prints ~45 lines; read the file for the lint and stack-check lines only. A ROLLOUT lint row is fixed in this close, not carried (item cell ≤ 280 chars).
 
-Wraps: **session summary → Supermemory (best-effort S283 — mirrors claude-mem's session summary to `session-logs` ONLY (S341 — `sl-*` is hand-write; the shared hand-write container is `sl-godworld` as of S372); zero LLM calls, idempotent, never blocks a close)** → `auditPlanTagDrift` (informational — drift never fails close) → ROLLOUT conformance lint (informational) → cross-terminal git stack check (read-only report) → `pm2 restart`.
+Wraps: **handoff check (2026-10-23: the PIN S<N> must be above the committed one — FATAL, so bump it in Step 2 before this runs; NEXT over 350 chars warns)** → **session summary → Supermemory (best-effort S283 — mirrors claude-mem's session summary to `session-logs` ONLY (S341 — `sl-*` is hand-write; the shared hand-write container is `sl-godworld` as of S372); zero LLM calls, idempotent, never blocks a close)** → `auditPlanTagDrift` (informational — drift never fails close) → ROLLOUT conformance lint (informational) → cross-terminal git stack check (read-only report) → `pm2 restart`.
 
 Retired sub-steps, so nobody goes looking for them: `minimalHandoffGuard` (S298, Mike-direct — shape/length caps are model judgment now), `rotateJournalRecent` + JOURNAL content-quality (S300 journal freeze), `writeShippedBlock` (ADR-0009 §loop-tightening — the carried set is hand-written in Step 2), `rolloutTriage` (S235).
 
@@ -202,6 +202,8 @@ Pulled out of the boot-loaded TERMINAL.md files (2026-08-15, HOUSE-PROCESS GATE)
 ---
 
 ## Changelog
+
+- 2026-10-23 (S594, engine-sheet) — Step 3 gained a handoff check in `sessionEndMechanical.js`: the PIN odometer not above the committed one aborts the close; NEXT over 350 chars warns. Builder: skill text gets skipped, code does not — the S594 close skipped the bump (another lane's bump was swept in) and ran a 4,000-char NEXT.
 
 - 2026-09-29 (S506, engine-sheet) — v2.9 staleness pass: Step 0 still mapped retired media/civic seats and pointed at a TERMINAL.md audit table that lives in this file; ROLLOUT has no Next Session Priorities section; no `Terminal-Specific Saves` list exists anywhere; PIN ownership under a governing doc (overnight §4c) was unstated.
 

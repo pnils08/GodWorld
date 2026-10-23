@@ -1,0 +1,106 @@
+{
+ "cycle": 115,
+ "from": 113,
+ "label": "F1",
+ "sheet": "bench 1004",
+ "rows": 54,
+ "baseRows": 53,
+ "sighted": [
+  {
+   "id": "CUL-9E72118C",
+   "name": "Evan Morello",
+   "lastSeen": 115,
+   "baseCategory": "actor",
+   "role": "actor",
+   "fame": "71→74",
+   "link": "POP-00536",
+   "bucket": true
+  },
+  {
+   "id": "CUL-4C7646A5",
+   "name": "Derek Obi",
+   "lastSeen": 115,
+   "baseCategory": "journalist",
+   "role": "reporter",
+   "fame": "33→38",
+   "link": "POP-00543",
+   "bucket": true
+  },
+  {
+   "id": "CUL-905CBDE8",
+   "name": "Brody Kale",
+   "lastSeen": 113,
+   "baseCategory": "influencer",
+   "role": "influencer",
+   "fame": "34→39",
+   "link": "POP-01059",
+   "bucket": true
+  },
+  {
+   "id": "CUL-72BD508A",
+   "name": "Marcus Webb",
+   "lastSeen": 113,
+   "baseCategory": "author",
+   "role": "novelist",
+   "fame": "4→9",
+   "link": "POP-00790",
+   "bucket": true
+  },
+  {
+   "id": "CUL-BA80115F",
+   "name": "Gallery Owner Mei Chen",
+   "lastSeen": 114,
+   "baseCategory": "curator",
+   "role": "gallery curator",
+   "fame": "33→43",
+   "link": "POP-00635",
+   "bucket": true
+  },
+  {
+   "id": "CUL-C13B0483",
+   "name": "Claire Ashford",
+   "lastSeen": 113,
+   "baseCategory": "author",
+   "role": "author",
+   "fame": "15→20",
+   "link": "POP-01071",
+   "bucket": true
+  },
+  {
+   "id": "CUL-A58950DF",
+   "name": "Henry Rivas",
+   "lastSeen": 115,
+   "baseCategory": "athlete",
+   "role": "A's player",
+   "fame": "20→25",
+   "link": "POP-00024",
+   "bucket": false
+  },
+  {
+   "id": "CUL-EB555F30",
+   "name": "Mike Paulson",
+   "lastSeen": 114,
+   "baseCategory": "sports-figure",
+   "role": "General Manager, Oakland A's & The Oaks",
+   "fame": "25→32",
+   "link": "POP-00527",
+   "bucket": false
+  }
+ ],
+ "minted": [
+  {
+   "id": "CUL-F809F66B",
+   "name": "Martin Richards",
+   "role": "A's player",
+   "src": "SystemEngine",
+   "lastSeen": 114,
+   "link": "POP-00031"
+  }
+ ],
+ "hold": [],
+ "note": [
+  "CUL-9E72118C Evan Morello sighted, FameScore 71→74 (under +5: a dim or decay rode the window)"
+ ],
+ "bucketSighted": 6,
+ "verdict": "PASS"
+}

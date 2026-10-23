@@ -1,0 +1,133 @@
+/tmp/claude-0/-root-GodWorld/a725df2c-536e-4a81-bd5c-126e074e188f/scratchpad/e297-fns.sh: line 21: unexpected EOF while looking for matching `"'
+AIM = BENCH (script read the bench marker)
+== leg F1 (stage 21 + engine.297 at 486ea61e, the 103 rows + realign)
+stage = stage 19 + 6 files at 486ea61e; manifest output/engine-sheet/stage21-e297-F1.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @120
+pull-back 167 js + manifest byte-identical to output/engine-sheet/stage21-e297-F1.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C116
+output/engine-sheet/2026-10-22-e297-bench.sh: line 39: drop_tab: command not found
+output/engine-sheet/2026-10-22-e297-bench.sh: line 39: drop_tab: command not found
+waiting 65 s: the reset's write quota clears before the intake writes
+ok   roster rows = 103
+ok   0 non-canon hoods
+ok   0 blank roster fields
+ok   Business_Archive holds no BIZ-00039
+ok   BIZ-00039 at row 40
+ok   ledger rows = 180
+ok   bizIdHighWater = 186
+ok   max active = mark
+ok   0 dup names ()
+ok   BIZ-00039 D = Downtown
+mode fresh | preimage /root/GodWorld/output/engine-sheet/2026-10-21-e306-preimage-bench.json | roster sha 2fea8d2d51bc228f | IDs BIZ-00187..BIZ-00289
+Business_Intake staged 103 rows, every cell read back
+processBusinessIntake rc=0 (log /root/GodWorld/output/engine-sheet/2026-10-21-e306-intake-bench.log)
+bench: data/employer_mapping.json restored
+realign BIZ-00039 row 40 D Downtown → Uptown
+ok   intake row i ↔ ledger row 182+i: A:F staged as written, promoted, ID BIZ-00187+i, nine typed cells = the seed, one ledger row per name
+ok   the original 180 rows A:I = the preimage except D40 = Uptown
+ok   bizIdHighWater = 289
+ok   ledger rows = 283
+ok   data/employer_mapping.json byte-identical to before
+RECEIPT PASS
+output/engine-sheet/2026-10-22-e297-bench.sh: line 43: wait_cut: command not found
+leg F1 C113 fire rc=0 "verdict": "PASS" "wallS": 192
+C113 F1: onto sports 0, off sports 0, sports career lines 0, elsewhere {"Promotion":11,"Career-Hired":1}, athlete career moves 0 (income-only 0) — athlete guard PASS
+e308 F1 C113 PASS | column armed | openings none
+  LIN-00001 Corliss Founding active living 4 firms 0/- clock NaN stamp null
+  LIN-00002 Dillon Established active living 3 firms 1/3 clock 109 stamp 109
+  LIN-00003 Keane Established active living 2 firms 2/2 clock 111 stamp 111
+  LIN-00004 Kelley Established active living 1 firms 1/1 clock 106 stamp 106
+  LIN-00005 Varek Prominent active living 1 firms 3/2 clock 112 stamp 112
+  LIN-00006 Paulson Founding active living 1 firms 0/- clock NaN stamp null
+  LIN-00007 Horn Founding active living 1 firms 0/- clock NaN stamp null
+  LIN-00008 Reaves Founding active living 1 firms 0/- clock NaN stamp null
+  LIN-00009 Villanueva Founding active living 4 firms 0/- clock NaN stamp null
+e297 F1 C113 PASS | rows 53→53 | sighted 3 (ledger buckets 3) | minted 0
+  seen C113 Brody Kale [influencer, bucket] fame 34→39
+  seen C113 Marcus Webb [author, bucket] fame 4→9
+  seen C113 Claire Ashford [author, bucket] fame 15→20
+leg F1 C114 fire rc=0 "verdict": "PASS" "wallS": 175
+C114 F1: onto sports 0, off sports 0, sports career lines 0, elsewhere {"Promotion":6,"Career-Hired":3,"Career-FieldChange":1}, athlete career moves 0 (income-only 0) — athlete guard PASS
+e308 F1 C114 PASS | column armed | openings none
+  LIN-00001 Corliss Founding active living 4 firms 0/- clock NaN stamp null
+  LIN-00002 Dillon Established active living 3 firms 1/3 clock 109 stamp 109
+  LIN-00003 Keane Established active living 2 firms 2/2 clock 111 stamp 111
+  LIN-00004 Kelley Established active living 1 firms 1/1 clock 106 stamp 106
+  LIN-00005 Varek Prominent active living 1 firms 3/2 clock 112 stamp 112
+  LIN-00006 Paulson Founding active living 1 firms 0/- clock NaN stamp null
+  LIN-00007 Horn Founding active living 1 firms 0/- clock NaN stamp null
+  LIN-00008 Reaves Founding active living 1 firms 0/- clock NaN stamp null
+  LIN-00009 Villanueva Founding active living 4 firms 0/- clock NaN stamp null
+e297 F1 C113..114 PASS | rows 53→54 | sighted 5 (ledger buckets 4) | minted 1
+  seen C113 Brody Kale [influencer, bucket] fame 34→39
+  seen C113 Marcus Webb [author, bucket] fame 4→9
+  seen C114 Gallery Owner Mei Chen [curator, bucket] fame 33→43
+  seen C113 Claire Ashford [author, bucket] fame 15→20
+  seen C114 Mike Paulson [sports-figure] fame 25→32
+  new  CUL-F809F66B Martin Richards (A's player) src SystemEngine C114
+leg F1 C115 fire rc=0 "verdict": "PASS" "wallS": 180
+C115 F1: onto sports 0, off sports 0, sports career lines 0, elsewhere {"Promotion":6,"Career-Hired":1}, athlete career moves 0 (income-only 0) — athlete guard PASS
+e308 F1 C115 PASS | column armed | openings none
+  LIN-00001 Corliss Founding active living 4 firms 0/- clock NaN stamp null
+  LIN-00002 Dillon Established active living 3 firms 1/3 clock 109 stamp 109
+  LIN-00003 Keane Established active living 2 firms 2/2 clock 111 stamp 111
+  LIN-00004 Kelley Established active living 1 firms 1/1 clock 106 stamp 106
+  LIN-00005 Varek Prominent active living 1 firms 3/2 clock 112 stamp 112
+  LIN-00006 Paulson Founding active living 1 firms 0/- clock NaN stamp null
+  LIN-00007 Horn Founding active living 1 firms 0/- clock NaN stamp null
+  LIN-00008 Reaves Founding active living 1 firms 0/- clock NaN stamp null
+  LIN-00009 Villanueva Founding active living 4 firms 0/- clock NaN stamp null
+e297 F1 C113..115 PASS | rows 53→54 | sighted 8 (ledger buckets 6) | minted 1
+  seen C115 Evan Morello [actor, bucket] fame 71→74
+  seen C115 Derek Obi [journalist, bucket] fame 33→38
+  seen C113 Brody Kale [influencer, bucket] fame 34→39
+  seen C113 Marcus Webb [author, bucket] fame 4→9
+  seen C114 Gallery Owner Mei Chen [curator, bucket] fame 33→43
+  seen C113 Claire Ashford [author, bucket] fame 15→20
+  seen C115 Henry Rivas [athlete] fame 20→25
+  seen C114 Mike Paulson [sports-figure] fame 25→32
+  new  CUL-F809F66B Martin Richards (A's player) src SystemEngine C114
+  note CUL-9E72118C Evan Morello sighted, FameScore 71→74 (under +5: a dim or decay rode the window)
+leg F1 C116 fire rc=0 "verdict": "PASS" "wallS": 214
+C116 F1: onto sports 0, off sports 0, sports career lines 0, elsewhere {"Promotion":7,"Career-Hired":2,"Career-Layoff":1}, athlete career moves 0 (income-only 0) — athlete guard PASS
+e308 F1 C116 PASS | column armed | openings none
+  LIN-00001 Corliss Founding active living 4 firms 0/- clock NaN stamp null
+  LIN-00002 Dillon Established active living 3 firms 1/3 clock 109 stamp 109
+  LIN-00003 Keane Established active living 2 firms 2/2 clock 111 stamp 111
+  LIN-00004 Kelley Established active living 1 firms 1/1 clock 106 stamp 106
+  LIN-00005 Varek Prominent active living 1 firms 3/2 clock 112 stamp 112
+  LIN-00006 Paulson Founding active living 1 firms 0/- clock NaN stamp null
+  LIN-00007 Horn Founding active living 1 firms 0/- clock NaN stamp null
+  LIN-00008 Reaves Founding active living 1 firms 0/- clock NaN stamp null
+  LIN-00009 Villanueva Founding active living 4 firms 0/- clock NaN stamp null
+e297 F1 C113..116 PASS | rows 53→55 | sighted 9 (ledger buckets 6) | minted 2
+  seen C116 Evan Morello [actor, bucket] fame 71→79
+  seen C115 Derek Obi [journalist, bucket] fame 33→38
+  seen C113 Brody Kale [influencer, bucket] fame 34→39
+  seen C113 Marcus Webb [author, bucket] fame 4→9
+  seen C114 Gallery Owner Mei Chen [curator, bucket] fame 33→43
+  seen C113 Claire Ashford [author, bucket] fame 15→20
+  seen C115 Henry Rivas [athlete] fame 20→25
+  seen C116 Benji Dillon [athlete] fame 25→30
+  seen C114 Mike Paulson [sports-figure] fame 25→32
+  new  CUL-F809F66B Martin Richards (A's player) src SystemEngine C114
+  new  CUL-B5A3A5B0 Dante Reyes (artist) src SystemEngine C116
+output/engine-sheet/2026-10-22-e297-bench.sh: line 52: drop_tab: command not found
+== restore bench code to stage 21
+built stage differs from stage 19 outside the listed files — stop
+80c80
+< 96c37a5964d0c32849034474c66dda496c279b3ef1c7a16f83a5c6e1c80a6662  ./phase07-evening-media/buildEveningFamous.js
+---
+> 29e21f51307c6e3a0c593a2b4c3338e9540a434ef3c4eac8e8100dcaaee9f89b  ./phase07-evening-media/buildEveningFamous.js
+86c86
+< aad59d659965d85fa027dba2db4a0d90d5d115b92b2e148a407c3710e21ad8af  ./phase07-evening-media/culturalLedger.js
+---
+> 594064d25c5f5428444e892b0536e4df15b0c18344323e2f6e6cc394003cd0e0  ./phase07-evening-media/culturalLedger.js
+exit 4

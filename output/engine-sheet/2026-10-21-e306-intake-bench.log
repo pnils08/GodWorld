@@ -1,4 +1,4 @@
-◇ injected env (31) from ../.config/godworld/.env // tip: ◈ secrets for agents [www.dotenvx.com]
+◇ injected env (31) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }
 === processBusinessIntake.js ===
 Mode: LIVE
 

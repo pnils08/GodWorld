@@ -59,6 +59,7 @@ const stubs = {
   '/root/GodWorld/lib/memoryFence': {},
   '/root/GodWorld/lib/resonanceRecall': {},
   '/root/GodWorld/lib/neighborhoodSlice': { createSlicer: () => ({ slice: () => null }) },
+  '/root/GodWorld/lib/provocationBank': require('/root/GodWorld/lib/provocationBank'), // engine.197 wake draw hash (pure, no I/O)
 };
 const sandbox = {
   module: { exports: {} },

@@ -336,6 +336,7 @@ Business mints for hood character (builder 2026-10-19). Walk complete 2026-10-21
 
 ## Changelog
 
+- 2026-10-22 (engine-sheet) — engine.308 shipped: `c88b5012` (cap 2 per citizen, line cap = living + tier step, 12-Cycle cooldown on new col LastBizOpenedCycle seeded from the [Heritage] opened stamps); bench H1 C113–C116 PASS vs the B14 control (Varek Fellowship gone); codex SHIP; PROD stage 21 @158 before C113 (DEPLOY_HISTORY §PROD stage 21).
 - 2026-10-22 (engine-sheet) — Builder ruled the engine.308 numbers (verbatim under the 308 design): cap 2 per citizen as the base, tier weights the line cap, 12-Cycle cooldown; tier-gated business types + class gates + opportunity → the citizen's wake decides filed as engine.311.
 - 2026-10-21 (research-build) — Builder: the $50M heritage door may be too low; checked — already money-game Task 5 (engine.295), not folded; 309 cites it for the ascent number, 308 independent.
 - 2026-10-21 (research-build) — Builder design ruling on business ownership (verbatim): cooldown, cap per citizen / scaled by line size, off-heritage ascent and crash. Read of what exists; engine.308 design cut, engine.309 filed; bracketed numbers are the builder's.

@@ -1,0 +1,10 @@
+fresh PROD pull = stage 20 (no drift)
+stage = the benched tree (output/engine-sheet/stage20-e308-H1.sha256), byte for byte
+live fire state before the push: cycleCount 112, Neighborhood_Map [112], Riley last 112, checkpoint none — C113 not fired
+└─ utilities/writeIntents.js
+pinned deployment AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ serves @158
+pull-back 167 js + manifest byte-identical to output/engine-sheet/stage20-e308-H1.sha256
+live fire state after the pull-back: cycleCount 112, Neighborhood_Map [112], Riley last 112, checkpoint none — C113 not fired
+waiting 480 s: a fire admitted before the deploy would persist inside this window
+live fire state 8 minutes after: cycleCount 112, Neighborhood_Map [112], Riley last 112, checkpoint none — C113 not fired
+exit 0

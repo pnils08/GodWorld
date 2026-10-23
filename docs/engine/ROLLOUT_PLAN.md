@@ -7,7 +7,7 @@
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
 **Plans in motion (54)** — each plan, its rows and the state each is in:
 
-- [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, engine.308 in-progress, engine.287 live-observing, engine.288 live-observing, engine.289 blocked, engine.305 live-observing, engine.306 live-observing, engine.307 live-observing, engine.309 needs-info, engine.311 needs-info
+- [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, engine.308 live-observing, engine.287 live-observing, engine.288 live-observing, engine.289 blocked, engine.305 live-observing, engine.306 live-observing, engine.307 live-observing, engine.309 needs-info, engine.311 needs-info
 - [[../plans/2026-10-11-media-extension]]: pipeline.83 live-observing, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.76 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing, pipeline.80 live-observing
 - [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.206 live-observing, engine.205 in-progress, engine.202 in-progress, engine.203d live-observing
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing, engine.298 live-observing
@@ -132,7 +132,7 @@
 | engine.27 | Card auto-invalidation Phase B (cycle-end marker hook); Phase A daemon live | ready | engine-sheet | [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]] |
 | infrastructure.6 | Sim-health observability: /api/sim-health + dashboard panel; 11 ghost tab refs + tab-reference test | ready | engine-sheet | [[../plans/2026-07-31-engine-observability-integrity]] |
 | pipeline.83 | Failure review: when a piece fails, whose failure was it. C111 pass done; open: first live UNDOCKED digest seat 2026-10-24 | live-observing | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.83 |
-| engine.308 | Heritage business cap + cadence. Builder 2026-10-22 ruled the numbers: cap 2 per citizen, line cap = living members + tier step (+0/+1/+2, floor 1), 12-Cycle line cooldown; slot gate counts what the standing counts | in-progress | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8, engine.308 design + builder 2026-10-22 |
+| engine.308 | Heritage business cap + cadence (builder 2026-10-22): cap 2 per citizen, line cap = living members + tier step, 12-Cycle line cooldown. `c88b5012` bench H1 PASS, codex SHIP; PROD @158 2026-10-22, first live C113, first possible opening Dillon C121 | live-observing | engine-sheet | DEPLOY_HISTORY §PROD stage 21; [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8, engine.308 design |
 
 ## 4. Queue — ruled, not started
 

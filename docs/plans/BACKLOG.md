@@ -526,6 +526,7 @@ Row text verbatim; the reason it parked follows each.
 - **infrastructure.3** — Reviewer lanes → Claude Managed Agents (Dreaming pilot, Anthropic preview-access gated) — parked 2026-09-29: preview-access gated, 174 days quiet; revisit when Anthropic opens access Was `parked`, owner research-build. Pointer: [[../ACTION_MANAGED_AGENTS]]
 - **infrastructure.8** — Hidden-tab audit + disposition (kimi) — 16 hidden tabs classified vs live code (3 load-bearing, 6 dead); Task 1 doc truth pass, Task 2 builder keep/delete rulings, Task 3 backup-then-delete. **Builder 2026-09-14: low priority — pick up only once the engine runs clean.** Was `parked`, owner engine-sheet. Pointer: [[../plans/2026-09-09-hidden-tab-audit]]
 - **infrastructure.9** — Daytime autonomy — builder 2026-10-01: run the overnight loop every session so rb works the ROLLOUT list without the builder; Discord as the reach-out channel. Design after a week of clean nights Was `parked`, owner research-build. Pointer: [[../reference/overnight_autonomy_session]]
+- **engine.98** — Pets — names ruled + Scout (Mags's cat) authored 2026-10-16; step 1 carrier LIVE PROD @142 (stage 4k), Scout on live POP-00005, read at C112; acquisition roll deferred — builder 2026-10-19: Scout stays on POP-00005, the pet build is revisited down the line Was `in-progress`, owner engine-sheet / research-build. Pointer: [[../plans/2026-09-26-future-build-ideas]] §engine.98 pets — design **Parked because:** builder 2026-10-19 deferred the acquisition roll — Scout stays on POP-00005, the pet build is revisited down the line (rollout stale check 2026-10-22, es + rb agreed).
 
 ### Watch List (moved from ROLLOUT 2026-10-07)
 
@@ -577,5 +578,6 @@ Tracking for future adoption, not building. Dropped on the move: the Drive OAuth
 
 - 2026-04-16 — Initial consolidation (S152). Content extracted verbatim from [[engine/ROLLOUT_PLAN]] §Open Phases + research patterns. When any phase here becomes active work, extract to its own [[plans/PLAN_TEMPLATE]]-shaped plan file and replace the section here with a pointer.
 - 2026-10-07 — Fourteen parked ROLLOUT rows and the Watch List moved here (engine-sheet; builder: rollout holds current work and waits only).
+- 2026-10-22 — engine.98 (pets) parked from ROLLOUT on the builder's 2026-10-19 deferral (engine-sheet stale check, research-build agreed).
 - **Article name index** — promoted to a plan 2026-10-19 (builder: master Bay Tribune index + assignment-time pre-check): ROLLOUT pipeline.84, [[2026-10-19-bay-tribune-master-index]]. Entry kept as a pointer.
 - 2026-09-29 — Added §Parked ideas and external watches (research.3/5/7/8/10 moved from ROLLOUT_PLAN, which had no owning doc for them).

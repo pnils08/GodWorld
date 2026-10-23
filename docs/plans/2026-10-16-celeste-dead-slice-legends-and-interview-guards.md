@@ -89,6 +89,8 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 **Ruled:** a sighting is worth 1 point (read flat — the extras ride the paper path, not sightings). **Open with the builder:** what fame is earned from (the reading engine-sheet brings: being named in the published record — Citizen_Media_Usage / UsageCount, the engine.118 mark at 25 mentions — with a sighting the consequence of fame, 1 point), whether today's scores are re-based from that record, and a ceiling. Not built; the 1-point rule rides the same build.
 
+**Builder 2026-10-23, chose "The paper (Recommended)" (verbatim option):** "Fame rises when a citizen is named in a published piece; a sighting is a result of fame and adds 1 point. Today's scores get re-based from each person's paper record, fading stays, and fame stops at 100." Design + build are engine-sheet's; the re-base is a live Cultural_Ledger data change — dry run with every row old → new, then apply and read back.
+
 ## Status log
 
 ### engine.296 — status (drained from ROLLOUT, 2026-10-22 / S592)
@@ -101,6 +103,7 @@ Fame sightings draw from the Cultural_Ledger (builder 2026-10-17: "the fame sigh
 
 ## Changelog
 
+- 2026-10-23 (engine-sheet) — engine.312 ruled "The paper": fame from published naming, sighting +1, re-base from the record, fading stays, ceiling 100.
 - 2026-10-23 (engine-sheet) — engine.312 filed: builder "1 point a sighting", then "Never heard of any of them so the fame score is broken"; live measure recorded under §engine.312.
 - 2026-10-22 (engine-sheet) — Task 9 / engine.297 LIVE PROD @159 (stage 22) after the rollout stale check found the codex patch unapplied since 10-17; build notes above.
 

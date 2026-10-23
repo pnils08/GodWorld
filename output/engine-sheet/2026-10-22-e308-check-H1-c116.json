@@ -1,0 +1,128 @@
+{
+ "cycle": 116,
+ "from": 116,
+ "label": "H1",
+ "sheet": "bench 1004",
+ "columnArmed": true,
+ "lines": [
+  {
+   "lin": "LIN-00001",
+   "family": "Corliss",
+   "status": "active",
+   "tier": "Founding",
+   "living": 4,
+   "minted": [],
+   "bizCount": 0,
+   "cap": null,
+   "lastOpen": null,
+   "latestStamp": null
+  },
+  {
+   "lin": "LIN-00002",
+   "family": "Dillon",
+   "status": "active",
+   "tier": "Established",
+   "living": 3,
+   "minted": [
+    "BIZ-00182"
+   ],
+   "bizCount": 1,
+   "cap": 3,
+   "lastOpen": 109,
+   "latestStamp": 109
+  },
+  {
+   "lin": "LIN-00003",
+   "family": "Keane",
+   "status": "active",
+   "tier": "Established",
+   "living": 2,
+   "minted": [
+    "BIZ-00185"
+   ],
+   "bizCount": 2,
+   "cap": 2,
+   "lastOpen": 111,
+   "latestStamp": 111
+  },
+  {
+   "lin": "LIN-00004",
+   "family": "Kelley",
+   "status": "active",
+   "tier": "Established",
+   "living": 1,
+   "minted": [
+    "BIZ-00180"
+   ],
+   "bizCount": 1,
+   "cap": 1,
+   "lastOpen": 106,
+   "latestStamp": 106
+  },
+  {
+   "lin": "LIN-00005",
+   "family": "Varek",
+   "status": "active",
+   "tier": "Prominent",
+   "living": 1,
+   "minted": [
+    "BIZ-00186"
+   ],
+   "bizCount": 3,
+   "cap": 2,
+   "lastOpen": 112,
+   "latestStamp": 112
+  },
+  {
+   "lin": "LIN-00006",
+   "family": "Paulson",
+   "status": "active",
+   "tier": "Founding",
+   "living": 1,
+   "minted": [],
+   "bizCount": 0,
+   "cap": null,
+   "lastOpen": null,
+   "latestStamp": null
+  },
+  {
+   "lin": "LIN-00007",
+   "family": "Horn",
+   "status": "active",
+   "tier": "Founding",
+   "living": 1,
+   "minted": [],
+   "bizCount": 0,
+   "cap": null,
+   "lastOpen": null,
+   "latestStamp": null
+  },
+  {
+   "lin": "LIN-00008",
+   "family": "Reaves",
+   "status": "active",
+   "tier": "Founding",
+   "living": 1,
+   "minted": [],
+   "bizCount": 0,
+   "cap": null,
+   "lastOpen": null,
+   "latestStamp": null
+  },
+  {
+   "lin": "LIN-00009",
+   "family": "Villanueva",
+   "status": "active",
+   "tier": "Founding",
+   "living": 4,
+   "minted": [],
+   "bizCount": 0,
+   "cap": null,
+   "lastOpen": null,
+   "latestStamp": null
+  }
+ ],
+ "openings": [],
+ "hold": [],
+ "verdict": "PASS"
+}

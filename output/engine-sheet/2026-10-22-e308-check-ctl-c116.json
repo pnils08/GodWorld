@@ -1,0 +1,149 @@
+{
+ "cycle": 116,
+ "from": 113,
+ "label": "ctl",
+ "sheet": "bench 1004",
+ "columnArmed": false,
+ "lines": [
+  {
+   "lin": "LIN-00001",
+   "family": "Corliss",
+   "status": "active",
+   "tier": "Founding",
+   "living": 4,
+   "minted": [],
+   "bizCount": 0,
+   "cap": null,
+   "latestStamp": null
+  },
+  {
+   "lin": "LIN-00002",
+   "family": "Dillon",
+   "status": "active",
+   "tier": "Established",
+   "living": 3,
+   "minted": [
+    "BIZ-00182"
+   ],
+   "bizCount": 1,
+   "cap": 3,
+   "latestStamp": 109
+  },
+  {
+   "lin": "LIN-00003",
+   "family": "Keane",
+   "status": "active",
+   "tier": "Established",
+   "living": 2,
+   "minted": [
+    "BIZ-00185"
+   ],
+   "bizCount": 2,
+   "cap": 2,
+   "latestStamp": 111
+  },
+  {
+   "lin": "LIN-00004",
+   "family": "Kelley",
+   "status": "active",
+   "tier": "Established",
+   "living": 1,
+   "minted": [
+    "BIZ-00180"
+   ],
+   "bizCount": 1,
+   "cap": 1,
+   "latestStamp": 106
+  },
+  {
+   "lin": "LIN-00005",
+   "family": "Varek",
+   "status": "active",
+   "tier": "Prominent",
+   "living": 1,
+   "minted": [
+    "BIZ-00186",
+    "BIZ-00290"
+   ],
+   "bizCount": 4,
+   "cap": 2,
+   "latestStamp": 113
+  },
+  {
+   "lin": "LIN-00006",
+   "family": "Paulson",
+   "status": "active",
+   "tier": "Founding",
+   "living": 1,
+   "minted": [],
+   "bizCount": 0,
+   "cap": null,
+   "latestStamp": null
+  },
+  {
+   "lin": "LIN-00007",
+   "family": "Horn",
+   "status": "active",
+   "tier": "Founding",
+   "living": 1,
+   "minted": [],
+   "bizCount": 0,
+   "cap": null,
+   "latestStamp": null
+  },
+  {
+   "lin": "LIN-00008",
+   "family": "Reaves",
+   "status": "active",
+   "tier": "Founding",
+   "living": 1,
+   "minted": [],
+   "bizCount": 0,
+   "cap": null,
+   "latestStamp": null
+  },
+  {
+   "lin": "LIN-00009",
+   "family": "Villanueva",
+   "status": "active",
+   "tier": "Founding",
+   "living": 4,
+   "minted": [],
+   "bizCount": 0,
+   "cap": null,
+   "latestStamp": null
+  },
+  {
+   "lin": "LIN-00010",
+   "family": "Rushing",
+   "status": "active",
+   "tier": "Founding",
+   "living": 1,
+   "minted": [],
+   "bizCount": 0,
+   "cap": null,
+   "latestStamp": null
+  }
+ ],
+ "openings": [
+  {
+   "lin": "LIN-00005",
+   "family": "Varek",
+   "cycle": 113,
+   "staker": "POP-00789",
+   "name": "Varek Fellowship",
+   "prevOpen": 112,
+   "gap": 1,
+   "countBefore": 3,
+   "cap": 2,
+   "stakerOwnedBefore": 3
+  }
+ ],
+ "hold": [
+  "LIN-00005 opened C113 only 1 cycles after C112",
+  "LIN-00005 opened C113 at 3 firms >= cap 2 (end-state cap)",
+  "LIN-00005 staker POP-00789 owned 3 firms before C113",
+  "Varek opened Varek Fellowship at C113"
+ ],
+ "verdict": "HOLD"
+}

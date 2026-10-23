@@ -70,19 +70,21 @@ function culturalSightingBuckets_(ctx) {
       var row = rows[r];
       if (String(row[iStatus] || '').trim().toLowerCase() !== 'active') continue;
       var name = String(row[iName] || '').trim(), role = String(row[iRole] || '').trim();
-      // 'unknown' is the classifier's miss at registration, not an authored category: re-read the role,
-      // then the role words themselves ("cultural leader" → cultural-leader), so no Active row is unsightable.
-      var cat = String(row[iCat] || '').trim().toLowerCase();
-      if (!cat || cat === 'unknown') cat = classifyRole(role).cat;
-      var key = category[cat] || category[role.toLowerCase().replace(/\s+/g, '-')];
+      // A blank or 'unknown' category is the classifier's miss at registration, not an authored one: only then
+      // re-read the role, then the role words themselves ("cultural leader" → cultural-leader). An authored
+      // category always decides — mapped wins, unmapped (model, media-personality) stays out (codex 2026-10-23 1a).
+      var cat = String(row[iCat] || '').trim().toLowerCase(), key;
+      if (!cat || cat === 'unknown') key = category[classifyRole(role).cat] || category[role.toLowerCase().replace(/\s+/g, '-')];
+      else key = category[cat];
       if (!name || !key || !Object.prototype.hasOwnProperty.call(buckets, key)) continue;
       var link = String(row[iLink] || '').trim().toUpperCase();
       // A linked citizen is out on the town only while living on the ledger (active or retired): a row
       // whose citizen died, left, or lies in hospital — or is off the ledger (archived) — is not sighted.
+      // A ledger without a Status column cannot vouch for anyone: linked rows stay home (codex 2026-10-23 1b).
       if (link.indexOf('POP-') === 0) {
         var cit = byPop[link];
-        if (!cit) continue;
-        if (iLSt >= 0 && !/^(active|retired)$/i.test(String(cit[iLSt] || '').trim())) continue;
+        if (!cit || iLSt < 0) continue;
+        if (!/^(active|retired)$/i.test(String(cit[iLSt] || '').trim())) continue;
       }
       var home = link.indexOf('POP-') === 0 ? String(byPop[link][iNh] || '') : String(row[iHood] || '');
       buckets[key].push({ name: name, role: role, homeNeighborhood: home });

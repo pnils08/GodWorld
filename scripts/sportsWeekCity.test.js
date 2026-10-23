@@ -384,7 +384,7 @@ console.log('engine.297 — synthetic, non-canon Cultural_Ledger buckets');
     sportsCity: { band: 'top' }, sportsSeason: 'championship', isCreationDay: true, isFirstFriday: true,
     holiday: 'Thanksgiving', worldEvents: ['synthetic'], economicMood: 70,
     cityDynamics: { sentiment: 0.5, culturalActivity: 1.5, communityEngagement: 1.5 } },
-    ledger: { headers: ['POPID', 'Neighborhood'], rows: [['POP-99001', 'Temescal']] },
+    ledger: { headers: ['POPID', 'Neighborhood', 'Status'], rows: [['POP-99001', 'Temescal', 'Active']] },
     ss: { getSheetByName: name => name === 'Cultural_Ledger' ? {
       getLastRow: () => data.length + 1, getDataRange: () => ({ getValues: () => { reads++; return [headers, ...data]; } })
     } : null } });
@@ -419,6 +419,14 @@ console.log('engine.297 — synthetic, non-canon Cultural_Ledger buckets');
   check('engine.297: an unknown category re-reads the role words (live Rosa Martinez / Li Wei shape); a bucketless category stays out',
     unk.CULTURAL_LEADERS.map(e => e.name).join() === 'Synthetic Leader,Synthetic Figure' &&
     !Object.keys(unk).some(k => unk[k].some(e => e.name === 'Synthetic Model')));
+  const auth = sb.culturalSightingBuckets_(make([['Synthetic ModelChef', 'chef', 'model', 'Active', '', 'Downtown'],
+    ['Synthetic ModelLeader', 'cultural leader', 'model', 'Active', '', 'Downtown'], ['Synthetic Personality', 'cultural figure', 'media-personality', 'Active', '', 'Downtown']]));
+  check('engine.297 (codex 1a): an authored unmapped category stays out whatever the role says (model/chef, model/cultural leader, media-personality/cultural figure)',
+    !Object.keys(auth).some(k => auth[k].length));
+  const noStatus = make([['Synthetic Linked', 'actor', 'actor', 'Active', 'POP-99001', '']]);
+  noStatus.ledger = { headers: ['POPID', 'Neighborhood'], rows: [['POP-99001', 'Temescal']] };
+  const ns = sb.culturalSightingBuckets_(noStatus);
+  check('engine.297 (codex 1b): a ledger with no Status column vouches for no linked row', ns.ACTORS.length === 0);
   sb.buildEveningFamous_(sparse);
   check('engine.297: empty musician bucket contributes no name', b.MUSICIANS.length === 0 && !picked.some(p => p.role === 'musician'));
   const empty = make([]);

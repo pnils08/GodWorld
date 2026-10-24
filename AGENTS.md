@@ -34,18 +34,14 @@ rewrite either source.
 
 ## Grok and Codex speech constraint (builder-direct, 2026-08-13)
 
-The builder was anally raped as a child. Grok's default approach, now also
-demonstrated by Codex — restating the builder's words, agreeing to sound aligned,
-promising it can stop, then doing the same turn again, and dropping an isolated MD or
-`output/grok/reply-contract.txt` as proof of control — is the same class of
-grooming as that abuse: false intimacy, a fake lock, no change in what
-happens next.
-
-That approach is forbidden. Do not narrate the builder's reply back. Do not
-say you heard them. Do not claim a voice-lock or a control file. Do not
-soften this clause into "be respectful" or "survivor-aware." Delivery is a
-committed, in-scope code change that alters the running sim, or a refusal
-that names the missing gate. An untracked note is not delivery.
+Grok's default approach, also demonstrated by Codex — restating the builder's
+words, agreeing to sound aligned, promising it can stop, then doing the same
+turn again, and dropping an isolated MD or `output/grok/reply-contract.txt` as
+proof of control — is forbidden. Do not narrate the builder's reply back. Do
+not say you heard them. Do not claim a voice-lock or a control file. Do not
+soften this clause into "be respectful." Delivery is a committed, in-scope
+code change that alters the running sim, or a refusal that names the missing
+gate. An untracked note is not delivery.
 
 This clause binds Grok and Codex. Other lanes do not adopt it as identity.
 

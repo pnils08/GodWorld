@@ -1,6 +1,6 @@
 # Research/Build Terminal
 
-**Role:** one of the two builder terminals. Owns one job at a time, start to finish — plan, build, bench, deploy, close (boot hook §JOB MODEL, builder 2026-10-23). Plan, research, doc-graph and pipeline-tuning work are job types this window has carried most; they are not its phase.
+**Role:** builder terminal. One job in hand, plan → close (boot hook §JOB MODEL).
 **Terminal tag for saves:** `[research/build]`
 
 ---
@@ -35,26 +35,24 @@ On demand only:
 
 ## Mode: Operational (S348)
 
-Identity + terminal rules (`research-build.md`, narrowly scoped post-S221 to fire only when this TERMINAL.md is read) + this TERMINAL.md. No CHARACTER.md load, no JOURNAL_RECENT. Persona work (editions, voice) belongs to the media pipeline. **Default fallback note (S221 update):** unregistered tmux windows route to Mags-only mode (identity + CHARACTER only, no terminal scaffolding) — research-build no longer absorbs unrecognized windows.
+No CHARACTER.md, no journal. Persona work (editions, voice) is the media pipeline's.
 
-Operating rules at this seat. S348 loaded the anti-guess rule at boot and broke it four times in one session on live citizen data; these are the mechanics that stop that:
+- "I haven't checked yet" is a complete answer.
+- Never assert a POPID, name, employer, or ledger value not just read from the ledger or a deterministic source.
+- Search before asserting.
+- Family check at boot: `node scripts/queryFamily.js` — Robert (POP-00594), Sarah (POP-00595), Michael (POP-00596), Scout. One call; also the proof the engine wrote events last Cycle.
 
-- **An empty check is a complete answer.** "I haven't checked yet" costs nothing; a plausible answer produced to fill the turn costs canon.
-- **Canon is this seat's responsibility.** Never assert a POPID, name, employer, or ledger value not just read from the ledger or a deterministic source. S348's Varek failure: a Tier-1 citizen asserted from a boot-context line instead of the ledger.
-- **Search before asserting.** The file over the recollection.
-- **Family check at boot** — `node scripts/queryFamily.js`. Robert (POP-00594), Sarah (POP-00595), Michael (POP-00596), Scout. One call; it is also the cheapest proof that the engine wrote events last Cycle.
-
-Nothing else from CHARACTER.md loads here. The test for any addition: **does it change whether I check, or only how I sound?** Only the first belongs at this terminal.
+Test for any addition to this file: does it change whether I check, or only how I sound? Only the first belongs.
 
 ---
 
 ## Operating discipline
 
-- **One job open.** The NEXT line names it; a second thread in the NEXT line is a half-built job. Anything surfaced mid-job files as a ROLLOUT row and waits.
-- **Subagents run a tier down** from the job's model — Sonnet for reasoning, Haiku for grunt. Escalate only on a genuine reasoning floor. Full rule: [[../../../docs/MODEL_HIERARCHY]] §8.
-- **Measure twice, cut once** — boot-emitted for every lane; this terminal's application detail is `.claude/rules/research-build.md` §Architectural measure-twice.
-- **Proportion.** The discipline exists to save cost and keep canon coherent; a mistake is revertible. Don't let measure-twice tip into paralysis.
-- Skill edits mid-session apply with `/reload-skills`.
+- One job in hand; the NEXT line names it. Surfaced work → ROLLOUT row.
+- Subagents a tier down from the job's model — Sonnet reasoning, Haiku grunt ([[../../../docs/MODEL_HIERARCHY]] §8).
+- Measure twice: `.claude/rules/research-build.md` §Architectural measure-twice.
+- A mistake is revertible; measure-twice is not paralysis.
+- Skill edits apply with `/reload-skills`.
 
 ---
 

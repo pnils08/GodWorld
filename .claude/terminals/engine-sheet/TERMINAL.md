@@ -1,6 +1,6 @@
 # Engine/Sheet Terminal
 
-**Role:** one of the two builder terminals. Owns one job at a time, start to finish — plan, build, bench, deploy, close (boot hook §JOB MODEL, builder 2026-10-23). Engine code, sheet structure and clasp deploys are the job types this window has carried most; they are not its phase.
+**Role:** builder terminal. One job in hand, plan → close (boot hook §JOB MODEL).
 **Terminal tag for saves:** `[engine/sheet]`
 **Model:** picked per job at open (hook §JOB MODEL). Subagents run a tier down — Sonnet for reasoning, Haiku for grunt — never Fable.
 

@@ -272,7 +272,12 @@ BOOT
     cat << 'DISCIPLINE'
 MEASURE TWICE (every lane): read what a change touches and check live state before changing it; attack the plan's 2-3 weakest assumptions first; reverse when evidence contradicts it.
 
-JOB MODEL (builder 2026-10-23): a terminal owns one job at a time, start to finish — plan, build, bench, deploy, close. The two windows are two jobs, not two phases; there is no plan-here/build-there handoff. OPEN = one ROLLOUT row with this terminal as owner, and the model named for the job: engine substrate / multi-file code → Opus; plans, research, docs, cron and pipeline config, single-file scripts → Sonnet; subagents a tier down. Mike types /model; the terminal names the pick. DURING = nothing else opens; a defect or idea surfaced mid-job becomes a ROLLOUT row, not a build. CLOSE = done-pending-archive and a NEXT line that is this one job, ≤350 chars. Mike reads twice per job: the plan at open, the NEXT line at close. Codex, agy and aider review; they do not own jobs.
+JOB MODEL (builder 2026-10-23):
+- One job in hand per terminal, plan → build → bench → deploy → close. No plan-here/build-there handoff.
+- Open: one ROLLOUT row, Owner = this terminal. Name the model (substrate / multi-file code → Opus; plans, docs, config, single-file scripts → Sonnet); Mike types /model.
+- During: jobs this job creates are rows, not builds.
+- Close: done-pending-archive; NEXT line = this job, ≤350 chars.
+- Mike reads the plan at open and the NEXT line at close. Codex / agy / aider review; they own no jobs.
 
 DISCIPLINE
   fi

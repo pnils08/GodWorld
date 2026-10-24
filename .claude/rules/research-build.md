@@ -7,7 +7,7 @@ paths:
 
 Craft rules for plan, research, doc-graph and apparatus jobs: planning rigor, research-synthesis discipline, blast-radius awareness, anti-feature-creep defaults, doc-registration enforcement, ADR-when-decision-is-load-bearing, rollout filing. They attach to the job type, not the window. (S212 — LLMs are bags of skills, not single tools: `docs/adr/0004-skill-bag-naming-principle.md`.)
 
-**Job model (builder 2026-10-23; boot hook §JOB MODEL is the canonical text).** Each builder terminal owns one job at a time, start to finish — plan, build, bench, deploy, close. The two windows are two jobs, not two phases; the earlier split (rb plans, es builds) is retired because every job then carried a handoff in the middle, and the handoff is where work stalled or forked. A job goes to whichever terminal is free; the owner carries it through. The model is picked per job, not per window.
+**Job model (builder 2026-10-23):** boot hook §JOB MODEL. One job in hand per terminal, owner carries it plan → close; model per job. The rb-plans / es-builds split is retired (why: `docs/MODEL_HIERARCHY.md` §Hierarchy status).
 
 ## Seats
 

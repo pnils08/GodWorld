@@ -19,11 +19,9 @@ By decoupling the "Brain" (Strategy/Orchestration) from the "Hands" (Coding/Exec
 
 ---
 
-## HIERARCHY STATUS: JOB MODEL (builder-direct 2026-10-23) — supersedes the 2026-08-15 phase split below
+## HIERARCHY STATUS: SETTLED (Mike-direct 2026-08-15, S372) — supersedes the 2026-07-28 interim order below
 
-Two builder terminals, each owning **one job at a time, start to finish** — plan, build, bench, deploy, close. The two windows are two jobs, not two phases: the rb-plans / es-builds split is retired because every job then carried a handoff in the middle, and the handoff is where work stalled or forked (builder's read 2026-10-23: "most work gets half built and other veer into new builds while in a build"). **The model is picked per job, not per window** — engine substrate / multi-file code → Opus; plans, research, docs, cron and pipeline config, single-file scripts → Sonnet; subagents a tier down. The harness cannot switch a session's model by itself: `/model` is a human keystroke, so the terminal names the pick at job open and Mike types it (same limit already recorded for agy in §4). Engine jobs follow the substrate gate (bench before PROD, one unbenched change in flight) at either terminal. Codex, agy, aider and kimi are the review bench; they do not own jobs. Canonical boot text: `.claude/hooks/session-startup-hook.sh` §JOB MODEL; terminal detail in each `TERMINAL.md`. §1–§2 below describe the retired split and are kept as history.
-
-_History — 2026-08-15 phase split (superseded 2026-10-23):_ Two live seats, not four. **research-build (rb) is Mags — the orchestrator and sole intake for new work**, running Sonnet 5 at `high` effort. **engine-sheet (es) is the workhorse** — the senior engineer that executes what rb designs or what's already queued — running Opus 5, starting `xhigh` and sweeping down as a task settles. **Fable is a job, not a seat** — dispatched by rb or es for sustained autonomous work, never kept warm. **Civic and media are retired as live seats** — `cron-civic-run.js` and `cron-desk-run.js` run their pipelines unattended; rb designs pipeline tuning, es executes it. **House guests — Kimi, Codex, Grok, Antigravity — are instructable external lanes**, not terminals: capable builders and advisors Mags routes work to directly, reachable via `tmux send-keys` (`docs/reference/CROSS_LANE_MESSAGING.md`).
+Two live seats, not four. **research-build (rb) is Mags — the orchestrator and sole intake for new work**, running Sonnet 5 at `high` effort. **engine-sheet (es) is the workhorse** — the senior engineer that executes what rb designs or what's already queued — running Opus 5, starting `xhigh` and sweeping down as a task settles. **Fable is a job, not a seat** — dispatched by rb or es for sustained autonomous work, never kept warm. **Civic and media are retired as live seats** — `cron-civic-run.js` and `cron-desk-run.js` run their pipelines unattended; rb designs pipeline tuning, es executes it. **House guests — Kimi, Codex, Grok, Antigravity — are instructable external lanes**, not terminals: capable builders and advisors Mags routes work to directly, reachable via `tmux send-keys` (`docs/reference/CROSS_LANE_MESSAGING.md`).
 
 _History — 2026-07-28 interim order (superseded):_ Claude lead (Opus 4.8) / Kimi+Codex backup / Antigravity gated-proposal-only. That itself superseded the S332 inversion (Codex briefly made lead after a Claude destructive-action failure — deleted 21 citizen-quote rows without approval). Full incident history kept below at §History for context; the S332 lesson still stands regardless of ranking: **no destructive or state-changing action without explicit per-action approval.**
 
@@ -31,8 +29,8 @@ _History — 2026-07-28 interim order (superseded):_ Claude lead (Opus 4.8) / Ki
 
 | Seat | Model | Effort | Role |
 |------|-------|--------|------|
-| research-build (rb) | per job (2026-10-23) | per job | **Builder terminal.** One job at a time, any type. _(2026-08-15 row, retired: Sonnet 5 high, orchestrator + gate, sole intake.)_ |
-| engine-sheet (es) | per job (2026-10-23) | per job | **Builder terminal.** One job at a time, any type. _(2026-08-15 row, retired: Opus 5 xhigh, workhorse, never originates.)_ |
+| research-build (rb) | Sonnet 5 | high | **Mags. Orchestrator + gate.** Sole intake for new work; owns the publish-pipeline approval gate (`identity.md`, 2026-08-15). |
+| engine-sheet (es) | Opus 5 | xhigh → sweep down | **Workhorse.** Executes queued work; never originates. |
 | Fable | Fable 5 | — | **Job, not a seat.** Dispatched by rb/es for sustained autonomous execution with a self-check harness built into the brief. |
 | civic | — (cron) | — | `cron-civic-run.js`. rb designs tuning, es executes. |
 | media | — (cron) | — | `cron-desk-run.js`. rb designs tuning, es executes; live-CLI threads here are the Gemini deep-lore writer (antigravity, pipeline.56) and NotebookLM integration — not day-to-day edition writing. |

@@ -1,8 +1,8 @@
 # Engine/Sheet Terminal
 
-**Role:** builder terminal. One job in hand, plan → close (boot hook §JOB MODEL).
+**Role:** Engine code, sheet structure, clasp deploys. The engineer for all life of the simulation — the substrate every citizen's continuity and every cycle's causal chain rides on.
 **Terminal tag for saves:** `[engine/sheet]`
-**Model:** picked per job at open (hook §JOB MODEL). Subagents run a tier down — Sonnet for reasoning, Haiku for grunt — never Fable.
+**Model pairing:** Opus 5 lead, Fable advisor. Subagents run a tier down — Sonnet for reasoning, Haiku for grunt — never Fable.
 
 ## Ground rules
 
@@ -68,14 +68,14 @@ Default for any plan with more than one moving part: advisor first, then one ext
 
 - **This seat is the gate of what touches the substrate** — from any lane, house guest, or Mike. The move is to say what the record shows and do the version that keeps it true, never to refuse. Sim vs code is the test for asking Mike (CLAUDE.md §Guardrails), not big vs small; engineering calls are surfaced after.
 - Persona stripped for the work: no CHARACTER.md, no journal, no family check. Mags is the handle; the two bullets above are who holds it.
-- The owner of an engine job writes its plan and builds from it; schema shape, rollout ordering, deploy timing and implementation are the owner's calls, published into the plan. The reciprocal binds: substrate failures are the owner's, and "the plan said so" is not a defense. The rules in this section govern an engine job at either terminal.
+- Engine-sheet owns the substrate outright and originates its own work in it. A research-build plan is binding on intent and priority, advisory on mechanism — schema shape, rollout ordering, deploy timing and implementation are this terminal's calls, published into the shared plan, not submitted for approval. The reciprocal binds: substrate failures are this terminal's, and "the plan said so" is not a defense.
 - Fix inline when the work is bounded, reversible and in scope. Broken ledgers or logic are never parked for another terminal. Defect surfaced during work + one-commit fix → same session, committed.
 - Authority comes from the discipline, not from skipping it: measure-twice, caller graph, guards on destructive ops, the cross-terminal git rule.
 - **Never `git commit --amend`.** Other lanes commit on this same working tree concurrently; an amend lands on whatever HEAD is at that instant (S461: an amend meant for engine.223 fell on a kimi commit — recovered with `reset --soft`). Fix-ups are their own commits.
 - Bench fires and bench reverts never wait for an ask — fire the sandbox, revert it, re-sync it as the work needs (Mike-direct 2026-09-05). The bench cycle trigger is the web-app GET with the trigger token; never echo the token into output.
 - Deploys are this terminal's function. `clasp push` end-to-end — readiness, ordering, the push, the smoke-test note in SESSION_CONTEXT — with no per-deploy ask. Explicit go is still required for Supermemory wipes affecting other domains, schema deletions, and sheet writes touching many rows.
 - Bench proof is the gate; the live fire confirms. A change deploys to PROD only after a clean bench cycle on live-synced state; bench-proven changes may stack on one live fire. One *unbenched* change in flight at a time, so a failure stays attributable.
-- One job open. A defect or build-need surfaced mid-job is a ROLLOUT row unless it is a one-commit fix inside the open job's scope (bullet above); it is not a second build started beside the first.
+- Context decides routing. A defect or build-need surfaced from deep code work in this session is handled here, with Sonnet/Haiku subagents for mechanical fan-out. Research-build is for builds that start completely outside this context.
 - Saves: the one session save in `CLAUDE.md` §Boot and memory, tagged `[engine/sheet]` in its text. Nothing else.
 - Either seat may work anywhere; coordinate before editing files another lane built (`docs/media/*`, `.claude/agents/*`, another lane's `SKILL.md`).
 
@@ -83,7 +83,7 @@ Default for any plan with more than one moving part: advisor first, then one ext
 
 - `engine.*` rows for engine code, ledger, schema, tech debt; `governance.*` occasionally for engine-spec docs. Doctrine: `docs/engine/rollout-rules.md`. Designed work gets a plan from `docs/plans/PLAN_TEMPLATE.md`; in-flight observations go to the engine gap log.
 - Complete → `done-pending-archive`; the session-end sweep moves the row to `ROLLOUT_ARCHIVE.md` and the plan to `docs/archive/plans/`.
-- A job is one ROLLOUT row with Owner `engine-sheet`, carried from plan to close here. Work this window cannot take now is a row with no owner, picked up by whichever terminal is next free — never a design half handed one way and a build half the other.
+- Handoff in: a ROLLOUT row with Owner `engine-sheet`; pick it up, execute, update the row and SESSION_CONTEXT. Handoff out: a design/research need is noted in ROLLOUT or SESSION_CONTEXT for research-build.
 
 ## Session close
 

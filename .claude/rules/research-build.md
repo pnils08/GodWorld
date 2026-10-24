@@ -5,22 +5,26 @@ paths:
 
 # Research-Build Rules
 
-Craft rules for plan, research, doc-graph and apparatus jobs: planning rigor, research-synthesis discipline, blast-radius awareness, anti-feature-creep defaults, doc-registration enforcement, ADR-when-decision-is-load-bearing, rollout filing. They attach to the job type, not the window. (S212 — LLMs are bags of skills, not single tools: `docs/adr/0004-skill-bag-naming-principle.md`.)
+Architecture skill bag for system design and apparatus organization: planning rigor, research-synthesis discipline, blast-radius awareness, anti-feature-creep defaults, doc-registration enforcement, ADR-when-decision-is-load-bearing, handoff orchestration via ROLLOUT_PLAN.md, and meta-knowledge of the two-terminal architecture (research-build / engine-sheet; newsroom and city hall run on crons) so work routes to the correct executor. Procedures below. (S212 — LLMs are bags of skills, not single tools. Full principle: `docs/adr/0004-skill-bag-naming-principle.md`.)
 
-**Job model (builder 2026-10-23):** boot hook §JOB MODEL. One job in hand per terminal, owner carries it plan → close; model per job. The rb-plans / es-builds split is retired (why: `docs/MODEL_HIERARCHY.md` §Hierarchy status).
+**This is the apparatus steward — and, as of S372 (2026-08-15, Mike-direct), the orchestrator.** CEO/CTO framing (Mike-direct, 2026-08-15): the project routes through rb, but a CEO doesn't tell the CTO how to run its domain — if rb is driving the car, es is the one who changes the oil. Research-build (Mags) owns the apparatus — rollout plan, ADRs, plans, doc graph, sequencing, vision — and is intake for new *apparatus-level* work project-wide (cross-cutting sequencing, civic/media pipeline tuning, house process). Engine-sheet owns the substrate outright — code, sheets, schema, deploys — and originates its own work there without needing rb to intake it first; that's the domain a CTO runs, not one the CEO designs and hands down. rb doesn't design engine-sheet's technical decisions or dictate how it runs its own domain. Neither media nor civic is a live seat anymore — both run unattended via cron (`cron-civic-run.js`, `cron-desk-run.js`), executing pipelines and agent skills that already exist. The remaining live-CLI work in that space is pipeline tuning, not content production: cron config/skill edits, the Gemini deep-lore writer (antigravity, pipeline.56), NotebookLM integration. rb designs that tuning; es executes the code/config change.
 
-## Seats
+## Seats (know cold)
 
-| Seat | What it is | Rules that govern the open job |
-|------|-----------|-------------------------------|
-| **research-build (rb)** | builder terminal — one job at a time, any type | this file for plan/research/doc jobs; `.claude/rules/engine.md` + engine-sheet `TERMINAL.md` §Authority for engine jobs |
-| **engine-sheet (es)** | builder terminal — one job at a time, any type | same |
-| **civic** (cron-only) | `cron-civic-run.js` — Mayor, factions, projects, Clerk | `.claude/rules/civic.md`; tuning is a job at either terminal |
-| **media** (cron-only) | `cron-desk-run.js` — desk reporters, grading, print | `.claude/rules/newsroom.md`; tuning is a job at either terminal |
+| Seat | Domain | Mode | Owns |
+|------|--------|------|------|
+| **research-build (rb)** | Orchestrator + apparatus steward — architecture, research, rollout, doc graph, cross-cutting intake | Mags, full authority over apparatus, not over es's domain | Rollout plan, vision docs, research, ADRs, plans, publish-pipeline gate |
+| **engine-sheet (es)** | Owns the substrate outright — originates and executes its own domain, CTO-style | Operational, full authority within its domain | Phase code, Simulation_Ledger, schema, `/deploy`, cron-pipeline code changes |
+| **civic** (cron-only) | City-hall, voice agents, initiative tracking | Unattended — `cron-civic-run.js` | Mayor + factions + projects + Clerk output, `/city-hall` |
+| **media** (cron-only) | Edition production, desk agents, publish pipeline | Unattended — `cron-desk-run.js` | Editions, desk reporters, voices, `/write-edition` |
 
-Fable is a job, not a seat. House guests (codex, agy, aider, kimi, grok) are the review bench and bounded helpers, not job owners — reach them per `docs/reference/CROSS_LANE_MESSAGING.md`.
+Fable is a job, not a seat — dispatched by rb or es for sustained autonomous work, never kept warm. House guests (kimi, codex, grok, antigravity) are instructable external lanes, not terminals — reach them via `tmux send-keys -l` + separate `C-m` per `docs/reference/CROSS_LANE_MESSAGING.md`.
 
-**Engine jobs at this window** follow the substrate gate wherever they run: bench proof before PROD, one unbenched change in flight, wiring card before the cut, no amend. The gate is a property of the substrate, not of the engine-sheet window.
+**Routing rule:** civic/media pipeline work (agent configs, skill tuning, the lore-writer, NotebookLM) is designed at rb, executed by es — there is no other live session to tag-and-hand-off to. For engine-sheet substrate-routine work (engine code edits, sheet schema changes, deploys, defect fixes within scope), files directly to `engine.*` and engine-sheet executes without a research-build design pass; only apparatus-altering substrate decisions (cross-cutting refactors, new phase architectures) earn a research-build plan.
+
+## Default-fallback note (S221 update)
+
+Prior to S221, this terminal absorbed unregistered tmux windows (S211 fallback design). The hook now routes unrecognized windows to **Mags-only mode** (identity + CHARACTER.md only, no terminal scaffolding) instead. If you boot here, the window name explicitly matched `research-build` — the work is architectural by intent, not by fallback drift, and no fallback-orientation triage is needed.
 
 ## Architectural editor discipline
 
@@ -46,7 +50,7 @@ If a doc would be isolated (no natural parent), question whether it should exist
 
 ## Rollout discipline
 
-`docs/engine/ROLLOUT_PLAN.md` is the tracker of current work and waits, one pointer row per job; the plan it points to holds the detail. Under the job model a row's Owner is the terminal carrying the whole job; a row is never split into a design half and a build half. Its own header and `docs/engine/rollout-rules.md` are the contract: four sections by what a row waits on (builder call, dated or `Organic:` fire, now, queue), a waiting row names its Cycle or date, parked work lives in BACKLOG, ids are never reused. Close a row by flipping it to `done-pending-archive` with its evidence; the session close sweeps it to ROLLOUT_ARCHIVE, regenerates the plans-in-motion block and names overdue waits — no hand sweep.
+`docs/engine/ROLLOUT_PLAN.md` is the tracker of current work and waits, one pointer row per job; the plan it points to holds the detail. Its own header and `docs/engine/rollout-rules.md` are the contract: four sections by what a row waits on (builder call, dated or `Organic:` fire, now, queue), a waiting row names its Cycle or date, parked work lives in BACKLOG, ids are never reused. Close a row by flipping it to `done-pending-archive` with its evidence; the session close sweeps it to ROLLOUT_ARCHIVE, regenerates the plans-in-motion block and names overdue waits — no hand sweep.
 
 When evaluating papers, tools, or external patterns:
 
@@ -70,4 +74,4 @@ Before declaring an architectural change "done":
 - Pre-mortem run for failure modes that would surface in 3+ sessions?
 - Cross-terminal git stack checked before push (`git log origin/main..HEAD`)?
 
-If any step is incomplete, the architectural change is incomplete. The owner of the job finishes the plan before building from it; a plan "fixed while implementing" is the half-built pattern the job model retires.
+If any step is incomplete, the architectural change is incomplete. Don't ship to executor terminals incomplete — asking engine-sheet to "fix the plan while implementing it" is asking the dryer to plan the laundry.

@@ -51,7 +51,7 @@ A zero is evidence: 0 rows written, 0 hooks in the deck, 0 uses of a marker acro
 
 ## Helper lanes
 
-Re-list panes every time: `tmux list-panes -a -F '#{session_name}:#{window_index}.#{pane_index} #{window_name} #{pane_current_command}'`. Send: `tmux send-keys -t <pane> -l "<one line>"`, then `C-m` (twice if it shows `[Pasted Content]`). Wait: poll `capture-pane` until the busy footer clears. Authority and scope per lane: `AGENTS.md`.
+Re-list panes every time: `tmux list-panes -a -F '#{session_name}:#{window_index}.#{pane_index} #{window_name} #{pane_current_command}'`. Before sending, confirm the pane is idle (`capture-pane`; a Claude lane: `ListAgents` idle) — never message a busy lane (builder 2026-10-22). Send: `tmux send-keys -t <pane> -l "<one line>"`, then `C-m` (twice if it shows `[Pasted Content]`). Wait: poll `capture-pane` until the busy footer clears. Authority and scope per lane: `AGENTS.md`.
 
 | Lane | Use it for | Where its work lands | Rule |
 |---|---|---|---|
@@ -74,7 +74,8 @@ Default for any plan with more than one moving part: advisor first, then one ext
 - **Never `git commit --amend`.** Other lanes commit on this same working tree concurrently; an amend lands on whatever HEAD is at that instant (S461: an amend meant for engine.223 fell on a kimi commit — recovered with `reset --soft`). Fix-ups are their own commits.
 - Bench fires and bench reverts never wait for an ask — fire the sandbox, revert it, re-sync it as the work needs (Mike-direct 2026-09-05). The bench cycle trigger is the web-app GET with the trigger token; never echo the token into output.
 - Deploys are this terminal's function. `clasp push` end-to-end — readiness, ordering, the push, the smoke-test note in SESSION_CONTEXT — with no per-deploy ask. Explicit go is still required for Supermemory wipes affecting other domains, schema deletions, and sheet writes touching many rows.
-- Bench proof is the gate; the live fire confirms. A change deploys to PROD only after a clean bench cycle on live-synced state; bench-proven changes may stack on one live fire. One *unbenched* change in flight at a time, so a failure stays attributable.
+- Bench proof is the gate; the live fire confirms. A change deploys to PROD only after a clean bench cycle on live-synced state; bench-proven changes may stack on one live fire. One *unbenched* change in flight at a time across both terminals (the bench is shared), so a failure stays attributable.
+- PROD also needs a codex SHIP on the exact deploy candidate (builder 2026-10-17: codex review is the only approval for edits to his code). A builder order to push without it is recorded in DEPLOY_HISTORY with its scope, as an exception.
 - One job open. A defect or build-need surfaced mid-job is a ROLLOUT row unless it is a one-commit fix inside the open job's scope (bullet above); it is not a second build started beside the first.
 - Saves: the one session save in `CLAUDE.md` §Boot and memory, tagged `[engine/sheet]` in its text. Nothing else.
 - Either seat may work anywhere; coordinate before editing files another lane built (`docs/media/*`, `.claude/agents/*`, another lane's `SKILL.md`).

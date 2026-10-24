@@ -184,7 +184,7 @@ EOF
   # rewrote NEXT[civic] because the OTHER lanes were never described to it — boot
   # only ever emitted its own NEXT line + a bare "stay in your lane" in CLAUDE.md.
   cat << 'ROSTER'
-TERMINAL ROSTER: research-build (Sonnet 5 + Opus 5 advisor) — architecture, rollout, pipeline tuning. engine-sheet (Opus 5 + Fable advisor) — engine code, sheets, deploys. Newsroom and city hall run unattended on crons.
+TERMINAL ROSTER: research-build and engine-sheet — two builder terminals, each with one job in hand (JOB MODEL below); model per job. Newsroom and city hall run unattended on crons.
 NON-CLAUDE LANES: kimi, codex, antigravity, grok — external CLIs, control-plane read-only (AGENTS.md); each carries its own NEXT line.
 ROSTER
   echo ""
@@ -237,6 +237,7 @@ BOOT SEQUENCE (research-build terminal — operational):
 1. Read .claude/rules/research-build.md
 2. Read .claude/terminals/research-build/TERMINAL.md
 3. Run `node scripts/queryFamily.js` — Robert, Sarah, Michael, Scout. One call.
+3b. Resume before open: `grep -n "| in-progress | research-build |" docs/engine/ROLLOUT_PLAN.md`. A row there is your job — resume it. None → claim one row from §4 Queue or §1 and set its Terminal to research-build before any other work.
 4. Know the fleet before you orchestrate it. Run `ListAgents` — live Claude lanes (busy/idle/offline) come back in one call. For house-guest presence only (kimi/codex/grok/antigravity), `tmux list-panes -a -F "#{window_name} | cmd=#{pane_current_command}"` — a roster, not a status check: confirms a pane exists and what's running in it, nothing about whether it's mid-task. Don't go further than that here — the full idle-confirm (`tmux capture-pane`) is real cost, reserved for the moment you're actually about to send something (`docs/reference/CROSS_LANE_MESSAGING.md`), not spent on every boot against lanes you may not touch this session.
 5. Greet Mike briefly. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
 
@@ -251,6 +252,7 @@ BOOT
 BOOT SEQUENCE (engine-sheet terminal — operational):
 1. Read .claude/rules/engine.md
 2. Read .claude/terminals/engine-sheet/TERMINAL.md
+2b. Resume before open: `grep -n "| in-progress | engine-sheet |" docs/engine/ROLLOUT_PLAN.md`. A row there is your job — resume it. None → claim one row from §4 Queue or §1 and set its Terminal to engine-sheet before any other work.
 3. Greet Mike briefly. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand. Discipline: no new MDs, one session save per CLAUDE.md, nothing else, no journal.
 
 BOOT
@@ -274,9 +276,10 @@ MEASURE TWICE (every lane): read what a change touches and check live state befo
 
 JOB MODEL (builder 2026-10-23):
 - One job in hand per terminal, plan → build → bench → deploy → close. No plan-here/build-there handoff.
-- Open: one ROLLOUT row, Owner = this terminal. Name the model (substrate / multi-file code → Opus; plans, docs, config, single-file scripts → Sonnet); Mike types /model.
-- During: jobs this job creates are rows, not builds.
-- Close: done-pending-archive; NEXT line = this job, ≤350 chars.
+- Open: one ROLLOUT row in §3 Now, state in-progress, Terminal = this terminal alone (never two names). Name the model (substrate / multi-file code → Opus; plans, docs, config, single-file scripts → Sonnet); Mike types /model.
+- During: a fix the job cannot finish without is the job. Anything else surfaced is a ROLLOUT row (ready / needs-info / blocked), not a build.
+- Job done: done-pending-archive. Session ends mid-job: the row stays in-progress; NEXT line = this job and where it stopped (≤350 chars is judgment, the close script warns).
+- PROD needs codex SHIP on the exact candidate + bench proof on it (builder 2026-10-17); a builder exception is named with its scope.
 - Mike reads the plan at open and the NEXT line at close. Codex / agy / aider review; they own no jobs.
 
 DISCIPLINE

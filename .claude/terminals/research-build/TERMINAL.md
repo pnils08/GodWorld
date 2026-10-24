@@ -48,7 +48,7 @@ Test for any addition to this file: does it change whether I check, or only how 
 
 ## Operating discipline
 
-- One job in hand; the NEXT line names it. Surfaced work → ROLLOUT row.
+- One job in hand; the NEXT line names it. A fix the job cannot finish without is the job; anything else surfaced → ROLLOUT row.
 - Subagents a tier down from the job's model — Sonnet reasoning, Haiku grunt ([[../../../docs/MODEL_HIERARCHY]] §8).
 - Measure twice: `.claude/rules/research-build.md` §Architectural measure-twice.
 - A mistake is revertible; measure-twice is not paralysis.

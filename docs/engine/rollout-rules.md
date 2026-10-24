@@ -135,7 +135,7 @@ State answers "is this pickable right now"; terminal answers "by whom." They are
 2. Pick the next available number in that group.
 3. Title ≤80 chars — clearly identifies the work.
 4. Set state (§3) — typically `ready`, or `needs-info` if gated.
-5. Set terminal — **builder terminals only**: `engine-sheet` (code / sheets / scripts) or `research-build` (skill / RULES / docs / ADRs / triage). Slash-separated for cross-builder work. **Never `media` or `civic`** — those are generator spaces (run skills, keep gap logs, produce artifacts; they don't carry routed rows). See ADR-0005 §Part 3.
+5. Set terminal — **one builder terminal**: `engine-sheet` or `research-build`, whichever owns the job (job model, builder 2026-10-23: the owner carries plan → close; the old code-vs-docs domain split no longer decides it). An `in-progress` row names exactly one terminal — never slash- or plus-joined; a queued row keeps the terminal that filed it until another claims it. Rows still carrying two names are migrated to one owner as they are picked up, not by syntax. **Never `media` or `civic`** — those are generator spaces (run skills, keep gap logs, produce artifacts; they don't carry routed rows). See ADR-0005 §Part 3.
 6. **Identify or create the pointer doc:**
    - **Designed work** → copy [[../plans/PLAN_TEMPLATE]] to `docs/plans/YYYY-MM-DD-<topic>.md`; register in [[../index]] same commit (S147 inbound-link rule).
    - **In-flight observations** → existing gap log (`output/production_log_..._gaps.md`).

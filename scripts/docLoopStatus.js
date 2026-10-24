@@ -46,6 +46,8 @@ const STATES = new Set([
 // drain it to its plan doc. 280 fits a real one-liner + pointer with headroom;
 // genuinely-lean rows run 40–215 chars. (governance.30 / S274.)
 const ITEM_BUDGET = 280;
+// Job model (builder 2026-10-23): the only values an in-progress row's Terminal cell may hold.
+const BUILDER_TERMINALS = new Set(['research-build', 'engine-sheet']);
 const VERDICTS = new Set(['adopt', 'watch', 'take-nothing']);
 // A work row leads with a `group.number` id cell, e.g. governance.28, engine.31, civic.10b.
 const ROW_ID = /^\|\s*([a-z][a-z-]*\.\d+[a-z]?)\s*\|/;
@@ -107,9 +109,32 @@ function lintRollout() {
       if (itemLen > ITEM_BUDGET) {
         problems.push(`  L${i + 1} ${id}: item cell ${itemLen} chars > ${ITEM_BUDGET} budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.`);
       }
+      // Job model (builder 2026-10-23): an in-progress row names ONE terminal.
+      if (cells[sIdx] === 'in-progress') {
+        const term = cells[sIdx + 1] || '';
+        if (!BUILDER_TERMINALS.has(term)) {
+          problems.push(`  L${i + 1} ${id}: in-progress with Terminal "${term}" → an active job names exactly one of ${[...BUILDER_TERMINALS].join(' / ')}. Fix: pick the owner; the other lane stays in the pointer doc.`);
+        }
+      }
     }
   });
   return problems;
+}
+
+// Job model, report-only: how many in-progress rows each terminal holds.
+// One in hand is the rule; more is named here, never gated — the open rows
+// migrate as they are picked up (rollout-rules §5 step 5).
+function inHandReport() {
+  const counts = new Map();
+  for (const r of parseRollout()) {
+    if (r.state !== 'in-progress') continue;
+    if (!counts.has(r.terminal)) counts.set(r.terminal, []);
+    counts.get(r.terminal).push(r.id);
+  }
+  const over = [...counts].filter(([, ids]) => ids.length > 1);
+  if (!over.length) return;
+  console.log('ROLLOUT IN HAND: more than one in-progress row per terminal (job model = one):');
+  over.forEach(([t, ids]) => console.log(`  ${t}: ${ids.length} — ${ids.join(', ')}`));
 }
 
 // --gate: identical output to --lint, but EXITS NON-ZERO on problems (S335).
@@ -127,6 +152,7 @@ function runLint(gate) {
   } else {
     console.log('ROLLOUT LINT: clean — every row is a sweep-safe pointer within budget.');
   }
+  inHandReport();
   // Overdue is a warning, never a gate: it names rows to re-read, the session decides.
   const overdue = overdueRows();
   if (overdue.length) {

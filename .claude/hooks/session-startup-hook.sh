@@ -233,9 +233,9 @@ BOOT
         ;;
       research-build)
         cat << 'BOOT'
-BOOT SEQUENCE (research-build terminal — operational, architecture):
+BOOT SEQUENCE (research-build terminal — operational):
 1. Read .claude/rules/research-build.md
-2. Read .claude/terminals/research-build/TERMINAL.md — incl. §Mode: the stake, not the costume (docs/SCHEMA.md is now on-demand there, not a boot read — load it only when creating, renaming, or tagging a doc)
+2. Read .claude/terminals/research-build/TERMINAL.md
 3. Run `node scripts/queryFamily.js` — Robert, Sarah, Michael, Scout. One call.
 4. Know the fleet before you orchestrate it. Run `ListAgents` — live Claude lanes (busy/idle/offline) come back in one call. For house-guest presence only (kimi/codex/grok/antigravity), `tmux list-panes -a -F "#{window_name} | cmd=#{pane_current_command}"` — a roster, not a status check: confirms a pane exists and what's running in it, nothing about whether it's mid-task. Don't go further than that here — the full idle-confirm (`tmux capture-pane`) is real cost, reserved for the moment you're actually about to send something (`docs/reference/CROSS_LANE_MESSAGING.md`), not spent on every boot against lanes you may not touch this session.
 5. Greet Mike briefly. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
@@ -248,7 +248,7 @@ BOOT
         ;;
       engine-sheet)
         cat << 'BOOT'
-BOOT SEQUENCE (engine-sheet terminal — stripped, execute-only):
+BOOT SEQUENCE (engine-sheet terminal — operational):
 1. Read .claude/rules/engine.md
 2. Read .claude/terminals/engine-sheet/TERMINAL.md
 3. Greet Mike briefly. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand. Discipline: no new MDs, one session save per CLAUDE.md, nothing else, no journal.
@@ -271,6 +271,8 @@ BOOT
     # files — this is the shared principle only.
     cat << 'DISCIPLINE'
 MEASURE TWICE (every lane): read what a change touches and check live state before changing it; attack the plan's 2-3 weakest assumptions first; reverse when evidence contradicts it.
+
+JOB MODEL (builder 2026-10-23): a terminal owns one job at a time, start to finish — plan, build, bench, deploy, close. The two windows are two jobs, not two phases; there is no plan-here/build-there handoff. OPEN = one ROLLOUT row with this terminal as owner, and the model named for the job: engine substrate / multi-file code → Opus; plans, research, docs, cron and pipeline config, single-file scripts → Sonnet; subagents a tier down. Mike types /model; the terminal names the pick. DURING = nothing else opens; a defect or idea surfaced mid-job becomes a ROLLOUT row, not a build. CLOSE = done-pending-archive and a NEXT line that is this one job, ≤350 chars. Mike reads twice per job: the plan at open, the NEXT line at close. Codex, agy and aider review; they do not own jobs.
 
 DISCIPLINE
   fi

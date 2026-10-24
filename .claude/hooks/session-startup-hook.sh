@@ -174,6 +174,22 @@ EOF
     fi
   fi
 
+  # --- claude-mem redact gate (builder 2026-10-23) — slurs and self-harm /
+  # distress sentences never reach the claude-mem store. A plugin update
+  # overwrites the worker; re-apply, restart the worker so it loads, warn if
+  # the anchors moved upstream.
+  CM_OUT=$(node "$PWD/scripts/claude-mem-patch/redact-gate.js" 2>&1)
+  if [ $? -ne 0 ]; then
+    echo ""
+    echo "CLAUDE-MEM REDACT GATE MISSING — $CM_OUT — re-port scripts/claude-mem-patch/redact-gate.js anchors by hand."
+  elif echo "$CM_OUT" | grep -q '^applied'; then
+    # the worker leaves chroma-mcp orphaned on TERM — stop both so one store client respawns
+    pkill -TERM -f 'worker-service.cjs --daemo[n]' 2>/dev/null; sleep 2
+    pkill -TERM -f 'bin/chroma-mc[p]|uvx .*chroma-mc[p]' 2>/dev/null
+    echo ""
+    echo "CLAUDE-MEM REDACT GATE re-applied after a plugin update; worker restarted."
+  fi
+
   # (G-SS3 "Last journal" line retired S300 — journal froze to Mags' page; the
   # media boot sequence reads her recent reflections via magsPageRecall.js. T4.)
   echo ""

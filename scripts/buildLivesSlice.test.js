@@ -64,7 +64,7 @@ try {
   // row and the bookkeeping line never ride; a person already on the page is not a second moment.
   const day1 = L.buildLivesSlice(cycle, { root, beats, profiles });
   assert.equal(day1.empty, false);
-  assert.deepStrictEqual(day1.facts.filter(f => f.kind !== 'moment' && f.kind !== 'stay' && f.kind !== 'background').map(f => f.kind), ['death', 'hospital', 'birth', 'retirement']);
+  assert.deepStrictEqual(day1.facts.filter(f => f.kind !== 'moment' && f.kind !== 'stay').map(f => f.kind), ['death', 'hospital', 'birth', 'retirement']);
   assert.ok(day1.facts[0].text.startsWith('Test Widow lost Test Departed'), 'a death is the survivor\'s passage: ' + day1.facts[0].text);
   assert.ok(day1.facts.some(f => f.kind === 'moment' && /Test Friend — reconnected/.test(f.text)));
   assert.ok(!day1.facts.some(f => /Emerged into|second small moment/.test(f.text)));
@@ -73,7 +73,6 @@ try {
   // "What came next" only from a LATER Cycle; the same Cycle's lines are the person's day.
   assert.ok(day1.facts.find(f => f.kind === 'retirement').text.includes('Since then, on the record: walked the lake'));
   assert.ok(day1.facts.find(f => f.kind === 'birth').text.includes('the record does not say yet'));
-  assert.ok(day1.facts.some(f => f.kind === 'background' && /who they are on the record: .*lives in/.test(f.text)));
   assert.ok(day1.citizens.some(c => c.popid === 'POP-90005' && /lost Test Departed/.test(c.why)));
   assert.ok(day1.prewrite.pageVoices.length === 1 && /Test Patient, own page \(night/.test(day1.prewrite.pageVoices[0]), 'the person\'s own page, never a PRESS reply');
   assert.deepStrictEqual(day1.prewrite.hooks.map(h => h.text), ['A block welcomes a newborn']);
@@ -81,13 +80,13 @@ try {
   assert.ok(/1 more news-grade events wait/.test(day1.prewrite.note));
 
   const covered = JSON.parse(fs.readFileSync(L.coveredPath(root), 'utf8'));
-  assert.equal(Object.keys(covered).length, day1.facts.filter(f => f.kind !== 'background').length);
+  assert.equal(Object.keys(covered).length, day1.facts.length);
   assert.ok(covered['death:POP-90099:111'] && covered['death:POP-90099:111'].popid === 'POP-90005');
 
   // Day 2: the one event left (the promotion), no repeats.
   const day2 = L.buildLivesSlice(cycle, { root, beats, profiles });
   assert.equal(day2.empty, false);
-  assert.deepStrictEqual(day2.facts.filter(f => f.kind !== 'background').map(f => f.kind), ['promotion']);
+  assert.deepStrictEqual(day2.facts.map(f => f.kind), ['promotion']);
   assert.ok(day2.facts[0].text.includes('the record lists their work as Janitor'));
 
   // Day 3: everything covered → empty, with the reason that says so.
@@ -95,7 +94,7 @@ try {
   assert.equal(day3.empty, true);
   assert.ok(/already covered/.test(day3.reason));
   // The covered list forgets nothing inside two Cycles.
-  assert.equal(Object.keys(JSON.parse(fs.readFileSync(L.coveredPath(root), 'utf8'))).length, day1.facts.filter(f => f.kind !== 'background').length + 1);
+  assert.equal(Object.keys(JSON.parse(fs.readFileSync(L.coveredPath(root), 'utf8'))).length, day1.facts.length + 1);
 
   // Nothing in the dump → the other empty reason.
   const none = L.buildLivesSlice(cycle, { root, beats: { Lived_Events: [], LifeHistory_Log: [], Hospital_Ledger: [], Household_Ledger: [], Story_Hook_Deck: [] }, profiles });

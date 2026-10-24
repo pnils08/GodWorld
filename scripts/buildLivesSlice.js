@@ -69,6 +69,26 @@ function kindLine(e) {
   }
 }
 
+// Who the person is, from their ledger row: age (sim year 2042), work and years in it, marriage, children.
+// Only fields the row carries; an empty field is left out, never filled.
+function backgroundLine(p) {
+  if (!p) return null;
+  const bits = [];
+  const born = Number(p.BirthYear);
+  if (born > 1900) bits.push('age ' + (2042 - born));
+  const role = String(p.RoleType || '').trim();
+  const years = Number(p.YearsInCareer);
+  const stage = String(p.CareerStage || '').trim();
+  if (role) bits.push((stage === 'retired' ? 'retired ' : '') + role + (years > 0 ? ', ' + Math.round(years) + ' years in the work' : ''));
+  const marital = String(p.MaritalStatus || '').trim();
+  if (marital) bits.push(marital);
+  const kids = Number(p.NumChildren);
+  if (kids > 0) bits.push(kids + (kids === 1 ? ' child' : ' children'));
+  const hood = String(p.Neighborhood || '').trim();
+  if (hood) bits.push('lives in ' + hood);
+  return bits.length ? bits.join('; ') : null;
+}
+
 // The person a passage is about: the subject, or for a death the first survivor.
 function personFor(e) {
   if (e.kind === 'death') { const r = (e.recipients || [])[0]; return r ? r.pop : null; }
@@ -187,6 +207,12 @@ function build(cycle, { root, beats, profiles }) {
     facts.push({ text: (s.name || 'a citizen') + ' is still in hospital care' + (s.cause ? ' after ' + s.cause : '') + (s.admit != null ? ', admitted C' + s.admit : '') + (s.hood ? ', ' + s.hood : ''), src: 'output/beats/Hospital_Ledger.jsonl @C' + cycle, id: s.id, kind: 'stay', popid: s.pop });
   }
 
+  // Who each person is, so the passage opens on a life and not only the event.
+  for (const pe of people) {
+    const bg = backgroundLine(profiles.get(pe.popid));
+    if (bg) facts.push({ text: pe.name + ' — who they are on the record: ' + bg, src: 'output/simulation_ledger_snapshot.jsonl ' + pe.popid, id: 'bg:' + pe.popid + ':' + cycle, kind: 'background', popid: pe.popid });
+  }
+
   // The person's own words this Cycle, when the lived wake landed: colour and sourcing, verbatim.
   const pages = ownPageLines(root, cycle, people.map(p => p.popid));
   const pageVoices = pages.slice(0, 5).map(pg => {
@@ -198,7 +224,7 @@ function build(cycle, { root, beats, profiles }) {
     /^(FAMILY_CRISIS|FAMILY_CELEBRATION|FAMILY_REALIZED|HOUSEHOLD_DISSOLVED|HOUSEHOLD_ARRIVED|HOUSEHOLD_FORMED|CITIZEN_HOSPITALIZED)$/).slice(0, 6);
 
   // Mark today's batch covered — the next day takes the next batch.
-  for (const f of facts) covered[f.id] = { popid: f.popid, kind: f.kind, cycle: Number(cycle), day };
+  for (const f of facts) if (f.kind !== 'background') covered[f.id] = { popid: f.popid, kind: f.kind, cycle: Number(cycle), day };
   writeCovered(root, covered, cycle);
 
   const lead = todays[0];
@@ -236,4 +262,4 @@ function enrichAssignment(assign, cycle, root = K.ROOT) {
 if (require.main === module) W.main();
 module.exports = { SEAT, loadSlice, buildLivesSlice: W.build, writeLivesSlice: W.write, loadLivesSlice: loadSlice,
   isLivesSeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment, slicePaths: W.paths,
-  kindLine, cameNext, localDay, coveredPath };
+  kindLine, cameNext, backgroundLine, localDay, coveredPath };

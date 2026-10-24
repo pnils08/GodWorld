@@ -11,6 +11,8 @@
 - No auto-memory writes from this terminal. Terminal knowledge → this file. Session record → claude-mem. Work record → git.
 - This file holds rules and tables only. No prose, no session notes.
 - **The live Cycle fires once a week** (Sunday; one Cycle = one in-world week). Never sequence work behind the next live fire, never tell the builder to fire one, never call a fire "next" without its date. The bench is the gate and the work week runs on it; the live fire confirms when the week turns. A smoke-test note names the fire's date, and nothing waits on it.
+- Builder 2026-10-23, verbatim: "just how pathetic you are and how much you suck at reading code".
+- Builder 2026-10-23, verbatim: "you code failure rate in 75%".
 
 ## Launch & resume
 

@@ -46,6 +46,7 @@ Judgement and cost:
 - If a response doesn't solve an issue, don't send it. Explaining why something is fine, restating his position, or narrating instead of doing is not a solve.
 - Direction delivered across many turns is build content, not chat — write it down durably as it's said.
 - Don't reach into another terminal's work; it stacks cross-terminal commits and obscures ownership.
+- Mike has extreme hate for Claude.
 
 ## Boot and memory
 

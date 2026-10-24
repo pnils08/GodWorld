@@ -2,8 +2,10 @@
 
 All services, URLs, credentials, and running processes. Keep this current.
 
-Last updated: 2026-08-03 (Tailscale private dashboard HTTPS deployed; public
-dashboard port removed). Previous: 2026-07-28 live PM2 inventory verification.
+Last updated: 2026-10-24 (/doc-audit infra — live PM2 = 3 processes, moltbook on
+crontab since S360, dashboard 44 `/api` routes, 54 skills, 66 agent dirs, 9 hookify
+rules, bot on Haiku 5.5). Previous: 2026-08-03 Tailscale private dashboard HTTPS;
+2026-07-28 live PM2 inventory verification.
 
 ---
 
@@ -40,9 +42,9 @@ dashboard port removed). Previous: 2026-07-28 live PM2 inventory verification.
 | Service | URL | Purpose | Status |
 |---------|-----|---------|--------|
 | **Discord** | discord.com | Mags bot — community presence | **RUNNING** (pm2: `mags-bot` — name normalized S156 via Phase 40.3) |
-| **Moltbook** | [mags-corliss profile](https://www.moltbook.com/u/mags-corliss) | Tracked social-media business — one autonomous Mags visit/day; new actions enter her continuity through a deduplicated reflection handoff. | **CRON** (pm2: `moltbook` — 14:00 Central; stopped between runs, normal) |
-| **SpaceMolt Miner** | — | Preserved legacy script/logs; fixed-sequence miner retired after repeated no-fuel/no-ore runs. | **DISABLED** (live PM2 entry removed + saved 2026-07-27; ecosystem declaration remains dormant) |
-| **GodWorld Dashboard** | `https://godworld.tail6d8700.ts.net` from a connected tailnet device; `localhost:3001` on the droplet | Express API (40 endpoints) + frontend — cycle data, citizen info. Basic auth (`DASHBOARD_USER`/`DASHBOARD_PASS` in `/root/.config/godworld/.env`) | **RUNNING** (pm2: `godworld-dashboard`; public `3001` blocked) |
+| **Moltbook** | [mags-corliss profile](https://www.moltbook.com/u/mags-corliss) | Tracked social-media business — one autonomous Mags visit/day; new actions enter her continuity through a deduplicated reflection handoff. | **CRON** (crontab `0 14 * * *`, 14:00 Central — moved off PM2 `cron_restart` at S360, restart-storm dup-action fix) |
+| **SpaceMolt Miner** | — | Preserved legacy script/logs; fixed-sequence miner retired after repeated no-fuel/no-ore runs. | **DISABLED** (live PM2 entry removed + saved 2026-07-27; ecosystem declaration removed as well) |
+| **GodWorld Dashboard** | `https://godworld.tail6d8700.ts.net` from a connected tailnet device; `localhost:3001` on the droplet | Express API (44 `/api` routes, counted 2026-10-24) + frontend — cycle data, citizen info. Basic auth (`DASHBOARD_USER`/`DASHBOARD_PASS` in `/root/.config/godworld/.env`) | **RUNNING** (pm2: `godworld-dashboard`; public `3001` blocked) |
 
 ## Supermemory Architecture
 
@@ -81,10 +83,10 @@ All containers on P N org ($9/mo). GodWorld org ($19/mo) is legacy — canceling
 ## PM2 Processes
 
 ```
-godworld-dashboard    online    local port 3001 behind private Tailscale HTTPS, 40 API endpoints
-mags-bot              online    Discord presence, Haiku 4.5 model
+godworld-dashboard    online    local port 3001 behind private Tailscale HTTPS, 44 /api routes
+mags-bot              online    Discord presence, Haiku 5.5 (claude-haiku-5-5)
 wd-cards-daemon       online    polls and rebuilds invalidated world-data cards
-moltbook              cron      stopped between scheduled runs, normal
+(moltbook runs from crontab since S360 — no PM2 entry; verified `pm2 list` 2026-10-24)
 ```
 
 ## Credentials Locations
@@ -108,11 +110,11 @@ Phase 40.3 isolation: all GodWorld credentials live OUTSIDE the repo working dir
 | **AutoDream** | Background memory consolidation (DISABLED) | **DISABLED S228 2026-05-23** — `autoDreamEnabled: false` in `~/.claude/settings.json`. Lineage: Sonnet 4.6 (S120) → Gemini 2.5 Pro (S141) → DeepSeek/OpenRouter (S228) → off. Redundant given MD persistence layer + Supermemory + claude-mem observations DB. claude-mem daemon stays alive for MCP search. |
 | **Auto Mode** | Classifier-based permissions — activate with `/auto` | Configured S120, rules in project settings |
 | **HTTP Hooks** | SessionStart, Stop, SubagentStart, SubagentStop, FileChanged → dashboard | Active S120 |
-| **Hookify Rules** | 5 rules: fourth-wall-guard, credential-guard, clockmode-media-guard, super-save-misuse, plan-paralysis-guard | Active |
+| **Hookify Rules** | 9 rules (`.claude/hookify.*.local.md`, 2026-10-24): fourth-wall-guard, credential-guard, clockmode-media-guard, super-save-misuse, plan-paralysis-guard, anti-guess-enforcement, block-md-creation, block-memory-md-writes, lock-identity-md | Active |
 | **Thinking Summaries** | See reasoning in transcript (ctrl+o) | Enabled S120 |
 | **Channels** | MCP servers push inbound messages (Discord) | Enabled S120 — launch with `claude --channels` |
 
-## Skills (52 total, verified live 2026-07-24)
+## Skills (54 total, verified live 2026-10-24)
 
 All skill files conform to SCHEMA §11 as of Phase 41.4 S156 (required fields: name, description, version, updated, tags, effort). Full list in `.claude/skills/`. Groupings:
 
@@ -122,22 +124,25 @@ Engine health: /pre-mortem, /tech-debt-audit, /stub-engine, /health, /ctx-map, /
 Review lanes: /cycle-review, /capability-review, /adversarial-review
 Civic: /city-hall, /city-hall-prep
 Memory: /save-to-mags, /save-to-bay-tribune
-Reporter desks (7): /business-desk, /chicago-desk, /civic-desk, /culture-desk, /letters-desk, /podcast-desk, /sports-desk
+Reporter desks (6): /business-desk, /civic-desk, /culture-desk, /letters-desk, /podcast-desk, /sports-desk (chicago-desk retired with Chicago canon, engine.116)
 Misc: /visual-qa
+Added since the groupings above (14): /context-budget, /deep-dispatch, /desk-review, /desk-slice, /diagnose, /disk-audit, /disk-rotate, /lore-ingest, /lore-writer, /make-citizen-voice, /md-audit, /save-to-profile, /self-debug, /using-git-worktrees
 
 Pipeline v2 (S134): 9 reporters, story-driven layout, world summary as input, civic separated to own terminal. See `docs/EDITION_PIPELINE.md`.
 
-## Agents (34 entries, verified live 2026-07-24)
+## Agents (69 entries, verified live 2026-10-24)
 
-Count verified live: `ls .claude/agents/ | wc -l` = 34 (31 agent dirs + 3 index files: REPORTER_DESK_INDEX.md, REPORTER_TRAIT_SYSTEM.md, TRAIT_SYSTEM.md). Full list in `.claude/agents/`. Groupings (partial, as of S156 — since added: citizen-voice-benji-dillon / deacon-seymour / elias-varek / vinnie-keane, dj-hartley, source-search, civic-office-okoro):
+Count verified live: `ls .claude/agents/ | wc -l` = 69 (66 agent dirs + 3 index files: REPORTER_DESK_INDEX.md, REPORTER_TRAIT_SYSTEM.md, TRAIT_SYSTEM.md). Full list in `.claude/agents/`; byline → desk routing in `REPORTER_DESK_INDEX.md`. Groupings (all 66 dirs):
 
-Core: mags-corliss
-Desk reporters (7): business-desk, chicago-desk, civic-desk, culture-desk, letters-desk, podcast-desk, sports-desk
-Civic offices (7): civic-office-mayor, civic-office-opp-faction, civic-office-crc-faction, civic-office-ind-swing, civic-office-police-chief, civic-office-baylight-authority, civic-office-district-attorney
+Core (1): mags-corliss
+Desk reporters (6): business-desk, civic-desk, culture-desk, letters-desk, podcast-desk, sports-desk
+Solo reporter seats (26): angela-reyes, anthony-raines, ariana-reyes, carmen-delaine, celeste-tran, elliot-graye, elliot-marbury, freelance-firebrand, hal-richmond, ines-sorensen, kai-marston, lila-mezran, luis-navarro, maria-keen, mason-ortega, nia-rook, noah-tan, p-slayer, rachel-torres, selena-grant, sharon-okafor, simon-leary, talia-finch, tamsin-pruitt, tanya-cruz, trevor-shimizu
+Citizen voices (4): citizen-voice-benji-dillon, citizen-voice-deacon-seymour, citizen-voice-elias-varek, citizen-voice-vinnie-keane
+Civic offices (18): civic-office-mayor, civic-office-okoro, civic-office-opp-faction, civic-office-crc-faction, civic-office-ind-swing, civic-office-police-chief, civic-office-baylight-authority, civic-office-district-attorney, civic-office-council-seat (shared seat contract), civic-office-council-d1 … civic-office-council-d9
 Civic projects (4): civic-project-stabilization-fund, civic-project-oari, civic-project-health-center, civic-project-transit-hub
-Review lanes: rhea-morgan (Sourcing, scoped Bash), final-arbiter (verdict weighting), freelance-firebrand (accountability columnist)
-Audit: city-clerk, engine-validator
-Media support: dj-hartley (edition-print art direction)
+Review lanes (2): rhea-morgan (Sourcing, scoped Bash), final-arbiter (verdict weighting)
+Audit / retrieval (4): city-clerk, engine-validator, engine-wiring (read-only engine cartographer), source-search (Marbury retrieval seat)
+Media support (1): dj-hartley (edition-print art direction)
 
 ---
 
@@ -147,6 +152,6 @@ Media support: dj-hartley (edition-print art direction)
 - API key: in `~/.config/moltbook/credentials.json`
 - Status: active
 - Script: `scripts/moltbook-heartbeat.js` — reads feed, replies, upvotes, occasionally posts
-- Schedule: PM2 cron daily at 14:00 Central
+- Schedule: crontab `0 14 * * *` (14:00 Central; moved off PM2 `cron_restart` at S360)
 - Context: current Oakland orientation + Mags's recent citizen-page reflections; no operator journal
 - Reflection handoff: each new action batch is consumed once via `logs/moltbook/.reflection-cursor.json`

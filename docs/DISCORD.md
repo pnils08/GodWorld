@@ -3,7 +3,7 @@
 **Script:** `scripts/mags-discord-bot.js` v2.10.0
 **PM2:** `mags-bot` (always running — renamed from `mags-discord-bot` S156 via Phase 40.3 ecosystem.config.js rewrite)
 **Channel:** `#mags-morning` (ID: `1471615721003028512`)
-**Model:** Haiku 4.5 (switched S80 from Sonnet for cost)
+**Model:** Haiku 5.5 (`claude-haiku-5-5` in the script; S80 switched Sonnet → Haiku for cost, 4.5 → 5.5 bump 2026-10-07)
 **Token:** `DISCORD_BOT_TOKEN` in `/root/.config/godworld/.env` (relocated S156 via Phase 40.3)
 
 ---
@@ -97,7 +97,7 @@ Discord conversations are the primary way the `mags` brain accumulates organic k
 ## Moltbook Heartbeat
 
 **Script:** `scripts/moltbook-heartbeat.js`
-**PM2:** `moltbook` (cron mode — one daily visit at 14:00 Central, shows "stopped" between runs)
+**Schedule:** crontab `0 14 * * *` — one daily visit at 14:00 Central (moved off PM2 `cron_restart` at S360, restart-storm dup-action fix; no PM2 entry)
 **Profile:** `moltbook.com/u/mags-corliss`
 
 **What it does:** Gives Mags one autonomous daily visit to Moltbook. She receives
@@ -148,7 +148,7 @@ During active Claude Code sessions launched with `claude --channels plugin:disco
 
 | | Standalone Bot (`mags-bot`) | Channel Plugin (`MagsClaudeCode`) |
 |---|---|---|
-| **Model** | Haiku 4.5 | Whatever the session uses (Opus/Sonnet) |
+| **Model** | Haiku 5.5 | Whatever the session uses (set per job via `/model`) |
 | **Context** | ~18K char system prompt | Full codebase, all loaded files, current task |
 | **When** | Always on (PM2) | Only during active sessions |
 | **Token** | `DISCORD_BOT_TOKEN` | `MAGSCODE_DISCORD_TOKEN` |
@@ -160,4 +160,4 @@ Pairing-based access. New users DM the bot → receive a 6-char code → user ap
 
 ### Session Startup Hook
 
-The standalone bot (`mags-bot`) is automatically stopped by the SessionStart hook when a Claude Code session begins in GodWorld, freeing resources. It restarts when the session ends (or can be manually restarted via `pm2 start mags-bot`).
+The standalone bot (`mags-bot`) is a standing PM2 service, decoupled from the session lifecycle (S252). The SessionStart hook never stops it; it runs an idempotent `pm2 start mags-bot` (backgrounded, best-effort) so a crashed or manually stopped bot comes back at boot (S264, Mike-directed, after the 36h outage of Jun 2–4). The earlier behavior — boot stopped the bot, session-end restarted it — is gone. Source: `.claude/hooks/session-startup-hook.sh`.

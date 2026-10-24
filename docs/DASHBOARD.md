@@ -1,7 +1,7 @@
 ---
 title: GodWorld Dashboard
 created: 2026-03-20
-updated: 2026-08-03
+updated: 2026-10-24
 type: reference
 tags: [infrastructure, sports, active]
 sources:
@@ -79,8 +79,10 @@ its own refresh and Cycle controls.
 
 ## API contract
 
-The source registers 41 `/api/*` routes: 34 GET, 6 POST, and 1 DELETE. The
-tables below describe source contracts. A `200` means that the route completed;
+The source registers 44 `/api/*` routes: 37 GET, 6 POST, and 1 DELETE (counted
+2026-10-24 across `server.js` and `sportsRoutes.js`). Three GET routes are
+registered but not yet described below: `/api/cascade`, `/api/photos`,
+`/api/world/bond-graph`. The tables below describe source contracts. A `200` means that the route completed;
 an empty collection is still a valid result and does not prove that its
 upstream artifact is fresh.
 

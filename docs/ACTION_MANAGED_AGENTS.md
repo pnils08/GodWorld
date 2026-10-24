@@ -1,6 +1,6 @@
 # Action Document: Claude Managed Agents for GodWorld
 
-**Created:** S137b (2026-04-08) | **Status:** Research Complete, Ready to Evaluate
+**Created:** S137b (2026-04-08) | **Status:** Research Complete (S137b) → partially adopted, hosted form only (noted 2026-10-24 doc-audit): the three Anthropic-cloud scheduled routines listed in `docs/OPERATIONS.md` §Scheduled Remote Agents are the managed-agent surface in use (not verifiable from the droplet); no Agent SDK build was undertaken (`@anthropic-ai/claude-agent-sdk` absent from `package.json`).
 
 ---
 

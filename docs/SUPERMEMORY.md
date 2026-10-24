@@ -1,7 +1,7 @@
 ---
 title: Supermemory Operations and Retrieval
 created: 2026-03-20
-updated: 2026-09-26
+updated: 2026-10-24
 type: reference
 tags: [infrastructure, memory, supermemory, active]
 sources:
@@ -39,7 +39,10 @@ cache their environment; an explicitly approved credential rotation requires
 - Builder-direct memory plumbing restore (2026-09-24, see Changelog) answered
   the open "leave, or point recall at `sl-godworld`" question this snapshot
   used to carry: the plugin's recall hook (`hooks/recall-directive.js`,
-  patched, verified still applied 2026-09-26) now searches `sl-rules` (hybrid,
+  patched, verified still applied 2026-09-26 — **2026-10-24: the SessionStart
+  hook reports the patch no longer applies to plugin 0.1.14; the upstream file
+  changed, recall is serving the undated auto container until
+  `scripts/supermemory-patch/` is re-ported by hand**) now searches `sl-rules` (hybrid,
   top 2, labeled `[rule]`) + `sl-godworld`, each line dated. The auto repo
   container was dropped from recall 2026-10-07 (builder flagged stale boot
   recall: a 09-27 capture about the old infrastructure.10 read as current after

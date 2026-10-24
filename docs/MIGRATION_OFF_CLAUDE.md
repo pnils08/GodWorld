@@ -1,7 +1,7 @@
 ---
 title: Migration Off Claude
 created: 2026-04-16
-updated: 2026-04-29
+updated: 2026-10-24
 type: project
 tags: [migration, infrastructure, research-watch]
 ---
@@ -9,6 +9,8 @@ tags: [migration, infrastructure, research-watch]
 # Migration Off Claude
 
 **Status:** Research/Watch (S156 reclassification — see ROLLOUT_PLAN: spine walked, API pressure off, migrating would unravel the harness; revisit if cost/limits bite again or if migration becomes goal-aligned rather than escape-aligned) | **Started:** S154 (2026-04-16)
+
+**2026-10-24 (doc-audit):** the wholesale migration never ran; the pressure went two other ways. (1) Per-persona model routing for the newsroom crons on OpenRouter — `scripts/newsroom-wake-packages.json` owns live routing (configured models: Llama 4 Maverick, DeepSeek V4 Flash, Grok 4.3, Sonnet 5.5, Haiku 5.5, GPT-5.6, one Opus 5.5 seat); `scripts/desk-model-map.json` is the manual fallback; plan [[plans/2026-08-20-consolidate-model-calls-on-openrouter]]. (2) A non-Claude helper fleet (codex, kimi, antigravity, grok) with no substrate and no lead — `AGENTS.md`. Status stays Research/Watch for the wholesale question.
 
 **Trigger:** Six sessions of stalled spine work + daily/weekly Claude API limits
 hit by day five. Need a path that's user-aligned, cheaper, and capable enough.

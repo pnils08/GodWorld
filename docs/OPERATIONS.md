@@ -16,12 +16,14 @@ UFW, and health probes.
 | `godworld-dashboard` | `dashboard/server.js` | Express API + React frontend, local port 3001 behind private Tailscale HTTPS | online |
 | `mags-bot` | `scripts/mags-discord-bot.js` | Mags presence in Discord | online |
 | `wd-cards-daemon` | `scripts/wdCardsDaemon.js` | Polls the invalidation queue and rebuilds world-data cards | online |
-| `moltbook` | `scripts/moltbook-heartbeat.js` | One autonomous Moltbook visit daily at 14:00 Central | stopped between scheduled runs |
+
+Live `pm2 list` and `ecosystem.config.js` carry exactly these three processes (verified 2026-10-24).
+
+**Moved off PM2:** `moltbook` (`scripts/moltbook-heartbeat.js`) left PM2 `cron_restart` for the crontab at S360 (restart-storm dup-action fix) — see the `0 14 * * *` row in the Cron Schedule.
 
 **Disabled PM2 jobs:** `spacemolt-miner` was removed from the live registry and
 the saved reboot state on 2026-07-27 after repeated fixed-sequence no-fuel runs.
-Its source and logs remain. The dormant `ecosystem.config.js` declaration must
-also be removed before a future full ecosystem reload.
+Its source and logs remain; its `ecosystem.config.js` declaration is gone too.
 
 **Common PM2 commands:**
 ```bash
@@ -74,6 +76,17 @@ it is weekly).
 | `7 23 * * 0` | Citizen bond graph rebuild (post-cycle, --live from Sheets) | `scripts/buildCitizenBondGraph.js` | `logs/bond-graph.log` |
 | `0 */6 * * *` | Server health check | `scripts/server-health-check.sh` | `logs/health-check.log` |
 | `30 * 1,2 * *` (UTC-guarded) | Monthly md-audit staleness detector | `scripts/mdStalenessDetector.js` | `output/md-audit-cron.log` |
+| `15 4 * * *` | sl-rules mirror sync — memory files, SIM_DOCTRINE, ADRs into Supermemory `sl-rules` (builder-direct 2026-09-24) | `scripts/brainSearch.js --sync` | `logs/sl-rules-sync.log` |
+| `15 4 * * 1` | claude-mem weekly worker restart — caps the chroma RSS leak (S447) | `npx claude-mem restart` | `logs/claude-mem-maint.log` |
+| `10 4 1 * *` | claude-mem monthly RSS check (inline shell, `ps` on chroma-mcp) | inline — see `crontab -l` | see `crontab -l` |
+| `17 * * * *` | Civic hourly tick — no model, idempotent (civic.39, builder-installed 2026-09-24) | `scripts/cron-civic-run.js --stage=tick --apply` | `logs/civic-cron.log` |
+| `15 7,9,11 * * 6` | Ines Sorensen (Voices) Saturday wakes 1/2/3 — angle, report, write + Rhea gate; her seat alone (pipeline.73) | `scripts/cron-desk-run.js --desk culture --persona ines-sorensen --stage=angle\|report\|write` | `logs/ines-weekend.log` |
+| `15 6,9,12 * * 0` | Ines Sorensen Sunday wakes 1/2/3 — pages only, safe either side of the fire | same as Saturday | `logs/ines-weekend.log` |
+| `45 12 * * 0` | Sunday delivery of Ines's piece to Discord (pipeline.73) | `scripts/deliver-articles.js` | `logs/deliver-articles.log` |
+| `15 8,9,10 * * 6` | UNDOCKED weekly leaderboard/digest wakes 1/2/3 — Nia Rook weekly persona (plan (e), 2026-09-25) | `scripts/cron-desk-run.js --desk undocked-digest --persona nia-rook-weekly --stage=angle\|report\|write` | `logs/undocked-weekly.log` |
+| `30 17 * * 6` | Weekly Drive canon sweep — new files in the Tribune Media Archive / Deep Canon Drive folders into Supermemory (engine.91 T4, builder go 2026-09-28) | `scripts/sweepCanonIngest.js --apply` | `logs/canon-sweep.log` |
+
+(48 crontab lines reconciled row by row against this table 2026-10-24; the ten rows above were live but undocumented.)
 
 **Disabled:**
 | Job | Script | Why |
@@ -160,8 +173,8 @@ tailscale serve status
 # Discord bot
 pm2 logs mags-bot --lines 10 --nostream
 
-# Moltbook
-pm2 logs moltbook --lines 10 --nostream
+# Moltbook (crontab job since S360, not PM2)
+tail -n 10 logs/moltbook-out.log
 
 # Supermemory
 curl -s -H "Authorization: Bearer $SUPERMEMORY_CC_API_KEY" https://api.supermemory.ai/v3/settings | head -c 200

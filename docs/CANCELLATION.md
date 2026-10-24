@@ -1,6 +1,6 @@
 # GodWorld — Cancellation Plan
 
-**Last refreshed:** 2026-07-08 (Cycle 101). Live state at refresh: ~913 citizens in Simulation_Ledger, 90+ editions published to Drive/GitHub, engine running on Apps Script against the prod sheet. This doc is the runbook to wind it down — reading it changes nothing; you execute each step yourself.
+**Last refreshed:** 2026-07-08 (Cycle 101); ledger count and OpenRouter row re-stamped 2026-10-24 (Cycle 112) — dollar amounts not re-verified. Live state at refresh: 1,044 rows in Simulation_Ledger (`output/simulation_ledger_snapshot.meta.json`, C112), 90+ editions published to Drive/GitHub, engine running on Apps Script against the prod sheet. This doc is the runbook to wind it down — reading it changes nothing; you execute each step yourself.
 
 ## Monthly Costs
 
@@ -9,9 +9,10 @@
 | Anthropic Claude Max | ~$100/mo | console.anthropic.com → subscription |
 | Supermemory (P N org) | $9/mo | supermemory.ai → account settings |
 | DigitalOcean droplet | ~$12-24/mo | cloud.digitalocean.com → droplet → destroy |
-| Together.ai | usage-based | together.ai → account settings |
+| Together.ai | usage-based (1 script still reads `TOGETHER_API_KEY`) | together.ai → account settings |
+| OpenRouter | usage-based — 41 scripts read `OPENROUTER_API_KEY` (newsroom desk crons, Rhea gate, claude-mem observer) | openrouter.ai → settings → credits |
 
-**Total monthly: ~$121-133+**
+**Total monthly: ~$121-133+ (plus OpenRouter usage)**
 
 ## Free Services (no cost to keep or cancel)
 

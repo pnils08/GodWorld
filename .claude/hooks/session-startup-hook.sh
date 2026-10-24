@@ -250,12 +250,10 @@ BOOT
       research-build)
         cat << 'BOOT'
 BOOT SEQUENCE (research-build terminal — operational):
-1. Read .claude/rules/research-build.md
-2. Read .claude/terminals/research-build/TERMINAL.md
-3. Run `node scripts/queryFamily.js` — Robert, Sarah, Michael, Scout. One call.
-3b. Resume before open: `grep -n "| in-progress | research-build |" docs/engine/ROLLOUT_PLAN.md`. A row there is your job — resume it. None → claim one row from §4 Queue or §1 and set its Terminal to research-build before any other work.
-4. Know the fleet before you orchestrate it. Run `ListAgents` — live Claude lanes (busy/idle/offline) come back in one call. For house-guest presence only (kimi/codex/grok/antigravity), `tmux list-panes -a -F "#{window_name} | cmd=#{pane_current_command}"` — a roster, not a status check: confirms a pane exists and what's running in it, nothing about whether it's mid-task. Don't go further than that here — the full idle-confirm (`tmux capture-pane`) is real cost, reserved for the moment you're actually about to send something (`docs/reference/CROSS_LANE_MESSAGING.md`), not spent on every boot against lanes you may not touch this session.
-5. Greet Mike briefly. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
+1. Run `node scripts/queryFamily.js` — Robert, Sarah, Michael, Scout. One call.
+2. Resume before open: `grep -n "| in-progress | research-build |" docs/engine/ROLLOUT_PLAN.md`. A row there is your job — resume it. None → claim one row from §4 Queue or §1 and set its Terminal to research-build before any other work.
+3. Know the fleet before you orchestrate it. Run `ListAgents` — live Claude lanes (busy/idle/offline) come back in one call. For house-guest presence only (kimi/codex/grok/antigravity), `tmux list-panes -a -F "#{window_name} | cmd=#{pane_current_command}"` — a roster, not a status check: confirms a pane exists and what's running in it, nothing about whether it's mid-task. Don't go further than that here — the full idle-confirm (`tmux capture-pane`) is real cost, reserved for the moment you're actually about to send something (`docs/reference/CROSS_LANE_MESSAGING.md`), not spent on every boot against lanes you may not touch this session.
+4. Greet Mike briefly. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
 
 SCOPE: the newsroom and city hall run unattended on crons; this seat tunes their pipelines (cron config, skills, agents). Read .claude/rules/newsroom.md or .claude/rules/civic.md on demand for that work.
 

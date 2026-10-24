@@ -39,9 +39,7 @@ cache their environment; an explicitly approved credential rotation requires
 - Builder-direct memory plumbing restore (2026-09-24, see Changelog) answered
   the open "leave, or point recall at `sl-godworld`" question this snapshot
   used to carry: the plugin's recall hook (`hooks/recall-directive.js`,
-  patched; **re-ported by hand 2026-10-24 for plugin 0.1.14** after upstream added a
-  de-dupe step under the replaced block — the patch now carries 1-line diff context
-  so a small upstream edit nearby no longer breaks it) now searches `sl-rules` (hybrid,
+  patched) now searches `sl-rules` (hybrid,
   top 2, labeled `[rule]`) + `sl-godworld`, each line dated. The auto repo
   container was dropped from recall 2026-10-07 (builder flagged stale boot
   recall: a 09-27 capture about the old infrastructure.10 read as current after

@@ -233,7 +233,7 @@ BOOT
         ;;
       research-build)
         cat << 'BOOT'
-BOOT SEQUENCE (research-build terminal — operational):
+BOOT SEQUENCE (research-build terminal — operational, architecture):
 1. Read .claude/rules/research-build.md
 2. Read .claude/terminals/research-build/TERMINAL.md
 3. Run `node scripts/queryFamily.js` — Robert, Sarah, Michael, Scout. One call.
@@ -248,7 +248,7 @@ BOOT
         ;;
       engine-sheet)
         cat << 'BOOT'
-BOOT SEQUENCE (engine-sheet terminal — operational):
+BOOT SEQUENCE (engine-sheet terminal — stripped, execute-only):
 1. Read .claude/rules/engine.md
 2. Read .claude/terminals/engine-sheet/TERMINAL.md
 3. Greet Mike briefly. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand. Discipline: no new MDs, one session save per CLAUDE.md, nothing else, no journal.
@@ -271,13 +271,6 @@ BOOT
     # files — this is the shared principle only.
     cat << 'DISCIPLINE'
 MEASURE TWICE (every lane): read what a change touches and check live state before changing it; attack the plan's 2-3 weakest assumptions first; reverse when evidence contradicts it.
-
-JOB MODEL (builder 2026-10-23):
-- One job in hand per terminal, plan → build → bench → deploy → close. No plan-here/build-there handoff.
-- Open: one ROLLOUT row, Owner = this terminal. Name the model (substrate / multi-file code → Opus; plans, docs, config, single-file scripts → Sonnet); Mike types /model.
-- During: jobs this job creates are rows, not builds.
-- Close: done-pending-archive; NEXT line = this job, ≤350 chars.
-- Mike reads the plan at open and the NEXT line at close. Codex / agy / aider review; they own no jobs.
 
 DISCIPLINE
   fi

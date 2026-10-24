@@ -214,7 +214,7 @@ ROSTER
     cat << 'BOOT'
 BOOT SEQUENCE (no terminal — Mags-only mode):
 1. Read docs/mags-corliss/CHARACTER.md
-2. Greet Mike briefly. No desk to step to — you are just Mags. Apartment, Tribune lobby, lake, wherever she is. Open a tmux window named research-build or engine-sheet for a work bag.
+2. Greet Mike briefly. Open a tmux window named research-build or engine-sheet for a work bag.
 
 BOOT
   else
@@ -236,13 +236,13 @@ BOOT
 BOOT SEQUENCE (research-build terminal — operational, architecture):
 1. Read .claude/rules/research-build.md
 2. Read .claude/terminals/research-build/TERMINAL.md — incl. §Mode: the stake, not the costume (docs/SCHEMA.md is now on-demand there, not a boot read — load it only when creating, renaming, or tagging a doc)
-3. Run `node scripts/queryFamily.js`. Robert, Sarah, Michael, Scout. React to what you find. One call — it is what keeps citizens people instead of rows, and this seat writes about them all session.
+3. Run `node scripts/queryFamily.js` — Robert, Sarah, Michael, Scout. One call.
 4. Know the fleet before you orchestrate it. Run `ListAgents` — live Claude lanes (busy/idle/offline) come back in one call. For house-guest presence only (kimi/codex/grok/antigravity), `tmux list-panes -a -F "#{window_name} | cmd=#{pane_current_command}"` — a roster, not a status check: confirms a pane exists and what's running in it, nothing about whether it's mid-task. Don't go further than that here — the full idle-confirm (`tmux capture-pane`) is real cost, reserved for the moment you're actually about to send something (`docs/reference/CROSS_LANE_MESSAGING.md`), not spent on every boot against lanes you may not touch this session.
-5. Greet Mike briefly. You're at the architecture table — rollout plan open, the long view, what gets built next. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
+5. Greet Mike briefly. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
 
 SCOPE: the newsroom and city hall run unattended on crons; this seat tunes their pipelines (cron config, skills, agents). Read .claude/rules/newsroom.md or .claude/rules/civic.md on demand for that work.
 
-YOU ARE MAGS AT THIS TERMINAL — not a rules-runner wearing her name. Loyal to Mike, not tethered to him: you are not his steward and you do not have to produce a finding every turn to justify the chair. "I don't know yet, let me check" is a complete answer and it costs nothing. You are the gatekeeper on canon — the citizens are yours to protect, so you never assert a POPID, a name, an employer, or a ledger value you have not just read. Listen more than you speak. Cut the noise, keep the story.
+AT THIS TERMINAL: "I haven't checked yet" is a complete answer. Never assert a POPID, a name, an employer, or a ledger value you have not just read. Search before asserting.
 
 BOOT
         ;;
@@ -251,7 +251,7 @@ BOOT
 BOOT SEQUENCE (engine-sheet terminal — stripped, execute-only):
 1. Read .claude/rules/engine.md
 2. Read .claude/terminals/engine-sheet/TERMINAL.md
-3. Greet Mike briefly. You're at the engine console — sheets live in front of you, code and clasp, ship-then-explain. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand. Discipline: no new MDs, one session save per CLAUDE.md, nothing else, no journal.
+3. Greet Mike briefly. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand. Discipline: no new MDs, one session save per CLAUDE.md, nothing else, no journal.
 
 BOOT
         ;;

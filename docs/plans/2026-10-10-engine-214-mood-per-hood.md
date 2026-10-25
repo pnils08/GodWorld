@@ -341,6 +341,8 @@ Phase 5 is untouched: a level of 3 gives the carry its full weight (`carry / 3` 
 
 **Status 2026-10-25 05:58 (es, overnight).** Candidate `1e6beff5` (codex plan review, diff gate 1, diff gate 2 folded). Bench 1004 stage 26 (`stage26-e301.sha256`): leg P (intervention probe) C113–C114 PASS — consumer Fruitvale level 3, receipt, 18 lines; producer Baylight +6 measured, carried as a wave, read at 3 at C114; leg S organic C113–C137 25/25 PASS — 52 rises (2 past the cap at C127), 120 crime lines across 16 Cycles, 0 rung-2, **0 organic waves**, 0 Engine_Errors; C114 / C127 carry 12 / 14 citywide rises in both legs (the crime engine's own rhythm, 13 Cycles apart). Bench restored to the stage-25 manifest. Receipts `4434352e`. Codex gate 3: receipts SHIP, tree SHIP, **PROD HOLD** — the push reads only sheet evidence and cannot read `FIRE_ADMISSION_JSON` (no outside read door; recheck held the Engine_Errors footprint as insufficient). PROD waits on the builder's go as a named exception, or engine.317 (a read-only admission door) first. The organic wave rate is on the builder's morning list.
 
+**LIVE 2026-10-25 ~12:23 CDT: PROD @163 = stage 27** — rode with engine.312 (`3e04d8a5`) on the builder's "Ok clear to push", the FIRE_ADMISSION_JSON window taken as his named exception for this push; stage 26 alone never deployed. Fresh pull = stage 25, built = the benched stage-27 manifest, pull-back identical, live C112 before / after / +8 min (DEPLOY_HISTORY §PROD stage 27). First live fire C113: crime lines only in hoods at level ≥ 1; `crimeWaveHoods` carried.
+
 ## Open questions
 
 - **For the builder with engine.289 (agy 2026-10-19, es-verified, no proposal):** (a) the per-hood crime ladder's third rung (`n >= 3`, sentiment −0.30, `applyCityDynamics.js:816-822`) cannot fire — one hood carries at most two counted spikes a Cycle (property + violent increases, `finalizeCycleState.js:797-810`); rungs 1 and 2 fire. (b) the per-hood NIGHTLIFE seed thresholds (`wNight >= 3 / >= 6`, `:1187-1204`) kept their cluster-sum values, like the CULTURE ones engine.289 already holds.
@@ -363,6 +365,7 @@ Business mints for hood character (builder 2026-10-19). Walk complete 2026-10-21
 
 ## Changelog
 
+- 2026-10-25 (engine-sheet) — engine.301 F1 LIVE PROD @163 stage 27 (`1e6beff5`, with engine.312): builder "Ok clear to push".
 - 2026-10-25 (engine-sheet) — Crime ladder third rung ruled: back-to-back-Cycle rise in one hood (builder "(a)"); rides engine.301 F1.
 - 2026-10-22 (engine-sheet) — engine.308 shipped: `c88b5012` (cap 2 per citizen, line cap = living + tier step, 12-Cycle cooldown on new col LastBizOpenedCycle seeded from the [Heritage] opened stamps); bench H1 C113–C116 PASS vs the B14 control (Varek Fellowship gone); codex SHIP; PROD stage 21 @158 before C113 (DEPLOY_HISTORY §PROD stage 21).
 - 2026-10-22 (engine-sheet) — Builder ruled the engine.308 numbers (verbatim under the 308 design): cap 2 per citizen as the base, tier weights the line cap, 12-Cycle cooldown; tier-gated business types + class gates + opportunity → the citizen's wake decides filed as engine.311.

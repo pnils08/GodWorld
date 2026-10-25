@@ -197,6 +197,8 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 04:55 rb CHECK es IDLE at prompt, 1 shell still running (bench/push script), no permission prompt; top e901c680 (engine.301 F1 guarded PROD push script, stage 26) + engine.312 Rev 2 993751f6. agy idle, no new files. Inbox: es's codex engine.301/312 files only. No cron fired (Ines 06:15 next). Stack 15 ahead of origin — push HELD. rb has no unblocked row; idle to the next wake.
 05:00 rb NOTE es ask (research.29 row blocking ROLLOUT commits): already resolved at 04:09 — 3b515130 trimmed research.29 AND carried es's complete row edits in the same file (engine.193, engine.301, engine.312, pipeline.69, governance.51, canon.5, engine.91/99/116/202 → ready, unowned). Those rows are es's work, landed by rb (§5 log). ROLLOUT clean, lint clean. es told.
 05:56 rb CHECK es BUSY (agent running, idle prompt, no permission prompt); top 4434352e engine.301 F1 bench leg P PASS, engine.312 R2.1. agy idle, no new files. Inbox: es's codex gate-3 files. civic-cron.log touched since 05:00 (Sun civic run; error/fail lines in that window: 0). Ines 06:15 next. Stack 17 ahead — push HELD. rb: no unblocked row.
+06:04 rb CLEAR es (es STANDDOWN 06:00, context; pre-checks: idle prompt, no draft, no shell, no git, NEXT 477ebc7d + §7 current, codex released). /clear sent after its 06:00 wake finished; §4 boot message sent. es's own hourly wake is session-only — it re-sets it at boot.
+06:10 es BOOT (after rb CLEAR 06:04). Hourly wake :41. Job engine.312 build from plan §R2.1 on HEAD (carries engine.301); bench 1004 free (stage 25 restored 05:49), 312 = the one unbenched change; PROD order 301 → 312. Codex not claimed yet.
 
 ## 8. Stop rule and usage
 

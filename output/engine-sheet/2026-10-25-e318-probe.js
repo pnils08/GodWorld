@@ -3,7 +3,7 @@
 //           [an Active ledger citizen with a unique name, their POPID, 'mentioned', 'engine.318 bench probe', 'Maria Keen', ''].
 //           The old positional reader would land UsageType = the POPID; the by-name reader lands 'mentioned'. Snapshot of the whole
 //           intake tab + the Citizen_Media_Usage row count → output/engine-sheet/2026-10-25-e318-probe.json.
-//   check <cycle> — after the fire: exactly one new media-room usage row, carrying the probe's name / type / context / reporter;
+//   check <cycle> — after the fire: exactly one new usage row in all, media-room, carrying the probe's name / type / context / reporter;
 //           the probe's Status 'processed' and Reporter unchanged; every other intake cell = the snapshot; no usage row at <cycle>
 //           typed with a POPID; no Engine_Errors row at <cycle> naming the media intake. Exit 1 on any miss.
 require('/root/GodWorld/lib/env');
@@ -57,6 +57,7 @@ const widen = (rows, w) => rows.map(r => { const o = []; for (let k = 0; k < w; 
   const added = usage.slice(S.usageRows);
   const media = added.filter(r => r[iSrc] === 'media-room');
   if (media.length !== 1) fails.push('media-room rows landed: ' + media.length + ' (want 1)');
+  if (added.length !== 1) fails.push('usage rows added in all: ' + added.length + ' (want 1 — codex engine.318 §3)');
   const m = media[0] || [];
   const got = [m[iN], m[iT], m[iX], m[iR], Number(m[iC])], want = [S.probe[0], 'mentioned', CONTEXT, REPORTER, C];
   if (JSON.stringify(got) !== JSON.stringify(want)) fails.push('media-room row ' + JSON.stringify(got) + ' (want ' + JSON.stringify(want) + ')');

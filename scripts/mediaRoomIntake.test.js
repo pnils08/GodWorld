@@ -146,6 +146,13 @@ for (const stem of ['sports_c103_x_packet-v2_deepseek-deepseek-chat', 'civic_c10
   const fresh = sheet([['CitizenName', 'UsageType', 'Context', 'Reporter', 'Status']]);
   pbox.parseCitizenUsage_({ getSheetByName: (n) => n === 'Citizen_Usage_Intake' ? fresh : null }, '— Briar Soto (electrician)');
   eq(JSON.stringify(fresh.rows[1]), JSON.stringify(['Briar Soto', 'mentioned', 'electrician', '', '']), 'engine.318: the five-column fresh header still takes the row by name');
+  // codex engine.318 §1: a shuffled header, so a reader or writer hardcoded for the five / six-column layouts cannot pass
+  const shuffled = sheet([['Status', 'Reporter', 'Context', 'POPID', 'UsageType', 'CitizenName'], ['', 'Nia Rook', 'electrician', '', 'quoted', 'Briar Soto'], ['processed', 'Tanya Cruz', 'dugout', 'POP-00001', 'quoted', 'Vinnie Keane']]);
+  const shmu = sheet([['Timestamp']]);
+  eq(box.processCitizenUsageIntake_({ getSheetByName: (n) => n === 'Citizen_Usage_Intake' ? shuffled : n === 'Citizen_Media_Usage' ? shmu : null }, 112, {}), 1, 'engine.318: shuffled header — only the Status-blank row is pending');
+  eq(shmu.rows.slice(1).map((r) => r.slice(2, 6).join('|')).join() + ' / ' + shuffled.rows.slice(1).map((r) => r[0] + ':' + r[1]).join(), 'Briar Soto|quoted|electrician|Nia Rook / processed:Nia Rook,processed:Tanya Cruz', 'engine.318: shuffled header — fields from their own columns, the mark in Status, Reporter untouched');
+  pbox.parseCitizenUsage_({ getSheetByName: (n) => n === 'Citizen_Usage_Intake' ? shuffled : null }, '— Ora Waiting (corner)');
+  eq(JSON.stringify(shuffled.rows[3]), JSON.stringify(['', '', 'corner', '', 'mentioned', 'Ora Waiting']), 'engine.318: shuffled header — the parser lays each value under its own name');
   const noType = sheet([['CitizenName', 'POPID', 'Context', 'Reporter', 'Status']]);
   threw = false;
   try { pbox.parseCitizenUsage_({ getSheetByName: (n) => n === 'Citizen_Usage_Intake' ? noType : null }, '— Briar Soto (electrician)'); } catch (e) { threw = /UsageType/.test(e.message); }

@@ -22,7 +22,7 @@ bash $O/2026-10-25-push-e318-bench.sh "$SRC" $O/stage28-e318.sha256 || exit 4
 CUT=$(date +%s)
 reset_leg
 step $O/2026-10-25-e318-status-step.js bench freeze
-step $O/2026-10-25-e318-status-step.js bench apply
+step $O/2026-10-25-e318-status-step.js bench apply --expect 105
 step $O/2026-10-25-e318-status-step.js bench verify
 step $O/2026-10-25-e318-probe.js lay
 wait_cut

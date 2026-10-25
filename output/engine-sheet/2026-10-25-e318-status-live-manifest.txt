@@ -1,0 +1,106 @@
+row	CitizenName	POPID	UsageType	Context	Reporter	Status
+809	Janae Rivers	POP-00043	mentioned	D5 Councilmember, OPP	processed	
+810	Nina Chen	POP-00505	mentioned	D8 Councilmember, CRC	processed	
+811	Warren Ashford	POP-00504	mentioned	D7 Councilmember, CRC	processed	
+812	Leonard Tran	POP-00502	mentioned	D2 Councilmember, IND	processed	
+813	Ramon Vega	POP-00042	mentioned	D4 Councilmember/Council President, IND	processed	
+814	Rafael Montez	POP-00136	mentioned	Police Chief	processed	
+815	Marcus Osei	POP-00036	mentioned	Deputy Mayor, Economic Development	processed	
+816	Keisha Ramos	POP-00041	mentioned	Baylight Authority Director	processed	
+817	Dr. Vanessa Tran-Muñoz		mentioned	OARI Program Director	processed	
+818	Eduardo Ramos		mentioned	SP — new ace, 2.89 ERA, 201 K	processed	
+819	Marcus Rivas		mentioned	SP — rotation slot 2	processed	
+820	Travis Coles	POP-00533	mentioned	SP — rotation slot 3, 2yr/$46.18M	processed	
+821	Jarrett Ellis		mentioned	SP — rotation slot 4	processed	
+822	Benji Dillon	POP-00018	mentioned	SP — rotation slot 5, 5x Cy Young	processed	
+823	Hank Trepagnier		mentioned	Forward — ROY, All-Rookie 1st Team, NBA Cup MVP	processed	
+824	Josh Giddey		mentioned	Guard — Career year, 19.8pts/7.0reb/7.4asst	processed	
+825	Adash Stanley		mentioned	Guard — All-Rookie 2nd Team, 42% 3pt	processed	
+826	Mike Paulson	POP-00527	mentioned	Owner/GM — Executive of the Year	processed	
+827	Carmen Delaine	POP-00011	mentioned	2 articles	processed	
+828	Luis Navarro	POP-00636	mentioned	1 article	processed	
+829	Jordan Velez	POP-00153	mentioned	1 article	processed	
+830	Maria Keen	POP-00013	mentioned	2 articles	processed	
+831	Kai Marston	POP-00158	mentioned	1 article	processed	
+832	P Slayer	POP-00008	mentioned	1 article	processed	
+833	Anthony		mentioned	1 article	processed	
+834	Hal Richmond	POP-00007	mentioned	1 article	processed	
+835	Selena Grant	POP-00591	mentioned	1 article	processed	
+836	Talia Finch	POP-00592	mentioned	1 article	processed	
+837	Mags Corliss	POP-00005	mentioned	1 Editor's Desk	processed	
+838	Travis Green, 43, Jack London, construction laborer		mentioned	Baylight mobilization waiting	processed	
+839	Ray Muñoz, 54, Jack London, longshoreman		mentioned	Jack London nightlife corridor	processed	
+840	Beverly Hayes, 58, West Oakland, tenant rights advocate		mentioned	Stabilization Fund first disbursement	processed	
+841	Darius Clark, West Oakland, bakery worker		mentioned	Stabilization Fund queue — status unresolved	processed	
+842	Calvin Turner, 38, Fruitvale, mechanic		mentioned	St. Columba Assumption, faith volunteer	processed	
+843	Dante Nelson, 41, Downtown, security guard		mentioned	NBA expansion reaction	processed	
+844	Paulette Okafor, 47, Bridgeport, postal worker		mentioned	Bulls Executive of Year reaction	processed	
+845	Raymond Polk, 58, Bridgeport, retired school custodian		mentioned	Bulls ownership statement reaction	processed	
+846	Carla Edmonds, 58, West Oakland, retired teacher		mentioned	LETTERS	processed	
+847	Sister Rosario Aguilar, 67, Fruitvale, retired hospital worker		mentioned	LETTERS	processed	
+848	Miguel Orozco, 71, Fruitvale, retired produce market owner		mentioned	LETTERS	processed	
+849	Jemaine Farris, 29, West Oakland, line cook		mentioned	LETTERS	processed	
+850	Father Manuel Avila		mentioned	Pastor, St. Columba Catholic Church, Fruitvale	processed	
+851	Cathedral of Christ the Light		mentioned	Faith Institution, Lake Merritt	processed	
+852	Shiva Vishnu Temple		mentioned	Faith Institution, Montclair	processed	
+853	First Presbyterian Church		mentioned	Faith Institution, Downtown	processed	
+854	Brianna Nguyen	quoted	Fruitvale parent, 2 children at Fruitvale Bilingual	edition	processed	
+855	Tomás Aguilar	quoted	Fruitvale parent, daughter transferred from Hayward	edition	processed	
+856	Jamal Thompson	quoted	East Oakland parent, son in Ellison's 5th grade	edition	processed	
+857	Priya Marchetti	quoted	Temescal parent, 4th-grader and 1st-grader at Claremont Hills	edition	processed	
+858	Ariana Lewis	quoted	Rockridge parent, daughter starting Claremont Hills	edition	processed	
+859	Ivy Cook	quoted	Downtown parent, son starting 7th grade at OUASA	edition	processed	
+860	Theo Banks	quoted	Downtown parent, daughter 3rd grade, son Jerome in Gridiron	edition	processed	
+861	Ivy Lopez	quoted	Fruitvale parent, 2 children at Fruitvale Rec Center	edition	processed	
+862	Kevin Park	quoted	Rockridge parent, retired, daughter 2nd grade at Claremont Hills	edition	processed	
+863	Tobias Scott	existing_new_role	47, Lake Merritt, principal of OUASA	edition	processed	
+864	Marcus Tan	referenced	Oakmesh Systems founder	edition	processed	
+865	Jasmine Torres	referenced	28, Tenth Street Digital founder	edition	processed	
+866	Daniel Yoon	referenced	Gridiron Analytics co-founder	edition	processed	
+867	Christine Nakamura	referenced	Gridiron Analytics co-founder	edition	processed	
+868	Jordan Velez	journalist	business desk reporter	edition	processed	
+869	Rosa Medina	new_citizen	58, Fruitvale, Principal, Fruitvale Bilingual Academy	edition	processed	
+870	Valentina Cruz	new_citizen	34, Fruitvale, 3rd-grade bilingual teacher, Fruitvale Bilingual Academy (9 years)	edition	processed	
+871	Marcus Ellison	new_citizen	41, East Oakland, 5th-grade teacher, Allen Temple Academy (14 years, neighborhood native)	edition	processed	
+872	Diane Sato	new_citizen	52, Rockridge, 4th-grade teacher, Claremont Hills Elementary (24 years)	edition	processed	
+873	Kwame Asante	new_citizen	38, KONO, math/data science teacher, OUASA (11 years)	edition	processed	
+874	Dario Vega	new_citizen	44, Fruitvale, Director, Fruitvale Recreation Center	edition	processed	
+875	Keisha Morales	new_citizen	29, Temescal, Program coordinator, Gridiron Analytics after-school	edition	processed	
+876	Davion Freeman	new_citizen	12, East Oakland, student, Allen Temple Academy 5th grade	edition	processed	
+877	Jerome Banks	new_citizen	14, Downtown, student, OUASA 9th grade, Gridiron Analytics peer mentor	edition	processed	
+878	Angela Reyes	new_citizen	journalist, culture desk, first published byline in education supplemental	edition	processed	
+879	Beverly Hayes	POP-00576	civic	E89 Civic	processed	
+880	Avery Santana	POP-00034	civic	E89 Civic	processed	
+881	Denise Carter	POP-00501	civic	E89 Civic	processed	
+882	Rose Delgado	POP-00503	civic	E89 Civic	processed	
+883	Janae Rivers	POP-00043	civic	E89 Civic	processed	
+884	Leonard Tran	POP-00502	civic	E89 Civic	processed	
+885	Ramon Vega	POP-00042	civic	E89 Civic	processed	
+886	Warren Ashford	POP-00504	civic	E89 Civic	processed	
+887	Nina Chen	POP-00505	civic	E89 Civic	processed	
+888	Elliott Crane	POP-00044	civic	E89 Civic	processed	
+889	Keisha Ramos	POP-00041	civic	E89 Civic	processed	
+890	Brenda Okoro	POP-00037	civic	E89 Civic	processed	
+891	Elena Lewis	POP-00193	business	E89 Business	processed	
+892	Jalen Hill	POP-00649	business	E89 Business	processed	
+893	Travis Coles	POP-00533	sports	E89 Sports	processed	
+894	Danny Horn	POP-00022	sports	E89 Sports	processed	
+895	Benji Dillon	POP-00018	sports	E89 Sports	processed	
+896	Vinnie Keane	POP-00001	sports	E89 Sports	processed	
+897	Bryan Franco	POP-00068	sports	E89 Sports	processed	
+898	Darrin Davis	POP-00021	sports	E89 Sports	processed	
+899	Ernesto Quintero	POP-00050	sports	E89 Sports	processed	
+900	Eric Taveras	POP-00597	sports	E89 Sports	processed	
+901	Arturo Ramos	POP-00025	sports	E89 Sports	processed	
+902	Henry Rivas	POP-00024	sports	E89 Sports	processed	
+903	Deacon Seymour	POP-00528	sports	E89 Sports	processed	
+904	DeShawn Hartley	POP-00015	sports	E89 Sports	processed	
+905	Marcus Webb	POP-00790	civic	E89 Civic - Stabilization Fund	processed	
+906	Elena Soria Dominguez	POP-00791	civic	E89 Civic - Transit Hub	processed	
+907	Bobby Chen-Ramirez	POP-00792	civic	E89 Civic Briefs - Health Center	processed	
+908	Gil Saucedo	POP-00793	sports	E89 Sports - new	processed	
+909	Irene Fay	POP-00794	letter_writer	E89 Letters - The Check That Hasnt Arrived	processed	
+910	Marisol Trujillo	POP-00795	letter_writer	E89 Letters - What Fruitvale Actually Said	processed	
+911	Dennis Abara	POP-00796	letter_writer	E89 Letters - Post-Day 45	processed	
+912	Curtis Boone	POP-00797	letter_writer	E89 Letters - The Piles Go In	processed	
+913	Grace Yamamoto	POP-00798	letter_writer	E89 Letters - September Morning	processed	

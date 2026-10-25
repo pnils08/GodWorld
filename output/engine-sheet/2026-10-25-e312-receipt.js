@@ -149,7 +149,7 @@ const same = (a, b) => String(a === undefined || a === null ? '' : a) === String
       const mcPost = typed(p[cM]), mcPre = r[cM] === '' ? 0 : typed(r[cM]);
       if (mcPost === null || mcPre === null) HOLD(r[cId] + ' "' + r[cName] + '": sighted but MediaCount is not a number (' + JSON.stringify([r[cM], p[cM]]) + ')');
       else if (mcPost - mcPre !== sight) HOLD(r[cId] + ' "' + r[cName] + '": MediaCount moved ' + (mcPost - mcPre) + ', the digest sighted it ' + sight + ' time(s)');
-      if (Number(String(p[cL] || '').replace(/[^0-9]/g, '')) !== C) HOLD(r[cId] + ' sighted but LastSeenCycle reads ' + p[cL]);
+      if (typed(p[cL]) !== C) HOLD(r[cId] + ' sighted but LastSeenCycle reads ' + JSON.stringify(p[cL]) + ' (the registrar writes the Cycle number)');
     } else {
       if (!same(p[cM], r[cM])) HOLD(r[cId] + ' "' + r[cName] + '": not sighted, but MediaCount ' + r[cM] + ' → ' + p[cM]);
       if (!same(p[cL], r[cL])) HOLD(r[cId] + ' "' + r[cName] + '": not sighted, but LastSeenCycle ' + r[cL] + ' → ' + p[cL] + ' (a false sighting would stop the fade)');
@@ -180,7 +180,9 @@ const same = (a, b) => String(a === undefined || a === null ? '' : a) === String
         FirstSeenCycle: C, LastSeenCycle: C, MediaCount: 0, TrendTrajectory: 'rising', FirstRefSource: 'engine.65', MediaSpread: 0,
         CityTier: '', Neighborhood: '', Holiday: '', HolidayPriority: '', SportsSeason: '' };
       for (const k of Object.keys(want)) {
-        const v = at(k); if (v === undefined) continue;
+        if (ch.indexOf(k) < 0) { if (want[k] !== '') bad.push('no ' + k + ' column'); continue; }
+        const v = at(k);
+        if (v === undefined && want[k] === '') continue;   // a ragged read drops trailing blank cells; a required cell may not be absent
         const ok = typeof want[k] === 'number' ? typed(v) === want[k] : same(v, want[k]);
         if (!ok) bad.push(k + '=' + JSON.stringify(v));
       }
@@ -197,14 +199,16 @@ const same = (a, b) => String(a === undefined || a === null ? '' : a) === String
     const mc = typed(p[cM]);
     if (mc === null || typed(p[cF]) === null) HOLD('new ' + p[cId] + ' "' + p[cName] + '": MediaCount / FameScore not numbers ' + JSON.stringify([p[cM], p[cF]]));
     // the registrar's CREATE row (culturalLedger.js): its fixed cells, and the sighting cells by this Cycle's digest
-    const atN = (n) => { const k = ch.indexOf(n); return k < 0 ? undefined : p[k]; };
+    // required, nonblank CREATE cells must be present (a missing column or a cut-off row is a HOLD, not a skip)
     const badN = [];
-    if (atN('FirstSeenCycle') !== undefined && typed(atN('FirstSeenCycle')) !== C) badN.push('FirstSeenCycle=' + JSON.stringify(atN('FirstSeenCycle')));
+    const needN = { FirstSeenCycle: C, MediaSpread: 1, Status: 'Active', TrendTrajectory: 'rising', CityTier: 'Local' };
+    for (const k of Object.keys(needN)) {
+      const ki = ch.indexOf(k);
+      if (ki < 0) { badN.push('no ' + k + ' column'); continue; }
+      const v = p[ki];
+      if (typeof needN[k] === 'number' ? typed(v) !== needN[k] : !same(v, needN[k])) badN.push(k + '=' + JSON.stringify(v));
+    }
     if (sight > 0 && typed(p[cL]) !== C) badN.push('LastSeenCycle=' + JSON.stringify(p[cL]));
-    if (atN('MediaSpread') !== undefined && typed(atN('MediaSpread')) !== 1) badN.push('MediaSpread=' + JSON.stringify(atN('MediaSpread')));
-    if (atN('Status') !== undefined && !same(atN('Status'), 'Active')) badN.push('Status=' + JSON.stringify(atN('Status')));
-    if (atN('TrendTrajectory') !== undefined && !same(atN('TrendTrajectory'), 'rising')) badN.push('TrendTrajectory=' + JSON.stringify(atN('TrendTrajectory')));
-    if (atN('CityTier') !== undefined && !same(atN('CityTier'), 'Local')) badN.push('CityTier=' + JSON.stringify(atN('CityTier')));
     if (badN.length) HOLD('new ' + p[cId] + ' "' + p[cName] + '" is not the registrar\'s CREATE row: ' + badN.join(', '));
     if (mc !== sight) HOLD('new ' + p[cId] + ' "' + p[cName] + '": MediaCount ' + mc + ', the digest sighted it ' + sight + ' time(s)');
     if (sight === 0 && String(p[cL] || '') !== '') HOLD('new ' + p[cId] + ' never sighted but LastSeenCycle ' + p[cL]);

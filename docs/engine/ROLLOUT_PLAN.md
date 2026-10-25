@@ -102,6 +102,7 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| pipeline.85 | Rhea stays and blocks, tuned per seat (builder 2026-10-25, reversing "Delete Rhea"): Voices packets hand her the citizens' whole page lines, so a verbatim page quote is supplied speech; advisory default removed; agy fold in the plan; live before Ines Sun 12:15 | done-pending-archive | research-build | [[../plans/2026-10-11-media-extension]] §Changelog 2026-10-25 |
 | pipeline.81 | Celeste's dead slice: trends ranks by this-cycle movement, no-citizen Cultural rows off every slice, no "engine" in slice text, pools start from the slice's names, proximity + rest guards dropped (builder 2026-10-16). Built 10-16 (es); acceptance C112 Fri 2026-10-23 | live-observing | engine-sheet / research-build | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
 | engine.296 | Sports legends from retired MLB-origin ledger rows, no literal fallback — LIVE @143/@144; re-read on C113 (Sun 2026-10-25) | live-observing | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
 |  research.29 | UNDOCKED crossover: Moves 1–5 live (engine.291 on PROD @138). C112 live readback 2026-10-19: 46 audience lines, 15 name a C112 pilot, 0 raw tokens, 0 self-naming. Next: 2026-10-24 digest crossover block | live-observing | research-build | [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]  |

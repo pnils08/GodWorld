@@ -129,6 +129,9 @@ function buildPrompt(cycle, draftRel, worldRel, nameCheck, evidenceRel, reviewCo
       'WRITER AUTHORITY PROFILE (apply while sourcing; do not turn this into a voice score):',
       JSON.stringify(reviewContext.profile),
       'Wake-3 manifest: ' + JSON.stringify(reviewContext.manifest),
+      ...((reviewContext.pageLines || []).length ? [
+        'APPROVED PAGE LINES (each citizen\'s own page text, whole; an exact copy attributed to its owner is supplied speech — still flag altered or paraphrased page text, added words, or a line attributed to a different citizen): ' + JSON.stringify(reviewContext.pageLines),
+      ] : []),
       'Lexical observations are review cues, not automatic flags: ' + JSON.stringify(reviewContext.audit.observations || []),
     ] : []),
     '',
@@ -372,6 +375,39 @@ function readAgentFile(rel) {
   try { return fs.readFileSync(path.join(ROOT, rel), 'utf8'); } catch (_) { return ''; }
 }
 
+// A Voices packet carries the citizens' own page lines as approved facts (src names the page's
+// customId). The model is shown them whole, from the page store — the fact copy is cut at 500
+// chars — so a passage that is an exact copy of a page reads as the citizen's supplied speech.
+// `deps` is for tests: { index: rows, nameFor: popId -> name }. Live calls read the page store and
+// the ledger. A page whose owner is not an approved subject (a Voices citizen who abstained in W2
+// is not one — livedExperiencePacket.js exposure.subjects keeps officials + usable quotes only)
+// still gets the ledger name, never a bare POPID, because the draft names the person (agy #2).
+// Each page is capped at PAGE_LINE_CAP chars — every self-initiated page is under it (max 4,083
+// at 2026-10-25); the cap bounds a pathological row, it never cuts a real one (agy #5).
+const PAGE_LINE_CAP = 8000;
+function pageLinesFromManifest(manifest, deps) {
+  const facts = (manifest && manifest.approvedFacts) || [];
+  const subjects = new Map(((manifest && manifest.approvedSubjects) || []).map(s => [s.id, s.name]));
+  const wanted = facts.map(f => /citizen_pages\/index\.jsonl (cp-\S+)/.exec(String(f.src || ''))).filter(Boolean).map(m => m[1]);
+  if (!wanted.length) return [];
+  let index = deps && deps.index;
+  if (!index) {
+    try { index = require('./scanCitizenPages').loadIndex(ROOT); }
+    catch (e) { log.warn('page lines: index load failed, ' + wanted.length + ' page fact(s) unshown: ' + e.message); return []; }
+  }
+  const nameFor = (deps && deps.nameFor) || (pop => {
+    try { const row = require('./livedExperiencePacket').ledgerRowForPop(pop); return row && row.Name; } catch (_) { return null; }
+  });
+  const byId = new Map(index.map(r => [r.customId, r]));
+  const out = wanted.map(id => byId.get(id)).filter(r => r && r.content)
+    .map(r => ({ customId: r.customId, name: subjects.get(r.popId) || nameFor(r.popId) || r.popId, text: String(r.content).slice(0, PAGE_LINE_CAP) }));
+  if (out.length < wanted.length) {
+    const missing = wanted.filter(id => !out.some(p => p.customId === id));
+    log.warn('page lines: ' + out.length + '/' + wanted.length + ' resolved; not in the page store: ' + missing.join(', '));
+  }
+  return out;
+}
+
 function loadReviewContext(persona, articlePacketFile, draftText) {
   if (!persona && !articlePacketFile) return null;
   const packagesApi = require('./newsroomWakePackages');
@@ -398,6 +434,7 @@ function loadReviewContext(persona, articlePacketFile, draftText) {
     // rewrite it (Luis's RECORDS_BRIEF swaps his two-range contract for 400-700 + its own open/close).
     contractProfile: packet && packet.reviewProfile && packet.reviewProfile.articleContract ? packet.reviewProfile : profile,
     manifest: packet && packet.manifest ? packet.manifest : null,
+    pageLines: pageLinesFromManifest(packet && packet.manifest),
     audit,
     packageVersion: wakePackage && wakePackage.version || null,
   };
@@ -488,6 +525,11 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
           ' [' + quote.src + '; supports ' + (quote.factIds || []).join(', ') + ']')
         : ['   (none)']),
       '   These exact speaker/text pairs are supplied interview evidence for this draft. Do not call an exact listed quote fabricated merely because older canon records a different statement by the same citizen. Still flag altered text, wrong attribution, or factual prose that the approved facts do not support.',
+      ...((reviewContext.pageLines || []).length ? [
+        '',
+        '   APPROVED PAGE LINES — each citizen\'s own page text, whole, from the page store (supplied record). A draft passage that is an exact copy of one of these, attributed to its owner, is that citizen\'s supplied speech: not fabricated, and not a mismatch with the interview quotes above. Still flag altered or paraphrased page text (quoted or unquoted), words added to a page passage, and a page line attributed to a different citizen.',
+        ...reviewContext.pageLines.map(p => '   - ' + p.name + ' [' + p.customId + ']: ' + JSON.stringify(p.text)),
+      ] : []),
     ] : []),
     '',
     'The machine-only ## INTAKE provenance block was validated separately and is intentionally omitted below. Do not flag its absence or speculate about its contents.',
@@ -558,7 +600,8 @@ async function main() {
   if (reviewContext) {
     console.log('review profile: ' + reviewContext.profile.id + ' package=' +
       (reviewContext.packageVersion || 'packet-only') + ' manifest=' +
-      (reviewContext.audit.manifestId || 'none'));
+      (reviewContext.audit.manifestId || 'none') +
+      ((reviewContext.pageLines || []).length ? ' pageLines=' + reviewContext.pageLines.length : ''));
   }
   let nameCheck = null;
   try {
@@ -787,6 +830,7 @@ async function main() {
       packageVersion: reviewContext.packageVersion,
       manifestId: reviewContext.audit.manifestId,
       lexicalObservations: reviewContext.audit.observations || [],
+      pageLines: (reviewContext.pageLines || []).map(p => p.customId),
     } : null,
     nameCheck: nameCheck ? { verified: nameCheck.verified, unverified: nameCheck.unverified } : null,
     intake: intakeReport,
@@ -852,4 +896,5 @@ module.exports = {
   scanEngineVerbiage,
   scanStructuralJunk,
   contractWordFloor, contractWordCount, buildContractPrompt, parseContractScore, // pipeline.77
+  pageLinesFromManifest, PAGE_LINE_CAP, // pipeline.85
 };

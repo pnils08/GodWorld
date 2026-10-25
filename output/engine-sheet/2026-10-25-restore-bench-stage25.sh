@@ -3,7 +3,7 @@
 # pull the bench, lay the six files those benches change at their stage-25 copies (engine.301's two at e3266c44^, engine.312's
 # four at 4826c757^ — each checked against the stage-25 manifest first), require the whole tree to equal the manifest, push,
 # deploy, pull back, compare. (2026-10-25-push-e301-bench.sh e3266c44^ resets only engine.301's two files.)
-#   bash output/engine-sheet/2026-10-25-restore-bench-stage25.sh [--dry-run]
+#   bash output/engine-sheet/2026-10-25-restore-bench-stage25.sh [--dry-run | --verify]   (--verify: pull + compare only, no push)
 set -euo pipefail
 cd /root/GodWorld
 CLASP=/root/GodWorld/node_modules/.bin/clasp
@@ -12,6 +12,12 @@ BENCH_DEP=AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdl
 MAN=/root/GodWorld/output/engine-sheet/stage24-e315-G3.sha256
 DRY=${1:-}
 W=$(mktemp -d); mkdir -p "$W/stage" "$W/pullback"
+if [ "$DRY" = "--verify" ]; then
+  ( cd "$W/pullback" && printf '{"scriptId":"%s","rootDir":""}' "$BENCH_ID" > .clasp.json && "$CLASP" pull >/dev/null )
+  ( cd "$W/pullback" && find . -type f ! -name .clasp.json | sort | xargs sha256sum ) | diff -q - "$MAN" >/dev/null \
+    && { echo "$(date -u +%FT%TZ) bench code = stage 25: pull-back $(find "$W/pullback" -name '*.js' | wc -l) js byte-identical to $(basename "$MAN")"; exit 0; } \
+    || { echo "bench code is NOT stage 25"; exit 1; }
+fi
 ( cd "$W/stage" && printf '{"scriptId":"%s","rootDir":""}' "$BENCH_ID" > .clasp.json && "$CLASP" pull >/dev/null )
 lay() {   # lay <ref> <file>
   local want have; want=$(grep " \./$2\$" "$MAN" | cut -d' ' -f1); have=$(git show "$1:$2" | sha256sum | cut -d' ' -f1)

@@ -802,6 +802,24 @@ console.log('engine.312 — synthetic, non-canon: fame from the paper (real cita
       cells8.some(u => u.address.col === C('FameScore') && u.values[0][0] === 25) && !cells8.some(u => [C('LastSeenCycle'), C('MediaCount')].includes(u.address.col)),
       JSON.stringify(cells8.map(u => [u.address.col, u.values[0][0]])));
   }
+  // gate 2 §1: a same-name dynasty / institution row is never a famous citizen's personal row — linked to them or unlinked
+  {
+    const g2 = world();
+    g2.cul.v.push(crow('CUL-E8', 'Synthetic Heir', 'POP-99112', 80, 112));   // r6: same name, linked to the citizen, an institution
+    g2.cul.v[5][C('FameCategory') - 1] = 'dynasty'; g2.cul.v[5][C('RoleType') - 1] = 'Institution';
+    g2.cul.v.push(crow('CUL-E9', 'Synthetic Lone', '', 70, 112));            // r7: same name, unlinked, an institution
+    g2.cul.v[6][C('RoleType') - 1] = 'Institution';
+    g2.ctx.ledger.rows.push(lrow('POP-99112', 'Synthetic', 'Heir', 30, 'C100'), lrow('POP-99113', 'Synthetic', 'Lone', 30, 'C100'));
+    fsb.processMediaUsage_(g2.ctx, 'C113', 113);
+    fsb.applyTierLadderState_(g2.ctx, 113);
+    fsb.flushCulturalFame_(g2.ctx);
+    const ap2 = appendsOf(g2.ctx), nm2 = n => ap2.filter(r => r[C('Name') - 1] === n);
+    check('engine.312 (gate 2 §1): famous citizens whose only same-name rows are institutions (one linked to them, one unlinked) each get their own roster row at the floor 25; neither institution row is written',
+      nm2('Synthetic Heir').length === 1 && nm2('Synthetic Heir')[0][C('FameScore') - 1] === 25 && nm2('Synthetic Heir')[0][C('UniverseLinks') - 1] === 'POP-99112' &&
+      nm2('Synthetic Lone').length === 1 && nm2('Synthetic Lone')[0][C('FameScore') - 1] === 25 &&
+      !updatesOf(g2.ctx).some(u => u.kind === 'cell' && u.tab === 'Cultural_Ledger' && (u.address.row === 6 || u.address.row === 7)),
+      JSON.stringify({ ap: ap2.map(r => [r[2], r[7], r[11]]), cells: updatesOf(g2.ctx).filter(u => u.tab === 'Cultural_Ledger' && u.kind === 'cell').map(u => [u.address.row, u.address.col, u.values[0][0]]) }));
+  }
   // §2: one flush a Cycle; a row whose intent fails is named and the rest still flush; a malformed tab fails closed
   {
     const r1 = world();

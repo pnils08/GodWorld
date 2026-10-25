@@ -478,19 +478,23 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   var targetIdx = -1;
   var byPop = false;
   var popKey = String(popId || '').trim().toUpperCase();
-  // engine.312 (codex diff gate 1 §1 b): a `roster` registration is for one
-  // citizen — their personal row by POPID first, then a row of the same name
-  // that links nobody else; never another citizen's row. Sightings keep
-  // engine.313's order (exact Name, then POPID).
-  var linkOk = function(idx) {
+  // engine.312 (codex diff gate 1 §1 b, gate 2 §1): a `roster` registration is
+  // for one citizen — their personal row by POPID first, then a PERSONAL row of
+  // the same name that links nobody else; never another citizen's row, never a
+  // dynasty / institution row. Sightings keep engine.313's order (exact Name,
+  // then POPID).
+  var personalOk = function(idx) {
     var link = iUniverse >= 0 ? String(data[idx][iUniverse] || '').trim().toUpperCase() : '';
-    return !link || link === popKey;
+    if (link && link !== popKey) return false;
+    if (iFameCat >= 0 && String(data[idx][iFameCat] || '').trim().toLowerCase() === 'dynasty') return false;
+    if (iRoleType >= 0 && String(data[idx][iRoleType] || '').trim().toLowerCase() === 'institution') return false;
+    return true;
   };
   if (!sighted && popKey && iUniverse >= 0) targetIdx = culturalTargetIdxByPop_(data, popKey);
   if (targetIdx < 0) {
     for (var ti = 1; ti < data.length; ti++) {
       if ((iName >= 0 ? data[ti][iName] : data[ti][2]) !== name) continue;
-      if (!sighted && !linkOk(ti)) continue;
+      if (!sighted && !personalOk(ti)) continue;
       targetIdx = ti; break;
     }
   }
@@ -679,10 +683,11 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
 
     // engine.312: the row is touched (the flush writes its one FameScore cell);
     // a sighting adds +1. A famous citizen's floor rides the row they resolve
-    // to unless it links another citizen (codex diff gate 1 §1 b — the
-    // unlinked same-name row a roster registration claims).
+    // to only when it is a personal row of theirs (codex diff gate 1 §1 b,
+    // gate 2 §1 — the unlinked same-name row a roster registration claims;
+    // never another citizen's row or an institution).
     var fameRow = culturalFameRow_(fameAcc, rowNum);
-    if (popKey && fameAcc.floorPops[popKey] && linkOk(i)) fameRow.floor = true;
+    if (popKey && fameAcc.floorPops[popKey] && personalOk(i)) fameRow.floor = true;
     if (sighted) {
       fameRow.sightings += 1;
       sightExisting_(reg);

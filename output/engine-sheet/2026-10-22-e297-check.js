@@ -5,7 +5,9 @@
 // sheet's Simulation_Ledger (active / retired — the A's / legend paths mint a row the first time a ledger player is seen); any of
 // the 42 retired literal pool names appears in a new row; a row sighted THIS cycle was Inactive at the baseline, or links (POP-)
 // to a citizen who is not living on the ledger now; or (end of a roll, --final) no pre-existing non-athlete row was sighted at
-// all. FameCategory / Neighborhood rewrites are the registration's own refresh (culturalLedger.js :270/:275) — not judged.
+// all. Neighborhood rewrites are the registration's own refresh — not judged. engine.315 (2026-10-25): a pre-existing row whose authored
+// FameCategory (not blank / unknown) or its CulturalDomain differs from the baseline → HOLD. engine.314: a new row whose HolidayPriority
+// equals its Holiday, or whose SportsSeason carries a joined calendar string (", ") → HOLD (the positional repeat-write signature).
 // engine.313 (2026-10-24, codex plan review F3/F4; diff gate 2026-10-25): HOLD when a new personal row (not FameCategory dynasty / RoleType
 // Institution, the same test on both sides) carries a POPID (canonical POP-ddddd only) a baseline personal row or an earlier new personal row
 // already carries — one citizen, two fame rows; a new dynasty, blank and malformed links never match. --e313 binds, per Cycle, a citizen-name
@@ -72,6 +74,9 @@ const BUCKETED = /^(actor|musician|influencer|journalist|chef|streamer|author|ci
       const m = { id, name, role: String(r[c('RoleType')] || ''), src, lastSeen: ls, link };
       out.minted.push(m);
       if (OLD.includes(name)) out.hold.push('new row ' + id + ' carries a retired literal name: ' + name);
+      const hol = String(r[c('Holiday')] || '').trim(), hpri = String(r[c('HolidayPriority')] || '').trim(), sea = String(r[c('SportsSeason')] || '');
+      if ((hpri && hpri === hol) || sea.indexOf(', ') >= 0)
+        out.hold.push('engine.314: new row ' + id + ' "' + name + '" calendar columns written by position — Holiday "' + hol + '", HolidayPriority "' + hpri + '", SportsSeason "' + sea + '"');
       if (src === 'SystemEngine' && !livingName[name.toLowerCase()]) out.hold.push('sighting minted ' + id + ' "' + name + '" — no living citizen by that name');
       const np = popOf(link);
       if (np && personal(r[c('FameCategory')], r[c('RoleType')])) {
@@ -81,6 +86,10 @@ const BUCKETED = /^(actor|musician|influencer|journalist|chef|streamer|author|ci
       }
       continue;
     }
+    const bCat = String(b[bh.indexOf('FameCategory')] || '').trim(), bDom = String(b[bh.indexOf('CulturalDomain')] || '').trim();
+    const nCat = String(r[c('FameCategory')] || '').trim(), nDom = String(r[c('CulturalDomain')] || '').trim();
+    if (bCat && bCat.toLowerCase() !== 'unknown' && (nCat !== bCat || (bDom && nDom !== bDom)))
+      out.hold.push('engine.315: ' + id + ' "' + name + '" authored ' + bCat + '/' + bDom + ' rewritten to ' + nCat + '/' + nDom);
     if (ls < from || ls > cyc) continue;
     const bs = String(b[bh.indexOf('Status')] || '').trim(), bcat = String(b[bh.indexOf('FameCategory')] || '').trim().toLowerCase();
     const bFame = Number(b[bh.indexOf('FameScore')]) || 0, fame = Number(r[c('FameScore')]) || 0;

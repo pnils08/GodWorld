@@ -1,6 +1,6 @@
 /**
  * ============================================================================
- * registerCulturalEntity_ v2.7 (engine.313 — one citizen, one fame row)
+ * registerCulturalEntity_ v2.8 (engine.313 one fame row; engine.315 authored category)
  * ============================================================================
  *
  * Automatically classifies and registers cultural entities with calendar awareness.
@@ -13,6 +13,10 @@
  * - Registry entries for existing rows key by `row:<n>`; pending creates by name.
  * - A POPID-resolved row keeps its FameCategory / CulturalDomain and is classified
  *   by them (fame bonus, summary) — never by a role word from another linked row.
+ *
+ * v2.8 — engine.315 / 314: on any existing row an authored FameCategory decides
+ * (never rewritten; a blank / 'unknown' one is filled); a same-Cycle repeat of a
+ * new entity writes LastSeenHoliday / CalendarContext by header name.
  *
  * v2.6 — engine.44 Class 3 (UniverseLinks was written '' since landing):
  * - UniverseLinks (col H) now carries the entity's Simulation_Ledger POPID —
@@ -291,16 +295,25 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   }
 
   var fam = classifyRole(roleType);
-  // engine.313 (codex diff gate F2): a POPID-resolved row is classified as the
-  // row has itself — its own FameCategory / CulturalDomain (else its own
-  // RoleType words) drive the fame bonus and the summary. The caller's role
-  // word may come from another row linked to the citizen (the bridge reads the
-  // highest-fame linked row, a dynasty included).
-  if (byPop) {
-    var ownWords = classifyRole(String(iRoleType >= 0 ? data[targetIdx][iRoleType] || '' : ''));
+  // engine.315: on an existing row an authored FameCategory (not blank, not
+  // 'unknown') decides, as it does for the sighting buckets (engine.297, codex
+  // 2026-10-23 1a) — the row is classified by it (fame bonus, summary) and it
+  // is never rewritten. The caller's role word is a bucket row's RoleType
+  // ("Celebrity"), the legend / player pool's "A's legend", or a category the
+  // bridge copied from another linked row, and classifyRole misreads several.
+  // A blank / 'unknown' category is filled when the classification finds one:
+  // on the POPID path from the row's own RoleType words (engine.313 — the
+  // caller's word may be a dynasty's), else from the caller's role word.
+  var fillCategory = false;
+  if (targetIdx > 0) {
     var ownCat = String(iFameCat >= 0 ? data[targetIdx][iFameCat] || '' : '').trim();
     var ownDom = String(iCulDom >= 0 ? data[targetIdx][iCulDom] || '' : '').trim();
-    fam = { cat: ownCat || ownWords.cat, dom: ownDom || ownWords.dom };
+    if (ownCat && ownCat.toLowerCase() !== 'unknown') {
+      fam = { cat: ownCat, dom: ownDom || classifyRole(ownCat).dom };
+    } else {
+      if (byPop) fam = classifyRole(String(iRoleType >= 0 ? data[targetIdx][iRoleType] || '' : ''));
+      fillCategory = fam.cat !== 'unknown';
+    }
   }
 
   // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank (ADR-0016)
@@ -470,8 +483,12 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
     pendingRow[9] = reg.accum.lastSeenCycle;          // LastSeenCycle
     pendingRow[10] = reg.accum.mediaCount;            // MediaCount
     pendingRow[11] = reg.accum.fameScore;             // FameScore
-    if (reg.accum.lastHoliday) pendingRow[18] = reg.accum.lastHoliday;  // LastSeenHoliday
-    pendingRow[19] = reg.accum.calendarContext;       // CalendarContext
+    // engine.314: LastSeenHoliday / CalendarContext by header name, as UPDATE
+    // writes them — positions 18 / 19 are HolidayPriority / SportsSeason on the
+    // live header (engine.266). Absent there, so the CREATE row's Holiday /
+    // HolidayPriority / SportsSeason stand (same Cycle, same values).
+    if (reg.accum.lastHoliday && iLastHoliday >= 0) pendingRow[iLastHoliday] = reg.accum.lastHoliday;
+    if (iCalendarContext >= 0) pendingRow[iCalendarContext] = reg.accum.calendarContext;
 
     return reg.culId;
   }
@@ -503,11 +520,9 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
     var newFame = baseFame + 5 + fameBonus;
     intents.fameScore = queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, fsCol + 1, newFame, 'registerCulturalEntity_: FameScore', 'media');
 
-    // FameCategory + Domain refresh — exact-name path only. On the POPID path
-    // the row's own metadata stands (engine.313): the caller's role word may
-    // come from another row linked to the citizen (the bridge reads the
-    // highest-fame linked row, a dynasty included).
-    if (!byPop) {
+    // FameCategory + Domain — only to fill a blank / 'unknown' category
+    // (engine.315; an authored category is never rewritten).
+    if (fillCategory) {
       if (iFameCat >= 0) queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iFameCat + 1, fam.cat, 'registerCulturalEntity_: FameCategory', 'media');
       if (iCulDom >= 0) queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iCulDom + 1, fam.dom, 'registerCulturalEntity_: CulturalDomain', 'media');
     }

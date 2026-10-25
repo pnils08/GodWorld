@@ -534,8 +534,8 @@ console.log('engine.313 — synthetic, non-canon: one citizen, one fame row (rea
     c5.cells.length === 0 && c5.helpers.length === 0);
   const c6 = run([row('CUL-SYN060', 'Synthia Arden', 'artist', 'artist', 'POP-99999', 5),
     row('CUL-SYN061', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 40)], [['Synthia Arden', 'author']]);
-  check('engine.313: exact Name still wins (old precedence, its category refresh kept)',
-    c6.returned[0] === 'CUL-SYN060' && rowsHit(c6) === '2' && onCol(c6, 'FameCategory').map(u => u.values[0][0]).join() === 'author' &&
+  check('engine.313: exact Name still wins (old precedence); engine.315: its authored category stands against the role word',
+    c6.returned[0] === 'CUL-SYN060' && rowsHit(c6) === '2' && onCol(c6, 'FameCategory').length === 0 &&
     !c6.logs.some(l => /engine\.313/.test(l)));
   const c7 = run([row('CUL-SYN070', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 40)], [['Synthetic Stranger', 'artist']]);
   check('engine.313: an unresolved name creates as before (blank link)',
@@ -554,9 +554,9 @@ console.log('engine.313 — synthetic, non-canon: one citizen, one fame row (rea
     JSON.stringify({ r: c9.returned, keys: c9.keys }));
   const c10 = run([row('CUL-SYN100', 'The Arden Family', 'Institution', 'dynasty', 'POP-99101', 80),
     row('CUL-SYN101', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 40)], [['The Arden Family', 'dynasty'], ['Synthia Arden', 'dynasty']]);
-  check('engine.313 (codex gate F1): dynasty registered first by its own name → the citizen still reaches the personal row',
+  check('engine.313 (codex gate F1): dynasty registered first by its own name → the citizen still reaches the personal row; engine.315: neither category rewritten (dynasty no longer → unknown)',
     c10.returned.join() === 'CUL-SYN100,CUL-SYN101' && c10.keys.sort().join() === 'row:2,row:3' && c10.appends.length === 0 &&
-    onCol(c10, 'FameCategory').map(u => u.address.row).join() === '2', JSON.stringify({ r: c10.returned, keys: c10.keys }));
+    onCol(c10, 'FameCategory').length === 0, JSON.stringify({ r: c10.returned, keys: c10.keys, cat: onCol(c10, 'FameCategory').map(u => u.address.row + ':' + u.values[0][0]) }));
 
   // codex diff gate F2: on the POPID path the row's own category drives the fame bonus and the summary (First Friday: Arts +4)
   const c11 = run([row('CUL-SYN110', 'The Arden Family', 'Institution', 'dynasty', 'POP-99101', 80),
@@ -595,6 +595,54 @@ console.log('engine.313 — synthetic, non-canon: one citizen, one fame row (rea
       upB.length === 1 && upB[0].fameCategory === 'artist' && v.length === 3,
       JSON.stringify({ picked: picked && picked.map(p => p.role), famous: ctx.summary.famousPeople, fs: fsB.map(u => u.address.row + ':' + u.values[0][0]),
         ap: ups.filter(u => u.kind === 'append').length, up: upB }));
+  }
+
+  // engine.315: on an existing row an authored FameCategory decides — the role word never rewrites it
+  const dom = (r, d) => { r[C('CulturalDomain') - 1] = d; return r; };
+  const catCells = res => onCol(res, 'FameCategory').concat(onCol(res, 'CulturalDomain')).map(u => u.address.row + ':' + u.values[0][0]).join();
+  const d1 = run([row('CUL-SYN130', 'Synthetic Star', 'Celebrity', 'musician', '', 40)], [['Synthetic Star', 'Celebrity']], null, { isFirstFriday: true });
+  check('engine.315: "Celebrity" on a musician row → no category write; First Friday Arts bonus by the authored category (40 + 5 + 4)',
+    catCells(d1) === '' && onCol(d1, 'FameScore').map(u => u.values[0][0]).join() === '49' &&
+    (d1.ctx.summary.culturalEntityUpdates || [])[0].fameCategory === 'musician', JSON.stringify({ cat: catCells(d1), fs: onCol(d1, 'FameScore').map(u => u.values[0][0]) }));
+  const rung = rsb.sportsRung_; rsb.sportsRung_ = () => 'championship';
+  const d2 = run([dom(row('CUL-SYN140', 'Synthetic Legend', "Shortstop, Oakland A's Legend", 'athlete', '', 40), 'Sports')], [['Synthetic Legend', "A's legend"]]);
+  rsb.sportsRung_ = rung;
+  check('engine.315: "A\'s legend" on an athlete row → no category write; championship Sports bonus (40 + 5 + 6)',
+    catCells(d2) === '' && onCol(d2, 'FameScore').map(u => u.values[0][0]).join() === '51', JSON.stringify({ cat: catCells(d2), fs: onCol(d2, 'FameScore').map(u => u.values[0][0]) }));
+  const d3 = run([dom(row('CUL-SYN150', 'Synthetic Manager', 'General Manager', 'sports-figure', '', 25), 'Sports')], [['Synthetic Manager', 'sports-figure']]);
+  check('engine.315: the bridge\'s copied "sports-figure" on a sports-figure row → no rewrite to athlete', catCells(d3) === '', catCells(d3));
+  const d4 = run([dom(row('CUL-SYN160', 'Synthetic Cook', 'Heritage Director', 'unknown', '', 20), 'Other')], [['Synthetic Cook', 'chef']]);
+  check('engine.315: an unknown category is filled when the role word classifies (chef / Culinary)', catCells(d4) === '2:chef,2:Culinary', catCells(d4));
+  const d5 = run([dom(row('CUL-SYN170', 'Synthetic Blank', 'Celebrity', '', '', 20), '')], [['Synthetic Blank', 'Celebrity']]);
+  check('engine.315: a blank category and a role word that does not classify → nothing written (no unknown / Other)', catCells(d5) === '', catCells(d5));
+  const d6 = run([dom(row('CUL-SYN180', 'Painter Synthia Arden', 'Painter', '', 'POP-99101', 30), '')], [['Synthia Arden', 'dynasty']]);
+  check('engine.315: POPID path, blank category → filled from the row\'s own RoleType ("Painter" → artist), never the caller\'s dynasty word',
+    d6.returned[0] === 'CUL-SYN180' && catCells(d6) === '2:artist,2:Arts', catCells(d6));
+
+  // engine.314: a same-Cycle repeat of a new entity keeps the CREATE row's calendar columns (live header)
+  const cal = { holiday: 'Thanksgiving', holidayPriority: 'major', sportsSeason: 'mid-season' };
+  const e1 = run([], [['Synthetic Newcomer', 'artist'], ['Synthetic Newcomer', 'artist']], null, cal);
+  const ap1 = e1.appends.length === 1 ? e1.appends[0].values[0] : [];
+  check('engine.314: a new entity twice in one Cycle → one append, MediaCount 2, Holiday / HolidayPriority / SportsSeason as CREATE wrote them',
+    e1.appends.length === 1 && ap1[C('MediaCount') - 1] === 2 && ap1[C('Holiday') - 1] === 'Thanksgiving' &&
+    ap1[C('HolidayPriority') - 1] === 'major' && ap1[C('SportsSeason') - 1] === 'mid-season',
+    JSON.stringify({ n: e1.appends.length, cal: ap1.slice(17) }));
+  {
+    // a v2.2 header (FirstSeenHoliday / LastSeenHoliday / CalendarContext): the repeat writes those two by name
+    const H22 = CH.slice(0, 17).concat(['FirstSeenHoliday', 'LastSeenHoliday', 'CalendarContext']);
+    const v22 = [H22.slice()];
+    const sheet22 = { getDataRange: () => ({ getValues: () => v22.map(r => r.slice()) }), getLastRow: () => v22.length, getLastColumn: () => H22.length,
+      getRange: () => ({ getValues: () => [H22.slice()], getValue: () => '', setValue: () => {} }) };
+    rsb.ensureCulturalLedger_ = () => sheet22;
+    const ctx22 = { summary: Object.assign({ cycleId: 113, economicMood: 50 }, cal), config: {}, ss: { getSheetByName: () => sheet22 },
+      ledger: { headers: ['POPID', 'First', 'Last'], rows: LEDGER } };
+    rsb.registerCulturalEntity_(ctx22, 'Synthetic Newcomer', 'artist', 'SystemEngine', '');
+    rsb.registerCulturalEntity_(ctx22, 'Synthetic Newcomer', 'artist', 'SystemEngine', '');
+    const ap22 = ctx22.persist.updates.filter(u => u.kind === 'append');
+    const r22 = ap22.length === 1 ? ap22[0].values[0] : [];
+    check('engine.314: on a v2.2 header the repeat writes LastSeenHoliday / CalendarContext by name',
+      ap22.length === 1 && r22[H22.indexOf('LastSeenHoliday')] === 'Thanksgiving' && r22[H22.indexOf('CalendarContext')] === 'Thanksgiving, mid-season',
+      JSON.stringify(r22.slice(17)));
   }
 }
 

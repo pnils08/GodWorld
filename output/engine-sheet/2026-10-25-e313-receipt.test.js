@@ -78,5 +78,25 @@ check('a citizen who is not living is no binding candidate', r.e313.length === 0
 r = run('nodigest', [MURAL, BELL, COLE], {}, 113, ['--e313']);
 check('no Riley_Digest row for the Cycle → HOLD', r.holds.some(h => /no Riley_Digest row for C113/.test(h)), r.holds.join(' / '));
 
+console.log('engine.315 / 314 receipt — authored category kept; calendar columns by name');
+const relabel = row('CUL-SYN3', 'Synthor Cole', 'artist', 'unknown', 'POP-99103', 113, 4); relabel[5] = 'Other';
+r = run('relabel', [MURAL, BELL, relabel], { 113: ['Synthor Cole'] }, 113);
+check('an authored category rewritten (artist/Arts → unknown/Other) → HOLD', r.holds.some(h => /engine\.315: CUL-SYN3 .*artist\/Arts rewritten to unknown\/Other/.test(h)), r.holds.join(' / '));
+const BASEU = BASE.map(x => x[1] === 'CUL-SYN3' ? (() => { const y = x.slice(); y[4] = 'unknown'; y[5] = 'Other'; return y; })() : x);
+const filled = row('CUL-SYN3', 'Synthor Cole', 'artist', 'artist', 'POP-99103', 113, 4);
+{ const fx = path.join(OUT, 'fill-fx'), o = path.join(OUT, 'fill'); fs.mkdirSync(fx, { recursive: true }); fs.mkdirSync(o, { recursive: true });
+  fs.writeFileSync(path.join(fx, 'base-Cultural_Ledger.json'), JSON.stringify(BASEU));
+  fs.writeFileSync(path.join(fx, 'now-Cultural_Ledger.json'), JSON.stringify([CH, MURAL, BELL, filled]));
+  fs.writeFileSync(path.join(fx, 'now-Simulation_Ledger.json'), JSON.stringify(SL));
+  fs.writeFileSync(path.join(fx, 'now-Riley_Digest.json'), JSON.stringify([['Timestamp', 'Cycle', 'FamousPeople'], ['C113', 113, 'Synthor Cole']]));
+  const rr = spawnSync('node', [RECEIPT, '113', 'F9'], { encoding: 'utf8', env: Object.assign({}, process.env, { E297_FIXTURES: fx, E297_OUT: o }) });
+  check('an unknown baseline category filled (unknown → artist) is not a rewrite', !/engine\.315/.test(rr.stdout), rr.stdout); }
+const posRow = row('CUL-NEWD', 'Synthia Dane', 'artist', 'artist', 'POP-99104', 113); posRow[17] = 'Thanksgiving'; posRow[18] = 'Thanksgiving'; posRow[19] = 'Thanksgiving, mid-season';
+r = run('positional', [MURAL, BELL, COLE, posRow], { 113: ['Synthor Cole'] }, 113);
+check('a new row with HolidayPriority = Holiday and a joined SportsSeason → HOLD (engine.314 signature)', r.holds.some(h => /engine\.314: new row CUL-NEWD/.test(h)), r.holds.join(' / '));
+const okRow = row('CUL-NEWE', 'Synthia Dane', 'artist', 'artist', 'POP-99104', 113); okRow[17] = 'Thanksgiving'; okRow[18] = 'major'; okRow[19] = 'mid-season';
+r = run('calok', [MURAL, BELL, COLE, okRow], { 113: ['Synthor Cole'] }, 113);
+check('a new row with its calendar columns by name passes', !r.holds.some(h => /engine\.314/.test(h)), r.holds.join(' / '));
+
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) process.exitCode = 1;

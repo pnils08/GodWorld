@@ -412,7 +412,7 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane,
   // wakes them." Identity stays (a ledger POPID), and a ledger fill-in that no slice named stays out.
   const candidates = (modeCandidates === undefined ? candidateRows(story, slice) : modeCandidates)
     .filter(candidate => isLedgerPop(candidate.pop) && !isLedgerFillCandidate(candidate))
-    .slice(0, 12);
+    .slice(0, (slice && slice.prewrite && slice.prewrite.peopleCap) || 12);
   const hasTargetCandidates = candidates.length > 0;
   const creativeBrief = creativeBriefFromSlice(slice);
   const packet = {

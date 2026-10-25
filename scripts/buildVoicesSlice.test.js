@@ -58,7 +58,7 @@ try {
   assert.equal(tech.docId, 'p1', 'the longer of the two pages');
   assert.ok(tech.text.startsWith('“Funny how fixing something so small'), 'the quote first, verbatim');
   assert.ok(/— Test Tech, Appliance Repair Technician, Laurel \(own page, the night page, C111\)$/.test(tech.text), tech.text);
-  assert.ok(/Lives carried their promotion/.test(day1.citizens.find(c => c.popid === 'POP-90001').why));
+  assert.ok(/Lives carried the promotion/.test(day1.citizens.find(c => c.popid === 'POP-90001').why));
   assert.ok(/in conversation/.test(day1.facts.find(f => f.slot === 'CONVO').text));
   assert.ok(day1.story.ref.endsWith(' ' + day1.day), 'the ref carries the day');
   assert.equal(day1.prewrite.pageVoices.length, day1.facts.length);

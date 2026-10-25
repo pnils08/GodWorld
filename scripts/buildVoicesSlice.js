@@ -106,7 +106,7 @@ function build(cycle, { root, profiles, now = new Date() }) {
     const eventCovered = Object.values(livesCovered).find(v => v && v.popid === d.popid && Number(v.cycle) >= Number(cycle) - 1);
     const why = 'wrote it on their own page — ' + slotWord(d.slot) + ', C' + d.cycle +
       (d.event ? ', about ' + String(d.event).toLowerCase() : '') + (d.affect ? ', feeling ' + String(d.affect).toLowerCase() : '') +
-      (eventCovered ? '; Lives carried their ' + eventCovered.kind + ' this Cycle — you carry the words, not the event' : '');
+      (eventCovered ? '; Lives carried ' + lives.kindWord(eventCovered.kind) + ' this Cycle — you carry the words, not the event' : '');
     const person = K.personFromProfile(profiles, d.popid, why, null);
     if (!person) continue;
     people.push(person);

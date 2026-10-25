@@ -1541,7 +1541,7 @@
     "reviewProfile": {
       "id": "tamsin-lives-v1",
       "canonPolicy": "load-bearing",
-      "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. The page is the city's real calendar; every person on it is one the record holds.",
+      "purpose": "Put the cycle's person events in the paper as news, one person at a time — a birth, a death, a hospital stay, a retirement, a promotion, a household set up or a place of one's own, a win or a loss on the book, what a turn of the city did to someone's day, and the smaller moments the record kept. The event is the lead, the person is named as the slice names them, and what came next appears only when a later record holds it. A stake or a payout is the person's own fact, not a statistic. The page is the city's real calendar; every person on it is one the record holds.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",

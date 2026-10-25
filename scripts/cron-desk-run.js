@@ -888,7 +888,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
           for (const f of bs.prewrite.anchorFacts.slice(0, bs.prewrite.factCap || 12)) L.push('  - ' + f);
           if (bs.citizens.length) {
             L.push('PEOPLE ON THE RECORD (your sources — never invent another):');
-            for (const c of bs.citizens.slice(0, 10)) L.push('  - ' + c.profile);
+            for (const c of bs.citizens.slice(0, bs.prewrite.peopleCap || 10)) L.push('  - ' + c.profile);
           }
           if (bs.prewrite.note) L.push('NOTE: ' + bs.prewrite.note);
           if ((bs.prewrite.hooks || []).length) {
@@ -2248,7 +2248,7 @@ async function runAngle(assign) {
       hood: beatSlice.hood,
       pulse: beatSlice.pulse,
       prewrite: beatSlice.prewrite,
-      citizens: beatSlice.citizens.slice(0, 12),
+      citizens: beatSlice.citizens.slice(0, beatSlice.prewrite.peopleCap || 12),
       pointers: beatSlice.pointers
     } : null,
     safetySlice: safetySlice && !safetySlice.empty ? {

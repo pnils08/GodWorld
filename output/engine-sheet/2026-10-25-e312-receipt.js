@@ -69,7 +69,7 @@ async function state() {
 }
 const col = (h, n) => { const i = h.indexOf(n); if (i < 0) throw new Error('no column ' + n); return i; };
 const clamp = (n) => Math.max(0, Math.min(100, n));
-const typed = (v) => { if (v === '' || v === null || v === undefined) return null; const n = Number(v); return Number.isFinite(n) ? n : null; };
+const typed = (v) => { if (v === null || v === undefined || (typeof v === 'string' && v.trim() === '')) return null; const n = Number(v); return Number.isFinite(n) ? n : null; };
 const same = (a, b) => String(a === undefined || a === null ? '' : a) === String(b === undefined || b === null ? '' : b);
 (async () => {
   if (mode === 'snap') { fs.writeFileSync(snapFile(C), JSON.stringify(await state())); console.log('snap C' + C + ' ' + label + ' saved'); return; }
@@ -173,10 +173,22 @@ const same = (a, b) => String(a === undefined || a === null ? '' : a) === String
     const inst = String(p[cCat] || '').toLowerCase() === 'dynasty' || String(p[cRole] || '').toLowerCase() === 'institution';
     if (inst) {
       out.created.push({ id: p[cId], name: p[cName], institution: true, source: p[cSrc] });
-      // the engine.65 dynasty append's whole shape (generationalWealthEngine.js updateHeritage_), not one label
-      const shapeOk = p[cRole] === 'Institution' && p[cCat] === 'dynasty' && /^CUL-[0-9a-f]{8}$/i.test(String(p[cId])) && p[cSrc] === 'engine.65' &&
-        typed(p[cM]) === 0 && typed(p[cF]) !== null && /^The .+ Family$/.test(String(p[cName])) && (p[cU] === '' || /^POP-\d+$/.test(String(p[cU])));
-      if (!shapeOk) HOLD('new institution row ' + p[cId] + ' "' + p[cName] + '" does not have the dynasty append\'s shape ' + JSON.stringify([p[cRole], p[cCat], p[cSrc], p[cM], p[cF], p[cU]]));
+      // the engine.65 dynasty append's whole row (generationalWealthEngine.js updateHeritage_): every fixed cell, not one label
+      const at = (n) => { const k = ch.indexOf(n); return k < 0 ? undefined : p[k]; };
+      const bad = [];
+      const want = { Timestamp: 'C' + C, RoleType: 'Institution', FameCategory: 'dynasty', CulturalDomain: 'Community', Status: 'Active',
+        FirstSeenCycle: C, LastSeenCycle: C, MediaCount: 0, TrendTrajectory: 'rising', FirstRefSource: 'engine.65', MediaSpread: 0,
+        CityTier: '', Neighborhood: '', Holiday: '', HolidayPriority: '', SportsSeason: '' };
+      for (const k of Object.keys(want)) {
+        const v = at(k); if (v === undefined) continue;
+        const ok = typeof want[k] === 'number' ? typed(v) === want[k] : same(v, want[k]);
+        if (!ok) bad.push(k + '=' + JSON.stringify(v));
+      }
+      if (!/^CUL-[0-9a-f]{8}$/i.test(String(p[cId]))) bad.push('CUL-ID=' + p[cId]);
+      if (!/^The .+ Family$/.test(String(p[cName]))) bad.push('Name=' + p[cName]);
+      if (!(p[cU] === '' || /^POP-\d+$/.test(String(p[cU])))) bad.push('UniverseLinks=' + p[cU]);
+      const fs65 = typed(p[cF]); if (fs65 === null || !Number.isInteger(fs65)) bad.push('FameScore=' + JSON.stringify(p[cF]));
+      if (bad.length) HOLD('new institution row ' + p[cId] + ' is not the engine.65 dynasty append: ' + bad.join(', '));
       continue;
     }
     const pop = String(p[cU] || '').trim().toUpperCase();
@@ -184,6 +196,16 @@ const same = (a, b) => String(a === undefined || a === null ? '' : a) === String
     const sight = sightNew[key] || 0; claimed[key] = (claimed[key] || 0) + 1;
     const mc = typed(p[cM]);
     if (mc === null || typed(p[cF]) === null) HOLD('new ' + p[cId] + ' "' + p[cName] + '": MediaCount / FameScore not numbers ' + JSON.stringify([p[cM], p[cF]]));
+    // the registrar's CREATE row (culturalLedger.js): its fixed cells, and the sighting cells by this Cycle's digest
+    const atN = (n) => { const k = ch.indexOf(n); return k < 0 ? undefined : p[k]; };
+    const badN = [];
+    if (atN('FirstSeenCycle') !== undefined && typed(atN('FirstSeenCycle')) !== C) badN.push('FirstSeenCycle=' + JSON.stringify(atN('FirstSeenCycle')));
+    if (sight > 0 && typed(p[cL]) !== C) badN.push('LastSeenCycle=' + JSON.stringify(p[cL]));
+    if (atN('MediaSpread') !== undefined && typed(atN('MediaSpread')) !== 1) badN.push('MediaSpread=' + JSON.stringify(atN('MediaSpread')));
+    if (atN('Status') !== undefined && !same(atN('Status'), 'Active')) badN.push('Status=' + JSON.stringify(atN('Status')));
+    if (atN('TrendTrajectory') !== undefined && !same(atN('TrendTrajectory'), 'rising')) badN.push('TrendTrajectory=' + JSON.stringify(atN('TrendTrajectory')));
+    if (atN('CityTier') !== undefined && !same(atN('CityTier'), 'Local')) badN.push('CityTier=' + JSON.stringify(atN('CityTier')));
+    if (badN.length) HOLD('new ' + p[cId] + ' "' + p[cName] + '" is not the registrar\'s CREATE row: ' + badN.join(', '));
     if (mc !== sight) HOLD('new ' + p[cId] + ' "' + p[cName] + '": MediaCount ' + mc + ', the digest sighted it ' + sight + ' time(s)');
     if (sight === 0 && String(p[cL] || '') !== '') HOLD('new ' + p[cId] + ' never sighted but LastSeenCycle ' + p[cL]);
     let s = (pop ? (record[pop] || 0) : 0) + sight;

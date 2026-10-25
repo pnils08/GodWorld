@@ -592,6 +592,11 @@ function validateAngleOutput(value, input) {
       if (!t || !allowed.has(t.pop) || !clean(t.question) || !clean(t.basis)) errs.push('target must use a supplied pop with question+basis');
     }
   }
+  // pipeline.89: a Voices plan IS its pick — no citizen named is a failed plan, caught here where the resample lives.
+  const brief = input && input.task && input.task.creativeBrief;
+  if (brief && brief.kind === 'beat-slice' && brief.domain === 'voices' && Array.isArray(out && out.targets) && !out.targets.length) {
+    errs.push('a Voices plan must name the citizen(s) it picks in targets');
+  }
   if (!Array.isArray(out && out.unverifiedLead)) errs.push('unverifiedLead must be an array');
   if (errs.length) throw new Error('invalid W1 output: ' + errs.join('; '));
   return {

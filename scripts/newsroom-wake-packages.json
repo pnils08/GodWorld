@@ -1574,6 +1574,7 @@
   "ines-sorensen": {
     "version": "INES-VOICES-1",
     "rewardLoop": true,
+    "gate": "off",
     "active": true,
     "requiredDaily": true,
     "persona": "ines-sorensen",

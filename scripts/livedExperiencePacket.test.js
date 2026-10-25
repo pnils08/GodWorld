@@ -120,6 +120,18 @@ const wrapped = p.validateAngleOutput(JSON.stringify({ output: withChase(w1, {
   interpretation: 'Accountability may lag', unverifiedLead: [], closeQuestion: 'Who owns the response?'
 }) }), w1);
 assert.equal(wrapped.focus, plan.focus);
+// pipeline.89 — a Voices plan IS its pick: zero targets fails at the angle (where the resample lives).
+{
+  const vw1 = JSON.parse(JSON.stringify(w1));
+  vw1.task = Object.assign({}, vw1.task, { creativeBrief: { kind: 'beat-slice', domain: 'voices', facts: [] } });
+  const picked = withChase(vw1, {
+    focus: 'TEST-ONLY mismatch', why: 'It is unresolved', checks: ['Check the source'], targets: [],
+    interpretation: 'Accountability may lag', unverifiedLead: [], closeQuestion: 'Who owns the response?'
+  });
+  assert.throws(() => p.validateAngleOutput(picked, vw1), /Voices plan must name the citizen/);
+  assert.doesNotThrow(() => p.validateAngleOutput(Object.assign({}, picked, { targets: [{ pop: 'TEST-POP-01', question: 'q?', basis: 'her own page' }] }), vw1));
+  assert.doesNotThrow(() => p.validateAngleOutput(picked, w1), 'other seats may file a plan with no targets');
+}
 // Money lines (casino, city treasury, debt) stay out of the planner's known list.
 const moneyW1 = p.buildAnglePacket({ cycle: 110, desk: 'business', reporter: { popid: 'TEST-POP-01', name: 'T' },
   story: { angle: 'TEST-ONLY storefronts', label: 'TEST-ONLY storefronts' }, approach: 'a',

@@ -435,6 +435,11 @@ function budgetReached(cycle) {
 // reaction ask. Task 2.5.4: the assigned story's citizens fill the pool FIRST —
 // they are the engine's actual affected residents for this angle — with the
 // lane's popids as fallback. Kills the fabricated-resident class at the root.
+// pipeline.89 — the Voices seat picks from a roster; her angle's targets are the citizens in play.
+function isVoicesSeat() {
+  return !!(ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.persona === 'ines-sorensen');
+}
+
 function collectQuoteAsks(lane, persona, story, angleArt) {
   const asks = [];
   // A records seat (wake package `sourcing: "records"`) reports the record and
@@ -513,7 +518,10 @@ function collectQuoteAsks(lane, persona, story, angleArt) {
           return pop && packetCandidates.has(pop);
         })
       : [];
-    const plannedPops = [...new Set(targetPops.concat([...packetCandidates.keys()]))];
+    // pipeline.89: Ines's pool is the whole roster; only the citizens her angle names are asked.
+    const plannedPops = isVoicesSeat()
+      ? [...new Set(targetPops)]
+      : [...new Set(targetPops.concat([...packetCandidates.keys()]))];
     for (const pop of plannedPops) {
       if (packetCandidates.has(pop)) push(pop, story.angle || story.label);
     }
@@ -2951,12 +2959,28 @@ async function runWrite(assign) {
   }
   const stateFile = path.join(COMPARE, base + (PACKET_ACTIVE ? '.state.json' : '.state.md'));
   let writePacket = null;
+  // pipeline.89: the Packet follows her pick — the roster drops out, every self-initiated page of each
+  // citizen her angle named goes in whole. No pick that resolves to a page is a failed day, not a substitute.
+  let voicesPicked = null;
+  if (PACKET_ACTIVE && isVoicesSeat()) {
+    const voices = require('./buildVoicesSlice');
+    const picks = ((angle && angle.angleRead && angle.angleRead.plan && angle.angleRead.plan.targets) || [])
+      .map(t => t && t.pop).filter(Boolean);
+    const pages = voices.pagesForPicks(picks);
+    if (!pages.length) throw new Error('Voices: the angle names no citizen with a page on the record (targets: ' + (picks.join(', ') || 'none') + ')');
+    const input = JSON.parse(JSON.stringify(angle.inputPacket));
+    if (input.task && input.task.creativeBrief) input.task.creativeBrief.facts = [];   // the roster stays at W1
+    input.known = (input.known || [])
+      .concat(pages.map(f => ({ t: 'FACT', text: f.text.replace(/\s+/g, ' ').trim(), src: f.src })));
+    voicesPicked = { angleInput: input, pages };
+    log('Voices: ' + new Set(pages.map(f => f.popid)).size + ' picked citizen(s), ' + pages.length + ' page(s) whole into the Packet');
+  }
   if (PACKET_ACTIVE) {
     writePacket = livedPacket.buildWritePacket({
       cycle, desk, reporter: byline,
       story: assignment && assignment.story,
       approach: assignment && assignment.approach,
-      angleInput: angle && angle.inputPacket,
+      angleInput: voicesPicked ? voicesPicked.angleInput : angle && angle.inputPacket,
       anglePlan: angle && angle.angleRead && angle.angleRead.plan,
       interviews: packet && packet.interviews || [],
       officeRecords: packet && packet.officeRecords || [],
@@ -3079,7 +3103,11 @@ async function runWrite(assign) {
   const assignmentSwap = PACKET_ACTIVE &&
     s344Gate.findings.some(row => row.issue === 'assignment-intake-mismatch');
   if (assignmentSwap) log('assignment swap — INTAKE does not belong to this story; Rhea skipped');
-  const skipRhea = contamination.fail || assignmentSwap;
+  // pipeline.89 (builder 2026-10-25) — gate 'off': no Rhea verdict on this seat's path. The
+  // contamination wall stays and decides staged vs flagged; the contract grade still runs below.
+  const gateOff = !!(ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.gate === 'off');
+  const skipRhea = contamination.fail || assignmentSwap || gateOff;
+  if (gateOff && !NO_GATE) log('gate OFF for this seat (pipeline.89) — contamination wall only, no Rhea verdict');
   if (NO_GATE) {
     log('gate SKIPPED (--no-gate sample) — output is ungated, NOT canon');
   } else if (!skipRhea) {
@@ -3115,6 +3143,12 @@ async function runWrite(assign) {
       if (co && co.contractScore) blockedContractScore = co.contractScore;
     } catch (e) { log('contract score (no Rhea) failed (non-fatal): ' + e.message); }
   }
+  if (gateOff && !NO_GATE && !contamination.fail) {
+    // The filing carries a proof-shaped record (hash + grade) so Saturday's and the router's
+    // exact-hash readers take it; `gate: 'off'` says no model read it. No verdict file exists.
+    rheaProof = { ok: true, articleSha256: crypto.createHash('sha256').update(fs.readFileSync(draftPath, 'utf8')).digest('hex') };
+    pass = true;
+  }
   if (pass && checkFlags.length) { pass = false; log('Rhea pass overridden by deterministic checks: ' + checkFlags.join('; ')); }
 
   // route (the wall — identical semantics to runWake)
@@ -3132,6 +3166,10 @@ async function runWrite(assign) {
       builtAt: new Date().toISOString()
     }, null, 2));
   } else if (pass) {
+    if (voicesPicked) {
+      try { require('./buildVoicesSlice').recordRan(voicesPicked.pages, cycle); }
+      catch (e) { log('voices memory not written (non-fatal): ' + e.message); }
+    }
     const bylineUsage = await recordBylineUsage(cycle, byline, base);   // engine.88: author earns byline-landed
     log('byline-landed: ' + (bylineUsage.recorded ? 'recorded for ' + byline.name : 'skipped — ' + bylineUsage.reason));
     // S492 fix: the sidecar used to sit at a FIXED base+'.staged.json' path
@@ -3167,8 +3205,12 @@ async function runWrite(assign) {
       // pipeline.45 Phase 1: the id-enriched INTAKE — the one surface the
       // Saturday run (sheets, Supermemory tags, EIC audit) reads.
       intake,
-      rhea: stagedRheaProof(rhea, rheaProof.articleSha256,
-        path.join(COMPARE, base + '.rhea.json')),
+      rhea: gateOff
+        ? { pass: true, gate: 'off', model: null, manifestId: null, draftSha256: rheaProof.articleSha256, verdict: null,
+            ranAt: new Date().toISOString(),
+            ...(blockedContractScore && Number.isInteger(blockedContractScore.score) ? { contractScore: blockedContractScore } : {}) }
+        : stagedRheaProof(rhea, rheaProof.articleSha256,
+          path.join(COMPARE, base + '.rhea.json')),
       note: 'M–F probation wall (S332): retrievable by the Saturday compile ONLY; NOT canon fact. Reporters/sift must not cite staged drafts.',
       stagedAt: new Date().toISOString()
     }, null, 2));

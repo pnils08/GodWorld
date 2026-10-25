@@ -1,6 +1,6 @@
 # TASK — codex: engine.306 gate 3 (post-landing audit)
 
-Read-only: code + docs + `output/` files; no cron, model, Sheet, bench, clasp, commit or push. Write to `docs/for-claude-review/2026-10-21-codex-engine306-diff-gate3.md`, one SHIP / FIX per item with file:line evidence, under ~20 lines. Report in one line when done.
+Read-only: code + docs + `output/` files; no cron, model, Sheet, bench, clasp, commit or push. Write to `docs/archive/for-claude-review/2026-10-21-codex-engine306-diff-gate3.md`, one SHIP / FIX per item with file:line evidence, under ~20 lines. Report in one line when done.
 
 **State:** the builder gave the go ahead of this gate. PROD stage 18 @155 and the live landing are done (`983d21d5`; DEPLOY_HISTORY §PROD stage 18). This gate audits them; a FIX names what to repair or revert (the revert path is the live preimage).
 

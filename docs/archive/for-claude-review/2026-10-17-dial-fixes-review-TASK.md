@@ -1,6 +1,6 @@
 # TASK — codex: review the dial-review fix, and write the repair for the 13 frozen citizens
 
-Read-only: code + `output/` dumps; no cron, model, Sheet write, bench or canon run. Write to `docs/for-claude-review/2026-10-17-codex-dial-fixes-review.md`, SHIP / FIX / HOLD per hunt, file:line evidence, under ~120 lines.
+Read-only: code + `output/` dumps; no cron, model, Sheet write, bench or canon run. Write to `docs/archive/for-claude-review/2026-10-17-codex-dial-fixes-review.md`, SHIP / FIX / HOLD per hunt, file:line evidence, under ~120 lines.
 Context: your review `docs/for-claude-review/2026-10-17-codex-dial-read-review.md` (hunt 1c). Builder 2026-10-17: "add codex fixes … make sure codex reviews it so it actually works and isn't trick code."
 
 ## Hunts

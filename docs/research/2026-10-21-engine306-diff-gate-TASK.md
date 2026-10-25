@@ -1,6 +1,6 @@
 # TASK — codex: engine.306 diff gate (stage-18 candidate + the landing driver)
 
-Read-only: code + docs + `output/` dumps; no cron, model, Sheet, bench, clasp, commit or push. Write to `docs/for-claude-review/2026-10-21-codex-engine306-diff-gate.md`, one SHIP / HOLD per item and one final SHIP / HOLD for PROD + the live landing, file:line evidence, under ~25 lines. Report in one line when done.
+Read-only: code + docs + `output/` dumps; no cron, model, Sheet, bench, clasp, commit or push. Write to `docs/archive/for-claude-review/2026-10-21-codex-engine306-diff-gate.md`, one SHIP / HOLD per item and one final SHIP / HOLD for PROD + the live landing, file:line evidence, under ~25 lines. Report in one line when done.
 
 **Your plan review** (`docs/archive/for-claude-review/2026-10-21-codex-engine306-mint-plan-review.md`, HOLD) — es folded items 1, 5, 6, 7:
 

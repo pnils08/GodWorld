@@ -2,7 +2,7 @@
 
 **From:** engine-sheet (S594). **Why:** the builder's rule — codex review is the only approval for edits to his code; nothing reaches PROD without a codex SHIP (2026-10-17). These three went out without one. Review each as if it had not shipped; a HOLD / FIX means engine-sheet fixes or rolls back.
 **Mode:** review only — do NOT edit tracked files, no deploy, no bench, no Sheet, no cron, no commit.
-**Deliver:** `docs/for-claude-review/2026-10-23-codex-post-ship-review.md` — per item SHIP / FIX / HOLD with file:line evidence; numbers, not adjectives.
+**Deliver:** `docs/archive/for-claude-review/2026-10-23-codex-post-ship-review.md` — per item SHIP / FIX / HOLD with file:line evidence; numbers, not adjectives.
 
 ## 1. engine.297 as landed — LIVE on PROD @159 (stage 22) since 2026-10-22 ~22:14 CDT
 - Your patch `output/codex/engine297-fame-ledger.patch` (base 3bfaa414) landed in `486ea61e` with two engine-sheet additions. Review exactly those deltas: `git diff 3bfaa414 486ea61e -- phase07-evening-media/buildEveningFamous.js scripts/sportsWeekCity.test.js` against your patch.

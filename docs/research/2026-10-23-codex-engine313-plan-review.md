@@ -13,7 +13,7 @@ sources:
 pointers:
   - "[[engine/ROLLOUT_PLAN]]"
   - "[[reference/DEPLOY_HISTORY]]"
-  - "[[for-claude-review/2026-10-23-codex-engine297-fix-diff-gate]]"
+  - "[[archive/for-claude-review/2026-10-23-codex-engine297-fix-diff-gate]]"
 ---
 
 # engine.313 — adversarial PLAN review

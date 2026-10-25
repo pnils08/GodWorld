@@ -2,7 +2,7 @@
 
 Read-only: code + docs + `output/` files; no cron, model, Sheet, bench, clasp, commit or push. Write to `docs/for-claude-review/2026-10-21-codex-engine306-gate3-fix-plan.md`, one SHIP / FIX per numbered step with file:line evidence, under ~20 lines. Report in one line when done.
 
-**Source:** your gate 3 (`docs/for-claude-review/2026-10-21-codex-engine306-diff-gate3.md`) items 3 (attribution FIX) and 4 (C113 watch FIX). Nothing is built yet; this is the plan.
+**Source:** your gate 3 (`docs/archive/for-claude-review/2026-10-21-codex-engine306-diff-gate3.md`) items 3 (attribution FIX) and 4 (C113 watch FIX). Nothing is built yet; this is the plan.
 
 ## Facts the plan stands on (es wiring cards 2026-10-21)
 - EventAttractiveness = `round(base × profile.eventMod × hMod.eventMod)` + pulse fold + chaos fold (`phase08-v3-chicago/v3NeighborhoodWriter.js:368-400, 487-489, 514, 523-534`). No rng on this column (`variance()` :470 feeds retail :513 and sentiment only). `pulseFoldDelta_` is pure (:278-287). `hMod` = holiday mods (same both legs); `profile.eventMod` = `hoodLabelMods_(name, S, label)` (:265-273) — reads S, not yet traced.

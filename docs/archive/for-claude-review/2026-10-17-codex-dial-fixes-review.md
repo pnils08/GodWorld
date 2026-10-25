@@ -5,7 +5,7 @@ updated: 2026-10-17
 type: reference
 tags: [engine, review, dials]
 sources:
-  - docs/for-claude-review/2026-10-17-dial-fixes-review-TASK.md
+  - docs/archive/for-claude-review/2026-10-17-dial-fixes-review-TASK.md
   - commits 113e78aa and 01ea836f
 pointers:
   - "[[2026-10-17-codex-dial-read-review]]"

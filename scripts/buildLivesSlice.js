@@ -294,15 +294,26 @@ function build(cycle, { root, beats, profiles }) {
     const rank = lifeRank(tag);
     const text = String(r.EventText || '').trim();
     if (rank == null || !text || BOOKKEEPING.test(text)) continue;
-    momentPool.push({ rank, r, tag, text });
+    momentPool.push({ rank, r, tag, text, pop: String(r.POPID).toUpperCase() });
   }
   momentPool.sort((a, b) => a.rank - b.rank);
+  // A family event is each member's event (every citizen carries their own dials) and one family passage
+  // (builder 2026-10-25): members of one household with the same line this Cycle share the passage, each
+  // with their own thread and their own covered mark. Strangers with the same texture line do not merge.
+  const householdOf = new Map();
+  for (const h of beats.Household_Ledger || []) {
+    if (String(h.DissolvedCycle || '').trim()) continue;
+    let members = [];
+    try { members = JSON.parse(h.Members || '[]'); } catch (_) { members = String(h.Members || '').match(/POP-\d{5}/g) || []; }
+    for (const m of members) householdOf.set(String(m).toUpperCase(), String(h.HouseholdId || ''));
+  }
   const moments = [];
-  for (const { r, tag, text } of momentPool) {
-    const pop = String(r.POPID).toUpperCase();
-    const id = 'moment:' + pop + ':' + cycle + ':' + tag;
-    if (!nameOf(pop) || !take(pop, id)) continue;
-    moments.push({ id, pop, tag, text, hood: String(r.Neighborhood || '').trim() || hoodOf(pop) });
+  for (const m of momentPool) {
+    const id = 'moment:' + m.pop + ':' + cycle + ':' + m.tag;
+    if (!nameOf(m.pop) || !take(m.pop, id)) continue;
+    const hh = householdOf.get(m.pop);
+    const family = hh ? momentPool.filter(o => o !== m && o.text === m.text && householdOf.get(o.pop) === hh && nameOf(o.pop) && take(o.pop, 'moment:' + o.pop + ':' + cycle + ':' + o.tag)).map(o => o.pop) : [];
+    moments.push({ id, pop: m.pop, family, tag: m.tag, text: m.text, hood: String(m.r.Neighborhood || '').trim() || hoodOf(m.pop) });
     if (moments.length >= PER_DAY.moments) break;
   }
 
@@ -374,9 +385,14 @@ function build(cycle, { root, beats, profiles }) {
       src: 'output/beats/Story_Seed_Deck.jsonl @C' + cycle, id: r.id, kind: 'seed', popid: r.pop }, { name: nameOf(r.pop), skipTexts: [r.line], includeStay: false, dropOwn: false });
   }
   for (const m of moments) {
-    addPerson(m.pop, m.tag.toLowerCase() + ' this Cycle: ' + m.text, m.hood);
-    passage({ text: nameOf(m.pop) + ' — ' + m.text + (m.hood ? ', ' + m.hood : '') + ' (C' + cycle + ', ' + m.tag + ')', src: logSrc, id: m.id, kind: 'moment', popid: m.pop },
+    const all = [m.pop].concat(m.family);
+    for (const pop of all) addPerson(pop, m.tag.toLowerCase() + ' this Cycle: ' + m.text, m.hood);
+    passage({ text: all.map(pop => nameOf(pop)).join(' and ') + ' — ' + m.text + (m.hood ? ', ' + m.hood : '') + ' (C' + cycle + ', ' + m.tag + ')', src: logSrc, id: m.id, kind: 'moment', popid: m.pop },
       { name: nameOf(m.pop), skipTexts: [m.text], includeStay: false, dropOwn: false });
+    for (const pop of m.family) {
+      for (const t of threadFor(pop, { beats, logByPop, covered, tribune, ownId: m.id, name: nameOf(pop), skipTexts: [m.text], includeStay: false, dropOwn: false })) facts.push({ ...t, kind: 'thread', popid: pop });
+      extraCovered.push(['moment:' + pop + ':' + cycle + ':' + m.tag, { popid: pop, kind: 'moment', cycle: Number(cycle), day }]);
+    }
   }
   for (const st of stays) {
     addPerson(st.pop, 'still in hospital care' + (st.cause ? ' — ' + st.cause : ''), st.hood);

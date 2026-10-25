@@ -33,7 +33,10 @@ const profiles = new Map([
   ['POP-90021', { POPID: 'POP-90021', Name: 'Test Reporter', RoleType: 'Journalist', Neighborhood: 'Uptown', ClockMode: 'MEDIA' }],
   ['POP-90022', { POPID: 'POP-90022', Name: 'Test Partner', RoleType: 'Nurse', Neighborhood: 'Rockridge' }],
   ['POP-90023', { POPID: 'POP-90023', Name: 'Test SoloB', RoleType: 'Driver', Neighborhood: 'Dimond' }],
-  ['POP-90024', { POPID: 'POP-90024', Name: 'Test Other', RoleType: 'Cook', Neighborhood: 'Dimond' }]
+  ['POP-90024', { POPID: 'POP-90024', Name: 'Test Other', RoleType: 'Cook', Neighborhood: 'Dimond' }],
+  ['POP-90025', { POPID: 'POP-90025', Name: 'Test MoverA', RoleType: 'Teacher', Neighborhood: 'West Oakland' }],
+  ['POP-90026', { POPID: 'POP-90026', Name: 'Test MoverB', RoleType: 'Teacher', Neighborhood: 'West Oakland' }],
+  ['POP-90027', { POPID: 'POP-90027', Name: 'Test Stranger', RoleType: 'Teacher', Neighborhood: 'West Oakland' }]
 ]);
 const beats = {
   Lived_Events: [
@@ -56,7 +59,10 @@ const beats = {
     { Timestamp: 't', POPID: 'POP-90019', Name: '', EventTag: 'CareerState', EventText: 'industry=service|employer=small|level=1|careerMod=0.92', Neighborhood: '', Cycle: String(cycle) },
     { Timestamp: 't', POPID: 'POP-90020', Name: '', EventTag: 'QoL-Composure-Down-S', EventText: 'saw the clinic line stretch out the door', Neighborhood: '', Cycle: String(cycle) },
     { Timestamp: 't', POPID: 'POP-90011', Name: '', EventTag: 'Strain', EventText: 'counted the boxes twice', Neighborhood: '', Cycle: String(cycle) },
-    { Timestamp: 't', POPID: 'POP-90010', Name: '', EventTag: 'Daily', EventText: 'measured the window for curtains', Neighborhood: '', Cycle: String(cycle) }
+    { Timestamp: 't', POPID: 'POP-90010', Name: '', EventTag: 'Daily', EventText: 'measured the window for curtains', Neighborhood: '', Cycle: String(cycle) },
+    { Timestamp: 't', POPID: 'POP-90025', Name: '', EventTag: 'Relocation-Drive-Up-M', EventText: 'moved from Uptown to West Oakland — moving up', Neighborhood: 'West Oakland', Cycle: String(cycle) },
+    { Timestamp: 't', POPID: 'POP-90026', Name: '', EventTag: 'Relocation-Drive-Up-M', EventText: 'moved from Uptown to West Oakland — moving up', Neighborhood: 'West Oakland', Cycle: String(cycle) },
+    { Timestamp: 't', POPID: 'POP-90027', Name: '', EventTag: 'Relocation-Drive-Up-M', EventText: 'moved from Uptown to West Oakland — moving up', Neighborhood: 'West Oakland', Cycle: String(cycle) }
   ],
   Hospital_Ledger: [
     { AdmissionId: 'H-C105-POP-90007', POPID: 'POP-90007', Name: 'Test Open Stay', Neighborhood: 'Lake Merritt', Cause: 'a workplace accident', AdmitCycle: '105', StatusNow: 'active', DischargeCycle: '' },
@@ -68,6 +74,7 @@ const beats = {
     { HouseholdId: 'HH-0111-F003', HeadOfHousehold: 'POP-90004', HouseholdType: 'couple', Members: '["POP-90004","POP-90022"]', Neighborhood: 'Rockridge', HousingType: 'rented', FormedCycle: String(cycle) },
     { HouseholdId: 'HH-0111-F004', HeadOfHousehold: 'POP-90023', HouseholdType: 'solo', Members: '["POP-90023"]', Neighborhood: 'Dimond', HousingType: 'rented', FormedCycle: String(cycle) },
     { HouseholdId: 'HH-0111-F005', HeadOfHousehold: 'POP-90021', HouseholdType: 'solo', Members: '["POP-90021"]', Neighborhood: 'Uptown', HousingType: 'rented', FormedCycle: String(cycle) },
+    { HouseholdId: 'HH-0100-F009', HeadOfHousehold: 'POP-90025', HouseholdType: 'couple', Members: '["POP-90025","POP-90026"]', Neighborhood: 'West Oakland', HousingType: 'owned', FormedCycle: '100' },
     { HouseholdId: 'HH-0110-F001', HeadOfHousehold: 'POP-90006', HouseholdType: 'solo', Members: '["POP-90006"]', Neighborhood: 'Fruitvale', HousingType: 'rented', FormedCycle: String(cycle - 1) }
   ],
   Casino_Ledger: [
@@ -122,7 +129,7 @@ try {
   // already on the page is not a second moment.
   const day1 = L.buildLivesSlice(cycle, { root, beats, profiles });
   assert.equal(day1.empty, false);
-  assert.deepStrictEqual(day1.facts.filter(f => f.kind !== 'thread').map(f => f.kind), ['death', 'hospital', 'birth', 'retirement', 'promotion', 'household', 'household', 'casino', 'casino', 'seed', 'seed', 'moment', 'moment', 'moment', 'stay']);
+  assert.deepStrictEqual(day1.facts.filter(f => f.kind !== 'thread').map(f => f.kind), ['death', 'hospital', 'birth', 'retirement', 'promotion', 'household', 'household', 'casino', 'casino', 'seed', 'seed', 'moment', 'moment', 'moment', 'moment', 'stay']);
   assert.ok(day1.facts.find(f => f.kind === 'promotion').text.includes('the record lists their work as Janitor'));
   const hh = day1.facts.filter(f => f.kind === 'household');
   assert.ok(/^Test PairA and Test PairB set up a household together in Temescal, renting \(C111\)$/.test(hh[0].text), hh[0].text);
@@ -141,8 +148,11 @@ try {
   assert.ok(/^Test Texture — traded an extra ticket for a promise, Montclair — one of 2 people the Cycle's community turn reached \(C111\)$/.test(seeds[1].text), 'another citizen\'s relocation line is not this person\'s why: ' + seeds[1].text);
   assert.ok(!day1.facts.some(f => /Test Other/.test(f.text) && f.kind === 'seed'), 'a bookkeeping CitizenEvents line never rides');
   const mm = day1.facts.filter(f => f.kind === 'moment');
-  assert.ok(/^Test Strained — the third late night this week, Eastlake \(C111, Strain\)$/.test(mm[0].text), 'pressure ranks above a tie, whatever the file order: ' + mm[0].text);
-  assert.ok(mm.some(m => /Test Friend — reconnected/.test(m.text)) && mm.some(m => /Test Graded — saw the clinic line/.test(m.text)), 'a dial-suffixed QoL row still ranks');
+  assert.ok(/^Test MoverA and Test MoverB — moved from Uptown to West Oakland — moving up, West Oakland \(C111, Relocation-Drive-Up-M\)$/.test(mm[0].text), 'a family event: one passage for the household, life-shape rank first: ' + mm[0].text);
+  assert.ok(day1.facts.some(f => f.kind === 'thread' && f.popid === 'POP-90026') || !day1.facts.some(f => f.kind === 'thread' && f.popid === 'POP-90025'), 'each mover carries their own thread when they have one');
+  assert.ok(/^Test Stranger — moved from Uptown to West Oakland — moving up/.test(mm[1].text), 'a stranger with the same line is their own passage: ' + mm[1].text);
+  assert.ok(/^Test Strained — the third late night this week, Eastlake \(C111, Strain\)$/.test(mm[2].text), 'pressure ranks above a tie, whatever the file order: ' + mm[2].text);
+  assert.ok(/Test Friend — reconnected/.test(mm[3].text), 'then the ties in file order; the QoL row waits for day 2');
   assert.ok(!day1.facts.some(f => /Test Student|Test Marker|industry=/.test(f.text)), 'Education colour and the CareerState marker never ride');
     assert.ok(!day1.facts.some(f => f.kind === 'seed' && f.popid === 'POP-90003'), 'the climber already has his passage — not a second one from the seed');
   assert.ok(day1.facts[0].text.startsWith('Test Widow lost Test Departed'), 'a death is the survivor\'s passage: ' + day1.facts[0].text);
@@ -171,14 +181,16 @@ try {
   assert.ok(patientThread.every((t, i) => day1.facts[hIdx + 1 + i].text === t), 'the whole thread sits directly under its person\'s event');
 
   const covered = JSON.parse(fs.readFileSync(L.coveredPath(root), 'utf8'));
-  assert.equal(Object.keys(covered).length, day1.facts.filter(f => f.kind !== 'thread').length + 1, 'every passage plus the couple\'s second member (Test PairA) is covered');
+  assert.equal(Object.keys(covered).length, day1.facts.filter(f => f.kind !== 'thread').length + 2, 'every passage plus the couple\'s second member (Test PairA) and the second mover are covered');
   assert.ok(Object.values(covered).some(v => v.popid === 'POP-90010' && v.kind === 'household'));
   assert.ok(covered['death:POP-90099:111'] && covered['death:POP-90099:111'].popid === 'POP-90005');
 
   // Day 2: the two solo households wait their turn (cap 2 a day, couples first); the seeds were used this
   // Cycle; the couple's second member is covered too, so his Strain line is not a second passage.
   const day2 = L.buildLivesSlice(cycle, { root, beats, profiles });
-  assert.deepStrictEqual(day2.facts.filter(f => f.kind !== 'thread').map(f => f.kind), ['household', 'household'], JSON.stringify(day2.facts.filter(f => f.kind !== 'thread').map(f => f.text)));
+  assert.deepStrictEqual(day2.facts.filter(f => f.kind !== 'thread').map(f => f.kind), ['household', 'household', 'moment'], JSON.stringify(day2.facts.filter(f => f.kind !== 'thread').map(f => f.text)));
+  assert.ok(/Test Graded — saw the clinic line/.test(day2.facts.filter(f => f.kind === 'moment')[0].text), 'a dial-suffixed QoL row still ranks');
+  assert.ok(!day2.facts.some(f => /Test MoverB/.test(f.text) && f.kind === 'moment'), 'the second mover is covered by the family passage');
   assert.ok(/^Test Solo moved into a place of their own in Fruitvale, a home they own/.test(day2.facts[0].text));
   assert.ok(!day2.facts.some(f => /counted the boxes twice/.test(f.text) && f.kind === 'moment'));
   // Day 3: everything covered → empty, with the reason that says so.

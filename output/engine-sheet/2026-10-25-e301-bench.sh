@@ -35,7 +35,7 @@ echo "== engine.301 F1 bench, stage 26 at $SRC, legs $LEGS, soak $N"
 bash $O/2026-10-25-push-e301-bench.sh "$SRC" $O/stage26-e301.sha256 || exit 4
 CUT=$(date +%s)
 if [[ "$LEGS" == *P* ]]; then
-  echo "== leg P (probe: Fruitvale wave on the C112 carry)"
+  echo "== leg P (intervention probe: Fruitvale wave on the C112 carry = consumer; Baylight index -10 = producer)"
   reset_leg
   node $O/2026-10-25-e301-probe.js --apply 2>&1 | grep -v "injected env"; [ ${PIPESTATUS[0]} -eq 0 ] || { echo "HALT probe write"; exit 6; }
   wait_cut

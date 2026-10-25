@@ -38,9 +38,19 @@ const apply = process.argv.includes('--apply');
   if (bi < 0 || iP < 0 || iL < 0) throw new Error('no Baylight District / PropertyCrimeIndex / PropertyLevel on Crime_Metrics');
   const oldIdx = Number(cm[bi][iP]), lvl = Number(cm[bi][iL]);
   const newIdx = Math.max(5, oldIdx - 10);
+  if (!isFinite(oldIdx) || !isFinite(lvl) || oldIdx - newIdx < 5) throw new Error('Baylight PropertyCrimeIndex ' + oldIdx + ' cannot drop 5+ (to ' + newIdx + ') — the producer half would not register a rise');
   const pc = 'Crime_Metrics!' + String.fromCharCode(65 + iP) + (bi + 1);
   await api.spreadsheets.values.update({ spreadsheetId: ID, range: pc, valueInputOption: 'RAW', requestBody: { values: [[newIdx]] } });
   const pb = Number((await api.spreadsheets.values.get({ spreadsheetId: ID, range: pc })).data.values[0][0]);
   if (pb !== newIdx) throw new Error('Crime_Metrics read-back mismatch');
   console.log('producer: ' + pc + ' Baylight District PropertyCrimeIndex ' + oldIdx + ' -> ' + newIdx + ' (PropertyLevel ' + lvl + ' kept), read back');
+  // codex diff gate 2 §2: the C113 receipt measures the rise from the post-probe cells Phase 3 reads, not the frozen baseline.
+  // This is an intervention: the edited cell also moves C113's hotspot threshold and neighbour spillover (updateCrimeMetrics.js
+  // :140-143, :232-260) — leg P proves the path, leg S (no edit) is the organic record.
+  const after = (await api.spreadsheets.values.get({ spreadsheetId: ID, range: 'Crime_Metrics!A1:M40' })).data.values;
+  const iV = hc.indexOf('ViolentCrimeIndex'), iU = hc.indexOf('LastUpdated'), snap = {};
+  for (const r of after.slice(1)) if (r[iN]) snap[r[iN]] = { p: Number(r[iP]), v: Number(r[iV]), u: Number(r[iU]) };
+  if (snap['Baylight District'].p !== newIdx) throw new Error('post-probe snapshot does not carry the edit');
+  require('fs').writeFileSync('/root/GodWorld/output/engine-sheet/2026-10-25-e301-crime-P-c112.json', JSON.stringify(snap));
+  console.log('post-probe Crime_Metrics snapshot saved (' + Object.keys(snap).length + ' hoods) for the C113 receipt');
 })().catch(e => { console.error(e.message); process.exit(1); });

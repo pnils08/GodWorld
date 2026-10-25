@@ -44,12 +44,19 @@ function blobFor(cfs, cyc) {
   const rows = cfs.slice(1).filter(r => r[iK] === 'PREV_CYCLE_STATE_JSON' && Number(r[iC]) === cyc);
   if (rows.length !== 1) { HOLD('PREV_CYCLE_STATE_JSON for C' + cyc + ': ' + rows.length + ' ring rows'); return null; }
   let j; try { j = JSON.parse(rows[0][iJ]); } catch (e) { HOLD('PREV_CYCLE_STATE_JSON C' + cyc + ' does not parse: ' + e.message); return null; }
+  if (!j || typeof j !== 'object' || Array.isArray(j)) { HOLD('PREV_CYCLE_STATE_JSON C' + cyc + ' is not an object: ' + JSON.stringify(j)); return null; }
   if (Number(j.cycle) !== cyc) HOLD('PREV_CYCLE_STATE_JSON C' + cyc + ' carries cycle ' + j.cycle);
   if (!Array.isArray(j.crimeSpikes)) { HOLD('C' + cyc + ' crimeSpikes is not an array'); j.crimeSpikes = []; }
+  if (j.crimeSpikes.length > 12) HOLD('C' + cyc + ' crimeSpikes carries ' + j.crimeSpikes.length + ' > the 12-spike cap');
+  const seen = new Set();
   j.crimeSpikes.forEach((s, k) => {
-    if (!s || typeof s.neighborhood !== 'string' || !s.neighborhood || METRICS.indexOf(s.metric) < 0 || !isFinite(Number(s.magnitude)))
+    const num = (x) => typeof x === 'number' && isFinite(x);
+    if (!s || typeof s !== 'object' || typeof s.neighborhood !== 'string' || !s.neighborhood || METRICS.indexOf(s.metric) < 0 || !num(s.magnitude) || !num(s.newValue))
       HOLD('C' + cyc + ' crimeSpikes[' + k + '] malformed: ' + JSON.stringify(s));
+    const key = s && (s.neighborhood + '|' + s.metric);
+    if (seen.has(key)) HOLD('C' + cyc + ' crimeSpikes duplicates ' + key); seen.add(key);
   });
+  j.crimeSpikes = j.crimeSpikes.filter(s => s && typeof s === 'object');
   if (j.crimeWaveHoods === undefined && cyc === 112) j.crimeWaveHoods = [];   // the baseline blob predates the key
   if (!Array.isArray(j.crimeWaveHoods) || !j.crimeWaveHoods.every(x => typeof x === 'string' && x) ||
       new Set(j.crimeWaveHoods).size !== j.crimeWaveHoods.length) {
@@ -71,7 +78,10 @@ function blobFor(cfs, cyc) {
   const cm = await tab(BENCH, 'Crime_Metrics'); const ch = cm[0];
   const iN = col(ch, 'Neighborhood'), iP = col(ch, 'PropertyCrimeIndex'), iV = col(ch, 'ViolentCrimeIndex'), iU = col(ch, 'LastUpdated');
   const snapNow = {}; for (const r of cm.slice(1)) if (r[iN]) snapNow[r[iN]] = { p: Number(r[iP]), v: Number(r[iV]), u: Number(r[iU]) };
-  const canon = new Set(Object.keys(snapNow));
+  // canon = the engine's own list (Phase-1 canonNeighborhoodLoader reads Neighborhood_Map); HOLD unless Crime_Metrics names the same set
+  const nm = await tab(BENCH, 'Neighborhood_Map'); const canon = new Set(nm.slice(1).map(r => r[col(nm[0], 'Neighborhood')]).filter(Boolean));
+  const cmSet = Object.keys(snapNow);
+  if (cmSet.length !== canon.size || cmSet.some(h => !canon.has(h))) HOLD('Crime_Metrics hoods ' + cmSet.length + ' vs Neighborhood_Map canon ' + canon.size + ' disagree');
   // the levels C's Phase 2 derived (from C-1's carry), canon hoods only
   const levels = {};
   for (const h of hoodsOf(prev)) if (canon.has(h)) levels[h] = (levels[h] || 0) + 1;
@@ -83,15 +93,27 @@ function blobFor(cfs, cyc) {
   if (fs.existsSync(prevFile)) snapPrev = JSON.parse(fs.readFileSync(prevFile, 'utf8'));
   else if (C === 113) { const b = await tab(BASE, 'Crime_Metrics'); snapPrev = {}; for (const r of b.slice(1)) if (r[iN]) snapPrev[r[iN]] = { p: Number(r[iP]), v: Number(r[iV]) }; }
   else HOLD('no Crime_Metrics snapshot for C' + (C - 1));
+  // the producer: every +5 rise (calculateCrimeShifts_, THRESHOLD 5) measured from the snapshots, against the carried list
   const rises = [];
   if (snapPrev) for (const h in snapNow) {
     const a = snapPrev[h]; if (!a) continue;
-    if (snapNow[h].p - a.p >= 5) rises.push(h + ' property +' + +(snapNow[h].p - a.p).toFixed(2));
-    if (snapNow[h].v - a.v >= 5) rises.push(h + ' violent +' + +(snapNow[h].v - a.v).toFixed(2));
+    if (snapNow[h].p - a.p >= 5) rises.push({ key: h + '|propertyCrime', magnitude: snapNow[h].p - a.p, newValue: snapNow[h].p });
+    if (snapNow[h].v - a.v >= 5) rises.push({ key: h + '|violentCrime', magnitude: snapNow[h].v - a.v, newValue: snapNow[h].v });
   }
-  out.risesPreCap = rises;
-  const carriedKeys = new Set(now.crimeSpikes.map(s => s.neighborhood + ' ' + (s.metric === 'violentCrime' ? 'violent' : 'property')));
-  out.risesDroppedByCap = rises.filter(r => !carriedKeys.has(r.replace(/ \+[\d.]+$/, '')));
+  rises.sort((x, y) => y.magnitude - x.magnitude);
+  out.risesPreCap = rises.map(r => r.key + ' +' + r.magnitude);
+  const carried = {}; for (const sp of now.crimeSpikes) carried[sp.neighborhood + '|' + sp.metric] = sp;
+  const expectN = Math.min(12, rises.length), floor = rises.length > 12 ? rises[11].magnitude : -Infinity;
+  out.risesDroppedByCap = rises.filter(r => !carried[r.key]).map(r => r.key + ' +' + r.magnitude);
+  if (snapPrev) {
+    if (now.crimeSpikes.length !== expectN) HOLD('C' + C + ' carries ' + now.crimeSpikes.length + ' spikes; the measured rises call for ' + expectN);
+    for (const r of rises) {
+      const c = carried[r.key];
+      if (!c) { if (r.magnitude > floor) HOLD('rise ' + r.key + ' +' + r.magnitude + ' was not carried (not displaced by the cap)'); continue; }
+      if (c.magnitude !== r.magnitude || c.newValue !== r.newValue) HOLD('carried ' + r.key + ' +' + c.magnitude + ' to ' + c.newValue + ' vs measured +' + r.magnitude + ' to ' + r.newValue);
+    }
+    for (const k in carried) if (!rises.some(r => r.key === k)) HOLD('carried spike ' + k + ' has no measured +5 rise');
+  }
   if (Object.values(snapNow).some(x => x.u !== C)) HOLD('Crime_Metrics LastUpdated is not C' + C + ' on every row');
   // crime-carry lines by the citizen's ledger hood
   const sl = await tab(BENCH, 'Simulation_Ledger'); const sh = sl[0];

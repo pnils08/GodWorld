@@ -284,20 +284,24 @@ function processCitizenUsageIntake_(ss, cycle, cal) {
   if (!intakeSheet) return 0;
 
   var data = intakeSheet.getDataRange().getValues();
+  // engine.318: columns by header name. Live carries POPID in B (the retired Node
+  // writer appended by name), so the positional read took the POPID for the type
+  // and marked Reporter processed. A missing column throws before any write.
+  var col = usageIntakeColumns_(data[0] || []);
   var usages = [], usageIdx = [];
 
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
 
     // Skip empty or processed
-    if (!row[0]) continue;
-    if (row[4] === 'processed') continue;
+    if (!row[col.CitizenName]) continue;
+    if (row[col.Status] === 'processed') continue;
 
     usages.push({
-      citizenName: row[0] || '',
-      usageType: row[1] || 'mentioned',  // mentioned / quoted / profiled / featured
-      context: row[2] || '',
-      reporter: row[3] || ''
+      citizenName: row[col.CitizenName] || '',
+      usageType: row[col.UsageType] || 'mentioned',  // mentioned / quoted / profiled / featured
+      context: row[col.Context] || '',
+      reporter: row[col.Reporter] || ''
     });
     usageIdx.push(i);
   }
@@ -354,9 +358,26 @@ function processCitizenUsageIntake_(ss, cycle, cal) {
   usageSheet.getRange(startRow, 1, rows.length, srcIdx + 1).setValues(rows);
   // engine.285 (4/6): marked processed AFTER the usage rows land (was before — a kill in
   // between lost them); a kill now can repeat a usage, never drop one.
-  markRowRuns_(intakeSheet, usageIdx, 5, 'processed');
+  markRowRuns_(intakeSheet, usageIdx, col.Status + 1, 'processed');
 
   return usages.length;
+}
+
+/**
+ * engine.318: Citizen_Usage_Intake's columns by exact header name, for its reader
+ * (above) and its writer (parseCitizenUsage_). Throws on a missing one — no
+ * positional fallback.
+ */
+function usageIntakeColumns_(header) {
+  var names = ['CitizenName', 'UsageType', 'Context', 'Reporter', 'Status'];
+  var col = {}, missing = [];
+  for (var k = 0; k < names.length; k++) {
+    var at = -1;
+    for (var h = 0; h < header.length; h++) if (String(header[h]).trim() === names[k]) { at = h; break; }
+    if (at < 0) missing.push(names[k]); else col[names[k]] = at;
+  }
+  if (missing.length) throw new Error('Citizen_Usage_Intake: no ' + missing.join(' / ') + ' column (engine.318 reads it by header name)');
+  return col;
 }
 
 

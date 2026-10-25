@@ -172,6 +172,26 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 **Done (2026-10-25):** candidate `3109503e`; bench G3 C113–C116 PASS — no authored category rewritten (Benji Dillon athlete, Mike Paulson sports-figure), their fame identical to G2, the engine.313 binding holds. Codex diff gate SHIP (`docs/research/2026-10-25-codex-engine315-diff-gate.md`; note: the bonus also reaches TrendTrajectory / CityTier through the helpers — not asserted by the tests). **LIVE: PROD @162 = stage 25, ~02:07 CDT** (DEPLOY_HISTORY stage 25). C113 is a smoke note; nothing waits on it.
 
+## engine.318 — the usage intake reads its columns by name (engine-sheet, 2026-10-25)
+
+**Builder 2026-10-25:** "let's address the defect you found" (found under engine.312 §B).
+
+**Defect (measured read-only on live and bench 1004, 2026-10-25).** Live `Citizen_Usage_Intake` header: `CitizenName, POPID, UsageType, Context, Reporter, Status` (912 rows). `processCitizenUsageIntake_` (`mediaRoomIntake.js:289-302`) reads by position — B as the type, C context, D reporter, E the processed flag — and marks column 5 (E = Reporter) `processed` (`:357`). It runs every Cycle (`Phase11-MediaIntake`, both entry points + the checkpoint tail). The deleted Node writer (`scripts/editionIntakeV3.js`, removed `13e6502f`) appended by header name, so every row it landed was read shifted: a POPID in B became the type, a blank B defaulted to `mentioned` while the real type landed in Context and the context in Reporter. 493 intake rows carry a POPID in B; Citizen_Media_Usage (1,064 rows, cleaned S99) holds 35 POPID-typed rows, all C90 — the earlier shifted output is no longer on the tab. The one writer left, `parseCitizenUsage_` (`parseMediaRoomMarkdown.js:479-494`, manual paste path), writes five positional cells — under the live header its type lands under POPID. State now: E = `processed` on all 912 rows; Status (F) `processed` on 807, blank on 105 (bench: 913 / 106). `Media_Intake` checked beside it: header = its reader's positions, 0 pending — not affected.
+
+**Build (two files).**
+1. `processCitizenUsageIntake_` resolves CitizenName / UsageType / Context / Reporter / Status by exact header name; a missing one throws before any write (Phase 11 `safePhaseCall_` logs it to Engine_Errors) — no positional fallback. A row is pending when CitizenName is set and Status ≠ `processed`; the mark goes to the Status column. The Citizen_Media_Usage output is unchanged (engine.312's `media-room` Source stays).
+2. `parseCitizenUsage_` writes by header: each row runs the header's width, values under CitizenName / UsageType / Context / Reporter / Status, other cells (POPID) blank; a missing header throws. `ensureCitizenUsageIntakeSheet_` keeps its five-name fresh header (by-name I/O reads either shape); the schema comments (`:389`, `:689`) say so.
+
+**Data step (the 105 — before the push).** Under the by-name reader the 105 rows with Status blank would read pending and land a second time in Citizen_Media_Usage and the router (re-advancing or re-minting citizens). All 105 carry E = `processed`, the old reader's own mark, so each was processed. Step: Status := `processed` on exactly the rows where Status is blank and E = `processed`; row-keyed manifest (row, CitizenName, POPID, UsageType) frozen first; typed read-back of every row. Harmless under the code live now (it reads E), so it lands before the push. Bench first (106), then live.
+
+**Not changed (stated).** The shifted rows already in Citizen_Media_Usage stay as the engine wrote them (engine output is canon; engine.312 scores the 35 POPID-typed rows 0 and the re-base exception manifest keys them). Reporter's `processed` marks stay (the deleted writer wrote Reporter blank).
+
+**Tests** (`scripts/mediaRoomIntake.test.js`): under the live six-column header the reader takes type / context / reporter from their own columns, marks Status, leaves Reporter untouched, skips Status `processed`; the five-column fresh header still works; a missing Status header throws with nothing written; the parser writes into a six-column tab by name with POPID blank. Each new case fails on `3e04d8a5`.
+
+**Bench.** SANDBOX 1004, stage 28 = stage 27 (PROD @163, `stage27-e312.sha256`) + the two files. Data step on the bench, then one pending row under the live header (an existing citizen, `mentioned`, Context `engine.318 bench probe`) and one Cycle: exactly one new `media-room` row in Citizen_Media_Usage carrying that type / context / reporter; the probe's Status `processed`, its Reporter unchanged; no other intake row landed again; Engine_Errors flat.
+
+**Gate.** Codex diff review of the exact candidate + the bench receipt → PROD. engine.317 is not built, so the push needs the builder's named exception for the admission window again (the stage-27 one covered that push only); one go covers the data step and the push.
+
 ## Status log
 
 ### engine.296 — status (drained from ROLLOUT, 2026-10-22 / S592)

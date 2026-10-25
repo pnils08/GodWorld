@@ -386,7 +386,8 @@ function parseArticleTable_(ss, section) {
 
 // ════════════════════════════════════════════════════════════════════════════
 // CITIZEN USAGE PARSER
-// Citizen_Usage_Intake: CitizenName, UsageType, Context, Reporter, Status
+// Citizen_Usage_Intake: CitizenName, UsageType, Context, Reporter, Status — by header
+// name (engine.318); live also carries POPID in B
 // ════════════════════════════════════════════════════════════════════════════
 
 function parseCitizenUsage_(ss, section) {
@@ -477,21 +478,25 @@ function parseCitizenUsage_(ss, section) {
   if (usages.length === 0) return 0;
   
   var sheet = ensureCitizenUsageIntakeSheet_(ss);
-  
+  // engine.318: by header name (usageIntakeColumns_, mediaRoomIntake.js) — live
+  // carries POPID in B; cells with no value here (POPID, Status) stay blank.
+  var header = sheet.getRange(1, 1, 1, Math.max(1, sheet.getLastColumn())).getValues()[0];
+  var col = usageIntakeColumns_(header);
+
   var rows = [];
   for (var j = 0; j < usages.length; j++) {
     var u = usages[j];
-    rows.push([
-      u.citizenName,
-      u.usageType,
-      u.context,
-      u.reporter,
-      ''  // Status
-    ]);
+    var row = [];
+    for (var c = 0; c < header.length; c++) row.push('');
+    row[col.CitizenName] = u.citizenName;
+    row[col.UsageType] = u.usageType;
+    row[col.Context] = u.context;
+    row[col.Reporter] = u.reporter;
+    rows.push(row);
   }
-  
+
   var startRow = sheet.getLastRow() + 1;
-  sheet.getRange(startRow, 1, rows.length, 5).setValues(rows);
+  sheet.getRange(startRow, 1, rows.length, header.length).setValues(rows);
   
   Logger.log('parseCitizenUsage_: Added ' + usages.length + ' citizen usages');
   return usages.length;
@@ -686,8 +691,8 @@ function ensureCitizenUsageIntakeSheet_(ss) {
  * Storyline_Intake (6 columns):
  *   StorylineType, Description, Neighborhood, RelatedCitizens, Priority, Status
  * 
- * Citizen_Usage_Intake (5 columns):
- *   CitizenName, UsageType, Context, Reporter, Status
+ * Citizen_Usage_Intake (read and written by header name, engine.318):
+ *   CitizenName, UsageType, Context, Reporter, Status — live also carries POPID in B
  * 
  * Continuity_Intake: REMOVED — pipeline eliminated.
  *   Direct quotes from CONTINUITY NOTES → LifeHistory_Log

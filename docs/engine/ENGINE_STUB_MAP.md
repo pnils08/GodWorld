@@ -3250,6 +3250,8 @@
 - **processCitizenUsageIntake_(ss, cycle, cal)**
   Sheets: Citizen_Usage_Intake
 
+- **usageIntakeColumns_(header)**
+
 - **routeCitizenUsageToIntake_(ctx, ss, cycle, cal)**
   Sheets: Citizen_Media_Usage, Generic_Citizens, Intake, Simulation_Ledger
 
@@ -4840,4 +4842,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1752
+**Functions mapped:** 1753

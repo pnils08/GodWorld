@@ -111,6 +111,45 @@ for (const stem of ['sports_c103_x_packet-v2_deepseek-deepseek-chat', 'civic_c10
   // engine.312 R2.1(a): the media-room copy has no print check — every row it lands names its source, so it scores no fame
   eq(cmu.rows[0][12] === 'Source' && cmu.rows.slice(1).every((r) => r.length === 13 && r[12] === 'media-room' && r[2] !== ''), true, 'engine.312: the Source header self-arms after the 12 written columns and each landed row reads media-room');
   eq(cmu.calls.filter((x) => x === 'setValues').length, 1, 'engine.312: still one block write for the batch');
+  // engine.318: the intake reads and marks its columns by header name. Live carries
+  // CitizenName, POPID, UsageType, Context, Reporter, Status — the positional read took the
+  // POPID (a blank one → 'mentioned') for the type and marked Reporter processed.
+  const liveCui = () => sheet([['CitizenName', 'POPID', 'UsageType', 'Context', 'Reporter', 'Status'],
+    ['Vinnie Keane', 'POP-00001', 'quoted', 'dugout', 'Tanya Cruz', ''],
+    ['Briar Soto', '', 'mentioned', 'electrician', 'Nia Rook', ''],
+    ['Ora Waiting', '', 'mentioned', 'corner', 'Maria Keen', 'processed']]);
+  const lc = liveCui(), lcmu = sheet([['Timestamp']]);
+  eq(box.processCitizenUsageIntake_({ getSheetByName: (n) => n === 'Citizen_Usage_Intake' ? lc : n === 'Citizen_Media_Usage' ? lcmu : null }, 112, {}), 2, 'engine.318: two pending rows under the live header');
+  eq(lcmu.rows.slice(1).map((r) => r.slice(2, 6).join('|')).join(), 'Vinnie Keane|quoted|dugout|Tanya Cruz,Briar Soto|mentioned|electrician|Nia Rook', 'engine.318: type / context / reporter from their own columns (was POPID / blank → mentioned, shifted)');
+  eq(lc.rows.slice(1).map((r) => r[5]).join(), 'processed,processed,processed', 'engine.318: the mark lands in Status');
+  eq(lc.rows.slice(1).map((r) => r[4]).join(), 'Tanya Cruz,Nia Rook,Maria Keen', 'engine.318: Reporter untouched');
+  // the 105 live rows the old reader marked in Reporter only: by name they read pending (the data step marks them first)
+  const legacy = sheet([['CitizenName', 'POPID', 'UsageType', 'Context', 'Reporter', 'Status'], ['Briar Soto', '', 'letter_writer', 'E89 Letters', 'processed', '']]);
+  const lgmu = sheet([['Timestamp']]);
+  eq(box.processCitizenUsageIntake_({ getSheetByName: (n) => n === 'Citizen_Usage_Intake' ? legacy : n === 'Citizen_Media_Usage' ? lgmu : null }, 112, {}), 1, 'engine.318: a Reporter cell reading processed is not the mark — Status alone decides');
+  const noStatus = sheet([['CitizenName', 'POPID', 'UsageType', 'Context', 'Reporter'], ['Vinnie Keane', '', 'quoted', 'dugout', '']]);
+  const nsmu = sheet([['Timestamp']]);
+  threw = false;
+  try { box.processCitizenUsageIntake_({ getSheetByName: (n) => n === 'Citizen_Usage_Intake' ? noStatus : n === 'Citizen_Media_Usage' ? nsmu : null }, 112, {}); } catch (e) { threw = /Status/.test(e.message); }
+  eq(threw && nsmu.rows.length === 1 && noStatus.calls.length === 0 && nsmu.calls.length === 0, true, 'engine.318: a missing Status column throws before any write');
+  // the writer (manual paste path) lays its rows by header name too: POPID blank, the round trip reads true
+  const pbox = vm.createContext({ Logger: { log() {} }, SpreadsheetApp: {}, Utilities: {} });
+  for (const rel of ['phase07-evening-media/mediaRoomIntake.js', 'phase07-evening-media/parseMediaRoomMarkdown.js']) {
+    vm.runInContext(fs.readFileSync(path.join(ROOT, rel), 'utf8'), pbox, { filename: rel });
+  }
+  const pasted = sheet([['CitizenName', 'POPID', 'UsageType', 'Context', 'Reporter', 'Status']]);
+  eq(pbox.parseCitizenUsage_({ getSheetByName: (n) => n === 'Citizen_Usage_Intake' ? pasted : null }, 'CITIZENS\n— Briar Soto (electrician)\n— Ora Waiting'), 2, 'engine.318: the parser lands two rows');
+  eq(JSON.stringify(pasted.rows.slice(1)), JSON.stringify([['Briar Soto', '', 'mentioned', 'electrician', '', ''], ['Ora Waiting', '', 'mentioned', 'CITIZEN', '', '']]), 'engine.318: written under their own headers, POPID and Status blank (was: the type under POPID)');
+  const rtmu = sheet([['Timestamp']]);
+  box.processCitizenUsageIntake_({ getSheetByName: (n) => n === 'Citizen_Usage_Intake' ? pasted : n === 'Citizen_Media_Usage' ? rtmu : null }, 112, {});
+  eq(rtmu.rows.slice(1).map((r) => r.slice(2, 5).join('|')).join(), 'Briar Soto|mentioned|electrician,Ora Waiting|mentioned|CITIZEN', 'engine.318: written by the parser, read back true by the intake');
+  const fresh = sheet([['CitizenName', 'UsageType', 'Context', 'Reporter', 'Status']]);
+  pbox.parseCitizenUsage_({ getSheetByName: (n) => n === 'Citizen_Usage_Intake' ? fresh : null }, '— Briar Soto (electrician)');
+  eq(JSON.stringify(fresh.rows[1]), JSON.stringify(['Briar Soto', 'mentioned', 'electrician', '', '']), 'engine.318: the five-column fresh header still takes the row by name');
+  const noType = sheet([['CitizenName', 'POPID', 'Context', 'Reporter', 'Status']]);
+  threw = false;
+  try { pbox.parseCitizenUsage_({ getSheetByName: (n) => n === 'Citizen_Usage_Intake' ? noType : null }, '— Briar Soto (electrician)'); } catch (e) { threw = /UsageType/.test(e.message); }
+  eq(threw && noType.rows.length === 1, true, 'engine.318: the parser throws on a missing UsageType column, nothing written');
   const mi = sheet([['Reporter', 'StoryType', 'SignalSource', 'Headline', 'ArticleText', 'CulturalMentions', 'Status'], ['Kai Marston', 'arts', 'edition', 'h', '', 'Oakland Ballet', '']]);
   threw = false;
   try { box.processArticleIntake_({ getSheetByName: (n) => n === 'Media_Intake' ? mi : n === 'Media_Ledger' ? killed() : null }, 112, {}); } catch (e) { threw = true; }

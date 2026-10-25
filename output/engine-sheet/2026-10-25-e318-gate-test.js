@@ -42,10 +42,13 @@ const run = (src, env, args = []) => {   // node -e <src> <args>, as the script 
   withFirst(u => { u.mr = u0.mr - 1; });
   check('D media-room usage row landed since the first read', 1, run(fireBench, Object.assign({ WHEN: 'D' }, base)));
   withFirst(u => { u.mr = u0.mr; u.sig = '0'.repeat(64); });
-  check('D2 media-room rows rewritten, same count', 1, run(fireBench, Object.assign({ WHEN: 'D2' }, base)));
+  check('D2 usage rows of the first read rewritten, same count (a cleaner pass)', 1, run(fireBench, Object.assign({ WHEN: 'D2' }, base)));
   withFirst(u => { u.sig = u0.sig; u.total = u0.total + 1; });
   check('D3 usage rows fewer than the first read (dedupe / delete)', 1, run(fireBench, Object.assign({ WHEN: 'D3' }, base)));
-  withFirst(u => { u.total = u0.total - 1; });
+  // a cron append: the first read held one row fewer — its record is that prefix (same hash the gate takes, same read)
+  const mu = await sh.getSheetData('Citizen_Media_Usage');
+  const prefixSig = require('crypto').createHash('sha256').update(JSON.stringify(mu.slice(1, u0.total))).digest('hex');
+  withFirst(u => { u.total = u0.total - 1; u.sig = prefixSig; });
   check('D4 usage rows more than the first read (a cron append) still passes', 0, run(fireBench, Object.assign({ WHEN: 'D4' }, base)));
   fs.writeFileSync(MF, JSON.stringify(u0));
   check('E wrong Cycle still stops', 1, run(fireBench, Object.assign({}, base, { WHEN: 'E', CYC: '112' })));
@@ -58,19 +61,25 @@ const run = (src, env, args = []) => {   // node -e <src> <args>, as the script 
   check('G live freeze, real run: ' + (applied ? 'applied → loads' : 'no apply recorded → stops'), applied ? 0 : 1, run(loadSrc, { DRY: '' }, [FRZ]));
   // Intake receipt = the Status step's own verify. The bench freeze predates the full-width fold (no width) — H0 proves the step
   // now refuses it; H runs verify against that freeze with width 6 added (the bench tab's width, A–F), then the file is put back
-  // byte for byte: the probe row was added and processed after it, 0 pending, so the one failure must be the row count.
+  // byte for byte: the probe row was added and processed after it, 0 pending, so the one failure must be the row count. H1 hands
+// it the same freeze with its last tab row dropped (rows still 912): refused on shape, nothing compared.
   const BF = '/root/GodWorld/output/engine-sheet/2026-10-25-e318-status-bench.json', bf = fs.readFileSync(BF);
   const verify = () => { pause(); const v = spawnSync('node', ['/root/GodWorld/output/engine-sheet/2026-10-25-e318-status-step.js', 'bench', 'verify'], { encoding: 'utf8' });
     return { code: v.status, out: (v.stdout + v.stderr).split('\n').filter(l => l && !/injected env/.test(l)).slice(0, 5).join(' | ') }; };
-  let h0, h;
+  let h0, h1, h;
   try {
     h0 = verify();
-    fs.writeFileSync(BF, JSON.stringify(Object.assign(JSON.parse(bf), { width: 6 })));
+    const b6 = Object.assign(JSON.parse(bf), { width: 6 });
+    fs.writeFileSync(BF, JSON.stringify(Object.assign({}, b6, { tab: b6.tab.slice(0, -1) })));   // rows 912, tab lost its last row
+    h1 = verify();
+    fs.writeFileSync(BF, JSON.stringify(b6));
     h = verify();
   } finally { fs.writeFileSync(BF, bf); }
   results.push(fs.readFileSync(BF).equals(bf)); console.log((fs.readFileSync(BF).equals(bf) ? 'PASS' : 'FAIL') + ' bench freeze file restored byte for byte');
   check('H0 intake receipt refuses a freeze with no width', 2, h0);
   results.push(/carries no width/.test(h0.out)); console.log((/carries no width/.test(h0.out) ? 'PASS' : 'FAIL') + ' H0 says why');
+  check('H1 intake receipt refuses an incoherent freeze (tab one row short of rows) before any compare — the same check precedes apply', 2, h1);
+  results.push(/shape is not coherent/.test(h1.out)); console.log((/shape is not coherent/.test(h1.out) ? 'PASS' : 'FAIL') + ' H1 says why');
   check('H intake receipt: a row added and processed since the freeze, 0 pending (bench probe)', 1, h);
   const why = /pending: 0\b/.test(h.out) && /FAIL 1:/.test(h.out) && /row count 912 → 913/.test(h.out);
   results.push(why); console.log((why ? 'PASS' : 'FAIL') + ' H fails on the row count alone (0 pending, 1 failure)');

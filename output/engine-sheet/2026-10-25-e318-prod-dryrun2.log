@@ -1,5 +1,5 @@
 fresh PROD pull = stage 27
 stage = the benched tree (output/engine-sheet/stage28-e318.sha256), byte for byte
-live fire state before the push: cycleCount 112, Neighborhood_Map [112], Riley last 112, checkpoint none, Engine_Errors at C113+ 0, usage intake pending by name 105, intake rows 912 (freeze 912), usage header ok, usage rows 1064 (first read 1064), media-room usage rows 0 (no Source column yet) (first read 0, rows identical) — NOT CLEAN
+live fire state before the push: cycleCount 112, Neighborhood_Map [112], Riley last 112, checkpoint none, Engine_Errors at C113+ 0, usage intake pending by name 105, intake rows 912 (freeze 912), usage header ok, usage rows 1064 (first read 1064), media-room usage rows 0 (no Source column yet) (first read 0), rows of the first read identical — NOT CLEAN
 intake receipt before the push: the live freeze records no apply (dry run) — the typed verify is not read
 the next Cycle fired, a checkpoint is held, the usage intake reads pending (run the Status step) or moved off the freeze, the usage read is malformed or moved, or a read failed — stop

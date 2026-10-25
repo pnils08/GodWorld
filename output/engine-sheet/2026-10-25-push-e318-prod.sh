@@ -18,6 +18,12 @@
 # least one row, the row total never below the first read's (the crons only append), and the media-room rows identical cell
 # for cell to the first read's. After the last read both entry points run stage 28 only (HEAD pushed, the pinned deployment
 # serves it, calls admitted before the cut outlasted), so a later intake row is processed once.
+# Codex recheck 3: (§2) every usage row of the first read must stay identical — the tab may only grow at the end (the crons
+# append) and the appended rows carry no media-room — so a cleaner rewrite stops it at any baseline; (§4) /exec keeps serving
+# the previous version for a propagation window after the cut (DEPLOY.md: ~5 min observed), so an old call admitted late in it
+# can run past an 8-minute watch. The watch now reads at 8 and 16 minutes after the pull-back: 16 min = twice the observed
+# window + the 6-min Apps Script wall. A stage-27 call admitted inside the window has persisted, written or failed by then,
+# and any of those moves a read.
 # Stated limit (codex engine.301 gate 3): FIRE_ADMISSION_JSON has no outside read door; a push needs the builder's go as a
 # named exception until engine.317 lands.
 #   bash output/engine-sheet/2026-10-25-push-e318-prod.sh <commit> <manifest> <cycle> [--dry-run]
@@ -76,19 +82,22 @@ const sh = require("/root/GodWorld/lib/sheets"), num = v => Number(String(v).rep
   const fs = require("fs"), IR = Number(process.env.INTAKE_ROWS), MF = process.env.MR_FILE, rows = cu.length - 1;
   // Usage read fails closed: A–F must be the six names the intake path writes by position, with at least one row. No Source
   // column = no media-room row yet (the intake path arms the header on its first write, mediaRoomIntake.js), so 0 until a row
-  // lands. Against the first read: row total never lower (the crons only append), media-room rows identical cell for cell.
+  // lands. Against the first read: row total never lower and the rows of the first read identical cell for cell (the crons only
+  // append at the end); the media-room count unchanged, so no appended row carries the mark of the intake path.
   const UH = ["Timestamp", "Cycle", "CitizenName", "UsageType", "Context", "Reporter"];
   const mu = await sh.getSheetData("Citizen_Media_Usage"), mh = mu[0] || [];
   const headOk = UH.every((h, k) => String(mh[k] === undefined ? "" : mh[k]).trim() === h) && mu.length >= 2;
   const iSrc = mh.findIndex(h => String(h).trim() === "Source");
-  const mrRows = iSrc >= 0 ? mu.slice(1).filter(r => String(r[iSrc] || "").trim() === "media-room") : [];
-  const u = { total: mu.length - 1, mr: mrRows.length, sig: require("crypto").createHash("sha256").update(JSON.stringify(mrRows)).digest("hex") };
+  const mr = iSrc >= 0 ? mu.slice(1).filter(r => String(r[iSrc] || "").trim() === "media-room").length : 0;
+  const hash = rows => require("crypto").createHash("sha256").update(JSON.stringify(rows)).digest("hex");
+  const u = { total: mu.length - 1, mr, sig: hash(mu.slice(1)) };
   if (headOk && !fs.existsSync(MF)) fs.writeFileSync(MF, JSON.stringify(u));
   const u0 = fs.existsSync(MF) ? JSON.parse(fs.readFileSync(MF, "utf8")) : null;
-  const usageOk = headOk && !!u0 && u.total >= u0.total && u.mr === u0.mr && u.sig === u0.sig;
+  const prefixSame = !!u0 && u.total >= u0.total && hash(mu.slice(1, 1 + u0.total)) === u0.sig;
+  const usageOk = headOk && prefixSame && u.mr === u0.mr;
   const ok = cc === C && iN >= 0 && iC >= 0 && nmc.length === 1 && nmc[0] === C && rl === C && cp === "" && iEC >= 0 && fired === 0 && pend === 0
     && Number.isInteger(IR) && rows === IR && usageOk;
-  console.log("live fire state " + process.env.WHEN + ": cycleCount " + cc + ", Neighborhood_Map " + JSON.stringify(nmc) + ", Riley last " + rl + ", checkpoint " + (cp ? "HELD" : "none") + ", Engine_Errors at C" + (C + 1) + "+ " + fired + ", usage intake pending by name " + pend + ", intake rows " + rows + " (freeze " + IR + "), usage header " + (headOk ? "ok" : "MALFORMED") + ", usage rows " + u.total + " (first read " + (u0 ? u0.total : "-") + "), media-room usage rows " + u.mr + (iSrc < 0 ? " (no Source column yet)" : "") + " (first read " + (u0 ? u0.mr : "-") + ", rows " + (u0 && u.sig === u0.sig ? "identical" : "DIFFER") + ") — " + (ok ? "C" + (C + 1) + " not fired, intake still" : "NOT CLEAN"));
+  console.log("live fire state " + process.env.WHEN + ": cycleCount " + cc + ", Neighborhood_Map " + JSON.stringify(nmc) + ", Riley last " + rl + ", checkpoint " + (cp ? "HELD" : "none") + ", Engine_Errors at C" + (C + 1) + "+ " + fired + ", usage intake pending by name " + pend + ", intake rows " + rows + " (freeze " + IR + "), usage header " + (headOk ? "ok" : "MALFORMED") + ", usage rows " + u.total + " (first read " + (u0 ? u0.total : "-") + "), media-room usage rows " + u.mr + (iSrc < 0 ? " (no Source column yet)" : "") + " (first read " + (u0 ? u0.mr : "-") + "), rows of the first read " + (prefixSame ? "identical" : "DIFFER") + " — " + (ok ? "C" + (C + 1) + " not fired, intake still" : "NOT CLEAN"));
   process.exit(ok ? 0 : 1);
 })().catch(e => { console.error(e.message); process.exit(2); });' 2>&1 | grep -v "injected env"; rc=${PIPESTATUS[0]}
   if [ "$APPLIED" = 1 ]; then
@@ -117,4 +126,6 @@ echo "pull-back $(find "$W/pullback" -name '*.js' | wc -l) js + manifest byte-id
 fire_state "after the pull-back" || { echo "STOP: live moved off Cycle $CYC, or the usage intake moved, across the deploy; read which version ran before anything else"; exit 3; }
 echo "waiting 480 s: a fire or intake run admitted before the deploy would persist inside this window"; sleep 480
 fire_state "8 minutes after" || { echo "STOP: a Cycle or an intake run persisted inside the window — read which version ran before anything else"; exit 3; }
-echo "$(date -Iseconds) engine.318 on PROD at $SRC ($BASE); pull-back = $MAN; live still Cycle $CYC eight minutes after the deploy" > "$OUT/push-e318-prod.DONE"
+echo "waiting 480 s more: an old-version call admitted late in the /exec propagation window (DEPLOY.md ~5 min) ends inside this one"; sleep 480
+fire_state "16 minutes after" || { echo "STOP: a Cycle or an intake run persisted inside the propagation window — read which version ran before anything else"; exit 3; }
+echo "$(date -Iseconds) engine.318 on PROD at $SRC ($BASE); pull-back = $MAN; live still Cycle $CYC, intake = the receipt, sixteen minutes after the deploy" > "$OUT/push-e318-prod.DONE"

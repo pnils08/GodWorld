@@ -63,6 +63,11 @@ const pendingByName = (rows) => rows.filter(r => String(r[0]).trim() && r[5] !==
   const F = JSON.parse(fs.readFileSync(OUT, 'utf8'));
   // A freeze written before the full-width fold carries no width: W would be NaN and every cell compare would be skipped.
   if (!Number.isInteger(F.width) || F.width < HEADER.length) throw new Error(OUT + ' carries no width (written before the full-width compare) — refreeze');
+  // Codex recheck 3 §3: the freeze's own shape, before any write — every frozen row present at its width, every manifest row
+  // inside the tab and equal to its frozen row (a freeze that lost a tab row would otherwise let apply write a row it never compared).
+  const shapeBad = !Number.isInteger(F.rows) || !Array.isArray(F.tab) || F.tab.length !== F.rows || F.tab.some(r => !Array.isArray(r) || r.length !== F.width) ||
+    !Array.isArray(F.manifest) || F.manifest.some(m => !Number.isInteger(m.row) || m.row < 2 || m.row > F.rows + 1 || JSON.stringify(m.cells) !== JSON.stringify(F.tab[m.row - 2]));
+  if (shapeBad) throw new Error(OUT + ' freeze shape is not coherent (rows / tab / width / manifest) — refreeze, nothing written');
   const W = Math.max(F.width, widthOf(tab));
   const now = widen(tab.slice(1), W), frozen = widen(F.tab, W);
   if (mode === 'apply') {

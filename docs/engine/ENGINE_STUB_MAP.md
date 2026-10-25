@@ -2420,9 +2420,6 @@
 
 - **tierPayFactor_(tier)**
 
-- **culturalFameOf_(ctx, popId, name)**
-  Sheets: Cultural_Ledger
-
 - **ensureFamousOnCulturalLedger_(ctx, popId, name, roleType, neighborhood)**
 
 - **intakeTierForExisting_(existingTier, intakeRaw)**
@@ -3138,6 +3135,9 @@
 - **flushCulturalFame_(ctx)**
   Reads: S.paperFameByPop
   Writes: S.culturalFameFlush
+  Sheets: Cultural_Ledger
+
+- **culturalLedgerSheetDirect_(ctx)**
   Sheets: Cultural_Ledger
 
 - **culturalFamePendingFinal_(acc, paperBy, pc)**

@@ -228,7 +228,7 @@ function runAdvancementIntakeManual() {
   var results = processAdvancementIntake_(ctx);
   // engine.312: the paper credits ride the fame accumulator; with no Phase 7 /
   // Phase 10 here the flush writes them direct, as the Processed marks went.
-  if (typeof flushCulturalFame_ === 'function') flushCulturalFame_(ctx);
+  flushCulturalFame_(ctx);
 
   if (ctx.ledger.dirty && ctx.ledger.rows.length) {
     ledgerSheet.getRange(2, 1, ctx.ledger.rows.length, ctx.ledger.headers.length)
@@ -409,7 +409,6 @@ function processMediaUsage_(ctx, now, cycle) {
   // (paperFameDelta_, culturalLedger.js) — Phase-5 credits and S.paperFameByPop
   // read it, so the two cannot disagree.
   var paperFameRowDelta_ = function(r) {
-    if (typeof paperFameDelta_ !== 'function') return 0;
     return paperFameDelta_(usageTypeCol >= 0 ? r[usageTypeCol] : '', sentimentCol >= 0 ? r[sentimentCol] : '', r[sourceCol]);
   };
   
@@ -462,6 +461,11 @@ function processMediaUsage_(ctx, now, cycle) {
     if (fdone) familyFirstRow[fkey] = -1;                         // already counted in an earlier pass
     else if (!(fkey in familyFirstRow)) familyFirstRow[fkey] = fpre; // the first unprocessed row is the one that ticks
   }
+
+  // engine.312 (codex diff gate 1 §2): the fame accumulator opens before the first Processed mark — an
+  // unreadable or malformed Cultural_Ledger throws here and the phase stops with no row marked, so no
+  // credit is ever converted into "no row" while its mark persists.
+  culturalFameAccum_(ctx);
 
   for (var i = 1; i < usageData.length; i++) {
     var row = usageData[i];
@@ -534,7 +538,7 @@ function processMediaUsage_(ctx, now, cycle) {
           // queues its Processed mark (a credit is never marked without being
           // accumulated). Every pending Cycle counts, not only this one.
           var fameDelta = paperFameRowDelta_(row);
-          if (fameDelta && popId && typeof culturalFameAddPaper_ === 'function') {
+          if (fameDelta && popId) {
             if (culturalFameAddPaper_(ctx, popId, fameDelta)) results.paperFame = (results.paperFame || 0) + 1;
             else results.paperFameNoRow = (results.paperFameNoRow || 0) + 1;
           }
@@ -1277,44 +1281,27 @@ var FAME_USAGE_BAR = 25;
 // engine.118 cut 3b (S412, builder 2026-09-02: "their likeness copies to the
 // culture ledger where fame citizens are tracked and the fame engine uses these
 // citizens for its events"): the Cultural_Ledger is the famous sub-roster. A
-// famous citizen with no row linked to their POPID gets one registered (the
-// evening-media registrar, queued for Phase 10); a linked row below the fame
-// bar is brightened to the bar so the antenna lights. Never re-registers a
+// famous citizen with no personal row linked to their POPID gets one registered
+// (the evening-media registrar, queued for Phase 10); a linked row below the
+// fame bar is brightened to the bar so the antenna lights. Never re-registers a
 // linked name. engine.312: the registration is a `roster` cause (no fame, no
 // sighting marks), and every famous citizen checked here keeps the 25 floor in
 // the Cycle's fame flush — the target row is touched even with nothing else to
 // add, and a row created for them tonight starts at 25 or more (R2.1 b).
-function culturalFameOf_(ctx, popId, name) {
-  try {
-    var sheet = ctx.ss ? ctx.ss.getSheetByName('Cultural_Ledger') : null;
-    if (!sheet || sheet.getLastRow() < 2) return null;
-    var v = sheet.getDataRange().getValues();
-    var h = v[0], iPop = h.indexOf('UniverseLinks'), iFame = h.indexOf('FameScore'), iName = h.indexOf('Name');
-    if (iFame < 0) return null;
-    var best = null, want = String(popId || '').trim().toUpperCase(), nm = String(name || '').trim().toLowerCase();
-    for (var r = 1; r < v.length; r++) {
-      var linked = iPop >= 0 && String(v[r][iPop] || '').trim().toUpperCase() === want;
-      var named = iName >= 0 && String(v[r][iName] || '').trim().toLowerCase() === nm;
-      if (!linked && !named) continue;
-      var f = Number(v[r][iFame]) || 0;
-      if (best === null || f > best) best = f;
-    }
-    return best;
-  } catch (e) { Logger.log('culturalFameOf_: ' + e.message); return null; }
-}
 function ensureFamousOnCulturalLedger_(ctx, popId, name, roleType, neighborhood) {
   ctx._famousRegistered118 = ctx._famousRegistered118 || {};
   if (ctx._famousRegistered118[popId]) return 'done';
-  var fame = culturalFameOf_(ctx, popId, name);
-  var floored = (typeof culturalFameMarkFloor_ === 'function') ? culturalFameMarkFloor_(ctx, popId) : null;
-  if (fame === null) {
-    if (typeof registerCulturalEntity_ !== 'function') return 'no-registrar';
+  // codex diff gate 1 §1(b): "has a row" means a personal row — the engine.313 target (linked, not a
+  // dynasty / institution). With none, the roster registration resolves an unlinked row of the same name
+  // or creates one, and the floor rides it (registrar, floorPops); a row linked to another citizen is never
+  // theirs.
+  var floored = culturalFameMarkFloor_(ctx, popId);
+  ctx._famousRegistered118[popId] = true;
+  if (floored === null) {
     registerCulturalEntity_(ctx, name, roleType || 'citizen', 'engine.118', neighborhood || '', 'roster');
-    ctx._famousRegistered118[popId] = true;
     return 'registered';
   }
-  ctx._famousRegistered118[popId] = true;
-  return (floored !== null && floored < FAME_USAGE_BAR) ? 'brightened' : 'linked';
+  return floored < FAME_USAGE_BAR ? 'brightened' : 'linked';
 }
 
 // Intake vs an existing row: blank keeps the row's Tier; a stated Tier can only

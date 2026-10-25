@@ -670,7 +670,8 @@ console.log('engine.312 — synthetic, non-canon: fame from the paper (real cita
     return { v, getDataRange: () => ({ getValues: () => v.map(r => r.slice()) }), getLastRow: () => v.length,
       getLastColumn: () => Math.max(...v.map(r => r.length)),
       getRange: (r, c, nr, nc) => ({ getValues: () => v.slice(r - 1, r - 1 + (nr || 1)).map(x => x.slice(c - 1, c - 1 + (nc || 1))),
-        getValue: () => (v[r - 1] || [])[c - 1], setValue: x => { (v[r - 1] = v[r - 1] || [])[c - 1] = x; } }) };
+        getValue: () => (v[r - 1] || [])[c - 1], setValue: x => { (v[r - 1] = v[r - 1] || [])[c - 1] = x; } }),
+      appendRow: row => { v.push(row.slice()); } };
   };
   const world = () => {
     const cul = tab([CH].concat([
@@ -774,6 +775,83 @@ console.log('engine.312 — synthetic, non-canon: fame from the paper (real cita
     check('engine.312: a roster call alone on an existing row → no FameScore change, no LastSeenCycle, no MediaCount, no helper writes',
       fameCells(o.ctx).length === 0 && !updatesOf(o.ctx).some(u => u.kind === 'cell' && [C('LastSeenCycle'), C('MediaCount')].includes(u.address.col)) &&
       o.cul.v[2][C('TrendTrajectory') - 1] === 'stable');
+  }
+
+  // ── codex diff gate 1 folds ──
+  // §1(b): a famous citizen with no PERSONAL row — dynasty-only, a foreign same-name row, an unlinked same-name row
+  {
+    const g = world();
+    g.cul.v.push(crow('CUL-E5', 'The Quiet Family', 'POP-99110', 80, 112));            // r6: dynasty linking Synthetic Quiet
+    g.cul.v[5][C('FameCategory') - 1] = 'dynasty'; g.cul.v[5][C('RoleType') - 1] = 'Institution';   // v[5] = sheet row 6
+    g.cul.v.push(crow('CUL-E6', 'Synthetic Rostered', 'POP-99999', 60, 112));          // r7: same name, linked to another citizen
+    g.cul.v.push(crow('CUL-E7', 'Synthetic Unlinked', '', 12, 112));                    // r8: same name, links nobody
+    g.ctx.ledger.rows.push(lrow('POP-99111', 'Synthetic', 'Unlinked', 30, 'C100'));
+    fsb.processMediaUsage_(g.ctx, 'C113', 113);
+    fsb.applyTierLadderState_(g.ctx, 113);
+    fsb.flushCulturalFame_(g.ctx);
+    const apG = appendsOf(g.ctx), nm = n => apG.filter(r => r[C('Name') - 1] === n);
+    const cells8 = updatesOf(g.ctx).filter(u => u.kind === 'cell' && u.tab === 'Cultural_Ledger' && u.address.row === 8);
+    check('engine.312 (gate 1 §1b): dynasty-only famous citizen → their own roster row at the floor 25; the dynasty row untouched',
+      nm('Synthetic Quiet').length === 1 && nm('Synthetic Quiet')[0][C('FameScore') - 1] === 25 && !fameCells(g.ctx).some(u => u.address.row === 6),
+      JSON.stringify(apG.map(r => [r[2], r[11]])));
+    check('engine.312 (gate 1 §1b): a same-name row linked to another citizen is not theirs — a new roster row (floor 25); the foreign row gets no write',
+      nm('Synthetic Rostered').length === 1 && nm('Synthetic Rostered')[0][C('UniverseLinks') - 1] === 'POP-99109' && nm('Synthetic Rostered')[0][C('FameScore') - 1] === 25 &&
+      !updatesOf(g.ctx).some(u => u.kind === 'cell' && u.tab === 'Cultural_Ledger' && u.address.row === 7), JSON.stringify(cells8));
+    check('engine.312 (gate 1 §1b): an unlinked same-name row is claimed — UniverseLinks backfilled, floored 12 → 25, no new row, no sighting marks',
+      nm('Synthetic Unlinked').length === 0 && cells8.some(u => u.address.col === C('UniverseLinks') && u.values[0][0] === 'POP-99111') &&
+      cells8.some(u => u.address.col === C('FameScore') && u.values[0][0] === 25) && !cells8.some(u => [C('LastSeenCycle'), C('MediaCount')].includes(u.address.col)),
+      JSON.stringify(cells8.map(u => [u.address.col, u.values[0][0]])));
+  }
+  // §2: one flush a Cycle; a row whose intent fails is named and the rest still flush; a malformed tab fails closed
+  {
+    const r1 = world();
+    fsb.processMediaUsage_(r1.ctx, 'C113', 113);
+    const first = fsb.flushCulturalFame_(r1.ctx), n1 = fameCells(r1.ctx).length;
+    const second = fsb.flushCulturalFame_(r1.ctx);
+    check('engine.312 (gate 1 §2): a second flush queues nothing and returns the first counts', second === first && fameCells(r1.ctx).length === n1 && n1 === 3, String(n1));
+    const r2 = world();
+    fsb.processMediaUsage_(r2.ctx, 'C113', 113);
+    const realQ = fsb.queueCellIntent_;
+    fsb.queueCellIntent_ = function (ctx, tabName, row) { if (tabName === 'Cultural_Ledger' && row === 3) throw new Error('synthetic intent failure'); return realQ.apply(null, arguments); };
+    let msg = '';
+    try { fsb.flushCulturalFame_(r2.ctx); } catch (e) { msg = e.message; }
+    fsb.queueCellIntent_ = realQ;
+    check('engine.312 (gate 1 §2): one row\'s intent fails → the flush still writes the others, then throws naming the row and the score it was owed',
+      /row 3 owed 100 \(was 99\)/.test(msg) && byRow(r2.ctx) === '2:43,5:0', msg + ' | ' + byRow(r2.ctx));
+    const r3 = world();
+    r3.cul.v[0][C('FameScore') - 1] = 'Fame';
+    let msg3 = '';
+    try { fsb.processMediaUsage_(r3.ctx, 'C113', 113); } catch (e) { msg3 = e.message; }
+    check('engine.312 (gate 1 §2): a Cultural_Ledger header without FameScore → the pass throws before any Processed mark',
+      /lacks FameScore/.test(msg3) && !updatesOf(r3.ctx).some(u => u.tab === 'Citizen_Media_Usage'), msg3);
+  }
+  // R2.1(d) through the real safePhaseCall_ (extracted from godWorldEngine2.js): a Famous throw is logged; the next phase flushes
+  {
+    const gw = fs.readFileSync(path.join(ROOT, 'phase01-config/godWorldEngine2.js'), 'utf8');
+    const grab = name => { const i = gw.indexOf('function ' + name + '('); let d = 0, j = gw.indexOf('{', i); for (; j < gw.length; j++) { if (gw[j] === '{') d++; else if (gw[j] === '}' && --d === 0) break; } return gw.slice(i, j + 1); };
+    const errs = [];
+    fsb.logEngineError_ = (ctx, phase, e) => errs.push(phase + ': ' + e.message);
+    vm.runInContext(grab('recordPhaseTiming_') + '\n' + grab('safePhaseCall_'), fsb);
+    const t = world();
+    fsb.safePhaseCall_(t.ctx, 'Phase5-Advancement', () => fsb.processMediaUsage_(t.ctx, 'C113', 113));
+    fsb.safePhaseCall_(t.ctx, 'Phase7-Famous', () => { fsb.decayCulturalFame_(t.ctx); throw new Error('synthetic Famous failure'); });
+    const ok = fsb.safePhaseCall_(t.ctx, 'Phase7-FameFlush', () => fsb.flushCulturalFame_(t.ctx));
+    check('engine.312 (R2.1 d, real safePhaseCall_): Famous throws and is logged; Phase7-FameFlush still persists the paper (r2 42, r3 100, r5 0)',
+      ok === true && errs.length === 1 && /Phase7-Famous: synthetic/.test(errs[0]) && byRow(t.ctx) === '2:42,3:100,5:0', JSON.stringify(errs) + ' ' + byRow(t.ctx));
+  }
+  // §4: the manual operator path writes direct — existing cells, and a pending CREATE appended and read back
+  {
+    const m = world();
+    m.ctx.manualRun = true;
+    fsb.processMediaUsage_(m.ctx, 'C113', 113);
+    fsb.applyTierLadderState_(m.ctx, 113);
+    const before = m.cul.v.length;
+    fsb.flushCulturalFame_(m.ctx);
+    const added = m.cul.v.slice(before);
+    check('engine.312 (gate 1 §4): manual run → r2 written 43 direct, r4 floored 25 direct, both roster rows appended (floor 25), no FameScore intents',
+      m.cul.v[1][C('FameScore') - 1] === 43 && m.cul.v[3][C('FameScore') - 1] === 25 && added.length === 2 &&
+      added.every(r => r[C('FameScore') - 1] === 25) && fameCells(m.ctx).length === 0,
+      JSON.stringify({ r2: m.cul.v[1][C('FameScore') - 1], r4: m.cul.v[3][C('FameScore') - 1], added: added.map(r => [r[2], r[11]]) }));
   }
 
   // ── the one record rule ──

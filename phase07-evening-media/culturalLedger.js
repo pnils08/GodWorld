@@ -149,22 +149,23 @@ function culturalTargetIdxByPop_(data, popId) {
 }
 
 // The Cycle's accumulator; the Cultural_Ledger tab is read once, the first
-// time any writer touches fame. Row numbers are sheet rows (1-based).
+// time any writer touches fame (Phase 5 opens it before its first Processed
+// mark). Row numbers are sheet rows (1-based). Fails closed (codex diff gate 1
+// §2): a missing or unreadable tab, or one without FameScore / UniverseLinks /
+// LastSeenCycle, throws — never an empty ledger that turns a credit into "no
+// row" — and nothing is cached, so the next caller throws too.
 function culturalFameAccum_(ctx) {
   if (ctx._culturalFame) return ctx._culturalFame;
-  var acc = { rows: {}, pending: [], floorPops: {}, data: [], iFame: -1, iPop: -1, iLast: -1,
-              paperCredited: 0, paperNoRow: 0 };
-  ctx._culturalFame = acc;
-  try {
-    var sheet = ctx.ss ? ctx.ss.getSheetByName('Cultural_Ledger') : null;
-    if (sheet && sheet.getLastRow() >= 1) acc.data = sheet.getDataRange().getValues();
-  } catch (eA) {
-    Logger.log('culturalFameAccum_: Cultural_Ledger read failed — ' + eA.message);
+  var sheet = ctx.ss ? ctx.ss.getSheetByName('Cultural_Ledger') : null;
+  if (!sheet) throw new Error('engine.312: Cultural_Ledger tab missing — fame cannot be accumulated');
+  var data = sheet.getDataRange().getValues();
+  var h = data[0] || [];
+  var acc = { rows: {}, pending: [], floorPops: {}, data: data, iFame: h.indexOf('FameScore'), iPop: h.indexOf('UniverseLinks'),
+              iLast: h.indexOf('LastSeenCycle'), paperCredited: 0, paperNoRow: 0, flushed: null };
+  if (acc.iFame < 0 || acc.iPop < 0 || acc.iLast < 0) {
+    throw new Error('engine.312: Cultural_Ledger header lacks FameScore / UniverseLinks / LastSeenCycle — fame cannot be accumulated');
   }
-  var h = acc.data[0] || [];
-  acc.iFame = h.indexOf('FameScore');
-  acc.iPop = h.indexOf('UniverseLinks');
-  acc.iLast = h.indexOf('LastSeenCycle');
+  ctx._culturalFame = acc;
   return acc;
 }
 
@@ -172,7 +173,7 @@ function culturalFameRow_(acc, rowNum) {
   var e = acc.rows[rowNum];
   if (!e) {
     var src = acc.data[rowNum - 1] || [];
-    e = acc.rows[rowNum] = { base: Number(src[acc.iFame >= 0 ? acc.iFame : 11]) || 0, paper: 0, decay: 0, sightings: 0, floor: false };
+    e = acc.rows[rowNum] = { base: Number(src[acc.iFame]) || 0, paper: 0, decay: 0, sightings: 0, floor: false };
   }
   return e;
 }
@@ -216,40 +217,70 @@ function culturalFameMarkFloor_(ctx, popId) {
 
 // Phase7-FameFlush. One FameScore intent per touched row whose final differs
 // from the sheet; each pending CREATE gets its final score in its append row.
-// The manual operator path (runAdvancementIntakeManual, no Phase 10) writes
-// direct, as its Processed marks do.
+// Runs once a Cycle: a second call returns the first call's counts and queues
+// nothing (codex diff gate 1 §2). A row whose intent fails is skipped, the
+// rest still flush, and the phase then throws naming every failed row and the
+// score it was owed (Engine_Errors — the receipt / re-base repairs from the
+// record). The manual operator path (runAdvancementIntakeManual, no Phase 10)
+// writes direct, as its Processed marks do: existing cells, and each pending
+// CREATE appended and read back.
 function flushCulturalFame_(ctx) {
   var acc = ctx && ctx._culturalFame;
-  var out = { touched: 0, written: 0, pending: 0, paperCredited: 0, paperNoRow: 0 };
+  var out = { touched: 0, written: 0, pending: 0, paperCredited: 0, paperNoRow: 0, failed: [] };
   if (!acc) return out;
+  if (acc.flushed) return acc.flushed;
+  acc.flushed = out;
   out.paperCredited = acc.paperCredited;
   out.paperNoRow = acc.paperNoRow;
   var S = ctx.summary || {};
-  var directSheet = (ctx.manualRun && ctx.ss) ? ctx.ss.getSheetByName('Cultural_Ledger') : null;
+  var directSheet = ctx.manualRun ? culturalLedgerSheetDirect_(ctx) : null;
   for (var rn in acc.rows) {
     if (!acc.rows.hasOwnProperty(rn)) continue;
     var e = acc.rows[rn];
     out.touched++;
     var fin = culturalFameFinal_(e);
-    if (fin === e.base || acc.iFame < 0) continue;
-    if (directSheet) {
-      directSheet.getRange(Number(rn), acc.iFame + 1).setValue(fin);
-    } else {
-      queueCellIntent_(ctx, 'Cultural_Ledger', Number(rn), acc.iFame + 1, fin,
-        'engine.312 fame ' + e.base + ' -> ' + fin + ' (paper ' + e.paper + ', fade ' + e.decay +
-        ', sightings ' + e.sightings + (e.floor ? ', famous floor' : '') + ')', 'media');
+    if (fin === e.base) continue;
+    try {
+      if (directSheet) {
+        directSheet.getRange(Number(rn), acc.iFame + 1).setValue(fin);
+      } else {
+        queueCellIntent_(ctx, 'Cultural_Ledger', Number(rn), acc.iFame + 1, fin,
+          'engine.312 fame ' + e.base + ' -> ' + fin + ' (paper ' + e.paper + ', fade ' + e.decay +
+          ', sightings ' + e.sightings + (e.floor ? ', famous floor' : '') + ')', 'media');
+      }
+      out.written++;
+    } catch (eW) {
+      out.failed.push('row ' + rn + ' owed ' + fin + ' (was ' + e.base + '): ' + eW.message);
     }
-    out.written++;
   }
   var paperBy = S.paperFameByPop || {};
   for (var p = 0; p < acc.pending.length; p++) {
     var pc = acc.pending[p];
     pc.intent.values[0][11] = culturalFamePendingFinal_(acc, paperBy, pc);   // 11 = FameScore (CREATE row)
+    if (directSheet) {
+      try {
+        directSheet.appendRow(pc.intent.values[0]);
+        var back = directSheet.getRange(directSheet.getLastRow(), 2).getValue();   // col B = CUL-ID
+        if (back !== pc.intent.values[0][1]) throw new Error('read-back ' + back);
+      } catch (eA) {
+        out.failed.push('new row ' + pc.intent.values[0][1] + ' not appended: ' + eA.message);
+        continue;
+      }
+    }
     out.pending++;
   }
   S.culturalFameFlush = out;
   Logger.log('flushCulturalFame_: ' + JSON.stringify(out));
+  if (out.failed.length) throw new Error('engine.312 fame flush: ' + out.failed.length + ' row(s) not written — ' + out.failed.join('; '));
   return out;
+}
+
+// The manual path's direct sheet (no Phase 10 there). Its queued CREATE
+// intents never execute, so the flush appends them itself.
+function culturalLedgerSheetDirect_(ctx) {
+  var sh = ctx.ss ? ctx.ss.getSheetByName('Cultural_Ledger') : null;
+  if (!sh) throw new Error('engine.312: Cultural_Ledger tab missing on the manual path');
+  return sh;
 }
 
 // R3: a new row starts at its linked citizen's paper record (the whole tab,
@@ -272,10 +303,10 @@ function decayCulturalFame_(ctx) {
   var S = ctx.summary || {};
   var cycle = S.cycleId || (ctx.config && ctx.config.cycleCount) || 0;
   if (!cycle) return;
+  var acc = culturalFameAccum_(ctx);   // throws on an unreadable / malformed tab (fail closed)
   try {
-    var acc = culturalFameAccum_(ctx);
     var v = acc.data;
-    if (v.length < 2 || acc.iFame < 0 || acc.iLast < 0) return;
+    if (v.length < 2) return;
     var decayed = 0;
     for (var r = 1; r < v.length; r++) {
       var fame = Number(v[r][acc.iFame]) || 0;
@@ -445,11 +476,24 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   // row named differently ("Muralist Dante Reyes") instead of minting a twin.
   // ═══════════════════════════════════════════════════════════════════════════
   var targetIdx = -1;
-  for (var ti = 1; ti < data.length; ti++) {
-    if ((iName >= 0 ? data[ti][iName] : data[ti][2]) === name) { targetIdx = ti; break; }
-  }
   var byPop = false;
   var popKey = String(popId || '').trim().toUpperCase();
+  // engine.312 (codex diff gate 1 §1 b): a `roster` registration is for one
+  // citizen — their personal row by POPID first, then a row of the same name
+  // that links nobody else; never another citizen's row. Sightings keep
+  // engine.313's order (exact Name, then POPID).
+  var linkOk = function(idx) {
+    var link = iUniverse >= 0 ? String(data[idx][iUniverse] || '').trim().toUpperCase() : '';
+    return !link || link === popKey;
+  };
+  if (!sighted && popKey && iUniverse >= 0) targetIdx = culturalTargetIdxByPop_(data, popKey);
+  if (targetIdx < 0) {
+    for (var ti = 1; ti < data.length; ti++) {
+      if ((iName >= 0 ? data[ti][iName] : data[ti][2]) !== name) continue;
+      if (!sighted && !linkOk(ti)) continue;
+      targetIdx = ti; break;
+    }
+  }
   if (targetIdx < 0 && popKey && iUniverse >= 0) {
     targetIdx = culturalTargetIdxByPop_(data, popKey);
     byPop = targetIdx > 0;
@@ -634,8 +678,11 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
     };
 
     // engine.312: the row is touched (the flush writes its one FameScore cell);
-    // a sighting adds +1.
+    // a sighting adds +1. A famous citizen's floor rides the row they resolve
+    // to unless it links another citizen (codex diff gate 1 §1 b — the
+    // unlinked same-name row a roster registration claims).
     var fameRow = culturalFameRow_(fameAcc, rowNum);
+    if (popKey && fameAcc.floorPops[popKey] && linkOk(i)) fameRow.floor = true;
     if (sighted) {
       fameRow.sightings += 1;
       sightExisting_(reg);

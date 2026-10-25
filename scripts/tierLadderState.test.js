@@ -23,6 +23,8 @@ cl.queueCellIntent_ = (ctx, tab, r, c, v) => clCells.push([tab, r, c, v]);
 sandbox.paperFameDelta_ = cl.paperFameDelta_;
 sandbox.culturalFameAddPaper_ = cl.culturalFameAddPaper_;
 sandbox.culturalFameMarkFloor_ = cl.culturalFameMarkFloor_;
+sandbox.culturalFameAccum_ = cl.culturalFameAccum_;
+sandbox.flushCulturalFame_ = cl.flushCulturalFame_;
 const src = (helperFile ? R(helperFile) + '\n' : '') + R('phase01-config/advanceSimulationCalendar.js') + '\n' + R('phase05-citizens/processAdvancementIntake.js');
 const E = new Function(...Object.keys(sandbox), src + '\nreturn { applyTierLadderState_, tierForEarnedUsage_, earnedCitationsByKey_, intakeTierForExisting_, decayMediaAttention_, processMediaUsage_, TIER_BAR, FAME_USAGE_BAR, TIER_PAY, tierPayFactor_ };')(...Object.values(sandbox));
 
@@ -34,7 +36,8 @@ const row = (pop, first, last, tier, use, extra) => Object.assign([pop, first, l
 const usage = (entries) => [['Timestamp', 'Cycle', 'CitizenName', 'UsageType']].concat(entries.map(([n, t, c]) => ['', 'C' + (c || 100), n, t || 'quoted']));
 const ctxOf = (rows, usageRows) => ({
   summary: { cycleRef: 'Y3C4' }, ledger: { headers: H.slice(), rows: rows.map(r => r.slice()), dirty: false },
-  ss: { getSheetByName: (n) => n === 'Citizen_Media_Usage' ? { getLastRow: () => usageRows.length, getDataRange: () => ({ getValues: () => usageRows }) } : null },
+  ss: { getSheetByName: (n) => n === 'Citizen_Media_Usage' ? { getLastRow: () => usageRows.length, getDataRange: () => ({ getValues: () => usageRows }) }
+    : n === 'Cultural_Ledger' ? { getLastRow: () => 1, getDataRange: () => ({ getValues: () => [['Name', 'UniverseLinks', 'FameScore', 'LastSeenCycle']] }) } : null },   // engine.312: header-only roster
 });
 
 console.log('\n1. bars:');
@@ -118,7 +121,8 @@ console.log('\n7. the citation event no longer decides Tier (grep-as-test):');
 console.log('\n8. engine.152 — coverage runs both ways:');
 {
   const usage2 = (entries) => [['Timestamp', 'Cycle', 'CitizenName', 'UsageType', 'Context', 'Reporter', 'Processed', 'Sentiment']].concat(entries.map(([n, t, s, p]) => ['', 'C111', n, t || 'quoted', 'ctx-' + n, '', p || '', s || '']));
-  const mkSs = (usageRows, gcRows) => { const set = []; return { set, getSheetByName: (n) => n === 'Citizen_Media_Usage' ? { getLastRow: () => usageRows.length, getDataRange: () => ({ getValues: () => usageRows }), getRange: (r, c) => ({ setValue: (v) => set.push([r, c, v]) }) } : n === 'Generic_Citizens' && gcRows ? { getDataRange: () => ({ getValues: () => gcRows }), getRange: (r, c) => ({ setValue: (v) => set.push(['gc', r, c, v]) }) } : null }; };
+  const CUL0 = [['Name', 'UniverseLinks', 'FameScore', 'LastSeenCycle']];   // engine.312: the usage pass opens the fame accumulator
+  const mkSs = (usageRows, gcRows, noCul) => { const set = []; return { set, getSheetByName: (n) => n === 'Cultural_Ledger' && !noCul ? { getLastRow: () => 1, getDataRange: () => ({ getValues: () => CUL0 }) } : n === 'Citizen_Media_Usage' ? { getLastRow: () => usageRows.length, getDataRange: () => ({ getValues: () => usageRows }), getRange: (r, c) => ({ setValue: (v) => set.push([r, c, v]) }) } : n === 'Generic_Citizens' && gcRows ? { getDataRange: () => ({ getValues: () => gcRows }), getRange: (r, c) => ({ setValue: (v) => set.push(['gc', r, c, v]) }) } : null }; };
   const cited = E.earnedCitationsByKey_({ ss: mkSs(usage2([['Ada Lin', 'quoted', 'positive'], ['Ada Lin', 'quoted', 'negative'], ['Ada Lin', 'mentioned', ''], ['Ada Lin', 'byline-published', 'negative']])) });
   check('earned splits cited vs hard; blank = neutral; a hard byline is still a byline', cited['ada lin'].cited === 3 && cited['ada lin'].hard === 1 && cited['ada lin'].published === 1, JSON.stringify(cited));
   const c1 = ctxOf([row('POP-H', 'Ada', 'Lin', 4, 4)], usage2([['Ada Lin', 'quoted', 'positive'], ['Ada Lin', 'quoted', 'negative'], ['Ada Lin', 'quoted', 'negative']]));
@@ -135,6 +139,14 @@ console.log('\n8. engine.152 — coverage runs both ways:');
   const c3 = { summary: {}, ss: mkSs([['Timestamp', 'Cycle', 'CitizenName', 'UsageType', 'Context', 'Reporter', 'Processed'], ['', 'C111', 'Ada Lin', 'quoted', '', '', '']]), ledger: { headers: H.slice(), rows: [row('POP-H', 'Ada', 'Lin', 4, 0)], dirty: false } };
   E.processMediaUsage_(c3, 'now', 111);
   check('Sentiment header self-arms when absent (like Processed)', c3.ss.set.some(s => s[2] === 'Sentiment') && c3.ledger.rows[0][5] === 1);
+  check('engine.312: the Source header self-arms after Sentiment when absent', c3.ss.set.some(s => s[1] === 9 && s[2] === 'Source'), JSON.stringify(c3.ss.set));
+  const marks = [];
+  const E4 = new Function(...Object.keys(sandbox), src + '\nreturn { processMediaUsage_ };')(...Object.values(Object.assign({}, sandbox, { queueCellIntent_: (ctx, tab, r, c, v) => marks.push([tab, r, c, v]) })));
+  const noCul = { summary: {}, ss: mkSs(usage2([['Ada Lin', 'quoted', 'positive']]), null, true), ledger: { headers: H.slice(), rows: [row('POP-H', 'Ada', 'Lin', 4, 0)], dirty: false } };
+  let threw = '';
+  try { E4.processMediaUsage_(noCul, 'now', 111); } catch (e) { threw = e.message; }
+  check('engine.312 (codex gate 1 §2): no Cultural_Ledger → the pass throws before any Processed mark or UsageCount move (fail closed)',
+    /Cultural_Ledger tab missing/.test(threw) && !marks.some(m => m[0] === 'Citizen_Media_Usage') && noCul.ledger.rows[0][5] === 0, threw + ' ' + JSON.stringify(marks));
   const floor = { summary: {}, ss: mkSs(usage2([['Ada Lin', 'quoted', 'negative']])), ledger: { headers: H.slice(), rows: [row('POP-H', 'Ada', 'Lin', 4, 0)], dirty: false } };
   E.processMediaUsage_(floor, 'now', 111);
   check('floor 0 — a hard light on a count of 0 stays 0', floor.ledger.rows[0][5] === 0);
@@ -160,7 +172,7 @@ console.log('\n9. engine.118 — fame is permanent:');
   check('decay skips a famous row entirely — count 30 and Tier 2 untouched after 21 quiet cycles', dc.ledger.rows[0][5] === 30 && dc.ledger.rows[0][3] === 2);
   // engine.312: a hard light on a famous name moves FameScore −2 through the fame accumulator, never the count
   const cells = [];
-  const cul = [['EntityName', 'UniverseLinks', 'FameScore'], ['Vin Keane', 'POP-V', 40], ['Vin Keane (dup)', 'POP-V', 12]];
+  const cul = [['EntityName', 'UniverseLinks', 'FameScore', 'LastSeenCycle'], ['Vin Keane', 'POP-V', 40, 110], ['Vin Keane (dup)', 'POP-V', 12, 110]];
   const ssF = { getSheetByName: (n) => n === 'Citizen_Media_Usage' ? { getLastRow: () => 2, getDataRange: () => ({ getValues: () => [['Timestamp', 'Cycle', 'CitizenName', 'UsageType', 'Context', 'Reporter', 'Processed', 'Sentiment'], ['', 'C111', 'Vin Keane', 'quoted', 'ctx', '', '', 'negative']] }), getRange: () => ({ setValue: () => {} }) } : n === 'Cultural_Ledger' ? { getLastRow: () => 3, getDataRange: () => ({ getValues: () => cul }) } : null };
   const fc = { summary: { cycleRef: 'Y3C4' }, ss: ssF, ledger: { headers: H.slice(), rows: [row('POP-V', 'Vin', 'Keane', 1, 60, { 10: 'C90' })], dirty: false } };
   const E2 = new Function(...Object.keys(sandbox), src + '\nreturn { processMediaUsage_ };')(...Object.values(Object.assign({}, sandbox, { queueCellIntent_: (ctx, tab, r, c, v) => cells.push([tab, r, c, v]) })));
@@ -172,7 +184,7 @@ console.log('\n9. engine.118 — fame is permanent:');
   check('engine.312: the flush writes 40 → 38 (−2) on the highest-fame linked row; the whole-tab record reads −2',
     clCells.length === 1 && clCells[0].join() === 'Cultural_Ledger,2,3,38' && fc.summary.paperFameByPop['POP-V'] === -2, JSON.stringify({ clCells, rec: fc.summary.paperFameByPop }));
   // cut 3b: the famous sub-roster follows the marker; engine.312: every famous citizen keeps the 25 floor
-  const culRows = [['Name', 'UniverseLinks', 'FameScore'], ['Vin Keane', 'POP-V', 26], ['Ann Low', 'POP-A', 15]];
+  const culRows = [['Name', 'UniverseLinks', 'FameScore', 'LastSeenCycle'], ['Vin Keane', 'POP-V', 26, 110], ['Ann Low', 'POP-A', 15, 110]];
   const cellsB = [];
   const E3 = new Function(...Object.keys(sandbox), src + '\nreturn { applyTierLadderState_ };')(...Object.values(Object.assign({}, sandbox, { queueCellIntent_: (ctx, tab, r, c, v) => cellsB.push([tab, r, c, v]) })));
   registered.length = 0;

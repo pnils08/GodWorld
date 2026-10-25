@@ -246,6 +246,10 @@ const sandbox2 = {
   heritageTierByPop_: () => ({}), heritageRank_: () => 0,
   bondProximity_: () => ({ near: (a, b) => a === b || (ADJ[a] || []).indexOf(b) >= 0 }),
 };
+// engine.312: the usage pass opens the real fame accumulator (culturalLedger.js, its own vm) before its first mark
+const clBox = vm.createContext({ Logger: { log() {} }, Math, String, Number, Array, Object, JSON, queueCellIntent_: () => {} });
+load(clBox, 'phase07-evening-media/culturalLedger.js');
+for (const fn of ['paperFameDelta_', 'culturalFameAccum_', 'culturalFameAddPaper_', 'culturalFameMarkFloor_']) sandbox2[fn] = clBox[fn];
 const E2 = new Function(...Object.keys(sandbox2), src('phase01-config/advanceSimulationCalendar.js') + '\n' + src('utilities/citizenDerivation.js') + '\n' + src('phase05-citizens/processAdvancementIntake.js') +
   '\nreturn { checkFamilyMatchPromotions_, checkEmergencePromotions_, processAdvancementRows_, familySpotsOpen_, familyLedgerCols_, gcFamilyLinks_, simYearFromCycle_, processMediaUsage_, earnedCitationsByKey_, isFamilyUsage_, markAsEmergedInGeneric_, familyAnchorOf_ };')(...Object.values(sandbox2));
 const SL2 = ['POPID','First','MaidenName','Last','ClockMode','Tier','RoleType','Status','BirthYear','LifeHistory','SpouseId','UsageCount','Neighborhood','HouseholdId','MaritalStatus','NumChildren','ParentIds','ChildrenIds','Income','NetWorth','DebtLevel','EducationLevel','CareerStage','YearsInCareer','EmployerBizId','Gender','SkillTags'];
@@ -263,6 +267,7 @@ function world2(ledgerRows, gcRows, rngFn) {
     Household_Ledger: mkSheet([['HouseholdId','HeadOfHousehold','HouseholdType','Members','Neighborhood','HousingType','MonthlyRent','HousingCost','HouseholdIncome','FormedCycle','DissolvedCycle','Status','HouseholdSavings']]),
     Family_Relationships: mkSheet([['HouseholdId','Husband','Wife','RelationshipType','SinceCycle','Status','Child1','Child2','Child3','Child4','Child5']]),
     Business_Ledger: mkSheet([['BIZ_ID','Name','Sector','Neighborhood','Employee_Count','Avg_Salary','Annual_Revenue','Growth_Rate','Key_Personnel']]),
+    Cultural_Ledger: mkSheet([['Timestamp','CUL-ID','Name','RoleType','FameCategory','CulturalDomain','Status','UniverseLinks','FirstSeenCycle','LastSeenCycle','MediaCount','FameScore']]),
   };
   const ctx = {
     ledger: { headers: SL2.slice(), rows: ledgerRows, dirty: false },
@@ -506,6 +511,7 @@ t('a family-own-words row ticks the Family row\'s EmergenceCount and not a same-
   E2.processMediaUsage_(w.ctx, 'C' + C2, C2);
   eq(w.sheets.Generic_Citizens.rows[1][g2('EmergenceCount')], 2);
   eq(w.ctx.ledger.rows[1][c2('UsageCount')], 2);
+  eq(JSON.stringify(w.ctx.summary.paperFameByPop), '{}');   // engine.312: own words about family are never fame
 });
 t('the same row is no earned citation on the tier ladder; a media mention still is', () => {
   const w = world2([darrin()], [famRow()]);

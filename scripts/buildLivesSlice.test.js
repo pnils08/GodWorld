@@ -18,7 +18,13 @@ const profiles = new Map([
   ['POP-90005', { POPID: 'POP-90005', Name: 'Test Widow', RoleType: 'Teacher', Neighborhood: 'Temescal' }],
   ['POP-90006', { POPID: 'POP-90006', Name: 'Test Friend', RoleType: 'Mechanic', Neighborhood: 'Fruitvale' }],
   ['POP-90007', { POPID: 'POP-90007', Name: 'Test Open Stay', RoleType: 'Manager, Oakland A\'s', Neighborhood: 'Lake Merritt' }],
-  ['POP-90008', { POPID: 'POP-90008', Name: 'Test Discharged', RoleType: 'Broker', Neighborhood: 'Rockridge' }]
+  ['POP-90008', { POPID: 'POP-90008', Name: 'Test Discharged', RoleType: 'Broker', Neighborhood: 'Rockridge' }],
+  ['POP-90010', { POPID: 'POP-90010', Name: 'Test PairA', RoleType: 'Nurse', Neighborhood: 'Temescal' }],
+  ['POP-90011', { POPID: 'POP-90011', Name: 'Test PairB', RoleType: 'Cook', Neighborhood: 'Temescal' }],
+  ['POP-90012', { POPID: 'POP-90012', Name: 'Test Solo', RoleType: 'Clerk', Neighborhood: 'Fruitvale' }],
+  ['POP-90013', { POPID: 'POP-90013', Name: 'Test Winner', RoleType: 'Driver', Neighborhood: 'Uptown' }],
+  ['POP-90014', { POPID: 'POP-90014', Name: 'Test Loser', RoleType: 'Barber', Neighborhood: 'Dimond' }],
+  ['POP-90015', { POPID: 'POP-90015', Name: 'Test Reached', RoleType: 'Teacher', Neighborhood: 'Laurel' }]
 ]);
 const beats = {
   Lived_Events: [
@@ -41,7 +47,20 @@ const beats = {
     { AdmissionId: 'H-C105-POP-90007', POPID: 'POP-90007', Name: 'Test Open Stay', Neighborhood: 'Lake Merritt', Cause: 'a workplace accident', AdmitCycle: '105', StatusNow: 'active', DischargeCycle: '' },
     { AdmissionId: 'H-C105-POP-90008', POPID: 'POP-90008', Name: 'Test Discharged', Neighborhood: 'Rockridge', Cause: 'a workplace accident', AdmitCycle: '105', StatusNow: 'active', DischargeCycle: '109', Outcome: 'recovered' }
   ],
-  Household_Ledger: [],
+  Household_Ledger: [
+    { HouseholdId: 'HH-0111-F001', HeadOfHousehold: 'POP-90010', HouseholdType: 'couple', Members: '["POP-90010","POP-90011"]', Neighborhood: 'Temescal', HousingType: 'rented', FormedCycle: String(cycle) },
+    { HouseholdId: 'HH-0111-F002', HeadOfHousehold: 'POP-90012', HouseholdType: 'solo', Members: '["POP-90012"]', Neighborhood: 'Fruitvale', HousingType: 'owned', FormedCycle: String(cycle) },
+    { HouseholdId: 'HH-0110-F001', HeadOfHousehold: 'POP-90006', HouseholdType: 'solo', Members: '["POP-90006"]', Neighborhood: 'Fruitvale', HousingType: 'rented', FormedCycle: String(cycle - 1) }
+  ],
+  Casino_Ledger: [
+    { WagerId: 'w-win', POPID: 'POP-90013', MarketFamily: 'undocked', Stake: '400', Payout: '1100', Status: 'settled-win', CyclePlaced: String(cycle - 1), CycleSettled: String(cycle) },
+    { WagerId: 'w-loss', POPID: 'POP-90014', MarketFamily: 'undocked', Stake: '500', Payout: '0', Status: 'settled-loss', CyclePlaced: String(cycle), CycleSettled: String(cycle) },
+    { WagerId: 'w-open', POPID: 'POP-90013', MarketFamily: 'undocked', Stake: '50', Payout: '0', Status: 'open', CyclePlaced: String(cycle), CycleSettled: '' }
+  ],
+  Story_Seed_Deck: [
+    { Cycle: String(cycle), SeedID: 'seed-1', Desk: 'sports', Class: 'major', Domain: 'SPORTS', Neighborhood: 'Citywide', What: 'sentiment +2.1', Why: "A's W3 [hot-streak] | The sports week reached 2 citizen(s)",
+      Citizens: 'POP-90003 Test Climber; POP-90015 Test Reached', CitizenEvents: 'Test Climber — saw their name in the sports pages again | Test Reached — got asked about the club' }
+  ],
   Story_Hook_Deck: [
     { Cycle: String(cycle), HookType: 'FAMILY_CELEBRATION', Domain: 'FAMILY', Neighborhood: 'West Oakland', Priority: '3', HookText: 'A block welcomes a newborn', SuggestedJournalist: '' },
     { Cycle: String(cycle), HookType: 'RENT_BURDEN_CRISIS', Domain: 'ECONOMIC', Neighborhood: 'Downtown', Priority: '5', HookText: 'not hers', SuggestedJournalist: '' }
@@ -75,11 +94,22 @@ try {
     { Timestamp: 't', POPID: 'POP-90004', Name: '', EventTag: 'Daily|source:familyLife|tier:3', EventText: 'sorted a box of old things', Neighborhood: '', Cycle: String(cycle) },
     { Timestamp: 't', POPID: 'POP-90004', Name: '', EventTag: 'Strain', EventText: 'the statement was the first thing read', Neighborhood: '', Cycle: String(cycle + 1) });
 
-  // Day 1: the four heaviest events (death first), the small moment, the open stay; the discharged
-  // row and the bookkeeping line never ride; a person already on the page is not a second moment.
+  // Day 1: the five events (death first), the two households (couple first), the two settled wagers (win
+  // first — the bigger swing), one person a seed reached (not the climber, who already has his event),
+  // the small moment, the open stay; the discharged row and the bookkeeping line never ride; a person
+  // already on the page is not a second moment.
   const day1 = L.buildLivesSlice(cycle, { root, beats, profiles });
   assert.equal(day1.empty, false);
-  assert.deepStrictEqual(day1.facts.filter(f => f.kind !== 'moment' && f.kind !== 'stay' && f.kind !== 'thread').map(f => f.kind), ['death', 'hospital', 'birth', 'retirement']);
+  assert.deepStrictEqual(day1.facts.filter(f => f.kind !== 'thread').map(f => f.kind), ['death', 'hospital', 'birth', 'retirement', 'promotion', 'household', 'household', 'casino', 'casino', 'seed', 'moment', 'stay']);
+  assert.ok(day1.facts.find(f => f.kind === 'promotion').text.includes('the record lists their work as Janitor'));
+  assert.ok(/^Test PairA and Test PairB set up a household together in Temescal, renting \(C111\)$/.test(day1.facts.filter(f => f.kind === 'household')[0].text), day1.facts.filter(f => f.kind === 'household')[0].text);
+  assert.ok(/^Test Solo moved into a place of their own in Fruitvale, a home they own \(C111\)$/.test(day1.facts.filter(f => f.kind === 'household')[1].text));
+  assert.ok(day1.citizens.some(c => c.popid === 'POP-90011' && /set up a household together/.test(c.why)), 'both members of a couple are people on the record');
+  assert.ok(/^Test Winner won on the UNDOCKED book — staked 400, paid 1100, Uptown \(C111\)$/.test(day1.facts.filter(f => f.kind === 'casino')[0].text), day1.facts.filter(f => f.kind === 'casino')[0].text);
+  assert.ok(/^Test Loser lost on the UNDOCKED book — staked 500, the book kept it, Dimond \(C111\)$/.test(day1.facts.filter(f => f.kind === 'casino')[1].text));
+  const seed = day1.facts.find(f => f.kind === 'seed');
+  assert.ok(/^Test Reached — got asked about the club, Laurel — one of 2 people the Cycle's sports turn reached \(A's W3 \[hot-streak\]\) \(C111, seed\)$/.test(seed.text), seed.text);
+  assert.ok(!day1.facts.some(f => f.kind === 'seed' && f.popid === 'POP-90003'), 'the climber already has his passage — not a second one from the seed');
   assert.ok(day1.facts[0].text.startsWith('Test Widow lost Test Departed'), 'a death is the survivor\'s passage: ' + day1.facts[0].text);
   assert.ok(day1.facts.some(f => f.kind === 'moment' && /Test Friend — reconnected/.test(f.text)));
   assert.ok(!day1.facts.some(f => f.kind !== 'thread' && /Emerged into|second small moment/.test(f.text)), 'not a second moment');
@@ -94,7 +124,7 @@ try {
   assert.ok(day1.prewrite.pageVoices.length === 1 && /Test Patient, own page \(night/.test(day1.prewrite.pageVoices[0]), 'the person\'s own page, never a PRESS reply');
   assert.deepStrictEqual(day1.prewrite.hooks.map(h => h.text), ['A block welcomes a newborn']);
   assert.ok(day1.story.ref.endsWith(' ' + day1.day), 'the ref carries the day so the fanout never drops a daily seat as stale');
-  assert.ok(/1 more news-grade events wait/.test(day1.prewrite.note));
+  assert.strictEqual(day1.prewrite.note, null, 'five events fit the day; a page exists — no note');
 
 
   const patientThread = day1.facts.filter(f => f.kind === 'thread' && f.popid === 'POP-90004').map(f => f.text);
@@ -109,21 +139,15 @@ try {
   assert.equal(Object.keys(covered).length, day1.facts.filter(f => f.kind !== 'thread').length);
   assert.ok(covered['death:POP-90099:111'] && covered['death:POP-90099:111'].popid === 'POP-90005');
 
-  // Day 2: the one event left (the promotion), no repeats.
+  // Day 2: everything the fixture holds was covered on day 1 (the C110 household and the open wager are
+  // not this Cycle's) → empty, with the reason that says so; the covered list forgets nothing inside two Cycles.
   const day2 = L.buildLivesSlice(cycle, { root, beats, profiles });
-  assert.equal(day2.empty, false);
-  assert.deepStrictEqual(day2.facts.filter(f => f.kind !== 'thread').map(f => f.kind), ['promotion']);
-  assert.ok(day2.facts[0].text.includes('the record lists their work as Janitor'));
-
-  // Day 3: everything covered → empty, with the reason that says so.
-  const day3 = L.buildLivesSlice(cycle, { root, beats, profiles });
-  assert.equal(day3.empty, true);
-  assert.ok(/already covered/.test(day3.reason));
-  // The covered list forgets nothing inside two Cycles.
-  assert.equal(Object.keys(JSON.parse(fs.readFileSync(L.coveredPath(root), 'utf8'))).length, day1.facts.filter(f => f.kind !== 'thread').length + 1);
+  assert.equal(day2.empty, true);
+  assert.ok(/already covered/.test(day2.reason));
+  assert.equal(Object.keys(JSON.parse(fs.readFileSync(L.coveredPath(root), 'utf8'))).length, day1.facts.filter(f => f.kind !== 'thread').length);
 
   // Nothing in the dump → the other empty reason.
-  const none = L.buildLivesSlice(cycle, { root, beats: { Lived_Events: [], LifeHistory_Log: [], Hospital_Ledger: [], Household_Ledger: [], Story_Hook_Deck: [] }, profiles });
+  const none = L.buildLivesSlice(cycle, { root, beats: { Lived_Events: [], LifeHistory_Log: [], Hospital_Ledger: [], Household_Ledger: [], Casino_Ledger: [], Story_Seed_Deck: [], Story_Hook_Deck: [] }, profiles });
   assert.ok(none.empty && /no Lived_Events/.test(none.reason));
 
 
@@ -162,7 +186,7 @@ try {
     assert.ok(climber.some(t => /already wrote this person: birth \(C109\)/.test(t)), 'the event\'s cycle, not the slice-run cycle: ' + climber.join(' | '));
     assert.ok(climber.some(t => /headlined Unprinted but gate-passed piece/.test(t)) && !climber.some(t => /profile dossier|####/.test(t)), 'a gate-passed piece counts; a dossier and a hash-line "title" do not');
     assert.ok(!s2.facts.some(f => f.kind === 'stay'), 'the person who died is not also a stay');
-    assert.equal(s2.prewrite.factCap, 60, 'the slice asks the prompt for room for its threads');
+    assert.equal(s2.prewrite.factCap, 90, 'the slice asks the prompt for room for its threads');
   } finally {
     fs.rmSync(root2, { recursive: true, force: true });
   }
@@ -170,7 +194,7 @@ try {
   // Seat wiring: the slug and name both resolve; a non-seat passes through.
   assert.ok(L.isLivesSeat({ persona: 'tamsin-pruitt' }) && L.isLivesSeat({ name: 'Tamsin Pruitt' }) && !L.isLivesSeat({ persona: 'celeste-tran' }));
   assert.equal(L.enrichAssignment({ persona: 'celeste-tran' }, cycle, root).persona, 'celeste-tran');
-  // Day 3 above left the slice EMPTY on disk: the Lives seat sits the day out (null → the fanout drops it), never the generic packet.
+  // Day 2 above left the slice EMPTY on disk: the Lives seat sits the day out (null → the fanout drops it), never the generic packet.
   fs.mkdirSync(path.join(root, 'output', 'beats'), { recursive: true });
   fs.writeFileSync(path.join(root, 'output', 'beats', 'meta.json'), JSON.stringify({ cycle, source: 'test stub — empty dump' }));
   for (const tab of L.SEAT.tabs) fs.writeFileSync(path.join(root, 'output', 'beats', tab + '.jsonl'), '');

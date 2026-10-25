@@ -148,6 +148,7 @@ function seedsFor(beats, cycle, deskRe) {
     .filter(r => Number(r.Cycle) === Number(cycle) && deskRe.test(String(r.Desk || '')))
     .map(r => ({
       seedId: r.SeedID || null, hood: r.Neighborhood || null, domain: r.Domain || null,
+      cls: String(r.Class || '').trim() || null, desk: String(r.Desk || '').trim() || null, what: String(r.What || '').trim() || null, why: String(r.Why || '').trim() || null,
       citizens: String(r.Citizens || '').split(';').map(t => t.trim()).filter(Boolean).map(t => {
         const m = t.match(/^(POP-\d+)\s+(.+)$/i);
         return m ? { popid: m[1].toUpperCase(), name: m[2].trim() } : { popid: null, name: t };

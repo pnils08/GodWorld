@@ -9,7 +9,10 @@
  *   LifeHistory_Log — the raw log rows of this Cycle and the one before: the small moments
  *                     (wedding, graduation, relationship, household) and "what came next".
  *   Hospital_Ledger — stays still active that no event row carries.
- *   Household_Ledger — households formed this Cycle.
+ *   Household_Ledger — households formed this Cycle (a couple's, or a place of one's own).
+ *   Casino_Ledger   — wagers settled this Cycle: a win or a loss on the book.
+ *   Story_Seed_Deck — the Cycle's engine seeds and the citizens each one reached, with their own event
+ *                     line (builder 2026-10-25: "hook her up with the events that attach to citizens").
  *   Story_Hook_Deck — family / household / hospital hooks as colour.
  *   The person's thread (beside every passage): their hospital stay in full, their other log lines
  *   in the dump window, what Lives already wrote them, and the Tribune pieces that named them
@@ -29,16 +32,26 @@ const K = require('./beatSliceKit');
 const SEAT = {
   slug: 'tamsin-pruitt', name: 'Tamsin Pruitt', popid: null, desk: 'culture',
   kind: 'beat-lives', domain: 'lives', artifact: 'lives', builder: 'buildLivesSlice.js',
-  version: 'LIVES-SLICE-1', nameRe: /tamsin\s*pruitt/i,
-  tabs: ['Lived_Events', 'LifeHistory_Log', 'Hospital_Ledger', 'Household_Ledger', 'Story_Hook_Deck'],
-  approach: 'Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion — and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to.',
+  version: 'LIVES-SLICE-2', nameRe: /tamsin\s*pruitt/i,
+  tabs: ['Lived_Events', 'LifeHistory_Log', 'Hospital_Ledger', 'Household_Ledger', 'Casino_Ledger', 'Story_Seed_Deck', 'Story_Hook_Deck'],
+  approach: 'Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion; a household set up or a place of their own; a win or a loss on the book; the people a turn of the city reached and what it did to their day; and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to.',
   roomIsYours: 'the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented',
   build
 };
 
-const PER_DAY = { events: 4, moments: 3, stays: 2 };
+const PER_DAY = { events: 5, households: 2, casino: 2, seeds: 3, moments: 4, stays: 2 };
 const KIND_ORDER = { death: 0, hospital: 1, birth: 2, retirement: 3, promotion: 4 };
-const SMALL_TAGS = /^(Wedding|Marriage|Graduation|Relationship|Household|Stabilized)$/i;
+// The log's event tags that are something that happened to the person, ranked: 0 shapes a life, 1 is
+// pressure, 2 a tie or a standing, 3 work and school as lived. The day's colour (Daily, Neighborhood,
+// Civic Perception, Personal, PrevEvening, Lifestyle, Sports…) never leads a passage; it rides the thread.
+// Plain Health and Recovering are ailment / wellness texture (the plan's news-grade read), not here.
+const LIFE_TAGS = [
+  [/^(Wedding|Marriage|Graduation|Household|Stabilized|Setback|Maneuver-(Climb|Hold|Retreat)|Career-FieldChange|PostCareer|Business-Gain)$/i, 0],
+  [/^(Strain|Friction)$/i, 1],
+  [/^(Relationship|Reputation|Community|Cultural|Faith|Rivalry|Public|BoundaryKept|QoL|Household-GameNight)$/i, 2],
+  [/^(Work|Education|Career|CareerState|Career-Training)$/i, 3]
+];
+const lifeRank = tag => { for (const [re, r] of LIFE_TAGS) if (re.test(tag)) return r; return null; };
 const BOOKKEEPING = /Emerged into Tier|Added to Simulation_Ledger|Updated to Tier|Promoted to Tier|Intake at Tier|Media usage C\d/i;
 const SELF_SLOTS = /^(morning|midday|afternoon|evening|night|work)$/;
 
@@ -187,29 +200,86 @@ function build(cycle, { root, beats, profiles }) {
   const covered = readCovered(root);
   const day = localDay();
   const tribune = tribuneByPop(root);
+  const nameOf = (pop, fallback) => String((profiles.get(String(pop || '').toUpperCase()) || {}).Name || fallback || '').trim();
+  const hoodOf = pop => String((profiles.get(String(pop || '').toUpperCase()) || {}).Neighborhood || '').trim() || null;
 
   // Today's batch of news-grade events: uncovered, heaviest first, then oldest.
   const pending = events.filter(e => !covered[e.id])
     .sort((a, b) => ((KIND_ORDER[a.kind] ?? 9) - (KIND_ORDER[b.kind] ?? 9)) || (Number(a.cycle) - Number(b.cycle)));
   const todays = pending.slice(0, PER_DAY.events);
 
-  // The small moments: this Cycle's log rows under the small tags, one per person, not bookkeeping.
   // One passage per person per Cycle: today's people, plus anyone already written this Cycle.
   const seenPop = new Set(todays.map(e => String(personFor(e) || '').toUpperCase()));
   for (const e of todays) if (e.kind === 'death' && e.subject) seenPop.add(String(e.subject).toUpperCase()); // the one who died is not also a stay
   for (const v of Object.values(covered)) if (v && v.popid && Number(v.cycle) === Number(cycle)) seenPop.add(String(v.popid).toUpperCase());
-  const moments = [];
+  const take = (pop, id) => { if (!pop || covered[id] || seenPop.has(pop)) return false; seenPop.add(pop); return true; };
+
+  // Households formed this Cycle: a couple's, or a place of one's own. Couples first.
+  const households = [];
+  for (const h of (beats.Household_Ledger || []).filter(h => Number(h.FormedCycle) === Number(cycle))
+    .sort((a, b) => String(b.Members || '').length - String(a.Members || '').length)) {
+    let members = [];
+    try { members = JSON.parse(h.Members || '[]'); } catch (_) { members = String(h.Members || '').match(/POP-\d{5}/g) || []; }
+    members = members.map(m => String(m).toUpperCase()).filter(m => /^POP-\d{5}$/.test(m));
+    const id = 'household:' + String(h.HouseholdId || members.join('+')) + ':' + cycle;
+    if (!members.length || covered[id] || members.some(m => seenPop.has(m))) continue;
+    const named = members.map(m => nameOf(m)).filter(Boolean);
+    if (!named.length) continue;
+    for (const m of members) seenPop.add(m);
+    households.push({ id, pop: members.find(m => nameOf(m)) || members[0], members, named, unnamed: members.length - named.length,
+      housing: String(h.HousingType || '').trim().toLowerCase(), hood: String(h.Neighborhood || '').trim() || null });
+    if (households.length >= PER_DAY.households) break;
+  }
+
+  // Wagers settled this Cycle: a win or a loss on the book, the biggest swing first.
+  const casino = [];
+  const settled = (beats.Casino_Ledger || []).filter(w => Number(w.CycleSettled) === Number(cycle) && /^settled-(win|loss)$/i.test(String(w.Status || '').trim()))
+    .map(w => { const won = /win$/i.test(String(w.Status).trim()); const stake = K.num(w.Stake) || 0, payout = K.num(w.Payout) || 0;
+      return { w, won, stake, payout, swing: won ? payout - stake : stake }; })
+    .sort((a, b) => b.swing - a.swing);
+  for (const { w, won, stake, payout } of settled) {
+    const pop = String(w.POPID || '').toUpperCase();
+    const id = 'casino:' + String(w.WagerId || pop) + ':' + cycle;
+    if (!nameOf(pop) || !take(pop, id)) continue;
+    casino.push({ id, pop, won, stake, payout, book: /^undocked$/i.test(String(w.MarketFamily || '')) ? 'the UNDOCKED book' : 'the ' + (String(w.MarketFamily || '').trim() || 'casino') + ' book' });
+    if (casino.length >= PER_DAY.casino) break;
+  }
+
+  // The citizens the Cycle's engine seeds reached — one person per seed, major seeds first — with the
+  // event line the engine kept for them (Story_Seed_Deck.CitizenEvents: "those citizens' actual event lines").
+  const reached = [];
+  const seeds = K.seedsFor(beats, cycle, /./).sort((a, b) => (a.cls === 'major' ? 0 : 1) - (b.cls === 'major' ? 0 : 1));
+  for (const sd of seeds) {
+    if (reached.length >= PER_DAY.seeds) break;
+    for (const c of sd.citizens) {
+      const pop = String(c.popid || '').toUpperCase();
+      const id = 'seed:' + String(sd.seedId || '') + ':' + pop;
+      const own = sd.citizenEvents.map(t => { const m = /^(.+?)\s+—\s+(.+)$/.exec(t); return m ? { name: m[1].trim(), text: m[2].trim() } : null; })
+        .find(x => x && x.name.toLowerCase() === String(c.name || '').trim().toLowerCase());
+      if (!own || !nameOf(pop) || !take(pop, id)) continue;
+      reached.push({ id, pop, line: own.text, hood: sd.hood && !/^citywide$/i.test(sd.hood) ? sd.hood : hoodOf(pop),
+        domain: String(sd.domain || sd.desk || 'city').toLowerCase().replace(/_/g, ' ').replace(/^general$/, 'city'), count: sd.citizens.length, why: String(sd.why || '').split('|')[0].trim().slice(0, 140) });
+      break;
+    }
+  }
+
+  // The log's own life events this Cycle, one per person, ranked (life-shape, pressure, ties, work), not bookkeeping.
+  const momentPool = [];
   for (const r of log) {
-    if (Number(r.Cycle) !== Number(cycle) || !SMALL_TAGS.test(String(r.EventTag || '').trim())) continue;
+    if (Number(r.Cycle) !== Number(cycle)) continue;
+    const tag = cleanTag(r.EventTag);
+    const rank = lifeRank(tag);
     const text = String(r.EventText || '').trim();
-    if (!text || BOOKKEEPING.test(text)) continue;
+    if (rank == null || !text || BOOKKEEPING.test(text)) continue;
+    momentPool.push({ rank, r, tag, text });
+  }
+  momentPool.sort((a, b) => a.rank - b.rank);
+  const moments = [];
+  for (const { r, tag, text } of momentPool) {
     const pop = String(r.POPID).toUpperCase();
-    const id = 'moment:' + pop + ':' + cycle + ':' + String(r.EventTag).trim();
-    if (covered[id] || seenPop.has(pop)) continue;
-    const p = profiles.get(pop);
-    if (!p || !String(p.Name || '').trim()) continue;
-    seenPop.add(pop);
-    moments.push({ id, pop, tag: String(r.EventTag).trim(), text, hood: String(r.Neighborhood || p.Neighborhood || '').trim() || null });
+    const id = 'moment:' + pop + ':' + cycle + ':' + tag;
+    if (!nameOf(pop) || !take(pop, id)) continue;
+    moments.push({ id, pop, tag, text, hood: String(r.Neighborhood || '').trim() || hoodOf(pop) });
     if (moments.length >= PER_DAY.moments) break;
   }
 
@@ -219,29 +289,32 @@ function build(cycle, { root, beats, profiles }) {
     // a stay is open only with no discharge Cycle — StatusNow has read 'active' on discharged rows
     if (!/^active$/i.test(String(r.StatusNow || '').trim()) || String(r.DischargeCycle || '').trim()) continue;
     const pop = String(r.POPID || '').toUpperCase();
-    if (!pop || seenPop.has(pop) || events.some(e => e.kind === 'hospital' && String(e.subject).toUpperCase() === pop)) continue;
+    if (events.some(e => e.kind === 'hospital' && String(e.subject).toUpperCase() === pop)) continue;
     const id = 'stay:' + String(r.AdmissionId || pop) + ':' + cycle;
-    if (covered[id]) continue;
-    seenPop.add(pop);
+    if (!take(pop, id)) continue;
     stays.push({ id, pop, name: String(r.Name || '').trim(), cause: String(r.Cause || '').trim(), admit: K.num(r.AdmitCycle), hood: String(r.Neighborhood || '').trim() || null });
     if (stays.length >= PER_DAY.stays) break;
   }
 
-  if (!todays.length && !moments.length && !stays.length) {
-    return K.emptySlice(SEAT, cycle, events.length || log.length
+  if (!todays.length && !households.length && !casino.length && !reached.length && !moments.length && !stays.length) {
+    return K.emptySlice(SEAT, cycle, events.length || log.length || seeds.length
       ? 'every life event of C' + cycle + ' is already covered — nothing new for today'
-      : 'no Lived_Events or LifeHistory_Log rows in the dump for C' + cycle);
+      : 'no Lived_Events, LifeHistory_Log or Story_Seed_Deck rows in the dump for C' + cycle);
   }
 
   const facts = [];
   const people = [];
   const evSrc = 'output/beats/Lived_Events.jsonl @C' + cycle;
   const logSrc = 'output/beats/LifeHistory_Log.jsonl @C' + cycle;
-  const nameOf = (pop, fallback) => String((profiles.get(String(pop).toUpperCase()) || {}).Name || fallback || '').trim();
   const addPerson = (pop, why, hood) => {
     const p = K.personFromProfile(profiles, pop, why, hood);
     if (p && !people.some(x => x.popid === p.popid)) people.push(p);
     return p;
+  };
+  // A passage: the person's fact, then their thread directly under it.
+  const passage = (fact, threadOpts) => {
+    facts.push(fact);
+    if (fact.popid) for (const t of threadFor(fact.popid, { beats, logByPop, covered, tribune, ownId: fact.id, ...threadOpts })) facts.push({ ...t, kind: 'thread', popid: fact.popid });
   };
 
   for (const e of todays) {
@@ -251,19 +324,37 @@ function build(cycle, { root, beats, profiles }) {
     const next = pop ? cameNext(logByPop, pop, e.cycle, null) : null;
     if (next) text += '. Since then, on the record: ' + String(next.EventText).trim() + ' (C' + next.Cycle + ')';
     else text += '. What came next: the record does not say yet';
-    facts.push({ text, src: evSrc, id: e.id, kind: e.kind, eventCycle: e.cycle, popid: pop ? String(pop).toUpperCase() : null });
-    if (!p && pop) facts[facts.length - 1].text += ' — not on the ledger snapshot; name only as the event row gives it';
-    if (pop) for (const t of threadFor(pop, { name: nameOf(pop, e.kind === 'death' ? ((e.recipients || [])[0] || {}).name : e.subjectName), skipTexts: [next && next.EventText], includeStay: e.kind === 'hospital', dropOwn: true, beats, logByPop, covered, ownId: e.id, tribune })) facts.push({ ...t, kind: 'thread', popid: String(pop).toUpperCase() });
+    if (!p && pop) text += ' — not on the ledger snapshot; name only as the event row gives it';
+    passage({ text, src: evSrc, id: e.id, kind: e.kind, eventCycle: e.cycle, popid: pop ? String(pop).toUpperCase() : null },
+      { name: nameOf(pop, e.kind === 'death' ? ((e.recipients || [])[0] || {}).name : e.subjectName), skipTexts: [next && next.EventText], includeStay: e.kind === 'hospital', dropOwn: true });
+  }
+  for (const h of households) {
+    const who = h.named.join(' and ') + (h.unnamed ? ' and ' + h.unnamed + ' other' + (h.unnamed > 1 ? 's' : '') + ' not on the ledger snapshot' : '');
+    const what = h.members.length > 1 ? 'set up a household together' : 'moved into a place of their own';
+    const how = h.housing === 'rented' ? ', renting' : h.housing === 'owned' ? ', a home they own' : '';
+    for (const m of h.members) addPerson(m, what + ' this Cycle', h.hood);
+    passage({ text: who + ' ' + what + (h.hood ? ' in ' + h.hood : '') + how + ' (C' + cycle + ')', src: 'output/beats/Household_Ledger.jsonl @C' + cycle, id: h.id, kind: 'household', popid: h.pop },
+      { name: nameOf(h.pop), skipTexts: [], includeStay: false, dropOwn: false });
+  }
+  for (const c of casino) {
+    addPerson(c.pop, (c.won ? 'won' : 'lost') + ' on ' + c.book + ' this Cycle', hoodOf(c.pop));
+    passage({ text: nameOf(c.pop) + (c.won ? ' won on ' + c.book + ' — staked ' + c.stake + ', paid ' + c.payout : ' lost on ' + c.book + ' — staked ' + c.stake + ', the book kept it') + (hoodOf(c.pop) ? ', ' + hoodOf(c.pop) : '') + ' (C' + cycle + ')',
+      src: 'output/beats/Casino_Ledger.jsonl @C' + cycle, id: c.id, kind: 'casino', popid: c.pop }, { name: nameOf(c.pop), skipTexts: [], includeStay: false, dropOwn: false });
+  }
+  for (const r of reached) {
+    addPerson(r.pop, 'reached by the Cycle\'s ' + r.domain + ' turn: ' + r.line, r.hood);
+    passage({ text: nameOf(r.pop) + ' — ' + r.line + (r.hood ? ', ' + r.hood : '') + ' — one of ' + r.count + ' people the Cycle\'s ' + r.domain + ' turn reached' + (r.why ? ' (' + r.why + ')' : '') + ' (C' + cycle + ', seed)',
+      src: 'output/beats/Story_Seed_Deck.jsonl @C' + cycle, id: r.id, kind: 'seed', popid: r.pop }, { name: nameOf(r.pop), skipTexts: [r.line], includeStay: false, dropOwn: false });
   }
   for (const m of moments) {
     addPerson(m.pop, m.tag.toLowerCase() + ' this Cycle: ' + m.text, m.hood);
-    facts.push({ text: (profiles.get(m.pop).Name || '').trim() + ' — ' + m.text + (m.hood ? ', ' + m.hood : '') + ' (C' + cycle + ', ' + m.tag + ')', src: logSrc, id: m.id, kind: 'moment', popid: m.pop });
-    for (const t of threadFor(m.pop, { name: nameOf(m.pop), skipTexts: [m.text], includeStay: false, dropOwn: false, beats, logByPop, covered, ownId: m.id, tribune })) facts.push({ ...t, kind: 'thread', popid: m.pop });
+    passage({ text: nameOf(m.pop) + ' — ' + m.text + (m.hood ? ', ' + m.hood : '') + ' (C' + cycle + ', ' + m.tag + ')', src: logSrc, id: m.id, kind: 'moment', popid: m.pop },
+      { name: nameOf(m.pop), skipTexts: [m.text], includeStay: false, dropOwn: false });
   }
-  for (const s of stays) {
-    addPerson(s.pop, 'still in hospital care' + (s.cause ? ' — ' + s.cause : ''), s.hood);
-    facts.push({ text: (nameOf(s.pop, s.name) || 'a citizen') + ' is still in hospital care' + (s.cause ? ' after ' + s.cause : '') + (s.admit != null ? ', admitted C' + s.admit : '') + (s.hood ? ', ' + s.hood : ''), src: 'output/beats/Hospital_Ledger.jsonl @C' + cycle, id: s.id, kind: 'stay', popid: s.pop });
-    for (const t of threadFor(s.pop, { name: nameOf(s.pop, s.name), skipTexts: [], includeStay: false, dropOwn: true, beats, logByPop, covered, ownId: s.id, tribune })) facts.push({ ...t, kind: 'thread', popid: s.pop });
+  for (const st of stays) {
+    addPerson(st.pop, 'still in hospital care' + (st.cause ? ' — ' + st.cause : ''), st.hood);
+    passage({ text: (nameOf(st.pop, st.name) || 'a citizen') + ' is still in hospital care' + (st.cause ? ' after ' + st.cause : '') + (st.admit != null ? ', admitted C' + st.admit : '') + (st.hood ? ', ' + st.hood : ''), src: 'output/beats/Hospital_Ledger.jsonl @C' + cycle, id: st.id, kind: 'stay', popid: st.pop },
+      { name: nameOf(st.pop, st.name), skipTexts: [], includeStay: false, dropOwn: true });
   }
 
   // The person's own words this Cycle, when the lived wake landed: colour and sourcing, verbatim.
@@ -274,27 +365,29 @@ function build(cycle, { root, beats, profiles }) {
   });
 
   const hooks = K.domainHooks(beats, cycle, SEAT.name,
-    /^(FAMILY_CRISIS|FAMILY_CELEBRATION|FAMILY_REALIZED|HOUSEHOLD_DISSOLVED|HOUSEHOLD_ARRIVED|HOUSEHOLD_FORMED|CITIZEN_HOSPITALIZED)$/).slice(0, 6);
+    /^(FAMILY_CRISIS|FAMILY_CELEBRATION|FAMILY_REALIZED|HOUSEHOLD_DISSOLVED|HOUSEHOLD_ARRIVED|HOUSEHOLD_FORMED|CITIZEN_HOSPITALIZED|HOME_PURCHASE|CITIZEN_RELOCATED|CASINO_WIN)$/).slice(0, 6);
 
   // Mark today's batch covered — the next day takes the next batch.
   for (const f of facts) if (f.id) covered[f.id] = { popid: f.popid, kind: f.kind, cycle: Number(cycle), ...(f.eventCycle != null ? { eventCycle: Number(f.eventCycle) } : {}), day };
   writeCovered(root, covered, cycle);
 
-  const lead = todays[0];
-  const leadName = lead ? ((people.find(p => p.popid === String(personFor(lead) || '').toUpperCase()) || {}).name || lead.subjectName) : (moments[0] ? (profiles.get(moments[0].pop).Name || '').trim() : stays[0].name);
-  const label = (lead ? kindLine(lead) : moments[0] ? leadName + ' — ' + moments[0].text : leadName + ' still in hospital care');
+  const passages = facts.filter(f => f.kind !== 'thread');
+  const leadFact = passages[0];
+  const leadName = (people.find(p => p.popid === leadFact.popid) || {}).name || (todays[0] && todays[0].subjectName) || 'the first person';
+  const label = leadFact.text.replace(/\s*\(C\d+[^)]*\)\.?.*$/, '').replace(/\. Since then.*$/, '');
+  const leadHood = (todays[0] && todays[0].neighborhood) || (people.find(p => p.popid === leadFact.popid) || {}).hood || null;
   // The ref carries the day: the fanout drops a beat seat whose ref was already filed this Cycle
   // (newsroom-fanout.js staleBeatRef) — right for a weekly seat, fatal for a daily one.
   return K.makeSlice(SEAT, cycle, beats, {
-    ref: evSrc + ' ' + day, hood: (lead && lead.neighborhood) || (moments[0] && moments[0].hood) || (stays[0] && stays[0].hood) || null,
+    ref: evSrc + ' ' + day, hood: leadHood,
     label,
-    angle: 'The lives of C' + cycle + ', ' + day + ': ' + facts.filter(f => f.kind !== 'thread').length + ' people — ' + label,
+    angle: 'The lives of C' + cycle + ', ' + day + ': ' + passages.length + ' people — ' + label,
     hookLine: leadName + ' first. The event is the lead; one true detail; what came next only if the record says.',
-    facts, people, hooks, pageVoices, factCap: 60,
+    facts, people, hooks, pageVoices, factCap: 90,
     deltas: null,
     note: [pending.length > todays.length ? (pending.length - todays.length) + ' more news-grade events wait for the next day' : null,
       pages.length ? null : 'none of today\'s people has written their own page this Cycle — no quotes'].filter(Boolean).join('; ') || null,
-    extra: { day, counted: { events: events.length, pending: pending.length, todays: todays.length, moments: moments.length, stays: stays.length } }
+    extra: { day, counted: { events: events.length, pending: pending.length, todays: todays.length, households: households.length, casino: casino.length, seeds: reached.length, moments: moments.length, stays: stays.length } }
   });
 }
 

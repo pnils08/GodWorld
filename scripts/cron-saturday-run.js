@@ -909,42 +909,76 @@ function worldSummaryText(cycle) {
 // same dump rows Tamsin's slice reads — so the audit judges "Maren Johns retired" against C111,
 // not against the C112 summary's one retirement (C112 scorecard, 2026-10-25: three real C111
 // events called citizen-bending and the piece retracted from the store).
-const LIVED_TAG = /^(Birth|Retirement|Promotion|Hospitalized|Critical|Recovery|Death)$/i;
+const LIVED_TAG = /^(Birth|Retirement|Promotion|Hospitalized|Critical|Recovery|Recovering|Death|Wedding|Marriage|Graduation|Relationship|Household|Stabilized)$/i;
+// the ledger's own bookkeeping rides the Promotion / Birth tags (lib/wakePerception.js BOOKKEEPING_PREFIX) — not a life event
+const LIVED_BOOKKEEPING = /^(Updated to Tier|Added to Simulation_Ledger|Emerged into Tier|Intake at Tier|Promoted to Tier|Neighborhood council|Local civic|Development civic)/i;
+const LIVED_KIND_TAG = { birth: 'Birth', retirement: 'Retirement', promotion: 'Promotion', death: 'Death' };
+const LIVED_KIND_WORD = { birth: 'welcomed a new child', retirement: 'retired', promotion: 'promoted' };
+const LIVED_MAX = 160;
+// The dump that holds Cycle N's window: output/beats when its meta says N, output/beats/prev when the
+// next fire has already moved the dump on (a Saturday audit re-run on Sunday). Neither → no record.
+function livedDumpDir(cycle, root) {
+  for (const dir of [path.join(root, 'output', 'beats'), path.join(root, 'output', 'beats', 'prev')]) {
+    const meta = readJsonSafe(path.join(dir, 'meta.json'));
+    if (meta && Number(meta.cycle) === Number(cycle)) return dir;
+  }
+  return null;
+}
 function livedEventsGroundTruth(cycle, profiles, root = ROOT) {
+  const dir = livedDumpDir(cycle, root);
+  if (!dir) return '';
+  const lo = Number(cycle) - 1, hi = Number(cycle);
+  const inWindow = c => Number(c) >= lo && Number(c) <= hi;
   const read = f => {
     try {
-      return fs.readFileSync(path.join(root, 'output', 'beats', f), 'utf8').split(/\r?\n/).filter(Boolean)
+      return fs.readFileSync(path.join(dir, f), 'utf8').split(/\r?\n/).filter(Boolean)
         .map(l => { try { return JSON.parse(l); } catch (_) { return null; } }).filter(Boolean);
     } catch (_) { return []; }
   };
   const nameOf = pop => ((profiles || {})[String(pop || '').toUpperCase()] || {}).name || '';
-  const lines = [];
+  const seen = new Set();
+  const rows = [];   // { cycle, text }
   for (const e of read('Lived_Events.jsonl')) {
-    if (!e || !e.kind || e.cycle == null) continue;
+    if (!e || !e.kind || !inWindow(e.cycle)) continue;
     if (e.kind === 'death') {
       const who = (e.recipients || [])[0] || {};
-      lines.push('C' + e.cycle + ' — ' + (who.name || nameOf(who.pop) || 'the household') + (who.pop ? ' (' + who.pop + ')' : '') +
-        ' lost ' + (e.deceasedName || 'a family member') + (who.rel && who.rel !== 'self' ? ', their ' + who.rel : ''));
-    } else {
-      lines.push('C' + e.cycle + ' — ' + (e.subjectName || nameOf(e.subject) || 'a citizen') + ' (' + e.subject + ') — ' + e.kind +
-        (e.phase ? ' ' + e.phase : '') + (e.cause ? ', ' + e.cause : '') + (e.roleType ? ', ' + e.roleType : '') + (e.neighborhood ? ', ' + e.neighborhood : ''));
+      seen.add(e.subject + '|' + e.cycle + '|Death');
+      rows.push({ cycle: Number(e.cycle), text: (e.deceasedName || nameOf(e.subject) || 'a citizen') + ' (' + e.subject + ') died; ' +
+        (who.name || nameOf(who.pop) || 'the household') + (who.pop ? ' (' + who.pop + ')' : '') + (who.rel && who.rel !== 'self' ? ', their ' + who.rel + ',' : '') + ' survives them' });
+      continue;
     }
+    if (LIVED_KIND_TAG[e.kind]) seen.add(e.subject + '|' + e.cycle + '|' + LIVED_KIND_TAG[e.kind]);
+    if (e.kind === 'hospital') seen.add(e.subject + '|' + e.cycle + '|' + (e.phase === 'discharged' ? 'Recovery' : 'Hospitalized'));
+    rows.push({ cycle: Number(e.cycle), text: (e.subjectName || nameOf(e.subject) || 'a citizen') + ' (' + e.subject + ') — ' + (e.kind === 'hospital' ? (e.phase === 'discharged' ? 'came home from the hospital' : 'admitted to the hospital') : (LIVED_KIND_WORD[e.kind] || e.kind)) + + (e.cause ? ', ' + e.cause : '') + (e.roleType ? ', ' + e.roleType : '') + (e.neighborhood ? ', ' + e.neighborhood : '') });
   }
-  const seen = new Set();
-  for (const r of read('LifeHistory_Log.jsonl')) {
+  // every stay the window touches, with its admission — the Lives slice prints "admitted C106 … 5 cycles in care"
+  for (const h of read('Hospital_Ledger.jsonl')) {
+    const adm = Number(h.AdmitCycle), dis = String(h.DischargeCycle || '').trim();
+    const open = !dis && /^active$/i.test(String(h.StatusNow || '').trim());
+    if (!h.POPID || !Number.isFinite(adm) || !(inWindow(adm) || (dis && inWindow(dis)) || (open && adm <= hi))) continue;
+    rows.push({ cycle: dis ? Number(dis) : hi, text: (h.Name || nameOf(h.POPID) || 'a citizen') + ' (' + h.POPID + ') — hospital stay: admitted C' + adm +
+      (h.Cause ? ' for ' + String(h.Cause).trim() : '') + (dis ? ', discharged C' + dis + (h.CyclesInCare ? ' after ' + h.CyclesInCare + ' cycles in care' : '') + (h.Outcome ? ', ' + String(h.Outcome).trim() : '') : ', still in care at C' + hi) });
+  }
+  // the log's own life rows, newest first so a heavy window never loses Cycle N to the cap
+  const log = read('LifeHistory_Log.jsonl').filter(r => r && r.POPID && inWindow(r.Cycle))
+    .sort((a, b) => Number(b.Cycle) - Number(a.Cycle));
+  for (const r of log) {
     const tag = String(r.EventTag || '').split('|')[0].trim();
-    if (!r.POPID || !LIVED_TAG.test(tag)) continue;
-    const k = r.POPID + '|' + r.Cycle + '|' + tag;
+    const text = String(r.EventText || '').trim();
+    if (!LIVED_TAG.test(tag) || !text || LIVED_BOOKKEEPING.test(text)) continue;
+    if (/^Birth$/i.test(tag) && !/welcomed a new child/i.test(text)) continue;   // the newborn's "born to" row is the parent's event
+    const k = String(r.POPID).toUpperCase() + '|' + r.Cycle + '|' + tag;
     if (seen.has(k)) continue;
     seen.add(k);
-    lines.push('C' + r.Cycle + ' — ' + (r.Name || nameOf(r.POPID) || 'a citizen') + ' (' + r.POPID + ') — ' + tag + ': ' + String(r.EventText || '').trim());
-    if (lines.length >= 80) break;
+    rows.push({ cycle: Number(r.Cycle), text: (r.Name || nameOf(r.POPID) || 'a citizen') + ' (' + r.POPID + ') — ' + tag + ': ' + text });
+    if (rows.length >= LIVED_MAX) break;
   }
-  if (!lines.length) return '';
-  const cycles = [...new Set(lines.map(l => l.slice(0, l.indexOf(' '))))].sort();
-  return 'Person events on the record for ' + cycles.join(' and ') + '. The paper reports last Cycle\'s life events through the ' +
+  if (!rows.length) return '';
+  rows.sort((a, b) => a.cycle - b.cycle);
+  return 'Person events on the record for C' + lo + ' and C' + hi + '. The paper reports last Cycle\'s life events through the ' +
     'following week, so a birth, death, hospital stay or discharge, retirement or promotion listed here is real whichever Cycle ' +
-    'the article is filed under:\n' + lines.join('\n');
+    'the article is filed under; a person event the article states that is NOT here and NOT in the world summary is unsupported:\n' +
+    rows.map(r => 'C' + r.cycle + ' — ' + r.text).join('\n');
 }
 
 // ---------------------------------------------------------------------------
@@ -995,20 +1029,12 @@ function undockedGroundTruth(rows) {
       ', streak ' + r.CurrentStreak + ', last aired C' + r.LastAiredCycle).join('\n');
 }
 
-async function auditOne(entry, profiles, worldText, livedText) {
+// The ground truth the auditor reads for one Article, in order: ledger rows for the INTAKE names (or a text scan for a
+// legacy piece) plus the byline's own row, the Cycle's world summary, the two-Cycle person-event record, the show board
+// for UNDOCKED, then the Article and its INTAKE. Pure: tests read it where auditOne spends a model call.
+function auditPrompt(entry, profiles, worldText, livedText) {
   const s = entry.sidecar;
   const intake = s.intake || null;
-  // Deterministic: every INTAKE name must resolve to the live ledger row it claims.
-  const nameFails = [];
-  if (intake) {
-    for (const n of (intake.names || [])) {
-      if (!n.popid) { nameFails.push(n.name + ' (no POPID resolved)'); continue; }
-      const prof = profiles[String(n.popid).toUpperCase()];
-      if (!prof) { nameFails.push(n.name + ' (' + n.popid + ' not in ledger)'); continue; }
-      const a = String(n.name || '').toLowerCase(), b = String(prof.name || '').toLowerCase();
-      if (a && b && !a.includes(b) && !b.includes(a)) nameFails.push(n.name + ' ≠ ledger ' + prof.name + ' (' + n.popid + ')');
-    }
-  }
   // Ground truth for the model: INTAKE names when present; for legacy no-INTAKE
   // articles, text-scan the ledger so quoted REAL citizens are visible as real
   // (c102 seat proof: without this, the audit called Lucia Polito et al.
@@ -1032,7 +1058,7 @@ async function auditOne(entry, profiles, worldText, livedText) {
   // The byline's own row: Angela Reyes C112 was failed for naming "Angela" — herself.
   const ownPop = String(s.bylinePopid || '').toUpperCase();
   if (profiles[ownPop]) groundProfiles = [groundProfiles, profileLine(ownPop, profiles[ownPop]) + ' — THE REPORTER (byline)'].filter(Boolean).join('\n');
-  const user = [
+  return [
     '=== LEDGER PROFILES (authoritative for every named citizen) ===', groundProfiles || '(none supplied)',
     '', '=== WORLD SUMMARY (authoritative cycle record) ===', worldText || '(missing)',
     ...(livedText ? ['', '=== LIVED EVENTS (authoritative for person events, this Cycle and the one before) ===', livedText] : []),
@@ -1041,6 +1067,23 @@ async function auditOne(entry, profiles, worldText, livedText) {
     '', intake ? '=== INTAKE (the article\'s own claim register) ===\n' + JSON.stringify(intake) : '=== NOTE: legacy article, no INTAKE block — judge the prose directly ===',
     '', 'Reply with the verdict JSON object ONLY. The first character of your reply must be {.'
   ].join('\n');
+}
+
+async function auditOne(entry, profiles, worldText, livedText) {
+  const s = entry.sidecar;
+  const intake = s.intake || null;
+  // Deterministic: every INTAKE name must resolve to the live ledger row it claims.
+  const nameFails = [];
+  if (intake) {
+    for (const n of (intake.names || [])) {
+      if (!n.popid) { nameFails.push(n.name + ' (no POPID resolved)'); continue; }
+      const prof = profiles[String(n.popid).toUpperCase()];
+      if (!prof) { nameFails.push(n.name + ' (' + n.popid + ' not in ledger)'); continue; }
+      const a = String(n.name || '').toLowerCase(), b = String(prof.name || '').toLowerCase();
+      if (a && b && !a.includes(b) && !b.includes(a)) nameFails.push(n.name + ' ≠ ledger ' + prof.name + ' (' + n.popid + ')');
+    }
+  }
+  const user = auditPrompt(entry, profiles, worldText, livedText);
   let verdict = 'corrections-needed', failures = [];
   for (let attempt = 1; attempt <= 2; attempt++) {   // flash intermittently drifts from JSON — one retry
     try {
@@ -1544,4 +1587,4 @@ if (require.main === module) {
 module.exports = { loadStagedSet, loadArcSeeds, excludeCanonViolations, stepSweep, stepDaily, dailyPending, retractionIds, articleCustomId, articleDoc, usageRowsFor, printedStems, printedOnly, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
   isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves,
-  auditOne, loadLedgerProfiles, worldSummaryText, livedEventsGroundTruth, deskSystem, crossoverCitizens, printedCrossovers, reserveDigestSeat, undockedGroundTruth, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE, curationScore };
+  auditOne, auditPrompt, loadLedgerProfiles, worldSummaryText, livedEventsGroundTruth, livedDumpDir, deskSystem, crossoverCitizens, printedCrossovers, reserveDigestSeat, undockedGroundTruth, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE, curationScore };

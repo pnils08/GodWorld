@@ -314,7 +314,8 @@ function enrichAssignment(assign, cycle, root = K.ROOT) {
   // assignment sent her to the generic culture packet (C112 Friday: 45 words on "one world event").
   return slice ? W.assignmentFromSlice(slice, assign) : null;
 }
+const sitsOutWhenEmpty = true;
 if (require.main === module) W.main();
-module.exports = { SEAT, loadSlice, buildLivesSlice: W.build, writeLivesSlice: W.write, loadLivesSlice: loadSlice,
+module.exports = { SEAT, sitsOutWhenEmpty, loadSlice, buildLivesSlice: W.build, writeLivesSlice: W.write, loadLivesSlice: loadSlice,
   isLivesSeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment, slicePaths: W.paths,
   kindLine, cameNext, localDay, coveredPath };

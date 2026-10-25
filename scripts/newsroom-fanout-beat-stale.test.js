@@ -12,7 +12,7 @@
  */
 'use strict';
 
-const { staleBeatRef, priorBeatKey } = require('./newsroom-fanout');
+const { staleBeatRef, priorBeatKey, enrichBeatSeats } = require('./newsroom-fanout');
 
 let failures = 0;
 function ok(label, cond) {
@@ -42,6 +42,30 @@ ok('another seat on the same tab ref → clear (kai)', staleBeatRef({ persona: '
 ok('another seat on the same tab ref → clear (sharon)', staleBeatRef({ persona: 'sharon-okafor', beatSlice: true, story: { ref: CUL } }, celesteFiled) === null);
 ok('the seat that filed it → stale (celeste)', staleBeatRef({ persona: 'celeste-tran', beatSlice: true, story: { ref: CUL } }, celesteFiled) === CUL);
 ok('bare-ref set (old key shape) never matches', staleBeatRef({ persona: 'kai-marston', beatSlice: true, story: { ref: CUL } }, new Set([CUL])) === null);
+
+
+// 2026-10-25: a daily record seat whose builder returns null (nothing new today) is dropped — never left
+// in the rota as the bare generic assignment (C112 Friday: Tamsin wrote 45 words on the culture packet).
+console.log('enrichBeatSeats:');
+{
+  const quiet = console.error; console.error = () => {};
+  const a = [{ persona: 'carmen-delaine', desk: 'civic' }, { persona: 'tamsin-pruitt', desk: 'culture' }, { persona: 'lila-mezran', desk: 'civic' }, { persona: 'no-builder-seat', desk: 'sports' }];
+  const loader = slug => ({ enrichAssignment: (assign) =>
+    slug === 'tamsin-pruitt' ? null
+      : slug === 'lila-mezran' ? Object.assign({}, assign, { beatSlice: true, pulse: { className: 'beat-health', hood: 'Chinatown' }, story: { kind: 'beat-health', ref: REF } })
+      : assign });
+  const res = enrichBeatSeats(a, 112, new Set(), loader);
+  console.error = quiet;
+  ok('null from the builder → seat dropped, reason recorded', !a.some(x => x.persona === 'tamsin-pruitt') && res.dropped.some(d => /tamsin-pruitt: empty slice/.test(d)));
+  ok('a seat with a slice is enriched in place', a.find(x => x.persona === 'lila-mezran').beatSlice === true && res.enriched && /lila-mezran\/beat-health:Chinatown/.test(res.reason));
+  ok('a builder seat with no slice stays as the bare assignment (not null, not enriched)', a.some(x => x.persona === 'carmen-delaine' && !x.beatSlice));
+  ok('a persona outside BEAT_BUILDERS is untouched', a.some(x => x.persona === 'no-builder-seat'));
+  const b = [{ persona: 'lila-mezran', desk: 'civic' }];
+  console.error = () => {};
+  const r2 = enrichBeatSeats(b, 112, new Set([priorBeatKey('lila-mezran', REF)]), loader);
+  console.error = quiet;
+  ok('a slice whose ref was already filed this Cycle is dropped as stale', b.length === 0 && /stale slice/.test(r2.dropped[0]));
+}
 
 if (failures) {
   console.error('\nnewsroom-fanout-beat-stale tests: ' + failures + ' FAILURE(S)');

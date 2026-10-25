@@ -150,6 +150,17 @@ try {
   assert.deepStrictEqual(heldFlags.checkFlags, ['thin: 45 words (floor 150, seat target 450-750)']);
   assert.match(heldFlags.summary, /deterministic checks: thin/);
 
+  console.log('Test 5c: a thin flag from an earlier run does not hold a later clean filing of the same base');
+  const rewrite = fixture('civic_c999_test-thin', true);   // the base is rewritten clean; the old flagged pair is still on disk
+  fs.writeFileSync(rewrite.draft, fs.readFileSync(rewrite.draft, 'utf8').replace('Supplied test fact.', 'Supplied test fact, now at length. '.repeat(40)));
+  const againVerdict = JSON.parse(fs.readFileSync(rewrite.verdict, 'utf8'));
+  againVerdict.draftSha256 = sha256File(rewrite.draft);
+  writeJson(rewrite.verdict, againVerdict);
+  const clean = reconcileVerdict({ root, verdictPath: rewrite.verdict, apply: true, now: new Date('2026-08-13T10:40:00.000Z') });
+  assert.equal(clean.disposition, 'staged', 'the clean rewrite stages; the stale thin flag belonged to other bytes');
+  assert(fs.existsSync(path.join(staged, 'civic_c999_test-thin.staged.md')));
+  assert(!fs.existsSync(path.join(flagged, 'civic_c999_test-thin.flags.json')), 'the stale flag is archived, not kept');
+
   console.log('Test 6 (pipeline.78): distinct staged filings of one base all survive a new pass');
   const multi = fixture('civic_c999_test-multi', true);
   fs.mkdirSync(staged, { recursive: true });

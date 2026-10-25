@@ -1511,6 +1511,18 @@ async function refreshCitizenPages(cycle) {
   } catch (e) { log('[pages] pulse skipped: ' + e.message); }
 }
 
+// pipeline.73 daily record seats (Lives, Voices): nothing new on the record today → the seat sits the day
+// out, never the generic desk packet (C112 Friday: Tamsin wrote 45 words on "one world event" and it reached
+// canon). Each stage checks for itself, so a --persona weekend run needs no angle artifact to skip cleanly.
+// loadSlice throws on a missing or stale dump by design — that stays loud.
+function seatSitsOut(personaSlug, cycle, stage) {
+  if (!personaSlug || !BEAT_BUILDERS[personaSlug]) return false;
+  const mod = require(path.join(__dirname, BEAT_BUILDERS[personaSlug]));
+  if (!mod.sitsOutWhenEmpty || mod.loadSlice(cycle)) return false;
+  console.log('[' + stage + '] ' + personaSlug + ' sits the day out — nothing new on the record for c' + cycle + ' (not an error).');
+  return true;
+}
+
 async function runAngle(assign) {
   SEAT_CHECKS = null;
   let angleCapHits = 0; // pipeline.75 — rides the angle artifact into the write record
@@ -1523,6 +1535,7 @@ async function runAngle(assign) {
   console.log('===================================');
   const lane = loadLane(cycle, desk, assign && assign.beatDomain);
   if (!lane) { console.log('[angle] no "' + desk + '" lane in desk_signal — skipping (not an error).'); return; }
+  if (seatSitsOut(personaSlug, cycle, 'angle')) return;
   // R2 — ledger snapshot freshness before any profile resolution this wake
   // (S252/S329 pattern; desk doctrine: refresh + degrade-not-drop, never halt)
   require('./canon-name-check').ensureLedgerSnapshot(cycle);
@@ -2635,6 +2648,7 @@ async function runReport(assign) {
   console.log('Wake 2 REPORT — ' + desk + ' c' + cycle + (personaSlug ? ' (' + personaSlug + ')' : '') + (assign ? ' [' + assign.name + ']' : ''));
   console.log('===================================');
   const anglePath = path.join(COMPARE, stem + 'angle.json');
+  if (seatSitsOut(personaSlug, cycle, 'report')) return;
   if (!fs.existsSync(anglePath)) throw new Error('no angle artifact at ' + path.relative(ROOT, anglePath) + ' — run --stage=angle first');
   const lane = loadLane(cycle, desk, assign && assign.beatDomain);
   if (!lane) { console.log('[report] no "' + desk + '" lane in desk_signal — skipping (not an error).'); return; }
@@ -2804,6 +2818,7 @@ async function runWrite(assign) {
   console.log('===================================');
   const anglePath = path.join(COMPARE, stem + 'angle.json');
   const packetPath = path.join(COMPARE, stem + 'packet.json');
+  if (seatSitsOut(personaSlug, cycle, 'write')) return;
   if (!fs.existsSync(anglePath)) throw new Error('no angle artifact at ' + path.relative(ROOT, anglePath) + ' — run --stage=angle first');
   if (!fs.existsSync(packetPath)) throw new Error('no packet artifact at ' + path.relative(ROOT, packetPath) + ' — run --stage=report first');
   const lane = loadLane(cycle, desk, assign && assign.beatDomain);

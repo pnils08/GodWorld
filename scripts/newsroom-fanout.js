@@ -430,6 +430,67 @@ function applyStinkForce(assignments, cycle, date, approachMap, takenRefs) {
   return out;
 }
 
+const BEAT_BUILDERS = {
+  'trevor-shimizu': 'buildTransitSlice',
+  'lila-mezran': 'buildHealthSlice',
+  'angela-reyes': 'buildSchoolsSlice',
+  'noah-tan': 'buildEnvironmentSlice',
+  'elliot-graye': 'buildFaithSlice',
+  'rachel-torres': 'buildSafetySlice',
+  'kai-marston': 'buildArtsSlice',
+  'sharon-okafor': 'buildLifestyleSlice',
+  'maria-keen': 'buildNeighborhoodSlice',
+  'selena-grant': 'buildOaksBeatSlice',
+  'talia-finch': 'buildOaksGroundSlice',
+  'celeste-tran': 'buildTrendsSlice',
+  'tamsin-pruitt': 'buildLivesSlice',   // pipeline.73
+  'ines-sorensen': 'buildVoicesSlice',  // pipeline.73
+  'elliot-marbury': 'buildMarburySlice'
+};
+
+// The beat-seat pass over the day's assignments, in place: each BEAT_BUILDERS persona is enriched from its
+// slice; a seat whose builder returns null (a daily record seat with nothing new today — Lives, Voices) or
+// whose slice ref was already filed this Cycle is dropped. `loadBuilder` is injectable for the tests.
+function enrichBeatSeats(assignments, cycle, filedBeats, loadBuilder = slug => require(path.join(__dirname, BEAT_BUILDERS[slug]))) {
+  const beatEnrich = { enriched: false, reason: 'none', seats: [], dropped: [] };
+  for (let i = assignments.length - 1; i >= 0; i--) {
+    const slug = assignments[i].persona;
+    if (!slug || !BEAT_BUILDERS[slug]) continue;
+    try {
+      const { enrichAssignment } = loadBuilder(slug);
+      const next = enrichAssignment(assignments[i], cycle);
+      if (next === null) {
+        console.error('[fanout] SEAT DROPPED ' + slug + ' — empty slice: nothing new on the record today');
+        beatEnrich.dropped.push(slug + ': empty slice — nothing new on the record today');
+        assignments.splice(i, 1);
+        continue;
+      }
+      const staleRef = staleBeatRef(next, filedBeats);
+      if (staleRef) {
+        console.error('[fanout] SEAT DROPPED ' + slug + ' — beat slice already filed at c' + cycle +
+          ' (engine cycle has not advanced; ref: ' + staleRef + ')');
+        beatEnrich.dropped.push(slug + ': stale slice — already filed at c' + cycle);
+        assignments.splice(i, 1);
+        continue;
+      }
+      if (next && next.beatSlice) {
+        assignments[i] = next;
+        beatEnrich.enriched = true;
+        beatEnrich.seats.push(slug + '/' + next.pulse.className + ':' + (next.pulse.hood || '—'));
+      }
+    } catch (e) {
+      console.error('[fanout] SEAT DROPPED ' + slug + ' — beat slice: ' + e.message);
+      beatEnrich.dropped.push(slug + ': ' + e.message);
+      assignments.splice(i, 1);
+    }
+  }
+  beatEnrich.reason = beatEnrich.enriched ? 'seats=' + beatEnrich.seats.length + ' ' + beatEnrich.seats.join(', ')
+    : (beatEnrich.dropped.length ? 'dropped: ' + beatEnrich.dropped.join('; ') : 'no beat-slice persona in rota');
+  if (beatEnrich.enriched) console.error('[fanout] BEAT SLICES — ' + beatEnrich.reason);
+  if (beatEnrich.dropped.length) console.error('[fanout] BEAT SLICES dropped — ' + beatEnrich.dropped.join('; '));
+  return beatEnrich;
+}
+
 async function buildFanout(date) {
   const { buildBylineRoster } = require(path.join(ROOT, 'scripts', 'engine-auditor', 'bayTribuneRoster'));
   const roster = await buildBylineRoster();
@@ -693,62 +754,8 @@ async function buildFanout(date) {
   // pipeline.68 Task 4: one beat slice per journalist, from the beat dump. A
   // builder that throws (missing/stale dump) drops THAT seat with a loud log;
   // the rest of the rota is untouched.
-  const BEAT_BUILDERS = {
-    'trevor-shimizu': 'buildTransitSlice',
-    'lila-mezran': 'buildHealthSlice',
-    'angela-reyes': 'buildSchoolsSlice',
-    'noah-tan': 'buildEnvironmentSlice',
-    'elliot-graye': 'buildFaithSlice',
-    'rachel-torres': 'buildSafetySlice',
-    'kai-marston': 'buildArtsSlice',
-    'sharon-okafor': 'buildLifestyleSlice',
-    'maria-keen': 'buildNeighborhoodSlice',
-    'selena-grant': 'buildOaksBeatSlice',
-    'talia-finch': 'buildOaksGroundSlice',
-    'celeste-tran': 'buildTrendsSlice',
-    'tamsin-pruitt': 'buildLivesSlice',   // pipeline.73
-    'ines-sorensen': 'buildVoicesSlice',  // pipeline.73
-    'elliot-marbury': 'buildMarburySlice'
-  };
   let beatEnrich = { enriched: false, reason: 'none', seats: [], dropped: [] };
-  if (cycle != null) {
-    const filedBeats = priorBeatRefs(cycle, date);
-    for (let i = assignments.length - 1; i >= 0; i--) {
-      const slug = assignments[i].persona;
-      if (!slug || !BEAT_BUILDERS[slug]) continue;
-      try {
-        const { enrichAssignment } = require(path.join(__dirname, BEAT_BUILDERS[slug]));
-        const next = enrichAssignment(assignments[i], cycle);
-        if (next === null) {   // a daily record seat with nothing new today sits the day out (Lives, pipeline.73)
-          console.error('[fanout] SEAT DROPPED ' + slug + ' — empty slice: nothing new on the record today');
-          beatEnrich.dropped.push(slug + ': empty slice — nothing new on the record today');
-          assignments.splice(i, 1);
-          continue;
-        }
-        const staleRef = staleBeatRef(next, filedBeats);
-        if (staleRef) {
-          console.error('[fanout] SEAT DROPPED ' + slug + ' — beat slice already filed at c' + cycle +
-            ' (engine cycle has not advanced; ref: ' + staleRef + ')');
-          beatEnrich.dropped.push(slug + ': stale slice — already filed at c' + cycle);
-          assignments.splice(i, 1);
-          continue;
-        }
-        if (next && next.beatSlice) {
-          assignments[i] = next;
-          beatEnrich.enriched = true;
-          beatEnrich.seats.push(slug + '/' + next.pulse.className + ':' + (next.pulse.hood || '—'));
-        }
-      } catch (e) {
-        console.error('[fanout] SEAT DROPPED ' + slug + ' — beat slice: ' + e.message);
-        beatEnrich.dropped.push(slug + ': ' + e.message);
-        assignments.splice(i, 1);
-      }
-    }
-    beatEnrich.reason = beatEnrich.enriched ? 'seats=' + beatEnrich.seats.length + ' ' + beatEnrich.seats.join(', ')
-      : (beatEnrich.dropped.length ? 'dropped: ' + beatEnrich.dropped.join('; ') : 'no beat-slice persona in rota');
-    if (beatEnrich.enriched) console.error('[fanout] BEAT SLICES — ' + beatEnrich.reason);
-    if (beatEnrich.dropped.length) console.error('[fanout] BEAT SLICES dropped — ' + beatEnrich.dropped.join('; '));
-  }
+  if (cycle != null) beatEnrich = enrichBeatSeats(assignments, cycle, priorBeatRefs(cycle, date));
 
   // grok pipeline.52: enrich culture evening consumers with evening-life pack.
   let eveningEnrich = { enriched: false, reason: 'none', seats: [] };
@@ -896,6 +903,6 @@ if (require.main === module) {
     .catch(e => { console.error('fanout failed: ' + e.message); process.exit(1); });
 }
 
-module.exports = { buildFanout, writeFanout, loadFanout, usageHistory, stagedTally, bylinePreference,
+module.exports = { buildFanout, enrichBeatSeats, writeFanout, loadFanout, usageHistory, stagedTally, bylinePreference,
   assignedStoryRefs, priorBeatKey, priorBeatRefs, staleBeatRef, laneSeeds, storyFromSeed, approachFor, applyStinkForce, loadFirebrandPersona,
   applyWakePackageGate, activeRotaCandidates, boundDailyAssignments, DAILY_QUOTAS, WEEK_GRID, gridSeatsFor };

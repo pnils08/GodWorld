@@ -165,10 +165,15 @@ function reconcileVerdict({ root = ROOT, verdictPath, apply = false, now = new D
   // The write stage's deterministic checks (a thin draft; cron-desk-run checkFlags) override a Rhea
   // pass there and must here too: the C112 Saturday sweep re-staged Tamsin's 45-word Friday draft
   // because the root verdict read pass while flagged/ held the thin check, and it reached canon.
+  // The flag must belong to THESE draft bytes: the write stage never clears flagged/<base>.* when a later
+  // write of the same base passes, so a Monday thin flag would otherwise un-stage Tuesday's clean filing.
   const heldFlags = (() => {
     try {
       const f = readJson(path.join(flagged, base + '.flags.json'));
-      return f.draft === path.basename(draftAbs) && Array.isArray(f.checkFlags) ? f.checkFlags.filter(Boolean) : [];
+      if (f.draft !== path.basename(draftAbs) || !Array.isArray(f.checkFlags)) return [];
+      const sameBytes = f.draftSha256 ? f.draftSha256 === draftSha256
+        : fs.existsSync(path.join(flagged, base + '.md')) && sha256File(path.join(flagged, base + '.md')) === draftSha256;
+      return sameBytes ? f.checkFlags.filter(Boolean) : [];
     } catch (_) { return []; }
   })();
   const effectivePass = verdict.pass && !contamination.fail && !heldFlags.length;

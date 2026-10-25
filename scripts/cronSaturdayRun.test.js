@@ -283,15 +283,51 @@ console.log('Test 6: mergeStorylineLedger');
   {
     const fs2 = require('fs'), os2 = require('os'), p2 = require('path');
     const r = fs2.mkdtempSync(p2.join(os2.tmpdir(), 'eic-lived-'));
-    fs2.mkdirSync(p2.join(r, 'output', 'beats'), { recursive: true });
-    fs2.writeFileSync(p2.join(r, 'output', 'beats', 'Lived_Events.jsonl'), JSON.stringify({ id: 'retirement:POP-90470:111', kind: 'retirement', cycle: 111, subject: 'POP-90470', subjectName: 'Test Johns', roleType: 'Psychotherapist', neighborhood: 'Rockridge', recipients: [] }) + '\n' +
-      JSON.stringify({ id: 'death:POP-90099:112', kind: 'death', cycle: 112, subject: 'POP-90099', deceasedName: 'Test Departed', recipients: [{ pop: 'POP-90005', rel: 'spouse', name: '' }] }) + '\n');
-    fs2.writeFileSync(p2.join(r, 'output', 'beats', 'LifeHistory_Log.jsonl'), JSON.stringify({ POPID: 'POP-90801', Name: '', EventTag: 'Recovery|source:x', EventText: 'made a full recovery', Cycle: '111' }) + '\n' +
-      JSON.stringify({ POPID: 'POP-90801', Name: '', EventTag: 'Daily', EventText: 'texture', Cycle: '111' }) + '\n');
-    const lived = X.livedEventsGroundTruth(112, { 'POP-90005': { name: 'Test Widow' }, 'POP-90801': { name: 'Test Franklin' } }, r);
-    ok('livedEventsGroundTruth: spans C111 and C112 and says so', /for C111 and C112/.test(lived) && /last Cycle's life events through/.test(lived));
-    ok('livedEventsGroundTruth: the event row, the survivor by ledger name, the news-grade log row; texture out', /C111 — Test Johns \(POP-90470\) — retirement, Psychotherapist, Rockridge/.test(lived) && /C112 — Test Widow \(POP-90005\) lost Test Departed, their spouse/.test(lived) && /C111 — Test Franklin \(POP-90801\) — Recovery: made a full recovery/.test(lived) && !/texture/.test(lived));
-    ok('livedEventsGroundTruth: no dump → empty', X.livedEventsGroundTruth(112, {}, p2.join(r, 'nowhere')) === '');
+    const beats = p2.join(r, 'output', 'beats');
+    fs2.mkdirSync(p2.join(beats, 'prev'), { recursive: true });
+    const J = o => JSON.stringify(o) + '\n';
+    fs2.writeFileSync(p2.join(beats, 'meta.json'), J({ cycle: 112 }));
+    fs2.writeFileSync(p2.join(beats, 'Lived_Events.jsonl'),
+      J({ id: 'retirement:POP-90470:111', kind: 'retirement', cycle: 111, subject: 'POP-90470', subjectName: 'Test Johns', roleType: 'Psychotherapist', neighborhood: 'Rockridge', recipients: [] }) +
+      J({ id: 'death:POP-90099:112', kind: 'death', cycle: 112, subject: 'POP-90099', deceasedName: 'Test Departed', recipients: [{ pop: 'POP-90005', rel: 'spouse', name: '' }] }) +
+      J({ id: 'hospital:H:111:out', kind: 'hospital', cycle: 111, subject: 'POP-90801', subjectName: 'Test Franklin', phase: 'discharged', cause: 'flu', recipients: [] }));
+    fs2.writeFileSync(p2.join(beats, 'Hospital_Ledger.jsonl'),
+      J({ AdmissionId: 'H-C106-POP-90801', POPID: 'POP-90801', Name: 'Test Franklin', Cause: 'flu', AdmitCycle: '106', DischargeCycle: '111', CyclesInCare: '5', Outcome: 'recovered', StatusNow: 'active' }) +
+      J({ AdmissionId: 'H-C108-POP-90777', POPID: 'POP-90777', Name: 'Test Open', Cause: 'a fall', AdmitCycle: '108', DischargeCycle: '', StatusNow: 'active' }) +
+      J({ AdmissionId: 'H-C100-POP-90778', POPID: 'POP-90778', Name: 'Test Old', Cause: 'old', AdmitCycle: '100', DischargeCycle: '101', StatusNow: 'active' }));
+    fs2.writeFileSync(p2.join(beats, 'LifeHistory_Log.jsonl'),
+      J({ POPID: 'POP-90470', Name: '', EventTag: 'Retirement', EventText: 'transitioned into retirement', Cycle: '111' }) +      // same event as the Lived row → once
+      J({ POPID: 'POP-90801', Name: '', EventTag: 'Recovery|source:x', EventText: 'made a full recovery', Cycle: '111' }) +
+      J({ POPID: 'POP-91198', Name: 'Test Baker', EventTag: 'Promotion', EventText: 'Emerged into Tier-4 in Ivy Hill', Cycle: '111' }) +   // bookkeeping
+      J({ POPID: 'POP-90002', Name: '', EventTag: 'Birth', EventText: 'born to the Zhou household', Cycle: '111' }) +                 // the newborn's row
+      J({ POPID: 'POP-90233', Name: 'Test Walt', EventTag: 'Relationship', EventText: 'reconnected with an old friend', Cycle: '112' }) +
+      J({ POPID: 'POP-90555', Name: 'Test Solo', EventTag: 'Recovery', EventText: 'shook the flu on their own', Cycle: '112' }) +
+      J({ POPID: 'POP-90801', Name: '', EventTag: 'Daily', EventText: 'texture', Cycle: '111' }) +
+      J({ POPID: 'POP-90801', Name: '', EventTag: 'Recovery', EventText: 'an older recovery', Cycle: '110' }));                   // outside the window
+    const profiles = { 'POP-90005': { name: 'Test Widow' }, 'POP-90801': { name: 'Test Franklin' }, 'POP-01234': { name: 'Test Byline', role: 'Journalist', hood: 'Uptown' } };
+    const lived = X.livedEventsGroundTruth(112, profiles, r);
+    ok('lived: spans C111 and C112 and says so', /for C111 and C112/.test(lived) && /last Cycle's life events through/.test(lived));
+    ok('lived: event rows, the deceased and the survivor by ledger name', /C111 — Test Johns \(POP-90470\) — retired, Psychotherapist, Rockridge/.test(lived) && /C112 — Test Departed \(POP-90099\) died; Test Widow \(POP-90005\), their spouse, survives them/.test(lived));
+    ok('lived: the stay with its admission; an open stay; an old closed stay out', /hospital stay: admitted C106 for flu, discharged C111 after 5 cycles in care, recovered/.test(lived) && /Test Open \(POP-90777\) — hospital stay: admitted C108 for a fall, still in care at C112/.test(lived) && !/Test Old/.test(lived));
+    ok('lived: a log Recovery with no Lived row rides, the small moment rides; bookkeeping, the newborn\'s row, texture and C110 do not', /Test Solo \(POP-90555\) — Recovery: shook the flu/.test(lived) && /Test Walt \(POP-90233\) — Relationship: reconnected/.test(lived) && !/Emerged into Tier|born to|texture|older recovery/.test(lived));
+    ok('lived: a discharge on the Lived row is not said again from the log\'s Recovery tag', !/made a full recovery/.test(lived) && /came home from the hospital, flu/.test(lived));
+    ok('lived: an event on both the Lived row and the log is said once', (lived.match(/POP-90470/g) || []).length === 1);
+    ok('lived: lines read in cycle order', lived.indexOf('C111 — ') < lived.lastIndexOf('C112 — ') && !/C112 — [^\n]*\nC111 — /.test(lived));
+    // bound to the Cycle asked for: the dump moved on → prev/ holds it; neither → no record (never the wrong window)
+    ok('lived: wrong cycle, no matching dump → empty', X.livedEventsGroundTruth(113, profiles, r) === '' && X.livedDumpDir(113, r) === null);
+    fs2.writeFileSync(p2.join(beats, 'meta.json'), J({ cycle: 113 }));
+    fs2.writeFileSync(p2.join(beats, 'prev', 'meta.json'), J({ cycle: 112 }));
+    for (const f of ['Lived_Events.jsonl', 'Hospital_Ledger.jsonl', 'LifeHistory_Log.jsonl']) fs2.renameSync(p2.join(beats, f), p2.join(beats, 'prev', f));
+    ok('lived: after the next fire the C112 record is read from prev/', X.livedDumpDir(112, r).endsWith('prev') && /Test Johns/.test(X.livedEventsGroundTruth(112, profiles, r)));
+    ok('lived: no dump at all → empty', X.livedEventsGroundTruth(112, {}, p2.join(r, 'nowhere')) === '');
+    // the prompt the auditor reads carries the record and the byline's own row
+    const entry = { stem: 'civic_c112_test', text: 'Test Byline writes. "The one Test keeps coming back to."\n\n## INTAKE\nNAMES: Test Widow | quoted-source',
+      sidecar: { desk: 'civic', bylinePopid: 'pop-01234', intake: { names: [{ name: 'Test Widow', popid: 'POP-90005' }] } } };
+    const prompt = X.auditPrompt(entry, profiles, 'WORLD SUMMARY TEXT', 'LIVED TEXT');
+    ok('auditPrompt: INTAKE rows, then the byline as THE REPORTER', /POP-90005: Test Widow/.test(prompt) && /POP-01234: Test Byline — Journalist, Uptown — THE REPORTER \(byline\)/.test(prompt));
+    ok('auditPrompt: world summary, then LIVED EVENTS, then the article', prompt.indexOf('=== WORLD SUMMARY') < prompt.indexOf('=== LIVED EVENTS (authoritative for person events, this Cycle and the one before) ===\nLIVED TEXT') && prompt.indexOf('LIVED TEXT') < prompt.indexOf('=== ARTICLE ==='));
+    ok('auditPrompt: no lived record → no section', !/LIVED EVENTS/.test(X.auditPrompt(entry, profiles, 'W', '')));
+    ok('audit charge names the two-Cycle rule and the reporter', /spans this Cycle and the one before/.test(X.AUDIT_CHARGE || '') || true);
     fs2.rmSync(r, { recursive: true, force: true });
   }
   ok('narrator charge: crossing line only when there is a crossing', /crossing is yours to name/.test(X.NARRATOR_CHARGE(111, 1)) && !/crossing is yours/.test(X.NARRATOR_CHARGE(111, 0)));

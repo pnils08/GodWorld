@@ -155,8 +155,10 @@ function loadSlice(cycle, root = K.ROOT) {
 function enrichAssignment(assign, cycle, root = K.ROOT) {
   if (!W.isSeat(assign)) return assign;
   const slice = loadSlice(cycle, root);
-  return slice ? W.assignmentFromSlice(slice, assign) : assign;
+  // Nothing new on the pages today → null: the fanout (or a --persona wake) sits the seat out, never the generic packet.
+  return slice ? W.assignmentFromSlice(slice, assign) : null;
 }
+const sitsOutWhenEmpty = true;
 function main() {
   const cycle = K.arg('--cycle', null) || (() => {
     try { return require(path.join(K.ROOT, 'lib', 'getCurrentCycle'))({ soft: true, noArgv: true }); } catch (_) { return null; }
@@ -167,5 +169,5 @@ function main() {
   console.log((slice.empty ? 'EMPTY — ' + slice.reason : slice.label) + ' → ' + path.relative(K.ROOT, p.md));
 }
 if (require.main === module) main();
-module.exports = { SEAT, loadSlice, buildVoicesSlice: buildSlice, writeVoicesSlice: W.write, loadVoicesSlice: loadSlice,
+module.exports = { SEAT, sitsOutWhenEmpty, loadSlice, buildVoicesSlice: buildSlice, writeVoicesSlice: W.write, loadVoicesSlice: loadSlice,
   isVoicesSeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment, slicePaths: W.paths, isMedia, coveredPath };

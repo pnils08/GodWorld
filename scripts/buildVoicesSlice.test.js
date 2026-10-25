@@ -81,6 +81,14 @@ try {
   // Seat wiring; the builder never touches the beat dump (no output/beats in this root).
   assert.ok(V.isVoicesSeat({ persona: 'ines-sorensen' }) && V.isVoicesSeat({ name: 'Ines Sorensen' }) && !V.isVoicesSeat({ persona: 'tamsin-pruitt' }));
   assert.equal(V.enrichAssignment({ persona: 'celeste-tran' }, cycle, root).persona, 'celeste-tran');
+  // nothing on the pages → null: Ines sits the day out (the fanout drops the seat), never the generic culture packet
+  {
+    const bare = fs.mkdtempSync(path.join(os.tmpdir(), 'voices-empty-'));
+    try {
+      assert.strictEqual(V.enrichAssignment({ persona: 'ines-sorensen', desk: 'culture' }, cycle, bare), null);
+      assert.strictEqual(V.sitsOutWhenEmpty, true);
+    } finally { fs.rmSync(bare, { recursive: true, force: true }); }
+  }
   assert.deepStrictEqual(V.SEAT.tabs, []);
 } finally {
   fs.rmSync(root, { recursive: true, force: true });

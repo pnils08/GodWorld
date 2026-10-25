@@ -1,0 +1,13 @@
+# TASK — codex: plan review of engine.301 F1 (the crime carry reaches citizens; the wave rung), one round
+
+Read-only; no cron, model, Sheet write, bench or canon run. Do not commit, do not push. Write to `docs/for-claude-review/2026-10-25-codex-engine301-crime-plan-review.md`, SHIP / FIX / HOLD per hunt, file:line evidence, under ~70 lines. Report in one line when done.
+
+Plan: `docs/plans/2026-10-10-engine-214-mood-per-hood.md` §engine.301 F1 (just before §Open questions); the ruling is the engine.289 bullet under §Open questions (builder 2026-10-25 "(a)": back-to-back-Cycle rise in one hood is the third rung; builder 2026-10-19: no mass waves, must be able to reach crisis). The ruling is fixed; attack the mechanism.
+
+1. **Publish.** `applyCityDynamics.js:224-243` → `S.crimeByNeighborhood` as the ladder level (1–2 counted rises, 3 for a carried wave hood). Every reader of `S.crimeByNeighborhood` and of the level's meaning (`:1283` ladder, `:1559-1580` receipt, `generateCitizensEvents.js:1842` carry weight `min(1, carry/3)`); anything that assumed it was a raw count; anything at Phase 3+ that would now see a value it never saw.
+2. **Carry.** `finalizeCycleState.js` gains `crimeWaveHoods` from this Cycle's `compactCrimeSpikes_` list × the Phase-2 published level ≥ 1. The claim that Phase 9 cannot read the loaded `previousCycleState.crimeSpikes` (shock monitor overwrite `applyShockMonitor.js:463`): true on both entry points (`godWorldEngine2.js:583/657/704/810`, `:2300/2374/2420/2519`)? Any path where `S.crimeByNeighborhood` is pre-set or stale at Phase 9 (replay, dry run, checkpoint resume — engine.95)? Loader/serializer key filtering (`loadPreviousEvening.js:266-290`, `savePreviousCycleState_` `:505-521`), the 9 KB prop + ring.
+3. **Semantics vs the ruling.** Does "rose last Cycle and the Cycle before" (a counted ≥ 5-point property/violent increase, `ensureCrimeMetrics.js:496-534`) match "a rise in back-to-back weeks"? The one-Cycle lag (the wave is felt the Cycle after the second rise — the existing carry grain). The drop to level 0 after a wave (no decay rung — stated, a builder call). Mass-wave risk: can many hoods hit rung 3 at once?
+4. **Tests + bench.** The listed tests prove the real path (not a stub)? `scripts/perHoodDynamics.test.js:211-231` block 6 comment trued; `phase09-digest/finalizeCycleState.test.js` is outside `npm test` (`scripts/run-tests.js:24`) — where should the helper's test live? The bench prediction and the 25-Cycle reach window: enough to call the rung reachable, or what receipt would you require?
+5. **Scope.** Anything past F1 (F6 drift pools are research-build's; engine.289 CULTURE/NIGHTLIFE gates stay untouched).
+
+Done = the md exists.

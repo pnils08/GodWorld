@@ -2,11 +2,11 @@
   "cycle": "112",
   "total": 34,
   "counts": {
-    "accurate": 32,
+    "accurate": 33,
     "corrections-needed": 0,
-    "canon-violation": 2
+    "canon-violation": 1
   },
-  "accuracyPct": 94.1,
+  "accuracyPct": 97.1,
   "auditModel": "google/gemini-3.7-flash",
   "trend": [
     {
@@ -60,14 +60,20 @@
       "byline": "Angela Reyes",
       "desk": "civic",
       "intakePresent": true,
-      "verdict": "canon-violation",
-      "failures": [
-        {
-          "what": "Angela",
-          "class": "citizen-bending",
-          "why": "Angela is referenced as a named figure ('the one Angela keeps coming back to') but does not appear in the ledger profiles or the world summary."
-        }
-      ]
+      "verdict": "accurate",
+      "failures": [],
+      "overridden": {
+        "from": "canon-violation",
+        "failures": [
+          {
+            "what": "Angela",
+            "class": "citizen-bending",
+            "why": "Angela is referenced as a named figure ('the one Angela keeps coming back to') but does not appear in the ledger profiles or the world summary."
+          }
+        ],
+        "by": "builder 2026-10-25 (research-build)",
+        "why": "\"Angela\" in the prose is the byline herself, not an invented person; the audit had no row for the reporter"
+      }
     },
     {
       "stem": "civic_c112_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",

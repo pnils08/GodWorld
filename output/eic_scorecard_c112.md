@@ -1,15 +1,14 @@
 # EIC Accuracy Scorecard — C112
 
-**94.1% accurate** (32/34 clean; 0 corrections-needed; 2 canon-violation)
+**97.1% accurate** (33/34 clean; 0 corrections-needed; 1 canon-violation)
 
 **AT THE 90% BAR.** Graduation needs 3 consecutive weeks at/above 90.
 
-Trend: C103 75% → C104 62.5% → C105 76.5% → C106 55.6% → C107 68.8% → C108 60% → C109 33.3% → C110 39.1% → C111 51.9% → C112 94.1%
+Trend: C103 75% → C104 62.5% → C105 76.5% → C106 55.6% → C107 68.8% → C108 60% → C109 33.3% → C110 39.1% → C111 51.9% → C112 97.1%
 
 ## Per-article
 - **business_c112_business-desk_packet-v2_anthropic-claude-opus-5-5** (Jordan Velez): accurate
-- **civic_c112_angela-reyes_packet-v2_anthropic-claude-haiku-5-5** (Angela Reyes): canon-violation
-  - [citizen-bending] Angela — Angela is referenced as a named figure ('the one Angela keeps coming back to') but does not appear in the ledger profiles or the world summary.
+- **civic_c112_angela-reyes_packet-v2_anthropic-claude-haiku-5-5** (Angela Reyes): accurate — overridden from canon-violation by the builder 2026-10-25: "Angela" in the prose is the byline herself; the audit had no row for the reporter
 - **civic_c112_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5** (Carmen Delaine): accurate
 - **civic_c112_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5** (Jax Caldera): canon-violation
   - [null] KONO is flagged for decay — undefined

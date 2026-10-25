@@ -1,0 +1,4 @@
+fresh PROD pull = stage 25 (engine.301 rides this push)
+stage = the benched tree (output/engine-sheet/stage27-e312.sha256), byte for byte
+live fire state before the push: cycleCount 112, Neighborhood_Map [112], Riley last 112, checkpoint none, Engine_Errors at C113+ 0 — C113 not fired
+dry run: stopping before the push (/tmp/tmp.98XtUVybtl/stage)

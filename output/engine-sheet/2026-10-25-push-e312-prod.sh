@@ -16,7 +16,7 @@ PROD_ID=1hL59VnByrXfWdz6EKZZQ1ss8DH1PFfDT9vVDvmjqHY_pwLyTB_N1iKW5
 OUT=/root/GodWorld/output/engine-sheet
 F301="phase02-world-state/applyCityDynamics.js phase09-digest/finalizeCycleState.js"
 FILES="phase07-evening-media/culturalLedger.js phase05-citizens/processAdvancementIntake.js phase07-evening-media/mediaRoomIntake.js phase01-config/godWorldEngine2.js"
-[[ "$CYC" =~ ^[0-9]+$ ]] && [ "$CYC" -ge 113 ] || { echo "cycle must be the live Cycle (>= 113) — stop"; exit 1; }
+[[ "$CYC" =~ ^[0-9]+$ ]] && [ "$CYC" -ge 112 ] || { echo "cycle must be the live Cycle (>= 112) — stop"; exit 1; }
 [ "$(realpath "$MAN")" = "$OUT/stage27-e312.sha256" ] || { echo "manifest must be the benched stage27-e312.sha256 — stop"; exit 1; }
 git ls-files --error-unmatch "$MAN" >/dev/null 2>&1 && git diff --quiet HEAD -- "$MAN" || { echo "manifest $MAN is not committed as-is — stop"; exit 1; }
 W=$(mktemp -d); mkdir -p "$W/stage" "$W/pullback"

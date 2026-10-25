@@ -175,5 +175,34 @@ console.log('  T9 skips by source:', JSON.stringify(calSkips));
   assert('T10 the stretched citizen draws money lines that read Down (and the debt lines open on their DebtLevel)', tally.stretched.down > 0 && tally.stretched.up === 0 && tally.stretched.debtLines > 0, JSON.stringify(tally.stretched));
   assert('T10 the comfortable citizen in the same hood draws money lines that read Up, never the debt lines', tally.comfortable.up > 0 && tally.comfortable.down === 0 && tally.comfortable.debtLines === 0, JSON.stringify(tally.comfortable));
 }
+
+// T11 (engine.301 F1): the crime carry reaches a citizen through the real Phase-5 pool — offered only for the
+// citizen's own hood at a level >= 1 (S.crimeByNeighborhood, published by Phase 2), weighted up the ladder; the
+// lines are written as graded watchful lines. Same seeds per level, so the counts compare like for like.
+{
+  global.hoodTexturePool_ = () => [];
+  // the hood-state pool reads the city's median through the real helper (runNeighborhoodEngine.js)
+  const rne = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/runNeighborhoodEngine.js'), 'utf8');
+  global.hoodStateMedian_ = new Function(rne.match(/function hoodStateMedian_[\s\S]*?\n}\n/)[0] + '\nreturn hoodStateMedian_;')();
+  global.pressureBar_ = M.pressureBar_;
+  global.hoodCrimeBar_ = new Function(rne.match(/function hoodCrimeBar_[\s\S]*?\n}\n/)[0] + '\nreturn hoodCrimeBar_;')();
+  const CRIME = /took a different route home after the recent break-ins around Temescal|counted the register twice before closing up|swapped stories with a neighbor about what got taken/;
+  const count = (levels) => {
+    let n = 0, tags = new Set();
+    for (let seed = 1; seed <= 600; seed++) {
+      const ctx = ctxFor(seed, 0);
+      ctx.summary.neighborhoodState = { Temescal: {} };
+      ctx.config.dialHoodPressureBar = 3; ctx.config.dialHoodCrimeBar = 1.45;   // the World_Config defaults (engine94SheetContract.js:504-505)
+      ctx.summary.crimeByNeighborhood = levels;
+      GEN.generateCitizensEvents_(ctx);
+      String(ctx.ledger.rows[0][5] || '').split('\n').forEach((l) => { if (CRIME.test(l)) { n++; const m = /\[([^\]]+)\]/.exec(l); if (m) tags.add(m[1]); } });
+    }
+    return { n, tags: [...tags] };
+  };
+  const zero = count({}), other = count({ Dimond: 3 }), one = count({ Temescal: 1 }), wave = count({ Temescal: 3 });
+  assert('T11 no crime-carry line at level 0, nor for a rise in another hood', zero.n === 0 && other.n === 0, JSON.stringify({ zero, other }));
+  assert('T11 a carried rise in the citizen\'s own hood reaches them, and a wave (level 3) more often than one rise', one.n > 0 && wave.n > one.n, JSON.stringify({ one: one.n, wave: wave.n }));
+  assert('T11 the crime-carry lines are written graded (a dial moves)', wave.tags.length > 0 && wave.tags.every((t) => !!M.gradedParts_(t)), JSON.stringify(wave.tags));
+}
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

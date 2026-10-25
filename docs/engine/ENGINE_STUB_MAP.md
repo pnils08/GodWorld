@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-10-22 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-10-25 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -348,8 +348,8 @@
 - **hoodCharacterBase_(profile)**
 
 - **applyCityDynamics_(ctx)**
-  Reads: S.absoluteCycle, S.activityObservations, S.approvalNeighborhoodEffects, S.cityCapacity, S.cityDynamics, S.cityDynamicsLag, S.commuteInbound, S.contractSeedsCarried, S.crimeByNeighborhood, S.crimeEvents, S.crimeSpikes, S.cycleId, S.editionNeighborhoodEffects, S.editionSentimentBoost, S.eventsGenerated, S.holiday, S.holidayPriority, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.isCreationDay, S.isFirstFriday, S.manualDynamicsInputs, S.mediaCount, S.mediaCoverage, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodState, S.neighborhoodWeather, S.previousCityDynamics, S.previousCycleState, S.resetDynamicsMomentum, S.season, S.shockFlag, S.sportsCity, S.sportsSeason, S.sportsSentimentBoost, S.sportsWeek, S.storySeeds, S.storySeedsCarried, S.weather, S.weatherEvents, S.worldEvents
-  Writes: S.activityObservations, S.cityDynamics, S.cityDynamicsCapacity, S.cityDynamicsLag, S.neighborhoodDemographics, S.neighborhoodDynamics, S.previousCityDynamics, S.previousNeighborhoodDynamics, S.resetDynamicsMomentum, S.storySeedSignals
+  Reads: S.absoluteCycle, S.activityObservations, S.approvalNeighborhoodEffects, S.cityCapacity, S.cityDynamics, S.cityDynamicsLag, S.commuteInbound, S.contractSeedsCarried, S.crimeEvents, S.crimeSpikes, S.cycleId, S.editionNeighborhoodEffects, S.editionSentimentBoost, S.eventsGenerated, S.holiday, S.holidayPriority, S.initiativeImplementationEffects, S.initiativeNeighborhoodEffects, S.isCreationDay, S.isFirstFriday, S.manualDynamicsInputs, S.mediaCount, S.mediaCoverage, S.neighborhoodDemographics, S.neighborhoodDynamics, S.neighborhoodEconomies, S.neighborhoodState, S.neighborhoodWeather, S.previousCityDynamics, S.previousCycleState, S.resetDynamicsMomentum, S.season, S.shockFlag, S.sportsCity, S.sportsSeason, S.sportsSentimentBoost, S.sportsWeek, S.storySeeds, S.storySeedsCarried, S.weather, S.weatherEvents, S.worldEvents
+  Writes: S.activityObservations, S.cityDynamics, S.cityDynamicsCapacity, S.cityDynamicsLag, S.crimeByNeighborhood, S.neighborhoodDemographics, S.neighborhoodDynamics, S.previousCityDynamics, S.previousNeighborhoodDynamics, S.resetDynamicsMomentum, S.storySeedSignals
   Config: ctx.config.cityCapacity, ctx.config.cycleCount, ctx.config.manualDynamicsInputs
 
 - **getNeighborhoodDynamics_(ctx, neighborhood)**
@@ -3515,6 +3515,8 @@
 
 - **compactCrimeSpikes_(crimeMetrics)**
 
+- **compactCrimeWaveHoods_(spikes, levelByHood)**
+
 - **compactEconomicRipples_(ripples, cycle)**
 
 - **compactInitiativeRipples_(ripples, cycle)**
@@ -4816,4 +4818,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1742
+**Functions mapped:** 1743

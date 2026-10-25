@@ -53,6 +53,10 @@ function finalizeCycleState_(ctx) {
     return;
   }
 
+  // engine.301 F1: one compaction feeds both crime carries, so crimeWaveHoods
+  // can only name a hood that crimeSpikes carries too.
+  var crimeCarry = compactCrimeSpikes_(S.crimeMetrics);
+
   // Build comprehensive final snapshot of this cycle
   var snapshot = {
     // Core identifiers
@@ -155,7 +159,14 @@ function finalizeCycleState_(ctx) {
     // crime branch inputs (S.crimeSpikes/S.crimeByNeighborhood) had no writer
     // (trace K gap G1); Phase-2 position means prev-cycle is the honest grain.
     // Same channel as migrationDrift. Increase-shifts only, responseTime excluded.
-    crimeSpikes: compactCrimeSpikes_(S.crimeMetrics),
+    crimeSpikes: crimeCarry,
+
+    // engine.301 F1 (builder 2026-10-25, "(a)"): the hoods whose crime rose this
+    // Cycle AND the Cycle before; next Cycle's ladder reads them at rung 3 (a
+    // wave). "The Cycle before" is the Phase-2 published level: the same frozen
+    // prior-rise signal this Cycle's ladder used, unset (so no wave) when
+    // Phase2-CityDynamics failed.
+    crimeWaveHoods: compactCrimeWaveHoods_(crimeCarry, S.crimeByNeighborhood),
 
     // v1.7 (engine.44 Class 3): weather streak state survives the cycle
     // boundary — applyWeatherModel's streak-gated alerts (heat_wave ≥6,
@@ -822,6 +833,26 @@ function compactCrimeSpikes_(crimeMetrics) {
 }
 
 /**
+ * engine.301 F1: the carried crime-wave list. A hood is on it when this Cycle's
+ * carried spikes (compactCrimeSpikes_, post-cap) name it and its Phase-2 ladder
+ * level — last Cycle's counted rises, published as S.crimeByNeighborhood — is
+ * at least 1: a rise in back-to-back Cycles. Sorted, unique; at most 22 names.
+ */
+function compactCrimeWaveHoods_(spikes, levelByHood) {
+  if (!Array.isArray(spikes) || !levelByHood || typeof levelByHood !== 'object') return [];
+  var out = [];
+  for (var i = 0; i < spikes.length; i++) {
+    var hood = spikes[i] && spikes[i].neighborhood;
+    if (hood && Number(levelByHood[hood]) >= 1 && out.indexOf(hood) === -1) out.push(hood);
+  }
+  out.sort();
+  if (out.length && typeof Logger !== 'undefined') {
+    Logger.log('compactCrimeWaveHoods_: ' + out.join(', ') + ' rose two Cycles running');
+  }
+  return out;
+}
+
+/**
  * Trim active economic ripples for carry-forward. Keeps every field the
  * next-cycle consumers read: processActiveRipples_ (startCycle/endCycle/impact/
  * currentStrength), calculateNeighborhoodEconomies_ (neighborhoods/
@@ -922,6 +953,7 @@ if (typeof module !== 'undefined' && module.exports) {
     compactEconomicRipples_: compactEconomicRipples_,
     compactInitiativeRipples_: compactInitiativeRipples_,
     compactCrimeSpikes_: compactCrimeSpikes_,
+    compactCrimeWaveHoods_: compactCrimeWaveHoods_,
     compactWeatherTracking_: compactWeatherTracking_,
     compactFrontTracking_: compactFrontTracking_,
     compactCrisisArcs_: compactCrisisArcs_,

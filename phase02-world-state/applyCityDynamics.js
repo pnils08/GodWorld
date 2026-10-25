@@ -225,22 +225,38 @@ function applyCityDynamics_(ctx) {
   // cycle's Crime_Metrics increase-shifts, carried via the T2 snapshot
   // (finalizeCycleState compactCrimeSpikes_). Prev-cycle is the honest grain:
   // this runs at Phase 2, updateCrimeMetrics computes at Phase 3. The direct
-  // S.crimeSpikes/S.crimeByNeighborhood reads stay first so a future same-cycle
-  // writer would win over the carried state.
+  // S.crimeSpikes read stays first so a future same-cycle writer would win over
+  // the carried state; the per-hood level below is derived here only (engine.301).
   var prevCrimeSpikes = (S.previousCycleState && Array.isArray(S.previousCycleState.crimeSpikes))
     ? S.previousCycleState.crimeSpikes : [];
   var crimeSpikes = S.crimeSpikes || S.crimeEvents || prevCrimeSpikes;
   var mediaCoverage = S.mediaCoverage || S.mediaCount || 0;
 
-  // Crime by neighborhood (the per-hood ladder)
-  var crimeByNeighborhood = S.crimeByNeighborhood;
-  if (!crimeByNeighborhood || Object.keys(crimeByNeighborhood).length === 0) {
-    crimeByNeighborhood = {};
-    for (var pci = 0; pci < prevCrimeSpikes.length; pci++) {
-      var pcHood = prevCrimeSpikes[pci] && prevCrimeSpikes[pci].neighborhood;
-      if (pcHood) crimeByNeighborhood[pcHood] = (crimeByNeighborhood[pcHood] || 0) + 1;
+  // Crime by neighborhood (the per-hood ladder). engine.301 F1: the value is the
+  // hood's ladder level: last Cycle's counted rises (property / violent, 1-2),
+  // and 3 when the hood also rose the Cycle before (previousCycleState.
+  // crimeWaveHoods, carried by finalizeCycleState_: a rise in back-to-back
+  // Cycles is a wave, builder 2026-10-25). A "rise" is a carried spike: a +5
+  // index point property or violent increase among the Cycle's 12 strongest
+  // (compactCrimeSpikes_). Derived from the carry only, never a pre-set map
+  // (codex plan review: a stale map could fabricate a wave), and published on S:
+  // Phase 5's crime carry reads it (it read undefined, so 0, on every live Cycle
+  // before) and Phase 9 carries the next wave list from it.
+  var crimeByNeighborhood = {};
+  var crimeWaveHoods = [];
+  for (var pci = 0; pci < prevCrimeSpikes.length; pci++) {
+    var pcHood = prevCrimeSpikes[pci] && prevCrimeSpikes[pci].neighborhood;
+    if (pcHood) crimeByNeighborhood[pcHood] = (crimeByNeighborhood[pcHood] || 0) + 1;
+  }
+  var prevWaves = (S.previousCycleState && Array.isArray(S.previousCycleState.crimeWaveHoods))
+    ? S.previousCycleState.crimeWaveHoods : [];
+  for (var pwi = 0; pwi < prevWaves.length; pwi++) {
+    if (typeof prevWaves[pwi] === 'string' && prevWaves[pwi] && crimeWaveHoods.indexOf(prevWaves[pwi]) === -1) {
+      crimeByNeighborhood[prevWaves[pwi]] = 3;
+      crimeWaveHoods.push(prevWaves[pwi]);
     }
   }
+  S.crimeByNeighborhood = crimeByNeighborhood;
 
   // ─────────────────────────────────────────────────────────────────────────
   // HELPERS (ES5)
@@ -1558,7 +1574,7 @@ function applyCityDynamics_(ctx) {
   // receipt behind for a phase that published nothing (codex impl review F7).
   if (crimeHoodsAtTwo.length) {
     Logger.log('applyCityDynamics_ engine.214: crime ladder at >=2 in ' + crimeHoodsAtTwo.join(', ') +
-      ' (max ' + crimeMaxSpikes + ' prev-cycle spike(s))');
+      ' (max level ' + crimeMaxSpikes + (crimeWaveHoods.length ? '; wave in ' + crimeWaveHoods.join(', ') : '') + ')');
     if (typeof recordRipple_ === 'function') {
       recordRipple_(ctx, {
         causeType: 'crime',
@@ -1568,7 +1584,8 @@ function applyCityDynamics_(ctx) {
         }).map(function(sp) {
           var metric = String(sp.metric || 'crime').replace(/([A-Z])/g, ' $1').toLowerCase();
           return sp.neighborhood + ' ' + metric.trim() + ' +' + sp.magnitude +
-            (sp.newValue !== undefined ? ' (now ' + sp.newValue + ')' : '');
+            (sp.newValue !== undefined ? ' (now ' + sp.newValue + ')' : '') +
+            (crimeWaveHoods.indexOf(sp.neighborhood) !== -1 ? ', rising two Cycles running' : '');
         }).join('; ') || 'prev-cycle crime spike carry',
         effectType: 'nightlife/tourism/publicSpaces/sentiment',
         targetScope: 'neighborhood',

@@ -211,23 +211,94 @@ console.log('engine.214 — mood per hood');
 // ── 6. crime ladder per hood + the receipt ───────────────────────────────────
 {
   const none = run();
-  // Live bound (agy 2026-10-19, verified): one hood carries at most two counted spikes a Cycle — property and
-  // violent increases only (finalizeCycleState.js compactCrimeSpikes_) — so the n >= 3 rung is reached only by
-  // this stub. On live it cannot fire; the builder's call with engine.289.
-  const r = run({ summary: { crimeByNeighborhood: { Laurel: 1, Dimond: 2, Glenview: 3 },
-    previousCycleState: { cycle: 119, crimeSpikes: [{ neighborhood: 'Dimond', metric: 'propertyCrime', magnitude: 2, newValue: 7 }, { neighborhood: 'Glenview', metric: 'crime', magnitude: 3 }] } } });
+  // One hood carries at most two counted spikes a Cycle — property and violent increases only (finalizeCycleState.js
+  // compactCrimeSpikes_). Level 3 is the carried wave (engine.301 F1, builder 2026-10-25: a rise in back-to-back
+  // Cycles; block 6c proves the live path); this stub feeds the levels directly.
+  const r = run({ summary: { previousCycleState: { cycle: 119, crimeWaveHoods: ['Glenview'], crimeSpikes: [
+    { neighborhood: 'Laurel', metric: 'propertyCrime', magnitude: 5, newValue: 30 },
+    { neighborhood: 'Dimond', metric: 'propertyCrime', magnitude: 2, newValue: 7 }, { neighborhood: 'Dimond', metric: 'violentCrime', magnitude: 6, newValue: 25 },
+    { neighborhood: 'Glenview', metric: 'crime', magnitude: 3 }] } } });
+  check('the carried spikes set the levels: Laurel 1, Dimond 2 (property + violent), Glenview 3 (a carried wave)',
+    JSON.stringify(r.S.crimeByNeighborhood) === '{"Laurel":1,"Dimond":2,"Glenview":3}', JSON.stringify(r.S.crimeByNeighborhood));
   const ratio = (h, k) => r.nd[h][k] / none.nd[h][k];
   check('1 spike: nightlife ×0.96, tourism and publicSpaces untouched', near(ratio('Laurel', 'nightlife'), 0.96, 1e-6) && near(ratio('Laurel', 'tourism'), 1, 1e-6) && near(ratio('Laurel', 'publicSpaces'), 1, 1e-6));
   check('2 spikes: nightlife ×0.90, tourism ×0.88, publicSpaces untouched', near(ratio('Dimond', 'nightlife'), 0.90, 1e-6) && near(ratio('Dimond', 'tourism'), 0.88, 1e-6) && near(ratio('Dimond', 'publicSpaces'), 1, 1e-6));
-  check('3 spikes: nightlife ×0.90, tourism ×0.88, publicSpaces ×0.88', near(ratio('Glenview', 'nightlife'), 0.90, 1e-6) && near(ratio('Glenview', 'tourism'), 0.88, 1e-6) && near(ratio('Glenview', 'publicSpaces'), 0.88, 1e-6));
+  check('level 3 (the wave): nightlife ×0.90, tourism ×0.88, publicSpaces ×0.88', near(ratio('Glenview', 'nightlife'), 0.90, 1e-6) && near(ratio('Glenview', 'tourism'), 0.88, 1e-6) && near(ratio('Glenview', 'publicSpaces'), 0.88, 1e-6));
   check('sentiment steps down the ladder (1 < 2 < 3 spikes)',
     none.nd.Laurel.sentiment - r.nd.Laurel.sentiment > 0.03 && (none.nd.Dimond.sentiment - r.nd.Dimond.sentiment) > (none.nd.Laurel.sentiment - r.nd.Laurel.sentiment) &&
     (none.nd.Glenview.sentiment - r.nd.Glenview.sentiment) > (none.nd.Dimond.sentiment - r.nd.Dimond.sentiment));
   const rows = r.ripples.filter(e => e.causeType === 'crime');
   check('one Ripple_Ledger receipt per Cycle naming the hoods at >= 2, with the spikes as prose',
     rows.length === 1 && JSON.stringify(rows[0].targetIds.slice().sort()) === JSON.stringify(['Dimond', 'Glenview']) && rows[0].magnitude === 3 &&
-    /Dimond property crime \+2 \(now 7\); Glenview crime \+3/.test(rows[0].causeDetail), JSON.stringify(rows[0]));
+    /Dimond property crime \+2 \(now 7\); Dimond violent crime \+6 \(now 25\); Glenview crime \+3, rising two Cycles running/.test(rows[0].causeDetail), JSON.stringify(rows[0]));
   check('no receipt when no hood reaches 2', none.ripples.filter(e => e.causeType === 'crime').length === 0);
+  const preset = run({ summary: { crimeByNeighborhood: { Dimond: 3 } } });
+  check('engine.301: a pre-set map is never read — the level comes from the carry only (no fabricated wave)',
+    JSON.stringify(preset.S.crimeByNeighborhood) === '{}' && near(preset.nd.Dimond.publicSpaces, none.nd.Dimond.publicSpaces, 1e-9));
+}
+
+// ── 6c. engine.301 F1: the ladder level is published, a carried wave takes rung 3, the chain ──────────
+{
+  const fcs = require('../phase09-digest/finalizeCycleState.js');   // the real Phase-9 compactors and snapshot
+  const none = run();
+  const spike = (h, metric, mag, now) => ({ neighborhood: h, metric: metric, magnitude: mag, newValue: now });
+  const one = run({ summary: { previousCycleState: { cycle: 119, crimeSpikes: [spike('Dimond', 'propertyCrime', 6, 40)] } } });
+  check('engine.301: the derived ladder level is published on S (Phase 5 crime carry reads it)',
+    JSON.stringify(one.S.crimeByNeighborhood) === '{"Dimond":1}', JSON.stringify(one.S.crimeByNeighborhood));
+  check('engine.301: one carried rise is rung 1', near(one.nd.Dimond.nightlife / none.nd.Dimond.nightlife, 0.96, 1e-6));
+  const wave = run({ summary: { previousCycleState: { cycle: 119, crimeSpikes: [spike('Dimond', 'propertyCrime', 6, 40)], crimeWaveHoods: ['Dimond'] } } });
+  const wr = k => wave.nd.Dimond[k] / none.nd.Dimond[k];
+  check('engine.301: a carried wave hood reads level 3 and takes rung 3 (nightlife ×0.90, tourism ×0.88, publicSpaces ×0.88)',
+    wave.S.crimeByNeighborhood.Dimond === 3 && near(wr('nightlife'), 0.90, 1e-6) && near(wr('tourism'), 0.88, 1e-6) && near(wr('publicSpaces'), 0.88, 1e-6));
+  check('engine.301: the wave costs the hood more sentiment than one rise',
+    (none.nd.Dimond.sentiment - wave.nd.Dimond.sentiment) > (none.nd.Dimond.sentiment - one.nd.Dimond.sentiment));
+  const wrow = wave.ripples.filter(e => e.causeType === 'crime');
+  check('engine.301: the receipt names the wave hood as rising two Cycles running',
+    wrow.length === 1 && wrow[0].targetIds.join() === 'Dimond' && wrow[0].magnitude === 3 &&
+    /Dimond property crime \+6 \(now 40\), rising two Cycles running/.test(wrow[0].causeDetail), JSON.stringify(wrow));
+  const bad = run({ summary: { previousCycleState: { cycle: 119, crimeSpikes: [spike('Dimond', 'propertyCrime', 6, 40)], crimeWaveHoods: 'Dimond' } } });
+  check('engine.301: a non-array crimeWaveHoods is ignored (level stays 1)', bad.S.crimeByNeighborhood.Dimond === 1);
+  // The chain: Cycle N's Phase-2 level × Cycle N's rises → the carried list → Cycle N+1 at rung 3.
+  const shifts = [
+    { neighborhood: 'Dimond', metric: 'propertyCrime', direction: 'increase', magnitude: 7, newValue: 47 },
+    { neighborhood: 'Laurel', metric: 'violentCrime', direction: 'increase', magnitude: 5, newValue: 30 },
+    { neighborhood: 'Glenview', metric: 'propertyCrime', direction: 'decrease', magnitude: 9, newValue: 20 },
+    { neighborhood: 'Dimond', metric: 'responseTime', direction: 'slower', magnitude: 2, newValue: 11 }
+  ];
+  const carry = fcs.compactCrimeSpikes_({ shifts: shifts });
+  check('engine.301: compactCrimeWaveHoods_ keeps only a hood that rose now and the Cycle before',
+    JSON.stringify(fcs.compactCrimeWaveHoods_(carry, one.S.crimeByNeighborhood)) === '["Dimond"]');
+  check('engine.301: no wave without a prior level; empty on bad input',
+    fcs.compactCrimeWaveHoods_(carry, {}).length === 0 && fcs.compactCrimeWaveHoods_(null, { Dimond: 1 }).length === 0 &&
+    fcs.compactCrimeWaveHoods_(carry, null).length === 0);
+  const fctx = { now: 'test-now', summary: { cycleId: 120, crimeMetrics: { shifts: shifts }, crimeByNeighborhood: one.S.crimeByNeighborhood } };
+  fcs.finalizeCycleState_(fctx);
+  const snap = JSON.parse(JSON.stringify(fctx.summary.previousCycleState));
+  check('engine.301: finalizeCycleState_ carries crimeWaveHoods beside crimeSpikes, from the same list',
+    JSON.stringify(snap.crimeWaveHoods) === '["Dimond"]' && snap.crimeSpikes.length === 2, JSON.stringify(snap.crimeWaveHoods));
+  const next = run({ summary: { previousCycleState: { cycle: 120, crimeSpikes: snap.crimeSpikes, crimeWaveHoods: snap.crimeWaveHoods } } });
+  check('engine.301: the chain — next Cycle reads Dimond at 3 (wave, rung 3), Laurel at 1',
+    next.S.crimeByNeighborhood.Dimond === 3 && next.S.crimeByNeighborhood.Laurel === 1 &&
+    near(next.nd.Dimond.publicSpaces / none.nd.Dimond.publicSpaces, 0.88, 1e-6), JSON.stringify(next.S.crimeByNeighborhood));
+  // The Cycle after: Dimond does not rise again → not carried as a wave, back to level 0 (no decay rung, plan §engine.301 F1).
+  const calm = { now: 'test-now', summary: { cycleId: 121, crimeMetrics: { shifts: [shifts[1]] }, crimeByNeighborhood: next.S.crimeByNeighborhood } };
+  fcs.finalizeCycleState_(calm);
+  const snap2 = JSON.parse(JSON.stringify(calm.summary.previousCycleState));
+  const after = run({ summary: { previousCycleState: { cycle: 121, crimeSpikes: snap2.crimeSpikes, crimeWaveHoods: snap2.crimeWaveHoods } } });
+  check('engine.301: the Cycle after a wave with no new rise — Dimond drops to level 0; Laurel, rising again, is the wave',
+    !('Dimond' in after.S.crimeByNeighborhood) && after.S.crimeByNeighborhood.Laurel === 3 && JSON.stringify(snap2.crimeWaveHoods) === '["Laurel"]',
+    JSON.stringify(after.S.crimeByNeighborhood));
+  // A rise dropped at the 12-spike cap is not carried, so it cannot make a wave (the two carried fields agree).
+  const many = [];
+  for (let i = 0; i < 12; i++) many.push({ neighborhood: 'H' + i, metric: 'propertyCrime', direction: 'increase', magnitude: 10 + i, newValue: 60 });
+  many.push({ neighborhood: 'Laurel', metric: 'propertyCrime', direction: 'increase', magnitude: 5, newValue: 35 });
+  const capped = fcs.compactCrimeSpikes_({ shifts: many });
+  check('engine.301: a hood whose rise fell past the 12-spike cap is in neither carried field',
+    capped.length === 12 && !capped.some(sp => sp.neighborhood === 'Laurel') && fcs.compactCrimeWaveHoods_(capped, { Laurel: 1 }).length === 0);
+  // Phase2-CityDynamics failed: the level was never published, so Phase 9 carries no wave.
+  const failed2 = { now: 'test-now', summary: { cycleId: 122, crimeMetrics: { shifts: shifts } } };
+  fcs.finalizeCycleState_(failed2);
+  check('engine.301: no published level (Phase 2 failed) → no wave carried', JSON.stringify(failed2.summary.previousCycleState.crimeWaveHoods) === '[]');
 }
 
 // ── 6b. engine.214 Task 17 (north-hills nightlife split) + Task 19 / engine.287 (citywide crime floor + share) ──
@@ -254,7 +325,7 @@ console.log('engine.214 — mood per hood');
     [wr('Dimond', 'nightlife'), wr('Dimond', 'publicSpaces'), wr('Dimond', 'tourism')].map(x => x.toFixed(4)).join(' '));
   check('engine.287: the citywide wave moves sentiment down on every hood, and by less than the own-hood two-spike rung (−0.20) moves a hood',
     HOODS.every(h => wave.nd[h].sentiment < none.nd[h].sentiment) && (() => {
-      const two = run({ summary: { crimeByNeighborhood: { Dimond: 2 } } });
+      const two = run({ summary: { previousCycleState: { cycle: 119, crimeSpikes: [{ neighborhood: 'Dimond', metric: 'propertyCrime', magnitude: 6, newValue: 40 }, { neighborhood: 'Dimond', metric: 'violentCrime', magnitude: 5, newValue: 25 }] } } });
       return (none.nd.Dimond.sentiment - wave.nd.Dimond.sentiment) < (none.nd.Dimond.sentiment - two.nd.Dimond.sentiment);
     })(), (none.nd.Dimond.sentiment - wave.nd.Dimond.sentiment).toFixed(4));
   const stretch = run({ summary: hist(4) });   // 4 vs a (2+0+0+... ) baseline — ratio 6: still the wave band; the bad-stretch band needs 1.25 ≤ x < 1.5
@@ -366,7 +437,8 @@ console.log('engine.214 — mood per hood');
     const ctx = { config: { cycleCount: 120 }, writeIntents: [], mode: {},
       ss: { getSheetByName: n => n === 'Neighborhood_Map' ? { getDataRange: () => ({ getValues: () => rows }) } : (n === 'Engine_Errors' ? { appendRow: r => errors.push(r) } : null) },
       summary: { cycleId: 120, season: 'Fall', holiday: 'none', sportsSeason: 'off-season', weather: { type: 'clear', impact: 1 }, neighborhoodEconomies: {}, neighborhoodDemographics: {}, worldEvents: [], storySeeds: [],
-        crimeByNeighborhood: { Dimond: 2 }, sportsCity: {}, sportsWeek: {} } };
+        previousCycleState: { cycle: 119, crimeSpikes: [{ neighborhood: 'Dimond', metric: 'propertyCrime', magnitude: 6, newValue: 40 }, { neighborhood: 'Dimond', metric: 'violentCrime', magnitude: 5, newValue: 25 }] },
+        sportsCity: {}, sportsWeek: {} } };
     sbw.loadCanonNeighborhoods_(ctx); ctx.summary.neighborhoodState = {};
     HOODS.forEach(h => { ctx.summary.neighborhoodState[h] = { employerCharacter: over.chr && h in over.chr ? over.chr[h] : G.character[h], boomIndex: G.boomIndex[h] }; });
     const ok = sbw.safePhaseCall_(ctx, 'Phase2-CityDynamics', () => sbw.applyCityDynamics_(ctx));

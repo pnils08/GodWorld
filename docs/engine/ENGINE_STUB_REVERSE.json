@@ -1,8 +1,8 @@
 {
-  "generated": "2026-10-22",
+  "generated": "2026-10-25",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1742,
+  "functionsMapped": 1743,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -2028,6 +2028,15 @@
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_"
       ]
     },
+    "crimeByNeighborhood": {
+      "writers": [
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_"
+      ],
+      "readers": [
+        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
+      ]
+    },
     "neighborhoodDemographics": {
       "writers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
@@ -2107,14 +2116,6 @@
       "readers": [
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase02-world-state/updateTransitMetrics.js::transitStationShares_"
-      ]
-    },
-    "crimeByNeighborhood": {
-      "writers": [],
-      "readers": [
-        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
-        "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
-        "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]
     },
     "crimeEvents": {

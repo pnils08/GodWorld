@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-10-22 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-10-25 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1742 · **S.* fields:** 379 · **Sheets:** 61
+**Files scanned:** 180 · **Functions mapped:** 1743 · **S.* fields:** 379 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -103,7 +103,7 @@
 | `S.cooldownCalendarContext` | `phase08-v3-chicago/applyDomainCooldowns.js::applyDomainCooldowns_` | _(none)_ | 1 | 0 |
 | `S.creationDayActive` | `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_` | _(none)_ | 1 | 0 |
 | `S.creationDayAnniversary` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_` | `phase02-world-state/calendarStorySeeds.js::applySeasonalStorySeeds_`, `phase07-evening-media/storyHook.js::storyHookEngine_`, `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 3 |
-| `S.crimeByNeighborhood` | _(none)_ | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 0 | 3 |
+| `S.crimeByNeighborhood` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_` | 1 | 2 |
 | `S.crimeEvents` | _(none)_ | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase09-digest/finalizeCycleState.js::compactActivityObservations_` | 0 | 2 |
 | `S.crimeLag` | `phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_` | `phase03-population/updateCrimeMetrics.js::getNeighborhoodLag_`, `phase03-population/updateCrimeMetrics.js::updateCrimeLagState_`, `phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_` | 1 | 3 |
 | `S.crimeMetrics` | `phase03-population/updateCrimeMetrics.js::updateCrimeMetrics_Phase3_` | `phase03-population/updateNeighborhoodDemographics.js::buildHoodIllnessWeights_`, `phase03-population/updateNeighborhoodDemographics.js::driftNeighborhoodEducation_`, `phase04-events/careJusticeService.js::runCareJusticeDemand_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase05-citizens/generateCivicModeEvents.js::generateCivicModeEvents_`, `phase05-citizens/generateMediaModeEvents.js::generateMediaModeEvents_`, …(+9 more) | 1 | 15 |
@@ -403,7 +403,7 @@
 ### Orphan / write-only / read-only S.* (quick triage)
 
 - **Write-only (no reader in scan):** `S._rng`, `S.activeRippleCount`, `S.activeRipples`, `S.approvalChanges`, `S.approvalTriggers`, `S.canonHoodCount`, `S.canonSportsPhase`, `S.careerChurn`, `S.careerEvents`, `S.chaosCategoryMap`, `S.chaosCategoryWeights`, `S.chaosFriction`, `S.cityEventsCalendarContext`, `S.civicDemographicContext`, `S.civicLoadCalendarFactors`, `S.civicModeEventDetails`, `S.civicModeEvents`, `S.civicRoleDraws`, `S.commuteFlowStats`, `S.cooldownCalendarContext`, `S.creationDayActive`, `S.cycleFinalizedAt`, `S.cycleFinalState`, `S.cyclePacket`, `S.cycleWeightCalendarFactors`, `S.demographicDriftLabel`, `S.demographicDriftSummary`, `S.demographicShiftsCount`, `S.domainCalendarContext`, `S.economicMoodLevel`, `S.editionCoverageEffects`, `S.educationEvents`, `S.employmentDistress`, `S.eveningSportsCalendarContext`, `S.eveningSportsDetails`, `S.eveningSystemsCalendarContext`, `S.eventPrioritization`, `S.faithJoins`, `S.famousSightingsContext`, `S.folkMemory`, `S.gameModeMicroEventDetails`, `S.gameModeMicroEvents`, `S.genericCitizensDistribution`, `S.genericCitizensGenerated`, `S.holidayDetails`, `S.hoodFloorWaveCount`, `S.hookSuppression`, `S.hospitalCensus`, `S.householdEvents`, `S.householdFormation`, `S.householdMoments`, `S.initiativeRenewalCredits`, `S.initiativeSpend`, `S.judicialCensus`, `S.lifeHistoryCompression`, `S.mediaModeEventDetails`, `S.mediaModeEvents`, `S.mediaPacket`, `S.migrationClamps`, `S.minorsSkippedTexture`, `S.neighborhoodAssignments`, `S.neighborhoodDriftEvents`, `S.neighborhoodStateCount`, `S.newGenericCitizens`, `S.nightShiftLoad`, `S.noiseFilterStats`, `S.patternCalendarContext`, `S.postCareerEvents`, `S.previousCycleAuditIssues`, `S.previousNeighborhoodDynamics`, `S.recoveryCalendarContext`, `S.recoveryMode`, `S.recoveryThresholds`, `S.shockCalendarContext`, `S.simDay`, `S.sportsFeedSeasonType`, `S.sportsSeasonOakland`, `S.spotlightStats`, `S.storySeedsUI`, `S.suppressEvents`, `S.suppressHooks`, `S.suppressTextures`, `S.textureCalendarContext`, `S.textureSuppression`, `S.tierDecay`, `S.tierLadder`, `S.transitStorySignals`, `S.v3CalendarContext`, `S.v3IntegrationComplete`, `S.v3ModulesRan`, `S.validationReport`, `S.weatherImpact`, `S.weatherType`, `S.worldEventsCalendarContext`, `S.youthTexture`
-- **Read-only (no writer in scan — may be set outside scanned tree or via bracket access):** 29 fields — see JSON for full list
+- **Read-only (no writer in scan — may be set outside scanned tree or via bracket access):** 28 fields — see JSON for full list
 - **Multi-writer fields:** `S.activityObservations`(2), `S.auditIssues`(5), `S.bondSummary`(2), `S.chaosCarsEvents`(3), `S.chaosNeighborhoodFold`(2), `S.chaosTransit`(2), `S.cityDynamics`(4), `S.cityEventDetails`(2), `S.civicLoadFactors`(2), `S.contests`(2), `S.crisisMemory`(2), `S.crowdHotspots`(2), `S.crowdMap`(2), `S.cycleActiveCitizens`(3), `S.cycleId`(2), `S.domainCooldowns`(2), `S.domainPresence`(2), `S.economicMood`(5), `S.economicMoodDesc`(3), `S.economicRipples`(5), `S.engine299`(6), `S.eventArcs`(6), `S.eventsGenerated`(23), `S.famousSightings`(2), `S.holiday`(2), `S.holidayPriority`(2), `S.hospitalEvents`(2), `S.initiativeEnginePhaseMoves`(2), `S.initiativeRipples`(4), `S.intakeProcessed`(2), `S.isCreationDay`(2), `S.isFirstFriday`(2), `S.judicialEvents`(2), `S.lifeEventDice`(2), `S.mediaEffects`(2), `S.namedSpotlights`(2), `S.neighborhoodDemographics`(2), `S.neighborhoodEconomies`(4), `S.nightlifeVolume`(2), `S.pendingCascades`(2), `S.phaseTimings`(2), `S.previousCityDynamics`(2), `S.previousCycleState`(3), `S.promotions`(2), `S.relationshipBonds`(9), `S.season`(2), `S.shockReasons`(2), `S.sportsSeason`(2), `S.storyHooks`(32), `S.storySeeds`(2), `S.textureTriggers`(2), `S.tier1ChaosEvents`(2), `S.transitStorySignals`(2), `S.validationReport`(2), `S.weather`(2), `S.weatherMood`(3), `S.worldEvents`(8)
 
 ---

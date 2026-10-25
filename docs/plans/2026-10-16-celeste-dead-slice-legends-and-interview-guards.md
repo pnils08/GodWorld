@@ -155,6 +155,7 @@ Fame sightings draw from the Cultural_Ledger (builder 2026-10-17: "the fame sigh
 
 - 2026-10-25 (engine-sheet) — engine.312 rate ruled: positive +5, negative −2, neutral +1; grade the 567 ungraded mentions first (passage lookup dispatched, Haiku).
 - 2026-10-25 (engine-sheet) — engine.314 / 315 LIVE PROD @162 stage 25 (`3109503e`): bench G3 PASS, codex SHIP, guarded push.
+- 2026-10-25 (research-build) — pipeline.81 acceptance read on C112 Fri: slice ranks by this-cycle gain, 5 citizens all with POPIDs, 0 "engine"; piece Rhea PASS 4/4, printed. Row closed; detail in media-extension §Status log pipeline.81.
 - 2026-10-25 (engine-sheet) — engine.314 / 315 opened (builder "Move on the 2 bugs"): live measured, plan section written, one stage.
 - 2026-10-25 (engine-sheet) — engine.313 LIVE PROD @161 stage 24 (`3b2de7c5`): codex gate 1 HOLD folded, bench G2 PASS, codex gate 2 SHIP, guarded push.
 - 2026-10-24 (engine-sheet) — engine.313 opened: plan section written, codex plan review F1–F4 folded, live measured 0 mismatched.

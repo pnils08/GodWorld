@@ -181,6 +181,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 03:20 rb CLAIM agy rb pipeline.85 diff review (TASK docs/for-claude-review/2026-10-25-rhea-page-lines-review-TASK.md → output/antigravity/2026-10-25-review-rhea-page-lines.md). Dispatched 03:14, agy WORKING.
 03:38 rb FOLD agy pipeline.85 (SHIP-WITH-FIXES, 6 findings, 5 fixed + 1 record-only; evidence note corrected: Thu 18:14 re-gate is the page-lines proof, not Sat). Tests PASS x2, live smoke 4/4 names. RELEASE agy. Committing.
 03:46 rb DONE pipeline.85 → e9a2b912 (done-pending-archive). agy cleared, idle. Inbox: es's codex engine.301 files only. Stack ahead of origin = 4 (rb 2, es 2) — HOLD push, es mid-job (engine.301 F1). FILE docs/engine/ROLLOUT_PLAN.md rb: one-owner pass on the 12 two-owner rows + pipeline.86 / engine.316 split off engine.273 / engine.301.
+04:02 rb DONE one-owner pass b137adc1 (0 two-owner rows left). DONE pipeline.76 + pipeline.81 owed reads (both PASS, rows closed). RELEASE ROLLOUT_PLAN.md. Next job pipeline.86 (holiday meaning carrier to the desks) — tracing the calendar line.
 
 ## 8. Stop rule and usage
 

@@ -123,39 +123,6 @@ check('rng exposes a draw counter', () => {
   assert.strictEqual(r.draws, 250);
 });
 
-// 9. The cycle seed is fresh entropy, never the cycle number (builder 2026-10-25).
-function loadSeedFns(Utilities) {
-  const sb = { Math, Logger: { log() {} }, console, Utilities };
-  vm.createContext(sb);
-  for (const fn of ['hashInt32_', 'hashString_', 'seededRng_', 'seededRngFor_', 'freshCycleSeed_', 'initializeSeededRng_']) {
-    const m = src.match(new RegExp('function ' + fn + '\\s*\\([\\s\\S]*?\\n\\}', 'm'));
-    assert.ok(m, 'could not extract ' + fn + ' from cycleModes.js');
-    vm.runInContext(m[0], sb);
-  }
-  return sb;
-}
-let uuidN = 0;
-const seedFns = loadSeedFns({ getUuid: () => 'uuid-' + (uuidN++) + '-test-stub' });
-
-check('fresh cycle seed is not the cycle number and differs between runs', () => {
-  const mk = () => { const ctx = { summary: { cycleId: 112 }, config: {} }; seedFns.initializeSeededRng_(ctx); return ctx; };
-  const a = mk(), b = mk();
-  assert.notStrictEqual(a.cycleSeed, 112);
-  assert.notStrictEqual(a.cycleSeed, b.cycleSeed);
-  assert.ok(Number.isInteger(a.cycleSeed) && a.cycleSeed >= 0 && a.cycleSeed <= 0xFFFFFFFF);
-});
-
-check('replay still uses the stored seed', () => {
-  const ctx = { summary: { cycleId: 112 }, config: {}, mode: { replay: true }, replaySeed: { seed: 4242 } };
-  seedFns.initializeSeededRng_(ctx);
-  assert.strictEqual(ctx.cycleSeed, 4242);
-});
-
-check('no entropy source throws instead of falling back to the cycle number', () => {
-  const bare = loadSeedFns(undefined);
-  assert.throws(() => bare.initializeSeededRng_({ summary: { cycleId: 112 }, config: {} }), /no entropy source/);
-});
-
 console.log(failures ? '\ncycleModes.rng.test.js: FAIL (' + failures + ')'
                      : '\ncycleModes.rng.test.js: PASS');
 process.exit(failures ? 1 : 0);

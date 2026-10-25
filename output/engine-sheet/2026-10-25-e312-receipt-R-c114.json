@@ -1,0 +1,374 @@
+{
+ "cycle": 114,
+ "label": "R",
+ "hold": [],
+ "counts": {
+  "paperCredited": 0,
+  "paperNoRow": 0,
+  "paperUnresolved": 0,
+  "pending": 1,
+  "touched": 31,
+  "written": 25,
+  "capped": 0,
+  "created": 0,
+  "crossedUp": [],
+  "crossedDown": []
+ },
+ "rows": [
+  {
+   "id": "CUL-3913E3E5",
+   "name": "Dax Monroe",
+   "base": 83,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 82,
+   "sheet": 82
+  },
+  {
+   "id": "CUL-6D596907",
+   "name": "Lena Cross",
+   "base": 92,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 91,
+   "sheet": 91
+  },
+  {
+   "id": "CUL-1D834E5A",
+   "name": "Kato Rivers",
+   "base": 76,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 75,
+   "sheet": 75
+  },
+  {
+   "id": "CUL-A2D9EBFF",
+   "name": "Sage Vienta",
+   "base": 89,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 88,
+   "sheet": 88
+  },
+  {
+   "id": "CUL-9E72118C",
+   "name": "Evan Morello",
+   "base": 70,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 69,
+   "sheet": 69
+  },
+  {
+   "id": "CUL-3A2CD59D",
+   "name": "Rowan Pierce",
+   "base": 66,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 1,
+   "floor": false,
+   "expected": 66,
+   "sheet": 66
+  },
+  {
+   "id": "CUL-A99D7E2E",
+   "name": "Nila James",
+   "base": 73,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 72,
+   "sheet": 72
+  },
+  {
+   "id": "CUL-6A0BC6CC",
+   "name": "Theo Banks",
+   "base": 46,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 45,
+   "sheet": 45
+  },
+  {
+   "id": "CUL-B60D00F6",
+   "name": "Nina Reyes",
+   "base": 50,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 49,
+   "sheet": 49
+  },
+  {
+   "id": "CUL-DC4EA635",
+   "name": "Jordan Steele",
+   "base": 13,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 12,
+   "sheet": 12
+  },
+  {
+   "id": "CUL-905CBDE8",
+   "name": "Brody Kale",
+   "base": 33,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 32,
+   "sheet": 32
+  },
+  {
+   "id": "CUL-21B70831",
+   "name": "Community Director Hayes",
+   "base": 16,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 15,
+   "sheet": 15
+  },
+  {
+   "id": "CUL-72BD508A",
+   "name": "Marcus Webb",
+   "base": 4,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 3,
+   "sheet": 3
+  },
+  {
+   "id": "CUL-732EA822",
+   "name": "Celeste Moon",
+   "base": 20,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 19,
+   "sheet": 19
+  },
+  {
+   "id": "CUL-5F7A348B",
+   "name": "Marisol Rivera",
+   "base": 38,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 37,
+   "sheet": 37
+  },
+  {
+   "id": "CUL-0E82EF6C",
+   "name": "Sculptor Alma Vasquez",
+   "base": 52,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 1,
+   "floor": false,
+   "expected": 52,
+   "sheet": 52
+  },
+  {
+   "id": "CUL-BA80115F",
+   "name": "Gallery Owner Mei Chen",
+   "base": 32,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 31,
+   "sheet": 31
+  },
+  {
+   "id": "CUL-9738B2EA",
+   "name": "Festival Organizer James Williams",
+   "base": 8,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 7,
+   "sheet": 7
+  },
+  {
+   "id": "CUL-065F46DC",
+   "name": "Heritage Director Rosa Martinez",
+   "base": 16,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 15,
+   "sheet": 15
+  },
+  {
+   "id": "CUL-C13B0483",
+   "name": "Claire Ashford",
+   "base": 15,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 14,
+   "sheet": 14
+  },
+  {
+   "id": "CUL-78BDC775",
+   "name": "Travis Coles",
+   "base": 14,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 13,
+   "sheet": 13
+  },
+  {
+   "id": "CUL-EEC72E06",
+   "name": "Advocate Simmons",
+   "base": 1,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 0,
+   "sheet": 0
+  },
+  {
+   "id": "CUL-85DD5B45",
+   "name": "Darrin Davis",
+   "base": 5,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 4,
+   "sheet": 4
+  },
+  {
+   "id": "CUL-978D65AE",
+   "name": "Vinnie Keane",
+   "base": 34,
+   "paper": 0,
+   "fade": 0,
+   "sightings": 0,
+   "floor": true,
+   "expected": 34,
+   "sheet": 34
+  },
+  {
+   "id": "CUL-EF1447BC",
+   "name": "Deacon Seymour",
+   "base": 1,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 0,
+   "sheet": 0
+  },
+  {
+   "id": "CUL-8A4E3B04",
+   "name": "Steve Conrad",
+   "base": 5,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 4,
+   "sheet": 4
+  },
+  {
+   "id": "CUL-187CFCE7",
+   "name": "Danny Horn",
+   "base": 7,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 6,
+   "sheet": 6
+  },
+  {
+   "id": "CUL-514B920D",
+   "name": "Mark Aitken",
+   "base": 30,
+   "paper": 0,
+   "fade": 0,
+   "sightings": 0,
+   "floor": true,
+   "expected": 30,
+   "sheet": 30
+  },
+  {
+   "id": "CUL-C485F452",
+   "name": "Benji Dillon",
+   "base": 25,
+   "paper": 0,
+   "fade": 0,
+   "sightings": 0,
+   "floor": true,
+   "expected": 25,
+   "sheet": 25
+  },
+  {
+   "id": "CUL-8F6DDFE5",
+   "name": "Isley Kelley",
+   "base": 25,
+   "paper": 0,
+   "fade": 0,
+   "sightings": 0,
+   "floor": true,
+   "expected": 25,
+   "sheet": 25
+  },
+  {
+   "id": "CUL-EB555F30",
+   "name": "Mike Paulson",
+   "base": 25,
+   "paper": 0,
+   "fade": 0,
+   "sightings": 1,
+   "floor": true,
+   "expected": 26,
+   "sheet": 26
+  }
+ ],
+ "created": [],
+ "sourceColumn": 16,
+ "probe": {
+  "name": "Dax Monroe",
+  "rows": 1,
+  "source": [
+   "media-room"
+  ],
+  "processed": [
+   "Y"
+  ]
+ },
+ "engineErrors": [],
+ "verdict": "PASS"
+}

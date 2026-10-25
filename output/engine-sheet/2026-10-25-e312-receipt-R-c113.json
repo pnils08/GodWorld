@@ -1,0 +1,440 @@
+{
+ "cycle": 113,
+ "label": "R",
+ "hold": [],
+ "counts": {
+  "paperCredited": 10,
+  "paperNoRow": 25,
+  "paperUnresolved": 1,
+  "pending": 71,
+  "touched": 36,
+  "written": 31,
+  "capped": 1,
+  "created": 1,
+  "crossedUp": [],
+  "crossedDown": []
+ },
+ "rows": [
+  {
+   "id": "CUL-3913E3E5",
+   "name": "Dax Monroe",
+   "base": 84,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 83,
+   "sheet": 83
+  },
+  {
+   "id": "CUL-6D596907",
+   "name": "Lena Cross",
+   "base": 93,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 92,
+   "sheet": 92
+  },
+  {
+   "id": "CUL-1D834E5A",
+   "name": "Kato Rivers",
+   "base": 77,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 76,
+   "sheet": 76
+  },
+  {
+   "id": "CUL-A2D9EBFF",
+   "name": "Sage Vienta",
+   "base": 90,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 89,
+   "sheet": 89
+  },
+  {
+   "id": "CUL-8B50B913",
+   "name": "Jade Orion",
+   "base": 104,
+   "paper": 5,
+   "fade": 0,
+   "sightings": 0,
+   "floor": false,
+   "expected": 100,
+   "sheet": 100
+  },
+  {
+   "id": "CUL-9E72118C",
+   "name": "Evan Morello",
+   "base": 71,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 70,
+   "sheet": 70
+  },
+  {
+   "id": "CUL-3A2CD59D",
+   "name": "Rowan Pierce",
+   "base": 67,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 66,
+   "sheet": 66
+  },
+  {
+   "id": "CUL-A99D7E2E",
+   "name": "Nila James",
+   "base": 74,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 73,
+   "sheet": 73
+  },
+  {
+   "id": "CUL-0F9D85B2",
+   "name": "Tara Ellison",
+   "base": 68,
+   "paper": 1,
+   "fade": 0,
+   "sightings": 1,
+   "floor": false,
+   "expected": 70,
+   "sheet": 70
+  },
+  {
+   "id": "CUL-6A0BC6CC",
+   "name": "Theo Banks",
+   "base": 47,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 46,
+   "sheet": 46
+  },
+  {
+   "id": "CUL-B60D00F6",
+   "name": "Nina Reyes",
+   "base": 51,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 50,
+   "sheet": 50
+  },
+  {
+   "id": "CUL-DC4EA635",
+   "name": "Jordan Steele",
+   "base": 14,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 13,
+   "sheet": 13
+  },
+  {
+   "id": "CUL-905CBDE8",
+   "name": "Brody Kale",
+   "base": 34,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 33,
+   "sheet": 33
+  },
+  {
+   "id": "CUL-21B70831",
+   "name": "Community Director Hayes",
+   "base": 17,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 16,
+   "sheet": 16
+  },
+  {
+   "id": "CUL-72BD508A",
+   "name": "Marcus Webb",
+   "base": 4,
+   "paper": 1,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 4,
+   "sheet": 4
+  },
+  {
+   "id": "CUL-732EA822",
+   "name": "Celeste Moon",
+   "base": 21,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 20,
+   "sheet": 20
+  },
+  {
+   "id": "CUL-5F7A348B",
+   "name": "Marisol Rivera",
+   "base": 39,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 38,
+   "sheet": 38
+  },
+  {
+   "id": "CUL-0E82EF6C",
+   "name": "Sculptor Alma Vasquez",
+   "base": 53,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 52,
+   "sheet": 52
+  },
+  {
+   "id": "CUL-BA80115F",
+   "name": "Gallery Owner Mei Chen",
+   "base": 33,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 32,
+   "sheet": 32
+  },
+  {
+   "id": "CUL-CEF9BF70",
+   "name": "Muralist Dante Reyes",
+   "base": 45,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 1,
+   "floor": false,
+   "expected": 45,
+   "sheet": 45
+  },
+  {
+   "id": "CUL-2F15E066",
+   "name": "Photographer Kai Tanaka",
+   "base": 1,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 0,
+   "sheet": 0
+  },
+  {
+   "id": "CUL-9738B2EA",
+   "name": "Festival Organizer James Williams",
+   "base": 9,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 8,
+   "sheet": 8
+  },
+  {
+   "id": "CUL-065F46DC",
+   "name": "Heritage Director Rosa Martinez",
+   "base": 17,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 16,
+   "sheet": 16
+  },
+  {
+   "id": "CUL-78BDC775",
+   "name": "Travis Coles",
+   "base": 15,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 14,
+   "sheet": 14
+  },
+  {
+   "id": "CUL-EEC72E06",
+   "name": "Advocate Simmons",
+   "base": 2,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 1,
+   "sheet": 1
+  },
+  {
+   "id": "CUL-4738E778",
+   "name": "Eric Taveras",
+   "base": 26,
+   "paper": 5,
+   "fade": 0,
+   "sightings": 0,
+   "floor": false,
+   "expected": 31,
+   "sheet": 31
+  },
+  {
+   "id": "CUL-F8C4B785",
+   "name": "Jose Colon",
+   "base": 1,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 0,
+   "sheet": 0
+  },
+  {
+   "id": "CUL-85DD5B45",
+   "name": "Darrin Davis",
+   "base": 1,
+   "paper": 5,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 5,
+   "sheet": 5
+  },
+  {
+   "id": "CUL-978D65AE",
+   "name": "Vinnie Keane",
+   "base": 31,
+   "paper": 3,
+   "fade": 0,
+   "sightings": 0,
+   "floor": true,
+   "expected": 34,
+   "sheet": 34
+  },
+  {
+   "id": "CUL-EF1447BC",
+   "name": "Deacon Seymour",
+   "base": 2,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 1,
+   "sheet": 1
+  },
+  {
+   "id": "CUL-8A4E3B04",
+   "name": "Steve Conrad",
+   "base": 6,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 5,
+   "sheet": 5
+  },
+  {
+   "id": "CUL-187CFCE7",
+   "name": "Danny Horn",
+   "base": 8,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 7,
+   "sheet": 7
+  },
+  {
+   "id": "CUL-514B920D",
+   "name": "Mark Aitken",
+   "base": 25,
+   "paper": 5,
+   "fade": 0,
+   "sightings": 0,
+   "floor": true,
+   "expected": 30,
+   "sheet": 30
+  },
+  {
+   "id": "CUL-C485F452",
+   "name": "Benji Dillon",
+   "base": 25,
+   "paper": -2,
+   "fade": 0,
+   "sightings": 0,
+   "floor": true,
+   "expected": 25,
+   "sheet": 25
+  },
+  {
+   "id": "CUL-8F6DDFE5",
+   "name": "Isley Kelley",
+   "base": 25,
+   "paper": 0,
+   "fade": 0,
+   "sightings": 0,
+   "floor": true,
+   "expected": 25,
+   "sheet": 25
+  },
+  {
+   "id": "CUL-EB555F30",
+   "name": "Mike Paulson",
+   "base": 25,
+   "paper": 0,
+   "fade": 0,
+   "sightings": 0,
+   "floor": true,
+   "expected": 25,
+   "sheet": 25
+  }
+ ],
+ "created": [
+  {
+   "id": "CUL-29924747",
+   "name": "Ernesto Quintero",
+   "pop": "POP-00050",
+   "record": 3,
+   "mediaCount": 1,
+   "lastSeen": "113",
+   "expected": 4,
+   "sheet": 4
+  }
+ ],
+ "sourceColumn": 16,
+ "probe": {
+  "name": "Dax Monroe",
+  "rows": 1,
+  "source": [
+   "media-room"
+  ],
+  "processed": [
+   ""
+  ]
+ },
+ "engineErrors": [],
+ "verdict": "PASS"
+}

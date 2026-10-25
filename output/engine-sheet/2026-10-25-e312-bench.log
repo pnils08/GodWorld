@@ -1,0 +1,37 @@
+AIM = BENCH (script read the bench marker)
+== engine.312 bench, stage 27 at a73bc2b9, leg R, 3 Cycles
+stage 27 = stage 26 + 4 files at a73bc2b9; manifest output/engine-sheet/stage27-e312.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @132
+pull-back 167 js + manifest byte-identical to output/engine-sheet/stage27-e312.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C137
+replay: 71 live pending C112 rows → bench; media-room probe: {"name":"Dax Monroe","popId":"POP-00769","culName":"Dax Monroe","context":"e312 bench probe: media-room copy"}
+read back: bench pending usage 71, intake probe 1; wrote /root/GodWorld/output/engine-sheet/2026-10-25-e312-probe.json
+version cut; waiting 101 s more for /exec propagation
+snap C113 R saved
+C113 fire rc=0 "verdict": "PASS" "wallS": 262 (273 s)
+C113 R PASS {"paperCredited":10,"paperNoRow":25,"paperUnresolved":1,"pending":71,"touched":36,"written":31,"capped":1,"created":1,"crossedUp":[],"crossedDown":[]}
+C114 fire rc=0 "verdict": "PASS" "wallS": 144 (156 s)
+C114 R PASS {"paperCredited":0,"paperNoRow":0,"paperUnresolved":0,"pending":1,"touched":31,"written":25,"capped":0,"created":0,"crossedUp":[],"crossedDown":[]}
+C115 fire rc=0 "verdict": "PASS" "wallS": 164 (176 s)
+C115 R PASS {"paperCredited":0,"paperNoRow":0,"paperUnresolved":0,"pending":0,"touched":29,"written":24,"capped":1,"created":0,"crossedUp":[],"crossedDown":[]}
+== restore bench code to stage 25
+built stage differs from stage 25 outside the two files — stop
+5c5
+< 616428bc80e712b3c1fe2229d82c669831cb3cb74939746b7c6fe1323452c06d  ./phase01-config/godWorldEngine2.js
+---
+> 76826056204a6f3a3ef34053a99cd6479eb7ae985e0de691905006349de2e72a  ./phase01-config/godWorldEngine2.js
+59c59
+< 42bf48ed8e84aeb164fa457396a12981852930a1e0f9b92cbaced5053fcf60b3  ./phase05-citizens/processAdvancementIntake.js
+---
+> b1e57192ac0cc1fe664308c35e58bc514e7bd642e9a4698079b255a4ec3aaa53  ./phase05-citizens/processAdvancementIntake.js
+92c92
+< 24adbdc54569da26343b511b2b7d548448b3db82ce0a3c5916b79c273fec0882  ./phase07-evening-media/mediaRoomIntake.js
+BENCH LEFT: script = stage 27 at a73bc2b9 (manifest output/engine-sheet/stage27-e312.sha256); data at the last fired Cycle; restore: bash output/engine-sheet/2026-10-25-push-e301-bench.sh e3266c44^ <manifest>
+EXIT 4

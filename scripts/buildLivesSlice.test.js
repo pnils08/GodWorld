@@ -170,6 +170,11 @@ try {
   // Seat wiring: the slug and name both resolve; a non-seat passes through.
   assert.ok(L.isLivesSeat({ persona: 'tamsin-pruitt' }) && L.isLivesSeat({ name: 'Tamsin Pruitt' }) && !L.isLivesSeat({ persona: 'celeste-tran' }));
   assert.equal(L.enrichAssignment({ persona: 'celeste-tran' }, cycle, root).persona, 'celeste-tran');
+  // Day 3 above left the slice EMPTY on disk: the Lives seat sits the day out (null → the fanout drops it), never the generic packet.
+  fs.mkdirSync(path.join(root, 'output', 'beats'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'output', 'beats', 'meta.json'), JSON.stringify({ cycle, source: 'test stub — empty dump' }));
+  for (const tab of L.SEAT.tabs) fs.writeFileSync(path.join(root, 'output', 'beats', tab + '.jsonl'), '');
+  assert.strictEqual(L.enrichAssignment({ persona: 'tamsin-pruitt', desk: 'culture' }, cycle, root), null, 'nothing new today → null');
 } finally {
   fs.rmSync(root, { recursive: true, force: true });
 }

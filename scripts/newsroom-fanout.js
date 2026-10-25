@@ -719,6 +719,12 @@ async function buildFanout(date) {
       try {
         const { enrichAssignment } = require(path.join(__dirname, BEAT_BUILDERS[slug]));
         const next = enrichAssignment(assignments[i], cycle);
+        if (next === null) {   // a daily record seat with nothing new today sits the day out (Lives, pipeline.73)
+          console.error('[fanout] SEAT DROPPED ' + slug + ' — empty slice: nothing new on the record today');
+          beatEnrich.dropped.push(slug + ': empty slice — nothing new on the record today');
+          assignments.splice(i, 1);
+          continue;
+        }
         const staleRef = staleBeatRef(next, filedBeats);
         if (staleRef) {
           console.error('[fanout] SEAT DROPPED ' + slug + ' — beat slice already filed at c' + cycle +

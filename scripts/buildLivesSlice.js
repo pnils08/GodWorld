@@ -310,7 +310,9 @@ function loadSlice(cycle, root = K.ROOT) {
 function enrichAssignment(assign, cycle, root = K.ROOT) {
   if (!W.isSeat(assign)) return assign;
   const slice = loadSlice(cycle, root);
-  return slice ? W.assignmentFromSlice(slice, assign) : assign;
+  // Nothing new on the record today → null: the fanout drops the seat for the day. Returning the bare
+  // assignment sent her to the generic culture packet (C112 Friday: 45 words on "one world event").
+  return slice ? W.assignmentFromSlice(slice, assign) : null;
 }
 if (require.main === module) W.main();
 module.exports = { SEAT, loadSlice, buildLivesSlice: W.build, writeLivesSlice: W.write, loadLivesSlice: loadSlice,

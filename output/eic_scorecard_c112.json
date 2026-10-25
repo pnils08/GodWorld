@@ -1,0 +1,356 @@
+{
+  "cycle": "112",
+  "total": 34,
+  "counts": {
+    "accurate": 32,
+    "corrections-needed": 0,
+    "canon-violation": 2
+  },
+  "accuracyPct": 94.1,
+  "auditModel": "google/gemini-3.7-flash",
+  "trend": [
+    {
+      "cycle": 103,
+      "pct": 75
+    },
+    {
+      "cycle": 104,
+      "pct": 62.5
+    },
+    {
+      "cycle": 105,
+      "pct": 76.5
+    },
+    {
+      "cycle": 106,
+      "pct": 55.6
+    },
+    {
+      "cycle": 107,
+      "pct": 68.8
+    },
+    {
+      "cycle": 108,
+      "pct": 60
+    },
+    {
+      "cycle": 109,
+      "pct": 33.3
+    },
+    {
+      "cycle": 110,
+      "pct": 39.1
+    },
+    {
+      "cycle": 111,
+      "pct": 51.9
+    }
+  ],
+  "articles": [
+    {
+      "stem": "business_c112_business-desk_packet-v2_anthropic-claude-opus-5-5",
+      "byline": "Jordan Velez",
+      "desk": "business",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c112_angela-reyes_packet-v2_anthropic-claude-haiku-5-5",
+      "byline": "Angela Reyes",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "Angela",
+          "class": "citizen-bending",
+          "why": "Angela is referenced as a named figure ('the one Angela keeps coming back to') but does not appear in the ledger profiles or the world summary."
+        }
+      ]
+    },
+    {
+      "stem": "civic_c112_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+      "byline": "Carmen Delaine",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c112_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Jax Caldera",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "canon-violation",
+      "failures": [
+        {
+          "what": "KONO is flagged for decay",
+          "class": null
+        }
+      ]
+    },
+    {
+      "stem": "civic_c112_lila-mezran_packet-v2_anthropic-claude-haiku-5-5",
+      "byline": "Dr. Lila Mezran",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c112_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Luis Navarro",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c112_noah-tan_packet-v2_x-ai-grok-4-3",
+      "byline": "Noah Tan",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c112_rachel-torres_packet-v2_x-ai-grok-4-3",
+      "byline": "Sgt. Rachel Torres",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "civic_c112_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Trevor Shimizu",
+      "desk": "civic",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c112_elliot-graye_packet-v2_anthropic-claude-haiku-5-5",
+      "byline": "Elliot Graye",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3-1615",
+      "byline": "Ines Sorensen",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3-1814",
+      "byline": "Ines Sorensen",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3-2320",
+      "byline": "Ines Sorensen",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3",
+      "byline": "Ines Sorensen",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c112_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+      "byline": "Kai Marston",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c112_maria-keen_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Maria Keen",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c112_mason-ortega_packet-v2_x-ai-grok-4-3",
+      "byline": "Mason Ortega",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c112_sharon-okafor_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Sharon Okafor",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3-1700",
+      "byline": "Tamsin Pruitt",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3-2320",
+      "byline": "Tamsin Pruitt",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3",
+      "byline": "Tamsin Pruitt",
+      "desk": "culture",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": [],
+      "overridden": {
+        "from": "canon-violation",
+        "failures": [
+          {
+            "what": "Maren Johns retired from work as a psychotherapist in Rockridge",
+            "class": "citizen-bending",
+            "why": "The world summary records only one citizen retirement in Cycle 112 (POP-00755, Antoine Vermeer). Maren Johns (POP-00470) did not retire."
+          },
+          {
+            "what": "Geneva Zhou welcomed a new child in West Oakland",
+            "class": "citizen-bending",
+            "why": "There is no ledger event or world summary record of Geneva Zhou welcoming a child in Cycle 112."
+          },
+          {
+            "what": "Maurice Franklin came home to Rockridge after a hospital stay for severe seasonal flu",
+            "class": "citizen-bending",
+            "why": "The ledger record does not list Maurice Franklin (POP-00801) experiencing a health or hospital event in Cycle 112."
+          }
+        ],
+        "by": "builder 2026-10-25 (research-build)",
+        "why": "the three events are C111 rows (Lives window = this Cycle and the one before); the audit had only the C112 world summary as its cycle record"
+      }
+    },
+    {
+      "stem": "sports_c112_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Anthony Raines",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c112_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Elliot Marbury",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c112_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5",
+      "byline": "Hal Richmond",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c112_p-slayer_packet-v2_x-ai-grok-4-3",
+      "byline": "P Slayer",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c112_selena-grant_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Selena Grant",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c112_simon-leary_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Simon Leary",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c112_talia-finch_packet-v2_openai-gpt-5-6-luna",
+      "byline": "Talia Finch",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "sports_c112_tanya-cruz_packet-v2_x-ai-grok-4-3",
+      "byline": "Tanya Cruz",
+      "desk": "sports",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "undocked-digest_c112_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+      "byline": "Nia Rook",
+      "desk": "undocked-digest",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "undocked_c112_nia-rook_packet-v2_x-ai-grok-4-3-2319",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "undocked_c112_nia-rook_packet-v2_x-ai-grok-4-3-2321",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "undocked_c112_nia-rook_packet-v2_x-ai-grok-4-3",
+      "byline": "Nia Rook",
+      "desk": "undocked",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    },
+    {
+      "stem": "wire_c112_celeste-tran_packet-v2_x-ai-grok-4-3",
+      "byline": "Celeste Tran",
+      "desk": "wire",
+      "intakePresent": true,
+      "verdict": "accurate",
+      "failures": []
+    }
+  ]
+}

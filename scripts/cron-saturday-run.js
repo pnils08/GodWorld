@@ -903,6 +903,50 @@ function worldSummaryText(cycle) {
   return fs.readFileSync(p, 'utf8').slice(0, 30000);
 }
 
+// The Lives desk (pipeline.73) reports a life event through the week after the Sunday fire, so a
+// Monday piece's births, deaths, stays, retirements and promotions are last Cycle's. The world
+// summary is one Cycle; this is the person-event record for this Cycle and the one before — the
+// same dump rows Tamsin's slice reads — so the audit judges "Maren Johns retired" against C111,
+// not against the C112 summary's one retirement (C112 scorecard, 2026-10-25: three real C111
+// events called citizen-bending and the piece retracted from the store).
+const LIVED_TAG = /^(Birth|Retirement|Promotion|Hospitalized|Critical|Recovery|Death)$/i;
+function livedEventsGroundTruth(cycle, profiles, root = ROOT) {
+  const read = f => {
+    try {
+      return fs.readFileSync(path.join(root, 'output', 'beats', f), 'utf8').split(/\r?\n/).filter(Boolean)
+        .map(l => { try { return JSON.parse(l); } catch (_) { return null; } }).filter(Boolean);
+    } catch (_) { return []; }
+  };
+  const nameOf = pop => ((profiles || {})[String(pop || '').toUpperCase()] || {}).name || '';
+  const lines = [];
+  for (const e of read('Lived_Events.jsonl')) {
+    if (!e || !e.kind || e.cycle == null) continue;
+    if (e.kind === 'death') {
+      const who = (e.recipients || [])[0] || {};
+      lines.push('C' + e.cycle + ' — ' + (who.name || nameOf(who.pop) || 'the household') + (who.pop ? ' (' + who.pop + ')' : '') +
+        ' lost ' + (e.deceasedName || 'a family member') + (who.rel && who.rel !== 'self' ? ', their ' + who.rel : ''));
+    } else {
+      lines.push('C' + e.cycle + ' — ' + (e.subjectName || nameOf(e.subject) || 'a citizen') + ' (' + e.subject + ') — ' + e.kind +
+        (e.phase ? ' ' + e.phase : '') + (e.cause ? ', ' + e.cause : '') + (e.roleType ? ', ' + e.roleType : '') + (e.neighborhood ? ', ' + e.neighborhood : ''));
+    }
+  }
+  const seen = new Set();
+  for (const r of read('LifeHistory_Log.jsonl')) {
+    const tag = String(r.EventTag || '').split('|')[0].trim();
+    if (!r.POPID || !LIVED_TAG.test(tag)) continue;
+    const k = r.POPID + '|' + r.Cycle + '|' + tag;
+    if (seen.has(k)) continue;
+    seen.add(k);
+    lines.push('C' + r.Cycle + ' — ' + (r.Name || nameOf(r.POPID) || 'a citizen') + ' (' + r.POPID + ') — ' + tag + ': ' + String(r.EventText || '').trim());
+    if (lines.length >= 80) break;
+  }
+  if (!lines.length) return '';
+  const cycles = [...new Set(lines.map(l => l.slice(0, l.indexOf(' '))))].sort();
+  return 'Person events on the record for ' + cycles.join(' and ') + '. The paper reports last Cycle\'s life events through the ' +
+    'following week, so a birth, death, hospital stay or discharge, retirement or promotion listed here is real whichever Cycle ' +
+    'the article is filed under:\n' + lines.join('\n');
+}
+
 // ---------------------------------------------------------------------------
 // Step 1 — EIC accuracy audit. The test Saturday exists for: per-article
 // verdict + the weekly %-to-90 answer (plan §Phase 3.1, graduation §Phase 4).
@@ -926,6 +970,10 @@ const AUDIT_CHARGE = [
   'The word "cycle" is the city\'s canonical time unit and engine NUMBERS are ordinary journalism (newsroom rule) — neither is engine-verbiage.',
   'A council member\'s district is the SEAT they hold, not the neighborhood they live in: never judge a district claim from the ledger home neighborhood.',
   'Scene texture (weather, unnamed street life, color) is NEVER a failure — only contradiction is.',
+  'A LIFE EVENT (a birth, a death, a hospital stay or discharge, a retirement, a promotion) is judged against the LIVED EVENTS',
+  'record when one is supplied: it spans this Cycle and the one before, because the paper reports last Cycle\'s events through',
+  'the week. An event found there is grounded even when the world summary does not carry it. The reporter named in',
+  'LEDGER PROFILES as THE REPORTER is the byline: their own first name in the prose is themselves, never an invented person.',
   'Reply STRICT JSON only: {"verdict":"...","failures":[{"what":"...","class":"citizen-bending|data-misrepresentation|unsupported-claim","why":"..."}]}'
 ].join('\n');
 
@@ -947,7 +995,7 @@ function undockedGroundTruth(rows) {
       ', streak ' + r.CurrentStreak + ', last aired C' + r.LastAiredCycle).join('\n');
 }
 
-async function auditOne(entry, profiles, worldText) {
+async function auditOne(entry, profiles, worldText, livedText) {
   const s = entry.sidecar;
   const intake = s.intake || null;
   // Deterministic: every INTAKE name must resolve to the live ledger row it claims.
@@ -981,9 +1029,13 @@ async function auditOne(entry, profiles, worldText) {
     }
     groundProfiles = hits.join('\n');
   }
+  // The byline's own row: Angela Reyes C112 was failed for naming "Angela" — herself.
+  const ownPop = String(s.bylinePopid || '').toUpperCase();
+  if (profiles[ownPop]) groundProfiles = [groundProfiles, profileLine(ownPop, profiles[ownPop]) + ' — THE REPORTER (byline)'].filter(Boolean).join('\n');
   const user = [
     '=== LEDGER PROFILES (authoritative for every named citizen) ===', groundProfiles || '(none supplied)',
     '', '=== WORLD SUMMARY (authoritative cycle record) ===', worldText || '(missing)',
+    ...(livedText ? ['', '=== LIVED EVENTS (authoritative for person events, this Cycle and the one before) ===', livedText] : []),
     ...(deskSystem(s.desk) === 'undocked' ? ['', '=== UNDOCKED SHOW RECORD (authoritative for the show) ===', undockedGroundTruth((readJsonSafe(path.join(ROOT, 'output', 'spacemolt-show', 'standings.json')) || {}).rows) || '(board missing)'] : []),
     '', '=== ARTICLE ===', entry.text.slice(0, 12000),
     '', intake ? '=== INTAKE (the article\'s own claim register) ===\n' + JSON.stringify(intake) : '=== NOTE: legacy article, no INTAKE block — judge the prose directly ===',
@@ -1015,9 +1067,11 @@ async function stepAudit(cycle) {
   const profiles = await loadLedgerProfiles();
   const worldText = worldSummaryText(cycle);
   if (!worldText) console.log('[warn] no world_summary_c' + cycle + '.md — claims audit runs on ledger + article only');
+  const livedText = livedEventsGroundTruth(cycle, profiles);
+  if (!livedText) console.log('[warn] no output/beats Lived_Events / LifeHistory_Log — life events audited against the summary only');
   const articles = [];
   for (const entry of set) {
-    const a = await auditOne(entry, profiles, worldText);
+    const a = await auditOne(entry, profiles, worldText, livedText);
     console.log('  ' + a.verdict.padEnd(18) + ' ' + a.stem + (a.failures.length ? ' (' + a.failures.length + ' finding(s))' : ''));
     articles.push(a);
   }
@@ -1490,4 +1544,4 @@ if (require.main === module) {
 module.exports = { loadStagedSet, loadArcSeeds, excludeCanonViolations, stepSweep, stepDaily, dailyPending, retractionIds, articleCustomId, articleDoc, usageRowsFor, printedStems, printedOnly, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
   isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves,
-  auditOne, loadLedgerProfiles, worldSummaryText, deskSystem, crossoverCitizens, printedCrossovers, reserveDigestSeat, undockedGroundTruth, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE, curationScore };
+  auditOne, loadLedgerProfiles, worldSummaryText, livedEventsGroundTruth, deskSystem, crossoverCitizens, printedCrossovers, reserveDigestSeat, undockedGroundTruth, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE, curationScore };

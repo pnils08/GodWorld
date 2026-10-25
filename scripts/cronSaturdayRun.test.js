@@ -279,6 +279,21 @@ console.log('Test 6: mergeStorylineLedger');
   const ug = X.undockedGroundTruth([{ Rank: 1, POPID: 'POP-00597', Holder: 'Eric Taveras', Episodes: 2, CreditsTotal: 1170, CombatTotal: 0, MishapTotal: 0, BestMagnitude: 3, CyclesLed: 1, CurrentStreak: 1, LastAiredCycle: 112 }]);
   ok('undockedGroundTruth: board row + in-world vocabulary line', /Eric Taveras \(POP-00597\) — 2 episodes, 1170 credits/.test(ug) && /in-world, not engine vocabulary/.test(ug));
   ok('undockedGroundTruth: no board → empty', X.undockedGroundTruth([]) === '' && X.undockedGroundTruth(null) === '');
+  // the audit judges a life event against the person-event record of this Cycle and the one before (Tamsin C112 false violation)
+  {
+    const fs2 = require('fs'), os2 = require('os'), p2 = require('path');
+    const r = fs2.mkdtempSync(p2.join(os2.tmpdir(), 'eic-lived-'));
+    fs2.mkdirSync(p2.join(r, 'output', 'beats'), { recursive: true });
+    fs2.writeFileSync(p2.join(r, 'output', 'beats', 'Lived_Events.jsonl'), JSON.stringify({ id: 'retirement:POP-90470:111', kind: 'retirement', cycle: 111, subject: 'POP-90470', subjectName: 'Test Johns', roleType: 'Psychotherapist', neighborhood: 'Rockridge', recipients: [] }) + '\n' +
+      JSON.stringify({ id: 'death:POP-90099:112', kind: 'death', cycle: 112, subject: 'POP-90099', deceasedName: 'Test Departed', recipients: [{ pop: 'POP-90005', rel: 'spouse', name: '' }] }) + '\n');
+    fs2.writeFileSync(p2.join(r, 'output', 'beats', 'LifeHistory_Log.jsonl'), JSON.stringify({ POPID: 'POP-90801', Name: '', EventTag: 'Recovery|source:x', EventText: 'made a full recovery', Cycle: '111' }) + '\n' +
+      JSON.stringify({ POPID: 'POP-90801', Name: '', EventTag: 'Daily', EventText: 'texture', Cycle: '111' }) + '\n');
+    const lived = X.livedEventsGroundTruth(112, { 'POP-90005': { name: 'Test Widow' }, 'POP-90801': { name: 'Test Franklin' } }, r);
+    ok('livedEventsGroundTruth: spans C111 and C112 and says so', /for C111 and C112/.test(lived) && /last Cycle's life events through/.test(lived));
+    ok('livedEventsGroundTruth: the event row, the survivor by ledger name, the news-grade log row; texture out', /C111 — Test Johns \(POP-90470\) — retirement, Psychotherapist, Rockridge/.test(lived) && /C112 — Test Widow \(POP-90005\) lost Test Departed, their spouse/.test(lived) && /C111 — Test Franklin \(POP-90801\) — Recovery: made a full recovery/.test(lived) && !/texture/.test(lived));
+    ok('livedEventsGroundTruth: no dump → empty', X.livedEventsGroundTruth(112, {}, p2.join(r, 'nowhere')) === '');
+    fs2.rmSync(r, { recursive: true, force: true });
+  }
   ok('narrator charge: crossing line only when there is a crossing', /crossing is yours to name/.test(X.NARRATOR_CHARGE(111, 1)) && !/crossing is yours/.test(X.NARRATOR_CHARGE(111, 0)));
   ok('narrator charge: no engine vocabulary leaks ("system")', !/\bsystems?\b/i.test(X.NARRATOR_CHARGE(111, 1).split('\n').slice(8).join(' ')));
 }

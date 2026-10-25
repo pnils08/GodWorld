@@ -138,6 +138,18 @@ try {
   assert.deepStrictEqual(digestSide.intake.names,
     [{ name: 'Test Pilot', role: 'subject', popid: 'POP-99998' }]);
 
+  console.log('Test 5b: the write stage\'s deterministic flags (thin) hold against a Rhea pass');
+  const thin = fixture('civic_c999_test-thin', true);
+  fs.writeFileSync(path.join(flagged, 'civic_c999_test-thin.md'), fs.readFileSync(thin.draft));
+  writeJson(path.join(flagged, 'civic_c999_test-thin.flags.json'), { draft: 'civic_c999_test-thin.md',
+    checkFlags: ['thin: 45 words (floor 150, seat target 450-750)'], flags: [], contamination: [] });
+  const held = reconcileVerdict({ root, verdictPath: thin.verdict, apply: true, now: new Date('2026-08-13T10:30:00.000Z') });
+  assert.equal(held.disposition, 'flagged', 'a thin draft the write flagged does not come back as staged');
+  assert(!fs.existsSync(path.join(staged, 'civic_c999_test-thin.staged.md')));
+  const heldFlags = JSON.parse(fs.readFileSync(path.join(flagged, 'civic_c999_test-thin.flags.json'), 'utf8'));
+  assert.deepStrictEqual(heldFlags.checkFlags, ['thin: 45 words (floor 150, seat target 450-750)']);
+  assert.match(heldFlags.summary, /deterministic checks: thin/);
+
   console.log('Test 6 (pipeline.78): distinct staged filings of one base all survive a new pass');
   const multi = fixture('civic_c999_test-multi', true);
   fs.mkdirSync(staged, { recursive: true });

@@ -162,7 +162,16 @@ function reconcileVerdict({ root = ROOT, verdictPath, apply = false, now = new D
   // manifest alone dropped the Packet provenance the invented-voice wall reads, and
   // flagged C111 Carmen's office-record quote that her write had staged clean.
   const contamination = articleContamination.scanFile(draftAbs, { desk: wake.desk, packet: state });
-  const effectivePass = verdict.pass && !contamination.fail;
+  // The write stage's deterministic checks (a thin draft; cron-desk-run checkFlags) override a Rhea
+  // pass there and must here too: the C112 Saturday sweep re-staged Tamsin's 45-word Friday draft
+  // because the root verdict read pass while flagged/ held the thin check, and it reached canon.
+  const heldFlags = (() => {
+    try {
+      const f = readJson(path.join(flagged, base + '.flags.json'));
+      return f.draft === path.basename(draftAbs) && Array.isArray(f.checkFlags) ? f.checkFlags.filter(Boolean) : [];
+    } catch (_) { return []; }
+  })();
+  const effectivePass = verdict.pass && !contamination.fail && !heldFlags.length;
 
   const stamp = now.toISOString().replace(/\D/g, '').slice(0, 14);
   const pairs = stagedPairsFor(staged, base);
@@ -275,9 +284,11 @@ function reconcileVerdict({ root = ROOT, verdictPath, apply = false, now = new D
       draft: path.basename(draftAbs),
       draftSha256,
       verdict: path.relative(root, verdictAbs),
-      flags: Array.isArray(verdict.flags) ? verdict.flags : [],
+      flags: (Array.isArray(verdict.flags) ? verdict.flags : []).concat(heldFlags.map(f => ({ severity: 'high', claim: 'deterministic check', issue: f }))),
+      checkFlags: heldFlags,
       contamination: contamination.findings,
-      summary: contamination.fail ? 'deterministic world-contamination blocker failed' :
+      summary: heldFlags.length ? 'deterministic checks: ' + heldFlags.join('; ') :
+        contamination.fail ? 'deterministic world-contamination blocker failed' :
         verdict.summary || 'Rhea did not pass this Article',
       reviewedAt: verdict.ranAt || null
     };

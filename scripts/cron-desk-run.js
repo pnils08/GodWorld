@@ -654,9 +654,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
   if (story) {
     const brief = citizenBrief(story.citizens, story.popids);
     if (brief.total) profileStamp.assignment = brief.resolved + '/' + brief.total;
-    L.push('### YOUR ASSIGNMENT (from your editor — the angle is fixed; the story is yours)');
-    L.push('ANGLE: ' + (story.angle || story.label));
-    if (story.hookLine) L.push('HOOK: ' + story.hookLine);
+    L.push('### WHAT THE RECORD SHOWS (the story is yours)');
     if (brief.names.length) L.push('AFFECTED CITIZENS (real people from the record — your sources): ' + brief.names.join('; '));
     if (brief.profiles.length) {
       L.push('WHO THEY ARE (ledger record — these facts are immutable; never contradict them):');

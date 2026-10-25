@@ -249,12 +249,14 @@ function formatMarkdown(slice) {
   L.push('');
   L.push('Cycle **C' + slice.cycle + '** · kind `' + slice.kind + '`' + (slice.hood ? ' · hood **' + slice.hood + '**' : ''));
   L.push('');
-  L.push('## THE SLICE');
-  L.push('- Angle: ' + slice.story.angle);
-  L.push('- Hook: ' + slice.story.hookLine);
-  if (slice.prewrite.note) L.push('- Note: ' + slice.prewrite.note);
-  if (slice.prewrite.deltas) L.push('- Prior cycle: ' + slice.prewrite.deltas.state + (slice.prewrite.deltas.vs != null ? ' (C' + slice.prewrite.deltas.vs + ')' : ''));
-  L.push('');
+  // No Angle / Hook / Approach / room-to-paint lines: the record is the slice, what to
+  // write about it is the reporter's (builder 2026-10-25, nothing puppets the media).
+  if (slice.prewrite.note || slice.prewrite.deltas) {
+    L.push('## THE SLICE');
+    if (slice.prewrite.note) L.push('- Note: ' + slice.prewrite.note);
+    if (slice.prewrite.deltas) L.push('- Prior cycle: ' + slice.prewrite.deltas.state + (slice.prewrite.deltas.vs != null ? ' (C' + slice.prewrite.deltas.vs + ')' : ''));
+    L.push('');
+  }
   L.push('## FACTS (each line is a row on the record)');
   for (const f of slice.facts) L.push('- ' + f.text + '  _[' + f.src + ']_');
   L.push('');
@@ -272,12 +274,6 @@ function formatMarkdown(slice) {
     for (const v of slice.prewrite.pageVoices) L.push('- ' + v);
     L.push('');
   }
-  L.push('## THE ROOM IS YOURS');
-  L.push(slice.prewrite.roomIsYours || '');
-  L.push('');
-  L.push('## APPROACH');
-  L.push(slice.approach);
-  L.push('');
   L.push('## FORBIDDEN');
   for (const f of slice.prewrite.forbidden) L.push('- ' + f);
   L.push('');

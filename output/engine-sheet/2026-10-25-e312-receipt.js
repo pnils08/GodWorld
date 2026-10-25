@@ -180,7 +180,7 @@ const same = (a, b) => String(a === undefined || a === null ? '' : a) === String
         FirstSeenCycle: C, LastSeenCycle: C, MediaCount: 0, TrendTrajectory: 'rising', FirstRefSource: 'engine.65', MediaSpread: 0,
         CityTier: '', Neighborhood: '', Holiday: '', HolidayPriority: '', SportsSeason: '' };
       for (const k of Object.keys(want)) {
-        if (ch.indexOf(k) < 0) { if (want[k] !== '') bad.push('no ' + k + ' column'); continue; }
+        if (ch.indexOf(k) < 0) { bad.push('no ' + k + ' column'); continue; }   // every append column must exist (schema P–T included)
         const v = at(k);
         if (v === undefined && want[k] === '') continue;   // a ragged read drops trailing blank cells; a required cell may not be absent
         const ok = typeof want[k] === 'number' ? typed(v) === want[k] : same(v, want[k]);

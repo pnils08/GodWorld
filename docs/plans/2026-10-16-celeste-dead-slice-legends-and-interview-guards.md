@@ -135,6 +135,8 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 **Bench:** stage 24 + this file from the B start, C113–C116 (leg G3); G2 is the before (Benji Dillon, Mike Paulson relabelled). **Gate:** codex diff review of the exact candidate + receipts → PROD, guarded against the C113 fire.
 
+**Done (2026-10-25):** candidate `3109503e`; bench G3 C113–C116 PASS — no authored category rewritten (Benji Dillon athlete, Mike Paulson sports-figure), their fame identical to G2, the engine.313 binding holds. Codex diff gate SHIP (`docs/research/2026-10-25-codex-engine315-diff-gate.md`; note: the bonus also reaches TrendTrajectory / CityTier through the helpers — not asserted by the tests). **LIVE: PROD @162 = stage 25, ~02:07 CDT** (DEPLOY_HISTORY stage 25). C113 is a smoke note; nothing waits on it.
+
 ## Status log
 
 ### engine.296 — status (drained from ROLLOUT, 2026-10-22 / S592)
@@ -147,6 +149,7 @@ Fame sightings draw from the Cultural_Ledger (builder 2026-10-17: "the fame sigh
 
 ## Changelog
 
+- 2026-10-25 (engine-sheet) — engine.314 / 315 LIVE PROD @162 stage 25 (`3109503e`): bench G3 PASS, codex SHIP, guarded push.
 - 2026-10-25 (engine-sheet) — engine.314 / 315 opened (builder "Move on the 2 bugs"): live measured, plan section written, one stage.
 - 2026-10-25 (engine-sheet) — engine.313 LIVE PROD @161 stage 24 (`3b2de7c5`): codex gate 1 HOLD folded, bench G2 PASS, codex gate 2 SHIP, guarded push.
 - 2026-10-24 (engine-sheet) — engine.313 opened: plan section written, codex plan review F1–F4 folded, live measured 0 mismatched.

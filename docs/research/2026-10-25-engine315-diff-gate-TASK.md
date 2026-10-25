@@ -11,3 +11,5 @@ Builder 2026-10-25: "Move on the 2 bugs" — engine.314 and engine.315 ship as o
 5. **Bench G3** on this exact candidate: `output/engine-sheet/2026-10-25-e315-bench-G3.log`, receipts `output/engine-sheet/2026-10-22-e297-check-G3-c11{3,4,5,6}.json`, manifest `output/engine-sheet/stage24-e315-G3.sha256` (= stage 24 `stage23-e313-G2.sha256` except the registrar). Read them when present; the leg is running as this TASK is written.
 
 Done = the review file exists.
+
+2026-10-25 (engine-sheet): moved from docs/for-claude-review/ to docs/research/ with its review once resolved; the paths above are as dispatched.

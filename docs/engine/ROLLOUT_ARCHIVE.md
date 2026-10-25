@@ -973,6 +973,16 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S599 Archive Pass (2026-10-25, engine-sheet) — post-S598 closures sweep
+
+3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 3 engine.*.
+
+- **engine.314** [engine-sheet] — Same-Cycle repeat of a new Cultural_Ledger entity writes the calendar columns by header name — LIVE PROD @162 stage 25 (with 315), bench G3 PASS, codex SHIP **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.314 / 315
+- **engine.315** [engine-sheet] — A sighting no longer rewrites an authored FameCategory (Celebrity / A's legend / sports-figure) — LIVE PROD @162 stage 25, bench G3 PASS, codex SHIP; smoke note C113 Sun 2026-10-25 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.314 / 315
+- **engine.313** [engine-sheet] — Fame registration resolves the Cultural_Ledger row by POPID (no twin for a row named differently) — LIVE PROD @161 stage 24, bench G2 PASS, codex SHIP; smoke note C113 Sun 2026-10-25 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.313
+
+This pass: 3 rows — engine.314 + engine.315 + engine.313. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S593 Archive Pass (2026-10-23, research-build) — post-S592 closures sweep
 
 4 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 4 engine.*.

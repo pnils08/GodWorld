@@ -398,7 +398,7 @@ function buildAnthonySlice(cycle, opts) {
     dossierFacts: dossierFacts.length ? dossierFacts : ['NONE — no TrueSource card on file for these players'],
     feedFacts: [
       row.storyAngle ? 'StoryAngle: ' + row.storyAngle : null,
-      row.notes ? 'Notes: ' + String(row.notes) : null,
+      row.notes ? 'Notes: ' + String(row.notes).slice(0, 200) : null,
       row.record && /\d/.test(row.record) ? 'Record/Streak: ' + row.record + ' / ' + (row.streak || '—') : null
     ].filter(Boolean),
     claim,

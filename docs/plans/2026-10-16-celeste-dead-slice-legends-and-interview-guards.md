@@ -121,6 +121,20 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 **Found, not built here:** the pending-create repeat branch writes positions 18 / 19, which on the live header are HolidayPriority / SportsSeason (engine.266 class) → its own ROLLOUT row. The name-only readers `recordMediaLedger_` and `logCulturalMention_` still miss an alias (codex review) — existing. The bridge's category round-trip (business-figure / media-personality / cultural-leader → unknown, sports-figure → athlete on the exact-name path) → engine.315, rides engine.312.
 
+## engine.314 / 315 — registration keeps the row's calendar columns and its authored category (engine-sheet, 2026-10-25)
+
+**Builder 2026-10-25:** "Move on the 2 bugs" — both ship as one stage (stage 25), one bench leg, one codex gate.
+
+**engine.314 — defect:** the pending-create repeat branch (`culturalLedger.js` registerCulturalEntity_, same-Cycle second call for an entity new this Cycle) writes positions 18 / 19 as the v2.2 LastSeenHoliday / CalendarContext; on the live header those are HolidayPriority / SportsSeason (the engine.266 bug CREATE already fixed by header name). **Measured live 2026-10-25:** HolidayPriority holds only priority words (major 9, minor 7, cultural 5, oakland 5, blank 24), SportsSeason only seasons — no damage to repair. **Build:** the repeat writes LastSeenHoliday / CalendarContext by header name, as UPDATE does; absent on the live header, so nothing is written there and the CREATE row's Holiday / HolidayPriority / SportsSeason stand (same Cycle, same values).
+
+**engine.315 — defect:** on an existing row the registration rewrites FameCategory / CulturalDomain from the caller's role word, against engine.297's rule that an authored category decides (codex 2026-10-23 1a). The role words are a bucket row's own RoleType, the legend / player pool's "A's legend" / "A's player", or the bridge's copied category, and `classifyRole` misreads several: "Celebrity" → unknown (the row then drops out of every sighting bucket for good), "A's legend" → unknown, "Community Advocate" → activist, `sports-figure` → athlete. **Measured live 2026-10-25:** 6 of 50 rows change under a role-word refresh (Dax Monroe, Marin Tao, Rico Valez, Lena Cross — "Celebrity"; Marisol Rivera; Isley Kelley — "A's legend"), 1 under a category-word refresh (Mike Paulson). Stage 22 put the ledger-row sightings live and no live Cycle has run since, so C113 is the first live reach. **Bench G2 already shows it:** Benji Dillon athlete/Sports → unknown/Other, Mike Paulson sports-figure → athlete. **Build:** on an existing row an authored FameCategory (not blank, not `unknown`) decides — the registration classifies the row by it (fame bonus, summary) and never rewrites it; a blank / `unknown` category is filled from the classification when it finds one (POPID path: the row's own RoleType words; exact-name path: the caller's role word). Subsumes the engine.313 POPID-path rule. The fame bonus now follows the authored category (a legend sighting in a championship week takes the Sports bonus) — the existing table, no new rate.
+
+**Tests (`scripts/sportsWeekCity.test.js`):** 314 — a new entity twice in one Cycle on the live header keeps the CREATE row's Holiday / HolidayPriority / SportsSeason, MediaCount 2; on a v2.2 header the repeat writes LastSeenHoliday / CalendarContext by name. 315 — "Celebrity" on a musician row, "A's legend" on an athlete row (championship: +6), `sports-figure` on a sports-figure row → no category write, bonus by the authored category; `unknown` row + "chef" → filled chef / Culinary; blank row + "Celebrity" → nothing written; POPID path, blank category → filled from the row's own RoleType. The engine.313 exact-name case (artist row, role `author`) now keeps `artist`.
+
+**Receipt (`output/engine-sheet/2026-10-22-e297-check.js`):** a pre-existing row whose authored category or domain changed from the baseline → HOLD (engine.315); a new row whose HolidayPriority equals its Holiday or whose SportsSeason carries a joined calendar string → HOLD (engine.314 signature). A natural leg rarely repeats a new entity in one Cycle, so 314's proof is the unit test; the receipt guards the signature.
+
+**Bench:** stage 24 + this file from the B start, C113–C116 (leg G3); G2 is the before (Benji Dillon, Mike Paulson relabelled). **Gate:** codex diff review of the exact candidate + receipts → PROD, guarded against the C113 fire.
+
 ## Status log
 
 ### engine.296 — status (drained from ROLLOUT, 2026-10-22 / S592)
@@ -133,6 +147,7 @@ Fame sightings draw from the Cultural_Ledger (builder 2026-10-17: "the fame sigh
 
 ## Changelog
 
+- 2026-10-25 (engine-sheet) — engine.314 / 315 opened (builder "Move on the 2 bugs"): live measured, plan section written, one stage.
 - 2026-10-25 (engine-sheet) — engine.313 LIVE PROD @161 stage 24 (`3b2de7c5`): codex gate 1 HOLD folded, bench G2 PASS, codex gate 2 SHIP, guarded push.
 - 2026-10-24 (engine-sheet) — engine.313 opened: plan section written, codex plan review F1–F4 folded, live measured 0 mismatched.
 - 2026-10-23 (engine-sheet) — engine.312 ruled "The paper": fame from published naming, sighting +1, re-base from the record, fading stays, ceiling 100.

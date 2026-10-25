@@ -102,6 +102,8 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.314 | Same-Cycle repeat of a new Cultural_Ledger entity writes positions 18 / 19 (= HolidayPriority / SportsSeason): write by header name. Live clean (2026-10-25) | in-progress | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.314 / 315 |
+| engine.315 | A sighting rewrites an authored FameCategory from its role word (Celebrity → unknown drops the row from every pool; A's legend → unknown; sports-figure → athlete): the authored category decides. Live-reachable from C113 | in-progress | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.314 / 315 |
 | engine.313 | Fame registration resolves the Cultural_Ledger row by POPID (no twin for a row named differently) — LIVE PROD @161 stage 24, bench G2 PASS, codex SHIP; smoke note C113 Sun 2026-10-25 | done-pending-archive | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.313 |
 | pipeline.81 | Celeste's dead slice: trends ranks by this-cycle movement, no-citizen Cultural rows off every slice, no "engine" in slice text, pools start from the slice's names, proximity + rest guards dropped (builder 2026-10-16). Built 10-16 (es); acceptance C112 Fri 2026-10-23 | live-observing | engine-sheet / research-build | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
 | engine.296 | Sports legends from retired MLB-origin ledger rows, no literal fallback — LIVE @143/@144; re-read on C113 (Sun 2026-10-25) | live-observing | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
@@ -135,8 +137,6 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.315 | Fame bridge round-trip degrades authored categories on the exact-name path (live-reachable): it passes the row's FameCategory as the role word and classifyRole misreads business-figure / media-personality / cultural-leader → unknown, sports-figure → athlete. Rides engine.312 | ready | | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.313 Found |
-| engine.314 | Cultural_Ledger same-Cycle repeat of a new entity writes positions 18 / 19 = HolidayPriority / SportsSeason on the live header (the engine.266 bug CREATE already fixed by header name). Found under engine.313 | ready | | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.313 Found |
 | engine.290 | Transit rides the sim — LIVE PROD stage 4d; re-read the transit mints on C113 (Sun 2026-10-25) | live-observing | engine-sheet / research-build | [[../plans/2026-10-15-engine-290-transit-rides-the-sim]] |
 | engine.294 | Raw "$MOOD" token in LifeHistory — fixed LIVE @138 stage 4g; re-read on C113 (Sun 2026-10-25) | live-observing | engine-sheet | commit 71637c7a; [[../reference/DEPLOY_HISTORY]] §stage 4g |
 | engine.295 | Owner draw → the money game: design session rb + builder, builds from the plan's Task 6. Household map written 2026-10-22; its §6: calls 1,2,4,5,6 ruled 2026-10-22 (Roots $25M, any household row, MaritalStatus; CIV/MED fame only; no rungs), call 3 left simple | needs-info | research-build | [[../plans/2026-10-16-the-money-game]] · [[../plans/2026-10-22-household-to-heritage-map]] |

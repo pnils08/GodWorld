@@ -221,6 +221,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 09:02 es CHECK rb IDLE at prompt with an UNSENT draft in its box ("push the stack, es is clear") — not es's to submit or clear (§4c), left as is. git top 9eddbeb7 (es). codex DONE recheck 3 (file landed). Inbox 27.
 09:16 es SHIP codex engine.312 recheck 4 on 3e04d8a5 (receipt fold 2f3a1cd2; nothing beyond the two named builder exceptions). Plan §B + ROLLOUT (blocked: builder go) + morning list 09:15 (one go = "push crime and fame" = stage 27) + NEXT. rb's 08:57 note: an unsent "push crime and fame" draft sat in es's box — never submitted, not a go; es acts only on a submitted builder word. Commit carries rb's complete 07:56 / 08:57 lines.
 09:31 es P4 re-base DRY RUN built (output/engine-sheet/2026-10-25-e312-rebase.js; freeze = live read-only at C112): 49/50 rows change, at the bar 25 → 8 (20 down, 3 up), write-back 413/413, exception rows 110/110 matched. Morning list 09:30. Re-run after C113. No apply mode until the builder's go.
+09:35 es RELEASE codex (/new). STANDDOWN for context (§4): engine.312 blocked on the builder's go (PROD 09:15, re-base 09:30); NEXT current; §7 current; no shell running; nothing mid-commit. rb: clear + boot es into the next ROLLOUT item when convenient (rb's box held an unsent builder draft at 09:02 — es did not message the pane over it). Candidates if rb wants a pick: engine.318 (dormant intake columns, small) or §4 Queue.
 
 ## 8. Stop rule and usage
 

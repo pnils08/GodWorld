@@ -91,6 +91,8 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 **Builder 2026-10-23, chose "The paper (Recommended)" (verbatim option):** "Fame rises when a citizen is named in a published piece; a sighting is a result of fame and adds 1 point. Today's scores get re-based from each person's paper record, fading stays, and fame stops at 100." Design + build are engine-sheet's; the re-base is a live Cultural_Ledger data change — dry run with every row old → new, then apply and read back.
 
+**Builder 2026-10-25, the paper's rate (verbatim):** "5 for positive coverage -2 for negative", then "1 pt for neutral". Each published mention reads its `Citizen_Media_Usage.Sentiment` (engine.152 light: positive / neutral / negative; blank reads neutral). Live 2026-10-25: 857 non-byline mentions — 43 positive, 6 negative, 241 neutral, 567 never graded (C70–C90 + 4 at C104, 3 at C107; their Context is a label, not the passage). **Builder 2026-10-25: "Grade"** the 567 before the re-base (Haiku 5.5 classifier, ~$0.06 at 0.10 / 0.50 per M), the passage lookup on a Haiku subagent. Passages land in a scratch receipt first; the Sentiment write-back rides the re-base dry run, not before it.
+
 ## engine.313 — one citizen, one fame row (engine-sheet, 2026-10-24)
 
 **Defect:** `registerCulturalEntity_` resolves the caller's POPID (`culturalLedger.js:354`) but picks the existing row by exact Name only (`:426-431`); a miss appends a new row carrying that POPID (`:535-571`). The fame bridge (`buildEveningFamous.js:229-243`) sights a citizen under their Simulation_Ledger name, so "Muralist Dante Reyes" gains a twin "Dante Reyes" (bench F1 + control 2026-10-22, DEPLOY_HISTORY stage 22 §Found).
@@ -149,6 +151,7 @@ Fame sightings draw from the Cultural_Ledger (builder 2026-10-17: "the fame sigh
 
 ## Changelog
 
+- 2026-10-25 (engine-sheet) — engine.312 rate ruled: positive +5, negative −2, neutral +1; grade the 567 ungraded mentions first (passage lookup dispatched, Haiku).
 - 2026-10-25 (engine-sheet) — engine.314 / 315 LIVE PROD @162 stage 25 (`3109503e`): bench G3 PASS, codex SHIP, guarded push.
 - 2026-10-25 (engine-sheet) — engine.314 / 315 opened (builder "Move on the 2 bugs"): live measured, plan section written, one stage.
 - 2026-10-25 (engine-sheet) — engine.313 LIVE PROD @161 stage 24 (`3b2de7c5`): codex gate 1 HOLD folded, bench G2 PASS, codex gate 2 SHIP, guarded push.

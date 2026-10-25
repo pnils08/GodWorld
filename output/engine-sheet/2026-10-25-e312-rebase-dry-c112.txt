@@ -1,0 +1,59 @@
+engine.312 fame re-base — DRY RUN from live frozen at C112 (2026-10-25T14:16:19.706Z). Nothing written.
+Rows 50: personal 50, institution 0 (kept), duplicate 0 (held), orphan 0 (held); 49 would change.
+At the fame bar (25+): 25 now → 8 after. Falls below: 20. Rises to it: 3.
+Sentiment write-back: 413 of 413 grades land; 0 skipped (each stays blank = neutral). Exception rows (75 own bylines, 35 shifted) matched: 110.
+
+Falls below the bar: Dax Monroe 84→1; Marin Tao 153→21; Rico Valez 116→3; Lena Cross 93→5; Kato Rivers 77→0; Sage Vienta 90→0; Jade Orion 104→14; Evan Morello 71→2; Rowan Pierce 67→3; Nila James 74→2; Tara Ellison 68→5; Theo Banks 47→8; Nina Reyes 51→7; Derek Obi 33→2; Brody Kale 34→0; Marisol Rivera 39→0; Alma Vasquez 53→1; Mei Chen 33→0; Dante Reyes 45→0; Eric Taveras 26→13
+Rises to the bar: Travis Coles 15→30; Darrin Davis 15→37; Danny Horn 8→37
+
+CUL-ID | name | POPID | old → new | record (+5 / +1 / −2) | note
+CUL-C485F452 | Benji Dillon | POP-00018 | 25 → 48 | 9 / 5 / 1 | personal, famous floor
+CUL-978D65AE | Vinnie Keane | POP-00001 | 31 → 47 | 9 / 6 / 2 | personal, famous floor
+CUL-85DD5B45 | Darrin Davis | POP-00021 | 15 → 37 | 7 / 2 / 0 | personal
+CUL-187CFCE7 | Danny Horn | POP-00022 | 8 → 37 | 7 / 2 / 0 | personal
+CUL-78BDC775 | Travis Coles | POP-00533 | 15 → 30 | 5 / 5 / 0 | personal
+CUL-EB555F30 | Mike Paulson | POP-00527 | 25 → 28 | 5 / 5 / 1 | personal, famous floor
+CUL-514B920D | Mark Aitken | POP-00003 | 25 → 27 | 5 / 4 / 1 | personal, famous floor
+CUL-8F6DDFE5 | Isley Kelley | POP-00019 | 25 → 25 | 2 / 2 / 0 | personal, famous floor
+CUL-A58950DF | Henry Rivas | POP-00024 | 20 → 22 | 4 / 2 / 0 | personal
+CUL-0FBABAC4 | Marin Tao | POP-00537 | 153 → 21 | 4 / 1 / 0 | personal
+CUL-8B50B913 | Jade Orion | POP-00540 | 104 → 14 | 2 / 4 / 0 | personal
+CUL-E46BC2A0 | John Ellis | POP-00033 | 11 → 14 | 3 / 1 / 1 | personal
+CUL-4738E778 | Eric Taveras | POP-00597 | 26 → 13 | 3 / 0 / 1 | personal
+CUL-6A0BC6CC | Theo Banks | POP-01056 | 47 → 8 | 1 / 3 / 0 | personal
+CUL-B60D00F6 | Nina Reyes | POP-01057 | 51 → 7 | 1 / 2 / 0 | personal
+CUL-B68BBF3B | Arturo Ramos | POP-00025 | 24 → 7 | 1 / 2 / 0 | personal
+CUL-72BD508A | Marcus Webb | POP-00790 | 4 → 6 | 1 / 3 / 1 | personal
+CUL-732EA822 | Celeste Moon | POP-01061 | 21 → 6 | 1 / 1 / 0 | personal
+CUL-6D596907 | Lena Cross | POP-00539 | 93 → 5 | 1 / 2 / 1 | personal
+CUL-0F9D85B2 | Tara Ellison | POP-00546 | 68 → 5 | 0 / 5 / 0 | personal
+CUL-F8C4B785 | Jose Colon | POP-00599 | 1 → 5 | 1 / 0 / 0 | personal
+CUL-EF1447BC | Deacon Seymour | POP-00528 | 2 → 5 | 1 / 0 / 0 | personal
+CUL-D508319E | Rico Valez | POP-00632 | 116 → 3 | 0 / 3 / 0 | personal
+CUL-3A2CD59D | Rowan Pierce | POP-00545 | 67 → 3 | 0 / 3 / 0 | personal
+CUL-B92FD72A | Vladimir Gonzalez | POP-00598 | 0 → 3 | 0 / 3 / 0 | personal
+CUL-9E72118C | Evan Morello | POP-00536 | 71 → 2 | 0 / 2 / 0 | personal
+CUL-A99D7E2E | Nila James | POP-00538 | 74 → 2 | 0 / 2 / 0 | personal
+CUL-4C7646A5 | Derek Obi | POP-00543 | 33 → 2 | 0 / 2 / 0 | personal
+CUL-DC4EA635 | Jordan Steele | POP-01058 | 14 → 2 | 0 / 2 / 0 | personal
+CUL-3913E3E5 | Dax Monroe | POP-00769 | 84 → 1 | 0 / 1 / 0 | personal
+CUL-0E82EF6C | Alma Vasquez | POP-01063 | 53 → 1 | 0 / 1 / 0 | personal
+CUL-1D834E5A | Kato Rivers | POP-00770 | 77 → 0 | 0 / 0 / 0 | personal
+CUL-A2D9EBFF | Sage Vienta | POP-00771 | 90 → 0 | 0 / 0 / 0 | personal
+CUL-905CBDE8 | Brody Kale | POP-01059 | 34 → 0 | 0 / 0 / 0 | personal
+CUL-21B70831 | Yvonne Hayes | POP-01060 | 17 → 0 | 0 / 0 / 0 | personal
+CUL-5F7A348B | Marisol Rivera | POP-01062 | 39 → 0 | 0 / 0 / 0 | personal
+CUL-BEF5B8CE | Pixel Pete | POP-01064 | 22 → 0 | 0 / 0 / 0 | personal
+CUL-1CFF5139 | GameGirl Gia | POP-01065 | 16 → 0 | 0 / 0 / 0 | personal
+CUL-BA80115F | Mei Chen | POP-00635 | 33 → 0 | 0 / 0 / 0 | personal
+CUL-CEF9BF70 | Dante Reyes | POP-01066 | 45 → 0 | 0 / 0 / 0 | personal
+CUL-EBD601D2 | Sienna Vale | POP-01067 | 21 → 0 | 0 / 0 / 0 | personal
+CUL-2F15E066 | Kai Tanaka | POP-01068 | 1 → 0 | 0 / 0 / 0 | personal
+CUL-9738B2EA | James Williams | POP-01069 | 9 → 0 | 0 / 0 / 0 | personal
+CUL-C13B0483 | Claire Ashford | POP-01071 | 15 → 0 | 0 / 0 / 0 | personal
+CUL-66EDE7C6 | Lumi Crest | POP-01072 | 6 → 0 | 0 / 0 / 0 | personal
+CUL-EEC72E06 | Denise Simmons | POP-01074 | 2 → 0 | 0 / 0 / 0 | personal
+CUL-3D28D67B | Marcus Duval | POP-01075 | 11 → 0 | 0 / 0 / 0 | personal
+CUL-8A4E3B04 | Steve Conrad | POP-00124 | 6 → 0 | 0 / 0 / 0 | personal
+CUL-065F46DC | Rosa Martinez | POP-01070 | 17 → 0 | 0 / 0 / 0 | personal
+CUL-66AA3FD9 | Li Wei | POP-01073 | 7 → 0 | 0 / 0 / 0 | personal

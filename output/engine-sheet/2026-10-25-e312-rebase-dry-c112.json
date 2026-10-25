@@ -1,0 +1,3767 @@
+{
+ "cycle": 112,
+ "frozenAt": "2026-10-25T14:16:19.706Z",
+ "counts": {
+  "rows": 50,
+  "personal": 50,
+  "institution": 0,
+  "duplicate": 0,
+  "orphan": 0,
+  "changed": 49,
+  "atBarBefore": 25,
+  "atBarAfter": 8,
+  "crossDown": 20,
+  "crossUp": 3,
+  "writeBack": 413,
+  "writeBackSkipped": 0,
+  "manifestRows": 110,
+  "manifestMiss": 0
+ },
+ "rows": [
+  {
+   "row": 2,
+   "id": "CUL-3913E3E5",
+   "name": "Dax Monroe",
+   "pop": "POP-00769",
+   "by": "UniverseLinks",
+   "old": 84,
+   "kind": "personal",
+   "record": {
+    "sum": 1,
+    "pos": 0,
+    "neu": 1,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 1
+  },
+  {
+   "row": 3,
+   "id": "CUL-0FBABAC4",
+   "name": "Marin Tao",
+   "pop": "POP-00537",
+   "by": "UniverseLinks",
+   "old": 153,
+   "kind": "personal",
+   "record": {
+    "sum": 21,
+    "pos": 4,
+    "neu": 1,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 21
+  },
+  {
+   "row": 4,
+   "id": "CUL-D508319E",
+   "name": "Rico Valez",
+   "pop": "POP-00632",
+   "by": "UniverseLinks",
+   "old": 116,
+   "kind": "personal",
+   "record": {
+    "sum": 3,
+    "pos": 0,
+    "neu": 3,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 3
+  },
+  {
+   "row": 5,
+   "id": "CUL-6D596907",
+   "name": "Lena Cross",
+   "pop": "POP-00539",
+   "by": "UniverseLinks",
+   "old": 93,
+   "kind": "personal",
+   "record": {
+    "sum": 5,
+    "pos": 1,
+    "neu": 2,
+    "neg": 1
+   },
+   "floor": false,
+   "next": 5
+  },
+  {
+   "row": 6,
+   "id": "CUL-1D834E5A",
+   "name": "Kato Rivers",
+   "pop": "POP-00770",
+   "by": "UniverseLinks",
+   "old": 77,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 7,
+   "id": "CUL-A2D9EBFF",
+   "name": "Sage Vienta",
+   "pop": "POP-00771",
+   "by": "UniverseLinks",
+   "old": 90,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 8,
+   "id": "CUL-8B50B913",
+   "name": "Jade Orion",
+   "pop": "POP-00540",
+   "by": "UniverseLinks",
+   "old": 104,
+   "kind": "personal",
+   "record": {
+    "sum": 14,
+    "pos": 2,
+    "neu": 4,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 14
+  },
+  {
+   "row": 9,
+   "id": "CUL-9E72118C",
+   "name": "Evan Morello",
+   "pop": "POP-00536",
+   "by": "UniverseLinks",
+   "old": 71,
+   "kind": "personal",
+   "record": {
+    "sum": 2,
+    "pos": 0,
+    "neu": 2,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 2
+  },
+  {
+   "row": 10,
+   "id": "CUL-3A2CD59D",
+   "name": "Rowan Pierce",
+   "pop": "POP-00545",
+   "by": "UniverseLinks",
+   "old": 67,
+   "kind": "personal",
+   "record": {
+    "sum": 3,
+    "pos": 0,
+    "neu": 3,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 3
+  },
+  {
+   "row": 11,
+   "id": "CUL-A99D7E2E",
+   "name": "Nila James",
+   "pop": "POP-00538",
+   "by": "UniverseLinks",
+   "old": 74,
+   "kind": "personal",
+   "record": {
+    "sum": 2,
+    "pos": 0,
+    "neu": 2,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 2
+  },
+  {
+   "row": 12,
+   "id": "CUL-0F9D85B2",
+   "name": "Tara Ellison",
+   "pop": "POP-00546",
+   "by": "UniverseLinks",
+   "old": 68,
+   "kind": "personal",
+   "record": {
+    "sum": 5,
+    "pos": 0,
+    "neu": 5,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 5
+  },
+  {
+   "row": 13,
+   "id": "CUL-6A0BC6CC",
+   "name": "Theo Banks",
+   "pop": "POP-01056",
+   "by": "UniverseLinks",
+   "old": 47,
+   "kind": "personal",
+   "record": {
+    "sum": 8,
+    "pos": 1,
+    "neu": 3,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 8
+  },
+  {
+   "row": 14,
+   "id": "CUL-B60D00F6",
+   "name": "Nina Reyes",
+   "pop": "POP-01057",
+   "by": "UniverseLinks",
+   "old": 51,
+   "kind": "personal",
+   "record": {
+    "sum": 7,
+    "pos": 1,
+    "neu": 2,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 7
+  },
+  {
+   "row": 15,
+   "id": "CUL-4C7646A5",
+   "name": "Derek Obi",
+   "pop": "POP-00543",
+   "by": "UniverseLinks",
+   "old": 33,
+   "kind": "personal",
+   "record": {
+    "sum": 2,
+    "pos": 0,
+    "neu": 2,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 2
+  },
+  {
+   "row": 16,
+   "id": "CUL-DC4EA635",
+   "name": "Jordan Steele",
+   "pop": "POP-01058",
+   "by": "UniverseLinks",
+   "old": 14,
+   "kind": "personal",
+   "record": {
+    "sum": 2,
+    "pos": 0,
+    "neu": 2,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 2
+  },
+  {
+   "row": 17,
+   "id": "CUL-905CBDE8",
+   "name": "Brody Kale",
+   "pop": "POP-01059",
+   "by": "UniverseLinks",
+   "old": 34,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 18,
+   "id": "CUL-21B70831",
+   "name": "Yvonne Hayes",
+   "pop": "POP-01060",
+   "by": "UniverseLinks",
+   "old": 17,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 19,
+   "id": "CUL-72BD508A",
+   "name": "Marcus Webb",
+   "pop": "POP-00790",
+   "by": "UniverseLinks",
+   "old": 4,
+   "kind": "personal",
+   "record": {
+    "sum": 6,
+    "pos": 1,
+    "neu": 3,
+    "neg": 1
+   },
+   "floor": false,
+   "next": 6
+  },
+  {
+   "row": 20,
+   "id": "CUL-732EA822",
+   "name": "Celeste Moon",
+   "pop": "POP-01061",
+   "by": "UniverseLinks",
+   "old": 21,
+   "kind": "personal",
+   "record": {
+    "sum": 6,
+    "pos": 1,
+    "neu": 1,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 6
+  },
+  {
+   "row": 21,
+   "id": "CUL-5F7A348B",
+   "name": "Marisol Rivera",
+   "pop": "POP-01062",
+   "by": "UniverseLinks",
+   "old": 39,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 22,
+   "id": "CUL-0E82EF6C",
+   "name": "Alma Vasquez",
+   "pop": "POP-01063",
+   "by": "UniverseLinks",
+   "old": 53,
+   "kind": "personal",
+   "record": {
+    "sum": 1,
+    "pos": 0,
+    "neu": 1,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 1
+  },
+  {
+   "row": 23,
+   "id": "CUL-BEF5B8CE",
+   "name": "Pixel Pete",
+   "pop": "POP-01064",
+   "by": "UniverseLinks",
+   "old": 22,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 24,
+   "id": "CUL-1CFF5139",
+   "name": "GameGirl Gia",
+   "pop": "POP-01065",
+   "by": "UniverseLinks",
+   "old": 16,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 25,
+   "id": "CUL-BA80115F",
+   "name": "Mei Chen",
+   "pop": "POP-00635",
+   "by": "UniverseLinks",
+   "old": 33,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 26,
+   "id": "CUL-CEF9BF70",
+   "name": "Dante Reyes",
+   "pop": "POP-01066",
+   "by": "UniverseLinks",
+   "old": 45,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 27,
+   "id": "CUL-EBD601D2",
+   "name": "Sienna Vale",
+   "pop": "POP-01067",
+   "by": "UniverseLinks",
+   "old": 21,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 28,
+   "id": "CUL-2F15E066",
+   "name": "Kai Tanaka",
+   "pop": "POP-01068",
+   "by": "UniverseLinks",
+   "old": 1,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 29,
+   "id": "CUL-9738B2EA",
+   "name": "James Williams",
+   "pop": "POP-01069",
+   "by": "UniverseLinks",
+   "old": 9,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 30,
+   "id": "CUL-C13B0483",
+   "name": "Claire Ashford",
+   "pop": "POP-01071",
+   "by": "UniverseLinks",
+   "old": 15,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 31,
+   "id": "CUL-66EDE7C6",
+   "name": "Lumi Crest",
+   "pop": "POP-01072",
+   "by": "UniverseLinks",
+   "old": 6,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 32,
+   "id": "CUL-78BDC775",
+   "name": "Travis Coles",
+   "pop": "POP-00533",
+   "by": "UniverseLinks",
+   "old": 15,
+   "kind": "personal",
+   "record": {
+    "sum": 30,
+    "pos": 5,
+    "neu": 5,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 30
+  },
+  {
+   "row": 33,
+   "id": "CUL-EEC72E06",
+   "name": "Denise Simmons",
+   "pop": "POP-01074",
+   "by": "UniverseLinks",
+   "old": 2,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 34,
+   "id": "CUL-4738E778",
+   "name": "Eric Taveras",
+   "pop": "POP-00597",
+   "by": "UniverseLinks",
+   "old": 26,
+   "kind": "personal",
+   "record": {
+    "sum": 13,
+    "pos": 3,
+    "neu": 0,
+    "neg": 1
+   },
+   "floor": false,
+   "next": 13
+  },
+  {
+   "row": 35,
+   "id": "CUL-F8C4B785",
+   "name": "Jose Colon",
+   "pop": "POP-00599",
+   "by": "UniverseLinks",
+   "old": 1,
+   "kind": "personal",
+   "record": {
+    "sum": 5,
+    "pos": 1,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 5
+  },
+  {
+   "row": 36,
+   "id": "CUL-3D28D67B",
+   "name": "Marcus Duval",
+   "pop": "POP-01075",
+   "by": "UniverseLinks",
+   "old": 11,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 37,
+   "id": "CUL-B92FD72A",
+   "name": "Vladimir Gonzalez",
+   "pop": "POP-00598",
+   "by": "UniverseLinks",
+   "old": 0,
+   "kind": "personal",
+   "record": {
+    "sum": 3,
+    "pos": 0,
+    "neu": 3,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 3
+  },
+  {
+   "row": 38,
+   "id": "CUL-B68BBF3B",
+   "name": "Arturo Ramos",
+   "pop": "POP-00025",
+   "by": "UniverseLinks",
+   "old": 24,
+   "kind": "personal",
+   "record": {
+    "sum": 7,
+    "pos": 1,
+    "neu": 2,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 7
+  },
+  {
+   "row": 39,
+   "id": "CUL-85DD5B45",
+   "name": "Darrin Davis",
+   "pop": "POP-00021",
+   "by": "UniverseLinks",
+   "old": 15,
+   "kind": "personal",
+   "record": {
+    "sum": 37,
+    "pos": 7,
+    "neu": 2,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 37
+  },
+  {
+   "row": 40,
+   "id": "CUL-978D65AE",
+   "name": "Vinnie Keane",
+   "pop": "POP-00001",
+   "by": "UniverseLinks",
+   "old": 31,
+   "kind": "personal",
+   "record": {
+    "sum": 47,
+    "pos": 9,
+    "neu": 6,
+    "neg": 2
+   },
+   "floor": true,
+   "next": 47
+  },
+  {
+   "row": 41,
+   "id": "CUL-EF1447BC",
+   "name": "Deacon Seymour",
+   "pop": "POP-00528",
+   "by": "UniverseLinks",
+   "old": 2,
+   "kind": "personal",
+   "record": {
+    "sum": 5,
+    "pos": 1,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 5
+  },
+  {
+   "row": 42,
+   "id": "CUL-8A4E3B04",
+   "name": "Steve Conrad",
+   "pop": "POP-00124",
+   "by": "UniverseLinks",
+   "old": 6,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 43,
+   "id": "CUL-A58950DF",
+   "name": "Henry Rivas",
+   "pop": "POP-00024",
+   "by": "UniverseLinks",
+   "old": 20,
+   "kind": "personal",
+   "record": {
+    "sum": 22,
+    "pos": 4,
+    "neu": 2,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 22
+  },
+  {
+   "row": 44,
+   "id": "CUL-187CFCE7",
+   "name": "Danny Horn",
+   "pop": "POP-00022",
+   "by": "UniverseLinks",
+   "old": 8,
+   "kind": "personal",
+   "record": {
+    "sum": 37,
+    "pos": 7,
+    "neu": 2,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 37
+  },
+  {
+   "row": 45,
+   "id": "CUL-514B920D",
+   "name": "Mark Aitken",
+   "pop": "POP-00003",
+   "by": "UniverseLinks",
+   "old": 25,
+   "kind": "personal",
+   "record": {
+    "sum": 27,
+    "pos": 5,
+    "neu": 4,
+    "neg": 1
+   },
+   "floor": true,
+   "next": 27
+  },
+  {
+   "row": 46,
+   "id": "CUL-E46BC2A0",
+   "name": "John Ellis",
+   "pop": "POP-00033",
+   "by": "UniverseLinks",
+   "old": 11,
+   "kind": "personal",
+   "record": {
+    "sum": 14,
+    "pos": 3,
+    "neu": 1,
+    "neg": 1
+   },
+   "floor": false,
+   "next": 14
+  },
+  {
+   "row": 47,
+   "id": "CUL-C485F452",
+   "name": "Benji Dillon",
+   "pop": "POP-00018",
+   "by": "UniverseLinks",
+   "old": 25,
+   "kind": "personal",
+   "record": {
+    "sum": 48,
+    "pos": 9,
+    "neu": 5,
+    "neg": 1
+   },
+   "floor": true,
+   "next": 48
+  },
+  {
+   "row": 48,
+   "id": "CUL-8F6DDFE5",
+   "name": "Isley Kelley",
+   "pop": "POP-00019",
+   "by": "UniverseLinks",
+   "old": 25,
+   "kind": "personal",
+   "record": {
+    "sum": 12,
+    "pos": 2,
+    "neu": 2,
+    "neg": 0
+   },
+   "floor": true,
+   "next": 25
+  },
+  {
+   "row": 49,
+   "id": "CUL-EB555F30",
+   "name": "Mike Paulson",
+   "pop": "POP-00527",
+   "by": "UniverseLinks",
+   "old": 25,
+   "kind": "personal",
+   "record": {
+    "sum": 28,
+    "pos": 5,
+    "neu": 5,
+    "neg": 1
+   },
+   "floor": true,
+   "next": 28
+  },
+  {
+   "row": 50,
+   "id": "CUL-065F46DC",
+   "name": "Rosa Martinez",
+   "pop": "POP-01070",
+   "by": "UniverseLinks",
+   "old": 17,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  },
+  {
+   "row": 51,
+   "id": "CUL-66AA3FD9",
+   "name": "Li Wei",
+   "pop": "POP-01073",
+   "by": "UniverseLinks",
+   "old": 7,
+   "kind": "personal",
+   "record": {
+    "sum": 0,
+    "pos": 0,
+    "neu": 0,
+    "neg": 0
+   },
+   "floor": false,
+   "next": 0
+  }
+ ],
+ "writeBack": [
+  {
+   "row": 2,
+   "name": "Mike Paulson",
+   "cycle": 70,
+   "light": "neutral",
+   "receiptRow": 2
+  },
+  {
+   "row": 3,
+   "name": "Deacon Seymour",
+   "cycle": 70,
+   "light": "negative",
+   "receiptRow": 3
+  },
+  {
+   "row": 4,
+   "name": "Josh Giddey",
+   "cycle": 70,
+   "light": "positive",
+   "receiptRow": 4
+  },
+  {
+   "row": 5,
+   "name": "Matas Buzelis",
+   "cycle": 70,
+   "light": "neutral",
+   "receiptRow": 5
+  },
+  {
+   "row": 6,
+   "name": "Hank Trepagnier",
+   "cycle": 70,
+   "light": "positive",
+   "receiptRow": 6
+  },
+  {
+   "row": 7,
+   "name": "Adash Stanley",
+   "cycle": 70,
+   "light": "positive",
+   "receiptRow": 7
+  },
+  {
+   "row": 8,
+   "name": "Kevin Huerter",
+   "cycle": 70,
+   "light": "positive",
+   "receiptRow": 8
+  },
+  {
+   "row": 9,
+   "name": "Vinnie Keane",
+   "cycle": 72,
+   "light": "positive",
+   "receiptRow": 9
+  },
+  {
+   "row": 10,
+   "name": "Darrin Davis",
+   "cycle": 72,
+   "light": "positive",
+   "receiptRow": 10
+  },
+  {
+   "row": 11,
+   "name": "Mark Aitken",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 11
+  },
+  {
+   "row": 12,
+   "name": "Henry Rivas",
+   "cycle": 72,
+   "light": "positive",
+   "receiptRow": 12
+  },
+  {
+   "row": 13,
+   "name": "Travis Coles",
+   "cycle": 72,
+   "light": "positive",
+   "receiptRow": 13
+  },
+  {
+   "row": 14,
+   "name": "Benji Dillon",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 14
+  },
+  {
+   "row": 15,
+   "name": "Deacon Seymour",
+   "cycle": 72,
+   "light": "negative",
+   "receiptRow": 15
+  },
+  {
+   "row": 16,
+   "name": "Josh Giddey",
+   "cycle": 72,
+   "light": "positive",
+   "receiptRow": 16
+  },
+  {
+   "row": 17,
+   "name": "Hank Trepagnier",
+   "cycle": 72,
+   "light": "positive",
+   "receiptRow": 17
+  },
+  {
+   "row": 18,
+   "name": "Matas Buzelis",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 18
+  },
+  {
+   "row": 19,
+   "name": "Adash Stanley",
+   "cycle": 72,
+   "light": "positive",
+   "receiptRow": 19
+  },
+  {
+   "row": 20,
+   "name": "Walker Kessler",
+   "cycle": 72,
+   "light": "negative",
+   "receiptRow": 20
+  },
+  {
+   "row": 21,
+   "name": "Kevin Huerter",
+   "cycle": 72,
+   "light": "positive",
+   "receiptRow": 21
+  },
+  {
+   "row": 22,
+   "name": "Tre Jones",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 22
+  },
+  {
+   "row": 23,
+   "name": "Ayo Dosunmu",
+   "cycle": 72,
+   "light": "positive",
+   "receiptRow": 23
+  },
+  {
+   "row": 24,
+   "name": "Avery Santana",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 24
+  },
+  {
+   "row": 25,
+   "name": "Marcus Osei",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 25
+  },
+  {
+   "row": 26,
+   "name": "Elliott Crane",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 26
+  },
+  {
+   "row": 27,
+   "name": "Brenda Okoro",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 27
+  },
+  {
+   "row": 28,
+   "name": "Aaron Whitfield",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 28
+  },
+  {
+   "row": 29,
+   "name": "Laila Cortez",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 29
+  },
+  {
+   "row": 30,
+   "name": "Evan Morello",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 30
+  },
+  {
+   "row": 31,
+   "name": "Marin Tao",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 31
+  },
+  {
+   "row": 32,
+   "name": "Nila James",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 32
+  },
+  {
+   "row": 33,
+   "name": "Lena Cross",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 33
+  },
+  {
+   "row": 34,
+   "name": "Jade Orion",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 34
+  },
+  {
+   "row": 35,
+   "name": "Theo Banks",
+   "cycle": 72,
+   "light": "positive",
+   "receiptRow": 35
+  },
+  {
+   "row": 36,
+   "name": "Nina Reyes",
+   "cycle": 72,
+   "light": "positive",
+   "receiptRow": 36
+  },
+  {
+   "row": 37,
+   "name": "Derek Obi",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 37
+  },
+  {
+   "row": 38,
+   "name": "Jordan Steele",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 38
+  },
+  {
+   "row": 39,
+   "name": "Rowan Pierce",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 39
+  },
+  {
+   "row": 40,
+   "name": "Tara Ellison",
+   "cycle": 72,
+   "light": "neutral",
+   "receiptRow": 40
+  },
+  {
+   "row": 41,
+   "name": "Avery Santana",
+   "cycle": 73,
+   "light": "positive",
+   "receiptRow": 41
+  },
+  {
+   "row": 42,
+   "name": "Marcus Osei",
+   "cycle": 73,
+   "light": "neutral",
+   "receiptRow": 42
+  },
+  {
+   "row": 43,
+   "name": "Laila Cortez",
+   "cycle": 73,
+   "light": "positive",
+   "receiptRow": 43
+  },
+  {
+   "row": 45,
+   "name": "Elliott Crane",
+   "cycle": 73,
+   "light": "neutral",
+   "receiptRow": 45
+  },
+  {
+   "row": 46,
+   "name": "Ramon Vega",
+   "cycle": 73,
+   "light": "neutral",
+   "receiptRow": 46
+  },
+  {
+   "row": 47,
+   "name": "Mike Paulson",
+   "cycle": 73,
+   "light": "positive",
+   "receiptRow": 47
+  },
+  {
+   "row": 48,
+   "name": "Kevin Park",
+   "cycle": 73,
+   "light": "neutral",
+   "receiptRow": 48
+  },
+  {
+   "row": 49,
+   "name": "Jasmine Santos",
+   "cycle": 73,
+   "light": "neutral",
+   "receiptRow": 49
+  },
+  {
+   "row": 50,
+   "name": "Darius Patel",
+   "cycle": 73,
+   "light": "neutral",
+   "receiptRow": 50
+  },
+  {
+   "row": 51,
+   "name": "Marcus Torres",
+   "cycle": 73,
+   "light": "neutral",
+   "receiptRow": 51
+  },
+  {
+   "row": 52,
+   "name": "Mark Aitken",
+   "cycle": 73,
+   "light": "positive",
+   "receiptRow": 52
+  },
+  {
+   "row": 53,
+   "name": "Deacon Seymour",
+   "cycle": 73,
+   "light": "negative",
+   "receiptRow": 53
+  },
+  {
+   "row": 54,
+   "name": "Vinnie Keane",
+   "cycle": 73,
+   "light": "negative",
+   "receiptRow": 54
+  },
+  {
+   "row": 55,
+   "name": "Benji Dillon",
+   "cycle": 73,
+   "light": "positive",
+   "receiptRow": 55
+  },
+  {
+   "row": 56,
+   "name": "Danny Horn",
+   "cycle": 73,
+   "light": "positive",
+   "receiptRow": 56
+  },
+  {
+   "row": 57,
+   "name": "Travis Coles",
+   "cycle": 73,
+   "light": "positive",
+   "receiptRow": 57
+  },
+  {
+   "row": 58,
+   "name": "Avery Santana",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 58
+  },
+  {
+   "row": 59,
+   "name": "Marcus Osei",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 59
+  },
+  {
+   "row": 60,
+   "name": "Elliott Crane",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 60
+  },
+  {
+   "row": 61,
+   "name": "Laila Cortez",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 61
+  },
+  {
+   "row": 62,
+   "name": "Aaron Whitfield",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 62
+  },
+  {
+   "row": 63,
+   "name": "Keisha Ramos",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 63
+  },
+  {
+   "row": 64,
+   "name": "Helen Vasquez",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 64
+  },
+  {
+   "row": 65,
+   "name": "David Chen",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 65
+  },
+  {
+   "row": 66,
+   "name": "Patricia Nwosu",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 66
+  },
+  {
+   "row": 67,
+   "name": "Mike Paulson",
+   "cycle": 74,
+   "light": "positive",
+   "receiptRow": 67
+  },
+  {
+   "row": 68,
+   "name": "Danny Horn",
+   "cycle": 74,
+   "light": "positive",
+   "receiptRow": 68
+  },
+  {
+   "row": 69,
+   "name": "Darrin Davis",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 69
+  },
+  {
+   "row": 70,
+   "name": "Vinnie Keane",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 70
+  },
+  {
+   "row": 71,
+   "name": "Henry Rivas",
+   "cycle": 74,
+   "light": "positive",
+   "receiptRow": 71
+  },
+  {
+   "row": 72,
+   "name": "Travis Coles",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 72
+  },
+  {
+   "row": 73,
+   "name": "Benji Dillon",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 73
+  },
+  {
+   "row": 74,
+   "name": "Mariano Rosales",
+   "cycle": 74,
+   "light": "positive",
+   "receiptRow": 74
+  },
+  {
+   "row": 75,
+   "name": "Steph Curry",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 75
+  },
+  {
+   "row": 76,
+   "name": "Tariq Jordan",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 76
+  },
+  {
+   "row": 77,
+   "name": "Sofia Jordan",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 77
+  },
+  {
+   "row": 78,
+   "name": "Marcus Nguyen",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 78
+  },
+  {
+   "row": 79,
+   "name": "Kaila Brown",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 79
+  },
+  {
+   "row": 80,
+   "name": "Brianna Harris",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 80
+  },
+  {
+   "row": 81,
+   "name": "Elena Lopez",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 81
+  },
+  {
+   "row": 82,
+   "name": "Lorenzo Lewis",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 82
+  },
+  {
+   "row": 83,
+   "name": "Ariana Reyes",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 83
+  },
+  {
+   "row": 84,
+   "name": "Marcus Harris",
+   "cycle": 74,
+   "light": "neutral",
+   "receiptRow": 84
+  },
+  {
+   "row": 85,
+   "name": "Avery Santana",
+   "cycle": 75,
+   "light": "positive",
+   "receiptRow": 85
+  },
+  {
+   "row": 86,
+   "name": "Mara Vance",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 86
+  },
+  {
+   "row": 87,
+   "name": "Laila Cortez",
+   "cycle": 75,
+   "light": "positive",
+   "receiptRow": 87
+  },
+  {
+   "row": 88,
+   "name": "Marcus Osei",
+   "cycle": 75,
+   "light": "positive",
+   "receiptRow": 88
+  },
+  {
+   "row": 89,
+   "name": "Ramon Vega",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 89
+  },
+  {
+   "row": 90,
+   "name": "Janae Rivers",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 90
+  },
+  {
+   "row": 91,
+   "name": "Elliott Crane",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 91
+  },
+  {
+   "row": 92,
+   "name": "Denise Carter",
+   "cycle": 75,
+   "light": "positive",
+   "receiptRow": 92
+  },
+  {
+   "row": 93,
+   "name": "Leonard Tran",
+   "cycle": 75,
+   "light": "positive",
+   "receiptRow": 93
+  },
+  {
+   "row": 94,
+   "name": "Rose Delgado",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 94
+  },
+  {
+   "row": 95,
+   "name": "Warren Ashford",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 95
+  },
+  {
+   "row": 96,
+   "name": "Nina Chen",
+   "cycle": 75,
+   "light": "positive",
+   "receiptRow": 96
+  },
+  {
+   "row": 97,
+   "name": "Terrence Mobley",
+   "cycle": 75,
+   "light": "positive",
+   "receiptRow": 97
+  },
+  {
+   "row": 98,
+   "name": "Stephen Curry",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 98
+  },
+  {
+   "row": 99,
+   "name": "Celeste Moon",
+   "cycle": 75,
+   "light": "positive",
+   "receiptRow": 99
+  },
+  {
+   "row": 100,
+   "name": "Marcus Webb",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 100
+  },
+  {
+   "row": 101,
+   "name": "Community Director Hayes",
+   "cycle": 75,
+   "light": "positive",
+   "receiptRow": 101
+  },
+  {
+   "row": 102,
+   "name": "Terrence Turner",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 102
+  },
+  {
+   "row": 103,
+   "name": "Darius Green",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 103
+  },
+  {
+   "row": 104,
+   "name": "Bruce Lee",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 104
+  },
+  {
+   "row": 105,
+   "name": "Rafael Phillips",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 105
+  },
+  {
+   "row": 106,
+   "name": "Ronald Scott",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 106
+  },
+  {
+   "row": 107,
+   "name": "Jose Wright",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 107
+  },
+  {
+   "row": 108,
+   "name": "Marcus Wright",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 108
+  },
+  {
+   "row": 109,
+   "name": "Darius Clark",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 109
+  },
+  {
+   "row": 110,
+   "name": "Javier Harris",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 110
+  },
+  {
+   "row": 111,
+   "name": "Joel Roberts",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 111
+  },
+  {
+   "row": 113,
+   "name": "Mike Paulson",
+   "cycle": 75,
+   "light": "neutral",
+   "receiptRow": 113
+  },
+  {
+   "row": 114,
+   "name": "Denise Carter",
+   "cycle": 79,
+   "light": "neutral",
+   "receiptRow": 114
+  },
+  {
+   "row": 115,
+   "name": "Leonard Tran",
+   "cycle": 79,
+   "light": "neutral",
+   "receiptRow": 115
+  },
+  {
+   "row": 116,
+   "name": "Ramon Vega",
+   "cycle": 79,
+   "light": "neutral",
+   "receiptRow": 116
+  },
+  {
+   "row": 117,
+   "name": "Warren Ashford",
+   "cycle": 79,
+   "light": "neutral",
+   "receiptRow": 117
+  },
+  {
+   "row": 118,
+   "name": "Nina Chen",
+   "cycle": 79,
+   "light": "negative",
+   "receiptRow": 118
+  },
+  {
+   "row": 119,
+   "name": "Elliott Crane",
+   "cycle": 79,
+   "light": "neutral",
+   "receiptRow": 119
+  },
+  {
+   "row": 121,
+   "name": "Mark Aitken",
+   "cycle": 79,
+   "light": "negative",
+   "receiptRow": 121
+  },
+  {
+   "row": 123,
+   "name": "Deacon Seymour",
+   "cycle": 79,
+   "light": "positive",
+   "receiptRow": 123
+  },
+  {
+   "row": 124,
+   "name": "Mike Kindler",
+   "cycle": 79,
+   "light": "positive",
+   "receiptRow": 124
+  },
+  {
+   "row": 125,
+   "name": "Hank Trepagnier",
+   "cycle": 79,
+   "light": "positive",
+   "receiptRow": 125
+  },
+  {
+   "row": 126,
+   "name": "Josh Giddey",
+   "cycle": 79,
+   "light": "positive",
+   "receiptRow": 126
+  },
+  {
+   "row": 127,
+   "name": "Adash Stanley",
+   "cycle": 79,
+   "light": "positive",
+   "receiptRow": 127
+  },
+  {
+   "row": 128,
+   "name": "Tre Jones",
+   "cycle": 79,
+   "light": "positive",
+   "receiptRow": 128
+  },
+  {
+   "row": 129,
+   "name": "Matas Buzelis",
+   "cycle": 79,
+   "light": "positive",
+   "receiptRow": 129
+  },
+  {
+   "row": 148,
+   "name": "Rose Delgado",
+   "cycle": 79,
+   "light": "neutral",
+   "receiptRow": 148
+  },
+  {
+   "row": 149,
+   "name": "Janae Rivers",
+   "cycle": 79,
+   "light": "positive",
+   "receiptRow": 149
+  },
+  {
+   "row": 150,
+   "name": "Terrence Mobley",
+   "cycle": 79,
+   "light": "neutral",
+   "receiptRow": 150
+  },
+  {
+   "row": 151,
+   "name": "Marcus Osei",
+   "cycle": 79,
+   "light": "neutral",
+   "receiptRow": 151
+  },
+  {
+   "row": 152,
+   "name": "Avery Santana",
+   "cycle": 79,
+   "light": "neutral",
+   "receiptRow": 152
+  },
+  {
+   "row": 153,
+   "name": "Darrin Davis",
+   "cycle": 79,
+   "light": "positive",
+   "receiptRow": 153
+  },
+  {
+   "row": 154,
+   "name": "Benji Dillon",
+   "cycle": 79,
+   "light": "positive",
+   "receiptRow": 154
+  },
+  {
+   "row": 155,
+   "name": "Mike Paulson",
+   "cycle": 79,
+   "light": "positive",
+   "receiptRow": 155
+  },
+  {
+   "row": 157,
+   "name": "Arturo Ramos",
+   "cycle": 79,
+   "light": "neutral",
+   "receiptRow": 157
+  },
+  {
+   "row": 159,
+   "name": "John Ellis",
+   "cycle": 79,
+   "light": "positive",
+   "receiptRow": 159
+  },
+  {
+   "row": 164,
+   "name": "Terrence Wright",
+   "cycle": 79,
+   "light": "neutral",
+   "receiptRow": 164
+  },
+  {
+   "row": 173,
+   "name": "Lila Mezran",
+   "cycle": 79,
+   "light": "neutral",
+   "receiptRow": 173
+  },
+  {
+   "row": 175,
+   "name": "Kevin Huerter",
+   "cycle": 79,
+   "light": "neutral",
+   "receiptRow": 175
+  },
+  {
+   "row": 176,
+   "name": "Vinnie Keane",
+   "cycle": 79,
+   "light": "positive",
+   "receiptRow": 176
+  },
+  {
+   "row": 177,
+   "name": "Walker Kessler",
+   "cycle": 79,
+   "light": "neutral",
+   "receiptRow": 177
+  },
+  {
+   "row": 178,
+   "name": "Ayo Dosunmu",
+   "cycle": 79,
+   "light": "neutral",
+   "receiptRow": 178
+  },
+  {
+   "row": 181,
+   "name": "Marin Tao",
+   "cycle": 79,
+   "light": "positive",
+   "receiptRow": 181
+  },
+  {
+   "row": 183,
+   "name": "Lena Cross",
+   "cycle": 79,
+   "light": "positive",
+   "receiptRow": 183
+  },
+  {
+   "row": 184,
+   "name": "Jade Orion",
+   "cycle": 79,
+   "light": "positive",
+   "receiptRow": 184
+  },
+  {
+   "row": 192,
+   "name": "Denise Carter",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 192
+  },
+  {
+   "row": 193,
+   "name": "Leonard Tran",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 193
+  },
+  {
+   "row": 194,
+   "name": "Rose Delgado",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 194
+  },
+  {
+   "row": 195,
+   "name": "Ramon Vega",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 195
+  },
+  {
+   "row": 196,
+   "name": "Janae Rivers",
+   "cycle": 80,
+   "light": "negative",
+   "receiptRow": 196
+  },
+  {
+   "row": 197,
+   "name": "Elliott Crane",
+   "cycle": 80,
+   "light": "negative",
+   "receiptRow": 197
+  },
+  {
+   "row": 198,
+   "name": "Warren Ashford",
+   "cycle": 80,
+   "light": "negative",
+   "receiptRow": 198
+  },
+  {
+   "row": 199,
+   "name": "Nina Chen",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 199
+  },
+  {
+   "row": 200,
+   "name": "Terrence Mobley",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 200
+  },
+  {
+   "row": 201,
+   "name": "Beverly Hayes",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 201
+  },
+  {
+   "row": 202,
+   "name": "Elena Rivera",
+   "cycle": 80,
+   "light": "positive",
+   "receiptRow": 202
+  },
+  {
+   "row": 203,
+   "name": "Marcus Osei",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 203
+  },
+  {
+   "row": 204,
+   "name": "Vinnie Keane",
+   "cycle": 80,
+   "light": "positive",
+   "receiptRow": 204
+  },
+  {
+   "row": 205,
+   "name": "Danny Horn",
+   "cycle": 80,
+   "light": "positive",
+   "receiptRow": 205
+  },
+  {
+   "row": 207,
+   "name": "Deacon Seymour",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 207
+  },
+  {
+   "row": 208,
+   "name": "Mike Paulson",
+   "cycle": 80,
+   "light": "negative",
+   "receiptRow": 208
+  },
+  {
+   "row": 209,
+   "name": "Ernesto Quintero",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 209
+  },
+  {
+   "row": 210,
+   "name": "Benji Dillon",
+   "cycle": 80,
+   "light": "positive",
+   "receiptRow": 210
+  },
+  {
+   "row": 211,
+   "name": "Darrin Davis",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 211
+  },
+  {
+   "row": 212,
+   "name": "Amara Keane",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 212
+  },
+  {
+   "row": 213,
+   "name": "Steph Curry",
+   "cycle": 80,
+   "light": "positive",
+   "receiptRow": 213
+  },
+  {
+   "row": 214,
+   "name": "Jimmy Butler",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 214
+  },
+  {
+   "row": 215,
+   "name": "Giannis Antetokounmpo",
+   "cycle": 80,
+   "light": "positive",
+   "receiptRow": 215
+  },
+  {
+   "row": 216,
+   "name": "Draymond Green",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 216
+  },
+  {
+   "row": 217,
+   "name": "Moses Moody",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 217
+  },
+  {
+   "row": 218,
+   "name": "Josh Giddey",
+   "cycle": 80,
+   "light": "positive",
+   "receiptRow": 218
+  },
+  {
+   "row": 219,
+   "name": "Hank Trepagnier",
+   "cycle": 80,
+   "light": "positive",
+   "receiptRow": 219
+  },
+  {
+   "row": 220,
+   "name": "Walker Kessler",
+   "cycle": 80,
+   "light": "positive",
+   "receiptRow": 220
+  },
+  {
+   "row": 221,
+   "name": "Adash Stanley",
+   "cycle": 80,
+   "light": "positive",
+   "receiptRow": 221
+  },
+  {
+   "row": 222,
+   "name": "Ayo Dosunmu",
+   "cycle": 80,
+   "light": "positive",
+   "receiptRow": 222
+  },
+  {
+   "row": 223,
+   "name": "Billy Donovan",
+   "cycle": 80,
+   "light": "positive",
+   "receiptRow": 223
+  },
+  {
+   "row": 224,
+   "name": "Gallery Owner Mei Chen",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 224
+  },
+  {
+   "row": 225,
+   "name": "Sculptor Alma Vasquez",
+   "cycle": 80,
+   "light": "positive",
+   "receiptRow": 225
+  },
+  {
+   "row": 226,
+   "name": "Muralist Dante Reyes",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 226
+  },
+  {
+   "row": 227,
+   "name": "Jade Orion",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 227
+  },
+  {
+   "row": 228,
+   "name": "Theo Banks",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 228
+  },
+  {
+   "row": 229,
+   "name": "Lena Cross",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 229
+  },
+  {
+   "row": 230,
+   "name": "Rico Valez",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 230
+  },
+  {
+   "row": 231,
+   "name": "Marin Tao",
+   "cycle": 80,
+   "light": "positive",
+   "receiptRow": 231
+  },
+  {
+   "row": 242,
+   "name": "Jose Johnson",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 242
+  },
+  {
+   "row": 243,
+   "name": "Darius Clark",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 243
+  },
+  {
+   "row": 244,
+   "name": "Dante Nelson",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 244
+  },
+  {
+   "row": 245,
+   "name": "Ronald Wright",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 245
+  },
+  {
+   "row": 246,
+   "name": "Devon Green",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 246
+  },
+  {
+   "row": 247,
+   "name": "Marco Lopez",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 247
+  },
+  {
+   "row": 248,
+   "name": "Hector Campbell",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 248
+  },
+  {
+   "row": 249,
+   "name": "Owen Campbell",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 249
+  },
+  {
+   "row": 250,
+   "name": "Guadalupe Lee",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 250
+  },
+  {
+   "row": 251,
+   "name": "Calvin Turner",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 251
+  },
+  {
+   "row": 252,
+   "name": "Rafael Phillips",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 252
+  },
+  {
+   "row": 253,
+   "name": "Andre Lee",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 253
+  },
+  {
+   "row": 254,
+   "name": "Marco Johnson",
+   "cycle": 80,
+   "light": "positive",
+   "receiptRow": 254
+  },
+  {
+   "row": 255,
+   "name": "Jalen Hill",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 255
+  },
+  {
+   "row": 256,
+   "name": "Marcus Walker",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 256
+  },
+  {
+   "row": 257,
+   "name": "Mateo Walker",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 257
+  },
+  {
+   "row": 258,
+   "name": "Omar Clark",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 258
+  },
+  {
+   "row": 259,
+   "name": "Damien Roberts",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 259
+  },
+  {
+   "row": 260,
+   "name": "Gloria Hutchins",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 260
+  },
+  {
+   "row": 261,
+   "name": "DeShawn Avery",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 261
+  },
+  {
+   "row": 262,
+   "name": "Patricia Nolan",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 262
+  },
+  {
+   "row": 263,
+   "name": "Clarence Moody",
+   "cycle": 80,
+   "light": "neutral",
+   "receiptRow": 263
+  },
+  {
+   "row": 264,
+   "name": "Denise Carter",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 264
+  },
+  {
+   "row": 265,
+   "name": "Leonard Tran",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 265
+  },
+  {
+   "row": 266,
+   "name": "Rose Delgado",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 266
+  },
+  {
+   "row": 267,
+   "name": "Ramon Vega",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 267
+  },
+  {
+   "row": 268,
+   "name": "Janae Rivers",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 268
+  },
+  {
+   "row": 269,
+   "name": "Elliott Crane",
+   "cycle": 81,
+   "light": "negative",
+   "receiptRow": 269
+  },
+  {
+   "row": 270,
+   "name": "Warren Ashford",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 270
+  },
+  {
+   "row": 271,
+   "name": "Nina Chen",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 271
+  },
+  {
+   "row": 272,
+   "name": "Terrence Mobley",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 272
+  },
+  {
+   "row": 273,
+   "name": "Leanne Wu",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 273
+  },
+  {
+   "row": 274,
+   "name": "Mark Aitken",
+   "cycle": 81,
+   "light": "positive",
+   "receiptRow": 274
+  },
+  {
+   "row": 275,
+   "name": "Benji Dillon",
+   "cycle": 81,
+   "light": "positive",
+   "receiptRow": 275
+  },
+  {
+   "row": 276,
+   "name": "Mike Paulson",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 276
+  },
+  {
+   "row": 277,
+   "name": "Vinnie Keane",
+   "cycle": 81,
+   "light": "positive",
+   "receiptRow": 277
+  },
+  {
+   "row": 278,
+   "name": "Deacon Seymour",
+   "cycle": 81,
+   "light": "positive",
+   "receiptRow": 278
+  },
+  {
+   "row": 279,
+   "name": "Danny Horn",
+   "cycle": 81,
+   "light": "positive",
+   "receiptRow": 279
+  },
+  {
+   "row": 280,
+   "name": "Josh Giddey",
+   "cycle": 81,
+   "light": "positive",
+   "receiptRow": 280
+  },
+  {
+   "row": 281,
+   "name": "Hank Trepagnier",
+   "cycle": 81,
+   "light": "positive",
+   "receiptRow": 281
+  },
+  {
+   "row": 282,
+   "name": "Deon Whitfield",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 282
+  },
+  {
+   "row": 283,
+   "name": "Ayo Dosunmu",
+   "cycle": 81,
+   "light": "positive",
+   "receiptRow": 283
+  },
+  {
+   "row": 284,
+   "name": "Walker Kessler",
+   "cycle": 81,
+   "light": "positive",
+   "receiptRow": 284
+  },
+  {
+   "row": 296,
+   "name": "Marco Lopez",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 296
+  },
+  {
+   "row": 297,
+   "name": "Jose Johnson",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 297
+  },
+  {
+   "row": 298,
+   "name": "Dante Nelson",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 298
+  },
+  {
+   "row": 299,
+   "name": "Darius Clark",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 299
+  },
+  {
+   "row": 300,
+   "name": "Rafael Phillips",
+   "cycle": 81,
+   "light": "positive",
+   "receiptRow": 300
+  },
+  {
+   "row": 301,
+   "name": "Andre Lee",
+   "cycle": 81,
+   "light": "positive",
+   "receiptRow": 301
+  },
+  {
+   "row": 302,
+   "name": "Jalen Hill",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 302
+  },
+  {
+   "row": 303,
+   "name": "Marcus Walker",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 303
+  },
+  {
+   "row": 304,
+   "name": "Patricia Nolan",
+   "cycle": 81,
+   "light": "neutral",
+   "receiptRow": 304
+  },
+  {
+   "row": 305,
+   "name": "Denise Carter",
+   "cycle": 82,
+   "light": "positive",
+   "receiptRow": 305
+  },
+  {
+   "row": 306,
+   "name": "Leonard Tran",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 306
+  },
+  {
+   "row": 307,
+   "name": "Rose Delgado",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 307
+  },
+  {
+   "row": 308,
+   "name": "Ramon Vega",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 308
+  },
+  {
+   "row": 309,
+   "name": "Janae Rivers",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 309
+  },
+  {
+   "row": 310,
+   "name": "Elliott Crane",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 310
+  },
+  {
+   "row": 311,
+   "name": "Warren Ashford",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 311
+  },
+  {
+   "row": 312,
+   "name": "Nina Chen",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 312
+  },
+  {
+   "row": 313,
+   "name": "Terrence Mobley",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 313
+  },
+  {
+   "row": 314,
+   "name": "Avery Santana",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 314
+  },
+  {
+   "row": 315,
+   "name": "Deacon Seymour",
+   "cycle": 82,
+   "light": "positive",
+   "receiptRow": 315
+  },
+  {
+   "row": 316,
+   "name": "Travis Coles",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 316
+  },
+  {
+   "row": 317,
+   "name": "Benji Dillon",
+   "cycle": 82,
+   "light": "positive",
+   "receiptRow": 317
+  },
+  {
+   "row": 318,
+   "name": "Vinnie Keane",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 318
+  },
+  {
+   "row": 319,
+   "name": "Mark Aitken",
+   "cycle": 82,
+   "light": "positive",
+   "receiptRow": 319
+  },
+  {
+   "row": 320,
+   "name": "Danny Horn",
+   "cycle": 82,
+   "light": "positive",
+   "receiptRow": 320
+  },
+  {
+   "row": 321,
+   "name": "Cy Newell",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 321
+  },
+  {
+   "row": 322,
+   "name": "Darrin Davis",
+   "cycle": 82,
+   "light": "positive",
+   "receiptRow": 322
+  },
+  {
+   "row": 323,
+   "name": "Mike Kinder",
+   "cycle": 82,
+   "light": "positive",
+   "receiptRow": 323
+  },
+  {
+   "row": 324,
+   "name": "Josh Giddey",
+   "cycle": 82,
+   "light": "positive",
+   "receiptRow": 324
+  },
+  {
+   "row": 325,
+   "name": "Matas Buzelis",
+   "cycle": 82,
+   "light": "positive",
+   "receiptRow": 325
+  },
+  {
+   "row": 326,
+   "name": "Jalen Smith",
+   "cycle": 82,
+   "light": "positive",
+   "receiptRow": 326
+  },
+  {
+   "row": 327,
+   "name": "Adash Stanley",
+   "cycle": 82,
+   "light": "positive",
+   "receiptRow": 327
+  },
+  {
+   "row": 328,
+   "name": "Mike Paulson",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 328
+  },
+  {
+   "row": 340,
+   "name": "Jose Wright",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 340
+  },
+  {
+   "row": 341,
+   "name": "Rafael Phillips",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 341
+  },
+  {
+   "row": 342,
+   "name": "Calvin Turner",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 342
+  },
+  {
+   "row": 343,
+   "name": "Andre Lee",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 343
+  },
+  {
+   "row": 344,
+   "name": "Dorothy Rios",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 344
+  },
+  {
+   "row": 345,
+   "name": "Father Miguel",
+   "cycle": 82,
+   "light": "positive",
+   "receiptRow": 345
+  },
+  {
+   "row": 346,
+   "name": "Carla Edmonds",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 346
+  },
+  {
+   "row": 347,
+   "name": "Vincent Cho",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 347
+  },
+  {
+   "row": 348,
+   "name": "Elena Reyes",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 348
+  },
+  {
+   "row": 349,
+   "name": "Oakland Buddhist Temple",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 349
+  },
+  {
+   "row": 350,
+   "name": "East Bay Meditation Center",
+   "cycle": 82,
+   "light": "neutral",
+   "receiptRow": 350
+  },
+  {
+   "row": 351,
+   "name": "Cathedral of Christ the Light",
+   "cycle": 82,
+   "light": "positive",
+   "receiptRow": 351
+  },
+  {
+   "row": 352,
+   "name": "St. Columba Catholic Church",
+   "cycle": 82,
+   "light": "positive",
+   "receiptRow": 352
+  },
+  {
+   "row": 353,
+   "name": "Denise Carter",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 353
+  },
+  {
+   "row": 354,
+   "name": "Leonard Tran",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 354
+  },
+  {
+   "row": 355,
+   "name": "Rose Delgado",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 355
+  },
+  {
+   "row": 356,
+   "name": "Ramon Vega",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 356
+  },
+  {
+   "row": 357,
+   "name": "Janae Rivers",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 357
+  },
+  {
+   "row": 358,
+   "name": "Elliott Crane",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 358
+  },
+  {
+   "row": 359,
+   "name": "Warren Ashford",
+   "cycle": 83,
+   "light": "negative",
+   "receiptRow": 359
+  },
+  {
+   "row": 360,
+   "name": "Nina Chen",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 360
+  },
+  {
+   "row": 361,
+   "name": "Terrence Mobley",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 361
+  },
+  {
+   "row": 362,
+   "name": "Avery Santana",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 362
+  },
+  {
+   "row": 363,
+   "name": "Simone Ellis",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 363
+  },
+  {
+   "row": 364,
+   "name": "Keisha Ramos",
+   "cycle": 83,
+   "light": "negative",
+   "receiptRow": 364
+  },
+  {
+   "row": 365,
+   "name": "Martin Richards",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 365
+  },
+  {
+   "row": 366,
+   "name": "Darrin Davis",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 366
+  },
+  {
+   "row": 367,
+   "name": "Ernesto Quintero",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 367
+  },
+  {
+   "row": 368,
+   "name": "Danny Horn",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 368
+  },
+  {
+   "row": 369,
+   "name": "Isley Kelley",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 369
+  },
+  {
+   "row": 370,
+   "name": "Vinnie Keane",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 370
+  },
+  {
+   "row": 371,
+   "name": "Benji Dillon",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 371
+  },
+  {
+   "row": 372,
+   "name": "Travis Coles",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 372
+  },
+  {
+   "row": 373,
+   "name": "Eric Taveras",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 373
+  },
+  {
+   "row": 374,
+   "name": "Henry Rivas",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 374
+  },
+  {
+   "row": 375,
+   "name": "John Ellis",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 375
+  },
+  {
+   "row": 376,
+   "name": "Mark Aitken",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 376
+  },
+  {
+   "row": 377,
+   "name": "Deacon Seymour",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 377
+  },
+  {
+   "row": 378,
+   "name": "Cy Newell",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 378
+  },
+  {
+   "row": 379,
+   "name": "Agustin Rodriguez",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 379
+  },
+  {
+   "row": 380,
+   "name": "Peter Busch",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 380
+  },
+  {
+   "row": 381,
+   "name": "Josh Giddey",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 381
+  },
+  {
+   "row": 382,
+   "name": "Hank Trepagnier",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 382
+  },
+  {
+   "row": 383,
+   "name": "Adash Stanley",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 383
+  },
+  {
+   "row": 384,
+   "name": "Kevin Huerter",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 384
+  },
+  {
+   "row": 385,
+   "name": "Deon Whitfield",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 385
+  },
+  {
+   "row": 386,
+   "name": "Jalen Smith",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 386
+  },
+  {
+   "row": 387,
+   "name": "Mike Paulson",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 387
+  },
+  {
+   "row": 388,
+   "name": "Record: 36-27. No player names used.",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 388
+  },
+  {
+   "row": 389,
+   "name": "Marin Tao",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 389
+  },
+  {
+   "row": 390,
+   "name": "Rico Valez",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 390
+  },
+  {
+   "row": 391,
+   "name": "Jade Orion",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 391
+  },
+  {
+   "row": 392,
+   "name": "Sculptor Alma Vasquez",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 392
+  },
+  {
+   "row": 404,
+   "name": "Elena Reyes",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 404
+  },
+  {
+   "row": 405,
+   "name": "Dante Nelson",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 405
+  },
+  {
+   "row": 406,
+   "name": "Shawn Nguyen",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 406
+  },
+  {
+   "row": 407,
+   "name": "Jose Wright",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 407
+  },
+  {
+   "row": 408,
+   "name": "Darius Clark",
+   "cycle": 83,
+   "light": "positive",
+   "receiptRow": 408
+  },
+  {
+   "row": 409,
+   "name": "Jalen Hill",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 409
+  },
+  {
+   "row": 410,
+   "name": "Marcus Walker",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 410
+  },
+  {
+   "row": 411,
+   "name": "Terrence Williams",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 411
+  },
+  {
+   "row": 412,
+   "name": "Andre Lee",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 412
+  },
+  {
+   "row": 413,
+   "name": "Rafael Phillips",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 413
+  },
+  {
+   "row": 414,
+   "name": "Jose Johnson",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 414
+  },
+  {
+   "row": 415,
+   "name": "Mara Vance",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 415
+  },
+  {
+   "row": 417,
+   "name": "Calvin Turner",
+   "cycle": 83,
+   "light": "neutral",
+   "receiptRow": 417
+  },
+  {
+   "row": 418,
+   "name": "Keisha Ramos",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 418
+  },
+  {
+   "row": 419,
+   "name": "Simone Ellis",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 419
+  },
+  {
+   "row": 420,
+   "name": "Leanne Wu",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 420
+  },
+  {
+   "row": 421,
+   "name": "Avery Santana",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 421
+  },
+  {
+   "row": 422,
+   "name": "Laila Cortez",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 422
+  },
+  {
+   "row": 423,
+   "name": "Theo Park",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 423
+  },
+  {
+   "row": 425,
+   "name": "Mara Vance",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 425
+  },
+  {
+   "row": 426,
+   "name": "Denise Carter",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 426
+  },
+  {
+   "row": 427,
+   "name": "Leonard Tran",
+   "cycle": 84,
+   "light": "negative",
+   "receiptRow": 427
+  },
+  {
+   "row": 428,
+   "name": "Rose Delgado",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 428
+  },
+  {
+   "row": 430,
+   "name": "Janae Rivers",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 430
+  },
+  {
+   "row": 431,
+   "name": "Elliott Crane",
+   "cycle": 84,
+   "light": "negative",
+   "receiptRow": 431
+  },
+  {
+   "row": 432,
+   "name": "Warren Ashford",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 432
+  },
+  {
+   "row": 433,
+   "name": "Nina Chen",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 433
+  },
+  {
+   "row": 434,
+   "name": "Terrence Mobley",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 434
+  },
+  {
+   "row": 435,
+   "name": "Benji Dillon",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 435
+  },
+  {
+   "row": 436,
+   "name": "Isley Kelley",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 436
+  },
+  {
+   "row": 437,
+   "name": "Vinnie Keane",
+   "cycle": 84,
+   "light": "negative",
+   "receiptRow": 437
+  },
+  {
+   "row": 438,
+   "name": "Mark Aitken",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 438
+  },
+  {
+   "row": 439,
+   "name": "Darrin Davis",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 439
+  },
+  {
+   "row": 440,
+   "name": "Danny Horn",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 440
+  },
+  {
+   "row": 441,
+   "name": "Martin Richards",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 441
+  },
+  {
+   "row": 442,
+   "name": "Henry Rivas",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 442
+  },
+  {
+   "row": 443,
+   "name": "Eric Taveras",
+   "cycle": 84,
+   "light": "negative",
+   "receiptRow": 443
+  },
+  {
+   "row": 444,
+   "name": "Ernesto Quintero",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 444
+  },
+  {
+   "row": 445,
+   "name": "Mariano Rosales",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 445
+  },
+  {
+   "row": 446,
+   "name": "Travis Coles",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 446
+  },
+  {
+   "row": 447,
+   "name": "Deacon Seymour",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 447
+  },
+  {
+   "row": 448,
+   "name": "Josh Giddey",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 448
+  },
+  {
+   "row": 449,
+   "name": "Hank Trepagnier",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 449
+  },
+  {
+   "row": 450,
+   "name": "Adash Stanley",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 450
+  },
+  {
+   "row": 451,
+   "name": "Kevin Huerter",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 451
+  },
+  {
+   "row": 452,
+   "name": "Walker Kessler",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 452
+  },
+  {
+   "row": 453,
+   "name": "Mike Paulson",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 453
+  },
+  {
+   "row": 454,
+   "name": "Ayo Dosunmu",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 454
+  },
+  {
+   "row": 455,
+   "name": "Jalen Smith",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 455
+  },
+  {
+   "row": 456,
+   "name": "Steph Curry",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 456
+  },
+  {
+   "row": 457,
+   "name": "Giannis Antetokounmpo",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 457
+  },
+  {
+   "row": 469,
+   "name": "Shawn Nguyen",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 469
+  },
+  {
+   "row": 470,
+   "name": "Beverly Hayes",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 470
+  },
+  {
+   "row": 471,
+   "name": "Rafael Phillips",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 471
+  },
+  {
+   "row": 472,
+   "name": "Andre Lee",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 472
+  },
+  {
+   "row": 473,
+   "name": "Calvin Turner",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 473
+  },
+  {
+   "row": 474,
+   "name": "Bruce Wright",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 474
+  },
+  {
+   "row": 475,
+   "name": "Jose Wright",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 475
+  },
+  {
+   "row": 476,
+   "name": "Marcus Walker",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 476
+  },
+  {
+   "row": 477,
+   "name": "Jalen Hill",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 477
+  },
+  {
+   "row": 478,
+   "name": "Darius Clark",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 478
+  },
+  {
+   "row": 479,
+   "name": "Elena Reyes",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 479
+  },
+  {
+   "row": 480,
+   "name": "Gloria Meeks",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 480
+  },
+  {
+   "row": 481,
+   "name": "Vincent Okoye",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 481
+  },
+  {
+   "row": 482,
+   "name": "St. Columba Catholic Church",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 482
+  },
+  {
+   "row": 483,
+   "name": "Allen Temple Baptist Church",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 483
+  },
+  {
+   "row": 484,
+   "name": "Cathedral of Christ the Light",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 484
+  },
+  {
+   "row": 485,
+   "name": "Muralist Dante Reyes",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 485
+  },
+  {
+   "row": 486,
+   "name": "Jade Orion",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 486
+  },
+  {
+   "row": 487,
+   "name": "Calhoun's Tap",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 487
+  },
+  {
+   "row": 488,
+   "name": "Council Member Ramon Vega",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 488
+  },
+  {
+   "row": 491,
+   "name": "Reed Thompson",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 491
+  },
+  {
+   "row": 492,
+   "name": "Linda Chow",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 492
+  },
+  {
+   "row": 493,
+   "name": "Marcus Williams",
+   "cycle": 84,
+   "light": "positive",
+   "receiptRow": 493
+  },
+  {
+   "row": 494,
+   "name": "Tomas Renteria",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 494
+  },
+  {
+   "row": 495,
+   "name": "Sonia Parikh",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 495
+  },
+  {
+   "row": 498,
+   "name": "Christine Nakamura",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 498
+  },
+  {
+   "row": 500,
+   "name": "Amara Osei",
+   "cycle": 84,
+   "light": "neutral",
+   "receiptRow": 500
+  },
+  {
+   "row": 528,
+   "name": "Avery Santana",
+   "cycle": 90,
+   "light": "positive",
+   "receiptRow": 528
+  },
+  {
+   "row": 531,
+   "name": "Janae Rivers",
+   "cycle": 90,
+   "light": "negative",
+   "receiptRow": 531
+  },
+  {
+   "row": 532,
+   "name": "Leonard Tran",
+   "cycle": 90,
+   "light": "negative",
+   "receiptRow": 532
+  },
+  {
+   "row": 533,
+   "name": "Ramon Vega",
+   "cycle": 90,
+   "light": "neutral",
+   "receiptRow": 533
+  },
+  {
+   "row": 534,
+   "name": "Warren Ashford",
+   "cycle": 90,
+   "light": "negative",
+   "receiptRow": 534
+  },
+  {
+   "row": 537,
+   "name": "Keisha Ramos",
+   "cycle": 90,
+   "light": "neutral",
+   "receiptRow": 537
+  },
+  {
+   "row": 538,
+   "name": "Brenda Okoro",
+   "cycle": 90,
+   "light": "positive",
+   "receiptRow": 538
+  },
+  {
+   "row": 541,
+   "name": "Travis Coles",
+   "cycle": 90,
+   "light": "positive",
+   "receiptRow": 541
+  },
+  {
+   "row": 542,
+   "name": "Danny Horn",
+   "cycle": 90,
+   "light": "positive",
+   "receiptRow": 542
+  },
+  {
+   "row": 543,
+   "name": "Benji Dillon",
+   "cycle": 90,
+   "light": "positive",
+   "receiptRow": 543
+  },
+  {
+   "row": 544,
+   "name": "Vinnie Keane",
+   "cycle": 90,
+   "light": "positive",
+   "receiptRow": 544
+  },
+  {
+   "row": 545,
+   "name": "Bryan Franco",
+   "cycle": 90,
+   "light": "positive",
+   "receiptRow": 545
+  },
+  {
+   "row": 549,
+   "name": "Arturo Ramos",
+   "cycle": 90,
+   "light": "neutral",
+   "receiptRow": 549
+  },
+  {
+   "row": 550,
+   "name": "Henry Rivas",
+   "cycle": 90,
+   "light": "positive",
+   "receiptRow": 550
+  },
+  {
+   "row": 551,
+   "name": "Deacon Seymour",
+   "cycle": 90,
+   "light": "positive",
+   "receiptRow": 551
+  },
+  {
+   "row": 552,
+   "name": "DeShawn Hartley",
+   "cycle": 90,
+   "light": "positive",
+   "receiptRow": 552
+  },
+  {
+   "row": 553,
+   "name": "Marcus Webb",
+   "cycle": 90,
+   "light": "negative",
+   "receiptRow": 553
+  },
+  {
+   "row": 581,
+   "name": "Ariana Lee",
+   "cycle": 104,
+   "light": "neutral",
+   "receiptRow": 581
+  },
+  {
+   "row": 582,
+   "name": "Sandra Velazquez",
+   "cycle": 104,
+   "light": "neutral",
+   "receiptRow": 582
+  },
+  {
+   "row": 583,
+   "name": "Pablo Almanzar",
+   "cycle": 104,
+   "light": "positive",
+   "receiptRow": 583
+  },
+  {
+   "row": 584,
+   "name": "Vinnie Keane",
+   "cycle": 104,
+   "light": "positive",
+   "receiptRow": 584
+  },
+  {
+   "row": 741,
+   "name": "Irene Fay",
+   "cycle": 107,
+   "light": "neutral",
+   "receiptRow": 741
+  },
+  {
+   "row": 742,
+   "name": "Darius Clark",
+   "cycle": 107,
+   "light": "neutral",
+   "receiptRow": 742
+  },
+  {
+   "row": 743,
+   "name": "Yu Zen",
+   "cycle": 107,
+   "light": "positive",
+   "receiptRow": 743
+  }
+ ],
+ "skips": [],
+ "manifestMiss": []
+}

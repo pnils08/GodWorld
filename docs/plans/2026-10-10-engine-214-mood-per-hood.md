@@ -339,6 +339,8 @@ Phase 5 is untouched: a level of 3 gives the carry its full weight (`carry / 3` 
 
 **Gate.** Codex diff review of the exact candidate + the bench receipt → PROD (guarded push, pull-back byte compare, DEPLOY_HISTORY stage 26).
 
+**Status 2026-10-25 05:58 (es, overnight).** Candidate `1e6beff5` (codex plan review, diff gate 1, diff gate 2 folded). Bench 1004 stage 26 (`stage26-e301.sha256`): leg P (intervention probe) C113–C114 PASS — consumer Fruitvale level 3, receipt, 18 lines; producer Baylight +6 measured, carried as a wave, read at 3 at C114; leg S organic C113–C137 25/25 PASS — 52 rises (2 past the cap at C127), 120 crime lines across 16 Cycles, 0 rung-2, **0 organic waves**, 0 Engine_Errors; C114 / C127 carry 12 / 14 citywide rises in both legs (the crime engine's own rhythm, 13 Cycles apart). Bench restored to the stage-25 manifest. Receipts `4434352e`. Codex gate 3: receipts SHIP, tree SHIP, **PROD HOLD** — the push reads only sheet evidence and cannot read `FIRE_ADMISSION_JSON` (no outside read door; recheck held the Engine_Errors footprint as insufficient). PROD waits on the builder's go as a named exception, or engine.317 (a read-only admission door) first. The organic wave rate is on the builder's morning list.
+
 ## Open questions
 
 - **For the builder with engine.289 (agy 2026-10-19, es-verified, no proposal):** (a) the per-hood crime ladder's third rung (`n >= 3`, sentiment −0.30, `applyCityDynamics.js:816-822`) cannot fire — one hood carries at most two counted spikes a Cycle (property + violent increases, `finalizeCycleState.js:797-810`); rungs 1 and 2 fire. (b) the per-hood NIGHTLIFE seed thresholds (`wNight >= 3 / >= 6`, `:1187-1204`) kept their cluster-sum values, like the CULTURE ones engine.289 already holds.

@@ -219,7 +219,8 @@ console.log('engine.214 — mood per hood');
     { neighborhood: 'Dimond', metric: 'propertyCrime', magnitude: 2, newValue: 7 }, { neighborhood: 'Dimond', metric: 'violentCrime', magnitude: 6, newValue: 25 },
     { neighborhood: 'Glenview', metric: 'crime', magnitude: 3 }] } } });
   check('the carried spikes set the levels: Laurel 1, Dimond 2 (property + violent), Glenview 3 (a carried wave)',
-    JSON.stringify(r.S.crimeByNeighborhood) === '{"Laurel":1,"Dimond":2,"Glenview":3}', JSON.stringify(r.S.crimeByNeighborhood));
+    Object.keys(r.S.crimeByNeighborhood).length === 3 && r.S.crimeByNeighborhood.Laurel === 1 && r.S.crimeByNeighborhood.Dimond === 2 &&
+    r.S.crimeByNeighborhood.Glenview === 3, JSON.stringify(r.S.crimeByNeighborhood));
   const ratio = (h, k) => r.nd[h][k] / none.nd[h][k];
   check('1 spike: nightlife ×0.96, tourism and publicSpaces untouched', near(ratio('Laurel', 'nightlife'), 0.96, 1e-6) && near(ratio('Laurel', 'tourism'), 1, 1e-6) && near(ratio('Laurel', 'publicSpaces'), 1, 1e-6));
   check('2 spikes: nightlife ×0.90, tourism ×0.88, publicSpaces untouched', near(ratio('Dimond', 'nightlife'), 0.90, 1e-6) && near(ratio('Dimond', 'tourism'), 0.88, 1e-6) && near(ratio('Dimond', 'publicSpaces'), 1, 1e-6));
@@ -230,7 +231,7 @@ console.log('engine.214 — mood per hood');
   const rows = r.ripples.filter(e => e.causeType === 'crime');
   check('one Ripple_Ledger receipt per Cycle naming the hoods at >= 2, with the spikes as prose',
     rows.length === 1 && JSON.stringify(rows[0].targetIds.slice().sort()) === JSON.stringify(['Dimond', 'Glenview']) && rows[0].magnitude === 3 &&
-    /Dimond property crime \+2 \(now 7\); Dimond violent crime \+6 \(now 25\); Glenview crime \+3, rising two Cycles running/.test(rows[0].causeDetail), JSON.stringify(rows[0]));
+    /Dimond property crime \+2 last Cycle \(to 7\); Dimond violent crime \+6 last Cycle \(to 25\); Glenview crime \+3 last Cycle, rising two Cycles running \(level 3\)/.test(rows[0].causeDetail), JSON.stringify(rows[0]));
   check('no receipt when no hood reaches 2', none.ripples.filter(e => e.causeType === 'crime').length === 0);
   const preset = run({ summary: { crimeByNeighborhood: { Dimond: 3 } } });
   check('engine.301: a pre-set map is never read — the level comes from the carry only (no fabricated wave)',
@@ -255,9 +256,16 @@ console.log('engine.214 — mood per hood');
   const wrow = wave.ripples.filter(e => e.causeType === 'crime');
   check('engine.301: the receipt names the wave hood as rising two Cycles running',
     wrow.length === 1 && wrow[0].targetIds.join() === 'Dimond' && wrow[0].magnitude === 3 &&
-    /Dimond property crime \+6 \(now 40\), rising two Cycles running/.test(wrow[0].causeDetail), JSON.stringify(wrow));
+    /Dimond property crime \+6 last Cycle \(to 40\), rising two Cycles running \(level 3\)/.test(wrow[0].causeDetail), JSON.stringify(wrow));
   const bad = run({ summary: { previousCycleState: { cycle: 119, crimeSpikes: [spike('Dimond', 'propertyCrime', 6, 40)], crimeWaveHoods: 'Dimond' } } });
   check('engine.301: a non-array crimeWaveHoods is ignored (level stays 1)', bad.S.crimeByNeighborhood.Dimond === 1);
+  const bare = run({ summary: { previousCycleState: { cycle: 119, crimeSpikes: [], crimeWaveHoods: ['Dimond'] } } });
+  check('engine.301: a carried wave name with no carried spike is no rise — no level, no rung, no receipt',
+    JSON.stringify(bare.S.crimeByNeighborhood) === '{}' && near(bare.nd.Dimond.publicSpaces, none.nd.Dimond.publicSpaces, 1e-9) &&
+    bare.ripples.filter(e => e.causeType === 'crime').length === 0, JSON.stringify(bare.S.crimeByNeighborhood));
+  const foreign = run({ summary: { previousCycleState: { cycle: 119, crimeSpikes: [spike('Atlantis', 'propertyCrime', 9, 50)], crimeWaveHoods: ['Atlantis'] } } });
+  check('engine.301: a foreign hood name is never published and makes no receipt',
+    JSON.stringify(foreign.S.crimeByNeighborhood) === '{}' && foreign.ripples.filter(e => e.causeType === 'crime').length === 0, JSON.stringify(foreign.S.crimeByNeighborhood));
   // The chain: Cycle N's Phase-2 level × Cycle N's rises → the carried list → Cycle N+1 at rung 3.
   const shifts = [
     { neighborhood: 'Dimond', metric: 'propertyCrime', direction: 'increase', magnitude: 7, newValue: 47 },
@@ -295,10 +303,13 @@ console.log('engine.214 — mood per hood');
   const capped = fcs.compactCrimeSpikes_({ shifts: many });
   check('engine.301: a hood whose rise fell past the 12-spike cap is in neither carried field',
     capped.length === 12 && !capped.some(sp => sp.neighborhood === 'Laurel') && fcs.compactCrimeWaveHoods_(capped, { Laurel: 1 }).length === 0);
-  // Phase2-CityDynamics failed: the level was never published, so Phase 9 carries no wave.
-  const failed2 = { now: 'test-now', summary: { cycleId: 122, crimeMetrics: { shifts: shifts } } };
-  fcs.finalizeCycleState_(failed2);
-  check('engine.301: no published level (Phase 2 failed) → no wave carried', JSON.stringify(failed2.summary.previousCycleState.crimeWaveHoods) === '[]');
+  // The full Phase-9 snapshot on 13 rises: the cap drops the weakest, and the two carried fields agree.
+  const snap13 = { now: 'test-now', summary: { cycleId: 123, crimeMetrics: { shifts: many }, crimeByNeighborhood: { Laurel: 1, H0: 1 } } };
+  fcs.finalizeCycleState_(snap13);
+  const s13 = JSON.parse(JSON.stringify(snap13.summary.previousCycleState));
+  check('engine.301: on 13 rises the snapshot carries 12 spikes and only waves among them (Laurel past the cap is in neither)',
+    s13.crimeSpikes.length === 12 && JSON.stringify(s13.crimeWaveHoods) === '["H0"]' &&
+    s13.crimeWaveHoods.every(h => s13.crimeSpikes.some(sp => sp.neighborhood === h)), JSON.stringify(s13.crimeWaveHoods));
 }
 
 // ── 6b. engine.214 Task 17 (north-hills nightlife split) + Task 19 / engine.287 (citywide crime floor + share) ──
@@ -447,6 +458,17 @@ console.log('engine.214 — mood per hood');
   const good = wrapped({});
   check('wrapper: the ordinary Cycle publishes 22 hoods, one crime receipt (Dimond at 2), no Engine_Errors row', good.ok === true && good.errors.length === 0 && Object.keys(good.S.neighborhoodDynamics).length === 22 && good.ripples.filter(e => e.causeType === 'crime').length === 1);
   const bad = wrapped({ chr: { Laurel: '__proto__' } });
+  {
+    // engine.301 F1 (codex diff gate 1): the throw lands after the crime level is derived — nothing is published,
+    // so the real Phase 9 snapshot carries no wave even with a qualifying rise in a hood that rose last Cycle.
+    const fcs = require('../phase09-digest/finalizeCycleState.js');
+    const after = { now: 'test-now', summary: { cycleId: 120, crimeByNeighborhood: bad.S.crimeByNeighborhood,
+      crimeMetrics: { shifts: [{ neighborhood: 'Dimond', metric: 'propertyCrime', direction: 'increase', magnitude: 8, newValue: 48 }] } } };
+    fcs.finalizeCycleState_(after);
+    check('engine.301: Phase 2 threw after deriving the level → S.crimeByNeighborhood unset → no wave carried',
+      bad.S.crimeByNeighborhood === undefined && JSON.stringify(after.summary.previousCycleState.crimeWaveHoods) === '[]' &&
+      after.summary.previousCycleState.crimeSpikes.length === 1, JSON.stringify(bad.S.crimeByNeighborhood));
+  }
   check('wrapper: an inherited-key label → false, one Engine_Errors row naming the label, S.cityDynamics and S.neighborhoodDynamics unset, zero ripple rows',
     bad.ok === false && bad.errors.length === 1 && /no row in HOOD_CHARACTER_BY_EMPLOYER/.test(String(bad.errors[0][3])) && bad.S.cityDynamics === undefined && bad.S.neighborhoodDynamics === undefined && bad.ripples.length === 0, JSON.stringify(bad.errors[0] && bad.errors[0].slice(1, 4)));
   const noAdj = wrapped({ noAdjacent: true });

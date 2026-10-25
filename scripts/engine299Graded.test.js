@@ -188,21 +188,29 @@ console.log('  T9 skips by source:', JSON.stringify(calSkips));
   global.hoodCrimeBar_ = new Function(rne.match(/function hoodCrimeBar_[\s\S]*?\n}\n/)[0] + '\nreturn hoodCrimeBar_;')();
   const CRIME = /took a different route home after the recent break-ins around Temescal|counted the register twice before closing up|swapped stories with a neighbor about what got taken/;
   const count = (levels) => {
-    let n = 0, tags = new Set();
+    let n = 0, still = 0, tags = new Set();
     for (let seed = 1; seed <= 600; seed++) {
       const ctx = ctxFor(seed, 0);
       ctx.summary.neighborhoodState = { Temescal: {} };
       ctx.config.dialHoodPressureBar = 3; ctx.config.dialHoodCrimeBar = 1.45;   // the World_Config defaults (engine94SheetContract.js:504-505)
       ctx.summary.crimeByNeighborhood = levels;
       GEN.generateCitizensEvents_(ctx);
-      String(ctx.ledger.rows[0][5] || '').split('\n').forEach((l) => { if (CRIME.test(l)) { n++; const m = /\[([^\]]+)\]/.exec(l); if (m) tags.add(m[1]); } });
+      String(ctx.ledger.rows[0][5] || '').split('\n').forEach((l) => {
+        if (!CRIME.test(l)) return;
+        n++; const m = /^C101 — \[([^\]]+)\] (.*)$/.exec(l);
+        if (m) { tags.add(m[1]); if (Object.keys(M.nudgesForEvent_(m[1], 1, m[2])).length === 0) still++; }
+      });
     }
-    return { n, tags: [...tags] };
+    return { n, tags: [...tags], still };
   };
   const zero = count({}), other = count({ Dimond: 3 }), one = count({ Temescal: 1 }), wave = count({ Temescal: 3 });
   assert('T11 no crime-carry line at level 0, nor for a rise in another hood', zero.n === 0 && other.n === 0, JSON.stringify({ zero, other }));
   assert('T11 a carried rise in the citizen\'s own hood reaches them, and a wave (level 3) more often than one rise', one.n > 0 && wave.n > one.n, JSON.stringify({ one: one.n, wave: wave.n }));
-  assert('T11 the crime-carry lines are written graded (a dial moves)', wave.tags.length > 0 && wave.tags.every((t) => !!M.gradedParts_(t)), JSON.stringify(wave.tags));
+  assert('T11 the crime-carry lines are written graded and each decodes to a dial move', wave.tags.length > 0 && wave.tags.every((t) => !!M.gradedParts_(t)) && wave.still === 0 && one.still === 0, JSON.stringify({ tags: wave.tags, still: wave.still }));
+  // pw(base, carry/3): level 1 weighs 1.1 × (1 + 4/3) ≈ 2.57, level 3 weighs 1.1 × 5 = 5.5 — ≈ 2.1× per entry; the draws land near it
+  // while the three lines stay a small share of the pool (same 600 seeds both ways).
+  console.log('  T11 draws: level 1 ' + one.n + ', level 3 ' + wave.n + ' (ratio ' + (wave.n / one.n).toFixed(2) + ')');
+  assert('T11 the wave draws at the full carry weight — 1.5× to 3× the single-rise draws', wave.n >= 1.5 * one.n && wave.n <= 3 * one.n, JSON.stringify({ one: one.n, wave: wave.n }));
 }
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

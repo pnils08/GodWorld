@@ -1,35 +1,43 @@
-// engine.301 F1 bench receipt (plan 2026-10-10-engine-214 §engine.301 F1; codex plan review 2026-10-25 §2-§4). Read-only on SANDBOX 1004.
-// Per Cycle C (run after the fire of C):
-//   carry   — Carry_Forward_Store PREV_CYCLE_STATE_JSON rows for C and C-1, typed: crimeSpikes array, crimeWaveHoods array of strings.
-//             HOLD on a missing / stale / malformed blob, a missing crimeWaveHoods key, a wave name not in C's crimeSpikes, or a wave
-//             name that C-1 did not carry (it did not rise the Cycle before).
-//   levels  — the ladder level Cycle C's Phase 2 read: C-1's crimeSpikes counted per hood, 3 for C-1's crimeWaveHoods.
+// engine.301 F1 bench receipt (plan 2026-10-10-engine-214 §engine.301 F1; codex plan review + diff gate 1, 2026-10-25). Read-only on
+// SANDBOX 1004 (and the frozen baseline for C113's Crime_Metrics start). Per Cycle C (run after the fire of C):
+//   carry   — Carry_Forward_Store PREV_CYCLE_STATE_JSON rows for C and C-1, typed: one ring row each, its own cycle; crimeSpikes an
+//             array of {neighborhood: string, metric: propertyCrime|violentCrime, magnitude: number}; crimeWaveHoods an array of unique
+//             strings (absent allowed only on the C112 baseline blob). HOLD on any break; HOLD on a C wave not in C's crimeSpikes or not
+//             in C-1's crimeSpikes (it did not rise the Cycle before).
+//   levels  — the ladder level Cycle C's Phase 2 derived: C-1's spikes counted per hood, 3 for C-1's waves that C-1 also carried as a
+//             spike; canon (Crime_Metrics) hoods only. The published S.crimeByNeighborhood is not persisted — its effects are read here.
 //   rises   — Crime_Metrics now vs the previous receipt's snapshot (C113: the baseline sheet): every +5 property / violent increase
-//             (pre-cap), against C's carried crimeSpikes (post-cap); qualifying rises the cap dropped are listed.
+//             (pre-cap) against C's carried crimeSpikes (post-cap); qualifying rises the cap dropped are listed.
 //   lines   — LifeHistory_Log rows of Cycle C carrying one of the three crime-carry texts, by the citizen's ledger hood. HOLD on any
-//             line in a hood at level 0. Per-hood count reported (a pool draw: a small hood may draw none).
-//   receipt — Ripple_Ledger causeType crime rows of Cycle C: the hoods at level >= 2, magnitude = max level, a wave hood named
-//             "rising two Cycles running". HOLD on a mismatch.
-//   errors  — Engine_Errors rows of Cycle C.
-// --final <from>: the window summary (rises, rung-2 hoods, waves, max simultaneous level 3) over the saved receipts <from>..C.
+//             line in a hood at level 0.
+//   receipt — Ripple_Ledger crime-ladder rows of Cycle C: exactly the hoods at level >= 2, magnitude = the max level, each level-3 hood
+//             named "rising two Cycles running (level 3)". HOLD on any mismatch.
+//   errors  — any Engine_Errors row of Cycle C is a HOLD.
+// Expectations (the probe leg): --expect-wave <hood> (level 3 at C and named in the receipt), --expect-lines <hood> (> 0 crime-carry
+// lines there), --expect-carry-wave <hood> (C's carried crimeWaveHoods names it), --expect-calm <hood> (level 0 at C). Repeatable.
+// --final <from>: the window summary; HOLD unless every receipt <from>..C exists and passed.
 // Writes nothing to any sheet; saves output/engine-sheet/2026-10-25-e301-receipt-<label>-c<C>.json (+ the Crime_Metrics snapshot).
-// usage: node 2026-10-25-e301-receipt.js <cycle> <label> [--final <from>]
+// usage: node 2026-10-25-e301-receipt.js <cycle> <label> [--final <from>] [--expect-wave <hood>] [--expect-lines <hood>] ...
 require('/root/GodWorld/lib/env');
 const LIVE = process.env.GODWORLD_SHEET_ID;
 const BENCH = '1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA', BASE = '1Mbz-sE13iu1RU4qo-rzsczjjPRKAU-KSfnQnrJNXCgA';
 if (LIVE === BENCH || LIVE === BASE) throw new Error('env already points at a bench sheet');
 const fs = require('fs');
 const O = '/root/GodWorld/output/engine-sheet/';
-const C = Number(process.argv[2]), label = process.argv[3];
-const fi = process.argv.indexOf('--final'), from = fi > 0 ? Number(process.argv[fi + 1]) : null;
-if (!(C >= 113) || !label) throw new Error('usage: <cycle> <label> [--final <from>]');
+const argv = process.argv.slice(2);
+const C = Number(argv[0]), label = argv[1];
+const flag = (k) => { const v = []; argv.forEach((a, i) => { if (a === k && argv[i + 1]) v.push(argv[i + 1]); }); return v; };
+const from = flag('--final').length ? Number(flag('--final')[0]) : null;
+const EXPECT = { wave: flag('--expect-wave'), lines: flag('--expect-lines'), carryWave: flag('--expect-carry-wave'), calm: flag('--expect-calm') };
+if (!(C >= 113) || !label || label.startsWith('--')) throw new Error('usage: <cycle> <label> [--final <from>] [--expect-* <hood>]');
 const CRIME = /took a different route home after the recent break-ins around|counted the register twice before closing up, just in case|swapped stories with a neighbor about what got taken up the block/;
+const METRICS = ['propertyCrime', 'violentCrime'];
 async function tab(id, name) {
   process.env.GODWORLD_SHEET_ID = id; delete require.cache[require.resolve('/root/GodWorld/lib/sheets')];
   return require('/root/GodWorld/lib/sheets').getSheetData(name);
 }
 const col = (h, n) => { const i = h.indexOf(n); if (i < 0) throw new Error('no column ' + n + ' in [' + h.join(', ') + ']'); return i; };
-const out = { cycle: C, label, hold: [] };
+const out = { cycle: C, label, expect: EXPECT, hold: [] };
 const HOLD = (m) => out.hold.push(m);
 function blobFor(cfs, cyc) {
   const h = cfs[0], iK = col(h, 'Key'), iC = col(h, 'Cycle'), iJ = col(h, 'JSON');
@@ -37,30 +45,38 @@ function blobFor(cfs, cyc) {
   if (rows.length !== 1) { HOLD('PREV_CYCLE_STATE_JSON for C' + cyc + ': ' + rows.length + ' ring rows'); return null; }
   let j; try { j = JSON.parse(rows[0][iJ]); } catch (e) { HOLD('PREV_CYCLE_STATE_JSON C' + cyc + ' does not parse: ' + e.message); return null; }
   if (Number(j.cycle) !== cyc) HOLD('PREV_CYCLE_STATE_JSON C' + cyc + ' carries cycle ' + j.cycle);
-  if (!Array.isArray(j.crimeSpikes)) HOLD('C' + cyc + ' crimeSpikes is not an array');
+  if (!Array.isArray(j.crimeSpikes)) { HOLD('C' + cyc + ' crimeSpikes is not an array'); j.crimeSpikes = []; }
+  j.crimeSpikes.forEach((s, k) => {
+    if (!s || typeof s.neighborhood !== 'string' || !s.neighborhood || METRICS.indexOf(s.metric) < 0 || !isFinite(Number(s.magnitude)))
+      HOLD('C' + cyc + ' crimeSpikes[' + k + '] malformed: ' + JSON.stringify(s));
+  });
+  if (j.crimeWaveHoods === undefined && cyc === 112) j.crimeWaveHoods = [];   // the baseline blob predates the key
+  if (!Array.isArray(j.crimeWaveHoods) || !j.crimeWaveHoods.every(x => typeof x === 'string' && x) ||
+      new Set(j.crimeWaveHoods).size !== j.crimeWaveHoods.length) {
+    HOLD('C' + cyc + ' crimeWaveHoods missing or malformed: ' + JSON.stringify(j.crimeWaveHoods)); j.crimeWaveHoods = [];
+  }
   return j;
 }
 (async () => {
   const cfs = await tab(BENCH, 'Carry_Forward_Store');
   const now = blobFor(cfs, C), prev = blobFor(cfs, C - 1);
   if (!now || !prev) return finish();
-  if (!Array.isArray(now.crimeWaveHoods) || !now.crimeWaveHoods.every(x => typeof x === 'string' && x)) HOLD('C' + C + ' crimeWaveHoods missing or malformed: ' + JSON.stringify(now.crimeWaveHoods));
-  const spikeHoods = j => (j.crimeSpikes || []).map(s => s && s.neighborhood).filter(Boolean);
-  const prevCarried = new Set(spikeHoods(prev).concat(Array.isArray(prev.crimeWaveHoods) ? prev.crimeWaveHoods : []));
-  for (const w of (now.crimeWaveHoods || [])) {
-    if (!spikeHoods(now).includes(w)) HOLD('wave ' + w + ' is not in C' + C + ' crimeSpikes');
-    if (!prevCarried.has(w)) HOLD('wave ' + w + ' did not rise at C' + (C - 1));
+  const hoodsOf = j => j.crimeSpikes.map(s => s && s.neighborhood).filter(Boolean);
+  for (const w of now.crimeWaveHoods) {
+    if (hoodsOf(now).indexOf(w) < 0) HOLD('wave ' + w + ' is not in C' + C + ' crimeSpikes');
+    if (hoodsOf(prev).indexOf(w) < 0) HOLD('wave ' + w + ' did not rise at C' + (C - 1) + ' (not in its crimeSpikes)');
   }
-  // the levels C's Phase 2 read (from C-1's carry)
-  const levels = {};
-  for (const h of spikeHoods(prev)) levels[h] = (levels[h] || 0) + 1;
-  for (const w of (Array.isArray(prev.crimeWaveHoods) ? prev.crimeWaveHoods : [])) levels[w] = 3;
-  out.levels = levels;
   out.carry = { crimeSpikes: now.crimeSpikes, crimeWaveHoods: now.crimeWaveHoods };
-  // pre-cap rises from Crime_Metrics deltas
+  // Crime_Metrics: the canon hood list and the pre-cap rises
   const cm = await tab(BENCH, 'Crime_Metrics'); const ch = cm[0];
   const iN = col(ch, 'Neighborhood'), iP = col(ch, 'PropertyCrimeIndex'), iV = col(ch, 'ViolentCrimeIndex'), iU = col(ch, 'LastUpdated');
   const snapNow = {}; for (const r of cm.slice(1)) if (r[iN]) snapNow[r[iN]] = { p: Number(r[iP]), v: Number(r[iV]), u: Number(r[iU]) };
+  const canon = new Set(Object.keys(snapNow));
+  // the levels C's Phase 2 derived (from C-1's carry), canon hoods only
+  const levels = {};
+  for (const h of hoodsOf(prev)) if (canon.has(h)) levels[h] = (levels[h] || 0) + 1;
+  for (const w of prev.crimeWaveHoods) if (levels[w] >= 1) levels[w] = 3;
+  out.levels = levels;
   fs.writeFileSync(O + '2026-10-25-e301-crime-' + label + '-c' + C + '.json', JSON.stringify(snapNow));
   let snapPrev;
   const prevFile = O + '2026-10-25-e301-crime-' + label + '-c' + (C - 1) + '.json';
@@ -74,7 +90,7 @@ function blobFor(cfs, cyc) {
     if (snapNow[h].v - a.v >= 5) rises.push(h + ' violent +' + +(snapNow[h].v - a.v).toFixed(2));
   }
   out.risesPreCap = rises;
-  const carriedKeys = new Set((now.crimeSpikes || []).map(s => s.neighborhood + ' ' + (s.metric === 'violentCrime' ? 'violent' : 'property')));
+  const carriedKeys = new Set(now.crimeSpikes.map(s => s.neighborhood + ' ' + (s.metric === 'violentCrime' ? 'violent' : 'property')));
   out.risesDroppedByCap = rises.filter(r => !carriedKeys.has(r.replace(/ \+[\d.]+$/, '')));
   if (Object.values(snapNow).some(x => x.u !== C)) HOLD('Crime_Metrics LastUpdated is not C' + C + ' on every row');
   // crime-carry lines by the citizen's ledger hood
@@ -90,46 +106,62 @@ function blobFor(cfs, cyc) {
     if (!(levels[hood] >= 1)) HOLD('crime-carry line in ' + hood + ' at level 0: ' + r[iLP] + ' ' + String(r[iLT]).slice(0, 80));
   }
   out.lines = { total: n, byHood: lines, tags: [...tags] };
-  // the crime receipt
+  // the crime-ladder receipt
   const rl = await tab(BENCH, 'Ripple_Ledger'); const rh = rl[0];
   const iRC = col(rh, 'Cycle'), iRT = col(rh, 'CauseType'), iRS = col(rh, 'SourceEngine'), iRI = col(rh, 'TargetIds'), iRM = col(rh, 'Magnitude'), iRD = col(rh, 'CauseDetail');
   const rows = rl.slice(1).filter(r => Number(r[iRC]) === C && r[iRT] === 'crime' && /applyCrimeLadder_/.test(String(r[iRS])));
   const atTwo = Object.keys(levels).filter(h => levels[h] >= 2).sort();
   out.receipt = rows.map(r => ({ targets: String(r[iRI]), magnitude: r[iRM], detail: String(r[iRD]) }));
-  if (atTwo.length === 0 && rows.length) HOLD('crime receipt with no hood at level >= 2');
+  if (!atTwo.length && rows.length) HOLD('crime receipt with no hood at level >= 2');
   if (atTwo.length) {
     if (rows.length !== 1) HOLD(rows.length + ' crime receipts for ' + atTwo.join(', '));
     else {
       const t = String(rows[0][iRI]).split(/[|,]\s*/).filter(Boolean).sort();
       if (t.join() !== atTwo.join()) HOLD('receipt targets ' + t.join() + ' vs level>=2 ' + atTwo.join());
-      if (Number(rows[0][iRM]) !== Math.max(...atTwo.map(h => levels[h]))) HOLD('receipt magnitude ' + rows[0][iRM]);
-      for (const w of (prev.crimeWaveHoods || [])) if (!new RegExp(w + '[^;]*rising two Cycles running').test(String(rows[0][iRD]))) HOLD('receipt does not name ' + w + ' as rising two Cycles running');
+      if (Number(rows[0][iRM]) !== Math.max(...atTwo.map(h => levels[h]))) HOLD('receipt magnitude ' + rows[0][iRM] + ' is not the max level');
+      for (const h of atTwo.filter(x => levels[x] === 3)) {
+        const re = new RegExp(h.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '[^;]*rising two Cycles running \\(level 3\\)');
+        if (!re.test(String(rows[0][iRD]))) HOLD('receipt does not name ' + h + ' as rising two Cycles running (level 3)');
+      }
     }
   }
   const ee = await tab(BENCH, 'Engine_Errors'); const eh = ee[0];
   out.engineErrors = ee.slice(1).filter(r => Number(r[col(eh, 'Cycle')]) === C).map(r => String(r[col(eh, 'Phase')]) + ': ' + String(r[col(eh, 'Error')]).slice(0, 120));
+  for (const e of out.engineErrors) HOLD('Engine_Errors C' + C + ': ' + e);
   out.level3 = Object.keys(levels).filter(h => levels[h] === 3);
+  for (const h of EXPECT.wave) if (levels[h] !== 3 || !out.receipt.some(r => r.detail.indexOf(h) >= 0 && /level 3/.test(r.detail))) HOLD('expected wave ' + h + ' at level 3 in the receipt');
+  for (const h of EXPECT.lines) if (!(lines[h] > 0)) HOLD('expected crime-carry lines in ' + h + ', got 0');
+  for (const h of EXPECT.carryWave) if (now.crimeWaveHoods.indexOf(h) < 0) HOLD('expected C' + C + ' to carry ' + h + ' as a wave');
+  for (const h of EXPECT.calm) if (levels[h] >= 1) HOLD('expected ' + h + ' at level 0, read ' + levels[h]);
   finish();
 })().catch(e => { console.error(e.stack || e.message); process.exit(1); });
 function finish() {
+  if (from) {
+    const missing = [], held = [];
+    const win = [];
+    for (let c = from; c <= C; c++) {
+      if (c === C) { win.push(out); if (out.hold.length) held.push(c); continue; }
+      const f = O + '2026-10-25-e301-receipt-' + label + '-c' + c + '.json';
+      if (!fs.existsSync(f)) { missing.push(c); continue; }
+      const w = JSON.parse(fs.readFileSync(f, 'utf8')); win.push(w); if (w.hold.length) held.push(c);
+    }
+    if (missing.length) HOLD('window: no receipt for C' + missing.join(', C'));
+    if (held.filter(c => c !== C).length) HOLD('window: held receipts at C' + held.filter(c => c !== C).join(', C'));
+    out.window = { from, cycles: win.length, missing, held,
+      rises: win.reduce((a, w) => a + (w.risesPreCap || []).length, 0), droppedByCap: win.reduce((a, w) => a + (w.risesDroppedByCap || []).length, 0),
+      rung2HoodCycles: win.reduce((a, w) => a + Object.values(w.levels || {}).filter(v => v === 2).length, 0),
+      waveHoodCycles: win.reduce((a, w) => a + (w.level3 || []).length, 0), maxSimultaneousWaves: Math.max(0, ...win.map(w => (w.level3 || []).length)),
+      wavesCarried: win.reduce((a, w) => a + ((w.carry && w.carry.crimeWaveHoods) || []).length, 0),
+      crimeLines: win.reduce((a, w) => a + ((w.lines && w.lines.total) || 0), 0), cyclesWithLines: win.filter(w => w.lines && w.lines.total).length,
+      engineErrors: win.reduce((a, w) => a + (w.engineErrors || []).length, 0) };
+  }
   fs.writeFileSync(O + '2026-10-25-e301-receipt-' + label + '-c' + C + '.json', JSON.stringify(out, null, 1));
   const L = out.levels || {};
   console.log('C' + C + ' ' + (out.hold.length ? 'HOLD' : 'PASS') + ' | levels ' + JSON.stringify(L) + ' | carried spikes ' +
     ((out.carry && out.carry.crimeSpikes) || []).length + ' waves ' + JSON.stringify((out.carry && out.carry.crimeWaveHoods) || null) +
     ' | rises pre-cap ' + (out.risesPreCap || []).length + ' dropped ' + (out.risesDroppedByCap || []).length +
-    ' | lines ' + JSON.stringify(out.lines || {}) + ' | receipt ' + (out.receipt || []).length + ' | EE ' + (out.engineErrors || []).length);
+    ' | lines ' + JSON.stringify(out.lines || {}) + ' | receipt ' + JSON.stringify((out.receipt || []).map(r => r.detail)) + ' | EE ' + (out.engineErrors || []).length);
   for (const h of out.hold) console.log('  HOLD ' + h);
-  if (from) {
-    const win = [];
-    for (let c = from; c <= C; c++) { const f = O + '2026-10-25-e301-receipt-' + label + '-c' + c + '.json'; if (fs.existsSync(f)) win.push(JSON.parse(fs.readFileSync(f, 'utf8'))); }
-    const sum = { cycles: win.length, holds: win.filter(w => w.hold.length).length,
-      rises: win.reduce((a, w) => a + (w.risesPreCap || []).length, 0), droppedByCap: win.reduce((a, w) => a + (w.risesDroppedByCap || []).length, 0),
-      rung2HoodCycles: win.reduce((a, w) => a + Object.values(w.levels || {}).filter(v => v === 2).length, 0),
-      waveHoodCycles: win.reduce((a, w) => a + (w.level3 || []).length, 0), maxSimultaneousWaves: Math.max(0, ...win.map(w => (w.level3 || []).length)),
-      crimeLines: win.reduce((a, w) => a + ((w.lines && w.lines.total) || 0), 0), cyclesWithLines: win.filter(w => w.lines && w.lines.total).length,
-      engineErrors: win.reduce((a, w) => a + (w.engineErrors || []).length, 0) };
-    console.log('WINDOW C' + from + '-C' + C + ' ' + JSON.stringify(sum));
-    fs.writeFileSync(O + '2026-10-25-e301-window-' + label + '-c' + from + '-c' + C + '.json', JSON.stringify(sum, null, 1));
-  }
+  if (out.window) console.log('WINDOW C' + from + '-C' + C + ' ' + JSON.stringify(out.window));
   process.exit(out.hold.length ? 1 : 0);
 }

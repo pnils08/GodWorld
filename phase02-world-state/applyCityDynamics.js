@@ -239,9 +239,13 @@ function applyCityDynamics_(ctx) {
   // Cycles is a wave, builder 2026-10-25). A "rise" is a carried spike: a +5
   // index point property or violent increase among the Cycle's 12 strongest
   // (compactCrimeSpikes_). Derived from the carry only, never a pre-set map
-  // (codex plan review: a stale map could fabricate a wave), and published on S:
+  // (codex plan review: a stale map could fabricate a wave). A carried wave name
+  // counts only for a hood that also carried a spike (a blob is not trusted
+  // past its own shape). Published on S with the hood outputs at the end, canon
+  // hoods only, so a Phase 2 that throws leaves it unset (codex diff gate 1):
   // Phase 5's crime carry reads it (it read undefined, so 0, on every live Cycle
   // before) and Phase 9 carries the next wave list from it.
+  delete S.crimeByNeighborhood;
   var crimeByNeighborhood = {};
   var crimeWaveHoods = [];
   for (var pci = 0; pci < prevCrimeSpikes.length; pci++) {
@@ -251,12 +255,11 @@ function applyCityDynamics_(ctx) {
   var prevWaves = (S.previousCycleState && Array.isArray(S.previousCycleState.crimeWaveHoods))
     ? S.previousCycleState.crimeWaveHoods : [];
   for (var pwi = 0; pwi < prevWaves.length; pwi++) {
-    if (typeof prevWaves[pwi] === 'string' && prevWaves[pwi] && crimeWaveHoods.indexOf(prevWaves[pwi]) === -1) {
+    if (typeof prevWaves[pwi] === 'string' && crimeByNeighborhood[prevWaves[pwi]] >= 1 && crimeWaveHoods.indexOf(prevWaves[pwi]) === -1) {
       crimeByNeighborhood[prevWaves[pwi]] = 3;
       crimeWaveHoods.push(prevWaves[pwi]);
     }
   }
-  S.crimeByNeighborhood = crimeByNeighborhood;
 
   // ─────────────────────────────────────────────────────────────────────────
   // HELPERS (ES5)
@@ -1583,9 +1586,9 @@ function applyCityDynamics_(ctx) {
           return sp && crimeHoodsAtTwo.indexOf(sp.neighborhood) !== -1;
         }).map(function(sp) {
           var metric = String(sp.metric || 'crime').replace(/([A-Z])/g, ' $1').toLowerCase();
-          return sp.neighborhood + ' ' + metric.trim() + ' +' + sp.magnitude +
-            (sp.newValue !== undefined ? ' (now ' + sp.newValue + ')' : '') +
-            (crimeWaveHoods.indexOf(sp.neighborhood) !== -1 ? ', rising two Cycles running' : '');
+          return sp.neighborhood + ' ' + metric.trim() + ' +' + sp.magnitude + ' last Cycle' +
+            (sp.newValue !== undefined ? ' (to ' + sp.newValue + ')' : '') +
+            (crimeWaveHoods.indexOf(sp.neighborhood) !== -1 ? ', rising two Cycles running (level 3)' : '');
         }).join('; ') || 'prev-cycle crime spike carry',
         effectType: 'nightlife/tourism/publicSpaces/sentiment',
         targetScope: 'neighborhood',
@@ -1862,6 +1865,12 @@ function applyCityDynamics_(ctx) {
 
   // Additive outputs
   S.neighborhoodDynamics = neighborhoodDynamics;
+  // engine.301 F1: the ladder level, canon hoods only, published only on success.
+  var crimePublished = {};
+  for (var cpi = 0; cpi < hoods.length; cpi++) {
+    if (crimeByNeighborhood[hoods[cpi]] >= 1) crimePublished[hoods[cpi]] = crimeByNeighborhood[hoods[cpi]];
+  }
+  S.crimeByNeighborhood = crimePublished;
   S.cityDynamicsLag = lag;
   S.cityDynamicsCapacity = {
     transitCapacity: capacity.transitCapacity,

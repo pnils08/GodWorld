@@ -12,7 +12,10 @@ const MARK = 'AIMCHECK-1004';
   if (meta.data.properties.title !== 'Sandox_104_c109-live_Simulation_Narrative' || BENCH === LIVE) throw new Error('target check failed');
   const a1 = async id => ((await api.spreadsheets.values.get({ spreadsheetId: id, range: '_CycleCheckpoint!A1' })).data.values || [[]])[0][0] || '';
   const cp = async () => { const r = await fetch(URL + '?' + new URLSearchParams({ token: tok, action: 'checkpoint' }), { redirect: 'follow' }); const t = await r.text(); try { return JSON.parse(t).checkpoint; } catch (e) { return 'nonJSON ' + r.status; } };
-  console.log('before: bench A1', JSON.stringify(await a1(BENCH)), '| live A1', JSON.stringify(await a1(LIVE)), '| script reads', JSON.stringify(await cp()));
+  const benchBefore = await a1(BENCH);
+  // codex engine.301 diff gate 1: never overwrite a real checkpoint manifest with the marker (an interrupted fire's resume state).
+  if (benchBefore && benchBefore !== MARK) throw new Error('bench _CycleCheckpoint!A1 already holds a checkpoint — refusing to mark over it: ' + String(benchBefore).slice(0, 60));
+  console.log('before: bench A1', JSON.stringify(benchBefore), '| live A1', JSON.stringify(await a1(LIVE)), '| script reads', JSON.stringify(await cp()));
   await api.spreadsheets.values.update({ spreadsheetId: BENCH, range: '_CycleCheckpoint!A1', valueInputOption: 'RAW', requestBody: { values: [[MARK]] } });
   const seen = await cp();
   console.log('marked bench: script reads', JSON.stringify(seen), '| live A1', JSON.stringify(await a1(LIVE)));

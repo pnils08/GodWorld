@@ -2033,6 +2033,7 @@
         "phase02-world-state/applyCityDynamics.js::applyCityDynamics_"
       ],
       "readers": [
+        "phase02-world-state/applyCityDynamics.js::applyCityDynamics_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_"
       ]

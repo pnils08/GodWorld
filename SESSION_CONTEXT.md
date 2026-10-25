@@ -1,6 +1,6 @@
 # SESSION_CONTEXT — NEXT WORK ONLY. One PIN + one NEXT line per lane. What already happened lives in git, claude-mem, ROLLOUT_PLAN and the gap/production logs — never here. If a line describes a session instead of an assignment, it is written wrong.
 
-**PIN:** S599 | Day 215 | Canon C112 | PROD @162 = stage 25 (`3109503e`) | next live fire C113 Sun 2026-10-25 | stage history, expectations, rollbacks: DEPLOY_HISTORY §PROD | claude-mem observer on quota cooldown — don't restart.
+**PIN:** S600 | Day 215 | Canon C112 | PROD @162 = stage 25 (`3109503e`) | next live fire C113 Sun 2026-10-25 | stage history, expectations, rollbacks: DEPLOY_HISTORY §PROD | claude-mem observer on quota cooldown — don't restart.
 
 **NEXT[engine-sheet]:** engine.313/314/315 LIVE (PROD @162 stage 25), each bench + codex SHIP; C113 Sun 2026-10-25 smoke note only (live watch without --e313). Pushed (origin 8e35176f, research-build landed it). Next: ROLLOUT engine.301 F1, 312, 204/205/281.
 

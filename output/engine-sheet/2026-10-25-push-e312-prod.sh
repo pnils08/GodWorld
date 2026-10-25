@@ -5,6 +5,7 @@
 # benched stage-27 manifest, so nothing unbenched rides. Live fire-state gate (shape of 2026-10-25-push-e301-prod.sh) at <cycle> =
 # the live Cycle now: cycleCount / every Neighborhood_Map Cycle / Riley_Digest last Cycle = <cycle>, no _CycleCheckpoint, no
 # Engine_Errors row stamped <cycle>+1 or later — right before the push, right after the pull-back and 8 minutes later.
+# The reads are bound to the sheet the pulled PROD code aims at (DEFAULT_SIM_SSID; codex engine.312 gate 3).
 # Stated limit (codex engine.301 gate 3): FIRE_ADMISSION_JSON has no outside read door, so the gate is the sheet-side proxy; a
 # push needs the builder's go as a named exception until engine.317 lands.
 #   bash output/engine-sheet/2026-10-25-push-e312-prod.sh <commit> <manifest> <cycle> [--dry-run]
@@ -22,6 +23,11 @@ git ls-files --error-unmatch "$MAN" >/dev/null 2>&1 && git diff --quiet HEAD -- 
 W=$(mktemp -d); mkdir -p "$W/stage" "$W/pullback"
 ( cd "$W/stage" && printf '{"scriptId":"%s","rootDir":""}' "$PROD_ID" > .clasp.json && "$CLASP" pull >/dev/null )
 TREE=$( cd "$W/stage" && find . -type f ! -name .clasp.json | sort | xargs sha256sum )
+# codex gate 3: the fire-state reads are bound to the sheet PROD's own code aims at — DEFAULT_SIM_SSID in the utilities file just
+# pulled from PROD (AIM-GUARD keeps the container-bound PROD script on that sheet unless a SIM_SSID property overrides it, which no
+# outside read can see — stated). An env file pointing anywhere else stops the push.
+LIVE_ID=$(grep -o "DEFAULT_SIM_SSID = '[^']*'" "$W/stage/utilities/utilityFunctions.js" | cut -d"'" -f2)
+[ ${#LIVE_ID} -gt 20 ] || { echo "no DEFAULT_SIM_SSID in the PROD pull — stop"; exit 1; }
 if diff -q <(echo "$TREE") "$OUT/stage26-e301.sha256" >/dev/null; then BASE="stage 26 (engine.301 on PROD)"
 elif diff -q <(echo "$TREE") "$OUT/stage24-e315-G3.sha256" >/dev/null; then BASE="stage 25 (engine.301 rides this push)"
   for f in $F301; do git show "1e6beff5:$f" > "$W/stage/$f"; done
@@ -32,10 +38,12 @@ for f in $FILES; do git show "$SRC:$f" > "$W/stage/$f"; done
   || { echo "built stage does not match the benched manifest $MAN — stop"; exit 1; }
 echo "stage = the benched tree ($MAN), byte for byte"
 fire_state() {   # fire_state <when> — exit 0 only when live reads Cycle $CYC everywhere, no checkpoint, no error stamped past it
-  WHEN="$1" CYC="$CYC" node -e '
+  WHEN="$1" CYC="$CYC" LIVE_ID="$LIVE_ID" node -e '
 require("/root/GodWorld/lib/env");
-const L = process.env.GODWORLD_SHEET_ID, C = Number(process.env.CYC);
-if (!L || L === "1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA" || L === "1Mbz-sE13iu1RU4qo-rzsczjjPRKAU-KSfnQnrJNXCgA") process.exit(2);
+const L = process.env.GODWORLD_SHEET_ID, C = Number(process.env.CYC), P = process.env.LIVE_ID;
+if (!L || L !== P) { console.error("env sheet " + (L ? L.slice(0, 6) + "…" : "(none)") + " is not the sheet the PROD code aims at — stop"); process.exit(2); }
+if (P === "1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA" || P === "1Mbz-sE13iu1RU4qo-rzsczjjPRKAU-KSfnQnrJNXCgA") process.exit(2);
+process.env.GODWORLD_SHEET_ID = P;
 const sh = require("/root/GodWorld/lib/sheets"), num = v => Number(String(v).replace(/^C/, ""));
 (async () => {
   const wc = await sh.getSheetData("World_Config"), cc = num((wc.find(r => String(r[0]).trim() === "cycleCount") || [])[1]);

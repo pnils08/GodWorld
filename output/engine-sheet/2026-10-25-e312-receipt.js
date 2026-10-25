@@ -4,6 +4,10 @@
 //   check <C> <label> — after the fire: recompute every Cultural_Ledger row's expected FameScore and MediaCount from the snapshot,
 //                       the post state and the Cycle's Riley_Digest sightings; save …-e312-receipt-<label>-c<C>.json and the post
 //                       state as the snapshot for C+1. Exit 1 on any HOLD.
+//   replay <C> <label> — the same check with the post state from the saved snapshot for C+1 (a finished run re-read offline;
+//                       Riley_Digest / Engine_Errors still read from the bench); writes …-receipt-<label>replay-c<C>.json only.
+// Typed reads (codex gate 3): a touched row's FameScore, a sighted row's MediaCount and every new row's numbers must be present,
+// finite numbers; an untouched row's FameScore, an unsighted row's MediaCount and LastSeenCycle must read back unchanged.
 // Independence (codex gate 2): the paper rule, the name parsing and the engine.313 target rule are this script's own copies
 // (below); the candidate's paperFameDelta_ / culturalTargetIdxByPop_ are run on the same inputs and any disagreement is a HOLD.
 // Sightings come from Riley_Digest.FamousPeople (written by writeDigest_, not the registrar), resolved the registrar's way —
@@ -20,10 +24,10 @@ const fs = require('fs'), vm = require('vm');
 const LIVE = process.env.GODWORLD_SHEET_ID;
 const BENCH = '1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA';
 if (LIVE === BENCH) throw new Error('env already points at the bench');
-const O = '/root/GodWorld/output/engine-sheet/';
+const O = process.env.E312_OUT || '/root/GodWorld/output/engine-sheet/';   // E312_OUT: a scratch dir for tamper / replay checks
 const [mode, Cs, label] = process.argv.slice(2);
 const C = Number(Cs);
-if (!['snap', 'check'].includes(mode) || !(C >= 113) || !label) throw new Error('usage: snap|check <cycle> <label>');
+if (!['snap', 'check', 'replay'].includes(mode) || !(C >= 113) || !label) throw new Error('usage: snap|check|replay <cycle> <label>');
 // ── this script's own rule copies ──
 const TYPES = ['mentioned', 'quoted', 'featured', 'referenced', 'new_citizen', 'existing_new_role'];
 const LIGHT = { positive: 5, neutral: 1, negative: -2 };
@@ -65,10 +69,12 @@ async function state() {
 }
 const col = (h, n) => { const i = h.indexOf(n); if (i < 0) throw new Error('no column ' + n); return i; };
 const clamp = (n) => Math.max(0, Math.min(100, n));
+const typed = (v) => { if (v === '' || v === null || v === undefined) return null; const n = Number(v); return Number.isFinite(n) ? n : null; };
+const same = (a, b) => String(a === undefined || a === null ? '' : a) === String(b === undefined || b === null ? '' : b);
 (async () => {
   if (mode === 'snap') { fs.writeFileSync(snapFile(C), JSON.stringify(await state())); console.log('snap C' + C + ' ' + label + ' saved'); return; }
   const pre = JSON.parse(fs.readFileSync(snapFile(C), 'utf8'));
-  const post = await state();
+  const post = mode === 'replay' ? JSON.parse(fs.readFileSync(snapFile(C + 1), 'utf8')) : await state();
   const out = { cycle: C, label, hold: [], counts: {} };
   const HOLD = (m) => out.hold.push(m);
   // identity of the two Cultural_Ledger reads
@@ -139,13 +145,21 @@ const clamp = (n) => Math.max(0, Math.min(100, n));
     const last = Number(String(r[cL] || '').replace(/[^0-9]/g, '')) || 0;
     const fade = (base > 0 && last && (C - last) > 10) ? -1 : 0;
     const sight = sightRow[i] || 0;
-    const mcDelta = (Number(p[cM]) || 0) - (Number(r[cM]) || 0);
-    if (mcDelta !== sight) HOLD(r[cId] + ' "' + r[cName] + '": MediaCount moved ' + mcDelta + ', the digest sighted it ' + sight + ' time(s)');
-    if (sight && Number(String(p[cL] || '').replace(/[^0-9]/g, '')) !== C) HOLD(r[cId] + ' sighted but LastSeenCycle reads ' + p[cL]);
+    if (sight) {
+      const mcPost = typed(p[cM]), mcPre = r[cM] === '' ? 0 : typed(r[cM]);
+      if (mcPost === null || mcPre === null) HOLD(r[cId] + ' "' + r[cName] + '": sighted but MediaCount is not a number (' + JSON.stringify([r[cM], p[cM]]) + ')');
+      else if (mcPost - mcPre !== sight) HOLD(r[cId] + ' "' + r[cName] + '": MediaCount moved ' + (mcPost - mcPre) + ', the digest sighted it ' + sight + ' time(s)');
+      if (Number(String(p[cL] || '').replace(/[^0-9]/g, '')) !== C) HOLD(r[cId] + ' sighted but LastSeenCycle reads ' + p[cL]);
+    } else {
+      if (!same(p[cM], r[cM])) HOLD(r[cId] + ' "' + r[cName] + '": not sighted, but MediaCount ' + r[cM] + ' → ' + p[cM]);
+      if (!same(p[cL], r[cL])) HOLD(r[cId] + ' "' + r[cName] + '": not sighted, but LastSeenCycle ' + r[cL] + ' → ' + p[cL] + ' (a false sighting would stop the fade)');
+    }
     const pp = paper[i] || 0, fl = floorIdx.has(i), isTouched = (i in paper) || fade || sight > 0 || fl;
     let exp = base;
     if (isTouched) { let s = base + pp + fade + sight; if (fl) s = Math.max(25, s); exp = clamp(s); touched++; if (base > 100) capped++; }
-    const act = Number(p[cF]) || 0;
+    const act = isTouched ? typed(p[cF]) : (same(p[cF], r[cF]) ? base : typed(p[cF]));
+    if (isTouched && act === null) { HOLD(r[cId] + ' "' + r[cName] + '": touched but FameScore reads ' + JSON.stringify(p[cF]) + ' (not a number)'); continue; }
+    if (!isTouched && !same(p[cF], r[cF])) HOLD(r[cId] + ' "' + r[cName] + '": untouched but FameScore ' + JSON.stringify(r[cF]) + ' → ' + JSON.stringify(p[cF]));
     if (act !== base) written++;
     if (act !== exp) HOLD(r[cId] + ' "' + r[cName] + '": expected ' + exp + ' (base ' + base + ', paper ' + pp + ', fade ' + fade + ', sightings ' + sight + (fl ? ', floor' : '') + '), sheet ' + act);
     if (base < 25 && act >= 25) up.push(r[cName] + ' ' + base + '→' + act);
@@ -159,18 +173,22 @@ const clamp = (n) => Math.max(0, Math.min(100, n));
     const inst = String(p[cCat] || '').toLowerCase() === 'dynasty' || String(p[cRole] || '').toLowerCase() === 'institution';
     if (inst) {
       out.created.push({ id: p[cId], name: p[cName], institution: true, source: p[cSrc] });
-      if (String(p[cSrc] || '') !== 'engine.65') HOLD('new institution row ' + p[cId] + ' "' + p[cName] + '" is not the dynasty append (FirstRefSource ' + p[cSrc] + ')');
+      // the engine.65 dynasty append's whole shape (generationalWealthEngine.js updateHeritage_), not one label
+      const shapeOk = p[cRole] === 'Institution' && p[cCat] === 'dynasty' && /^CUL-[0-9a-f]{8}$/i.test(String(p[cId])) && p[cSrc] === 'engine.65' &&
+        typed(p[cM]) === 0 && typed(p[cF]) !== null && /^The .+ Family$/.test(String(p[cName])) && (p[cU] === '' || /^POP-\d+$/.test(String(p[cU])));
+      if (!shapeOk) HOLD('new institution row ' + p[cId] + ' "' + p[cName] + '" does not have the dynasty append\'s shape ' + JSON.stringify([p[cRole], p[cCat], p[cSrc], p[cM], p[cF], p[cU]]));
       continue;
     }
     const pop = String(p[cU] || '').trim().toUpperCase();
     const key = pop ? 'pop:' + pop : 'name:' + p[cName];
     const sight = sightNew[key] || 0; claimed[key] = (claimed[key] || 0) + 1;
-    const mc = Number(p[cM]) || 0;
+    const mc = typed(p[cM]);
+    if (mc === null || typed(p[cF]) === null) HOLD('new ' + p[cId] + ' "' + p[cName] + '": MediaCount / FameScore not numbers ' + JSON.stringify([p[cM], p[cF]]));
     if (mc !== sight) HOLD('new ' + p[cId] + ' "' + p[cName] + '": MediaCount ' + mc + ', the digest sighted it ' + sight + ' time(s)');
     if (sight === 0 && String(p[cL] || '') !== '') HOLD('new ' + p[cId] + ' never sighted but LastSeenCycle ' + p[cL]);
     let s = (pop ? (record[pop] || 0) : 0) + sight;
     if (pop && famous.includes(pop)) s = Math.max(25, s);
-    const exp = clamp(s), act = Number(p[cF]) || 0;
+    const exp = clamp(s), act = typed(p[cF]);
     out.created.push({ id: p[cId], name: p[cName], pop, record: pop ? (record[pop] || 0) : 0, sightings: sight, mediaCount: mc, lastSeen: p[cL], expected: exp, sheet: act });
     if (act !== exp) HOLD('new ' + p[cId] + ' "' + p[cName] + '": expected ' + exp + ' (record ' + (record[pop] || 0) + ', sightings ' + sight + (famous.includes(pop) ? ', floor' : '') + '), sheet ' + act);
   }
@@ -194,8 +212,8 @@ const clamp = (n) => Math.max(0, Math.min(100, n));
   Object.assign(out.counts, { pending: pendingRows.length, paperCredited: credited, paperNoRow: noRow, paperUnresolved: unresolved,
     sightings: sighted.length, touched, written, capped, created: out.created.length, famous: famous.length, crossedUp: up, crossedDown: down });
   out.verdict = out.hold.length ? 'HOLD' : 'PASS';
-  fs.writeFileSync(O + '2026-10-25-e312-receipt-' + label + '-c' + C + '.json', JSON.stringify(out, null, 1));
-  fs.writeFileSync(snapFile(C + 1), JSON.stringify(post));
+  fs.writeFileSync(O + '2026-10-25-e312-receipt-' + label + (mode === 'replay' ? 'replay' : '') + '-c' + C + '.json', JSON.stringify(out, null, 1));
+  if (mode === 'check') fs.writeFileSync(snapFile(C + 1), JSON.stringify(post));
   console.log('C' + C + ' ' + label + ' ' + out.verdict + ' ' + JSON.stringify(out.counts) + (out.hold.length ? '\n  ' + out.hold.slice(0, 15).join('\n  ') : ''));
   process.exit(out.hold.length ? 1 : 0);
 })().catch(e => { console.error(e.stack || e.message); process.exit(1); });

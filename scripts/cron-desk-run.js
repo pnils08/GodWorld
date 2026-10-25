@@ -229,6 +229,33 @@ function stageRoute(desk, persona, stage) {
 }
 const slug = m => m.replace(/[^a-z0-9]+/gi, '-').toLowerCase();
 function readJson(p) { try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return null; } }
+// pipeline.87 (rb 2026-10-25): a stage artifact must be UNSPENT. The stem carries the Cycle, not the
+// day, so when a multi-day seat's angle fails (Ines Sun 10-25: three llama runs, none a plan) the next
+// stage found Saturday's angle.json under the same stem and would have filed a second piece on a plan
+// that had already produced a staged filing. Age is the wrong test (agy HOLD #1: the Saturday 12:00
+// sweep legitimately retries a Friday seat 22h+ later): the test is whether a STAGED filing for this
+// stem is newer than the artifact. A flagged or failed write leaves no staged file, so retries stay
+// open; a plan that already filed is spent and the seat sits out loud. --regate re-gates a draft on
+// disk and never consumes a plan, so it is exempt.
+function requireUnspentArtifact(p, label, runStage, stem, opts) {
+  if (!fs.existsSync(p)) throw new Error('no ' + label + ' artifact at ' + path.relative(ROOT, p) + ' — run --stage=' + runStage + ' first');
+  const stagedDir = (opts && opts.stagedDir) || STAGED;
+  const artifactMs = fs.statSync(p).mtimeMs;
+  let spentBy = null;
+  try {
+    for (const f of fs.readdirSync(stagedDir)) {
+      if (!f.startsWith(stem)) continue;
+      const ms = fs.statSync(path.join(stagedDir, f)).mtimeMs;
+      if (ms > artifactMs && (!spentBy || ms > spentBy.ms)) spentBy = { file: f, ms };
+    }
+  } catch (_) { /* no staged dir yet = nothing filed */ }
+  if (spentBy) {
+    throw new Error('spent ' + label + ' artifact at ' + path.relative(ROOT, p) + ' (written ' + new Date(artifactMs).toISOString() +
+      ') — already filed as staged/' + spentBy.file + ' at ' + new Date(spentBy.ms).toISOString() +
+      '; today\'s --stage=' + runStage + ' did not land, not filing twice on one plan');
+  }
+  return p;
+}
 
 function validateWakeHandoff(angle, packet, expected) {
   const want = expected || {};
@@ -2649,7 +2676,7 @@ async function runReport(assign) {
   console.log('===================================');
   const anglePath = path.join(COMPARE, stem + 'angle.json');
   if (seatSitsOut(personaSlug, cycle, 'report')) return;
-  if (!fs.existsSync(anglePath)) throw new Error('no angle artifact at ' + path.relative(ROOT, anglePath) + ' — run --stage=angle first');
+  requireUnspentArtifact(anglePath, 'angle', 'angle', stem);
   const lane = loadLane(cycle, desk, assign && assign.beatDomain);
   if (!lane) { console.log('[report] no "' + desk + '" lane in desk_signal — skipping (not an error).'); return; }
   const persona = personaInfo(personaSlug);
@@ -2819,8 +2846,14 @@ async function runWrite(assign) {
   const anglePath = path.join(COMPARE, stem + 'angle.json');
   const packetPath = path.join(COMPARE, stem + 'packet.json');
   if (seatSitsOut(personaSlug, cycle, 'write')) return;
-  if (!fs.existsSync(anglePath)) throw new Error('no angle artifact at ' + path.relative(ROOT, anglePath) + ' — run --stage=angle first');
-  if (!fs.existsSync(packetPath)) throw new Error('no packet artifact at ' + path.relative(ROOT, packetPath) + ' — run --stage=report first');
+  if (!REGATE) {
+    requireUnspentArtifact(anglePath, 'angle', 'angle', stem);
+    requireUnspentArtifact(packetPath, 'packet', 'report', stem);
+  } else {
+    for (const [pp, label, st] of [[anglePath, 'angle', 'angle'], [packetPath, 'packet', 'report']]) {
+      if (!fs.existsSync(pp)) throw new Error('no ' + label + ' artifact at ' + path.relative(ROOT, pp) + ' — run --stage=' + st + ' first');
+    }
+  }
   const lane = loadLane(cycle, desk, assign && assign.beatDomain);
   if (!lane) { console.log('[write] no "' + desk + '" lane in desk_signal — skipping (not an error).'); return; }
   if (budgetReached(cycle)) return;   // S339 submission budget — exit before writer spend
@@ -3639,6 +3672,7 @@ if (require.main === module) {
 }
 
 module.exports = {
+  requireUnspentArtifact, // pipeline.87
   stageStem,
   nameSlug,
   writerArtifactTag,

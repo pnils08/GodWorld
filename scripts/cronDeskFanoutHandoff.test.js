@@ -359,4 +359,30 @@ assert.throws(() => validateWakeHandoff(handoffAngle,
   }
 }
 
+// pipeline.87 — an artifact is spent once a STAGED filing for its stem is newer than it (Ines Sun 10-25:
+// the Sunday angle failed and the report would have run on Saturday's already-filed plan). Age is not
+// the test: the Saturday sweep retries a Friday seat 22h+ later and must pass when nothing staged.
+{
+  const os = require('os');
+  const { requireUnspentArtifact } = require('./cron-desk-run');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'unspent-'));
+  try {
+    const staged = path.join(dir, 'staged'); fs.mkdirSync(staged);
+    const stem = 'culture_c999_test-seat_packet-v2_';
+    const angle = path.join(dir, stem + 'angle.json'); fs.writeFileSync(angle, '{}');
+    const old = Date.now() / 1000 - 48 * 3600;
+    fs.utimesSync(angle, old, old); // two days old, like a Friday angle on Saturday
+    assert.strictEqual(requireUnspentArtifact(angle, 'angle', 'angle', stem, { stagedDir: staged }), angle, 'old but unfiled: a retry may run');
+    fs.writeFileSync(path.join(staged, 'other_c999_seat_packet-v2_x.staged.md'), 'x');
+    assert.strictEqual(requireUnspentArtifact(angle, 'angle', 'angle', stem, { stagedDir: staged }), angle, 'another stem\'s filing is not ours');
+    fs.writeFileSync(path.join(staged, stem + 'x-model.staged-1115.md'), 'filed');
+    assert.throws(() => requireUnspentArtifact(angle, 'angle', 'angle', stem, { stagedDir: staged }),
+      /spent angle artifact .*already filed as staged\/culture_c999_test-seat_packet-v2_x-model\.staged-1115\.md.*not filing twice/);
+    const fresh = path.join(dir, stem + 'packet.json'); fs.writeFileSync(fresh, '{}'); // newer than the staged file
+    assert.strictEqual(requireUnspentArtifact(fresh, 'packet', 'report', stem, { stagedDir: staged }), fresh, 'a new artifact after the filing is a new plan');
+    assert.throws(() => requireUnspentArtifact(path.join(dir, 'none.json'), 'packet', 'report', stem, { stagedDir: staged }), /no packet artifact .*--stage=report first/);
+    assert.strictEqual(requireUnspentArtifact(angle, 'angle', 'angle', stem, { stagedDir: path.join(dir, 'missing') }), angle, 'no staged dir yet = nothing filed');
+  } finally { fs.rmSync(dir, { recursive: true, force: true }); }
+}
+
 console.log('cron fan-out filename handoff tests: PASS');

@@ -949,7 +949,7 @@ function livedEventsGroundTruth(cycle, profiles, root = ROOT) {
     }
     if (LIVED_KIND_TAG[e.kind]) seen.add(e.subject + '|' + e.cycle + '|' + LIVED_KIND_TAG[e.kind]);
     if (e.kind === 'hospital') seen.add(e.subject + '|' + e.cycle + '|' + (e.phase === 'discharged' ? 'Recovery' : 'Hospitalized'));
-    rows.push({ cycle: Number(e.cycle), text: (e.subjectName || nameOf(e.subject) || 'a citizen') + ' (' + e.subject + ') — ' + (e.kind === 'hospital' ? (e.phase === 'discharged' ? 'came home from the hospital' : 'admitted to the hospital') : (LIVED_KIND_WORD[e.kind] || e.kind)) + + (e.cause ? ', ' + e.cause : '') + (e.roleType ? ', ' + e.roleType : '') + (e.neighborhood ? ', ' + e.neighborhood : '') });
+    rows.push({ cycle: Number(e.cycle), text: (e.subjectName || nameOf(e.subject) || 'a citizen') + ' (' + e.subject + ') — ' + (e.kind === 'hospital' ? (e.phase === 'discharged' ? 'came home from the hospital' : 'admitted to the hospital') : (LIVED_KIND_WORD[e.kind] || e.kind)) + (e.cause ? ', ' + e.cause : '') + (e.roleType ? ', ' + e.roleType : '') + (e.neighborhood ? ', ' + e.neighborhood : '') });
   }
   // every stay the window touches, with its admission — the Lives slice prints "admitted C106 … 5 cycles in care"
   for (const h of read('Hospital_Ledger.jsonl')) {

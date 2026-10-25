@@ -102,7 +102,8 @@ try {
   assert.ok(patientThread.some(t => /on the log, C111: borrowed against next month/.test(t)) && !patientThread.some(t => /the statement was the first thing read/.test(t)) && /Since then, on the record: the statement was the first thing read/.test(day1.facts.find(f => f.kind === 'hospital').text), 'same-cycle lines ride the thread; the later line stays in "since then" and is not said twice');
   assert.ok(patientThread.some(t => /on the log, C111: sorted a box/.test(t)) && !patientThread.some(t => /made a full recovery/.test(t)), 'texture rides clean-tagged; the event\'s own line never repeats');
   assert.ok(patientThread.some(t => /passed piece naming Test Patient/.test(t)) && !patientThread.some(t => /flagged piece/.test(t)), 'only gate-passed Tribune pieces');
-  assert.ok(day1.facts.findIndex(f => f.kind === 'thread' && f.popid === 'POP-90004') === day1.facts.findIndex(f => f.kind === 'hospital') + 1, 'the thread sits directly under its person\'s event');
+  const hIdx = day1.facts.findIndex(f => f.kind === 'hospital');
+  assert.ok(patientThread.every((t, i) => day1.facts[hIdx + 1 + i].text === t), 'the whole thread sits directly under its person\'s event');
 
   const covered = JSON.parse(fs.readFileSync(L.coveredPath(root), 'utf8'));
   assert.equal(Object.keys(covered).length, day1.facts.filter(f => f.kind !== 'thread').length);
@@ -124,6 +125,47 @@ try {
   // Nothing in the dump → the other empty reason.
   const none = L.buildLivesSlice(cycle, { root, beats: { Lived_Events: [], LifeHistory_Log: [], Hospital_Ledger: [], Household_Ledger: [], Story_Hook_Deck: [] }, profiles });
   assert.ok(none.empty && /no Lived_Events/.test(none.reason));
+
+
+  // Thread rules, second scenario: promotion detail kept, tier-intake bookkeeping out, one line per text,
+  // the deceased is not also a stay, "already wrote" carries the EVENT's cycle, Tribune pieces are real pieces.
+  const root2 = fs.mkdtempSync(path.join(os.tmpdir(), 'lives-slice2-'));
+  try {
+    fs.mkdirSync(path.join(root2, 'archive'), { recursive: true });
+    fs.writeFileSync(path.join(root2, 'archive', 'ARTICLE_INDEX.jsonl'), [
+      { id: 'p', title: 'A profile dossier', source: 'profile', canon: true, citizens: [{ popid: 'POP-90003' }] },
+      { id: 'h', title: '######################', source: 'archive', published: true, canon: true, citizens: [{ popid: 'POP-90003' }] },
+      { id: 'n', title: 'Unprinted but gate-passed piece', source: 'staged', stage: 'passed-gate-not-printed', published: false, canon: true, desk: 'Civic', cycle: 110, citizens: [{ popid: 'POP-90003' }] }
+    ].map(o => JSON.stringify(o)).join('\n') + '\n');
+    const b2 = {
+      Lived_Events: [
+        { id: 'promotion:POP-90003:111', kind: 'promotion', cycle: 111, subject: 'POP-90003', subjectName: 'Test Climber', neighborhood: 'West Oakland', roleType: 'Janitor', recipients: [] },
+        { id: 'death:POP-90099:111', kind: 'death', cycle: 111, subject: 'POP-90099', subjectName: 'Test Departed', deceasedName: 'Test Departed', neighborhood: 'Temescal', recipients: [{ pop: 'POP-90005', rel: 'spouse', name: 'Test Widow' }] }
+      ],
+      LifeHistory_Log: [
+        { POPID: 'POP-90003', EventTag: 'Promotion', EventText: 'Got the nod for the lead role at AC Transit after 14 years', Cycle: '111' },
+        { POPID: 'POP-90003', EventTag: 'Advancement', EventText: 'Intake at Tier 3. Media usage C110 (mentioned): a Bay Tribune civic desk piece, C109', Cycle: '111' },
+        { POPID: 'POP-90003', EventTag: 'Daily', EventText: 'saw their name in the sports pages again', Cycle: '111' },
+        { POPID: 'POP-90003', EventTag: 'Neighborhood', EventText: 'saw their name in the sports pages again', Cycle: '111' },
+        { POPID: 'POP-90003', EventTag: 'Daily', EventText: 'walked the lake the next morning', Cycle: '112' }
+      ],
+      Hospital_Ledger: [{ AdmissionId: 'H-C110-POP-90099', POPID: 'POP-90099', Name: 'Test Departed', Cause: 'stroke', AdmitCycle: '110', StatusNow: 'active', DischargeCycle: '' }],
+      Household_Ledger: [], Story_Hook_Deck: []
+    };
+    fs.mkdirSync(path.join(root2, 'output', 'cron-compare'), { recursive: true });
+    fs.writeFileSync(L.coveredPath(root2), JSON.stringify({ 'birth:POP-90003:109': { popid: 'POP-90003', kind: 'birth', cycle: 110, eventCycle: 109, day: 'x' } }));
+    const s2 = L.buildLivesSlice(112, { root: root2, beats: b2, profiles });
+    const climber = s2.facts.filter(f => f.popid === 'POP-90003' && f.kind === 'thread').map(f => f.text);
+    assert.ok(climber.some(t => /Got the nod for the lead role at AC Transit after 14 years/.test(t)), 'the promotion line carries the employer and years');
+    assert.ok(!climber.some(t => /Intake at Tier|Media usage/.test(t)), 'tier-intake rows are bookkeeping');
+    assert.equal(climber.filter(t => /sports pages/.test(t)).length, 1, 'one line per distinct text');
+    assert.ok(climber.some(t => /already wrote this person: birth \(C109\)/.test(t)), 'the event\'s cycle, not the slice-run cycle: ' + climber.join(' | '));
+    assert.ok(climber.some(t => /headlined Unprinted but gate-passed piece/.test(t)) && !climber.some(t => /profile dossier|####/.test(t)), 'a gate-passed piece counts; a dossier and a hash-line "title" do not');
+    assert.ok(!s2.facts.some(f => f.kind === 'stay'), 'the person who died is not also a stay');
+    assert.equal(s2.prewrite.factCap, 60, 'the slice asks the prompt for room for its threads');
+  } finally {
+    fs.rmSync(root2, { recursive: true, force: true });
+  }
 
   // Seat wiring: the slug and name both resolve; a non-seat passes through.
   assert.ok(L.isLivesSeat({ persona: 'tamsin-pruitt' }) && L.isLivesSeat({ name: 'Tamsin Pruitt' }) && !L.isLivesSeat({ persona: 'celeste-tran' }));

@@ -39,7 +39,7 @@ const SEAT = {
 const PER_DAY = { events: 4, moments: 3, stays: 2 };
 const KIND_ORDER = { death: 0, hospital: 1, birth: 2, retirement: 3, promotion: 4 };
 const SMALL_TAGS = /^(Wedding|Marriage|Graduation|Relationship|Household|Stabilized)$/i;
-const BOOKKEEPING = /Emerged into Tier|Added to Simulation_Ledger|Updated to Tier|Promoted to Tier/i;
+const BOOKKEEPING = /Emerged into Tier|Added to Simulation_Ledger|Updated to Tier|Promoted to Tier|Intake at Tier|Media usage C\d/i;
 const SELF_SLOTS = /^(morning|midday|afternoon|evening|night|work)$/;
 
 function coveredPath(root) { return path.join(root, 'output', 'cron-compare', 'lives_covered.json'); }
@@ -105,11 +105,14 @@ function ownPageLines(root, cycle, popids) {
   return out;
 }
 
-const OWN_EVENT_TAG = /^(Recovery|Hospitalized|Critical|Birth|Retirement|Promotion|Death)$/i;
+// the event row already says these; a Promotion line stays — it carries the employer and the years the event row lacks
+const OWN_EVENT_TAG = /^(Recovery|Hospitalized|Critical|Birth|Retirement|Death)$/i;
 // what happened to the person vs. the day's colour: the signal tags rank first on a thread
 const SIGNAL_TAG = /^(Strain|Friction|Relationship|Work|Career|Advancement|Education|Reputation|Household|Wedding|Marriage|Graduation|Stabilized|Faith|Promotion|LifeEvent-Promotion|Maneuver)/i;
 const THREAD_MAX = { log: 4, tribune: 3 };
 const cleanTag = t => String(t || '').split('|')[0].trim();
+
+const usableTitle = t => { const x = String(t || '').trim(); return x.length >= 4 && x.length <= 120 && !/^[#*_=\-\s]/.test(x); };
 
 // Gate-passed Tribune pieces that name a citizen (the article index carries the cited citizens per piece).
 function tribuneByPop(root) {
@@ -120,6 +123,8 @@ function tribuneByPop(root) {
     if (!line.trim()) continue;
     let a; try { a = JSON.parse(line); } catch (_) { continue; }
     if (!(a.canon === true || a.published === true) || a.stage === 'canon-violation') continue;
+    if (/^(profile|lore)$/.test(String(a.source || '')) || !usableTitle(a.title)) continue; // internal dossiers and lore are not Tribune pieces; a headline-less file indexes its first sentence
+
     for (const c of a.citizens || []) {
       const k = String(c && c.popid || '').toUpperCase();
       if (!k) continue;
@@ -133,7 +138,7 @@ function tribuneByPop(root) {
 // The person's thread, in the order the record gives it: the stay, the other log lines, what Lives and the
 // Tribune already wrote. Each line is a fact with its own source; nothing is inferred. `skipTexts` are the
 // lines the passage's own event already carries.
-function threadFor(pop, { name, skipTexts, includeStay, beats, logByPop, covered, ownId, tribune }) {
+function threadFor(pop, { name, skipTexts, includeStay, dropOwn, beats, logByPop, covered, ownId, tribune }) {
   const who = (name || 'This person') + ' — ';
   const skip = new Set((skipTexts || []).map(t => String(t || '').trim()).filter(Boolean));
   const P = String(pop || '').toUpperCase();
@@ -149,16 +154,24 @@ function threadFor(pop, { name, skipTexts, includeStay, beats, logByPop, covered
   }
   const lines = (logByPop.get(P) || []).filter(r => {
     const t = String(r.EventText || '').trim();
-    return t && !skip.has(t) && !BOOKKEEPING.test(t) && !OWN_EVENT_TAG.test(cleanTag(r.EventTag));
+    return t && !skip.has(t) && !BOOKKEEPING.test(t) && !(dropOwn && OWN_EVENT_TAG.test(cleanTag(r.EventTag)));
   });
   const signal = r => SIGNAL_TAG.test(cleanTag(r.EventTag));
-  const kept = lines.filter(signal).concat(lines.filter(r => !signal(r))).slice(0, THREAD_MAX.log)
+  // newest first inside each rank, one line per distinct text, then back into cycle order for reading
+  const fresh = [];
+  const seenText = new Set();
+  for (const r of lines.slice().sort((a, b) => Number(b.Cycle) - Number(a.Cycle))) {
+    const t = String(r.EventText).trim();
+    if (seenText.has(t)) continue;
+    seenText.add(t); fresh.push(r);
+  }
+  const kept = fresh.filter(signal).concat(fresh.filter(r => !signal(r))).slice(0, THREAD_MAX.log)
     .sort((a, b) => Number(a.Cycle) - Number(b.Cycle));
   for (const r of kept) out.push({ text: who + 'on the log, C' + r.Cycle + ': ' + String(r.EventText).trim(), src: 'output/beats/LifeHistory_Log.jsonl @C' + r.Cycle });
   const before = Object.entries(covered).filter(([id, v]) => id !== ownId && v && String(v.popid || '').toUpperCase() === P);
-  if (before.length) out.push({ text: who + 'Lives already wrote this person: ' + before.map(([, v]) => v.kind + ' (C' + v.cycle + ')').join(', '), src: 'output/cron-compare/lives_covered.json' });
+  if (before.length) out.push({ text: who + 'Lives already wrote this person: ' + before.map(([, v]) => v.kind + ' (C' + (v.eventCycle != null ? v.eventCycle : v.cycle) + ')').join(', '), src: 'output/cron-compare/lives_covered.json' });
   const seen = (tribune.get(P) || []).slice().sort((a, b) => Number(b.cycle || 0) - Number(a.cycle || 0)).slice(0, THREAD_MAX.tribune);
-  for (const a of seen.filter(a => String(a.title || '').trim())) out.push({ text: who + 'the Tribune named them in “' + String(a.title || '').slice(0, 90) + '” (' + (a.desk || 'desk unknown') + (a.cycle != null ? ', C' + a.cycle : '') + ')', src: 'archive/ARTICLE_INDEX.jsonl ' + (a.id || '') });
+  for (const a of seen) out.push({ text: who + 'the Tribune named them in a piece headlined ' + String(a.title).trim() + ' (' + (a.desk || 'desk unknown') + (a.cycle != null ? ', C' + a.cycle : '') + ')', src: 'archive/ARTICLE_INDEX.jsonl ' + (a.id || '') });
   return out;
 }
 
@@ -183,6 +196,7 @@ function build(cycle, { root, beats, profiles }) {
   // The small moments: this Cycle's log rows under the small tags, one per person, not bookkeeping.
   // One passage per person per Cycle: today's people, plus anyone already written this Cycle.
   const seenPop = new Set(todays.map(e => String(personFor(e) || '').toUpperCase()));
+  for (const e of todays) if (e.kind === 'death' && e.subject) seenPop.add(String(e.subject).toUpperCase()); // the one who died is not also a stay
   for (const v of Object.values(covered)) if (v && v.popid && Number(v.cycle) === Number(cycle)) seenPop.add(String(v.popid).toUpperCase());
   const moments = [];
   for (const r of log) {
@@ -237,19 +251,19 @@ function build(cycle, { root, beats, profiles }) {
     const next = pop ? cameNext(logByPop, pop, e.cycle, null) : null;
     if (next) text += '. Since then, on the record: ' + String(next.EventText).trim() + ' (C' + next.Cycle + ')';
     else text += '. What came next: the record does not say yet';
-    facts.push({ text, src: evSrc, id: e.id, kind: e.kind, popid: pop ? String(pop).toUpperCase() : null });
+    facts.push({ text, src: evSrc, id: e.id, kind: e.kind, eventCycle: e.cycle, popid: pop ? String(pop).toUpperCase() : null });
     if (!p && pop) facts[facts.length - 1].text += ' — not on the ledger snapshot; name only as the event row gives it';
-    if (pop) for (const t of threadFor(pop, { name: nameOf(pop, e.kind === 'death' ? ((e.recipients || [])[0] || {}).name : e.subjectName), skipTexts: [next && next.EventText], includeStay: e.kind === 'hospital', beats, logByPop, covered, ownId: e.id, tribune })) facts.push({ ...t, kind: 'thread', popid: String(pop).toUpperCase() });
+    if (pop) for (const t of threadFor(pop, { name: nameOf(pop, e.kind === 'death' ? ((e.recipients || [])[0] || {}).name : e.subjectName), skipTexts: [next && next.EventText], includeStay: e.kind === 'hospital', dropOwn: true, beats, logByPop, covered, ownId: e.id, tribune })) facts.push({ ...t, kind: 'thread', popid: String(pop).toUpperCase() });
   }
   for (const m of moments) {
     addPerson(m.pop, m.tag.toLowerCase() + ' this Cycle: ' + m.text, m.hood);
     facts.push({ text: (profiles.get(m.pop).Name || '').trim() + ' — ' + m.text + (m.hood ? ', ' + m.hood : '') + ' (C' + cycle + ', ' + m.tag + ')', src: logSrc, id: m.id, kind: 'moment', popid: m.pop });
-    for (const t of threadFor(m.pop, { name: nameOf(m.pop), skipTexts: [m.text], includeStay: false, beats, logByPop, covered, ownId: m.id, tribune })) facts.push({ ...t, kind: 'thread', popid: m.pop });
+    for (const t of threadFor(m.pop, { name: nameOf(m.pop), skipTexts: [m.text], includeStay: false, dropOwn: false, beats, logByPop, covered, ownId: m.id, tribune })) facts.push({ ...t, kind: 'thread', popid: m.pop });
   }
   for (const s of stays) {
     addPerson(s.pop, 'still in hospital care' + (s.cause ? ' — ' + s.cause : ''), s.hood);
-    facts.push({ text: (s.name || 'a citizen') + ' is still in hospital care' + (s.cause ? ' after ' + s.cause : '') + (s.admit != null ? ', admitted C' + s.admit : '') + (s.hood ? ', ' + s.hood : ''), src: 'output/beats/Hospital_Ledger.jsonl @C' + cycle, id: s.id, kind: 'stay', popid: s.pop });
-    for (const t of threadFor(s.pop, { name: nameOf(s.pop, s.name), skipTexts: [], includeStay: false, beats, logByPop, covered, ownId: s.id, tribune })) facts.push({ ...t, kind: 'thread', popid: s.pop });
+    facts.push({ text: (nameOf(s.pop, s.name) || 'a citizen') + ' is still in hospital care' + (s.cause ? ' after ' + s.cause : '') + (s.admit != null ? ', admitted C' + s.admit : '') + (s.hood ? ', ' + s.hood : ''), src: 'output/beats/Hospital_Ledger.jsonl @C' + cycle, id: s.id, kind: 'stay', popid: s.pop });
+    for (const t of threadFor(s.pop, { name: nameOf(s.pop, s.name), skipTexts: [], includeStay: false, dropOwn: true, beats, logByPop, covered, ownId: s.id, tribune })) facts.push({ ...t, kind: 'thread', popid: s.pop });
   }
 
   // The person's own words this Cycle, when the lived wake landed: colour and sourcing, verbatim.
@@ -263,7 +277,7 @@ function build(cycle, { root, beats, profiles }) {
     /^(FAMILY_CRISIS|FAMILY_CELEBRATION|FAMILY_REALIZED|HOUSEHOLD_DISSOLVED|HOUSEHOLD_ARRIVED|HOUSEHOLD_FORMED|CITIZEN_HOSPITALIZED)$/).slice(0, 6);
 
   // Mark today's batch covered — the next day takes the next batch.
-  for (const f of facts) if (f.id) covered[f.id] = { popid: f.popid, kind: f.kind, cycle: Number(cycle), day };
+  for (const f of facts) if (f.id) covered[f.id] = { popid: f.popid, kind: f.kind, cycle: Number(cycle), ...(f.eventCycle != null ? { eventCycle: Number(f.eventCycle) } : {}), day };
   writeCovered(root, covered, cycle);
 
   const lead = todays[0];
@@ -276,7 +290,7 @@ function build(cycle, { root, beats, profiles }) {
     label,
     angle: 'The lives of C' + cycle + ', ' + day + ': ' + facts.filter(f => f.kind !== 'thread').length + ' people — ' + label,
     hookLine: leadName + ' first. The event is the lead; one true detail; what came next only if the record says.',
-    facts, people, hooks, pageVoices,
+    facts, people, hooks, pageVoices, factCap: 60,
     deltas: null,
     note: [pending.length > todays.length ? (pending.length - todays.length) + ' more news-grade events wait for the next day' : null,
       pages.length ? null : 'none of today\'s people has written their own page this Cycle — no quotes'].filter(Boolean).join('; ') || null,

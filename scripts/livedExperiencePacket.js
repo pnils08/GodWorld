@@ -207,7 +207,7 @@ function creativeBriefFromSlice(slice) {
       kind: 'beat-slice',
       domain: clean(slice.seat && slice.seat.domain, 60) || null,
       hood: clean(slice.hood, 80) || null,
-      facts: uniq(prewrite.anchorFacts).slice(0, 12),
+      facts: uniq(prewrite.anchorFacts).slice(0, prewrite.factCap || 12),
       priorCycle: clean(prewrite.deltas && prewrite.deltas.state, 40) || null,
       note: clean(prewrite.note, 200) || null,
       engineHooks: (prewrite.hooks || []).slice(0, 4).map(h => clean(
@@ -782,7 +782,13 @@ function buildReportPacket({ cycle, desk, reporter, angleInput, anglePlan, story
     ? [refClaim('INTERPRETATION', candidate.evidence.excerpt, candidate.evidence.source)]
     : streetLife
     ? [refClaim('FACT', candidate.evidence.line, candidate.evidence.source)]
-    : (angleInput && angleInput.known || []).filter(c => c.t === 'FACT').slice(0, 8);
+    : (() => {
+      // the interviewee's own lines first: a slice that threads many people must not hand person #3 only person #1's record
+      const facts = (angleInput && angleInput.known || []).filter(c => c.t === 'FACT');
+      const nm = String(candidate.name || '').trim().toLowerCase();
+      const mine = nm ? facts.filter(c => String(c.text || '').toLowerCase().includes(nm)) : [];
+      return mine.concat(facts.filter(c => !mine.includes(c))).slice(0, Math.max(8, mine.length));
+    })();
   if (candidate.profile && !streetLife) known.push(refClaim('FACT', candidate.profile, 'Simulation_Ledger profile for ' + candidate.pop));
   const isOfficial = /council|mayor|official|director|chief/i.test(candidate.role || '');
   // pipeline.81 S3 (builder 2026-10-16): "I drop any guard on a citizen being interviewed." A citizen

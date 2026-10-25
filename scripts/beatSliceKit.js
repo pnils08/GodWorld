@@ -221,6 +221,8 @@ function makeSlice(seat, cycle, beats, body) {
       deltas: body.deltas || null, hooks: body.hooks || [], note: body.note || null,
       // pipeline.70: what the citizens' own pages say — colour and sourcing, never a number in print.
       pageVoices: body.pageVoices || [],
+      // a seat whose slice is threads (Lives) asks the prompt for more than the default 12 fact lines
+      ...(body.factCap ? { factCap: Number(body.factCap) } : {}),
       roomIsYours: seat.roomIsYours
     },
     ...(body.extra || {}),

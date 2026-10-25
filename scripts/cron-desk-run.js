@@ -885,7 +885,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
           if (bs.hood) L.push('WHERE: ' + bs.hood);
           L.push('HOOK: ' + bs.story.hookLine);
           L.push('FACTS (real — every line is a row on the record):');
-          for (const f of bs.prewrite.anchorFacts.slice(0, 12)) L.push('  - ' + f);
+          for (const f of bs.prewrite.anchorFacts.slice(0, bs.prewrite.factCap || 12)) L.push('  - ' + f);
           if (bs.citizens.length) {
             L.push('PEOPLE ON THE RECORD (your sources — never invent another):');
             for (const c of bs.citizens.slice(0, 10)) L.push('  - ' + c.profile);
@@ -1990,7 +1990,7 @@ async function runAngle(assign) {
     } else if (persona && beatSlice && !beatSlice.empty && story) {
       // pipeline.68 Task 4 — the journalist's own beat slice (legacy free-text ask;
       // under packet-v2 the typed packet below replaces it).
-      const facts = beatSlice.prewrite.anchorFacts.slice(0, 12);
+      const facts = beatSlice.prewrite.anchorFacts.slice(0, beatSlice.prewrite.factCap || 12);
       ask = 'You\'re ' + asker.name + '. This is your ' + beatSlice.seat.domain + ' beat this cycle, straight off the record:\n' +
         'ANGLE: ' + (story.angle || story.label) +
         (story.hookLine ? '\nHOOK: ' + story.hookLine : '') +

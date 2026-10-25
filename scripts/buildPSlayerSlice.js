@@ -586,7 +586,7 @@ function buildPSlayerSlice(cycle, opts) {
       mood: row.mood,
       fanSentiment: row.fanSentiment,
       neighborhood: row.neighborhood,
-      notes: (row.notes || '').slice(0, 400),
+      notes: row.notes || '',
       stats: row.stats
     },
     charge: {
@@ -662,7 +662,7 @@ function formatPSlayerSliceMarkdown(slice) {
       (slice.pulse.fanSentiment ? ' · FAN: ' + slice.pulse.fanSentiment : ''));
   }
   if (slice.pulse.stats && slice.pulse.stats !== '-') L.push('STATS: ' + slice.pulse.stats);
-  if (slice.pulse.notes) L.push('NOTES: ' + slice.pulse.notes.slice(0, 320));
+  if (slice.pulse.notes) L.push('NOTES: ' + slice.pulse.notes);
   L.push('');
   L.push('## CHARGE BAG');
   L.push('MODES: ' + slice.charge.bagModes.map(m => m.id + ' ' + m.name).join(' · '));

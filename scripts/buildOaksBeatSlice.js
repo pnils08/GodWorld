@@ -44,6 +44,10 @@ function rowFacts(r) {
       ', C' + cyc + ': ' + String(r.StoryAngle || r.Notes || '').trim(),
     src: 'output/beats/Oakland_Sports_Feed.jsonl C' + cyc
   }];
+  const note = String(r.Notes || '').trim();
+  if (note && note !== String(r.StoryAngle || '').trim()) {
+    facts.push({ text: 'Notebook (feed): ' + note, src: 'output/beats/Oakland_Sports_Feed.jsonl C' + cyc });
+  }
   if (r['Team Record'] && /\d/.test(String(r['Team Record']))) {
     facts.push({ text: 'Record ' + r['Team Record'] + (r.Streak ? ' · streak ' + r.Streak : ''), src: 'output/beats/Oakland_Sports_Feed.jsonl C' + cyc });
   }

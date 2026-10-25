@@ -42,7 +42,7 @@ function rowFacts(r) {
   const facts = [];
   if (r.FanSentiment) facts.push({ text: team + ' fans, C' + cyc + ': ' + r.FanSentiment, src });
   if (r.PlayerMood) facts.push({ text: 'Room mood, C' + cyc + ': ' + r.PlayerMood, src });
-  if (r.Notes) facts.push({ text: 'Notebook (feed): ' + String(r.Notes).slice(0, 200), src });
+  if (r.Notes) facts.push({ text: 'Notebook (feed): ' + String(r.Notes), src });
   facts.push({
     text: team + ' — ' + String(r.EventType || 'event') + (r.SeasonType ? ' (' + r.SeasonType + ')' : '') +
       ', C' + cyc + ': ' + String(r.StoryAngle || '').trim(),

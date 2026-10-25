@@ -39,9 +39,15 @@ const sh = require("/root/GodWorld/lib/sheets"), num = v => Number(String(v).rep
   const nm = await sh.getSheetData("Neighborhood_Map"), iN = nm[0].indexOf("Neighborhood"), iC = nm[0].indexOf("Cycle");
   const nmc = [...new Set(nm.slice(1).filter(r => r[iN]).map(r => num(r[iC])))];
   const rd = await sh.getSheetData("Riley_Digest"), rl = num(rd[rd.length - 1][rd[0].indexOf("Cycle")]);
+  // codex gate 3: an admitted C113 that failed or never persisted its counter leaves its footprint here — a Phase1-FireGuard /
+  // Phase11-FireGuardClose row or a phase error stamped Cycle >= 113 (godWorldEngine2.js:343-345,376-438; logEngineError_ is
+  // best effort). FIRE_ADMISSION_JSON itself has no read door from outside the script (webTrigger getprop is whitelisted to the
+  // carry-forward keys; a GET fires a Cycle), so this is the typed sheet-side proxy, read at all three points.
+  const ee = await sh.getSheetData("Engine_Errors"), iEC = ee[0].indexOf("Cycle"), iEP = ee[0].indexOf("Phase");
+  const fired = ee.slice(1).filter(r => num(r[iEC]) >= 113).length;   // any row stamped C113+, FireGuard or phase
   let cp = ""; try { const c = await sh.getSheetData("_CycleCheckpoint"); cp = c && c[0] ? String(c[0][0] || "") : ""; } catch (e) { if (!/Unable to parse range|not found/i.test(e.message)) throw e; cp = ""; } // no tab = no checkpoint; any other failure is not clean
-  const ok = cc === 112 && iN >= 0 && iC >= 0 && nmc.length === 1 && nmc[0] === 112 && rl === 112 && cp === "";
-  console.log("live fire state " + process.env.WHEN + ": cycleCount " + cc + ", Neighborhood_Map " + JSON.stringify(nmc) + ", Riley last " + rl + ", checkpoint " + (cp ? "HELD" : "none") + " — " + (ok ? "C113 not fired" : "NOT CLEAN"));
+  const ok = cc === 112 && iN >= 0 && iC >= 0 && nmc.length === 1 && nmc[0] === 112 && rl === 112 && cp === "" && iEC >= 0 && fired === 0;
+  console.log("live fire state " + process.env.WHEN + ": cycleCount " + cc + ", Neighborhood_Map " + JSON.stringify(nmc) + ", Riley last " + rl + ", checkpoint " + (cp ? "HELD" : "none") + ", Engine_Errors at C113+ " + fired + " — " + (ok ? "C113 not fired" : "NOT CLEAN"));
   process.exit(ok ? 0 : 1);
 })().catch(e => { console.error(e.message); process.exit(2); });' 2>&1 | grep -v "injected env"
   return ${PIPESTATUS[0]}

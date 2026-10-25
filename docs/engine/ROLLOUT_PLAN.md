@@ -7,15 +7,15 @@
 **Working order (builder 2026-10-22, "work through this list how you lay it out"):** ship what is already paid for (finished, reviewed code) first; then clear the builder's decisions; then builds ranked by "does it give the citizens a life", grouped by the file they touch; plumbing only when a build already has the file open. Nothing waits on the live fire (TERMINAL.md: the bench is the gate; a bench-proven change goes live the same session).
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
-**Plans in motion (50)** — each plan, its rows and the state each is in:
+**Plans in motion (51)** — each plan, its rows and the state each is in:
 
-- [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, engine.308 live-observing, engine.287 live-observing, engine.288 live-observing, engine.289 blocked, engine.305 live-observing, engine.306 live-observing, engine.307 live-observing, engine.309 needs-info, engine.311 needs-info
-- [[../plans/2026-10-11-media-extension]]: pipeline.83 live-observing, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.76 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing, pipeline.80 live-observing
-- [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]: engine.312 ready, pipeline.81 live-observing, engine.296 live-observing, engine.297 live-observing
-- [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.206 live-observing, engine.205 ready, engine.202 in-progress, engine.203d live-observing
+- [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, engine.301 live-observing, engine.308 live-observing, engine.287 live-observing, engine.288 live-observing, engine.289 blocked, engine.305 live-observing, engine.306 live-observing, engine.307 live-observing, engine.309 needs-info, engine.311 needs-info
+- [[../plans/2026-10-11-media-extension]]: pipeline.85 in-progress, pipeline.83 live-observing, pipeline.88 needs-info, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing, pipeline.80 live-observing
+- [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.206 live-observing, engine.205 ready, engine.202 ready, engine.203d live-observing
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing, engine.298 live-observing
+- [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]: engine.296 live-observing, engine.312 blocked, engine.318 in-progress, engine.297 live-observing
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.264 needs-info, engine.261 ready
-- [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 in-progress, engine.201 live-observing, engine.197 live-observing
+- [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 ready, engine.201 live-observing, engine.197 live-observing
 - [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing, engine.302 live-observing, engine.304 live-observing
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 ready
 - [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]: research.29 live-observing, engine.291 live-observing
@@ -38,16 +38,18 @@
 - [[../plans/2026-07-11-agent-exchange-engine]]: engine.53 live-observing
 - [[../plans/2026-08-07-spacemolt-game-show]]: research.27 live-observing
 - [[../plans/2026-07-06-citizen-loop-deepening]]: engine.48 live-observing
-- [[../plans/2026-09-13-run-cycle-packages-the-world]]: pipeline.69 in-progress
-- [[../plans/2026-08-29-boot-doc-consolidation]]: governance.51 in-progress
+- [[../plans/2026-09-13-run-cycle-packages-the-world]]: pipeline.69 ready
+- [[../plans/2026-08-29-boot-doc-consolidation]]: governance.51 ready
 - [[../plans/2026-08-16-city-hall-nine-seat-table]]: civic.24 ready
-- [[../canon/INSTITUTIONS]]: canon.5 in-progress
+- [[../canon/INSTITUTIONS]]: canon.5 ready
 - [[../plans/2026-06-24-engine-output-canon-coverage]]: engine.41 ready
-- [[../plans/2026-07-31-canon-ingest-backfill]]: engine.91 in-progress
-- [[../plans/2026-08-02-neighborhood-truth-source-migration]]: engine.99 in-progress
-- [[../plans/2026-08-17-sheet-weight-reduction]]: engine.116 in-progress
+- [[../plans/2026-07-31-canon-ingest-backfill]]: engine.91 ready
+- [[../plans/2026-08-02-neighborhood-truth-source-migration]]: engine.99 ready
+- [[../plans/2026-08-17-sheet-weight-reduction]]: engine.116 ready
 - [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]]: engine.27 ready
 - [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
+- `docs/for-claude-review/2026-10-25-codex-engine301-gate3-recheck.md`: engine.317 ready
+- `output/antigravity/2026-10-19-review-engine214-prod-candidate.md`: engine.316 ready
 - [[../plans/2026-10-15-engine-290-transit-rides-the-sim]]: engine.290 live-observing
 - [[../reference/DEPLOY_HISTORY]]: engine.294 live-observing
 - [[../plans/2026-10-16-the-money-game]]: engine.295 needs-info
@@ -58,7 +60,6 @@
 - [[../plans/2026-05-22-engine-regulatory-friction]]: engine.20d ready
 - [[../research/2026-09-10-kimi-faith-lane-routing]]: engine.248 ready
 - [[../plans/2026-10-18-event-engines-move-dials]]: engine.299 live-observing
-- `output/antigravity/2026-10-19-review-engine214-prod-candidate.md`: engine.301 ready
 <!-- /generated -->
 
 ## Pull order (builder, 2026-09-29; trued 2026-10-07)
@@ -101,10 +102,7 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| pipeline.87 | Stage artifacts must be unspent: a staged filing newer than the artifact = spent (--regate exempt). Accepted live Sun 10-25: Ines 09:15 + 12:15 refused on Saturday's filed plan, nothing written | done-pending-archive | research-build | [[../plans/2026-10-11-media-extension]] §Status log pipeline.87 |
-| pipeline.86 | World-born holidays reach the desks with their meaning: approved sentence on the world-summary calendar line + a Calendar known-fact in every seat packet. Built 10-25; Ines's planner failed 3/3 on its first run with it — suspect, unproven, unchanged | done-pending-archive | research-build | [[../plans/2026-09-29-sim-holiday-calendar]] §Builder's words (2026-10-07) |
-| pipeline.85 | Rhea stays and blocks, tuned per seat (builder 2026-10-25, reversing "Delete Rhea"): Voices packets hand her the citizens' whole page lines, so a verbatim page quote is supplied speech; advisory default removed; agy fold in the plan; live before Ines Sun 12:15 | done-pending-archive | research-build | [[../plans/2026-10-11-media-extension]] §Changelog 2026-10-25 |
-| pipeline.81 | Celeste's dead slice: trends rank by this-cycle movement, no-citizen Cultural rows off, no "engine" in slice text, pools from the slice's names (builder 2026-10-16). Built 10-16 (es); acceptance read 2026-10-25 on the C112 Fri slice + piece: PASS (plan changelog) | done-pending-archive | research-build | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
+| pipeline.85 | Rhea gates the world's record, not the Packet (builder 10-25: gate the facts, not the color): writer fence + repair pass gone, audit never fails a draft, Rhea sees only what named citizens said + ledger + world state. Proof: Mon 10-26 fanout | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §Status log pipeline.85 |
 | engine.296 | Sports legends from retired MLB-origin ledger rows, no literal fallback — LIVE @143/@144; re-read on C113 (Sun 2026-10-25) | live-observing | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
 |  research.29 | UNDOCKED crossover: Moves 1–5 live (engine.291 on PROD @138). C112 readback 10-19: 46 audience lines, 15 name a pilot, 0 raw tokens. Sat 10-24 read: 10 crossings, 2 printed both sides (Yu Zen, Vinnie Keane), digest seat printed; next read Sat 2026-10-31 | live-observing | research-build | [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]  |
 | engine.214 | Mood per hood + 287/288 LIVE @148 (stage 5); 8a Cut A = engine.305 @151; Cut B (hood reactions) @152; **Cut C LIVE @153, rate 1-in-10 @154 = stage 17** (2026-10-20). First live fire C113 Sun 2026-10-25; next 8b `$VENUE` draws the citizen's spot | live-observing | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] |
@@ -151,7 +149,6 @@
 | pipeline.73 | Tamsin (Lives) + Ines (Voices) live since 2026-10-19. Lives rebuilt 2026-10-25 (thread + wide intake + family passages; EIC two-Cycle record; empty-day sit-out) — plan changelog 10-25. Read Tamsin's first wide run Mon 2026-10-26 06:15: people, length vs 450-1200, grade | live-observing | research-build | docs/plans/2026-10-11-media-extension.md |
 | pipeline.74 | Organic: the next unattended Tanya / P Slayer / Noah write proves the rest of the swapped-model fixes (es c9d59d24) — off-season label, P Slayer POPIDs, Noah → grok-4.3; none has written unattended since. Angle cap 1600 PROVEN (capHits 0 on 10-15/16/19) | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |
 | pipeline.75 | Organic: Tanya's next unattended write proves the feed names + Notes (the 10-14 runs were manual). Deterministic write checks (thin/verbatim/cap/toolCalls) PROVEN in every unattended fan-out results file 10-15 → 10-19 (landed es) | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |
-| pipeline.76 | Writer tools: Marbury, Hal + Anthony (builder 10-14 / 10-19). Marbury 2026-10-21 Rhea PASS; Hal 2026-10-22 empty compose (one-off, provider returned nothing), Sat 10-24 sweep retry PASS 4/4; Anthony 10-19 PASS 4/4. All three read 2026-10-25 (plan changelog) | done-pending-archive | research-build | [[../plans/2026-10-11-media-extension]] |
 | pipeline.77 | Reward loop on five seats (rubric seen = rubric judged, grade on the page, W1 reads it); C111 baseline staged; first unattended C112 runs Mon–Wed 10-19..21; mechanism 2 held | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |
 | pipeline.78 | Staged readers take suffixed reruns (one matcher); Saturday 10-17 lands 16 C111 pieces incl. Nia's three; Friday reconciler + per-filing Packet folded (es a8095541, 734db7cd); next read Sat 10-24 (C112 pieces) | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |
 | pipeline.79 | Every journalist graded; Saturday prints the best-graded first; printed pieces earn byline-published (tier credit, none written since C102); C111 backfilled; length graded as a floor only; next read Sat 10-24 (C112) | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |

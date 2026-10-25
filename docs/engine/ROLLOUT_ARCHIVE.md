@@ -973,6 +973,17 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S601 Archive Pass (2026-10-25, research-build) — post-S600 closures sweep
+
+4 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 4 pipeline.*.
+
+- **pipeline.87** [research-build] — Stage artifacts must be unspent: a staged filing newer than the artifact = spent (--regate exempt). Accepted live Sun 10-25: Ines 09:15 + 12:15 refused on Saturday's filed plan, nothing written **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-11-media-extension]] §Status log pipeline.87
+- **pipeline.86** [research-build] — World-born holidays reach the desks with their meaning: approved sentence on the world-summary calendar line + a Calendar known-fact in every seat packet. Built 10-25; Ines's planner failed 3/3 on its first run with it — suspect, unproven, unchanged **State at archive:** done-pending-archive. Pointer: [[../plans/2026-09-29-sim-holiday-calendar]] §Builder's words (2026-10-07)
+- **pipeline.81** [research-build] — Celeste's dead slice: trends rank by this-cycle movement, no-citizen Cultural rows off, no "engine" in slice text, pools from the slice's names (builder 2026-10-16). Built 10-16 (es); acceptance read 2026-10-25 on the C112 Fri slice + piece: PASS (plan changelog) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]
+- **pipeline.76** [research-build] — Writer tools: Marbury, Hal + Anthony (builder 10-14 / 10-19). Marbury 2026-10-21 Rhea PASS; Hal 2026-10-22 empty compose (one-off, provider returned nothing), Sat 10-24 sweep retry PASS 4/4; Anthony 10-19 PASS 4/4. All three read 2026-10-25 (plan changelog) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-11-media-extension]]
+
+This pass: 4 rows — pipeline.87 + pipeline.86 + pipeline.81 + pipeline.76. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S599 Archive Pass (2026-10-25, engine-sheet) — post-S598 closures sweep
 
 3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 3 engine.*.

@@ -1,6 +1,6 @@
 # SESSION_CONTEXT — NEXT WORK ONLY. One PIN + one NEXT line per lane. What already happened lives in git, claude-mem, ROLLOUT_PLAN and the gap/production logs — never here. If a line describes a session instead of an assignment, it is written wrong.
 
-**PIN:** BUILD HALT (Mike 2026-10-25) — hard stop on building anything else; deletion is in progress; no gates on the removal. | S602 | Day 215 | Canon C112 | PROD @163 = stage 27 (`3e04d8a5` + `1e6beff5`) | next live fire C113 Sun 2026-10-25 | stage history, expectations, rollbacks: DEPLOY_HISTORY §PROD | claude-mem observer on quota cooldown — don't restart.
+**PIN:** BUILD HALT (Mike 2026-10-25) — hard stop on building anything else; deletion is in progress; no gates on the removal. | S603 | Day 215 | Canon C112 | PROD @163 = stage 27 (`3e04d8a5` + `1e6beff5`) | next live fire C113 Sun 2026-10-25 | stage history, expectations, rollbacks: DEPLOY_HISTORY §PROD | claude-mem observer on quota cooldown — don't restart.
 
 **NEXT[engine-sheet]:** Builder 2026-10-25: START OVER — "the entire sim is built wrong"; carry-over = NOTHING (not citizens, not paper, not doctrines). Fails his three tests (sl-godworld): cycle dice seeded by cycle number, crons fed packets, crons told what to write. This build frozen untouched, never deleted; engine.318 dead. New build starts only from what the builder says.
 

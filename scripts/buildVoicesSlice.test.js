@@ -46,57 +46,37 @@ try {
   // Lives carried the tech's event this Cycle — Ines carries the words, the slice says so.
   fs.writeFileSync(L.coveredPath(root), JSON.stringify({ 'promotion:POP-90001:111': { popid: 'POP-90001', kind: 'promotion', cycle, day: '2026-01-02' } }));
 
-  // pipeline.89: the slice is the roster, not the pick. Every citizen with a self-initiated page, once,
-  // however old the page; the journalist, the PRESS reply, the tension strand, the short line and the
-  // unknown POPID are not citizens' own voices.
   const day1 = V.buildVoicesSlice(cycle, { root, profiles, now });
   assert.equal(day1.empty, false, day1.reason);
-  const pops = day1.citizens.map(c => c.popid).sort();
-  assert.deepStrictEqual(pops, ['POP-90001', 'POP-90002', 'POP-90003', 'POP-90005', 'POP-90006']);
-  assert.ok(!pops.includes('POP-90004') && !pops.includes('POP-99999'));
-  assert.equal(day1.facts.length, day1.citizens.length, 'one line per citizen — nothing cut, no per-day cap');
-  assert.equal(day1.prewrite.factCap, day1.facts.length);
-  assert.equal(day1.prewrite.peopleCap, day1.citizens.length);
+  const pops = day1.citizens.map(c => c.popid);
+  // The tech (longest of two pages), the worker, one side of the conversation; never the journalist,
+  // the PRESS reply, the tension strand, the stale page, the short line or the unknown POPID.
+  assert.ok(pops.includes('POP-90001') && pops.includes('POP-90005'), pops.join(','));
+  assert.equal(pops.filter(p => p === 'POP-90002' || p === 'POP-90003').length, 1, 'one conversation passage a day');
+  assert.ok(!pops.includes('POP-90004') && !pops.includes('POP-90006') && !pops.includes('POP-99999'));
   const tech = day1.facts.find(f => f.popid === 'POP-90001');
-  assert.equal(tech.docId, 'p1b', 'the latest page leads the line');
-  assert.ok(/Test Tech, Appliance Repair Technician, Laurel \(POP-90001\) — 2 pages; latest the morning page, C111, 2026-01-02; new since your last piece/.test(tech.text), tech.text);
-  assert.ok(/Lives carried the promotion/.test(tech.text));
-  const late = day1.facts.find(f => f.popid === 'POP-90006');
-  assert.ok(late && /1 page; latest the evening page, C110, 2025-12-20: /.test(late.text) && !/new since/.test(late.text), 'the old page is on the roster, not marked new; the short line is not a page');
+  assert.equal(tech.docId, 'p1', 'the longer of the two pages');
+  assert.ok(tech.text.startsWith('“Funny how fixing something so small'), 'the quote first, verbatim');
+  assert.ok(/— Test Tech, Appliance Repair Technician, Laurel \(own page, the night page, C111\)$/.test(tech.text), tech.text);
+  assert.ok(/Lives carried the promotion/.test(day1.citizens.find(c => c.popid === 'POP-90001').why));
+  assert.ok(/in conversation/.test(day1.facts.find(f => f.slot === 'CONVO').text));
   assert.ok(day1.story.ref.endsWith(' ' + day1.day), 'the ref carries the day');
-  assert.deepStrictEqual(day1.prewrite.pageVoices, []);
-  assert.ok(/pick whoever you want/i.test(day1.story.hookLine));
-  assert.ok(/not your assignment/.test(day1.approach));
-  // Building the roster chooses nothing and remembers nothing.
-  assert.ok(!fs.existsSync(V.coveredPath(root)), 'building the slice writes no covered file');
-  // A page from before the window is still on the roster, marked as not new.
-  const stale = V.buildVoicesSlice(cycle, { root, profiles, now: new Date('2026-03-01T00:00:00Z') });
-  assert.equal(stale.empty, false);
-  assert.ok(stale.facts.length === day1.facts.length && !/new since your last piece/.test(stale.facts.map(f => f.text).join('\n')));
+  assert.equal(day1.prewrite.pageVoices.length, day1.facts.length);
+  assert.ok(day1.story.hookLine.startsWith('Open on Test Tech\'s own line'));
 
-  // Her pick, resolved: every self-initiated page of the citizens she named, whole, oldest first.
-  const picked = V.pagesForPicks(['POP-90001', 'pop-90005'], { root, profiles });
-  assert.deepStrictEqual(picked.map(f => f.docId), ['p1', 'p1b', 'p5']);
-  assert.ok(picked[0].text.startsWith('“Funny how fixing something so small') && picked[0].text.includes(pages[0].content), 'whole page, verbatim');
-  assert.ok(/— Test Tech, Appliance Repair Technician, Laurel \(own page, the night page, C111\)$/.test(picked[0].text), picked[0].text);
-  assert.deepStrictEqual(V.pagesForPicks([], { root, profiles }), []);
-  assert.deepStrictEqual(V.pagesForPicks(['POP-90004'], { root, profiles }).length, 1, 'a pick is hers — the resolver does not second-guess');
-
-  // Her memory: recorded when a piece files, shown on the roster, never enforced.
-  V.recordRan(picked, cycle, root);
   const covered = JSON.parse(fs.readFileSync(V.coveredPath(root), 'utf8'));
-  assert.deepStrictEqual(Object.keys(covered).sort(), ['p1', 'p1b', 'p5']);
+  assert.deepStrictEqual(Object.keys(covered).sort(), day1.facts.map(f => f.docId).sort());
+
+  // Day 2 (same window): the other side of the conversation and the tech's second page are left.
   const day2 = V.buildVoicesSlice(cycle, { root, profiles, now });
-  assert.equal(day2.facts.length, day1.facts.length, 'having run them removes no one from the roster');
-  const tech2 = day2.facts.find(f => f.popid === 'POP-90001').text;
-  assert.ok(/you ran them C111/.test(tech2) && !/new since your last piece/.test(tech2), tech2);
-  assert.ok(/new since your last piece/.test(day2.facts.find(f => f.popid === 'POP-90002').text));
-  // No pages in the store at all.
-  const bareRoot = fs.mkdtempSync(path.join(os.tmpdir(), 'voices-nopages-'));
-  try {
-    const none = V.buildVoicesSlice(cycle, { root: bareRoot, profiles, now });
-    assert.ok(none.empty && /no self-initiated citizen page/.test(none.reason));
-  } finally { fs.rmSync(bareRoot, { recursive: true, force: true }); }
+  assert.equal(day2.empty, false, day2.reason);
+  assert.ok(!day2.facts.some(f => covered[f.docId]), 'no page is carried twice');
+  // Day 3: carried out.
+  const day3 = V.buildVoicesSlice(cycle, { root, profiles, now });
+  assert.ok(day3.empty && /already carried/.test(day3.reason), day3.reason);
+  // No pages in the window at all.
+  const none = V.buildVoicesSlice(cycle, { root, profiles, now: new Date('2026-03-01T00:00:00Z') });
+  assert.ok(none.empty && /no self-initiated citizen page/.test(none.reason));
 
   // Seat wiring; the builder never touches the beat dump (no output/beats in this root).
   assert.ok(V.isVoicesSeat({ persona: 'ines-sorensen' }) && V.isVoicesSeat({ name: 'Ines Sorensen' }) && !V.isVoicesSeat({ persona: 'tamsin-pruitt' }));

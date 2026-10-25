@@ -4,7 +4,7 @@
 
 **NEXT[engine-sheet]:** engine.318: codex recheck HOLD on one gap — push-e318-prod.sh must also stop if the intake row count moves; fold, codex look, then one builder go (`apply --expect 105` + push). engine.312 live @163: watch C113.
 
-**NEXT[research-build]:** pipeline.89 cut 1 (Ines only) committed 5cbd6d76: roster slice, her picks → whole pages, Rhea off her path (wall + thin floor stay). Cut 2 (tools + Rhea-off, other 27) waits on Wed 10-28 06:15. Builder calls: angle model (llama failed 3/3 Sun; prompt now ~16k) and keep the contract grade on her (else 'nothing measurable'). READ Mon fanout first (pipeline.85).
+**NEXT[research-build]:** Session ended by the builder 10-25 12:50 (Ines dispute). Live in tree, committed: Rhea/packet fence cut 37444482 (gate the facts, not the color) — READ Mon 10-26 fanout first (Rhea flags, drafts' colour); pipeline.85 in-progress. Ines Wed 10-28 06:15: planner (llama) failed 3/3 Sun, Calendar line suspect — builder calls: model swap? pull the line? pipeline.88 stems. Clear+boot es (§4) at boot. Stack 48 held.
 **NEXT[kimi]:** OUT for the week (usage limit 2026-10-03). Nothing queued; its civic.38 renew-move check moved to codex 2026-10-04.
 
 **NEXT[codex]:** Verify board comparator/config/history export gaps per the same plan §Task 4; separate counter threshold-rounding defect in §Health numerator amendment.

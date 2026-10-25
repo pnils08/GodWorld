@@ -129,19 +129,6 @@ assert.equal(texture.fail, false, 'anonymous texture must pass: ' + JSON.stringi
     'another speaker\'s approval does not cover this one');
 }
 
-// pipeline.89 — a citizen's own page line the Packet carries whole is their sourced speech (Ines's picks).
-{
-  const prose = '# TEST-ONLY\n\n"TEST-ONLY sentence about the fund," Marcus Webb said on the record.\n';
-  const page = { t: 'FACT', text: '“TEST-ONLY sentence about the fund” — Marcus Webb (own page, the night page, C112)',
-    src: 'output/citizen_pages/index.jsonl cp-POP-00790-c112-night' };
-  assert.equal(scan(prose, { desk: 'culture', packet: { known: [page] } }).findings.filter(f => f.check === 'invented-voice').length, 0,
-    'a page FACT in known sources its owner');
-  assert.equal(scan(prose, { desk: 'culture', packet: { manifest: { approvedFacts: [page] } } }).findings.filter(f => f.check === 'invented-voice').length, 0);
-  const elsewhere = Object.assign({}, page, { src: 'output/citizen_pages/index.jsonl cp-POP-00034-c112-night' });
-  assert.equal(scan(prose, { desk: 'culture', packet: { known: [elsewhere] } }).findings.filter(f => f.check === 'invented-voice').length, 1,
-    'another citizen\'s page does not source this speaker');
-}
-
 console.log('articleContamination.test.js PASS');
 console.log('  vacuum findings:', v.findings.length);
 console.log('  caldera findings:', c.findings.length);

@@ -353,15 +353,6 @@ assert.ok(gate.skipped.every(row => row.reason === 'no-active-wake-package'));
 
 assert.throws(() => packagesApi.routeFor(jax, 'publish'), /unknown wake stage/);
 assert.throws(() => packagesApi.validatePackage('bad', { active: true }), /invalid wake package/);
-// pipeline.89 — gate 'off' is Ines's alone: optional, only the value 'off'; no other seat carries it.
-{
-  const gated = Object.entries(packagesApi.loadPackages ? packagesApi.loadPackages() : {}).filter(([, v]) => v && v.gate !== undefined).map(([k]) => k);
-  assert.deepStrictEqual(gated, ['ines-sorensen']);
-  const ok = Object.values(packagesApi.loadPackages()).find(v => v.persona === 'ines-sorensen');
-  assert.doesNotThrow(() => packagesApi.validatePackage(ok.persona, Object.assign({}, ok, { gate: 'off' })));
-  assert.throws(() => packagesApi.validatePackage(ok.persona, Object.assign({}, ok, { gate: 'on' })), /gate/);
-  assert.throws(() => packagesApi.validatePackage(ok.persona, Object.assign({}, ok, { gate: true })), /gate/);
-}
 // pipeline.75 — thinFloor optional; when present, a positive integer
 {
   const ok = JSON.parse(JSON.stringify(jax));

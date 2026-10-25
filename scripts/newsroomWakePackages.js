@@ -42,9 +42,6 @@ function validatePackage(key, value) {
   if (value && value.rewardLoop !== undefined && typeof value.rewardLoop !== 'boolean') {
     errors.push('rewardLoop must be boolean');
   }
-  // pipeline.89 — gate 'off': Rhea's verdict is off this seat's path (builder 2026-10-25); the
-  // contamination wall and the thin floor stay.
-  if (value && value.gate !== undefined && value.gate !== 'off') errors.push("gate must be 'off' when present");
   // pipeline.76 — writer tools are a per-package exception to ADR-0017 (builder 2026-10-14).
   if (value && value.writerTools !== undefined) {
     const n = value.writerTools && value.writerTools.maxToolCalls;

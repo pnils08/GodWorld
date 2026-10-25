@@ -132,13 +132,6 @@ function approvedSpeakers(packet) {
   for (const q of (packet && packet.manifest && packet.manifest.approvedQuotes) || []) add(q && q.speakerId);
   for (const q of (packet && packet.exposure && packet.exposure.sources) || []) add(q && q.pop);
   for (const q of (packet && packet.quotes) || []) if (q && String(q.quote || '').trim()) add(q.pop);
-  // pipeline.89: a citizen's own page line the Packet carries whole (Ines's picks) is their sourced
-  // speech — the page's customId names the speaker (cp-POP-nnnnn-...).
-  const pageSrc = /citizen_pages\/index\.jsonl cp-(POP-\d+)-/i;
-  for (const c of [].concat((packet && packet.known) || [], (packet && packet.manifest && packet.manifest.approvedFacts) || [])) {
-    const m = pageSrc.exec(String(c && c.src || ''));
-    if (m) add(m[1]);
-  }
   return pops;
 }
 

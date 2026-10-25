@@ -139,6 +139,7 @@
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.317 | A read-only door for FIRE_ADMISSION_JSON (webTrigger getprop is carry-forward-only; a GET fires a Cycle), so a PROD push can prove no Cycle was admitted across it (codex engine.301 gate 3, 2026-10-25) | ready |  | `docs/for-claude-review/2026-10-25-codex-engine301-gate3-recheck.md` |
+| engine.318 | Citizen_Usage_Intake's columns disagree with its Phase-11 reader (the tab carries POPID in B; processCitizenUsageIntake_ reads B as the type) — the source of the 35 C90 usage rows with a POPID for a type. Dormant path (912 rows, all processed) | ready |  | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.312 §B |
 | engine.316 | Five hoods' texture pools are empty after textureSigned_: Eastlake, Baylight District, East Oakland have 0 up / 0 down lines; Grand Lake, San Antonio 0 down (agy 2026-10-19 F6, split from engine.301). Author signed lines → builder approves → land under the substrate gate | ready | research-build | `output/antigravity/2026-10-19-review-engine214-prod-candidate.md` F6 |
 | engine.290 | Transit rides the sim — LIVE PROD stage 4d; re-read the transit mints on C113 (Sun 2026-10-25) | live-observing | engine-sheet | [[../plans/2026-10-15-engine-290-transit-rides-the-sim]] |
 | engine.294 | Raw "$MOOD" token in LifeHistory — fixed LIVE @138 stage 4g; re-read on C113 (Sun 2026-10-25) | live-observing | engine-sheet | commit 71637c7a; [[../reference/DEPLOY_HISTORY]] §stage 4g |

@@ -175,6 +175,43 @@ console.log('\nTest 4: formatWeatherLine');
 }
 
 // ────────────────────────────────────────────────────────────────────────────
+// Test 4b: pipeline.86 — a world-born holiday prints its approved meaning on the calendar
+// line; every other day prints the label alone. calendarContext reads that line back.
+console.log('\nTest 4b: holiday meaning on the calendar line + calendarContext read-back');
+{
+  const K = require('./beatSliceKit');
+  const second = helper.emitHeader(131, { Weather: '{}' }, [['3', '27', 'x', 'Summer', 'SecondDawn']], [])
+    .find(l => l.startsWith('**Calendar context:**'));
+  assertIncludes('Second Dawn label', second, 'holiday=Second Dawn — ');
+  assertIncludes('Second Dawn meaning (builder 2026-10-07 working line)', second, 'the week the city found its voice');
+  const creation = helper.emitHeader(152, { Weather: '{}' }, [['3', '48', 'x', 'Fall', 'CreationDay']], [])
+    .find(l => l.startsWith('**Calendar context:**'));
+  assertIncludes('Creation Day meaning', creation, 'holiday=Creation Day — Creation Day marks the week Civis Systems came online');
+  const easter = helper.emitHeader(119, { Weather: '{}' }, [['3', '15', 'x', 'Spring', 'Easter']], [])
+    .find(l => l.startsWith('**Calendar context:**'));
+  assertIncludes('Easter label alone', easter, 'holiday=Easter | Sports season');
+  const none = helper.emitHeader(112, { Weather: '{}' }, [['3', '8', 'x', 'Winter', 'none']], [])
+    .find(l => l.startsWith('**Calendar context:**'));
+  assertIncludes('no holiday, no dash', none, 'holiday=none | Sports season');
+  assertEqual('holidayMeaning by label', K.holidayMeaning('Second Dawn'), K.HOLIDAY_MEANING.SecondDawn);
+  assertEqual('holidayMeaning: a kept real-world day carries none', K.holidayMeaning('Halloween'), null);
+  assertEqual('holidayMeaning: none/blank', K.holidayMeaning('none') || K.holidayMeaning(''), null);
+  assertEqual('holidayMeaning: Open Court Week is godworld but has no approved sentence yet', K.holidayMeaning('OpenCourtWeek'), null);
+  // read-back from a scratch summary (never the live output dir)
+  const os = require('os');
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'ws-cal-'));
+  try {
+    fs.mkdirSync(path.join(tmp, 'output'));
+    fs.writeFileSync(path.join(tmp, 'output', 'world_summary_c131.md'), '# World Summary — Cycle 131\n\n' + second + '\n');
+    const cal = K.calendarContext(131, tmp);
+    assertEqual('calendarContext text', cal && cal.text, 'Calendar: Y3C27, Summer, holiday=Second Dawn — ' + K.HOLIDAY_MEANING.SecondDawn);
+    assertIncludes('calendarContext src names the summary + sheet', cal && cal.src, 'world_summary_c131.md Calendar context (Simulation_Calendar)');
+    assertEqual('calendarContext: no summary -> null', K.calendarContext(998, tmp), null);
+  } finally {
+    fs.rmSync(tmp, { recursive: true, force: true });
+  }
+}
+
 // Test 5: sortNeighborhoods
 // ────────────────────────────────────────────────────────────────────────────
 console.log('\nTest 5: sortNeighborhoods (RetailVitality desc, name asc tiebreak)');

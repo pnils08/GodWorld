@@ -461,8 +461,7 @@ function renderRecordsBrief(packet) {
   if (!packet.task || packet.task.writingMode !== 'RECORDS_BRIEF') {
     throw new Error('renderRecordsBrief requires W3 RECORDS_BRIEF mode');
   }
-  const facts = packet.manifest.approvedFacts.filter(row =>
-    row.src !== 'cron-desk-run explicit cycle argument');
+  const facts = packet.manifest.approvedFacts.filter(row => !ambientFact(row));
   if (!facts.length) throw new Error('RECORDS_BRIEF requires one approved non-runtime fact');
   const missing = packet.task.creativeBrief && packet.task.creativeBrief.missing || [];
   const quotes = packet.manifest.approvedQuotes || [];
@@ -510,9 +509,14 @@ function renderRecordsBrief(packet) {
   return lines.filter(line => line !== null).join('\n');
 }
 
+// The runtime Cycle claim and the pipeline.86 calendar line describe every seat's day: context
+// for the writer, never a brief bullet or paragraph, never a source of approved numbers (agy #1, #2).
+function ambientFact(row) {
+  return !!row && (row.src === 'cron-desk-run explicit cycle argument' || v1.AMBIENT_FACT.test(row.text || ''));
+}
 function publicBriefFacts(packet) {
   return packet.manifest.approvedFacts.filter(row => {
-    if (row.src === 'cron-desk-run explicit cycle argument') return false;
+    if (ambientFact(row)) return false;
     const text = clean(row.text, 500);
     if (!text) return false;
     if (/(?:engine_audit|snapshot:|world_summary|desk_signal|patterns?\[|rows?\[|\s##\s)/i.test(text)) return false;
@@ -608,7 +612,7 @@ function significantNumbers(text) {
 function selectUsedToolLines(draftText, candidates, packet) {
   const body = String(draftText || '').split(/^##\s+INTAKE\s*$/im)[0];
   const allowed = new Set(numericTokens([
-    ...((packet && packet.manifest && packet.manifest.approvedFacts) || []).map(r => r.text),
+    ...((packet && packet.manifest && packet.manifest.approvedFacts) || []).filter(r => !/^Calendar:/i.test(r && r.text || '')).map(r => r.text),
     ...((packet && packet.manifest && packet.manifest.approvedQuotes) || []).map(r => r.text),
   ].join('\n')).map(v => v.toLowerCase()));
   const units = [];
@@ -672,7 +676,11 @@ function auditArticle(draftText, packet) {
     ...packet.manifest.approvedQuotes.map(row => row.text),
     ...packet.manifest.approvedSubjects.map(row => row.profile),
   ].join('\n');
-  const allowedNumbers = new Set(numericTokens(approvedText).map(v => v.toLowerCase()));
+  // pipeline.86 (agy #1): the calendar line's Y<n>C<m> digits approve no article number; the
+  // Cycle claim's own number stays approved ("this cycle, C112" is the record's number).
+  const allowedNumbers = new Set(numericTokens(
+    approvedText.split('\n').filter(line => !/^Calendar:/i.test(line)).join('\n')
+  ).map(v => v.toLowerCase()));
   const newNumbers = [...new Set(numericTokens(bodyText)
     .map(v => v.toLowerCase()).filter(v => !allowedNumbers.has(v)))];
   const approvedQuotes = new Set(packet.manifest.approvedQuotes.map(row => clean(row.text)));

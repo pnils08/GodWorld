@@ -831,4 +831,33 @@ assert.throws(() => interviewContract.validateInterviewOutput(liveQuote, residen
   }
 }
 
+// pipeline.86 (agy #2): the Calendar known-fact is context, never article prose — the deterministic
+// brief renderers leave it out, as they leave out the runtime Cycle claim. Runs on a live Cycle whose
+// world summary is on disk; skipped (not faked) when none is.
+{
+  const fs = require('fs');
+  const live = [112, 111, 110].find(c => fs.existsSync(require('path').join(__dirname, '..', 'output', 'world_summary_c' + c + '.md')));
+  if (live) {
+    const reporter86 = { popid: 'TEST-LILA', name: 'Test Health Reporter' };
+    const story86 = { ref: 'INIT-TEST-HEALTH', label: 'Construction is active for Test Health Center.', angle: 'Construction is active for Test Health Center.', kind: 'initiative', hood: 'TEST-HOOD', popids: [], citizens: [] };
+    const slice86 = { kind: 'civic-domain', packetSeat: { seat: { domain: 'health' }, prewrite: { method: 'ACCESS_TIMELINE_HUMAN_COST', missing: ['a named affected resident'], humanConsequence: { state: 'UNESTABLISHED', subjects: [], facts: [], src: null }, forbidden: [] } } };
+    const w1 = p.buildAnglePacket({ cycle: live, desk: 'civic', reporter: reporter86, story: story86, approach: 'x', slice: slice86, lane: [] });
+    assert.ok(w1.known.some(c => /^Calendar: Y\d+C\d+/.test(c.text)), 'calendar fact present at C' + live);
+    const plan86 = p.validateAngleOutput({ chase: 'Chase the active construction for Test Health Center on this block.', focus: 'f', why: 'w', checks: [], targets: [], interpretation: 'i', unverifiedLead: [], closeQuestion: 'q?' }, w1);
+    const w3 = p.buildWritePacket({ cycle: live, desk: 'civic', reporter: reporter86, story: story86, approach: 'x', angleInput: w1, anglePlan: plan86, interviews: [], lane: [], reviewProfile: { id: 'T', canonPolicy: 'load-bearing', articleContract: { renderMode: 'SOURCE_BRIEF' } } });
+    const brief = p.renderSourceBrief(w3);
+    assert.ok(!/Calendar:/.test(brief), 'SOURCE_BRIEF prints no Calendar line');
+    assert.ok(/Construction is active for Test Health Center/.test(brief), 'the story fact still prints');
+    // the calendar's own digits (Y3C8) approve no article number
+    const cal = w1.known.find(c => /^Calendar:/.test(c.text));
+    const m = /Y(\d+)C(\d+)/.exec(cal.text);
+    const audit = p.auditArticle('Crews counted ' + m[2] + ' trucks and ' + m[1] + ' cranes.\n\n## INTAKE\n', w3);
+    const nums = [...audit.errors, ...audit.observations].find(e => e.code === 'UNAPPROVED_NUMBER');
+    assert.ok(nums && nums.values.includes(m[2]) && nums.values.includes(m[1]), 'the calendar line\'s Y<n>C<m> digits approve no article number');
+    // the Cycle claim's own number stays approved
+    const cyc = p.auditArticle('Nothing moved in C' + live + '.\n\n## INTAKE\n', w3);
+    assert.ok(![...cyc.errors, ...cyc.observations].some(e => e.code === 'UNAPPROVED_NUMBER'), 'C' + live + ' is the record\'s number');
+  }
+}
+
 console.log('livedExperiencePacketV2.test.js: PASS');

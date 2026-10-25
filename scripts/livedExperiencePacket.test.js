@@ -372,4 +372,29 @@ for (const why of ['assignment', 'stink-handle', 'feed-names', 'on Hospital_Ledg
   assert.ok(JSON.stringify(pk.evidence || pk).includes('a line about this person'), 'the interviewee\'s own fact reaches the report packet past the first 8');
 }
 
+// pipeline.86: the Cycle's calendar is a known FACT when a world summary exists for the Cycle;
+// the test cycle (999) has none, so no claim is added and nothing else here shifts.
+{
+  const w1 = p.buildAnglePacket({ cycle: 999, desk: 'civic', reporter: { name: 'Test Reporter' }, story: { label: 'TEST-ONLY story', ref: 'test' }, approach: 'x', slice: null, lane: [], candidates: [] });
+  assert.ok(!w1.known.some(c => /^Calendar:/.test(c.text)), 'no world summary for C999 -> no calendar claim');
+  const K = require('./beatSliceKit');
+  assert.equal(K.calendarContext(999), null);
+  // positive path on a live Cycle whose summary is on disk (skipped, not faked, when none is)
+  const fs = require('fs');
+  const live = [112, 111, 110].find(c => fs.existsSync(require('path').join(__dirname, '..', 'output', 'world_summary_c' + c + '.md')));
+  if (live) {
+    const story2 = { ref: 'test', label: 'TEST-ONLY signal changed', hookLine: 'TEST-ONLY hook' };
+    const slice2 = { prewrite: { anchorFacts: ['TEST-ONLY fact 1', 'TEST-ONLY fact 2'] } };
+    const w1live = p.buildAnglePacket({ cycle: live, desk: 'civic', reporter: { name: 'Test Reporter' }, story: story2, approach: 'x', slice: slice2, lane: [], candidates: [] });
+    const cal = w1live.known.find(c => /^Calendar: Y\d+C\d+, /.test(c.text));
+    assert.ok(cal, 'a Cycle with a world summary carries a Calendar known-fact');
+    assert.ok(cal.src.includes('world_summary_c' + live + '.md Calendar context (Simulation_Calendar)'));
+    assert.equal(w1live.known[w1live.known.length - 1], cal, 'calendar rides last — it displaces no story or slice fact (agy #3)');
+    assert.ok(p.AMBIENT_FACT.test(cal.text) && p.AMBIENT_FACT.test('Current cycle: C112') && !p.AMBIENT_FACT.test('TEST-ONLY fact 1'));
+    // the season word from the calendar line admits no off-assignment chase (agy #1)
+    const off = { chase: 'The no-hitter downtown this winter is the only story worth chasing tonight.', focus: 'x', why: 'x', checks: [], targets: [], interpretation: 'x', unverifiedLead: [], closeQuestion: 'x' };
+    assert.throws(() => p.validateAngleOutput(off, w1live), /chase replaces the assignment/);
+  }
+}
+
 console.log('livedExperiencePacket.test.js: PASS');

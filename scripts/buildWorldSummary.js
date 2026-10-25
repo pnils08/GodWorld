@@ -43,7 +43,7 @@ const sheets = require('/root/GodWorld/lib/sheets');
 // W5h2 (S336 engine.76): roster lane pools for the byline WHO-assist
 const { buildLanePools } = require('./engine-auditor/bayTribuneRoster');
 const { SIM_HOLIDAYS } = require('../phase02-world-state/getSimHoliday');
-const { censusTrail } = require('./beatSliceKit');
+const { censusTrail, holidayMeaning } = require('./beatSliceKit');
 
 const REPO_ROOT = path.resolve(__dirname, '..');
 const SCRIPT_VERSION = '2.3.0';
@@ -189,7 +189,11 @@ function emitHeader(cycle, rileyCurr, calendar, sportsRows) {
   // A flag the table no longer knows is a row written by the engine before engine.273
   // wave 1 reached that sheet — printed as written, with a warning, never invented.
   if (holidayFlag !== 'none' && !holidayRow) console.warn('buildWorldSummary: holiday flag not in SIM_HOLIDAYS (pre-wave-1 row?): ' + holidayFlag);
-  const holidayLabel = holidayRow ? holidayRow.label : (holidayFlag || 'none');
+  // pipeline.86: a world-born holiday prints what it is beside its name, so the desks read
+  // the approved meaning instead of inventing one. Other days print the label alone.
+  const holidayMeaningLine = holidayMeaning(holidayFlag);
+  const holidayLabel = (holidayRow ? holidayRow.label : (holidayFlag || 'none')) +
+    (holidayMeaningLine ? ' — ' + holidayMeaningLine : '');
 
   const nightlife = parseJsonField(rileyCurr.NightLife, {});
   const sportsSeason = realSeasonLabel_(sportsRows, cycle)

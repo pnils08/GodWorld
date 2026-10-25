@@ -349,6 +349,9 @@ function creativeBriefFromSlice(slice) {
 }
 
 const PLANNING_SKIP_FACT = /^(?:CASINO|CITY MONEY|DEBT):/;
+// Claims about the day itself, shared by every seat: never assignment anchors, never article
+// prose, never a source of approved numbers (Y3C8 would approve a stray "3" and "8").
+const AMBIENT_FACT = /^(?:Calendar|Current cycle):/i;
 
 function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane, candidates: modeCandidates }) {
   if (!story) throw new Error('W1 Packet requires an assigned story');
@@ -405,6 +408,14 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane,
       known.push(refClaim('FACT', text, src));
     }
   }
+  // pipeline.86: the Cycle's calendar — Y<n>C<m>, season, holiday (with the approved meaning
+  // when the day is the city's own) — is a known fact for every seat. Before this nothing in the
+  // packet told a writer a holiday was on. Read from the deterministic world summary; a Cycle
+  // without one (the test cycles) adds no claim. Pushed last so it never displaces a story or
+  // slice fact from W2's 8-fact cap (agy #3); ambient like `Current cycle:`, it is kept out of
+  // the off-assignment tokens and the deterministic brief renderers (see AMBIENT_FACT).
+  const calendar = require('./beatSliceKit').calendarContext(cycle);
+  if (calendar) known.push(refClaim('FACT', calendar.text, calendar.src));
   // Interview exposure is identity-bearing: unresolved names may remain in the
   // assigned facts, but only ledger-resolved POPIDs can become W2 targets.
   // pipeline.81 S3 (builder 2026-10-16, supersedes the 2026-09-30 touched-or-nobody ruling for slice
@@ -515,10 +526,13 @@ function chaseReplacesAssignment(chase, input) {
   // exposure.candidates, built from that same story before it's dropped.
   const candidates = (input && input.exposure && input.exposure.candidates) || [];
   const candidateNames = candidates.map(function (c) { return c && c.name || ''; }).join(' ');
+  // Ambient claims (the Cycle number, the calendar line) describe every seat's day, not this
+  // assignment: "winter", "holiday", "oakland" from them would admit any chase (agy pipeline.86 #1).
   const blob = [
     assignment, hood,
     candidateNames,
-    known.map(function (k) { return k && (k.text || k.t) || ''; }).join(' ')
+    known.filter(function (k) { return !AMBIENT_FACT.test(k && k.text || ''); })
+      .map(function (k) { return k && (k.text || k.t) || ''; }).join(' ')
   ].join(' ').toLowerCase();
   const tokens = blob.split(/[^a-z0-9-]+/).filter(function (w) {
     return w.replace(/-/g, '').length >= 5;
@@ -984,5 +998,6 @@ module.exports = {
   validateAngleOutput, reporterChaseText, chaseIsJsonShaped, candidateRows,
   buildReportPacket, validateReportOutput,
   quoteIneligibility, isAthleteRow, ledgerRowForPop, neighborsFromLedger, isProximityCandidate, isLedgerFillCandidate,
+  AMBIENT_FACT,
   buildWritePacket, parseJsonObject, prompt,
 };

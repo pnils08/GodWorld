@@ -102,6 +102,7 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| pipeline.86 | World-born holidays reach the desks with their meaning (builder 2026-10-07): Creation Day + Second Dawn print their approved sentence on the world-summary calendar line; every seat packet carries a Calendar known-fact. Built 2026-10-25, agy fold in the plan | done-pending-archive | research-build | [[../plans/2026-09-29-sim-holiday-calendar]] §Builder's words (2026-10-07) |
 | pipeline.85 | Rhea stays and blocks, tuned per seat (builder 2026-10-25, reversing "Delete Rhea"): Voices packets hand her the citizens' whole page lines, so a verbatim page quote is supplied speech; advisory default removed; agy fold in the plan; live before Ines Sun 12:15 | done-pending-archive | research-build | [[../plans/2026-10-11-media-extension]] §Changelog 2026-10-25 |
 | pipeline.81 | Celeste's dead slice: trends rank by this-cycle movement, no-citizen Cultural rows off, no "engine" in slice text, pools from the slice's names (builder 2026-10-16). Built 10-16 (es); acceptance read 2026-10-25 on the C112 Fri slice + piece: PASS (plan changelog) | done-pending-archive | research-build | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
 | engine.296 | Sports legends from retired MLB-origin ledger rows, no literal fallback — LIVE @143/@144; re-read on C113 (Sun 2026-10-25) | live-observing | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
@@ -135,7 +136,6 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| pipeline.86 | World-born holidays reach the desks with their meaning: the desk calendar line carries the approved one-sentence meaning for Creation Day and Second Dawn (builder 2026-10-07 "meaning sentences yes"; carrier is newsroom-side). Nothing carries it today; first Second Dawn C131 | ready | research-build | [[../plans/2026-09-29-sim-holiday-calendar]] §Builder's words (2026-10-07) |
 | engine.316 | Five hoods' texture pools are empty after textureSigned_: Eastlake, Baylight District, East Oakland have 0 up / 0 down lines; Grand Lake, San Antonio 0 down (agy 2026-10-19 F6, split from engine.301). Author signed lines → builder approves → land under the substrate gate | ready | research-build | `output/antigravity/2026-10-19-review-engine214-prod-candidate.md` F6 |
 | engine.290 | Transit rides the sim — LIVE PROD stage 4d; re-read the transit mints on C113 (Sun 2026-10-25) | live-observing | engine-sheet | [[../plans/2026-10-15-engine-290-transit-rides-the-sim]] |
 | engine.294 | Raw "$MOOD" token in LifeHistory — fixed LIVE @138 stage 4g; re-read on C113 (Sun 2026-10-25) | live-observing | engine-sheet | commit 71637c7a; [[../reference/DEPLOY_HISTORY]] §stage 4g |

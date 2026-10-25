@@ -14,6 +14,7 @@
 const fs = require('fs');
 const path = require('path');
 const { loadBeatTabs } = require('./buildEconomicSlice');
+const { SIM_HOLIDAYS } = require('../phase02-world-state/getSimHoliday');
 
 const ROOT = path.join(__dirname, '..');
 const SCHEMA = 'BEAT-SLICE-1';
@@ -659,8 +660,42 @@ function debtPattern(profiles, hookRows, cycle, src, hood) {
   return { defaults, crisisByHood, overLine, overLineByHood, facts };
 }
 
+// pipeline.86 — what a world-born holiday IS, for the desks. The calendar table names
+// the day; nothing told a writer what it meant, so each could invent a Second Dawn and
+// every invention would become canon (engine.273 plan §247). Builder 2026-10-07: these two
+// sentences are the approved working lines ("the holiday lines look good"); a later
+// brainstorm reshapes them. Only `type: 'godworld'` holidays carry a meaning — the city's
+// own days. Keyed by the table's flag; the label resolves to the flag first.
+const HOLIDAY_MEANING = {
+  CreationDay: 'Creation Day marks the week Civis Systems came online and began tracking the city — the week Oakland started keeping its own record.',
+  SecondDawn: 'Second Dawn marks the week the city found its voice — when the Tribune began carrying its citizens\' own words, and Oakland started hearing itself.',
+};
+/** holidayMeaning('SecondDawn' | 'Second Dawn') -> the approved sentence, or null for any other day. */
+function holidayMeaning(flagOrLabel) {
+  const key = String(flagOrLabel || '').trim();
+  if (!key || key === 'none') return null;
+  const row = Object.values(SIM_HOLIDAYS).find(r => r.name === key || r.label === key);
+  if (!row || row.type !== 'godworld') return null;
+  return HOLIDAY_MEANING[row.name] || null;
+}
+/**
+ * The Cycle's calendar as the world summary printed it — `Y<n>C<m>, <season>, holiday=<label>`
+ * (+ the meaning sentence once buildWorldSummary carries it) — read back from the deterministic
+ * summary so every seat's packet states the same calendar the desks' sources do. No summary for
+ * that Cycle -> null (the test cycles have none; a live Cycle always does by desk time).
+ */
+function calendarContext(cycle, root = ROOT) {
+  const rel = path.join('output', 'world_summary_c' + cycle + '.md');
+  const md = loadText(path.join(root, rel));
+  if (!md) return null;
+  const m = md.match(/^\*\*Calendar context:\*\*\s*(.+?)\s*(?:\|\s*Sports season:.*)?$/m);
+  if (!m || !m[1]) return null;
+  return { text: 'Calendar: ' + m[1].trim(), src: rel + ' Calendar context (Simulation_Calendar)' };
+}
+
 module.exports = {
   ROOT, SCHEMA, FACTS_TAIL, FORBIDDEN,
+  HOLIDAY_MEANING, holidayMeaning, calendarContext, // pipeline.86
   num, hoodKey, fmtInt, loadJson, loadText, extractSection, arg,
   loadBeatTabs, loadProfiles, prevTabRows, rosterAtSectors, hooksFor, domainHooks, seedsFor,
   person, personFromProfile, figureHood, citizenTags, makeSlice, emptySlice, formatMarkdown, wire,

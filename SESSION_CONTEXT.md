@@ -2,7 +2,7 @@
 
 **PIN:** BUILD HALT (Mike 2026-10-25) — hard stop on building anything else; deletion is in progress; no gates on the removal. | S602 | Day 215 | Canon C112 | PROD @163 = stage 27 (`3e04d8a5` + `1e6beff5`) | next live fire C113 Sun 2026-10-25 | stage history, expectations, rollbacks: DEPLOY_HISTORY §PROD | claude-mem observer on quota cooldown — don't restart.
 
-**NEXT[engine-sheet]:** engine.318: codex recheck HOLD on one gap — push-e318-prod.sh must also stop if the intake row count moves; fold, codex look, then one builder go (`apply --expect 105` + push). engine.312 live @163: watch C113.
+**NEXT[engine-sheet]:** engine.318 HELD, not pushed — builder 2026-10-25: "you're building the wrong project." Live untouched (105 Status still blank, PROD still stage 27 @163). Fix + gate committed; codex HOLD only on the /exec propagation bound. Ask the builder which project before any engine.318 step.
 
 **NEXT[research-build]:** BUILD HALT (Mike 2026-10-25): hard stop on building anything else. Deletion is in progress. No gates on the removal.
 **NEXT[kimi]:** OUT for the week (usage limit 2026-10-03). Nothing queued; its civic.38 renew-move check moved to codex 2026-10-04.

@@ -1,0 +1,77 @@
+{
+ "cycle": 115,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "San Antonio": 1,
+  "East Oakland": 1,
+  "Rockridge": 1,
+  "Uptown": 1,
+  "Baylight District": 1,
+  "Temescal": 1,
+  "Jack London": 1,
+  "Brooklyn": 1,
+  "Eastlake": 1,
+  "Glenview": 1,
+  "Dimond": 1,
+  "Lake Merritt": 1
+ },
+ "risesPreCap": [],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 28,
+  "byHood": {
+   "Rockridge": 4,
+   "Lake Merritt": 8,
+   "Temescal": 4,
+   "Jack London": 4,
+   "Uptown": 3,
+   "Brooklyn": 1,
+   "East Oakland": 2,
+   "Glenview": 1,
+   "Eastlake": 1
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Journalist, Lead Beat Reporter - Oakland A's|ageGroup:adult|neighborhood:Rockridge|tier:3|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Elections Office|ageGroup:adult|neighborhood:Lake Merritt|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|venue:local|occupation:Redevelopment Board|ageGroup:adult|neighborhood:Lake Merritt|tier:4|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:DEPUTY PUBLIC DEFENDER|ageGroup:adult|neighborhood:Lake Merritt|tier:4|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Delivery driver|ageGroup:adult|neighborhood:Temescal|tier:4|qol:low|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Independent Bookstore Owner|ageGroup:adult|neighborhood:Temescal|tier:4|qol:low|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Warehouse worker|ageGroup:adult|neighborhood:Jack London|tier:4|qol:high|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Mechanic|ageGroup:adult|neighborhood:Uptown|tier:4|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|venue:local|occupation:Retail worker|ageGroup:adult|neighborhood:Rockridge|tier:4|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Bakery worker|ageGroup:adult|neighborhood:Uptown|tier:4|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|venue:local|occupation:High School Science Teacher|ageGroup:senior|neighborhood:Rockridge|tier:4|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Sustainable Materials Scientist|ageGroup:senior|neighborhood:Lake Merritt|tier:4|archetype:Caretaker",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|venue:local|occupation:Line Cook|ageGroup:youngAdult|neighborhood:Jack London|tier:3|qol:high",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Sourdough Baker|ageGroup:adult|neighborhood:Brooklyn|tier:4|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Gene Therapy Counselor|ageGroup:adult|neighborhood:Lake Merritt|tier:4|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Herbalist|ageGroup:adult|neighborhood:Jack London|tier:3|qol:high",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Software engineer|ageGroup:youngAdult|neighborhood:Lake Merritt|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Civic & Neighborhood Reporter, OakTown Echo|ageGroup:youngAdult|neighborhood:Temescal|tier:4|qol:low|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Trade Union Representative|ageGroup:adult|neighborhood:Jack London|tier:4|qol:high",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Quantum Computing Researcher|ageGroup:youngAdult|neighborhood:Rockridge|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Paramedic|ageGroup:adult|neighborhood:Lake Merritt|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Paramedic|ageGroup:youngAdult|neighborhood:Lake Merritt|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Dance Choreographer|ageGroup:adult|neighborhood:Uptown|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:High School English Teacher|ageGroup:youngAdult|neighborhood:East Oakland|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:BART Rail Dispatcher|ageGroup:adult|neighborhood:Temescal|tier:4|qol:low",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Transit operator|ageGroup:senior|neighborhood:Glenview|tier:4|qol:low",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Fleet dispatcher|ageGroup:youngAdult|neighborhood:Eastlake|tier:4"
+  ]
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

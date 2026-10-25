@@ -1,0 +1,32 @@
+{
+ "cycle": 126,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "Dimond": 1
+ },
+ "risesPreCap": [],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 1,
+  "byHood": {
+   "Dimond": 1
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|firstFriday|occupation:Bartender|ageGroup:adult|neighborhood:Dimond|tier:4|qol:low"
+  ]
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

@@ -1,0 +1,52 @@
+{
+ "cycle": 137,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Uptown",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 48
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "Brooklyn": 1
+ },
+ "risesPreCap": [
+  "Uptown|propertyCrime +6"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 0,
+  "byHood": {},
+  "tags": []
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": [],
+ "window": {
+  "from": 113,
+  "cycles": 25,
+  "missing": [],
+  "held": [],
+  "rises": 52,
+  "droppedByCap": 2,
+  "rung2HoodCycles": 0,
+  "waveHoodCycles": 0,
+  "maxSimultaneousWaves": 0,
+  "wavesCarried": 0,
+  "crimeLines": 120,
+  "cyclesWithLines": 16,
+  "engineErrors": 0
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "cycle": 124,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [],
+  "crimeWaveHoods": []
+ },
+ "levels": {},
+ "risesPreCap": [],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 0,
+  "byHood": {},
+  "tags": []
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

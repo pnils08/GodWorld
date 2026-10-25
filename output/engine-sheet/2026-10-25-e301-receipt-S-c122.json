@@ -1,0 +1,42 @@
+{
+ "cycle": 122,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Uptown",
+    "metric": "propertyCrime",
+    "magnitude": 7,
+    "newValue": 43
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "Dimond": 1,
+  "Ivy Hill": 1
+ },
+ "risesPreCap": [
+  "Uptown|propertyCrime +7"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 1,
+  "byHood": {
+   "Ivy Hill": 1
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|firstFriday|venue:local|occupation:Kindergarten Teacher|ageGroup:youngAdult|neighborhood:Ivy Hill|tier:4|qol:low"
+  ]
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

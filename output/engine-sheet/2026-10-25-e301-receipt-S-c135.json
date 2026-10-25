@@ -1,0 +1,53 @@
+{
+ "cycle": 135,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Ivy Hill",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 49
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "Downtown": 1,
+  "Rockridge": 1
+ },
+ "risesPreCap": [
+  "Ivy Hill|propertyCrime +5"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 11,
+  "byHood": {
+   "Rockridge": 5,
+   "Downtown": 6
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Ethics Commission|ageGroup:adult|neighborhood:Rockridge|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Closing Pitcher, Las Vegas Aviators (AAA)|ageGroup:youngAdult|neighborhood:Downtown|tier:4|qol:high|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Journalist, Arts & Entertainment|ageGroup:youngAdult|neighborhood:Rockridge|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Juvenile Probation Officer|ageGroup:adult|neighborhood:Downtown|tier:4|qol:high|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Nurse aide|ageGroup:adult|neighborhood:Rockridge|tier:4|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Starting Pitcher, Oakland A's|ageGroup:youth|neighborhood:Downtown|tier:1|qol:high",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Security Guard|ageGroup:adult|neighborhood:Downtown|tier:3|qol:high|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Wine Bar Owner|ageGroup:adult|neighborhood:Rockridge|tier:4|archetype:Caretaker",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:OEWD Program Director|ageGroup:adult|neighborhood:Downtown|tier:3|qol:high|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Immigration Attorney|ageGroup:senior|neighborhood:Downtown|tier:4|qol:high",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Construction worker|ageGroup:adult|neighborhood:Rockridge|tier:4"
+  ]
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

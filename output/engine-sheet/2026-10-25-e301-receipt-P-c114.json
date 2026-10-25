@@ -1,0 +1,151 @@
+{
+ "cycle": 114,
+ "label": "P",
+ "expect": {
+  "wave": [
+   "Baylight District"
+  ],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "San Antonio",
+    "metric": "propertyCrime",
+    "magnitude": 9,
+    "newValue": 44
+   },
+   {
+    "neighborhood": "East Oakland",
+    "metric": "propertyCrime",
+    "magnitude": 7,
+    "newValue": 42
+   },
+   {
+    "neighborhood": "Rockridge",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 38
+   },
+   {
+    "neighborhood": "Uptown",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 41
+   },
+   {
+    "neighborhood": "Baylight District",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 34
+   },
+   {
+    "neighborhood": "Temescal",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 49
+   },
+   {
+    "neighborhood": "Jack London",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 41
+   },
+   {
+    "neighborhood": "Brooklyn",
+    "metric": "violentCrime",
+    "magnitude": 5,
+    "newValue": 29
+   },
+   {
+    "neighborhood": "Eastlake",
+    "metric": "violentCrime",
+    "magnitude": 5,
+    "newValue": 28
+   },
+   {
+    "neighborhood": "Glenview",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 43
+   },
+   {
+    "neighborhood": "Dimond",
+    "metric": "violentCrime",
+    "magnitude": 5,
+    "newValue": 29
+   },
+   {
+    "neighborhood": "Lake Merritt",
+    "metric": "violentCrime",
+    "magnitude": 5,
+    "newValue": 24
+   }
+  ],
+  "crimeWaveHoods": [
+   "Baylight District"
+  ]
+ },
+ "levels": {
+  "Baylight District": 3,
+  "Adams Point": 1,
+  "Piedmont Ave": 1
+ },
+ "risesPreCap": [
+  "San Antonio|propertyCrime +9",
+  "East Oakland|propertyCrime +7",
+  "Rockridge|propertyCrime +6",
+  "Uptown|propertyCrime +6",
+  "Baylight District|propertyCrime +6",
+  "Temescal|propertyCrime +5",
+  "Lake Merritt|violentCrime +5",
+  "Jack London|propertyCrime +5",
+  "Dimond|violentCrime +5",
+  "Glenview|propertyCrime +5",
+  "Brooklyn|violentCrime +5",
+  "Eastlake|violentCrime +5"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 4,
+  "byHood": {
+   "Piedmont Ave": 2,
+   "Baylight District": 2
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|firstFriday|occupation:Mover|ageGroup:adult|neighborhood:Piedmont Ave|tier:4|qol:high|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|firstFriday|occupation:Mover|ageGroup:adult|neighborhood:Piedmont Ave|tier:4|qol:high",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|firstFriday|occupation:Last-mile delivery driver|ageGroup:adult|neighborhood:Baylight District|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|firstFriday|venue:local|occupation:QA tester|ageGroup:youth|neighborhood:Baylight District|tier:4"
+  ]
+ },
+ "receipt": [
+  {
+   "targets": "Baylight District",
+   "magnitude": "3",
+   "detail": "Baylight District property crime +6 last Cycle (to 28), rising two Cycles running (level 3)"
+  }
+ ],
+ "engineErrors": [],
+ "level3": [
+  "Baylight District"
+ ],
+ "window": {
+  "from": 113,
+  "cycles": 2,
+  "missing": [],
+  "held": [],
+  "rises": 15,
+  "droppedByCap": 0,
+  "rung2HoodCycles": 0,
+  "waveHoodCycles": 2,
+  "maxSimultaneousWaves": 1,
+  "wavesCarried": 2,
+  "crimeLines": 22,
+  "cyclesWithLines": 2,
+  "engineErrors": 0
+ }
+}

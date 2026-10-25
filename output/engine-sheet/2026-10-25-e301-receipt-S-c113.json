@@ -1,0 +1,48 @@
+{
+ "cycle": 113,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Adams Point",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 38
+   },
+   {
+    "neighborhood": "Piedmont Ave",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 35
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "Baylight District": 1
+ },
+ "risesPreCap": [
+  "Piedmont Ave|propertyCrime +5",
+  "Adams Point|propertyCrime +5"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 1,
+  "byHood": {
+   "Baylight District": 1
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|occupation:Warehouse worker|ageGroup:senior|neighborhood:Baylight District|tier:4|qol:high"
+  ]
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

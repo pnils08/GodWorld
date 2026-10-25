@@ -1,0 +1,121 @@
+{
+ "cycle": 114,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "San Antonio",
+    "metric": "propertyCrime",
+    "magnitude": 9,
+    "newValue": 44
+   },
+   {
+    "neighborhood": "East Oakland",
+    "metric": "propertyCrime",
+    "magnitude": 7,
+    "newValue": 42
+   },
+   {
+    "neighborhood": "Rockridge",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 38
+   },
+   {
+    "neighborhood": "Uptown",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 41
+   },
+   {
+    "neighborhood": "Baylight District",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 34
+   },
+   {
+    "neighborhood": "Temescal",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 49
+   },
+   {
+    "neighborhood": "Jack London",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 41
+   },
+   {
+    "neighborhood": "Brooklyn",
+    "metric": "violentCrime",
+    "magnitude": 5,
+    "newValue": 29
+   },
+   {
+    "neighborhood": "Eastlake",
+    "metric": "violentCrime",
+    "magnitude": 5,
+    "newValue": 28
+   },
+   {
+    "neighborhood": "Glenview",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 43
+   },
+   {
+    "neighborhood": "Dimond",
+    "metric": "violentCrime",
+    "magnitude": 5,
+    "newValue": 29
+   },
+   {
+    "neighborhood": "Lake Merritt",
+    "metric": "violentCrime",
+    "magnitude": 5,
+    "newValue": 24
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "Adams Point": 1,
+  "Piedmont Ave": 1
+ },
+ "risesPreCap": [
+  "San Antonio|propertyCrime +9",
+  "East Oakland|propertyCrime +7",
+  "Rockridge|propertyCrime +6",
+  "Uptown|propertyCrime +6",
+  "Baylight District|propertyCrime +6",
+  "Temescal|propertyCrime +5",
+  "Lake Merritt|violentCrime +5",
+  "Jack London|propertyCrime +5",
+  "Dimond|violentCrime +5",
+  "Glenview|propertyCrime +5",
+  "Brooklyn|violentCrime +5",
+  "Eastlake|violentCrime +5"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 2,
+  "byHood": {
+   "Piedmont Ave": 1,
+   "Adams Point": 1
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|firstFriday|occupation:Physical Therapist|ageGroup:adult|neighborhood:Piedmont Ave|tier:3|qol:high|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|firstFriday|occupation:Chief Medical Officer|ageGroup:adult|neighborhood:Adams Point|tier:3"
+  ]
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

@@ -1,0 +1,42 @@
+{
+ "cycle": 134,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Downtown",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 44
+   },
+   {
+    "neighborhood": "Rockridge",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 44
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {},
+ "risesPreCap": [
+  "Downtown|propertyCrime +5",
+  "Rockridge|propertyCrime +5"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 0,
+  "byHood": {},
+  "tags": []
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

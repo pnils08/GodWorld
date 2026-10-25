@@ -1,0 +1,35 @@
+{
+ "cycle": 119,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Temescal",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 51
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {},
+ "risesPreCap": [
+  "Temescal|propertyCrime +6"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 0,
+  "byHood": {},
+  "tags": []
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

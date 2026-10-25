@@ -1,0 +1,49 @@
+{
+ "cycle": 117,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Chinatown",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 43
+   },
+   {
+    "neighborhood": "Glenview",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 45
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "Brooklyn": 1,
+  "Ivy Hill": 1
+ },
+ "risesPreCap": [
+  "Chinatown|propertyCrime +5",
+  "Glenview|propertyCrime +5"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 1,
+  "byHood": {
+   "Brooklyn": 1
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Last-mile delivery driver|ageGroup:youngAdult|neighborhood:Brooklyn|tier:4"
+  ]
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

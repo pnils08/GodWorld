@@ -1,0 +1,37 @@
+{
+ "cycle": 136,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Brooklyn",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 45
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "Ivy Hill": 1
+ },
+ "risesPreCap": [
+  "Brooklyn|propertyCrime +6"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 0,
+  "byHood": {},
+  "tags": []
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

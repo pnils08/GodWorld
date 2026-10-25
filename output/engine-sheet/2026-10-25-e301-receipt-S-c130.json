@@ -1,0 +1,59 @@
+{
+ "cycle": 130,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Fruitvale",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 46
+   },
+   {
+    "neighborhood": "Jack London",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 47
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "KONO": 1,
+  "Temescal": 1,
+  "Brooklyn": 1,
+  "Lake Merritt": 1
+ },
+ "risesPreCap": [
+  "Fruitvale|propertyCrime +6",
+  "Jack London|propertyCrime +5"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 7,
+  "byHood": {
+   "Lake Merritt": 4,
+   "Temescal": 2,
+   "Brooklyn": 1
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SummerSolstice|holidayPriority:minor|firstFriday|occupation:Female Model|ageGroup:youth|neighborhood:Lake Merritt|tier:4|qol:high",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SummerSolstice|holidayPriority:minor|firstFriday|occupation:Starting Pitcher, Oakland A's|ageGroup:youngAdult|neighborhood:Lake Merritt|tier:2|qol:high|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SummerSolstice|holidayPriority:minor|firstFriday|occupation:Journalist, Civic & Cultural Opinion|ageGroup:adult|neighborhood:Temescal|tier:4|qol:low|hotspot:true",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SummerSolstice|holidayPriority:minor|firstFriday|occupation:Pastry Chef|ageGroup:senior|neighborhood:Temescal|tier:4|qol:low|hotspot:true|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SummerSolstice|holidayPriority:minor|firstFriday|occupation:Senior Pastor / Faith Leader|ageGroup:senior|neighborhood:Lake Merritt|tier:2|qol:high",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SummerSolstice|holidayPriority:minor|firstFriday|occupation:Head Coach, Oakland Oaks|ageGroup:youngAdult|neighborhood:Lake Merritt|tier:2|qol:high",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SummerSolstice|holidayPriority:minor|firstFriday|occupation:Taxi driver|ageGroup:adult|neighborhood:Brooklyn|tier:4"
+  ]
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

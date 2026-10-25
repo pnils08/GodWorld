@@ -1,0 +1,35 @@
+{
+ "cycle": 125,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Dimond",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 45
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {},
+ "risesPreCap": [
+  "Dimond|propertyCrime +5"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 0,
+  "byHood": {},
+  "tags": []
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

@@ -1,0 +1,32 @@
+{
+ "cycle": 133,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "Temescal": 1
+ },
+ "risesPreCap": [],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 1,
+  "byHood": {
+   "Temescal": 1
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Warehouse Worker|ageGroup:adult|neighborhood:Temescal|tier:4|qol:low|hotspot:true"
+  ]
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

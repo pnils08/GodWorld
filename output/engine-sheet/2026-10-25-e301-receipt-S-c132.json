@@ -1,0 +1,42 @@
+{
+ "cycle": 132,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Temescal",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 59
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "Eastlake": 1,
+  "KONO": 1
+ },
+ "risesPreCap": [
+  "Temescal|propertyCrime +6"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 1,
+  "byHood": {
+   "KONO": 1
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Public Defender|ageGroup:adult|neighborhood:KONO|tier:4"
+  ]
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

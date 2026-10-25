@@ -1,0 +1,88 @@
+{
+ "cycle": 113,
+ "label": "P",
+ "expect": {
+  "wave": [
+   "Fruitvale"
+  ],
+  "lines": [
+   "Fruitvale"
+  ],
+  "carryWave": [
+   "Baylight District"
+  ],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Baylight District",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 28
+   },
+   {
+    "neighborhood": "Adams Point",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 38
+   },
+   {
+    "neighborhood": "Piedmont Ave",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 35
+   }
+  ],
+  "crimeWaveHoods": [
+   "Baylight District"
+  ]
+ },
+ "levels": {
+  "Baylight District": 1,
+  "Fruitvale": 3
+ },
+ "risesPreCap": [
+  "Baylight District|propertyCrime +6",
+  "Piedmont Ave|propertyCrime +5",
+  "Adams Point|propertyCrime +5"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 18,
+  "byHood": {
+   "Fruitvale": 18
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|occupation:Aura Wellness Practitioner|ageGroup:adult|neighborhood:Fruitvale|tier:3|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|occupation:Affordable Childcare Advocate|ageGroup:adult|neighborhood:Fruitvale|tier:4|archetype:Caretaker",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|occupation:Immigration Attorney|ageGroup:senior|neighborhood:Fruitvale|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|occupation:Disability Rights Advocate|ageGroup:senior|neighborhood:Fruitvale|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|venue:local|occupation:Mechanic|ageGroup:adult|neighborhood:Fruitvale|tier:3|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|occupation:Mechanic|ageGroup:adult|neighborhood:Fruitvale|tier:3|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|venue:local|occupation:Mover|ageGroup:youngAdult|neighborhood:Fruitvale|tier:3|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|occupation:Mutual Aid Network Organizer|ageGroup:adult|neighborhood:Fruitvale|tier:3|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|occupation:City Building Inspector|ageGroup:adult|neighborhood:Fruitvale|tier:3",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|occupation:Auto Body Shop Owner|ageGroup:adult|neighborhood:Fruitvale|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|venue:local|occupation:Seamstress|ageGroup:adult|neighborhood:Fruitvale|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|occupation:Electrician|ageGroup:youngAdult|neighborhood:Fruitvale|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|occupation:Retired|ageGroup:senior|neighborhood:Fruitvale|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|occupation:Transit Hub Planning Lead|ageGroup:adult|neighborhood:Fruitvale|tier:3|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|occupation:CBA Compliance Monitor, Fruitvale Transit Hub|ageGroup:adult|neighborhood:Fruitvale|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|occupation:Detective|ageGroup:adult|neighborhood:Fruitvale|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|sportsSeason:early-season|occupation:Firefighter|ageGroup:youngAdult|neighborhood:Fruitvale|tier:4"
+  ]
+ },
+ "receipt": [
+  {
+   "targets": "Fruitvale",
+   "magnitude": "3",
+   "detail": "Fruitvale property crime +6 last Cycle (to 41), rising two Cycles running (level 3)"
+  }
+ ],
+ "engineErrors": [],
+ "level3": [
+  "Fruitvale"
+ ]
+}

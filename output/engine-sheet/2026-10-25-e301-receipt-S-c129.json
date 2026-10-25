@@ -1,0 +1,56 @@
+{
+ "cycle": 129,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "KONO",
+    "metric": "propertyCrime",
+    "magnitude": 7,
+    "newValue": 50
+   },
+   {
+    "neighborhood": "Temescal",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 58
+   },
+   {
+    "neighborhood": "Brooklyn",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 45
+   },
+   {
+    "neighborhood": "Lake Merritt",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 44
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {},
+ "risesPreCap": [
+  "KONO|propertyCrime +7",
+  "Temescal|propertyCrime +5",
+  "Lake Merritt|propertyCrime +5",
+  "Brooklyn|propertyCrime +5"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 0,
+  "byHood": {},
+  "tags": []
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

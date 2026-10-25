@@ -1,0 +1,63 @@
+{
+ "cycle": 131,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Eastlake",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 49
+   },
+   {
+    "neighborhood": "KONO",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 51
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "Fruitvale": 1,
+  "Jack London": 1
+ },
+ "risesPreCap": [
+  "KONO|propertyCrime +5",
+  "Eastlake|propertyCrime +5"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 15,
+  "byHood": {
+   "Jack London": 5,
+   "Fruitvale": 10
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SecondDawn|holidayPriority:oakland|occupation:Catcher, Midland RockHounds (AA)|ageGroup:youth|neighborhood:Jack London|tier:4|qol:high",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SecondDawn|holidayPriority:oakland|occupation:Longshoreman (Port of Oakland)|ageGroup:adult|neighborhood:Jack London|tier:4|qol:high|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SecondDawn|holidayPriority:oakland|occupation:Mechanic|ageGroup:adult|neighborhood:Fruitvale|tier:2|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SecondDawn|holidayPriority:oakland|occupation:Janitor|ageGroup:adult|neighborhood:Fruitvale|tier:4|archetype:Caretaker",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SecondDawn|holidayPriority:oakland|occupation:Home Health Aide|ageGroup:adult|neighborhood:Jack London|tier:4|qol:high|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SecondDawn|holidayPriority:oakland|occupation:Pupuseria Owner|ageGroup:senior|neighborhood:Fruitvale|tier:4|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SecondDawn|holidayPriority:oakland|occupation:Mover|ageGroup:youngAdult|neighborhood:Fruitvale|tier:3|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SecondDawn|holidayPriority:oakland|venue:local|occupation:Mover|ageGroup:youngAdult|neighborhood:Fruitvale|tier:3|archetype:Striver",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SecondDawn|holidayPriority:oakland|occupation:Auto Body Shop Owner|ageGroup:adult|neighborhood:Fruitvale|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SecondDawn|holidayPriority:oakland|occupation:Journalist - The Oakland Oaks Ground Reporter|ageGroup:youngAdult|neighborhood:Jack London|tier:4|qol:high|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SecondDawn|holidayPriority:oakland|occupation:Parish priest|ageGroup:adult|neighborhood:Fruitvale|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SecondDawn|holidayPriority:oakland|occupation:Crisis Clinician|ageGroup:youngAdult|neighborhood:Fruitvale|tier:4",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SecondDawn|holidayPriority:oakland|occupation:Family Physician|ageGroup:adult|neighborhood:Jack London|tier:4|qol:high",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:SecondDawn|holidayPriority:oakland|occupation:Journalist, Lives|ageGroup:adult|neighborhood:Fruitvale|tier:4"
+  ]
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

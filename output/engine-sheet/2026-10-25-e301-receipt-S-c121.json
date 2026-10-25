@@ -1,0 +1,53 @@
+{
+ "cycle": 121,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Dimond",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 45
+   },
+   {
+    "neighborhood": "Ivy Hill",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 45
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "Jack London": 1
+ },
+ "risesPreCap": [
+  "Dimond|propertyCrime +6",
+  "Ivy Hill|propertyCrime +6"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 6,
+  "byHood": {
+   "Jack London": 6
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:City Ombudsman|ageGroup:adult|neighborhood:Jack London|tier:4|qol:high|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Artist/Muralist|ageGroup:youngAdult|neighborhood:Jack London|tier:4|qol:high",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Line Cook|ageGroup:youngAdult|neighborhood:Jack London|tier:3|qol:high",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Trade Union Representative|ageGroup:adult|neighborhood:Jack London|tier:4|qol:high",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:streamer|ageGroup:adult|neighborhood:Jack London|tier:3|qol:high",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Co-Founder, Gridiron Analytics|ageGroup:youngAdult|neighborhood:Jack London|tier:3|qol:high"
+  ]
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

@@ -1,0 +1,42 @@
+{
+ "cycle": 120,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Jack London",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 41
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "Temescal": 1
+ },
+ "risesPreCap": [
+  "Jack London|propertyCrime +5"
+ ],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 2,
+  "byHood": {
+   "Temescal": 2
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Sourdough Baker|ageGroup:adult|neighborhood:Temescal|tier:1|qol:low|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|occupation:Sourdough Baker|ageGroup:adult|neighborhood:Temescal|tier:4|qol:low"
+  ]
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

@@ -1,0 +1,33 @@
+{
+ "cycle": 123,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "Uptown": 1
+ },
+ "risesPreCap": [],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 2,
+  "byHood": {
+   "Uptown": 2
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:MothersDay|holidayPriority:minor|occupation:EMS DIRECTOR|ageGroup:adult|neighborhood:Uptown|tier:4|archetype:Connector",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|holiday:MothersDay|holidayPriority:minor|occupation:Coffee Roaster|ageGroup:youngAdult|neighborhood:Uptown|tier:4"
+  ]
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

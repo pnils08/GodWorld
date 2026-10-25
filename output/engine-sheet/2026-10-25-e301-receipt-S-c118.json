@@ -1,0 +1,39 @@
+{
+ "cycle": 118,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [],
+  "crimeWaveHoods": []
+ },
+ "levels": {
+  "Chinatown": 1,
+  "Glenview": 1
+ },
+ "risesPreCap": [],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 6,
+  "byHood": {
+   "Chinatown": 4,
+   "Glenview": 2
+  },
+  "tags": [
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|firstFriday|occupation:PROBATION & REENTRY DIRECTOR|ageGroup:adult|neighborhood:Chinatown|tier:4|qol:low",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|firstFriday|occupation:Refugee Resettlement Case Worker|ageGroup:adult|neighborhood:Chinatown|tier:4|qol:low|archetype:Caretaker",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|firstFriday|venue:local|occupation:Small Business Loan Officer|ageGroup:adult|neighborhood:Chinatown|tier:4|qol:low",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|firstFriday|occupation:Yoga Instructor|ageGroup:youngAdult|neighborhood:Chinatown|tier:4|qol:low",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|firstFriday|venue:local|occupation:Deputy Fire Chief|ageGroup:adult|neighborhood:Glenview|tier:3|qol:low",
+   "Neighborhood-Composure-Down-S|source:nbhdState|state:watchful|firstFriday|occupation:Urban garden worker|ageGroup:adult|neighborhood:Glenview|tier:4|qol:low"
+  ]
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

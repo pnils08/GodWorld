@@ -1,0 +1,117 @@
+{
+ "cycle": 127,
+ "label": "S",
+ "expect": {
+  "wave": [],
+  "lines": [],
+  "carryWave": [],
+  "calm": []
+ },
+ "hold": [],
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Ivy Hill",
+    "metric": "propertyCrime",
+    "magnitude": 10,
+    "newValue": 48
+   },
+   {
+    "neighborhood": "Dimond",
+    "metric": "propertyCrime",
+    "magnitude": 9,
+    "newValue": 49
+   },
+   {
+    "neighborhood": "Adams Point",
+    "metric": "propertyCrime",
+    "magnitude": 8,
+    "newValue": 47
+   },
+   {
+    "neighborhood": "Grand Lake",
+    "metric": "propertyCrime",
+    "magnitude": 8,
+    "newValue": 46
+   },
+   {
+    "neighborhood": "Uptown",
+    "metric": "propertyCrime",
+    "magnitude": 8,
+    "newValue": 45
+   },
+   {
+    "neighborhood": "Chinatown",
+    "metric": "propertyCrime",
+    "magnitude": 7,
+    "newValue": 47
+   },
+   {
+    "neighborhood": "Lake Merritt",
+    "metric": "propertyCrime",
+    "magnitude": 7,
+    "newValue": 41
+   },
+   {
+    "neighborhood": "Fruitvale",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 45
+   },
+   {
+    "neighborhood": "Jack London",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 42
+   },
+   {
+    "neighborhood": "San Antonio",
+    "metric": "propertyCrime",
+    "magnitude": 6,
+    "newValue": 46
+   },
+   {
+    "neighborhood": "Temescal",
+    "metric": "violentCrime",
+    "magnitude": 5,
+    "newValue": 28
+   },
+   {
+    "neighborhood": "Piedmont Ave",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 38
+   }
+  ],
+  "crimeWaveHoods": []
+ },
+ "levels": {},
+ "risesPreCap": [
+  "Ivy Hill|propertyCrime +10",
+  "Dimond|propertyCrime +9",
+  "Grand Lake|propertyCrime +8",
+  "Adams Point|propertyCrime +8",
+  "Uptown|propertyCrime +8",
+  "Lake Merritt|propertyCrime +7",
+  "Chinatown|propertyCrime +7",
+  "Fruitvale|propertyCrime +6",
+  "Jack London|propertyCrime +6",
+  "San Antonio|propertyCrime +6",
+  "Temescal|violentCrime +5",
+  "Lake Merritt|violentCrime +5",
+  "Piedmont Ave|propertyCrime +5",
+  "Eastlake|propertyCrime +5"
+ ],
+ "risesDroppedByCap": [
+  "Lake Merritt|violentCrime +5",
+  "Eastlake|propertyCrime +5"
+ ],
+ "lines": {
+  "total": 0,
+  "byHood": {},
+  "tags": []
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

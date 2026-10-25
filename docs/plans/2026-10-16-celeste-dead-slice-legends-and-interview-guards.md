@@ -113,7 +113,7 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 **Gate:** codex diff review of the exact candidate and its receipts → PROD.
 
-**Found, not built here:** the pending-create repeat branch writes positions 18 / 19, which on the live header are HolidayPriority / SportsSeason (engine.266 class) → its own ROLLOUT row. The name-only readers `recordMediaLedger_` and `logCulturalMention_` still miss an alias (codex review) — existing.
+**Found, not built here:** the pending-create repeat branch writes positions 18 / 19, which on the live header are HolidayPriority / SportsSeason (engine.266 class) → its own ROLLOUT row. The name-only readers `recordMediaLedger_` and `logCulturalMention_` still miss an alias (codex review) — existing. The bridge's category round-trip (business-figure / media-personality / cultural-leader → unknown, sports-figure → athlete on the exact-name path) → engine.315, rides engine.312.
 
 ## Status log
 

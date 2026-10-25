@@ -135,6 +135,7 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.315 | Fame bridge round-trip degrades authored categories on the exact-name path (live-reachable): it passes the row's FameCategory as the role word and classifyRole misreads business-figure / media-personality / cultural-leader → unknown, sports-figure → athlete. Rides engine.312 | ready | | [[../for-claude-review/2026-10-23-codex-engine313-plan-review]] F2 |
 | engine.314 | Cultural_Ledger same-Cycle repeat of a new entity writes positions 18 / 19 = HolidayPriority / SportsSeason on the live header (the engine.266 bug CREATE already fixed by header name). Found under engine.313 | ready | | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.313 Found |
 | engine.290 | Transit rides the sim — LIVE PROD stage 4d; re-read the transit mints on C113 (Sun 2026-10-25) | live-observing | engine-sheet / research-build | [[../plans/2026-10-15-engine-290-transit-rides-the-sim]] |
 | engine.294 | Raw "$MOOD" token in LifeHistory — fixed LIVE @138 stage 4g; re-read on C113 (Sun 2026-10-25) | live-observing | engine-sheet | commit 71637c7a; [[../reference/DEPLOY_HISTORY]] §stage 4g |

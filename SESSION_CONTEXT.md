@@ -2,7 +2,7 @@
 
 **PIN:** S600 | Day 215 | Canon C112 | PROD @162 = stage 25 (`3109503e`) | next live fire C113 Sun 2026-10-25 | stage history, expectations, rollbacks: DEPLOY_HISTORY §PROD | claude-mem observer on quota cooldown — don't restart.
 
-**NEXT[engine-sheet]:** engine.313/314/315 LIVE (PROD @162 stage 25), each bench + codex SHIP; C113 Sun 2026-10-25 smoke note only (live watch without --e313). Pushed (origin 8e35176f, research-build landed it). Next: ROLLOUT engine.301 F1, 312, 204/205/281.
+**NEXT[engine-sheet]:** engine.301 `1e6beff5` bench-proven (probe + 25-Cycle soak) + codex SHIP on code/receipts/tree; PROD BLOCKED — push can't read FIRE_ADMISSION_JSON (codex gate 3): builder go on the morning list, or engine.317. Next: engine.312 build from plan §R2.1 (graded 149/242/22). C113 Sun 10-25 smoke note stands. es+rb stack unpushed.
 
 **NEXT[research-build]:** Pushed the 34-commit stack 2026-10-25 (fa683eda→8e35176f, es confirmed). Lives seat rebuilt: thread per person + wide intake (events, households, wagers, seed-reached citizens, life tags, family passages), agy folded; EIC audit reads the two-Cycle lived record; Lives/Voices sit out empty days; reconcile honours thin flags; C112 Tamsin + Angela restored to canon. Watch Tamsin Mon 06:15 (people count, length, grade). Open: rheaAdvisory line uncommitted in newsroom-wake-packages.json (10-23 gate job); 8 es in-progress + 14 two-owner ROLLOUT rows to one owner.
 **NEXT[kimi]:** OUT for the week (usage limit 2026-10-03). Nothing queued; its civic.38 renew-move check moved to codex 2026-10-04.

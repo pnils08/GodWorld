@@ -36,7 +36,8 @@ const widen = (rows) => rows.map(r => HEADER.map((_, k) => cell(r, k)));
   const iN = 0, iR = 4, iS = 5;
 
   if (mode === 'freeze') {
-    if (fs.existsSync(OUT) && JSON.parse(fs.readFileSync(OUT, 'utf8')).applied) throw new Error(OUT + ' records an apply — not refrozen');
+    // live: one freeze per apply. bench: each run starts from a fresh reset, so a refreeze replaces the last run's file.
+    if (target === 'live' && fs.existsSync(OUT) && JSON.parse(fs.readFileSync(OUT, 'utf8')).applied) throw new Error(OUT + ' records an apply — not refrozen');
     const rows = widen(tab.slice(1));
     const manifest = [];
     rows.forEach((r, k) => { if (String(r[iN]).trim() && r[iS] === '' && r[iR] === 'processed') manifest.push({ row: k + 2, cells: r }); });

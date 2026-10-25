@@ -1,0 +1,32 @@
+AIM = BENCH (script read the bench marker)
+== engine.318 bench, stage 28 at 5ed4ceba
+stage 28 = stage 27 + 2 files at 5ed4ceba; manifest output/engine-sheet/stage28-e318.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @136
+pull-back 167 js + manifest byte-identical to stage28-e318.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C115
+rm-guard: REFUSED to delete 'output/engine-sheet/2026-10-25-e318-status-bench.json' (protected: /root/GodWorld). Use /bin/rm by hand if truly intended.
+bench frozen: 912 rows; Status blank with Reporter processed: 105; Status processed 807; other Status 0; Status blank, Reporter not processed (would read pending) 0 → /root/GodWorld/output/engine-sheet/2026-10-25-e318-status-bench.json
+bench applied: Status := processed on 105 rows; run verify
+bench verify: 105 manifest rows, 912 rows; rows the by-name reader would take as pending: 0
+PASS — every manifest Status reads processed, every other cell = the freeze
+probe laid at row 914: ["Vinnie Keane","POP-00001","mentioned","engine.318 bench probe","Maria Keen",""]; usage rows 993
+version cut; waiting 77 s more for /exec propagation
+C113 fire rc=0 "verdict": "PASS" "wallS": 242 (254 s)
+C113 probe check: usage rows added 1 (media-room 1), probe Status "processed", Reporter "Maria Keen", Engine_Errors at C113 0 (media intake 0)
+PASS
+== restore bench code to stage 27
+xargs: sha256sum: terminated by signal 13
+bench + engine.301 + engine.312 is not stage 27 — stop
+HALT restore to stage 27 failed
+BENCH LEFT: script = stage 28 at 5ed4ceba (manifest output/engine-sheet/stage28-e318.sha256); restore: bash output/engine-sheet/2026-10-25-push-e318-bench.sh stage27
+stage 27 rebuilt from the bench + six files
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @137
+pull-back 167 js + manifest byte-identical to stage27-e312.sha256

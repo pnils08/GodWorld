@@ -11,6 +11,9 @@
  *   Hospital_Ledger — stays still active that no event row carries.
  *   Household_Ledger — households formed this Cycle.
  *   Story_Hook_Deck — family / household / hospital hooks as colour.
+ *   The person's thread (beside every passage): their hospital stay in full, their other log lines
+ *   in the dump window, what Lives already wrote them, and the Tribune pieces that named them
+ *   (archive/ARTICLE_INDEX.jsonl, gate-passed only) — the record read in order, not the one event.
  * Daily, not once a Cycle: the Cycle's events are stamped at the Sunday fire and she runs
  * Mon–Fri, so each day takes the next uncovered batch and marks it in the covered list
  * (output/cron-compare/lives_covered.json, keyed by event id — the Carmen/Luis failure was
@@ -28,7 +31,7 @@ const SEAT = {
   kind: 'beat-lives', domain: 'lives', artifact: 'lives', builder: 'buildLivesSlice.js',
   version: 'LIVES-SLICE-1', nameRe: /tamsin\s*pruitt/i,
   tabs: ['Lived_Events', 'LifeHistory_Log', 'Hospital_Ledger', 'Household_Ledger', 'Story_Hook_Deck'],
-  approach: 'Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion — and the smaller moments the record kept. Each person gets their own short passage: the event, the one true detail the record carries, what they did next if the record says. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to.',
+  approach: 'Lives approach: this slice is the people something happened to this Cycle — a birth, a death in the house, a hospital stay, a retirement, a promotion — and the smaller moments the record kept. Each person gets their own passage: the event, then the thread under it — the stay or strain that led there, the other lines the record kept for them, what the Tribune or this page already said of them, and what they did next if the record says. Read the thread in order and name where two lines of it do not agree; do not restate a ledger value as the story. The fact exactly right; never a trend, never a number first; the person, not the system the event belongs to.',
   roomIsYours: 'the plain respect, what the event meant in that house or on that block, the detail the family would have picked — from the lines below, never invented',
   build
 };
@@ -102,6 +105,63 @@ function ownPageLines(root, cycle, popids) {
   return out;
 }
 
+const OWN_EVENT_TAG = /^(Recovery|Hospitalized|Critical|Birth|Retirement|Promotion|Death)$/i;
+// what happened to the person vs. the day's colour: the signal tags rank first on a thread
+const SIGNAL_TAG = /^(Strain|Friction|Relationship|Work|Career|Advancement|Education|Reputation|Household|Wedding|Marriage|Graduation|Stabilized|Faith|Promotion|LifeEvent-Promotion|Maneuver)/i;
+const THREAD_MAX = { log: 4, tribune: 3 };
+const cleanTag = t => String(t || '').split('|')[0].trim();
+
+// Gate-passed Tribune pieces that name a citizen (the article index carries the cited citizens per piece).
+function tribuneByPop(root) {
+  const byPop = new Map();
+  let text = '';
+  try { text = fs.readFileSync(path.join(root, 'archive', 'ARTICLE_INDEX.jsonl'), 'utf8'); } catch (_) { return byPop; }
+  for (const line of text.split(/\r?\n/)) {
+    if (!line.trim()) continue;
+    let a; try { a = JSON.parse(line); } catch (_) { continue; }
+    if (!(a.canon === true || a.published === true) || a.stage === 'canon-violation') continue;
+    for (const c of a.citizens || []) {
+      const k = String(c && c.popid || '').toUpperCase();
+      if (!k) continue;
+      if (!byPop.has(k)) byPop.set(k, []);
+      byPop.get(k).push(a);
+    }
+  }
+  return byPop;
+}
+
+// The person's thread, in the order the record gives it: the stay, the other log lines, what Lives and the
+// Tribune already wrote. Each line is a fact with its own source; nothing is inferred. `skipTexts` are the
+// lines the passage's own event already carries.
+function threadFor(pop, { name, skipTexts, includeStay, beats, logByPop, covered, ownId, tribune }) {
+  const who = (name || 'This person') + ' — ';
+  const skip = new Set((skipTexts || []).map(t => String(t || '').trim()).filter(Boolean));
+  const P = String(pop || '').toUpperCase();
+  const out = [];
+  if (includeStay) {
+    for (const r of beats.Hospital_Ledger || []) {
+      if (String(r.POPID || '').toUpperCase() !== P || !String(r.AdmitCycle || '').trim()) continue;
+      const done = String(r.DischargeCycle || '').trim();
+      out.push({ text: who + 'on the hospital record: admitted C' + r.AdmitCycle + (r.Cause ? ' for ' + String(r.Cause).trim() : '') +
+        (done ? ', discharged C' + done + (r.CyclesInCare ? ' after ' + r.CyclesInCare + ' cycles in care' : '') + (r.Outcome ? ', ' + String(r.Outcome).trim() : '') : ', still in care'),
+        src: 'output/beats/Hospital_Ledger.jsonl ' + (r.AdmissionId || P) });
+    }
+  }
+  const lines = (logByPop.get(P) || []).filter(r => {
+    const t = String(r.EventText || '').trim();
+    return t && !skip.has(t) && !BOOKKEEPING.test(t) && !OWN_EVENT_TAG.test(cleanTag(r.EventTag));
+  });
+  const signal = r => SIGNAL_TAG.test(cleanTag(r.EventTag));
+  const kept = lines.filter(signal).concat(lines.filter(r => !signal(r))).slice(0, THREAD_MAX.log)
+    .sort((a, b) => Number(a.Cycle) - Number(b.Cycle));
+  for (const r of kept) out.push({ text: who + 'on the log, C' + r.Cycle + ': ' + String(r.EventText).trim(), src: 'output/beats/LifeHistory_Log.jsonl @C' + r.Cycle });
+  const before = Object.entries(covered).filter(([id, v]) => id !== ownId && v && String(v.popid || '').toUpperCase() === P);
+  if (before.length) out.push({ text: who + 'Lives already wrote this person: ' + before.map(([, v]) => v.kind + ' (C' + v.cycle + ')').join(', '), src: 'output/cron-compare/lives_covered.json' });
+  const seen = (tribune.get(P) || []).slice().sort((a, b) => Number(b.cycle || 0) - Number(a.cycle || 0)).slice(0, THREAD_MAX.tribune);
+  for (const a of seen.filter(a => String(a.title || '').trim())) out.push({ text: who + 'the Tribune named them in “' + String(a.title || '').slice(0, 90) + '” (' + (a.desk || 'desk unknown') + (a.cycle != null ? ', C' + a.cycle : '') + ')', src: 'archive/ARTICLE_INDEX.jsonl ' + (a.id || '') });
+  return out;
+}
+
 function build(cycle, { root, beats, profiles }) {
   const events = (beats.Lived_Events || []).filter(e => e && e.id && e.kind);
   const log = (beats.LifeHistory_Log || []).filter(r => r && r.POPID);
@@ -113,6 +173,7 @@ function build(cycle, { root, beats, profiles }) {
   }
   const covered = readCovered(root);
   const day = localDay();
+  const tribune = tribuneByPop(root);
 
   // Today's batch of news-grade events: uncovered, heaviest first, then oldest.
   const pending = events.filter(e => !covered[e.id])
@@ -162,6 +223,7 @@ function build(cycle, { root, beats, profiles }) {
   const people = [];
   const evSrc = 'output/beats/Lived_Events.jsonl @C' + cycle;
   const logSrc = 'output/beats/LifeHistory_Log.jsonl @C' + cycle;
+  const nameOf = (pop, fallback) => String((profiles.get(String(pop).toUpperCase()) || {}).Name || fallback || '').trim();
   const addPerson = (pop, why, hood) => {
     const p = K.personFromProfile(profiles, pop, why, hood);
     if (p && !people.some(x => x.popid === p.popid)) people.push(p);
@@ -177,14 +239,17 @@ function build(cycle, { root, beats, profiles }) {
     else text += '. What came next: the record does not say yet';
     facts.push({ text, src: evSrc, id: e.id, kind: e.kind, popid: pop ? String(pop).toUpperCase() : null });
     if (!p && pop) facts[facts.length - 1].text += ' — not on the ledger snapshot; name only as the event row gives it';
+    if (pop) for (const t of threadFor(pop, { name: nameOf(pop, e.kind === 'death' ? ((e.recipients || [])[0] || {}).name : e.subjectName), skipTexts: [next && next.EventText], includeStay: e.kind === 'hospital', beats, logByPop, covered, ownId: e.id, tribune })) facts.push({ ...t, kind: 'thread', popid: String(pop).toUpperCase() });
   }
   for (const m of moments) {
     addPerson(m.pop, m.tag.toLowerCase() + ' this Cycle: ' + m.text, m.hood);
     facts.push({ text: (profiles.get(m.pop).Name || '').trim() + ' — ' + m.text + (m.hood ? ', ' + m.hood : '') + ' (C' + cycle + ', ' + m.tag + ')', src: logSrc, id: m.id, kind: 'moment', popid: m.pop });
+    for (const t of threadFor(m.pop, { name: nameOf(m.pop), skipTexts: [m.text], includeStay: false, beats, logByPop, covered, ownId: m.id, tribune })) facts.push({ ...t, kind: 'thread', popid: m.pop });
   }
   for (const s of stays) {
     addPerson(s.pop, 'still in hospital care' + (s.cause ? ' — ' + s.cause : ''), s.hood);
     facts.push({ text: (s.name || 'a citizen') + ' is still in hospital care' + (s.cause ? ' after ' + s.cause : '') + (s.admit != null ? ', admitted C' + s.admit : '') + (s.hood ? ', ' + s.hood : ''), src: 'output/beats/Hospital_Ledger.jsonl @C' + cycle, id: s.id, kind: 'stay', popid: s.pop });
+    for (const t of threadFor(s.pop, { name: nameOf(s.pop, s.name), skipTexts: [], includeStay: false, beats, logByPop, covered, ownId: s.id, tribune })) facts.push({ ...t, kind: 'thread', popid: s.pop });
   }
 
   // The person's own words this Cycle, when the lived wake landed: colour and sourcing, verbatim.
@@ -198,7 +263,7 @@ function build(cycle, { root, beats, profiles }) {
     /^(FAMILY_CRISIS|FAMILY_CELEBRATION|FAMILY_REALIZED|HOUSEHOLD_DISSOLVED|HOUSEHOLD_ARRIVED|HOUSEHOLD_FORMED|CITIZEN_HOSPITALIZED)$/).slice(0, 6);
 
   // Mark today's batch covered — the next day takes the next batch.
-  for (const f of facts) covered[f.id] = { popid: f.popid, kind: f.kind, cycle: Number(cycle), day };
+  for (const f of facts) if (f.id) covered[f.id] = { popid: f.popid, kind: f.kind, cycle: Number(cycle), day };
   writeCovered(root, covered, cycle);
 
   const lead = todays[0];
@@ -209,7 +274,7 @@ function build(cycle, { root, beats, profiles }) {
   return K.makeSlice(SEAT, cycle, beats, {
     ref: evSrc + ' ' + day, hood: (lead && lead.neighborhood) || (moments[0] && moments[0].hood) || (stays[0] && stays[0].hood) || null,
     label,
-    angle: 'The lives of C' + cycle + ', ' + day + ': ' + facts.length + ' people — ' + label,
+    angle: 'The lives of C' + cycle + ', ' + day + ': ' + facts.filter(f => f.kind !== 'thread').length + ' people — ' + label,
     hookLine: leadName + ' first. The event is the lead; one true detail; what came next only if the record says.',
     facts, people, hooks, pageVoices,
     deltas: null,

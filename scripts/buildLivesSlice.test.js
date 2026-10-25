@@ -60,14 +60,31 @@ try {
     JSON.stringify({ docId: 'd2', customId: 'cp-POP-90004-c111-PRESS', popId: 'POP-90004', cycle, slot: 'PRESS', content: 'a reporter asked and this is not her source', createdAt: '2026-01-01T00:00:00Z' })
   ].join('\n') + '\n');
 
+
+  // The thread: the discharged patient's stay in full, his other log lines (event lines and texture
+  // handled), what Lives wrote earlier, and a gate-passed Tribune piece — not an unpassed one.
+  fs.mkdirSync(path.join(root, 'archive'), { recursive: true });
+  fs.writeFileSync(path.join(root, 'archive', 'ARTICLE_INDEX.jsonl'), [
+    JSON.stringify({ id: 'a1', title: 'A passed piece naming Test Patient', desk: 'Civic', cycle: 109, canon: true, published: false, citizens: [{ name: 'Test Patient', popid: 'POP-90004' }] }),
+    JSON.stringify({ id: 'a2', title: 'A flagged piece', desk: 'Civic', cycle: 110, canon: false, stage: 'canon-violation', citizens: [{ name: 'Test Patient', popid: 'POP-90004' }] })
+  ].join('\n') + '\n');
+  beats.Hospital_Ledger.push({ AdmissionId: 'H-C106-POP-90004', POPID: 'POP-90004', Name: 'Test Patient', Neighborhood: 'Rockridge', Cause: 'severe seasonal flu', AdmitCycle: '106', StatusNow: 'active', DischargeCycle: '111', Outcome: 'recovered', CyclesInCare: '5' });
+  beats.LifeHistory_Log.push(
+    { Timestamp: 't', POPID: 'POP-90004', Name: '', EventTag: 'Recovery', EventText: 'made a full recovery', Neighborhood: '', Cycle: String(cycle) },
+    { Timestamp: 't', POPID: 'POP-90004', Name: '', EventTag: 'Friction', EventText: 'borrowed against next month to close this one', Neighborhood: '', Cycle: String(cycle) },
+    { Timestamp: 't', POPID: 'POP-90004', Name: '', EventTag: 'Daily|source:familyLife|tier:3', EventText: 'sorted a box of old things', Neighborhood: '', Cycle: String(cycle) },
+    { Timestamp: 't', POPID: 'POP-90004', Name: '', EventTag: 'Strain', EventText: 'the statement was the first thing read', Neighborhood: '', Cycle: String(cycle + 1) });
+
   // Day 1: the four heaviest events (death first), the small moment, the open stay; the discharged
   // row and the bookkeeping line never ride; a person already on the page is not a second moment.
   const day1 = L.buildLivesSlice(cycle, { root, beats, profiles });
   assert.equal(day1.empty, false);
-  assert.deepStrictEqual(day1.facts.filter(f => f.kind !== 'moment' && f.kind !== 'stay').map(f => f.kind), ['death', 'hospital', 'birth', 'retirement']);
+  assert.deepStrictEqual(day1.facts.filter(f => f.kind !== 'moment' && f.kind !== 'stay' && f.kind !== 'thread').map(f => f.kind), ['death', 'hospital', 'birth', 'retirement']);
   assert.ok(day1.facts[0].text.startsWith('Test Widow lost Test Departed'), 'a death is the survivor\'s passage: ' + day1.facts[0].text);
   assert.ok(day1.facts.some(f => f.kind === 'moment' && /Test Friend — reconnected/.test(f.text)));
-  assert.ok(!day1.facts.some(f => /Emerged into|second small moment/.test(f.text)));
+  assert.ok(!day1.facts.some(f => f.kind !== 'thread' && /Emerged into|second small moment/.test(f.text)), 'not a second moment');
+  assert.ok(day1.facts.some(f => f.kind === 'thread' && f.popid === 'POP-90001' && /second small moment/.test(f.text)), 'it is that person\'s thread instead');
+  assert.ok(!day1.facts.some(f => f.kind === 'thread' && /Emerged into/.test(f.text)), 'bookkeeping never rides a thread');
   assert.ok(day1.facts.some(f => f.kind === 'stay' && /Test Open Stay is still in hospital care/.test(f.text)));
   assert.ok(!day1.facts.some(f => /Test Discharged/.test(f.text)), 'a discharged row is not a stay');
   // "What came next" only from a LATER Cycle; the same Cycle's lines are the person's day.
@@ -79,14 +96,22 @@ try {
   assert.ok(day1.story.ref.endsWith(' ' + day1.day), 'the ref carries the day so the fanout never drops a daily seat as stale');
   assert.ok(/1 more news-grade events wait/.test(day1.prewrite.note));
 
+
+  const patientThread = day1.facts.filter(f => f.kind === 'thread' && f.popid === 'POP-90004').map(f => f.text);
+  assert.ok(patientThread[0].startsWith('Test Patient — on the hospital record: admitted C106 for severe seasonal flu, discharged C111 after 5 cycles in care, recovered'), patientThread[0]);
+  assert.ok(patientThread.some(t => /on the log, C111: borrowed against next month/.test(t)) && !patientThread.some(t => /the statement was the first thing read/.test(t)) && /Since then, on the record: the statement was the first thing read/.test(day1.facts.find(f => f.kind === 'hospital').text), 'same-cycle lines ride the thread; the later line stays in "since then" and is not said twice');
+  assert.ok(patientThread.some(t => /on the log, C111: sorted a box/.test(t)) && !patientThread.some(t => /made a full recovery/.test(t)), 'texture rides clean-tagged; the event\'s own line never repeats');
+  assert.ok(patientThread.some(t => /passed piece naming Test Patient/.test(t)) && !patientThread.some(t => /flagged piece/.test(t)), 'only gate-passed Tribune pieces');
+  assert.ok(day1.facts.findIndex(f => f.kind === 'thread' && f.popid === 'POP-90004') === day1.facts.findIndex(f => f.kind === 'hospital') + 1, 'the thread sits directly under its person\'s event');
+
   const covered = JSON.parse(fs.readFileSync(L.coveredPath(root), 'utf8'));
-  assert.equal(Object.keys(covered).length, day1.facts.length);
+  assert.equal(Object.keys(covered).length, day1.facts.filter(f => f.kind !== 'thread').length);
   assert.ok(covered['death:POP-90099:111'] && covered['death:POP-90099:111'].popid === 'POP-90005');
 
   // Day 2: the one event left (the promotion), no repeats.
   const day2 = L.buildLivesSlice(cycle, { root, beats, profiles });
   assert.equal(day2.empty, false);
-  assert.deepStrictEqual(day2.facts.map(f => f.kind), ['promotion']);
+  assert.deepStrictEqual(day2.facts.filter(f => f.kind !== 'thread').map(f => f.kind), ['promotion']);
   assert.ok(day2.facts[0].text.includes('the record lists their work as Janitor'));
 
   // Day 3: everything covered → empty, with the reason that says so.
@@ -94,7 +119,7 @@ try {
   assert.equal(day3.empty, true);
   assert.ok(/already covered/.test(day3.reason));
   // The covered list forgets nothing inside two Cycles.
-  assert.equal(Object.keys(JSON.parse(fs.readFileSync(L.coveredPath(root), 'utf8'))).length, day1.facts.length + 1);
+  assert.equal(Object.keys(JSON.parse(fs.readFileSync(L.coveredPath(root), 'utf8'))).length, day1.facts.filter(f => f.kind !== 'thread').length + 1);
 
   // Nothing in the dump → the other empty reason.
   const none = L.buildLivesSlice(cycle, { root, beats: { Lived_Events: [], LifeHistory_Log: [], Hospital_Ledger: [], Household_Ledger: [], Story_Hook_Deck: [] }, profiles });

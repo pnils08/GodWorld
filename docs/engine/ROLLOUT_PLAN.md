@@ -102,7 +102,7 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.313 | Fame registration doubles a citizen whose Cultural_Ledger row is named differently (Muralist Dante Reyes → new Dante Reyes): resolve the row by POPID. Live 0 mismatched (2026-10-24) | in-progress | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.313 |
+| engine.313 | Fame registration resolves the Cultural_Ledger row by POPID (no twin for a row named differently) — LIVE PROD @161 stage 24, bench G2 PASS, codex SHIP; smoke note C113 Sun 2026-10-25 | done-pending-archive | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.313 |
 | pipeline.81 | Celeste's dead slice: trends ranks by this-cycle movement, no-citizen Cultural rows off every slice, no "engine" in slice text, pools start from the slice's names, proximity + rest guards dropped (builder 2026-10-16). Built 10-16 (es); acceptance C112 Fri 2026-10-23 | live-observing | engine-sheet / research-build | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
 | engine.296 | Sports legends from retired MLB-origin ledger rows, no literal fallback — LIVE @143/@144; re-read on C113 (Sun 2026-10-25) | live-observing | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
 |  research.29 | UNDOCKED crossover: Moves 1–5 live (engine.291 on PROD @138). C112 live readback 2026-10-19: 46 audience lines, 15 name a C112 pilot, 0 raw tokens, 0 self-naming. Next: 2026-10-24 digest crossover block | live-observing | research-build | [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]  |
@@ -135,7 +135,7 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.315 | Fame bridge round-trip degrades authored categories on the exact-name path (live-reachable): it passes the row's FameCategory as the role word and classifyRole misreads business-figure / media-personality / cultural-leader → unknown, sports-figure → athlete. Rides engine.312 | ready | | [[../for-claude-review/2026-10-23-codex-engine313-plan-review]] F2 |
+| engine.315 | Fame bridge round-trip degrades authored categories on the exact-name path (live-reachable): it passes the row's FameCategory as the role word and classifyRole misreads business-figure / media-personality / cultural-leader → unknown, sports-figure → athlete. Rides engine.312 | ready | | [[../research/2026-10-23-codex-engine313-plan-review]] F2 |
 | engine.314 | Cultural_Ledger same-Cycle repeat of a new entity writes positions 18 / 19 = HolidayPriority / SportsSeason on the live header (the engine.266 bug CREATE already fixed by header name). Found under engine.313 | ready | | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.313 Found |
 | engine.290 | Transit rides the sim — LIVE PROD stage 4d; re-read the transit mints on C113 (Sun 2026-10-25) | live-observing | engine-sheet / research-build | [[../plans/2026-10-15-engine-290-transit-rides-the-sim]] |
 | engine.294 | Raw "$MOOD" token in LifeHistory — fixed LIVE @138 stage 4g; re-read on C113 (Sun 2026-10-25) | live-observing | engine-sheet | commit 71637c7a; [[../reference/DEPLOY_HISTORY]] §stage 4g |

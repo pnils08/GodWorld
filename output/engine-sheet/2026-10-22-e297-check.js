@@ -97,8 +97,10 @@ const BUCKETED = /^(actor|musician|influencer|journalist|chef|streamer|author|ci
   out.bucketSighted = bucketHits;
   if (final && bucketHits === 0) out.hold.push('no pre-existing non-athlete Cultural_Ledger row sighted across C' + from + '..' + cyc);
   if (e313) {
-    const nameByPop = {};
-    for (const r of led.slice(1)) nameByPop[String(r[lc('POPID')]).trim().toUpperCase()] = (String(r[lc('First')] || '') + ' ' + String(r[lc('Last')] || '')).trim();
+    const nameByPop = {};   // living citizens only (active / retired) — the pools that sight a ledger spelling admit no one else
+    for (const r of led.slice(1)) if (/^(active|retired)$/i.test(String(r[lc('Status')] || '').trim()))
+      nameByPop[String(r[lc('POPID')]).trim().toUpperCase()] = (String(r[lc('First')] || '') + ' ' + String(r[lc('Last')] || '')).trim();
+    const mcOf = v => (v === '' || v === null || v === undefined || !Number.isFinite(Number(v))) ? null : Number(v);
     const dig = await tab(SHEET, 'Riley_Digest'), dh = dig[0];
     const digRow = dig.slice(1).filter(r => (Number(r[dh.indexOf('Cycle')]) || 0) === cyc).pop();
     const famous = digRow ? String(digRow[dh.indexOf('FamousPeople')] || '').split(',').map(x => x.trim()).filter(Boolean) : null;
@@ -106,8 +108,11 @@ const BUCKETED = /^(actor|musician|influencer|journalist|chef|streamer|author|ci
     const priorFile = n => O + '2026-10-22-e297-check-' + label + '-c' + n + '.json';
     let prior = null;
     if (cyc > from) {
-      if (fs.existsSync(priorFile(cyc - 1))) prior = JSON.parse(fs.readFileSync(priorFile(cyc - 1), 'utf8')).e313state || null;
-      if (!prior) out.hold.push('engine.313: no C' + (cyc - 1) + ' ' + label + ' receipt with e313state — the per-Cycle binding needs the receipt after every fire');
+      // the previous receipt counts only as this leg's PASS for the Cycle before (codex gate 2: no reuse across labels / windows / verdicts)
+      const pj = fs.existsSync(priorFile(cyc - 1)) ? JSON.parse(fs.readFileSync(priorFile(cyc - 1), 'utf8')) : null;
+      if (pj && pj.e313state && pj.cycle === cyc - 1 && pj.label === label && pj.from === from && pj.verdict === 'PASS') prior = pj.e313state;
+      else out.hold.push('engine.313: no PASS C' + (cyc - 1) + ' ' + label + ' receipt (from C' + from + ') with e313state — ' +
+        (pj ? 'found ' + [pj.label, 'C' + pj.cycle, 'from C' + pj.from, pj.verdict].join(' / ') : 'missing') + '; the per-Cycle binding needs the receipt after every fire');
     }
     const nowById = {};
     for (const r of now.slice(1)) nowById[String(r[c('CUL-ID')]).trim()] = r;
@@ -115,18 +120,18 @@ const BUCKETED = /^(actor|musician|influencer|journalist|chef|streamer|author|ci
       const p = popOf(b[bh.indexOf('UniverseLinks')]), bName = String(b[bh.indexOf('Name')] || '').trim(), id = String(b[bh.indexOf('CUL-ID')]).trim();
       if (!p || !personal(b[bh.indexOf('FameCategory')], b[bh.indexOf('RoleType')]) || !nameByPop[p] || nameByPop[p] === bName) continue;
       const r = nowById[id];
-      const st = { mediaCount: r ? Number(r[c('MediaCount')]) || 0 : null, lastSeen: r ? seen(r[c('LastSeenCycle')]) : null, name: r ? String(r[c('Name')] || '').trim() : null };
+      const st = { mediaCount: r ? mcOf(r[c('MediaCount')]) : null, lastSeen: r ? seen(r[c('LastSeenCycle')]) : null, name: r ? String(r[c('Name')] || '').trim() : null };
       out.e313state[id] = st;
       if (!famous) continue;
       const byCitizen = famous.filter(n => n === nameByPop[p]).length, byLabel = famous.filter(n => n === bName).length;
       if (!byCitizen) continue;
-      const was = cyc === from ? { mediaCount: Number(b[bh.indexOf('MediaCount')]) || 0 } : (prior && prior[id]);
+      const was = cyc === from ? { mediaCount: mcOf(b[bh.indexOf('MediaCount')]) } : (prior && prior[id]);
       const e = { cycle: cyc, citizen: nameByPop[p], pop: p, row: id + ' "' + bName + '"', lastSeen: st.lastSeen,
         mediaCount: (was ? was.mediaCount : '?') + '→' + st.mediaCount, bound: false };
       if (byLabel) { e.why = 'its own label was sighted this Cycle too — not attributable'; out.e313.push(e); out.note.push('engine.313: ' + e.citizen + ' and ' + e.row + ' both sighted C' + cyc + ' — not bound'); continue; }
       if (!r || st.name !== bName) e.why = r ? 'renamed to "' + st.name + '"' : 'row gone';
       else if (st.lastSeen !== cyc) e.why = 'LastSeenCycle ' + st.lastSeen;
-      else if (!was) e.why = 'no prior MediaCount';
+      else if (!was || was.mediaCount === null || st.mediaCount === null) e.why = 'MediaCount not a number (prior ' + (was ? was.mediaCount : 'none') + ', now ' + st.mediaCount + ')';
       else if (st.mediaCount - was.mediaCount !== byCitizen) e.why = 'MediaCount ' + e.mediaCount + ' for ' + byCitizen + ' sighting(s)';
       else e.bound = true;
       out.e313.push(e);
@@ -134,7 +139,11 @@ const BUCKETED = /^(actor|musician|influencer|journalist|chef|streamer|author|ci
     }
     if (final) {
       let bound = out.e313.filter(x => x.bound).length;
-      for (let n = from; n < cyc; n++) if (fs.existsSync(priorFile(n))) bound += (JSON.parse(fs.readFileSync(priorFile(n), 'utf8')).e313 || []).filter(x => x.bound).length;
+      for (let n = from; n < cyc; n++) {
+        if (!fs.existsSync(priorFile(n))) continue;
+        const pj = JSON.parse(fs.readFileSync(priorFile(n), 'utf8'));
+        if (pj.cycle === n && pj.label === label && pj.from === from && pj.verdict === 'PASS') bound += (pj.e313 || []).filter(x => x.bound).length;
+      }
       if (!bound) out.hold.push('engine.313 coverage: no citizen-name sighting bound to a differently named row across C' + from + '..' + cyc + ' — the fallback was never exercised');
     }
   }

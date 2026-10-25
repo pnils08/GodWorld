@@ -18,12 +18,12 @@ const BASE = [CH, MURAL, BELL, COLE];
 
 const OUT = fs.mkdtempSync(path.join(os.tmpdir(), 'e313-receipt-'));
 // run(case, nowRows, digest {cycle: [names]}, cycle, flags) — each case its own fixture dir; receipts land in OUT/<case>
-function run(name, nowRows, digest, cycle, flags, out) {
+function run(name, nowRows, digest, cycle, flags, out, sl) {
   const fx = path.join(OUT, name + '-fx'), o = out || path.join(OUT, name);
   fs.mkdirSync(fx, { recursive: true }); fs.mkdirSync(o, { recursive: true });
   fs.writeFileSync(path.join(fx, 'base-Cultural_Ledger.json'), JSON.stringify(BASE));
   fs.writeFileSync(path.join(fx, 'now-Cultural_Ledger.json'), JSON.stringify([CH].concat(nowRows)));
-  fs.writeFileSync(path.join(fx, 'now-Simulation_Ledger.json'), JSON.stringify(SL));
+  fs.writeFileSync(path.join(fx, 'now-Simulation_Ledger.json'), JSON.stringify(sl || SL));
   fs.writeFileSync(path.join(fx, 'now-Riley_Digest.json'), JSON.stringify([['Timestamp', 'Cycle', 'FamousPeople']]
     .concat(Object.keys(digest).map(c => ['C' + c, Number(c), digest[c].join(', ')]))));
   const r = spawnSync('node', [RECEIPT, String(cycle), 'F9'].concat(flags || []), { encoding: 'utf8', env: Object.assign({}, process.env, { E297_FIXTURES: fx, E297_OUT: o }) });
@@ -64,7 +64,17 @@ run('chain113', [reached, BELL, COLE], { 113: ['Synthia Arden'] }, 113, ['--e313
 r = run('chain114', [reached, BELL, COLE], { 113: ['Synthia Arden'], 114: ['Synthor Cole'] }, 114, ['--from', '113', '--e313', '--final'], chain);
 check('--final reads the window\'s earlier receipts: a C113 binding covers a quiet C114', !r.holds.some(h => /coverage|engine\.313/.test(h)), r.holds.join(' / '));
 r = run('nochain', [reached, BELL, COLE], { 113: ['Synthia Arden'], 114: ['Synthia Arden'] }, 114, ['--from', '113', '--e313']);
-check('no previous receipt → HOLD (the binding needs the receipt after every fire)', r.holds.some(h => /no C113 F9 receipt/.test(h)), r.holds.join(' / '));
+check('no previous receipt → HOLD (the binding needs the receipt after every fire)', r.holds.some(h => /no PASS C113 F9 receipt .*missing/.test(h)), r.holds.join(' / '));
+const held = path.join(OUT, 'held');
+run('held113', [row('CUL-SYN1', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 113, 3), BELL, COLE], { 113: ['Synthia Arden'] }, 113, ['--e313'], held);
+r = run('held114', [reached, BELL, COLE], { 113: ['Synthia Arden'], 114: ['Synthor Cole'] }, 114, ['--from', '113', '--e313', '--final'], held);
+check('a previous receipt that HOLDs is not prior state and its bindings do not count (codex gate 2)',
+  r.holds.some(h => /no PASS C113 F9 receipt .*HOLD/.test(h)) && r.holds.some(h => /coverage/.test(h)), r.holds.join(' / '));
+r = run('blankmc', [row('CUL-SYN1', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 113, ''), BELL, COLE], { 113: ['Synthia Arden'] }, 113, ['--e313']);
+check('a blank MediaCount is not zero → HOLD (not a number)', r.holds.some(h => /MediaCount not a number/.test(h)), r.holds.join(' / '));
+r = run('deceased', [reached, BELL, COLE], { 113: ['Synthia Arden'] }, 113, ['--e313'], null,
+  SL.map(x => x[0] === 'POP-99101' ? ['POP-99101', 'Synthia', 'Arden', 'Deceased'] : x));
+check('a citizen who is not living is no binding candidate', r.e313.length === 0, r.all);
 r = run('nodigest', [MURAL, BELL, COLE], {}, 113, ['--e313']);
 check('no Riley_Digest row for the Cycle → HOLD', r.holds.some(h => /no Riley_Digest row for C113/.test(h)), r.holds.join(' / '));
 

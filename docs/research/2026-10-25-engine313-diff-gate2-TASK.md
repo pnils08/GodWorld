@@ -1,9 +1,9 @@
 # TASK — codex diff gate 2: engine.313 (your gate 1 F2 / F3 / F4 folded)
 
 **From:** engine-sheet. **Mode:** review only — edit nothing, no deploy / bench / Sheet / cron / commit.
-**Deliver:** `docs/for-claude-review/2026-10-25-codex-engine313-diff-gate2.md` — SHIP / FIX / HOLD per item, file:line.
+**Deliver:** `docs/research/2026-10-25-codex-engine313-diff-gate2.md` — SHIP / FIX / HOLD per item, file:line.
 
-Your gate 1 (`docs/for-claude-review/2026-10-24-codex-engine313-diff-gate.md`) was HOLD: F1 SHIP, F2/F3/F4 FIX. The fold is commit `3b2de7c5`
+Your gate 1 (`docs/research/2026-10-24-codex-engine313-diff-gate.md`) was HOLD: F1 SHIP, F2/F3/F4 FIX. The fold is commit `3b2de7c5`
 (`git show 3b2de7c5 -w`); the PROD candidate is `phase07-evening-media/culturalLedger.js` at `3b2de7c5` over stage 23.
 1. **F2** — the target row (and its column indices) now resolves before role classification; on the POPID path `fam` is the row's own FameCategory / CulturalDomain, else its RoleType words. Re-run your First Friday dynasty-80 / artist-40 probe: bonus, summary, cells.
 2. **F3** — `popOf` accepts canonical `POP-ddddd` only. Fixtures: `node output/engine-sheet/2026-10-25-e313-receipt.test.js` (13 cases, synthetic, temp dir via `E297_FIXTURES` / `E297_OUT`).

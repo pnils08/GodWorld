@@ -3,17 +3,24 @@
  "label": "R",
  "hold": [],
  "counts": {
+  "pending": 0,
   "paperCredited": 0,
   "paperNoRow": 0,
   "paperUnresolved": 0,
-  "pending": 0,
+  "sightings": 3,
   "touched": 29,
   "written": 24,
   "capped": 1,
   "created": 0,
+  "famous": 5,
   "crossedUp": [],
   "crossedDown": []
  },
+ "sightings": [
+  "Mei Chen",
+  "Vinnie Keane",
+  "Lena Cross"
+ ],
  "rows": [
   {
    "id": "CUL-3913E3E5",

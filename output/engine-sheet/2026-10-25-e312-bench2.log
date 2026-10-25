@@ -1,0 +1,30 @@
+AIM = BENCH (script read the bench marker)
+== engine.312 bench, stage 27 at 3e04d8a5, leg R, 3 Cycles
+stage 27 = stage 26 + 4 files at 3e04d8a5; manifest output/engine-sheet/stage27-e312.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @134
+pull-back 167 js + manifest byte-identical to output/engine-sheet/stage27-e312.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C115
+replay: 71 live pending C112 rows → bench; media-room probe: {"name":"Dax Monroe","popId":"POP-00769","culName":"Dax Monroe","context":"e312 bench probe: media-room copy"}
+read back: bench pending usage 71, intake probe 1; wrote /root/GodWorld/output/engine-sheet/2026-10-25-e312-probe.json
+version cut; waiting 94 s more for /exec propagation
+snap C113 R saved
+C113 fire rc=0 "verdict": "PASS" "wallS": 212 (223 s)
+C113 R PASS {"pending":71,"paperCredited":10,"paperNoRow":25,"paperUnresolved":1,"sightings":3,"touched":36,"written":31,"capped":1,"created":1,"famous":5,"crossedUp":[],"crossedDown":[]}
+C114 fire rc=0 "verdict": "PASS" "wallS": 150 (161 s)
+C114 R PASS {"pending":1,"paperCredited":0,"paperNoRow":0,"paperUnresolved":0,"sightings":3,"touched":31,"written":25,"capped":0,"created":0,"famous":5,"crossedUp":[],"crossedDown":[]}
+C115 fire rc=0 "verdict": "PASS" "wallS": 160 (172 s)
+C115 R PASS {"pending":0,"paperCredited":0,"paperNoRow":0,"paperUnresolved":0,"sightings":3,"touched":29,"written":24,"capped":1,"created":0,"famous":5,"crossedUp":[],"crossedDown":[]}
+== restore bench code to stage 25
+stage 25 rebuilt from the bench + six files
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @135
+bench code = stage 25: pull-back byte-identical to stage24-e315-G3.sha256
+engine.312 bench done
+EXIT 0

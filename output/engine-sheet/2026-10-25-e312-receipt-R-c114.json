@@ -3,17 +3,24 @@
  "label": "R",
  "hold": [],
  "counts": {
+  "pending": 1,
   "paperCredited": 0,
   "paperNoRow": 0,
   "paperUnresolved": 0,
-  "pending": 1,
+  "sightings": 3,
   "touched": 31,
   "written": 25,
   "capped": 0,
   "created": 0,
+  "famous": 5,
   "crossedUp": [],
   "crossedDown": []
  },
+ "sightings": [
+  "Mike Paulson",
+  "Sculptor Alma Vasquez",
+  "Rowan Pierce"
+ ],
  "rows": [
   {
    "id": "CUL-3913E3E5",

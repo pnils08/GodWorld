@@ -3,17 +3,24 @@
  "label": "R",
  "hold": [],
  "counts": {
+  "pending": 71,
   "paperCredited": 10,
   "paperNoRow": 25,
   "paperUnresolved": 1,
-  "pending": 71,
+  "sightings": 3,
   "touched": 36,
   "written": 31,
   "capped": 1,
   "created": 1,
+  "famous": 5,
   "crossedUp": [],
   "crossedDown": []
  },
+ "sightings": [
+  "Dante Reyes",
+  "Tara Ellison",
+  "Ernesto Quintero"
+ ],
  "rows": [
   {
    "id": "CUL-3913E3E5",
@@ -414,10 +421,11 @@
  ],
  "created": [
   {
-   "id": "CUL-29924747",
+   "id": "CUL-F4B59DFE",
    "name": "Ernesto Quintero",
    "pop": "POP-00050",
    "record": 3,
+   "sightings": 1,
    "mediaCount": 1,
    "lastSeen": "113",
    "expected": 4,

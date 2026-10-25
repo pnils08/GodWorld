@@ -11,7 +11,8 @@
  *   caller's POPID (highest-FameScore linked non-institution row, ties to the
  *   earlier row), else CREATE. UPDATE writes that row; no rescan by name.
  * - Registry entries for existing rows key by `row:<n>`; pending creates by name.
- * - A POPID-resolved row keeps its FameCategory / CulturalDomain.
+ * - A POPID-resolved row keeps its FameCategory / CulturalDomain and is classified
+ *   by them (fame bonus, summary) — never by a role word from another linked row.
  *
  * v2.6 — engine.44 Class 3 (UniverseLinks was written '' since landing):
  * - UniverseLinks (col H) now carries the entity's Simulation_Ledger POPID —
@@ -220,6 +221,62 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   var col = function(n) { return header.indexOf(n); };
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // COLUMN INDICES
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Column indices used downstream — others (FirstSeenCycle, Status,
+  // TrendTrajectory, FirstRefSource, MediaSpread, CityTier, FirstSeenHoliday)
+  // are written positionally on CREATE only; no read/update site needs the
+  // header-derived index, so they're not looked up. Resolved ahead of role
+  // classification: the engine.313 target row feeds it.
+  var iCulId = col('CUL-ID');
+  var iName = col('Name');
+  var iFameCat = col('FameCategory');
+  var iCulDom = col('CulturalDomain');
+  var iNeighborhood = col('Neighborhood');
+  var iLastSeen = col('LastSeenCycle');
+  var iMediaCount = col('MediaCount');
+  var iFameScore = col('FameScore');
+  var iLastHoliday = col('LastSeenHoliday');
+  var iCalendarContext = col('CalendarContext');
+  var iUniverse = col('UniverseLinks');
+  var iRoleType = col('RoleType');
+
+  // v2.6: POPID cross-ref for UniverseLinks (col H) — resolved once per call,
+  // used by both the CREATE row and the UPDATE empty-cell backfill below.
+  var popId = resolveLedgerPopId_(ctx, name);
+
+  // ═══════════════════════════════════════════════════════════════════════════
+  // TARGET ROW (engine.313 — one citizen, one fame row)
+  //
+  // Resolved before the registry. Exact Name first (unchanged precedence);
+  // else the caller's POPID: the highest-FameScore linked row that is not an
+  // institution (a dynasty row links its wealthiest member, engine.65), ties
+  // to the earlier row. A citizen sighted under their ledger name reaches a
+  // row named differently ("Muralist Dante Reyes") instead of minting a twin.
+  // ═══════════════════════════════════════════════════════════════════════════
+  var targetIdx = -1;
+  for (var ti = 1; ti < data.length; ti++) {
+    if ((iName >= 0 ? data[ti][iName] : data[ti][2]) === name) { targetIdx = ti; break; }
+  }
+  var byPop = false;
+  var popKey = String(popId || '').trim().toUpperCase();
+  if (targetIdx < 0 && popKey && iUniverse >= 0) {
+    var bestFame = -Infinity;
+    for (var tp = 1; tp < data.length; tp++) {
+      if (String(data[tp][iUniverse] || '').trim().toUpperCase() !== popKey) continue;
+      if (iFameCat >= 0 && String(data[tp][iFameCat] || '').trim().toLowerCase() === 'dynasty') continue;
+      if (iRoleType >= 0 && String(data[tp][iRoleType] || '').trim().toLowerCase() === 'institution') continue;
+      var tpFame = Number(data[tp][iFameScore >= 0 ? iFameScore : 11]) || 0;
+      if (tpFame > bestFame) { bestFame = tpFame; targetIdx = tp; }
+    }
+    byPop = targetIdx > 0;
+    if (byPop) {
+      Logger.log('registerCulturalEntity_: "' + name + '" -> ' + data[targetIdx][iCulId >= 0 ? iCulId : 1] +
+        ' "' + data[targetIdx][iName >= 0 ? iName : 2] + '" by ' + popKey + ' (engine.313)');
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // ROLE CLASSIFICATION
   // ═══════════════════════════════════════════════════════════════════════════
 
@@ -234,6 +291,17 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   }
 
   var fam = classifyRole(roleType);
+  // engine.313 (codex diff gate F2): a POPID-resolved row is classified as the
+  // row has itself — its own FameCategory / CulturalDomain (else its own
+  // RoleType words) drive the fame bonus and the summary. The caller's role
+  // word may come from another row linked to the citizen (the bridge reads the
+  // highest-fame linked row, a dynasty included).
+  if (byPop) {
+    var ownWords = classifyRole(String(iRoleType >= 0 ? data[targetIdx][iRoleType] || '' : ''));
+    var ownCat = String(iFameCat >= 0 ? data[targetIdx][iFameCat] || '' : '').trim();
+    var ownDom = String(iCulDom >= 0 ? data[targetIdx][iCulDom] || '' : '').trim();
+    fam = { cat: ownCat || ownWords.cat, dom: ownDom || ownWords.dom };
+  }
 
   // engine.99 Cohort 2 — core-sim hoods from Neighborhood_Map CoreSimRank (ADR-0016)
   var validNeighborhoods = getCoreSimNeighborhoods_(ctx);
@@ -338,29 +406,6 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
     }
   }
 
-  // ═══════════════════════════════════════════════════════════════════════════
-  // COLUMN INDICES
-  // ═══════════════════════════════════════════════════════════════════════════
-  // Column indices used downstream — others (RoleType, FirstSeenCycle, Status,
-  // TrendTrajectory, FirstRefSource, MediaSpread, CityTier, FirstSeenHoliday)
-  // are written positionally on CREATE only; no read/update site needs the
-  // header-derived index, so they're not looked up.
-  var iCulId = col('CUL-ID');
-  var iName = col('Name');
-  var iFameCat = col('FameCategory');
-  var iCulDom = col('CulturalDomain');
-  var iNeighborhood = col('Neighborhood');
-  var iLastSeen = col('LastSeenCycle');
-  var iMediaCount = col('MediaCount');
-  var iFameScore = col('FameScore');
-  var iLastHoliday = col('LastSeenHoliday');
-  var iCalendarContext = col('CalendarContext');
-  var iUniverse = col('UniverseLinks');
-
-  // v2.6: POPID cross-ref for UniverseLinks (col H) — resolved once per call,
-  // used by both the CREATE row and the UPDATE empty-cell backfill below.
-  var popId = resolveLedgerPopId_(ctx, name);
-
   // Build calendar context string (v2.2) — hoisted, referenced from both
   // first-call and registry-hit branches below.
   function buildCalendarContext_() {
@@ -370,37 +415,6 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
     if (isCreationDay) parts.push("CreationDay");
     if (sportsSeason !== "off-season") parts.push(sportsSeason);
     return parts.join(", ") || "";
-  }
-
-  // ═══════════════════════════════════════════════════════════════════════════
-  // TARGET ROW (engine.313 — one citizen, one fame row)
-  //
-  // Resolved before the registry. Exact Name first (unchanged precedence);
-  // else the caller's POPID: the highest-FameScore linked row that is not an
-  // institution (a dynasty row links its wealthiest member, engine.65), ties
-  // to the earlier row. A citizen sighted under their ledger name reaches a
-  // row named differently ("Muralist Dante Reyes") instead of minting a twin.
-  // ═══════════════════════════════════════════════════════════════════════════
-  var targetIdx = -1;
-  for (var ti = 1; ti < data.length; ti++) {
-    if ((iName >= 0 ? data[ti][iName] : data[ti][2]) === name) { targetIdx = ti; break; }
-  }
-  var byPop = false;
-  var popKey = String(popId || '').trim().toUpperCase();
-  if (targetIdx < 0 && popKey && iUniverse >= 0) {
-    var iRoleType = col('RoleType'), bestFame = -Infinity;
-    for (var tp = 1; tp < data.length; tp++) {
-      if (String(data[tp][iUniverse] || '').trim().toUpperCase() !== popKey) continue;
-      if (iFameCat >= 0 && String(data[tp][iFameCat] || '').trim().toLowerCase() === 'dynasty') continue;
-      if (iRoleType >= 0 && String(data[tp][iRoleType] || '').trim().toLowerCase() === 'institution') continue;
-      var tpFame = Number(data[tp][iFameScore >= 0 ? iFameScore : 11]) || 0;
-      if (tpFame > bestFame) { bestFame = tpFame; targetIdx = tp; }
-    }
-    byPop = targetIdx > 0;
-    if (byPop) {
-      Logger.log('registerCulturalEntity_: "' + name + '" -> ' + data[targetIdx][iCulId >= 0 ? iCulId : 1] +
-        ' "' + data[targetIdx][iName >= 0 ? iName : 2] + '" by ' + popKey + ' (engine.313)');
-    }
   }
 
   // ═══════════════════════════════════════════════════════════════════════════

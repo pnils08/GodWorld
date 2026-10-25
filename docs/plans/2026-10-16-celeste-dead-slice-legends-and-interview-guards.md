@@ -113,6 +113,10 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 **Gate:** codex diff review of the exact candidate and its receipts → PROD.
 
+**Bench G1 (2026-10-25, candidate `962b7547`, `output/engine-sheet/2026-10-25-e313-bench-G1.log`):** C113–C116 all PASS; minted only Martin Richards (A's player, as in F1). C116 sighted "Dante Reyes" and reached CUL-CEF9BF70 "Muralist Dante Reyes" (LastSeen 116, still artist) where F1 at C116 minted the twin CUL-B5A3A5B0.
+
+**Codex diff gate 1 (2026-10-25, `docs/for-claude-review/2026-10-24-codex-engine313-diff-gate.md`): HOLD** — F1 SHIP; F2 FIX (the caller's role word still set the fame bonus and the summary on the POPID path); F3 FIX (receipt accepted any `POP-` string; no committed fixtures); F4 FIX (final-snapshot `>=` is not path proof). **Folded:** target row resolves before role classification and a POPID-resolved row is classified by its own FameCategory / CulturalDomain (else its RoleType words); receipt joins canonical `POP-ddddd` only and binds each Cycle's citizen-name sighting to the row by MediaCount delta over the previous receipt (only the registrar writes MediaCount), label-also-sighted = not attributable, missing previous receipt = HOLD; fixtures `output/engine-sheet/2026-10-25-e313-receipt.test.js` 13/13; registrar tests 86/86 — every cell intent's row, both helper sets, registry-preloaded score / dynasty cases, the F2 bonus case and a real-bridge case (both F2 cases fail on `962b7547`). Re-bench G2, then codex gate 2.
+
 **Found, not built here:** the pending-create repeat branch writes positions 18 / 19, which on the live header are HolidayPriority / SportsSeason (engine.266 class) → its own ROLLOUT row. The name-only readers `recordMediaLedger_` and `logCulturalMention_` still miss an alias (codex review) — existing. The bridge's category round-trip (business-figure / media-personality / cultural-leader → unknown, sports-figure → athlete on the exact-name path) → engine.315, rides engine.312.
 
 ## Status log

@@ -6,11 +6,15 @@
 // the 42 retired literal pool names appears in a new row; a row sighted THIS cycle was Inactive at the baseline, or links (POP-)
 // to a citizen who is not living on the ledger now; or (end of a roll, --final) no pre-existing non-athlete row was sighted at
 // all. FameCategory / Neighborhood rewrites are the registration's own refresh (culturalLedger.js :270/:275) — not judged.
-// engine.313 (2026-10-24, codex plan review F3/F4): HOLD when a new personal row (not FameCategory dynasty / RoleType Institution, the same
-// test on both sides) carries a POPID a baseline personal row (or another new personal row) already carries — one citizen, two fame rows;
-// a new dynasty and blank links never match. --e313: each baseline row named differently from its citizen is checked against Riley_Digest
-// FamousPeople — when the citizen's ledger name was sighted in a Cycle of the window (only the fame bridge sights that spelling), the row
-// must still be there under its CUL-ID and Name with LastSeenCycle >= that Cycle; with --final, no such sighting at all = coverage HOLD.
+// engine.313 (2026-10-24, codex plan review F3/F4; diff gate 2026-10-25): HOLD when a new personal row (not FameCategory dynasty / RoleType
+// Institution, the same test on both sides) carries a POPID (canonical POP-ddddd only) a baseline personal row or an earlier new personal row
+// already carries — one citizen, two fame rows; a new dynasty, blank and malformed links never match. --e313 binds, per Cycle, a citizen-name
+// sighting to the row it reached: for each baseline personal row named differently from its citizen, when this Cycle's Riley_Digest
+// FamousPeople carries the citizen's ledger spelling (the ledger-name pools — fame bridge, A's players, legends — sight and register under
+// it) and not the row's own label, the row must keep its CUL-ID and Name, read LastSeenCycle = this Cycle, and carry MediaCount up by exactly
+// the number of those sightings over the previous Cycle's receipt (C<from>: the baseline) — only the registrar writes MediaCount. Run it after
+// every fire: a missing previous receipt is a HOLD. With --final, no bound sighting across the window's receipts = coverage HOLD.
+// E297_FIXTURES=<dir> reads <dir>/{base,now}-<tab>.json instead of the sheets and E297_OUT=<dir> moves the saved receipt (the fixture test).
 // Writes nothing to any sheet; saves output/engine-sheet/2026-10-22-e297-check-<label>-c<cycle>.json.
 // usage: node 2026-10-22-e297-check.js <cycle> <label> [--from <first>] [--final] [--base <file.json>]   (label `ctl`/`F<n>` read the bench;
 //        `live` reads live — pass --base output/engine-sheet/2026-10-22-e297-live-cultural-c112.json, the live pre-C113 snapshot) [--e313]
@@ -19,7 +23,7 @@ const LIVE = process.env.GODWORLD_SHEET_ID;
 const BENCH = '1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA', BASE = '1Mbz-sE13iu1RU4qo-rzsczjjPRKAU-KSfnQnrJNXCgA';
 if (LIVE === BENCH || LIVE === BASE) throw new Error('env already points at a bench sheet');
 const fs = require('fs');
-const O = '/root/GodWorld/output/engine-sheet/';
+const O = process.env.E297_OUT ? process.env.E297_OUT.replace(/\/?$/, '/') : '/root/GodWorld/output/engine-sheet/';
 const cyc = Number(process.argv[2]), label = process.argv[3];
 const fi = process.argv.indexOf('--from'), from = fi > 0 ? Number(process.argv[fi + 1]) : cyc;
 const final = process.argv.includes('--final'), e313 = process.argv.includes('--e313');
@@ -28,6 +32,7 @@ const SHEET = label === 'live' ? LIVE : BENCH;
 const OLD = JSON.parse('[' + /const oldNames = \[([^\]]+)\]/.exec(fs.readFileSync('/root/GodWorld/scripts/sportsWeekCity.test.js', 'utf8'))[1] + ']');
 if (OLD.length !== 42) throw new Error('expected the 42 retired pool names, read ' + OLD.length);
 async function tab(id, name) {
+  if (process.env.E297_FIXTURES) return JSON.parse(fs.readFileSync(process.env.E297_FIXTURES + '/' + (id === BASE ? 'base' : 'now') + '-' + name + '.json', 'utf8'));
   process.env.GODWORLD_SHEET_ID = id; delete require.cache[require.resolve('/root/GodWorld/lib/sheets')];
   return require('/root/GodWorld/lib/sheets').getSheetData(name);
 }
@@ -48,10 +53,10 @@ const BUCKETED = /^(actor|musician|influencer|journalist|chef|streamer|author|ci
     livingName[(String(r[lc('First')] || '') + ' ' + String(r[lc('Last')] || '')).trim().toLowerCase()] = r;
   }
   const out = { cycle: cyc, from, label, sheet: label === 'live' ? 'live' : 'bench 1004', rows: now.length - 1, baseRows: base.length - 1,
-    sighted: [], minted: [], hold: [], note: [], e313: [] };
+    sighted: [], minted: [], hold: [], note: [], e313: [], e313state: {} };
   // engine.313: personal = not a family institution, judged the same way on the baseline and the sheet
   const personal = (cat, role) => !/^dynasty$/i.test(String(cat || '').trim()) && !/^institution$/i.test(String(role || '').trim());
-  const popOf = v => { const x = String(v || '').trim().toUpperCase(); return x.indexOf('POP-') === 0 ? x : ''; };
+  const popOf = v => { const x = String(v || '').trim().toUpperCase(); return /^POP-\d{5}$/.test(x) ? x : ''; };
   const basePersonalByPop = {};
   for (const r of base.slice(1)) {
     const p = popOf(r[bh.indexOf('UniverseLinks')]);
@@ -94,25 +99,44 @@ const BUCKETED = /^(actor|musician|influencer|journalist|chef|streamer|author|ci
   if (e313) {
     const nameByPop = {};
     for (const r of led.slice(1)) nameByPop[String(r[lc('POPID')]).trim().toUpperCase()] = (String(r[lc('First')] || '') + ' ' + String(r[lc('Last')] || '')).trim();
-    const dig = await tab(SHEET, 'Riley_Digest'), dh = dig[0], famousIn = {};
-    for (const r of dig.slice(1)) {
-      const cy = Number(r[dh.indexOf('Cycle')]) || 0;
-      if (cy >= from && cy <= cyc) famousIn[cy] = String(r[dh.indexOf('FamousPeople')] || '').split(',').map(x => x.trim()).filter(Boolean);
+    const dig = await tab(SHEET, 'Riley_Digest'), dh = dig[0];
+    const digRow = dig.slice(1).filter(r => (Number(r[dh.indexOf('Cycle')]) || 0) === cyc).pop();
+    const famous = digRow ? String(digRow[dh.indexOf('FamousPeople')] || '').split(',').map(x => x.trim()).filter(Boolean) : null;
+    if (!famous) out.hold.push('engine.313: no Riley_Digest row for C' + cyc);
+    const priorFile = n => O + '2026-10-22-e297-check-' + label + '-c' + n + '.json';
+    let prior = null;
+    if (cyc > from) {
+      if (fs.existsSync(priorFile(cyc - 1))) prior = JSON.parse(fs.readFileSync(priorFile(cyc - 1), 'utf8')).e313state || null;
+      if (!prior) out.hold.push('engine.313: no C' + (cyc - 1) + ' ' + label + ' receipt with e313state — the per-Cycle binding needs the receipt after every fire');
     }
     const nowById = {};
     for (const r of now.slice(1)) nowById[String(r[c('CUL-ID')]).trim()] = r;
     for (const b of base.slice(1)) {
       const p = popOf(b[bh.indexOf('UniverseLinks')]), bName = String(b[bh.indexOf('Name')] || '').trim(), id = String(b[bh.indexOf('CUL-ID')]).trim();
       if (!p || !personal(b[bh.indexOf('FameCategory')], b[bh.indexOf('RoleType')]) || !nameByPop[p] || nameByPop[p] === bName) continue;
-      for (const cy of Object.keys(famousIn).map(Number).sort((x, y) => x - y)) {
-        if (!famousIn[cy].includes(nameByPop[p])) continue;
-        const r = nowById[id], ls = r ? seen(r[c('LastSeenCycle')]) : 0;
-        const ok = !!r && String(r[c('Name')] || '').trim() === bName && ls >= cy;
-        out.e313.push({ cycle: cy, citizen: nameByPop[p], pop: p, row: id + ' "' + bName + '"', lastSeen: ls, ok });
-        if (!ok) out.hold.push('engine.313: ' + nameByPop[p] + ' sighted C' + cy + ' but ' + id + ' "' + bName + '" was not reached (LastSeenCycle ' + ls + (r ? '' : ', row gone') + ')');
-      }
+      const r = nowById[id];
+      const st = { mediaCount: r ? Number(r[c('MediaCount')]) || 0 : null, lastSeen: r ? seen(r[c('LastSeenCycle')]) : null, name: r ? String(r[c('Name')] || '').trim() : null };
+      out.e313state[id] = st;
+      if (!famous) continue;
+      const byCitizen = famous.filter(n => n === nameByPop[p]).length, byLabel = famous.filter(n => n === bName).length;
+      if (!byCitizen) continue;
+      const was = cyc === from ? { mediaCount: Number(b[bh.indexOf('MediaCount')]) || 0 } : (prior && prior[id]);
+      const e = { cycle: cyc, citizen: nameByPop[p], pop: p, row: id + ' "' + bName + '"', lastSeen: st.lastSeen,
+        mediaCount: (was ? was.mediaCount : '?') + '→' + st.mediaCount, bound: false };
+      if (byLabel) { e.why = 'its own label was sighted this Cycle too — not attributable'; out.e313.push(e); out.note.push('engine.313: ' + e.citizen + ' and ' + e.row + ' both sighted C' + cyc + ' — not bound'); continue; }
+      if (!r || st.name !== bName) e.why = r ? 'renamed to "' + st.name + '"' : 'row gone';
+      else if (st.lastSeen !== cyc) e.why = 'LastSeenCycle ' + st.lastSeen;
+      else if (!was) e.why = 'no prior MediaCount';
+      else if (st.mediaCount - was.mediaCount !== byCitizen) e.why = 'MediaCount ' + e.mediaCount + ' for ' + byCitizen + ' sighting(s)';
+      else e.bound = true;
+      out.e313.push(e);
+      if (!e.bound) out.hold.push('engine.313: ' + e.citizen + ' sighted C' + cyc + ' but ' + e.row + ' was not reached (' + e.why + ')');
     }
-    if (final && !out.e313.length) out.hold.push('engine.313 coverage: no citizen whose fame row is named differently was sighted across C' + from + '..' + cyc + ' — the fallback was never exercised');
+    if (final) {
+      let bound = out.e313.filter(x => x.bound).length;
+      for (let n = from; n < cyc; n++) if (fs.existsSync(priorFile(n))) bound += (JSON.parse(fs.readFileSync(priorFile(n), 'utf8')).e313 || []).filter(x => x.bound).length;
+      if (!bound) out.hold.push('engine.313 coverage: no citizen-name sighting bound to a differently named row across C' + from + '..' + cyc + ' — the fallback was never exercised');
+    }
   }
   out.verdict = out.hold.length ? 'HOLD' : 'PASS';
   fs.writeFileSync(O + '2026-10-22-e297-check-' + label + '-c' + cyc + '.json', JSON.stringify(out, null, 1));
@@ -121,7 +145,7 @@ const BUCKETED = /^(actor|musician|influencer|journalist|chef|streamer|author|ci
   for (const s of out.sighted) console.log('  seen C' + s.lastSeen + ' ' + s.name + ' [' + (s.baseCategory || '-') + (s.bucket ? ', bucket' : '') + '] fame ' + s.fame);
   for (const m of out.minted) console.log('  new  ' + m.id + ' ' + m.name + ' (' + m.role + ') src ' + m.src + ' C' + m.lastSeen);
   for (const n of out.note) console.log('  note ' + n);
-  for (const x of out.e313) console.log('  e313 C' + x.cycle + ' ' + x.citizen + ' → ' + x.row + ' last seen C' + x.lastSeen + (x.ok ? ' ok' : ' MISSED'));
+  for (const x of out.e313) console.log('  e313 C' + x.cycle + ' ' + x.citizen + ' → ' + x.row + ' last seen C' + x.lastSeen + ', MediaCount ' + x.mediaCount + (x.bound ? ' bound' : ' NOT BOUND: ' + x.why));
   for (const x of out.hold) console.log('  HOLD ' + x);
   process.exit(out.hold.length ? 1 : 0);
 })().catch(e => { console.error(e.message); process.exit(2); });

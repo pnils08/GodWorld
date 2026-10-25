@@ -448,7 +448,7 @@ console.log('engine.313 — synthetic, non-canon: one citizen, one fame row (rea
   let ids = 0;
   const logs = [], helperCalls = [];
   const rsb = vm.createContext({ Logger: { log: m => logs.push(String(m)) }, Math, String, Number, Array, Object, JSON, Date,
-    safeRand_: () => () => 0.5, getCoreSimNeighborhoods_: () => ['Downtown'], sportsRung_: () => '',
+    safeRand_: () => () => 0.5, getCoreSimNeighborhoods_: () => ['Downtown'], sportsRung_: () => '', hoodNamesWithScene_: () => [],
     shortId_: () => 'syn' + (++ids), inWorldStamp_: () => 'C113' });
   ['utilities/writeIntents.js', 'phase07-evening-media/updateMediaSpread.js', 'phase07-evening-media/updateTrendTrajectory.js',
     'phase03-population/updateCityTier.js', 'phase07-evening-media/culturalLedger.js'].forEach(f => load(rsb, f));
@@ -458,15 +458,18 @@ console.log('engine.313 — synthetic, non-canon: one citizen, one fame row (rea
   }
   const LEDGER = [['POP-99101', 'Synthia', 'Arden'], ['POP-99102', 'Synthor', 'Bell']];
   // a fresh Cycle per run: mutable fake tab (the helpers write it direct), fresh ctx (resolver cache, registry, intents)
-  const run = (rows, calls, ledger) => {
+  const mkSheet = rows => {
     const v = [CH.slice()].concat(rows.map(r => r.slice()));
-    const sheet = { getDataRange: () => ({ getValues: () => v.map(r => r.slice()) }), getLastRow: () => v.length,
+    return { v, sheet: { getDataRange: () => ({ getValues: () => v.map(r => r.slice()) }), getLastRow: () => v.length,
       getLastColumn: () => CH.length,
       getRange: (r, c, nr, nc) => ({ getValues: () => v.slice(r - 1, r - 1 + (nr || 1)).map(x => x.slice(c - 1, c - 1 + (nc || 1))),
-        getValue: () => v[r - 1][c - 1], setValue: x => { v[r - 1][c - 1] = x; } }) };
+        getValue: () => v[r - 1][c - 1], setValue: x => { v[r - 1][c - 1] = x; } }) } };
+  };
+  const run = (rows, calls, ledger, extra) => {
+    const { v, sheet } = mkSheet(rows);
     rsb.ensureCulturalLedger_ = () => sheet;
     logs.length = 0; helperCalls.length = 0;
-    const ctx = { summary: { cycleId: 113, economicMood: 50 }, config: {}, ss: { getSheetByName: () => sheet },
+    const ctx = { summary: Object.assign({ cycleId: 113, economicMood: 50 }, extra || {}), config: {}, ss: { getSheetByName: () => sheet },
       ledger: { headers: ['POPID', 'First', 'Last'], rows: ledger || LEDGER } };
     const returned = [], fame = [];
     for (const [name, role] of calls) {
@@ -496,8 +499,8 @@ console.log('engine.313 — synthetic, non-canon: one citizen, one fame row (rea
     const mc = onCol(b, 'MediaCount'), fsI = onCol(b, 'FameScore'), b1 = b.fame[0] - 45, b2 = b.fame[1] - b.fame[0];
     check('engine.313: both spellings in one Cycle (' + order[0][0] + ' first) → one registry entry, one intent set, MediaCount +2, equal fame bumps',
       b.keys.join() === 'row:2' && b.appends.length === 0 && mc.length === 1 && mc[0].values[0][0] === 5 && fsI.length === 1 &&
-      b1 > 0 && b2 === b1 && onCol(b, 'LastSeenCycle').length === 1 && b.returned.every(x => x === 'CUL-SYN002'),
-      JSON.stringify({ keys: b.keys, ap: b.appends.length, mc: mc.map(u => u.values[0][0]), fame: b.fame }));
+      b1 > 0 && b2 === b1 && onCol(b, 'LastSeenCycle').length === 1 && b.returned.every(x => x === 'CUL-SYN002') && rowsHit(b) === '2',
+      JSON.stringify({ keys: b.keys, ap: b.appends.length, mc: mc.map(u => u.values[0][0]), fame: b.fame, rows: rowsHit(b) }));
     check('engine.313: … and the helpers run once on that row (' + order[0][0] + ' first)',
       b.helpers.join() === 'updateMediaSpread_@2,updateTrendTrajectory_@2,updateCityTier_@2', b.helpers.join());
   }
@@ -508,8 +511,11 @@ console.log('engine.313 — synthetic, non-canon: one citizen, one fame row (rea
     [['Synthetic Shared Label', 'artist'], ['Synthia Arden', 'artist']]);
   check('engine.313 (codex F1): an earlier row with the same label and another POPID is not the citizen\'s target, even when already registered this Cycle',
     c1.returned.join() === 'CUL-SYN010,CUL-SYN011' && c1.keys.sort().join() === 'row:2,row:3' &&
-    onCol(c1, 'MediaCount').map(u => u.address.row + ':' + u.values[0][0]).join() === '2:4,3:4' && c1.appends.length === 0,
-    JSON.stringify({ r: c1.returned, keys: c1.keys, mc: onCol(c1, 'MediaCount').map(u => u.address.row + ':' + u.values[0][0]) }));
+    onCol(c1, 'MediaCount').map(u => u.address.row + ':' + u.values[0][0]).join() === '2:4,3:4' && c1.appends.length === 0 &&
+    onCol(c1, 'FameScore').map(u => u.address.row + ':' + u.values[0][0]).join() === '2:10,3:45' &&
+    c1.helpers.join() === 'updateMediaSpread_@2,updateTrendTrajectory_@2,updateCityTier_@2,updateMediaSpread_@3,updateTrendTrajectory_@3,updateCityTier_@3',
+    JSON.stringify({ r: c1.returned, keys: c1.keys, mc: onCol(c1, 'MediaCount').map(u => u.address.row + ':' + u.values[0][0]),
+      fs: onCol(c1, 'FameScore').map(u => u.address.row + ':' + u.values[0][0]), h: c1.helpers }));
   const c2 = run([row('CUL-SYN020', 'Photographer Synthia Arden', 'Photographer', 'artist', 'POP-99101', 10),
     row('CUL-SYN021', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 40)], [['Synthia Arden', 'artist']]);
   check('engine.313 (codex F1): one POPID on two personal rows → the higher-fame row, not the first', c2.returned[0] === 'CUL-SYN021' && rowsHit(c2) === '3');
@@ -538,6 +544,58 @@ console.log('engine.313 — synthetic, non-canon: one citizen, one fame row (rea
     [['POP-99101', 'Synthia', 'Arden'], ['POP-99103', 'Synthia', 'Arden']]);
   check('engine.313: an ambiguous citizen name resolves no POPID → no fallback (never the wrong citizen)',
     c8.appends.length === 1 && c8.appends[0].values[0][C('UniverseLinks') - 1] === '' && c8.cells.length === 0);
+
+  // codex diff gate F1: the conflicting row already registered this Cycle, for the score and dynasty cases
+  const c9 = run([row('CUL-SYN090', 'Photographer Synthia Arden', 'Photographer', 'artist', 'POP-99101', 10),
+    row('CUL-SYN091', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 40)], [['Photographer Synthia Arden', 'artist'], ['Synthia Arden', 'artist']]);
+  check('engine.313 (codex gate F1): lower-fame row registered first → the citizen still reaches the higher row, each on its own intents',
+    c9.returned.join() === 'CUL-SYN090,CUL-SYN091' && c9.keys.sort().join() === 'row:2,row:3' &&
+    onCol(c9, 'MediaCount').map(u => u.address.row + ':' + u.values[0][0]).join() === '2:4,3:4' && c9.appends.length === 0,
+    JSON.stringify({ r: c9.returned, keys: c9.keys }));
+  const c10 = run([row('CUL-SYN100', 'The Arden Family', 'Institution', 'dynasty', 'POP-99101', 80),
+    row('CUL-SYN101', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 40)], [['The Arden Family', 'dynasty'], ['Synthia Arden', 'dynasty']]);
+  check('engine.313 (codex gate F1): dynasty registered first by its own name → the citizen still reaches the personal row',
+    c10.returned.join() === 'CUL-SYN100,CUL-SYN101' && c10.keys.sort().join() === 'row:2,row:3' && c10.appends.length === 0 &&
+    onCol(c10, 'FameCategory').map(u => u.address.row).join() === '2', JSON.stringify({ r: c10.returned, keys: c10.keys }));
+
+  // codex diff gate F2: on the POPID path the row's own category drives the fame bonus and the summary (First Friday: Arts +4)
+  const c11 = run([row('CUL-SYN110', 'The Arden Family', 'Institution', 'dynasty', 'POP-99101', 80),
+    row('CUL-SYN111', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 40)], [['Synthia Arden', 'dynasty']], null, { isFirstFriday: true });
+  const up11 = c11.ctx.summary.culturalEntityUpdates || [];
+  check('engine.313 (codex gate F2): a dynasty role word on the POPID path → artist bonus (40 + 5 + 4), summary artist / Arts, no category write',
+    c11.returned[0] === 'CUL-SYN111' && onCol(c11, 'FameScore').map(u => u.address.row + ':' + u.values[0][0]).join() === '3:49' &&
+    up11.length === 1 && up11[0].fameCategory === 'artist' && up11[0].domain === 'Arts' && up11[0].name === 'Muralist Synthia Arden' &&
+    onCol(c11, 'FameCategory').length === 0, JSON.stringify({ fs: onCol(c11, 'FameScore').map(u => u.values[0][0]), up: up11 }));
+
+  // codex diff gate F2, through the actual bridge: the fame bar admits the citizen, the bridge passes the dynasty's category
+  {
+    const { v, sheet } = mkSheet([row('CUL-SYN120', 'The Arden Family', 'Institution', 'dynasty', 'POP-99101', 80),
+      row('CUL-SYN121', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 40)]);
+    let picked = null;
+    const bsb = vm.createContext({ Logger: { log: () => {} }, Math, String, Number, Array, Object, JSON, Date,
+      safeRand_: () => () => 0.5, getCoreSimNeighborhoods_: () => ['Downtown'], hoodNamesWithScene_: () => [], normHood_: h => h,
+      sportsRung_: () => '', recordRipple_: () => {}, shortId_: () => 'syn' + (++ids), inWorldStamp_: () => 'C113',
+      pickRandomSet_: (pool, n) => { picked = pool.filter(p => p.name === 'Synthia Arden'); return picked.slice(0, 1); } });
+    ['utilities/writeIntents.js', 'phase07-evening-media/updateMediaSpread.js', 'phase07-evening-media/updateTrendTrajectory.js',
+      'phase03-population/updateCityTier.js', 'phase07-evening-media/culturalLedger.js', 'phase07-evening-media/buildEveningFamous.js'].forEach(f => load(bsb, f));
+    bsb.decayCulturalFame_ = () => {};
+    bsb.ensureCulturalLedger_ = () => sheet;
+    const ctx = { rng: () => 0.5, config: {}, summary: { cycleId: 113, economicMood: 50, isFirstFriday: true },
+      ss: { getSheetByName: n => n === 'Cultural_Ledger' ? sheet : null },
+      ledger: { headers: ['POPID', 'First', 'Last', 'Tier', 'ClockMode', 'Status', 'OriginGame', 'Neighborhood', 'TraitProfile', 'RoleType'],
+        rows: [['POP-99101', 'Synthia', 'Arden', 3, 'ENGINE', 'Active', '', 'Downtown', '', '']] } };
+    bsb.buildEveningFamous_(ctx);
+    const ups = ctx.persist ? ctx.persist.updates : [];
+    const fsB = ups.filter(u => u.kind === 'cell' && u.address.col === C('FameScore'));
+    const upB = ctx.summary.culturalEntityUpdates || [];
+    check('engine.313 (codex gate F2, real bridge): the dynasty-role sighting reaches the artist row, artist bonus, no append, no category write',
+      !!picked && picked.length > 0 && picked[0].role === 'dynasty' && ctx.summary.famousPeople.join() === 'Synthia Arden' &&
+      ups.filter(u => u.kind === 'append').length === 0 && fsB.map(u => u.address.row + ':' + u.values[0][0]).join() === '3:49' &&
+      !ups.some(u => u.kind === 'cell' && (u.address.row === 2 || u.address.col === C('FameCategory'))) &&
+      upB.length === 1 && upB[0].fameCategory === 'artist' && v.length === 3,
+      JSON.stringify({ picked: picked && picked.map(p => p.role), famous: ctx.summary.famousPeople, fs: fsB.map(u => u.address.row + ':' + u.values[0][0]),
+        ap: ups.filter(u => u.kind === 'append').length, up: upB }));
+  }
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

@@ -1,0 +1,46 @@
+{
+ "cycle": 113,
+ "from": 113,
+ "label": "G1",
+ "sheet": "bench 1004",
+ "rows": 53,
+ "baseRows": 53,
+ "sighted": [
+  {
+   "id": "CUL-905CBDE8",
+   "name": "Brody Kale",
+   "lastSeen": 113,
+   "baseCategory": "influencer",
+   "role": "influencer",
+   "fame": "34→39",
+   "link": "POP-01059",
+   "bucket": true
+  },
+  {
+   "id": "CUL-72BD508A",
+   "name": "Marcus Webb",
+   "lastSeen": 113,
+   "baseCategory": "author",
+   "role": "novelist",
+   "fame": "4→9",
+   "link": "POP-00790",
+   "bucket": true
+  },
+  {
+   "id": "CUL-C13B0483",
+   "name": "Claire Ashford",
+   "lastSeen": 113,
+   "baseCategory": "author",
+   "role": "author",
+   "fame": "15→20",
+   "link": "POP-01071",
+   "bucket": true
+  }
+ ],
+ "minted": [],
+ "hold": [],
+ "note": [],
+ "e313": [],
+ "bucketSighted": 3,
+ "verdict": "PASS"
+}

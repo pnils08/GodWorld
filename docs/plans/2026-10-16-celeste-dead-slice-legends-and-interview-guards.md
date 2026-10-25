@@ -109,7 +109,7 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 **Receipt (extend `output/engine-sheet/2026-10-22-e297-check.js`):** F3 — a new personal row (dynasty predicate on both sides, case- and space-insensitive) whose non-empty POPID matches a baseline personal row → HOLD naming both CUL-IDs; blank links never match; a new dynasty passes. F4 — for each baseline row named differently from its citizen, when the citizen's ledger name is in that Cycle's Riley_Digest famous list (`godWorldEngine2.js:2002`), the row's LastSeenCycle is that Cycle; `--final` with no such hit → coverage HOLD.
 
-**Bench:** stage 23 + this file from the B start (baseline reset, the mismatched names kept), C113 then C114–C116; e297 F1 (same start) minted Dante Reyes and is the before. **Held for the builder:** bench use was stopped 2026-10-23 ("You're not allowed to touch the sandbox anymore", DEPLOY_HISTORY stage 23); the job model of the same day keeps bench in the lifecycle.
+**Bench:** stage 23 + this file from the B start (baseline reset, the mismatched names kept), C113 then C114–C116; e297 F1 (same start) minted Dante Reyes and is the before. **Held for the builder:** bench use was stopped 2026-10-23 ("You're not allowed to touch the sandbox anymore", DEPLOY_HISTORY stage 23); the job model of the same day keeps bench in the lifecycle. **Builder 2026-10-25:** chose "Bench it" for engine.313; on codex: "That’s was for a bad night codex can take the review from you".
 
 **Gate:** codex diff review of the exact candidate and its receipts → PROD.
 

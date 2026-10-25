@@ -91,6 +91,30 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 **Builder 2026-10-23, chose "The paper (Recommended)" (verbatim option):** "Fame rises when a citizen is named in a published piece; a sighting is a result of fame and adds 1 point. Today's scores get re-based from each person's paper record, fading stays, and fame stops at 100." Design + build are engine-sheet's; the re-base is a live Cultural_Ledger data change — dry run with every row old → new, then apply and read back.
 
+## engine.313 — one citizen, one fame row (engine-sheet, 2026-10-24)
+
+**Defect:** `registerCulturalEntity_` resolves the caller's POPID (`culturalLedger.js:354`) but picks the existing row by exact Name only (`:426-431`); a miss appends a new row carrying that POPID (`:535-571`). The fame bridge (`buildEveningFamous.js:229-243`) sights a citizen under their Simulation_Ledger name, so "Muralist Dante Reyes" gains a twin "Dante Reyes" (bench F1 + control 2026-10-22, DEPLOY_HISTORY stage 22 §Found).
+
+**Measured 2026-10-24 (Cultural_Ledger × Simulation_Ledger by UniverseLinks):** live — 50 rows, 0 personal rows named differently from the linked citizen, 0 citizens with two personal rows, 0 dynasty rows. Bench baseline `BASELINE-1004-C112b` — 10 named differently, 4 at the fame bar (Evan Morello 71 / citizen Everson Morello, Sculptor Alma Vasquez 53, Muralist Dante Reyes 45, Gallery Owner Mei Chen 33). Nothing on live to merge; the fix closes the mechanism.
+
+**Build (`registerCulturalEntity_` only; codex plan review `docs/for-claude-review/2026-10-23-codex-engine313-plan-review.md` F1–F4 folded):**
+1. Resolve the target row before the registry: exact Name first (old precedence, unchanged) → else, with a resolved POPID, the highest-FameScore linked row that is not an institution (FameCategory `dynasty` or RoleType `Institution`), ties to the earliest row → else CREATE.
+2. UPDATE writes the resolved row; no rescan by name (F1).
+3. The registry key for an existing row is the row (`row:<n>`), so both spellings land on one entry and one intent set; pending-create stays keyed by name.
+4. On the POPID path FameCategory / CulturalDomain are not refreshed — the row's own metadata stands, so a dynasty-derived role cannot overwrite a personal row (F2). The exact-name path keeps its refresh.
+5. No Status filter (UPDATE never reactivates a row). One log line per POPID resolution, for the bench read.
+6. The bridge and `culturalStatusByPop_` are untouched (that map also weights recognition events, `generateCitizensEvents.js:2956`).
+
+**Tests (engine.313 block in `scripts/sportsWeekCity.test.js`: the real registrar, real write intents and the three real helpers on a mutable fake sheet; synthetic non-canon rows):** a citizen-name call updates the differently named linked row (CUL-ID / Name / UniverseLinks unchanged, 0 appends); both spellings in one Cycle, in both orders → one registry entry, one intent set, MediaCount +2, the second fame bump equal to the first, each helper once on that row; F1 collisions — an earlier row with the same label and another POPID, one POPID on two personal rows at different scores, a dynasty row first → the caller's highest personal row; an equal-score tie → the earlier row; dynasty-only link → CREATE; dynasty 80 + personal artist 40 with role `dynasty` → the artist row, still `artist`; exact-name precedence and unresolved-name CREATE unchanged.
+
+**Receipt (extend `output/engine-sheet/2026-10-22-e297-check.js`):** F3 — a new personal row (dynasty predicate on both sides, case- and space-insensitive) whose non-empty POPID matches a baseline personal row → HOLD naming both CUL-IDs; blank links never match; a new dynasty passes. F4 — for each baseline row named differently from its citizen, when the citizen's ledger name is in that Cycle's Riley_Digest famous list (`godWorldEngine2.js:2002`), the row's LastSeenCycle is that Cycle; `--final` with no such hit → coverage HOLD.
+
+**Bench:** stage 23 + this file from the B start (baseline reset, the mismatched names kept), C113 then C114–C116; e297 F1 (same start) minted Dante Reyes and is the before. **Held for the builder:** bench use was stopped 2026-10-23 ("You're not allowed to touch the sandbox anymore", DEPLOY_HISTORY stage 23); the job model of the same day keeps bench in the lifecycle.
+
+**Gate:** codex diff review of the exact candidate and its receipts → PROD.
+
+**Found, not built here:** the pending-create repeat branch writes positions 18 / 19, which on the live header are HolidayPriority / SportsSeason (engine.266 class) → its own ROLLOUT row. The name-only readers `recordMediaLedger_` and `logCulturalMention_` still miss an alias (codex review) — existing.
+
 ## Status log
 
 ### engine.296 — status (drained from ROLLOUT, 2026-10-22 / S592)
@@ -103,6 +127,7 @@ Fame sightings draw from the Cultural_Ledger (builder 2026-10-17: "the fame sigh
 
 ## Changelog
 
+- 2026-10-24 (engine-sheet) — engine.313 opened: plan section written, codex plan review F1–F4 folded, live measured 0 mismatched.
 - 2026-10-23 (engine-sheet) — engine.312 ruled "The paper": fame from published naming, sighting +1, re-base from the record, fading stays, ceiling 100.
 - 2026-10-23 (engine-sheet) — engine.312 filed: builder "1 point a sighting", then "Never heard of any of them so the fame score is broken"; live measure recorded under §engine.312.
 - 2026-10-22 (engine-sheet) — Task 9 / engine.297 LIVE PROD @159 (stage 22) after the rollout stale check found the codex patch unapplied since 10-17; build notes above.

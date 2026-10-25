@@ -437,5 +437,108 @@ console.log('engine.297 — synthetic, non-canon Cultural_Ledger buckets');
   check('engine.297: none of the ' + oldNames.length + ' former literal names survives in source', oldNames.every(n => !source.includes(n)));
 }
 
+console.log('engine.313 — synthetic, non-canon: one citizen, one fame row (real registrar, intents, helpers)');
+{
+  const CH = ['Timestamp', 'CUL-ID', 'Name', 'RoleType', 'FameCategory', 'CulturalDomain', 'Status', 'UniverseLinks',
+    'FirstSeenCycle', 'LastSeenCycle', 'MediaCount', 'FameScore', 'TrendTrajectory', 'FirstRefSource', 'MediaSpread',
+    'CityTier', 'Neighborhood', 'Holiday', 'HolidayPriority', 'SportsSeason'];
+  const C = n => CH.indexOf(n) + 1;   // 1-based, as the intents address it
+  const row = (id, name, role, cat, pop, fame) => ['C100', id, name, role, cat, cat === 'dynasty' ? 'Community' : 'Arts', 'Active', pop,
+    100, 100, 3, fame, 'stable', '', 1, 'Local', '', '', '', ''];
+  let ids = 0;
+  const logs = [], helperCalls = [];
+  const rsb = vm.createContext({ Logger: { log: m => logs.push(String(m)) }, Math, String, Number, Array, Object, JSON, Date,
+    safeRand_: () => () => 0.5, getCoreSimNeighborhoods_: () => ['Downtown'], sportsRung_: () => '',
+    shortId_: () => 'syn' + (++ids), inWorldStamp_: () => 'C113' });
+  ['utilities/writeIntents.js', 'phase07-evening-media/updateMediaSpread.js', 'phase07-evening-media/updateTrendTrajectory.js',
+    'phase03-population/updateCityTier.js', 'phase07-evening-media/culturalLedger.js'].forEach(f => load(rsb, f));
+  for (const fn of ['updateMediaSpread_', 'updateTrendTrajectory_', 'updateCityTier_']) {
+    const real = rsb[fn];
+    rsb[fn] = function (sheet, r) { helperCalls.push(fn + '@' + r); return real.apply(null, arguments); };
+  }
+  const LEDGER = [['POP-99101', 'Synthia', 'Arden'], ['POP-99102', 'Synthor', 'Bell']];
+  // a fresh Cycle per run: mutable fake tab (the helpers write it direct), fresh ctx (resolver cache, registry, intents)
+  const run = (rows, calls, ledger) => {
+    const v = [CH.slice()].concat(rows.map(r => r.slice()));
+    const sheet = { getDataRange: () => ({ getValues: () => v.map(r => r.slice()) }), getLastRow: () => v.length,
+      getLastColumn: () => CH.length,
+      getRange: (r, c, nr, nc) => ({ getValues: () => v.slice(r - 1, r - 1 + (nr || 1)).map(x => x.slice(c - 1, c - 1 + (nc || 1))),
+        getValue: () => v[r - 1][c - 1], setValue: x => { v[r - 1][c - 1] = x; } }) };
+    rsb.ensureCulturalLedger_ = () => sheet;
+    logs.length = 0; helperCalls.length = 0;
+    const ctx = { summary: { cycleId: 113, economicMood: 50 }, config: {}, ss: { getSheetByName: () => sheet },
+      ledger: { headers: ['POPID', 'First', 'Last'], rows: ledger || LEDGER } };
+    const returned = [], fame = [];
+    for (const [name, role] of calls) {
+      returned.push(rsb.registerCulturalEntity_(ctx, name, role, 'SystemEngine', ''));
+      const fs = ctx.persist.updates.find(u => u.kind === 'cell' && u.address.col === C('FameScore'));
+      fame.push(fs ? fs.values[0][0] : null);
+    }
+    const ups = ctx.persist.updates;
+    return { ctx, v, returned, fame, ups, cells: ups.filter(u => u.kind === 'cell'), appends: ups.filter(u => u.kind === 'append'),
+      keys: Object.keys(ctx.summary.culturalRegistry), helpers: helperCalls.slice(), logs: logs.slice() };
+  };
+  const onCol = (res, col) => res.cells.filter(u => u.address.col === C(col));
+  const rowsHit = res => [...new Set(res.cells.map(u => u.address.row))].join();
+
+  const a = run([row('CUL-SYN001', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 45)], [['Synthia Arden', 'artist']]);
+  check('engine.313: a citizen-name call updates the linked row named differently — same CUL-ID, no new row',
+    a.returned[0] === 'CUL-SYN001' && a.appends.length === 0 && rowsHit(a) === '2', JSON.stringify({ r: a.returned, ap: a.appends.length, rows: rowsHit(a) }));
+  check('engine.313: CUL-ID, Name and UniverseLinks are never written; the row keeps its own FameCategory / CulturalDomain',
+    !a.cells.some(u => [C('CUL-ID'), C('Name'), C('UniverseLinks'), C('FameCategory'), C('CulturalDomain')].includes(u.address.col)) &&
+    a.v[1][C('Name') - 1] === 'Muralist Synthia Arden' && a.v[1][C('FameCategory') - 1] === 'artist');
+  check('engine.313: each direct helper runs once, on that row; the resolution is logged',
+    a.helpers.join() === 'updateMediaSpread_@2,updateTrendTrajectory_@2,updateCityTier_@2' && a.logs.some(l => /engine\.313/.test(l) && /CUL-SYN001/.test(l)),
+    a.helpers.join() + ' | ' + a.logs.join(' / '));
+
+  for (const order of [[['Synthia Arden', 'artist'], ['Muralist Synthia Arden', 'artist']], [['Muralist Synthia Arden', 'artist'], ['Synthia Arden', 'artist']]]) {
+    const b = run([row('CUL-SYN002', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 45)], order);
+    const mc = onCol(b, 'MediaCount'), fsI = onCol(b, 'FameScore'), b1 = b.fame[0] - 45, b2 = b.fame[1] - b.fame[0];
+    check('engine.313: both spellings in one Cycle (' + order[0][0] + ' first) → one registry entry, one intent set, MediaCount +2, equal fame bumps',
+      b.keys.join() === 'row:2' && b.appends.length === 0 && mc.length === 1 && mc[0].values[0][0] === 5 && fsI.length === 1 &&
+      b1 > 0 && b2 === b1 && onCol(b, 'LastSeenCycle').length === 1 && b.returned.every(x => x === 'CUL-SYN002'),
+      JSON.stringify({ keys: b.keys, ap: b.appends.length, mc: mc.map(u => u.values[0][0]), fame: b.fame }));
+    check('engine.313: … and the helpers run once on that row (' + order[0][0] + ' first)',
+      b.helpers.join() === 'updateMediaSpread_@2,updateTrendTrajectory_@2,updateCityTier_@2', b.helpers.join());
+  }
+
+  // F1 — the selected row is the write target; no rescan by label
+  const c1 = run([row('CUL-SYN010', 'Synthetic Shared Label', 'artist', 'artist', 'POP-99102', 5),
+    row('CUL-SYN011', 'Synthetic Shared Label', 'artist', 'artist', 'POP-99101', 40)],
+    [['Synthetic Shared Label', 'artist'], ['Synthia Arden', 'artist']]);
+  check('engine.313 (codex F1): an earlier row with the same label and another POPID is not the citizen\'s target, even when already registered this Cycle',
+    c1.returned.join() === 'CUL-SYN010,CUL-SYN011' && c1.keys.sort().join() === 'row:2,row:3' &&
+    onCol(c1, 'MediaCount').map(u => u.address.row + ':' + u.values[0][0]).join() === '2:4,3:4' && c1.appends.length === 0,
+    JSON.stringify({ r: c1.returned, keys: c1.keys, mc: onCol(c1, 'MediaCount').map(u => u.address.row + ':' + u.values[0][0]) }));
+  const c2 = run([row('CUL-SYN020', 'Photographer Synthia Arden', 'Photographer', 'artist', 'POP-99101', 10),
+    row('CUL-SYN021', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 40)], [['Synthia Arden', 'artist']]);
+  check('engine.313 (codex F1): one POPID on two personal rows → the higher-fame row, not the first', c2.returned[0] === 'CUL-SYN021' && rowsHit(c2) === '3');
+  const c3 = run([row('CUL-SYN030', 'The Arden Family', 'Institution', 'dynasty', 'POP-99101', 80),
+    row('CUL-SYN031', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 40)], [['Synthia Arden', 'dynasty']]);
+  check('engine.313 (codex F1/F2): a higher-fame dynasty row first → the personal row; its category stays artist, the family row untouched',
+    c3.returned[0] === 'CUL-SYN031' && rowsHit(c3) === '3' && onCol(c3, 'FameCategory').length === 0 && onCol(c3, 'CulturalDomain').length === 0 &&
+    c3.v[2][C('FameCategory') - 1] === 'artist' && c3.v[1].join() === row('CUL-SYN030', 'The Arden Family', 'Institution', 'dynasty', 'POP-99101', 80).join(),
+    JSON.stringify({ r: c3.returned, rows: rowsHit(c3) }));
+  const c4 = run([row('CUL-SYN040', 'Photographer Synthia Arden', 'Photographer', 'artist', 'POP-99101', 30),
+    row('CUL-SYN041', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 30)], [['Synthia Arden', 'artist']]);
+  check('engine.313: an equal-fame tie goes to the earlier row', c4.returned[0] === 'CUL-SYN040' && rowsHit(c4) === '2');
+  const c5 = run([row('CUL-SYN050', 'The Arden Family', 'Institution', 'dynasty', 'POP-99101', 80)], [['Synthia Arden', 'dynasty']]);
+  check('engine.313: a dynasty-only link is no personal row → CREATE under the citizen name and POPID; the family row untouched',
+    c5.appends.length === 1 && c5.appends[0].values[0][C('Name') - 1] === 'Synthia Arden' && c5.appends[0].values[0][C('UniverseLinks') - 1] === 'POP-99101' &&
+    c5.cells.length === 0 && c5.helpers.length === 0);
+  const c6 = run([row('CUL-SYN060', 'Synthia Arden', 'artist', 'artist', 'POP-99999', 5),
+    row('CUL-SYN061', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 40)], [['Synthia Arden', 'author']]);
+  check('engine.313: exact Name still wins (old precedence, its category refresh kept)',
+    c6.returned[0] === 'CUL-SYN060' && rowsHit(c6) === '2' && onCol(c6, 'FameCategory').map(u => u.values[0][0]).join() === 'author' &&
+    !c6.logs.some(l => /engine\.313/.test(l)));
+  const c7 = run([row('CUL-SYN070', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 40)], [['Synthetic Stranger', 'artist']]);
+  check('engine.313: an unresolved name creates as before (blank link)',
+    c7.appends.length === 1 && c7.appends[0].values[0][C('UniverseLinks') - 1] === '' && c7.cells.length === 0);
+  const c8 = run([row('CUL-SYN080', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 40)], [['Synthia Arden', 'artist']],
+    [['POP-99101', 'Synthia', 'Arden'], ['POP-99103', 'Synthia', 'Arden']]);
+  check('engine.313: an ambiguous citizen name resolves no POPID → no fallback (never the wrong citizen)',
+    c8.appends.length === 1 && c8.appends[0].values[0][C('UniverseLinks') - 1] === '' && c8.cells.length === 0);
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed) process.exitCode = 1;

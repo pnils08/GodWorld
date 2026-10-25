@@ -77,7 +77,6 @@
 | research.30 | Discord voices connected (builder 2026-10-19): brief, search first, Paulson bonds, talk recorder LIVE. Read 2026-10-25: first Cycle drain of DISCORD rows (C113) | live-observing | research-build | [[../plans/2026-10-19-discord-voices-connected]] |
 | pipeline.71 | Each hood read against its own canon: every hood's INSTITUTIONS character is its own baseline and its own numbers say whether it lives up to it (builder 2026-10-20; the one-axis tech-boom design is superseded). Rewrite with the builder: which numbers express each hood's character | needs-info | research-build / engine-sheet | [[../plans/2026-10-20-hood-character-standing]] |
 | engine.312 | Fame score is broken (builder 2026-10-23): fame tracked sightings of the old literal names, not the paper. Ruled: fame rises when a citizen is named in a published piece, a sighting adds 1, re-base from the record, fading stays, ceiling 100 | ready | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.312 |
-| engine.313 | Fame bridge mints a duplicate Cultural_Ledger row: a citizen admitted at FameScore ≥ 25 is registered under their Simulation_Ledger name, so a row named differently (Muralist Dante Reyes → new Dante Reyes) doubles. Found on bench F1 + control 2026-10-22 | ready | engine-sheet | DEPLOY_HISTORY §PROD stage 22 |
 
 ## 2. Waiting on a fire — dated or organic
 
@@ -103,6 +102,7 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.313 | Fame registration doubles a citizen whose Cultural_Ledger row is named differently (Muralist Dante Reyes → new Dante Reyes): resolve the row by POPID. Live 0 mismatched (2026-10-24) | in-progress | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.313 |
 | pipeline.81 | Celeste's dead slice: trends ranks by this-cycle movement, no-citizen Cultural rows off every slice, no "engine" in slice text, pools start from the slice's names, proximity + rest guards dropped (builder 2026-10-16). Built 10-16 (es); acceptance C112 Fri 2026-10-23 | live-observing | engine-sheet / research-build | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
 | engine.296 | Sports legends from retired MLB-origin ledger rows, no literal fallback — LIVE @143/@144; re-read on C113 (Sun 2026-10-25) | live-observing | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
 |  research.29 | UNDOCKED crossover: Moves 1–5 live (engine.291 on PROD @138). C112 live readback 2026-10-19: 46 audience lines, 15 name a C112 pilot, 0 raw tokens, 0 self-naming. Next: 2026-10-24 digest crossover block | live-observing | research-build | [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]  |
@@ -135,6 +135,7 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.314 | Cultural_Ledger same-Cycle repeat of a new entity writes positions 18 / 19 = HolidayPriority / SportsSeason on the live header (the engine.266 bug CREATE already fixed by header name). Found under engine.313 | ready | | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.313 Found |
 | engine.290 | Transit rides the sim — LIVE PROD stage 4d; re-read the transit mints on C113 (Sun 2026-10-25) | live-observing | engine-sheet / research-build | [[../plans/2026-10-15-engine-290-transit-rides-the-sim]] |
 | engine.294 | Raw "$MOOD" token in LifeHistory — fixed LIVE @138 stage 4g; re-read on C113 (Sun 2026-10-25) | live-observing | engine-sheet | commit 71637c7a; [[../reference/DEPLOY_HISTORY]] §stage 4g |
 | engine.295 | Owner draw → the money game: design session rb + builder, builds from the plan's Task 6. Household map written 2026-10-22; its §6: calls 1,2,4,5,6 ruled 2026-10-22 (Roots $25M, any household row, MaritalStatus; CIV/MED fame only; no rungs), call 3 left simple | needs-info | research-build | [[../plans/2026-10-16-the-money-game]] · [[../plans/2026-10-22-household-to-heritage-map]] |

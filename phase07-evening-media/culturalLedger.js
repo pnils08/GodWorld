@@ -1,9 +1,17 @@
 /**
  * ============================================================================
- * registerCulturalEntity_ v2.6 (engine.44 Class 3 — UniverseLinks POPID)
+ * registerCulturalEntity_ v2.7 (engine.313 — one citizen, one fame row)
  * ============================================================================
  *
  * Automatically classifies and registers cultural entities with calendar awareness.
+ *
+ * v2.7 — engine.313 (a citizen registered under their ledger name doubled a
+ * linked row named differently — Muralist Dante Reyes → a new Dante Reyes):
+ * - The target row resolves before the registry: exact Name, else the
+ *   caller's POPID (highest-FameScore linked non-institution row, ties to the
+ *   earlier row), else CREATE. UPDATE writes that row; no rescan by name.
+ * - Registry entries for existing rows key by `row:<n>`; pending creates by name.
+ * - A POPID-resolved row keeps its FameCategory / CulturalDomain.
  *
  * v2.6 — engine.44 Class 3 (UniverseLinks was written '' since landing):
  * - UniverseLinks (col H) now carries the entity's Simulation_Ledger POPID —
@@ -365,15 +373,49 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   }
 
   // ═══════════════════════════════════════════════════════════════════════════
+  // TARGET ROW (engine.313 — one citizen, one fame row)
+  //
+  // Resolved before the registry. Exact Name first (unchanged precedence);
+  // else the caller's POPID: the highest-FameScore linked row that is not an
+  // institution (a dynasty row links its wealthiest member, engine.65), ties
+  // to the earlier row. A citizen sighted under their ledger name reaches a
+  // row named differently ("Muralist Dante Reyes") instead of minting a twin.
+  // ═══════════════════════════════════════════════════════════════════════════
+  var targetIdx = -1;
+  for (var ti = 1; ti < data.length; ti++) {
+    if ((iName >= 0 ? data[ti][iName] : data[ti][2]) === name) { targetIdx = ti; break; }
+  }
+  var byPop = false;
+  var popKey = String(popId || '').trim().toUpperCase();
+  if (targetIdx < 0 && popKey && iUniverse >= 0) {
+    var iRoleType = col('RoleType'), bestFame = -Infinity;
+    for (var tp = 1; tp < data.length; tp++) {
+      if (String(data[tp][iUniverse] || '').trim().toUpperCase() !== popKey) continue;
+      if (iFameCat >= 0 && String(data[tp][iFameCat] || '').trim().toLowerCase() === 'dynasty') continue;
+      if (iRoleType >= 0 && String(data[tp][iRoleType] || '').trim().toLowerCase() === 'institution') continue;
+      var tpFame = Number(data[tp][iFameScore >= 0 ? iFameScore : 11]) || 0;
+      if (tpFame > bestFame) { bestFame = tpFame; targetIdx = tp; }
+    }
+    byPop = targetIdx > 0;
+    if (byPop) {
+      Logger.log('registerCulturalEntity_: "' + name + '" -> ' + data[targetIdx][iCulId >= 0 ? iCulId : 1] +
+        ' "' + data[targetIdx][iName >= 0 ? iName : 2] + '" by ' + popKey + ' (engine.313)');
+    }
+  }
+
+  // ═══════════════════════════════════════════════════════════════════════════
   // PER-CYCLE REGISTRY (v2.5 — §B6 dedup hazard fix)
   //
-  // Stores `{ culId, kind, accum, intents }` per entity name registered this
-  // cycle. `intents` are object references returned by queue* helpers;
-  // mutating their `values` array re-targets the persistence executor's
-  // future cell/append write to the new value (no re-queueing, no LWW games).
+  // Stores `{ culId, kind, accum, intents }` per entity registered this cycle:
+  // an existing row under `row:<n>` (engine.313 — every spelling of one
+  // citizen lands on one entry), a pending create under its name. `intents`
+  // are object references returned by queue* helpers; mutating their `values`
+  // array re-targets the persistence executor's future cell/append write to
+  // the new value (no re-queueing, no LWW games).
   // ═══════════════════════════════════════════════════════════════════════════
   ctx.summary.culturalRegistry = ctx.summary.culturalRegistry || {};
-  var reg = ctx.summary.culturalRegistry[name];
+  var regKey = targetIdx > 0 ? 'row:' + (targetIdx + 1) : name;
+  var reg = ctx.summary.culturalRegistry[regKey];
 
   // ───── REPEAT CALL: snapshot-UPDATE branch ─────
   // Entity existed in pre-cycle committed state; first call this cycle queued
@@ -423,104 +465,108 @@ function registerCulturalEntity_(ctx, name, roleType, journalistName, neighborho
   // ═══════════════════════════════════════════════════════════════════════════
   // UPDATE IF EXISTS (snapshot path — first call this cycle for the entity)
   // ═══════════════════════════════════════════════════════════════════════════
-  for (var i = 1; i < data.length; i++) {
-    var rowName = iName >= 0 ? data[i][iName] : data[i][2];
+  if (targetIdx > 0) {
+    var i = targetIdx;
+    var rowName = iName >= 0 ? data[i][iName] : data[i][2];   // the row's own label (differs from `name` on the POPID path)
 
-    if (rowName === name) {
 
-      var rowNum = i + 1;
-      var intents = {};
+    var rowNum = i + 1;
+    var intents = {};
 
-      // LastSeenCycle
-      if (iLastSeen >= 0) {
-        intents.lastSeen = queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iLastSeen + 1, cycle, 'registerCulturalEntity_: LastSeenCycle', 'media');
-      }
+    // LastSeenCycle
+    if (iLastSeen >= 0) {
+      intents.lastSeen = queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iLastSeen + 1, cycle, 'registerCulturalEntity_: LastSeenCycle', 'media');
+    }
 
-      // MediaCount
-      var mcCol = iMediaCount >= 0 ? iMediaCount : 10;
-      var mc = Number(data[i][mcCol] || 0) + 1;
-      intents.mediaCount = queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, mcCol + 1, mc, 'registerCulturalEntity_: MediaCount', 'media');
+    // MediaCount
+    var mcCol = iMediaCount >= 0 ? iMediaCount : 10;
+    var mc = Number(data[i][mcCol] || 0) + 1;
+    intents.mediaCount = queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, mcCol + 1, mc, 'registerCulturalEntity_: MediaCount', 'media');
 
-      // FameScore with calendar bonus
-      var fsCol = iFameScore >= 0 ? iFameScore : 11;
-      var baseFame = Number(data[i][fsCol] || 0);
-      var newFame = baseFame + 5 + fameBonus;
-      intents.fameScore = queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, fsCol + 1, newFame, 'registerCulturalEntity_: FameScore', 'media');
+    // FameScore with calendar bonus
+    var fsCol = iFameScore >= 0 ? iFameScore : 11;
+    var baseFame = Number(data[i][fsCol] || 0);
+    var newFame = baseFame + 5 + fameBonus;
+    intents.fameScore = queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, fsCol + 1, newFame, 'registerCulturalEntity_: FameScore', 'media');
 
-      // FameCategory + Domain refresh
+    // FameCategory + Domain refresh — exact-name path only. On the POPID path
+    // the row's own metadata stands (engine.313): the caller's role word may
+    // come from another row linked to the citizen (the bridge reads the
+    // highest-fame linked row, a dynasty included).
+    if (!byPop) {
       if (iFameCat >= 0) queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iFameCat + 1, fam.cat, 'registerCulturalEntity_: FameCategory', 'media');
       if (iCulDom >= 0) queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iCulDom + 1, fam.dom, 'registerCulturalEntity_: CulturalDomain', 'media');
-
-      // Neighborhood update if provided and column exists
-      if (iNeighborhood >= 0 && validNeighborhood) {
-        queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iNeighborhood + 1, validNeighborhood, 'registerCulturalEntity_: Neighborhood', 'media');
-      }
-
-      // UniverseLinks POPID backfill (v2.6) — only when the committed cell is
-      // empty; never overwrites an existing cross-ref.
-      if (iUniverse >= 0 && popId && !data[i][iUniverse]) {
-        queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iUniverse + 1, popId, 'registerCulturalEntity_: UniverseLinks', 'media');
-      }
-
-      // Calendar columns update (v2.2)
-      var lastHolidayValue = "";
-      if (iLastHoliday >= 0 && holiday !== "none") {
-        lastHolidayValue = holiday;
-        intents.lastHoliday = queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iLastHoliday + 1, holiday, 'registerCulturalEntity_: LastSeenHoliday', 'media');
-      }
-      var calCtxValue = "";
-      if (iCalendarContext >= 0) {
-        calCtxValue = buildCalendarContext_();
-        intents.calendarContext = queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iCalendarContext + 1, calCtxValue, 'registerCulturalEntity_: CalendarContext', 'media');
-      }
-
-      // Helper updates (B4 batch pending — still caller-passed-sheet direct
-      // writes; remain valid here on first-cycle-call because UPDATE branch
-      // resolved a real committed row. Skipped on subsequent same-cycle
-      // calls via registry short-circuit above.)
-      if (typeof updateMediaSpread_ === 'function') {
-        updateMediaSpread_(sheet, rowNum, journalistName);
-      }
-      if (typeof updateTrendTrajectory_ === 'function') {
-        updateTrendTrajectory_(sheet, rowNum, newFame);
-      }
-      if (typeof updateCityTier_ === 'function') {
-        updateCityTier_(sheet, rowNum, newFame, mc);
-      }
-
-      // Register for same-cycle repeat-call dedup
-      var existingCulId = iCulId >= 0 ? data[i][iCulId] : data[i][1];
-      ctx.summary.culturalRegistry[name] = {
-        kind: 'snapshot-update',
-        culId: existingCulId,
-        row: rowNum,
-        accum: {
-          fameScore: newFame,
-          mediaCount: mc,
-          lastSeenCycle: cycle,
-          lastHoliday: lastHolidayValue,
-          calendarContext: calCtxValue
-        },
-        intents: intents
-      };
-
-      // Track in summary
-      S.culturalEntityUpdates = S.culturalEntityUpdates || [];
-      S.culturalEntityUpdates.push({
-        culId: existingCulId,
-        name: name,
-        fameCategory: fam.cat,
-        domain: fam.dom,
-        newFameScore: newFame,
-        mediaCount: mc,
-        calendarBonus: fameBonus,
-        holiday: holiday,
-        isFirstFriday: isFirstFriday,
-        sportsSeason: sportsSeason
-      });
-
-      return existingCulId;
     }
+
+    // Neighborhood update if provided and column exists
+    if (iNeighborhood >= 0 && validNeighborhood) {
+      queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iNeighborhood + 1, validNeighborhood, 'registerCulturalEntity_: Neighborhood', 'media');
+    }
+
+    // UniverseLinks POPID backfill (v2.6) — only when the committed cell is
+    // empty; never overwrites an existing cross-ref.
+    if (iUniverse >= 0 && popId && !data[i][iUniverse]) {
+      queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iUniverse + 1, popId, 'registerCulturalEntity_: UniverseLinks', 'media');
+    }
+
+    // Calendar columns update (v2.2)
+    var lastHolidayValue = "";
+    if (iLastHoliday >= 0 && holiday !== "none") {
+      lastHolidayValue = holiday;
+      intents.lastHoliday = queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iLastHoliday + 1, holiday, 'registerCulturalEntity_: LastSeenHoliday', 'media');
+    }
+    var calCtxValue = "";
+    if (iCalendarContext >= 0) {
+      calCtxValue = buildCalendarContext_();
+      intents.calendarContext = queueCellIntent_(ctx, 'Cultural_Ledger', rowNum, iCalendarContext + 1, calCtxValue, 'registerCulturalEntity_: CalendarContext', 'media');
+    }
+
+    // Helper updates (B4 batch pending — still caller-passed-sheet direct
+    // writes; remain valid here on first-cycle-call because UPDATE branch
+    // resolved a real committed row. Skipped on subsequent same-cycle
+    // calls via registry short-circuit above.)
+    if (typeof updateMediaSpread_ === 'function') {
+      updateMediaSpread_(sheet, rowNum, journalistName);
+    }
+    if (typeof updateTrendTrajectory_ === 'function') {
+      updateTrendTrajectory_(sheet, rowNum, newFame);
+    }
+    if (typeof updateCityTier_ === 'function') {
+      updateCityTier_(sheet, rowNum, newFame, mc);
+    }
+
+    // Register for same-cycle repeat-call dedup
+    var existingCulId = iCulId >= 0 ? data[i][iCulId] : data[i][1];
+    ctx.summary.culturalRegistry[regKey] = {
+      kind: 'snapshot-update',
+      culId: existingCulId,
+      row: rowNum,
+      accum: {
+        fameScore: newFame,
+        mediaCount: mc,
+        lastSeenCycle: cycle,
+        lastHoliday: lastHolidayValue,
+        calendarContext: calCtxValue
+      },
+      intents: intents
+    };
+
+    // Track in summary
+    S.culturalEntityUpdates = S.culturalEntityUpdates || [];
+    S.culturalEntityUpdates.push({
+      culId: existingCulId,
+      name: rowName,
+      fameCategory: fam.cat,
+      domain: fam.dom,
+      newFameScore: newFame,
+      mediaCount: mc,
+      calendarBonus: fameBonus,
+      holiday: holiday,
+      isFirstFriday: isFirstFriday,
+      sportsSeason: sportsSeason
+    });
+
+    return existingCulId;
   }
 
   // ═══════════════════════════════════════════════════════════════════════════

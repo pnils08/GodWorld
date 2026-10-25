@@ -49,9 +49,11 @@ for (const stem of ['sports_c103_x_packet-v2_deepseek-deepseek-chat', 'civic_c10
   const sheet = (rows, opts = {}) => {
     const s = { rows, calls: [], lostAck: !!opts.lostAck,
       getLastRow: () => rows.length,
+      getLastColumn: () => Math.max(0, ...rows.map((r) => r.length)),
       getDataRange: () => ({ getValues: () => rows.map((r) => r.slice()) }),
       appendRow: (r) => { s.calls.push('appendRow'); rows.push(r.slice()); },
       getRange: (r, c, nr, nc) => ({
+        getValues: () => rows.slice(r - 1, r - 1 + (nr || 1)).map((x) => { const o = []; for (let j = 0; j < (nc || 1); j++) o.push(x[c - 1 + j] === undefined ? '' : x[c - 1 + j]); return o; }),
         setValue: (v) => { s.calls.push('setValue'); (rows[r - 1] = rows[r - 1] || [])[c - 1] = v; },
         setValues: (vals) => {
           s.calls.push('setValues');
@@ -96,8 +98,9 @@ for (const stem of ['sports_c103_x_packet-v2_deepseek-deepseek-chat', 'civic_c10
 
   // the two intake readers (dormant since E89, engine.285): output first, then the processed mark —
   // a kill on the output leaves the intake rows unmarked for the next run (was: marked, output lost)
-  const killed = () => ({ rows: [], getLastRow: () => 1, appendRow() { throw new Error('killed'); },
-    getRange: () => ({ setValues() { throw new Error('killed'); } }) });
+  const killed = () => ({ rows: [], getLastRow: () => 1, getLastColumn: () => 13, appendRow() { throw new Error('killed'); },
+    getRange: () => ({ getValues: () => [['Timestamp', 'Cycle', 'CitizenName', 'UsageType', 'Context', 'Reporter', 'Season', 'Holiday', 'HolidayPriority', 'IsFirstFriday', 'IsCreationDay', 'SportsSeason', 'Source']],
+      setValue() {}, setValues() { throw new Error('killed'); } }) });
   const cui = sheet([['CitizenName', 'UsageType', 'Context', 'Reporter', 'Status'], ['Vinnie Keane', 'mentioned', 'x', 'Hal Richmond', ''], ['Briar Soto', 'quoted', 'y', 'Nia Rook', '']]);
   let threw = false;
   try { box.processCitizenUsageIntake_({ getSheetByName: (n) => n === 'Citizen_Usage_Intake' ? cui : n === 'Citizen_Media_Usage' ? killed() : null }, 112, {}); } catch (e) { threw = true; }
@@ -105,6 +108,9 @@ for (const stem of ['sports_c103_x_packet-v2_deepseek-deepseek-chat', 'civic_c10
   const cmu = sheet([['Timestamp']]);
   box.processCitizenUsageIntake_({ getSheetByName: (n) => n === 'Citizen_Usage_Intake' ? cui : n === 'Citizen_Media_Usage' ? cmu : null }, 112, {});
   eq(cmu.rows.length === 3 && cui.rows.slice(1).every((r) => r[4] === 'processed') && cui.calls.filter((x) => x === 'setValues').length === 1, true, 'the re-run lands both, then marks them in one run');
+  // engine.312 R2.1(a): the media-room copy has no print check — every row it lands names its source, so it scores no fame
+  eq(cmu.rows[0][12] === 'Source' && cmu.rows.slice(1).every((r) => r.length === 13 && r[12] === 'media-room' && r[2] !== ''), true, 'engine.312: the Source header self-arms after the 12 written columns and each landed row reads media-room');
+  eq(cmu.calls.filter((x) => x === 'setValues').length, 1, 'engine.312: still one block write for the batch');
   const mi = sheet([['Reporter', 'StoryType', 'SignalSource', 'Headline', 'ArticleText', 'CulturalMentions', 'Status'], ['Kai Marston', 'arts', 'edition', 'h', '', 'Oakland Ballet', '']]);
   threw = false;
   try { box.processArticleIntake_({ getSheetByName: (n) => n === 'Media_Intake' ? mi : n === 'Media_Ledger' ? killed() : null }, 112, {}); } catch (e) { threw = true; }

@@ -333,8 +333,25 @@ function processCitizenUsageIntake_(ss, cycle, cal) {
     }
   }
 
+  // engine.312 R2.1(a): this copy carries no print check (arbitrary intake
+  // types), so each row names its source — 'media-room' scores no fame
+  // (paperFameDelta_). One write per batch: the row runs out to the Source
+  // column, the cells between blank as on any new row. The header self-arms
+  // like Phase 5's (schema-setup).
+  var usageHeader = usageSheet.getRange(1, 1, 1, Math.max(1, usageSheet.getLastColumn())).getValues()[0];
+  var srcIdx = -1;
+  for (var hi = 0; hi < usageHeader.length; hi++) if (String(usageHeader[hi]).trim() === 'Source') srcIdx = hi;
+  if (srcIdx < 0) {
+    srcIdx = Math.max(usageHeader.length, 12);
+    usageSheet.getRange(1, srcIdx + 1).setValue('Source');
+  }
+  for (var rw = 0; rw < rows.length; rw++) {
+    while (rows[rw].length < srcIdx) rows[rw].push('');
+    rows[rw][srcIdx] = 'media-room';
+  }
+
   var startRow = usageSheet.getLastRow() + 1;
-  usageSheet.getRange(startRow, 1, rows.length, 12).setValues(rows);
+  usageSheet.getRange(startRow, 1, rows.length, srcIdx + 1).setValues(rows);
   // engine.285 (4/6): marked processed AFTER the usage rows land (was before — a kill in
   // between lost them); a kill now can repeat a usage, never drop one.
   markRowRuns_(intakeSheet, usageIdx, 5, 'processed');

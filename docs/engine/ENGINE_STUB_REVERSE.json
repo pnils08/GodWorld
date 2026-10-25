@@ -2,7 +2,7 @@
   "generated": "2026-10-25",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1743,
+  "functionsMapped": 1752,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1242,7 +1242,6 @@
         "phase07-evening-media/buildEveningMedia.js::buildEveningMedia_",
         "phase07-evening-media/buildNightLife.js::buildNightlife_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
-        "phase07-evening-media/culturalLedger.js::registerCulturalEntity_",
         "phase07-evening-media/domainTracker.js::domainTracker_",
         "phase07-evening-media/mediaFeedbackEngine.js::applyMediaToCityDynamics_",
         "phase07-evening-media/sportsStreaming.js::buildEveningSportsAndStreaming_",
@@ -1287,7 +1286,6 @@
         "phase07-evening-media/buildEveningFood.js::buildEveningFood_",
         "phase07-evening-media/buildNightLife.js::buildNightlife_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
-        "phase07-evening-media/culturalLedger.js::registerCulturalEntity_",
         "phase07-evening-media/domainTracker.js::domainTracker_",
         "phase07-evening-media/mediaFeedbackEngine.js::runMediaFeedbackEngine_",
         "phase08-v3-chicago/applyDomainCooldowns.js::applyDomainCooldowns_",
@@ -1817,7 +1815,6 @@
         "phase07-evening-media/buildEveningMedia.js::buildEveningMedia_",
         "phase07-evening-media/buildNightLife.js::buildNightlife_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
-        "phase07-evening-media/culturalLedger.js::registerCulturalEntity_",
         "phase07-evening-media/sportsStreaming.js::buildEveningSportsAndStreaming_",
         "phase08-v3-chicago/applyCycleRecovery.js::applyCycleRecovery_",
         "phase08-v3-chicago/v3preLoader.js::v3PreloadContext_",
@@ -3739,6 +3736,16 @@
         "phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_"
       ]
     },
+    "paperFameByPop": {
+      "writers": [
+        "phase05-citizens/processAdvancementIntake.js::processMediaUsage_"
+      ],
+      "readers": [
+        "phase05-citizens/processAdvancementIntake.js::processMediaUsage_",
+        "phase07-evening-media/culturalLedger.js::flushCulturalFame_",
+        "phase07-evening-media/culturalLedger.js::registerCulturalEntity_"
+      ]
+    },
     "tierLadder": {
       "writers": [
         "phase05-citizens/processAdvancementIntake.js::applyTierLadderState_"
@@ -4245,6 +4252,12 @@
       "readers": [
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_"
       ]
+    },
+    "culturalFameFlush": {
+      "writers": [
+        "phase07-evening-media/culturalLedger.js::flushCulturalFame_"
+      ],
+      "readers": []
     },
     "culturalEntityCreates": {
       "writers": [
@@ -5193,8 +5206,7 @@
     "Cultural_Ledger": {
       "writers": [
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
-        "phase05-citizens/processAdvancementIntake.js::dimCulturalFame_",
-        "phase07-evening-media/culturalLedger.js::decayCulturalFame_",
+        "phase07-evening-media/culturalLedger.js::flushCulturalFame_",
         "phase07-evening-media/culturalLedger.js::registerCulturalEntity_"
       ],
       "readers": [
@@ -5202,10 +5214,10 @@
         "phase05-citizens/citizenContextBuilder.js::getCulturalStatus_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/processAdvancementIntake.js::culturalFameOf_",
-        "phase05-citizens/processAdvancementIntake.js::dimCulturalFame_",
         "phase07-evening-media/buildEveningFamous.js::culturalSightingBuckets_",
+        "phase07-evening-media/culturalLedger.js::culturalFameAccum_",
         "phase07-evening-media/culturalLedger.js::culturalStatusByPop_",
-        "phase07-evening-media/culturalLedger.js::decayCulturalFame_",
+        "phase07-evening-media/culturalLedger.js::flushCulturalFame_",
         "phase07-evening-media/culturalLedger.js::registerCulturalEntity_",
         "phase07-evening-media/mediaRoomIntake.js::logCulturalMention_",
         "phase10-persistence/recordMediaLedger.js::recordMediaLedger_",

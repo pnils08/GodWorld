@@ -293,7 +293,7 @@ console.log('7. engine.281 (a2) — sportsRung_ and the ladder sites');
     'phase06-analysis/filterNoiseEvents.js', 'phase07-evening-media/buildEveningFamous.js', 'phase05-citizens/checkForPromotions.js',
     'phase05-citizens/generateGenericCitizens.js', 'phase06-analysis/applyCivicLoadIndicator.js', 'phase09-digest/applyCycleWeight.js',
     'phase07-evening-media/domainTracker.js', 'phase06-analysis/applyPatternDetection.js', 'phase06-analysis/prioritizeEvents.js',
-    'phase07-evening-media/culturalLedger.js', 'phase08-v3-chicago/applyDomainCooldowns.js', 'phase08-v3-chicago/v3DomainWriter.js'];
+    'phase08-v3-chicago/applyDomainCooldowns.js', 'phase08-v3-chicago/v3DomainWriter.js'];
   const WORD = /sportsSeason (===|!==) *['"](championship|playoffs|late-season|post-season)['"]/;
   // a number moved under the word: += / *= (not a string concatenation), a count, a tally,
   // a placement or an athlete-weighted pool; the window takes the line before (a condition
@@ -312,6 +312,9 @@ console.log('7. engine.281 (a2) — sportsRung_ and the ladder sites');
   }
   check('every a2 file reads the rung once, beside its lens', noDecl.length === 0, noDecl.join(' '));
   check('no numeric payload left under a lens word test in the a2 files', hits.length === 0, hits.join(' '));
+  const clSrc = fs.readFileSync(path.join(ROOT, 'phase07-evening-media/culturalLedger.js'), 'utf8');
+  check('engine.312: the registrar carries no sports / calendar / economy fame extra (a sighting is +1 flat; it left the a2 list)',
+    !/sportsRung_\(|fameBonus|econMood/.test(clSrc));
   const sw = fs.readFileSync(path.join(ROOT, 'phase02-world-state/applySeasonWeights.js'), 'utf8');
   check('season weights: a feed week reads the rung, a Maker-declared season keeps its word',
     /\(S\.sportsSource === 'oakland-feed'\) \? sportsRung_\(S\.sportsSeason, S\.sportsCity\)/.test(sw) && /S\.sportsAtmosphereEnabled === true \? S\.sportsSeason : ""/.test(sw));
@@ -471,14 +474,12 @@ console.log('engine.313 — synthetic, non-canon: one citizen, one fame row (rea
     logs.length = 0; helperCalls.length = 0;
     const ctx = { summary: Object.assign({ cycleId: 113, economicMood: 50 }, extra || {}), config: {}, ss: { getSheetByName: () => sheet },
       ledger: { headers: ['POPID', 'First', 'Last'], rows: ledger || LEDGER } };
-    const returned = [], fame = [];
-    for (const [name, role] of calls) {
-      returned.push(rsb.registerCulturalEntity_(ctx, name, role, 'SystemEngine', ''));
-      const fs = ctx.persist.updates.find(u => u.kind === 'cell' && u.address.col === C('FameScore'));
-      fame.push(fs ? fs.values[0][0] : null);
-    }
+    const returned = [];
+    for (const [name, role] of calls) returned.push(rsb.registerCulturalEntity_(ctx, name, role, 'SystemEngine', ''));
+    const noFameBeforeFlush = !ctx.persist.updates.some(u => u.kind === 'cell' && u.address.col === C('FameScore'));
+    rsb.flushCulturalFame_(ctx);   // engine.312: Phase7-FameFlush writes the one FameScore per row
     const ups = ctx.persist.updates;
-    return { ctx, v, returned, fame, ups, cells: ups.filter(u => u.kind === 'cell'), appends: ups.filter(u => u.kind === 'append'),
+    return { ctx, v, returned, noFameBeforeFlush, ups, cells: ups.filter(u => u.kind === 'cell'), appends: ups.filter(u => u.kind === 'append'),
       keys: Object.keys(ctx.summary.culturalRegistry), helpers: helperCalls.slice(), logs: logs.slice() };
   };
   const onCol = (res, col) => res.cells.filter(u => u.address.col === C(col));
@@ -496,11 +497,11 @@ console.log('engine.313 — synthetic, non-canon: one citizen, one fame row (rea
 
   for (const order of [[['Synthia Arden', 'artist'], ['Muralist Synthia Arden', 'artist']], [['Muralist Synthia Arden', 'artist'], ['Synthia Arden', 'artist']]]) {
     const b = run([row('CUL-SYN002', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 45)], order);
-    const mc = onCol(b, 'MediaCount'), fsI = onCol(b, 'FameScore'), b1 = b.fame[0] - 45, b2 = b.fame[1] - b.fame[0];
-    check('engine.313: both spellings in one Cycle (' + order[0][0] + ' first) → one registry entry, one intent set, MediaCount +2, equal fame bumps',
+    const mc = onCol(b, 'MediaCount'), fsI = onCol(b, 'FameScore');
+    check('engine.313: both spellings in one Cycle (' + order[0][0] + ' first) → one registry entry, one intent set, MediaCount +2; engine.312: one FameScore 45 + 2, written only by the flush',
       b.keys.join() === 'row:2' && b.appends.length === 0 && mc.length === 1 && mc[0].values[0][0] === 5 && fsI.length === 1 &&
-      b1 > 0 && b2 === b1 && onCol(b, 'LastSeenCycle').length === 1 && b.returned.every(x => x === 'CUL-SYN002') && rowsHit(b) === '2',
-      JSON.stringify({ keys: b.keys, ap: b.appends.length, mc: mc.map(u => u.values[0][0]), fame: b.fame, rows: rowsHit(b) }));
+      fsI[0].values[0][0] === 47 && b.noFameBeforeFlush && onCol(b, 'LastSeenCycle').length === 1 && b.returned.every(x => x === 'CUL-SYN002') && rowsHit(b) === '2',
+      JSON.stringify({ keys: b.keys, ap: b.appends.length, mc: mc.map(u => u.values[0][0]), fame: fsI.map(u => u.values[0][0]), rows: rowsHit(b) }));
     check('engine.313: … and the helpers run once on that row (' + order[0][0] + ' first)',
       b.helpers.join() === 'updateMediaSpread_@2,updateTrendTrajectory_@2,updateCityTier_@2', b.helpers.join());
   }
@@ -512,7 +513,7 @@ console.log('engine.313 — synthetic, non-canon: one citizen, one fame row (rea
   check('engine.313 (codex F1): an earlier row with the same label and another POPID is not the citizen\'s target, even when already registered this Cycle',
     c1.returned.join() === 'CUL-SYN010,CUL-SYN011' && c1.keys.sort().join() === 'row:2,row:3' &&
     onCol(c1, 'MediaCount').map(u => u.address.row + ':' + u.values[0][0]).join() === '2:4,3:4' && c1.appends.length === 0 &&
-    onCol(c1, 'FameScore').map(u => u.address.row + ':' + u.values[0][0]).join() === '2:10,3:45' &&
+    onCol(c1, 'FameScore').map(u => u.address.row + ':' + u.values[0][0]).join() === '2:6,3:41' &&
     c1.helpers.join() === 'updateMediaSpread_@2,updateTrendTrajectory_@2,updateCityTier_@2,updateMediaSpread_@3,updateTrendTrajectory_@3,updateCityTier_@3',
     JSON.stringify({ r: c1.returned, keys: c1.keys, mc: onCol(c1, 'MediaCount').map(u => u.address.row + ':' + u.values[0][0]),
       fs: onCol(c1, 'FameScore').map(u => u.address.row + ':' + u.values[0][0]), h: c1.helpers }));
@@ -562,8 +563,8 @@ console.log('engine.313 — synthetic, non-canon: one citizen, one fame row (rea
   const c11 = run([row('CUL-SYN110', 'The Arden Family', 'Institution', 'dynasty', 'POP-99101', 80),
     row('CUL-SYN111', 'Muralist Synthia Arden', 'Muralist', 'artist', 'POP-99101', 40)], [['Synthia Arden', 'dynasty']], null, { isFirstFriday: true });
   const up11 = c11.ctx.summary.culturalEntityUpdates || [];
-  check('engine.313 (codex gate F2): a dynasty role word on the POPID path → artist bonus (40 + 5 + 4), summary artist / Arts, no category write',
-    c11.returned[0] === 'CUL-SYN111' && onCol(c11, 'FameScore').map(u => u.address.row + ':' + u.values[0][0]).join() === '3:49' &&
+  check('engine.313 (codex gate F2): a dynasty role word on the POPID path → the artist row (engine.312: 40 + 1, the First Friday extra retired), summary artist / Arts, no category write',
+    c11.returned[0] === 'CUL-SYN111' && onCol(c11, 'FameScore').map(u => u.address.row + ':' + u.values[0][0]).join() === '3:41' &&
     up11.length === 1 && up11[0].fameCategory === 'artist' && up11[0].domain === 'Arts' && up11[0].name === 'Muralist Synthia Arden' &&
     onCol(c11, 'FameCategory').length === 0, JSON.stringify({ fs: onCol(c11, 'FameScore').map(u => u.values[0][0]), up: up11 }));
 
@@ -585,12 +586,13 @@ console.log('engine.313 — synthetic, non-canon: one citizen, one fame row (rea
       ledger: { headers: ['POPID', 'First', 'Last', 'Tier', 'ClockMode', 'Status', 'OriginGame', 'Neighborhood', 'TraitProfile', 'RoleType'],
         rows: [['POP-99101', 'Synthia', 'Arden', 3, 'ENGINE', 'Active', '', 'Downtown', '', '']] } };
     bsb.buildEveningFamous_(ctx);
+    bsb.flushCulturalFame_(ctx);
     const ups = ctx.persist ? ctx.persist.updates : [];
     const fsB = ups.filter(u => u.kind === 'cell' && u.address.col === C('FameScore'));
     const upB = ctx.summary.culturalEntityUpdates || [];
-    check('engine.313 (codex gate F2, real bridge): the dynasty-role sighting reaches the artist row, artist bonus, no append, no category write',
+    check('engine.313 (codex gate F2, real bridge): the dynasty-role sighting reaches the artist row (engine.312: +1), no append, no category write',
       !!picked && picked.length > 0 && picked[0].role === 'dynasty' && ctx.summary.famousPeople.join() === 'Synthia Arden' &&
-      ups.filter(u => u.kind === 'append').length === 0 && fsB.map(u => u.address.row + ':' + u.values[0][0]).join() === '3:49' &&
+      ups.filter(u => u.kind === 'append').length === 0 && fsB.map(u => u.address.row + ':' + u.values[0][0]).join() === '3:41' &&
       !ups.some(u => u.kind === 'cell' && (u.address.row === 2 || u.address.col === C('FameCategory'))) &&
       upB.length === 1 && upB[0].fameCategory === 'artist' && v.length === 3,
       JSON.stringify({ picked: picked && picked.map(p => p.role), famous: ctx.summary.famousPeople, fs: fsB.map(u => u.address.row + ':' + u.values[0][0]),
@@ -601,14 +603,14 @@ console.log('engine.313 — synthetic, non-canon: one citizen, one fame row (rea
   const dom = (r, d) => { r[C('CulturalDomain') - 1] = d; return r; };
   const catCells = res => onCol(res, 'FameCategory').concat(onCol(res, 'CulturalDomain')).map(u => u.address.row + ':' + u.values[0][0]).join();
   const d1 = run([row('CUL-SYN130', 'Synthetic Star', 'Celebrity', 'musician', '', 40)], [['Synthetic Star', 'Celebrity']], null, { isFirstFriday: true });
-  check('engine.315: "Celebrity" on a musician row → no category write; First Friday Arts bonus by the authored category (40 + 5 + 4)',
-    catCells(d1) === '' && onCol(d1, 'FameScore').map(u => u.values[0][0]).join() === '49' &&
+  check('engine.315: "Celebrity" on a musician row → no category write; the authored category in the summary (engine.312: 40 + 1, no First Friday extra)',
+    catCells(d1) === '' && onCol(d1, 'FameScore').map(u => u.values[0][0]).join() === '41' &&
     (d1.ctx.summary.culturalEntityUpdates || [])[0].fameCategory === 'musician', JSON.stringify({ cat: catCells(d1), fs: onCol(d1, 'FameScore').map(u => u.values[0][0]) }));
   const rung = rsb.sportsRung_; rsb.sportsRung_ = () => 'championship';
   const d2 = run([dom(row('CUL-SYN140', 'Synthetic Legend', "Shortstop, Oakland A's Legend", 'athlete', '', 40), 'Sports')], [['Synthetic Legend', "A's legend"]]);
   rsb.sportsRung_ = rung;
-  check('engine.315: "A\'s legend" on an athlete row → no category write; championship Sports bonus (40 + 5 + 6)',
-    catCells(d2) === '' && onCol(d2, 'FameScore').map(u => u.values[0][0]).join() === '51', JSON.stringify({ cat: catCells(d2), fs: onCol(d2, 'FameScore').map(u => u.values[0][0]) }));
+  check('engine.315: "A\'s legend" on an athlete row → no category write (engine.312: 40 + 1, no championship extra)',
+    catCells(d2) === '' && onCol(d2, 'FameScore').map(u => u.values[0][0]).join() === '41', JSON.stringify({ cat: catCells(d2), fs: onCol(d2, 'FameScore').map(u => u.values[0][0]) }));
   const d3 = run([dom(row('CUL-SYN150', 'Synthetic Manager', 'General Manager', 'sports-figure', '', 25), 'Sports')], [['Synthetic Manager', 'sports-figure']]);
   check('engine.315: the bridge\'s copied "sports-figure" on a sports-figure row → no rewrite to athlete', catCells(d3) === '', catCells(d3));
   const d4 = run([dom(row('CUL-SYN160', 'Synthetic Cook', 'Heritage Director', 'unknown', '', 20), 'Other')], [['Synthetic Cook', 'chef']]);
@@ -644,6 +646,143 @@ console.log('engine.313 — synthetic, non-canon: one citizen, one fame row (rea
       ap22.length === 1 && r22[H22.indexOf('LastSeenHoliday')] === 'Thanksgiving' && r22[H22.indexOf('CalendarContext')] === 'Thanksgiving, mid-season',
       JSON.stringify(r22.slice(17)));
   }
+}
+
+console.log('engine.312 — synthetic, non-canon: fame from the paper (real citation pass, ladder floor, fade, sightings, one flush)');
+{
+  const CH = ['Timestamp', 'CUL-ID', 'Name', 'RoleType', 'FameCategory', 'CulturalDomain', 'Status', 'UniverseLinks',
+    'FirstSeenCycle', 'LastSeenCycle', 'MediaCount', 'FameScore', 'TrendTrajectory', 'FirstRefSource', 'MediaSpread',
+    'CityTier', 'Neighborhood', 'Holiday', 'HolidayPriority', 'SportsSeason'];
+  const C = n => CH.indexOf(n) + 1;
+  const crow = (id, name, pop, fame, last) => ['C100', id, name, 'artist', 'artist', 'Arts', 'Active', pop, 100, last, 3, fame, 'stable', '', 1, 'Local', '', '', '', ''];
+  const UH = ['Timestamp', 'Cycle', 'CitizenName', 'UsageType', 'Context', 'Reporter', 'Processed', 'Sentiment'];
+  const LH = ['POPID', 'First', 'Last', 'Tier', 'ClockMode', 'UsageCount', 'Status', 'LifeHistory', 'LastUpdated', 'Neighborhood', 'Famous', 'RoleType'];
+  const lrow = (pop, first, last, use, famous) => [pop, first, last, 4, 'ENGINE', use, 'Active', '', '', 'Downtown', famous || '', 'Painter'];
+  let ids = 0;
+  const fsb = vm.createContext({ Logger: { log: () => {} }, Math, String, Number, Array, Object, JSON, Date,
+    safeRand_: () => () => 0.5, getCoreSimNeighborhoods_: () => ['Downtown'], hoodNamesWithScene_: () => [],
+    shortId_: () => 'e312n' + (++ids), inWorldStamp_: () => 'C113', recordRipple_: () => {} });
+  ['utilities/writeIntents.js', 'phase07-evening-media/updateMediaSpread.js', 'phase07-evening-media/updateTrendTrajectory.js',
+    'phase03-population/updateCityTier.js', 'phase07-evening-media/culturalLedger.js', 'phase01-config/advanceSimulationCalendar.js',
+    'phase05-citizens/processAdvancementIntake.js'].forEach(f => load(fsb, f));
+  const tab = (rows) => {
+    const v = rows.map(r => r.slice());
+    return { v, getDataRange: () => ({ getValues: () => v.map(r => r.slice()) }), getLastRow: () => v.length,
+      getLastColumn: () => Math.max(...v.map(r => r.length)),
+      getRange: (r, c, nr, nc) => ({ getValues: () => v.slice(r - 1, r - 1 + (nr || 1)).map(x => x.slice(c - 1, c - 1 + (nc || 1))),
+        getValue: () => (v[r - 1] || [])[c - 1], setValue: x => { (v[r - 1] = v[r - 1] || [])[c - 1] = x; } }) };
+  };
+  const world = () => {
+    const cul = tab([CH].concat([
+      crow('CUL-E1', 'Muralist Synthia Arden', 'POP-99101', 40, 100),   // r2: paper +5 −2, quiet since C100 (fade −1), two sightings
+      crow('CUL-E2', 'Synthor Bell', 'POP-99102', 99, 112),              // r3: paper +5, a sighting → 105 → the cap
+      crow('CUL-E3', 'Synthetic Famous', 'POP-99104', 20, 112),          // r4: held as Famous → the 25 floor
+      crow('CUL-E4', 'Synthetic Low', 'POP-99105', 1, 112)               // r5: paper −2 → clamp 0
+    ]));
+    const use = tab([UH].concat([
+      ['C110', 110, 'Synthia Arden', 'mentioned', 'a delayed Cycle', 'R', '', 'positive'],   // +5 (an older pending Cycle counts)
+      ['C112', 112, 'Synthia Arden', 'quoted', 'q', 'R', '', 'negative'],                    // −2
+      ['C112', 112, 'Synthia Arden', 'byline-landed', 'own', 'Synthia Arden', '', ''],       // own work 0
+      ['C112', 112, 'Synthia Arden', 'family-own-words', 'page', '', '', ''],               // family 0
+      ['C112', 112, 'Synthia Arden', 'POP-99101', 'shifted', '', '', ''],                   // off-list (a POPID in the type cell) 0
+      ['C112', 112, 'Synthea Twin', 'mentioned', 'amb', 'R', '', 'positive'],                // ambiguous name → nothing, counted
+      ['C112', 112, 'Synthor Bell', 'featured', 'f', 'R', '', 'positive'],                   // +5
+      ['C112', 112, 'Synthetic Low', 'mentioned', 'm', 'R', '', 'negative'],                 // −2
+      ['C100', 100, 'Synthetic Newstar', 'mentioned', 'old', 'R', 'Y', 'positive'],          // processed: record 5, no credit tonight
+      ['C112', 112, 'Synthetic Newstar', 'quoted', 'new', 'R', '', ''],                      // +1, no CUL row → counted; record 6
+      ['C100', 100, 'Synthetic Rostered', 'mentioned', 'old', 'R', 'Y', 'positive']          // record 5
+    ]));
+    // the Phase-11 media-room copy: Source named, no print → 0 (the column is armed on the first pass)
+    use.v[0][8] = 'Source';
+    use.v.push(['C112', 112, 'Synthia Arden', 'mentioned', 'media room', 'R', '', 'positive', 'media-room']);
+    const ledger = { headers: LH.slice(), dirty: false, rows: [
+      lrow('POP-99101', 'Synthia', 'Arden', 4), lrow('POP-99102', 'Synthor', 'Bell', 4), lrow('POP-99104', 'Synthetic', 'Famous', 30, 'C100'),
+      lrow('POP-99105', 'Synthetic', 'Low', 2), lrow('POP-99106', 'Synthea', 'Twin', 1), lrow('POP-99107', 'Synthea', 'Twin', 1),
+      lrow('POP-99108', 'Synthetic', 'Newstar', 2), lrow('POP-99109', 'Synthetic', 'Rostered', 40), lrow('POP-99110', 'Synthetic', 'Quiet', 26, 'C100')] };
+    fsb.ensureCulturalLedger_ = () => cul;
+    const ctx = { summary: { cycleId: 113, economicMood: 50 }, config: {}, ledger,
+      ss: { getSheetByName: n => n === 'Cultural_Ledger' ? cul : n === 'Citizen_Media_Usage' ? use : null } };
+    return { ctx, cul, use };
+  };
+  const updatesOf = ctx => (ctx.persist ? ctx.persist.updates : []);
+  const fameCells = ctx => updatesOf(ctx).filter(u => u.kind === 'cell' && u.address.col === C('FameScore'));
+  const byRow = ctx => fameCells(ctx).map(u => u.address.row + ':' + u.values[0][0]).sort().join();
+  const appendsOf = ctx => ctx.persist.updates.filter(u => u.kind === 'append' && u.tab === 'Cultural_Ledger').map(u => u.values[0]);
+
+  // ── the whole Cycle in phase order ──
+  const w = world();
+  const pm = fsb.processMediaUsage_(w.ctx, 'C113', 113);
+  fsb.applyTierLadderState_(w.ctx, 113);
+  const noFameYet = fameCells(w.ctx).length === 0;
+  fsb.decayCulturalFame_(w.ctx);
+  for (const n of ['Synthia Arden', 'Synthia Arden', 'Synthor Bell', 'Synthetic Rostered', 'Synthetic Newstar', 'Synthetic Newstar '])
+    fsb.registerCulturalEntity_(w.ctx, n, 'artist', 'SystemEngine', '', 'sighting');
+  const flushed = fsb.flushCulturalFame_(w.ctx);
+  const ap = appendsOf(w.ctx);
+  const apBy = name => ap.filter(r => r[C('Name') - 1] === name);
+  check('engine.312: nothing writes FameScore before the flush (Phase 5 and the ladder only accumulate)', noFameYet);
+  check('engine.312: one FameScore intent per touched row — r2 40 +5 −2 −1 fade +2 sightings = 44; r3 99 +5 +1 → 100 (cap); r4 20 → 25 (famous floor); r5 1 −2 → 0',
+    byRow(w.ctx) === '2:44,3:100,4:25,5:0' && fameCells(w.ctx).length === 4, byRow(w.ctx));
+  check('engine.312: credits counted — 4 rows credited, 1 with no row (Newstar), 1 unresolved (the ambiguous twin); own work / family / off-list / media-room add nothing',
+    pm.paperFame === 4 && pm.paperFameNoRow === 1 && pm.paperFameUnresolved === 1, JSON.stringify(pm));
+  check('engine.312: the whole-tab record (Processed or not) — Newstar 5 + 1 = 6, Rostered 5, Arden +3 (media-room 0)',
+    w.ctx.summary.paperFameByPop['POP-99108'] === 6 && w.ctx.summary.paperFameByPop['POP-99109'] === 5 && w.ctx.summary.paperFameByPop['POP-99101'] === 3,
+    JSON.stringify(w.ctx.summary.paperFameByPop));
+  const ns = apBy('Synthetic Newstar'), ro = apBy('Synthetic Rostered'), qu = apBy('Synthetic Quiet');
+  check('engine.312: a new row starts at its paper record + tonight\'s sightings — Newstar 6 + 2 = 8; the whitespace alias is a repeat by POPID, not a twin row',
+    ns.length === 1 && ap.length === 3 && ns[0][C('FameScore') - 1] === 8 && ns[0][C('MediaCount') - 1] === 2 && ns[0][C('UniverseLinks') - 1] === 'POP-99108',
+    JSON.stringify(ap.map(r => [r[2], r[9], r[10], r[11]])));
+  check('engine.312: a roster create then a sighting the same Cycle → one row, the sighting counted (MediaCount 1, LastSeen 113), 5 + 1 lifted to the famous floor 25',
+    ro.length === 1 && ro[0][C('MediaCount') - 1] === 1 && ro[0][C('LastSeenCycle') - 1] === 113 && ro[0][C('FameScore') - 1] === 25,
+    JSON.stringify(ro.map(r => [r[9], r[10], r[11]])));
+  check('engine.312: a roster create never sighted marks no sighting (LastSeenCycle blank, MediaCount 0) and starts at the famous floor 25',
+    qu.length === 1 && qu[0][C('LastSeenCycle') - 1] === '' && qu[0][C('MediaCount') - 1] === 0 && qu[0][C('FameScore') - 1] === 25 && qu[0][C('FirstRefSource') - 1] === 'engine.118',
+    JSON.stringify(qu.map(r => [r[9], r[10], r[11], r[13]])));
+  const processedMarks = w.ctx.persist.updates.filter(u => u.kind === 'cell' && u.tab === 'Citizen_Media_Usage');
+  check('engine.312: every pending usage row still gets its Processed mark (UsageCount path unchanged)', processedMarks.length === 10, String(processedMarks.length));
+  check('engine.312: the flush reports its counts on the summary', flushed.touched === 4 && flushed.written === 4 && flushed.pending === 3 && w.ctx.summary.culturalFameFlush === flushed, JSON.stringify(flushed));
+  check('engine.312: the Source header self-armed nothing new (already present); MediaCount on r2 is 3 + 2 sightings',
+    w.use.v[0].filter(h => h === 'Source').length === 1 &&
+    w.ctx.persist.updates.some(u => u.kind === 'cell' && u.address.row === 2 && u.address.col === C('MediaCount') && u.values[0][0] === 5));
+
+  // ── R2.1(d): the Famous phase throws after the fade — the separate flush still persists the paper credit ──
+  const f = world();
+  fsb.processMediaUsage_(f.ctx, 'C113', 113);
+  try { fsb.decayCulturalFame_(f.ctx); throw new Error('synthetic Famous-phase failure'); } catch (e) { /* safePhaseCall_ logs and moves on */ }
+  fsb.flushCulturalFame_(f.ctx);
+  check('engine.312 (R2.1 d): a Famous-phase throw → the flush still writes the paper (r2 40 +3 −1 = 42, r3 → 100, r5 → 0)',
+    byRow(f.ctx) === '2:42,3:100,5:0', byRow(f.ctx));
+  const src2 = fs.readFileSync(path.join(ROOT, 'phase01-config/godWorldEngine2.js'), 'utf8');
+  const order = src2.match(/safePhaseCall_\(ctx, 'Phase7-Famous'[^\n]*\n(?:\s*\/\/[^\n]*\n)*\s*safePhaseCall_\(ctx, 'Phase7-FameFlush', function\(\) \{ flushCulturalFame_\(ctx\); \}\);/g) || [];
+  check('engine.312 (R2.1 d): Phase7-FameFlush is its own phase right after Phase7-Famous at both entry points', order.length === 2, String(order.length));
+
+  // ── caller orders on one existing row: roster then sighting, sighting then roster → +1 and one set of sighting marks either way ──
+  for (const seq of [['roster', 'sighting'], ['sighting', 'roster']]) {
+    const o = world();
+    for (const cause of seq) fsb.registerCulturalEntity_(o.ctx, 'Synthor Bell', 'artist', 'SystemEngine', '', cause);
+    fsb.flushCulturalFame_(o.ctx);
+    const mcs = o.ctx.persist.updates.filter(u => u.kind === 'cell' && u.address.col === C('MediaCount'));
+    const ls = o.ctx.persist.updates.filter(u => u.kind === 'cell' && u.address.col === C('LastSeenCycle'));
+    check('engine.312: ' + seq.join(' → ') + ' on an existing row → FameScore 99 + 1 = 100, MediaCount 4, one LastSeenCycle 113',
+      byRow(o.ctx) === '3:100' && mcs.length === 1 && mcs[0].values[0][0] === 4 && ls.length === 1 && ls[0].values[0][0] === 113,
+      JSON.stringify({ f: byRow(o.ctx), mc: mcs.map(u => u.values[0][0]), ls: ls.map(u => u.values[0][0]) }));
+  }
+  {
+    const o = world();
+    fsb.registerCulturalEntity_(o.ctx, 'Synthor Bell', 'artist', 'engine.118', '', 'roster');
+    fsb.flushCulturalFame_(o.ctx);
+    check('engine.312: a roster call alone on an existing row → no FameScore change, no LastSeenCycle, no MediaCount, no helper writes',
+      fameCells(o.ctx).length === 0 && !updatesOf(o.ctx).some(u => u.kind === 'cell' && [C('LastSeenCycle'), C('MediaCount')].includes(u.address.col)) &&
+      o.cul.v[2][C('TrendTrajectory') - 1] === 'stable');
+  }
+
+  // ── the one record rule ──
+  const D = fsb.paperFameDelta_;
+  check('engine.312 R1: +5 / +1 / +1 (blank) / −2; own work, family, journalist, legacy byline, off-list 0; a named non-print source 0; print counts',
+    D('mentioned', 'positive', '') === 5 && D('quoted', 'neutral', '') === 1 && D('featured', '', '') === 1 && D('referenced', 'negative', '') === -2 &&
+    D('new_citizen', '', '') === 1 && D('existing_new_role', '', '') === 1 && D('byline-landed', 'positive', '') === 0 && D('byline-published', '', '') === 0 &&
+    D('journalist', '', '') === 0 && D('byline', '', '') === 0 && D('family-own-words', '', '') === 0 && D('POP-00034', '', '') === 0 && D('', '', '') === 0 &&
+    D('mentioned', 'positive', 'media-room') === 0 && D('mentioned', 'positive', 'print') === 5 && D(' Mentioned ', ' POSITIVE ', '') === 5);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

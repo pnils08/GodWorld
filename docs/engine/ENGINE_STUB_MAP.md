@@ -2404,6 +2404,8 @@
 - **buildNameIndex_(rows, firstCol, lastCol, filterFn, startRow)**
 
 - **processMediaUsage_(ctx, now, cycle)**
+  Reads: S.paperFameByPop
+  Writes: S.paperFameByPop
   Sheets: Citizen_Media_Usage, Generic_Citizens, LifeHistory_Log
 
 - **advancementLogBuffer_(sheet, label)**
@@ -2417,9 +2419,6 @@
   RNG: ctx.rng / safeRand_(ctx)
 
 - **tierPayFactor_(tier)**
-
-- **dimCulturalFame_(ctx, popId, delta)**
-  Sheets: Cultural_Ledger
 
 - **culturalFameOf_(ctx, popId, name)**
   Sheets: Cultural_Ledger
@@ -3119,18 +3118,41 @@
   Sheets: World_Population
 
 ### culturalLedger.js
+- **paperFameDelta_(usageType, light, source)**
+
+- **clampCulturalFame_(n)**
+
+- **culturalTargetIdxByPop_(data, popId)**
+
+- **culturalFameAccum_(ctx)**
+  Sheets: Cultural_Ledger
+
+- **culturalFameRow_(acc, rowNum)**
+
+- **culturalFameFinal_(e)**
+
+- **culturalFameAddPaper_(ctx, popId, delta)**
+
+- **culturalFameMarkFloor_(ctx, popId)**
+
+- **flushCulturalFame_(ctx)**
+  Reads: S.paperFameByPop
+  Writes: S.culturalFameFlush
+  Sheets: Cultural_Ledger
+
+- **culturalFamePendingFinal_(acc, paperBy, pc)**
+
 - **decayCulturalFame_(ctx)**
   Reads: S.cycleId
   Config: ctx.config.cycleCount
-  Sheets: Cultural_Ledger
 
 - **culturalStatusByPop_(ctx)**
   Sheets: Cultural_Ledger
 
 - **classifyRole(role)**
 
-- **registerCulturalEntity_(ctx, name, roleType, journalistName, neighborhood)**
-  Reads: S.cityDynamics, S.culturalEntityCreates, S.culturalEntityUpdates, S.culturalRegistry, S.cycleId, S.economicMood, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.sportsCity, S.sportsSeason
+- **registerCulturalEntity_(ctx, name, roleType, journalistName, neighborhood, cause)**
+  Reads: S.culturalEntityCreates, S.culturalEntityUpdates, S.culturalRegistry, S.cycleId, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.paperFameByPop, S.sportsSeason
   Writes: S.culturalEntityCreates, S.culturalEntityUpdates, S.culturalRegistry
   Config: ctx.config.cycleCount
   Sheets: Cultural_Ledger
@@ -4818,4 +4840,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1743
+**Functions mapped:** 1752

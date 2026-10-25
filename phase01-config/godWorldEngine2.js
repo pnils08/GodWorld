@@ -739,6 +739,9 @@ function runWorldCycleLocked_(ss, fire) {
   safePhaseCall_(ctx, 'Phase7-Sports', function() { buildEveningSportsAndStreaming_(ctx); });
   safePhaseCall_(ctx, 'Phase7-Food', function() { buildEveningFood_(ctx); });
   safePhaseCall_(ctx, 'Phase7-Famous', function() { buildEveningFamous_(ctx); });
+  // engine.312 R2.1(d): its own phase, so a Famous-phase throw still persists the Phase-5
+  // paper credit beside its Processed marks — one FameScore intent per touched Cultural_Ledger row.
+  safePhaseCall_(ctx, 'Phase7-FameFlush', function() { flushCulturalFame_(ctx); });
   safePhaseCall_(ctx, 'Phase7-EveningMedia', function() { buildEveningMedia_(ctx); });
   safePhaseCall_(ctx, 'Phase7-CitySystems', function() { buildCityEveningSystems_(ctx); });
   safePhaseCall_(ctx, 'Phase7-MediaPacket', function() { buildMediaPacket_(ctx); });
@@ -2454,6 +2457,9 @@ function runCyclePhases_(ctx) {
   safePhaseCall_(ctx, 'Phase7-Sports', function() { buildEveningSportsAndStreaming_(ctx); });
   safePhaseCall_(ctx, 'Phase7-Food', function() { buildEveningFood_(ctx); });
   safePhaseCall_(ctx, 'Phase7-Famous', function() { buildEveningFamous_(ctx); });
+  // engine.312 R2.1(d): its own phase, so a Famous-phase throw still persists the Phase-5
+  // paper credit beside its Processed marks — one FameScore intent per touched Cultural_Ledger row.
+  safePhaseCall_(ctx, 'Phase7-FameFlush', function() { flushCulturalFame_(ctx); });
   safePhaseCall_(ctx, 'Phase7-EveningMedia', function() { buildEveningMedia_(ctx); });
   safePhaseCall_(ctx, 'Phase7-CitySystems', function() { buildCityEveningSystems_(ctx); });
   safePhaseCall_(ctx, 'Phase7-MediaPacket', function() { buildMediaPacket_(ctx); });

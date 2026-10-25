@@ -7,15 +7,24 @@ const findDef = (fn) => { for (const d of ['utilities', 'phase01-config', 'phase
 const helperFile = findDef('findColByName_');
 const intents = [], ripples = [], registered = [], cellsG = [];
 const sandbox = {
-  registerCulturalEntity_: (ctx, name, role, j, hood) => registered.push({ name, role, j, hood }),
+  registerCulturalEntity_: (ctx, name, role, j, hood, cause) => registered.push({ name, role, j, hood, cause }),
   Logger: { log() {} },
   queueAppendIntent_: (ctx, tab, row) => intents.push({ tab, row }),
   queueCellIntent_: () => {},
   recordRipple_: (ctx, r) => ripples.push(r),
   inWorldStamp_: (ctx) => 'Y3C4',
 };
+// engine.312: the real fame accumulator (culturalLedger.js) — its own vm, its intents captured
+const vm = require('vm');
+const clCells = [];
+const cl = vm.createContext({ Logger: { log() {} }, Math, String, Number, Array, Object, JSON });
+vm.runInContext(R('phase07-evening-media/culturalLedger.js'), cl);
+cl.queueCellIntent_ = (ctx, tab, r, c, v) => clCells.push([tab, r, c, v]);
+sandbox.paperFameDelta_ = cl.paperFameDelta_;
+sandbox.culturalFameAddPaper_ = cl.culturalFameAddPaper_;
+sandbox.culturalFameMarkFloor_ = cl.culturalFameMarkFloor_;
 const src = (helperFile ? R(helperFile) + '\n' : '') + R('phase01-config/advanceSimulationCalendar.js') + '\n' + R('phase05-citizens/processAdvancementIntake.js');
-const E = new Function(...Object.keys(sandbox), src + '\nreturn { applyTierLadderState_, tierForEarnedUsage_, earnedCitationsByKey_, intakeTierForExisting_, decayMediaAttention_, processMediaUsage_, dimCulturalFame_, TIER_BAR, FAME_USAGE_BAR, TIER_PAY, tierPayFactor_ };')(...Object.values(sandbox));
+const E = new Function(...Object.keys(sandbox), src + '\nreturn { applyTierLadderState_, tierForEarnedUsage_, earnedCitationsByKey_, intakeTierForExisting_, decayMediaAttention_, processMediaUsage_, TIER_BAR, FAME_USAGE_BAR, TIER_PAY, tierPayFactor_ };')(...Object.values(sandbox));
 
 let pass = 0, fail = 0;
 function check(name, cond, detail) { if (cond) { pass++; console.log('  ok   ' + name); } else { fail++; console.log('  FAIL ' + name + (detail ? ' — ' + detail : '')); } }
@@ -149,18 +158,20 @@ console.log('\n9. engine.118 — fame is permanent:');
     ss: { getSheetByName: (n) => n === 'Citizen_Media_Usage' ? { getLastRow: () => 2, getDataRange: () => ({ getValues: () => [['Timestamp', 'Cycle', 'CitizenName', 'UsageType'], ['', 'C90', 'Vin Keane', 'quoted']] }) } : n === 'LifeHistory_Log' ? { getLastRow: () => 2, getDataRange: () => ({ getValues: () => [['Timestamp', 'POPID', 'Name', 'Type', 'Text', '', 'Cycle'], ['', 'POP-V', 'Vin Keane', 'Promotion', 'Advanced from Tier 3 to Tier 2', '', 90]] }) } : null } };
   E.decayMediaAttention_(dc, 111);
   check('decay skips a famous row entirely — count 30 and Tier 2 untouched after 21 quiet cycles', dc.ledger.rows[0][5] === 30 && dc.ledger.rows[0][3] === 2);
-  // hard light on a famous name dims Cultural_Ledger FameScore, never the count
+  // engine.312: a hard light on a famous name moves FameScore −2 through the fame accumulator, never the count
   const cells = [];
   const cul = [['EntityName', 'UniverseLinks', 'FameScore'], ['Vin Keane', 'POP-V', 40], ['Vin Keane (dup)', 'POP-V', 12]];
   const ssF = { getSheetByName: (n) => n === 'Citizen_Media_Usage' ? { getLastRow: () => 2, getDataRange: () => ({ getValues: () => [['Timestamp', 'Cycle', 'CitizenName', 'UsageType', 'Context', 'Reporter', 'Processed', 'Sentiment'], ['', 'C111', 'Vin Keane', 'quoted', 'ctx', '', '', 'negative']] }), getRange: () => ({ setValue: () => {} }) } : n === 'Cultural_Ledger' ? { getLastRow: () => 3, getDataRange: () => ({ getValues: () => cul }) } : null };
   const fc = { summary: { cycleRef: 'Y3C4' }, ss: ssF, ledger: { headers: H.slice(), rows: [row('POP-V', 'Vin', 'Keane', 1, 60, { 10: 'C90' })], dirty: false } };
-  const saveCell = sandbox.queueCellIntent_; 
-  global.__cells = cells;
   const E2 = new Function(...Object.keys(sandbox), src + '\nreturn { processMediaUsage_ };')(...Object.values(Object.assign({}, sandbox, { queueCellIntent_: (ctx, tab, r, c, v) => cells.push([tab, r, c, v]) })));
   E2.processMediaUsage_(fc, 'now', 111);
-  check('famous + hard light: UsageCount 60 unchanged; FameScore 40 → 39 queued on the highest-fame cultural row', fc.ledger.rows[0][5] === 60 && cells.some(x => x[0] === 'Cultural_Ledger' && x[1] === 2 && x[2] === 3 && x[3] === 39) && /shine dims/.test(fc.ledger.rows[0][7]));
-  check('dimCulturalFame_ floors at 0 and returns null with no linked row', E.dimCulturalFame_({ ss: ssF }, 'POP-NOBODY', -1) === null);
-  // cut 3b: the famous sub-roster follows the marker
+  check('famous + hard light: UsageCount 60 unchanged, the life line says the shine dims, the pass itself writes no FameScore',
+    fc.ledger.rows[0][5] === 60 && /shine dims/.test(fc.ledger.rows[0][7]) && !cells.some(x => x[0] === 'Cultural_Ledger'));
+  clCells.length = 0;
+  cl.flushCulturalFame_(fc);
+  check('engine.312: the flush writes 40 → 38 (−2) on the highest-fame linked row; the whole-tab record reads −2',
+    clCells.length === 1 && clCells[0].join() === 'Cultural_Ledger,2,3,38' && fc.summary.paperFameByPop['POP-V'] === -2, JSON.stringify({ clCells, rec: fc.summary.paperFameByPop }));
+  // cut 3b: the famous sub-roster follows the marker; engine.312: every famous citizen keeps the 25 floor
   const culRows = [['Name', 'UniverseLinks', 'FameScore'], ['Vin Keane', 'POP-V', 26], ['Ann Low', 'POP-A', 15]];
   const cellsB = [];
   const E3 = new Function(...Object.keys(sandbox), src + '\nreturn { applyTierLadderState_ };')(...Object.values(Object.assign({}, sandbox, { queueCellIntent_: (ctx, tab, r, c, v) => cellsB.push([tab, r, c, v]) })));
@@ -169,9 +180,16 @@ console.log('\n9. engine.118 — fame is permanent:');
     ss: { getSheetByName: (n) => n === 'Citizen_Media_Usage' ? { getLastRow: () => 1, getDataRange: () => ({ getValues: () => [['Timestamp', 'Cycle', 'CitizenName', 'UsageType']] }) } : n === 'Cultural_Ledger' ? { getLastRow: () => culRows.length, getDataRange: () => ({ getValues: () => culRows }) } : null } });
   const c3 = mk([row('POP-V', 'Vin', 'Keane', 1, 60, { 4: 'GAME', 10: 'C90' }), row('POP-A', 'Ann', 'Low', 1, 30, { 10: 'C90' }), row('POP-P', 'Mike', 'Paulson', 1, 38, { 4: 'GAME', 10: 'C90', 9: 'Uptown' })]);
   const r3 = E3.applyTierLadderState_(c3, 111);
-  check('famous + linked at 26: nothing to do', !registered.some(x => x.name === 'Vin Keane') && !cellsB.some(x => x[1] === 2));
-  check('famous + linked at 15: brightened to the bar (25) on the cultural row', cellsB.some(x => x[0] === 'Cultural_Ledger' && x[1] === 3 && x[3] === 25));
-  check('famous + no cultural row: registered once with role + hood by engine.118', registered.length === 1 && registered[0].name === 'Mike Paulson' && registered[0].j === 'engine.118' && registered[0].hood === 'Uptown' && r3.cultural === 2);
+  clCells.length = 0;
+  cl.flushCulturalFame_(c3);
+  check('famous + linked at 26: no registration, no write (the floor is under it)', !registered.some(x => x.name === 'Vin Keane') && !clCells.some(x => x[1] === 2));
+  check('famous + linked at 15: the flush lifts it to the bar (25) on the cultural row; the ladder writes no FameScore itself',
+    clCells.some(x => x[0] === 'Cultural_Ledger' && x[1] === 3 && x[3] === 25) && !cellsB.some(x => x[0] === 'Cultural_Ledger'), JSON.stringify(clCells));
+  check('famous + no cultural row: registered once with role + hood by engine.118, as a roster cause (no sighting)',
+    registered.length === 1 && registered[0].name === 'Mike Paulson' && registered[0].j === 'engine.118' && registered[0].hood === 'Uptown' && registered[0].cause === 'roster' && r3.cultural === 2,
+    JSON.stringify(registered));
+  check('engine.312: all three famous citizens carry the floor into the flush (Paulson for his pending row)',
+    ['POP-V', 'POP-A', 'POP-P'].every(p => c3._culturalFame.floorPops[p]));
   E3.applyTierLadderState_(c3, 112);
   check('same ctx, second pass: no double registration', registered.length === 1);
 }

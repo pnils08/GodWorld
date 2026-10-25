@@ -147,6 +147,9 @@ function processAdvancementIntake_(ctx) {
   var usageResults = processMediaUsage_(ctx, now, cycle);
   results.usageProcessed = usageResults.processed;
   results.usageSkipped = usageResults.skipped;
+  results.paperFame = usageResults.paperFame || 0;                    // engine.312: rows credited to a fame row
+  results.paperFameNoRow = usageResults.paperFameNoRow || 0;          // a citizen with no Cultural_Ledger row
+  results.paperFameUnresolved = usageResults.paperFameUnresolved || 0; // a coverage row with no unique ledger citizen
 
   // engine.150 (S412, builder-direct): the ladder is a STATE — every cycle a
   // citizen's Tier follows the bar their EARNED count clears. Runs before decay
@@ -223,6 +226,9 @@ function runAdvancementIntakeManual() {
   };
 
   var results = processAdvancementIntake_(ctx);
+  // engine.312: the paper credits ride the fame accumulator; with no Phase 7 /
+  // Phase 10 here the flush writes them direct, as the Processed marks went.
+  if (typeof flushCulturalFame_ === 'function') flushCulturalFame_(ctx);
 
   if (ctx.ledger.dirty && ctx.ledger.rows.length) {
     ledgerSheet.getRange(2, 1, ctx.ledger.rows.length, ctx.ledger.headers.length)
@@ -362,7 +368,8 @@ function buildNameIndex_(rows, firstCol, lastCol, filterFn, startRow) {
 function processMediaUsage_(ctx, now, cycle) {
   var ss = ctx.ss;
   var results = { processed: 0, skipped: 0, promotionsTriggered: 0 };
-  
+  if (ctx.summary) ctx.summary.paperFameByPop = {};   // engine.312: set below from the whole tab
+
   var usageSheet = ss.getSheetByName('Citizen_Media_Usage');
   if (!usageSheet) return results;
   
@@ -388,6 +395,23 @@ function processMediaUsage_(ctx, now, cycle) {
     sentimentCol = Math.max(usageHeaders.length, processedCol + 1);
     usageSheet.getRange(1, sentimentCol + 1).setValue('Sentiment');
   }
+  // engine.312 R2.1(a): where a row came from, when its writer says — the
+  // Phase-11 media-room copy writes 'media-room' (no print source, fame 0).
+  // Self-arms like Sentiment; read by exact header (findColByName_'s prefix
+  // fallback would let 'Source' match some other column).
+  var sourceCol = -1;
+  for (var sc = 0; sc < usageHeaders.length; sc++) if (String(usageHeaders[sc]).trim() === 'Source') sourceCol = sc;
+  if (sourceCol < 0) {
+    sourceCol = Math.max(usageHeaders.length, processedCol + 1, sentimentCol + 1);
+    usageSheet.getRange(1, sourceCol + 1).setValue('Source');
+  }
+  // engine.312 R1: one row's paper delta by the one record rule
+  // (paperFameDelta_, culturalLedger.js) — Phase-5 credits and S.paperFameByPop
+  // read it, so the two cannot disagree.
+  var paperFameRowDelta_ = function(r) {
+    if (typeof paperFameDelta_ !== 'function') return 0;
+    return paperFameDelta_(usageTypeCol >= 0 ? r[usageTypeCol] : '', sentimentCol >= 0 ? r[sentimentCol] : '', r[sourceCol]);
+  };
   
   var genericSheet = ss.getSheetByName('Generic_Citizens');
   var genericData = genericSheet ? genericSheet.getDataRange().getValues() : [];
@@ -465,6 +489,7 @@ function processMediaUsage_(ctx, now, cycle) {
 
     var split = splitUsageName_(citizenName);
     var found = false;
+    var ledgerHit = false;
 
     if (split) {
       var usageKey = normalizeCitizenName_(split.first) + ' ' + normalizeCitizenName_(split.last);
@@ -474,6 +499,7 @@ function processMediaUsage_(ctx, now, cycle) {
         var lr = ledgerHits[0];
         {
           found = true;
+          ledgerHit = true;
 
           var currentUsage = ledgerUpdates[lr] ? ledgerUpdates[lr].usageCount :
                             (lUsageCol >= 0 ? (Number(ledgerRows[lr][lUsageCol]) || 0) : 0);
@@ -482,7 +508,7 @@ function processMediaUsage_(ctx, now, cycle) {
           // The state pass then holds or lowers nothing itself (upward only);
           // decay's bar does the demoting when the earned count falls under it.
           var isFamous = lFamousCol >= 0 && String(ledgerRows[lr][lFamousCol] || '').trim() !== '';
-          // engine.118: a famous name cannot shrink — the hard light dims FameScore instead (apply block)
+          // engine.118: a famous name cannot shrink — the hard light moves FameScore instead (engine.312: −2 by the paper credit below)
           var newUsage = hardLight ? (isFamous ? currentUsage : Math.max(0, currentUsage - 1)) : currentUsage + 1;
           if (hardLight) results.hardLight = (results.hardLight || 0) + 1;
 
@@ -502,6 +528,16 @@ function processMediaUsage_(ctx, now, cycle) {
             hard: hardLight || (ledgerUpdates[lr] && ledgerUpdates[lr].hard) || false,
             famous: isFamous
           };
+
+          // engine.312 R2: the paper moves fame — this accepted row's delta onto
+          // the citizen's target Cultural_Ledger row, in the same step that
+          // queues its Processed mark (a credit is never marked without being
+          // accumulated). Every pending Cycle counts, not only this one.
+          var fameDelta = paperFameRowDelta_(row);
+          if (fameDelta && popId && typeof culturalFameAddPaper_ === 'function') {
+            if (culturalFameAddPaper_(ctx, popId, fameDelta)) results.paperFame = (results.paperFame || 0) + 1;
+            else results.paperFameNoRow = (results.paperFameNoRow || 0) + 1;
+          }
         }
       } else if (ledgerHits.length > 1) {
         // Normalization collision — two+ ledger citizens share this name.
@@ -523,6 +559,8 @@ function processMediaUsage_(ctx, now, cycle) {
       }
     }
 
+    // engine.312: a coverage row with no unique ledger citizen moves no fame (counted, never guessed)
+    if (!ledgerHit && paperFameRowDelta_(row)) results.paperFameUnresolved = (results.paperFameUnresolved || 0) + 1;
     markUsageProcessed_(ctx, usageSheet, i + 1, processedCol + 1, 'Y');
     if (found) {
       results.processed++;
@@ -531,6 +569,28 @@ function processMediaUsage_(ctx, now, cycle) {
     }
   }
   
+  // engine.312 R3: every citizen's whole paper record — every row of the tab,
+  // Processed or not, by the same rule and the same name resolution as the
+  // credits above (family rows and ambiguous names add nothing). The start of a
+  // Cultural_Ledger row created for the citizen this Cycle (registrar CREATE).
+  // Not the re-base manifest: an old own-byline row typed 'mentioned' counts +1
+  // here and 0 in the re-base (plan §engine.312 R5 limit).
+  var paperByPop = {};
+  if (lPopIdCol >= 0) {
+    for (var pf = 1; pf < usageData.length; pf++) {
+      var pRow = usageData[pf];
+      var pDelta = paperFameRowDelta_(pRow);
+      if (!pDelta || (usageTypeCol >= 0 && isFamilyUsage_(pRow[usageTypeCol]))) continue;
+      var pSplit = splitUsageName_(String(pRow[nameCol] || '').trim());
+      if (!pSplit) continue;
+      var pHits = ledgerIndex[normalizeCitizenName_(pSplit.first) + ' ' + normalizeCitizenName_(pSplit.last)] || [];
+      if (pHits.length !== 1) continue;
+      var pPop = String(ledgerRows[pHits[0]][lPopIdCol] || '').trim().toUpperCase();
+      if (pPop) paperByPop[pPop] = (paperByPop[pPop] || 0) + pDelta;
+    }
+  }
+  if (ctx.summary) ctx.summary.paperFameByPop = paperByPop;
+
   if (genericSheet && gEmergenceCol >= 0 && genericData.length > 1) {
     // engine.230: ONE column write instead of a setValue per touched GC row — each was its own
     // Sheets call, and this phase's wall doubles with per-call latency (bench 79 s at night →
@@ -559,9 +619,9 @@ function processMediaUsage_(ctx, now, cycle) {
       // engine.152: the hard light is a moment in the life, and a log row
       var lLife152 = findColByName_(ledgerHeaders, 'LifeHistory');
       var stamp152 = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
-      var dimmed = update.famous ? dimCulturalFame_(ctx, update.popId, -1) : null; // engine.118
+      // engine.118: a famous name does not shrink; engine.312: the hard light's −2 rides the paper credit
       var line152 = stamp152 + (update.famous
-        ? ' — [Media] Named in a hard light — the coverage was not kind, and a name this big does not shrink; the shine dims' + (dimmed !== null ? ' (fame ' + dimmed + ')' : '') + ' (' + (update.context || 'the paper') + ')'
+        ? ' — [Media] Named in a hard light — the coverage was not kind, and a name this big does not shrink; the shine dims (' + (update.context || 'the paper') + ')'
         : ' — [Media] Named in a hard light — the coverage was not kind (' + (update.context || 'the paper') + ')');
       if (lLife152 >= 0) ledgerRows[rowIdx][lLife152] = (ledgerRows[rowIdx][lLife152] ? ledgerRows[rowIdx][lLife152] + '\n' : '') + line152;
       if (typeof queueAppendIntent_ === 'function') {
@@ -1214,36 +1274,16 @@ function tierPayFactor_(tier) {
 // From then on a hard light dims Cultural_Ledger FameScore, never the count.
 var FAME_USAGE_BAR = 25;
 
-// Dim (or brighten) the citizen's Cultural_Ledger FameScore by delta on the
-// highest-fame row linked to the POPID. Queued as a cell intent (Phase 10
-// executes). Returns the new score, or null when no cultural row links them.
-function dimCulturalFame_(ctx, popId, delta) {
-  try {
-    var sheet = ctx.ss ? ctx.ss.getSheetByName('Cultural_Ledger') : null;
-    if (!sheet || sheet.getLastRow() < 2) return null;
-    var v = sheet.getDataRange().getValues();
-    var h = v[0], iPop = h.indexOf('UniverseLinks'), iFame = h.indexOf('FameScore');
-    if (iPop < 0 || iFame < 0) return null;
-    var best = -1, bestFame = -1;
-    for (var r = 1; r < v.length; r++) {
-      if (String(v[r][iPop] || '').trim().toUpperCase() !== String(popId || '').trim().toUpperCase()) continue;
-      var f = Number(v[r][iFame]) || 0;
-      if (f > bestFame) { bestFame = f; best = r; }
-    }
-    if (best < 0) return null;
-    var next = Math.max(0, bestFame + delta);
-    if (typeof queueCellIntent_ === 'function') queueCellIntent_(ctx, 'Cultural_Ledger', best + 1, iFame + 1, next, 'engine.118 fame ' + (delta < 0 ? 'dims' : 'brightens'), 'media');
-    return next;
-  } catch (e) { Logger.log('dimCulturalFame_: ' + e.message); return null; }
-}
-
 // engine.118 cut 3b (S412, builder 2026-09-02: "their likeness copies to the
 // culture ledger where fame citizens are tracked and the fame engine uses these
 // citizens for its events"): the Cultural_Ledger is the famous sub-roster. A
 // famous citizen with no row linked to their POPID gets one registered (the
 // evening-media registrar, queued for Phase 10); a linked row below the fame
 // bar is brightened to the bar so the antenna lights. Never re-registers a
-// linked name (the registrar bumps +5 on every call for an existing entity).
+// linked name. engine.312: the registration is a `roster` cause (no fame, no
+// sighting marks), and every famous citizen checked here keeps the 25 floor in
+// the Cycle's fame flush — the target row is touched even with nothing else to
+// add, and a row created for them tonight starts at 25 or more (R2.1 b).
 function culturalFameOf_(ctx, popId, name) {
   try {
     var sheet = ctx.ss ? ctx.ss.getSheetByName('Cultural_Ledger') : null;
@@ -1266,15 +1306,15 @@ function ensureFamousOnCulturalLedger_(ctx, popId, name, roleType, neighborhood)
   ctx._famousRegistered118 = ctx._famousRegistered118 || {};
   if (ctx._famousRegistered118[popId]) return 'done';
   var fame = culturalFameOf_(ctx, popId, name);
+  var floored = (typeof culturalFameMarkFloor_ === 'function') ? culturalFameMarkFloor_(ctx, popId) : null;
   if (fame === null) {
     if (typeof registerCulturalEntity_ !== 'function') return 'no-registrar';
-    registerCulturalEntity_(ctx, name, roleType || 'citizen', 'engine.118', neighborhood || '');
+    registerCulturalEntity_(ctx, name, roleType || 'citizen', 'engine.118', neighborhood || '', 'roster');
     ctx._famousRegistered118[popId] = true;
     return 'registered';
   }
-  if (fame < FAME_USAGE_BAR) { dimCulturalFame_(ctx, popId, FAME_USAGE_BAR - fame); ctx._famousRegistered118[popId] = true; return 'brightened'; }
   ctx._famousRegistered118[popId] = true;
-  return 'linked';
+  return (floored !== null && floored < FAME_USAGE_BAR) ? 'brightened' : 'linked';
 }
 
 // Intake vs an existing row: blank keeps the row's Tier; a stated Tier can only

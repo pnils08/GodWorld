@@ -2,7 +2,7 @@
 
 **PIN:** S602 | Day 215 | Canon C112 | PROD @163 = stage 27 (`3e04d8a5` + `1e6beff5`) | next live fire C113 Sun 2026-10-25 | stage history, expectations, rollbacks: DEPLOY_HISTORY §PROD | claude-mem observer on quota cooldown — don't restart.
 
-**NEXT[engine-sheet]:** engine.318: read codex recheck (`…-codex-engine318-diff-gate-recheck.md`), then one builder go: live Status step (`apply --expect 105`) + `push-e318-prod.sh`. engine.312 live @163: watch C113, re-run re-base dry run.
+**NEXT[engine-sheet]:** engine.318: codex recheck HOLD on one gap — push-e318-prod.sh must also stop if the intake row count moves; fold, codex look, then one builder go (`apply --expect 105` + push). engine.312 live @163: watch C113.
 
 **NEXT[research-build]:** Session ended by the builder 10-25 12:50 (Ines dispute). Live in tree, committed: Rhea/packet fence cut 37444482 (gate the facts, not the color) — READ Mon 10-26 fanout first (Rhea flags, drafts' colour); pipeline.85 in-progress. Ines Wed 10-28 06:15: planner (llama) failed 3/3 Sun, Calendar line suspect — builder calls: model swap? pull the line? pipeline.88 stems. Clear+boot es (§4) at boot. Stack 48 held.
 **NEXT[kimi]:** OUT for the week (usage limit 2026-10-03). Nothing queued; its civic.38 renew-move check moved to codex 2026-10-04.

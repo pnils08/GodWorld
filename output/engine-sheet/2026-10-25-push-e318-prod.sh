@@ -11,6 +11,13 @@
 # twice. So every read also holds Citizen_Usage_Intake at the live freeze's row count (the 105 step's own freeze, which must
 # record its apply) and the Citizen_Media_Usage rows sourced 'media-room' (the intake path's mark — the newsroom crons write
 # the tab with no Source) at the first read's count. A new intake row anywhere between the freeze and the last read stops it.
+# Codex recheck 2 §1 (counts can be returned to baseline — clearAllProcessedIntake deletes intake rows, cleanCitizenMediaUsage
+# rewrites usage — and a malformed usage read passed as 0): on a real run every read also runs the Status step's own typed
+# `live verify` (every intake cell = the freeze with the 105 Status processed, row count = the freeze, 0 pending) — the row
+# receipt, not a count; and the usage read fails closed: header A–F = the six names the intake path writes by position, at
+# least one row, the row total never below the first read's (the crons only append), and the media-room rows identical cell
+# for cell to the first read's. After the last read both entry points run stage 28 only (HEAD pushed, the pinned deployment
+# serves it, calls admitted before the cut outlasted), so a later intake row is processed once.
 # Stated limit (codex engine.301 gate 3): FIRE_ADMISSION_JSON has no outside read door; a push needs the builder's go as a
 # named exception until engine.317 lands.
 #   bash output/engine-sheet/2026-10-25-push-e318-prod.sh <commit> <manifest> <cycle> [--dry-run]
@@ -25,11 +32,12 @@ FILES="phase07-evening-media/mediaRoomIntake.js phase07-evening-media/parseMedia
 [ "$(realpath "$MAN")" = "$OUT/stage28-e318.sha256" ] || { echo "manifest must be the benched stage28-e318.sha256 — stop"; exit 1; }
 git ls-files --error-unmatch "$MAN" >/dev/null 2>&1 && git diff --quiet HEAD -- "$MAN" || { echo "manifest $MAN is not committed as-is — stop"; exit 1; }
 FRZ="$OUT/2026-10-25-e318-status-live.json"
-INTAKE_ROWS=$(DRY="$DRY" node -e '
+LOADED=$(DRY="$DRY" node -e '
 const F = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
 if (F.target !== "live" || !Number.isInteger(F.rows) || F.rows < 1) { console.error("live freeze unreadable"); process.exit(1); }
 if (!F.applied && process.env.DRY !== "--dry-run") { console.error("the live freeze records no apply — run the Status step first"); process.exit(1); }
-console.log(F.rows);' "$FRZ") || { echo "no usable live freeze at $FRZ — stop"; exit 1; }
+console.log(F.rows + " " + (F.applied ? 1 : 0));' "$FRZ") || { echo "no usable live freeze at $FRZ — stop"; exit 1; }
+read -r INTAKE_ROWS APPLIED <<< "$LOADED"
 W=$(mktemp -d); mkdir -p "$W/stage" "$W/pullback"
 ( cd "$W/stage" && printf '{"scriptId":"%s","rootDir":""}' "$PROD_ID" > .clasp.json && "$CLASP" pull >/dev/null )
 TREE=$( cd "$W/stage" && find . -type f ! -name .clasp.json | sort | xargs sha256sum )
@@ -45,7 +53,9 @@ for f in $FILES; do git show "$SRC:$f" > "$W/stage/$f"; done
   || { echo "built stage does not match the benched manifest $MAN — stop"; exit 1; }
 echo "stage = the benched tree ($MAN), byte for byte"
 fire_state() {   # fire_state <when> — exit 0 only when live reads Cycle $CYC everywhere, no checkpoint, no error stamped past it,
-                 # the intake at the freeze's row count and the media-room usage rows at the first read's count ($W/mr)
+                 # the intake at the freeze's row count, the usage read well-formed with its media-room rows as at the first read
+                 # ($W/mr), and — on a real run — the Status step's typed live verify PASS (the intake row receipt)
+  local rc v
   WHEN="$1" CYC="$CYC" LIVE_ID="$LIVE_ID" INTAKE_ROWS="$INTAKE_ROWS" MR_FILE="$W/mr" node -e '
 require("/root/GodWorld/lib/env");
 const L = process.env.GODWORLD_SHEET_ID, C = Number(process.env.CYC), P = process.env.LIVE_ID;
@@ -64,20 +74,31 @@ const sh = require("/root/GodWorld/lib/sheets"), num = v => Number(String(v).rep
   const cu = await sh.getSheetData("Citizen_Usage_Intake"), ch = cu[0] || [], iCN = ch.indexOf("CitizenName"), iSt = ch.indexOf("Status");
   const pend = (iCN >= 0 && iSt >= 0) ? cu.slice(1).filter(r => String(r[iCN] || "").trim() && r[iSt] !== "processed").length : -1;
   const fs = require("fs"), IR = Number(process.env.INTAKE_ROWS), MF = process.env.MR_FILE, rows = cu.length - 1;
-  // No Source column = no media-room row yet: the intake path arms the header on its first write (mediaRoomIntake.js), so the
-  // count reads 0 until a row lands and 1+ after — the move the gate stops on.
-  const mu = await sh.getSheetData("Citizen_Media_Usage"), iSrc = (mu[0] || []).findIndex(h => String(h).trim() === "Source");
-  const mr = iSrc >= 0 ? mu.slice(1).filter(r => String(r[iSrc] || "").trim() === "media-room").length : 0;
-  if (!fs.existsSync(MF)) fs.writeFileSync(MF, String(mr));
-  const mr0 = Number(fs.readFileSync(MF, "utf8"));
+  // Usage read fails closed: A–F must be the six names the intake path writes by position, with at least one row. No Source
+  // column = no media-room row yet (the intake path arms the header on its first write, mediaRoomIntake.js), so 0 until a row
+  // lands. Against the first read: row total never lower (the crons only append), media-room rows identical cell for cell.
+  const UH = ["Timestamp", "Cycle", "CitizenName", "UsageType", "Context", "Reporter"];
+  const mu = await sh.getSheetData("Citizen_Media_Usage"), mh = mu[0] || [];
+  const headOk = UH.every((h, k) => String(mh[k] === undefined ? "" : mh[k]).trim() === h) && mu.length >= 2;
+  const iSrc = mh.findIndex(h => String(h).trim() === "Source");
+  const mrRows = iSrc >= 0 ? mu.slice(1).filter(r => String(r[iSrc] || "").trim() === "media-room") : [];
+  const u = { total: mu.length - 1, mr: mrRows.length, sig: require("crypto").createHash("sha256").update(JSON.stringify(mrRows)).digest("hex") };
+  if (headOk && !fs.existsSync(MF)) fs.writeFileSync(MF, JSON.stringify(u));
+  const u0 = fs.existsSync(MF) ? JSON.parse(fs.readFileSync(MF, "utf8")) : null;
+  const usageOk = headOk && !!u0 && u.total >= u0.total && u.mr === u0.mr && u.sig === u0.sig;
   const ok = cc === C && iN >= 0 && iC >= 0 && nmc.length === 1 && nmc[0] === C && rl === C && cp === "" && iEC >= 0 && fired === 0 && pend === 0
-    && Number.isInteger(IR) && rows === IR && mr === mr0;
-  console.log("live fire state " + process.env.WHEN + ": cycleCount " + cc + ", Neighborhood_Map " + JSON.stringify(nmc) + ", Riley last " + rl + ", checkpoint " + (cp ? "HELD" : "none") + ", Engine_Errors at C" + (C + 1) + "+ " + fired + ", usage intake pending by name " + pend + ", intake rows " + rows + " (freeze " + IR + "), media-room usage rows " + mr + (iSrc < 0 ? " (no Source column yet)" : "") + " (first read " + mr0 + ") — " + (ok ? "C" + (C + 1) + " not fired, intake still" : "NOT CLEAN"));
+    && Number.isInteger(IR) && rows === IR && usageOk;
+  console.log("live fire state " + process.env.WHEN + ": cycleCount " + cc + ", Neighborhood_Map " + JSON.stringify(nmc) + ", Riley last " + rl + ", checkpoint " + (cp ? "HELD" : "none") + ", Engine_Errors at C" + (C + 1) + "+ " + fired + ", usage intake pending by name " + pend + ", intake rows " + rows + " (freeze " + IR + "), usage header " + (headOk ? "ok" : "MALFORMED") + ", usage rows " + u.total + " (first read " + (u0 ? u0.total : "-") + "), media-room usage rows " + u.mr + (iSrc < 0 ? " (no Source column yet)" : "") + " (first read " + (u0 ? u0.mr : "-") + ", rows " + (u0 && u.sig === u0.sig ? "identical" : "DIFFER") + ") — " + (ok ? "C" + (C + 1) + " not fired, intake still" : "NOT CLEAN"));
   process.exit(ok ? 0 : 1);
-})().catch(e => { console.error(e.message); process.exit(2); });' 2>&1 | grep -v "injected env"
-  return ${PIPESTATUS[0]}
+})().catch(e => { console.error(e.message); process.exit(2); });' 2>&1 | grep -v "injected env"; rc=${PIPESTATUS[0]}
+  if [ "$APPLIED" = 1 ]; then
+    node "$OUT/2026-10-25-e318-status-step.js" live verify 2>&1 | grep -v "injected env"; v=${PIPESTATUS[0]}
+  else
+    v=0; echo "intake receipt $1: the live freeze records no apply (dry run) — the typed verify is not read"
+  fi
+  [ "$rc" = 0 ] && [ "$v" = 0 ]
 }
-fire_state "before the push" || { echo "the next Cycle fired, a checkpoint is held, the usage intake reads pending (run the Status step) or moved off the freeze, or the read failed — stop"; exit 1; }
+fire_state "before the push" || { echo "the next Cycle fired, a checkpoint is held, the usage intake reads pending (run the Status step) or moved off the freeze, the usage read is malformed or moved, or a read failed — stop"; exit 1; }
 if [ "$DRY" = "--dry-run" ]; then echo "dry run: stopping before the push ($W/stage)"; exit 0; fi
 DEP=$(grep -o '"deploymentId": "[^"]*"' /root/GodWorld/.clasp.json | cut -d'"' -f4)
 [ -n "$DEP" ] || { echo "no pinned deploymentId in the repo .clasp.json — STOP"; exit 1; }

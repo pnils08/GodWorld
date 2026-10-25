@@ -61,6 +61,8 @@ const pendingByName = (rows) => rows.filter(r => String(r[0]).trim() && r[5] !==
     return;
   }
   const F = JSON.parse(fs.readFileSync(OUT, 'utf8'));
+  // A freeze written before the full-width fold carries no width: W would be NaN and every cell compare would be skipped.
+  if (!Number.isInteger(F.width) || F.width < HEADER.length) throw new Error(OUT + ' carries no width (written before the full-width compare) — refreeze');
   const W = Math.max(F.width, widthOf(tab));
   const now = widen(tab.slice(1), W), frozen = widen(F.tab, W);
   if (mode === 'apply') {

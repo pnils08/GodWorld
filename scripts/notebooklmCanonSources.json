@@ -44,7 +44,8 @@
     "4a9c722e-472c-4bea-bd83-29d12404170a",
     "7d5a94fd-e689-41d6-a444-d266c9ddcafb",
     "3448ce79-e222-46ed-a8b0-6adc8e35429e",
-    "45e84e2f-87a7-4e37-a3ff-2d1f828239ef"
+    "45e84e2f-87a7-4e37-a3ff-2d1f828239ef",
+    "06e1843d-5c67-4052-8ddd-de2fc22413d1"
   ],
   "allowedCanonReferenceSourceIds": [
     "c31ff29f-42d5-4ed3-ba71-620c463a39a6",
@@ -760,6 +761,14 @@
         "Source file: output/lore-quarantine/danny_horn_deep_dive.md",
         "Cycle placement: Y3C7",
         "Verdict: pass (rhea)"
+      ]
+    },
+    "06e1843d-5c67-4052-8ddd-de2fc22413d1": {
+      "title": "The Cycle Pulse — Y3C8",
+      "classification": "published",
+      "reason": "Published Cycle Pulse edition, added to the permanent notebook by the Saturday run (cron-saturday-run.js stepPublish).",
+      "evidence": [
+        "editions/cycle_pulse_c112.txt"
       ]
     }
   }

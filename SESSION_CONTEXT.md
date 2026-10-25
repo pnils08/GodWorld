@@ -2,9 +2,9 @@
 
 **PIN:** S599 | Day 215 | Canon C112 | PROD @162 = stage 25 (`3109503e`) | next live fire C113 Sun 2026-10-25 | stage history, expectations, rollbacks: DEPLOY_HISTORY §PROD | claude-mem observer on quota cooldown — don't restart.
 
-**NEXT[engine-sheet]:** engine.313/314/315 LIVE (PROD @162 stage 25), each bench + codex SHIP; C113 Sun 2026-10-25 smoke note only (live watch without --e313). FIRST: push the local stack once research-build's commits are landable (stages 24/25 exist only on this machine). Then ROLLOUT engine.301 F1, 312, 204/205/281.
+**NEXT[engine-sheet]:** engine.313/314/315 LIVE (PROD @162 stage 25), each bench + codex SHIP; C113 Sun 2026-10-25 smoke note only (live watch without --e313). Pushed (origin 8e35176f, research-build landed it). Next: ROLLOUT engine.301 F1, 312, 204/205/281.
 
-**NEXT[research-build]:** Boot docs changed 2026-10-23 on the builder's word: emotional tone out, JOB MODEL block in the hook (one job in hand per terminal, resume-before-open step), PIN one line; codex HOLD findings folded (499301a2), its review in docs/for-claude-review/. Open: migrate the 8 engine-sheet in-progress rows + 14 two-owner rows to one owner as picked up (lint names them). Rhea gate still half-wired, uncommitted; builder ruling on length/canon unresolved. Builder: paper and sim make no sense — next session is a reading session with him, not a build.
+**NEXT[research-build]:** Pushed the 34-commit stack 2026-10-25 (fa683eda→8e35176f, es confirmed). Lives seat rebuilt: thread per person + wide intake (events, households, wagers, seed-reached citizens, life tags, family passages), agy folded; EIC audit reads the two-Cycle lived record; Lives/Voices sit out empty days; reconcile honours thin flags; C112 Tamsin + Angela restored to canon. Watch Tamsin Mon 06:15 (people count, length, grade). Open: rheaAdvisory line uncommitted in newsroom-wake-packages.json (10-23 gate job); 8 es in-progress + 14 two-owner ROLLOUT rows to one owner.
 **NEXT[kimi]:** OUT for the week (usage limit 2026-10-03). Nothing queued; its civic.38 renew-move check moved to codex 2026-10-04.
 
 **NEXT[codex]:** Verify board comparator/config/history export gaps per the same plan §Task 4; separate counter threshold-rounding defect in §Health numerator amendment.

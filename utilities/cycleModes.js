@@ -179,17 +179,37 @@ function initializeReplayMode_(ctx, cycleId) {
 
 
 /**
+ * A fresh 32-bit seed folded from a random UUID. Throws with no entropy source:
+ * falling back to the cycle number would make every cycle's dice predictable.
+ * @returns {number} unsigned 32-bit seed
+ */
+function freshCycleSeed_() {
+  var id = (typeof Utilities !== 'undefined' && Utilities.getUuid) ? Utilities.getUuid() : '';
+  if (!id) throw new Error('freshCycleSeed_: no entropy source (Utilities.getUuid); the cycle seed must not be the cycle number');
+  var h = 2166136261; // FNV-1a over the UUID text
+  for (var i = 0; i < id.length; i++) {
+    h ^= id.charCodeAt(i);
+    h = Math.imul(h, 16777619) >>> 0;
+  }
+  return h >>> 0;
+}
+
+
+/**
  * Initializes seeded RNG for the current cycle.
  * Call this at cycle start (Phase 0/1) for deterministic execution.
  * @param {Object} ctx - Engine context
  */
 function initializeSeededRng_(ctx) {
-  var cycleId = ctx.summary.cycleId || ctx.config.cycleCount || 1;
-  var seed = cycleId;
+  var seed;
 
-  // If replaying, use stored seed
+  // If replaying, use stored seed; otherwise the seed is fresh entropy, unknowable
+  // before the cycle runs (builder 2026-10-25: nobody may know what fires). It is
+  // still stored by saveCycleSeed_ at Phase 10, so a replay of a finished cycle works.
   if (ctx.mode && ctx.mode.replay && ctx.replaySeed) {
     seed = ctx.replaySeed.seed;
+  } else {
+    seed = freshCycleSeed_();
   }
 
   ctx.rng = seededRng_(seed);

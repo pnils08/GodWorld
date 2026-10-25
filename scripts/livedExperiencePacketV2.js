@@ -361,29 +361,20 @@ function buildWritePacket(args) {
     unverifiedLeads: (packet.exposure.excludedLeads || []).map(lead => ({
       from: lead.from, text: lead.text, publishable: false,
     })),
+    // Builder 2026-10-25 ("gate the facts, not the color" — S433, restated: "I'm walking the crons to
+    // make up color"; "a packet has the canon, writing strict to it defeats the purpose"): the
+    // per-seat texture lists ride as the seat's own notes, never a fence; there are no forbidden
+    // claim classes. Invention is the job; the canon it may not contradict is the approved record.
     authorizedTexture: loadBearingPolicy ? clone(reviewProfile.authorizedTexture || []) : [],
     textureConditions: loadBearingPolicy ? clone(reviewProfile.textureConditions || []) : [],
-    forbiddenClaimClasses: loadBearingPolicy
-      ? clone(reviewProfile.canonBlockers || [])
-      : [
-        'new person or institution',
-        'new place or street',
-        'new event or firsthand scene',
-        'new date, cycle, count, metric, budget, or duration',
-        'new direct quotation',
-        'unsupported collective sentiment',
-        'unsupported history, causality, duty, action, or absence',
-      ],
+    forbiddenClaimClasses: [],
   };
   packet.manifest.id = manifestId(packet);
-  packet.limits.assert = ['manifest.approvedFacts exact claims'];
-  packet.limits.attribute = ['manifest.approvedQuotes exact text'];
-  packet.limits.rule = loadBearingPolicy
-    ? 'The manifest is exhaustive for load-bearing canon claims. Persona-authorized texture may create lived street color only inside manifest.authorizedTexture and manifest.textureConditions; it never proves a canon fact.'
-    : 'The Article claim manifest is exhaustive. Better prose may arrange and interpret it, but may not enlarge it.';
+  packet.limits.assert = ['manifest.approvedFacts are canon — never contradict them'];
+  packet.limits.attribute = ['a named ledger citizen speaks only in manifest.approvedQuotes or their own page line; everyone else speaks in your words'];
+  packet.limits.rule = 'The Packet is what you know, not the fence around what you may write. The approved facts and the ledger are canon: never contradict them, and never import real-world Oakland (its people, businesses, landmarks, troubles). Everything else — the scene, the street, the weather in the room, unnamed people and what they say, new in-world places and businesses, what the city is talking about — is yours to invent; that colour is the job, and it never rewrites a canon fact. A named ledger citizen speaks only in their approved quote or their own page line.';
   if (investigation) {
-    packet.limits.rule += ' For this investigation, do not convert a source intention to keep watching into past tracking; do not invent conversations, access, requests, responses, files, owners, duties, offices, expectations, or collective conclusions. Attribute each approved quote exactly and separately. Missing fields stay unknown, not implied.';
-    packet.limits.rule += ' Missing evidence stays off the page. Do not print "the Packet does not establish X". Never rewrite missing evidence as "X did not happen," "no one did X," "I looked/asked/requested," or "the absence proves X." First-person reporting acts require an approved fact that names that act.';
+    packet.limits.rule += ' For this investigation: do not invent official acts, requests, responses, files, duties, or offices for a named office or named citizen, and claim no reporting act (asked, requested, obtained, tracked) the record does not show. Attribute each approved quote exactly. Missing evidence stays unknown — never rewritten as "X did not happen," "no one did X," or "the absence proves X."';
     packet.manifest.permittedInterpretationSlots.push({
       id: 'P_KNOWN_UNKNOWN',
       rule: 'Contrast approved facts with creativeBrief.missing only; do not narrate a missing item as an event that occurred.'
@@ -393,10 +384,10 @@ function buildWritePacket(args) {
     }
   }
   if (!approvedQuotes.length) {
-    packet.limits.rule += ' No citizen spoke for this piece: manifest.approvedQuotes is empty. Write no quoted speech and attribute no statement to any person; the piece stands on the record and the place.';
+    packet.limits.rule += ' No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen\'s mouth. Unnamed voices are yours.';
   }
   if (packet.task.writingMode === 'SOURCE_BRIEF') {
-    packet.limits.rule += ' Stay inside approved facts and exact quotes. Omit raw engine fields. Do not brief the record. Open on a person or place living the condition.';
+    packet.limits.rule += ' Do not brief the record. Open on a person or place living the condition.';
   }
   packet.output.preflight = {
     facts: 'select manifest.approvedFacts ids',
@@ -746,19 +737,11 @@ function auditArticle(draftText, packet) {
       values: [...new Set(overreach)],
     });
   }
-  // A load-bearing profile deliberately routes lexical differences to Rhea for
-  // semantic review. Street ordinals, sign phrasing, punctuation, and anonymous
-  // color are not mechanically distinguishable from factual claims. The old
-  // fatal lexical wall therefore becomes review evidence, while exhaustive
-  // evaluation packets retain their original fail-closed behavior.
-  if (packet.manifest.policy === 'load-bearing') {
-    const hard = errors.filter(error =>
-      ['UNAPPROVED_QUOTE', 'INVESTIGATION_EPISTEMIC_OVERREACH', 'ENGINE_METADATA_LEAK'].includes(error.code));
-    if (hard.length) return { ok: false, manifestId: packet.manifest.id, errors: hard,
-      observations: errors.filter(error => !hard.includes(error)) };
-    return { ok: true, manifestId: packet.manifest.id, errors: [], observations: errors };
-  }
-  return { ok: errors.length === 0, manifestId: packet.manifest.id, errors, observations: [] };
+  // Builder 2026-10-25: the audit never fails a draft. A number, a quoted span, an engine word or
+  // an investigator's phrase the Packet did not supply is colour until Rhea — reading the ledger
+  // and the citizens' own words, not the Packet — says it contradicts the record. Everything the
+  // audit finds rides to her as a review cue (observations); `errors` stays empty by contract.
+  return { ok: true, manifestId: packet.manifest.id, errors: [], observations: errors };
 }
 
 function prompt(packet) {

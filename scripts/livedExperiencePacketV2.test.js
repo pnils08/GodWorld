@@ -97,7 +97,7 @@ assert.match(w3.manifest.id, /^AM-[a-f0-9]{12}$/);
 assert.equal(w3.manifest.approvedQuotes[0].id, claims.quoteId);
 assert.ok(w3.manifest.approvedFacts.some(row => row.id === selectedFactId));
 assert.equal(w3.manifest.unverifiedLeads[0].publishable, false);
-assert.ok(w3.manifest.forbiddenClaimClasses.includes('new place or street'));
+assert.deepStrictEqual(w3.manifest.forbiddenClaimClasses, [], 'no forbidden claim classes — colour is the job (builder 2026-10-25)');
 assert.doesNotThrow(() => p.assertBase(w3, 'W3'));
 const officeRecord = { sourceKind: 'office-record', cycle: 999, officeSlug: 'test_office',
   statementId: 'STMT-999-test-001', quote: 'Test-only official statement.',
@@ -141,10 +141,10 @@ assert.deepStrictEqual(p.auditArticle(splitDraft, w3).errors, []);
 // Scare-quoted term lifted verbatim from the approved record passes.
 const factFragment = w3.manifest.approvedFacts[0].text.split(/\s+/).slice(0, 3).join(' ');
 const scareDraft = '## TEST-ONLY\n\nTEST-ONLY value rose by 4. The record calls it “' + factFragment + '” again.\n';
-assert.ok(!p.auditArticle(scareDraft, w3).errors.some(e => e.code === 'UNAPPROVED_QUOTE'));
+assert.ok(!p.auditArticle(scareDraft, w3).observations.some(e => e.code === 'UNAPPROVED_QUOTE'));
 // Paraphrase — same idea, different words — still fails closed.
 const paraDraft = '## TEST-ONLY\n\nTest Resident said, “The record really does not line up with anything I expected to see.”\n';
-assert.ok(p.auditArticle(paraDraft, w3).errors.some(e => e.code === 'UNAPPROVED_QUOTE'));
+assert.ok(p.auditArticle(paraDraft, w3).observations.some(e => e.code === 'UNAPPROVED_QUOTE'));
 // Nobody on the record: a five-word quoted run is speech even when its words sit in an approved fact.
 const quotelessW3 = JSON.parse(JSON.stringify(w3));
 quotelessW3.manifest.approvedQuotes = [];
@@ -152,15 +152,15 @@ const longFact = quotelessW3.manifest.approvedFacts.map(row => row.text).find(te
 if (longFact) {
   const borrowed = longFact.split(/\s+/).slice(0, 5).join(' ');
   assert.ok(p.auditArticle('## TEST-ONLY\n\nTest Resident said, “' + borrowed + '.”\n', quotelessW3)
-    .errors.some(e => e.code === 'UNAPPROVED_QUOTE'), 'a quoteless Packet cannot lend a fact to a speaker');
+    .observations.some(e => e.code === 'UNAPPROVED_QUOTE'), 'a quoteless Packet cannot lend a fact to a speaker');
 }
 assert.ok(!p.auditArticle('## TEST-ONLY\n\nThe record calls it “' + factFragment + '” again.\n', quotelessW3)
-  .errors.some(e => e.code === 'UNAPPROVED_QUOTE'), 'a short scare-quoted term still passes with nobody on the record');
+  .observations.some(e => e.code === 'UNAPPROVED_QUOTE'), 'a short scare-quoted term still passes with nobody on the record');
 const bad = good + '\nI stood on 8th Street. A source said, “Invented words.”\n';
 const audit = p.auditArticle(bad, w3);
-assert.equal(audit.ok, false);
-assert.ok(audit.errors.some(e => e.code === 'UNAPPROVED_NUMBER' && e.values.includes('8th')));
-assert.ok(audit.errors.some(e => e.code === 'UNAPPROVED_QUOTE'));
+assert.equal(audit.ok, true, 'the audit never fails a draft (builder 2026-10-25)');
+assert.ok(audit.observations.some(e => e.code === 'UNAPPROVED_NUMBER' && e.values.includes('8th')));
+assert.ok(audit.observations.some(e => e.code === 'UNAPPROVED_QUOTE'));
 
 const jaxProfile = {
   id: 'TEST-JAX', canonPolicy: 'load-bearing',
@@ -176,18 +176,18 @@ const jaxW3 = p.buildWritePacket({
 });
 assert.equal(jaxW3.manifest.policy, 'load-bearing');
 assert.deepStrictEqual(jaxW3.manifest.authorizedTexture, jaxProfile.authorizedTexture);
-assert.deepStrictEqual(jaxW3.manifest.forbiddenClaimClasses, jaxProfile.canonBlockers);
+assert.deepStrictEqual(jaxW3.manifest.forbiddenClaimClasses, [], 'canon blockers no longer ride the manifest as a fence');
 const jaxAudit = p.auditArticle(bad, jaxW3);
-assert.equal(jaxAudit.ok, false);
-assert.ok(jaxAudit.errors.some(e => e.code === 'UNAPPROVED_QUOTE'));
+assert.equal(jaxAudit.ok, true, 'the audit never fails a draft (builder 2026-10-25)');
+assert.ok(jaxAudit.observations.some(e => e.code === 'UNAPPROVED_QUOTE'));
 assert.ok(jaxAudit.observations.some(e => e.code === 'UNAPPROVED_NUMBER'));
 const jaxRawMetadata = p.auditArticle('The TEST-ONLY Initiative remains in construction-planning.', jaxW3);
-assert.equal(jaxRawMetadata.ok, false);
-assert.ok(jaxRawMetadata.errors.some(e => e.code === 'ENGINE_METADATA_LEAK'));
+assert.equal(jaxRawMetadata.ok, true, 'the audit never fails a draft (builder 2026-10-25)');
+assert.ok(jaxRawMetadata.observations.some(e => e.code === 'ENGINE_METADATA_LEAK'));
 const naturalizedMetadata = p.auditArticle(
   'The room had a volume of 3, movement is restricted, low volume, restricted movement, and weather impact was at 1.05.', jaxW3);
-assert.equal(naturalizedMetadata.ok, false);
-assert.ok(naturalizedMetadata.errors.some(e => e.code === 'ENGINE_METADATA_LEAK'));
+assert.equal(naturalizedMetadata.ok, true, 'the audit never fails a draft (builder 2026-10-25)');
+assert.ok(naturalizedMetadata.observations.some(e => e.code === 'ENGINE_METADATA_LEAK'));
 
 const sourceBriefProfile = {
   ...jaxProfile,
@@ -439,9 +439,9 @@ const luisPlan = p.validateAngleOutput({
 const luisW3 = p.buildWritePacket({ cycle: 999, desk: 'civic', reporter,
   story: { ...story, popids: [], citizens: [] }, approach: 'TEST-ONLY investigation',
   angleInput: luisW1, anglePlan: luisPlan, interviews: [], lane: [], reviewProfile: luisProfile });
-assert.match(luisW3.limits.rule, /do not convert a source intention to keep watching into past tracking/);
-assert.match(luisW3.limits.rule, /Do not print "the Packet does not establish X"/);
-assert.match(luisW3.limits.rule, /First-person reporting acts require an approved fact/);
+assert.match(luisW3.limits.rule, /do not invent official acts, requests, responses, files, duties, or offices for a named office or named citizen/);
+assert.match(luisW3.limits.rule, /claim no reporting act .* the record does not show/);
+assert.match(luisW3.limits.rule, /The Packet is what you know, not the fence/);
 assert.ok(luisW3.manifest.permittedInterpretationSlots.some(row => row.id === 'P_KNOWN_UNKNOWN'));
 assert.equal(luisW3.task.writingMode, 'RECORDS_BRIEF');
 assert.equal(luisW3.reviewProfile.articleContract.targetWords, '400-700');
@@ -451,41 +451,41 @@ assert.equal(luisW3.signal.plan.closeQuestion,
   'What is still unfinished for the people living this?');
 const luisOverreach = p.auditArticle(
   'I went looking. Two residents flagged it to me independently. Somebody owns the file.', luisW3);
-assert.equal(luisOverreach.ok, false);
-assert.ok(luisOverreach.errors.some(row => row.code === 'INVESTIGATION_EPISTEMIC_OVERREACH'));
+assert.equal(luisOverreach.ok, true, 'the audit never fails a draft (builder 2026-10-25)');
+assert.ok(luisOverreach.observations.some(row => row.code === 'INVESTIGATION_EPISTEMIC_OVERREACH'));
 // pipeline.62 — "I've heard" is a hedge, not a claim of unrecorded legwork.
 // Acceptance 2: it must not be a hard fail. The rest of the overreach wall
 // (legwork the Packet never recorded) is untouched, asserted above.
 const luisHedge = p.auditArticle(
   "I've heard the money was supposed to land two cycles ago.", luisW3);
-assert.ok(!luisHedge.errors.some(row => row.code === 'INVESTIGATION_EPISTEMIC_OVERREACH'),
+assert.ok(!luisHedge.observations.some(row => row.code === 'INVESTIGATION_EPISTEMIC_OVERREACH'),
   'a hedge is not overreach: ' + JSON.stringify(luisHedge.errors));
 
 // Acceptance 4: signage is a thing the reporter read, not a thing a person
 // said. A long attributed sentence with no Packet record is still fabrication.
 const luisSignage = p.auditArticle(
   'The window still carries a "For Lease" card, curling at the corner.', luisW3);
-assert.ok(!luisSignage.errors.some(row => row.code === 'UNAPPROVED_QUOTE'),
+assert.ok(!luisSignage.observations.some(row => row.code === 'UNAPPROVED_QUOTE'),
   'signage is not a citizen quote: ' + JSON.stringify(luisSignage.errors));
 // Attribution before the span is still speech — `she said, "Not My Problem"` is
 // three Title-Case words and must not ride out as signage.
 const luisPreAttrib = p.auditArticle(
   'Marla Deene said, "Not My Problem", and closed the door.', luisW3);
-assert.ok(luisPreAttrib.errors.some(row => row.code === 'UNAPPROVED_QUOTE'),
+assert.ok(luisPreAttrib.observations.some(row => row.code === 'UNAPPROVED_QUOTE'),
   'attribution before the span is speech: ' + JSON.stringify(luisPreAttrib.errors));
 
 const luisFabricated = p.auditArticle(
   'Standing by the fence, she said, "Nobody from that office has ever once called me back about any of it."',
   luisW3);
-assert.ok(luisFabricated.errors.some(row => row.code === 'UNAPPROVED_QUOTE'),
+assert.ok(luisFabricated.observations.some(row => row.code === 'UNAPPROVED_QUOTE'),
   'fabricated speech is still fatal: ' + JSON.stringify(luisFabricated.errors));
 
 const luisEngineLeak = p.auditArticle('The stuck-initiative is marked high in row 4.', luisW3);
-assert.equal(luisEngineLeak.ok, false);
-assert.ok(luisEngineLeak.errors.some(row => row.code === 'ENGINE_METADATA_LEAK'));
+assert.equal(luisEngineLeak.ok, true, 'the audit never fails a draft (builder 2026-10-25)');
+assert.ok(luisEngineLeak.observations.some(row => row.code === 'ENGINE_METADATA_LEAK'));
 const luisMissingAsAbsence = p.auditArticle('There is no request and no response.', luisW3);
-assert.equal(luisMissingAsAbsence.ok, false);
-assert.ok(luisMissingAsAbsence.errors.some(row => row.code === 'INVESTIGATION_EPISTEMIC_OVERREACH'));
+assert.equal(luisMissingAsAbsence.ok, true, 'the audit never fails a draft (builder 2026-10-25)');
+assert.ok(luisMissingAsAbsence.observations.some(row => row.code === 'INVESTIGATION_EPISTEMIC_OVERREACH'));
 assert.equal(p.auditArticle(
   'The Packet does not establish a request, response, owner, office, or cause.', luisW3).ok, true);
 const luisRendered = p.renderRecordsBrief(luisW3);

@@ -105,8 +105,8 @@ function buildPrompt(cycle, draftRel, worldRel, nameCheck, evidenceRel, reviewCo
         'on a sheet." HIGH-severity only for a real-world import, or a wholly invented person given the authority ' +
         'of an established citizen or office-holder. A name present in the supplied record but not the ledger is an ' +
         'UNRESOLVED SUBJECT (low severity, note as intake, do not fail the article). Dismiss newly named in-world ' +
-        'places and businesses, unnamed or role-only local voices, and common phrases. Words put in the mouth of a ' +
-        'name the ledger DOES carry still require Packet support.'
+        'places and businesses, unnamed or role-only local voices, and common phrases. A named ledger citizen\'s ' +
+        'quoted words must come from their interview record or their own page; everyone else\'s speech is the reporter\'s colour.'
       : 'Every person-name candidate in the draft resolved to a ledger citizen.',
     nameCheck.verified.length ? 'Confirmed ledger citizens in the draft: ' + nameCheck.verified.join('; ') + '.' : '',
     ''
@@ -122,17 +122,18 @@ function buildPrompt(cycle, draftRel, worldRel, nameCheck, evidenceRel, reviewCo
       : []),
     'The draft to verify is: ' + draftRel + '.',
     ...(PERSONA === 'hal-richmond' ? [
-      'HISTORIAN SEAT: Hal Richmond may name pre-sim baseball history (franchise figures, era comps, a legend against a Packet-present line). That is archive echo, not a real-world Oakland import. Invented current stats, invented seasons, and Oakland geography leaks still fail. Words in the mouth of a tracked living citizen still require Packet support.'
+      'HISTORIAN SEAT: Hal Richmond may name pre-sim baseball history (franchise figures, era comps, a legend against a Packet-present line). That is archive echo, not a real-world Oakland import. Invented current stats, invented seasons, and Oakland geography leaks still fail. A tracked living citizen\'s quoted words still come from their interview record or their own page.'
     ] : []),
+    // Builder 2026-10-25: the Packet is what the reporter knew, never the fence Rhea judges by. She
+    // is handed only what the named citizens actually said (interview record + own page lines) —
+    // the world's record — and nothing about permitted texture or approved facts/numbers.
     ...(reviewContext ? [
       '',
-      'WRITER AUTHORITY PROFILE (apply while sourcing; do not turn this into a voice score):',
-      JSON.stringify(reviewContext.profile),
-      'Wake-3 manifest: ' + JSON.stringify(reviewContext.manifest),
+      'WHAT THE NAMED CITIZENS SAID (interview record, exact): ' + JSON.stringify((reviewContext.manifest && reviewContext.manifest.approvedQuotes || []).map(q => ({ speaker: q.speakerName, text: q.text }))),
       ...((reviewContext.pageLines || []).length ? [
-        'APPROVED PAGE LINES (each citizen\'s own page text, whole; an exact copy attributed to its owner is supplied speech — still flag altered or paraphrased page text, added words, or a line attributed to a different citizen): ' + JSON.stringify(reviewContext.pageLines),
+        'THEIR OWN PAGE LINES (each citizen\'s own page text, whole; an exact copy attributed to its owner is their speech — flag words added to a page passage or a line attributed to a different citizen): ' + JSON.stringify(reviewContext.pageLines),
       ] : []),
-      'Lexical observations are review cues, not automatic flags: ' + JSON.stringify(reviewContext.audit.observations || []),
+      'Scenes, streets, unnamed voices, new in-world places and the reporter\'s own numbers are the reporter\'s colour — never a flag unless they contradict the ledger or the world state.',
     ] : []),
     '',
     pre +
@@ -141,7 +142,7 @@ function buildPrompt(cycle, draftRel, worldRel, nameCheck, evidenceRel, reviewCo
     'Do NOT trust the draft\'s own EVIDENCE/sourcing blocks — verify independently.',
     '',
     'Failure classes per ENGINE_CRON_LOOP.md §4.7 — this list is EXHAUSTIVE: ' +
-    '(a) FABRICATED SPEECH — a quote in the mouth of a tracked citizen with no interview/Packet support. ' +
+    '(a) FABRICATED SPEECH — words in the mouth of a NAMED LEDGER CITIZEN that neither their interview record nor their own page carries (an unnamed or role-only voice is the reporter\'s colour, never this class). ' +
     '(b) DIRECT CONTRADICTION OF RECORDED STATE — contradictory figures, wrong GM/manager/roster, invented ' +
     'official acts/votes/criminal claims, a citizen in two places at one recorded moment. ' +
     '(c) FOURTH-WALL LEAKAGE — exactly two things: real-world Oakland imported into the city (the pre-check\'s ' +
@@ -483,8 +484,8 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
         '       legal colour that mints as an untracked citizen. Dismiss.',
         '     - A wholly invented person given the authority of an established citizen or office-holder —',
         '       presented as a named official, a named source with a title, or a tracked citizen — HIGH-severity.',
-        '   Words put in the mouth of a name the ledger DOES carry still require Packet support; that rule is',
-        '   unchanged and is checked below.',
+        '   A named ledger citizen\'s quoted words must come from their interview record or their own page (section',
+        '   4 below); everyone else\'s speech is the reporter\'s colour.',
       ].join('\n')
       : '   every person-name candidate resolved to a ledger citizen' + (nameCheck && nameCheck.verified.length ? ' (' + nameCheck.verified.join('; ') + ')' : '') + '.',
     '2. Fourth-wall scan (article body):',
@@ -503,33 +504,25 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
     '3. Ledger profiles of verified citizens named in the draft (bio ground truth — any age, occupation,' +
     '   tenure, wealth, or neighborhood claim contradicting these is HIGH-severity misrepresentation):',
     profiles.length ? profiles.map(p => '   - ' + p).join('\n') : '   (none)',
+    // Builder 2026-10-25 ("gate the facts, not the color"; "Rhea has no business telling me what my
+    // world is"): the Packet is what the reporter knew, never the fence Rhea judges by. No writer
+    // profile, no permitted-texture list, no manifest policy, no approved-number cues reach her.
+    // She is handed one thing from the Packet — what the named citizens actually said — because
+    // that is the world's record of those citizens, not a limit on the reporter.
     ...(reviewContext ? [
       '',
-      '4. PERSONA-SPECIFIC SOURCING AUTHORITY — profile ' + reviewContext.profile.id +
-        ' (package ' + (reviewContext.packageVersion || 'unknown') + '):',
-      '   PURPOSE: ' + reviewContext.profile.purpose,
-      '   AUTHORIZED TEXTURE (absence from the ledger is not a sourcing failure by itself):',
-      ...reviewContext.profile.authorizedTexture.map(v => '   - ' + v),
-      '   CONDITIONS:',
-      ...reviewContext.profile.textureConditions.map(v => '   - ' + v),
-      '   CANON BLOCKERS:',
-      ...reviewContext.profile.canonBlockers.map(v => '   - ' + v),
-      '   WAKE-3 MANIFEST POLICY: ' + (reviewContext.manifest && reviewContext.manifest.policy || 'unknown'),
-      '   LEXICAL REVIEW CUES (not automatic flags): ' +
-        JSON.stringify(reviewContext.audit.observations || []),
-      '',
-      '5. EXACT PACKET QUOTE PROVENANCE (deterministically validated against the Wake-3 manifest):',
+      '4. WHAT THE NAMED CITIZENS SAID — the interview record for this draft, exact:',
       ...((reviewContext.manifest && reviewContext.manifest.approvedQuotes || []).length
         ? reviewContext.manifest.approvedQuotes.map(quote =>
-          '   - ' + quote.speakerName + ': ' + JSON.stringify(quote.text) +
-          ' [' + quote.src + '; supports ' + (quote.factIds || []).join(', ') + ']')
-        : ['   (none)']),
-      '   These exact speaker/text pairs are supplied interview evidence for this draft. Do not call an exact listed quote fabricated merely because older canon records a different statement by the same citizen. Still flag altered text, wrong attribution, or factual prose that the approved facts do not support.',
+          '   - ' + quote.speakerName + ': ' + JSON.stringify(quote.text) + ' [' + quote.src + ']')
+        : ['   (no named citizen was interviewed for this piece)']),
+      '   An exact listed quote attributed to its speaker is that citizen\'s speech. Do not call an exact listed quote fabricated merely because older canon records a different statement by the same citizen. Flag words added to a named citizen\'s mouth and a quote attributed to the wrong citizen.',
       ...((reviewContext.pageLines || []).length ? [
         '',
-        '   APPROVED PAGE LINES — each citizen\'s own page text, whole, from the page store (supplied record). A draft passage that is an exact copy of one of these, attributed to its owner, is that citizen\'s supplied speech: not fabricated, and not a mismatch with the interview quotes above. Still flag altered or paraphrased page text (quoted or unquoted), words added to a page passage, and a page line attributed to a different citizen.',
+        '   THEIR OWN PAGE LINES — each citizen\'s own page text, whole, from the page store. A draft passage that is an exact copy of one of these, attributed to its owner, is that citizen\'s own speech. Flag words added to a page passage and a page line attributed to a different citizen.',
         ...reviewContext.pageLines.map(p => '   - ' + p.name + ' [' + p.customId + ']: ' + JSON.stringify(p.text)),
       ] : []),
+      '   Everything else in the draft — scenes, streets, unnamed voices and what they say, new in-world places, the reporter\'s own figures — is the reporter\'s colour. It is never a flag unless it contradicts the ground truth above or a verified citizen\'s ledger profile.',
     ] : []),
     '',
     'The machine-only ## INTAKE provenance block was validated separately and is intentionally omitted below. Do not flag its absence or speculate about its contents.',
@@ -538,8 +531,9 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
     articleProse,
     '',
     'Your job is the §4.7 failure classes — this list is EXHAUSTIVE (you police the canon boundary, not the editorial voice):',
-    '(1) FABRICATED SPEECH — a quote in the mouth of a tracked citizen that no interview record or Packet',
-    '    evidence produced. The worst contamination there is.',
+    '(1) FABRICATED SPEECH — words in the mouth of a NAMED LEDGER CITIZEN that neither their interview record',
+    '    nor their own page (section 4) carries. The worst contamination there is. An unnamed or role-only',
+    '    voice is the reporter\'s colour, never this class.',
     '(2) DIRECT CONTRADICTION OF RECORDED STATE — a claim that contradicts the ground truth above (a metric',
     '    stated as falling when it rose; a count off from canon; a prior-cycle stat presented as current;',
     '    a citizen in two places at the same recorded moment).',
@@ -551,9 +545,7 @@ function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profil
     'absence in a slice is NEVER evidence of falsity; data citation and trade vocabulary ("packet", "cycle",',
     'quoted figures); a reporter\'s inference from real data; texture authorized by the active writer profile.',
     'Echoing the ground-truth slice back is LAZY, not contamination — quality note, severity low at most.',
-    reviewContext
-      ? 'For this profile, a street reference, generic room, or role-only anonymous voice is not a fabricated canon entity. Flag it only when it violates a listed texture condition or carries a listed canon blocker.'
-      : 'Anonymous scene texture may pass when it carries no load-bearing factual claim.',
+    'A street reference, a room, a role-only anonymous voice, a new in-world place or business, a figure the reporter supplies: colour, not a fabricated canon entity. Flag colour only when it contradicts the ground truth or a verified citizen\'s ledger profile, or imports real-world Oakland.',
     'Do not fact-check opinion; do not flatten voice. Do not score whether the Article moves the sim — that belongs to the editorial/capability lanes.',
     'Verify the load-bearing claims against the ground truth, then return the verdict JSON.'
   ].join('\n');

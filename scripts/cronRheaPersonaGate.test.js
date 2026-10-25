@@ -37,19 +37,18 @@ const prompt = buildApiPrompt(
   reviewContext
 );
 
-assert.ok(prompt.user.includes('PERSONA-SPECIFIC SOURCING AUTHORITY'));
-assert.ok(prompt.user.includes('jax-accountability-v1'));
+assert.ok(!prompt.user.includes('PERSONA-SPECIFIC SOURCING AUTHORITY'), 'no writer profile reaches Rhea (builder 2026-10-25)');
+assert.ok(!prompt.user.includes('AUTHORIZED TEXTURE') && !prompt.user.includes('CANON BLOCKERS') && !prompt.user.includes('LEXICAL REVIEW CUES'), 'no texture fence, no number cues');
 assert.ok(prompt.user.includes('bartender'));
-assert.ok(prompt.user.includes('not automatic flags'));
 assert.ok(prompt.user.includes('Do not score whether the Article moves the sim'));
 assert.ok(prompt.system.includes('canonIntegrity'));
 const draftSection = prompt.user.split('=== DRAFT TO VERIFY ===')[1].split('Your job is TWO flag classes')[0];
 assert.ok(draftSection.includes('A bartender on 7th spoke.'));
 assert.ok(!draftSection.includes('Initiative_Tracker'));
 assert.ok(prompt.user.includes('machine-only ## INTAKE provenance block was validated separately'));
-assert.ok(prompt.user.includes('EXACT PACKET QUOTE PROVENANCE'));
+assert.ok(prompt.user.includes('WHAT THE NAMED CITIZENS SAID'));
 assert.ok(prompt.user.includes('Test Citizen: "This exact Packet quote is supplied."'));
-assert.ok(prompt.user.includes('packet.W2[TEST-CITIZEN]; supports F-TEST'));
+assert.ok(prompt.user.includes('packet.W2[TEST-CITIZEN]'));
 assert.ok(prompt.user.includes('Do not call an exact listed quote fabricated'));
 
 const faithPrompt = buildApiPrompt(
@@ -101,9 +100,9 @@ assert.ok(faithPrompt.user.includes('canon name on the right is not an invention
     { canonNames: 1, verified: [], unverified: [] }, [], [],
     Object.assign({}, reviewContext, { pageLines: [{ customId: 'cp-POP-TEST-c1-work', name: 'Test Citizen', text: 'The citizen wrote this whole line, past any cut.' }] })
   );
-  assert.ok(withPages.user.includes('APPROVED PAGE LINES'));
+  assert.ok(withPages.user.includes('THEIR OWN PAGE LINES'));
   assert.ok(withPages.user.includes('Test Citizen [cp-POP-TEST-c1-work]: "The citizen wrote this whole line, past any cut."'));
-  assert.ok(!prompt.user.includes('APPROVED PAGE LINES'), 'no page lines, no section');
+  assert.ok(!prompt.user.includes('THEIR OWN PAGE LINES'), 'no page lines, no section');
 }
 
 // pageLinesFromManifest against a real-shaped manifest (src as buildVoicesSlice.js writes it): page facts
@@ -139,11 +138,11 @@ assert.ok(faithPrompt.user.includes('canon name on the right is not an invention
   // the claude backend prompt carries them too (agy #3b)
   const claudePrompt = g.buildPrompt(999, 'draft.md', 'world.md', null, null,
     Object.assign({}, reviewContext, { pageLines: out.slice(0, 1) }));
-  assert.ok(claudePrompt.includes('APPROVED PAGE LINES') && claudePrompt.includes(index[0].content), 'claude backend shows page lines');
+  assert.ok(claudePrompt.includes('THEIR OWN PAGE LINES') && claudePrompt.includes(index[0].content), 'claude backend shows page lines');
   // the api prompt pairs the allow-rule with its block-rule (agy #3a)
   const apiPrompt = buildApiPrompt(999, '# TEST-ONLY\n\nA.\n\n## INTAKE\nCLAIM: Test-only | source', 'TEST-ONLY world state',
     { canonNames: 1, verified: [], unverified: [] }, [], [], Object.assign({}, reviewContext, { pageLines: out.slice(0, 1) }));
-  assert.ok(apiPrompt.user.includes('Still flag altered or paraphrased page text'), 'negative clause present');
+  assert.ok(apiPrompt.user.includes('Flag words added to a page passage and a page line attributed to a different citizen'), 'negative clause present');
 }
 
 // No seat is advisory (builder 2026-10-25: Rhea stays and blocks; she is tuned per seat, not softened)

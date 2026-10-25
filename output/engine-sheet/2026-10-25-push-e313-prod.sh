@@ -1,7 +1,7 @@
 #!/bin/bash
 # engine.313 PROD push (stage 24): PROD (stage 23, @160, manifest stage21-e297-F2.sha256) + culturalLedger.js at <commit> (fame
 # registration resolves the Cultural_Ledger row by POPID when no row carries the caller's exact name), which must equal the benched
-# stage byte for byte (<manifest>: stage23-e313-G1.sha256, leg G1). Same live fire-state gate as stage 23: cycleCount / every
+# stage byte for byte (<manifest>: stage23-e313-G2.sha256, leg G2 — the codex gate 1 fold). Same live fire-state gate as stage 23: cycleCount / every
 # Neighborhood_Map Cycle / Riley_Digest's last Cycle = 112 and no _CycleCheckpoint right before the push, right after the pull-back and
 # 8 minutes later; a C113 persisting inside the window is a straddle (exit 3). Copied from 2026-10-23-push-e297fix-prod.sh.
 #   bash output/engine-sheet/2026-10-25-push-e313-prod.sh <commit> <manifest> [--dry-run]
@@ -14,7 +14,7 @@ OUT=/root/GodWorld/output/engine-sheet
 PRE=486ea61e   # stage 23's copy of the registrar
 FILES="phase07-evening-media/culturalLedger.js"
 [ -f "$MAN" ] || { echo "no benched manifest $MAN — stop"; exit 1; }
-[ "$(realpath "$MAN")" = "$OUT/stage23-e313-G1.sha256" ] || { echo "manifest must be the benched stage23-e313-G1.sha256 — stop"; exit 1; }
+[ "$(realpath "$MAN")" = "$OUT/stage23-e313-G2.sha256" ] || { echo "manifest must be the benched stage23-e313-G2.sha256 — stop"; exit 1; }
 git ls-files --error-unmatch "$MAN" >/dev/null 2>&1 && git diff --quiet HEAD -- "$MAN" || { echo "manifest $MAN is not committed as-is — stop"; exit 1; }
 W=$(mktemp -d); mkdir -p "$W/stage" "$W/pullback"
 ( cd "$W/stage" && printf '{"scriptId":"%s","rootDir":""}' "$PROD_ID" > .clasp.json && "$CLASP" pull >/dev/null )
@@ -52,7 +52,7 @@ DEP=$(grep -o '"deploymentId": "[^"]*"' /root/GodWorld/.clasp.json | cut -d'"' -
 [ -n "$DEP" ] || { echo "no pinned deploymentId in the repo .clasp.json — STOP"; exit 1; }
 /root/GodWorld/node_modules/.bin/clasp-real deployments 2>/dev/null | grep -q "$DEP" || { echo "pinned deployment $DEP not in the listing — STOP"; exit 1; }
 ( cd "$W/stage" && CLAUDE_CTL=1 "$CLASP" push --force | tail -1 )
-VER=$( cd "$W/stage" && CLAUDE_CTL=1 "$CLASP" deploy -i "$DEP" -d "engine.313 = stage 23 + culturalLedger.js at $SRC (one citizen, one fame row) — bench 1004 leg G1" | tail -1 | grep -o '@[0-9]*$' )
+VER=$( cd "$W/stage" && CLAUDE_CTL=1 "$CLASP" deploy -i "$DEP" -d "engine.313 = stage 23 + culturalLedger.js at $SRC (one citizen, one fame row) — bench 1004 leg G2" | tail -1 | grep -o '@[0-9]*$' )
 [ -n "$VER" ] || { echo "deploy printed no version — STOP, read the deployment listing by hand"; exit 1; }
 served=0; for t in 1 2 3 4 5 6; do   # the listing lags the deploy by seconds (stage 22 push stopped on it)
   /root/GodWorld/node_modules/.bin/clasp-real deployments 2>/dev/null | grep "$DEP" | grep -qE " ${VER}( |$)" && { served=1; break; }; sleep 10; done

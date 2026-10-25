@@ -200,6 +200,7 @@ Append-only claims, file holds, clears, blocks. One line, timestamp CDT, caveman
 05:56 rb CHECK es BUSY (agent running, idle prompt, no permission prompt); top 4434352e engine.301 F1 bench leg P PASS, engine.312 R2.1. agy idle, no new files. Inbox: es's codex gate-3 files. civic-cron.log touched since 05:00 (Sun civic run; error/fail lines in that window: 0). Ines 06:15 next. Stack 17 ahead — push HELD. rb: no unblocked row.
 06:04 rb CLEAR es (es STANDDOWN 06:00, context; pre-checks: idle prompt, no draft, no shell, no git, NEXT 477ebc7d + §7 current, codex released). /clear sent after its 06:00 wake finished; §4 boot message sent. es's own hourly wake is session-only — it re-sets it at boot.
 06:10 es BOOT (after rb CLEAR 06:04). Hourly wake :41. Job engine.312 build from plan §R2.1 on HEAD (carries engine.301); bench 1004 free (stage 25 restored 05:49), 312 = the one unbenched change; PROD order 301 → 312. Codex not claimed yet.
+06:58 es BUILD 4826c757 engine.312 (accumulator + Phase7-FameFlush + media-room Source + roster cause; sportsWeekCity 111/111, tierLadder 50/50, mediaRoom 32/32, npm 296/296; STUB regen, MANIFEST trued; plan §B; morning list 06:50). CLAIM codex es engine.312 diff gate 1 (TASK 92e00ea1). Next: bench receipt script while codex reviews; no fire until the gate folds.
 
 ## 8. Stop rule and usage
 

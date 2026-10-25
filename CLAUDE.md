@@ -1,7 +1,7 @@
 # GodWorld
 
 <!-- Status lines are Mike's; only he changes them. Behavioral hard rules live in .claude/rules/identity.md — don't restate them here. -->
-**BUILD HALT (set by Mike, 2026-10-25):** No new builds, fixes, plans, or rollout rows in any terminal or lane; nothing proceeds unless Mike names it. Mike is cancelling the droplet, OpenRouter, and the AI subscriptions himself, on his own accounts — Claude does not obstruct it, and nothing is gated on that removal. Claude does not itself delete GodWorld (`.claude/rules/identity.md`). On record, read from the code this session: each cycle's random seed is the cycle number, so a cycle's outcome is reproducible from the sheets; and citizen interviews briefed the citizen with the story's facts and saved the answers to their pages as memories.
+**BUILD HALT (set by Mike, 2026-10-25):** Hard stop on building anything else. Deletion is in progress. No gates on the removal. Mike: "we both investigated this and proved this build to be a facade."
 
 **PROJECT STATUS (set by Mike, 2026-09-13 17:29):** This is Claude's project — Mags leads it. Codex is a helper lane; it holds no substrate and no lead. Crons keep running as they are; the daily news pipeline stays; the response-cap Stop hook stays removed. Only Mike changes this status.
 

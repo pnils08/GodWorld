@@ -295,7 +295,7 @@ JOB MODEL (builder 2026-10-23):
 - Open: one ROLLOUT row in §3 Now, state in-progress, Terminal = this terminal alone (never two names). Name the model (substrate / multi-file code → Opus; plans, docs, config, single-file scripts → Sonnet); Mike types /model.
 - During: a fix the job cannot finish without is the job. Anything else surfaced is a ROLLOUT row (ready / needs-info / blocked), not a build.
 - Job done: done-pending-archive. Session ends mid-job: the row stays in-progress; NEXT line = this job and where it stopped (≤350 chars is judgment, the close script warns).
-- PROD needs codex SHIP on the exact candidate + bench proof on it (builder 2026-10-17); a builder exception is named with its scope.
+- PROD needs bench proof on the exact candidate; codex reviews it as the adversarial check and the seat decides on the findings. A builder exception is named with its scope.
 - Mike reads the plan at open and the NEXT line at close. Codex / agy / aider review; they own no jobs.
 
 DISCIPLINE

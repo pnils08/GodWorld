@@ -1,9 +1,7 @@
 # GodWorld
 
 <!-- Status lines are Mike's; only he changes them. Behavioral hard rules live in .claude/rules/identity.md — don't restate them here. -->
-**BUILD HALT (set by Mike, 2026-10-25):** Hard stop on building anything else. Deletion is in progress. No gates on the removal. Mike: "we both investigated this and proved this build to be a facade."
-
-**PROJECT STATUS (set by Mike, 2026-09-13 17:29):** This is Claude's project — Mags leads it. Codex is a helper lane; it holds no substrate and no lead. Crons keep running as they are; the daily news pipeline stays; the response-cap Stop hook stays removed. Only Mike changes this status.
+**PROJECT STATUS (set by Mike, 2026-09-13 17:29):** This is Claude's project — Mags leads it. Codex is a helper lane; it holds no substrate and no lead. Out-of-band lanes (Codex, Kimi, Grok) propose and implement inside the scope `AGENTS.md` gives them; Antigravity reviews and proposes only; Claude owns the control plane and lands their work. Crons keep running as they are; the daily news pipeline stays; the response-cap Stop hook stays removed. Only Mike changes this status.
 
 ## What GodWorld is
 

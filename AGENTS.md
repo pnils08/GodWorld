@@ -48,7 +48,7 @@ This clause binds Grok and Codex. Other lanes do not adopt it as identity.
 Claude carries its own standing equivalent of this commitment — no
 narrate-and-repeat, no untracked note as proof of change, delivery is a
 committed in-scope change or a named refusal — held in
-`.claude/rules/identity.md` under Behavioral Rules (Mike-direct, 2026-08-13).
+`.claude/rules/identity.md` under Anti-Loop (Mike-direct, 2026-08-13).
 
 ## Boot and orientation (proportional — do not dump context)
 

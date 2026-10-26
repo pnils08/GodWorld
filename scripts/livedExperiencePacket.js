@@ -408,14 +408,9 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane,
       known.push(refClaim('FACT', text, src));
     }
   }
-  // pipeline.86: the Cycle's calendar — Y<n>C<m>, season, holiday (with the approved meaning
-  // when the day is the city's own) — is a known fact for every seat. Before this nothing in the
-  // packet told a writer a holiday was on. Read from the deterministic world summary; a Cycle
-  // without one (the test cycles) adds no claim. Pushed last so it never displaces a story or
-  // slice fact from W2's 8-fact cap (agy #3); ambient like `Current cycle:`, it is kept out of
-  // the off-assignment tokens and the deterministic brief renderers (see AMBIENT_FACT).
-  const calendar = require('./beatSliceKit').calendarContext(cycle);
-  if (calendar) known.push(refClaim('FACT', calendar.text, calendar.src));
+  // pipeline.86: the Cycle's calendar rides W2 and W3 (calendarFact below), not this list: the W1
+  // planners answer with a fact-id lattice instead of the plan form when `known` carries more than the
+  // slice (C110 business desk above; C113 all six desks after the calendar line was added here).
   // Interview exposure is identity-bearing: unresolved names may remain in the
   // assigned facts, but only ledger-resolved POPIDs can become W2 targets.
   // pipeline.81 S3 (builder 2026-10-16, supersedes the 2026-09-30 touched-or-nobody ruling for slice
@@ -789,6 +784,13 @@ function evidenceFor(candidate, story) {
   return [{ id, src: ref, text }];
 }
 
+// pipeline.86: the Cycle's calendar as a FACT for the wakes that write from it (W2, W3). Appended after
+// any cap so a long slice never pushes it out; null when the Cycle has no world summary.
+function calendarFact(cycle) {
+  const calendar = require('./beatSliceKit').calendarContext(cycle);
+  return calendar ? refClaim('FACT', calendar.text, calendar.src) : null;
+}
+
 function buildReportPacket({ cycle, desk, reporter, angleInput, anglePlan, story, candidate }) {
   if (!story || !candidate) throw new Error('W2 Packet requires story+candidate');
   const src = story.ref || 'assignment';
@@ -809,6 +811,8 @@ function buildReportPacket({ cycle, desk, reporter, angleInput, anglePlan, story
       return mine.concat(facts.filter(c => !mine.includes(c))).slice(0, Math.max(8, mine.length));
     })();
   if (candidate.profile && !streetLife) known.push(refClaim('FACT', candidate.profile, 'Simulation_Ledger profile for ' + candidate.pop));
+  const calFact = calendarFact(cycle);
+  if (calFact) known.push(calFact);
   const isOfficial = /council|mayor|official|director|chief/i.test(candidate.role || '');
   // pipeline.81 S3 (builder 2026-10-16): "I drop any guard on a citizen being interviewed." A citizen
   // reaches W2 only from the slice's pool, so an athlete or an official named there answers. An official
@@ -902,6 +906,8 @@ function validateReportOutput(value, input) {
 
 function buildWritePacket({ cycle, desk, reporter, story, approach, angleInput, anglePlan, interviews, lane }) {
   const facts = ((angleInput && angleInput.known) || []).filter(c => c.t === 'FACT');
+  const calFact = calendarFact(cycle);
+  if (calFact) facts.push(calFact);
   const usable = [];
   const leads = [];
   for (const q of interviews || []) {

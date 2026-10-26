@@ -398,11 +398,13 @@ for (const why of ['assignment', 'stink-handle', 'feed-names', 'on Hospital_Ledg
     const story2 = { ref: 'test', label: 'TEST-ONLY signal changed', hookLine: 'TEST-ONLY hook' };
     const slice2 = { prewrite: { anchorFacts: ['TEST-ONLY fact 1', 'TEST-ONLY fact 2'] } };
     const w1live = p.buildAnglePacket({ cycle: live, desk: 'civic', reporter: { name: 'Test Reporter' }, story: story2, approach: 'x', slice: slice2, lane: [], candidates: [] });
-    const cal = w1live.known.find(c => /^Calendar: Y\d+C\d+, /.test(c.text));
-    assert.ok(cal, 'a Cycle with a world summary carries a Calendar known-fact');
-    assert.ok(cal.src.includes('world_summary_c' + live + '.md Calendar context (Simulation_Calendar)'));
-    assert.equal(w1live.known[w1live.known.length - 1], cal, 'calendar rides last — it displaces no story or slice fact (agy #3)');
-    assert.ok(p.AMBIENT_FACT.test(cal.text) && p.AMBIENT_FACT.test('Current cycle: C112') && !p.AMBIENT_FACT.test('TEST-ONLY fact 1'));
+    // C113: the W1 planners answer with a fact-id lattice when `known` carries the calendar line — W1 stays without it
+    assert.ok(!w1live.known.some(c => /^Calendar:/.test(c.text)), 'W1 known carries no Calendar claim (planners break on it)');
+    const w3live = p.buildWritePacket({ cycle: live, desk: 'civic', reporter: { name: 'Test Reporter' }, story: story2, approach: 'x', angleInput: w1live, anglePlan: { chase: 'x' }, interviews: [], lane: [] });
+    const cal = JSON.stringify(w3live).match(/Calendar: Y\d+C\d+, [^"]*/);
+    assert.ok(cal, 'a Cycle with a world summary carries the Calendar fact into W3');
+    const cal2 = { text: cal[0] };
+    assert.ok(p.AMBIENT_FACT.test(cal2.text) && p.AMBIENT_FACT.test('Current cycle: C112') && !p.AMBIENT_FACT.test('TEST-ONLY fact 1'));
     // the season word from the calendar line admits no off-assignment chase (agy #1)
     const off = { chase: 'The no-hitter downtown this winter is the only story worth chasing tonight.', focus: 'x', why: 'x', checks: [], targets: [], interpretation: 'x', unverifiedLead: [], closeQuestion: 'x' };
     assert.throws(() => p.validateAngleOutput(off, w1live), /chase replaces the assignment/);

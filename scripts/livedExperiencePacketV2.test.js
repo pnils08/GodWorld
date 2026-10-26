@@ -842,15 +842,16 @@ assert.throws(() => interviewContract.validateInterviewOutput(liveQuote, residen
     const story86 = { ref: 'INIT-TEST-HEALTH', label: 'Construction is active for Test Health Center.', angle: 'Construction is active for Test Health Center.', kind: 'initiative', hood: 'TEST-HOOD', popids: [], citizens: [] };
     const slice86 = { kind: 'civic-domain', packetSeat: { seat: { domain: 'health' }, prewrite: { method: 'ACCESS_TIMELINE_HUMAN_COST', missing: ['a named affected resident'], humanConsequence: { state: 'UNESTABLISHED', subjects: [], facts: [], src: null }, forbidden: [] } } };
     const w1 = p.buildAnglePacket({ cycle: live, desk: 'civic', reporter: reporter86, story: story86, approach: 'x', slice: slice86, lane: [] });
-    assert.ok(w1.known.some(c => /^Calendar: Y\d+C\d+/.test(c.text)), 'calendar fact present at C' + live);
+    assert.ok(!w1.known.some(c => /^Calendar:/.test(c.text)), 'W1 known carries no calendar fact (C113: planners answer with a fact-id lattice)');
     const plan86 = p.validateAngleOutput({ chase: 'Chase the active construction for Test Health Center on this block.', focus: 'f', why: 'w', checks: [], targets: [], interpretation: 'i', unverifiedLead: [], closeQuestion: 'q?' }, w1);
     const w3 = p.buildWritePacket({ cycle: live, desk: 'civic', reporter: reporter86, story: story86, approach: 'x', angleInput: w1, anglePlan: plan86, interviews: [], lane: [], reviewProfile: { id: 'T', canonPolicy: 'load-bearing', articleContract: { renderMode: 'SOURCE_BRIEF' } } });
     const brief = p.renderSourceBrief(w3);
     assert.ok(!/Calendar:/.test(brief), 'SOURCE_BRIEF prints no Calendar line');
     assert.ok(/Construction is active for Test Health Center/.test(brief), 'the story fact still prints');
     // the calendar's own digits (Y3C8) approve no article number
-    const cal = w1.known.find(c => /^Calendar:/.test(c.text));
-    const m = /Y(\d+)C(\d+)/.exec(cal.text);
+    const cal = JSON.stringify(w3).match(/Calendar: Y\d+C\d+[^"]*/);
+    assert.ok(cal, 'calendar fact rides the W3 packet at C' + live);
+    const m = /Y(\d+)C(\d+)/.exec(cal[0]);
     const audit = p.auditArticle('Crews counted ' + m[2] + ' trucks and ' + m[1] + ' cranes.\n\n## INTAKE\n', w3);
     const nums = [...audit.errors, ...audit.observations].find(e => e.code === 'UNAPPROVED_NUMBER');
     assert.ok(nums && nums.values.includes(m[2]) && nums.values.includes(m[1]), 'the calendar line\'s Y<n>C<m> digits approve no article number');

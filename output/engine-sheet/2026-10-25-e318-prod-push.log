@@ -1,0 +1,20 @@
+fresh PROD pull = stage 27
+stage = the benched tree (output/engine-sheet/stage28-e318.sha256), byte for byte
+live fire state before the push: cycleCount 112, Neighborhood_Map [112], Riley last 112, checkpoint none, Engine_Errors at C113+ 0, usage intake pending by name 0, intake rows 912 (freeze 912), usage header ok, usage rows 1064 (first read 1064), media-room usage rows 0 (no Source column yet) (first read 0), rows of the first read identical — C113 not fired, intake still
+live verify: 105 manifest rows, 912 rows; rows the by-name reader would take as pending: 0
+PASS — every manifest Status reads processed, every other cell = the freeze
+└─ utilities/writeIntents.js
+pinned deployment AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ serves @164
+pull-back 167 js + manifest byte-identical to output/engine-sheet/stage28-e318.sha256
+live fire state after the pull-back: cycleCount 112, Neighborhood_Map [112], Riley last 112, checkpoint none, Engine_Errors at C113+ 0, usage intake pending by name 0, intake rows 912 (freeze 912), usage header ok, usage rows 1064 (first read 1064), media-room usage rows 0 (no Source column yet) (first read 0), rows of the first read identical — C113 not fired, intake still
+live verify: 105 manifest rows, 912 rows; rows the by-name reader would take as pending: 0
+PASS — every manifest Status reads processed, every other cell = the freeze
+waiting 480 s: a fire or intake run admitted before the deploy would persist inside this window
+live fire state 8 minutes after: cycleCount 112, Neighborhood_Map [112], Riley last 112, checkpoint none, Engine_Errors at C113+ 0, usage intake pending by name 0, intake rows 912 (freeze 912), usage header ok, usage rows 1064 (first read 1064), media-room usage rows 0 (no Source column yet) (first read 0), rows of the first read identical — C113 not fired, intake still
+live verify: 105 manifest rows, 912 rows; rows the by-name reader would take as pending: 0
+PASS — every manifest Status reads processed, every other cell = the freeze
+waiting 480 s more: an old-version call admitted late in the /exec propagation window (DEPLOY.md ~5 min) ends inside this one
+live fire state 16 minutes after: cycleCount 112, Neighborhood_Map [112], Riley last 112, checkpoint none, Engine_Errors at C113+ 0, usage intake pending by name 0, intake rows 912 (freeze 912), usage header ok, usage rows 1064 (first read 1064), media-room usage rows 0 (no Source column yet) (first read 0), rows of the first read identical — C113 not fired, intake still
+live verify: 105 manifest rows, 912 rows; rows the by-name reader would take as pending: 0
+PASS — every manifest Status reads processed, every other cell = the freeze
+exit 0

@@ -13,7 +13,7 @@
 - [[../plans/2026-10-11-media-extension]]: pipeline.85 in-progress, pipeline.83 live-observing, pipeline.88 needs-info, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing, pipeline.80 live-observing
 - [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.206 live-observing, engine.205 ready, engine.202 ready, engine.203d live-observing
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing, engine.298 live-observing
-- [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]: engine.296 live-observing, engine.312 blocked, engine.318 in-progress, engine.297 live-observing
+- [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]: engine.296 live-observing, engine.312 blocked, engine.318 live-observing, engine.297 live-observing
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.264 needs-info, engine.261 ready
 - [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 ready, engine.201 live-observing, engine.197 live-observing
 - [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing, engine.302 live-observing, engine.304 live-observing
@@ -132,7 +132,7 @@
 | infrastructure.6 | Sim-health observability: /api/sim-health + dashboard panel (Track A, not built). Track B ghost tabs + tab-reference test done (`c3fe1780`, `86f43999`, `1240a80a`; test 273 refs PASS 2026-10-22) | ready | engine-sheet | [[../plans/2026-07-31-engine-observability-integrity]] |
 | pipeline.83 | Failure review: when a piece fails, whose failure was it. C111 pass done; first live UNDOCKED digest seat ran 2026-10-24 (audited accurate) — rb reads it 2026-10-27 | live-observing | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.83 |
 | engine.308 | Heritage business cap + cadence (builder 2026-10-22): cap 2 per citizen, line cap = living members + tier step, 12-Cycle line cooldown. `c88b5012` bench H1 PASS, codex SHIP; PROD @158 2026-10-22, first live C113, first possible opening Dillon C121 | live-observing | engine-sheet | DEPLOY_HISTORY §PROD stage 21; [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8, engine.308 design |
-| engine.318 | Citizen_Usage_Intake's live header (`CitizenName, POPID, UsageType, …, Status`) disagrees with processCitizenUsageIntake_ (reads B as the type, marks col E) — source of the 35 C90 POPID-for-type rows. Builder 2026-10-25 "let's address the defect you found". Opus | in-progress | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.318 |
+| engine.318 | Citizen_Usage_Intake read and written by header name (the old reader took B as the type and marked col E) — source of the 35 C90 POPID-for-type usage rows. LIVE PROD @164 stage 28 2026-10-25 (builder go); first live fire C113. Opus | live-observing | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.318 |
 
 ## 4. Queue — ruled, not started
 

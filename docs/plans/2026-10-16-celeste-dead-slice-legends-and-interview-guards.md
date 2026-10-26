@@ -204,6 +204,8 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 **Codex recheck 4 (`…-codex-engine318-diff-gate-recheck4.md`) — usage prefix SHIP, freeze shape SHIP, proof SHIP, propagation HOLD.** It holds on one thing: DEPLOY.md's ~5 min is observed, not a maximum. A 16-minute watch is proof only if no old-version admission happens later than 10 min after the cut, and nothing outside Apps Script can read or forbid one (the same door engine.317 would open). Measured actors (2026-10-25): no cron, PM2 process or script calls the live web app or writes Citizen_Usage_Intake. The crontab and the three PM2 apps (Discord bot, dashboard, cards daemon) were grepped for the web-app URL and trigger token, with no caller. So the sequence needs two acts by the builder inside the window: a live web Cycle and a Sheet-menu intake row. That residual is the builder's to name, beside the engine.317 admission exception.
 
+**LIVE PROD @164 = stage 28 (2026-10-25 ~22:24 CDT).** Builder go before the C113 fire ("go: run the engine.318 live fix and push"), named exception for the propagation HOLD (`DEPLOY_HISTORY.md` §PROD stage 28). Live Status step: apply 105 → verify PASS. Push: PROD = stage 27, built = the benched manifest, pull-back identical, fire state + intake receipt clean at all four reads through +16 min. First live fire C113 Sun 2026-10-25.
+
 **Gate.** Codex diff review of the exact candidate + the bench receipt → PROD. engine.317 is not built, so the push needs the builder's named exception for the admission window again (the stage-27 one covered that push only); one go covers the data step and the push.
 
 ## Status log
@@ -218,6 +220,7 @@ Fame sightings draw from the Cultural_Ledger (builder 2026-10-17: "the fame sigh
 
 ## Changelog
 
+- 2026-10-25 (engine-sheet) — engine.318 LIVE PROD @164 stage 28 (`5ed4ceba`) on the builder's go, named exception for codex recheck 4's propagation HOLD; live Status step 105 applied + verified first; 16-minute watch clean. Row → live-observing; first live fire C113.
 - 2026-10-25 (engine-sheet) — engine.318 codex recheck 3 folded: 16-minute post-deploy read (the /exec propagation window + the wall), usage rows of the first read held identical, Status step checks freeze shape before any write; gate test 19/19. Codex recheck 4 next.
 - 2026-10-25 (engine-sheet) — engine.318 codex recheck 2 folded: each push read also runs the Status step's typed live verify (the intake row receipt) and fails closed on a malformed or rewritten usage read; Status step refuses a widthless freeze; gate test 17/17. Codex recheck 3 next.
 - 2026-10-25 (engine-sheet) — engine.318 codex recheck §2 folded: the push script also holds the intake at the freeze's row count and the media-room usage rows at the first read's count; bench gate test 7/7, live dry run stopped on the 105 as designed. Codex recheck 2 next.

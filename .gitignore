@@ -89,3 +89,8 @@ output/audio/*.m4a
 # Runtime cache under output/ — regenerated, never canon (S404)
 output/cache/
 output/.wdcards-state.json
+
+# Clasp deploy staging — full copies of the engine tree that the push scripts
+# rebuild per job (output/engine<N>/prod-stage*/); the deploy record is the
+# stage manifest (output/engine-sheet/stage*.sha256), never these copies.
+output/engine*/prod-stage*/

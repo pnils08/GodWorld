@@ -1,0 +1,354 @@
+{
+ "label": "probeB",
+ "from": 113,
+ "to": 113,
+ "total": {
+  "lines": 45,
+  "with": 30,
+  "against": 15
+ },
+ "byCycle": {
+  "113": 45
+ },
+ "hoods": {
+  "Downtown": {
+   "generatorLines": 162,
+   "lines": 6,
+   "with": 4,
+   "against": 2,
+   "byGroup": {
+    "brag": 2,
+    "complain": 2,
+    "humble": 2
+   },
+   "graded": {
+    "Up": 4,
+    "Down": 2,
+    "other": 0
+   },
+   "side": {
+    "growth": 6
+   }
+  },
+  "KONO": {
+   "generatorLines": 29,
+   "lines": 0,
+   "with": 0,
+   "against": 0,
+   "byGroup": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {}
+  },
+  "West Oakland": {
+   "generatorLines": 258,
+   "lines": 1,
+   "with": 1,
+   "against": 0,
+   "byGroup": {
+    "humble": 1
+   },
+   "graded": {
+    "Up": 1,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {
+    "growth": 1
+   }
+  },
+  "Fruitvale": {
+   "generatorLines": 186,
+   "lines": 10,
+   "with": 6,
+   "against": 4,
+   "byGroup": {
+    "complain": 4,
+    "humble": 5,
+    "brag": 1
+   },
+   "graded": {
+    "Up": 6,
+    "Down": 4,
+    "other": 0
+   },
+   "side": {
+    "growth": 10
+   }
+  },
+  "Jack London": {
+   "generatorLines": 134,
+   "lines": 6,
+   "with": 4,
+   "against": 2,
+   "byGroup": {
+    "brag": 4,
+    "complain": 2
+   },
+   "graded": {
+    "Up": 4,
+    "Down": 2,
+    "other": 0
+   },
+   "side": {
+    "growth": 6
+   }
+  },
+  "Uptown": {
+   "generatorLines": 174,
+   "lines": 8,
+   "with": 5,
+   "against": 3,
+   "byGroup": {
+    "humble": 2,
+    "brag": 3,
+    "complain": 3
+   },
+   "graded": {
+    "Up": 5,
+    "Down": 3,
+    "other": 0
+   },
+   "side": {
+    "growth": 8
+   }
+  },
+  "Piedmont Ave": {
+   "generatorLines": 117,
+   "lines": 0,
+   "with": 0,
+   "against": 0,
+   "byGroup": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {}
+  },
+  "Grand Lake": {
+   "generatorLines": 18,
+   "lines": 0,
+   "with": 0,
+   "against": 0,
+   "byGroup": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {}
+  },
+  "Chinatown": {
+   "generatorLines": 123,
+   "lines": 4,
+   "with": 1,
+   "against": 3,
+   "byGroup": {
+    "complain": 3,
+    "brag": 1
+   },
+   "graded": {
+    "Up": 1,
+    "Down": 3,
+    "other": 0
+   },
+   "side": {
+    "growth": 4
+   }
+  },
+  "Lake Merritt": {
+   "generatorLines": 177,
+   "lines": 0,
+   "with": 0,
+   "against": 0,
+   "byGroup": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {}
+  },
+  "Laurel": {
+   "generatorLines": 103,
+   "lines": 0,
+   "with": 0,
+   "against": 0,
+   "byGroup": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {}
+  },
+  "Rockridge": {
+   "generatorLines": 191,
+   "lines": 0,
+   "with": 0,
+   "against": 0,
+   "byGroup": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {}
+  },
+  "Temescal": {
+   "generatorLines": 122,
+   "lines": 0,
+   "with": 0,
+   "against": 0,
+   "byGroup": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {}
+  },
+  "Baylight District": {
+   "generatorLines": 20,
+   "lines": 4,
+   "with": 3,
+   "against": 1,
+   "byGroup": {
+    "complain": 3,
+    "humble": 1
+   },
+   "graded": {
+    "Up": 1,
+    "Down": 3,
+    "other": 0
+   },
+   "side": {
+    "decay": 4
+   }
+  },
+  "East Oakland": {
+   "generatorLines": 35,
+   "lines": 0,
+   "with": 0,
+   "against": 0,
+   "byGroup": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {}
+  },
+  "Adams Point": {
+   "generatorLines": 11,
+   "lines": 0,
+   "with": 0,
+   "against": 0,
+   "byGroup": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {}
+  },
+  "Brooklyn": {
+   "generatorLines": 14,
+   "lines": 1,
+   "with": 1,
+   "against": 0,
+   "byGroup": {
+    "complain": 1
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 1,
+    "other": 0
+   },
+   "side": {
+    "decay": 1
+   }
+  },
+  "Dimond": {
+   "generatorLines": 21,
+   "lines": 0,
+   "with": 0,
+   "against": 0,
+   "byGroup": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {}
+  },
+  "San Antonio": {
+   "generatorLines": 12,
+   "lines": 0,
+   "with": 0,
+   "against": 0,
+   "byGroup": {},
+   "graded": {
+    "Up": 0,
+    "Down": 0,
+    "other": 0
+   },
+   "side": {}
+  },
+  "Ivy Hill": {
+   "generatorLines": 13,
+   "lines": 2,
+   "with": 2,
+   "against": 0,
+   "byGroup": {
+    "complain": 2
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 2,
+    "other": 0
+   },
+   "side": {
+    "decay": 2
+   }
+  },
+  "Glenview": {
+   "generatorLines": 14,
+   "lines": 1,
+   "with": 1,
+   "against": 0,
+   "byGroup": {
+    "complain": 1
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 1,
+    "other": 0
+   },
+   "side": {
+    "decay": 1
+   }
+  },
+  "Eastlake": {
+   "generatorLines": 18,
+   "lines": 2,
+   "with": 2,
+   "against": 0,
+   "byGroup": {
+    "complain": 2
+   },
+   "graded": {
+    "Up": 0,
+    "Down": 2,
+    "other": 0
+   },
+   "side": {
+    "decay": 2
+   }
+  }
+ }
+}

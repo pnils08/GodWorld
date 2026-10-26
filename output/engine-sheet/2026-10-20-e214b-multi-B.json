@@ -3,14 +3,14 @@
  "from": 113,
  "to": 117,
  "total": {
-  "lines": 281,
-  "with": 175,
-  "against": 106
+  "lines": 285,
+  "with": 178,
+  "against": 107
  },
  "byCycle": {
-  "113": 43,
+  "113": 45,
   "114": 43,
-  "115": 59,
+  "115": 61,
   "116": 61,
   "117": 75
  },
@@ -36,39 +36,41 @@
   },
   "Piedmont Ave": {
    "generatorLines": 764,
-   "lines": 14,
-   "with": 10,
+   "lines": 17,
+   "with": 13,
    "against": 4,
    "byGroup": {
-    "brag": 8,
-    "complain": 4,
-    "humble": 2
+    "complain": 5,
+    "humble": 4,
+    "brag": 8
    },
    "graded": {
-    "Up": 10,
-    "Down": 4,
+    "Up": 12,
+    "Down": 5,
     "other": 0
    },
    "side": {
-    "growth": 14
+    "decay": 1,
+    "growth": 16
    }
   },
   "KONO": {
    "generatorLines": 212,
-   "lines": 3,
+   "lines": 4,
    "with": 2,
-   "against": 1,
+   "against": 2,
    "byGroup": {
-    "humble": 1,
+    "humble": 2,
     "brag": 1,
     "complain": 1
    },
    "graded": {
-    "Up": 2,
+    "Up": 3,
     "Down": 1,
     "other": 0
    },
    "side": {
+    "decay": 1,
     "growth": 3
    }
   },

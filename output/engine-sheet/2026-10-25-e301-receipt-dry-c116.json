@@ -1,0 +1,35 @@
+{
+ "cycle": 116,
+ "label": "dry",
+ "hold": [
+  "C116 crimeWaveHoods missing or malformed: undefined",
+  "no Crime_Metrics snapshot for C115"
+ ],
+ "levels": {},
+ "carry": {
+  "crimeSpikes": [
+   {
+    "neighborhood": "Brooklyn",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 42
+   },
+   {
+    "neighborhood": "Ivy Hill",
+    "metric": "propertyCrime",
+    "magnitude": 5,
+    "newValue": 43
+   }
+  ]
+ },
+ "risesPreCap": [],
+ "risesDroppedByCap": [],
+ "lines": {
+  "total": 0,
+  "byHood": {},
+  "tags": []
+ },
+ "receipt": [],
+ "engineErrors": [],
+ "level3": []
+}

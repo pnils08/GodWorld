@@ -1,0 +1,361 @@
+{
+ "cycle": 115,
+ "label": "T",
+ "hold": [
+  "CUL-978D65AE \"Vinnie Keane\": MediaCount moved 2, the digest sighted it 1 time(s)"
+ ],
+ "counts": {
+  "pending": 0,
+  "paperCredited": 0,
+  "paperNoRow": 0,
+  "paperUnresolved": 0,
+  "sightings": 3,
+  "touched": 29,
+  "written": 24,
+  "capped": 1,
+  "created": 0,
+  "famous": 5,
+  "crossedUp": [],
+  "crossedDown": []
+ },
+ "sightings": [
+  "Mei Chen",
+  "Vinnie Keane",
+  "Lena Cross"
+ ],
+ "rows": [
+  {
+   "id": "CUL-3913E3E5",
+   "name": "Dax Monroe",
+   "base": 82,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 81,
+   "sheet": 81
+  },
+  {
+   "id": "CUL-0FBABAC4",
+   "name": "Marin Tao",
+   "base": 153,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 100,
+   "sheet": 100
+  },
+  {
+   "id": "CUL-6D596907",
+   "name": "Lena Cross",
+   "base": 91,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 1,
+   "floor": false,
+   "expected": 91,
+   "sheet": 91
+  },
+  {
+   "id": "CUL-1D834E5A",
+   "name": "Kato Rivers",
+   "base": 75,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 74,
+   "sheet": 74
+  },
+  {
+   "id": "CUL-A2D9EBFF",
+   "name": "Sage Vienta",
+   "base": 88,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 87,
+   "sheet": 87
+  },
+  {
+   "id": "CUL-9E72118C",
+   "name": "Evan Morello",
+   "base": 69,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 68,
+   "sheet": 68
+  },
+  {
+   "id": "CUL-A99D7E2E",
+   "name": "Nila James",
+   "base": 72,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 71,
+   "sheet": 71
+  },
+  {
+   "id": "CUL-6A0BC6CC",
+   "name": "Theo Banks",
+   "base": 45,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 44,
+   "sheet": 44
+  },
+  {
+   "id": "CUL-B60D00F6",
+   "name": "Nina Reyes",
+   "base": 49,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 48,
+   "sheet": 48
+  },
+  {
+   "id": "CUL-DC4EA635",
+   "name": "Jordan Steele",
+   "base": 12,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 11,
+   "sheet": 11
+  },
+  {
+   "id": "CUL-905CBDE8",
+   "name": "Brody Kale",
+   "base": 32,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 31,
+   "sheet": 31
+  },
+  {
+   "id": "CUL-21B70831",
+   "name": "Community Director Hayes",
+   "base": 15,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 14,
+   "sheet": 14
+  },
+  {
+   "id": "CUL-72BD508A",
+   "name": "Marcus Webb",
+   "base": 3,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 2,
+   "sheet": 2
+  },
+  {
+   "id": "CUL-732EA822",
+   "name": "Celeste Moon",
+   "base": 19,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 18,
+   "sheet": 18
+  },
+  {
+   "id": "CUL-5F7A348B",
+   "name": "Marisol Rivera",
+   "base": 37,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 36,
+   "sheet": 36
+  },
+  {
+   "id": "CUL-BA80115F",
+   "name": "Gallery Owner Mei Chen",
+   "base": 31,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 1,
+   "floor": false,
+   "expected": 31,
+   "sheet": 31
+  },
+  {
+   "id": "CUL-9738B2EA",
+   "name": "Festival Organizer James Williams",
+   "base": 7,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 6,
+   "sheet": 6
+  },
+  {
+   "id": "CUL-065F46DC",
+   "name": "Heritage Director Rosa Martinez",
+   "base": 15,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 14,
+   "sheet": 14
+  },
+  {
+   "id": "CUL-C13B0483",
+   "name": "Claire Ashford",
+   "base": 14,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 13,
+   "sheet": 13
+  },
+  {
+   "id": "CUL-78BDC775",
+   "name": "Travis Coles",
+   "base": 13,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 12,
+   "sheet": 12
+  },
+  {
+   "id": "CUL-85DD5B45",
+   "name": "Darrin Davis",
+   "base": 4,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 3,
+   "sheet": 3
+  },
+  {
+   "id": "CUL-978D65AE",
+   "name": "Vinnie Keane",
+   "base": 34,
+   "paper": 0,
+   "fade": 0,
+   "sightings": 1,
+   "floor": true,
+   "expected": 35,
+   "sheet": 35
+  },
+  {
+   "id": "CUL-8A4E3B04",
+   "name": "Steve Conrad",
+   "base": 4,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 3,
+   "sheet": 3
+  },
+  {
+   "id": "CUL-187CFCE7",
+   "name": "Danny Horn",
+   "base": 6,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 5,
+   "sheet": 5
+  },
+  {
+   "id": "CUL-514B920D",
+   "name": "Mark Aitken",
+   "base": 30,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": true,
+   "expected": 29,
+   "sheet": 29
+  },
+  {
+   "id": "CUL-E46BC2A0",
+   "name": "John Ellis",
+   "base": 11,
+   "paper": 0,
+   "fade": -1,
+   "sightings": 0,
+   "floor": false,
+   "expected": 10,
+   "sheet": 10
+  },
+  {
+   "id": "CUL-C485F452",
+   "name": "Benji Dillon",
+   "base": 25,
+   "paper": 0,
+   "fade": 0,
+   "sightings": 0,
+   "floor": true,
+   "expected": 25,
+   "sheet": 25
+  },
+  {
+   "id": "CUL-8F6DDFE5",
+   "name": "Isley Kelley",
+   "base": 25,
+   "paper": 0,
+   "fade": 0,
+   "sightings": 0,
+   "floor": true,
+   "expected": 25,
+   "sheet": 25
+  },
+  {
+   "id": "CUL-EB555F30",
+   "name": "Mike Paulson",
+   "base": 26,
+   "paper": 0,
+   "fade": 0,
+   "sightings": 0,
+   "floor": true,
+   "expected": 26,
+   "sheet": 26
+  }
+ ],
+ "created": [],
+ "sourceColumn": 16,
+ "probe": {
+  "name": "Dax Monroe",
+  "rows": 1,
+  "source": [
+   "media-room"
+  ],
+  "processed": [
+   "Y"
+  ]
+ },
+ "engineErrors": [],
+ "verdict": "HOLD"
+}

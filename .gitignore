@@ -92,6 +92,7 @@ output/.wdcards-state.json
 
 # Clasp deploy staging — full copies of the engine tree, each with its own
 # .clasp.json, made for the 2026-10-16/17 PROD pushes
-# (output/engine<N>/prod-stage*/). Later pushes record the deployed tree as a
-# stage manifest (output/engine-sheet/stage*.sha256) instead; no script reads these.
+# (output/engine<N>/prod-stage*/). DEPLOY_HISTORY names them as the rollback
+# sources for stages 4f-4p, all superseded; later pushes record the deployed
+# tree as a stage manifest (output/engine-sheet/stage*.sha256). No script reads them.
 output/engine*/prod-stage*/

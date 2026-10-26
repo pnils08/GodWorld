@@ -1,0 +1,34 @@
+◇ injected env (31) from ../.config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+=== Engine Auditor (Phase 38.1 + 38.7 + 38.8) ===
+
+Cycle: 112
+Reading sheets...
+Running ailment detectors (38.1)...
+  detectStuckInitiatives: 0
+  detectRepeatingEvents: 0
+  detectMathImbalances: 9
+  detectCascadeFailures: 1
+  detectWritebackDrift: 0
+  detectProductionImbalance: 1
+  detectImprovements: 3
+  detectIncoherence: 0
+  detectLedgerCompleteness: 0
+Running enrichers (38.2 + 38.3 + 38.4)...
+  checkMitigators: enriched 14 patterns
+  recommendRemedy: enriched 14 patterns
+  resolveAffectedCitizens: enriched 14 patterns
+  generateTribuneFraming: enriched 14 patterns
+  measureRemedies: enriched 14 patterns
+  checkOrphanAilments: enriched 14 patterns
+Running anomaly detector (38.7)...
+  detectAnomalies: 0
+Generating baseline briefs (38.8)...
+  generateBaselineBriefs: 74
+Citizen scoreboard: {"married":0,"born":0,"promoted":0,"laidOff":0,"hired":0,"boughtHome":2,"soldHome":3,"forcedSale":0,"heritage":1}
+Wrote /root/GodWorld/output/carry_forward_c112.json
+
+Wrote /root/GodWorld/output/engine_audit_c112.json
+Wrote /root/GodWorld/output/engine_anomalies_c112.json
+Wrote /root/GodWorld/output/baseline_briefs_c112.json
+Ailments: 14 | Anomalies: 0 | Briefs: 74
+Elapsed: 2.6s

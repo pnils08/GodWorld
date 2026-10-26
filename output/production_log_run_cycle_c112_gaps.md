@@ -266,3 +266,7 @@
   - **Baseline (es, 2026-10-20, read from disk):** C112 civic week `moves_c112.jsonl` 10 moves, 0 on housing; D2 proposed "Downtown Economic Support Package" (rejected, `:rej0`), D9 no move. Tracker: no initiative names Uptown; INIT-006 Baylight passed / construction-active (Jack London, Downtown); INIT-008 Downtown Economic Revitalization proposed / legislation-filed. Auditor C112: math-imbalance Uptown medium, Downtown low (`HousingPressure +1.000`, Sentiment −0.35 / −0.37).
   - **Wiring as it stands:** D9 = Laurel + Uptown, D2 = Downtown + Chinatown + Jack London + Baylight (`lib/districtMap.js`). A seat's hood turn scores sentiment gap, crime and decay only (`scripts/buildCivicOfficeSlice.js` `scoreHoods`, no HousingPressure); Uptown 0.06 / Downtown 0.09 sit above the city median −0.025, so neither is an outlier and neither seat's turn lands there. A hood fact carrying "housing pressure 9" enters a pack only for the picked hood (`:658-662`; D2 c111/c112 packs carry Jack London's). The C112 directive targeted seats by stall clock only, D9 not at all. The pressure reaches a seat only through an auditor directive.
   - **Pickup (the review's acceptance):** a recorded move or referral on Uptown / Downtown housing in `moves_c113.jsonl`, a new tracker row naming it, or an INIT-006 phase change. A directive that mentions it is not pickup (D2's c111 pack already asked for a referral).
+
+## LEG: /city-hall (G-R)
+
+- G-R (AUTO): 1 voice(s) pending this window: council_d1

@@ -1,8 +1,8 @@
 # SESSION_CONTEXT — NEXT WORK ONLY. One PIN + one NEXT line per lane. What already happened lives in git, claude-mem, ROLLOUT_PLAN and the gap/production logs — never here. If a line describes a session instead of an assignment, it is written wrong.
 
-**PIN:** S603 | Day 215 | Canon C112 | PROD @164 = stage 28 (`5ed4ceba` over stage 27) | next live fire C113 Sun 2026-10-25 | stage history, expectations, rollbacks: DEPLOY_HISTORY §PROD | claude-mem observer on quota cooldown — don't restart.
+**PIN:** S604 | Day 216 | Canon C113 (fired 2026-10-25 23:03 CDT, 0 errors; run-cycle chain complete through Step 6) | PROD @164 = stage 28 (`5ed4ceba` over stage 27) — stages 27 + 28 first-live readback as expected | next live fire C114 Sun 2026-11-01 | stage history, expectations, rollbacks: DEPLOY_HISTORY §PROD | claude-mem observer on quota cooldown — don't restart.
 
-**NEXT[engine-sheet]:** engine.318 LIVE PROD @164 stage 28 on the builder's go before C113 (named exception, DEPLOY_HISTORY §PROD stage 28). C113 is its first live fire — read the watch list there after the fire. Builder fires C113 himself; es does not run the cycle ahead of him.
+**NEXT[engine-sheet]:** C113 chain done; civic chain fires off the hourly tick (no hand run). Open on the builder: engine.312 re-base apply (dry run on C113 in DEPLOY_HISTORY stage 27 — 48 rows change, 20 fall below the bar) — his go only. engine.201 C113 trace is codex's read (cohort-c113.json on disk). Gap log G-EC39–43 are reads, not builds (halt holds).
 
 **NEXT[research-build]:** No job in hand. Boot docs and memory cleaned of the project-over / Claude-off / codex-only-approval text (builder 2026-10-25); claim a row from ROLLOUT §4 when Mike assigns work.
 **NEXT[kimi]:** OUT for the week (usage limit 2026-10-03). Nothing queued; its civic.38 renew-move check moved to codex 2026-10-04.

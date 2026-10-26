@@ -1,0 +1,38 @@
+{
+  "tab": "Simulation_Ledger",
+  "writtenAt": "2026-10-26T18:21:34.874Z",
+  "cells": [
+    {
+      "popid": "POP-01223",
+      "row": 1053,
+      "column": "ClockMode",
+      "range": "Simulation_Ledger!I1053",
+      "old": "Game",
+      "new": "GAME"
+    },
+    {
+      "popid": "POP-01223",
+      "row": 1053,
+      "column": "EmployerBizId",
+      "range": "Simulation_Ledger!AS1053",
+      "old": "",
+      "new": "BIZ-00074"
+    },
+    {
+      "popid": "POP-01224",
+      "row": 1054,
+      "column": "ClockMode",
+      "range": "Simulation_Ledger!I1054",
+      "old": "Game",
+      "new": "GAME"
+    },
+    {
+      "popid": "POP-01224",
+      "row": 1054,
+      "column": "EmployerBizId",
+      "range": "Simulation_Ledger!AS1054",
+      "old": "",
+      "new": "BIZ-00074"
+    }
+  ]
+}

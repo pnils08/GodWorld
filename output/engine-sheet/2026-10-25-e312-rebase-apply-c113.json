@@ -1,0 +1,4176 @@
+{
+ "cycle": 113,
+ "frozenAt": "2026-10-26T18:20:39.394Z",
+ "appliedAt": "2026-10-26T18:20:40.268Z",
+ "cells": [
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P2",
+   "row": 2,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Mike Paulson C70"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P3",
+   "row": 3,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Deacon Seymour C70"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P4",
+   "row": 4,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Josh Giddey C70"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P5",
+   "row": 5,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Matas Buzelis C70"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P6",
+   "row": 6,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Hank Trepagnier C70"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P7",
+   "row": 7,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Adash Stanley C70"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P8",
+   "row": 8,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Kevin Huerter C70"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P9",
+   "row": 9,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Vinnie Keane C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P10",
+   "row": 10,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Darrin Davis C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P11",
+   "row": 11,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Mark Aitken C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P12",
+   "row": 12,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Henry Rivas C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P13",
+   "row": 13,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Travis Coles C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P14",
+   "row": 14,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Benji Dillon C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P15",
+   "row": 15,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Deacon Seymour C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P16",
+   "row": 16,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Josh Giddey C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P17",
+   "row": 17,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Hank Trepagnier C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P18",
+   "row": 18,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Matas Buzelis C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P19",
+   "row": 19,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Adash Stanley C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P20",
+   "row": 20,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Walker Kessler C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P21",
+   "row": 21,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Kevin Huerter C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P22",
+   "row": 22,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Tre Jones C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P23",
+   "row": 23,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Ayo Dosunmu C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P24",
+   "row": 24,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Avery Santana C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P25",
+   "row": 25,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marcus Osei C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P26",
+   "row": 26,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Elliott Crane C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P27",
+   "row": 27,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Brenda Okoro C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P28",
+   "row": 28,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Aaron Whitfield C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P29",
+   "row": 29,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Laila Cortez C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P30",
+   "row": 30,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Evan Morello C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P31",
+   "row": 31,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marin Tao C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P32",
+   "row": 32,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Nila James C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P33",
+   "row": 33,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Lena Cross C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P34",
+   "row": 34,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jade Orion C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P35",
+   "row": 35,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Theo Banks C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P36",
+   "row": 36,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Nina Reyes C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P37",
+   "row": 37,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Derek Obi C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P38",
+   "row": 38,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jordan Steele C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P39",
+   "row": 39,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Rowan Pierce C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P40",
+   "row": 40,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Tara Ellison C72"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P41",
+   "row": 41,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Avery Santana C73"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P42",
+   "row": 42,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marcus Osei C73"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P43",
+   "row": 43,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Laila Cortez C73"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P45",
+   "row": 45,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Elliott Crane C73"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P46",
+   "row": 46,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Ramon Vega C73"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P47",
+   "row": 47,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Mike Paulson C73"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P48",
+   "row": 48,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Kevin Park C73"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P49",
+   "row": 49,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jasmine Santos C73"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P50",
+   "row": 50,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Darius Patel C73"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P51",
+   "row": 51,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marcus Torres C73"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P52",
+   "row": 52,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Mark Aitken C73"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P53",
+   "row": 53,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Deacon Seymour C73"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P54",
+   "row": 54,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Vinnie Keane C73"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P55",
+   "row": 55,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Benji Dillon C73"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P56",
+   "row": 56,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Danny Horn C73"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P57",
+   "row": 57,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Travis Coles C73"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P58",
+   "row": 58,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Avery Santana C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P59",
+   "row": 59,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marcus Osei C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P60",
+   "row": 60,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Elliott Crane C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P61",
+   "row": 61,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Laila Cortez C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P62",
+   "row": 62,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Aaron Whitfield C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P63",
+   "row": 63,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Keisha Ramos C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P64",
+   "row": 64,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Helen Vasquez C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P65",
+   "row": 65,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment David Chen C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P66",
+   "row": 66,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Patricia Nwosu C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P67",
+   "row": 67,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Mike Paulson C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P68",
+   "row": 68,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Danny Horn C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P69",
+   "row": 69,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Darrin Davis C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P70",
+   "row": 70,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Vinnie Keane C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P71",
+   "row": 71,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Henry Rivas C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P72",
+   "row": 72,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Travis Coles C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P73",
+   "row": 73,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Benji Dillon C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P74",
+   "row": 74,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Mariano Rosales C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P75",
+   "row": 75,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Steph Curry C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P76",
+   "row": 76,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Tariq Jordan C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P77",
+   "row": 77,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Sofia Jordan C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P78",
+   "row": 78,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marcus Nguyen C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P79",
+   "row": 79,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Kaila Brown C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P80",
+   "row": 80,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Brianna Harris C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P81",
+   "row": 81,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Elena Lopez C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P82",
+   "row": 82,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Lorenzo Lewis C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P83",
+   "row": 83,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Ariana Reyes C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P84",
+   "row": 84,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marcus Harris C74"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P85",
+   "row": 85,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Avery Santana C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P86",
+   "row": 86,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Mara Vance C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P87",
+   "row": 87,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Laila Cortez C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P88",
+   "row": 88,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Marcus Osei C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P89",
+   "row": 89,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Ramon Vega C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P90",
+   "row": 90,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Janae Rivers C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P91",
+   "row": 91,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Elliott Crane C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P92",
+   "row": 92,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Denise Carter C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P93",
+   "row": 93,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Leonard Tran C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P94",
+   "row": 94,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Rose Delgado C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P95",
+   "row": 95,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Warren Ashford C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P96",
+   "row": 96,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Nina Chen C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P97",
+   "row": 97,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Terrence Mobley C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P98",
+   "row": 98,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Stephen Curry C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P99",
+   "row": 99,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Celeste Moon C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P100",
+   "row": 100,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marcus Webb C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P101",
+   "row": 101,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Community Director Hayes C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P102",
+   "row": 102,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Terrence Turner C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P103",
+   "row": 103,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Darius Green C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P104",
+   "row": 104,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Bruce Lee C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P105",
+   "row": 105,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Rafael Phillips C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P106",
+   "row": 106,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Ronald Scott C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P107",
+   "row": 107,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jose Wright C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P108",
+   "row": 108,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marcus Wright C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P109",
+   "row": 109,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Darius Clark C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P110",
+   "row": 110,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Javier Harris C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P111",
+   "row": 111,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Joel Roberts C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P113",
+   "row": 113,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Mike Paulson C75"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P114",
+   "row": 114,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Denise Carter C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P115",
+   "row": 115,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Leonard Tran C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P116",
+   "row": 116,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Ramon Vega C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P117",
+   "row": 117,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Warren Ashford C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P118",
+   "row": 118,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Nina Chen C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P119",
+   "row": 119,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Elliott Crane C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P121",
+   "row": 121,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Mark Aitken C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P123",
+   "row": 123,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Deacon Seymour C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P124",
+   "row": 124,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Mike Kindler C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P125",
+   "row": 125,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Hank Trepagnier C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P126",
+   "row": 126,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Josh Giddey C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P127",
+   "row": 127,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Adash Stanley C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P128",
+   "row": 128,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Tre Jones C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P129",
+   "row": 129,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Matas Buzelis C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P148",
+   "row": 148,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Rose Delgado C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P149",
+   "row": 149,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Janae Rivers C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P150",
+   "row": 150,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Terrence Mobley C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P151",
+   "row": 151,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marcus Osei C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P152",
+   "row": 152,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Avery Santana C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P153",
+   "row": 153,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Darrin Davis C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P154",
+   "row": 154,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Benji Dillon C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P155",
+   "row": 155,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Mike Paulson C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P157",
+   "row": 157,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Arturo Ramos C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P159",
+   "row": 159,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment John Ellis C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P164",
+   "row": 164,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Terrence Wright C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P173",
+   "row": 173,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Lila Mezran C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P175",
+   "row": 175,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Kevin Huerter C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P176",
+   "row": 176,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Vinnie Keane C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P177",
+   "row": 177,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Walker Kessler C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P178",
+   "row": 178,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Ayo Dosunmu C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P181",
+   "row": 181,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Marin Tao C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P183",
+   "row": 183,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Lena Cross C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P184",
+   "row": 184,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Jade Orion C79"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P192",
+   "row": 192,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Denise Carter C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P193",
+   "row": 193,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Leonard Tran C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P194",
+   "row": 194,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Rose Delgado C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P195",
+   "row": 195,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Ramon Vega C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P196",
+   "row": 196,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Janae Rivers C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P197",
+   "row": 197,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Elliott Crane C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P198",
+   "row": 198,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Warren Ashford C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P199",
+   "row": 199,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Nina Chen C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P200",
+   "row": 200,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Terrence Mobley C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P201",
+   "row": 201,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Beverly Hayes C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P202",
+   "row": 202,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Elena Rivera C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P203",
+   "row": 203,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marcus Osei C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P204",
+   "row": 204,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Vinnie Keane C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P205",
+   "row": 205,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Danny Horn C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P207",
+   "row": 207,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Deacon Seymour C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P208",
+   "row": 208,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Mike Paulson C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P209",
+   "row": 209,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Ernesto Quintero C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P210",
+   "row": 210,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Benji Dillon C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P211",
+   "row": 211,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Darrin Davis C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P212",
+   "row": 212,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Amara Keane C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P213",
+   "row": 213,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Steph Curry C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P214",
+   "row": 214,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jimmy Butler C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P215",
+   "row": 215,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Giannis Antetokounmpo C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P216",
+   "row": 216,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Draymond Green C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P217",
+   "row": 217,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Moses Moody C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P218",
+   "row": 218,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Josh Giddey C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P219",
+   "row": 219,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Hank Trepagnier C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P220",
+   "row": 220,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Walker Kessler C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P221",
+   "row": 221,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Adash Stanley C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P222",
+   "row": 222,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Ayo Dosunmu C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P223",
+   "row": 223,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Billy Donovan C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P224",
+   "row": 224,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Gallery Owner Mei Chen C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P225",
+   "row": 225,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Sculptor Alma Vasquez C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P226",
+   "row": 226,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Muralist Dante Reyes C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P227",
+   "row": 227,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jade Orion C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P228",
+   "row": 228,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Theo Banks C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P229",
+   "row": 229,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Lena Cross C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P230",
+   "row": 230,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Rico Valez C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P231",
+   "row": 231,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Marin Tao C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P242",
+   "row": 242,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jose Johnson C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P243",
+   "row": 243,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Darius Clark C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P244",
+   "row": 244,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Dante Nelson C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P245",
+   "row": 245,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Ronald Wright C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P246",
+   "row": 246,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Devon Green C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P247",
+   "row": 247,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marco Lopez C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P248",
+   "row": 248,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Hector Campbell C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P249",
+   "row": 249,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Owen Campbell C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P250",
+   "row": 250,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Guadalupe Lee C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P251",
+   "row": 251,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Calvin Turner C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P252",
+   "row": 252,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Rafael Phillips C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P253",
+   "row": 253,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Andre Lee C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P254",
+   "row": 254,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Marco Johnson C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P255",
+   "row": 255,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jalen Hill C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P256",
+   "row": 256,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marcus Walker C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P257",
+   "row": 257,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Mateo Walker C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P258",
+   "row": 258,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Omar Clark C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P259",
+   "row": 259,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Damien Roberts C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P260",
+   "row": 260,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Gloria Hutchins C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P261",
+   "row": 261,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment DeShawn Avery C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P262",
+   "row": 262,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Patricia Nolan C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P263",
+   "row": 263,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Clarence Moody C80"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P264",
+   "row": 264,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Denise Carter C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P265",
+   "row": 265,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Leonard Tran C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P266",
+   "row": 266,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Rose Delgado C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P267",
+   "row": 267,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Ramon Vega C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P268",
+   "row": 268,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Janae Rivers C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P269",
+   "row": 269,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Elliott Crane C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P270",
+   "row": 270,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Warren Ashford C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P271",
+   "row": 271,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Nina Chen C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P272",
+   "row": 272,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Terrence Mobley C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P273",
+   "row": 273,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Leanne Wu C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P274",
+   "row": 274,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Mark Aitken C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P275",
+   "row": 275,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Benji Dillon C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P276",
+   "row": 276,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Mike Paulson C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P277",
+   "row": 277,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Vinnie Keane C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P278",
+   "row": 278,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Deacon Seymour C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P279",
+   "row": 279,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Danny Horn C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P280",
+   "row": 280,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Josh Giddey C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P281",
+   "row": 281,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Hank Trepagnier C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P282",
+   "row": 282,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Deon Whitfield C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P283",
+   "row": 283,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Ayo Dosunmu C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P284",
+   "row": 284,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Walker Kessler C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P296",
+   "row": 296,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marco Lopez C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P297",
+   "row": 297,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jose Johnson C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P298",
+   "row": 298,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Dante Nelson C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P299",
+   "row": 299,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Darius Clark C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P300",
+   "row": 300,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Rafael Phillips C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P301",
+   "row": 301,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Andre Lee C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P302",
+   "row": 302,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jalen Hill C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P303",
+   "row": 303,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marcus Walker C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P304",
+   "row": 304,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Patricia Nolan C81"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P305",
+   "row": 305,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Denise Carter C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P306",
+   "row": 306,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Leonard Tran C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P307",
+   "row": 307,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Rose Delgado C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P308",
+   "row": 308,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Ramon Vega C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P309",
+   "row": 309,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Janae Rivers C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P310",
+   "row": 310,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Elliott Crane C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P311",
+   "row": 311,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Warren Ashford C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P312",
+   "row": 312,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Nina Chen C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P313",
+   "row": 313,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Terrence Mobley C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P314",
+   "row": 314,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Avery Santana C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P315",
+   "row": 315,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Deacon Seymour C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P316",
+   "row": 316,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Travis Coles C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P317",
+   "row": 317,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Benji Dillon C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P318",
+   "row": 318,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Vinnie Keane C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P319",
+   "row": 319,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Mark Aitken C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P320",
+   "row": 320,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Danny Horn C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P321",
+   "row": 321,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Cy Newell C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P322",
+   "row": 322,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Darrin Davis C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P323",
+   "row": 323,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Mike Kinder C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P324",
+   "row": 324,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Josh Giddey C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P325",
+   "row": 325,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Matas Buzelis C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P326",
+   "row": 326,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Jalen Smith C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P327",
+   "row": 327,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Adash Stanley C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P328",
+   "row": 328,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Mike Paulson C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P340",
+   "row": 340,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jose Wright C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P341",
+   "row": 341,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Rafael Phillips C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P342",
+   "row": 342,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Calvin Turner C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P343",
+   "row": 343,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Andre Lee C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P344",
+   "row": 344,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Dorothy Rios C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P345",
+   "row": 345,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Father Miguel C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P346",
+   "row": 346,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Carla Edmonds C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P347",
+   "row": 347,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Vincent Cho C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P348",
+   "row": 348,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Elena Reyes C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P349",
+   "row": 349,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Oakland Buddhist Temple C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P350",
+   "row": 350,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment East Bay Meditation Center C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P351",
+   "row": 351,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Cathedral of Christ the Light C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P352",
+   "row": 352,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment St. Columba Catholic Church C82"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P353",
+   "row": 353,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Denise Carter C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P354",
+   "row": 354,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Leonard Tran C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P355",
+   "row": 355,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Rose Delgado C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P356",
+   "row": 356,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Ramon Vega C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P357",
+   "row": 357,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Janae Rivers C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P358",
+   "row": 358,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Elliott Crane C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P359",
+   "row": 359,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Warren Ashford C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P360",
+   "row": 360,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Nina Chen C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P361",
+   "row": 361,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Terrence Mobley C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P362",
+   "row": 362,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Avery Santana C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P363",
+   "row": 363,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Simone Ellis C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P364",
+   "row": 364,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Keisha Ramos C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P365",
+   "row": 365,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Martin Richards C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P366",
+   "row": 366,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Darrin Davis C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P367",
+   "row": 367,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Ernesto Quintero C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P368",
+   "row": 368,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Danny Horn C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P369",
+   "row": 369,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Isley Kelley C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P370",
+   "row": 370,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Vinnie Keane C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P371",
+   "row": 371,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Benji Dillon C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P372",
+   "row": 372,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Travis Coles C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P373",
+   "row": 373,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Eric Taveras C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P374",
+   "row": 374,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Henry Rivas C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P375",
+   "row": 375,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment John Ellis C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P376",
+   "row": 376,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Mark Aitken C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P377",
+   "row": 377,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Deacon Seymour C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P378",
+   "row": 378,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Cy Newell C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P379",
+   "row": 379,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Agustin Rodriguez C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P380",
+   "row": 380,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Peter Busch C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P381",
+   "row": 381,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Josh Giddey C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P382",
+   "row": 382,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Hank Trepagnier C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P383",
+   "row": 383,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Adash Stanley C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P384",
+   "row": 384,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Kevin Huerter C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P385",
+   "row": 385,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Deon Whitfield C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P386",
+   "row": 386,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jalen Smith C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P387",
+   "row": 387,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Mike Paulson C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P388",
+   "row": 388,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Record: 36-27. No player names used. C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P389",
+   "row": 389,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Marin Tao C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P390",
+   "row": 390,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Rico Valez C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P391",
+   "row": 391,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jade Orion C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P392",
+   "row": 392,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Sculptor Alma Vasquez C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P404",
+   "row": 404,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Elena Reyes C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P405",
+   "row": 405,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Dante Nelson C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P406",
+   "row": 406,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Shawn Nguyen C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P407",
+   "row": 407,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jose Wright C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P408",
+   "row": 408,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Darius Clark C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P409",
+   "row": 409,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jalen Hill C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P410",
+   "row": 410,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marcus Walker C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P411",
+   "row": 411,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Terrence Williams C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P412",
+   "row": 412,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Andre Lee C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P413",
+   "row": 413,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Rafael Phillips C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P414",
+   "row": 414,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jose Johnson C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P415",
+   "row": 415,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Mara Vance C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P417",
+   "row": 417,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Calvin Turner C83"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P418",
+   "row": 418,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Keisha Ramos C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P419",
+   "row": 419,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Simone Ellis C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P420",
+   "row": 420,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Leanne Wu C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P421",
+   "row": 421,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Avery Santana C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P422",
+   "row": 422,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Laila Cortez C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P423",
+   "row": 423,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Theo Park C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P425",
+   "row": 425,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Mara Vance C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P426",
+   "row": 426,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Denise Carter C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P427",
+   "row": 427,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Leonard Tran C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P428",
+   "row": 428,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Rose Delgado C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P430",
+   "row": 430,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Janae Rivers C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P431",
+   "row": 431,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Elliott Crane C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P432",
+   "row": 432,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Warren Ashford C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P433",
+   "row": 433,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Nina Chen C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P434",
+   "row": 434,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Terrence Mobley C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P435",
+   "row": 435,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Benji Dillon C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P436",
+   "row": 436,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Isley Kelley C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P437",
+   "row": 437,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Vinnie Keane C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P438",
+   "row": 438,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Mark Aitken C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P439",
+   "row": 439,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Darrin Davis C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P440",
+   "row": 440,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Danny Horn C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P441",
+   "row": 441,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Martin Richards C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P442",
+   "row": 442,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Henry Rivas C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P443",
+   "row": 443,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Eric Taveras C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P444",
+   "row": 444,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Ernesto Quintero C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P445",
+   "row": 445,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Mariano Rosales C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P446",
+   "row": 446,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Travis Coles C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P447",
+   "row": 447,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Deacon Seymour C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P448",
+   "row": 448,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Josh Giddey C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P449",
+   "row": 449,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Hank Trepagnier C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P450",
+   "row": 450,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Adash Stanley C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P451",
+   "row": 451,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Kevin Huerter C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P452",
+   "row": 452,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Walker Kessler C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P453",
+   "row": 453,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Mike Paulson C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P454",
+   "row": 454,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Ayo Dosunmu C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P455",
+   "row": 455,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jalen Smith C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P456",
+   "row": 456,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Steph Curry C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P457",
+   "row": 457,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Giannis Antetokounmpo C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P469",
+   "row": 469,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Shawn Nguyen C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P470",
+   "row": 470,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Beverly Hayes C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P471",
+   "row": 471,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Rafael Phillips C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P472",
+   "row": 472,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Andre Lee C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P473",
+   "row": 473,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Calvin Turner C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P474",
+   "row": 474,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Bruce Wright C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P475",
+   "row": 475,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Jose Wright C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P476",
+   "row": 476,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Marcus Walker C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P477",
+   "row": 477,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Jalen Hill C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P478",
+   "row": 478,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Darius Clark C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P479",
+   "row": 479,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Elena Reyes C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P480",
+   "row": 480,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Gloria Meeks C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P481",
+   "row": 481,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Vincent Okoye C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P482",
+   "row": 482,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment St. Columba Catholic Church C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P483",
+   "row": 483,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Allen Temple Baptist Church C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P484",
+   "row": 484,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Cathedral of Christ the Light C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P485",
+   "row": 485,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Muralist Dante Reyes C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P486",
+   "row": 486,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Jade Orion C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P487",
+   "row": 487,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Calhoun's Tap C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P488",
+   "row": 488,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Council Member Ramon Vega C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P491",
+   "row": 491,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Reed Thompson C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P492",
+   "row": 492,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Linda Chow C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P493",
+   "row": 493,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Marcus Williams C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P494",
+   "row": 494,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Tomas Renteria C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P495",
+   "row": 495,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Sonia Parikh C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P498",
+   "row": 498,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Christine Nakamura C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P500",
+   "row": 500,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Amara Osei C84"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P528",
+   "row": 528,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Avery Santana C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P531",
+   "row": 531,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Janae Rivers C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P532",
+   "row": 532,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Leonard Tran C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P533",
+   "row": 533,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Ramon Vega C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P534",
+   "row": 534,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Warren Ashford C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P537",
+   "row": 537,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Keisha Ramos C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P538",
+   "row": 538,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Brenda Okoro C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P541",
+   "row": 541,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Travis Coles C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P542",
+   "row": 542,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Danny Horn C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P543",
+   "row": 543,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Benji Dillon C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P544",
+   "row": 544,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Vinnie Keane C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P545",
+   "row": 545,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Bryan Franco C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P549",
+   "row": 549,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Arturo Ramos C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P550",
+   "row": 550,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Henry Rivas C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P551",
+   "row": 551,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Deacon Seymour C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P552",
+   "row": 552,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment DeShawn Hartley C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P553",
+   "row": 553,
+   "col": 15,
+   "old": "",
+   "value": "negative",
+   "what": "Sentiment Marcus Webb C90"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P581",
+   "row": 581,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Ariana Lee C104"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P582",
+   "row": 582,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Sandra Velazquez C104"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P583",
+   "row": 583,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Pablo Almanzar C104"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P584",
+   "row": 584,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Vinnie Keane C104"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P741",
+   "row": 741,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Irene Fay C107"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P742",
+   "row": 742,
+   "col": 15,
+   "old": "",
+   "value": "neutral",
+   "what": "Sentiment Darius Clark C107"
+  },
+  {
+   "tab": "Citizen_Media_Usage",
+   "range": "Citizen_Media_Usage!P743",
+   "row": 743,
+   "col": 15,
+   "old": "",
+   "value": "positive",
+   "what": "Sentiment Yu Zen C107"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L2",
+   "row": 2,
+   "col": 11,
+   "old": 83,
+   "value": 1,
+   "what": "FameScore CUL-3913E3E5 Dax Monroe"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L3",
+   "row": 3,
+   "col": 11,
+   "old": 153,
+   "value": 21,
+   "what": "FameScore CUL-0FBABAC4 Marin Tao"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L4",
+   "row": 4,
+   "col": 11,
+   "old": 116,
+   "value": 3,
+   "what": "FameScore CUL-D508319E Rico Valez"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L5",
+   "row": 5,
+   "col": 11,
+   "old": 92,
+   "value": 5,
+   "what": "FameScore CUL-6D596907 Lena Cross"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L6",
+   "row": 6,
+   "col": 11,
+   "old": 76,
+   "value": 0,
+   "what": "FameScore CUL-1D834E5A Kato Rivers"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L7",
+   "row": 7,
+   "col": 11,
+   "old": 89,
+   "value": 0,
+   "what": "FameScore CUL-A2D9EBFF Sage Vienta"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L8",
+   "row": 8,
+   "col": 11,
+   "old": 100,
+   "value": 14,
+   "what": "FameScore CUL-8B50B913 Jade Orion"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L9",
+   "row": 9,
+   "col": 11,
+   "old": 70,
+   "value": 2,
+   "what": "FameScore CUL-9E72118C Evan Morello"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L10",
+   "row": 10,
+   "col": 11,
+   "old": 66,
+   "value": 3,
+   "what": "FameScore CUL-3A2CD59D Rowan Pierce"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L11",
+   "row": 11,
+   "col": 11,
+   "old": 73,
+   "value": 2,
+   "what": "FameScore CUL-A99D7E2E Nila James"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L12",
+   "row": 12,
+   "col": 11,
+   "old": 69,
+   "value": 5,
+   "what": "FameScore CUL-0F9D85B2 Tara Ellison"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L13",
+   "row": 13,
+   "col": 11,
+   "old": 46,
+   "value": 8,
+   "what": "FameScore CUL-6A0BC6CC Theo Banks"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L14",
+   "row": 14,
+   "col": 11,
+   "old": 50,
+   "value": 7,
+   "what": "FameScore CUL-B60D00F6 Nina Reyes"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L15",
+   "row": 15,
+   "col": 11,
+   "old": 33,
+   "value": 2,
+   "what": "FameScore CUL-4C7646A5 Derek Obi"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L16",
+   "row": 16,
+   "col": 11,
+   "old": 13,
+   "value": 2,
+   "what": "FameScore CUL-DC4EA635 Jordan Steele"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L17",
+   "row": 17,
+   "col": 11,
+   "old": 33,
+   "value": 0,
+   "what": "FameScore CUL-905CBDE8 Brody Kale"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L18",
+   "row": 18,
+   "col": 11,
+   "old": 16,
+   "value": 0,
+   "what": "FameScore CUL-21B70831 Yvonne Hayes"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L19",
+   "row": 19,
+   "col": 11,
+   "old": 4,
+   "value": 6,
+   "what": "FameScore CUL-72BD508A Marcus Webb"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L20",
+   "row": 20,
+   "col": 11,
+   "old": 20,
+   "value": 6,
+   "what": "FameScore CUL-732EA822 Celeste Moon"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L21",
+   "row": 21,
+   "col": 11,
+   "old": 39,
+   "value": 0,
+   "what": "FameScore CUL-5F7A348B Marisol Rivera"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L22",
+   "row": 22,
+   "col": 11,
+   "old": 52,
+   "value": 1,
+   "what": "FameScore CUL-0E82EF6C Alma Vasquez"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L23",
+   "row": 23,
+   "col": 11,
+   "old": 22,
+   "value": 0,
+   "what": "FameScore CUL-BEF5B8CE Pixel Pete"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L24",
+   "row": 24,
+   "col": 11,
+   "old": 16,
+   "value": 0,
+   "what": "FameScore CUL-1CFF5139 GameGirl Gia"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L25",
+   "row": 25,
+   "col": 11,
+   "old": 32,
+   "value": 0,
+   "what": "FameScore CUL-BA80115F Mei Chen"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L26",
+   "row": 26,
+   "col": 11,
+   "old": 44,
+   "value": 0,
+   "what": "FameScore CUL-CEF9BF70 Dante Reyes"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L27",
+   "row": 27,
+   "col": 11,
+   "old": 21,
+   "value": 0,
+   "what": "FameScore CUL-EBD601D2 Sienna Vale"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L29",
+   "row": 29,
+   "col": 11,
+   "old": 8,
+   "value": 0,
+   "what": "FameScore CUL-9738B2EA James Williams"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L30",
+   "row": 30,
+   "col": 11,
+   "old": 16,
+   "value": 0,
+   "what": "FameScore CUL-C13B0483 Claire Ashford"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L31",
+   "row": 31,
+   "col": 11,
+   "old": 6,
+   "value": 0,
+   "what": "FameScore CUL-66EDE7C6 Lumi Crest"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L32",
+   "row": 32,
+   "col": 11,
+   "old": 14,
+   "value": 30,
+   "what": "FameScore CUL-78BDC775 Travis Coles"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L33",
+   "row": 33,
+   "col": 11,
+   "old": 1,
+   "value": 0,
+   "what": "FameScore CUL-EEC72E06 Denise Simmons"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L34",
+   "row": 34,
+   "col": 11,
+   "old": 31,
+   "value": 13,
+   "what": "FameScore CUL-4738E778 Eric Taveras"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L35",
+   "row": 35,
+   "col": 11,
+   "old": 0,
+   "value": 5,
+   "what": "FameScore CUL-F8C4B785 Jose Colon"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L36",
+   "row": 36,
+   "col": 11,
+   "old": 11,
+   "value": 0,
+   "what": "FameScore CUL-3D28D67B Marcus Duval"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L37",
+   "row": 37,
+   "col": 11,
+   "old": 0,
+   "value": 3,
+   "what": "FameScore CUL-B92FD72A Vladimir Gonzalez"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L38",
+   "row": 38,
+   "col": 11,
+   "old": 24,
+   "value": 7,
+   "what": "FameScore CUL-B68BBF3B Arturo Ramos"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L39",
+   "row": 39,
+   "col": 11,
+   "old": 20,
+   "value": 37,
+   "what": "FameScore CUL-85DD5B45 Darrin Davis"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L40",
+   "row": 40,
+   "col": 11,
+   "old": 34,
+   "value": 47,
+   "what": "FameScore CUL-978D65AE Vinnie Keane"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L41",
+   "row": 41,
+   "col": 11,
+   "old": 2,
+   "value": 5,
+   "what": "FameScore CUL-EF1447BC Deacon Seymour"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L42",
+   "row": 42,
+   "col": 11,
+   "old": 5,
+   "value": 0,
+   "what": "FameScore CUL-8A4E3B04 Steve Conrad"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L43",
+   "row": 43,
+   "col": 11,
+   "old": 20,
+   "value": 22,
+   "what": "FameScore CUL-A58950DF Henry Rivas"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L44",
+   "row": 44,
+   "col": 11,
+   "old": 7,
+   "value": 37,
+   "what": "FameScore CUL-187CFCE7 Danny Horn"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L45",
+   "row": 45,
+   "col": 11,
+   "old": 30,
+   "value": 27,
+   "what": "FameScore CUL-514B920D Mark Aitken"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L46",
+   "row": 46,
+   "col": 11,
+   "old": 11,
+   "value": 14,
+   "what": "FameScore CUL-E46BC2A0 John Ellis"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L47",
+   "row": 47,
+   "col": 11,
+   "old": 25,
+   "value": 48,
+   "what": "FameScore CUL-C485F452 Benji Dillon"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L49",
+   "row": 49,
+   "col": 11,
+   "old": 25,
+   "value": 28,
+   "what": "FameScore CUL-EB555F30 Mike Paulson"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L50",
+   "row": 50,
+   "col": 11,
+   "old": 16,
+   "value": 0,
+   "what": "FameScore CUL-065F46DC Rosa Martinez"
+  },
+  {
+   "tab": "Cultural_Ledger",
+   "range": "Cultural_Ledger!L51",
+   "row": 51,
+   "col": 11,
+   "old": 7,
+   "value": 0,
+   "what": "FameScore CUL-66AA3FD9 Li Wei"
+  }
+ ],
+ "counts": {
+  "rows": 50,
+  "personal": 50,
+  "institution": 0,
+  "duplicate": 0,
+  "orphan": 0,
+  "changed": 48,
+  "atBarBefore": 25,
+  "atBarAfter": 8,
+  "crossDown": 20,
+  "crossUp": 3,
+  "writeBack": 413,
+  "writeBackSkipped": 0,
+  "manifestRows": 110,
+  "manifestMiss": 0
+ },
+ "readback": {
+  "checked": 461,
+  "mismatched": []
+ }
+}

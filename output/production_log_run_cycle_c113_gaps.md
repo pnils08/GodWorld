@@ -262,6 +262,7 @@
 ### G-EC42 — pre-flight "Harry Hayward does NOT resolve" closed by the fire [judgment] [cross-cycle-debt] [INFO]
 - `applyGameNightMoments_: unresolved feed names, cycle 113: Harry Hayward` at Phase 5, then the hiring engine minted POP-01223 Harry Hayward (Oaks PF, KONO) and POP-01224 Trevor Henderson (Oaks C, Lake Merritt) the same Cycle
 - feed E251/E252 missing comma fixed by hand before the fire (two names read as one); the desk can interview him from C113
+- the mint wrote ClockMode `Game` (intake cell verbatim) and no EmployerBizId for both rows → ROLLOUT engine.319; the four cells corrected on live 2026-10-26 (`GAME`, `BIZ-00074`), receipt `output/engine-sheet/2026-10-26-oaks-rookies-identity-receipt.json`
 
 ### G-EC43 — rate read: 13 real outcomes of 2,489 lines (C112: 6 of 2,335); married 0, laid off 0 for the second Cycle [judgment] [math-anomaly] [INFO]
 - born 1, promoted 1, hired 1, bought 4 (2 also heritage steps), sold 3, heritage 3; rate and severity are the builder's dials — recorded, not filed

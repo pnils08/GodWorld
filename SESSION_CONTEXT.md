@@ -1,6 +1,6 @@
 # SESSION_CONTEXT — NEXT WORK ONLY. One PIN + one NEXT line per lane. What already happened lives in git, claude-mem, ROLLOUT_PLAN and the gap/production logs — never here. If a line describes a session instead of an assignment, it is written wrong.
 
-**PIN:** S604 | Day 216 | Canon C113 (fired 2026-10-25 23:03 CDT, 0 errors; run-cycle chain complete through Step 6) | PROD @164 = stage 28 (`5ed4ceba` over stage 27) — stages 27 + 28 first-live readback as expected | next live fire C114 Sun 2026-11-01 | stage history, expectations, rollbacks: DEPLOY_HISTORY §PROD | claude-mem observer on quota cooldown — don't restart.
+**PIN:** S605 | Day 217 | Canon C113 (fired 2026-10-25 23:03 CDT, 0 errors; chain complete; engine.312 re-base applied 2026-10-26) | PROD @164 = stage 28 (`5ed4ceba` over stage 27) — stages 27 + 28 first-live readback as expected | next live fire C114 Sun 2026-11-01 | stage history, expectations, rollbacks: DEPLOY_HISTORY §PROD | claude-mem observer on quota cooldown — don't restart.
 
 **NEXT[engine-sheet]:** C113 chain done; engine.312 re-base applied on C113 (row done-pending-archive). No job in hand — claim a §4 row when Mike assigns (engine.319 Oaks mint fix is filed, ready). engine.201 C113 trace is codex's read (cohort-c113.json on disk). Gap log G-EC39–43 are reads, not builds. Watch C114 fire: Cultural_Ledger fades from the re-based scores.
 

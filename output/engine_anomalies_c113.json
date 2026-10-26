@@ -1,0 +1,83 @@
+{
+  "cycle": 113,
+  "generatedAt": "C113",
+  "detectorVersion": "1.2.0",
+  "anomalies": [
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Eastlake"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Eastlake",
+          "previousMigrationFlow": -2,
+          "currentMigrationFlow": -5,
+          "delta": "-3.00",
+          "subCheck": "migration-shift",
+          "band": 3
+        }
+      },
+      "description": "Eastlake migration flow shifted -2 → -5",
+      "historicalContext": {
+        "priorCycles": [
+          -2
+        ],
+        "currentCycle": -5
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.2.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "medium",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [],
+        "neighborhoods": [
+          "Glenview"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Neighborhood_Map",
+        "rows": [],
+        "fields": {
+          "Neighborhood": "Glenview",
+          "previousMigrationFlow": -2,
+          "currentMigrationFlow": -5,
+          "delta": "-3.00",
+          "subCheck": "migration-shift",
+          "band": 3
+        }
+      },
+      "description": "Glenview migration flow shifted -2 → -5",
+      "historicalContext": {
+        "priorCycles": [
+          -2
+        ],
+        "currentCycle": -5
+      },
+      "triagePath": "suppress-until-verified",
+      "confidence": "medium",
+      "detectorVersion": "1.2.0"
+    }
+  ],
+  "summary": {
+    "total": 2,
+    "byTriage": {
+      "suppress-until-verified": 2
+    }
+  }
+}

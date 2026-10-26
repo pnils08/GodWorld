@@ -493,7 +493,7 @@ function buildPSlayerSlice(cycle, opts) {
   const namePool = [
     ...extractPlayerNames(row.namesUsed),
     ...extractPlayerNames(row.storyAngle),
-    ...extractPlayerNames((row.notes || '').slice(0, 280))
+    ...extractPlayerNames(row.notes || '')
   ].filter((n, i, a) => a.findIndex(x => x.toLowerCase() === n.toLowerCase()) === i);
   const players = [];
   const seenPop = new Set();

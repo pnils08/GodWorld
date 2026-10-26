@@ -131,7 +131,7 @@ function loadEditionSlice(popId, name, nh, cycle) {
       for (const line of txt.slice(idx).split('\n')) {
         const m = line.match(/^(POP-\d{5})\s*\|\s*([^|]+)\|\s*(.+)$/);
         if (m && m[1].toUpperCase() === popId) {
-          return `The Tribune wrote about you this week: ${m[3].trim()}.`.slice(0, 200);
+          return `The Tribune wrote about you this week: ${m[3].trim()}.`;
         }
       }
     }

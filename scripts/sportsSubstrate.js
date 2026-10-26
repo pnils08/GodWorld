@@ -524,7 +524,7 @@ function resolveFeedPlayers(row, ledger, limit, opts) {
   const explicitNames = extractPlayerNames(row.namesUsed);
   const fallbackNames = [
     ...extractPlayerNames(row.storyAngle),
-    ...extractPlayerNames(o.proseUnion ? (row.notes || '') : (row.notes || '').slice(0, 280))
+    ...extractPlayerNames(row.notes || '')
   ];
   // NamesUsed is the feed's explicit subject field. When present, do not let
   // prose fragments or alternate spellings become additional people.

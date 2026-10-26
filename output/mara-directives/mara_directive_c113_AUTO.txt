@@ -1,0 +1,62 @@
+# C113 Voice Directives — Mara Vance (AUTO)
+
+**Cycle:** 113
+**Issued:** C113 (auto-derived, cron-civic-run.js --stage=directive, post-close)
+**Source:** close_c113 + world_summary_c113 + engine review HIGHs + tracker + C112 voice record
+
+---
+## Nina Chen — City Council District 8
+
+- **Agent:** `.claude/agents/civic-office-council-d8/`
+- **Address:** Cast the decisive floor vote on the $2.5M Commercial Stabilization for Grand Lake ordinance (INIT-009) and file the Eastlake corridor commercial stabilization review.
+- **Why:** INIT-009 advanced to full council with audit conditions in C113 and sits at vote-ready status with its stall clock expiring at C114, while Eastlake continues to log decay momentum of 3, sentiment of -0.06, and Adams Point sentiment sits at -0.04.
+- **Acceptance:** A recorded roll-call vote on INIT-009 and a published commercial review for Eastlake observable in C114.
+- **Silence consequence:** INIT-009 defaults at the council floor threshold, leaving Grand Lake and Eastlake merchants without appropriated stabilization funds.
+
+## Leonard Tran — City Council District 2
+
+- **Agent:** `.claude/agents/civic-office-council-d2/`
+- **Address:** Execute the Uptown stabilization planning track for the $15M Downtown Economic Revitalization ordinance (INIT-008) and publish an emergency response to the Chinatown math-imbalance decay flag.
+- **Why:** INIT-008 sits at vote-scheduled with its C114 Uptown planning milestone pending, while engine diagnostics in C113 flagged a high-severity decay pattern in Chinatown with sentiment at -0.06, retail vitality down to 7.78, and crime at 0.62.
+- **Acceptance:** Filed Uptown stabilization plan for INIT-008 and a recorded municipal response to Chinatown's decay signals in C114.
+- **Silence consequence:** INIT-008 stalls prior to full appropriation, leaving Chinatown and Downtown commercial corridors without structured intervention.
+
+## Ramon Vega — City Council District 4
+
+- **Agent:** `.claude/agents/civic-office-council-d4/`
+- **Address:** Docket the committee referral and hearing for the Ivy Hill Revitalization Initiative (INIT-011) and reconcile the duplicate announced filings for INIT-012 and INIT-013.
+- **Why:** INIT-011 reached legislation-filed status in C113 with a C114 committee referral deadline, while Ivy Hill records the city's lowest sentiment at -0.10 with crime at 0.62 and Glenview carries a crime index of 0.65.
+- **Acceptance:** A formal committee referral schedule for INIT-011 and docketed legislative text for INIT-012/INIT-013 in C114.
+- **Silence consequence:** Legislative momentum on District 4 revitalization stalls, leaving Ivy Hill and Glenview unaddressed as crime remains elevated.
+
+## Avery Santana — Mayor
+
+- **Agent:** `.claude/agents/civic-office-mayor/`
+- **Address:** File legislative proposals addressing the 4 citizen complaints above the visibility threshold and execute the Month-12 disbursement and charter renewal for INIT-001.
+- **Why:** The mayoral ledger carries 4 citizen complaints above the visibility threshold without responsive proposals filed, while 10 board initiatives face C114 stall clock deadlines including INIT-001's Month-12 renewal and INIT-007's placement gap analysis.
+- **Acceptance:** Formal legislative or administrative filings on the 4 citizen petitions and published Month-12 closeout documentation for INIT-001 in C114.
+- **Silence consequence:** Executive default across multiple active initiatives and public breach of the charter visibility threshold for citizen petitions.
+
+## Denise Carter — City Council District 1
+
+- **Agent:** `.claude/agents/civic-office-council-d1/`
+- **Address:** Publish a municipal mitigation response for the 2 active District 1 citizen complaints and execute the D1 OARI evaluation review under INIT-002.
+- **Why:** District 1 carries 2 unaddressed petitions on the record while Brooklyn shows decay momentum of 2 and sentiment of 0.00, with INIT-001, INIT-002, INIT-007, and INIT-010 facing C114 milestone deadlines.
+- **Acceptance:** Recorded disposition of the 2 D1 citizen complaints and published D1 dispatch evaluation metrics for INIT-002 in C114.
+- **Silence consequence:** Brooklyn corridor decay accelerates without municipal intervention and District 1 response metrics remain absent from citywide safety reporting.
+
+## Rose Delgado — City Council District 3
+
+- **Agent:** `.claude/agents/civic-office-council-d3/`
+- **Address:** Schedule the D3 OARI community briefing under INIT-002 and publish the preliminary design review date for Fruitvale Transit Hub Phase II (INIT-003).
+- **Why:** INIT-002 mandates a D3 community briefing execution in C114, INIT-003 reaches preliminary schematics review at C114, and San Antonio records negative sentiment of -0.04, crime at 0.61, and 1 unresolved citizen petition.
+- **Acceptance:** A confirmed public hearing date for the D3 OARI briefing and published schematic schedule for INIT-003 in C114.
+- **Silence consequence:** Fruitvale transit capital planning freezes at the design phase and District 3 community oversight on emergency response lapses.
+
+## Janae Rivers — City Council District 5
+
+- **Agent:** `.claude/agents/civic-office-council-d5/`
+- **Address:** Deliver the East Oakland placement gap analysis for INIT-007 and file an action plan addressing East Oakland's decay momentum.
+- **Why:** East Oakland recorded a city-high decay momentum of 4 in C113 despite positive sentiment, with 1 active citizen complaint and C114 stall clocks pending on INIT-002 and INIT-007 placement adjustments.
+- **Acceptance:** Published cohort adjustment data for INIT-007 and a filed response to the East Oakland citizen complaint in C114.
+- **Silence consequence:** East Oakland youth apprenticeship allocations miss the adjustment window while localized infrastructure decay compounds unchecked.

@@ -1,0 +1,88 @@
+{
+  "stage": "directive",
+  "cycle": 113,
+  "model": "google/gemini-3.7-flash",
+  "mayorModel": "moonshotai/kimi-k2",
+  "closeDerived": true,
+  "targets": [
+    {
+      "agentDir": "civic-office-mayor",
+      "reasons": [
+        "petition pool: 4 complaint(s) ≥ the visibility line (3) with NO proposal filed by this seat",
+        "stall clock: INIT-001, INIT-002, INIT-003, INIT-007, INIT-008, INIT-009, INIT-010, INIT-011, INIT-012, INIT-013 (NextActionCycle ≤ C114)"
+      ]
+    },
+    {
+      "agentDir": "civic-office-council-d1",
+      "reasons": [
+        "stall clock: INIT-001, INIT-002, INIT-007, INIT-010 (NextActionCycle ≤ C114)"
+      ]
+    },
+    {
+      "agentDir": "civic-office-council-d2",
+      "reasons": [
+        "stall clock: INIT-008, INIT-009 (NextActionCycle ≤ C114)"
+      ]
+    },
+    {
+      "agentDir": "civic-office-council-d3",
+      "reasons": [
+        "stall clock: INIT-002, INIT-003, INIT-007 (NextActionCycle ≤ C114)"
+      ]
+    },
+    {
+      "agentDir": "civic-office-council-d4",
+      "reasons": [
+        "stall clock: INIT-011, INIT-012, INIT-013 (NextActionCycle ≤ C114)"
+      ]
+    },
+    {
+      "agentDir": "civic-office-council-d5",
+      "reasons": [
+        "stall clock: INIT-002, INIT-007 (NextActionCycle ≤ C114)"
+      ]
+    },
+    {
+      "agentDir": "civic-office-council-d8",
+      "reasons": [
+        "stall clock: INIT-009 (NextActionCycle ≤ C114)"
+      ]
+    }
+  ],
+  "blocks": [
+    "Nina Chen — City Council District 8",
+    "Leonard Tran — City Council District 2",
+    "Ramon Vega — City Council District 4",
+    "Avery Santana — Mayor",
+    "Denise Carter — City Council District 1",
+    "Rose Delgado — City Council District 3",
+    "Janae Rivers — City Council District 5"
+  ],
+  "rejectedBlocks": [],
+  "usage": {
+    "prompt_tokens": 8843,
+    "completion_tokens": 2464,
+    "total_tokens": 11307,
+    "cost": 0.01587225,
+    "is_byok": false,
+    "prompt_tokens_details": {
+      "cached_tokens": 0,
+      "cache_write_tokens": 0,
+      "audio_tokens": 0,
+      "video_tokens": 0
+    },
+    "cost_details": {
+      "upstream_inference_cost": 0.01587225,
+      "upstream_inference_prompt_cost": 0.00663225,
+      "upstream_inference_completions_cost": 0.00924
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1073,
+      "image_tokens": 0,
+      "audio_tokens": 0
+    }
+  },
+  "note": null,
+  "directive": "output/mara-directives/mara_directive_c113_AUTO.txt",
+  "ranAt": "2026-10-26T05:39:38.298Z"
+}

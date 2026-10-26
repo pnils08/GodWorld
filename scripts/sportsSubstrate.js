@@ -598,12 +598,12 @@ function buildFeedAnchorFacts(row, cycle) {
   if (row.record && /\d/.test(row.record)) {
     facts.push('Team record (feed): ' + row.record + (row.streak ? ' · streak ' + row.streak : ''));
   }
-  if (hasUsableStats(row)) facts.push('Stats (feed): ' + String(row.stats).slice(0, 180));
+  if (hasUsableStats(row)) facts.push('Stats (feed): ' + String(row.stats));
   if (row.eventKind) {
     facts.push('Event: ' + row.team + ' — ' + row.eventKind +
       (row.seasonType ? ' (' + row.seasonType + ')' : ''));
   }
-  if (row.namesUsed) facts.push('NamesUsed: ' + row.namesUsed.slice(0, 160));
+  if (row.namesUsed) facts.push('NamesUsed: ' + row.namesUsed);
   if (row.fanSentiment) {
     facts.push('FanSentiment: ' + row.fanSentiment + (row.mood ? ' · Mood: ' + row.mood : ''));
   }

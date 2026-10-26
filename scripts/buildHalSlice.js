@@ -276,7 +276,7 @@ function buildHistorianClaim(row, cls, foil, closing) {
   const present = foil
     ? 'Present fact: ' + foil + ' on the feed.'
     : (row.storyAngle
-      ? 'Present fact: ' + String(row.storyAngle).slice(0, 140)
+      ? 'Present fact: ' + String(row.storyAngle)
       : 'Present fact: the feed names this chapter.');
   return present + ' Archive claim: the man behind the line — ' + angle +
     ' Close toward ' + closing + '.';
@@ -354,7 +354,7 @@ function matchPriorFilings(row, priorCols, limit) {
 function buildPresentFacts(row, cycle) {
   const facts = [];
   if (row.storyAngle) facts.push('StoryAngle (feed): ' + row.storyAngle);
-  if (sports.hasUsableStats(row)) facts.push('Stats (feed): ' + String(row.stats).slice(0, 180));
+  if (sports.hasUsableStats(row)) facts.push('Stats (feed): ' + String(row.stats));
   if (row.record && /\d/.test(row.record)) {
     facts.push('Record/Streak (feed): ' + row.record + (row.streak ? ' · ' + row.streak : ''));
   }
@@ -362,7 +362,7 @@ function buildPresentFacts(row, cycle) {
     facts.push('Event (feed): ' + row.team + ' — ' + row.eventKind +
       (row.seasonType ? ' (' + row.seasonType + ')' : ''));
   }
-  if (row.namesUsed) facts.push('NamesUsed: ' + row.namesUsed.slice(0, 120));
+  if (row.namesUsed) facts.push('NamesUsed: ' + row.namesUsed);
   facts.push('Cycle: C' + (row.cycle != null ? row.cycle : cycle));
   // Ensure min 2
   while (facts.length < 2) facts.push('Feed present: ' + (row.rawHeader || 'sports row'));
@@ -542,7 +542,7 @@ function buildHalSlice(cycle, opts) {
       team: s.row.team,
       primary: s.cls.primary,
       hasStats: s.cls.hasStats,
-      angle: String(s.row.storyAngle || s.row.rawHeader || '').slice(0, 100),
+      angle: String(s.row.storyAngle || s.row.rawHeader || ''),
       priorHits: (s.priors || []).length
     })),
     pointers: [

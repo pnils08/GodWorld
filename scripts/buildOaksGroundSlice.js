@@ -42,7 +42,7 @@ function rowFacts(r) {
   const facts = [];
   if (r.FanSentiment) facts.push({ text: team + ' fans, C' + cyc + ': ' + r.FanSentiment, src });
   if (r.PlayerMood) facts.push({ text: 'Room mood, C' + cyc + ': ' + r.PlayerMood, src });
-  if (r.Notes) facts.push({ text: 'Notebook (feed): ' + String(r.Notes).slice(0, 200), src });
+  if (r.Notes) facts.push({ text: 'Notebook (feed): ' + String(r.Notes), src });
   facts.push({
     text: team + ' — ' + String(r.EventType || 'event') + (r.SeasonType ? ' (' + r.SeasonType + ')' : '') +
       ', C' + cyc + ': ' + String(r.StoryAngle || '').trim(),
@@ -73,11 +73,11 @@ function build(cycle, { beats, profiles }) {
   const lead = rows[0];
   const team = String(lead.TeamsUsed || 'Oaks').trim();
   const mood = lead.FanSentiment || lead.PlayerMood || null;
-  const label = team + ' ground read C' + lead.Cycle + (mood ? ' — ' + String(mood).slice(0, 80) : '');
+  const label = team + ' ground read C' + lead.Cycle + (mood ? ' — ' + String(mood) : '');
   return K.makeSlice(SEAT, cycle, beats, {
     ref: 'output/beats/Oakland_Sports_Feed.jsonl @C' + cycle, hood: lead.HomeNeighborhood || null, label,
     angle: label + ' — the people around the second club',
-    hookLine: mood ? String(mood).slice(0, 200) : String(lead.StoryAngle || label).slice(0, 200),
+    hookLine: mood ? String(mood) : String(lead.StoryAngle || label),
     facts, people,
     deltas: null,
     hooks: K.hooksFor(beats, cycle, SEAT.name),

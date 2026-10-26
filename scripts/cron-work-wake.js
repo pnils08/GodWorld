@@ -298,7 +298,7 @@ async function wakeOne(pkg, cycle, state) {
 
   if (cls.event || cls.affect) {
     await sheets.appendRows('Reflection_Intake', [[
-      new Date().toISOString(), pkg.popid, cycle, DAYPART, cls.event || '', reflection.slice(0, 180).replace(/\n/g, ' '), 'no', cls.affect || '',
+      new Date().toISOString(), pkg.popid, cycle, DAYPART, cls.event || '', reflection.replace(/\n/g, ' '), 'no', cls.affect || '',
       '', cls.tension || '', '',
     ]]);
     logLine(`Reflection_Intake <- event=[${cls.event || '-'}] affect=[${cls.affect || '-'}] (applied=no, gated)`);

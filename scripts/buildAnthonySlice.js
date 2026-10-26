@@ -310,7 +310,7 @@ function buildLineFacts(row, players) {
     facts.push('Event kind (feed): ' + row.team + ' — ' + row.eventKind +
       (row.seasonType ? ' (' + row.seasonType + ')' : ''));
   }
-  if (row.namesUsed) facts.push('NamesUsed (feed): ' + row.namesUsed.slice(0, 120));
+  if (row.namesUsed) facts.push('NamesUsed (feed): ' + row.namesUsed);
   // Contract tokens from notes only when present
   const money = String(row.notes || '').match(/(\d+-year[^.]{0,40}|\$\d+M[^.]{0,20})/i);
   if (money) facts.push('Money/term on feed notes: ' + money[1].trim());
@@ -379,7 +379,7 @@ function buildAnthonySlice(cycle, opts) {
     kind: 'sports-analytics',
     angle: claim,
     label: (row.team || '') + ' · ' + (row.eventKind || 'feed') + ' — ' +
-      String(row.storyAngle || row.rawHeader || '').slice(0, 120),
+      String(row.storyAngle || row.rawHeader || ''),
     hookLine: row.storyAngle || claim,
     hood: row.neighborhood || null,
     pulseClass: cls.primary,
@@ -398,7 +398,7 @@ function buildAnthonySlice(cycle, opts) {
     dossierFacts: dossierFacts.length ? dossierFacts : ['NONE — no TrueSource card on file for these players'],
     feedFacts: [
       row.storyAngle ? 'StoryAngle: ' + row.storyAngle : null,
-      row.notes ? 'Notes: ' + String(row.notes).slice(0, 200) : null,
+      row.notes ? 'Notes: ' + String(row.notes) : null,
       row.record && /\d/.test(row.record) ? 'Record/Streak: ' + row.record + ' / ' + (row.streak || '—') : null
     ].filter(Boolean),
     claim,
@@ -414,7 +414,7 @@ function buildAnthonySlice(cycle, opts) {
     team: s.row.team,
     primary: s.cls.primary,
     hasStats: s.cls.hasStats,
-    angle: String(s.row.storyAngle || s.row.rawHeader || '').slice(0, 100)
+    angle: String(s.row.storyAngle || s.row.rawHeader || '')
   }));
 
   const slice = {

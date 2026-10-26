@@ -48,7 +48,7 @@ function rowFacts(r) {
     facts.push({ text: 'Record ' + r['Team Record'] + (r.Streak ? ' · streak ' + r.Streak : ''), src: 'output/beats/Oakland_Sports_Feed.jsonl C' + cyc });
   }
   if (sports.hasUsableStats({ stats: r.Stats })) {
-    facts.push({ text: 'Stats (feed): ' + String(r.Stats).slice(0, 180), src: 'output/beats/Oakland_Sports_Feed.jsonl C' + cyc });
+    facts.push({ text: 'Stats (feed): ' + String(r.Stats), src: 'output/beats/Oakland_Sports_Feed.jsonl C' + cyc });
   }
   if (r.EventTrigger) facts.push({ text: 'Trigger: ' + r.EventTrigger, src: 'output/beats/Oakland_Sports_Feed.jsonl C' + cyc });
   if (r.FranchiseStability) facts.push({ text: 'Franchise stability: ' + r.FranchiseStability, src: 'output/beats/Oakland_Sports_Feed.jsonl C' + cyc });
@@ -78,7 +78,7 @@ function build(cycle, { beats, profiles }) {
   return K.makeSlice(SEAT, cycle, beats, {
     ref: 'output/beats/Oakland_Sports_Feed.jsonl @C' + cycle, hood: lead.HomeNeighborhood || null, label,
     angle: label + ' — the second club\'s board read',
-    hookLine: String(lead.StoryAngle || lead.Notes || label).slice(0, 200),
+    hookLine: String(lead.StoryAngle || lead.Notes || label),
     facts, people,
     deltas: null,
     hooks: K.hooksFor(beats, cycle, SEAT.name),

@@ -382,7 +382,7 @@ async function generateVoice(system, user) {
   //    composure-as-affect-only lives in the cycle's gated write-back (nudgesForReflection_), not here.
   if (cls.event || cls.affect) {
     await sheets.appendRows('Reflection_Intake', [[
-      new Date().toISOString(), c.popId, cycle, WAKE, cls.event || '', reflection.slice(0, 180).replace(/\n/g, ' '), 'no', cls.affect || '',
+      new Date().toISOString(), c.popId, cycle, WAKE, cls.event || '', reflection.replace(/\n/g, ' '), 'no', cls.affect || '',
       bondTarget, cls.tension || '', resolvedText,
     ]]);
     logLine(`Reflection_Intake <- event=[${cls.event || '-'}] affect=[${cls.affect || '-'}]${cls.affectFallback ? ' (affect fallback)' : ''}${bondTarget ? ' bondTarget=' + bondTarget : ''} (applied=no, gated)`);

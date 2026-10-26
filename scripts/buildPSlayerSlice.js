@@ -528,7 +528,7 @@ function buildPSlayerSlice(cycle, opts) {
   const story = {
     ref: row.ref ||
       ('Oakland_Sports_Feed cycle ' + (row.cycle || cyc) +
-        '; world_summary_c' + cyc + '.md "## Sports" · ' + (row.storyAngle || row.rawHeader).slice(0, 80)),
+        '; world_summary_c' + cyc + '.md "## Sports" · ' + (row.storyAngle || row.rawHeader)),
     label: row.storyAngle || row.rawHeader,
     kind: cls.primary,
     angle: row.storyAngle || row.rawHeader,
@@ -562,7 +562,7 @@ function buildPSlayerSlice(cycle, opts) {
     cycle: s.row.cycle,
     team: s.row.team,
     primary: s.cls.primary,
-    angle: (publicSportsRow(s.row).storyAngle || s.row.rawHeader || '').slice(0, 120),
+    angle: (publicSportsRow(s.row).storyAngle || s.row.rawHeader || ''),
     priorHits: s.priorHits
   }));
 
@@ -586,7 +586,7 @@ function buildPSlayerSlice(cycle, opts) {
       mood: row.mood,
       fanSentiment: row.fanSentiment,
       neighborhood: row.neighborhood,
-      notes: (row.notes || '').slice(0, 400),
+      notes: (row.notes || ''),
       stats: row.stats
     },
     charge: {
@@ -662,7 +662,7 @@ function formatPSlayerSliceMarkdown(slice) {
       (slice.pulse.fanSentiment ? ' · FAN: ' + slice.pulse.fanSentiment : ''));
   }
   if (slice.pulse.stats && slice.pulse.stats !== '-') L.push('STATS: ' + slice.pulse.stats);
-  if (slice.pulse.notes) L.push('NOTES: ' + slice.pulse.notes.slice(0, 320));
+  if (slice.pulse.notes) L.push('NOTES: ' + slice.pulse.notes);
   L.push('');
   L.push('## CHARGE BAG');
   L.push('MODES: ' + slice.charge.bagModes.map(m => m.id + ' ' + m.name).join(' · '));

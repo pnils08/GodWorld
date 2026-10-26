@@ -147,7 +147,7 @@ function careerLinesFor(name, cycle, feedPath) {
     const body = sanitizeCareerText(sents.join(' '));
     if (!body) continue;
     lines.push({ cycle: rc, seasonType: r.SeasonType || '', eventType: r.EventType || '',
-      line: seasonLabel(r.SeasonType) + ': ' + (body.length > 220 ? body.slice(0, 217) + '...' : body) });
+      line: seasonLabel(r.SeasonType) + ': ' + body });
   }
   // newest first; the headline moments are the most recent rows
   lines.sort((a, b) => b.cycle - a.cycle);

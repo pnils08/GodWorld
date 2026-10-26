@@ -3359,8 +3359,7 @@ async function runChain() {
   if (priorClose) {
     console.log('[chain] close_c' + cycle + '.json exists but applied:' + priorClose.applied + ' — prior run staged without writing. Re-running chain.');
   }
-  const need = ['world_summary_c' + cycle + '.md', 'engine_audit_c' + cycle + '.json'];
-  const missing = need.filter(f => !fs.existsSync(path.join(ROOT, 'output', f)));
+  const missing = engineInputsMissing(cycle);
   if (missing.length) {
     console.log('[chain] engine has not fired for c' + cycle + ' yet (missing: ' + missing.join(', ') + '). Exiting clean.');
     return;
@@ -3433,10 +3432,9 @@ function civicStatusLine(cycle) {
   if (close) {
     return '⚠️ **City-hall C' + cycle + ' ran but did NOT write** (clerk ' + (close.clerk || '?') + ', gate ' + (close.gatePass ? 'pass' : 'blocked') + ') at ' + hhmm(close.ranAt) + '. The 21:00 retry re-enters the chain; decisions staged under output/cron-civic/staged/c' + cycle + '/. Do not fire the cycle yet.';
   }
-  const need = ['world_summary_c' + cycle + '.md', 'engine_audit_c' + cycle + '.json'];
-  const missing = need.filter(f => !fs.existsSync(path.join(ROOT, 'output', f)));
+  const missing = engineInputsMissing(cycle);
   if (missing.length) {
-    return 'ℹ️ **City-hall C' + cycle + ': nothing to do** — engine outputs missing (' + missing.join(', ') + '), so the chain exited clean. Run /engine-review + /build-world-summary for C' + cycle + ' first.';
+    return 'ℹ️ **City-hall C' + cycle + ': nothing to do** — engine outputs missing (' + missing.join(', ') + '), so the chain exited clean. Run /engine-review + /build-world-summary + dumpBeatTabs for C' + cycle + ' first.';
   }
   const prep = readJson(path.join(CIVIC, 'prep_c' + cycle + '.json'));
   return '❌ **City-hall C' + cycle + ' has not closed** — inputs are on disk but no close record' + (prep ? ' (prep ran; a later stage failed)' : ' (chain never started)') + '. Read logs/civic-cron.log; the 21:00 retry will try again. Do not fire the cycle yet.';
@@ -3557,15 +3555,32 @@ function launchChainDetached(cycle) {
   return child.pid;
 }
 
+// The chain's third input (C113, gap log G-EC44): the Step-5.56 beat dump.
+// The hearing reads the tracker and petitions off output/beats, and the
+// directive dies on a stale dump (buildCivicOfficeSlice.js). Launching on the
+// summary + audit pair alone ran the C110 and C113 hearings on the prior
+// week's dump — the dump's cycle stamp is part of "the engine has fired".
+function beatsDumpReady(cycle, root) {
+  const meta = readJson(path.join(root || ROOT, 'output', 'beats', 'meta.json'));
+  return !!(meta && Number(meta.cycle) === Number(cycle));
+}
+function engineInputsMissing(cycle, root) {
+  root = root || ROOT;
+  const need = ['world_summary_c' + cycle + '.md', 'engine_audit_c' + cycle + '.json'];
+  const missing = need.filter(f => !fs.existsSync(path.join(root, 'output', f)));
+  if (!beatsDumpReady(cycle, root)) missing.push('beats/meta.json at c' + cycle);
+  return missing;
+}
+
 // The engine fire is a manual event; its on-disk witness is the pair of
-// compile artifacts every fire produces. firedAt = the later of the two
-// mtimes (the moment the pair was complete). Never wall-clock-facing — this
-// only feeds the verdict cutoff clock.
+// compile artifacts every fire produces plus the beat dump's stamp. firedAt =
+// the later of the two compile mtimes (the moment the pair was complete).
+// Never wall-clock-facing — this only feeds the verdict cutoff clock.
 function engineFireInfo(cycle, root) {
   root = root || ROOT;
   const files = ['world_summary_c' + cycle + '.md', 'engine_audit_c' + cycle + '.json']
     .map(f => path.join(root, 'output', f));
-  if (!files.every(f => fs.existsSync(f))) return { fired: false, firedAt: null };
+  if (!files.every(f => fs.existsSync(f)) || !beatsDumpReady(cycle, root)) return { fired: false, firedAt: null };
   const mtimes = files.map(f => fs.statSync(f).mtimeMs);
   return { fired: true, firedAt: new Date(Math.max.apply(null, mtimes)).toISOString() };
 }

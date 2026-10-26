@@ -270,7 +270,7 @@
 - hourly tick 23:17 CDT: `world_summary_c113.md` + `engine_audit_c113.json` on disk (23:10) → chain launched; prep → close 23:22, tracker written (9 rows, INIT-010 excluded by sanity-read), 50 decision entries
 - `beats/meta.json` still c112 (Step 5.56 ran 00:30) → `runDirective` → `buildCivicOfficeSlice.js:760` "cycle mismatch (expected C113)"; the hearing's per-seat beat reads ran on the c112 dump; tick then reads "already applied — nothing to do", no retry
 - repaired 00:39: `cron-civic-run.js --stage=directive --cycle 113` on the c113 dump → 7 blocks, 0 rejected (`directive_c113.json`, `mara_directive_c113_AUTO.txt`); local files + one model call, no sheet write
-- same hole as C110 (Step 5 gate note); the tick's launch key is two files, the chain's inputs are four — ordering row, not built under the halt
+- same hole as C110 (Step 5 gate note); the tick's launch key was two files, the chain's inputs are three — **fixed same session:** `cron-civic-run.js` `beatsDumpReady` / `engineInputsMissing` — the chain, the status line and `engineFireInfo` all require `output/beats/meta.json` at C{XX}; tick test + G-EC44 regression 71/71; run-cycle SKILL §What Happens After names the third key
 
 ### G-EC45 — INIT-013 "Ivy Hill Community Revitalization" filed by Vega (D4) at C113 beside his own INIT-011 "Ivy Hill Revitalization Initiative" (legislation-filed C113) [judgment] [cross-cycle-debt] [INFO]
 - two live rows, one hood, one proposer; the gate's touchedInitiatives names both; the clerk did not flag the pair — world event, a civic-desk read, not a sheet edit

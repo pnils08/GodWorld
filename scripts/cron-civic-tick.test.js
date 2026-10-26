@@ -68,6 +68,8 @@ function fireEngine(root, ageMs) {
   ;
   fs.writeFileSync(a, '# world summary c' + CYCLE + '\n');
   const b = writeJson(root, 'output/engine_audit_c' + CYCLE + '.json', { cycle: CYCLE });
+  // G-EC44: the beat dump's stamp is the third fire witness (its mtime never feeds the cutoff clock)
+  writeJson(root, 'output/beats/meta.json', { cycle: CYCLE });
   if (ageMs) {
     const t = new Date(Date.now() - ageMs);
     fs.utimesSync(a, t, t);
@@ -1021,3 +1023,16 @@ test('filterDirectiveBlocks caps at the template maximum of 12 blocks', () => {
   console.log('\n' + passed + ' passed, ' + failed + ' failed');
   process.exit(failed ? 1 : 0);
 })();
+
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nG-EC44 — the beat dump is the third fire witness');
+// ────────────────────────────────────────────────────────────────────────────
+
+test('a stale beat dump holds the fire; a current one releases it (C110 / C113 shape)', () => {
+  const root = mkRoot();
+  fireEngine(root);
+  writeJson(root, 'output/beats/meta.json', { cycle: CYCLE - 1 });
+  assert.strictEqual(civicRun.engineFireInfo(CYCLE, root).fired, false, 'summary + audit with last week\'s dump is not a fire');
+  writeJson(root, 'output/beats/meta.json', { cycle: CYCLE });
+  assert.strictEqual(civicRun.engineFireInfo(CYCLE, root).fired, true, 'the current dump releases it');
+});

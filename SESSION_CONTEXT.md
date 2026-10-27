@@ -2,7 +2,7 @@
 
 **PIN:** S605 | Day 217 | Canon C113 (fired 2026-10-25 23:03 CDT, 0 errors; chain complete; engine.312 re-base applied 2026-10-26) | PROD @164 = stage 28 (`5ed4ceba` over stage 27) — stages 27 + 28 first-live readback as expected | next live fire C114 Sun 2026-11-01 | stage history, expectations, rollbacks: DEPLOY_HISTORY §PROD | claude-mem observer on quota cooldown — don't restart.
 
-**NEXT[engine-sheet]:** C113 chain done; engine.312 re-base applied on C113 (row done-pending-archive). No job in hand — claim a §4 row when Mike assigns (engine.319 Oaks mint fix is filed, ready). engine.201 C113 trace is codex's read (cohort-c113.json on disk). Gap log G-EC39–43 are reads, not builds. Watch C114 fire: Cultural_Ledger fades from the re-based scores.
+**NEXT[engine-sheet]:** engine.319 (intake mint places a citizen by clock) built + benched on the exact candidate `ee27fadc` (round 5 PASS); PROD waits on the builder's go: `bash output/engine-sheet/2026-10-26-push-e319-prod.sh ee27fadc output/engine-sheet/stage29d-e319.sha256 113`. Before C114 Sun 2026-11-01. Plan Task 10.
 
 **NEXT[research-build]:** No job in hand. Boot docs and memory cleaned of the project-over / Claude-off / codex-only-approval text (builder 2026-10-25); claim a row from ROLLOUT §4 when Mike assigns work.
 **NEXT[kimi]:** OUT for the week (usage limit 2026-10-03). Nothing queued; its civic.38 renew-move check moved to codex 2026-10-04.

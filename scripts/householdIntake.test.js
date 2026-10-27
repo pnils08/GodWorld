@@ -412,29 +412,30 @@ console.log('\n10. engine.319 — the clock is folded at the door and places the
   adv3.appendRow(usage);
   let err3 = null; try { E.processAdvancementRows_(w3.ctx, 'C' + CYCLE, CYCLE); } catch (e) { err3 = e; }
   check('an existing citizen\'s row ignores the cell, as before (it never sets the clock)', !err3 && w3.ctx.ledger.rows.find(r => r[col('POPID')] === 'POP-00950')[col('ClockMode')] === 'ENGINE', err3 && err3.message);
-  // codex recheck §1: the check follows queue order — a later row repeating a name an earlier row mints is that citizen's update
-  const w4 = world([]);
-  E.ensureHouseholdQueueSheet_(w4.ctx.ss);
-  const adv4 = w4.sheets.Advancement_Intake1, q4 = adv4.rows[0], c4 = (n) => q4.indexOf(n);
-  const r1 = new Array(q4.length).fill(''); r1[c4('First')] = 'Nova'; r1[c4('Last')] = 'Repeat'; r1[c4('RoleType')] = 'Plumber'; r1[c4('Tier')] = 4; r1[c4('ClockMode')] = 'ENGINE'; r1[c4('BirthYear')] = 1990; r1[c4('Neighborhood')] = 'Temescal';
-  const r2 = new Array(q4.length).fill(''); r2[c4('First')] = 'Nova'; r2[c4('Last')] = 'Repeat'; r2[c4('Tier')] = 3; r2[c4('ClockMode')] = 'Gaem';
-  adv4.appendRow(r1); adv4.appendRow(r2);
-  const before4 = w4.ctx.ledger.rows.length;
-  let err4 = null; try { E.processAdvancementRows_(w4.ctx, 'C' + CYCLE, CYCLE); } catch (e) { err4 = e; }
-  const nova = w4.ctx.ledger.rows.slice(before4);
-  check('a same-batch repeat of a name the queue mints is its update, not refused — one citizen, ENGINE, both rows cleared', !err4 && nova.length === 1 && nova[0][col('ClockMode')] === 'ENGINE' && adv4.cleared.length === 2, (err4 && err4.message) + ' | minted ' + nova.length + ' cleared ' + adv4.cleared.length);
-  // …and the one row the queue order cannot foresee: the earlier same-name row is a family arrival the family door refuses
-  const w5 = world([]);
-  E.ensureHouseholdQueueSheet_(w5.ctx.ss);
-  const adv5 = w5.sheets.Advancement_Intake1, q5 = adv5.rows[0];
-  ['MatchPopId', 'MatchType'].forEach(c => { if (q5.indexOf(c) < 0) q5.push(c); });
-  const c5 = (n) => q5.indexOf(n);
-  const f1 = new Array(q5.length).fill(''); f1[c5('First')] = 'Fay'; f1[c5('Last')] = 'Drip'; f1[c5('Tier')] = 4; f1[c5('ClockMode')] = 'ENGINE'; f1[c5('BirthYear')] = 2000; f1[c5('MatchPopId')] = 'POP-00900'; f1[c5('MatchType')] = 'child';
-  const f2 = new Array(q5.length).fill(''); f2[c5('First')] = 'Fay'; f2[c5('Last')] = 'Drip'; f2[c5('Tier')] = 4; f2[c5('ClockMode')] = 'Gaem'; f2[c5('BirthYear')] = 2000; f2[c5('Neighborhood')] = 'Temescal';
-  adv5.appendRow(f1); adv5.appendRow(f2);
-  const before5 = w5.ctx.ledger.rows.length;
-  let err5 = null; try { E.processAdvancementRows_(w5.ctx, 'C' + CYCLE, CYCLE); } catch (e) { err5 = e; }
-  check('the mint branch keeps its own guard: the family door refuses the first "Fay Drip", the second would mint with "Gaem" — refused, no citizen', !!err5 && /Advancement_Intake row for "Fay Drip" carries ClockMode "Gaem"/.test(err5.message) && !/no row in the queue was processed/.test(err5.message) && w5.ctx.ledger.rows.length === before5, (err5 && err5.message) + ' | minted ' + (w5.ctx.ledger.rows.length - before5));
+  // codex final look §1: every row whose name finds no ledger citizen is checked — a same-batch repeat or a family row the
+  // family door would refuse included — so every refusal is all or nothing. A valid, distinct mint ahead of each case pins it.
+  const refusal = (label, rows, extraCols) => {
+    const w = world([]);
+    E.ensureHouseholdQueueSheet_(w.ctx.ss);
+    const adv = w.sheets.Advancement_Intake1, q = adv.rows[0];
+    (extraCols || []).forEach(c => { if (q.indexOf(c) < 0) q.push(c); });
+    const cq = (n) => q.indexOf(n);
+    const lead = new Array(q.length).fill(''); lead[cq('First')] = 'Lead'; lead[cq('Last')] = 'Ahead'; lead[cq('RoleType')] = 'Plumber'; lead[cq('Tier')] = 4; lead[cq('ClockMode')] = 'ENGINE'; lead[cq('BirthYear')] = 1990; lead[cq('Neighborhood')] = 'Temescal';
+    adv.appendRow(lead);
+    rows.forEach(o => { const r = new Array(q.length).fill(''); Object.keys(o).forEach(k => { r[cq(k)] = o[k]; }); adv.appendRow(r); });
+    const before = w.ctx.ledger.rows.length;
+    let err = null; try { E.processAdvancementRows_(w.ctx, 'C' + CYCLE, CYCLE); } catch (e) { err = e; }
+    check(label, !!err && /no row in the queue was processed/.test(err.message) && w.ctx.ledger.rows.length === before && adv.cleared.length === 0 && w.sheets.LifeHistory_Log.rows.length === 1,
+      (err ? err.message : 'no throw') + ' | minted ' + (w.ctx.ledger.rows.length - before) + ', cleared ' + adv.cleared.length);
+  };
+  refusal('a same-batch repeat carrying "Gaem" is refused with the queue — the mint ahead of it is not made, nothing cleared',
+    [{ First: 'Nova', Last: 'Repeat', RoleType: 'Plumber', Tier: 4, ClockMode: 'ENGINE', BirthYear: 1990, Neighborhood: 'Temescal' }, { First: 'Nova', Last: 'Repeat', Tier: 3, ClockMode: 'Gaem' }]);
+  refusal('a family arrival the family door would refuse, then its name again with "Gaem" — refused up front, no mint ahead of it lands',
+    [{ First: 'Fay', Last: 'Drip', Tier: 4, ClockMode: 'ENGINE', BirthYear: 2000, MatchPopId: 'POP-00900', MatchType: 'child' }, { First: 'Fay', Last: 'Drip', Tier: 4, ClockMode: 'Gaem', BirthYear: 2000, Neighborhood: 'Temescal' }],
+    ['MatchPopId', 'MatchType']);
+  refusal('a lone family row carrying "Gaem" is refused too — the cell is wrong whether or not the family door would take it',
+    [{ First: 'Fay', Last: 'Drip', Tier: 4, ClockMode: 'Gaem', BirthYear: 2000, MatchPopId: 'POP-00900', MatchType: 'child' }], ['MatchPopId', 'MatchType']);
+  check('the mint branch holds no second clock check — the queue-wide one is the only refusal', (src.match(/which is not ENGINE, GAME, CIVIC or MEDIA/g) || []).length === 1);
 }
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed');

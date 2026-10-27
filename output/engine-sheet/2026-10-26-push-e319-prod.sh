@@ -1,6 +1,6 @@
 #!/bin/bash
 # engine.319 PROD push (stage 29): PROD (stage 28, @164) + phase05-citizens/processAdvancementIntake.js at <commit>, which must
-# equal the benched stage byte for byte (<manifest>: stage29c-e319.sha256, bench 1004 round 4, 2026-10-27). Live fire-state gate
+# equal the benched stage byte for byte (<manifest>: stage29d-e319.sha256, bench 1004 round 5, 2026-10-27). Live fire-state gate
 # (shape of push-e318-prod.sh) at <cycle> = the live Cycle now: cycleCount / every Neighborhood_Map Cycle / Riley_Digest last
 # Cycle = <cycle>, no _CycleCheckpoint, no Engine_Errors row stamped <cycle>+1 or later — and, for this file, the
 # Advancement_Intake1 tab identical cell for cell and the Simulation_Ledger row count unchanged (an old-version mint, by a fire or
@@ -18,7 +18,7 @@ PROD_ID=1hL59VnByrXfWdz6EKZZQ1ss8DH1PFfDT9vVDvmjqHY_pwLyTB_N1iKW5
 OUT=/root/GodWorld/output/engine-sheet
 FILE="phase05-citizens/processAdvancementIntake.js"
 [[ "$CYC" =~ ^[0-9]+$ ]] && [ "$CYC" -ge 113 ] || { echo "cycle must be the live Cycle (>= 113) — stop"; exit 1; }
-[ "$(realpath "$MAN")" = "$OUT/stage29c-e319.sha256" ] || { echo "manifest must be the benched stage29c-e319.sha256 — stop"; exit 1; }
+[ "$(realpath "$MAN")" = "$OUT/stage29d-e319.sha256" ] || { echo "manifest must be the benched stage29d-e319.sha256 — stop"; exit 1; }
 git ls-files --error-unmatch "$MAN" >/dev/null 2>&1 && git diff --quiet HEAD -- "$MAN" || { echo "manifest $MAN is not committed as-is — stop"; exit 1; }
 W=$(mktemp -d); mkdir -p "$W/stage" "$W/pullback"
 ( cd "$W/stage" && printf '{"scriptId":"%s","rootDir":""}' "$PROD_ID" > .clasp.json && "$CLASP" pull >/dev/null )
@@ -54,8 +54,10 @@ const hash = x => require("crypto").createHash("sha256").update(JSON.stringify(x
   const qh = q[0] || [], lh = led[0] || [];
   const readOk = ["First", "Last", "ClockMode"].every(c => qh.indexOf(c) >= 0) && ["POPID", "First", "Last", "ClockMode"].every(c => lh.indexOf(c) >= 0) && led.length > 1000;
   if (!readOk) { console.error("Advancement_Intake1 or Simulation_Ledger read without its header or rows (ledger " + (led.length - 1) + ") — stop"); process.exit(2); }
-  // Any old-version run of the queue — a fire or the operator menu path, mint or existing-citizen update — clears the rows
-  // it processed (processAdvancementRowsBody_ rowsToClear), so the queue hash moves; the ledger count catches a mint.
+  // What this gate certifies (codex engine.319 final look §4): no mint across the window — the only outcome that differs
+  // between stage 28 and stage 29 (the existing-citizen branch, media usage, ladder, decay and the doors ahead of the
+  // queue are unchanged), and every mint adds a ledger row. The queue hash adds a stop on any queue row cleared or
+  // edited. It does not certify that no old-version call ran: one that minted nothing behaves as stage 29 would.
   const now = { q: hash(q), qRows: q.length - 1, ledgerRows: led.length - 1 };
   if (!fs.existsSync(process.env.Q_FILE)) fs.writeFileSync(process.env.Q_FILE, JSON.stringify(now));
   const first = JSON.parse(fs.readFileSync(process.env.Q_FILE, "utf8"));

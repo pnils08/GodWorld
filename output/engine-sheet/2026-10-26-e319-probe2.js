@@ -142,7 +142,9 @@ const [mode, leg, flag] = process.argv.slice(2);
       if (got.length !== 1) return;
       if (got[0].RoleType !== q.RoleType) fails.push(q.name + ' RoleType ' + JSON.stringify(got[0].RoleType));
       if (q.Neighborhood && got[0].Neighborhood !== q.Neighborhood) fails.push(q.name + ' Neighborhood ' + JSON.stringify(got[0].Neighborhood));
-      if (got[0].Status !== 'Active' || Number(got[0].Tier) !== 4) fails.push(q.name + ' Status/Tier ' + got[0].Status + '/' + got[0].Tier);
+      // with --dup the repeat row (Tier 3) is the civic citizen's update: intake lifts a Tier, never lowers it (engine.150)
+      const wantTier = (S.dup && q.name === 'Benchprobe Civic-E319') ? 3 : 4;
+      if (got[0].Status !== 'Active' || Number(got[0].Tier) !== wantTier) fails.push(q.name + ' Status/Tier ' + got[0].Status + '/' + got[0].Tier + ' (want Active/' + wantTier + ')');
     });
     if (minted.length !== 13) fails.push('minted ' + minted.length + ' (the C113 start mints 13 with the five)');
     if (S.dup && pending.indexOf('Benchprobe Civic-E319') >= 0) fails.push('the repeat row was not processed');

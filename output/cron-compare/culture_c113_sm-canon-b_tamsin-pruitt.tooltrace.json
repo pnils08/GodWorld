@@ -1,0 +1,46 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Maren Johns"
+      },
+      "resultChars": 551,
+      "resultHead": "[C112 · daily · Tamsin Pruitt] Maren Johns retired from work as a psychotherapist in Rockridge. The adjustment came in small steps. \"I've been getting used to not having patients to see,\" Johns said. \"It's been a bit of an adjustment. I did help paint over some graffiti on the recreation center wall with some neighbors recently.\" Antoine Vermeer retired from work as Senior Pastor at Lake Merritt. The change left open hours. \"To be honest, I'm still figuring out my plans after retiring as Senior Pastor,\" Vermeer said. \"It's been a big change for "
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Alicia Hernandez"
+      },
+      "resultChars": 192,
+      "resultHead": "No published piece from before C113 came back for \"Alicia Hernandez\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Manfred Owens"
+      },
+      "resultChars": 189,
+      "resultHead": "No published piece from before C113 came back for \"Manfred Owens\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "Ross Cabral"
+      },
+      "resultChars": 537,
+      "resultHead": "[C100 · edition] Contract Efficiency Analysis: • Years 1-3: Overpay by $8M annually (fair value: $24M for this production) • Years 4-5: Potentially neutral if development continues • Years 6-7: High risk of negative value (age 31-32 locked at $32M) Oakland is betting Tavares develops like Isley Kelley did (signed at 25, became perennial All-Star). But Kelley hit .242 in his acquisition year with superior defensive metrics. Tavares hit .237 with average defense. The Mariano Rosales Trade (February 22nd): Trading a proven 5x All-Star"
+    },
+    {
+      "tool": "canon_recall",
+      "input": {
+        "query": "UNDOCKED Baylight District"
+      },
+      "resultChars": 202,
+      "resultHead": "No published piece from before C113 came back for \"UNDOCKED Baylight District\". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not."
+    }
+  ],
+  "ranAt": "2026-10-27T06:08:57.621Z"
+}

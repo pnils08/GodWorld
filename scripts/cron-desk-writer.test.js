@@ -189,3 +189,38 @@ console.log('cron-desk-writer pipeline.77 rubric tests: PASS');
   assert.deepStrictEqual(threadFor('TEST-ONLY Nobody Atall'), []);
 }
 console.log('cron-desk-writer pipeline.89 seat-frame tests: PASS');
+
+// pipeline.89 cut 3 — canon_recall: before-cycle only, no lore, term guard, dedupe, honest empty (stubbed search, TEST-ONLY docs)
+(async () => {
+  const smPath = require.resolve('../lib/supermemory');
+  const real = require.cache[smPath];
+  const long = t => t + ' ' + 'filler words for the test chunk '.repeat(8);
+  const doc = (id, title, cycle, text, extra) => Object.assign({ documentId: id, title, metadata: { title, cycle, type: 'edition' }, chunks: [{ isRelevant: true, content: long(text) }] }, extra || {});
+  const docs = [
+    doc('d1', 'TEST-ONLY Edition 90', 90, 'Quillon Marsh opened a stall on the TEST-ONLY corner.'),
+    doc('d1', 'TEST-ONLY Edition 90', 90, 'Quillon Marsh duplicate document id.'),
+    doc('d2', 'TEST-ONLY Edition 113', 113, 'Quillon Marsh this very cycle — must not come back.'),
+    doc('d3', 'TEST-ONLY Lore 105', 105, 'Quillon Marsh lore deep-dive.', { metadata: { title: 'TEST-ONLY Lore 105', cycle: 105, type: 'lore' } }),
+    doc('d4', 'TEST-ONLY Edition 80', 80, 'Nothing about the queried person at all, just a nearest neighbour.'),
+    doc('d5', 'TEST-ONLY Edition 70', 70, '### ## ---'),
+  ];
+  let seenOpts = null;
+  require.cache[smPath] = { id: smPath, filename: smPath, loaded: true, exports: { search: async (q, o) => { seenOpts = o; return q.includes('Nobody') ? [] : docs; } } };
+  const prevKey = process.env.SUPERMEMORY_CC_API_KEY;
+  process.env.SUPERMEMORY_CC_API_KEY = 'TEST-ONLY-key';
+  try {
+    const { toolCanonRecall } = require('./cron-desk-writer');
+    const out = await toolCanonRecall({ query: 'Quillon Marsh' }, 113);
+    assert.deepStrictEqual(seenOpts.containerTags, ['bay-tribune']);       // published pieces only — never world-data
+    assert.strictEqual(out.split('\n').length, 1, 'one piece: dup, same-cycle, lore, off-topic and header-only chunks are dropped');
+    assert.match(out, /^\[C90 · edition\] Quillon Marsh opened a stall/);
+    assert.match(await toolCanonRecall({ query: 'Nobody Atall' }, 113), /No published piece from before C113 .* not proof/);
+    assert.match(await toolCanonRecall({ query: '  ' }, 113), /empty query/);
+    delete process.env.SUPERMEMORY_CC_API_KEY;
+    assert.match(await toolCanonRecall({ query: 'Quillon Marsh' }, 113), /unavailable: no Supermemory key/);
+  } finally {
+    if (prevKey === undefined) delete process.env.SUPERMEMORY_CC_API_KEY; else process.env.SUPERMEMORY_CC_API_KEY = prevKey;
+    if (real) require.cache[smPath] = real; else delete require.cache[smPath];
+  }
+  console.log('cron-desk-writer pipeline.89 canon_recall tests: PASS');
+})().catch(e => { console.error(e); process.exit(1); });

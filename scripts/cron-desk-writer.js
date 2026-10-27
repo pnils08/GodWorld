@@ -841,9 +841,62 @@ async function toolMemoryNote(popId, input, cycle) {
   } catch (e) { return '(note failed: ' + e.message + ')'; }
 }
 
+// pipeline.89 cut 3 — canon_recall (builder 2026-10-27: "the world doesn't know itself until they get access
+// to canon"). What the Tribune has already PUBLISHED on a person, place or topic, read from the bay-tribune
+// Supermemory container (editions, supplementals, gate-passed daily pieces). world-data is left out on
+// purpose: its old cards read as current when a query names no cycle. TEST-ONLY: the flag needs a
+// `sm-canon` artifact tag and --packet-only, so no scheduled run can switch it on until the builder accepts it.
+const CANON_RECALL = process.argv.includes('--canon-recall');
+const OWN_TOOL_SEATS = ['elliot-marbury', 'hal-richmond', 'anthony-raines'];
+const RECALL_ONLY = CANON_RECALL && !OWN_TOOL_SEATS.includes(PERSONA);   // a seat with no tools of its own gets this one alone
+let CANON_RECALL_CYCLE = null;                                          // the cycle being written; set in main
+const CANON_RECALL_TOOL = { type: 'function', function: { name: 'canon_recall', description: 'What the Tribune has already published on a person, place or topic: editions, supplementals and daily pieces from earlier cycles, each labeled with its cycle. Search a name or a place.', parameters: { type: 'object', properties: { query: { type: 'string', description: 'a person, place or topic, e.g. "Alicia Hernandez" or "Uptown coffee roaster"' } }, required: ['query'] } } };
+const RECALL_BLOCK = '\n\n=== YOUR TOOLS — WHAT THE PAPER HAS ALREADY PUBLISHED' + (RECALL_ONLY ? '' : ' (added)') + ' ===\n' +
+  '- canon_recall(query): what the Tribune has already published on a person, place or topic, each piece labeled with its cycle. Search the name of every person and the place you are about to write.\n' +
+  'A published piece is canon: build on it, do not contradict it, and do not repeat it — if the paper already said it, move the story forward from there. Name the cycle when you lean on one ("the paper\'s C99 coverage"); never an edition number. Only a piece\'s facts carry forward, not its quoted words or its scene. An empty answer does not prove the paper never covered it.\n' +
+  '=== END TOOLS ===';
+const RECALL_KICKOFF = 'Before you write each person or place, ask the paper what it has already published about them (canon_recall), then move the story forward from there — naming each cycle you lean on. ';
+async function toolCanonRecall(input, cycleNow) {
+  const q = String(input && input.query || '').trim();
+  if (!q) return '(empty query)';
+  const key = process.env.SUPERMEMORY_CC_API_KEY || '';
+  if (!key) return '(canon_recall unavailable: no Supermemory key in this run — say nothing about what the paper has or has not published)';
+  const now = cycleNow !== undefined ? cycleNow : CANON_RECALL_CYCLE;
+  const raw = await require('../lib/supermemory').search(q, { containerTags: ['bay-tribune'], limit: 16, timeoutMs: 15000, apiVersion: 'v3', apiKey: key });
+  // Supermemory is semantic and always answers; a name the paper never printed would come back as its nearest
+  // neighbours. A result counts only if its text carries the query's own terms (all of a name, 60% of a topic).
+  const STOP = new Set(['the', 'and', 'for', 'with', 'from', 'that', 'this', 'about', 'what', 'where', 'into', 'over']);
+  const terms = Array.from(new Set(q.toLowerCase().split(/[^a-z0-9']+/).filter(t => t.length >= 3 && !STOP.has(t))));
+  const need = terms.length <= 3 ? terms.length : Math.ceil(terms.length * 0.6);
+  const seen = new Set(), out = [];
+  for (const x of raw || []) {
+    const m = x.metadata || {};
+    const title = String(m.title || x.title || '');
+    if (m.type === 'lore' || /Lore \d+/.test(title)) continue;                 // lore deep-dives are not the paper
+    let c = Number(m.cycle);
+    if (!Number.isFinite(c)) { const t = title.match(/(?:Edition|Supplemental)\s+(\d+)/i) || title.match(/_c(\d{2,3})_/); c = t ? Number(t[1]) : null; }
+    if (c != null && now != null && c >= now) continue;                       // before the cycle being written, so a rerun never reads its own piece
+    if (seen.has(x.documentId)) continue;
+    const chunks = (x.chunks || []).filter(k => k.isRelevant);
+    const text = (chunks.length ? chunks : (x.chunks || []).slice(0, 1)).map(k => String(k.content || '')).join(' ')
+      .replace(/[#*_|>-]{2,}/g, ' ').replace(/\s+/g, ' ').trim();
+    if ((text.match(/[A-Za-z]/g) || []).length < 80) continue;                 // skip rule-line and header-only chunks
+    const low = text.toLowerCase();
+    if (terms.length && terms.filter(t => low.includes(t)).length < need) continue;   // nearest-neighbour noise, not coverage
+    seen.add(x.documentId);
+    const kind = m.source === 'saturday-sweep' ? 'daily' : (m.type || 'piece');
+    const by = m.source === 'saturday-sweep' && m.byline ? ' · ' + m.byline : '';
+    out.push('[' + (c != null ? 'C' + c : 'earlier') + ' · ' + kind + by + '] ' + text.slice(0, 520));
+    if (out.length >= 6) break;
+  }
+  if (!out.length) return 'No published piece from before C' + now + ' came back for "' + q + '". That is not proof the paper never covered it (an empty answer can also be a failed lookup) — do not write that it did not.';
+  return cap(out.join('\n'), 5000);
+}
+
 async function execOpenRouterTool(name, input, memCtx) {
   if (name === 'dossier_read') return toolDossierRead(input);
   if (name === 'memory_note' && memCtx && memCtx.dryNote) return 'noted (test run — not saved): ' + String(input && input.note || '').slice(0, 200);
+  if (name === 'canon_recall') return toolCanonRecall(input);
   if (name === 'canon_search') return toolSearchWorld({ query: input.query });
   if (name === 'citizen_lookup') return toolCitizenLookup(input);
   if (name === 'sheet_read') return toolSheetRead(input);
@@ -965,7 +1018,10 @@ async function main() {
   }
   // codex pipeline.76 #1: the exception is bound here too, not only in the runner — the persona's
   // own package must grant at least this many calls.
-  if (WRITER_TOOLS) {
+  if (CANON_RECALL && (!PACKET_ONLY || !WRITER_TOOLS || !/^sm-canon(-[a-z0-9-]*)?$/.test(ARTIFACT_TAG || ''))) {
+    throw new Error('--canon-recall is the pipeline.89 test run: it requires --packet-only, --writer-tools and --artifact-tag sm-canon[-...]');
+  }
+  if (WRITER_TOOLS && !CANON_RECALL) {   // the test run is tag-bound above and bypasses the package grant
     const pkg = PERSONA ? require('./newsroomWakePackages').packageForAssignment({ persona: PERSONA }) : null;
     const granted = pkg && pkg.writerTools && pkg.writerTools.maxToolCalls || 0;
     if (granted < WRITER_TOOLS) throw new Error('--writer-tools ' + WRITER_TOOLS + ' not granted by the ' + (PERSONA || 'unnamed') + ' package');
@@ -1002,6 +1058,7 @@ async function main() {
   }
 
   const cycle = detectCycle();
+  CANON_RECALL_CYCLE = Number.isFinite(Number(cycle)) ? Number(cycle) : null;
   // Firebrand lane (S332): a persona loads the reporter's adversarial STANCE
   // (IDENTITY+LENS+RULES) — the teeth — instead of the desk's roundup skill.
   const skill = PERSONA
@@ -1254,8 +1311,9 @@ async function main() {
             'Every number you bring in from a tool is printed exactly as the tool returned it and named to its source ("his TrueSource card", "his Statcast card", "the feed"). Do no arithmetic on it. A method shapes the argument; it never invents a figure.\n' +
             '=== END TOOLS ==='
           : '') +
-        (WRITER_TOOLS && SEAT_TOOL_FRAMES[PERSONA] ? seatToolsBlock(PERSONA, WRITER_TOOLS) : '') +
-        (WRITER_TOOLS && PERSONA !== 'hal-richmond' && PERSONA !== 'anthony-raines' && !SEAT_TOOL_FRAMES[PERSONA]
+        (WRITER_TOOLS && SEAT_TOOL_FRAMES[PERSONA] && !RECALL_ONLY ? seatToolsBlock(PERSONA, WRITER_TOOLS) : '') +
+        (WRITER_TOOLS && CANON_RECALL ? RECALL_BLOCK : '') +
+        (WRITER_TOOLS && PERSONA !== 'hal-richmond' && PERSONA !== 'anthony-raines' && !SEAT_TOOL_FRAMES[PERSONA] && !RECALL_ONLY
           ? '\n\n=== YOUR TOOLS — DEPTH, NOT A NEW STORY (up to ' + WRITER_TOOLS + ' calls, read-only) ===\n' +
             'The slice is your story and your claim. The tools are for depth: another season, a third peer, prior coverage, a current feed line. A tool call never changes the assignment.\n' +
             '- dossier_read(player, season?): a player\'s season lines and the rates already worked from them — use it for another season or another peer at the position.\n' +
@@ -1346,18 +1404,19 @@ async function main() {
           : 'You are this journalist in GodWorld this cycle. The Packet facts are the physics — what the engine did. The Article is someone living under that physics. Open on a named interviewed person or a Packet-named place, in a body, doing something. Use every approved quote as spoken speech in a scene, not as a caption under a recap. Never announce the season or the temperature; if it is winter, show a Packet-backed thing that moved on a day like this. Never lead with a tracker phase, a feed label, a bullet list of approved facts, or the words supplied record / listed as / what remains to be learned. Do not import real-world Oakland winter tropes the Packet did not name. Do not invent names, numbers, quotes, or events. Texture may only dress Packet-named places and approved speakers. If you cannot write the life, stop. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. ')
         : 'Use your tools FIRST where the state runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ') +
       (TOOLS_AB ? 'Use your tools where the Packet runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ' : '') +
-      (WRITER_TOOLS ? (SEAT_TOOL_FRAMES[PERSONA] ? SEAT_TOOL_FRAMES[PERSONA].kickoff : PERSONA === 'hal-richmond'
+      (WRITER_TOOLS ? (RECALL_ONLY ? RECALL_KICKOFF : SEAT_TOOL_FRAMES[PERSONA] ? SEAT_TOOL_FRAMES[PERSONA].kickoff : PERSONA === 'hal-richmond'
         ? 'The slice is the story. Before you write, open the archive — the man\'s origins and prior coverage by name, his dossier across the years — then compose, naming each tool-fetched fact to its source. '
         : PERSONA === 'anthony-raines'
         ? 'The slice is the story. Before you write, pull the board — the player\'s TrueSource card, a peer\'s, his Statcast card if the archive holds one, this cycle\'s feed line — then compose, naming each tool-fetched number to its source. '
         : 'The slice is the story. Before you write, use your tools for depth the slice does not hold — another season, a third peer, what the paper said before — then compose, citing each tool-fetched number to its source. ') : '') +
+      (CANON_RECALL && !RECALL_ONLY ? RECALL_KICKOFF : '') +
       priorArcFinal + strictSourceFinal + ' Output ONLY the section.';
     const abPop = TOOLS_AB && packetState && packetState.actor && /^POP-\d+$/.test(packetState.actor.id) ? packetState.actor.id : null;
     const r = await openRouterToolLoop({ model: MODEL, system, user: composeUser,
       maxToolCalls: PACKET_ONLY && !TOOLS_AB ? WRITER_TOOLS : 6,
       traceResults: TOOLS_AB || WRITER_TOOLS > 0,
       keepResults: WRITER_TOOLS > 0,
-      ...(WRITER_TOOLS ? { toolset: OPENROUTER_TOOLS.concat([DOSSIER_TOOL]) } : {}),
+      ...(WRITER_TOOLS ? { toolset: RECALL_ONLY ? [CANON_RECALL_TOOL] : OPENROUTER_TOOLS.concat([DOSSIER_TOOL]).concat(CANON_RECALL ? [CANON_RECALL_TOOL] : []) } : {}),
       forceFirstTool: TOOLS_FORCED,
       memCtx: BYLINE_POPID ? { popId: BYLINE_POPID, cycle }
         : (abPop ? { popId: abPop, cycle, dryNote: true } : null) });
@@ -1550,6 +1609,7 @@ if (require.main === module) {
 module.exports = {
   toolDossierRead, // pipeline.76
   toolSheetRead,
+  toolCanonRecall,
   toolCitizenLookup,
   SEAT_TOOL_FRAMES,
   seatToolsBlock,

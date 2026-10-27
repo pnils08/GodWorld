@@ -793,14 +793,17 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
   // before any queue row is touched. Every refusal is then all or nothing (codex diff gate §1, final look §1: a
   // queue-order exemption cannot be atomic once the family door refuses an earlier same-name row). A name with a
   // ledger citizen (or an ambiguous one, skipped) never reads the cell and is never refused for it.
+  // engine.320: the off-map hood refusal is the same check on the same rows — it threw at the mint, mid-pass, so the
+  // mints ahead of it stayed in the ledger with every queue row uncleared and re-ran next Cycle as existing bumps.
   for (var pv = 1; pv < intakeData.length; pv++) {
     var pvFirst = iFirst >= 0 ? String(intakeData[pv][iFirst] || '').trim() : '';
     var pvLast = iLast >= 0 ? String(intakeData[pv][iLast] || '').trim() : '';
     if (!pvFirst && !pvLast) continue;
     if ((advNameIndex[normalizeCitizenName_(pvFirst) + ' ' + normalizeCitizenName_(pvLast)] || []).length) continue;
     var pvRaw = iClockMode >= 0 ? String(intakeData[pv][iClockMode] || '').trim() : '';
-    if (!pvRaw || MINT_CLOCK_MODES_[pvRaw.toUpperCase()]) continue;
-    throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + pvFirst + ' ' + pvLast + '" carries ClockMode "' + pvRaw + '", which is not ENGINE, GAME, CIVIC or MEDIA — fix the cell (no row in the queue was processed).');
+    if (pvRaw && !MINT_CLOCK_MODES_[pvRaw.toUpperCase()]) throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + pvFirst + ' ' + pvLast + '" carries ClockMode "' + pvRaw + '", which is not ENGINE, GAME, CIVIC or MEDIA — fix the cell (no row in the queue was processed).');
+    var pvHood = iNeighborhood >= 0 ? String(intakeData[pv][iNeighborhood] || '').trim() : '';
+    if (pvHood && !resolveHoodOrChild_(ctx, pvHood)) throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + pvFirst + ' ' + pvLast + '" names neighborhood "' + pvHood + '", which is not on Neighborhood_Map (ADR-0016) — fix the cell (no row in the queue was processed).');
   }
 
   for (var i = 1; i < intakeData.length; i++) {
@@ -970,12 +973,12 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
       var age = simYearOf_(ctx, cycle) - birthYear;
       var rawNbhd = (iNeighborhood >= 0) ? String(row[iNeighborhood] || '').trim() : '';
       // engine.148 P3: the door folds an authored hood to the map (child area →
-      // parent) and refuses a name that is not on it — every Phase-5 texture
-      // engine now throws on an off-map ledger hood, so the typo stops here,
-      // naming the intake row, instead of dropping seven engines next cycle.
+      // parent) — every Phase-5 texture engine throws on an off-map ledger hood.
+      // engine.320: a name not on the map was refused for the whole queue above;
+      // a null here means that check was bypassed, never a drawn hood.
       if (rawNbhd) {
         var foldedNbhd = resolveHoodOrChild_(ctx, rawNbhd);
-        if (!foldedNbhd) throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + first + ' ' + last + '" names neighborhood "' + rawNbhd + '", which is not on Neighborhood_Map (ADR-0016) — fix the cell.');
+        if (!foldedNbhd) throw new Error('processAdvancementIntake_: "' + first + ' ' + last + '" reached the mint with neighborhood "' + rawNbhd + '" off Neighborhood_Map — the queue check above was bypassed (engine.320).');
         rawNbhd = foldedNbhd;
       }
       var profile = deriveCitizenProfile_(seed, age, rawNbhd, ledgerFreq, {

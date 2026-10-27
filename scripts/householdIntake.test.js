@@ -22,7 +22,7 @@ const sandbox = {
   queueCellIntent_: () => {},
   recordRipple_: () => {},
   inWorldStamp_: () => 'Y3C2',
-  jobReferencePay_: (role) => (role === 'student' ? null : 61000),
+  jobReferencePay_: (role) => { if (role === 'Breaker Probe') throw new Error('mid-pass breaker'); return role === 'student' ? null : 61000; }, // engine.320: the hood refusal moved ahead of the loop, so section 8 breaks mid-pass here
   estimateRent_: (hood) => (hood === 'Temescal' ? 2200 : 1900),
   inferSexFromFirstName_: (f) => ({ marcus: 'male', dana: 'female', theo: 'male', ivy: 'female', rosa: 'female' }[String(f).toLowerCase()] || ''),
   getCoreSimNeighborhoods_: () => ['Temescal'],
@@ -316,19 +316,19 @@ console.log('\n8. engine.279 — the pass logs once and reads Generic_Citizens o
   let terr = null; try { E.processAdvancementRows_(t.ctx, 'C' + CYCLE, CYCLE); } catch (e) { terr = e; }
   check('a log write that landed and still threw is not written again', !!terr && /timed out/.test(terr.message) && t.sheets.LifeHistory_Log.writes.length === 1 && t.sheets.LifeHistory_Log.rows.length === 1 + 11 && t.sheets.Advancement_Intake1.cleared.length === 0, (terr && terr.message) + ' | writes ' + t.sheets.LifeHistory_Log.writes.length + ' rows ' + t.sheets.LifeHistory_Log.rows.length);
 
-  // The body throws mid-pass (an off-map hood on the last row): the lines buffered before it still land, and the body's error is thrown.
-  const badRow = (w) => { const adv = w.sheets.Advancement_Intake1, qh = adv.rows[0], qc = (n) => qh.indexOf(n); const r = new Array(qh.length).fill(''); r[qc('First')] = 'Lost'; r[qc('Last')] = 'Soul'; r[qc('Tier')] = 4; r[qc('ClockMode')] = 'ENGINE'; r[qc('BirthYear')] = 1990; r[qc('Neighborhood')] = 'Atlantis'; adv.appendRow(r); };
+  // The body throws mid-pass (a mint whose pay lookup throws, on the last row): the lines buffered before it still land, and the body's error is thrown.
+  const badRow = (w) => { const adv = w.sheets.Advancement_Intake1, qh = adv.rows[0], qc = (n) => qh.indexOf(n); const r = new Array(qh.length).fill(''); r[qc('First')] = 'Lost'; r[qc('Last')] = 'Soul'; r[qc('RoleType')] = 'Breaker Probe'; r[qc('Tier')] = 4; r[qc('ClockMode')] = 'ENGINE'; r[qc('BirthYear')] = 1990; r[qc('Neighborhood')] = 'Temescal'; adv.appendRow(r); };
   const b = build(); badRow(b);
   let berr = null; try { E.processAdvancementRows_(b.ctx, 'C' + CYCLE, CYCLE); } catch (e) { berr = e; }
   const blog = b.sheets.LifeHistory_Log;
-  check('a body throw still lands the lines buffered before it, in one write', !!berr && /Atlantis/.test(berr.message) && blog.writes.length === 1 && blog.rows.length === 1 + 10 && blog.rows[1][2] === 'Marcus Bell' && blog.rows[10][2] === 'Jonah Pike', (berr && berr.message) + ' | rows ' + blog.rows.length);
+  check('a body throw still lands the lines buffered before it, in one write', !!berr && /mid-pass breaker/.test(berr.message) && blog.writes.length === 1 && blog.rows.length === 1 + 10 && blog.rows[1][2] === 'Marcus Bell' && blog.rows[10][2] === 'Jonah Pike', (berr && berr.message) + ' | rows ' + blog.rows.length);
   check('…and no queue row was cleared', b.sheets.Advancement_Intake1.cleared.length === 0);
 
   // Both fail: the body's error is the one thrown.
   const d = build(); badRow(d);
   d.sheets.LifeHistory_Log.failWrites = true;
   let derr = null; try { E.processAdvancementRows_(d.ctx, 'C' + CYCLE, CYCLE); } catch (e) { derr = e; }
-  check('body throw and log failure together: the body\'s error is thrown, not the write\'s', !!derr && /Atlantis/.test(derr.message) && !/injected/.test(derr.message), derr && derr.message);
+  check('body throw and log failure together: the body\'s error is thrown, not the write\'s', !!derr && /mid-pass breaker/.test(derr.message) && !/injected/.test(derr.message), derr && derr.message);
 }
 
 console.log('\n9. engine.278 — the minted row carries the pick (field employer, sentinel, tag):');
@@ -436,6 +436,48 @@ console.log('\n10. engine.319 — the clock is folded at the door and places the
   refusal('a lone family row carrying "Gaem" is refused too — the cell is wrong whether or not the family door would take it',
     [{ First: 'Fay', Last: 'Drip', Tier: 4, ClockMode: 'Gaem', BirthYear: 2000, MatchPopId: 'POP-00900', MatchType: 'child' }], ['MatchPopId', 'MatchType']);
   check('the mint branch holds no second clock check — the queue-wide one is the only refusal', (src.match(/which is not ENGINE, GAME, CIVIC or MEDIA/g) || []).length === 1);
+}
+
+console.log('\n11. engine.320 — an off-map hood refuses the whole queue up front, as the clock does:');
+{
+  // C113-era shape: the hood threw at the mint, mid-pass — the mints ahead of it stayed in the ledger, no queue row cleared,
+  // and they re-ran next Cycle as existing-citizen bumps. Now the same rows the clock check reads are checked for the hood.
+  const queue = (rows, extraCols) => {
+    const w = world([]);
+    E.ensureHouseholdQueueSheet_(w.ctx.ss);
+    const adv = w.sheets.Advancement_Intake1, q = adv.rows[0];
+    (extraCols || []).forEach(c => { if (q.indexOf(c) < 0) q.push(c); });
+    const cq = (n) => q.indexOf(n);
+    rows.forEach(o => { const r = new Array(q.length).fill(''); Object.keys(o).forEach(k => { r[cq(k)] = o[k]; }); adv.appendRow(r); });
+    const before = w.ctx.ledger.rows.length;
+    let err = null; try { E.processAdvancementRows_(w.ctx, 'C' + CYCLE, CYCLE); } catch (e) { err = e; }
+    return { w, adv, err, minted: w.ctx.ledger.rows.length - before };
+  };
+  const lead = { First: 'Lead', Last: 'Ahead', RoleType: 'Plumber', Tier: 4, ClockMode: 'ENGINE', BirthYear: 1990, Neighborhood: 'Temescal' };
+  const refused = (label, rows, extraCols) => {
+    const r = queue([lead].concat(rows), extraCols);
+    check(label, !!r.err && /names neighborhood "Atlantis", which is not on Neighborhood_Map \(ADR-0016\) — fix the cell \(no row in the queue was processed\)/.test(r.err.message) && r.minted === 0 && r.adv.cleared.length === 0 && r.w.sheets.LifeHistory_Log.rows.length === 1,
+      (r.err ? r.err.message : 'no throw') + ' | minted ' + r.minted + ', cleared ' + r.adv.cleared.length + ', log ' + (r.w.sheets.LifeHistory_Log.rows.length - 1));
+  };
+  refused('a typo hood behind a valid mint: the whole queue is refused, naming the row — the mint ahead is not made, nothing cleared, no log line',
+    [{ First: 'Nadia', Last: 'Okafor', Tier: 4, ClockMode: 'ENGINE', BirthYear: 1991, Neighborhood: 'Atlantis' }]);
+  refused('a same-batch repeat carrying a typo hood is refused with the queue (the clock rule\'s shape)',
+    [{ First: 'Nova', Last: 'Repeat', RoleType: 'Plumber', Tier: 4, ClockMode: 'ENGINE', BirthYear: 1990, Neighborhood: 'Temescal' }, { First: 'Nova', Last: 'Repeat', Tier: 3, ClockMode: 'ENGINE', Neighborhood: 'Atlantis' }]);
+  refused('a lone family row carrying a typo hood is refused too, whether or not the family door would take it',
+    [{ First: 'Fay', Last: 'Drip', Tier: 4, ClockMode: 'ENGINE', BirthYear: 2000, Neighborhood: 'Atlantis', MatchPopId: 'POP-00900', MatchType: 'child' }], ['MatchPopId', 'MatchType']);
+  const both = queue([lead, { First: 'Gwen', Last: 'Typo', Tier: 4, ClockMode: 'Gaem', BirthYear: 1991, Neighborhood: 'Atlantis' }]);
+  check('a row wrong on both cells is refused once, for its clock', !!both.err && /carries ClockMode "Gaem"/.test(both.err.message) && both.minted === 0, both.err && both.err.message);
+  const kid = queue([lead, { First: 'Kit', Last: 'Child', RoleType: 'Plumber', Tier: 4, ClockMode: 'ENGINE', BirthYear: 1992, Neighborhood: 'old oakland' }]);
+  check('a child area passes the check and folds to its parent; the queue processes and clears', !kid.err && kid.minted === 2 && kid.w.ctx.ledger.rows[kid.w.ctx.ledger.rows.length - 1][col('Neighborhood')] === 'Downtown' && kid.adv.cleared.length === 2,
+    (kid.err && kid.err.message) + ' | minted ' + kid.minted + ', cleared ' + kid.adv.cleared.length);
+  const w4 = world([], { extraRows: [slRow({ POPID: 'POP-00951', First: 'Ida', Last: 'Known', Tier: 4, ClockMode: 'ENGINE', Status: 'Active', BirthYear: 1980, Neighborhood: 'Temescal' })] });
+  E.ensureHouseholdQueueSheet_(w4.ctx.ss);
+  const adv4 = w4.sheets.Advancement_Intake1, q4 = adv4.rows[0], c4 = (n) => q4.indexOf(n);
+  const usage4 = new Array(q4.length).fill(''); usage4[c4('First')] = 'Ida'; usage4[c4('Last')] = 'Known'; usage4[c4('Tier')] = 3; usage4[c4('ClockMode')] = 'ENGINE'; usage4[c4('Neighborhood')] = 'Atlantis';
+  adv4.appendRow(usage4);
+  let err4 = null; try { E.processAdvancementRows_(w4.ctx, 'C' + CYCLE, CYCLE); } catch (e) { err4 = e; }
+  check('an existing citizen\'s row ignores the hood cell, as before (it never sets the hood)', !err4 && w4.ctx.ledger.rows.find(r => r[col('POPID')] === 'POP-00951')[col('Neighborhood')] === 'Temescal' && adv4.cleared.length === 1, err4 && err4.message);
+  check('the queue-wide check is the only hood refusal; the mint keeps a bypass guard, never a drawn hood', (src.match(/which is not on Neighborhood_Map \(ADR-0016\)/g) || []).length === 1 && /reached the mint with neighborhood .* the queue check above was bypassed \(engine\.320\)/.test(src));
 }
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed');

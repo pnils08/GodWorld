@@ -66,7 +66,7 @@ const [mode, leg, flag] = process.argv.slice(2);
     console.log(fails.length ? 'FAIL ' + fails.join(' | ') : 'PASS — ' + leg + ' vs ' + flag + ': every minted column, every Employee_Count, every Ripple_Ledger row, every Generic_Citizens flip and the queue equal outside the five');
     process.exit(fails.length ? 1 : 0);
   }
-  if (!/^[A-Z][0-9]?$/.test(String(leg || ''))) throw new Error('usage: lay <leg> [--badclock] | check <leg> [--expect|--expect-badclock] | compare <A> <B>');
+  if (!/^[A-Z][0-9]?[a-z]?$/.test(String(leg || ''))) throw new Error('usage: lay <leg> [--badclock] | check <leg> [--expect|--expect-badclock] | compare <A> <B>');
   const SNAP = O + '2026-10-26-e319-r2-lay-' + leg + '.json';
   const adv = await get('Advancement_Intake1'), h = adv[0];
   const ac = n => { const i = h.indexOf(n); if (i < 0) throw new Error('intake: no ' + n + ' column'); return i; };

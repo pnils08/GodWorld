@@ -1,0 +1,7 @@
+Business_Ledger rows 283
+pool membership changed (old → new): 3
+  BIZ-00008 Gridiron Analytics [Sports Analytics] null → Tech & Innovation
+  BIZ-00041 Green & Gold Tavern [Sports Bar & Dining] null → Food & Culture
+  BIZ-00274 Coliseum Corner Sports Bar [Sports Bar & Grill] null → Food & Culture
+news outlets: BIZ-00018, BIZ-00099, BIZ-00183, BIZ-00184
+  [Media & Journalism] BIZ-00018 Bay Tribune; BIZ-00099 OakTown Echo; BIZ-00183 Bayline 6; BIZ-00184 Oakland 12

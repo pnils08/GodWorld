@@ -215,7 +215,8 @@ check('8.18 a CIVIC title the mapping names still goes there', pick2('Police Chi
 check('8.19 a CIVIC title with no field (a union rep) stays UNTRACKED — the City is not their payroll', pick2('Bay Area Tenants Union Rep', 'Fruitvale', 'CIVIC').sentinel === 'UNTRACKED');
 check('8.20 the same title on an ENGINE row still draws its field', pick2('Chief Legal Counsel', 'Downtown', 'ENGINE').bizId === 'BIZ-00237');
 const cityFull = (id) => id !== 'BIZ-00017' && room2(id);
-check('8.21 City of Oakland with no room → the field draw, as any full employer', ['BIZ-00017', ''].indexOf(pick2('Redevelopment Board', 'Temescal', 'CIVIC', 's', cityFull).bizId) < 0);
+const civFull = pick2('Redevelopment Board', 'Temescal', 'CIVIC', 's', cityFull);
+check('8.21 City of Oakland with no room → the field draw, as any full employer', !!civFull.bizId && civFull.bizId !== 'BIZ-00017' && pool2.fieldById[civFull.bizId] === 'Government & Civic', JSON.stringify(civFull));
 // parity
 check('8.22 the CIVIC default is the mapping\'s Government & Civic category default', E.MINT_CIVIC_EMPLOYER_ === mapping.categoryDefaults['Government & Civic'], mapping.categoryDefaults['Government & Civic']);
 const rosterSrc = R('scripts/linkCitizensToEmployers.js');

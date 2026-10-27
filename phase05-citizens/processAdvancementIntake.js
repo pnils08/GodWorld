@@ -787,6 +787,20 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
   var householdMints = {}; // engine.109: HouseholdKey -> { head, members[] } minted this pass
   var ownerMints = []; // engine.96 Task 12: rows queued with OwnerOfBizId minted this pass
 
+  // engine.319: the clock routes a new citizen to their event kind and their employer. A row that would mint
+  // (its name finds no ledger citizen) carrying a clock outside the four is refused for the whole queue, naming
+  // the row, before any row is touched (codex diff gate §1: a throw mid-pass left earlier mints committed and
+  // their queue rows uncleared). An existing citizen's row, or an ambiguous name (skipped), never reads the cell.
+  for (var pv = 1; pv < intakeData.length; pv++) {
+    var pvFirst = iFirst >= 0 ? String(intakeData[pv][iFirst] || '').trim() : '';
+    var pvLast = iLast >= 0 ? String(intakeData[pv][iLast] || '').trim() : '';
+    if (!pvFirst && !pvLast) continue;
+    var pvRaw = iClockMode >= 0 ? String(intakeData[pv][iClockMode] || '').trim() : '';
+    if (!pvRaw || MINT_CLOCK_MODES_[pvRaw.toUpperCase()]) continue;
+    if ((advNameIndex[normalizeCitizenName_(pvFirst) + ' ' + normalizeCitizenName_(pvLast)] || []).length) continue;
+    throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + pvFirst + ' ' + pvLast + '" carries ClockMode "' + pvRaw + '", which is not ENGINE, GAME, CIVIC or MEDIA — fix the cell (no row in the queue was processed).');
+  }
+
   for (var i = 1; i < intakeData.length; i++) {
     var row = intakeData[i];
     var first = iFirst >= 0 ? String(row[iFirst] || '').trim() : '';
@@ -896,9 +910,6 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
           (tier !== tierBefore ? 'Updated to Tier ' + tier : 'Intake at Tier ' + tier) + (roleChanged ? '; RoleType -> ' + roleType : '') + '. ' + notes, '', cycle]); // engine.150: the earned-rung marker only when the Tier actually moved
       }
     } else {
-      // engine.319: the clock routes the citizen to their event kind and their employer; an unknown one is
-      // refused here, naming the row, before a POPID is drawn — the off-map hood door's shape below.
-      if (!MINT_CLOCK_MODES_[clockMode]) throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + first + ' ' + last + '" carries ClockMode "' + rawClockMode + '", which is not ENGINE, GAME, CIVIC or MEDIA — fix the cell.');
       // engine.304 D6b: a family arrival is re-checked against the ledger as it stands NOW — an earlier wire in
       // this batch (a parent's co-parent stroke) may have filled the spot. Closed → nothing minted; the GC row
       // stays Family and the next family pass releases it.
@@ -1115,7 +1126,9 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
           newRow[lEmployerBiz] = mintedBiz;
           mintTrackedByBiz[mintedBiz] = (mintTrackedByBiz[mintedBiz] || 0) + 1; // reserve within the batch
           var mcs = ctx.summary && ctx.summary.careerSignals;
-          if (mcs && mcs.businessDeltas) {
+          // engine.319: a player is never a hire (engine.307) — a GAME mint sends no headcount signal, so a
+          // draft class is not a Phase-6 BUSINESS_EXPANSION. Carried and title placement alike.
+          if (mcs && mcs.businessDeltas && clockMode !== 'GAME') {
             if (!mcs.businessDeltas[mintedBiz]) mcs.businessDeltas[mintedBiz] = { gained: 0, lost: 0 };
             mcs.businessDeltas[mintedBiz].gained += 1;
           }

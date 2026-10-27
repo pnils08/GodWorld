@@ -387,7 +387,9 @@ console.log('\n10. engine.319 — the clock is folded at the door and places the
   check('a "Game" cell mints GAME; " game " too; "Civic" CIVIC; "media" MEDIA; blank ENGINE', cm(hal) === 'GAME' && cm(cal) === 'GAME' && cm(rhoda) === 'CIVIC' && cm(phil) === 'MEDIA' && cm(eve) === 'ENGINE', [hal, cal, rhoda, phil, eve].map(cm).join());
   check('the Oaks rookie is minted at the Oaks; the farm-club catcher at the A\'s', emp(hal) === 'BIZ-00074' && emp(cal) === 'BIZ-00005', emp(hal) + '/' + emp(cal));
   check('…on the sports base salary, as every GAME mint', hal && hal[col('Income')] === 100000 && cal[col('Income')] === 100000, hal && hal[col('Income')]);
-  check('…and the team\'s headcount signal counts them', (w.ctx.summary.careerSignals.businessDeltas['BIZ-00074'] || {}).gained === 1 && (w.ctx.summary.careerSignals.businessDeltas['BIZ-00005'] || {}).gained === 2, JSON.stringify(w.ctx.summary.careerSignals.businessDeltas));
+  const bd = w.ctx.summary.careerSignals.businessDeltas;
+  check('…and a player sends no headcount signal — a player is never a hire, so a draft class is no business expansion', !bd['BIZ-00074'] && !bd['BIZ-00005'], JSON.stringify(bd));
+  check('the civic and media mints still signal their employer', (bd['BIZ-00017'] || {}).gained === 1 && (bd['BIZ-00018'] || {}).gained === 1, JSON.stringify(bd));
   check('a filled employer column still wins over the title', emp(otto) === 'BIZ-00005', emp(otto));
   check('an unnamed civic title lands at City of Oakland, not the fire department in its hood', emp(rhoda) === 'BIZ-00017', emp(rhoda));
   check('an unnamed media title lands at a news outlet', emp(phil) === 'BIZ-00018', emp(phil));
@@ -402,7 +404,7 @@ console.log('\n10. engine.319 — the clock is folded at the door and places the
   const before2 = w2.ctx.ledger.rows.length;
   let err = null; try { E.processAdvancementRows_(w2.ctx, 'C' + CYCLE, CYCLE); } catch (e) { err = e; }
   check('an unknown clock throws at the door, naming the row and the cell', !!err && /Advancement_Intake row for "Gwen Typo" carries ClockMode "Gaem", which is not ENGINE, GAME, CIVIC or MEDIA/.test(err.message), err && err.message);
-  check('…before a POPID is drawn for it, and no queue row is cleared', w2.ctx.ledger.rows.length === before2 + 1 && adv2.cleared.length === 0, (w2.ctx.ledger.rows.length - before2) + ' minted, ' + adv2.cleared.length + ' cleared');
+  check('…before any row in the queue is touched: the good row ahead of it is not minted, nothing cleared, no log line', w2.ctx.ledger.rows.length === before2 && adv2.cleared.length === 0 && w2.sheets.LifeHistory_Log.rows.length === 1, (w2.ctx.ledger.rows.length - before2) + ' minted, ' + adv2.cleared.length + ' cleared, log ' + (w2.sheets.LifeHistory_Log.rows.length - 1));
   const w3 = world([], { extraRows: [slRow({ POPID: 'POP-00950', First: 'Ida', Last: 'Known', Tier: 4, ClockMode: 'ENGINE', Status: 'Active', BirthYear: 1980, Neighborhood: 'Temescal' })] });
   E.ensureHouseholdQueueSheet_(w3.ctx.ss);
   const adv3 = w3.sheets.Advancement_Intake1, q3 = adv3.rows[0], c3 = (n) => q3.indexOf(n);

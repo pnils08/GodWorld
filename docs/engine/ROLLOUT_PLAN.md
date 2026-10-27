@@ -139,6 +139,8 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.320 | The intake's off-map hood throw fires mid-pass: earlier mints commit, no queue row clears, they re-run next Cycle as existing bumps — make the refusal queue-wide like engine.319's clock check | ready |  | [[../plans/2026-07-27-employment-living-system]] Task 10 §What it does not do |
+| engine.321 | A tracked mint's headcount signal lands after Career writes Employee_Count; Phase 6 reads 2+ mints at one business as BUSINESS_EXPANSION (C110: 54 authored staff) — is a mint business growth? | needs-info |  | [[../plans/2026-07-27-employment-living-system]] Task 10 §What it does not do |
 | pipeline.88 | Proposal, builder's call: daily seats (Ines, Tamsin) write angle/packet/draft under a Cycle-keyed stem, so five days share one file set and a failed day can see yesterday's plan (Ines Sun 10-25). Key their stems by day? | needs-info | research-build | [[../plans/2026-10-11-media-extension]] §Status log pipeline.87 |
 | engine.317 | A read-only door for FIRE_ADMISSION_JSON (webTrigger getprop is carry-forward-only; a GET fires a Cycle), so a PROD push can prove no Cycle was admitted across it (codex engine.301 gate 3, 2026-10-25) | ready |  | `docs/for-claude-review/2026-10-25-codex-engine301-gate3-recheck.md` |
 | engine.316 | Five hoods' texture pools are empty after textureSigned_: Eastlake, Baylight District, East Oakland have 0 up / 0 down lines; Grand Lake, San Antonio 0 down (agy 2026-10-19 F6, split from engine.301). Author signed lines → builder approves → land under the substrate gate | ready | research-build | `output/antigravity/2026-10-19-review-engine214-prod-candidate.md` F6 |

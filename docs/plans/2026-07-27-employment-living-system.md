@@ -1,7 +1,7 @@
 ---
 title: Employment Living System Plan
 created: 2026-07-27
-updated: 2026-10-26
+updated: 2026-10-27
 type: plan
 tags: [engine, citizens, economy, active]
 sources:
@@ -234,7 +234,7 @@ pointers:
 - **Bench round 4 — the exact candidate (`…-e319-bench4.sh 4198e46a` + `…-bench4-legC2.sh`, log `…-e319-bench4.log`, manifest `stage29c-e319.sha256`).** **B0c** neutral queue = round 3's A0 (stage 28, same start, same seed) byte-equal on every captured surface. **B3** the rookies + three probes + a repeat of the civic probe's name with `Gaem` right after it: the five land (clock, employer, role, hood, Active), 13 minted, the repeat processed as the civic citizen's update (it lifts Tier 4 → 3: intake lifts, never lowers — the check first expected 4, corrected and re-read on the same data, PASS), Engine_Errors +0. **C2** `Gaem` last: Engine_Errors exactly +1 naming the row and the cell, no queued name minted, the owner-door row left queued, the 7 non-intake mints only (bench script pulled = `stage29c` before the fire). Bench code restored to stage 28 (@148).
 - **Codex final look (`docs/for-claude-review/2026-10-27-codex-engine319-recheck2.md`) — HOLD, folded in `ee27fadc` (seat decision).** §1: the queue-order exemption could not be atomic — a valid mint ahead, a family-refused row and a `Gaem` repeat threw mid-pass — and a lone family row with a bad clock was refused while claimed exempt. The seat took the strict rule the first diff gate prescribed: any queue row whose name finds no ledger citizen carrying a clock outside the four refuses the whole queue before any queue row is touched (a same-batch repeat and a family row included — the cell is wrong whichever branch would take the row); a ledger citizen's row never reads the cell; the mint-branch guard is gone (unreachable). §4: the push gate certifies no mint across the window — the only stage-28 / stage-29 difference — not that no old-version call ran. This last fold is not codex-reviewed; it is the strict form codex's own §1 asked for, with tests that put a valid mint ahead of each refused row.
 - **Bench round 5 — the exact candidate (`…-e319-bench5.sh ee27fadc`, log `…-e319-bench5.log`, manifest `stage29d-e319.sha256`; the runner's echo lines still read "round 4", copied).** **N5** neutral queue = round 3's A0 byte-equal on every captured surface. **B5** the rookies + three probes: the five land (clock, employer, role, hood, Active, Tier 4), 13 minted, Engine_Errors +0. **C5** `Gaem` last: Engine_Errors exactly +1 naming the row and the cell, no queued name minted, the owner-door row left queued, the 7 non-intake mints only. Bench code restored to stage 28 (@150).
-- **Status:** [ ] built + benched on the exact candidate `ee27fadc`; PROD waits on the builder's go (engine.317 named exception): `bash output/engine-sheet/2026-10-26-push-e319-prod.sh ee27fadc output/engine-sheet/stage29d-e319.sha256 113`.
+- **Status:** [x] LIVE PROD @165 = stage 29 (2026-10-27 ~10:47 CDT, builder "Go on the push"): fresh pull = stage 28, built = `stage29d-e319.sha256`, pull-back identical, live Cycle 113 / queue / ledger unchanged across the 16-minute watch (`output/engine-sheet/2026-10-27-push-e319-prod.log`; DEPLOY_HISTORY §PROD stage 29). Open until the C114 first-live readback (Sun 2026-11-01) — the watch list is in DEPLOY_HISTORY.
 
 ## Open questions
 
@@ -257,3 +257,4 @@ pointers:
 - 2026-10-27 (engine-sheet) — Task 10 / engine.319: codex diff gate HOLD folded (`4b3ed62e`: queue-wide clock refusal, no headcount signal for a player); bench round 2's whole-Cycle compare failed on the shared seeded stream (explained), round 3 neutral pair byte-equal and the bad-clock leg PASS.
 - 2026-10-27 (engine-sheet) — Task 10 / engine.319: codex recheck HOLD folded (`4198e46a`: queue-order clock check + mint-branch backstop, push-script read headers); bench round 4 on the exact candidate PASS (neutral byte-equal, the five + a repeat, bad clock refused).
 - 2026-10-27 (engine-sheet) — Task 10 / engine.319: codex final look HOLD folded by the seat (`ee27fadc`: strict all-or-nothing clock refusal); bench round 5 on the exact candidate PASS. PROD waits on the builder's go.
+- 2026-10-27 (engine-sheet) — Task 10 / engine.319 LIVE PROD @165 = stage 29 on the builder's go; pull-back identical, 16-minute watch clean. First live fire C114.

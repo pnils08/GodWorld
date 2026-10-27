@@ -1,7 +1,7 @@
 ---
 title: Deploy History — full sandbox + PROD deployment ledger
 created: 2026-09-04
-updated: 2026-10-18
+updated: 2026-10-27
 type: reference
 tags: [engine, deploy, history, active]
 sources:
@@ -165,6 +165,15 @@ pointers:
 ---
 
 ## PROD deploy log — full trail
+
+### PROD stage 29 (`ee27fadc`, one file over stage 28) — engine.319 the intake mint places a citizen by clock (2026-10-27 ~10:47 CDT, engine-sheet)
+- **Why:** builder 2026-10-27, typed into engine-sheet after bench round 5: "Go on the push". **Named builder exception, this push only:** `FIRE_ADMISSION_JSON` has no outside read door (engine.317). Codex's last word (final look on `4198e46a`) was HOLD on §1 (a later refusal left an earlier mint committed) and §4 (the gate's claim); the seat folded both in `ee27fadc` (strict all-or-nothing clock refusal, the claim narrowed to "no mint across the window"). Codex has not read `ee27fadc`; tests + bench round 5 cover it.
+- **What changed:** `phase05-citizens/processAdvancementIntake.js` — ClockMode trimmed + upper-cased at the door, blank = `ENGINE`; any queue row whose name finds no ledger citizen and whose clock is outside the four refuses the whole queue before a row is processed (one Engine_Errors row naming it); GAME → the team the title names (Oaks BIZ-00074; A's + the three farm clubs BIZ-00005) when it has room, else `UNTRACKED`, never a field draw, no headcount signal; an unnamed CIVIC title with a field → City of Oakland BIZ-00017; an unnamed MEDIA title → a news outlet, hood first; the sports-worded Sector pool narrowed (Gridiron Analytics + two sports bars back). Plan `docs/plans/2026-07-27-employment-living-system.md` Task 10.
+- **Reviews:** codex diff gate → recheck → final look, each HOLD, each folded (`docs/for-claude-review/2026-10-26-codex-engine319-diff-gate.md`, `2026-10-27-codex-engine319-recheck.md`, `-recheck2.md`).
+- **Bench proof (SANDBOX 1004):** round 5 on `ee27fadc` (`stage29d-e319.sha256`, log `output/engine-sheet/2026-10-27-e319-bench5.log`): neutral queue byte-equal to stage 28 on every captured surface; the two real C113 rookie rows + three probes land (clock, employer, role, hood, Active, Tier 4); `Gaem` refuses the whole queue, Engine_Errors exactly +1, no queued name minted.
+- **Push:** `bash output/engine-sheet/2026-10-26-push-e319-prod.sh ee27fadc output/engine-sheet/stage29d-e319.sha256 113` (log `output/engine-sheet/2026-10-27-push-e319-prod.log`) → dry run clean first, fresh PROD pull = stage 28 (no drift), built = the benched manifest byte for byte, **@165**, pinned deployment serves @165, pull-back 167 js identical, fire state clean before / after / +8 / +16 min (Cycle 113, Advancement_Intake1 148 rows identical, Simulation_Ledger 1,053 rows) (`push-e319-prod.DONE`).
+- **First live fire:** C114 Sun 2026-11-01. Watch: no `Phase5-Advancement` Engine_Errors row (one = a queued new name with a clock outside the four — read that cell); every intake mint's ClockMode is ENGINE / GAME / CIVIC / MEDIA; a GAME mint sits at its title's team or `UNTRACKED`, never a field-drawn employer; the queued existing-citizen rows process and clear as before.
+- **Rollback:** `phase05-citizens/processAdvancementIntake.js` from `5ed4ceba` with a guarded deploy / pull-back against `stage28-e318.sha256`.
 
 ### PROD stage 28 (`5ed4ceba`, two files over stage 27) — engine.318 the usage intake reads its columns by name (2026-10-25 ~22:24 CDT, engine-sheet; auto mode off, the builder's permission prompts)
 - **Why:** builder 2026-10-25, typed into engine-sheet before the C113 fire: "that needs to push before we run", then "go: run the engine.318 live fix and push" — after es stated the go covers the 105-row Status step and the push. **Named builder exception, this push only:** codex recheck 4 holds on propagation (an old-version `/exec` call admitted later than ~10 min after the cut is outside the 16-minute watch; `FIRE_ADMISSION_JSON` has no outside read door — engine.317 is the fix). The residual named in the plan (a live web Cycle or a Sheet-menu intake row inside the window) did not occur: every watch read clean.

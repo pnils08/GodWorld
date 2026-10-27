@@ -103,7 +103,7 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.319 | The intake mint places a citizen by clock (builder 10-26 go): ClockMode folded at the door; GAME → the team in the title; unnamed CIVIC → City of Oakland; unnamed MEDIA → a news outlet. Model Opus | in-progress | engine-sheet | [[../plans/2026-07-27-employment-living-system]] Task 10 |
+| engine.319 | The intake mint places a citizen by clock: ClockMode folded at the door; GAME → the team in the title; unnamed CIVIC → City of Oakland; unnamed MEDIA → a news outlet. LIVE PROD @165 stage 29 2026-10-27 (builder go); first live fire C114. Opus | live-observing | engine-sheet | [[../plans/2026-07-27-employment-living-system]] Task 10 |
 | pipeline.85 | Rhea gates the world's record, not the Packet (builder 10-25: gate the facts, not the color): writer fence + repair pass gone, audit never fails a draft, Rhea sees only what named citizens said + ledger + world state. Proof: 2026-10-26 fanout | live-observing | research-build | [[../plans/2026-10-11-media-extension]] §Status log pipeline.85 |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | engine.296 | Sports legends from retired MLB-origin ledger rows, no literal fallback — LIVE @143/@144; re-read on C113 (Sun 2026-10-25) | live-observing | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |

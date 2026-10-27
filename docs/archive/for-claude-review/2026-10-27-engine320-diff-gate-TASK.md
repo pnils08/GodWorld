@@ -1,6 +1,6 @@
 # TASK — codex: engine.320 diff gate — one round
 
-Read-only; no cron, model, Sheet write, bench, clasp or canon run. Do not commit, do not push. Write to `docs/for-claude-review/2026-10-27-codex-engine320-diff-gate.md`, SHIP / FIX / HOLD per hunt, file:line evidence, under ~25 lines. Report in one line when done.
+Read-only; no cron, model, Sheet write, bench, clasp or canon run. Do not commit, do not push. Write to `docs/archive/for-claude-review/2026-10-27-codex-engine320-diff-gate.md`, SHIP / FIX / HOLD per hunt, file:line evidence, under ~25 lines. Report in one line when done.
 
 Candidate: `2f2e7123` (`git diff ee27fadc 2f2e7123 -- phase05-citizens/processAdvancementIntake.js scripts/householdIntake.test.js`). PROD = stage 29 = `ee27fadc` (engine.319, live). Plan: `docs/plans/2026-07-27-employment-living-system.md` Task 11. engine.319's strict all-or-nothing clock rule (your final look §1) is settled; this job gives the off-map hood the same shape — do not reopen the clock rule.
 

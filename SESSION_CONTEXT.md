@@ -2,7 +2,7 @@
 
 **PIN:** S605 | Day 217 | Canon C113 (fired 2026-10-25 23:03 CDT, 0 errors; chain complete; engine.312 re-base applied 2026-10-26) | PROD @165 = stage 29 (`ee27fadc` over stage 28, engine.319, pushed 2026-10-27) — stages 27 + 28 first-live readback as expected; stage 29 first live C114 | next live fire C114 Sun 2026-11-01 | stage history, expectations, rollbacks: DEPLOY_HISTORY §PROD | claude-mem observer on quota cooldown — don't restart.
 
-**NEXT[engine-sheet]:** engine.319 (intake mint places a citizen by clock) LIVE PROD @165 = stage 29, 2026-10-27 on the builder's go; pull-back identical, 16-min watch clean. Row live-observing until the C114 first-live readback Sun 2026-11-01 — watch list: DEPLOY_HISTORY §PROD stage 29; then done-pending-archive.
+**NEXT[engine-sheet]:** engine.319 LIVE @165 (stage 29) — C114 readback Sun 2026-11-01 per DEPLOY_HISTORY §PROD stage 29. engine.320 (off-map hood refuses the whole queue) benched on `2f2e7123`, PROD waits on the builder's go: `bash output/engine-sheet/2026-10-27-push-e320-prod.sh 2f2e7123 output/engine-sheet/stage30-e320.sha256 113`. Plan Task 11.
 
 **NEXT[research-build]:** No job in hand. Boot docs and memory cleaned of the project-over / Claude-off / codex-only-approval text (builder 2026-10-25); claim a row from ROLLOUT §4 when Mike assigns work.
 **NEXT[kimi]:** OUT for the week (usage limit 2026-10-03). Nothing queued; its civic.38 renew-move check moved to codex 2026-10-04.

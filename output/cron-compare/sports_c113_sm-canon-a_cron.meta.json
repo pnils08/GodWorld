@@ -1,0 +1,17 @@
+{
+  "desk": "sports",
+  "cycle": "113",
+  "model": "anthropic/claude-sonnet-5.5",
+  "turns": 6,
+  "maxTurns": 15,
+  "usageInputTokens": 35707,
+  "usageOutputTokens": 3408,
+  "savedFiles": [
+    "output/cron-compare/sports_c113_anthony-raines_sm-canon-a_anthropic-claude-sonnet-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/sports_c113.md",
+  "durationMs": 30738,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-27T06:07:21.642Z"
+}

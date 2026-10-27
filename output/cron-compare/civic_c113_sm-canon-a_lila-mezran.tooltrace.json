@@ -1,0 +1,32 @@
+{
+  "model": "anthropic/claude-sonnet-5.5",
+  "calls": [
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Neighborhood_Demographics",
+        "match": "Chinatown"
+      },
+      "resultChars": 248,
+      "resultHead": "Neighborhood | Students | Adults | Seniors | Unemployed | Sick | LastUpdated | SchoolQualityIndex | GraduationRate | CollegeReadinessRate | TeacherQuality | Funding\nChinatown | 314 | 1492 | 395 | 86 | 140 | 113 | 6.91 | 85.93 | 53.79 | 6.94 | 12000"
+    },
+    {
+      "tool": "sheet_read",
+      "input": {
+        "tab": "Care_Justice_Census",
+        "match": "Chinatown"
+      },
+      "resultChars": 2185,
+      "resultHead": "Cycle | System | GeographicScope | Neighborhood | IntakeType | PopulationBasis | CoveredPopulation | MethodVersion | Completeness | TotalIntakes | TrackedIntakes | OtherResidentIntakes | OccupancyMeasure | OpeningOccupancy | ClosingOccupancy | TrackedOccupancy | OtherResidentOccupancy | BedsOccupied | TransfersIn | TransfersOut | Exits | Corrections\n112 | hospital | neighborhood | Chinatown | all | hood-table | 2193 | cj-2 | complete | 3 | 0 | 3 | in-care | 6 | 6 | 0 | 6 | 6 | 0 | 0 | 3 | 0\n112 | judicial | neighborhood | Chinatown | arrest | hood-table | 2193 | cj-2 | complete | 2 | 0 | 2 | i"
+    },
+    {
+      "tool": "canon_search",
+      "input": {
+        "query": "Chinatown sick residents health"
+      },
+      "resultChars": 2641,
+      "resultHead": "274 file(s) matched on disk for 'Chinatown sick residents health':\n— output/simulation_ledger_snapshot.jsonl: 1:{\"Name\":\"Vinnie Keane\",\"POPID\":\"POP-00001\",\"First\":\"Vinnie\",\"MaidenName\":\"\",\"Last\":\"Keane\",\"OriginGame\":\"MLB The Show\",\"UNI (y/n)\":\"yes\",\"MED (y/n)\":\"no\",\"CIV (y/n)\":\"no\",\"ClockMode\":\"GAME\",\"Tier\":\"1\",\"RoleType\":\"Designated Hitter, Oakland A's Legend\",\"Status\":\"Active\",\"BirthYear\":\"2003\",\"OrginCity\":\"Boston, MA\",\"LifeHistory\":\"[Compressed: 5 entries | 2026-06-20 23:35 → 2026-06-20 23:35 | Dominant:PrevEvening,Daily,Personal | Archetype:Striver | Mods:relentless,outgoing,warm,curious,"
+    }
+  ],
+  "ranAt": "2026-10-27T15:59:50.057Z"
+}

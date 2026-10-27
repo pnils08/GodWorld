@@ -1,0 +1,17 @@
+{
+  "desk": "civic",
+  "cycle": "113",
+  "model": "anthropic/claude-sonnet-5.5",
+  "turns": 4,
+  "maxTurns": 15,
+  "usageInputTokens": 40998,
+  "usageOutputTokens": 3882,
+  "savedFiles": [
+    "output/cron-compare/civic_c113_lila-mezran_sm-canon-a_anthropic-claude-sonnet-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/civic_c113.md",
+  "durationMs": 38205,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-27T15:59:50.116Z"
+}

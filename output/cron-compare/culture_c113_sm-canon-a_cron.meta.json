@@ -1,0 +1,17 @@
+{
+  "desk": "culture",
+  "cycle": "113",
+  "model": "anthropic/claude-sonnet-5.5",
+  "turns": 1,
+  "maxTurns": 15,
+  "usageInputTokens": 28244,
+  "usageOutputTokens": 4832,
+  "savedFiles": [
+    "output/cron-compare/culture_c113_tamsin-pruitt_sm-canon-a_anthropic-claude-sonnet-5-5.md"
+  ],
+  "compareAgainst": "output/desk-output/culture_c113.md",
+  "durationMs": 31204,
+  "dryRun": false,
+  "packetOnly": true,
+  "ranAt": "2026-10-27T06:08:25.762Z"
+}

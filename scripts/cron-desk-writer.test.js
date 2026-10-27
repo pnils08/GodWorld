@@ -145,3 +145,28 @@ console.log('cron-desk-writer pipeline.76 dossier_read tests: PASS');
   assert.ok(!rpi('# T\n\nBody.\n', pk, { noSelfScore: true }).includes('SELF-SCORE'));
 }
 console.log('cron-desk-writer pipeline.77 rubric tests: PASS');
+
+// pipeline.89 cut 2 — sheet_read match: a long tab no longer hides its later rows, and a miss says it was a miss
+(async () => {
+  const sheetsPath = require.resolve('../lib/sheets');
+  const real = require.cache[sheetsPath];
+  const header = ['InitiativeID', 'Name', 'MilestoneNotes'];
+  const rows = [header];
+  for (let i = 1; i <= 60; i++) rows.push(['TEST-ONLY-' + i, 'TEST-ONLY Fund ' + i, 'x'.repeat(300)]);
+  rows.push(['TEST-ONLY-LAST', 'TEST-ONLY Needle Program', 'needle note']);
+  require.cache[sheetsPath] = { id: sheetsPath, filename: sheetsPath, loaded: true, exports: { getRawSheetData: async () => rows } };
+  try {
+    const { toolSheetRead } = require('./cron-desk-writer');
+    const plain = await toolSheetRead({ tab: 'Initiative_Tracker' });
+    assert.ok(!plain.includes('Needle Program'), 'unfiltered read stays bounded');
+    assert.match(plain, /first 40 of 62 rows — pass match/);
+    const hit = await toolSheetRead({ tab: 'Initiative_Tracker', match: 'needle program' });
+    assert.ok(hit.startsWith('InitiativeID | Name | MilestoneNotes'), 'match returns the header');
+    assert.ok(hit.includes('TEST-ONLY Needle Program') && !hit.includes('TEST-ONLY Fund 1 '));
+    assert.match(await toolSheetRead({ tab: 'Initiative_Tracker', match: 'no such term' }), /no row in Initiative_Tracker names "no such term" \(61 rows read\)/);
+    assert.match(await toolSheetRead({ tab: 'Secret_Tab', match: 'x' }), /tab not allowed/);
+  } finally {
+    if (real) require.cache[sheetsPath] = real; else delete require.cache[sheetsPath];
+  }
+  console.log('cron-desk-writer pipeline.89 sheet_read match tests: PASS');
+})().catch(e => { console.error(e); process.exit(1); });

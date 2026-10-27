@@ -72,7 +72,7 @@
     }
   },
   "carmen-delaine": {
-    "version": "CARMEN-LEP2-2",
+    "version": "CARMEN-LEP2-3",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -129,6 +129,9 @@
         "an Initiative phase, Project status, milestone, or current-state claim that contradicts the tracker or verified prior coverage",
         "a resident consequence, attributed statement, or collective public sentiment not supported by a Packet subject or quote"
       ]
+    },
+    "writerTools": {
+      "maxToolCalls": 6
     }
   },
   "luis-navarro": {

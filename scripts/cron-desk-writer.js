@@ -617,7 +617,7 @@ function callOpenRouterRaw(payloadObj) {
 const OPENROUTER_TOOLS = [
   { type: 'function', function: { name: 'canon_search', description: 'Ranked keyword search across the city records on disk — published editions, citizens, businesses, world summaries, staged past work. Use for canon depth and prior coverage.', parameters: { type: 'object', properties: { query: { type: 'string', description: 'keywords, e.g. "Fruitvale transit"' } }, required: ['query'] } } },
   { type: 'function', function: { name: 'citizen_lookup', description: 'Exact citizen lookup in the simulation ledger by name. Returns the canonical profile (role, neighborhood, birth year) — these facts are immutable.', parameters: { type: 'object', properties: { name: { type: 'string', description: 'full name, e.g. "Lucia Polito"' } }, required: ['name'] } } },
-  { type: 'function', function: { name: 'sheet_read', description: 'Read a bounded slice of one allowlisted live city sheet: Initiative_Tracker, Neighborhood_Map, Oakland_Sports_Feed, Civic_Office_Ledger.', parameters: { type: 'object', properties: { tab: { type: 'string' } }, required: ['tab'] } } }
+  { type: 'function', function: { name: 'sheet_read', description: 'Read a bounded slice of one allowlisted live city sheet: Initiative_Tracker, Neighborhood_Map, Oakland_Sports_Feed, Civic_Office_Ledger.', parameters: { type: 'object', properties: { tab: { type: 'string' }, match: { type: 'string', description: 'optional: return only the rows that name this term (an initiative, office or neighborhood), plus the header' } }, required: ['tab'] } } }
 ];
 // pipeline.76 — the stats surface: a dossier player's season lines and the rates worked in code,
 // the same lines and arithmetic as the data-desk slice (buildMarburySlice), so the memo still
@@ -675,7 +675,18 @@ async function toolSheetRead(input) {
   try {
     const sheets = require('../lib/sheets');
     const data = await sheets.getRawSheetData(tab);
-    return cap(data.slice(0, 40).map(r => r.join(' | ')).join('\n'), 6000);
+    // match: the header plus every row that names the term — a long tab (Initiative_Tracker runs ~13k
+    // chars against the 6000 cap) otherwise hides the later rows, and a writer that "looked" and saw
+    // nothing would print an absence the sheet does not hold. A miss is stated as a miss.
+    const match = String(input.match || '').trim().toLowerCase();
+    if (match) {
+      const rows = data.slice(1).filter(r => r.join(' ').toLowerCase().includes(match));
+      if (!rows.length) return 'no row in ' + tab + ' names "' + input.match + '" (' + Math.max(0, data.length - 1) + ' rows read)';
+      return cap([data[0]].concat(rows).slice(0, 12).map(r => r.join(' | ')).join('\n'), 6000);
+    }
+    const shown = data.slice(0, 40);
+    const note = data.length > shown.length ? '\n(first ' + shown.length + ' of ' + data.length + ' rows — pass match to pull a row by name)' : '';
+    return cap(shown.map(r => r.join(' | ')).join('\n'), 6000) + note;
   } catch (e) { return '(sheet read failed: ' + e.message + ')'; }
 }
 
@@ -1125,13 +1136,22 @@ async function main() {
           ? '\n\n=== YOUR TOOLS — YOUR OWN RECORD, NOT A NEW STORY (up to ' + WRITER_TOOLS + ' calls, read-only) ===\n' +
             'The slice is your story and your claim. The tools check your record before you accuse anyone. A tool call never changes the assignment.\n' +
             '- canon_search(query): your own earlier columns and the paper\'s prior coverage. Search the subject (the neighborhood, the office, the program) with "Jax Caldera". Before you write "again", "still" or "I\'ve been watching", this is how you find out whether you did, and what you said.\n' +
-            '- sheet_read(tab): Neighborhood_Map, Initiative_Tracker or Civic_Office_Ledger — the number as the sheet holds it now, to set against what a column printed then.\n' +
+            '- sheet_read(tab, match?): Neighborhood_Map, Initiative_Tracker or Civic_Office_Ledger — the number as the sheet holds it now, to set against what a column printed then. Pass match ("KONO") to pull that row; a long tab cuts off its later rows.\n' +
             '- citizen_lookup(name): one person\'s ledger profile — use it before you characterize anyone.\n' +
             '- memory_recall(query?): your own page — the thread you noted last wake.\n' +
             'Name each fact to its source in the column ("my C112 column", "the tracker", "the map"), printed as the tool returned it; do no arithmetic on it. A claim of earlier coverage must come from a column canon_search returned. If none returned, this is new — say so, and do not claim a pattern you cannot show.\n' +
             '=== END TOOLS ==='
           : '') +
-        (WRITER_TOOLS && PERSONA !== 'hal-richmond' && PERSONA !== 'anthony-raines' && PERSONA !== 'freelance-firebrand'
+        (WRITER_TOOLS && PERSONA === 'carmen-delaine'
+          ? '\n\n=== YOUR TOOLS — THE RECORD BEHIND THE PACKET, NOT A NEW STORY (up to ' + WRITER_TOOLS + ' calls, read-only) ===\n' +
+            'The slice is your story and your claim. The tools are the ledger itself: you may say what the record shows and has not reached only after you have looked. A tool call never changes the assignment.\n' +
+            '- sheet_read(tab, match?): Initiative_Tracker (an initiative\'s status, vote, budget and its milestone notes cycle by cycle), Civic_Office_Ledger (offices and who holds them), Neighborhood_Map. Pass match ("Stabilization") to pull that row; a long tab cuts off its later rows, and a miss on a named match is a real miss.\n' +
+            '- canon_search(query): what the paper has already printed on this initiative or office — last cycle\'s milestone, a vote, a statement.\n' +
+            '- citizen_lookup(name): an official\'s ledger profile — use it before you characterize anyone.\n' +
+            'Before you write that the record does not carry a figure, a name or a vote, read the tracker row for it and search the figure. If a tool returns it, print it as returned and name the source ("the tracker\'s milestone notes", "the C112 filing"); if neither returns it, say you looked ("the tracker and the paper\'s prior coverage do not carry it"). Never write "the ledger does not carry" for something you did not check. Reconcile figures in the open, as you do.\n' +
+            '=== END TOOLS ==='
+          : '') +
+        (WRITER_TOOLS && PERSONA !== 'hal-richmond' && PERSONA !== 'anthony-raines' && PERSONA !== 'freelance-firebrand' && PERSONA !== 'carmen-delaine'
           ? '\n\n=== YOUR TOOLS — DEPTH, NOT A NEW STORY (up to ' + WRITER_TOOLS + ' calls, read-only) ===\n' +
             'The slice is your story and your claim. The tools are for depth: another season, a third peer, prior coverage, a current feed line. A tool call never changes the assignment.\n' +
             '- dossier_read(player, season?): a player\'s season lines and the rates already worked from them — use it for another season or another peer at the position.\n' +
@@ -1224,6 +1244,8 @@ async function main() {
       (TOOLS_AB ? 'Use your tools where the Packet runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ' : '') +
       (WRITER_TOOLS ? (PERSONA === 'hal-richmond'
         ? 'The slice is the story. Before you write, open the archive — the man\'s origins and prior coverage by name, his dossier across the years — then compose, naming each tool-fetched fact to its source. '
+        : PERSONA === 'carmen-delaine'
+        ? 'The slice is the story. Before you write that the record does not carry something, read the tracker row and search the figure — what the initiative\'s milestone notes hold, what the paper printed last cycle — then compose, naming each tool-fetched fact to its source and stating only what you looked for and did not find. '
         : PERSONA === 'freelance-firebrand'
         ? 'The slice is the story. Before you write, check your own record — what you printed on this subject before (search your name and the subject), and the number the sheet holds now — then compose, naming each tool-fetched fact to its source and claiming no earlier coverage a search did not return. '
         : PERSONA === 'anthony-raines'
@@ -1427,6 +1449,7 @@ if (require.main === module) {
 
 module.exports = {
   toolDossierRead, // pipeline.76
+  toolSheetRead,
   rubricBlock, // pipeline.77
   normalizeArtifactTag,
   buildOutputSlug,

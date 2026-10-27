@@ -35,7 +35,7 @@ assert.equal(niaWeekly.reviewProfile.canonPolicy, 'load-bearing');
 assert.ok(nia.reviewProfile.canonBlockers.some(b => /video game/.test(b)));
 
 const jax = packages['freelance-firebrand'];
-assert.equal(jax.version, 'JAX-LEP2-1');
+assert.equal(jax.version, 'JAX-LEP2-2');
 assert.equal(jax.active, true);
 assert.equal(jax.requiredDaily, true);
 assert.equal(jax.assignment.name, 'Jax Caldera');
@@ -171,11 +171,13 @@ const seats = Object.entries(packages).filter(([, v]) => v && v.persona);
 assert(seats.length >= 25);
 assert.deepStrictEqual(seats.filter(([, v]) => v.rewardLoop !== true).map(([k]) => k), []);
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { rewardLoop: 'yes' })), /rewardLoop/);
-assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['anthony-raines', 'elliot-marbury', 'hal-richmond']); // registry order; Hal + Anthony: builder 2026-10-19
+assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'anthony-raines', 'elliot-marbury', 'hal-richmond']); // registry order; Hal + Anthony: builder 2026-10-19; Jax 2026-10-26
 assert.equal(packages['hal-richmond'].writerTools.maxToolCalls, 6);
 assert.equal(packages['hal-richmond'].version, 'HAL-LEP2-3');
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { writerTools: { maxToolCalls: 9 } })), /writerTools/);
-assert.throws(() => packagesApi.validatePackage(jax.persona, Object.assign({}, jax, { writerTools: { maxToolCalls: 6 } })), /granted only to elliot-marbury, hal-richmond, anthony-raines/);
+assert.equal(jax.writerTools.maxToolCalls, 6);
+const carmenPkg = packages['carmen-delaine'];
+assert.throws(() => packagesApi.validatePackage(carmenPkg.persona, Object.assign({}, carmenPkg, { writerTools: { maxToolCalls: 6 } })), /granted only to elliot-marbury, hal-richmond, anthony-raines, freelance-firebrand/);
 assert.equal(marbury.assignment.popid, 'POP-00166');
 assert.equal(packagesApi.routeFor(marbury, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(hal.active, true);
@@ -342,7 +344,7 @@ const gate = packagesApi.gateAssignments([
   { desk: 'culture', name: 'TEST-ONLY Unpackaged Reporter', persona: 'test-only' },
 ], packages);
 assert.equal(gate.eligible.length, 5);
-assert.equal(gate.eligible[0].wakePackage, 'JAX-LEP2-1');
+assert.equal(gate.eligible[0].wakePackage, 'JAX-LEP2-2');
 assert.equal(gate.eligible[1].wakePackage, 'CARMEN-LEP2-2');
 assert.equal(gate.eligible[2].wakePackage, 'PSLAYER-LEP2-1');
 assert.equal(gate.eligible[3].wakePackage, 'ANTHONY-LEP2-3');

@@ -1,7 +1,7 @@
 {
   "_comment": "ADR-0017 live wake packages. The scheduled fan-out is package-only: a journalist must have one active entry before any wake runs. Models are explicit per wake; reviewProfile is the machine-readable authority Rhea uses to distinguish canon assertions from persona-authorized texture.",
   "freelance-firebrand": {
-    "version": "JAX-LEP2-1",
+    "version": "JAX-LEP2-2",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -66,6 +66,9 @@
         "a load-bearing number, date, duration, budget, metric direction, or count that contradicts or lacks the supplied record",
         "a current-state claim that contradicts the world summary or verified prior coverage"
       ]
+    },
+    "writerTools": {
+      "maxToolCalls": 6
     }
   },
   "carmen-delaine": {

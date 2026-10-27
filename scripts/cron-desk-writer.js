@@ -1121,7 +1121,17 @@ async function main() {
             'Every number you bring in from a tool is printed exactly as the tool returned it and named to its source ("his TrueSource card", "his Statcast card", "the feed"). Do no arithmetic on it. A method shapes the argument; it never invents a figure.\n' +
             '=== END TOOLS ==='
           : '') +
-        (WRITER_TOOLS && PERSONA !== 'hal-richmond' && PERSONA !== 'anthony-raines'
+        (WRITER_TOOLS && PERSONA === 'freelance-firebrand'
+          ? '\n\n=== YOUR TOOLS — YOUR OWN RECORD, NOT A NEW STORY (up to ' + WRITER_TOOLS + ' calls, read-only) ===\n' +
+            'The slice is your story and your claim. The tools check your record before you accuse anyone. A tool call never changes the assignment.\n' +
+            '- canon_search(query): your own earlier columns and the paper\'s prior coverage. Search the subject (the neighborhood, the office, the program) with "Jax Caldera". Before you write "again", "still" or "I\'ve been watching", this is how you find out whether you did, and what you said.\n' +
+            '- sheet_read(tab): Neighborhood_Map, Initiative_Tracker or Civic_Office_Ledger — the number as the sheet holds it now, to set against what a column printed then.\n' +
+            '- citizen_lookup(name): one person\'s ledger profile — use it before you characterize anyone.\n' +
+            '- memory_recall(query?): your own page — the thread you noted last wake.\n' +
+            'Name each fact to its source in the column ("my C112 column", "the tracker", "the map"), printed as the tool returned it; do no arithmetic on it. A claim of earlier coverage must come from a column canon_search returned. If none returned, this is new — say so, and do not claim a pattern you cannot show.\n' +
+            '=== END TOOLS ==='
+          : '') +
+        (WRITER_TOOLS && PERSONA !== 'hal-richmond' && PERSONA !== 'anthony-raines' && PERSONA !== 'freelance-firebrand'
           ? '\n\n=== YOUR TOOLS — DEPTH, NOT A NEW STORY (up to ' + WRITER_TOOLS + ' calls, read-only) ===\n' +
             'The slice is your story and your claim. The tools are for depth: another season, a third peer, prior coverage, a current feed line. A tool call never changes the assignment.\n' +
             '- dossier_read(player, season?): a player\'s season lines and the rates already worked from them — use it for another season or another peer at the position.\n' +
@@ -1214,6 +1224,8 @@ async function main() {
       (TOOLS_AB ? 'Use your tools where the Packet runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ' : '') +
       (WRITER_TOOLS ? (PERSONA === 'hal-richmond'
         ? 'The slice is the story. Before you write, open the archive — the man\'s origins and prior coverage by name, his dossier across the years — then compose, naming each tool-fetched fact to its source. '
+        : PERSONA === 'freelance-firebrand'
+        ? 'The slice is the story. Before you write, check your own record — what you printed on this subject before (search your name and the subject), and the number the sheet holds now — then compose, naming each tool-fetched fact to its source and claiming no earlier coverage a search did not return. '
         : PERSONA === 'anthony-raines'
         ? 'The slice is the story. Before you write, pull the board — the player\'s TrueSource card, a peer\'s, his Statcast card if the archive holds one, this cycle\'s feed line — then compose, naming each tool-fetched number to its source. '
         : 'The slice is the story. Before you write, use your tools for depth the slice does not hold — another season, a third peer, what the paper said before — then compose, citing each tool-fetched number to its source. ') : '') +

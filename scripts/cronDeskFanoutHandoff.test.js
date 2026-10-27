@@ -164,7 +164,7 @@ assert.throws(
 
 const liveContext = activateWakeContext(personaAssignment, personaAssignment.persona);
 assert.equal(liveContext.packetContract, 'v2');
-assert.equal(liveContext.wakePackage.version, 'JAX-LEP2-1');
+assert.equal(liveContext.wakePackage.version, 'JAX-LEP2-2');
 assert.equal(stageRoute('civic', personaAssignment.persona, 'angle').model,
   'meta-llama/llama-4-maverick');
 assert.equal(stageRoute('civic', personaAssignment.persona, 'write').model,

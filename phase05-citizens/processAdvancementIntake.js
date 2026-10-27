@@ -788,16 +788,22 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
   var ownerMints = []; // engine.96 Task 12: rows queued with OwnerOfBizId minted this pass
 
   // engine.319: the clock routes a new citizen to their event kind and their employer. A row that would mint
-  // (its name finds no ledger citizen) carrying a clock outside the four is refused for the whole queue, naming
-  // the row, before any row is touched (codex diff gate §1: a throw mid-pass left earlier mints committed and
-  // their queue rows uncleared). An existing citizen's row, or an ambiguous name (skipped), never reads the cell.
+  // carrying a clock outside the four is refused for the whole queue, naming the row, before any queue row is
+  // touched (codex diff gate §1: a throw mid-pass left earlier mints committed and their queue rows uncleared).
+  // The check follows queue order: a name with a ledger citizen (or an ambiguous one, skipped) never reads the
+  // cell, and neither does a later row repeating a name an earlier row mints — that row is the new citizen's update
+  // (codex recheck §1). The mint branch keeps its own guard for the one row this cannot foresee: an earlier
+  // same-name row the family door then refuses.
+  var pvMints = {};
   for (var pv = 1; pv < intakeData.length; pv++) {
     var pvFirst = iFirst >= 0 ? String(intakeData[pv][iFirst] || '').trim() : '';
     var pvLast = iLast >= 0 ? String(intakeData[pv][iLast] || '').trim() : '';
     if (!pvFirst && !pvLast) continue;
+    var pvKey = normalizeCitizenName_(pvFirst) + ' ' + normalizeCitizenName_(pvLast);
+    if ((advNameIndex[pvKey] || []).length || pvMints[pvKey]) continue;
+    pvMints[pvKey] = true;
     var pvRaw = iClockMode >= 0 ? String(intakeData[pv][iClockMode] || '').trim() : '';
     if (!pvRaw || MINT_CLOCK_MODES_[pvRaw.toUpperCase()]) continue;
-    if ((advNameIndex[normalizeCitizenName_(pvFirst) + ' ' + normalizeCitizenName_(pvLast)] || []).length) continue;
     throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + pvFirst + ' ' + pvLast + '" carries ClockMode "' + pvRaw + '", which is not ENGINE, GAME, CIVIC or MEDIA — fix the cell (no row in the queue was processed).');
   }
 
@@ -910,6 +916,9 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
           (tier !== tierBefore ? 'Updated to Tier ' + tier : 'Intake at Tier ' + tier) + (roleChanged ? '; RoleType -> ' + roleType : '') + '. ' + notes, '', cycle]); // engine.150: the earned-rung marker only when the Tier actually moved
       }
     } else {
+      // engine.319: the queue-wide check above foresees every mint but one (an earlier same-name row the family door
+      // refused, so this row mints instead) — refused here, naming the row, before a POPID is drawn.
+      if (!MINT_CLOCK_MODES_[clockMode]) throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + first + ' ' + last + '" carries ClockMode "' + rawClockMode + '", which is not ENGINE, GAME, CIVIC or MEDIA — fix the cell.');
       // engine.304 D6b: a family arrival is re-checked against the ledger as it stands NOW — an earlier wire in
       // this batch (a parent's co-parent stroke) may have filled the spot. Closed → nothing minted; the GC row
       // stays Family and the next family pass releases it.

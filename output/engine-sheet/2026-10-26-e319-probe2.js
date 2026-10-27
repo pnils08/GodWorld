@@ -1,5 +1,6 @@
 // engine.319 bench probe, round 2 (codex diff gate §5) — BENCH ONLY, title-guarded, after reset_leg and the bench Status step.
-//   lay <leg> [--badclock | --neutral] — (--neutral: blank the two rookie rows, add no probe — nothing reaches an engine.319 branch)
+//   lay <leg> [--badclock | --neutral | --dup] — (--dup: the civic probe's name again, 'Gaem', right after it)
+//                   (--neutral: blank the two rookie rows, add no probe — nothing reaches an engine.319 branch)
 //                   assert the baseline's two Oaks rookie rows are pending ('Game'); add the three synthetic probes
 //                   (+ with --badclock a fourth, 'Benchprobe Badclock-E319', ClockMode 'Gaem', LAST in queue order).
 //                   Snapshot → output/engine-sheet/2026-10-26-e319-r2-lay-<leg>.json: ledger max POPID, Engine_Errors and
@@ -98,15 +99,17 @@ const [mode, leg, flag] = process.argv.slice(2);
       console.log('leg ' + leg + ' (neutral): rookie rows blanked; pending ' + left.length + ', every clock blank or ENGINE; ledger max POP-' + snap.maxPop + '; EE ' + (ee.length - 1) + '; ripples ' + (rip.length - 1));
       return;
     }
-    const add = PROBES.concat(flag === '--badclock' ? [BAD] : []);
+    // --dup (codex recheck §1): a later row repeating the civic probe's name with 'Gaem' — the new citizen's update, never refused
+    const DUP = { First: 'Benchprobe', Last: 'Civic-E319', RoleType: '', ClockMode: 'Gaem', Neighborhood: '', Tier: 3 };
+    const add = flag === '--dup' ? [PROBES[0], DUP, PROBES[1], PROBES[2]] : PROBES.concat(flag === '--badclock' ? [BAD] : []);
     add.forEach(p => { if (taken.has(p.First + ' ' + p.Last)) throw new Error('probe name on the ledger: ' + p.Last); });
-    const rows = add.map(p => { const r = new Array(h.length).fill(''); r[ac('First')] = p.First; r[ac('Last')] = p.Last; r[ac('RoleType')] = p.RoleType; r[ac('Tier')] = 4; r[ac('ClockMode')] = p.ClockMode; r[ac('Notes')] = 'engine.319 bench probe'; r[ac('BirthYear')] = 1994; r[ac('Neighborhood')] = p.Neighborhood; return r; });
+    const rows = add.map(p => { const r = new Array(h.length).fill(''); r[ac('First')] = p.First; r[ac('Last')] = p.Last; r[ac('RoleType')] = p.RoleType; r[ac('Tier')] = p.Tier || 4; r[ac('ClockMode')] = p.ClockMode; r[ac('Notes')] = 'engine.319 bench probe'; r[ac('BirthYear')] = 1994; r[ac('Neighborhood')] = p.Neighborhood; return r; });
     const at = adv.length + 1;
     await api.spreadsheets.values.update({ spreadsheetId: ID, range: 'Advancement_Intake1!A' + at, valueInputOption: 'RAW', requestBody: { values: rows } });
     const after = await get('Advancement_Intake1');
     const tail = pendingNames(after).slice(-add.length);
     if (JSON.stringify(tail) !== JSON.stringify(add.map(p => p.First + ' ' + p.Last))) throw new Error('probes are not last in queue order: ' + JSON.stringify(tail));
-    const snap = { leg, badclock: flag === '--badclock', maxPop: Math.max(...led.slice(1).map(r => popNum(r[lc('POPID')]))), ee: ee.length, rip: rip.length,
+    const snap = { leg, badclock: flag === '--badclock', dup: flag === '--dup', queued: add.map(p => ({ name: p.First + ' ' + p.Last, RoleType: p.RoleType, Neighborhood: p.Neighborhood })), maxPop: Math.max(...led.slice(1).map(r => popNum(r[lc('POPID')]))), ee: ee.length, rip: rip.length,
       gcStatus: gc.slice(1).map(r => [nameOf(r, gF, gL), String(r[gS] || '')]), pending: pendingNames(after), rookieClock: rk.map(x => x[0][ac('ClockMode')]) };
     fs.writeFileSync(SNAP, JSON.stringify(snap));
     console.log('leg ' + leg + ': rookies pending ' + JSON.stringify(snap.rookieClock) + '; ' + add.length + ' probes last at row ' + at + '; pending ' + snap.pending.length + '; ledger max POP-' + snap.maxPop + '; EE ' + (ee.length - 1) + '; ripples ' + (rip.length - 1));
@@ -133,6 +136,16 @@ const [mode, leg, flag] = process.argv.slice(2);
       if (/Seeking work/.test(String(got[0].LifeHistory))) fails.push(n + ' carries a seeking-work line');
     });
     if (eeNew.length) fails.push(eeNew.length + ' new Engine_Errors rows');
+    // codex recheck §3: the five beyond clock and employer — one row each, Active, Tier 4, the queued role and hood
+    (S.queued || []).filter(q => q.RoleType).forEach(q => {
+      const got = minted.filter(m => m.name === q.name);
+      if (got.length !== 1) return;
+      if (got[0].RoleType !== q.RoleType) fails.push(q.name + ' RoleType ' + JSON.stringify(got[0].RoleType));
+      if (q.Neighborhood && got[0].Neighborhood !== q.Neighborhood) fails.push(q.name + ' Neighborhood ' + JSON.stringify(got[0].Neighborhood));
+      if (got[0].Status !== 'Active' || Number(got[0].Tier) !== 4) fails.push(q.name + ' Status/Tier ' + got[0].Status + '/' + got[0].Tier);
+    });
+    if (minted.length !== 13) fails.push('minted ' + minted.length + ' (the C113 start mints 13 with the five)');
+    if (S.dup && pending.indexOf('Benchprobe Civic-E319') >= 0) fails.push('the repeat row was not processed');
   }
   if (flag === '--expect-badclock') {
     if (eeNew.length !== 1) fails.push('Engine_Errors +' + eeNew.length + ' (want exactly 1)');

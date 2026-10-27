@@ -802,7 +802,10 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
     var roleType = rawRole; // existing-row branch uses rawRole directly via truthy guard
     var tier = iTier >= 0 ? (row[iTier] || 3) : 3;
     tier = Math.min(Number(tier) || 3, 4); // Cap at Tier 4 (max valid tier)
-    var clockMode = iClockMode >= 0 ? (row[iClockMode] || 'ENGINE') : 'ENGINE';
+    // engine.319: the cell is folded to the ledger's enum — C113 minted two Oaks rookies as 'Game', verbatim.
+    // Blank is ENGINE (every engine-written queue row); a value outside the four is refused at the mint below.
+    var rawClockMode = iClockMode >= 0 ? String(row[iClockMode] || '').trim() : '';
+    var clockMode = rawClockMode ? rawClockMode.toUpperCase() : 'ENGINE';
     var notes = iNotes >= 0 ? (row[iNotes] || '') : '';
     
     // engine.66 — family-match payload (blank on non-drip rows)
@@ -893,6 +896,9 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
           (tier !== tierBefore ? 'Updated to Tier ' + tier : 'Intake at Tier ' + tier) + (roleChanged ? '; RoleType -> ' + roleType : '') + '. ' + notes, '', cycle]); // engine.150: the earned-rung marker only when the Tier actually moved
       }
     } else {
+      // engine.319: the clock routes the citizen to their event kind and their employer; an unknown one is
+      // refused here, naming the row, before a POPID is drawn — the off-map hood door's shape below.
+      if (!MINT_CLOCK_MODES_[clockMode]) throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + first + ' ' + last + '" carries ClockMode "' + rawClockMode + '", which is not ENGINE, GAME, CIVIC or MEDIA — fix the cell.');
       // engine.304 D6b: a family arrival is re-checked against the ledger as it stands NOW — an earlier wire in
       // this batch (a parent's co-parent stroke) may have filled the spot. Closed → nothing minted; the GC row
       // stays Family and the next family pass releases it.
@@ -1641,24 +1647,30 @@ function buildMintBizPool_(ss) {
     var catFn = (typeof sectorCategory_ === 'function') ? sectorCategory_ : null;
     var byField = {}, fieldById = {};
     var statedById = {};
+    var newsOutlets = []; // engine.319: an unnamed MEDIA title draws from these
     for (var r = 1; r < bizData.length; r++) {
       var id = String(bizData[r][bId] || '').trim();
       if (!id) continue;
-      var field = catFn ? catFn(bizData[r][bSector], true) : null;
+      var sector = String(bizData[r][bSector] || '');
+      var hood = bHood >= 0 ? String(bizData[r][bHood] || '').trim() : '';
+      var field = catFn ? catFn(sector, true) : null;
       // engine.307 fields a sports org for HIRING (runCareerEngine.js); the mint keeps it out of the pool
       // exactly as before (codex diff gates 1–6): staff reach a team by the rehire matcher and the
       // settlement, never by a title the mint reads — a carried employer is authored placement, unchanged.
-      if (/sports|stadium|franchise|athletic/i.test(String(bizData[r][bSector] || ''))) field = null;
+      // engine.319: "as before" = only what sectorCategory_'s sports branch alone fields. Sports Analytics
+      // (Tech) and a sports bar (Food) read as their field ahead of that branch and stay in the pool.
+      if (field && MINT_SPORTS_SECTOR_RE_.test(sector) && !(catFn && catFn(sector.replace(new RegExp(MINT_SPORTS_SECTOR_RE_.source, 'ig'), ' '), true))) field = null;
       if (field) {
         if (!byField[field]) byField[field] = [];
-        byField[field].push({ id: id, hood: bHood >= 0 ? String(bizData[r][bHood] || '').trim() : '' });
+        byField[field].push({ id: id, hood: hood });
         fieldById[id] = field;
       }
+      if (MINT_NEWS_SECTOR_RE_.test(sector)) newsOutlets.push({ id: id, hood: hood });
       var rawCount = bCount >= 0 ? bizData[r][bCount] : '';
       statedById[id] = (rawCount === '' || rawCount === null || rawCount === undefined || isNaN(Number(rawCount)))
         ? null : Number(rawCount);
     }
-    return { byField: byField, fieldById: fieldById, statedById: statedById };
+    return { byField: byField, fieldById: fieldById, statedById: statedById, newsOutlets: newsOutlets };
   } catch (e) {
     Logger.log('buildMintBizPool_: Business_Ledger read failed (' + e.message + ') — mint employer skipped');
     return null;
@@ -1744,44 +1756,102 @@ function mintNamedEmployer_(role) {
   return '';
 }
 
-// engine.278 — the mint's employer pick, in order:
-//   a GAME-clock citizen or a no-job role (student, retired) → no employer, no line;
+// engine.319 — the ledger's four clocks; the intake door folds its cell to one of them or refuses the row.
+var MINT_CLOCK_MODES_ = { ENGINE: true, GAME: true, CIVIC: true, MEDIA: true };
+// engine.319 — a GAME title's team: the roster script's two sports-layer ids
+// (scripts/linkCitizensToEmployers.js layer 1 — keyed there on OriginGame, which
+// an intake mint never carries, so the mint reads the title). The farm clubs are
+// live's own titles, every one at the A's. The first team the title names decides.
+var MINT_GAME_TEAMS_ = [
+  [/\bOaks\b/, 'BIZ-00074'],
+  [/\bOakland (?:A['’]s|As|Athletics)\b|\b(?:Las Vegas Aviators|Midland RockHounds|Stockton Ports)\b/, 'BIZ-00005']
+];
+// engine.319 — an unnamed CIVIC title: the mapping's categoryDefaults['Government & Civic'] (City of Oakland).
+var MINT_CIVIC_EMPLOYER_ = 'BIZ-00017';
+// engine.319 — the Sector words of sectorCategory_'s sports branch; a news outlet's Sector.
+var MINT_SPORTS_SECTOR_RE_ = /sports|stadium|franchise|athletic/i;
+var MINT_NEWS_SECTOR_RE_ = /journalism|news|broadcast/i;
+
+function mintGameTeam_(role) {
+  var best = '', at = -1;
+  for (var t = 0; t < MINT_GAME_TEAMS_.length; t++) {
+    var m = MINT_GAME_TEAMS_[t][0].exec(role);
+    if (m && (at < 0 || m.index < at)) { at = m.index; best = MINT_GAME_TEAMS_[t][1]; }
+  }
+  return best;
+}
+
+// Deterministic slot: seed-hash over the citizen identity, no rng
+// (this path predates ctx.rng plumbing; replayable either way).
+function mintSeedSlot_(seed, list) {
+  var s = String(seed || ''), mHash = 0;
+  for (var mc = 0; mc < s.length; mc++) mHash = ((mHash << 5) - mHash + s.charCodeAt(mc)) | 0;
+  return list[Math.abs(mHash) % list.length].id;
+}
+
+// The citizen's own hood first ('City-wide' counts as every hood), then the whole list.
+function mintHoodFirst_(list, hood) {
+  var h = String(hood || '').trim();
+  var near = h ? list.filter(function (b) { return b.hood === h || b.hood === 'City-wide'; }) : [];
+  return near.length ? near : list;
+}
+
+// engine.278 / engine.319 — the mint's employer pick, in order:
+//   a no-job role (student, retired, Hall of Famer) → no employer, no line;
+//   a GAME-clock citizen → the first team the title names (MINT_GAME_TEAMS_),
+//     on the ledger with room; a title naming no Oakland team → UNTRACKED
+//     (another league: employed off the tracked ledger). Never a field draw;
 //   a title the mapping names an organisation for (Police → the police
 //     department, Teacher → the school district) → that business, when it is a
 //     fielded business with room; a title the mapping calls self-employed →
 //     SELF_EMPLOYED;
+//   a MEDIA-clock title nothing names → a news outlet with room, hood first,
+//     seed-hash slot; none with room → UNTRACKED;
+//   a CIVIC-clock title nothing names, with a job field → City of Oakland when
+//     it has room (not a draw across police, fire and housing, nor a private
+//     firm); a civic title with no field (a union rep) stays UNTRACKED below;
 //   else the role's field (roleFieldOf_, 'Trades' read as its field by
 //     skillTagField_) against businesses of that field with room — the citizen's
-//     own hood first ('City-wide' counts as every hood), then the whole field;
-//     seed-hash slot;
+//     own hood first, then the whole field; seed-hash slot;
 //   a field with no room, or a role with no field → UNTRACKED (a mint arrives
 //     with a job and its pay: employed off the tracked ledger, not seeking);
 //   an unreadable Business_Ledger → seeking: true (the caller writes the line).
-// A business whose Sector reads as no field (sports first among them — the
-// sports world places its own) is never picked, named or not.
+// Outside a GAME row's team, a business whose Sector reads as no field (the
+// sports orgs among them) is never picked, named or not.
 // Pure: no rng, no sheet. Returns { bizId, sentinel, seeking }.
 function pickMintEmployer_(roleType, hood, clockMode, seed, pool, hasRoom) {
   var out = { bizId: '', sentinel: '', seeking: false };
   var role = String(roleType || '').trim();
-  if (String(clockMode || '').trim().toUpperCase() === 'GAME') return out; // the sports world places its own
+  var clock = String(clockMode || '').trim().toUpperCase();
   if (!role || MINT_NO_EMPLOYMENT_ROLE.test(role)) return out;
+  if (clock === 'GAME') {
+    var team = mintGameTeam_(role);
+    if (!team) { out.sentinel = 'UNTRACKED'; return out; }
+    if (!pool) { out.seeking = true; return out; }
+    if (hasRoom(team)) out.bizId = team; else out.sentinel = 'UNTRACKED';
+    return out;
+  }
   var named = mintNamedEmployer_(role);
   if (named === 'SELF_EMPLOYED') { out.sentinel = 'SELF_EMPLOYED'; return out; }
   if (named && pool && pool.fieldById && pool.fieldById[named] && hasRoom(named)) { out.bizId = named; return out; }
+  if (clock === 'MEDIA') {
+    if (!pool || !pool.newsOutlets) { out.seeking = true; return out; }
+    var outlets = pool.newsOutlets.filter(function (b) { return hasRoom(b.id); });
+    if (!outlets.length) { out.sentinel = 'UNTRACKED'; return out; }
+    out.bizId = mintSeedSlot_(seed, mintHoodFirst_(outlets, hood));
+    return out;
+  }
   var cat = (typeof roleFieldOf_ === 'function') ? roleFieldOf_(role) : null;
   var field = (cat && typeof skillTagField_ === 'function') ? skillTagField_(cat) : null;
   if (!field) { out.sentinel = 'UNTRACKED'; return out; }
   if (!pool || !pool.byField) { out.seeking = true; return out; }
+  if (clock === 'CIVIC' && pool.fieldById && pool.fieldById[MINT_CIVIC_EMPLOYER_] && hasRoom(MINT_CIVIC_EMPLOYER_)) {
+    out.bizId = MINT_CIVIC_EMPLOYER_;
+    return out;
+  }
   var open = (pool.byField[field] || []).filter(function (b) { return hasRoom(b.id); });
-  var h = String(hood || '').trim();
-  var near = h ? open.filter(function (b) { return b.hood === h || b.hood === 'City-wide'; }) : [];
-  var from = near.length ? near : open;
-  if (!from.length) { out.sentinel = 'UNTRACKED'; return out; }
-  // Deterministic slot: seed-hash over the citizen identity, no rng
-  // (this path predates ctx.rng plumbing; replayable either way).
-  var s = String(seed || ''), mHash = 0;
-  for (var mc = 0; mc < s.length; mc++) mHash = ((mHash << 5) - mHash + s.charCodeAt(mc)) | 0;
-  out.bizId = from[Math.abs(mHash) % from.length].id;
+  if (!open.length) { out.sentinel = 'UNTRACKED'; return out; }
+  out.bizId = mintSeedSlot_(seed, mintHoodFirst_(open, hood));
   return out;
 }
 

@@ -1,0 +1,22 @@
+BIZ-00005 cap 520 tracked 50 inPool(field) null
+BIZ-00074 cap 250 tracked 11 inPool(field) null
+BIZ-00018 cap 61 tracked 37 inPool(field) Creative & Arts
+BIZ-00099 cap 20 tracked 8 inPool(field) Creative & Arts
+BIZ-00017 cap 1201 tracked 42 inPool(field) Government & Civic
+BIZ-00022 cap 222 tracked 13 inPool(field) Professional
+BIZ-00024 cap 701 tracked 15 inPool(field) Government & Civic
+
+GAME: mint matches live 60, differs 0
+
+MEDIA: mint matches live 44, differs 3
+  POP-00057 "Public Safety" live=BIZ-00018 mint=BIZ-00017
+  POP-00161 "Journalist, Civic & Cultural Opinion" live=SELF_EMPLOYED mint=BIZ-00018
+  POP-00745 "Podcast Host / Software Engineer" live=SELF_EMPLOYED mint=BIZ-00184
+
+CIVIC: mint matches live 47, differs 6
+  POP-00142 "MEDICAL EXAMINER" live=BIZ-00017 mint=BIZ-00015
+  POP-00151 "PROBATION & REENTRY DIRECTOR" live=BIZ-00034 mint=BIZ-00022
+  POP-00152 "DIRECTOR OF EMERGENCY MANAGEMENT" live=BIZ-00034 mint=BIZ-00017
+  POP-00511 "Executive Director - WONA" live=BIZ-00028 mint=UNTRACKED
+  POP-00512 "Bay Area Tenants Union Rep" live=SELF_EMPLOYED mint=UNTRACKED
+  POP-00513 "Oakland Taxpayers Coalition President" live=SELF_EMPLOYED mint=UNTRACKED

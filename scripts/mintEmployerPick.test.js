@@ -2,7 +2,8 @@
 // engine.278 (employment-living plan Task 9) — THE MINT'S EMPLOYER PICK.
 // A minted citizen lands at a business in the role's own field, the hood first;
 // a self-employed role is SELF_EMPLOYED; a role with no field or no room is
-// UNTRACKED; a student, a retiree and a GAME-clock citizen hold no employer.
+// UNTRACKED; a student and a retiree hold no employer; a GAME-clock citizen
+// lands at the team the title names (engine.319), never a field draw.
 // Proves: the pure pick, the pool the pick reads, the two ported lists against
 // their sources, and the mint end to end through processAdvancementRows_'s file.
 // Run: node scripts/mintEmployerPick.test.js
@@ -14,7 +15,7 @@ const src = ['utilities/citizenDerivation.js', 'phase05-citizens/runCareerEngine
   'phase05-citizens/educationCareerEngine.js', 'phase05-citizens/processAdvancementIntake.js'].map(R).join('\n');
 const E = new Function('ECONOMIC_PARAMETERS', 'Logger', src +
   '\nreturn { pickMintEmployer_, buildMintBizPool_, mintNamedEmployer_, roleFieldOf_, skillTagField_, sectorCategory_,' +
-  ' MINT_PARENTHETICAL, MINT_KEYWORD_RULES, MINT_SELF_EMPLOYED_PATTERNS, MINT_NO_EMPLOYMENT_ROLE };')(
+  ' MINT_PARENTHETICAL, MINT_KEYWORD_RULES, MINT_SELF_EMPLOYED_PATTERNS, MINT_NO_EMPLOYMENT_ROLE, MINT_CIVIC_EMPLOYER_, mintGameTeam_ };')(
   JSON.parse(R('data/economic_parameters.json')), { log(m) { logs.push(String(m)); } });
 
 let pass = 0, fail = 0;
@@ -127,7 +128,7 @@ console.log('\n6. no job, no field, no ledger:');
 const blank = (o) => !o.bizId && !o.sentinel && !o.seeking;
 check('6.1 a student holds no employer and no line (the old pick hired students at a shop)', blank(pick('student', 'Temescal')));
 check('6.2 a retiree holds no employer', blank(pick('Retired', 'Temescal')) && blank(pick('Retired Teacher', 'Temescal')));
-check('6.3 a GAME-clock citizen is left to the sports world, whatever the role', blank(pick('Plumber', 'Temescal', 'GAME')) && blank(pick('Athlete', 'Jack London', 'GAME')));
+check('6.3 engine.319: a GAME-clock title that names no Oakland team is UNTRACKED, never a field draw', pick('Plumber', 'Temescal', 'GAME').sentinel === 'UNTRACKED' && !pick('Plumber', 'Temescal', 'GAME').bizId && pick('Athlete', 'Jack London', 'GAME').sentinel === 'UNTRACKED');
 check('6.4 a blank role holds no employer', blank(pick('', 'Temescal')));
 check('6.4b a Vice President is not a resident — the roster rule skipped every title ending in "President" as jobless', !blank(pick('Vice President', 'Downtown')) && !blank(pick('Bank President', 'Downtown')) && blank(pick('Longtime resident', 'Downtown')), JSON.stringify(pick('Vice President', 'Downtown')));
 const odd = pick('QA tester', 'Temescal');
@@ -159,6 +160,67 @@ check('7.3 the no-job rule is the roster script\'s', R('scripts/linkCitizensToEm
 const intakeSrc = R('phase05-citizens/processAdvancementIntake.js');
 check('7.4 the four-bucket classifier is gone from the intake engine', !/classifyMintSector_/.test(intakeSrc) && !/pools\.service/.test(intakeSrc));
 check('7.5 the tag stamp reads the role\'s field, not a bucket map', /var mintField = \(typeof roleFieldOf_ === 'function'\) \? roleFieldOf_\(newRoleType\) : null;/.test(intakeSrc) && !/mintTagMap/.test(intakeSrc));
+
+console.log('\n8. engine.319 — the clock places the citizen (GAME by the title\'s team, an unnamed CIVIC / MEDIA title):');
+const BIZ2 = BIZ.concat([
+  ['BIZ-00074', 'Oakland Oaks', 'Sports', 'Baylight District', 250],
+  ['BIZ-00008', 'Gridiron Analytics', 'Sports Analytics', 'Temescal', 20],
+  ['BIZ-00041', 'Green & Gold Tavern', 'Sports Bar & Dining', 'East Oakland', 30],
+  ['BIZ-00063', 'Civis Systems Field', 'As Stadium', 'Baylight District', 110],
+  ['BIZ-00278', 'Oakland Coliseum', 'Stadium / Historic Landmark', 'East Oakland', 6],
+  ['BIZ-00103', 'Firehouse 29 Baseball Academy', 'Sports', 'West Oakland', 20],
+  ['BIZ-00018', 'Bay Tribune', 'Media & Journalism', 'Downtown', 61],
+  ['BIZ-00099', 'OakTown Echo', 'Media & Journalism', 'West Oakland', 20],
+  ['BIZ-00017', 'City of Oakland', 'Municipal Government', 'Downtown', 1201],
+  ['BIZ-00237', 'Hale & Ortiz', 'Legal Services', 'Downtown', 40],
+]);
+const pool2 = E.buildMintBizPool_(ssOf(BIZ2));
+const room2 = (id) => { const st = pool2.statedById[id]; return st !== null && st !== undefined && st > 0; };
+const pick2 = (role, hood, clock, seed, rm, p) => E.pickMintEmployer_(role, hood, clock, seed === undefined ? 'seed-1' : seed, p === undefined ? pool2 : p, rm || room2);
+const sweep = (role, hood, clock, n) => { const got = {}; for (let k = 0; k < (n || 100); k++) { const o = pick2(role, hood, clock, 'w' + k); got[o.bizId || o.sentinel || (o.seeking ? 'seeking' : 'blank')] = 1; } return Object.keys(got).sort().join(','); };
+// GAME — the team in the title
+const OAKS = ['Oakland Oaks - Power Forward', 'Oakland Oaks - Center', 'PG / The Oaks', 'Head Coach, Oakland Oaks'];
+const AS = ["Starting Pitcher, Oakland A's", 'Closing Pitcher, Oakland As', "Designated Hitter, Oakland A's Legend", 'Catcher, Las Vegas Aviators (AAA)',
+  'Starting Pitcher, Midland RockHounds (AA)', 'Second Baseman, Stockton Ports (A)', "Hitting Coach, Oakland A's", 'Left Fielder, Oakland A\u2019s'];
+check('8.1 a GAME title naming the Oaks lands at the Oaks, on every seed', OAKS.every(t => sweep(t, 'Jack London', 'GAME') === 'BIZ-00074'), OAKS.map(t => sweep(t, 'Jack London', 'GAME')).join(' | '));
+check('8.2 a GAME title naming the A\'s or a farm club lands at the A\'s (live\'s own titles, curly apostrophe too)', AS.every(t => sweep(t, 'Temescal', 'GAME') === 'BIZ-00005'), AS.map(t => t + '>' + sweep(t, 'Temescal', 'GAME')).join(' | '));
+check('8.3 the first team the title names decides', E.mintGameTeam_("General Manager, Oakland A's & The Oaks") === 'BIZ-00005' && E.mintGameTeam_("Head Coach, The Oaks — formerly Oakland A's") === 'BIZ-00074');
+check('8.4 a word containing "Oaks" or "As" names no team', E.mintGameTeam_('Oaksmith Fan Club') === '' && E.mintGameTeam_('Oakland Aspire League') === '');
+check('8.5 another league\'s player is UNTRACKED — employed off the tracked ledger', pick2('Third Baseman, New York Mets', 'Temescal', 'GAME').sentinel === 'UNTRACKED' && !pick2('Third Baseman, New York Mets', 'Temescal', 'GAME').bizId);
+check('8.6 a GAME no-job title holds no employer', blank(pick2("Hall of Famer, Oakland A's", 'Temescal', 'GAME')) && blank(pick2('student', 'Temescal', 'GAME')) && blank(pick2('', 'Temescal', 'GAME')));
+check('8.7 a full team or a team off the ledger is UNTRACKED; no ledger read is seeking', pick2('Oakland Oaks - Center', 'X', 'GAME', 's', (id) => id !== 'BIZ-00074' && room2(id)).sentinel === 'UNTRACKED' &&
+  pick('Oakland Oaks - Center', 'X', 'GAME').sentinel === 'UNTRACKED' && pick2('Oakland Oaks - Center', 'X', 'GAME', 's', null, null).seeking === true);
+check('8.8 the pick reads the clock case-blind', pick2('Oakland Oaks - Center', 'X', 'Game').bizId === 'BIZ-00074' && pick2('Oakland Oaks - Center', 'X', ' game ').bizId === 'BIZ-00074');
+check('8.9 an ENGINE row with a player or staff title never lands at a team (codex gates 1–6 hold)',
+  ['Power Forward, Oakland Oaks', "Scout, Oakland A's", "Manager, Oakland A's", "A's Marketing Coordinator"].every(t => ['BIZ-00005', 'BIZ-00074'].indexOf(pick2(t, 'Baylight District', 'ENGINE').bizId) < 0));
+// the pool
+check('8.10 the pool: Sports Analytics and a sports bar keep their field; the teams, the stadiums and the academy stay out',
+  pool2.fieldById['BIZ-00008'] === 'Tech & Innovation' && pool2.fieldById['BIZ-00041'] === 'Food & Culture' &&
+  ['BIZ-00005', 'BIZ-00074', 'BIZ-00063', 'BIZ-00278', 'BIZ-00103'].every(id => pool2.fieldById[id] === undefined) && pool2.statedById['BIZ-00074'] === 250,
+  JSON.stringify(['BIZ-00008', 'BIZ-00041', 'BIZ-00005', 'BIZ-00074', 'BIZ-00063', 'BIZ-00278', 'BIZ-00103'].map(id => pool2.fieldById[id])));
+check('8.11 Data Analyst (Gridiron Analytics) lands at Gridiron (the gate-6 regex had dropped it)', pick2('Data Analyst (Gridiron Analytics)', 'Temescal', 'MEDIA').bizId === 'BIZ-00008' && pick2('Data Analyst (Gridiron Analytics)', 'Temescal', 'ENGINE').bizId === 'BIZ-00008');
+check('8.12 the news outlets are the journalism Sectors only', pool2.newsOutlets.map(b => b.id).sort().join() === 'BIZ-00018,BIZ-00099', pool2.newsOutlets.map(b => b.id).join());
+// MEDIA
+check('8.13 an unnamed MEDIA title lands at a news outlet, the hood first', pick2('Photo Assistant', 'Downtown', 'MEDIA').bizId === 'BIZ-00018' && pick2('Photo Assistant', 'West Oakland', 'MEDIA').bizId === 'BIZ-00099' &&
+  sweep('Podcast Host / Software Engineer', 'Temescal', 'MEDIA') === 'BIZ-00018,BIZ-00099', sweep('Podcast Host / Software Engineer', 'Temescal', 'MEDIA'));
+check('8.14 a MEDIA title the mapping names still goes there; a self-employed pattern stays self-employed', pick2('Reporter', 'West Oakland', 'MEDIA').bizId === 'BIZ-00018' && pick2('Freelance Photo Editor', 'Downtown', 'MEDIA').sentinel === 'SELF_EMPLOYED');
+check('8.15 the same unnamed title on an ENGINE row is decided as before', pick2('Photo Assistant', 'Downtown', 'ENGINE').sentinel === 'UNTRACKED');
+check('8.16 no outlet with room → UNTRACKED; no ledger → seeking', pick2('Photo Assistant', 'Downtown', 'MEDIA', 's', (id) => ['BIZ-00018', 'BIZ-00099'].indexOf(id) < 0 && room2(id)).sentinel === 'UNTRACKED' &&
+  pick2('Photo Assistant', 'Downtown', 'MEDIA', 's', null, null).seeking === true);
+// CIVIC
+check('8.17 an unnamed CIVIC title with a field lands at City of Oakland on every seed — not the fire department, not a law firm',
+  sweep('Redevelopment Board', 'Temescal', 'CIVIC') === 'BIZ-00017' && sweep('Chief Legal Counsel', 'Fruitvale', 'CIVIC') === 'BIZ-00017',
+  sweep('Redevelopment Board', 'Temescal', 'CIVIC') + ' / ' + sweep('Chief Legal Counsel', 'Fruitvale', 'CIVIC'));
+check('8.18 a CIVIC title the mapping names still goes there', pick2('Police Chief', 'Temescal', 'CIVIC').bizId === 'BIZ-00024' && pick2('Mayor of Oakland', 'Downtown', 'CIVIC').bizId === 'BIZ-00017');
+check('8.19 a CIVIC title with no field (a union rep) stays UNTRACKED — the City is not their payroll', pick2('Bay Area Tenants Union Rep', 'Fruitvale', 'CIVIC').sentinel === 'UNTRACKED');
+check('8.20 the same title on an ENGINE row still draws its field', pick2('Chief Legal Counsel', 'Downtown', 'ENGINE').bizId === 'BIZ-00237');
+const cityFull = (id) => id !== 'BIZ-00017' && room2(id);
+check('8.21 City of Oakland with no room → the field draw, as any full employer', ['BIZ-00017', ''].indexOf(pick2('Redevelopment Board', 'Temescal', 'CIVIC', 's', cityFull).bizId) < 0);
+// parity
+check('8.22 the CIVIC default is the mapping\'s Government & Civic category default', E.MINT_CIVIC_EMPLOYER_ === mapping.categoryDefaults['Government & Civic'], mapping.categoryDefaults['Government & Civic']);
+const rosterSrc = R('scripts/linkCitizensToEmployers.js');
+check('8.23 the two team ids are the roster script\'s sports layer', rosterSrc.indexOf("bizId = 'BIZ-00005'; // Oakland Athletics") >= 0 && rosterSrc.indexOf("bizId = 'BIZ-00074'; // Oakland Oaks") >= 0 &&
+  E.mintGameTeam_('Oakland Oaks') === 'BIZ-00074' && E.mintGameTeam_("Oakland A's") === 'BIZ-00005');
 
 console.log('\n' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

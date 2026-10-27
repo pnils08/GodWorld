@@ -360,5 +360,57 @@ console.log('\n9. engine.278 — the minted row carries the pick (field employer
   check('a sentinel reserves no slot and sends no headcount signal', !sig || !sig.businessDeltas || (!sig.businessDeltas.SELF_EMPLOYED && !sig.businessDeltas.UNTRACKED));
 }
 
+console.log('\n10. engine.319 — the clock is folded at the door and places the citizen:');
+{
+  const w = world([]);
+  w.sheets.Business_Ledger.rows.push(
+    ['BIZ-00074', 'Oakland Oaks', 'Sports', 'Baylight District', 250, '', '', '', ''],
+    ['BIZ-00005', 'Oakland Athletics', 'Sports Franchise', 'Baylight District', 520, '', '', '', ''],
+    ['BIZ-00017', 'City of Oakland', 'Municipal Government', 'Downtown', 1201, '', '', '', ''],
+    ['BIZ-00023', 'Oakland Fire Department', 'Public Safety', 'Temescal', 452, '', '', '', ''],
+    ['BIZ-00018', 'Bay Tribune', 'Media & Journalism', 'Downtown', 61, '', '', '', '']);
+  E.ensureHouseholdQueueSheet_(w.ctx.ss);
+  const adv = w.sheets.Advancement_Intake1, qh = adv.rows[0], qc = (n) => qh.indexOf(n);
+  qh.push('EmployerBizId');
+  const add = (first, last, role, clock, extra) => { const r = new Array(qh.length).fill(''); r[qc('First')] = first; r[qc('Last')] = last; r[qc('RoleType')] = role; r[qc('Tier')] = 4; r[qc('ClockMode')] = clock; r[qc('BirthYear')] = 1999; r[qc('Neighborhood')] = 'Temescal'; r[qc('Notes')] = 'Second Round Draft Pick'; Object.assign(r, extra || {}); adv.appendRow(r); };
+  add('Hal', 'Haywood', 'Oakland Oaks - Power Forward', 'Game');
+  add('Cal', 'Ketch', 'Catcher, Midland RockHounds (AA)', ' game ');
+  add('Rhoda', 'Board', 'Redevelopment Board', 'Civic');
+  add('Phil', 'Lens', 'Photo Assistant', 'media');
+  add('Eve', 'Blank', 'Plumber', '');
+  const carried = {}; carried[qc('EmployerBizId')] = 'BIZ-00005'; add('Otto', 'Carried', 'Oakland Oaks - Center', 'GAME', carried);
+  w.ctx.summary.careerSignals = { businessDeltas: {} }; // Phase5-Career runs first on live and leaves this
+  const before = w.ctx.ledger.rows.length;
+  E.processAdvancementRows_(w.ctx, 'C' + CYCLE, CYCLE);
+  const [hal, cal, rhoda, phil, eve, otto] = w.ctx.ledger.rows.slice(before);
+  const cm = (r) => r && r[col('ClockMode')], emp = (r) => r && r[col('EmployerBizId')];
+  check('a "Game" cell mints GAME; " game " too; "Civic" CIVIC; "media" MEDIA; blank ENGINE', cm(hal) === 'GAME' && cm(cal) === 'GAME' && cm(rhoda) === 'CIVIC' && cm(phil) === 'MEDIA' && cm(eve) === 'ENGINE', [hal, cal, rhoda, phil, eve].map(cm).join());
+  check('the Oaks rookie is minted at the Oaks; the farm-club catcher at the A\'s', emp(hal) === 'BIZ-00074' && emp(cal) === 'BIZ-00005', emp(hal) + '/' + emp(cal));
+  check('…on the sports base salary, as every GAME mint', hal && hal[col('Income')] === 100000 && cal[col('Income')] === 100000, hal && hal[col('Income')]);
+  check('…and the team\'s headcount signal counts them', (w.ctx.summary.careerSignals.businessDeltas['BIZ-00074'] || {}).gained === 1 && (w.ctx.summary.careerSignals.businessDeltas['BIZ-00005'] || {}).gained === 2, JSON.stringify(w.ctx.summary.careerSignals.businessDeltas));
+  check('a filled employer column still wins over the title', emp(otto) === 'BIZ-00005', emp(otto));
+  check('an unnamed civic title lands at City of Oakland, not the fire department in its hood', emp(rhoda) === 'BIZ-00017', emp(rhoda));
+  check('an unnamed media title lands at a news outlet', emp(phil) === 'BIZ-00018', emp(phil));
+  check('no seeking-work line on any of them', [hal, cal, rhoda, phil, otto].every(r => !/Seeking work/.test(r[col('LifeHistory')])));
+
+  const w2 = world([]);
+  E.ensureHouseholdQueueSheet_(w2.ctx.ss);
+  const adv2 = w2.sheets.Advancement_Intake1, q2 = adv2.rows[0], c2 = (n) => q2.indexOf(n);
+  const ok = new Array(q2.length).fill(''); ok[c2('First')] = 'First'; ok[c2('Last')] = 'Fine'; ok[c2('Tier')] = 4; ok[c2('ClockMode')] = 'ENGINE'; ok[c2('BirthYear')] = 1991; ok[c2('Neighborhood')] = 'Temescal';
+  const bad = ok.slice(); bad[c2('First')] = 'Gwen'; bad[c2('Last')] = 'Typo'; bad[c2('ClockMode')] = 'Gaem';
+  adv2.appendRow(ok); adv2.appendRow(bad);
+  const before2 = w2.ctx.ledger.rows.length;
+  let err = null; try { E.processAdvancementRows_(w2.ctx, 'C' + CYCLE, CYCLE); } catch (e) { err = e; }
+  check('an unknown clock throws at the door, naming the row and the cell', !!err && /Advancement_Intake row for "Gwen Typo" carries ClockMode "Gaem", which is not ENGINE, GAME, CIVIC or MEDIA/.test(err.message), err && err.message);
+  check('…before a POPID is drawn for it, and no queue row is cleared', w2.ctx.ledger.rows.length === before2 + 1 && adv2.cleared.length === 0, (w2.ctx.ledger.rows.length - before2) + ' minted, ' + adv2.cleared.length + ' cleared');
+  const w3 = world([], { extraRows: [slRow({ POPID: 'POP-00950', First: 'Ida', Last: 'Known', Tier: 4, ClockMode: 'ENGINE', Status: 'Active', BirthYear: 1980, Neighborhood: 'Temescal' })] });
+  E.ensureHouseholdQueueSheet_(w3.ctx.ss);
+  const adv3 = w3.sheets.Advancement_Intake1, q3 = adv3.rows[0], c3 = (n) => q3.indexOf(n);
+  const usage = new Array(q3.length).fill(''); usage[c3('First')] = 'Ida'; usage[c3('Last')] = 'Known'; usage[c3('Tier')] = 3; usage[c3('ClockMode')] = 'whatever';
+  adv3.appendRow(usage);
+  let err3 = null; try { E.processAdvancementRows_(w3.ctx, 'C' + CYCLE, CYCLE); } catch (e) { err3 = e; }
+  check('an existing citizen\'s row ignores the cell, as before (it never sets the clock)', !err3 && w3.ctx.ledger.rows.find(r => r[col('POPID')] === 'POP-00950')[col('ClockMode')] === 'ENGINE', err3 && err3.message);
+}
+
 console.log('\n' + pass + ' passed, ' + fail + ' failed');
 process.exit(fail ? 1 : 0);

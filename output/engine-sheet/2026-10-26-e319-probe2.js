@@ -1,11 +1,11 @@
 // engine.319 bench probe, round 2 (codex diff gate §5) — BENCH ONLY, title-guarded, after reset_leg and the bench Status step.
-//   lay <leg> [--badclock | --neutral | --dup] — (--dup: the civic probe's name again, 'Gaem', right after it)
+//   lay <leg> [--badclock | --badhood | --neutral | --dup] — (--badhood, engine.320: 'Benchprobe Badhood-E320', hood 'Temescall', LAST) — (--dup: the civic probe's name again, 'Gaem', right after it)
 //                   (--neutral: blank the two rookie rows, add no probe — nothing reaches an engine.319 branch)
 //                   assert the baseline's two Oaks rookie rows are pending ('Game'); add the three synthetic probes
 //                   (+ with --badclock a fourth, 'Benchprobe Badclock-E319', ClockMode 'Gaem', LAST in queue order).
 //                   Snapshot → output/engine-sheet/2026-10-26-e319-r2-lay-<leg>.json: ledger max POPID, Engine_Errors and
 //                   Ripple_Ledger row counts, Generic_Citizens Status by row, pending intake names.
-//   check <leg> [--expect | --expect-badclock] — after the fire: every minted row (POPID past the snapshot), every column but
+//   check <leg> [--expect | --expect-badclock | --expect-badhood (the badclock checks, the error naming the hood row and cell)] — after the fire: every minted row (POPID past the snapshot), every column but
 //                   the timestamps; Business_Ledger Employee_Count for every row; Ripple_Ledger rows added; Generic_Citizens
 //                   Status flips; Engine_Errors added; intake names still pending → …-e319-r2-<leg>.json.
 //       --expect          the five land exactly as Task 10 says, no seeking-work line, Engine_Errors +0.
@@ -25,6 +25,7 @@ const PROBES = [
   { First: 'Benchprobe', Last: 'Farm-E319', RoleType: 'Catcher, Midland RockHounds (AA)', ClockMode: 'game', Neighborhood: 'Fruitvale' },
 ];
 const BAD = { First: 'Benchprobe', Last: 'Badclock-E319', RoleType: 'Plumber', ClockMode: 'Gaem', Neighborhood: 'Temescal' };
+const BADHOOD = { First: 'Benchprobe', Last: 'Badhood-E320', RoleType: 'Plumber', ClockMode: 'ENGINE', Neighborhood: 'Temescall' };
 const ROOKIES = ['Harry Hayward', 'Trevor Henderson'];
 const EXPECT = {
   'Harry Hayward': { ClockMode: 'GAME', EmployerBizId: 'BIZ-00074' },
@@ -66,7 +67,7 @@ const [mode, leg, flag] = process.argv.slice(2);
     console.log(fails.length ? 'FAIL ' + fails.join(' | ') : 'PASS — ' + leg + ' vs ' + flag + ': every minted column, every Employee_Count, every Ripple_Ledger row, every Generic_Citizens flip and the queue equal outside the five');
     process.exit(fails.length ? 1 : 0);
   }
-  if (!/^[A-Z][0-9]?[a-z]?$/.test(String(leg || ''))) throw new Error('usage: lay <leg> [--badclock] | check <leg> [--expect|--expect-badclock] | compare <A> <B>');
+  if (!/^[A-Z][0-9]?[a-z]?$/.test(String(leg || ''))) throw new Error('usage: lay <leg> [--badclock|--badhood|--neutral|--dup] | check <leg> [--expect|--expect-badclock|--expect-badhood] | compare <A> <B>');
   const SNAP = O + '2026-10-26-e319-r2-lay-' + leg + '.json';
   const adv = await get('Advancement_Intake1'), h = adv[0];
   const ac = n => { const i = h.indexOf(n); if (i < 0) throw new Error('intake: no ' + n + ' column'); return i; };
@@ -101,15 +102,15 @@ const [mode, leg, flag] = process.argv.slice(2);
     }
     // --dup (codex recheck §1): a later row repeating the civic probe's name with 'Gaem' — the new citizen's update, never refused
     const DUP = { First: 'Benchprobe', Last: 'Civic-E319', RoleType: '', ClockMode: 'Gaem', Neighborhood: '', Tier: 3 };
-    const add = flag === '--dup' ? [PROBES[0], DUP, PROBES[1], PROBES[2]] : PROBES.concat(flag === '--badclock' ? [BAD] : []);
+    const add = flag === '--dup' ? [PROBES[0], DUP, PROBES[1], PROBES[2]] : PROBES.concat(flag === '--badclock' ? [BAD] : flag === '--badhood' ? [BADHOOD] : []);
     add.forEach(p => { if (taken.has(p.First + ' ' + p.Last)) throw new Error('probe name on the ledger: ' + p.Last); });
-    const rows = add.map(p => { const r = new Array(h.length).fill(''); r[ac('First')] = p.First; r[ac('Last')] = p.Last; r[ac('RoleType')] = p.RoleType; r[ac('Tier')] = p.Tier || 4; r[ac('ClockMode')] = p.ClockMode; r[ac('Notes')] = 'engine.319 bench probe'; r[ac('BirthYear')] = 1994; r[ac('Neighborhood')] = p.Neighborhood; return r; });
+    const rows = add.map(p => { const r = new Array(h.length).fill(''); r[ac('First')] = p.First; r[ac('Last')] = p.Last; r[ac('RoleType')] = p.RoleType; r[ac('Tier')] = p.Tier || 4; r[ac('ClockMode')] = p.ClockMode; r[ac('Notes')] = 'engine.319/320 bench probe'; r[ac('BirthYear')] = 1994; r[ac('Neighborhood')] = p.Neighborhood; return r; });
     const at = adv.length + 1;
     await api.spreadsheets.values.update({ spreadsheetId: ID, range: 'Advancement_Intake1!A' + at, valueInputOption: 'RAW', requestBody: { values: rows } });
     const after = await get('Advancement_Intake1');
     const tail = pendingNames(after).slice(-add.length);
     if (JSON.stringify(tail) !== JSON.stringify(add.map(p => p.First + ' ' + p.Last))) throw new Error('probes are not last in queue order: ' + JSON.stringify(tail));
-    const snap = { leg, badclock: flag === '--badclock', dup: flag === '--dup', queued: add.map(p => ({ name: p.First + ' ' + p.Last, RoleType: p.RoleType, Neighborhood: p.Neighborhood })), maxPop: Math.max(...led.slice(1).map(r => popNum(r[lc('POPID')]))), ee: ee.length, rip: rip.length,
+    const snap = { leg, badclock: flag === '--badclock', badhood: flag === '--badhood', dup: flag === '--dup', queued: add.map(p => ({ name: p.First + ' ' + p.Last, RoleType: p.RoleType, Neighborhood: p.Neighborhood })), maxPop: Math.max(...led.slice(1).map(r => popNum(r[lc('POPID')]))), ee: ee.length, rip: rip.length,
       gcStatus: gc.slice(1).map(r => [nameOf(r, gF, gL), String(r[gS] || '')]), pending: pendingNames(after), rookieClock: rk.map(x => x[0][ac('ClockMode')]) };
     fs.writeFileSync(SNAP, JSON.stringify(snap));
     console.log('leg ' + leg + ': rookies pending ' + JSON.stringify(snap.rookieClock) + '; ' + add.length + ' probes last at row ' + at + '; pending ' + snap.pending.length + '; ledger max POP-' + snap.maxPop + '; EE ' + (ee.length - 1) + '; ripples ' + (rip.length - 1));
@@ -149,9 +150,10 @@ const [mode, leg, flag] = process.argv.slice(2);
     if (minted.length !== 13) fails.push('minted ' + minted.length + ' (the C113 start mints 13 with the five)');
     if (S.dup && pending.indexOf('Benchprobe Civic-E319') >= 0) fails.push('the repeat row was not processed');
   }
-  if (flag === '--expect-badclock') {
+  if (flag === '--expect-badclock' || flag === '--expect-badhood') {
+    const want = flag === '--expect-badhood' ? [/Benchprobe Badhood-E320/, /Temescall/, /Neighborhood_Map/, /no row in the queue was processed/] : [/Benchprobe Badclock-E319/, /Gaem/];
     if (eeNew.length !== 1) fails.push('Engine_Errors +' + eeNew.length + ' (want exactly 1)');
-    else if (!/Phase5-Advancement/.test(eeNew[0]) || !/Benchprobe Badclock-E319/.test(eeNew[0]) || !/Gaem/.test(eeNew[0])) fails.push('the error does not name the phase / row / cell: ' + eeNew[0]);
+    else if (!/Phase5-Advancement/.test(eeNew[0]) || want.some(re => !re.test(eeNew[0]))) fails.push('the error does not name the phase / row / cell: ' + eeNew[0]);
     const queued = new Set(S.pending);
     const leaked = minted.filter(m => queued.has(m.name)).map(m => m.name);
     if (leaked.length) fails.push('queued names minted: ' + leaked.join(', '));
@@ -169,7 +171,7 @@ const [mode, leg, flag] = process.argv.slice(2);
     const unexplained = emerged.filter(f => !queued.has(f[1]) && !mintedNames.has(f[1]));
     if (unexplained.length) fails.push('Emerged flip with no mint behind it: ' + unexplained.map(f => f[1]).join(', '));
   }
-  const rec = { leg, at: new Date().toISOString(), badclock: S.badclock, minted, employeeCount, ripples, gcFlips, eeNew, pending,
+  const rec = { leg, at: new Date().toISOString(), badclock: S.badclock, badhood: S.badhood, minted, employeeCount, ripples, gcFlips, eeNew, pending,
     verdict: flag ? (fails.length ? 'FAIL' : 'PASS') : 'RECORD', fails };
   fs.writeFileSync(O + '2026-10-26-e319-r2-' + leg + '.json', JSON.stringify(rec, null, 1));
   minted.forEach(m => console.log('  ' + m.POPID + ' ' + m.name + ' | ' + m.ClockMode + ' | ' + m.EmployerBizId + ' | ' + m.RoleType + ' | ' + m.Income));

@@ -49,7 +49,7 @@
 - [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]]: engine.27 ready
 - [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
 - [[../gap]]: engine.319 ready
-- `docs/for-claude-review/2026-10-25-codex-engine301-gate3-recheck.md`: engine.317 ready
+- `docs/archive/for-claude-review/2026-10-25-codex-engine301-gate3-recheck.md`: engine.317 ready
 - `output/antigravity/2026-10-19-review-engine214-prod-candidate.md`: engine.316 ready
 - [[../plans/2026-10-15-engine-290-transit-rides-the-sim]]: engine.290 live-observing
 - [[../reference/DEPLOY_HISTORY]]: engine.294 live-observing
@@ -104,6 +104,7 @@
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.319 | The intake mint places a citizen by clock: ClockMode folded at the door; GAME → the team in the title; unnamed CIVIC → City of Oakland; unnamed MEDIA → a news outlet. LIVE PROD @165 stage 29 2026-10-27 (builder go); first live fire C114. Opus | live-observing | engine-sheet | [[../plans/2026-07-27-employment-living-system]] Task 10 |
+| engine.320 | An off-map intake hood refuses the whole queue up front, as the engine.319 clock does (it threw mid-pass: earlier mints committed, no queue row cleared, re-ran next Cycle as bumps). Model Opus | in-progress | engine-sheet | [[../plans/2026-07-27-employment-living-system]] Task 11 |
 | pipeline.85 | Rhea gates the world's record, not the Packet (builder 10-25: gate the facts, not the color): writer fence + repair pass gone, audit never fails a draft, Rhea sees only what named citizens said + ledger + world state. Proof: 2026-10-26 fanout | live-observing | research-build | [[../plans/2026-10-11-media-extension]] §Status log pipeline.85 |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | engine.296 | Sports legends from retired MLB-origin ledger rows, no literal fallback — LIVE @143/@144; re-read on C113 (Sun 2026-10-25) | live-observing | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] |
@@ -139,10 +140,9 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.320 | The intake's off-map hood throw fires mid-pass: earlier mints commit, no queue row clears, they re-run next Cycle as existing bumps — make the refusal queue-wide like engine.319's clock check | ready |  | [[../plans/2026-07-27-employment-living-system]] Task 10 §What it does not do |
-| engine.321 | A tracked mint's headcount signal lands after Career writes Employee_Count; Phase 6 reads 2+ mints at one business as BUSINESS_EXPANSION (C110: 54 authored staff) — is a mint business growth? | needs-info |  | [[../plans/2026-07-27-employment-living-system]] Task 10 §What it does not do |
+| engine.321 | Is a tracked mint business growth (its headcount signal; 2+ at one business = BUSINESS_EXPANSION)? Builder 2026-10-27: "a citizen added to a buisness can result in a growth" — stands as built, no change | wontfix |  | [[../plans/2026-07-27-employment-living-system]] §Open questions |
 | pipeline.88 | Proposal, builder's call: daily seats (Ines, Tamsin) write angle/packet/draft under a Cycle-keyed stem, so five days share one file set and a failed day can see yesterday's plan (Ines Sun 10-25). Key their stems by day? | needs-info | research-build | [[../plans/2026-10-11-media-extension]] §Status log pipeline.87 |
-| engine.317 | A read-only door for FIRE_ADMISSION_JSON (webTrigger getprop is carry-forward-only; a GET fires a Cycle), so a PROD push can prove no Cycle was admitted across it (codex engine.301 gate 3, 2026-10-25) | ready |  | `docs/for-claude-review/2026-10-25-codex-engine301-gate3-recheck.md` |
+| engine.317 | A read-only door for FIRE_ADMISSION_JSON (webTrigger getprop is carry-forward-only; a GET fires a Cycle), so a PROD push can prove no Cycle was admitted across it (codex engine.301 gate 3, 2026-10-25) | ready |  | `docs/archive/for-claude-review/2026-10-25-codex-engine301-gate3-recheck.md` |
 | engine.316 | Five hoods' texture pools are empty after textureSigned_: Eastlake, Baylight District, East Oakland have 0 up / 0 down lines; Grand Lake, San Antonio 0 down (agy 2026-10-19 F6, split from engine.301). Author signed lines → builder approves → land under the substrate gate | ready | research-build | `output/antigravity/2026-10-19-review-engine214-prod-candidate.md` F6 |
 | engine.290 | Transit rides the sim — LIVE PROD stage 4d; re-read the transit mints on C113 (Sun 2026-10-25) | live-observing | engine-sheet | [[../plans/2026-10-15-engine-290-transit-rides-the-sim]] |
 | engine.294 | Raw "$MOOD" token in LifeHistory — fixed LIVE @138 stage 4g; re-read on C113 (Sun 2026-10-25) | live-observing | engine-sheet | commit 71637c7a; [[../reference/DEPLOY_HISTORY]] §stage 4g |

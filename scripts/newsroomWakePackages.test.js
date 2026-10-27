@@ -71,7 +71,7 @@ assert.equal(carmen.assignment.popid, 'POP-00011');
 assert.equal(carmen.packetContract, 'v2');
 assert.equal(packagesApi.routeFor(carmen, 'angle').model, 'deepseek/deepseek-v4-flash-0731');
 assert.equal(packagesApi.routeFor(carmen, 'report').model, 'deepseek/deepseek-v4-flash-0731');
-assert.equal(packagesApi.routeFor(carmen, 'write').model, 'anthropic/claude-haiku-5.5');
+assert.equal(packagesApi.routeFor(carmen, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(carmen.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(carmen.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(carmen.reviewProfile.textureConditions.some(v => v.includes('all nine seats')));

@@ -3,7 +3,7 @@
 # (BASELINE-1004-C112b + marital migration + GC header + the engine.318 Status step), C113, all on stage 29d:
 #   N5 = neutral queue (rookie rows blanked, no probe) — compare with round 3's A0 (stage 28, same start, same seed): byte-equal
 #   B5  = the rookies + three probes — the five land (clock,
-#         employer, role, hood, Active, Tier 4), 13 minted, the repeat processed as the update, Engine_Errors +0 (--expect)
+#         employer, role, hood, Active, Tier 4), 13 minted, Engine_Errors +0 (--expect)
 #   C5  = the rookies + three probes + 'Gaem' last — the whole queue refused (--expect-badclock; benchfire exits 2 on
 #         PASS-WITH-NEW-EE, so the check runs on rc 2 when the verdict says so)
 # End: bench code restored to stage 28; data left at C113 (leg C5).

@@ -2720,7 +2720,7 @@ async function runReport(assign) {
   fs.writeFileSync(packetPath, JSON.stringify({
     stage: 'report', desk, cycle, persona: personaSlug,
     ...(PACKET_ACTIVE ? { packetContract: livedPacket.VERSION } : {}),
-    reporter: assign ? { name: assign.name, popid: assign.popid } : null,
+    reporter: assign ? { name: assign.name, popid: assign.popid } : (persona ? { name: persona.name, popid: persona.popid } : null),
     assignment: story ? { story } : null,   // Task 2.5.4: what the quote pool was seeded from
     angle: path.relative(ROOT, anglePath),
     quotesRequested: asks.length + officeRecords.length, quotesLanded: quotes.length, quotes,

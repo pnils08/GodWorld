@@ -195,6 +195,37 @@ function profilesFor(names) {
   return out;
 }
 
+// A citizen's thread (pipeline.89, Tamsin): the ledger's LifeHistory entries oldest -> newest, then any
+// rows this cycle's beat dump holds for the POPID that the ledger column does not yet show. Sim-clock
+// stamps (Y3C9), never a real date — the compressed header line is dropped. Exact-name match only.
+function threadFor(name, limit) {
+  const lim = limit || 15;
+  const want = String(name || '').replace(/\s+/g, ' ').trim().toLowerCase();
+  if (!want) return [];
+  for (const row of loadRows()) {
+    const full = String(row.Name || '').replace(/\s+/g, ' ').trim();
+    const fl = [row.First, row.Last].filter(Boolean).join(' ').replace(/\s+/g, ' ').trim();
+    if (full.toLowerCase() !== want && fl.toLowerCase() !== want) continue;
+    const lines = String(row.LifeHistory || '').split('\n').map(l => l.trim()).filter(l => /^Y\d+C\d+ — /.test(l));
+    const pop = String(row.POPID || '').trim();
+    const seen = new Set(lines.map(l => l.replace(/^Y\d+C\d+ — \[[^\]]*\]\s*/, '')));
+    const recent = [];
+    try {
+      const f = path.join(ROOT, 'output', 'beats', 'LifeHistory_Log.jsonl');
+      for (const l of fs.readFileSync(f, 'utf8').split('\n')) {
+        if (!l || l.indexOf(pop) < 0) continue;
+        let j; try { j = JSON.parse(l); } catch (_) { continue; }
+        if (String(j.POPID).trim() !== pop || seen.has(String(j.EventText || '').trim())) continue;
+        recent.push(j.Timestamp + ' — [' + String(j.EventTag || '').split('|')[0] + '] ' + String(j.EventText || '').trim());
+      }
+    } catch (_) { /* no beat dump on disk = the ledger column alone */ }
+    const all = lines.concat(recent);
+    return [full + ' (' + pop + ') — ' + all.length + ' life-history entries on the record; last ' + Math.min(lim, all.length) + ', oldest first:']
+      .concat(all.slice(-lim));
+  }
+  return [];
+}
+
 // Title words stripped iteratively from the front of a candidate ("Deputy Mayor
 // Brenda Okoro" -> "Brenda Okoro"; "Police Chief Montez" -> "Montez" -> skipped
 // as single-word rather than false-flagged invented). Compound titles were the
@@ -328,4 +359,4 @@ if (require.main === module) {
   process.exit(out.unverified.length ? 2 : 0);
 }
 
-module.exports = { checkText, extractCandidates, loadCanonNames, buildStoplist, profilesFor, profilesForPopids, resolveCitizens, ensureLedgerSnapshot };
+module.exports = { checkText, extractCandidates, loadCanonNames, buildStoplist, profilesFor, profilesForPopids, threadFor, resolveCitizens, ensureLedgerSnapshot };

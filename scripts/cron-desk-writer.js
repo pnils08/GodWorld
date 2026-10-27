@@ -616,14 +616,133 @@ function callOpenRouterRaw(payloadObj) {
 // ---------------------------------------------------------------------------
 const OPENROUTER_TOOLS = [
   { type: 'function', function: { name: 'canon_search', description: 'Ranked keyword search across the city records on disk — published editions, citizens, businesses, world summaries, staged past work. Use for canon depth and prior coverage.', parameters: { type: 'object', properties: { query: { type: 'string', description: 'keywords, e.g. "Fruitvale transit"' } }, required: ['query'] } } },
-  { type: 'function', function: { name: 'citizen_lookup', description: 'Exact citizen lookup in the simulation ledger by name. Returns the canonical profile (role, neighborhood, birth year) — these facts are immutable.', parameters: { type: 'object', properties: { name: { type: 'string', description: 'full name, e.g. "Lucia Polito"' } }, required: ['name'] } } },
-  { type: 'function', function: { name: 'sheet_read', description: 'Read a bounded slice of one allowlisted live city sheet: Initiative_Tracker, Neighborhood_Map, Oakland_Sports_Feed, Civic_Office_Ledger.', parameters: { type: 'object', properties: { tab: { type: 'string' }, match: { type: 'string', description: 'optional: return only the rows that name this term (an initiative, office or neighborhood), plus the header' } }, required: ['tab'] } } }
+  { type: 'function', function: { name: 'citizen_lookup', description: 'Exact citizen lookup in the simulation ledger by name. Returns the canonical profile (role, neighborhood, birth year) — these facts are immutable.', parameters: { type: 'object', properties: { name: { type: 'string', description: 'full name, e.g. "Lucia Polito"' }, thread: { type: 'boolean', description: 'optional: also return the person\'s life-history entries from the ledger, oldest first' } }, required: ['name'] } } },
+  { type: 'function', function: { name: 'sheet_read', description: 'Read a bounded slice of one allowlisted live city sheet: Initiative_Tracker, Neighborhood_Map, Oakland_Sports_Feed, Civic_Office_Ledger, Faith_Organizations, Faith_Ledger, Business_Ledger, Transit_Metrics, Neighborhood_Demographics, Care_Justice_Census, Community_Programs, Crime_Metrics.', parameters: { type: 'object', properties: { tab: { type: 'string' }, match: { type: 'string', description: 'optional: return only the rows that name this term (an initiative, office or neighborhood), plus the header' } }, required: ['tab'] } } }
 ];
 // pipeline.76 — the stats surface: a dossier player's season lines and the rates worked in code,
 // the same lines and arithmetic as the data-desk slice (buildMarburySlice), so the memo still
 // does no arithmetic of its own.
 const DOSSIER_TOOL = { type: 'function', function: { name: 'dossier_read', description: 'Read one player\'s dossier: every season line on file plus the rates already worked from it (K/9, BB/9, K/BB for a pitcher; AB per HR, AB per SO for a hitter). Optional season narrows to one year. Use it for another season or another peer.', parameters: { type: 'object', properties: { player: { type: 'string', description: 'player name, e.g. "Arturo Ramos"' }, season: { type: 'string', description: 'optional four-digit year' } }, required: ['player'] } } };
-const SHEET_READ_ALLOWLIST = ['Initiative_Tracker', 'Neighborhood_Map', 'Oakland_Sports_Feed', 'Civic_Office_Ledger'];
+// pipeline.89 cut 2 — per-seat writer-tool frames. Each seat's tools block names the ONE question its tools
+// answer (builder 2026-10-26: "what is the question a tool answers, otherwise they won't use it"), the
+// tabs it may read, and a look-before-you-claim-an-absence rule. A seat without a frame keeps the sports
+// frames above or the generic depth block. Text only; the tool set itself is the shared toolset.
+const SM = 'sheet_read(tab, match?)';
+const MATCH_NOTE = ' Pass match ("Stabilization") to pull the rows that name it; a long tab cuts off its later rows, and a miss on a named match is a real miss.';
+const SEAT_TOOL_FRAMES = {
+  'freelance-firebrand': {
+    title: 'YOUR OWN RECORD',
+    intro: 'The slice is your story and your claim. The tools check your record before you accuse anyone.',
+    tools: [
+      'canon_search(query): your own earlier columns and the paper\'s prior coverage. Search the subject (the neighborhood, the office, the program) with "Jax Caldera". Before you write "again", "still" or "I\'ve been watching", this is how you find out whether you did, and what you said.',
+      SM + ': Neighborhood_Map, Initiative_Tracker or Civic_Office_Ledger — the number as the sheet holds it now, to set against what a column printed then. Pass match ("KONO") to pull that row; a long tab cuts off its later rows.',
+      'citizen_lookup(name): one person\'s ledger profile — use it before you characterize anyone.',
+      'memory_recall(query?): your own page — the thread you noted last wake.'],
+    rule: 'Name each fact to its source in the column ("my C112 column", "the tracker", "the map"), printed as the tool returned it; do no arithmetic on it. A claim of earlier coverage must come from a column canon_search returned. If none returned, this is new — say so, and do not claim a pattern you cannot show.',
+    kickoff: 'The slice is the story. Before you write, check your own record — what you printed on this subject before (search your name and the subject), and the number the sheet holds now — then compose, naming each tool-fetched fact to its source and claiming no earlier coverage a search did not return. '
+  },
+  'carmen-delaine': {
+    title: 'THE RECORD BEHIND THE PACKET',
+    intro: 'The slice is your story and your claim. The tools are the ledger itself: you may say what the record shows and has not reached only after you have looked.',
+    tools: [
+      SM + ': Initiative_Tracker (an initiative\'s status, vote, budget and its milestone notes cycle by cycle), Civic_Office_Ledger (offices and who holds them), Neighborhood_Map.' + MATCH_NOTE,
+      'canon_search(query): what the paper has already printed on this initiative or office — last cycle\'s milestone, a vote, a statement.',
+      'citizen_lookup(name): an official\'s ledger profile — use it before you characterize anyone.'],
+    rule: 'Before you write that the record does not carry a figure, a name or a vote, read the tracker row for it and search the figure. If a tool returns it, print it as returned and name the source ("the tracker\'s milestone notes", "the C112 filing"); if neither returns it, say you looked ("the tracker and the paper\'s prior coverage do not carry it"). Never write "the ledger does not carry" for something you did not check. Reconcile figures in the open, as you do.',
+    kickoff: 'The slice is the story. Before you write that the record does not carry something, read the tracker row and search the figure — what the initiative\'s milestone notes hold, what the paper printed last cycle — then compose, naming each tool-fetched fact to its source and stating only what you looked for and did not find. '
+  },
+  'luis-navarro': {
+    title: 'THE DOCUMENTED RECORD',
+    intro: 'The slice is your story. A silence or a contradiction is documented only when you have looked.',
+    tools: [
+      SM + ': Initiative_Tracker (status, vote, budget and milestone notes cycle by cycle) and Civic_Office_Ledger (offices and who holds them).' + MATCH_NOTE,
+      'canon_search(query): what the paper has already printed on this matter — an earlier filing, a statement, a deadline.',
+      'citizen_lookup(name): an official\'s ledger profile.'],
+    rule: 'Before you write that something was not said, not answered or not done, read the row for it and search the paper. A silence is documented when you can name where you looked ("the tracker row and the paper\'s prior coverage name no recipient"). A contradiction is documented when two sources you can name disagree — print both as returned and name each. Never write an absence you did not check.',
+    kickoff: 'The slice is the story. Before you write that something was not said or not done, read the tracker row and search the paper\'s prior coverage — then compose, naming where you looked and what each source returned. '
+  },
+  'elliot-graye': {
+    title: 'THE REGISTRY AND THE EVENT ROWS',
+    intro: 'The slice is your story. The tools are the faith ledger: what a congregation did, as the record kept it.',
+    tools: [
+      SM + ': Faith_Organizations (congregation, tradition, leader, status) and Faith_Ledger (event rows by cycle: event, status, attendance).' + MATCH_NOTE.replace('Stabilization', 'the congregation\'s name'),
+      'canon_search(query): what the paper has already printed on this congregation or event.',
+      'citizen_lookup(name): one person\'s ledger profile.'],
+    rule: 'Attendance, clergy, services and aid enter only as a row returned them, named to the ledger ("the Faith Ledger\'s event row"). What the registry and the event rows do not hold stays unsaid — say you looked ("the registry and the event rows do not say who asked"). No belief, doctrine or motive beyond what a row states.',
+    kickoff: 'The slice is the story. Before you write who asked, who came or what was given, read the congregation\'s registry row and its event rows — then compose, naming each fact to the ledger and saying where you looked when a row holds nothing. '
+  },
+  'business-desk': {
+    title: 'THE BUSINESS LEDGER',
+    intro: 'The slice is your story. The tools are the books behind the storefront.',
+    tools: [
+      SM + ': Business_Ledger (sector, neighborhood, employees, salary, revenue, growth, key personnel) and Initiative_Tracker.' + MATCH_NOTE.replace('Stabilization', 'the business or corridor'),
+      'canon_search(query): what the paper has already printed on this business, corridor or program.',
+      'citizen_lookup(name): one person\'s ledger profile — use it before you characterize anyone.'],
+    rule: 'A figure about a business (employees, salary, revenue, growth) enters as the ledger prints it, named to it. A business the ledger does not hold is not described as established. Say who the figure helps only where a row or a prior piece shows it.',
+    kickoff: 'The slice is the story. Before you state what a business employs, pays or earns, read its Business Ledger row — then compose, naming each figure to the ledger and leaving out what no row holds. '
+  },
+  'trevor-shimizu': {
+    title: 'THE TRANSIT ROWS',
+    intro: 'The slice is your story. The tools are the metrics behind the condition.',
+    tools: [
+      SM + ': Transit_Metrics (per cycle and station: ridership, on-time performance, traffic index, corridor, notes, factors).' + MATCH_NOTE.replace('Stabilization', 'the station'),
+      'canon_search(query): what the paper has already printed on this line, station or failure.',
+      'citizen_lookup(name): one person\'s ledger profile.'],
+    rule: 'A timestamp, failure or on-time figure enters as the row prints it, named to the metrics. This cycle against an earlier one only with both rows read. A causal link no row or earlier piece carries stays a question, not a finding.',
+    kickoff: 'The slice is the story. Before you state a ridership or on-time figure or call a failure new, read the station\'s newest rows — then compose, naming each figure to the metrics and keeping any cause no row carries as a question. '
+  },
+  'lila-mezran': {
+    title: 'THE HEALTH ROWS',
+    intro: 'The slice is your story. The tools are the counts behind the care.',
+    tools: [
+      SM + ': Neighborhood_Demographics (per hood: sick, unemployed, seniors), Care_Justice_Census (per cycle: intakes, occupancy, transfers), Initiative_Tracker (the health initiatives).' + MATCH_NOTE.replace('Stabilization', 'the neighborhood'),
+      'canon_search(query): what the paper has already printed on this clinic, initiative or count.',
+      'citizen_lookup(name): one person\'s ledger profile.'],
+    rule: 'A count enters as the row prints it, named to the sheet. This cycle against an earlier one only with both read or both printed. No diagnosis, and no clinical outcome beyond what a row holds; say you looked when a row is silent.',
+    kickoff: 'The slice is the story. Before you state a count or call it higher or lower than before, read the neighborhood\'s row and search the paper\'s earlier figure — then compose, naming each to its source and diagnosing no one. '
+  },
+  'angela-reyes': {
+    title: 'THE SCHOOL AND PROGRAM ROWS',
+    intro: 'The slice is your story. The tools are the district\'s own numbers and the program registry.',
+    tools: [
+      SM + ': Neighborhood_Demographics (per hood: students, school quality index, graduation rate, college readiness, teacher quality, funding), Community_Programs (youth programs, hood, type, status), Initiative_Tracker.' + MATCH_NOTE.replace('Stabilization', 'the neighborhood or program'),
+      'canon_search(query): what the paper has already printed on this school, program or score.',
+      'citizen_lookup(name): one person\'s ledger profile.'],
+    rule: 'A score, rate or funding figure enters as the row prints it, named to the sheet. A program the registry does not hold is not described as established. Participants, access and outcomes stay out unless a row or a prior piece holds them; say you looked.',
+    kickoff: 'The slice is the story. Before you state a school figure or say a program is running, read the neighborhood\'s row and the program registry — then compose, naming each fact to its source and saying where you looked when nothing is there. '
+  },
+  'rachel-torres': {
+    title: 'THE SAFETY ROWS',
+    intro: 'The slice is your story. The tools are the metrics and the offices behind the incident.',
+    tools: [
+      SM + ': Crime_Metrics (per hood: property and violent indexes, response time, clearance rate, incident count, trend, hotspot), Civic_Office_Ledger (OPD and OARI offices), Initiative_Tracker (OARI).' + MATCH_NOTE.replace('Stabilization', 'the neighborhood or office'),
+      'canon_search(query): what the paper has already printed on this incident, classification or response.',
+      'citizen_lookup(name): an official\'s ledger profile.'],
+    rule: 'A classification gap or a response failure is stated only after you read the hood\'s row and searched the paper; name where you looked. Metrics enter as the row prints them. No case detail beyond what a row or a prior piece holds.',
+    kickoff: 'The slice is the story. Before you call something unclassified, unanswered or unreported, read the hood\'s safety row and search the paper — then compose, naming each figure to its source and saying where you looked. '
+  },
+  'tamsin-pruitt': {
+    title: 'THE PERSON\'S THREAD',
+    intro: 'The slice is your story: the event is the lead. The tools give you the person behind it — what the record held of them before the event, in order.',
+    tools: [
+      'citizen_lookup(name, thread: true): the person\'s ledger profile and their life-history entries, oldest first, each stamped with the sim clock (Y3C9). Pull it for every person you write.',
+      'canon_search(query): any earlier piece that named them.'],
+    rule: 'The event on the slice stays the lead; the thread is what the record holds of the person before it. Print a thread entry as returned and date it by its stamp. What came next appears only if a later record holds it. State no feeling, motive or relationship an entry does not state, and name no one a thread does not name.',
+    kickoff: 'The slice is the story. Before you write each person, pull their thread (citizen_lookup with thread) — then compose the passage from the event first and the record behind it second, dating each earlier entry by its stamp. '
+  }
+};
+function seatToolsBlock(persona, n) {
+  const f = SEAT_TOOL_FRAMES[persona];
+  return '\n\n=== YOUR TOOLS — ' + f.title + ', NOT A NEW STORY (up to ' + n + ' calls, read-only) ===\n' +
+    f.intro + ' A tool call never changes the assignment.\n' +
+    f.tools.map(t => '- ' + t + '\n').join('') + f.rule + '\n=== END TOOLS ===';
+}
+
+// pipeline.89 cut 2 widened the list for the seats whose question a sheet answers: faith, business, transit,
+// health/school/safety hood rows. Aggregate city and hood sheets only — no household or per-citizen finance tab.
+const SHEET_READ_ALLOWLIST = ['Initiative_Tracker', 'Neighborhood_Map', 'Oakland_Sports_Feed', 'Civic_Office_Ledger',
+  'Faith_Organizations', 'Faith_Ledger', 'Business_Ledger', 'Transit_Metrics', 'Neighborhood_Demographics',
+  'Care_Justice_Census', 'Community_Programs', 'Crime_Metrics'];
 // memory tools appear in the loop only when the run knows whose page it is
 // (--byline-popid from cron-desk-run, or the persona's own POPID).
 const MEMORY_TOOLS = [
@@ -663,8 +782,9 @@ function toolDossierRead(input) {
 
 function toolCitizenLookup(input) {
   try {
-    const { profilesFor } = require('./canon-name-check');
+    const { profilesFor, threadFor } = require('./canon-name-check');
     const rows = profilesFor([String(input.name || '')]);
+    if (rows.length && input.thread) rows.push.apply(rows, threadFor(String(input.name || ''), 15));
     return rows.length ? rows.join('\n') : 'No ledger citizen named "' + input.name + '". Do not use this name as a person.';
   } catch (e) { return '(citizen lookup failed: ' + e.message + ')'; }
 }
@@ -682,7 +802,9 @@ async function toolSheetRead(input) {
     if (match) {
       const rows = data.slice(1).filter(r => r.join(' ').toLowerCase().includes(match));
       if (!rows.length) return 'no row in ' + tab + ' names "' + input.match + '" (' + Math.max(0, data.length - 1) + ' rows read)';
-      return cap([data[0]].concat(rows).slice(0, 12).map(r => r.join(' | ')).join('\n'), 6000);
+      const shownRows = rows.slice(-12);   // append-ordered tabs: the newest rows are the last ones
+      const more = rows.length > shownRows.length ? '\n(' + shownRows.length + ' newest of ' + rows.length + ' rows naming "' + input.match + '")' : '';
+      return cap([data[0]].concat(shownRows).map(r => r.join(' | ')).join('\n'), 6000) + more;
     }
     const shown = data.slice(0, 40);
     const note = data.length > shown.length ? '\n(first ' + shown.length + ' of ' + data.length + ' rows — pass match to pull a row by name)' : '';
@@ -1132,26 +1254,8 @@ async function main() {
             'Every number you bring in from a tool is printed exactly as the tool returned it and named to its source ("his TrueSource card", "his Statcast card", "the feed"). Do no arithmetic on it. A method shapes the argument; it never invents a figure.\n' +
             '=== END TOOLS ==='
           : '') +
-        (WRITER_TOOLS && PERSONA === 'freelance-firebrand'
-          ? '\n\n=== YOUR TOOLS — YOUR OWN RECORD, NOT A NEW STORY (up to ' + WRITER_TOOLS + ' calls, read-only) ===\n' +
-            'The slice is your story and your claim. The tools check your record before you accuse anyone. A tool call never changes the assignment.\n' +
-            '- canon_search(query): your own earlier columns and the paper\'s prior coverage. Search the subject (the neighborhood, the office, the program) with "Jax Caldera". Before you write "again", "still" or "I\'ve been watching", this is how you find out whether you did, and what you said.\n' +
-            '- sheet_read(tab, match?): Neighborhood_Map, Initiative_Tracker or Civic_Office_Ledger — the number as the sheet holds it now, to set against what a column printed then. Pass match ("KONO") to pull that row; a long tab cuts off its later rows.\n' +
-            '- citizen_lookup(name): one person\'s ledger profile — use it before you characterize anyone.\n' +
-            '- memory_recall(query?): your own page — the thread you noted last wake.\n' +
-            'Name each fact to its source in the column ("my C112 column", "the tracker", "the map"), printed as the tool returned it; do no arithmetic on it. A claim of earlier coverage must come from a column canon_search returned. If none returned, this is new — say so, and do not claim a pattern you cannot show.\n' +
-            '=== END TOOLS ==='
-          : '') +
-        (WRITER_TOOLS && PERSONA === 'carmen-delaine'
-          ? '\n\n=== YOUR TOOLS — THE RECORD BEHIND THE PACKET, NOT A NEW STORY (up to ' + WRITER_TOOLS + ' calls, read-only) ===\n' +
-            'The slice is your story and your claim. The tools are the ledger itself: you may say what the record shows and has not reached only after you have looked. A tool call never changes the assignment.\n' +
-            '- sheet_read(tab, match?): Initiative_Tracker (an initiative\'s status, vote, budget and its milestone notes cycle by cycle), Civic_Office_Ledger (offices and who holds them), Neighborhood_Map. Pass match ("Stabilization") to pull that row; a long tab cuts off its later rows, and a miss on a named match is a real miss.\n' +
-            '- canon_search(query): what the paper has already printed on this initiative or office — last cycle\'s milestone, a vote, a statement.\n' +
-            '- citizen_lookup(name): an official\'s ledger profile — use it before you characterize anyone.\n' +
-            'Before you write that the record does not carry a figure, a name or a vote, read the tracker row for it and search the figure. If a tool returns it, print it as returned and name the source ("the tracker\'s milestone notes", "the C112 filing"); if neither returns it, say you looked ("the tracker and the paper\'s prior coverage do not carry it"). Never write "the ledger does not carry" for something you did not check. Reconcile figures in the open, as you do.\n' +
-            '=== END TOOLS ==='
-          : '') +
-        (WRITER_TOOLS && PERSONA !== 'hal-richmond' && PERSONA !== 'anthony-raines' && PERSONA !== 'freelance-firebrand' && PERSONA !== 'carmen-delaine'
+        (WRITER_TOOLS && SEAT_TOOL_FRAMES[PERSONA] ? seatToolsBlock(PERSONA, WRITER_TOOLS) : '') +
+        (WRITER_TOOLS && PERSONA !== 'hal-richmond' && PERSONA !== 'anthony-raines' && !SEAT_TOOL_FRAMES[PERSONA]
           ? '\n\n=== YOUR TOOLS — DEPTH, NOT A NEW STORY (up to ' + WRITER_TOOLS + ' calls, read-only) ===\n' +
             'The slice is your story and your claim. The tools are for depth: another season, a third peer, prior coverage, a current feed line. A tool call never changes the assignment.\n' +
             '- dossier_read(player, season?): a player\'s season lines and the rates already worked from them — use it for another season or another peer at the position.\n' +
@@ -1242,12 +1346,8 @@ async function main() {
           : 'You are this journalist in GodWorld this cycle. The Packet facts are the physics — what the engine did. The Article is someone living under that physics. Open on a named interviewed person or a Packet-named place, in a body, doing something. Use every approved quote as spoken speech in a scene, not as a caption under a recap. Never announce the season or the temperature; if it is winter, show a Packet-backed thing that moved on a day like this. Never lead with a tracker phase, a feed label, a bullet list of approved facts, or the words supplied record / listed as / what remains to be learned. Do not import real-world Oakland winter tropes the Packet did not name. Do not invent names, numbers, quotes, or events. Texture may only dress Packet-named places and approved speakers. If you cannot write the life, stop. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. ')
         : 'Use your tools FIRST where the state runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ') +
       (TOOLS_AB ? 'Use your tools where the Packet runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ' : '') +
-      (WRITER_TOOLS ? (PERSONA === 'hal-richmond'
+      (WRITER_TOOLS ? (SEAT_TOOL_FRAMES[PERSONA] ? SEAT_TOOL_FRAMES[PERSONA].kickoff : PERSONA === 'hal-richmond'
         ? 'The slice is the story. Before you write, open the archive — the man\'s origins and prior coverage by name, his dossier across the years — then compose, naming each tool-fetched fact to its source. '
-        : PERSONA === 'carmen-delaine'
-        ? 'The slice is the story. Before you write that the record does not carry something, read the tracker row and search the figure — what the initiative\'s milestone notes hold, what the paper printed last cycle — then compose, naming each tool-fetched fact to its source and stating only what you looked for and did not find. '
-        : PERSONA === 'freelance-firebrand'
-        ? 'The slice is the story. Before you write, check your own record — what you printed on this subject before (search your name and the subject), and the number the sheet holds now — then compose, naming each tool-fetched fact to its source and claiming no earlier coverage a search did not return. '
         : PERSONA === 'anthony-raines'
         ? 'The slice is the story. Before you write, pull the board — the player\'s TrueSource card, a peer\'s, his Statcast card if the archive holds one, this cycle\'s feed line — then compose, naming each tool-fetched number to its source. '
         : 'The slice is the story. Before you write, use your tools for depth the slice does not hold — another season, a third peer, what the paper said before — then compose, citing each tool-fetched number to its source. ') : '') +
@@ -1450,6 +1550,9 @@ if (require.main === module) {
 module.exports = {
   toolDossierRead, // pipeline.76
   toolSheetRead,
+  toolCitizenLookup,
+  SEAT_TOOL_FRAMES,
+  seatToolsBlock,
   rubricBlock, // pipeline.77
   normalizeArtifactTag,
   buildOutputSlug,

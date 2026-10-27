@@ -78,7 +78,7 @@ assert.ok(carmen.reviewProfile.textureConditions.some(v => v.includes('all nine 
 assert.ok(carmen.reviewProfile.canonBlockers.some(v => v.includes('implementation clock')));
 
 const luis = packages['luis-navarro'];
-assert.equal(luis.version, 'LUIS-LEP2-1');
+assert.equal(luis.version, 'LUIS-LEP2-2');
 assert.equal(luis.requiredDaily, true);
 assert.equal(luis.assignment.desk, 'civic');
 assert.equal(luis.assignment.name, 'Luis Navarro');
@@ -94,7 +94,7 @@ assert.ok(luis.reviewProfile.textureConditions.some(v => v.includes('silence clo
 assert.ok(luis.reviewProfile.canonBlockers.some(v => v.includes('records request')));
 
 const trevor = packages['trevor-shimizu'];
-assert.equal(trevor.version, 'TREVOR-LEP2-1');
+assert.equal(trevor.version, 'TREVOR-LEP2-2');
 assert.equal(trevor.requiredDaily, true);
 assert.equal(trevor.assignment.desk, 'civic');
 assert.equal(trevor.assignment.name, 'Trevor Shimizu');
@@ -103,7 +103,7 @@ assert.equal(trevor.assignment.beatDomain, 'INFRASTRUCTURE');
 assert.equal(trevor.packetContract, 'v2');
 assert.equal(packagesApi.routeFor(trevor, 'angle').model, 'deepseek/deepseek-v4-flash-0731');
 assert.equal(packagesApi.routeFor(trevor, 'report').model, 'deepseek/deepseek-v4-flash-0731');
-assert.equal(packagesApi.routeFor(trevor, 'write').model, 'openai/gpt-5.6-luna');
+assert.equal(packagesApi.routeFor(trevor, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(trevor.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(trevor.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(trevor.reviewProfile.textureConditions.some(v => v.includes('cascade')));
@@ -171,14 +171,14 @@ const seats = Object.entries(packages).filter(([, v]) => v && v.persona);
 assert(seats.length >= 25);
 assert.deepStrictEqual(seats.filter(([, v]) => v.rewardLoop !== true).map(([k]) => k), []);
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { rewardLoop: 'yes' })), /rewardLoop/);
-assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'anthony-raines', 'elliot-marbury', 'hal-richmond']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26
+assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'elliot-graye', 'business-desk', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'tamsin-pruitt']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27
 assert.equal(packages['hal-richmond'].writerTools.maxToolCalls, 6);
 assert.equal(packages['hal-richmond'].version, 'HAL-LEP2-3');
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { writerTools: { maxToolCalls: 9 } })), /writerTools/);
 assert.equal(jax.writerTools.maxToolCalls, 6);
 assert.equal(packages['carmen-delaine'].writerTools.maxToolCalls, 6);
-const luisPkg = packages['luis-navarro'];
-assert.throws(() => packagesApi.validatePackage(luisPkg.persona, Object.assign({}, luisPkg, { writerTools: { maxToolCalls: 6 } })), /granted only to elliot-marbury, hal-richmond, anthony-raines, freelance-firebrand, carmen-delaine/);
+const noToolsPkg = packages['noah-tan'];
+assert.throws(() => packagesApi.validatePackage(noToolsPkg.persona, Object.assign({}, noToolsPkg, { writerTools: { maxToolCalls: 6 } })), /writerTools is granted only to/);
 assert.equal(marbury.assignment.popid, 'POP-00166');
 assert.equal(packagesApi.routeFor(marbury, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(hal.active, true);
@@ -230,7 +230,7 @@ assert.ok(maria.reviewProfile.textureConditions.some(v => v.includes('may not as
 assert.ok(maria.reviewProfile.canonBlockers.some(v => v.includes('invented attendance')));
 
 const graye = packages['elliot-graye'];
-assert.equal(graye.version, 'GRAYE-LEP2-1');
+assert.equal(graye.version, 'GRAYE-LEP2-2');
 assert.equal(graye.active, true);
 assert.equal(graye.assignment.popid, 'POP-00012');
 assert.equal(graye.assignment.beatDomain, 'COMMUNITY');
@@ -261,7 +261,7 @@ assert.ok(sharon.reviewProfile.textureConditions.some(v => v.includes('proves on
 assert.ok(sharon.reviewProfile.canonBlockers.some(v => v.includes('invented attendance')));
 
 const jordan = packages['business-desk'];
-assert.equal(jordan.version, 'JORDAN-LEP2-1');
+assert.equal(jordan.version, 'JORDAN-LEP2-2');
 assert.equal(jordan.requiredDaily, true);
 assert.equal(jordan.assignment.desk, 'business');
 assert.equal(jordan.assignment.name, 'Jordan Velez');
@@ -293,36 +293,36 @@ assert.ok(kai.reviewProfile.textureConditions.some(v => v.includes('evening sour
 assert.ok(kai.reviewProfile.canonBlockers.some(v => v.includes('social-media reaction')));
 
 const rachel = packages['rachel-torres'];
-assert.equal(rachel.version, 'RACHEL-LEP2-1');
+assert.equal(rachel.version, 'RACHEL-LEP2-2');
 assert.equal(rachel.assignment.popid, 'POP-00057');
 assert.equal(rachel.assignment.beatDomain, 'SAFETY');
-assert.equal(packagesApi.routeFor(rachel, 'write').model, 'x-ai/grok-4.3');
+assert.equal(packagesApi.routeFor(rachel, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(rachel.reviewProfile.canonPolicy, 'load-bearing');
 assert.equal(rachel.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(rachel.reviewProfile.canonBlockers.some(v => v.includes('invented incident')));
 
 const lila = packages['lila-mezran'];
-assert.equal(lila.version, 'LILA-LEP2-1');
+assert.equal(lila.version, 'LILA-LEP2-2');
 assert.equal(lila.requiredDaily, true);
 assert.equal(lila.assignment.name, 'Dr. Lila Mezran');
 assert.equal(lila.assignment.popid, 'POP-00154');
 assert.equal(lila.assignment.beatDomain, 'HEALTH');
 assert.equal(packagesApi.routeFor(lila, 'angle').model, 'deepseek/deepseek-v4-flash-0731');
 assert.equal(packagesApi.routeFor(lila, 'report').model, 'deepseek/deepseek-v4-flash-0731');
-assert.equal(packagesApi.routeFor(lila, 'write').model, 'anthropic/claude-haiku-5.5');
+assert.equal(packagesApi.routeFor(lila, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(lila.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(lila.reviewProfile.textureConditions.some(v => v.includes('human consequence')));
 assert.ok(lila.reviewProfile.canonBlockers.some(v => v.includes('invented diagnosis')));
 
 const angela = packages['angela-reyes'];
-assert.equal(angela.version, 'ANGELA-LEP2-1');
+assert.equal(angela.version, 'ANGELA-LEP2-2');
 assert.equal(angela.requiredDaily, true);
 assert.equal(angela.assignment.name, 'Angela Reyes');
 assert.equal(angela.assignment.popid, 'POP-00156');
 assert.equal(angela.assignment.beatDomain, 'EDUCATION');
 assert.equal(packagesApi.routeFor(angela, 'angle').model, 'deepseek/deepseek-v4-flash-0731');
 assert.equal(packagesApi.routeFor(angela, 'report').model, 'deepseek/deepseek-v4-flash-0731');
-assert.equal(packagesApi.routeFor(angela, 'write').model, 'anthropic/claude-haiku-5.5');
+assert.equal(packagesApi.routeFor(angela, 'write').model, 'anthropic/claude-sonnet-5.5');
 assert.equal(angela.reviewProfile.articleContract.renderMode, 'SOURCE_BRIEF');
 assert.ok(angela.reviewProfile.textureConditions.some(v => v.includes('stability evidence')));
 assert.ok(angela.reviewProfile.canonBlockers.some(v => v.includes('invented student')));
@@ -349,7 +349,7 @@ assert.equal(gate.eligible[0].wakePackage, 'JAX-LEP2-2');
 assert.equal(gate.eligible[1].wakePackage, 'CARMEN-LEP2-3');
 assert.equal(gate.eligible[2].wakePackage, 'PSLAYER-LEP2-1');
 assert.equal(gate.eligible[3].wakePackage, 'ANTHONY-LEP2-3');
-assert.equal(gate.eligible[4].wakePackage, 'JORDAN-LEP2-1');
+assert.equal(gate.eligible[4].wakePackage, 'JORDAN-LEP2-2');
 assert.deepStrictEqual(gate.skipped.map(row => row.name),
   ['TEST-ONLY Unpackaged Reporter']);
 assert.ok(gate.skipped.every(row => row.reason === 'no-active-wake-package'));
@@ -546,7 +546,7 @@ assert.deepStrictEqual(
   DAILY_QUOTAS);
 assert.equal(bounded.assignments[0].approach, 'Carmen civic ledger');
 assert.equal(bounded.assignments[0].story.ref, 'TEST-CIVIC-ONE');
-assert.equal(bounded.assignments[5].wakePackage, 'JORDAN-LEP2-1');
+assert.equal(bounded.assignments[5].wakePackage, 'JORDAN-LEP2-2');
 
 const staleSeat = applyWakePackageGate(selected.concat({
   desk: 'culture', name: 'TEST-ONLY Unpackaged Reporter', persona: 'test-only', popid: 'POP-99999'

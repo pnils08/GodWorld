@@ -135,7 +135,7 @@
     }
   },
   "luis-navarro": {
-    "version": "LUIS-LEP2-1",
+    "version": "LUIS-LEP2-2",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -191,10 +191,13 @@
         "a number, date, duration, budget, metric, count, vote, or timeline that contradicts or lacks the supplied record",
         "Jax-style theatrical heat that turns an unestablished lead into a settled factual claim"
       ]
+    },
+    "writerTools": {
+      "maxToolCalls": 6
     }
   },
   "trevor-shimizu": {
-    "version": "TREVOR-LEP2-1",
+    "version": "TREVOR-LEP2-2",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -218,7 +221,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "openai/gpt-5.6-luna"
+        "model": "anthropic/claude-sonnet-5.5"
       }
     },
     "reviewProfile": {
@@ -251,6 +254,9 @@
         "a named person, place, route, station, system, agency, office, Project, Initiative, business, or organization not found in the supplied record",
         "raw engine terminology or simulation values presented as an in-world technical measurement"
       ]
+    },
+    "writerTools": {
+      "maxToolCalls": 6
     }
   },
   "p-slayer": {
@@ -673,7 +679,7 @@
     }
   },
   "elliot-graye": {
-    "version": "GRAYE-LEP2-1",
+    "version": "GRAYE-LEP2-2",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -697,7 +703,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "anthropic/claude-haiku-5.5"
+        "model": "anthropic/claude-sonnet-5.5"
       }
     },
     "reviewProfile": {
@@ -724,6 +730,9 @@
         "an invented or altered person, institution, tradition, neighborhood, event, relationship, date, count, or quote",
         "a blocked real-world institution or clergy name, doctrine-war framing, raw engine label, or collective faith-community sentiment presented as fact"
       ]
+    },
+    "writerTools": {
+      "maxToolCalls": 6
     }
   },
   "mason-ortega": {
@@ -835,7 +844,7 @@
     }
   },
   "business-desk": {
-    "version": "JORDAN-LEP2-1",
+    "version": "JORDAN-LEP2-2",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -894,6 +903,9 @@
         "a fabricated owner, worker, customer, official, interview, quote, observation, or collective business sentiment",
         "an unsupported causal chain, corruption implication, winner, loser, or current-state claim presented as settled fact"
       ]
+    },
+    "writerTools": {
+      "maxToolCalls": 6
     }
   },
   "kai-marston": {
@@ -959,7 +971,7 @@
     }
   },
   "rachel-torres": {
-    "version": "RACHEL-LEP2-1",
+    "version": "RACHEL-LEP2-2",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -983,7 +995,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "x-ai/grok-4.3"
+        "model": "anthropic/claude-sonnet-5.5"
       }
     },
     "reviewProfile": {
@@ -1013,10 +1025,13 @@
         "raw engine labels or decimals as public-facing evidence",
         "a named person or institution not supplied by the Packet"
       ]
+    },
+    "writerTools": {
+      "maxToolCalls": 6
     }
   },
   "lila-mezran": {
-    "version": "LILA-LEP2-1",
+    "version": "LILA-LEP2-2",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -1040,7 +1055,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "anthropic/claude-haiku-5.5"
+        "model": "anthropic/claude-sonnet-5.5"
       }
     },
     "reviewProfile": {
@@ -1071,10 +1086,13 @@
         "an unsupported opening, closure, delay, service change, official act, duty, response, promise, timeline, or causal health claim",
         "raw engine or tracker labels, phases, scores, decimals, source paths, or row metadata printed as public-facing evidence"
       ]
+    },
+    "writerTools": {
+      "maxToolCalls": 6
     }
   },
   "angela-reyes": {
-    "version": "ANGELA-LEP2-1",
+    "version": "ANGELA-LEP2-2",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -1098,7 +1116,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "anthropic/claude-haiku-5.5"
+        "model": "anthropic/claude-sonnet-5.5"
       }
     },
     "reviewProfile": {
@@ -1129,6 +1147,9 @@
         "an unsupported launch, closure, delay, continuity, access, participation, placement, duty, response, promise, timeline, or causal education claim",
         "raw engine or tracker labels, phases, scores, decimals, source paths, row metadata, or non-canon real-world institutions printed as public-facing evidence"
       ]
+    },
+    "writerTools": {
+      "maxToolCalls": 6
     }
   },
   "noah-tan": {
@@ -1517,7 +1538,7 @@
     }
   },
   "tamsin-pruitt": {
-    "version": "TAMSIN-LIVES-1",
+    "version": "TAMSIN-LIVES-2",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -1541,7 +1562,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "x-ai/grok-4.3"
+        "model": "anthropic/claude-sonnet-5.5"
       }
     },
     "reviewProfile": {
@@ -1575,6 +1596,9 @@
         "intake bookkeeping rows (Emerged into Tier, Added to Simulation_Ledger, Updated to Tier) written as life events",
         "raw engine labels or decimals printed as public-facing evidence"
       ]
+    },
+    "writerTools": {
+      "maxToolCalls": 6
     }
   },
   "ines-sorensen": {

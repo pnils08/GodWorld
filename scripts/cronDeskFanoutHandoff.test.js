@@ -179,7 +179,7 @@ const jordanAssignment = {
 };
 const jordanContext = activateWakeContext(jordanAssignment, jordanAssignment.persona);
 assert.equal(jordanContext.packetContract, 'v2');
-assert.equal(jordanContext.wakePackage.version, 'JORDAN-LEP2-1');
+assert.equal(jordanContext.wakePackage.version, 'JORDAN-LEP2-2');
 for (const file of ['IDENTITY.md', 'LENS.md', 'RULES.md']) {
   assert.ok(fs.existsSync(path.join(__dirname, '..', '.claude', 'agents',
     jordanAssignment.persona, file)), 'Jordan control-plane identity missing ' + file);
@@ -214,13 +214,13 @@ const lilaAssignment = {
 };
 const lilaContext = activateWakeContext(lilaAssignment, lilaAssignment.persona);
 assert.equal(lilaContext.packetContract, 'v2');
-assert.equal(lilaContext.wakePackage.version, 'LILA-LEP2-1');
+assert.equal(lilaContext.wakePackage.version, 'LILA-LEP2-2');
 assert.equal(stageRoute('civic', lilaAssignment.persona, 'angle').model,
   'deepseek/deepseek-v4-flash-0731');
 assert.equal(stageRoute('civic', lilaAssignment.persona, 'report').model,
   'deepseek/deepseek-v4-flash-0731');
 assert.equal(stageRoute('civic', lilaAssignment.persona, 'write').model,
-  'anthropic/claude-haiku-5.5');
+  'anthropic/claude-sonnet-5.5');
 
 const angelaAssignment = {
   name: 'Angela Reyes', popid: 'POP-00156', desk: 'civic',
@@ -228,7 +228,7 @@ const angelaAssignment = {
 };
 const angelaContext = activateWakeContext(angelaAssignment, angelaAssignment.persona);
 assert.equal(angelaContext.packetContract, 'v2');
-assert.equal(angelaContext.wakePackage.version, 'ANGELA-LEP2-1');
+assert.equal(angelaContext.wakePackage.version, 'ANGELA-LEP2-2');
 for (const file of [
   path.join(__dirname, '..', 'docs', 'media', 'voices', 'angela_reyes.md'),
   path.join(__dirname, '..', 'docs', 'media', 'ANGELA_EDUCATION_BAG.md'),
@@ -243,7 +243,7 @@ assert.equal(stageRoute('civic', angelaAssignment.persona, 'angle').model,
 assert.equal(stageRoute('civic', angelaAssignment.persona, 'report').model,
   'deepseek/deepseek-v4-flash-0731');
 assert.equal(stageRoute('civic', angelaAssignment.persona, 'write').model,
-  'anthropic/claude-haiku-5.5');
+  'anthropic/claude-sonnet-5.5');
 
 const noahAssignment = {
   name: 'Noah Tan', popid: 'POP-00157', desk: 'civic',

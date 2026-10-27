@@ -1,0 +1,143 @@
+{
+ "label": "B",
+ "at": "2026-10-27T05:24:02.702Z",
+ "minted": [
+  {
+   "popId": "POP-01216",
+   "name": "Theo Bautista",
+   "ClockMode": "ENGINE",
+   "EmployerBizId": "",
+   "RoleType": "student",
+   "Income": 0,
+   "Neighborhood": "Chinatown",
+   "LifeHistory": "Y3C9 — [Birth] born to Ingrid Bautista in Chinatown"
+  },
+  {
+   "popId": "POP-01217",
+   "name": "Jamele Brown",
+   "ClockMode": "ENGINE",
+   "EmployerBizId": "",
+   "RoleType": "Janitor",
+   "Income": 46800,
+   "Neighborhood": "Grand Lake",
+   "LifeHistory": "Arrived in Grand Lake with the Cycle 113 migration wave — one of the households that filled the neighborhood's empty streets. Migration wave: settled Grand Lake"
+  },
+  {
+   "popId": "POP-01218",
+   "name": "Victor Scott",
+   "ClockMode": "ENGINE",
+   "EmployerBizId": "",
+   "RoleType": "Nurse aide",
+   "Income": 48100,
+   "Neighborhood": "Adams Point",
+   "LifeHistory": "Arrived in Adams Point with the Cycle 113 migration wave — one of the households that filled the neighborhood's empty streets. Migration wave: settled Adams Poi"
+  },
+  {
+   "popId": "POP-01219",
+   "name": "Tara Mehta",
+   "ClockMode": "ENGINE",
+   "EmployerBizId": "",
+   "RoleType": "Transit operator",
+   "Income": 60000,
+   "Neighborhood": "Glenview",
+   "LifeHistory": "Arrived in Glenview with the Cycle 113 migration wave — one of the households that filled the neighborhood's empty streets. Migration wave: settled Glenview und"
+  },
+  {
+   "popId": "POP-01220",
+   "name": "Clara Dubois",
+   "ClockMode": "ENGINE",
+   "EmployerBizId": "",
+   "RoleType": "Urban garden worker",
+   "Income": 60000,
+   "Neighborhood": "Ivy Hill",
+   "LifeHistory": "Arrived in Ivy Hill with the Cycle 113 migration wave — one of the households that filled the neighborhood's empty streets. Migration wave: settled Ivy Hill und"
+  },
+  {
+   "popId": "POP-01221",
+   "name": "Margot Crenshaw",
+   "ClockMode": "ENGINE",
+   "EmployerBizId": "",
+   "RoleType": "Fleet dispatcher",
+   "Income": 77500,
+   "Neighborhood": "Eastlake",
+   "LifeHistory": "Arrived in Eastlake with the Cycle 113 migration wave — one of the households that filled the neighborhood's empty streets. Migration wave: settled Eastlake und"
+  },
+  {
+   "popId": "POP-01222",
+   "name": "Astrid Freeman",
+   "ClockMode": "ENGINE",
+   "EmployerBizId": "",
+   "RoleType": "Urban garden worker",
+   "Income": 60000,
+   "Neighborhood": "Adams Point",
+   "LifeHistory": "Arrived in Adams Point with the Cycle 113 migration wave — one of the households that filled the neighborhood's empty streets. Migration wave: settled Adams Poi"
+  },
+  {
+   "popId": "POP-01223",
+   "name": "Harry Hayward",
+   "ClockMode": "GAME",
+   "EmployerBizId": "BIZ-00074",
+   "RoleType": "Oakland Oaks - Power Forward",
+   "Income": 100000,
+   "Neighborhood": "KONO",
+   "LifeHistory": "Promoted to Tier 4 in Cycle 113. Second Round Draft Pick"
+  },
+  {
+   "popId": "POP-01224",
+   "name": "Trevor Henderson",
+   "ClockMode": "GAME",
+   "EmployerBizId": "BIZ-00074",
+   "RoleType": "Oakland Oaks - Center",
+   "Income": 100000,
+   "Neighborhood": "Lake Merritt",
+   "LifeHistory": "Promoted to Tier 4 in Cycle 113. Second Round Draft Pick\nY3C9 — [Friction] did the math on the rent twice and it came out the same"
+  },
+  {
+   "popId": "POP-01225",
+   "name": "Benchprobe Civic-E319",
+   "ClockMode": "CIVIC",
+   "EmployerBizId": "BIZ-00017",
+   "RoleType": "Redevelopment Board",
+   "Income": 114400,
+   "SkillTags": "Government & Civic",
+   "Neighborhood": "Temescal",
+   "LifeHistory": "Promoted to Tier 4 in Cycle 113. engine.319 bench probe"
+  },
+  {
+   "popId": "POP-01226",
+   "name": "Benchprobe Media-E319",
+   "ClockMode": "MEDIA",
+   "EmployerBizId": "BIZ-00018",
+   "RoleType": "Photo Assistant",
+   "Income": 95885,
+   "SkillTags": "Creative & Arts",
+   "Neighborhood": "Downtown",
+   "LifeHistory": "Promoted to Tier 4 in Cycle 113. engine.319 bench probe"
+  },
+  {
+   "popId": "POP-01227",
+   "name": "Benchprobe Farm-E319",
+   "ClockMode": "GAME",
+   "EmployerBizId": "BIZ-00005",
+   "RoleType": "Catcher, Midland RockHounds (AA)",
+   "Income": 100000,
+   "Neighborhood": "Fruitvale",
+   "LifeHistory": "Promoted to Tier 4 in Cycle 113. engine.319 bench probe"
+  },
+  {
+   "popId": "POP-01228",
+   "name": "Chidi Mehta",
+   "ClockMode": "ENGINE",
+   "EmployerBizId": "BIZ-00026",
+   "RoleType": "Owner, Fruitvale Community Clinic",
+   "Income": 81100,
+   "SkillTags": "Faith & Community",
+   "Neighborhood": "Fruitvale",
+   "LifeHistory": "Promoted to Tier 4 in Cycle 113. Owner door — Fruitvale Community Clinic (BIZ-00026), C113 (engine.96 Task 12: the business is the reason; authored, not a pool "
+  }
+ ],
+ "eeNew": [],
+ "stillPending": 0,
+ "verdict": "PASS",
+ "fails": []
+}

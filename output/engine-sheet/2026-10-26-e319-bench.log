@@ -1,0 +1,89 @@
+AIM = BENCH (script read the bench marker)
+== engine.319 bench, candidate a0cf12dc
+== leg A
+stage 28 rebuilt from the bench
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @138
+pull-back 167 js + manifest byte-identical to stage28-e318.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C113
+bench frozen: 912 rows, width 6 (rows with cells past F: 0); manifest (Status blank, Reporter processed) 105 = rows 809..913; Status processed 807; other Status 0; pending by name outside the manifest 0 → /root/GodWorld/output/engine-sheet/2026-10-25-e318-status-bench.json
+bench applied: Status := processed on 105 rows; run verify
+bench verify: 105 manifest rows, 912 rows; rows the by-name reader would take as pending: 0
+PASS — every manifest Status reads processed, every other cell = the freeze
+rookies pending with ClockMode ["Game","Game"]; 3 probes laid at row 134; pending rows 60; ledger max POP-1215; Engine_Errors 4
+version cut; waiting 80 s more for /exec propagation
+leg A C113 fire rc=0 "verdict": "PASS" "wallS": 272 (285 s)
+  POP-01216 Theo Bautista | ENGINE |  | student | 0
+  POP-01217 Jamele Brown | ENGINE |  | Janitor | 46800
+  POP-01218 Victor Scott | ENGINE |  | Nurse aide | 48100
+  POP-01219 Tara Mehta | ENGINE |  | Transit operator | 60000
+  POP-01220 Clara Dubois | ENGINE |  | Urban garden worker | 60000
+  POP-01221 Margot Crenshaw | ENGINE |  | Fleet dispatcher | 77500
+  POP-01222 Astrid Freeman | ENGINE |  | Urban garden worker | 60000
+  POP-01223 Harry Hayward | Game |  | Oakland Oaks - Power Forward | 100000
+  POP-01224 Trevor Henderson | Game |  | Oakland Oaks - Center | 100000
+  POP-01225 Benchprobe Civic-E319 | Civic | BIZ-00027 | Redevelopment Board | 95400
+  POP-01226 Benchprobe Media-E319 | media | UNTRACKED | Photo Assistant | 29435
+  POP-01227 Benchprobe Farm-E319 | game |  | Catcher, Midland RockHounds (AA) | 100000
+  POP-01228 Chidi Mehta | ENGINE | BIZ-00026 | Owner, Fruitvale Community Clinic | 81100
+leg A: minted 13, Engine_Errors +0, intake pending 0 — RECORD
+== leg B
+stage 29 = stage 28 + phase05-citizens/processAdvancementIntake.js at a0cf12dc; manifest output/engine-sheet/stage29-e319.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @139
+pull-back 167 js + manifest byte-identical to stage29-e319.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C113
+bench frozen: 912 rows, width 6 (rows with cells past F: 0); manifest (Status blank, Reporter processed) 105 = rows 809..913; Status processed 807; other Status 0; pending by name outside the manifest 0 → /root/GodWorld/output/engine-sheet/2026-10-25-e318-status-bench.json
+bench applied: Status := processed on 105 rows; run verify
+bench verify: 105 manifest rows, 912 rows; rows the by-name reader would take as pending: 0
+PASS — every manifest Status reads processed, every other cell = the freeze
+rookies pending with ClockMode ["Game","Game"]; 3 probes laid at row 134; pending rows 60; ledger max POP-1215; Engine_Errors 4
+version cut; waiting 88 s more for /exec propagation
+leg B C113 fire rc=0 "verdict": "PASS" "wallS": 225 (240 s)
+  POP-01216 Theo Bautista | ENGINE |  | student | 0
+  POP-01217 Jamele Brown | ENGINE |  | Janitor | 46800
+  POP-01218 Victor Scott | ENGINE |  | Nurse aide | 48100
+  POP-01219 Tara Mehta | ENGINE |  | Transit operator | 60000
+  POP-01220 Clara Dubois | ENGINE |  | Urban garden worker | 60000
+  POP-01221 Margot Crenshaw | ENGINE |  | Fleet dispatcher | 77500
+  POP-01222 Astrid Freeman | ENGINE |  | Urban garden worker | 60000
+  POP-01223 Harry Hayward | GAME | BIZ-00074 | Oakland Oaks - Power Forward | 100000
+  POP-01224 Trevor Henderson | GAME | BIZ-00074 | Oakland Oaks - Center | 100000
+  POP-01225 Benchprobe Civic-E319 | CIVIC | BIZ-00017 | Redevelopment Board | 114400
+  POP-01226 Benchprobe Media-E319 | MEDIA | BIZ-00018 | Photo Assistant | 95885
+  POP-01227 Benchprobe Farm-E319 | GAME | BIZ-00005 | Catcher, Midland RockHounds (AA) | 100000
+  POP-01228 Chidi Mehta | ENGINE | BIZ-00026 | Owner, Fruitvale Community Clinic | 81100
+leg B: minted 13, Engine_Errors +0, intake pending 0 — PASS
+  = Astrid Freeman :: A ENGINE |  | Urban garden worker | 60000
+  ≠ Benchprobe Civic-E319 :: A Civic | BIZ-00027 | Redevelopment Board | 95400  →  B CIVIC | BIZ-00017 | Redevelopment Board | 114400
+  ≠ Benchprobe Farm-E319 :: A game |  | Catcher, Midland RockHounds (AA) | 100000  →  B GAME | BIZ-00005 | Catcher, Midland RockHounds (AA) | 100000
+  ≠ Benchprobe Media-E319 :: A media | UNTRACKED | Photo Assistant | 29435  →  B MEDIA | BIZ-00018 | Photo Assistant | 95885
+  = Chidi Mehta :: A ENGINE | BIZ-00026 | Owner, Fruitvale Community Clinic | 81100
+  = Clara Dubois :: A ENGINE |  | Urban garden worker | 60000
+  ≠ Harry Hayward :: A Game |  | Oakland Oaks - Power Forward | 100000  →  B GAME | BIZ-00074 | Oakland Oaks - Power Forward | 100000
+  = Jamele Brown :: A ENGINE |  | Janitor | 46800
+  = Margot Crenshaw :: A ENGINE |  | Fleet dispatcher | 77500
+  = Tara Mehta :: A ENGINE |  | Transit operator | 60000
+  = Theo Bautista :: A ENGINE |  | student | 0
+  ≠ Trevor Henderson :: A Game |  | Oakland Oaks - Center | 100000  →  B GAME | BIZ-00074 | Oakland Oaks - Center | 100000
+  = Victor Scott :: A ENGINE |  | Nurse aide | 48100
+PASS — legs differ only on the five engine.319 rows (13 minted in all)
+== restore bench code to stage 28
+stage 28 rebuilt from the bench
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @140
+pull-back 167 js + manifest byte-identical to stage28-e318.sha256
+engine.319 bench done
+exit 0

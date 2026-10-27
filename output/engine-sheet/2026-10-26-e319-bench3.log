@@ -1,0 +1,133 @@
+AIM = BENCH (script read the bench marker)
+== engine.319 bench round 3, candidate 4b3ed62e
+== leg A0 (stage 28, neutral queue)
+stage 28 rebuilt from the bench
+Script is already up to date.
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @144
+pull-back 167 js + manifest byte-identical to stage28-e318.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C113
+bench frozen: 912 rows, width 6 (rows with cells past F: 0); manifest (Status blank, Reporter processed) 105 = rows 809..913; Status processed 807; other Status 0; pending by name outside the manifest 0 → /root/GodWorld/output/engine-sheet/2026-10-25-e318-status-bench.json
+bench applied: Status := processed on 105 rows; run verify
+bench verify: 105 manifest rows, 912 rows; rows the by-name reader would take as pending: 0
+PASS — every manifest Status reads processed, every other cell = the freeze
+leg A0 (neutral): rookie rows blanked; pending 55, every clock blank or ENGINE; ledger max POP-1215; EE 4; ripples 693
+version cut; waiting 76 s more for /exec propagation
+leg A0 C113 fire rc=0 "verdict": "PASS" "wallS": 210 (223 s)
+  POP-01216 Theo Bautista | ENGINE |  | student | 0
+  POP-01217 Jamele Brown | ENGINE |  | Janitor | 46800
+  POP-01218 Victor Scott | ENGINE |  | Nurse aide | 48100
+  POP-01219 Tara Mehta | ENGINE |  | Transit operator | 60000
+  POP-01220 Clara Dubois | ENGINE |  | Urban garden worker | 60000
+  POP-01221 Margot Crenshaw | ENGINE |  | Fleet dispatcher | 77500
+  POP-01222 Astrid Freeman | ENGINE |  | Urban garden worker | 60000
+  POP-01223 Chidi Mehta | ENGINE | BIZ-00026 | Owner, Fruitvale Community Clinic | 75000
+leg A0: minted 8, Engine_Errors +0, ripples +67, GC flips 25, intake pending 0 — RECORD
+== leg B0 (stage 29 at 4b3ed62e, neutral queue)
+stage 29 = stage 28 + phase05-citizens/processAdvancementIntake.js at 4b3ed62e; manifest output/engine-sheet/stage29b-e319.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @145
+pull-back 167 js + manifest byte-identical to stage29b-e319.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C113
+bench frozen: 912 rows, width 6 (rows with cells past F: 0); manifest (Status blank, Reporter processed) 105 = rows 809..913; Status processed 807; other Status 0; pending by name outside the manifest 0 → /root/GodWorld/output/engine-sheet/2026-10-25-e318-status-bench.json
+bench applied: Status := processed on 105 rows; run verify
+bench verify: 105 manifest rows, 912 rows; rows the by-name reader would take as pending: 0
+PASS — every manifest Status reads processed, every other cell = the freeze
+leg B0 (neutral): rookie rows blanked; pending 55, every clock blank or ENGINE; ledger max POP-1215; EE 4; ripples 693
+version cut; waiting 80 s more for /exec propagation
+leg B0 C113 fire rc=0 "verdict": "PASS" "wallS": 215 (228 s)
+  POP-01216 Theo Bautista | ENGINE |  | student | 0
+  POP-01217 Jamele Brown | ENGINE |  | Janitor | 46800
+  POP-01218 Victor Scott | ENGINE |  | Nurse aide | 48100
+  POP-01219 Tara Mehta | ENGINE |  | Transit operator | 60000
+  POP-01220 Clara Dubois | ENGINE |  | Urban garden worker | 60000
+  POP-01221 Margot Crenshaw | ENGINE |  | Fleet dispatcher | 77500
+  POP-01222 Astrid Freeman | ENGINE |  | Urban garden worker | 60000
+  POP-01223 Chidi Mehta | ENGINE | BIZ-00026 | Owner, Fruitvale Community Clinic | 75000
+leg B0: minted 8, Engine_Errors +0, ripples +67, GC flips 25, intake pending 0 — RECORD
+minted 8 / 8; Employee_Count rows 180; ripples 67; GC flips 25
+PASS — A0 vs B0: every minted column, every Employee_Count, every Ripple_Ledger row, every Generic_Citizens flip and the queue equal outside the five
+== leg C (stage 29, bad clock last in the queue)
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C113
+bench frozen: 912 rows, width 6 (rows with cells past F: 0); manifest (Status blank, Reporter processed) 105 = rows 809..913; Status processed 807; other Status 0; pending by name outside the manifest 0 → /root/GodWorld/output/engine-sheet/2026-10-25-e318-status-bench.json
+bench applied: Status := processed on 105 rows; run verify
+bench verify: 105 manifest rows, 912 rows; rows the by-name reader would take as pending: 0
+PASS — every manifest Status reads processed, every other cell = the freeze
+leg C: rookies pending ["Game","Game"]; 4 probes last at row 134; pending 61; ledger max POP-1215; EE 4; ripples 693
+leg C C113 fire rc=2 "verdict": "PASS-WITH-NEW-EE (read them)" "wallS": 192 (206 s)
+HALT fire leg C
+    "cycleId": 113
+   },
+   {
+    "key": "PREV_FRANCHISE_WEIGHT_JSON",
+    "event": "ghost-skipped",
+    "stamped": 113,
+    "cycleId": 113
+   },
+   {
+    "key": "PREV_FRANCHISE_WEIGHT_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 112,
+    "cycleId": 113
+   },
+   {
+    "key": "CHAOS_NBHD_FOLD_JSON",
+    "event": "ghost-skipped",
+    "stamped": 113,
+    "cycleId": 113
+   },
+   {
+    "key": "CHAOS_NBHD_FOLD_JSON",
+    "event": "recovered-from-sheet",
+    "cycle": 112,
+    "cycleId": 113
+   }
+  ]
+ },
+ "post": {
+  "bench": 113,
+  "live": 113,
+  "ee": 5,
+  "rileyLast": 113,
+  "checkpoint": null
+ },
+ "newEE": [
+  "[113,\"Phase5-Advancement\",\"processAdvancementIntake_: Advancement_Intake row for \\\"Benchprobe Badclock-E319\\\" carries ClockMode \\\"Gaem\\\", which is not ENGINE, GAME, CIVIC or MEDIA — fix the c\"]"
+ ],
+ "verdict": "PASS-WITH-NEW-EE (read them)"
+}
+BENCH LEFT: script = stage 29 at 4b3ed62e; restore: bash output/engine-sheet/2026-10-26-push-e319-bench.sh stage28
+exit 2
+  POP-01216 Theo Bautista | ENGINE |  | student | 0
+  POP-01217 Jamele Brown | ENGINE |  | Janitor | 46800
+  POP-01218 Victor Scott | ENGINE |  | Nurse aide | 48100
+  POP-01219 Tara Mehta | ENGINE |  | Transit operator | 60000
+  POP-01220 Clara Dubois | ENGINE |  | Urban garden worker | 60000
+  POP-01221 Margot Crenshaw | ENGINE |  | Fleet dispatcher | 77500
+  POP-01222 Astrid Freeman | ENGINE |  | Urban garden worker | 60000
+  EE+ 2026-10-27T06:28:41.136Z | 113 | Phase5-Advancement | processAdvancementIntake_: Advancement_Intake row for "Benchprobe Badclock-E319" carries ClockMode "Gaem", which is not ENGINE, GAME, CIVIC or MEDIA — fix the cell (no row in the queue was processed). | Error: processAdvancementIntake_: Advancement_Intake row for "Benchprobe Badclock-E319" carries ClockMode "Gaem", which is not ENGINE, GAME, CIVIC or MEDIA — fix the cell (no row in the queue was processed).
+    at processAdvancementRowsBod
+leg C: minted 7, Engine_Errors +1, ripples +66, GC flips 25, intake pending 62 — FAIL: Generic_Citizens flipped to Emerged: Jamele Brown, Victor Scott, Tara Mehta, Clara Dubois, Margot Crenshaw, Astrid Freeman
+== restore bench code to stage 28 (after the leg C check, run by hand: benchfire exits 2 on PASS-WITH-NEW-EE)
+pull-back 167 js + manifest byte-identical to stage28-e318.sha256
+== leg C check re-run with the narrowed Emerged rule (bench data untouched since the fire)
+  EE+ 2026-10-27T06:28:41.136Z | 113 | Phase5-Advancement | processAdvancementIntake_: Advancement_Intake row for "Benchprobe Badclock-E319" carries ClockMode "Gaem", which is not ENGINE, GAME, CIVIC 
+    at processAdvancementRowsBod
+leg C: minted 7, Engine_Errors +1, ripples +66, GC flips 25, intake pending 62 — PASS

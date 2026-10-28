@@ -1,0 +1,51 @@
+{
+ "cycle": 113,
+ "from": 113,
+ "label": "live",
+ "sheet": "live",
+ "rows": 50,
+ "baseRows": 50,
+ "sighted": [
+  {
+   "id": "CUL-5F7A348B",
+   "name": "Marisol Rivera",
+   "lastSeen": 113,
+   "baseCategory": "civic-figure",
+   "role": "Community Advocate",
+   "fame": "39→0",
+   "link": "POP-01062",
+   "bucket": true
+  },
+  {
+   "id": "CUL-C13B0483",
+   "name": "Claire Ashford",
+   "lastSeen": 113,
+   "baseCategory": "author",
+   "role": "author",
+   "fame": "15→0",
+   "link": "POP-01071",
+   "bucket": true
+  },
+  {
+   "id": "CUL-EF1447BC",
+   "name": "Deacon Seymour",
+   "lastSeen": 113,
+   "baseCategory": "athlete",
+   "role": "A's player",
+   "fame": "2→5",
+   "link": "POP-00528",
+   "bucket": false
+  }
+ ],
+ "minted": [],
+ "hold": [],
+ "note": [
+  "CUL-5F7A348B Marisol Rivera sighted, FameScore 39→0 (under +5: a dim or decay rode the window)",
+  "CUL-C13B0483 Claire Ashford sighted, FameScore 15→0 (under +5: a dim or decay rode the window)",
+  "CUL-EF1447BC Deacon Seymour sighted, FameScore 2→5 (under +5: a dim or decay rode the window)"
+ ],
+ "e313": [],
+ "e313state": {},
+ "bucketSighted": 2,
+ "verdict": "PASS"
+}

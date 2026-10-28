@@ -21,6 +21,45 @@ Pre-fire hand-write diff (run-cycle Step 2.5): Neighborhood_Map / Crime_Metrics 
 | engine.286 / 302 | life-event dice; five marital statuses live | scoreboard below; see §Citizen Scoreboard on the 39 "newly married" | as expected |
 | sports — Oaks C113 (3 games) | record-driven pricing on a 3-0 week | `sportsWeek Oaks: g 3 h 1 w 3 l 0 … signed 0.08`; `applyGameNightMoments_: 19 named, 10 staff, 4 fan line(s); weeks {"Oaks":"WIN"}`; `applyGameNightMoments_: unresolved feed names, cycle 113: Harry Hayward` — then the hiring engine minted him: **POP-01223 Harry Hayward, Oakland Oaks – Power Forward, KONO** and **POP-01224 Trevor Henderson, Oaks – Center, Lake Merritt** | as expected — the pre-flight "cannot interview Harry Hayward" warning resolved itself inside the fire; he is a citizen from C113 |
 
+## C113 re-reads — first live fire of stages 5–25, and the C112-era rows dated to C113 (read 2026-10-27, engine-sheet)
+
+Read two days after the fire; the Sunday review above covered stages 27 + 28 only. Sources: **dump** = the C113 beat dump (`output/beats/`, generated 2026-10-26 00:31 CDT — before the engine.312 re-base apply at 13:58 that day, so fire state); **log** = `output/execution_log_c113.txt` line; **live** = live sheet read 2026-10-27 (after the re-base apply's 413 Sentiment + 48 FameScore cells and the POP-01223/01224 ClockMode / employer correction — fame and those two rows are not fire state there); **ring** = the `Carry_Forward_Store` row stamped C113. Watch scripts are the ones each stage's DEPLOY_HISTORY entry names (`output/engine-sheet/`).
+
+**Close (done-pending-archive):**
+
+| Row (stage) | C113 | Source |
+|---|---|---|
+| engine.297 + 313/314/315 (22–25) fame sightings | `e297-check 113 live --base …-live-cultural-c112.json` **PASS**: 50→50 rows, 3 sighted (2 ledger buckets), 0 minted, no authored category rewritten, no positional calendar write, no POPID on two personal rows. Its "FameScore 39→0 / 15→0 — a dim or decay rode the window" notes on Marisol Rivera and Claire Ashford are the 10-26 re-base apply, not the fire (fire readback above: Ashford 15→16) | live |
+| engine.307 (20) sports orgs hire staff, never athletes | `e307-check 113 live live` **PASS**: 0 onto / 0 off the 8 sports orgs, 0 athlete career or income moves, 0 sports hires (expected few or none); 8 intake mints. The first run printed FAIL: it counted the two Oaks rookies' intake "Added to Simulation_Ledger" rows as sports career lines — that placement is the intake mint's (engine.319's case, live since). Check fixed: a citizen absent from the pre-fire snap is a mint, listed apart | live; pre-fire snap 2026-10-22 |
+| engine.306 (18) the 103 business rows | `e306-livewatch diff 113` **ACCEPT-CANDIDATE**: 283 rows read, 0 added / removed, high water 289; 0 citizens moved by the new rows (1 employer move, POP-00183 BIZ-00028 → BIZ-00094, neither new); the 103 drift revenue / growth like every row; 33 spot lines, each on the citizen's own spot. The first run's HOLD was one "stray": Daire Green (POP-00442, Retired) — the check skipped Retired citizens, the generator keeps them (`generateCitizensEvents.js:2602`); his own spot is Fruitvale Diner. Check fixed to the generator's pool | live; pre-fire snap 2026-10-21 |
+| engine.214 Cut B (15) hood reactions | the three old trajectory lines: 21 at C112 → **0**; 36 reaction lines in 8 hoods; 25 of 36 run with the hood's trend (69% — the mechanism's 2:1; bench 62%); growth hoods carry grumbling (Uptown 3, Fruitvale 3, Downtown 1, West Oakland 1); the 3 decay-hood lines are all defend / humble, and 7 of 9 decay hoods drew none (small sample). KONO's brag: KONO was rising at C112 (`world_summary_c112.md:76`), steady on the C113 map | dump; live map |
+| engine.214 Cut C rate (16/17) spot lines | 33 lift lines against the watch's "low teens (bench 8–15)". The lift is on every food spot in a hood carrying the game-week bar term — the venue hoods plus hoods at or above the nightlife median (`sportsWeekRecord.js:349-360`, `applyBusinessDynamics.js:721`), so Fruitvale (8) qualifies by nightlife. C113 lifted 8 hoods; 371 citizens hold a food spot there; at the builder's 1-in-10, ~37 expected; 33 drawn. The bench band was a one-win, narrower week | dump; spot holders from the pre-fire snap |
+| engine.305 (14) hood pulse follows the line's sign | 0 errors; LifeHistory unchanged in kind (2,396 lines; C112 2,344). The −0.01…−0.07 per hood is not separable on live without a counterfactual; bench-proven (stage 14) | log, dump |
+| engine.304 (13) family lottery | `familyLinks 6` (bench 6.8 a Cycle), `familyLinksReleased 0`; 6 arrivals named, in the background (4 spouses, 2 children — log 186–191); 0 `family-own-words` rows (no linked wake has spoken) | log 192, dump |
+| engine.302 (9) bonds | 23 new bonds (soak band ~25), 645 total; 0 weddings, 0 divorces; 0 deaths, so no widowing to test; MaritalStatus off-enum 0; 205.9 s (band 154–240). Wedding rate stays the builder's dial (§Citizen Scoreboard) | log 156–181, live audit |
+| engine.291 / 294 (4g) | 0 raw-token LifeHistory lines (C112 also 0) | dump |
+| engine.293 (4h) arrival pay | one arrival at exactly 60000, named by the log as designed: `no pay rule places "Urban garden worker" (POP-01220) — kept 60000` | log 151 |
+| engine.298 census line | summary hospital segment in the care trail's words, no load %: "35 admissions, 71 in care at the close (0 tracked), 71 beds occupied" | `world_summary_c113.md:10,14` |
+| engine.194 priced week | `games 0.010` on a 3-win week (C112: +0.004 on one win) | log 41 |
+| engine.203d aftermath | `A's title quiet 3 since C110 … = 0.061` — exactly the expectation (0.072 × 0.85); C114 would be 0.052 | log 37 |
+
+**Re-dated (stay live-observing):**
+
+| Row | C113 | Next |
+|---|---|---|
+| engine.288 / 289 seed gates, CULTURE gates; stage 5 "city steps down while hoods rise" | no seed input at C113, as stage 5 expected: first adoption, no carried blob (no `seedCarriedSeedList_` line in the log); Phase 9 then wrote `PREV_STORY_SEEDS_JSON` (30 seeds) and `PREV_CONTRACT_SEEDS_JSON` (42) stamped C113 (log 255–256, ring). Every seed gate read nothing; city sentiment −0.01 → −0.01 (ring `PREV_CITY_DYN_JSON`). Stage 5's other items hold: EE 4 unchanged, 2,396 LifeHistory lines, 0 raw, 57 advancements processed, 0 errors | C114 Sun 2026-11-01 — first Cycle the gates have input; engine.289's keep / re-tier call goes to the builder on those numbers |
+| engine.310 (19) event draw | `e310-c114watch diff 113` **CLEAN**: EA sum 114.29 → 114.12, range 3–8.42, up 10 / down 8; 3 staged events, each counted once | C114: migration drift and trajectory read the C113 map (not automated) |
+| engine.208 fandom | 4 fan lines, `fandom seeded 9`, Oaks weight 0.3831 → 0.4061 (weeks 2, fans 4) | C114, the band's second read |
+| engine.308 (21) heritage cap + cadence | `e308-check 113 live` **PASS**: column armed, clocks 106 / 109 / 111 / 112, no opening | C121, Dillon's first possible opening |
+| engine.287 crime gate | `compactCrimeSpikes_: carrying 2` — Adams Point and Piedmont Ave propertyCrime +5 (ring); no wave at floor 3. Counts on record 2/0/0/1/1/1 → 2 | the builder's window longer than 20 Cycles |
+| engine.290 transit | 18 Transit_Metrics rows (`base: ledger`, game-day factors); the four C112 crew POP-01212–01215 Active at BIZ-00014 | open work is the plan's Sequencing 4 (crew ECL rows + governor) and Trevor's slice read — not a fire read |
+
+**engine.301 F1 — gap log G-EC41 resolved:** the `PREV_CYCLE_STATE_JSON` blob is readable from this seat — the `Carry_Forward_Store` ring carries it. C113: `crimeWaveHoods []` (no wave), 2 spikes carried (above).
+
+**engine.206 — the trace the row asked for (stays open, a build):** the game-day-crowds seed is a `transit-event` ripple (`updateTransitMetrics.js:657`), routed to civic by design (`buildWorldSummary.js:771`); it reached `lanes.civic[47]` at C113, game-night reached `lanes.sports[8]`. The game-week bar money (`game-week bars 54 at 0.04pp`, log 140) writes no ripple or world event — `applyBusinessDynamics.js` ripples only a closure (`:694`) — so nothing about the sports week reaches the business desk. The fix is a game-week bar ripple routed to business; not built.
+
+**Feed row for the builder:** the first Oaks game of C113 (91–78 at Detroit per its StoryAngle) carries WeekRecord `H:W`; the engine read it as a home game (`sportsWeek Oaks: g 3 h 1`), so Downtown and Jack London got game-day crowds and the venue lift. The other two carry `A:W`.
+
 ## The week in one line
 
 The Oaks went 4–0 to open their first season (91–78 at Detroit, 115–93 at New York, 105–62 at Washington) and the engine minted their rookie power forward as a citizen; Mark Aitken, heading into free agency saying he stays in Oakland, bought a home the same week his paper record pushed his fame to 30; Theo Bautista was born in Chinatown; 25 households formed (875 → 900); city sentiment +0.10, hospital 35 admissions / 71 in care; Chinatown is the one hood decaying on all three dials with nothing on the council floor for it.
@@ -146,4 +185,5 @@ No win callout: no pattern flipped from `remedy-not-firing` to `remedy-firing-as
 - Improvements: 8
 - Baseline briefs: 80 (75 with promotion hints)
 - Measurements: 0 / 6 firing as expected; 4 not firing (all `priorRemedyType: none`), 2 overshot
-- First live fire of stages 27 + 28: engine.318 as expected, engine.312 as expected, engine.301 no error (ring blob unread from here)
+- First live fire of stages 27 + 28: engine.318 as expected, engine.312 as expected, engine.301 no error (ring blob unread from here — read 2026-10-27 from Carry_Forward_Store: no wave, 2 spikes)
+- C113 re-reads (2026-10-27): 13 rows close as expected; seed and CULTURE gates had no input (first input C114); engine.206 traced — the bar money writes no seed for the business desk

@@ -1,0 +1,197 @@
+{
+ "cycle": 113,
+ "vs": 112,
+ "hold": [],
+ "diagnose": [],
+ "prev": {
+  "cycle": 112,
+  "at": "2026-10-22T07:05:40.080Z",
+  "missing": [],
+  "ea": {
+   "Downtown": 6.38,
+   "Temescal": 5.3,
+   "Laurel": 5.1,
+   "West Oakland": 5.21,
+   "Fruitvale": 6.16,
+   "Jack London": 8.18,
+   "Rockridge": 5.25,
+   "Adams Point": 3.26,
+   "Grand Lake": 7.25,
+   "Piedmont Ave": 4.27,
+   "Chinatown": 7.74,
+   "Brooklyn": 3.25,
+   "Eastlake": 5.22,
+   "Glenview": 3,
+   "Dimond": 4.25,
+   "Ivy Hill": 3,
+   "San Antonio": 5.25,
+   "KONO": 7,
+   "Lake Merritt": 3.16,
+   "Uptown": 8.06,
+   "Baylight District": 4,
+   "East Oakland": 4
+  },
+  "inputs": {
+   "staged": 4,
+   "stagedNames": [
+    "Downtown Volunteer Boost Rally",
+    "Chinatown Winter Lights",
+    "Jack London Waterfront Stroll",
+    "Temescal Street Vendors Block"
+   ],
+   "worldEvents": 11,
+   "evDomain": 0,
+   "evText": 0,
+   "storySeedCount": "35",
+   "hookRows": 48,
+   "hookHits": 1,
+   "baseEstimate": 5
+  },
+  "eaSum": 114.29,
+  "eaRange": [
+   3,
+   8.18
+  ]
+ },
+ "now": {
+  "cycle": 113,
+  "at": "2026-10-28T03:43:18.615Z",
+  "missing": [],
+  "ea": {
+   "Downtown": 6.3,
+   "Temescal": 5.33,
+   "Laurel": 5.41,
+   "West Oakland": 5.26,
+   "Fruitvale": 6.14,
+   "Jack London": 8.42,
+   "Rockridge": 5.3,
+   "Adams Point": 3,
+   "Grand Lake": 7,
+   "Piedmont Ave": 4.11,
+   "Chinatown": 7.4,
+   "Brooklyn": 3,
+   "Eastlake": 5.36,
+   "Glenview": 3.25,
+   "Dimond": 4.25,
+   "Ivy Hill": 3,
+   "San Antonio": 5,
+   "KONO": 7,
+   "Lake Merritt": 3.18,
+   "Uptown": 8.16,
+   "Baylight District": 4,
+   "East Oakland": 4.25
+  },
+  "inputs": {
+   "staged": 3,
+   "stagedNames": [
+    "Jack London Cozy Nights Film Series",
+    "The Villanueva Family Block Party",
+    "Lake Merritt Lantern Parade"
+   ],
+   "worldEvents": 11,
+   "evDomain": 0,
+   "evText": 0,
+   "storySeedCount": "30",
+   "hookRows": 41,
+   "hookHits": 0,
+   "baseEstimate": 3
+  },
+  "eaSum": 114.12,
+  "eaRange": [
+   3,
+   8.42
+  ]
+ },
+ "perHood": {
+  "Downtown": [
+   6.38,
+   6.3
+  ],
+  "Temescal": [
+   5.3,
+   5.33
+  ],
+  "Laurel": [
+   5.1,
+   5.41
+  ],
+  "West Oakland": [
+   5.21,
+   5.26
+  ],
+  "Fruitvale": [
+   6.16,
+   6.14
+  ],
+  "Jack London": [
+   8.18,
+   8.42
+  ],
+  "Rockridge": [
+   5.25,
+   5.3
+  ],
+  "Adams Point": [
+   3.26,
+   3
+  ],
+  "Grand Lake": [
+   7.25,
+   7
+  ],
+  "Piedmont Ave": [
+   4.27,
+   4.11
+  ],
+  "Chinatown": [
+   7.74,
+   7.4
+  ],
+  "Brooklyn": [
+   3.25,
+   3
+  ],
+  "Eastlake": [
+   5.22,
+   5.36
+  ],
+  "Glenview": [
+   3,
+   3.25
+  ],
+  "Dimond": [
+   4.25,
+   4.25
+  ],
+  "Ivy Hill": [
+   3,
+   3
+  ],
+  "San Antonio": [
+   5.25,
+   5
+  ],
+  "KONO": [
+   7,
+   7
+  ],
+  "Lake Merritt": [
+   3.16,
+   3.18
+  ],
+  "Uptown": [
+   8.06,
+   8.16
+  ],
+  "Baylight District": [
+   4,
+   4
+  ],
+  "East Oakland": [
+   4,
+   4.25
+  ]
+ },
+ "engineErrors": [],
+ "verdict": "CLEAN"
+}

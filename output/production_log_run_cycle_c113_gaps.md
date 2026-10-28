@@ -258,6 +258,7 @@
 ### G-EC41 — engine.301 F1 `crimeWaveHoods` not readable from the live sheet after the fire [judgment] [writeback-drift] [LOW]
 - the ring persists as the `PREV_CYCLE_STATE_JSON` carry-forward blob (`phase01-config/loadPreviousEvening.js:276`); no tab, no Phase-2 log line names the carried hoods
 - live readback of the stage-27 watch item is 0 Engine_Errors only; a Phase-2 Logger line (`crimeWaveHoods: [...]`) or a blob dump is the read — needs a row, not built under the halt
+- **resolved 2026-10-27 (engine-sheet):** the blob is readable — `saveCarryForwardBlob_` mirrors every key to the `Carry_Forward_Store` tab ring (`loadPreviousEvening.js:125-143`). The C113 row: `crimeWaveHoods []`, 2 spikes carried (Adams Point, Piedmont Ave propertyCrime +5). No row needed; `engine_review_c113.md` §C113 re-reads
 
 ### G-EC42 — pre-flight "Harry Hayward does NOT resolve" closed by the fire [judgment] [cross-cycle-debt] [INFO]
 - `applyGameNightMoments_: unresolved feed names, cycle 113: Harry Hayward` at Phase 5, then the hiring engine minted POP-01223 Harry Hayward (Oaks PF, KONO) and POP-01224 Trevor Henderson (Oaks C, Lake Merritt) the same Cycle

@@ -1,0 +1,1407 @@
+{
+ "cycle": 113,
+ "vs": 112,
+ "hold": [],
+ "bizAdded": [],
+ "bizRemoved": [],
+ "highWater": [
+  289,
+  289
+ ],
+ "archiveAdded": [],
+ "removedNotArchived": [],
+ "bizAddedUnexplained": [],
+ "newRowChanges": {
+  "BIZ-00187": {
+   "Annual_Revenue": [
+    "9000000",
+    "9015525"
+   ],
+   "Growth_Rate": [
+    "8",
+    "8.97"
+   ]
+  },
+  "BIZ-00188": {
+   "Annual_Revenue": [
+    "9000000",
+    "9014469"
+   ],
+   "Growth_Rate": [
+    "8",
+    "8.36"
+   ]
+  },
+  "BIZ-00189": {
+   "Annual_Revenue": [
+    "9000000",
+    "9015283"
+   ],
+   "Growth_Rate": [
+    "8",
+    "8.83"
+   ]
+  },
+  "BIZ-00190": {
+   "Annual_Revenue": [
+    "500000",
+    "500227"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.36"
+   ]
+  },
+  "BIZ-00191": {
+   "Annual_Revenue": [
+    "720000",
+    "720541"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.91"
+   ]
+  },
+  "BIZ-00192": {
+   "Annual_Revenue": [
+    "800000",
+    "800571"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.71"
+   ]
+  },
+  "BIZ-00193": {
+   "Annual_Revenue": [
+    "800000",
+    "800540"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.51"
+   ]
+  },
+  "BIZ-00194": {
+   "Annual_Revenue": [
+    "720000",
+    "720554"
+   ],
+   "Growth_Rate": [
+    "3",
+    "4"
+   ]
+  },
+  "BIZ-00195": {
+   "Annual_Revenue": [
+    "720000",
+    "720554"
+   ],
+   "Growth_Rate": [
+    "3",
+    "4"
+   ]
+  },
+  "BIZ-00196": {
+   "Annual_Revenue": [
+    "720000",
+    "720515"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.72"
+   ]
+  },
+  "BIZ-00197": {
+   "Annual_Revenue": [
+    "720000",
+    "720554"
+   ],
+   "Growth_Rate": [
+    "3",
+    "4"
+   ]
+  },
+  "BIZ-00198": {
+   "Annual_Revenue": [
+    "720000",
+    "720532"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.84"
+   ]
+  },
+  "BIZ-00199": {
+   "Annual_Revenue": [
+    "6200000",
+    "6205461"
+   ],
+   "Growth_Rate": [
+    "4",
+    "4.58"
+   ]
+  },
+  "BIZ-00200": {
+   "Annual_Revenue": [
+    "6200000",
+    "6205544"
+   ],
+   "Growth_Rate": [
+    "4",
+    "4.65"
+   ]
+  },
+  "BIZ-00201": {
+   "Annual_Revenue": [
+    "6200000",
+    "6205306"
+   ],
+   "Growth_Rate": [
+    "4",
+    "4.45"
+   ]
+  },
+  "BIZ-00202": {
+   "Annual_Revenue": [
+    "6200000",
+    "6205449"
+   ],
+   "Growth_Rate": [
+    "4",
+    "4.57"
+   ]
+  },
+  "BIZ-00203": {
+   "Annual_Revenue": [
+    "500000",
+    "500110"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.14"
+   ]
+  },
+  "BIZ-00204": {
+   "Annual_Revenue": [
+    "720000",
+    "720277"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2"
+   ]
+  },
+  "BIZ-00205": {
+   "Annual_Revenue": [
+    "380000",
+    "380110"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.5"
+   ]
+  },
+  "BIZ-00206": {
+   "Annual_Revenue": [
+    "380000",
+    "380075"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.03"
+   ]
+  },
+  "BIZ-00207": {
+   "Annual_Revenue": [
+    "1200000",
+    "1200402"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.74"
+   ]
+  },
+  "BIZ-00208": {
+   "Annual_Revenue": [
+    "800000",
+    "800583"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.79"
+   ]
+  },
+  "BIZ-00209": {
+   "Annual_Revenue": [
+    "800000",
+    "800545"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.54"
+   ]
+  },
+  "BIZ-00210": {
+   "Annual_Revenue": [
+    "800000",
+    "800549"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.57"
+   ]
+  },
+  "BIZ-00211": {
+   "Annual_Revenue": [
+    "720000",
+    "720511"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.69"
+   ]
+  },
+  "BIZ-00212": {
+   "Annual_Revenue": [
+    "720000",
+    "720498"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.6"
+   ]
+  },
+  "BIZ-00213": {
+   "Annual_Revenue": [
+    "800000",
+    "800460"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.99"
+   ]
+  },
+  "BIZ-00214": {
+   "Annual_Revenue": [
+    "720000",
+    "720363"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.62"
+   ]
+  },
+  "BIZ-00215": {
+   "Annual_Revenue": [
+    "380000",
+    "380145"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.98"
+   ]
+  },
+  "BIZ-00216": {
+   "Annual_Revenue": [
+    "800000",
+    "800475"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.09"
+   ]
+  },
+  "BIZ-00217": {
+   "Annual_Revenue": [
+    "720000",
+    "720446"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.22"
+   ]
+  },
+  "BIZ-00218": {
+   "Annual_Revenue": [
+    "4000000",
+    "4002231"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.9"
+   ]
+  },
+  "BIZ-00219": {
+   "Annual_Revenue": [
+    "380000",
+    "380105"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.43"
+   ]
+  },
+  "BIZ-00220": {
+   "Annual_Revenue": [
+    "4000000",
+    "4002062"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.68"
+   ]
+  },
+  "BIZ-00221": {
+   "Annual_Revenue": [
+    "720000",
+    "720367"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.65"
+   ]
+  },
+  "BIZ-00222": {
+   "Annual_Revenue": [
+    "500000",
+    "500154"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.6"
+   ]
+  },
+  "BIZ-00223": {
+   "Annual_Revenue": [
+    "4000000",
+    "4003077"
+   ],
+   "Growth_Rate": [
+    "3",
+    "4"
+   ]
+  },
+  "BIZ-00224": {
+   "Annual_Revenue": [
+    "6200000",
+    "6205962"
+   ],
+   "Growth_Rate": [
+    "4",
+    "5"
+   ]
+  },
+  "BIZ-00225": {
+   "Annual_Revenue": [
+    "380000",
+    "380219"
+   ],
+   "Growth_Rate": [
+    "2",
+    "3"
+   ]
+  },
+  "BIZ-00226": {
+   "Annual_Revenue": [
+    "1200000",
+    "1200660"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.86"
+   ]
+  },
+  "BIZ-00227": {
+   "Annual_Revenue": [
+    "720000",
+    "720494"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.57"
+   ]
+  },
+  "BIZ-00228": {
+   "Annual_Revenue": [
+    "720000",
+    "720507"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.66"
+   ]
+  },
+  "BIZ-00229": {
+   "Annual_Revenue": [
+    "380000",
+    "380182"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.49"
+   ]
+  },
+  "BIZ-00230": {
+   "Annual_Revenue": [
+    "4000000",
+    "4002654"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.45"
+   ]
+  },
+  "BIZ-00231": {
+   "Annual_Revenue": [
+    "500000",
+    "500237"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.46"
+   ]
+  },
+  "BIZ-00232": {
+   "Annual_Revenue": [
+    "380000",
+    "380184"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.52"
+   ]
+  },
+  "BIZ-00233": {
+   "Annual_Revenue": [
+    "380000",
+    "380184"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.52"
+   ]
+  },
+  "BIZ-00234": {
+   "Annual_Revenue": [
+    "380000",
+    "380174"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.38"
+   ]
+  },
+  "BIZ-00235": {
+   "Annual_Revenue": [
+    "380000",
+    "380194"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.65"
+   ]
+  },
+  "BIZ-00236": {
+   "Annual_Revenue": [
+    "720000",
+    "720482"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.48"
+   ]
+  },
+  "BIZ-00237": {
+   "Annual_Revenue": [
+    "6200000",
+    "6205055"
+   ],
+   "Growth_Rate": [
+    "4",
+    "4.24"
+   ]
+  },
+  "BIZ-00238": {
+   "Annual_Revenue": [
+    "720000",
+    "720407"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.94"
+   ]
+  },
+  "BIZ-00239": {
+   "Annual_Revenue": [
+    "380000",
+    "380173"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.37"
+   ]
+  },
+  "BIZ-00240": {
+   "Annual_Revenue": [
+    "380000",
+    "380158"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.16"
+   ]
+  },
+  "BIZ-00241": {
+   "Annual_Revenue": [
+    "720000",
+    "720431"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.11"
+   ]
+  },
+  "BIZ-00242": {
+   "Annual_Revenue": [
+    "720000",
+    "720396"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.86"
+   ]
+  },
+  "BIZ-00243": {
+   "Annual_Revenue": [
+    "720000",
+    "720364"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.63"
+   ]
+  },
+  "BIZ-00244": {
+   "Annual_Revenue": [
+    "500000",
+    "500096"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1"
+   ]
+  },
+  "BIZ-00245": {
+   "Annual_Revenue": [
+    "720000",
+    "720364"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.63"
+   ]
+  },
+  "BIZ-00246": {
+   "Annual_Revenue": [
+    "4000000",
+    "4002038"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.65"
+   ]
+  },
+  "BIZ-00247": {
+   "Annual_Revenue": [
+    "800000",
+    "800565"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.67"
+   ]
+  },
+  "BIZ-00248": {
+   "Annual_Revenue": [
+    "720000",
+    "720522"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.77"
+   ]
+  },
+  "BIZ-00249": {
+   "Annual_Revenue": [
+    "380000",
+    "380206"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.82"
+   ]
+  },
+  "BIZ-00250": {
+   "Annual_Revenue": [
+    "720000",
+    "720529"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.82"
+   ]
+  },
+  "BIZ-00251": {
+   "Annual_Revenue": [
+    "720000",
+    "720277"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2"
+   ]
+  },
+  "BIZ-00252": {
+   "Annual_Revenue": [
+    "720000",
+    "720379"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.74"
+   ]
+  },
+  "BIZ-00253": {
+   "Annual_Revenue": [
+    "720000",
+    "720396"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.86"
+   ]
+  },
+  "BIZ-00254": {
+   "Annual_Revenue": [
+    "6200000",
+    "6204674"
+   ],
+   "Growth_Rate": [
+    "4",
+    "3.92"
+   ]
+  },
+  "BIZ-00255": {
+   "Annual_Revenue": [
+    "380000",
+    "380120"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.64"
+   ]
+  },
+  "BIZ-00256": {
+   "Annual_Revenue": [
+    "500000",
+    "500105"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.09"
+   ]
+  },
+  "BIZ-00257": {
+   "Annual_Revenue": [
+    "4000000",
+    "4001731"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.25"
+   ]
+  },
+  "BIZ-00258": {
+   "Annual_Revenue": [
+    "500000",
+    "500110"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.14"
+   ]
+  },
+  "BIZ-00259": {
+   "Annual_Revenue": [
+    "380000",
+    "380073"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1"
+   ]
+  },
+  "BIZ-00260": {
+   "Annual_Revenue": [
+    "6200000",
+    "6204328"
+   ],
+   "Growth_Rate": [
+    "4",
+    "3.63"
+   ]
+  },
+  "BIZ-00261": {
+   "Annual_Revenue": [
+    "1200000",
+    "1200427"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.85"
+   ]
+  },
+  "BIZ-00262": {
+   "Annual_Revenue": [
+    "720000",
+    "720342"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.47"
+   ]
+  },
+  "BIZ-00263": {
+   "Annual_Revenue": [
+    "500000",
+    "500157"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.63"
+   ]
+  },
+  "BIZ-00264": {
+   "Annual_Revenue": [
+    "380000",
+    "380183"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.5"
+   ]
+  },
+  "BIZ-00265": {
+   "Annual_Revenue": [
+    "720000",
+    "720490"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.54"
+   ]
+  },
+  "BIZ-00266": {
+   "Annual_Revenue": [
+    "380000",
+    "380194"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.66"
+   ]
+  },
+  "BIZ-00267": {
+   "Annual_Revenue": [
+    "720000",
+    "720548"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.96"
+   ]
+  },
+  "BIZ-00268": {
+   "Annual_Revenue": [
+    "380000",
+    "380194"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.66"
+   ]
+  },
+  "BIZ-00269": {
+   "Annual_Revenue": [
+    "720000",
+    "720489"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.53"
+   ]
+  },
+  "BIZ-00270": {
+   "Annual_Revenue": [
+    "720000",
+    "720533"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.85"
+   ]
+  },
+  "BIZ-00271": {
+   "Annual_Revenue": [
+    "720000",
+    "720522"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.77"
+   ]
+  },
+  "BIZ-00272": {
+   "Annual_Revenue": [
+    "8000000",
+    "8008662"
+   ],
+   "Growth_Rate": [
+    "5",
+    "5.63"
+   ]
+  },
+  "BIZ-00273": {
+   "Annual_Revenue": [
+    "8000000",
+    "8008985"
+   ],
+   "Growth_Rate": [
+    "5",
+    "5.84"
+   ]
+  },
+  "BIZ-00274": {
+   "Annual_Revenue": [
+    "720000",
+    "720547"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.95"
+   ]
+  },
+  "BIZ-00275": {
+   "Annual_Revenue": [
+    "720000",
+    "720554"
+   ],
+   "Growth_Rate": [
+    "3",
+    "4"
+   ]
+  },
+  "BIZ-00276": {
+   "Annual_Revenue": [
+    "500000",
+    "500258"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.68"
+   ]
+  },
+  "BIZ-00277": {
+   "Annual_Revenue": [
+    "500000",
+    "500284"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.95"
+   ]
+  },
+  "BIZ-00278": {
+   "Annual_Revenue": [
+    "500000",
+    "500275"
+   ],
+   "Growth_Rate": [
+    "2",
+    "2.86"
+   ]
+  },
+  "BIZ-00279": {
+   "Annual_Revenue": [
+    "1200000",
+    "1200418"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.81"
+   ]
+  },
+  "BIZ-00280": {
+   "Annual_Revenue": [
+    "500000",
+    "500177"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.84"
+   ]
+  },
+  "BIZ-00281": {
+   "Annual_Revenue": [
+    "800000",
+    "800458"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.98"
+   ]
+  },
+  "BIZ-00282": {
+   "Annual_Revenue": [
+    "380000",
+    "380137"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.88"
+   ]
+  },
+  "BIZ-00283": {
+   "Annual_Revenue": [
+    "500000",
+    "500176"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.83"
+   ]
+  },
+  "BIZ-00284": {
+   "Annual_Revenue": [
+    "1200000",
+    "1200408"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.77"
+   ]
+  },
+  "BIZ-00285": {
+   "Annual_Revenue": [
+    "720000",
+    "720451"
+   ],
+   "Growth_Rate": [
+    "3",
+    "3.26"
+   ]
+  },
+  "BIZ-00286": {
+   "Annual_Revenue": [
+    "720000",
+    "720388"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.8"
+   ]
+  },
+  "BIZ-00287": {
+   "Annual_Revenue": [
+    "380000",
+    "380133"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.82"
+   ]
+  },
+  "BIZ-00288": {
+   "Annual_Revenue": [
+    "380000",
+    "380137"
+   ],
+   "Growth_Rate": [
+    "2",
+    "1.88"
+   ]
+  },
+  "BIZ-00289": {
+   "Annual_Revenue": [
+    "720000",
+    "720390"
+   ],
+   "Growth_Rate": [
+    "3",
+    "2.82"
+   ]
+  }
+ },
+ "newRowDyn": {},
+ "employerMoves": [
+  [
+   "POP-00183",
+   "BIZ-00028",
+   "BIZ-00094",
+   ""
+  ]
+ ],
+ "employerMovesNewRows": [],
+ "citizensGone": [],
+ "newCitizensAtNewRows": [],
+ "spots": {
+  "Jack London": {
+   "eligible": [
+    11,
+    11
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 2
+  },
+  "Downtown": {
+   "eligible": [
+    4,
+    4
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 2
+  },
+  "Temescal": {
+   "eligible": [
+    4,
+    4
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 1
+  },
+  "Uptown": {
+   "eligible": [
+    7,
+    7
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "Lake Merritt": {
+   "eligible": [
+    7,
+    7
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "Chinatown": {
+   "eligible": [
+    8,
+    8
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "Rockridge": {
+   "eligible": [
+    6,
+    6
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 1
+  },
+  "Fruitvale": {
+   "eligible": [
+    10,
+    10
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "KONO": {
+   "eligible": [
+    8,
+    8
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "West Oakland": {
+   "eligible": [
+    2,
+    2
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "Dimond": {
+   "eligible": [
+    10,
+    10
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "Grand Lake": {
+   "eligible": [
+    11,
+    11
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "Laurel": {
+   "eligible": [
+    6,
+    6
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "Baylight District": {
+   "eligible": [
+    2,
+    2
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "Adams Point": {
+   "eligible": [
+    5,
+    5
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "Brooklyn": {
+   "eligible": [
+    5,
+    5
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "East Oakland": {
+   "eligible": [
+    5,
+    5
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "Eastlake": {
+   "eligible": [
+    7,
+    7
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "Glenview": {
+   "eligible": [
+    4,
+    4
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "Ivy Hill": {
+   "eligible": [
+    3,
+    3
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "Piedmont Ave": {
+   "eligible": [
+    9,
+    9
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  },
+  "San Antonio": {
+   "eligible": [
+    5,
+    5
+   ],
+   "lost": [],
+   "gained": [],
+   "holdersMoved": 0
+  }
+ },
+ "holderShift": {
+  "citizensWithSpotBoth": 1000,
+  "moved": 6
+ },
+ "spotLines": {
+  "drawn": 33,
+  "byFact": {
+   "lift": 33
+  },
+  "notTheirSpot": [],
+  "strays": []
+ },
+ "ea": {
+  "Downtown": [
+   6.38,
+   6.3,
+   -0.08
+  ],
+  "Temescal": [
+   5.3,
+   5.33,
+   0.03
+  ],
+  "Laurel": [
+   5.1,
+   5.41,
+   0.31
+  ],
+  "West Oakland": [
+   5.21,
+   5.26,
+   0.05
+  ],
+  "Fruitvale": [
+   6.16,
+   6.14,
+   -0.02
+  ],
+  "Jack London": [
+   8.18,
+   8.42,
+   0.24
+  ],
+  "Rockridge": [
+   5.25,
+   5.3,
+   0.05
+  ],
+  "Adams Point": [
+   3.26,
+   3,
+   -0.26
+  ],
+  "Grand Lake": [
+   7.25,
+   7,
+   -0.25
+  ],
+  "Piedmont Ave": [
+   4.27,
+   4.11,
+   -0.16
+  ],
+  "Chinatown": [
+   7.74,
+   7.4,
+   -0.34
+  ],
+  "Brooklyn": [
+   3.25,
+   3,
+   -0.25
+  ],
+  "Eastlake": [
+   5.22,
+   5.36,
+   0.14
+  ],
+  "Glenview": [
+   3,
+   3.25,
+   0.25
+  ],
+  "Dimond": [
+   4.25,
+   4.25,
+   0
+  ],
+  "Ivy Hill": [
+   3,
+   3,
+   0
+  ],
+  "San Antonio": [
+   5.25,
+   5,
+   -0.25
+  ],
+  "KONO": [
+   7,
+   7,
+   0
+  ],
+  "Lake Merritt": [
+   3.16,
+   3.18,
+   0.02
+  ],
+  "Uptown": [
+   8.06,
+   8.16,
+   0.1
+  ],
+  "Baylight District": [
+   4,
+   4,
+   0
+  ],
+  "East Oakland": [
+   4,
+   4.25,
+   0.25
+  ]
+ },
+ "eaComponents": {
+  "112": {
+   "worldEvents": 11,
+   "evDomain": 0,
+   "evText": 0,
+   "hookRows": 48,
+   "hookHitsFromText": 2,
+   "seedCount": 35,
+   "baseLow": 2,
+   "baseHigh": 37
+  },
+  "113": {
+   "worldEvents": 11,
+   "evDomain": 0,
+   "evText": 0,
+   "hookRows": 41,
+   "hookHitsFromText": 0,
+   "seedCount": 30,
+   "baseLow": 0,
+   "baseHigh": 30
+  },
+  "note": "live EA unknown: seeds bounded 0..StorySeedCount, hook hits a lower bound, pulse + chaos fold unobserved"
+ },
+ "eaAllDown": false,
+ "verdict": "ACCEPT-CANDIDATE"
+}

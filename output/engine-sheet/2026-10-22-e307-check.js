@@ -62,6 +62,9 @@ function snapOf(led) {
     const tag = String(r[iT] || '');
     if (!/^(Career-Hired|Career-FieldChange|Promotion|Career-Layoff)/.test(tag)) continue;
     const pop = String(r[iP] || '').trim(), emp = (now[pop] || {}).emp, text = String(r[iX] || '');
+    // a citizen absent from the previous snapshot was minted this Cycle (the intake's "Added to Simulation_Ledger" row):
+    // its placement is the intake mint's (engine.319), not a hire the athlete guard judges
+    if (!prev[pop]) { (out.log.mints = out.log.mints || []).push({ pop, tag, text, emp, clock: (now[pop] || {}).clock }); continue; }
     const atSports = SPORTS.some(id => text.indexOf(String(name[id])) >= 0) || (SPORTS.includes(emp) && /Promotion/.test(tag));
     if (atSports) out.log.sports.push({ pop, tag, text, clock: (now[pop] || {}).clock, econ: (now[pop] || {}).econ, roleBefore: (prev[pop] || {}).role, tags: (now[pop] || {}).tags });
     else out.log.elsewhere[tag] = (out.log.elsewhere[tag] || 0) + 1;
@@ -72,7 +75,7 @@ function snapOf(led) {
   // player-shaped row hired at a shop is the pre-307 path, reported in careerMoves, not failed.
   const verdict = out.athleteGuard.careerMoves.filter(m => SPORTS.includes(m.to) || m.clock === 'GAME' || m.econ === 'SPORTS_OVERRIDE').length === 0 &&
     out.log.sports.every(x => x.clock !== 'GAME' && x.econ !== 'SPORTS_OVERRIDE' && !/\b(athlete|player|pitcher|catcher|infielder|outfielder|shortstop|closer|point guard|quarterback|coach|scout)\b/i.test(x.roleBefore || '')) ? 'PASS' : 'FAIL';
-  console.log('C' + cyc + ' ' + label + ': onto sports ' + out.ontoSports.length + ', off sports ' + out.offSports.length + ', sports career lines ' + out.log.sports.length +
+  console.log('C' + cyc + ' ' + label + ': onto sports ' + out.ontoSports.length + ', off sports ' + out.offSports.length + ', sports career lines ' + out.log.sports.length + ', intake mints ' + (out.log.mints || []).length +
     ', elsewhere ' + JSON.stringify(out.log.elsewhere) + ', athlete career moves ' + out.athleteGuard.careerMoves.length + ' (income-only ' + out.athleteGuard.incomeOnly + ') — athlete guard ' + verdict);
   if (verdict !== 'PASS') process.exit(4);
 })().catch(e => { console.error(e.message); process.exit(1); });

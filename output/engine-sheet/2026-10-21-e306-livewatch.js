@@ -169,7 +169,8 @@ function components(s) {   // v3NeighborhoodWriter.js:368-400 tests on what the 
     ['go quiet lately', 'quiet'], ['let some staff go', 'shed'], ['steadier again', 'recovery'], ['felt a lift at ', 'lift']];
   const iNm = bh.indexOf('Name'), spotAt = {};
   Object.keys(p.citizens).forEach(pop => {
-    const [status, nb] = p.citizens[pop]; if (status !== 'Active') return;
+    // the generator's own pool (generateCitizensEvents.js:2602): traded / pending / deceased draw no texture; Retired stay
+    const [status, nb] = p.citizens[pop]; if (/^(deceased|traded|pending)$/i.test(String(status).trim())) return;
     let best = null, br = -1;
     for (const [sid] of s.spots[foldP(nb)] || []) { const rk = spotRank_(pop, sid); if (rk > br || (rk === br && sid < best)) { best = sid; br = rk; } }
     if (best) spotAt[pop] = String(s.biz[best][iNm] || '').trim();

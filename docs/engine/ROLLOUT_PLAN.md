@@ -139,7 +139,6 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| pipeline.91 | Writers' `canon_search` (`lib/mags.js searchDisk`) greps `docs/` — plans with real dates / builder text reachable as prior coverage; same function feeds mags-bot + discord-reflection. Decide roots per caller, cut. Found 2026-10-28 (pipeline.89 read) | ready | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 changelog 2026-10-28 |
 | infrastructure.13 | lib/wakePerception.test.js fails on main: "snippet capped at 180" (nightlyIntakeRow body cap), 107/108; fails on HEAD before engine.206, found by its full-suite run 2026-10-27 | ready |  | `lib/wakePerception.test.js:242` |
 | engine.321 | Is a tracked mint business growth (its headcount signal; 2+ at one business = BUSINESS_EXPANSION)? Builder 2026-10-27: "a citizen added to a buisness can result in a growth" — stands as built, no change | wontfix |  | [[../plans/2026-07-27-employment-living-system]] §Open questions |
 | pipeline.88 | Proposal, builder's call: daily seats (Ines, Tamsin) write angle/packet/draft under a Cycle-keyed stem, so five days share one file set and a failed day can see yesterday's plan (Ines Sun 10-25). Key their stems by day? | needs-info | research-build | [[../plans/2026-10-11-media-extension]] §Status log pipeline.87 |

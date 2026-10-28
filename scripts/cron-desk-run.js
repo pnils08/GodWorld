@@ -32,6 +32,7 @@ const path = require('path');
 const https = require('https');
 const crypto = require('crypto');
 const { execFileSync } = require('child_process');
+const ASK_ARGV_MAX = 100 * 1024;   // under the kernel's 128 KiB single-argument cap, with room for the rest of argv
 const articleContamination = require('./articleContamination');
 
 const ROOT = path.join(__dirname, '..');
@@ -2134,15 +2135,19 @@ async function runAngle(assign) {
     for (let attempt = 1; attempt <= ANGLE_ATTEMPTS; attempt++) {
       lastAngleRaw = null;
       try {
+        // A single argv string is capped at 128 KiB (MAX_ARG_STRLEN); Ines's whole-roster Voices ask
+        // (244 citizens with page excerpts, ~390 KB) tripped E2BIG on 2026-10-28 and she never wrote.
+        // Over the cap the ask goes on stdin (citizenVoice --stdin); under it nothing changes.
+        const askOnStdin = Buffer.byteLength(ask, 'utf8') > ASK_ARGV_MAX;
         const out = execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
-          '--pop=' + asker.popid, '--ask=' + ask, '--cycle=' + cycle, '--json',
+          '--pop=' + asker.popid, ...(askOnStdin ? ['--stdin'] : ['--ask=' + ask]), '--cycle=' + cycle, '--json',
           ...(PACKET_ACTIVE ? ['--evidence-bound'] : []),
           ...(angleModel ? ['--model=' + angleModel] : []),
           // pipeline.74 — 700 truncated DeepSeek v4-flash plans mid-JSON (7 of 12 calls stopped at
           // exactly 700, 10-13/10-14; resample hit the same wall). Its whole plans ran 532–658+ where
           // deepseek-chat ran 353–547. A cut plan is worthless; the chase is clipped to 700 chars downstream.
           '--max-tokens=' + (PACKET_ACTIVE ? '1600' : '320')],
-          { cwd: ROOT, encoding: 'utf8', timeout: 300000 });
+          { cwd: ROOT, encoding: 'utf8', timeout: 300000, ...(askOnStdin ? { input: ask } : {}) });
         const outTrim = out.trim();
         // tolerate dotenv banner lines before the JSON — line-anchored: the rotating
         // dotenv tip sometimes contains "{ debug: true }" mid-line, so first-'{' slicing

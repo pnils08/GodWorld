@@ -1235,7 +1235,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "x-ai/grok-4.3"
+        "model": "openai/gpt-6-luna"
       }
     },
     "reviewProfile": {
@@ -1305,7 +1305,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "x-ai/grok-4.3"
+        "model": "openai/gpt-6-luna"
       }
     },
     "reviewProfile": {

@@ -16,7 +16,7 @@ assert.equal(nia.requiredDaily, true);
 assert.equal(nia.assignment.desk, 'undocked');
 assert.equal(nia.assignment.popid, 'POP-01076');
 assert.equal(nia.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(nia, 'write').model, 'x-ai/grok-4.3');
+assert.equal(packagesApi.routeFor(nia, 'write').model, 'openai/gpt-6-luna');
 assert.equal(nia.reviewProfile.canonPolicy, 'load-bearing');
 
 // (e) NEXT BUILD (2026-09-25) — Nia's weekly leaderboard/digest: own desk key
@@ -30,7 +30,7 @@ assert.equal(niaWeekly.requiredDaily, false);
 assert.equal(niaWeekly.assignment.desk, 'undocked-digest');
 assert.equal(niaWeekly.assignment.popid, 'POP-01076');
 assert.equal(niaWeekly.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(niaWeekly, 'write').model, 'x-ai/grok-4.3');
+assert.equal(packagesApi.routeFor(niaWeekly, 'write').model, 'openai/gpt-6-luna');
 assert.equal(niaWeekly.reviewProfile.canonPolicy, 'load-bearing');
 assert.ok(nia.reviewProfile.canonBlockers.some(b => /video game/.test(b)));
 

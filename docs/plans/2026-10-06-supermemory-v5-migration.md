@@ -19,8 +19,6 @@ pointers:
 
 **Deadline:** vendor email 2026-10-06 gives 3 months → cut over before **2027-01-06**. The guide itself names no sunset. Probed 2026-10-06 with the lib's key: `/v3/search`, `/v4/search`, `/ns/sl-godworld/search`, `/v3/documents/list` all **200**. Nothing is broken today.
 
-**Re-probed 2026-10-28 (research-build):** vendor dashboard notice "container tags are now namespaces" is the same rename this plan already maps; no scope change. `/v3/documents/list` still **200**, no deprecation or sunset header. `npx supermemory migrate --prompt` (CLI 5.0.3) counts 351 lines in 59 files on v3/v4 names — the inventory below, plus tests. Plugin `claude-supermemory` 0.1.15 (marketplace 2026-10-27) already writes under `namespace`; nothing to do there. Daily canon ingest (2026-10-20) rides `cron-saturday-run.js` step 5, already inventoried; its journalist/cycle/desk tags land in metadata on v5.
-
 **Shape of the job:** a design pass, not a rename. v5 puts a document in exactly one namespace; the card layer writes every doc under two container tags and two readers search across containers. The guide's agent prompt ("rename everything, no aliases") is the wrong tool on a live bot — cut one domain at a time with rollback.
 
 ## Field map (guide)

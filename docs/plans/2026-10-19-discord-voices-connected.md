@@ -74,6 +74,7 @@ pointers:
 
 ## Changelog
 
+- 2026-10-28 (research-build) — **C113 readback (step 2, due 10-25):** no proof available — Reflection_Intake holds no `DISCORD` row at Cycle 113 (rows: C102 ×5, C104 ×1, C105 ×2, C112 ×1); no talk happened in the C112→C113 window, so the Phase-9 drain had nothing to move. The Paulson–Keane bond (w2xd78qv) carried 112→113 in the live bond export, which is the one Phase 2 trace visible. Proof now waits on the next Discord talk and the Cycle after it — row moved to Organic.
 - 2026-10-19 (research-build) — Created. Phase 1 (brief, search first, Saturday newsroom) live `4cd74194`; Phase 2 (Paulson bonds, talk recorder) live `1c27f7fa`; search fan-out `2de11db8`. Section moved here from the Tier-1 voice plan.
 - 2026-10-19 (research-build) — Task 9 done on the builder's answer: Vinnie's IDENTITY and RULES say seven rings and Grand Lake. Plan filed to the template; the section in the Tier-1 voice plan is now a pointer.
 - 2026-10-19 (research-build) — Task 11 added on the builder's message: TrueSource player cards go stale; open design question.

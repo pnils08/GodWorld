@@ -387,7 +387,7 @@ function formatStrictSourceHygiene(nameCheck, packet) {
       'only as a place/organization when the lane explicitly identifies it as one.',
     loadBearing
       ? 'Packet people, quotes, and numbers stay Packet-backed. In-world rooms and named spots that are not real Oakland are allotted hallucination; new businesses go on INTAKE BIZ. AuthorizedTexture in the Packet is additional SET, not a cap. Anonymous role-only color is not an official source or canon proof.'
-      : 'Do not invent anonymous people, Packet quotes, numbers handed to the Packet or a record, or real-world Oakland places. In-world named spots are yours — a place with no row is not a ghost — and go on INTAKE BIZ.',
+      : 'Do not invent anonymous people, Packet quotes, fake counts, or real-world Oakland places. In-world named spots that fit the data are allotted hallucination and go on INTAKE BIZ.',
     loadBearing
       ? 'Do not put Anonymous/Unnamed descriptors in INTAKE. A role-only texture quote must remain anonymous color and must not be attributed to a named citizen, official, institution, or canon source.'
       : 'Do not put Anonymous/Unnamed descriptors in the Names Index. If no supplied canon quote fits, use no quote rather than fabricating one.',
@@ -630,10 +630,6 @@ const DOSSIER_TOOL = { type: 'function', function: { name: 'dossier_read', descr
 // frames above or the generic depth block. Text only; the tool set itself is the shared toolset.
 const SM = 'sheet_read(tab, match?)';
 const MATCH_NOTE = ' Pass match ("Stabilization") to pull the rows that name it; a long tab cuts off its later rows, and a miss on a named match is a real miss.';
-// Builder 2026-10-28: gate the facts, not the color; nothing tells a writer what to say.
-// The tools hold the record. What the record does not hold is the writer's own, and the
-// frame says nothing about what that should be.
-const RECORD_NOTE = ' The tools hold the record and nothing more. People are the ledger\'s (the source hygiene below); the scene is yours. The only line on the record: never hand it a thing it did not return, and never contradict one it did.';
 const NIA_FRAME = {
   title: 'THE PILOT OFF THE SHIP',
   intro: 'The slice is your story: the episode, the credits, the board are the feed\'s and stay as the feed gives them. The tools give you the pilot as a citizen of this city, and what the paper has already said about them.',
@@ -641,7 +637,7 @@ const NIA_FRAME = {
     'citizen_lookup(name, thread: true): the pilot\'s ledger profile — job, neighborhood, household — and their life-history entries oldest first, each stamped with the sim clock (Y3C9). Pull it for every pilot you name; a pilot the ledger does not hold stays exactly as the feed names them.',
     'canon_search(query): what the paper has already printed about this pilot or this week of the show — your own recaps first (search the pilot\'s name, or "UNDOCKED" with "Nia Rook"). Before you write "again", "still", "first time" or "climbed", this is how you know.',
     SM + ': Neighborhood_Map — the pilot\'s neighborhood as the sheet holds it now (sentiment, nightlife, events), for where the city is talking about them.' + MATCH_NOTE.replace('Stabilization', 'the neighborhood')],
-  rule: 'What happened in the episode is the feed\'s and nowhere else. What a tool returns about a pilot reads as returned, named to its source ("the ledger", "my C112 recap", "the map"). Every pilot the feed names gets written. A quote in a pilot\'s mouth comes through the interview pass, not from you.',
+  rule: 'Facts are gated, color is yours. Facts: what happened in the episode (the feed, nowhere else), who the pilots are in the city (the tools, printed as returned and named to their source — "the ledger", "my C112 recap", "the map"), and any citizen you name by name (a lookup first). Every pilot the feed names gets written. The bar, the crowd, the weather on the walk over, who was yelling at the screen — that is yours to write. A quote attributed to a pilot comes through the interview pass, not from you.',
   kickoff: 'The slice is the story. Before you write a pilot, pull their thread and search what you printed about them last — then compose from the episode first and the citizen second, every pilot on the feed named, the board as the sidecar gives it. '
 };
 const SEAT_TOOL_FRAMES = {
@@ -683,8 +679,8 @@ const SEAT_TOOL_FRAMES = {
       SM + ': Faith_Organizations (congregation, tradition, leader, status) and Faith_Ledger (event rows by cycle: event, status, attendance).' + MATCH_NOTE.replace('Stabilization', 'the congregation\'s name'),
       'canon_search(query): what the paper has already printed on this congregation or event.',
       'citizen_lookup(name): one person\'s ledger profile.'],
-    rule: 'A figure or a name you give to the ledger reads as the row returned it, named to it ("the Faith Ledger\'s event row"). When you write that the record does not say something, you looked first. What no row holds is not the ledger\'s to say and not yours to hand it.',
-    kickoff: 'The slice is the story. Before you give the ledger a figure or a name, read the congregation\'s registry row and its event rows — then compose, naming each ledger fact to its row. '
+    rule: 'Attendance, clergy, services and aid enter only as a row returned them, named to the ledger ("the Faith Ledger\'s event row"). What the registry and the event rows do not hold stays unsaid — say you looked ("the registry and the event rows do not say who asked"). No belief, doctrine or motive beyond what a row states.',
+    kickoff: 'The slice is the story. Before you write who asked, who came or what was given, read the congregation\'s registry row and its event rows — then compose, naming each fact to the ledger and saying where you looked when a row holds nothing. '
   },
   'business-desk': {
     title: 'THE BUSINESS LEDGER',
@@ -693,8 +689,8 @@ const SEAT_TOOL_FRAMES = {
       SM + ': Business_Ledger (sector, neighborhood, employees, salary, revenue, growth, key personnel) and Initiative_Tracker.' + MATCH_NOTE.replace('Stabilization', 'the business or corridor'),
       'canon_search(query): what the paper has already printed on this business, corridor or program.',
       'citizen_lookup(name): one person\'s ledger profile — use it before you characterize anyone.'],
-    rule: 'A figure you give to the ledger (employees, salary, revenue, growth) reads as the row printed it, named to it; a business the ledger holds keeps the books it holds. A business the ledger does not hold is not the ledger\'s to vouch for and not yours to hand it.',
-    kickoff: 'The slice is the story. Before you give the ledger a figure on what a business employs, pays or earns, read its Business Ledger row — then compose, naming each ledger figure to its row. '
+    rule: 'A figure about a business (employees, salary, revenue, growth) enters as the ledger prints it, named to it. A business the ledger does not hold is not described as established. Say who the figure helps only where a row or a prior piece shows it.',
+    kickoff: 'The slice is the story. Before you state what a business employs, pays or earns, read its Business Ledger row — then compose, naming each figure to the ledger and leaving out what no row holds. '
   },
   'trevor-shimizu': {
     title: 'THE TRANSIT ROWS',
@@ -703,8 +699,8 @@ const SEAT_TOOL_FRAMES = {
       SM + ': Transit_Metrics (per cycle and station: ridership, on-time performance, traffic index, corridor, notes, factors).' + MATCH_NOTE.replace('Stabilization', 'the station'),
       'canon_search(query): what the paper has already printed on this line, station or failure.',
       'citizen_lookup(name): one person\'s ledger profile.'],
-    rule: 'A figure you give to the metrics (timestamp, failure, on-time) reads as the row printed it, named to it; this cycle against an earlier one only with both rows read. A cause no row carries is yours to say in your own voice, not the metrics\'.',
-    kickoff: 'The slice is the story. Before you give the metrics a ridership or on-time figure or call a failure new on the record, read the station\'s newest rows — then compose, naming each metrics figure to its row. '
+    rule: 'A timestamp, failure or on-time figure enters as the row prints it, named to the metrics. This cycle against an earlier one only with both rows read. A causal link no row or earlier piece carries stays a question, not a finding.',
+    kickoff: 'The slice is the story. Before you state a ridership or on-time figure or call a failure new, read the station\'s newest rows — then compose, naming each figure to the metrics and keeping any cause no row carries as a question. '
   },
   'lila-mezran': {
     title: 'THE HEALTH ROWS',
@@ -713,7 +709,7 @@ const SEAT_TOOL_FRAMES = {
       SM + ': Neighborhood_Demographics (per hood: sick, unemployed, seniors), Care_Justice_Census (per cycle: intakes, occupancy, transfers), Initiative_Tracker (the health initiatives).' + MATCH_NOTE.replace('Stabilization', 'the neighborhood'),
       'canon_search(query): what the paper has already printed on this clinic, initiative or count.',
       'citizen_lookup(name): one person\'s ledger profile.'],
-    rule: 'A count you give to the sheet reads as the row printed it, named to it; this cycle against an earlier one only with both read. A diagnosis or outcome for a citizen the ledger holds is the record\'s to state, not yours to hand it. When you write that a row is silent, you looked.',
+    rule: 'A count enters as the row prints it, named to the sheet. This cycle against an earlier one only with both read or both printed. No diagnosis, and no clinical outcome beyond what a row holds; say you looked when a row is silent.',
     kickoff: 'The slice is the story. Before you state a count or call it higher or lower than before, read the neighborhood\'s row and search the paper\'s earlier figure — then compose, naming each to its source and diagnosing no one. '
   },
   'angela-reyes': {
@@ -723,8 +719,8 @@ const SEAT_TOOL_FRAMES = {
       SM + ': Neighborhood_Demographics (per hood: students, school quality index, graduation rate, college readiness, teacher quality, funding), Community_Programs (youth programs, hood, type, status), Initiative_Tracker.' + MATCH_NOTE.replace('Stabilization', 'the neighborhood or program'),
       'canon_search(query): what the paper has already printed on this school, program or score.',
       'citizen_lookup(name): one person\'s ledger profile.'],
-    rule: 'A score, rate or funding figure you give to the sheet reads as the row printed it, named to it; a program the registry holds keeps the record it holds. When you write that the registry holds nothing, you looked.',
-    kickoff: 'The slice is the story. Before you give the sheet a school figure or the registry a program, read the neighborhood\'s row and the program registry — then compose, naming each record fact to its source. '
+    rule: 'A score, rate or funding figure enters as the row prints it, named to the sheet. A program the registry does not hold is not described as established. Participants, access and outcomes stay out unless a row or a prior piece holds them; say you looked.',
+    kickoff: 'The slice is the story. Before you state a school figure or say a program is running, read the neighborhood\'s row and the program registry — then compose, naming each fact to its source and saying where you looked when nothing is there. '
   },
   'rachel-torres': {
     title: 'THE SAFETY ROWS',
@@ -733,7 +729,7 @@ const SEAT_TOOL_FRAMES = {
       SM + ': Crime_Metrics (per hood: property and violent indexes, response time, clearance rate, incident count, trend, hotspot), Civic_Office_Ledger (OPD and OARI offices), Initiative_Tracker (OARI).' + MATCH_NOTE.replace('Stabilization', 'the neighborhood or office'),
       'canon_search(query): what the paper has already printed on this incident, classification or response.',
       'citizen_lookup(name): an official\'s ledger profile.'],
-    rule: 'A classification gap or a response failure, as a finding about the record, is stated after you read the hood\'s row and searched the paper; name where you looked. Metrics read as the row printed them. A case detail for a citizen the ledger holds is the record\'s, not yours to hand it.',
+    rule: 'A classification gap or a response failure is stated only after you read the hood\'s row and searched the paper; name where you looked. Metrics enter as the row prints them. No case detail beyond what a row or a prior piece holds.',
     kickoff: 'The slice is the story. Before you call something unclassified, unanswered or unreported, read the hood\'s safety row and search the paper — then compose, naming each figure to its source and saying where you looked. '
   },
   // pipeline.83 (builder 2026-10-28: "give her tool calls to the ledgers and maybe citizen cards"):
@@ -748,7 +744,7 @@ const SEAT_TOOL_FRAMES = {
     tools: [
       'citizen_lookup(name, thread: true): the person\'s ledger profile and their life-history entries, oldest first, each stamped with the sim clock (Y3C9). Pull it for every person you write.',
       'canon_search(query): any earlier piece that named them.'],
-    rule: 'The event on the slice stays the lead; the thread is what the record held of the person before it. Print a thread entry as returned and date it by its stamp; what the record says came next appears only if a later record holds it. A feeling, a motive or a tie is not the ledger\'s to state unless an entry states it — do not hand the record what it did not return.',
+    rule: 'The event on the slice stays the lead; the thread is what the record holds of the person before it. Print a thread entry as returned and date it by its stamp. What came next appears only if a later record holds it. State no feeling, motive or relationship an entry does not state, and name no one a thread does not name.',
     kickoff: 'The slice is the story. Before you write each person, pull their thread (citizen_lookup with thread) — then compose the passage from the event first and the record behind it second, dating each earlier entry by its stamp. '
   }
 };
@@ -756,7 +752,7 @@ function seatToolsBlock(persona, n) {
   const f = SEAT_TOOL_FRAMES[persona];
   return '\n\n=== YOUR TOOLS — ' + f.title + ', NOT A NEW STORY (up to ' + n + ' calls, read-only) ===\n' +
     f.intro + ' A tool call never changes the assignment.\n' +
-    f.tools.map(t => '- ' + t + '\n').join('') + f.rule + RECORD_NOTE + '\n=== END TOOLS ===';
+    f.tools.map(t => '- ' + t + '\n').join('') + f.rule + '\n=== END TOOLS ===';
 }
 
 // pipeline.89 cut 2 widened the list for the seats whose question a sheet answers: faith, business, transit,

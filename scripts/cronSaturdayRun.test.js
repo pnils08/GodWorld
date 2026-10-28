@@ -257,6 +257,15 @@ console.log('Test 6: mergeStorylineLedger');
   let regErr = null;
   try { loadStorylineRegistryStrict('no-such-cycle'); } catch (e) { regErr = e; }
   assert('codex #4: a missing desk signal throws', regErr && /storyline registry unavailable/.test(regErr.message));
+  const { checkStorylineRegistry: chk } = require('./cron-saturday-run');
+  const good = { id: 'INIT-003:design-phase', name: 'Fruitvale Transit Hub Phase II \u2014 design-phase', status: 'open', hoods: ['Fruitvale'] };
+  const throwsLike = (sig, re) => { try { chk(sig, '113', 'x'); return false; } catch (e) { return re.test(e.message); } };
+  assert('round 2 #2: a signal for another Cycle throws', throwsLike({ meta: { cycle: 112 }, storylineRegistry: [good] }, /C112 signal, not C113/));
+  assert('round 2 #2: an unusable entry throws', throwsLike({ meta: { cycle: 113 }, storylineRegistry: [good, { id: 'west-oakland-slug' }] }, /unusable/));
+  assert('round 2 #2: an empty registry from a missing tracker snapshot throws', throwsLike({ meta: { cycle: 113,
+    notes: ['no Initiative_Tracker snapshot in engine_audit \u2014 initiative/vote entries omitted'] }, storylineRegistry: [] }, /snapshot was missing/));
+  assert('a valid empty world loads as zero storylines', chk({ meta: { cycle: 113, notes: [] }, storylineRegistry: [] }, '113', 'x').length === 0);
+  assert('a good registry for this Cycle loads', chk({ meta: { cycle: 113 }, storylineRegistry: [good] }, 113, 'x').length === 1);
 
   // Curation never reads an attached storyline: the print pick stays grade-first.
   const { curationScore, primarySlug } = require('./cron-saturday-run');
@@ -276,6 +285,8 @@ console.log('Test 6: mergeStorylineLedger');
   const { commitAttaches, aggregateStorylineSignals: agg, mergeStorylineLedger: merge } = require('./cron-saturday-run');
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'engine270-attach-'));
   const sha = t => crypto.createHash('sha256').update(t).digest('hex');
+  const REG = [{ id: 'INIT-003:design-phase', type: 'initiative-stage', initiativeId: 'INIT-003', stage: 'design-phase', status: 'open',
+    name: 'Fruitvale Transit Hub Phase II \u2014 Visioning \u2014 design-phase', hoods: ['Fruitvale'] }];
   const put = (stem, text) => {
     fs.writeFileSync(path.join(dir, stem + '.staged.md'), text);
     const side = { status: 'staged', desk: 'civic', cycle: '113', article: path.join(dir, stem + '.staged.md'),
@@ -288,13 +299,13 @@ console.log('Test 6: mergeStorylineLedger');
   const goodB = fs.readFileSync(path.join(dir, 'b.staged.json'), 'utf8');
   fs.writeFileSync(path.join(dir, 'b.staged.json'), '{ not json');
   let partial = null;
-  try { commitAttaches(dir, [a, b], '113'); } catch (e) { partial = e; }
+  try { commitAttaches(dir, [a, b], '113', REG); } catch (e) { partial = e; }
   const readSide = stem => JSON.parse(fs.readFileSync(path.join(dir, stem + '.staged.json'), 'utf8'));
   assert('a malformed sidecar throws, loud', Boolean(partial));
   assert('the sidecar before it was written once', readSide('a').intake.storylines.length === 1
     && readSide('a').intake.storylines[0].attachedBy === 'stepAttach' && readSide('a').intake.storylines[0].verb === 'referenced');
   fs.writeFileSync(path.join(dir, 'b.staged.json'), goodB);
-  const retry = commitAttaches(dir, [a, b], '113');
+  const retry = commitAttaches(dir, [a, b], '113', REG);
   assert('the retry writes only what is missing', retry.written === 1 && readSide('a').intake.storylines.length === 1
     && readSide('b').intake.storylines.length === 1);
   assert('no temp file is left behind', !fs.readdirSync(dir).some(f => f.endsWith('.attach-tmp')));
@@ -309,15 +320,22 @@ console.log('Test 6: mergeStorylineLedger');
     u && u[7] === 2 && u[8] === 2 && u[3] === 'open' && u[1] === '109' && u[2] === '113' && m.appends.length === 0);
   const c = put('c', 'Article C on the Fruitvale Transit Hub Phase II.');
   fs.writeFileSync(path.join(dir, 'c.staged.md'), 'Article C, edited after the match.');
-  const changed = commitAttaches(dir, [c], '113');
+  const changed = commitAttaches(dir, [c], '113', REG);
   assert('a sidecar whose Article changed since the match is skipped by name, never written',
     changed.written === 0 && changed.skipped.length === 1 && /bytes changed/.test(changed.skipped[0])
     && readSide('c').intake.storylines.length === 0);
   const d = put('d', 'Article D on the Fruitvale Transit Hub Phase II.');
   const dSide = readSide('d'); dSide.intake.storylines.push({ slug: 'INIT-001:disbursement-active', verb: 'advanced' });
   fs.writeFileSync(path.join(dir, 'd.staged.json'), JSON.stringify(dSide, null, 2));
-  assert('a sidecar now on an assigned storyline is left alone', commitAttaches(dir, [d], '113').skipped.length === 1);
-  assert('a sidecar from another Cycle is left alone', commitAttaches(dir, [put('e', 'E on the Fruitvale Transit Hub Phase II.')], '112').skipped.length === 1);
+  assert('a sidecar now on an assigned storyline is left alone', commitAttaches(dir, [d], '113', REG).skipped.length === 1);
+  assert('a sidecar from another Cycle is left alone', commitAttaches(dir, [put('e', 'E on the Fruitvale Transit Hub Phase II.')], '112', REG).skipped.length === 1);
+  // codex round 2 #1: the sidecar's hoods change between the match and the write.
+  const g = put('g', 'G on the Fruitvale Transit Hub Phase II.');
+  const gSide = readSide('g'); gSide.intake.hoods = ['Temescal'];
+  fs.writeFileSync(path.join(dir, 'g.staged.json'), JSON.stringify(gSide, null, 2));
+  const moved = commitAttaches(dir, [g], '113', REG);
+  assert('round 2 #1: a hood changed since the match is re-matched and not written',
+    moved.written === 0 && moved.skipped.length === 1 && /no longer matches/.test(moved.skipped[0]) && readSide('g').intake.storylines.length === 0);
   fs.rmSync(dir, { recursive: true, force: true });
 }
 

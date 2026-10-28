@@ -794,17 +794,31 @@ function storylineAttachNames(e) {
 }
 
 // The attach pass's registry: unavailable or malformed is an error, never "no
-// storylines" (codex 2026-10-28 #4) — every signal since C109 carries the array.
+// storylines" (codex 2026-10-28 #4, round 2 #2) — every signal since C109
+// carries the array. Refused: a signal for another Cycle, an entry the matcher
+// cannot use, and an empty registry the build left empty because its
+// Initiative_Tracker snapshot was missing. An empty registry with its source
+// present is a valid empty world: zero attaches.
 function loadStorylineRegistryStrict(cycle) {
   const p = path.join(ROOT, 'output', 'desk_signal_c' + cycle + '.json');
+  const where = path.relative(ROOT, p);
   let signal;
   try { signal = JSON.parse(fs.readFileSync(p, 'utf8')); } catch (e) {
-    throw new Error('storyline registry unavailable: ' + path.relative(ROOT, p) + ' (' + e.message + ')');
+    throw new Error('storyline registry unavailable: ' + where + ' (' + e.message + ')');
   }
-  if (!signal || !Array.isArray(signal.storylineRegistry)) {
-    throw new Error('no storylineRegistry array in ' + path.relative(ROOT, p));
+  return checkStorylineRegistry(signal, cycle, where);
+}
+function checkStorylineRegistry(signal, cycle, where) {
+  if (!signal || !Array.isArray(signal.storylineRegistry)) throw new Error('no storylineRegistry array in ' + where);
+  const meta = signal.meta || {};
+  if (String(meta.cycle) !== String(cycle)) throw new Error(where + ' is the C' + meta.cycle + ' signal, not C' + cycle);
+  const reg = signal.storylineRegistry;
+  const bad = reg.filter(e => !e || !isEngineStorylineId(e.id) || !e.name || !e.status || !Array.isArray(e.hoods));
+  if (bad.length) throw new Error(bad.length + ' unusable storyline registry entr(ies) in ' + where);
+  if (!reg.length && (meta.notes || []).some(n => /no Initiative_Tracker snapshot/.test(String(n)))) {
+    throw new Error('storyline registry in ' + where + ' is empty because its Initiative_Tracker snapshot was missing at the build');
   }
-  return signal.storylineRegistry;
+  return reg;
 }
 
 // Pure: staged set × the cycle's registry → attaches. Deterministic, no model.
@@ -849,11 +863,12 @@ function attachStorylines(set, registry) {
 // Writes attaches into the staged sidecars in `dir` (codex #3). Each sidecar is
 // re-read and re-checked against the Article the match was made on — status,
 // cycle, Article in `dir`, the same Article bytes, no assigned storyline since —
-// then written to a temp file, renamed over the original (a crash leaves the old
-// sidecar whole) and read back. A changed sidecar is skipped by name, never
-// written. A slug already present is not added twice, so a retry after a
-// partial run writes only what is missing.
-function commitAttaches(dir, hits, cycle) {
+// and the match is made again on the sidecar as it is now (its hoods may have
+// changed — codex round 2 #1): only a hit that still matches is written. Then a
+// temp file, renamed over the original (a crash leaves the old sidecar whole),
+// read back. Whatever is not written is skipped by name. A slug already present
+// is not added twice, so a retry after a partial run writes only what is missing.
+function commitAttaches(dir, hits, cycle, registry) {
   const byFile = new Map();
   for (const h of hits) {
     if (!byFile.has(h.sidecarFile)) byFile.set(h.sidecarFile, []);
@@ -876,7 +891,13 @@ function commitAttaches(dir, hits, cycle) {
       : !st ? 'no INTAKE'
       : st.some(s => s && isEngineStorylineId(s.slug) && !s.attachedBy) ? 'now on an assigned storyline' : null;
     if (why) { skipped.push(f + ': ' + why); continue; }
-    const add = list.filter(h => !st.some(s => s && s.slug === h.id));
+    // The match again, on the sidecar as it is now (this pass's own earlier
+    // attaches set aside, so a retry still sees the article as untagged).
+    const now = { stem: list[0].stem, sidecarFile: f, articleSha256: sha, text: bytes,
+      sidecar: Object.assign({}, side, { intake: Object.assign({}, side.intake, { storylines: st.filter(s => !(s && s.attachedBy)) }) }) };
+    const still = new Set(attachStorylines([now], registry).map(h => h.id));
+    for (const h of list) if (!still.has(h.id)) skipped.push(f + ': ' + h.id + ' no longer matches the sidecar');
+    const add = list.filter(h => still.has(h.id) && !st.some(s => s && s.slug === h.id));
     if (!add.length) continue;
     for (const h of add) st.push({ slug: h.id, verb: 'referenced', attachedBy: 'stepAttach' });
     const tmp = path.join(dir, '.' + f + '.attach-tmp');
@@ -904,7 +925,7 @@ async function stepAttach(cycle) {
     if (hits.length) console.log('(dry-run) sidecars unchanged');
     return { attached: hits.length, written: 0 };
   }
-  const res = commitAttaches(STAGED, hits, cycle);
+  const res = commitAttaches(STAGED, hits, cycle, registry);
   for (const s of res.skipped) console.log('  [attach-skip] ' + s);
   console.log(res.written + ' storyline(s) written into ' + res.files + ' staged sidecar(s)' +
     (res.skipped.length ? ', ' + res.skipped.length + ' sidecar(s) changed since the match and left alone' : ''));
@@ -1752,6 +1773,6 @@ if (require.main === module) {
 
 module.exports = { loadStagedSet, loadArcSeeds, excludeCanonViolations, stepSweep, stepDaily, dailyPending, retractionIds, articleCustomId, articleDoc, usageRowsFor, printedStems, printedOnly, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
-  attachStorylines, storylineAttachNames, stepAttach, commitAttaches, loadStorylineRegistryStrict, primarySlug,
+  attachStorylines, storylineAttachNames, stepAttach, commitAttaches, loadStorylineRegistryStrict, checkStorylineRegistry, primarySlug,
   isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves,
   auditOne, auditPrompt, loadLedgerProfiles, worldSummaryText, livedEventsGroundTruth, livedDumpDir, deskSystem, crossoverCitizens, printedCrossovers, reserveDigestSeat, undockedGroundTruth, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE, curationScore };

@@ -28,6 +28,7 @@ import IntelTab from './components/tabs/IntelTab';
 import CityTab from './components/tabs/CityTab';
 import SearchTab from './components/tabs/SearchTab';
 import MissionTab from './components/tabs/MissionTab';
+import CostsTab from './components/tabs/CostsTab';
 import WorldTab from './components/tabs/WorldTab';
 import { Stat, Badge, TabButton } from './components/ui';
 
@@ -604,6 +605,7 @@ export default function App() {
               'WORLD',
               'SEARCH',
               'MISSION',
+              'COSTS',
             ].map((tab) => (
               <button
                 key={tab}
@@ -651,6 +653,7 @@ export default function App() {
             }}
           />
         )}
+        {activeTab === 'COSTS' && <CostsTab />}
       </main>
 
       {/* BOTTOM NAV */}

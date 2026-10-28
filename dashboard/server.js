@@ -16,6 +16,7 @@ import {
   registerSportsRoutes,
   sportsBodyLimitVerify,
 } from './sportsRoutes.js';
+import { registerCostRoutes } from './costRoutes.js';
 
 const require = createRequire(import.meta.url);
 
@@ -246,6 +247,8 @@ async function readFreshSportsSheet(sheetName) {
     warnings: [],
   };
 }
+
+registerCostRoutes(app);
 
 registerSportsRoutes(app, {
   readSheet: readSportsSheet,

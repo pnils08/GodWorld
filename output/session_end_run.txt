@@ -1,5 +1,5 @@
 ========================================================================
-sessionEndMechanical: terminal=research-build, rotate-history=false, dry-run=false
+sessionEndMechanical: terminal=engine-sheet, rotate-history=false, dry-run=false
 ========================================================================
 Expected upstream model step (BEFORE this script):
   1. SESSION_CONTEXT.md PIN + NEXT[terminal] line + ROLLOUT_PLAN.md updated
@@ -13,86 +13,60 @@ Mechanical sub-steps (5):
 ========================================================================
 
 --- [1/5] session summary → Supermemory (best-effort) ---
-✓ session log → Supermemory [session-logs] doc QVbsMAWHeWBMbpz5YPQ6N7 (2820 chars, 30 summary rows folded)
+✓ session log → Supermemory [session-logs] doc 6SjQTMWvuZ5x7TkzSo8FbF (2759 chars, 16 summary rows folded)
 
 --- [2/5] auditPlanTagDrift (informational) ---
   # Plan tag drift audit
   
-  Generated: 2026-10-21T17:41:06.631Z
-  Plans scanned: 147
+  Generated: 2026-10-28T05:59:55.997Z
+  Plans scanned: 148
   No frontmatter: 7
   No changelog: 8
-  No status-verb match: 130
+  No status-verb match: 131
   Drifts found: 0
   
   No plan-tag drift detected.
   ✓ no drift detected
 
 --- [3/5] ROLLOUT conformance lint (informational) ---
-  ROLLOUT LINT: 14 non-conforming row(s) — state-cell breaks the sweep, or item cell over the 280-char pointer budget:
-    L106 engine.296: item cell 394 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L118 engine.201: item cell 285 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L123 engine.5: item cell 400 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L129 engine.197: item cell 402 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L140 engine.290: item cell 469 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L141 engine.294: item cell 416 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L143 engine.293: item cell 497 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L144 engine.291: item cell 340 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L145 engine.297: item cell 663 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L160 engine.194: item cell 294 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L162 engine.285: item cell 320 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L171 engine.298: item cell 837 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L172 engine.299: item cell 564 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-    L178 engine.306: item cell 647 chars > 280 budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.
-  ROLLOUT OVERDUE: 2 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
-    L151 pipeline.78: latest Cycle named C111, live is C112
-    L152 pipeline.79: latest Cycle named C111, live is C112
+  # rolloutSweep — APPLY
+  
+  Would move 13 rows:
+    - pipeline.90  [research-build]
+    - engine.294  [engine-sheet]
+    - engine.293  [engine-sheet]
+    - engine.291  [engine-sheet]
+    - engine.297  [engine-sheet]
+    - engine.203d  [engine-sheet]
+    - engine.194  [engine-sheet]
+    - engine.298  [engine-sheet]
+    - engine.302  [engine-sheet]
+    - engine.304  [engine-sheet]
+    - engine.305  [engine-sheet]
+    - engine.306  [engine-sheet]
+    - engine.307  [engine-sheet]
+  
+  APPLIED.
+    ROLLOUT_PLAN:    187 → 174 lines (-13)
+    ROLLOUT_ARCHIVE: 2076 → 2096 lines (+20)
+    Rows moved: 13
+  ROLLOUT LINT: clean — every row is a sweep-safe pointer within budget.
+  ROLLOUT OVERDUE: 8 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
+    L107 pipeline.85: latest date named 2026-10-26, today is 2026-10-28
+    L134 pipeline.83: latest Cycle named C111, live is C113; latest date named 2026-10-27, today is 2026-10-28
+    L149 pipeline.73: latest date named 2026-10-26, today is 2026-10-28
+    L152 pipeline.77: latest Cycle named C112, live is C113
+    L153 pipeline.78: latest Cycle named C112, live is C113
+    L154 pipeline.79: latest Cycle named C112, live is C113
+    L162 engine.286: latest Cycle named C112, live is C113; latest date named 2026-10-25, today is 2026-10-28
+    L168 engine.299: latest Cycle named C112, live is C113
 
 --- [4/5] cross-terminal git stack check (read-only) ---
-  ⚠ 38 unpushed commit(s) ahead of origin/main:
-    28a55436 engine.306: codex gate 3 filed (driver + landing SHIP; attribution + C113 watch FIX) → NEXT[engine-sheet] [engine/sheet]
-    04c5a854 money-game Task 5: builder 2026-10-21 verbatim on falling off the heritage ledger; read: engine.156 dormancy (empty 4 Cycles / standing under 10 for 52, Established+ only), row never deleted, heritageTierByPop_ skips dormant lines so every reader treats the member as no line, household untouched; open: dormancy bar vs the door [research-build]
-    86414897 S589 session-end: PIN + NEXT[engine-sheet] [engine-sheet]
-    23f9f9ff engine.306: PIN → PROD @155 stage 18 + the 103 rows landed; DEPLOY_HISTORY notes the live Business_Intake tab stays (provenance trail, no other reader) [engine/sheet]
-    af8c3447 engine.306: plan card + ROLLOUT folded to the landing (live-observing); codex gate 3 TASK = post-landing audit; codex gate 2 review filed [engine/sheet]
-    983d21d5 engine.306 LANDED: PROD stage 18 @155 (owner door skips Tier-1 landmarks, 2896c46c) + the 103 Business_Ledger rows and the BIZ-00039 realign on live, RECEIPT PASS (builder's go) [engine/sheet]
-    7e95a0b7 Heritage door ($50M) re-raised by the builder 2026-10-21: already money-game Task 5 (engine.295) — not folded; cross-linked both ways; engine.309 ascent takes its door number from Task 5; live read: 18 citizens ≥ $50M, 11 off-line, door admits a score of 17 vs Established 30 [research-build]
-    386999e7 engine.308 design + engine.309 filed: builder 2026-10-21 verbatim on business ownership — cooldown, cap per citizen or by line size, off-heritage ascent/crash; read of what exists (Key_Personnel is the link, owner door mints new citizens only, closure costs one openness band); citizen is the atom, line aggregates; bracketed numbers are the builder's [research-build]
-    d82c9943 engine.308 filed: heritage business cap and cadence — builder 2026-10-21 verbatim on the bench's Varek Fellowship; read: standing counts owned rows (3), slot gate counts minted only (1), a tier crossing opens the next slot the next Cycle; 'Fellowship' = Faith & Community birth suffix drawn from the hood mix; fix shape for es, numbers open [research-build]
-    d5ab5515 engine.306: codex diff gate 2 TASK [engine/sheet]
-    437f7884 engine.306 bench: leg B C113 PASS with the 103 rows; processBusinessIntake writes Status in one call; landing driver rebuilt to the codex diff gate and drilled (fresh + recover PASS) [engine/sheet]
-    02243538 Community_Programs fixes (builder 2026-10-21): PRG-009 Coliseum District → East Oakland (non-map hood, never drawn); PRG-008 renamed to the INIT-007 canon name Oakland Youth Apprenticeship Pipeline; PRG-032 The Reaves Line → The Reaves Line Transit Fund (builder: a transit program for families, not the lineage); PRG-015/018/028 blank hood → City-wide; beat dump refreshed [research-build]
-    2896c46c engine.306: owner door never authors an owner for a Tier-1 landmark — 'landmark' joins OWNER_DOOR_INST_SECTOR_RE [engine/sheet]
-    8c10a2b2 engine.306: builder closes the Sports Bar conflict — name restored (Coliseum Corner Sports Bar / Sports Bar & Grill); ruling verbatim: the sports hiring guard is not a builder gate, teams have staff who run the building → engine.307 filed (lift sectorCategory_ sports null; staff roles only, never athletes) [research-build]
-    0a93eba1 engine.306 roster: ' / Historic Landmark' appended to the five Tier-1 rows' Sector (es owner-door exclusion keys on it; class, seed and field unchanged — verified through sectorCategory_ + economicSeedForSector) [research-build]
-    f5fa2d0f engine.306: codex plan review HOLD accepted — 7 findings folded into the plan (write path = Business_Intake + typed readback, 13 default rows, expanded reader bench, landmark owner-door exclusion, Pulse District already Uptown in C92 print, landing proof); review archived; one builder call open (Sports Bar vs Game-Day Bar) [research-build]
-    37b7d157 engine.306 es wiring card: write path appendBusinesses (BIZ-00187..00289), readers' static A/B, land before C113 after the 1004 bench pair [engine/sheet]
-    3cc1f877 engine.306 walk complete: 103 mints / 1 realign across 19 hoods (Baylight, Glenview, Ivy Hill untouched), roster output/engine306-mint-roster.tsv (all sectors classified, 0 dupes); codex plan review TASK dispatched; es wiring card requested; INSTITUTIONS: Oakland City College Laurel Campus, Coliseum fate open, disbursement office row; ledger fixes POP-00595 → BIZ-00002, POP-00031 → UNTRACKED (builder go), snapshot refreshed [research-build]
-    95ca7d92 engine.306 walk: Glenview left as is (builder) [research-build]
-    9921c795 engine.306 walk: Dimond 5 approved (Tops n Tassels added by the builder) [research-build]
-    98c76f68 engine.306 walk: Laurel 6 approved incl. Oakland City College Laurel Campus (builder) [research-build]
-    838af8e9 engine.306 walk: East Oakland 7 approved (disbursement office + Oakland Coliseum added; Coliseum's post-A's fate an open sim story) [research-build]
-    90a64349 engine.306 walk: Fruitvale 8 approved (Taco Fusion + two trendy restaurants added by the builder) [research-build]
-    419a64d3 engine.306 walk: San Antonio 4 approved [research-build]
-    c8eb57e4 engine.306 walk: Brooklyn 4 approved [research-build]
-    a0af28d7 engine.306 walk: Eastlake 4 approved [research-build]
-    2bd25759 engine.306 walk: Grand Lake 5 approved [research-build]
-    269fe8d5 engine.306 walk: Adams Point 4 approved [research-build]
-    2f1f27af engine.306 walk: Piedmont Ave 9 approved (boutiques added); Lake Merritt 7 approved (cigar club, wine bar added) [research-build]
-    279d1dc0 engine.306 walk: Rockridge 4 approved [research-build]
-    f764d43f engine.306 walk: Temescal 5 approved [research-build]
-    5b3c2b62 engine.306 walk: KONO 5 approved; jobs-match read logged (2 real mismatches of 635: Sarah Corliss link, Martin Richards traded) [research-build]
-    f9fdb17b engine.306 walk: Uptown 5 approved [research-build]
-    7ef89539 engine.306 walk: Chinatown 5 approved [research-build]
-    053bc46f engine.306 walk: Varek Systems kept (builder); Baylight no mints; Jack London 8 approved; Downtown 4 approved + Pulse District realign to Uptown approved [research-build]
-    fb7c8a5e engine.306 walk: West Oakland — 4 mints approved by name; Varek Systems traced to the C112 heritage business roll (not a duplicate filing), builder call pending [research-build]
-    d317dc92 engine.306: builder ruling 2026-10-20 night recorded verbatim — depth on every hood per INSTITUTIONS, hood-by-hood walk, realign only unprinted rows without disturbing tracked staff; C84 tech-landscape print placements carried [research-build]
-    ae9fc33e engine.306 design-pass read: 22 hoods' live Business_Ledger mix vs authored character folded into the engine-214 plan step 8; six-row template named as a prior backfill; Business_Intake tab absent on live; heritage births draw from the hood mix; builder calls A–C open [research-build]
-  Model decision: push if all yours, hold if other terminals stacked.
+  ✓ stack clean (origin/main..HEAD empty)
 
 --- [5/5] pm2 restart ---
   ✓ godworld-dashboard restarted
 
 ========================================================================
-sessionEndMechanical: complete (terminal=research-build)
+sessionEndMechanical: complete (terminal=engine-sheet)
 ========================================================================

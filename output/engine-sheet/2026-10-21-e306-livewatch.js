@@ -65,7 +65,7 @@ async function read(c) {
   });
   s.citizenSpot = {};
   Object.keys(s.citizens).forEach(pop => {
-    const [status, nb] = s.citizens[pop]; if (status !== 'Active') return;
+    const [status, nb] = s.citizens[pop]; if (/^(deceased|traded|pending)$/i.test(String(status).trim())) return; // generator's pool: Retired stay
     const hood = fold(nb) || String(nb || '');
     let best = null, br = -1;
     for (const sp of spots[hood] || []) { const rk = spotRank_(pop, sp.id); if (rk > br || (rk === br && sp.id < best.id)) { best = sp; br = rk; } }

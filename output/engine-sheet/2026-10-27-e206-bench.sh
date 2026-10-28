@@ -4,8 +4,8 @@
 # C113 Oaks row: H:W, Streak W2.
 #   leg A = engine.320's N6 (stage 30, same prep, same seed) — not re-fired; receipts 2026-10-26-e319-r2-N6.json
 #   S5 = stage 31, the bar absent (the self-arm writes 5): probe2 compare N6 S5 equal; no SPORTS_WEEK ripple, no streak seed
-#   S2 = stage 31, bench World_Config sportsStreakHeadline = 2 written before the fire: one Oaks SPORTS_WEEK ripple
-#        ("— 2 straight wins", magnitude 1) + a streak seed
+#   S2 = stage 31, bench World_Config sportsStreakHeadline = 2 written before the fire: one Oaks SPORTS_WEEK ripple at the
+#        week's own magnitude ("— 2 straight wins") + exactly one ECONOMIC streak seed
 # End: bench code = stage 30 (= PROD @166); data left at C113 (leg S2).
 #   usage: 2026-10-27-e206-bench.sh <commit>
 set -uo pipefail

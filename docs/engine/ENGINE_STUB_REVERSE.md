@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-10-27 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-10-28 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 

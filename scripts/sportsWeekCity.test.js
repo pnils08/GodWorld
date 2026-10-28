@@ -122,7 +122,8 @@ console.log('1b. engine.206 — the game-week ripple names the bars the week mov
 // ── population ───────────────────────────────────────────────────────────────
 console.log('1c. engine.206 cut 2 — a run at the streak bar carries a week under .15 to the business desk');
 {
-  // weeks built by the real Phase-2 code, the feed's Streak riding each week, marked at `bar`
+  // weeks built by the real Phase-2 code, the feed's Streak riding each week, marked at `bar` after the
+  // intensity (the run must agree with the week's signed result) — applySportsSeason_'s own order
   function streakWeek(cells, streaks, bar, cycle) {
     const weeks = {};
     for (const f of Object.keys(cells)) {
@@ -130,16 +131,16 @@ console.log('1c. engine.206 cut 2 — a run at the streak bar carries a week und
       weeks[f] = wsb.buildSportsWeek_(f, wsb.parseSportsWeekRecord_(cell), lens, {}, cycle);
       if (streaks[f]) weeks[f].streak = streaks[f];
     }
-    wsb.markSportsStreakHeadline_(weeks, bar);
     const city = wsb.deriveSportsIntensity_(weeks, {}, {}, {}, cycle);
+    wsb.markSportsStreakHeadline_(weeks, bar);
     return JSON.parse(JSON.stringify({ sportsWeek: weeks, sportsCity: city }));
   }
   const OAKS_WIN = { Oaks: ['H:W H:W', 'regular-season'] };
   const w5 = streakWeek(OAKS_WIN, { Oaks: 'W5' }, 5, 110);
   const sig = w5.sportsWeek.Oaks.signed;
   const r5 = sportsRipples(ripples('regular-season', w5));
-  check('the Oaks\' small week (|signed| under .15) on W5 at bar 5: one SPORTS_WEEK, spending, impact the week\'s own size floored at 1, text names the run',
-    Math.abs(sig) < 0.15 && r5.length === 1 && r5[0].impact === Math.max(1, Math.round(15 * Math.abs(sig))) && r5[0].impact > 0 &&
+  check('the Oaks\' small week (0 < signed < .15) on W5 at bar 5: one SPORTS_WEEK, spending, impact the week\'s own 15 × signed, text names the run',
+    sig > 0 && sig < 0.15 && r5.length === 1 && r5[0].impact === Math.round(15 * sig) &&
     /^Oaks game-week spending — 5 straight wins$/.test(r5[0].source),
     JSON.stringify([sig, r5.map(x => [x.impact, x.source])]));
   const r4 = sportsRipples(ripples('regular-season', streakWeek(OAKS_WIN, { Oaks: 'W4' }, 5, 110)));
@@ -148,34 +149,44 @@ console.log('1c. engine.206 cut 2 — a run at the streak bar carries a week und
   check('the same week with no Streak typed: no ripple', noStreak.length === 0, JSON.stringify(noStreak));
   const off = sportsRipples(ripples('regular-season', streakWeek(OAKS_WIN, { Oaks: 'W9' }, null, 110)));
   check('an unusable bar (null): no streak headline, the .15 gate alone', off.length === 0, JSON.stringify(off));
+  const zero = JSON.parse(JSON.stringify(w5)); zero.sportsWeek.Oaks.signed = 0; zero.sportsWeek.Oaks.unsigned = 0;
+  const rz = sportsRipples(ripples('regular-season', zero));
+  check('a W5 week that met expectation exactly (signed 0): the headline files with impact 0 — no invented money; the run names the direction',
+    rz.length === 1 && rz[0].impact === 0 && Object.is(rz[0].impact, 0) && rz[0].currentStrength === 0 &&
+    /^Oaks game-week spending — 5 straight wins$/.test(rz[0].source), JSON.stringify(rz.map(x => [x.impact, x.source])));
   const lw = streakWeek({ Oaks: ['H:L H:L', 'regular-season'] }, { Oaks: 'l6' }, 5, 110);
   const rl = sportsRipples(ripples('regular-season', lw));
-  check('a losing run (typed lower-case l6) files a slump: negative, at least −1, text names the losses',
-    rl.length === 1 && rl[0].impact <= -1 && rl[0].impact === -Math.max(1, Math.round(15 * Math.abs(lw.sportsWeek.Oaks.signed))) &&
+  check('a losing run (typed lower-case l6) on a losing week files a slump at the week\'s own size, text names the losses',
+    lw.sportsWeek.Oaks.signed < 0 && rl.length === 1 && rl[0].impact === (Math.round(15 * lw.sportsWeek.Oaks.signed) || 0) && rl[0].impact <= 0 &&
     /^Oaks game-week slump — 6 straight losses$/.test(rl[0].source), JSON.stringify([lw.sportsWeek.Oaks.signed, rl.map(x => [x.impact, x.source])]));
+  const against = streakWeek({ Oaks: ['H:L H:L', 'regular-season'] }, { Oaks: 'W5' }, 5, 110);
+  check('a run against the week\'s result (W5 typed on a losing week) is not marked and files nothing — never "spending" on falling bars',
+    against.sportsWeek.Oaks.signed < 0 && against.sportsWeek.Oaks.streakHeadline === false &&
+    sportsRipples(ripples('regular-season', against)).length === 0, JSON.stringify(against.sportsWeek.Oaks));
   const big = streakWeek({ "A's": ['H:W H:W H:W', 'playoffs'] }, { "A's": 'W7' }, 5, 110);
   const plain = streakWeek({ "A's": ['H:W H:W H:W', 'playoffs'] }, {}, 5, 110);
   const rb = sportsRipples(ripples('playoffs', big)), rp = sportsRipples(ripples('playoffs', plain));
-  check('a week at/above .15 is unchanged by its run: same impact and text as with no Streak',
-    Math.abs(big.sportsWeek["A's"].signed) >= 0.15 && rb.length === 1 && rp.length === 1 && rb[0].impact === rp[0].impact &&
-    rb[0].impact === Math.round(15 * big.sportsWeek["A's"].signed) && rb[0].source === rp[0].source && !/straight/.test(rb[0].source),
-    JSON.stringify([rb.map(x => [x.impact, x.source]), rp.map(x => [x.impact, x.source])]));
+  check('a week at/above .15 is unchanged by its run: the whole ripple object equals the no-Streak one',
+    Math.abs(big.sportsWeek["A's"].signed) >= 0.15 && rb.length === 1 && rp.length === 1 && JSON.stringify(rb) === JSON.stringify(rp) &&
+    rb[0].impact === Math.round(15 * big.sportsWeek["A's"].signed) && !/straight/.test(rb[0].source),
+    JSON.stringify([rb, rp]));
   const nog = streakWeek({ Oaks: ['none', 'regular-season'] }, { Oaks: 'W8' }, 5, 110);
   check('a no-games week on a run is not marked (a run needs a game week)', nog.sportsWeek.Oaks.streakHeadline === false &&
     sportsRipples(ripples('regular-season', nog)).length === 0, JSON.stringify(nog.sportsWeek.Oaks));
 }
 
-console.log('1d. engine.206 cut 2 — the feed reader, the bar, the away bars');
+console.log('1d. engine.206 cut 2 — the feed reader, the bar, the away bars, the Phase-1 self-arm');
 {
-  const entries = [
-    { teamsUsed: 'Oaks', seasonType: 'early-season', weekRecord: 'A:W', streak: 'W3' },
-    { teamsUsed: 'Oaks', seasonType: 'early-season', weekRecord: 'A:W', streak: 'W4' },
-    { teamsUsed: 'Oaks', seasonType: 'early-season', weekRecord: 'A:W', streak: 'W5' },
-    { teamsUsed: "A's", seasonType: 'off-season', weekRecord: '', streak: '' },
-    { teamsUsed: 'Oaks', seasonType: 'early-season', weekRecord: '', streak: 'hot' }];
-  const wk = wsb.deriveSportsWeekFromFeed_(entries, {}, 113);
-  check('the week carries the franchise\'s last typed run (W5, not W3; an unparseable "hot" skipped); no run, no field',
+  const G = (streak, extra) => Object.assign({ teamsUsed: 'Oaks', seasonType: 'early-season', eventType: 'game-result', weekGames: 1, streak }, extra);
+  const wk = wsb.deriveSportsWeekFromFeed_([G('W3', { weekRecord: 'A:W A:W A:W' }), G('W4'), G('W5'),
+    { teamsUsed: "A's", seasonType: 'off-season', eventType: 'rumor', streak: '' }], {}, 113);
+  check('the week carries the run after its last game row (W5, not W3); a franchise with no game run carries no field',
     wk.Oaks.streak === 'W5' && wk["A's"].streak === undefined, JSON.stringify([wk.Oaks.streak, wk["A's"].streak]));
+  const stale = wsb.deriveSportsWeekFromFeed_([G('W3', { weekRecord: 'A:W A:W' }), G('W4'),
+    { teamsUsed: 'Oaks', seasonType: 'early-season', eventType: 'rumor', streak: 'W9' }], {}, 113);
+  check('a later rumor row\'s Streak (W9) never speaks for the week: the last game row\'s W4 stands', stale.Oaks.streak === 'W4', JSON.stringify(stale.Oaks));
+  const blank = wsb.deriveSportsWeekFromFeed_([G('W4', { weekRecord: 'A:W A:W' }), G('')], {}, 113);
+  check('the last game row typed no Streak: no run (an earlier game row\'s W4 is not the week\'s run)', blank.Oaks.streak === undefined, JSON.stringify(blank.Oaks));
   const errs = [];
   const box = { config: {} };
   wsb.logEngineError_ = (ctx, phase, err) => errs.push(phase + ': ' + err.message);
@@ -185,6 +196,17 @@ console.log('1d. engine.206 cut 2 — the feed reader, the bar, the away bars');
     [1, 31, 5.5, '', 'x', true].every(v => at(v) === null) && errs.length === 6 && errs.every(e => /^Phase2-SportsFeed: engine\.206/.test(e)),
     JSON.stringify(errs));
   delete wsb.logEngineError_;
+  const CON = new Function(fs.readFileSync(path.join(ROOT, 'phase01-config/engine94SheetContract.js'), 'utf8') +
+    '\nreturn { seeds: ENGINE209_CONFIG_SEEDS, inspect: inspectEngine94Config_ };')();
+  const HDR = ['Key', 'Value', 'Description'];
+  const plan0 = CON.inspect([HDR], CON.seeds);
+  const seeded = plan0.additions.filter(a => a[0] === 'sportsStreakHeadline');
+  check('Phase-1 self-arm: an absent key is written as sportsStreakHeadline | 5', seeded.length === 1 && seeded[0][1] === 5, JSON.stringify(seeded));
+  const withKey = v => [HDR].concat(plan0.additions.filter(a => a[0] !== 'sportsStreakHeadline'), [['sportsStreakHeadline', v, '']]);
+  const rejects = v => { try { CON.inspect(withKey(v), CON.seeds); return false; } catch (e) { return /sportsStreakHeadline/.test(e.message); } };
+  check('Phase-1 self-arm: a typed 2 / 30 kept; 1, 31, 4.5, "", "five" stop the Cycle (the existing contract)',
+    CON.inspect(withKey(2), CON.seeds).normalized.sportsStreakHeadline === 2 && CON.inspect(withKey(30), CON.seeds).normalized.sportsStreakHeadline === 30 &&
+    [1, 31, 4.5, '', 'five'].every(rejects));
   // two away franchises: the away bars ride the larger week among those that FILE — a bigger week that
   // stays under .15 with no run no longer takes them from the run-carried one
   const AWAY = { byHood: { Uptown: { ids: ['BIZ-04'], pp: 0.3 } }, ids: ['BIZ-04'], pp: 0.3 };
@@ -197,8 +219,8 @@ console.log('1d. engine.206 cut 2 — the feed reader, the bar, the away bars');
   two["A's"] = wsb.buildSportsWeek_("A's", wsb.parseSportsWeekRecord_('A:W A:W A:W'), 'regular-season', {}, 110);
   two.Oaks = wsb.buildSportsWeek_('Oaks', wsb.parseSportsWeekRecord_('A:W'), 'regular-season', {}, 110);
   two.Oaks.streak = 'W5';
-  wsb.markSportsStreakHeadline_(two, 5);
   wsb.deriveSportsIntensity_(two, {}, {}, {}, 110);
+  wsb.markSportsStreakHeadline_(two, 5);
   const tw = JSON.parse(JSON.stringify(two));
   const ns2 = {}; HOODS.concat(['Uptown']).forEach(h => { ns2[h] = { employerCharacter: 'retail', boomIndex: 0 }; });
   const ctx2 = { config: { cycleCount: 110, rngSeed: 3, econMoodInertia: 1 }, ss: { getSheetByName: () => null }, writeIntents: [],

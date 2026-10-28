@@ -3,7 +3,9 @@
 //   --bar n            World_Config sportsStreakHeadline must read n (the self-arm's 5, or the leg's written 2)
 //   (default)          no SPORTS_WEEK ripple on Ripple_Ledger at C113; no Story_Seed_Deck C113 row naming a streak
 //   --expect-headline  exactly one SPORTS_WEEK economic-event row at C113: Oaks, business-scoped (bar ids), CauseDetail
-//                      "Oaks game-week spending — <n> straight wins — …", Magnitude 1; and a C113 seed carrying "straight wins"
+//                      "Oaks game-week spending — <n> straight wins — …", Magnitude the week's own round(15 × signed) (0..2 on a
+//                      win week under .15), TargetIds count = the "<k> bar(s)" in the text; and exactly one C113 ECONOMIC seed
+//                      carrying "straight wins". (Engine_Errors +0 is the bench fire's own PASS: benchfire.js fails a new row.)
 // Writes nothing to any sheet; saves output/engine-sheet/2026-10-27-e206-check-<leg>.json. Exit 0 = PASS, 2 = HOLD.
 require('/root/GodWorld/lib/env');
 const { google } = require('/root/GodWorld/node_modules/googleapis');
@@ -40,10 +42,14 @@ if (!/^[A-Z][0-9]?[a-z]?$/.test(String(leg || '')) || !Number.isInteger(bar)) th
       if (r[0].CauseType !== 'economic-event') out.hold.push('CauseType ' + r[0].CauseType);
       if (!/OAKS/.test(String(r[0].CauseId))) out.hold.push('CauseId ' + r[0].CauseId);
       if (!new RegExp('^Oaks game-week spending — ' + bar + ' straight wins( — |$)').test(String(r[0].CauseDetail))) out.hold.push('CauseDetail ' + r[0].CauseDetail);
-      if (Number(r[0].Magnitude) !== 1) out.hold.push('Magnitude ' + r[0].Magnitude + ' (want 1)');
-      if (r[0].TargetScope !== 'business' && /bar\(s\)/.test(String(r[0].CauseDetail))) out.hold.push('bars named but TargetScope ' + r[0].TargetScope);
+      const mag = Number(r[0].Magnitude);
+      if (!(Number.isInteger(mag) && mag >= 0 && mag <= 2)) out.hold.push('Magnitude ' + r[0].Magnitude + ' (want the week\'s own 0..2)');
+      const k = /— (\d+) bar\(s\)/.exec(String(r[0].CauseDetail));
+      const ids = String(r[0].TargetIds || '').split('|').filter(x => /^BIZ-/.test(x));   // rippleLedger.js:55-56, cap 20 + '+N more'
+      if (k && (r[0].TargetScope !== 'business' || ids.length !== Math.min(20, Number(k[1])))) out.hold.push('bars named ' + k[1] + ' but TargetScope ' + r[0].TargetScope + ' ids ' + ids.length);
+      out.barsNamed = k ? Number(k[1]) : 0;
     }
-    if (!out.streakSeeds.length) out.hold.push('no C113 seed carrying the streak');
+    if (out.streakSeeds.length !== 1 || out.streakSeeds[0].Domain !== 'ECONOMIC') out.hold.push('C113 streak seeds ' + out.streakSeeds.length + ' ' + JSON.stringify(out.streakSeeds.map(x => x.Domain + '/' + x.Desk)) + ' (want one ECONOMIC)');
   } else {
     if (out.sportsWeek.length) out.hold.push('SPORTS_WEEK rows at C113: ' + out.sportsWeek.length + ' (want 0)');
     if (out.streakSeeds.length) out.hold.push('C113 seeds naming a streak: ' + out.streakSeeds.length + ' (want 0)');

@@ -444,14 +444,17 @@ function sportsStreakHeadlineConfig_(ctx) {
   return null;
 }
 
-// In place on S.sportsWeek: wk.streakRun = the parsed run (when the feed typed one), wk.streakHeadline
-// = a game week on a run at or past the bar. bar null (unusable config) marks none.
+// In place on S.sportsWeek, after the intensity: wk.streakRun = the parsed run (the week's last game row
+// typed one), wk.streakHeadline = a game week on a run at or past the bar whose signed result does not
+// run against it (a W run on a week below expectation, or an L run above it, carries nothing). bar null
+// (unusable config) marks none.
 function markSportsStreakHeadline_(weeks, bar) {
   for (var f in (weeks || {})) {
     if (!weeks.hasOwnProperty(f) || !weeks[f]) continue;
-    var wk = weeks[f], run = parseSportsStreak_(wk.streak);
+    var wk = weeks[f], run = parseSportsStreak_(wk.streak), signed = Number(wk.signed) || 0;
+    var against = run && ((run.dir === 'W' && signed < 0) || (run.dir === 'L' && signed > 0));
     wk.streakRun = run;
-    wk.streakHeadline = !!(bar && run && wk.g > 0 && run.n >= bar);
+    wk.streakHeadline = !!(bar && run && wk.g > 0 && run.n >= bar && !against);
   }
   return weeks;
 }

@@ -445,5 +445,23 @@ if (replayArg !== -1) {
     emit('SYNTHETIC', f, wk, oldPrice({ record: w + '-' + l, seasonType: lens }));
   }
 }
+test('engine.206 cut 2: the real reader marks each accepted game row (folded ones too); the week\'s run is its last game row\'s', () => {
+  const keys = [...headers, 'WeekRecord'];
+  const rows = [row({ Cycle: 113, TeamsUsed: 'Oaks', EventType: 'game-result', SeasonType: 'early-season', WeekRecord: 'H:W', Streak: 'W2' }),
+    row({ Cycle: 113, TeamsUsed: 'Oaks', EventType: 'game-result', SeasonType: 'early-season', WeekRecord: 'A:W', Streak: 'W3' }),
+    row({ Cycle: 113, TeamsUsed: 'Oaks', EventType: 'game-result', SeasonType: 'early-season', WeekRecord: 'A:W', Streak: 'W4' }),
+    row({ Cycle: 113, TeamsUsed: 'Oaks', EventType: 'rumor', SeasonType: 'early-season', Streak: 'W9' }),
+    row({ Cycle: 113, TeamsUsed: "A's", EventType: 'season-state', SeasonType: 'off-season', WeekRecord: 'none', Streak: 'W7' })];
+  const sheet = { getDataRange: () => ({ getValues: () => [keys, ...rows.map(r => keys.map(k => r[k] ?? ''))] }) };
+  const ctx = { summary: { cycleId: 113 }, config: {}, ss: { getSheetByName: () => sheet } };
+  const entries = plain(sandbox.readOaklandFeedEntries_(ctx, 113));
+  assert.deepStrictEqual(entries.map(e => e.weekGames), [1, 1, 1, undefined, 0]);
+  assert.strictEqual(entries[0].weekRecord, 'H:W A:W A:W');
+  const weeks = sandbox.deriveSportsWeekFromFeed_(entries, ctx._sportsWeekHistory || {}, 113);
+  assert.strictEqual(weeks.Oaks.streak, 'W4');
+  assert.strictEqual(weeks.Oaks.g, 3);
+  assert.strictEqual(weeks["A's"].streak, undefined);
+});
+
 console.log(`sportsFeedParser: ${passed} passed, ${failed} failed`);
 process.exitCode = failed ? 1 : 0;

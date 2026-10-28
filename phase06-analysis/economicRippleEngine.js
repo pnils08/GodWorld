@@ -490,9 +490,10 @@ function detectCalendarRipples_(ctx, currentCycle) {
   for (var sf in sportsWeeks) {
     if (!sportsWeeks.hasOwnProperty(sf)) continue;
     var swk = sportsWeeks[sf], swSigned = Number(swk.signed) || 0;
-    // engine.206 cut 2 (builder 2026-10-27): a run at the streak bar (Phase 2 wk.streakHeadline) carries a
-    // week under .15 to the business desk. It never sizes the week: the sign is the run's, the impact the
-    // week's own, at least 1 so the opened gate never files a zero-strength ripple. At/above .15: unchanged.
+    // engine.206 cut 2 (builder 2026-10-27): a run at the streak bar (Phase 2 wk.streakHeadline — the run
+    // agrees with the week's result) carries a week under .15 to the business desk. It never sizes the week:
+    // the impact is the week's own (15 × signed, 0 when the week met expectation exactly — a headline with no
+    // money); the run only names the direction when signed is 0. At/above .15: unchanged.
     var swRun = (swk && swk.streakHeadline && swk.streakRun) ? swk.streakRun : null;
     var swCarried = Math.abs(swSigned) < 0.15;
     if (!(swk && swk.g > 0) || (swCarried && !swRun)) continue;   // no games → no week (signed is 0 then anyway; agy review)
@@ -510,9 +511,7 @@ function detectCalendarRipples_(ctx, currentCycle) {
       { description: swText, rippleKey: String(sf).replace(/[^A-Za-z]/g, '').toUpperCase() },
       swHome ? swk.venue[0] : 'all', cal);
     if (swRipple) {
-      swRipple.impact = swRipple.currentStrength = swCarried
-        ? (swUp ? 1 : -1) * Math.max(1, Math.round(15 * Math.abs(swSigned)))
-        : Math.round(15 * swSigned);
+      swRipple.impact = swRipple.currentStrength = Math.round(15 * swSigned) || 0;   // || 0: never a −0
       swRipple.neighborhoods = swHome ? swk.venue.slice() : ['all'];
       if (swBars.ids.length) { swRipple.bizIds = swBars.ids; swRipple.bizPp = swBars.pp; }
     }

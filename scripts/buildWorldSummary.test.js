@@ -779,13 +779,27 @@ console.log('\nTest 11g: storyline registry (engine.270)');
   ] });
   const byId = id => stages.find(e => e.id === id);
   assert('stage id is <InitiativeID>:<stage>', Boolean(byId('INIT-002:dispatch-live')));
-  assert('known stage keeps its first-observed cycle', byId('INIT-002:dispatch-live').startCycle === 104
-    && byId('INIT-002:dispatch-live').age === 6 && !byId('INIT-002:dispatch-live').firstSeen);
-  assert('new stage is first-seen at this cycle', byId('INIT-005:construction-active').firstSeen === true
-    && byId('INIT-005:construction-active').startCycle === 109 && !byId('INIT-005:construction-active').hasLedgerRow);
+  // engine.270 D2 (live C113: five rollout stages read "week 5"): a FirstCycle is
+  // when the stage was first OBSERVED. Without an earlier stage row of the same
+  // initiative the move was never seen, so the stage carries no age.
+  const unseen = byId('INIT-002:dispatch-live');
+  assert('D2: a stage running when tracking began has no start and no age',
+    unseen.firstSeen === true && unseen.startCycle === null && unseen.age === null && unseen.hasLedgerRow);
+  const moved = byId('INIT-005:construction-active');
+  assert('D2: a stage the ledger saw begin starts at that cycle',
+    moved.firstSeen === false && moved.startCycle === 109 && moved.age === 1 && !moved.hasLedgerRow);
   const ended = byId('INIT-005:construction-planning');
   assert('a stage the tracker moved past is closed', ended && ended.status === 'closed' && ended.endCycle === 109);
   assert('closed stage names where it moved', ended.movedTo === 'construction-active');
+  assert('D2: a closed stage with no start on record has no age', ended.firstSeen === true && ended.age === null);
+  const later = helper.buildStorylineRegistry({ initiatives, cycle: 111, ledgerRows: [
+    { StorylineId: 'INIT-005:construction-planning', FirstCycle: '106', Status: 'closed' },
+    { StorylineId: 'INIT-005:construction-active', FirstCycle: '109', Status: 'open' },
+    { StorylineId: 'INIT-002:dispatch-live', FirstCycle: '104', Status: 'open' }
+  ] });
+  const seenLater = later.find(e => e.id === 'INIT-005:construction-active');
+  assert('D2: an observed start keeps counting weeks', seenLater.startCycle === 109 && seenLater.age === 3 && !seenLater.firstSeen);
+  assert('D2: an unseen start stays ageless every week after', later.find(e => e.id === 'INIT-002:dispatch-live').age === null);
   assert('an already-closed stage row is not listed again', !helper.buildStorylineRegistry({ initiatives, cycle: 110, ledgerRows: [
     { StorylineId: 'INIT-005:construction-planning', FirstCycle: '106', Status: 'closed' }] })
     .some(e => e.id === 'INIT-005:construction-planning'));
@@ -816,6 +830,36 @@ console.log('\nTest 11g: storyline registry (engine.270)');
     helper.resolveStoryline({ ref: crisisRipple.ref, label: crisisRipple.label, kind: 'ripple' }, R).id === 'CRISIS-105-WESTOAKL');
   assert('hood alone never attaches', helper.resolveStoryline({ ref: 'output/neighborhood_texture_c106.md "### West Oakland"', hood: 'West Oakland' }, R) === null);
   assert('ref file head is unchanged by the tag', crisisRipple.ref.split(/[\s;]/)[0] === 'Ripple_Ledger');
+
+  // engine.270 D1 (Task 2 step 3): anomaly entries name their storyline. Shape is
+  // the live C110 stuck-initiative pattern for Fruitvale Transit Hub (INIT-003).
+  const patternSig = helper.emitDeskSignal(106, {
+    auditJson: {
+      snapshots: { Initiative_Tracker: initiatives },
+      patterns: [
+        { type: 'stuck-initiative', severity: 'medium', description: 'stuck', affectedEntities: { initiatives: ['INIT-005'] },
+          evidence: { sheet: 'Initiative_Tracker', rows: [4] },
+          tribuneFraming: { storyHandles: { business: { angle: 'contractors wait', hookLine: 'x' } } } },
+        { type: 'strain', severity: 'low', description: 'repeating event', affectedEntities: { neighborhoods: ['West Oakland'] } },
+        { type: 'math-imbalance', severity: 'low', description: 'two budgets', affectedEntities: { initiatives: ['INIT-005', 'INIT-002'] } },
+        { type: 'cascade-failure', severity: 'high', description: 'arc', affectedEntities: {}, evidence: { note: 'feeds CRISIS-105-WESTOAKL' } },
+        { type: 'improvement', severity: 'low', description: 'unknown init', affectedEntities: { initiatives: ['INIT-099'] } }
+      ]
+    },
+    rippleAll: [], sportsAll: [], neighborhoodsC: [], rileyCurr: {}, storylineLedger: [], arcRows, liveArcs: []
+  });
+  const anomalies = Object.values(patternSig.lanes).flat().filter(e => e.kind === 'anomaly');
+  const pat = i => anomalies.filter(e => e.ref.includes('patterns[' + i + ']'));
+  assert('D1: a pattern naming one initiative resolves to its stage',
+    helper.resolveStoryline(pat(0)[0], R) && helper.resolveStoryline(pat(0)[0], R).id === 'INIT-005:construction-active');
+  assert('D1: the desk copy of that pattern carries the same storyline', pat(0).length === 2
+    && pat(0).every(e => e.ref.endsWith('; storyline INIT-005:construction-active')));
+  assert('D1: a strain pattern carries none', !pat(1)[0].ref.includes('; storyline'));
+  assert('D1: a pattern naming two initiatives carries none', !pat(2)[0].ref.includes('; storyline'));
+  assert('D1: a pattern whose evidence names a crisis arc resolves to it',
+    helper.resolveStoryline(pat(3)[0], R) && helper.resolveStoryline(pat(3)[0], R).id === 'CRISIS-105-WESTOAKL');
+  assert('D1: an initiative not on the tracker tags nothing', !pat(4)[0].ref.includes('; storyline'));
+  assert('D1: the ref head is unchanged', pat(0)[0].ref.startsWith('output/engine_audit_c106.json patterns[0]; evidence: Initiative_Tracker row(s) 4'));
 
   assert('storylines ride their own key, a sibling of lanes', sig.storylines.civic.some(e => e.id === 'CRISIS-105-WESTOAKL'));
   assert('NO storyline leaks into any lane', !allEntries.some(e => e.type === 'crisis' || e.type === 'initiative-stage'));

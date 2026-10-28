@@ -804,9 +804,27 @@ const STORYLINE_DESKS = ['civic', 'sports', 'culture', 'business'];
 
 function storylineRefTag(id) { return '; storyline ' + id; }
 
+// engine.270 D1 (Task 2 step 3): an audit pattern about ONE engine event names
+// its storyline, as initiative and ripple entries do. Evidence only — the
+// pattern's own affectedEntities.initiatives, or a CRISIS- arc ID in its
+// evidence. A pattern naming two is left untagged: a ref carries one storyline,
+// and the Saturday attach pass is the path for the rest.
+function patternStorylineTag(p, stageById) {
+  const ae = (p && p.affectedEntities) || {};
+  const tags = new Set();
+  for (const id of (Array.isArray(ae.initiatives) ? ae.initiatives : [])) {
+    const tag = stageById.get(String(id).trim());
+    if (tag) tags.add(tag);
+  }
+  const text = JSON.stringify((p && p.evidence) || {}) + JSON.stringify(ae);
+  for (const arc of (text.match(/\bCRISIS-\d+-[A-Z0-9]+\b/g) || [])) tags.add(storylineRefTag(arc));
+  return tags.size === 1 ? [...tags][0] : '';
+}
+
 // Pure: engine state -> registry entries. `ledgerRows` is Storyline_Ledger as
-// objects; it supplies the first-observed cycle of an initiative stage and the
-// open stage rows the tracker has since moved past.
+// objects; it supplies the first-observed cycle of an initiative stage, the
+// stage moves the ledger has seen, and the open stage rows the tracker has
+// since moved past.
 function buildStorylineRegistry(input) {
   const { arcRows = [], liveArcs = [], initiatives = [], ledgerRows = [], cycle } = input || {};
   const num = v => { const n = parseInt(v, 10); return Number.isFinite(n) ? n : 0; };
@@ -815,6 +833,25 @@ function buildStorylineRegistry(input) {
     const id = String(r.StorylineId || '').trim();
     if (id) ledgerById.set(id, r);
   }
+  // engine.270 D2: a stage's start is on record only when the ledger saw the
+  // initiative move INTO it (an earlier stage row of the same initiative). A
+  // stage already running when tracking began — the C109 rollout rows, a new
+  // initiative's first stage — has no start anywhere: the tracker has no
+  // phase-start column (LastStageChangeCycle is the Stage clock) and the
+  // carry-forward holds one cycle of moves. Its FirstCycle is when it was first
+  // OBSERVED, so it carries no age (startCycle null, firstSeen true).
+  const earliestByInit = new Map();
+  for (const [id, r] of ledgerById) {
+    const m = id.match(/^([A-Z]+-\d+):/);
+    const fc = num(r.FirstCycle);
+    if (!m || !fc) continue;
+    if (!earliestByInit.has(m[1]) || fc < earliestByInit.get(m[1])) earliestByInit.set(m[1], fc);
+  }
+  const stageClock = (initId, observed) => {
+    const known = earliestByInit.has(initId) && earliestByInit.get(initId) < observed;
+    return known ? { startCycle: observed, age: cycle - observed + 1, firstSeen: false }
+      : { startCycle: null, age: null, firstSeen: true };
+  };
   const out = [];
 
   // ── crisis arcs ──
@@ -865,7 +902,7 @@ function buildStorylineRegistry(input) {
     currentStage.set(initId, { stage, it });
     const id = initId + ':' + stage;
     const row = ledgerById.get(id);
-    const startCycle = row && num(row.FirstCycle) ? num(row.FirstCycle) : cycle;
+    const clock = stageClock(initId, row && num(row.FirstCycle) ? num(row.FirstCycle) : cycle);
     out.push({
       id,
       type: 'initiative-stage',
@@ -873,10 +910,10 @@ function buildStorylineRegistry(input) {
       name: String(it.Name || initId).trim() + ' \u2014 ' + stage,
       stage,
       status: 'open',
-      startCycle,
+      startCycle: clock.startCycle,
       endCycle: null,
-      age: cycle - startCycle + 1,
-      firstSeen: !row,
+      age: clock.age,
+      firstSeen: clock.firstSeen,
       hoods: String(it.AffectedNeighborhoods || '').split(',').map(h => h.trim()).filter(Boolean),
       desks: ['civic'],
       ref: `Initiative_Tracker (InitiativeID ${initId})`,
@@ -892,7 +929,7 @@ function buildStorylineRegistry(input) {
     if (String(row.Status || '').trim().toLowerCase() === 'closed') continue;
     const cur = currentStage.get(m[1]);
     if (!cur || cur.stage === m[2]) continue;
-    const startCycle = num(row.FirstCycle) || cycle;
+    const clock = stageClock(m[1], num(row.FirstCycle) || cycle);
     out.push({
       id,
       type: 'initiative-stage',
@@ -901,9 +938,10 @@ function buildStorylineRegistry(input) {
       stage: m[2],
       movedTo: cur.stage,
       status: 'closed',
-      startCycle,
+      startCycle: clock.startCycle,
       endCycle: cycle,
-      age: cycle - startCycle + 1,
+      age: clock.age,
+      firstSeen: clock.firstSeen,
       hoods: String(cur.it.AffectedNeighborhoods || '').split(',').map(h => h.trim()).filter(Boolean),
       desks: ['civic'],
       ref: `Initiative_Tracker (InitiativeID ${m[1]})`,
@@ -1151,13 +1189,33 @@ function emitDeskSignal(cycle, data) {
   const notes = [];
   const lanes = { civic: [], sports: [], culture: [], business: [] };
 
+  // Initiative snapshot (audit, same-cycle, zero extra reads) — read first: the
+  // anomaly, initiative and vote entries all tag their storyline from it.
+  const snapIT = auditJson.snapshots && auditJson.snapshots.Initiative_Tracker;
+  const initiatives = Array.isArray(snapIT) ? snapIT : [];
+  if (!initiatives.length) notes.push('no Initiative_Tracker snapshot in engine_audit — initiative/vote entries omitted');
+  // engine.270: the assignment's ref names the storyline it belongs to. The ref
+  // string is the one field every downstream path carries intact.
+  const stageTag = it => {
+    const stage = String(it.ImplementationPhase || it.Status || '').trim();
+    return (it.InitiativeID && stage) ? storylineRefTag(it.InitiativeID + ':' + stage) : '';
+  };
+  const stageByName = new Map();
+  const stageById = new Map();
+  for (const it of initiatives) {
+    const tag = stageTag(it);
+    if (tag && it.Name) stageByName.set(String(it.Name).trim(), tag);
+    if (tag) stageById.set(String(it.InitiativeID).trim(), tag);
+  }
+
   // ── civic: anomalies (every audit pattern — bug-is-event: they must be
   // reachable from some desk; /desk-slice curates cover-as-story placement) ──
   const patterns = Array.isArray(auditJson.patterns) ? auditJson.patterns : [];
   patterns.forEach((p, i) => {
     const ev = p.evidence || {};
     const ref = `output/engine_audit_c${cycle}.json patterns[${i}]`
-      + (ev.sheet ? `; evidence: ${ev.sheet} row(s) ${(ev.rows || []).join(',')}` : '');
+      + (ev.sheet ? `; evidence: ${ev.sheet} row(s) ${(ev.rows || []).join(',')}` : '')
+      + patternStorylineTag(p, stageById);
     const ae = p.affectedEntities || {};
     const popids = extractPopids(ae.citizens);
     const hood = (Array.isArray(ae.neighborhoods) && ae.neighborhoods.length)
@@ -1195,20 +1253,6 @@ function emitDeskSignal(cycle, data) {
   });
 
   // ── civic: initiatives + votes (audit snapshot — same-cycle, zero extra reads) ──
-  const snapIT = auditJson.snapshots && auditJson.snapshots.Initiative_Tracker;
-  const initiatives = Array.isArray(snapIT) ? snapIT : [];
-  if (!initiatives.length) notes.push('no Initiative_Tracker snapshot in engine_audit — initiative/vote entries omitted');
-  // engine.270: the assignment's ref names the storyline it belongs to. The ref
-  // string is the one field every downstream path carries intact.
-  const stageTag = it => {
-    const stage = String(it.ImplementationPhase || it.Status || '').trim();
-    return (it.InitiativeID && stage) ? storylineRefTag(it.InitiativeID + ':' + stage) : '';
-  };
-  const stageByName = new Map();
-  for (const it of initiatives) {
-    const tag = stageTag(it);
-    if (tag && it.Name) stageByName.set(String(it.Name).trim(), tag);
-  }
   for (const it of initiatives) {
     lanes.civic.push({
       kind: 'initiative',

@@ -156,6 +156,21 @@ const posGate = gate.evaluate(posArt, {
 });
 assert.equal(posGate.fail, false, 'Task 9 positive pair must pass every deterministic check: ' + JSON.stringify(posGate.findings));
 
+// engine.270 D2: a stage with no start on record prints no week count, open or ended.
+{
+  const lines = desk.storylineLines([
+    { name: 'Temescal Community Health Center — operational', type: 'initiative-stage', status: 'open', firstSeen: true, age: null, hoods: ['Temescal'] },
+    { name: 'Downtown Economic Revitalization — announced', type: 'initiative-stage', status: 'closed', firstSeen: true, age: null, movedTo: 'legislation-filed', hoods: [] },
+    { name: 'Downtown Economic Revitalization — legislation-filed', type: 'initiative-stage', status: 'open', firstSeen: false, age: 3, hoods: [] },
+    { name: 'The West Oakland Crime Spike', type: 'crisis', status: 'closed', age: 5, hoods: ['West Oakland'] }
+  ]);
+  assert.equal(lines[0], 'Temescal Community Health Center — operational [Temescal] — under way');
+  assert.equal(lines[1], 'Downtown Economic Revitalization — announced — ENDED this week; now legislation-filed');
+  assert.equal(lines[2], 'Downtown Economic Revitalization — legislation-filed — week 3');
+  assert.equal(lines[3], 'The West Oakland Crime Spike [West Oakland] — ENDED this week after 5 week(s)');
+  assert.ok(!lines.some(l => /null|undefined/.test(l)));
+}
+
 console.log('cronDeskStoryTemplate.test.js: PASS');
 console.log('  luis near-pass now clean (pipeline.62 — token overlap is not a gate)');
 console.log('  jordan missing-? and civic phase-lede are observations, not fails');

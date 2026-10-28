@@ -1,7 +1,7 @@
 ---
 title: Storylines Keyed To Engine Events Plan
 created: 2026-09-28
-updated: 2026-10-08
+updated: 2026-10-28
 type: plan
 tags: [engine, media, active]
 sources:
@@ -16,7 +16,7 @@ pointers:
 
 # Storylines Keyed To Engine Events Plan
 
-**STATUS (2026-10-08): BUILT, RUNNING, REVIEW 1 RULED — build queued for engine-sheet, not dispatched (es on a separate project, builder 2026-10-08).** Tasks 1–6 are live. Review 1 (2026-10-07) found six misalignments (§Review 1); the four calls on them were made 2026-10-08 (§Review 1 Disposition): fix D1 (Task 2 step 3 never built) and D2 (no age on first-seen entries), build Task 7 step 1, accept D3, release engine.20d. Task 7 step 2 and the reporter-chased storylines wait for the C113 read. The scorer rewire stays OPEN on the builder's word. Original ruling (2026-09-29): "the smart move is to see how this helps, and it does keep a history of engine events." See §Observation and review.
+**STATUS (2026-10-28): REVIEW 1 BUILD COMMITTED (engine-sheet) — D1, D2 and Task 7 step 1 are in the working tree the crons run; codex diff review before the first unattended attach pass (Sat 2026-10-31 16:00); first desk-signal build with D1 + D2 is the C114 fire (Sun 2026-11-01).** See §Review 1 build (2026-10-28). Tasks 1–6 are live. Review 1 (2026-10-07) found six misalignments (§Review 1); the four calls on them were made 2026-10-08 (§Review 1 Disposition): fix D1 (Task 2 step 3 never built) and D2 (no age on first-seen entries), build Task 7 step 1, accept D3, release engine.20d. Task 7 step 2 and the reporter-chased storylines wait for the C113 read. The scorer rewire stays OPEN on the builder's word. Original ruling (2026-09-29): "the smart move is to see how this helps, and it does keep a history of engine events." See §Observation and review.
 
 **Goal:** A storyline is an engine event that has its own ID and its own life span; the newsroom sees it with its stage, articles attach to its ID, and it closes when the engine ends it.
 
@@ -82,7 +82,7 @@ pointers:
   2. `rippleEntry` gets `storylineId` when `CauseId` equals a crisis arc ID (live: `crisis-event :: CRISIS-105-WESTOAKL`), or when `CauseType` is `initiative-implementation` and `CauseId` equals an initiative's full `Name` (live ripples carry the name, not the ID — verified untruncated 2026-09-28).
   3. Anomaly entries get `storylineId` when the pattern's `affectedEntities` or evidence names a registry arc ID.
 - **Verify:** test asserts a C105 crisis ripple and an `initiative-implementation` ripple each resolve to the right ID; an unrelated `faith-event` ripple carries none.
-- **Status:** [x] steps 1–2 built 2026-09-28 (`f7249710`). **Step 3 was never built (found 2026-10-08):** the anomaly loop in `buildWorldSummary.js` (~:1143) never calls `storylineRefTag`, and the ripple/initiative paths do. The stuck-initiative pattern for Fruitvale Transit Hub at C110 carries `affectedEntities.initiatives: ["INIT-003"]` and the live registry holds `INIT-003:design-phase`, yet the lane entry's ref reads `output/engine_audit_c110.json patterns[0]; evidence: Initiative_Tracker row(s) 4` with no tag. Open — queued, see §Review 1 Disposition (D1).
+- **Status:** [x] steps 1–2 built 2026-09-28 (`f7249710`). **Step 3 was never built (found 2026-10-08):** the anomaly loop in `buildWorldSummary.js` (~:1143) never calls `storylineRefTag`, and the ripple/initiative paths do. The stuck-initiative pattern for Fruitvale Transit Hub at C110 carries `affectedEntities.initiatives: ["INIT-003"]` and the live registry holds `INIT-003:design-phase`, yet the lane entry's ref reads `output/engine_audit_c110.json patterns[0]; evidence: Initiative_Tracker row(s) 4` with no tag. **Step 3 built 2026-10-28 (engine-sheet), see §Review 1 build.**
 
 ### Task 3: Packet shows running stories
 
@@ -137,7 +137,7 @@ pointers:
   2. Residue only — shares hood and cycle window, prints no name: one cheap-model yes/no with the entry's name, stage and the article body. Verdict and model recorded in `output/storyline_signal_c<N>.json`.
   3. The pass ATTACHES an article to an existing registry ID. It never creates an ID and never edits an article.
 - **Verify:** run steps 1–2 over the staged C105–C108 West Oakland articles; report attach counts and step-2 verdicts before enabling on `--apply`.
-- **Status:** step 1 (deterministic hood + printed-name attach) RULED 2026-10-08, queued for engine-sheet, not started. Step 2 (cheap-model yes/no on the residue) waits for the C113 read. Verify for step 1: run it over the staged C105–C110 civic articles and report attach counts before enabling on `--apply`; Firebrand C110 and Navarro C109/C110 are the known targets.
+- **Status:** step 1 (deterministic hood + printed-name attach) RULED 2026-10-08, **built 2026-10-28 (engine-sheet), see §Review 1 build**. Step 2 (cheap-model yes/no on the residue) waits for the C113 read. Verify for step 1: run it over the staged C105–C110 civic articles and report attach counts before enabling on `--apply`; Firebrand C110 and Navarro C109/C110 are the known targets.
 
 ## Observation and review
 
@@ -149,7 +149,7 @@ pointers:
 | 2026-10-03 Saturday run | 8 engine-keyed rows land in `Storyline_Ledger`; `CRISIS-105-WESTOAKL` reads `closed`; 97 legacy rows unchanged | the tab; `output/storyline_signal_c109.json` |
 | after the C110 fire 2026-10-04 | `Initiative_Tracker.ImplementationPhase` vs carry-forward `initiativePhases` — they disagreed at C109 on INIT-005 and INIT-006. Find which writer owns the column before a stage close is trusted | tracker tab; `Carry_Forward_Store` |
 | week of 2026-10-05 — **REVIEW** | first read with the builder: did IDs attach, did rows land, did any stage close falsely, did the running-story lines show up in what writers wrote | all of the above. **READ 2026-10-07 — results in §Review 1.** The Saturday 2026-10-10 run adds a second ledger data point |
-| after four cycles (C113) | how many storylines went uncovered (`Articles 0`), how many articles attached, whether writers used the running-story lines. Decides Task 7 step 2 and reporter-chased storylines. Read the attach counts knowing that movement-only seeding (engine.20d) thins initiative lanes from its landing cycle on | `Storyline_Ledger` |
+| after the Saturday 2026-10-31 run (C113, the first with the attach pass; re-dated 2026-10-28 — before it the count is the biased one D1 names) | how many storylines went uncovered (`Articles 0`), how many articles attached, whether writers used the running-story lines. Decides Task 7 step 2 and reporter-chased storylines. Read the attach counts knowing that movement-only seeding (engine.20d) thins initiative lanes from its landing cycle on | `Storyline_Ledger` |
 
 **Update 2026-10-07 (Review 1, D5): the dead-path removal below already shipped as engine.268 (2026-10-04, `d9f13e8e`), and the rewire stays OPEN on the builder's word. The paragraphs below are the 2026-10-02 state.**
 
@@ -258,6 +258,18 @@ Advisor review and codex review (`docs/research/2026-09-28-codex-storylines-plan
 | A2 | uncovered storylines never reach the ledger | every registry entry is upserted (AC 7) |
 | A3 | two lists shown to writers | `openThreads` removed (Task 1.6) |
 
+## Review 1 build (2026-10-28, engine-sheet)
+
+Built from §Review 1 Disposition against the code as it stood 2026-10-28 (nothing had moved since 10-08: the anomaly loop still had no tag; the registry still read the ledger's `FirstCycle` back as the start). Read-only replay over live inputs (scratchpad, no writes): live `Storyline_Ledger`, `engine_audit_c113.json`, `desk_signal_c109`–`c113.json`, the staged set.
+
+| Item | What was built | Live replay |
+|---|---|---|
+| D1 — anomaly tag | `buildWorldSummary.js patternStorylineTag`: an audit pattern whose `affectedEntities.initiatives` names ONE initiative on the tracker snapshot, or whose evidence names ONE `CRISIS-` arc, carries `; storyline <ID>` in its ref; the desk copies of the pattern share the ref. The initiative map is now read before the anomaly loop. A pattern naming two (C113 p2 and p17: INIT-001 + INIT-007) is left untagged — a ref carries one storyline; Task 7 is its path. No type filter (the ruling named stuck-initiative; most live hits are budget patterns) | C113: 7 of 29 anomaly entries tagged (was 0): math-imbalance 4 (INIT-006 ×2, INIT-007 ×2 incl. business), cascade-failure 1 (INIT-007), improvement 2 (INIT-010, civic + business). No stuck-initiative pattern at C113 |
+| D2 — no false age | `buildStorylineRegistry` `stageClock`: a stage's start is on record only when the ledger holds an EARLIER stage row of the same initiative (the move was seen). Otherwise `startCycle: null`, `age: null`, `firstSeen: true`. Searched for a true phase-start source first: none — the tracker has no phase-start column (`LastStageChangeCycle` is the Stage clock, `civicInitiativeEngine.js:4333–4337`), and `initiativeEnginePhaseMoves` holds one cycle of moves (`applyInitiativeImplementationEffects.js:343`). The ledger writer is unchanged: `FirstCycle` keeps its C2 meaning (first observed) and no sheet value changes (a new row appends at first observation, `e.startCycle || cycle` = this cycle either way). `storylineLines` (`cron-desk-run.js`) prints "ENDED this week" with no length for a closed stage with no start | C113 registry, same 12 IDs: INIT-001/002/003/005/006 "week 5" → "under way"; INIT-010:operational "under way" → "week 1" (the ledger saw vote-scheduled → operational); INIT-011:announced "week 2" → "under way" (a new initiative's first stage has no earlier row; conservative, never wrong) |
+| Task 7 step 1 — attach | `cron-saturday-run.js stepAttach` (step 3b, after narrate, before the canon door — C3's placement; `--step attach`). Pure `attachStorylines`: an article on no engine storyline joins a registry entry (open, or closed this week — its ending is a story) when it is in one of the entry's hoods AND prints the entry's name. Name = the initiative's `Name` and its head before a subtitle (no article prints "— design-phase"); a crisis's arc name; a leading "The" optional; one-word names never match. Hood = the INTAKE hood; an article that declared none uses the entry hoods it prints (Firebrand C110 declared none). Verb `referenced` (a printed name proves a mention, not depth), stamped `attachedBy: 'stepAttach'`, written into the sidecar's `intake.storylines` on `--apply` only; the Rhea proofs hash the Article bytes, so they stay valid. Curation reads assigned storylines only (`assignedStorylines`), so the print pick stays grade-first. Failure is loud and fails the run at the end, never the door. Re-runs are no-ops | Dry replay C109–C113 (registries exist from C109; the staged set holds C108–C113, so C105–C108 cannot replay): C109 3 attaches / 2 articles, C110 2/2, C111 3/3, C112 2/2, C113 3/3. Known targets: Firebrand C110 → `CRISIS-105-WESTOAKL` (closed) ✓, Navarro C110 → `INIT-003:design-phase` ✓, Navarro C109 → none (prints "transit hub", not the name — step 2 residue, as ruled). Spot-checked 5 others: each prints the storyline as a real reference (Baylight construction ×2, the health center, the apprenticeship pipeline, OARI) |
+
+Tests: `buildWorldSummary.test.js` 11g (277 pass; the two old assertions that pinned the D2 defect rewritten), `cronSaturdayRun.test.js` attach block (138 pass), `cronDeskStoryTemplate.test.js` running-story lines. Full suite 297/298 — the one fail is `lib/wakePerception.test.js`, failing on main before this (infrastructure.13). No live rebuild of `desk_signal_c113.json`: tonight's writers see the same lines; the C114 fire is the first build with D1 + D2.
+
 ## Weakest assumptions (attack these first)
 
 1. **The assignment's lane entry survives to the writer with `storylineId` intact.** The angle stage rewrites stories; if it drops unknown fields, Task 3.4 tags nothing. Trace one story object from `loadLane` to `packet` before writing Task 3.
@@ -279,3 +291,4 @@ Advisor review and codex review (`docs/research/2026-09-28-codex-storylines-plan
 - 2026-09-29 — status set to under observation, review due the week of 2026-10-05; audit findings and builder direction moved here from the ROLLOUT row.
 - 2026-10-07 (research-build) — Review 1 read C109–C110 with the builder: six findings D1–D6, scorer rewire kept open; nothing fixed, no row edited.
 - 2026-10-08 (research-build) — Review 1 ruled; build queued for es, not dispatched. Detail in §Review 1 Disposition.
+- 2026-10-28 (engine-sheet) — Review 1 build: D1 anomaly tag, D2 no age without an observed start, Task 7 step 1 attach pass; live replay and tests in §Review 1 build. C113 read re-dated to after the Sat 2026-10-31 run.

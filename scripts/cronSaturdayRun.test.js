@@ -203,6 +203,53 @@ console.log('Test 6: mergeStorylineLedger');
   assert('a legacy row is left exactly as it is', untouched.updates.length === 0);
 }
 
+// engine.270 Task 7 step 1 — the deterministic attach pass. Registry names are
+// the live C110 entries; article lines are the shape of the known targets
+// (Firebrand C110 on the crisis ending, Navarro C110 on the transit hub).
+{
+  const { attachStorylines, storylineAttachNames } = require('./cron-saturday-run');
+  const registry = [
+    { id: 'CRISIS-105-WESTOAKL', type: 'crisis', name: 'The West Oakland Crime Spike', status: 'closed', hoods: ['West Oakland'] },
+    { id: 'INIT-003:design-phase', type: 'initiative-stage', stage: 'design-phase', status: 'open',
+      name: 'Fruitvale Transit Hub Phase II — Visioning — design-phase', hoods: ['Fruitvale'] },
+    { id: 'INIT-002:dispatch-live', type: 'initiative-stage', stage: 'dispatch-live', status: 'open',
+      name: 'Oakland Alternative Response Initiative — dispatch-live', hoods: ['West Oakland', 'Fruitvale'] },
+    { id: 'INIT-099:announced', type: 'initiative-stage', stage: 'announced', status: 'open', name: 'Nowhere Plan — announced', hoods: [] }
+  ];
+  const art = (stem, text, intake) => ({ stem, sidecarFile: stem + '.staged.json', text, sidecar: { intake: Object.assign({ storylines: [], hoods: [] }, intake) } });
+  const set = [
+    art('firebrand', 'Nobody announced that the West Oakland crime spike was over.', {}),
+    art('navarro', 'The record on the Fruitvale Transit Hub Phase II shows a design phase.', { hoods: ['Fruitvale'] }),
+    art('wrong-hood', 'The Fruitvale Transit Hub Phase II came up at a Temescal meeting.', { hoods: ['Temescal'] }),
+    art('hood-only', 'Fruitvale had a quiet week at the transit hub.', { hoods: ['Fruitvale'] }),
+    art('tagged', 'The West Oakland Crime Spike, again.', { storylines: [{ slug: 'INIT-001:disbursement-active', verb: 'advanced' }], hoods: ['West Oakland'] }),
+    art('two', 'In West Oakland, the Oakland Alternative Response Initiative met the end of the West Oakland Crime Spike.', { hoods: ['West Oakland'] }),
+    art('no-hood-entry', 'The Nowhere Plan, in Downtown.', { hoods: ['Downtown'] }),
+    art('legacy-slug', 'The West Oakland Crime Spike ended.', { storylines: [{ slug: 'west-oakland-elio-perez-crisis', verb: 'opened' }], hoods: ['West Oakland'] })
+  ];
+  const hits = attachStorylines(set, registry);
+  const on = stem => hits.filter(h => h.stem === stem).map(h => h.id).sort().join(',');
+  assert('stage names match on the initiative Name and its head, never the stage suffix',
+    storylineAttachNames(registry[1]).join('|') === 'Fruitvale Transit Hub Phase II — Visioning|Fruitvale Transit Hub Phase II');
+  assert('a leading "The" is not required', storylineAttachNames(registry[0])[0] === 'West Oakland Crime Spike');
+  assert('a closed-this-week arc takes the piece on its ending (no INTAKE hood: the hood it prints)', on('firebrand') === 'CRISIS-105-WESTOAKL');
+  assert('name + INTAKE hood attaches', on('navarro') === 'INIT-003:design-phase');
+  assert('name in another declared hood does not attach', on('wrong-hood') === '');
+  assert('hood alone never attaches', on('hood-only') === '');
+  assert('an article already on an engine storyline is skipped', on('tagged') === '');
+  assert('a piece printing two storylines joins both', on('two') === 'CRISIS-105-WESTOAKL,INIT-002:dispatch-live');
+  assert('an entry with no hoods never attaches', on('no-hood-entry') === '');
+  assert('a retired slug is not an engine storyline: the piece can attach', on('legacy-slug') === 'CRISIS-105-WESTOAKL');
+  assert('attach carries the sidecar file it will write', hits.every(h => h.sidecarFile === h.stem + '.staged.json'));
+  assert('no registry, no attaches', attachStorylines(set, []).length === 0);
+
+  // Curation never reads an attached storyline: the print pick stays grade-first.
+  const { curationScore } = require('./cron-saturday-run');
+  const plain = { sidecar: { intake: { storylines: [], names: [] } } };
+  const attached = { sidecar: { intake: { storylines: [{ slug: 'CRISIS-105-WESTOAKL', verb: 'referenced', attachedBy: 'stepAttach' }], names: [] } } };
+  assert('an attached storyline does not move the curation score', curationScore(attached, null) === curationScore(plain, null));
+}
+
 // engine.152 (S412) — coverage runs both ways: the snippet the light classifier reads
 {
   const { citationSnippet } = require('./cron-saturday-run');

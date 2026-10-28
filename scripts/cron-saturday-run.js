@@ -13,6 +13,9 @@
  *                never publish.
  *   3 narrate  — Mags narrates the Pulse from the curated set (Sonnet, the one
  *                voice-critical call) → cycle_pulse_c{N}.md
+ *   3b attach  — engine.270: an untagged staged article that prints a registry
+ *                storyline's name in its hood joins it (`referenced`, sidecar
+ *                intake only; --apply writes, curation never reads it)
  *   4 publish  — canon door: assemble editions/cycle_pulse_c{N}.txt; --apply
  *   4b coverage — rate the published edition into Edition_Coverage_Ratings
  *                (pipeline.62); non-fatal, pre-flight catches a miss next cycle
@@ -772,6 +775,94 @@ function loadStorylineRegistry(cycle) {
   } catch (_) { return []; }
 }
 
+// engine.270 Task 7 step 1 — the names an article prints when it covers a
+// registry entry. A stage entry's name ends in " — <stage>", which no article
+// prints: match the initiative's Name, and its head before a subtitle
+// ("Fruitvale Transit Hub Phase II — Visioning"). One-word names never match.
+function storylineAttachNames(e) {
+  let name = String((e && e.name) || '').trim();
+  const suffix = ' — ' + ((e && e.stage) || '');
+  if (e && e.type === 'initiative-stage' && e.stage && name.endsWith(suffix)) name = name.slice(0, -suffix.length).trim();
+  const out = new Set();
+  const add = n => {
+    const clean = n.replace(/^the\s+/i, '').replace(/\s+/g, ' ').trim();
+    if (clean.split(' ').length >= 2) out.add(clean);
+  };
+  add(name);
+  if (name.indexOf(' — ') > 0) add(name.slice(0, name.indexOf(' — ')));
+  return [...out];
+}
+
+// Pure: staged set × the cycle's registry → attaches. Deterministic, no model.
+// An article not already on an engine storyline attaches to a registry entry
+// (open, or closed this week — its ending is a story) when its hood is one of
+// the entry's hoods AND its text prints the entry's name. The hood is the
+// INTAKE hood; an article that declared none uses the entry hoods it prints.
+// Attaches only to an existing ID; never creates one, never edits an article.
+function attachStorylines(set, registry) {
+  const entries = (Array.isArray(registry) ? registry : [])
+    .filter(e => e && isEngineStorylineId(e.id) && (e.hoods || []).length);
+  const norm = s => String(s || '').toLowerCase().replace(/[‘’]/g, "'").replace(/\s+/g, ' ');
+  const prints = (text, phrase) => new RegExp('(^|[^a-z0-9])' +
+    norm(phrase).replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '($|[^a-z0-9])').test(text);
+  const out = [];
+  for (const entry of (Array.isArray(set) ? set : [])) {
+    const intake = entry && entry.sidecar && entry.sidecar.intake;
+    if (!intake || !entry.sidecarFile) continue;
+    if ((intake.storylines || []).some(s => s && isEngineStorylineId(s.slug))) continue;
+    const text = norm(entry.text);
+    const declared = (intake.hoods || []).flatMap(h => String(h).split(','))
+      .map(h => norm(h).trim()).filter(Boolean);
+    for (const e of entries) {
+      const hoods = e.hoods.map(h => norm(h).trim());
+      const inHood = declared.length ? declared.some(h => hoods.includes(h)) : hoods.some(h => prints(text, h));
+      if (!inHood || !storylineAttachNames(e).some(n => prints(text, n))) continue;
+      out.push({ stem: entry.stem, sidecarFile: entry.sidecarFile, id: e.id, status: e.status });
+    }
+  }
+  return out;
+}
+
+// Step 3b — the attach pass writes each attach into the staged sidecar's
+// intake.storylines as `referenced` (a printed name proves a mention, not
+// depth), stamped attachedBy. The proof hashes cover the Article bytes only,
+// so the sidecar write leaves every proof valid. Re-runs are no-ops: an
+// attached article is on an engine storyline and is skipped.
+async function stepAttach(cycle) {
+  console.log('--- step 3b: storyline attach (engine.270 Task 7 step 1) ---');
+  const registry = loadStorylineRegistry(cycle);
+  if (!registry.length) {
+    console.log('no storyline registry in desk_signal_c' + cycle + '.json — nothing to attach to');
+    return { attached: 0, written: 0 };
+  }
+  const hits = attachStorylines(loadStagedSetExcludingCanonViolations(cycle), registry);
+  for (const h of hits) console.log('  ' + h.stem + ' → ' + h.id + (h.status === 'closed' ? ' (closed this week)' : ''));
+  console.log(hits.length + ' attach(es) across ' + new Set(hits.map(h => h.stem)).size + ' article(s)');
+  if (!APPLY) {
+    if (hits.length) console.log('(dry-run) sidecars unchanged');
+    return { attached: hits.length, written: 0 };
+  }
+  const byFile = new Map();
+  for (const h of hits) {
+    if (!byFile.has(h.sidecarFile)) byFile.set(h.sidecarFile, []);
+    byFile.get(h.sidecarFile).push(h);
+  }
+  let written = 0;
+  for (const [f, list] of byFile) {
+    const p = path.join(STAGED, f);
+    const side = JSON.parse(fs.readFileSync(p, 'utf8'));
+    const st = side.intake.storylines = side.intake.storylines || [];
+    for (const h of list) {
+      if (st.some(s => s && s.slug === h.id)) continue;
+      st.push({ slug: h.id, verb: 'referenced', attachedBy: 'stepAttach' });
+      written++;
+    }
+    fs.writeFileSync(p, JSON.stringify(side, null, 2));
+  }
+  console.log(written + ' storyline(s) written into ' + byFile.size + ' staged sidecar(s)');
+  return { attached: hits.length, written };
+}
+
 async function stepSignals(cycle) {
   console.log('--- step 6b: storyline signals → Storyline_Ledger ---');
   const registry = loadStorylineRegistry(cycle);
@@ -1159,10 +1250,13 @@ async function stepAudit(cycle) {
 // Step 2 — curation. Mechanical rank over the audited set; canon-violations
 // never publish; storyline dedup keeps one article per thread in the top set.
 // ---------------------------------------------------------------------------
+// A storyline the attach pass added (engine.270 Task 7) counts coverage on the
+// ledger and never moves the print pick: curation reads assigned storylines only.
+const assignedStorylines = intake => (intake.storylines || []).filter(s => s && !s.attachedBy);
 function curationScore(entry, auditRow) {
   const intake = entry.sidecar.intake || {};
   let moves = 0, refs = 0;
-  for (const s of (intake.storylines || [])) {
+  for (const s of assignedStorylines(intake)) {
     if (s.verb === 'referenced') refs++; else moves++;
   }
   // pipeline.80 (codex Saturday-readers review hunt 4): the floor's automatic mention-only
@@ -1174,7 +1268,7 @@ function curationScore(entry, auditRow) {
     + (auditRow && auditRow.verdict === 'accurate' ? 2 : 0);
 }
 function primarySlug(entry) {
-  const st = (entry.sidecar.intake && entry.sidecar.intake.storylines) || [];
+  const st = assignedStorylines(entry.sidecar.intake || {});
   const mover = st.find(s => s.verb !== 'referenced');
   return (mover || st[0] || {}).slug || null;
 }
@@ -1517,10 +1611,11 @@ async function main() {
     narrate: () => stepNarrate(cycle), publish: () => stepPublish(cycle),
     coverage: () => stepCoverage(cycle),
     sweep: () => stepSweep(cycle), sheets: () => stepSheets(cycle),
-    signals: () => stepSignals(cycle), daily: () => stepDaily(cycle)
+    signals: () => stepSignals(cycle), daily: () => stepDaily(cycle),
+    attach: () => stepAttach(cycle)
   };
   if (step) {
-    if (!dispatch[step]) throw new Error('unknown --step "' + step + '" (want audit|curate|narrate|publish|coverage|sweep|index|sheets|signals|daily)');
+    if (!dispatch[step]) throw new Error('unknown --step "' + step + '" (want audit|curate|narrate|attach|publish|coverage|sweep|index|sheets|signals|daily)');
     const res = await dispatch[step]();
     if (res && res.retractFailed && res.retractFailed.length) throw new Error(res.retractFailed.length + ' retraction(s) failed — re-run --step sweep --apply');
   } else {
@@ -1530,6 +1625,17 @@ async function main() {
     await stepAudit(cycle);
     await stepCurate(cycle);
     await stepNarrate(cycle);
+    // engine.270 Task 7: the attach pass runs before the canon door so the sweep
+    // metadata and the Storyline_Ledger see the same storylines. A local sidecar
+    // write: a failure is loud and fails the run at the end, never the door.
+    let attachErr = null;
+    try {
+      await stepAttach(cycle);
+    } catch (e) {
+      attachErr = e;
+      console.error('[ATTACH FAILED] ' + e.message);
+      console.error('  Recover: node scripts/cron-saturday-run.js --cycle ' + cycle + ' --step attach --apply, then --step signals --apply');
+    }
     // engine.114 (S427): stepPublish can throw on either armed gate — the
     // ingestEdition exit-code check or the NotebookLM `source add` check —
     // and until now an uncaught throw here aborted every step below it.
@@ -1571,6 +1677,7 @@ async function main() {
     await stepSheets(cycle);
     await stepSignals(cycle);
     if (publishErr) throw publishErr;
+    if (attachErr) throw attachErr;
     if (indexErr) throw indexErr;
     // A canon-violation still in the store fails the run loud, after the steps below it ran.
     if (sweep.retractFailed.length) {
@@ -1586,5 +1693,6 @@ if (require.main === module) {
 
 module.exports = { loadStagedSet, loadArcSeeds, excludeCanonViolations, stepSweep, stepDaily, dailyPending, retractionIds, articleCustomId, articleDoc, usageRowsFor, printedStems, printedOnly, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
+  attachStorylines, storylineAttachNames, stepAttach,
   isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves,
   auditOne, auditPrompt, loadLedgerProfiles, worldSummaryText, livedEventsGroundTruth, livedDumpDir, deskSystem, crossoverCitizens, printedCrossovers, reserveDigestSeat, undockedGroundTruth, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE, curationScore };

@@ -1221,13 +1221,14 @@ function loadStorylines(cycle, desk) {
 function storylineLines(entries) {
   return (entries || []).filter(e => e && e.name).map(e => {
     const where = (e.hoods || []).length ? ' [' + e.hoods.join(', ') + ']' : '';
+    // firstSeen = the stage's start is not on record (it was running when
+    // tracking began), so it has no age: a stage running since C82 must not
+    // reach a writer as "week 1" or "week 5" (engine.270 D2).
     if (e.status === 'closed') {
-      return e.name + where + ' — ENDED this week after ' + e.age + ' week(s)' +
+      return e.name + where + ' — ENDED this week' + (e.firstSeen ? '' : ' after ' + e.age + ' week(s)') +
         (e.movedTo ? '; now ' + e.movedTo : '');
     }
     // An initiative stage's name already ends in its stage.
-    // firstSeen = tracking began this cycle, NOT the stage's first week: a stage
-    // running since C82 must not reach a writer as "week 1".
     if (e.firstSeen) return e.name + where + ' — under way';
     const stage = e.type === 'initiative-stage' ? '' : (e.stage || 'running') + ', ';
     return e.name + where + ' — ' + stage + 'week ' + e.age;

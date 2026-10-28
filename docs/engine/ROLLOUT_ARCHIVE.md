@@ -973,6 +973,16 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S609 Archive Pass (2026-10-28, engine-sheet) — post-S608 closures sweep
+
+3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 pipeline.* + 1 engine.*.
+
+- **pipeline.78** [engine-sheet] — Staged readers take suffixed reruns (one matcher). Sat 2026-10-24 (C112): all 7 suffixed filings read by audit, curation, sweep and index; Ines’s -1615 and -1814 printed and credited as two rows **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-11-media-extension]]
+- **pipeline.79** [engine-sheet] — Every journalist graded; Saturday prints the best-graded first; printed pieces earn byline-published. Sat 10-17 and 10-24: curation grade-first, 9 + 9 byline-published rows on the sheet, both processed by the next fire (none C103–C110) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-11-media-extension]]
+- **engine.299** [engine-sheet] — Every hardcoded event moves a dial, no real-Oakland premise — LIVE @147 stage 4p, main-only three in stage 5. Live offender scan PASS C112 and C113 (0 inert, 2,396 lines); all-neutral base dials 63.6% C111 → 56.5% C113 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-18-event-engines-move-dials]]
+
+This pass: 3 rows — pipeline.78 + pipeline.79 + engine.299. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S607 Archive Pass (2026-10-28, engine-sheet) — post-S606 closures sweep
 
 13 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.* + 12 engine.*.

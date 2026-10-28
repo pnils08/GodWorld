@@ -7,9 +7,9 @@
 **Working order (builder 2026-10-22, "work through this list how you lay it out"):** ship what is already paid for (finished, reviewed code) first; then clear the builder's decisions; then builds ranked by "does it give the citizens a life", grouped by the file they touch; plumbing only when a build already has the file open. Nothing waits on the live fire (TERMINAL.md: the bench is the gate; a bench-proven change goes live the same session).
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
-**Plans in motion (51)** — each plan, its rows and the state each is in:
+**Plans in motion (50)** — each plan, its rows and the state each is in:
 
-- [[../plans/2026-10-11-media-extension]]: pipeline.85 live-observing, pipeline.89 in-progress, pipeline.83 live-observing, pipeline.88 needs-info, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.77 live-observing, pipeline.78 live-observing, pipeline.79 live-observing, pipeline.80 live-observing
+- [[../plans/2026-10-11-media-extension]]: pipeline.85 live-observing, pipeline.89 in-progress, pipeline.83 live-observing, pipeline.91 ready, pipeline.88 needs-info, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.77 live-observing, pipeline.80 live-observing
 - [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.214 live-observing, engine.301 live-observing, engine.308 live-observing, engine.287 live-observing, engine.288 live-observing, engine.289 blocked, engine.309 needs-info, engine.311 needs-info
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.264 needs-info, engine.261 ready
@@ -59,7 +59,6 @@
 - [[../plans/2026-05-22-engine-regulatory-friction]]: engine.20d ready
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.104 ready
 - [[../research/2026-09-10-kimi-faith-lane-routing]]: engine.248 ready
-- [[../plans/2026-10-18-event-engines-move-dials]]: engine.299 live-observing
 <!-- /generated -->
 
 ## Pull order (builder, 2026-09-29; trued 2026-10-07)
@@ -151,8 +150,6 @@
 | pipeline.74 | Organic: the next unattended Tanya / P Slayer / Noah write proves the rest of the swapped-model fixes (es c9d59d24) — off-season label, P Slayer POPIDs, Noah → grok-4.3; none has written unattended since. Angle cap 1600 PROVEN (capHits 0 on 10-15/16/19) | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |
 | pipeline.75 | Organic: Tanya's next unattended write proves the feed names + Notes (the 10-14 runs were manual). Deterministic write checks (thin/verbatim/cap/toolCalls) PROVEN in every unattended fan-out results file 10-15 → 10-19 (landed es) | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |
 | pipeline.77 | Reward loop on five seats (rubric seen = rubric judged, grade on the page, W1 reads it). Group avg 2.86 C111 → 3.80 C112 → 4.00 C113 so far (Carmen, Luis); the watch ends with Marbury, Noah and Tanya on Wed 2026-10-28, then mechanism 2 (two drafts) is the builder’s cost call | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |
-| pipeline.78 | Staged readers take suffixed reruns (one matcher). Sat 2026-10-24 (C112): all 7 suffixed filings read by audit, curation, sweep and index; Ines’s -1615 and -1814 printed and credited as two rows | done-pending-archive | engine-sheet | [[../plans/2026-10-11-media-extension]] |
-| pipeline.79 | Every journalist graded; Saturday prints the best-graded first; printed pieces earn byline-published. Sat 10-17 and 10-24: curation grade-first, 9 + 9 byline-published rows on the sheet, both processed by the next fire (none C103–C110) | done-pending-archive | engine-sheet | [[../plans/2026-10-11-media-extension]] |
 | pipeline.80 | INTAKE names floor LIVE (4fabf88e); first floor entries 2026-10-19; read at the 2026-10-31 ingest (the 10-24 read was not done); tier bars 3/6/9 stay | live-observing | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.80 |
 | engine.287 | Citywide crime gate: floor 3 carried spikes, half share on each hood (builder 2026-10-10). Rides the engine.214 PROD. Live counts 2/0/0/1/1/1/2 (C113: Adams Point, Piedmont Ave; no wave); read over the builder's window longer than 20 Cycles | live-observing | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] §Tasks 17/18/19 — mechanism; `output/engine_review_c113.md` §C113 re-reads |
 | engine.288 | Mood gates read both seed lists (builder 2026-10-10) — the newsroom's deck beside the engine list; benched @16 (seed hoods 7 → 14). C113 had no seed input (first adoption); first gated read C114 Sun 2026-11-01 | live-observing | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] §engine.288 bench results; `output/engine_review_c113.md` §C113 re-reads |
@@ -166,7 +163,6 @@
 | engine.104 | Mint economy: arrivals born right. Mint paths take job titles from lists outside the Economic_Parameters job table; revision owes legacy mutating-path disposition + D2 proof (agy 2026-10-17) | ready | research-build | [[../plans/2026-08-10-economy-native-rebuild]] §Read 2026-10-16 |
 | engine.248 | Faith orgs get a sim role: membership, a slight dial nudge, faith-life events | ready | engine-sheet | [[../research/2026-09-10-kimi-faith-lane-routing]] |
 | engine.261 | Firm agents: three business owners get a wake slice to run their business | ready | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
-| engine.299 | Every hardcoded event moves a dial, no real-Oakland premise — LIVE @147 stage 4p, main-only three in stage 5. Live offender scan PASS C112 and C113 (0 inert, 2,396 lines); all-neutral base dials 63.6% C111 → 56.5% C113 | done-pending-archive | engine-sheet | [[../plans/2026-10-18-event-engines-move-dials]] |
 | engine.303 | Compression and archive outside the Cycle run? (builder 2026-10-19). Bench C123: Phase9-CompressLifeHistory 151 s of 308 s (wall 360); Phase11-MaintainLifeHistoryLog ~30 s every fire. Read the writers and what reads their output in-Cycle first | ready | engine-sheet | DEPLOY_HISTORY §SANDBOX 1004 @57 soak |
 | engine.309 | Off-heritage ownership with ascent and crash (builder 2026-10-21): founder door for an existing citizen in their own field; ascent via owner draw → home → Door C; crash = back to the hiring pool. Door number = money-game Task 5. After engine.308 | needs-info | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8, engine.309 design |
 | engine.311 | Business entry by opportunity (builder 2026-10-22): line tier decides which business types open; every business class gets entry gates (none today); line contents in combination raise an opportunity to buy/open; the citizen's wake decides, not a roll. Covers 309's door | needs-info | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8, builder 2026-10-22 under engine.308 |

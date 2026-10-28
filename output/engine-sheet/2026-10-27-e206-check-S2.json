@@ -1,0 +1,52 @@
+{
+ "leg": "S2",
+ "at": "2026-10-28T05:20:45.554Z",
+ "hold": [],
+ "cycleCount": 113,
+ "barRow": [
+  2
+ ],
+ "rippleRowsC113": 68,
+ "sportsWeek": [
+  {
+   "Cycle": 113,
+   "CauseType": "economic-event",
+   "CauseId": "SPORTS_WEEK_OAKS_113",
+   "CauseDetail": "Oaks game-week spending — 2 straight wins — 10 bar(s) and restaurant(s) at Jack London / Downtown, Growth_Rate +0.07pp",
+   "EffectType": "sector-impact:entertainment/food/retail",
+   "TargetScope": "business",
+   "TargetIds": "BIZ-00033|BIZ-00036|BIZ-00041|BIZ-00044|BIZ-00050|BIZ-00037|BIZ-00039|BIZ-00047|BIZ-00049|BIZ-00051",
+   "Neighborhood": "Jack London",
+   "Magnitude": 1,
+   "Duration": 3,
+   "RemainingStrength": 1,
+   "SourceEngine": "economicRippleEngine",
+   "CycleStamp": "Y3C9"
+  }
+ ],
+ "streakSeeds": [
+  {
+   "Cycle": 113,
+   "SeedID": "ee345a2d",
+   "Desk": "business",
+   "Class": "texture",
+   "Domain": "ECONOMIC",
+   "Neighborhood": "Jack London",
+   "What": "sector-impact:entertainment/food/retail +1",
+   "Why": "Oaks game-week spending — 2 straight wins — 10 bar(s) and restaurant(s) at Jack London / Downtown, Growth_Rate +0.07pp",
+   "Citizens": "POP-01172 Arjun Venkataraman; POP-00667 Lo Thoop; POP-00177 Elle Lilo; POP-00725 Matthew Welker",
+   "CitizenEvents": "Arjun Venkataraman — caught the Oaks chatter at the gym and joined in like a regular | Lo Thoop — navigated the stroller traffic on College Avenue and silently judged the parking jobs | Elle Lilo — Intake at Tier 4. Media usage C112 (quoted): a Bay Tribune business desk piece, C111 | Matthew Welker — stood by the bar at a patio by the estuary, nodding along to the DJ’s set",
+   "Businesses": "BIZ-00033 Jack London Square Markets; BIZ-00036 Blue Lantern Bar; BIZ-00041 Green & Gold Tavern; BIZ-00044 Harborline Grill; BIZ-00050 Dockhouse BBQ; BIZ-00037 Temple Lounge; BIZ-00039 Pulse District; BIZ-00047 Miso Metro; BIZ-00049 Midnight Bistro; BIZ-00051 SpeedyBurger",
+   "OtherEntities": "",
+   "Magnitude": 1,
+   "Trend": "carrying, 1.00 strength left of 3-cycle run",
+   "CycleStamp": "Y3C9",
+   "SuggestedJournalist": "",
+   "SuggestedAngle": "general coverage",
+   "MatchConfidence": "low"
+  }
+ ],
+ "engineErrors": 4,
+ "barsNamed": 10,
+ "verdict": "PASS"
+}

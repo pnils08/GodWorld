@@ -1,0 +1,14 @@
+{
+ "leg": "S5",
+ "at": "2026-10-28T05:13:04.843Z",
+ "hold": [],
+ "cycleCount": 113,
+ "barRow": [
+  5
+ ],
+ "rippleRowsC113": 67,
+ "sportsWeek": [],
+ "streakSeeds": [],
+ "engineErrors": 4,
+ "verdict": "PASS"
+}

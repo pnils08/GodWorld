@@ -1,0 +1,17 @@
+{
+ "what": "C113 Oaks at Detroit (91-78) feed row marked H:W; builder 2026-10-27: fix the Oaks line, the week outcome on the hoods stands",
+ "tab": "Oakland_Sports_Feed",
+ "row": 250,
+ "range": "Oakland_Sports_Feed!S250",
+ "before": "H:W",
+ "after": "A:W",
+ "cellsChanged": [
+  [
+   "WeekRecord",
+   "H:W",
+   "A:W"
+  ]
+ ],
+ "otherRowsUnchanged": true,
+ "rows": 255
+}

@@ -78,7 +78,6 @@
 | civic.43 | School board: T1 + T3 LIVE. T2 seating HELD (builder 2026-10-07): schools half built (hood school data, no schools in hoods); deep review first, then the canon-name fix | needs-info | research-build | [[../plans/2026-10-04-school-board]] §Builder's words (2026-10-07) |
 | research.30 | Discord voices connected (builder 2026-10-19): brief, search first, Paulson bonds, talk recorder LIVE. Read 2026-10-25: first Cycle drain of DISCORD rows (C113) | live-observing | research-build | [[../plans/2026-10-19-discord-voices-connected]] |
 | pipeline.71 | Each hood read against its own canon: every hood's INSTITUTIONS character is its own baseline and its own numbers say whether it lives up to it (builder 2026-10-20; the one-axis tech-boom design is superseded). Rewrite with the builder: which numbers express each hood's character | needs-info | research-build | [[../plans/2026-10-20-hood-character-standing]] |
-| engine.206 | Game-week bar money reaches the business desk only on a week with abs(signed) ≥ 0.15: Oaks C112 0.03, C113 0.08 (3–0); none has reached it since C111. Builder call: should an ordinary game week's bar money reach the business desk? | needs-info | engine-sheet | `output/engine_review_c113.md` §C113 re-reads; [[../plans/2026-09-11-sports-as-a-lived-system]] Task 6 |
 
 ## 2. Waiting on a fire — dated or organic
 
@@ -140,6 +139,7 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.206 | Streaks drive a game week toward a business headline (builder 2026-10-27: ordinary weeks stay under the .15 gate; streaks, team success and playoffs push it over). Playoffs + team success already feed it; the streak does not. Bench streak options, builder picks the rate | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 6 §Builder's words (2026-10-27) |
 | engine.321 | Is a tracked mint business growth (its headcount signal; 2+ at one business = BUSINESS_EXPANSION)? Builder 2026-10-27: "a citizen added to a buisness can result in a growth" — stands as built, no change | wontfix |  | [[../plans/2026-07-27-employment-living-system]] §Open questions |
 | pipeline.90 | Dashboard cost page, its own page: OpenRouter spend by day and model, which scripts/seats run each model, claude-mem tracked on its own key. Blocked on the builder's management key, a claude-mem key and a balance top-up | blocked |  | [[../plans/2026-10-11-media-extension]] §Status log |
 | pipeline.88 | Proposal, builder's call: daily seats (Ines, Tamsin) write angle/packet/draft under a Cycle-keyed stem, so five days share one file set and a failed day can see yesterday's plan (Ines Sun 10-25). Key their stems by day? | needs-info | research-build | [[../plans/2026-10-11-media-extension]] §Status log pipeline.87 |

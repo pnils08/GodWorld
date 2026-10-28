@@ -485,6 +485,19 @@ Sports stops being a lane and becomes a horizontal. A cycle's sports emits seeds
 
 **Status (2026-10-04 02:57):** BUILT `d7ac5fff`, unit-proven (every new assertion fails on the old code), suite 284/284, **BENCH-PROVEN** C119 on SANDBOX 0908 @200 — every acceptance line above read back as written (economic seed at Jack London leads with the week's spending, 10 bars listed; one CIVIC game-day seed at the same hood, .16 major; bars line gone from the citywide SPORTS seed; 0 `Oakland_Sports_Feed.bars` rows; 0 new Engine_Errors). agy diff review next; PROD after the C110 live fire.
 
+#### Builder's words (2026-10-27, engine-sheet) — when the bar money is a business headline
+
+Asked after the C113 re-read (Oaks C112 `signed` 0.03, C113 0.08 on a 3–0 week; the SPORTS_WEEK ripple waits on `|signed| ≥ .15`, `economicRippleEngine.js:487-507`), verbatim: "no a ordinary week would not reach the business desk and the streaks or teams success and if is playoffs should be what drives it to be a headline , however the team being good can be a reason for a hoods success like a losing team would lower the foot traffic."
+
+Read against the code:
+- **An ordinary week stays under the gate** — the .15 gate stands.
+- **Playoffs drive it** — already: `stakes = depth / 6` (`utilities/sportsWeekRecord.js:287`), so a playoff or late-season week carries two to three times an early-season week's stakes.
+- **Team success drives it** — partly already: the franchise weight drifts with results week over week (engine.209, `sportsWeekRecord.js:255-280`) and `signed` carries it.
+- **Streaks do not drive it — the gap.** `signed = vol × stakes × weight × surprise` reads no streak (`sportsWeekRecord.js:5`, "does not infer … a carried streak"). The feed's Streak column (C113: W2 / W3 / W4) reaches only the citizens' game-night lines (`applyGameNightMoments.js:45-68`, `winStreak` at 4+). Build: ROLLOUT engine.206. How long a streak and how much it lifts the week is a rate — bench the options, the builder picks.
+- **A good team lifts a hood, a losing team lowers its foot traffic** — already, every game week, no gate: the bar term is `signed` (`sportsWeekRecord.js:349-360`), so a winning week raises the venue and nightlife hoods' food and bar growth and a losing week lowers it (`applyBusinessDynamics.js:617-636`; C113: 54 bars +0.04 pp).
+
+The C113 feed row "Oaks 91 – Pistons 78 on the road in Detroit" carried WeekRecord `H:W`; corrected to `A:W` on live 2026-10-27 on the builder's word ("You can fix the Oaks line, the outcome for the week is ok on the hood") — one cell, read back, receipt `output/engine-sheet/2026-10-27-oaks-c113-weekrecord-receipt.json`. The C113 hood outcome it produced stands.
+
 ### Task 7 — engine.194: reprice sentiment
 Only after 1-4. Magnitude is downstream of the contract. Carries the `generateCitizensEvents.js:1707` saturation fix (`min(1,abs(boost)/0.15)`).
 **LANDED 2026-10-11 (`ae9278aa`, codex-authored, engine-sheet landed; bench 1004 @22 stage 3 clean):** share = clamp(0.5 × wk.signed × wk.reach, ±0.10) — the week's result against the franchise's own expectation (Q3) at the round's reach (Q4); no accepted game week → no games share; MediaProfile/FanSentiment/Streak stay trigger/prose inputs; the cumulative Team Record no longer prices mood; gnI divisor 0.10. Consequence for the builder: a 2–1 dynasty WS week reads −0.022. Record: [[../research/2026-10-11-codex-engine194-cut]].
@@ -599,3 +612,4 @@ engine.210 LIVE on PROD @97; engine.202 LIVE on PROD @98 with the `WeekRecord` c
 - 2026-10-04 (engine-sheet) — Task 6 card revised after codex HOLD (8 findings folded): bars ride the economy's SPORTS_WEEK ripple (bizIds, one gate), transit one ripple per franchise home week at venue[0], builder lets a birth lead over a carryover; limits and rejected alternatives recorded.
 - 2026-10-04 02:57 (engine-sheet) — Task 6 built d7ac5fff and bench-proven C119 @200; status line under the card.
 - 2026-10-04 03:30 (engine-sheet) — Task 9 build card + build (engine.209: PREV_FRANCHISE_WEIGHT_JSON carry, drift on results/tenure/fan reach, five World_Config dials self-armed); engine.211 closed on the agy census (verified); status line under Task 9.
+- 2026-10-27 (engine-sheet) — Task 6: C113 re-read traced the absent business-desk sports seed to the .15 gate (Oaks 0.03 / 0.08); builder ruled ordinary weeks stay under it, streaks / team success / playoffs push it over — streaks are the unbuilt part (ROLLOUT engine.206, ready). C113 Detroit feed row WeekRecord H:W → A:W on live (builder's word), receipt in output/engine-sheet.

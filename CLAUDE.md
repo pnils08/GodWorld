@@ -51,6 +51,5 @@ Judgement and cost:
 
 - The SessionStart hook names your terminal (research-build or engine-sheet) and what to read. Follow it.
 - Search: `node scripts/brainSearch.js "<query>"` — a `rule` hit is current law; a `brain` or `mem` hit is history.
-- No memory saves of any kind — no memory files, no Supermemory adds, no auto-capture (Mike 2026-10-28: "it's a scam"). The repo, ROLLOUT and plan changelogs are the only record.
-- An article is never pasted into chat: it goes to Discord, or a path is given (Mike 2026-10-28).
+- Save: `npx supermemory add "<fact>" --namespace sl-godworld` — one hand-written fact per session, before close. Never a log or diff.
 - `docs/index.md` catalogs every doc (~40k tokens): grep it, don't load it.

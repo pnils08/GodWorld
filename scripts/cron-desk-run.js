@@ -2628,6 +2628,81 @@ function readWire(cycle, max) {
 }
 
 // ---------------------------------------------------------------------------
+// pipeline.89 (builder 2026-10-28, "Go"): what the writers couldn't find.
+// The pieces already say it — "the tracker doesn't show it", "the registry
+// doesn't hold one", "the records searched do not say how the trend field is
+// calculated" — and the tool trace says it when a call comes back empty. This
+// is the detector only: it lifts those sentences and calls into the cycle's
+// production log under their own header. Sorting them into code / tool / data
+// / design is the review pass (docs/plans/GAP_LOG_TRIAGE_PLAYBOOK.md), never
+// this code. Zero model calls.
+// ---------------------------------------------------------------------------
+const GAPS_HEADER = "## What the writers couldn't find (AUTO — cron-desk-run.js)";
+const ABSENCE_SOURCE = '(?:record|records|tracker|table|ledger|registry|slice|row|rows|sheet|feed|roster|map|archive|page|packet|register)';
+const ABSENCE_RES = [
+  new RegExp('\\b' + ABSENCE_SOURCE + '\\b[^.!?]{0,40}\\b(?:do(?:es)? not|did not|doesn\'t|didn\'t|don\'t|won\'t|has not|hasn\'t|have not|haven\'t)\\b[^.!?]{0,24}\\b(?:say|hold|show|carry|list|name|record|give|tell|include|contain|explain|reach|exist|have|offer|answer|track|note)', 'i'),
+  new RegExp('\\b(?:nothing|no (?:row|entry|record|line|figure|number|name|statement|filing|page|trace|sign|mention)|not (?:a |one |any )?(?:word|line|row|entry|record|mention|figure|number|statement|filing|trace|sign))\\b[^.!?]{0,30}\\b(?:in|on|from) (?:the |any |that )?' + ABSENCE_SOURCE + '\\b', 'i'),
+  /\b(?:could not|couldn't|cannot|can't|unable to|was not able to|were not able to) (?:find|locate|verify|confirm|trace)\b/i,
+  /\b(?:is|are|was|were) not (?:recorded|listed|on the table|on file|available|documented|in the record|in the ledger|in the tracker|in the registry|on the roster|on the sheet)\b/i,
+  /\b(?:I|we) (?:looked|searched|checked|asked)\b[^.!?]{0,60}\b(?:nothing|no |none|empty|not there|came back)/i,
+  /\b(?:records? searched|the search|a search) (?:do|does|did|turned up|returned) (?:not|nothing)\b/i,
+  /\bno (?:disk )?hits?\b/i,
+  /\bthe (?:paper|Tribune) (?:has not|hasn't|has never|never) (?:printed|covered|run|named)\b/i,
+];
+function absenceLines(text, max) {
+  const body = String(text || '')
+    .replace(/<!--[\s\S]*?-->/g, ' ')             // SELF-SCORE footer and any comment
+    .replace(/^#+ .*$/gm, ' ')                      // headings are titles, not claims
+    .replace(/[*_`]/g, '')
+    .replace(/\s+/g, ' ');
+  const out = [];
+  for (const raw of body.split(/(?<=[.!?])\s+/)) {
+    const sent = raw.trim();
+    if (sent.length < 12) continue;
+    if (!ABSENCE_RES.some(re => re.test(sent))) continue;
+    if (out.some(o => o.startsWith(sent.slice(0, 120)))) continue;   // a deck that repeats the lede
+    out.push(sent.length > 200 ? sent.slice(0, 197) + '…' : sent);
+    if (out.length >= (max || 8)) break;
+  }
+  return out;
+}
+const THIN_RESULT_RE = /^(?:\(search failed|\(empty|\(none|\(no |No disk hits|No match|no rows? match|0 file\(s\)|0 rows?|not found|No .{0,30} found|\(unknown)/i;
+function thinToolCalls(calls) {
+  const out = [];
+  for (const c of (Array.isArray(calls) ? calls : [])) {
+    const head = String(c.resultHead || '').replace(/\s+/g, ' ').trim();
+    const chars = Number(c.resultChars) || head.length;
+    const thin = THIN_RESULT_RE.test(head) || chars < 120;
+    if (!thin) continue;
+    const input = c.input && typeof c.input === 'object'
+      ? Object.values(c.input).filter(v => typeof v === 'string').join(' ') : String(c.input || '');
+    out.push({ tool: c.tool, input: input.slice(0, 80), note: head ? head.slice(0, 90) : chars + ' chars' });
+  }
+  return out;
+}
+function formatGapsEntry(cycle, desk, bylineName, disposition, sentences, thinCalls) {
+  if (!sentences.length && !thinCalls.length) return null;
+  const lines = ['- c' + cycle + ' ' + desk + ' | ' + bylineName + ' (' + disposition + ')'];
+  for (const s of sentences) lines.push('  - said: "' + s.replace(/"/g, '\'') + '"');
+  for (const t of thinCalls) lines.push('  - tool: ' + t.tool + ' "' + t.input.replace(/"/g, '\'') + '" → ' + t.note.replace(/"/g, '\''));
+  return lines.join('\n');
+}
+// Same file and mechanics as the wire; its own header so readWire (which stops
+// at the next "## ") never reads a gap line as a filing.
+function appendGapsEntry(cycle, entry, filePath) {
+  if (!entry) return false;
+  try {
+    const p = filePath || wirePath(cycle);
+    let txt = fs.existsSync(p) ? fs.readFileSync(p, 'utf8') : '# Production log — C' + cycle + '\n';
+    if (!txt.includes(GAPS_HEADER)) txt = txt.trimEnd() + '\n\n' + GAPS_HEADER + '\n';
+    const lines = txt.split('\n');
+    lines.splice(lines.findIndex(l => l.trim() === GAPS_HEADER) + 1, 0, entry);
+    fs.writeFileSync(p, lines.join('\n'));
+    return true;
+  } catch (e) { log('gaps append failed (non-fatal): ' + e.message); return false; }
+}
+
+// ---------------------------------------------------------------------------
 // Task 2.5.3 — the growing story template (docs/media/wake_templates/
 // STORY_TEMPLATE.md defines the shape). Each wake appends its section in order;
 // the doc is the per-story audit trail the Saturday compile reads.
@@ -3323,6 +3398,12 @@ async function runWrite(assign) {
     selfRecord, ranAt: new Date().toISOString()
   };
   fs.writeFileSync(path.join(COMPARE, base + '.wake.json'), JSON.stringify(record, null, 2));
+  // pipeline.89 — what this writer said they couldn't find, plus the calls that came back empty.
+  try {
+    const gapsEntry = formatGapsEntry(cycle, desk, byline ? byline.name : 'desk', record.disposition,
+      absenceLines(fs.readFileSync(draftPath, 'utf8')), thinToolCalls(traceArt ? traceArt.calls : []));
+    if (appendGapsEntry(cycle, gapsEntry)) log('gaps logged: ' + gapsEntry.split('\n').length + ' line(s) → production log');
+  } catch (e) { log('gaps extract failed (non-fatal): ' + e.message); }
   SEAT_CHECKS = { stage: 'write', toolCalls: record.toolCalls, capHits: record.capHit, thin: thin.thin,
     verbatim, words: thin.words,
     contractScore: contractScore && Number.isInteger(contractScore.score) ? contractScore.score : null };
@@ -3746,4 +3827,5 @@ module.exports = {
   checkBody, draftWordCount, thinCheck, verbatimSliceRuns, angleCapHit,
   fanoutCheckTotals, formatCheckTotals, THIN_WORDS,
   gradedLine, lastGradedLine, // pipeline.77
+  absenceLines, thinToolCalls, formatGapsEntry, appendGapsEntry, GAPS_HEADER, // pipeline.89 gaps
 };

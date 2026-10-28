@@ -124,14 +124,17 @@ function buildPrompt(cycle, draftRel, worldRel, nameCheck, evidenceRel, reviewCo
     ...(PERSONA === 'hal-richmond' ? [
       'HISTORIAN SEAT: Hal Richmond may name pre-sim baseball history (franchise figures, era comps, a legend against a Packet-present line). That is archive echo, not a real-world Oakland import. Invented current stats, invented seasons, and Oakland geography leaks still fail. A tracked living citizen\'s quoted words still come from their interview record or their own page.'
     ] : []),
-    // Builder 2026-10-25: the Packet is what the reporter knew, never the fence Rhea judges by. She
-    // is handed only what the named citizens actually said (interview record + own page lines) —
-    // the world's record — and nothing about permitted texture or approved facts/numbers.
+    // The Packet is what the reporter knew, never the fence Rhea judges by.
+    // The interview record and independently rechecked show feed are world evidence.
     ...(reviewContext ? [
       '',
       'WHAT THE NAMED CITIZENS SAID (interview record, exact): ' + JSON.stringify((reviewContext.manifest && reviewContext.manifest.approvedQuotes || []).map(q => ({ speaker: q.speakerName, text: q.text }))),
       ...((reviewContext.pageLines || []).length ? [
         'THEIR OWN PAGE LINES (each citizen\'s own page text, whole; an exact copy attributed to its owner is their speech — flag words added to a page passage or a line attributed to a different citizen): ' + JSON.stringify(reviewContext.pageLines),
+      ] : []),
+      ...((reviewContext.historyLines || []).length ? [
+        'VERIFIED PRIOR UNDOCKED FEED (re-read from approved packs; past episodes, never current standings):',
+        ...reviewContext.historyLines.map(line => line.text + ' [' + line.src + ']'),
       ] : []),
       'Scenes, streets, unnamed voices, new in-world places and the reporter\'s own numbers are the reporter\'s colour — never a flag unless they contradict the ledger or the world state.',
     ] : []),
@@ -409,7 +412,7 @@ function pageLinesFromManifest(manifest, deps) {
   return out;
 }
 
-function loadReviewContext(persona, articlePacketFile, draftText) {
+function loadReviewContext(persona, articlePacketFile, draftText, cycle) {
   if (!persona && !articlePacketFile) return null;
   const packagesApi = require('./newsroomWakePackages');
   const wakePackage = persona ? packagesApi.packageForAssignment({ persona }) : null;
@@ -436,9 +439,19 @@ function loadReviewContext(persona, articlePacketFile, draftText) {
     contractProfile: packet && packet.reviewProfile && packet.reviewProfile.articleContract ? packet.reviewProfile : profile,
     manifest: packet && packet.manifest ? packet.manifest : null,
     pageLines: pageLinesFromManifest(packet && packet.manifest),
+    historyLines: /^nia-rook-undocked/.test(String(profile.id || ''))
+      ? require('./undockedHistory').verifiedHistoryClaims(packet && packet.manifest, cycle)
+      : [],
     audit,
     packageVersion: wakePackage && wakePackage.version || null,
   };
+}
+
+function withVerifiedShowHistory(worldText, reviewContext) {
+  const lines = reviewContext && reviewContext.historyLines || [];
+  if (!lines.length) return worldText;
+  return worldText + '\n\nVERIFIED PRIOR UNDOCKED FEED (independently re-read from approved packs; past episodes, not current standings):\n' +
+    lines.map(line => '- ' + line.text + ' [' + line.src + ']').join('\n');
 }
 
 function buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profiles, reviewContext) {
@@ -588,7 +601,7 @@ async function main() {
   // Deterministic canon name pre-check (2026-07-25, the "Marisol Garcia" class):
   // invented officials/sources get handed to the gate as a must-verify list.
   const draftText = fs.readFileSync(draftAbs, 'utf8');
-  const reviewContext = loadReviewContext(PERSONA, ARTICLE_PACKET_FILE, draftText);
+  const reviewContext = loadReviewContext(PERSONA, ARTICLE_PACKET_FILE, draftText, cycle);
   if (reviewContext) {
     console.log('review profile: ' + reviewContext.profile.id + ' package=' +
       (reviewContext.packageVersion || 'packet-only') + ' manifest=' +
@@ -717,6 +730,7 @@ async function main() {
         }
       } catch (e) { log.warn('canon-facts load failed (non-fatal): ' + e.message); }
     }
+    worldText = withVerifiedShowHistory(worldText, reviewContext);
     const profiles = nameCheck ? require('./canon-name-check').profilesFor(nameCheck.verified) : [];
     const { system, user } = buildApiPrompt(cycle, draftText, worldText, nameCheck, verbiage, profiles, reviewContext);
     log.info('calling ' + API_MODEL + ' via OpenRouter (no tools, injected context)...');
@@ -883,6 +897,7 @@ if (require.main === module) {
 module.exports = {
   buildPrompt,
   buildApiPrompt,
+  withVerifiedShowHistory,
   loadReviewContext,
   articleProseForReview,
   scanEngineVerbiage,

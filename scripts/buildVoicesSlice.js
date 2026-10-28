@@ -72,7 +72,6 @@ function slotWord(slot) {
 const ROSTER_SRC = 'output/citizen_pages/index.jsonl roster';
 const OPENING_CHARS = 150;    // the opening of a citizen's latest line, so the roster reads like a tip sheet
 
-function dayOf(iso) { return String(iso || '').slice(0, 10); }
 function opening(text) {
   const t = String(text || '').replace(/\s+/g, ' ').trim();
   return t.length > OPENING_CHARS ? t.slice(0, OPENING_CHARS).replace(/\s+\S*$/, '') + '…' : t;
@@ -122,7 +121,7 @@ function build(cycle, { root, profiles, now = new Date() }) {
     if (!person) continue;
     people.push(person);
     const notes = [r.pages + ' page' + (r.pages === 1 ? '' : 's'),
-      'latest ' + slotWord(d.slot) + ', C' + d.cycle + ', ' + dayOf(d.createdAt),
+      'latest ' + slotWord(d.slot) + ', C' + d.cycle,
       r.fresh ? 'new since your last piece' : null,
       ranBefore.has(r.popid) ? 'you ran them C' + ranBefore.get(r.popid) : null,
       eventCovered ? 'Lives carried ' + lives.kindWord(eventCovered.kind) + ' this Cycle' : null].filter(Boolean);
@@ -136,12 +135,12 @@ function build(cycle, { root, profiles, now = new Date() }) {
   if (!facts.length) return K.emptySlice(SEAT, cycle, 'the pages belong to citizens not on the ledger snapshot — ' + trail);
 
   const fresh = roster.filter(r => r.fresh).length;
-  const label = 'Voices roster, ' + day + ': ' + people.length + ' citizens with pages' + (fresh ? ', ' + fresh + ' new since your last piece' : '');
+  const label = 'Voices roster, C' + cycle + ': ' + people.length + ' citizens with pages' + (fresh ? ', ' + fresh + ' new since your last piece' : '');
   return K.makeSlice(SEAT, cycle, {}, {
     // the day in the ref: the fanout's staleBeatRef drops a seat whose ref was filed this Cycle
-    ref: 'output/citizen_pages/index.jsonl (self-initiated pages, whole store) ' + day,
+    ref: 'output/citizen_pages/index.jsonl (self-initiated pages, whole store) ' + lives.dayToken(day),
     hood: null, label,
-    angle: 'Voices, ' + day + ': you pick whose own words carry the day',
+    angle: 'Voices, C' + cycle + ': you pick whose own words carry the day',
     hookLine: 'Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.',
     facts, people, hooks: [], pageVoices: [],
     deltas: null, factCap: people.length, peopleCap: people.length,

@@ -1,7 +1,7 @@
 'use strict';
 
 const assert = require('assert');
-const { scanEngineVerbiage } = require('./cron-rhea-gate');
+const { scanEngineVerbiage, buildPrompt, withVerifiedShowHistory } = require('./cron-rhea-gate');
 
 const provenanceOnly = [
   '# Test-only brief',
@@ -36,5 +36,21 @@ assert.deepStrictEqual(scanEngineVerbiage(fourthWall), [
 assert.deepStrictEqual(scanEngineVerbiage('```markdown\n' + fourthWall + '\n```').length, 2);
 // A code sample inside prose is skipped, as before.
 assert.deepStrictEqual(scanEngineVerbiage('Plain.\n\n```\nsimulation\n```\n\n## INTAKE\nHOOD: Uptown'), []);
+
+const showHistory = buildPrompt(999, 'output/cron-compare/TEST-ONLY-draft.md',
+  'output/TEST-ONLY-world.md', null, null, {
+    manifest: { approvedQuotes: [] }, pageLines: [],
+    historyLines: [{ text: 'C998 UNDOCKED: TEST-ONLY Pilot — credits 42.',
+      src: 'tool:undocked_history:feed/c998.json#TEST-ONLY-episode' }]
+  });
+assert.match(showHistory, /VERIFIED PRIOR UNDOCKED FEED/);
+assert.match(showHistory, /C998 UNDOCKED: TEST-ONLY Pilot — credits 42/);
+const apiWorld = withVerifiedShowHistory('TEST-ONLY current world', {
+  historyLines: [{ text: 'C998 UNDOCKED: TEST-ONLY Pilot — credits 42.',
+    src: 'tool:undocked_history:feed/c998.json#TEST-ONLY-episode' }]
+});
+assert.match(apiWorld, /VERIFIED PRIOR UNDOCKED FEED/);
+assert.match(apiWorld, /feed\/c998\.json#TEST-ONLY-episode/);
+assert.equal(withVerifiedShowHistory('TEST-ONLY current world', { historyLines: [] }), 'TEST-ONLY current world');
 
 console.log('cron-rhea-gate tests passed');

@@ -4,7 +4,7 @@ const assert = require('assert');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const { readHistory, MAX_EVENTS } = require('./undockedHistory');
+const { readHistory, verifiedHistoryClaims, MAX_EVENTS } = require('./undockedHistory');
 
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'test-only-undocked-history-'));
 const feed = path.join(root, 'output', 'spacemolt-show', 'feed');
@@ -36,6 +36,14 @@ try {
   assert.ok(pilot.lines.every(x => x.src.startsWith('tool:undocked_history:feed/c')));
   assert.ok(!pilot.text.includes('credits 99'), 'current episode never enters history');
   assert.ok(!pilot.text.includes('StagedPath'), 'no raw or staged path enters result');
+  assert.deepStrictEqual(verifiedHistoryClaims({ approvedFacts: [pilot.lines[0]] }, 8, root), [pilot.lines[0]],
+    'Rhea re-reads a used history line from the approved pack');
+  assert.throws(() => verifiedHistoryClaims({ approvedFacts: [
+    { ...pilot.lines[0], text: pilot.lines[0].text.replace('unsettled', '0') }
+  ] }, 8, root), /differs from its approved feed row/);
+  assert.throws(() => verifiedHistoryClaims({ approvedFacts: [
+    { ...pilot.lines[0], src: 'tool:undocked_history:feed/c8.json#TEST-ONLY-POP-99991-C8' }
+  ] }, 8, root), /not from an earlier Cycle/);
 
   const all = readHistory({}, 8, root);
   assert.deepStrictEqual(readHistory(undefined, 8, root).lines, all.lines,
@@ -68,6 +76,9 @@ try {
   const malformed = readHistory({}, 8, root);
   assert.equal(malformed.lines.length, 0, 'a damaged approved pack fails closed');
   assert.match(malformed.text, /c2.json could not be parsed/);
+  assert.throws(() => verifiedHistoryClaims({ approvedFacts: [all.lines.find(x => x.src.includes('feed/c2.json'))] }, 8, root),
+    /Unexpected token|Expected property name|not valid JSON/,
+    'a damaged referenced pack cannot be passed to Rhea');
 } finally {
   fs.rmSync(root, { recursive: true, force: true });
 }

@@ -69,6 +69,9 @@ function writeCovered(root, covered, cycle) {
   fs.mkdirSync(path.dirname(coveredPath(root)), { recursive: true });
   fs.writeFileSync(coveredPath(root), JSON.stringify(keep, null, 2));
 }
+// A per-day token for refs the writer sees: unique per day (the fanout's stale-ref check needs that),
+// never a wall-clock date (sim-facing text carries Cycles only — builder 2026-10-28).
+function dayToken(day) { return 'batch ' + require('crypto').createHash('sha1').update(String(day)).digest('hex').slice(0, 6); }
 function localDay(d = new Date()) {
   return d.toLocaleDateString('en-CA'); // YYYY-MM-DD in the server's zone — the crons' day
 }
@@ -423,9 +426,9 @@ function build(cycle, { root, beats, profiles }) {
   // The ref carries the day: the fanout drops a beat seat whose ref was already filed this Cycle
   // (newsroom-fanout.js staleBeatRef) — right for a weekly seat, fatal for a daily one.
   return K.makeSlice(SEAT, cycle, beats, {
-    ref: evSrc + ' ' + day, hood: leadHood,
+    ref: evSrc + ' ' + dayToken(day), hood: leadHood,
     label,
-    angle: 'The lives of C' + cycle + ', ' + day + ': ' + passages.length + ' people — ' + label,
+    angle: 'The lives of C' + cycle + ': ' + passages.length + ' people — ' + label,
     hookLine: leadName + ' first. The event is the lead; one true detail; what came next only if the record says.',
     facts, people, hooks, pageVoices, factCap: 120, peopleCap: 16,
     deltas: null,
@@ -453,6 +456,6 @@ function enrichAssignment(assign, cycle, root = K.ROOT) {
 }
 const sitsOutWhenEmpty = true;
 if (require.main === module) W.main();
-module.exports = { SEAT, sitsOutWhenEmpty, kindWord, loadSlice, buildLivesSlice: W.build, writeLivesSlice: W.write, loadLivesSlice: loadSlice,
+module.exports = { SEAT, sitsOutWhenEmpty, kindWord, loadSlice, dayToken, buildLivesSlice: W.build, writeLivesSlice: W.write, loadLivesSlice: loadSlice,
   isLivesSeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment, slicePaths: W.paths,
   kindLine, cameNext, localDay, coveredPath };

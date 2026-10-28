@@ -168,7 +168,8 @@ try {
   assert.ok(day1.citizens.some(c => c.popid === 'POP-90005' && /lost Test Departed/.test(c.why)));
   assert.ok(day1.prewrite.pageVoices.length === 1 && /Test Patient, own page \(night/.test(day1.prewrite.pageVoices[0]), 'the person\'s own page, never a PRESS reply');
   assert.deepStrictEqual(day1.prewrite.hooks.map(h => h.text), ['A block welcomes a newborn']);
-  assert.ok(day1.story.ref.endsWith(' ' + day1.day), 'the ref carries the day so the fanout never drops a daily seat as stale');
+  assert.ok(day1.story.ref.endsWith(' ' + L.dayToken(day1.day)), 'the ref carries a per-day token so the fanout never drops a daily seat as stale');
+  assert.ok(!/\b20\d\d-\d\d-\d\d\b/.test(JSON.stringify([day1.story, day1.pulse, day1.prewrite, day1.facts])), 'no wall-clock date reaches the writer (builder 2026-10-28)');
   assert.strictEqual(day1.prewrite.note, null, 'five events fit the day; a page exists — no note');
 
 

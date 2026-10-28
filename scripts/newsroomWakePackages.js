@@ -13,9 +13,7 @@ function slug(value) {
 }
 
 const WRITER_TOOLS_SEATS = ['elliot-marbury', 'hal-richmond', 'anthony-raines', 'freelance-firebrand', 'carmen-delaine',
-  'luis-navarro', 'elliot-graye', 'business-desk', 'trevor-shimizu', 'lila-mezran', 'angela-reyes', 'rachel-torres', 'tamsin-pruitt',
-  'nia-rook', 'nia-rook-weekly'   // pipeline.83 (builder 2026-10-28): the UNDOCKED seats get the pilot-as-citizen tools
-];
+  'luis-navarro', 'elliot-graye', 'business-desk', 'trevor-shimizu', 'lila-mezran', 'angela-reyes', 'rachel-torres', 'tamsin-pruitt'];
 // pipeline.76, builder 2026-10-14; Hal + Anthony 2026-10-19; Jax + Carmen 2026-10-26; the rest builder 2026-10-27 ("Luis and all the right question small change we can and set up Tamsin")
 
 function validatePackage(key, value) {

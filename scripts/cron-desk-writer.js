@@ -371,6 +371,7 @@ function formatStrictSourceHygiene(nameCheck, packet) {
     ? nameCheck.unverified
     : [];
   const loadBearing = packet && packet.manifest && packet.manifest.policy === 'load-bearing';
+  const niaShow = /^nia-rook-undocked/.test(String(packet && packet.reviewProfile && packet.reviewProfile.id || ''));
   return [
     '=== STRICT SOURCE HYGIENE — PACKET BOUNDARY ===',
     loadBearing
@@ -383,8 +384,10 @@ function formatStrictSourceHygiene(nameCheck, packet) {
       (verified.length ? verified.join('; ') : '(none)'),
     'These candidates are not ledger-verified as people: ' +
       (unverified.length ? unverified.join('; ') : '(none)'),
-    'Do not use an unverified candidate as a person or official. It may appear ' +
-      'only as a place/organization when the lane explicitly identifies it as one.',
+    niaShow
+      ? 'An unverified candidate is not a person or official. New in-world places and businesses may be scene color; index a named business in INTAKE BIZ.'
+      : 'Do not use an unverified candidate as a person or official. It may appear ' +
+        'only as a place/organization when the lane explicitly identifies it as one.',
     loadBearing
       ? 'Packet people, quotes, and numbers stay Packet-backed. In-world rooms and named spots that are not real Oakland are allotted hallucination; new businesses go on INTAKE BIZ. AuthorizedTexture in the Packet is additional SET, not a cap. Anonymous role-only color is not an official source or canon proof.'
       : 'Do not invent anonymous people, Packet quotes, numbers handed to the Packet or a record, or real-world Oakland places. In-world named spots are yours — a place with no row is not a ghost — and go on INTAKE BIZ.',
@@ -624,6 +627,16 @@ const OPENROUTER_TOOLS = [
 // the same lines and arithmetic as the data-desk slice (buildMarburySlice), so the memo still
 // does no arithmetic of its own.
 const DOSSIER_TOOL = { type: 'function', function: { name: 'dossier_read', description: 'Read one player\'s dossier: every season line on file plus the rates already worked from it (K/9, BB/9, K/BB for a pitcher; AB per HR, AB per SO for a hitter). Optional season narrows to one year. Use it for another season or another peer.', parameters: { type: 'object', properties: { player: { type: 'string', description: 'player name, e.g. "Arturo Ramos"' }, season: { type: 'string', description: 'optional four-digit year' } }, required: ['player'] } } };
+const UNDOCKED_HISTORY_TOOL = { type: 'function', function: { name: 'undocked_history', description: 'Earlier gate-approved UNDOCKED feed episodes. An exact pilot name narrows by citizen identity; omit it for the show-wide recent record. beforeCycle pages to earlier nights. The current Cycle is excluded.', parameters: { type: 'object', properties: { pilot: { type: 'string', description: 'optional exact pilot name from the show' }, beforeCycle: { type: 'integer', description: 'optional earlier Cycle for paging' } }, required: [] } } };
+const NIA_CITIZEN_TOOL = { type: 'function', function: { name: 'citizen_lookup', description: 'Exact ledger profile for a named pilot or other citizen; no life-history thread.', parameters: { type: 'object', properties: { name: { type: 'string' } }, required: ['name'] } } };
+function isNiaSeat(persona) { return persona === 'nia-rook' || persona === 'nia-rook-weekly'; }
+function writerToolset(persona, recallOnly, canonRecall) {
+  if (recallOnly) return [CANON_RECALL_TOOL];
+  const base = isNiaSeat(persona)
+    ? [UNDOCKED_HISTORY_TOOL, NIA_CITIZEN_TOOL]
+    : OPENROUTER_TOOLS.concat([DOSSIER_TOOL]);
+  return canonRecall ? base.concat([CANON_RECALL_TOOL]) : base;
+}
 // pipeline.89 cut 2 — per-seat writer-tool frames. Each seat's tools block names the ONE question its tools
 // answer (builder 2026-10-26: "what is the question a tool answers, otherwise they won't use it"), the
 // tabs it may read, and a look-before-you-claim-an-absence rule. A seat without a frame keeps the sports
@@ -635,14 +648,11 @@ const MATCH_NOTE = ' Pass match ("Stabilization") to pull the rows that name it;
 // frame says nothing about what that should be.
 const RECORD_NOTE = ' The tools hold the record and nothing more. People are the ledger\'s (the source hygiene below); the scene is yours. The only line on the record: never hand it a thing it did not return, and never contradict one it did.';
 const NIA_FRAME = {
-  title: 'THE PILOT OFF THE SHIP',
-  intro: 'The slice is your story: the episode, the credits, the board are the feed\'s and stay as the feed gives them. The tools give you the pilot as a citizen of this city, and what the paper has already said about them.',
+  title: 'THE SHOW RECORD',
   tools: [
-    'citizen_lookup(name, thread: true): the pilot\'s ledger profile — job, neighborhood, household — and their life-history entries oldest first, each stamped with the sim clock (Y3C9). Pull it for every pilot you name; a pilot the ledger does not hold stays exactly as the feed names them.',
-    'canon_search(query): what the paper has already printed about this pilot or this week of the show — your own recaps first (search the pilot\'s name, or "UNDOCKED" with "Nia Rook"). Before you write "again", "still", "first time" or "climbed", this is how you know.',
-    SM + ': Neighborhood_Map — the pilot\'s neighborhood as the sheet holds it now (sentiment, nightlife, events), for where the city is talking about them.' + MATCH_NOTE.replace('Stabilization', 'the neighborhood')],
-  rule: 'What happened in the episode is the feed\'s and nowhere else. What a tool returns about a pilot reads as returned, named to its source ("the ledger", "my C112 recap", "the map"). Every pilot the feed names gets written. A quote in a pilot\'s mouth comes through the interview pass, not from you.',
-  kickoff: 'The slice is the story. Before you write a pilot, pull their thread and search what you printed about them last — then compose from the episode first and the citizen second, every pilot on the feed named, the board as the sidecar gives it. '
+    'undocked_history(pilot?, beforeCycle?): earlier gate-approved episodes, with credits, systems, combat and mishaps; a pilot name narrows the record, and beforeCycle pages back.',
+    'citizen_lookup(name): the ledger profile of a named citizen.'
+  ]
 };
 const SEAT_TOOL_FRAMES = {
   'freelance-firebrand': {
@@ -737,9 +747,8 @@ const SEAT_TOOL_FRAMES = {
     kickoff: 'The slice is the story. Before you call something unclassified, unanswered or unreported, read the hood\'s safety row and search the paper — then compose, naming each figure to its source and saying where you looked. '
   },
   // pipeline.83 (builder 2026-10-28: "give her tool calls to the ledgers and maybe citizen cards"):
-  // both UNDOCKED seats share one frame. The feed pack stays the only source for what happened
-  // in the episode (her bag's data contract, buildNiaSlice.js); the tools give her the pilot as a
-  // citizen of the city and what the paper already printed about them.
+  // both UNDOCKED seats share the show's approved history tool. Current episode
+  // facts still come from the feed pack in the Packet (buildNiaSlice.js).
   'nia-rook': NIA_FRAME,
   'nia-rook-weekly': NIA_FRAME,
   'tamsin-pruitt': {
@@ -754,6 +763,8 @@ const SEAT_TOOL_FRAMES = {
 };
 function seatToolsBlock(persona, n) {
   const f = SEAT_TOOL_FRAMES[persona];
+  if (isNiaSeat(persona)) return '\n\n=== YOUR TOOLS — ' + f.title + ' (up to ' + n + ' calls, read-only) ===\n' +
+    f.tools.map(t => '- ' + t + '\n').join('') + '=== END TOOLS ===';
   return '\n\n=== YOUR TOOLS — ' + f.title + ', NOT A NEW STORY (up to ' + n + ' calls, read-only) ===\n' +
     f.intro + ' A tool call never changes the assignment.\n' +
     f.tools.map(t => '- ' + t + '\n').join('') + f.rule + RECORD_NOTE + '\n=== END TOOLS ===';
@@ -914,12 +925,17 @@ async function toolCanonRecall(input, cycleNow) {
   return cap(out.join('\n'), 5000);
 }
 
-async function execOpenRouterTool(name, input, memCtx) {
+async function execOpenRouterTool(name, input, memCtx, cycleNow) {
+  if (isNiaSeat(PERSONA) && name !== 'undocked_history' && name !== 'citizen_lookup' &&
+      !(CANON_RECALL && name === 'canon_recall')) return 'tool unavailable for Nia Rook';
+  if (name === 'undocked_history') return isNiaSeat(PERSONA)
+    ? require('./undockedHistory').readHistory(input, cycleNow)
+    : 'undocked_history is only available to Nia Rook';
   if (name === 'dossier_read') return toolDossierRead(input);
   if (name === 'memory_note' && memCtx && memCtx.dryNote) return 'noted (test run — not saved): ' + String(input && input.note || '').slice(0, 200);
   if (name === 'canon_recall') return toolCanonRecall(input);
   if (name === 'canon_search') return toolSearchWorld({ query: input.query });
-  if (name === 'citizen_lookup') return toolCitizenLookup(input);
+  if (name === 'citizen_lookup') return toolCitizenLookup(isNiaSeat(PERSONA) ? { name: input.name } : input);
   if (name === 'sheet_read') return toolSheetRead(input);
   if (name === 'memory_recall' && memCtx) return toolMemoryRecall(memCtx.popId, input);
   if (name === 'memory_note' && memCtx) return toolMemoryNote(memCtx.popId, input, memCtx.cycle);
@@ -958,7 +974,7 @@ async function openRouterToolLoop(opts) {
         let input = {};
         try { input = JSON.parse(tc.function.arguments || '{}'); } catch (_) {}
         const raw = calls < maxCalls
-          ? await execOpenRouterTool(tc.function.name, input, opts.memCtx)
+          ? await execOpenRouterTool(tc.function.name, input, opts.memCtx, opts.cycle)
           : 'tool budget exhausted — compose from what you have.';
         // dossier_read returns { text, lines }; every other tool returns its text.
         const result = String(raw && typeof raw === 'object' ? raw.text : raw);
@@ -1283,8 +1299,11 @@ async function main() {
     'tracker. NotebookLM will summarize you later. ' + (RECORDS_PIECE
       ? 'Nobody was interviewed for this piece, so your job is the record made plain: the line, the vote, ' +
         'the figure, what it shows and what it does not. No one speaks in it and no scene is staged for it. '
+      : isNiaSeat(PERSONA)
+      ? 'Your beat is the UNDOCKED show and its standing in the city. '
       : 'Your job is street grain: a named regular, a named ' +
-        'counter, dirt at a Packet-named place that is this place\'s dirt. ') + 'Only Packet and ledger names. ' +
+        'counter, dirt at a Packet-named place that is this place\'s dirt. ') +
+    (isNiaSeat(PERSONA) ? 'Named people come from the ledger; in-world places are yours. ' : 'Only Packet and ledger names. ') +
     'Your SKILL is voice. Read IDENTITY/LENS/RULES.\n\n' +
     'CURRENT-CYCLE OVERRIDE: the edition pipeline is paused, so your desk workspace ' +
     '(output/desks/' + DESK + '/current/) is STALE — do NOT take cycle facts from it. ' + depthInstr +
@@ -1422,10 +1441,12 @@ async function main() {
       'return. ' + (PACKET_ONLY
         ? (RECORDS_PIECE
           ? 'You are this journalist in GodWorld this cycle. Nobody was interviewed for this piece: the Packet holds no approved quote. Write it from the record. Open the way packet.reviewProfile.articleContract.opening says — on a supplied line, figure, vote or filing — and close the way its closing says. Write no quoted speech and attribute no statement, mood or intention to anyone. Do not stage a scene, a street, a bar or a room to carry the facts. Name a source the way a reader would — the city\'s initiative record, his career line — never the Packet, a tab or file name, or a bracketed tag. Never lead with a tracker phase label, a feed label, or a bullet list of approved facts. Do not import real-world Oakland tropes the Packet did not name. Do not invent names, numbers, quotes, or events, and do no arithmetic the Packet has not already done. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
+          : isNiaSeat(PERSONA)
+          ? 'You are Nia Rook covering UNDOCKED this cycle. The Packet holds the current show facts; undocked_history returns earlier approved feed facts if you have a show-history question. Keep named people on the ledger, pilot speech in approved quotes, and scores or episode events in the approved record. The in-world scene and its unnamed voices are yours. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
           : 'You are this journalist in GodWorld this cycle. The Packet facts are the physics — what the engine did. The Article is someone living under that physics. Open on a named interviewed person or a Packet-named place, in a body, doing something. Use every approved quote as spoken speech in a scene, not as a caption under a recap. Never announce the season or the temperature; if it is winter, show a Packet-backed thing that moved on a day like this. Never lead with a tracker phase, a feed label, a bullet list of approved facts, or the words supplied record / listed as / what remains to be learned. Do not import real-world Oakland winter tropes the Packet did not name. Do not invent names, numbers, quotes, or events. Texture may only dress Packet-named places and approved speakers. If you cannot write the life, stop. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. ')
         : 'Use your tools FIRST where the state runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ') +
       (TOOLS_AB ? 'Use your tools where the Packet runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ' : '') +
-      (WRITER_TOOLS ? (RECALL_ONLY ? RECALL_KICKOFF : SEAT_TOOL_FRAMES[PERSONA] ? SEAT_TOOL_FRAMES[PERSONA].kickoff : PERSONA === 'hal-richmond'
+      (WRITER_TOOLS ? (RECALL_ONLY ? RECALL_KICKOFF : SEAT_TOOL_FRAMES[PERSONA] ? (isNiaSeat(PERSONA) ? '' : SEAT_TOOL_FRAMES[PERSONA].kickoff) : PERSONA === 'hal-richmond'
         ? 'The slice is the story. Before you write, open the archive — the man\'s origins and prior coverage by name, his dossier across the years — then compose, naming each tool-fetched fact to its source. '
         : PERSONA === 'anthony-raines'
         ? 'The slice is the story. Before you write, pull the board — the player\'s TrueSource card, a peer\'s, his Statcast card if the archive holds one, this cycle\'s feed line — then compose, naming each tool-fetched number to its source. '
@@ -1437,8 +1458,9 @@ async function main() {
       maxToolCalls: PACKET_ONLY && !TOOLS_AB ? WRITER_TOOLS : 6,
       traceResults: TOOLS_AB || WRITER_TOOLS > 0,
       keepResults: WRITER_TOOLS > 0,
-      ...(WRITER_TOOLS ? { toolset: RECALL_ONLY ? [CANON_RECALL_TOOL] : OPENROUTER_TOOLS.concat([DOSSIER_TOOL]).concat(CANON_RECALL ? [CANON_RECALL_TOOL] : []) } : {}),
+      ...(WRITER_TOOLS ? { toolset: writerToolset(PERSONA, RECALL_ONLY, CANON_RECALL) } : {}),
       forceFirstTool: TOOLS_FORCED,
+      cycle,
       memCtx: BYLINE_POPID ? { popId: BYLINE_POPID, cycle }
         : (abPop ? { popId: abPop, cycle, dryNote: true } : null) });
     usageIn += r.usageIn; usageOut += r.usageOut; turns = 1 + r.trace.length;
@@ -1632,6 +1654,7 @@ module.exports = {
   toolSheetRead,
   toolCanonRecall,
   toolCitizenLookup,
+  writerToolset,
   SEAT_TOOL_FRAMES,
   seatToolsBlock,
   rubricBlock, // pipeline.77

@@ -1,12 +1,12 @@
 ---
 title: Nia Rook — UNDOCKED Recap Bag
 created: 2026-08-16
-updated: 2026-10-11
+updated: 2026-10-28
 type: reference
 tags: [media, culture, undocked, nia-rook, active]
 sources:
   - docs/plans/2026-08-07-spacemolt-game-show.md §3.1
-  - output/spacemolt-show/feed/c{N}.json — only approved events
+  - output/spacemolt-show/feed/c{N}.json — gate-approved current and earlier events
 pointers:
   - "[[voices/nia_rook]]"
   - "[[plans/2026-08-07-spacemolt-game-show]] §3.1"
@@ -39,7 +39,8 @@ Solo `nia-rook`. Entertainment recap. Not culture-desk average. Not sports.
 
 ## Authority
 
-- **Facts:** `output/spacemolt-show/feed/c{N}.json` events only. Never the Undocked_Feed tab.
+- **Episode facts:** the current `output/spacemolt-show/feed/c{N}.json` pack and earlier gate-approved packs through `undocked_history`. The history tool reads no raw episode or staged episode file and returns no inferred earlier rank. Never the `Undocked_Feed` tab.
+- **People and color:** a named person has a ledger row. New in-world places and businesses can be scene color; a named business goes on INTAKE BIZ. A scene does not establish a measured audience reaction or another episode event.
 - **Quotes:** only if the approved feed row already carries marked quote text. If it doesn't, write color without quoting the pilot.
 - **Cadence:** file when a feed event has no write-up yet. No empty-cycle recap.
 - **Canon door:** Saturday only.

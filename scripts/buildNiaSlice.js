@@ -162,8 +162,6 @@ function whoLine(name, info, career) {
   return s.replace(/\.$/, '');   // callers end the sentence
 }
 
-const WHO_RULE = ' The career is who they are, not the story; the story is the flight.';
-
 // agy review 2026-10-16 hunt 1: the Packet caps task.assignment (the angle) at
 // 500 chars and the V2 auditor approves numbers only from known facts — so the
 // identity and career ride as typed FACTS (story.facts → W1 known → W3
@@ -200,15 +198,14 @@ function laneEntryFor(e, info, leader, cycle) {
     kind: 'undocked',
     popids: [e.POPID],
     handle: {
-      angle: 'Recap ' + (name || 'the pilot') + '\'s UNDOCKED episode — who\'s up, who\'s down, ' +
-        'what the city argues about tomorrow. Facts: credits ' +
+      angle: 'UNDOCKED episode: ' + (name || 'the pilot') + '. Credits ' +
         (e.CreditsDelta == null ? 'unsettled' : e.CreditsDelta) +
         ', systems ' + ((e.Systems || []).join(', ') || 'unlisted') +
         ', combat ' + (e.CombatEvents || 0) + ', mishaps ' + (e.MishapCount || 0) +
         ', magnitude ' + (e.Magnitude || 1) + '/5' +
         ((e.Flags || []).indexOf('open_escrow') >= 0 ? ', open escrow position' : '') + '.' +
         standingsNote(leader) +
-        ' In the chair: ' + inChair(name, info) + '.' + WHO_RULE,
+        ' In the chair: ' + inChair(name, info) + '.',
       citizens: [name + ' — ' + ((info && info.roleType) ? info.roleType + ', ' : '') + 'UNDOCKED cast pilot'],
       facts: whoFacts(name, info, career),
     },
@@ -273,9 +270,9 @@ function buildNiaWeeklySlice(cycle) {
   });
   // The angle stays under the Packet's 500-char assignment cap; the per-pilot
   // numbers and careers are typed facts below (agy hunt 1).
-  const angle = 'Week-in-UNDOCKED leaderboard digest — every pilot who flew this cycle (' +
-    pilots.map(p => p.name).join(', ') + '), who is climbing and who is fading.' +
-    standingsNote(leader) + ' In the chair: ' + pilots.map(p => inChair(p.name, p)).join('; ') + '.' + WHO_RULE;
+  const angle = 'UNDOCKED week: pilots who flew this cycle (' +
+    pilots.map(p => p.name).join(', ') + ').' +
+    standingsNote(leader) + ' In the chair: ' + pilots.map(p => inChair(p.name, p)).join('; ') + '.';
   const facts = [].concat(
     pilots.map(p => p.name + ' — ' + p.episodes + ' episode(s) this cycle, ' + (p.hasWindowed ? 'partial ' : '') +
       'credits ' + p.creditsDelta + ', combat ' + p.combatEvents + ', mishaps ' + p.mishapCount + ' (UNDOCKED feed)'),

@@ -211,6 +211,44 @@ assert.match(sourceBrief, /What remains to be learned here\?/);
 assert.doesNotMatch(sourceBrief, /supplied condition/i);
 assert.equal(p.auditArticle(sourceBrief, sourceBriefW3).ok, true);
 
+// Nia's two SOURCE_BRIEF seats keep the show as the subject even when the
+// interview abstains. An earlier approved feed line can enter the manifest
+// only when the draft actually uses its pilot, Cycle, and result.
+const niaStory = { ref: 'undocked:TEST-ONLY-episode', label: 'TEST-ONLY show night',
+  angle: 'TEST-ONLY Pilot earned 0 credits', kind: 'undocked', popids: [], citizens: [] };
+const niaW1 = p.buildAnglePacket({ cycle: 999, desk: 'undocked', reporter, story: niaStory,
+  approach: 'TEST-ONLY show record', slice: {}, lane: [] });
+const niaPlan = p.validateAngleOutput({ focus: 'TEST-ONLY show night', why: 'TEST-ONLY board',
+  checks: ['Check approved show history'], targets: [], interpretation: 'No inference',
+  unverifiedLead: [], closeQuestion: 'What is next for the board?' }, niaW1);
+for (const desk of ['undocked', 'undocked-digest']) {
+  const niaW3 = p.buildWritePacket({ cycle: 999, desk, reporter, story: niaStory,
+    angleInput: niaW1, anglePlan: niaPlan, interviews: [], lane: [], reviewProfile: {
+      id: desk === 'undocked' ? 'nia-rook-undocked-recap-v1' : 'nia-rook-undocked-weekly-digest-v1',
+      canonPolicy: 'load-bearing', articleContract: { renderMode: 'SOURCE_BRIEF', targetWords: '350-600' },
+      authorizedTexture: ['TEST-ONLY in-world scene'], textureConditions: [] } });
+  assert.match(niaW3.task.goal, /UNDOCKED/);
+  assert.match(niaW3.task.reportingQuestion, /earlier approved UNDOCKED episodes/);
+  assert.match(niaW3.task.reportingQuestion, desk === 'undocked' ? /current board leader/ : /this week's assignment/);
+  assert.doesNotMatch(niaW3.task.goal, /Write the life|named interviewed person/);
+  assert.doesNotMatch(niaW3.output.rule, /must not mint a room|one Packet quote/);
+  assert.doesNotMatch(niaW3.limits.rule, /Open on a person or place living/);
+  assert.deepStrictEqual(niaW3.manifest.approvedQuotes, []);
+
+  const prior = { text: 'C998 UNDOCKED: TEST-ONLY Pilot — credits 42; systems test_system; combat 0; mishaps 0.',
+    src: 'tool:undocked_history:feed/c998.json#TEST-ONLY-episode' };
+  const used = p.selectUsedToolLines('In Cycle 998, TEST-ONLY Pilot earned 42 credits.', [prior], niaW3);
+  assert.deepStrictEqual(used, [prior]);
+  const amended = p.appendToolFacts(niaW3, used);
+  assert.equal(amended.added.length, 1);
+  assert.ok(amended.packet.manifest.approvedFacts.some(f => f.src === prior.src));
+  assert.deepStrictEqual(p.selectUsedToolLines('TEST-ONLY Pilot has a history.', [prior], niaW3), []);
+  assert.deepStrictEqual(p.selectUsedToolLines('In Cycle 998, TEST-ONLY Pilot earned 0 credits.', [prior], niaW3), [],
+    'zero combat or mishaps cannot validate a wrong credits claim');
+  assert.deepStrictEqual(p.selectUsedToolLines('In Cycle 997, TEST-ONLY Pilot earned 42 credits.', [prior], niaW3), [],
+    'a result from the wrong earlier Cycle cannot validate a claim');
+}
+
 const trackerSourceBriefW3 = JSON.parse(JSON.stringify(sourceBriefW3));
 trackerSourceBriefW3.manifest.approvedFacts = [{
   id: 'F-TRACKER', t: 'FACT',

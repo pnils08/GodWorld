@@ -270,11 +270,20 @@ function buildWritePacket(args) {
     }
   }
   const loadBearingPolicy = reviewProfile && reviewProfile.canonPolicy === 'load-bearing';
+  const niaShow = reviewProfile && /^nia-rook-undocked/.test(String(reviewProfile.id || ''));
   const configuredRenderMode = reviewProfile && reviewProfile.articleContract &&
     reviewProfile.articleContract.renderMode;
   if (!investigation && configuredRenderMode === 'SOURCE_BRIEF') {
     packet.task.writingMode = 'SOURCE_BRIEF';
-    packet.task.goal = 'Write the life this cycle\'s record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.';
+    packet.task.goal = niaShow
+      ? (args.desk === 'undocked-digest' ? 'Cover the UNDOCKED week and its show history.' : 'Cover this UNDOCKED episode and its show history.')
+      : 'Write the life this cycle\'s record produced. Lead with a named interviewed person or a Packet-named place. The feed or tracker line is the weather, never the lede.';
+    if (niaShow) {
+      packet.task.reportingQuestion = args.desk === 'undocked-digest'
+        ? 'What did earlier approved UNDOCKED episodes record for the pilots in this week\'s assignment?'
+        : 'What did earlier approved UNDOCKED episodes record for this pilot or the current board leader?';
+      packet.output.rule = 'Index only what the Article prints. Repeat NAMES/BIZ/HOOD/CLAIM lines for multiple records. Every CLAIM must point to a supplied source ref.';
+    }
     reviewProfile.articleContract = Object.assign({}, reviewProfile.articleContract, {
       targetWords: reviewProfile.articleContract.targetWords ||
         'evidence-bounded; length follows supplied public facts and exact quotes',
@@ -386,7 +395,7 @@ function buildWritePacket(args) {
   if (!approvedQuotes.length) {
     packet.limits.rule += ' No named ledger citizen spoke for this piece (manifest.approvedQuotes is empty): put no words in a named citizen\'s mouth. Unnamed voices are yours.';
   }
-  if (packet.task.writingMode === 'SOURCE_BRIEF') {
+  if (packet.task.writingMode === 'SOURCE_BRIEF' && !niaShow) {
     packet.limits.rule += ' Do not brief the record. Open on a person or place living the condition.';
   }
   packet.output.preflight = {
@@ -593,12 +602,19 @@ function renderSourceBrief(packet) {
 // shared "3" or a generic five-word phrase). A tool line is used only when ONE unit of the body
 // (a line, or a sentence inside a line) carries the line's anchor AND two of its significant
 // numbers (two+ digits or a decimal), at least one not already approved. Anchor: a dossier
-// line's season year; any other line's full two-word name. canon_search results (prior
+// line's season year; any other line's full two-word name. UNDOCKED history
+// requires the pilot, earlier Cycle, and one result detail in the same unit. canon_search results (prior
 // coverage, staged drafts) and any line holding quotation marks never become approved facts —
 // retrieved speech is never laundered into the manifest.
-const TOOL_FACT_SOURCES = /^tool:(dossier_read|sheet_read|citizen_lookup):/;
+const TOOL_FACT_SOURCES = /^tool:(dossier_read|sheet_read|citizen_lookup|undocked_history):/;
 function significantNumbers(text) {
   return numericTokens(text).map(v => v.toLowerCase()).filter(v => /\d{2,}|\d*\.\d+/.test(v));
+}
+function historyFieldUsed(unit, field, value) {
+  if (value == null) return false;
+  const escaped = String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return new RegExp('(?:\\b' + field + '\\b\\s+(?:of\\s+)?' + escaped + '(?![\\d.])|' +
+    '(?<![\\d.])' + escaped + '\\s+\\b' + field + '\\b)', 'i').test(unit);
 }
 function selectUsedToolLines(draftText, candidates, packet) {
   const body = String(draftText || '').split(/^##\s+INTAKE\s*$/im)[0];
@@ -619,6 +635,25 @@ function selectUsedToolLines(draftText, candidates, packet) {
     const text = clean(c && c.text, 500);
     const src = clean(c && c.src, 300);
     if (!text || seen.has(text) || !TOOL_FACT_SOURCES.test(src) || /["“”]/.test(text)) continue;
+    if (/^tool:undocked_history:/.test(src)) {
+      const cycle = (text.match(/^C(\d+)\s+UNDOCKED:/) || [])[1];
+      const name = (text.match(/UNDOCKED:\s+([A-Z][^—;]+?)\s+—/) || [])[1];
+      if (!cycle || !name) continue;
+      const credits = (text.match(/— credits (unsettled|[+-]?\d+(?:\.\d+)?);/) || [])[1];
+      const combat = (text.match(/; combat ([+-]?\d+(?:\.\d+)?);/) || [])[1];
+      const mishaps = (text.match(/; mishaps ([+-]?\d+(?:\.\d+)?)\./) || [])[1];
+      const systems = ((text.match(/; systems ([^;]+); combat/) || [])[1] || '')
+        .split(',').map(s => s.trim().toLowerCase()).filter(s => s && s !== 'systems unlisted');
+      const hit = units.some(u => {
+        const low = u.toLowerCase();
+        if (!low.includes(name.toLowerCase()) || !new RegExp('\\b(?:c' + cycle + '|cycle\\s+' + cycle + ')\\b', 'i').test(u)) return false;
+        return historyFieldUsed(u, 'credits?', credits) ||
+          historyFieldUsed(u, 'combat', combat) || historyFieldUsed(u, 'mishaps?', mishaps) ||
+          systems.some(s => low.includes(s));
+      });
+      if (hit) { seen.add(text); out.push({ text, src }); }
+      continue;
+    }
     const dossier = /^tool:dossier_read:/.test(src);
     const year = dossier ? (text.match(/\b(19|20)\d{2}\b/) || [])[0] : null;
     const name = dossier ? null : (text.match(/\b[A-Z][a-z'’-]+ [A-Z][a-z'’-]+\b/) || [])[0];

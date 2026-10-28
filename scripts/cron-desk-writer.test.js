@@ -58,6 +58,12 @@ assert.ok(jaxHygiene.includes('role-only anonymous voice may appear solely as au
 assert.ok(jaxHygiene.includes('must not be attributed to a named citizen, official, institution, or canon source'));
 assert.ok(!jaxHygiene.includes('overrides persona text that permits invented or anonymous sources'));
 
+const niaHygiene = formatStrictSourceHygiene({ verified: [], unverified: ['TEST-ONLY Lantern Bar'] }, {
+  manifest: { policy: 'load-bearing' }, reviewProfile: { id: 'nia-rook-undocked-recap-v1' }
+});
+assert.match(niaHygiene, /New in-world places and businesses may be scene color/);
+assert.ok(!niaHygiene.includes('only as a place/organization when the lane explicitly identifies it'));
+
 const normalized = renderPacketIntake(
   '# TEST-ONLY Article\n\nTest Citizen said, "Test concern." TEST-HOOD remains in the story.\n\n' +
   '## INTAKE\nBIZ: None |\nNAMES: Bad, Combined | role\n',
@@ -173,15 +179,30 @@ console.log('cron-desk-writer pipeline.77 rubric tests: PASS');
 
 // pipeline.89 cut 2 — every framed seat is a granted tool seat with a package grant, and the frames carry their rule
 {
-  const { SEAT_TOOL_FRAMES, seatToolsBlock, toolCitizenLookup } = require('./cron-desk-writer');
+  const { SEAT_TOOL_FRAMES, seatToolsBlock, toolCitizenLookup, writerToolset } = require('./cron-desk-writer');
   const pk = require('./newsroom-wake-packages.json');
   for (const persona of Object.keys(SEAT_TOOL_FRAMES)) {
     assert.ok(pk[persona] && pk[persona].writerTools && pk[persona].writerTools.maxToolCalls >= 1, persona + ' has a frame but no package grant');
     const f = SEAT_TOOL_FRAMES[persona];
-    assert.ok(f.title && f.intro && f.rule && f.kickoff && f.tools.length >= 2, persona + ' frame is incomplete');
+    if (persona === 'nia-rook' || persona === 'nia-rook-weekly') {
+      assert.ok(f.title && f.tools.length >= 2 && !f.kickoff && !f.rule && !f.intro);
+    } else assert.ok(f.title && f.intro && f.rule && f.kickoff && f.tools.length >= 2, persona + ' frame is incomplete');
     const block = seatToolsBlock(persona, 6);
     assert.ok(block.includes('up to 6 calls') && block.includes('=== END TOOLS ==='));
+    if (persona === 'nia-rook' || persona === 'nia-rook-weekly') {
+      assert.ok(block.includes('undocked_history'));
+      assert.ok(!block.includes('Before you write') && !block.includes('Pull it for every'));
+    }
   }
+  for (const persona of ['nia-rook', 'nia-rook-weekly']) {
+    assert.ok(writerToolset(persona, false, false).some(t => t.function.name === 'undocked_history'));
+    assert.ok(!writerToolset(persona, false, false).some(t => t.function.name === 'dossier_read'));
+    assert.ok(!writerToolset(persona, false, false).some(t => t.function.name === 'canon_search'));
+    assert.ok(!writerToolset(persona, false, false).some(t => t.function.name === 'sheet_read'));
+    const citizen = writerToolset(persona, false, false).find(t => t.function.name === 'citizen_lookup');
+    assert.ok(citizen && !Object.hasOwn(citizen.function.parameters.properties, 'thread'));
+  }
+  assert.ok(!writerToolset('tamsin-pruitt', false, false).some(t => t.function.name === 'undocked_history'));
   assert.ok(SEAT_TOOL_FRAMES['tamsin-pruitt'].tools.join(' ').includes('thread'));
   // thread on a name the ledger does not hold stays a "no such citizen" answer — it never invents a person
   assert.match(toolCitizenLookup({ name: 'TEST-ONLY Nobody Atall', thread: true }), /No ledger citizen named/);

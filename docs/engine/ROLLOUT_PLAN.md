@@ -14,6 +14,7 @@
 - [[../plans/2026-09-11-sports-as-a-lived-system]]: engine.206 live-observing, engine.205 ready, engine.202 ready, engine.203d live-observing
 - [[../plans/2026-09-21-care-and-justice-system]]: engine.254 live-observing, engine.271 live-observing, engine.272 live-observing, engine.298 live-observing
 - [[../plans/2026-09-26-future-build-ideas]]: engine.238 live-observing, engine.264 needs-info, engine.261 ready
+- [[../plans/2026-07-27-employment-living-system]]: engine.319 live-observing, engine.320 live-observing, engine.321 wontfix
 - [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]: engine.296 live-observing, engine.318 live-observing, engine.297 live-observing
 - [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 ready, engine.201 live-observing, engine.197 live-observing
 - [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing, engine.302 live-observing, engine.304 live-observing
@@ -48,7 +49,6 @@
 - [[../plans/2026-08-17-sheet-weight-reduction]]: engine.116 ready
 - [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]]: engine.27 ready
 - [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
-- [[../gap]]: engine.319 ready
 - `docs/archive/for-claude-review/2026-10-25-codex-engine301-gate3-recheck.md`: engine.317 ready
 - `output/antigravity/2026-10-19-review-engine214-prod-candidate.md`: engine.316 ready
 - [[../plans/2026-10-15-engine-290-transit-rides-the-sim]]: engine.290 live-observing

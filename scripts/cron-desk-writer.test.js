@@ -171,15 +171,14 @@ console.log('cron-desk-writer pipeline.77 rubric tests: PASS');
   console.log('cron-desk-writer pipeline.89 sheet_read match tests: PASS');
 })().catch(e => { console.error(e); process.exit(1); });
 
-// pipeline.89 cut 2 — every framed seat is a granted tool seat with a package grant; a frame lists tools only (builder 2026-10-28)
+// pipeline.89 cut 2 — every framed seat is a granted tool seat with a package grant, and the frames carry their rule
 {
   const { SEAT_TOOL_FRAMES, seatToolsBlock, toolCitizenLookup } = require('./cron-desk-writer');
   const pk = require('./newsroom-wake-packages.json');
   for (const persona of Object.keys(SEAT_TOOL_FRAMES)) {
     assert.ok(pk[persona] && pk[persona].writerTools && pk[persona].writerTools.maxToolCalls >= 1, persona + ' has a frame but no package grant');
     const f = SEAT_TOOL_FRAMES[persona];
-    assert.ok(f.title && f.tools.length >= 2, persona + ' frame is incomplete');
-    assert.ok(!f.rule && !f.intro && !f.kickoff, persona + ' frame tells the writer how to write (builder 2026-10-28)');
+    assert.ok(f.title && f.intro && f.rule && f.kickoff && f.tools.length >= 2, persona + ' frame is incomplete');
     const block = seatToolsBlock(persona, 6);
     assert.ok(block.includes('up to 6 calls') && block.includes('=== END TOOLS ==='));
   }

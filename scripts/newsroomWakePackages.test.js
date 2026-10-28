@@ -10,13 +10,13 @@ assert.deepStrictEqual(active.map(row => row.key),
 
 // pipeline.60 — Nia Rook's UNDOCKED show seat (own desk key, feed-built lane)
 const nia = packages['nia-rook'];
-assert.equal(nia.version, 'NIAROOK-UNDOCKED-1');
+assert.equal(nia.version, 'NIAROOK-UNDOCKED-2');
 assert.equal(nia.active, true);
 assert.equal(nia.requiredDaily, true);
 assert.equal(nia.assignment.desk, 'undocked');
 assert.equal(nia.assignment.popid, 'POP-01076');
 assert.equal(nia.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(nia, 'write').model, 'x-ai/grok-4.3');
+assert.equal(packagesApi.routeFor(nia, 'write').model, 'openai/gpt-6-luna');   // pipeline.83 2026-10-28: Luna 6 + tools (was grok-4.3)
 assert.equal(nia.reviewProfile.canonPolicy, 'load-bearing');
 
 // (e) NEXT BUILD (2026-09-25) — Nia's weekly leaderboard/digest: own desk key
@@ -24,13 +24,13 @@ assert.equal(nia.reviewProfile.canonPolicy, 'load-bearing');
 // of activeRotaCandidates() / rotaPool below), dispatched by direct
 // --persona invocation on its own Saturday-morning crontab triple.
 const niaWeekly = packages['nia-rook-weekly'];
-assert.equal(niaWeekly.version, 'NIAROOK-UNDOCKED-WEEKLY-1');
+assert.equal(niaWeekly.version, 'NIAROOK-UNDOCKED-WEEKLY-2');
 assert.equal(niaWeekly.active, true);
 assert.equal(niaWeekly.requiredDaily, false);
 assert.equal(niaWeekly.assignment.desk, 'undocked-digest');
 assert.equal(niaWeekly.assignment.popid, 'POP-01076');
 assert.equal(niaWeekly.packetContract, 'v2');
-assert.equal(packagesApi.routeFor(niaWeekly, 'write').model, 'x-ai/grok-4.3');
+assert.equal(packagesApi.routeFor(niaWeekly, 'write').model, 'openai/gpt-6-luna');   // pipeline.83 2026-10-28
 assert.equal(niaWeekly.reviewProfile.canonPolicy, 'load-bearing');
 assert.ok(nia.reviewProfile.canonBlockers.some(b => /video game/.test(b)));
 
@@ -171,7 +171,7 @@ const seats = Object.entries(packages).filter(([, v]) => v && v.persona);
 assert(seats.length >= 25);
 assert.deepStrictEqual(seats.filter(([, v]) => v.rewardLoop !== true).map(([k]) => k), []);
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { rewardLoop: 'yes' })), /rewardLoop/);
-assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'elliot-graye', 'business-desk', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'tamsin-pruitt']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27
+assert.deepStrictEqual(Object.entries(packages).filter(([, v]) => v && v.writerTools).map(([k]) => k), ['freelance-firebrand', 'carmen-delaine', 'luis-navarro', 'trevor-shimizu', 'anthony-raines', 'elliot-marbury', 'hal-richmond', 'elliot-graye', 'business-desk', 'rachel-torres', 'lila-mezran', 'angela-reyes', 'nia-rook', 'nia-rook-weekly', 'tamsin-pruitt']); // registry order; Hal + Anthony: builder 2026-10-19; Jax + Carmen 2026-10-26; the rest 2026-10-27
 assert.equal(packages['hal-richmond'].writerTools.maxToolCalls, 6);
 assert.equal(packages['hal-richmond'].version, 'HAL-LEP2-3');
 assert.throws(() => packagesApi.validatePackage(marbury.persona, Object.assign({}, marbury, { writerTools: { maxToolCalls: 9 } })), /writerTools/);

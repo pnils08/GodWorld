@@ -253,6 +253,7 @@ const RATES = {
   'anthropic/claude-opus-5.5': [4, 20],
   'anthropic/claude-haiku-5.5': [0.10, 0.50],
   'openai/gpt-5.6-luna': [0.20, 1.20],
+  'openai/gpt-6-luna': [0.10, 0.50],   // pipeline.83 2026-10-28 — Nia's two seats (OpenRouter list 2026-10-28)
   'x-ai/grok-4.3': [1.25, 2.50],
   'deepseek/deepseek-v4-flash-0731': [0.016, 0.64],
   'meta-llama/llama-4-maverick': [0.188, 0.652],
@@ -629,6 +630,16 @@ const DOSSIER_TOOL = { type: 'function', function: { name: 'dossier_read', descr
 // frames above or the generic depth block. Text only; the tool set itself is the shared toolset.
 const SM = 'sheet_read(tab, match?)';
 const MATCH_NOTE = ' Pass match ("Stabilization") to pull the rows that name it; a long tab cuts off its later rows, and a miss on a named match is a real miss.';
+const NIA_FRAME = {
+  title: 'THE PILOT OFF THE SHIP',
+  intro: 'The slice is your story: the episode, the credits, the board are the feed\'s and stay as the feed gives them. The tools give you the pilot as a citizen of this city, and what the paper has already said about them.',
+  tools: [
+    'citizen_lookup(name, thread: true): the pilot\'s ledger profile — job, neighborhood, household — and their life-history entries oldest first, each stamped with the sim clock (Y3C9). Pull it for every pilot you name; a pilot the ledger does not hold stays exactly as the feed names them.',
+    'canon_search(query): what the paper has already printed about this pilot or this week of the show — your own recaps first (search the pilot\'s name, or "UNDOCKED" with "Nia Rook"). Before you write "again", "still", "first time" or "climbed", this is how you know.',
+    SM + ': Neighborhood_Map — the pilot\'s neighborhood as the sheet holds it now (sentiment, nightlife, events), for where the city is talking about them.' + MATCH_NOTE.replace('Stabilization', 'the neighborhood')],
+  rule: 'What happened in the episode comes from the feed and nowhere else; what the pilot is in the city comes from the tools, printed as returned and named to its source ("the ledger", "my C112 recap", "the map"). Every pilot the feed names gets written. A scene, a bar, a crowd or a named civilian enters only if a record holds them — the pilots\' own words come through the interview pass, not from you.',
+  kickoff: 'The slice is the story. Before you write a pilot, pull their thread and search what you printed about them last — then compose from the episode first and the citizen second, every pilot on the feed named, the board as the sidecar gives it. '
+};
 const SEAT_TOOL_FRAMES = {
   'freelance-firebrand': {
     title: 'YOUR OWN RECORD',
@@ -721,6 +732,12 @@ const SEAT_TOOL_FRAMES = {
     rule: 'A classification gap or a response failure is stated only after you read the hood\'s row and searched the paper; name where you looked. Metrics enter as the row prints them. No case detail beyond what a row or a prior piece holds.',
     kickoff: 'The slice is the story. Before you call something unclassified, unanswered or unreported, read the hood\'s safety row and search the paper — then compose, naming each figure to its source and saying where you looked. '
   },
+  // pipeline.83 (builder 2026-10-28: "give her tool calls to the ledgers and maybe citizen cards"):
+  // both UNDOCKED seats share one frame. The feed pack stays the only source for what happened
+  // in the episode (her bag's data contract, buildNiaSlice.js); the tools give her the pilot as a
+  // citizen of the city and what the paper already printed about them.
+  'nia-rook': NIA_FRAME,
+  'nia-rook-weekly': NIA_FRAME,
   'tamsin-pruitt': {
     title: 'THE PERSON\'S THREAD',
     intro: 'The slice is your story: the event is the lead. The tools give you the person behind it — what the record held of them before the event, in order.',

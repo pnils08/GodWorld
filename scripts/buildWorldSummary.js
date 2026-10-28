@@ -822,9 +822,7 @@ function patternStorylineTag(p, stageById) {
 }
 
 // Pure: engine state -> registry entries. `ledgerRows` is Storyline_Ledger as
-// objects; it supplies the first-observed cycle of an initiative stage, the
-// stage moves the ledger has seen, and the open stage rows the tracker has
-// since moved past.
+// objects; it supplies the open stage rows the tracker has since moved past.
 function buildStorylineRegistry(input) {
   const { arcRows = [], liveArcs = [], initiatives = [], ledgerRows = [], cycle } = input || {};
   const num = v => { const n = parseInt(v, 10); return Number.isFinite(n) ? n : 0; };
@@ -833,25 +831,14 @@ function buildStorylineRegistry(input) {
     const id = String(r.StorylineId || '').trim();
     if (id) ledgerById.set(id, r);
   }
-  // engine.270 D2: a stage's start is on record only when the ledger saw the
-  // initiative move INTO it (an earlier stage row of the same initiative). A
-  // stage already running when tracking began — the C109 rollout rows, a new
-  // initiative's first stage — has no start anywhere: the tracker has no
-  // phase-start column (LastStageChangeCycle is the Stage clock) and the
-  // carry-forward holds one cycle of moves. Its FirstCycle is when it was first
-  // OBSERVED, so it carries no age (startCycle null, firstSeen true).
-  const earliestByInit = new Map();
-  for (const [id, r] of ledgerById) {
-    const m = id.match(/^([A-Z]+-\d+):/);
-    const fc = num(r.FirstCycle);
-    if (!m || !fc) continue;
-    if (!earliestByInit.has(m[1]) || fc < earliestByInit.get(m[1])) earliestByInit.set(m[1], fc);
-  }
-  const stageClock = (initId, observed) => {
-    const known = earliestByInit.has(initId) && earliestByInit.get(initId) < observed;
-    return known ? { startCycle: observed, age: cycle - observed + 1, firstSeen: false }
-      : { startCycle: null, age: null, firstSeen: true };
-  };
+  // engine.270 D2: an initiative stage has no start on record. The tracker has
+  // no phase-start column (LastStageChangeCycle is the Stage clock), the
+  // carry-forward holds one cycle of moves, and the ledger's FirstCycle is when
+  // a stage was first OBSERVED — up to a Cycle after it began (D3). So a stage
+  // carries no age (startCycle null, firstSeen true); crisis arcs keep theirs
+  // (CycleCreated is a true start). codex 2026-10-28 #6: an earlier stage row
+  // proves a move happened, not when.
+  const STAGE_CLOCK = { startCycle: null, age: null, firstSeen: true };
   const out = [];
 
   // ── crisis arcs ──
@@ -902,7 +889,7 @@ function buildStorylineRegistry(input) {
     currentStage.set(initId, { stage, it });
     const id = initId + ':' + stage;
     const row = ledgerById.get(id);
-    const clock = stageClock(initId, row && num(row.FirstCycle) ? num(row.FirstCycle) : cycle);
+    const clock = STAGE_CLOCK;
     out.push({
       id,
       type: 'initiative-stage',
@@ -929,7 +916,7 @@ function buildStorylineRegistry(input) {
     if (String(row.Status || '').trim().toLowerCase() === 'closed') continue;
     const cur = currentStage.get(m[1]);
     if (!cur || cur.stage === m[2]) continue;
-    const clock = stageClock(m[1], num(row.FirstCycle) || cycle);
+    const clock = STAGE_CLOCK;
     out.push({
       id,
       type: 'initiative-stage',

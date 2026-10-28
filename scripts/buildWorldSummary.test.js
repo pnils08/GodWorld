@@ -786,8 +786,8 @@ console.log('\nTest 11g: storyline registry (engine.270)');
   assert('D2: a stage running when tracking began has no start and no age',
     unseen.firstSeen === true && unseen.startCycle === null && unseen.age === null && unseen.hasLedgerRow);
   const moved = byId('INIT-005:construction-active');
-  assert('D2: a stage the ledger saw begin starts at that cycle',
-    moved.firstSeen === false && moved.startCycle === 109 && moved.age === 1 && !moved.hasLedgerRow);
+  assert('D2: even a stage the ledger saw begin carries no age (an earlier row proves a move, not when — codex #6)',
+    moved.firstSeen === true && moved.startCycle === null && moved.age === null && !moved.hasLedgerRow);
   const ended = byId('INIT-005:construction-planning');
   assert('a stage the tracker moved past is closed', ended && ended.status === 'closed' && ended.endCycle === 109);
   assert('closed stage names where it moved', ended.movedTo === 'construction-active');
@@ -798,8 +798,9 @@ console.log('\nTest 11g: storyline registry (engine.270)');
     { StorylineId: 'INIT-002:dispatch-live', FirstCycle: '104', Status: 'open' }
   ] });
   const seenLater = later.find(e => e.id === 'INIT-005:construction-active');
-  assert('D2: an observed start keeps counting weeks', seenLater.startCycle === 109 && seenLater.age === 3 && !seenLater.firstSeen);
-  assert('D2: an unseen start stays ageless every week after', later.find(e => e.id === 'INIT-002:dispatch-live').age === null);
+  assert('D2: a stage stays ageless every week after', seenLater.age === null && seenLater.firstSeen === true
+    && later.find(e => e.id === 'INIT-002:dispatch-live').age === null);
+  assert('D2: crisis arcs keep their age (CycleCreated is a true start)', crisis(107).age === 3 && !crisis(107).firstSeen);
   assert('an already-closed stage row is not listed again', !helper.buildStorylineRegistry({ initiatives, cycle: 110, ledgerRows: [
     { StorylineId: 'INIT-005:construction-planning', FirstCycle: '106', Status: 'closed' }] })
     .some(e => e.id === 'INIT-005:construction-planning'));

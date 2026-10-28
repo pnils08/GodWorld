@@ -793,12 +793,30 @@ function storylineAttachNames(e) {
   return [...out];
 }
 
+// The attach pass's registry: unavailable or malformed is an error, never "no
+// storylines" (codex 2026-10-28 #4) — every signal since C109 carries the array.
+function loadStorylineRegistryStrict(cycle) {
+  const p = path.join(ROOT, 'output', 'desk_signal_c' + cycle + '.json');
+  let signal;
+  try { signal = JSON.parse(fs.readFileSync(p, 'utf8')); } catch (e) {
+    throw new Error('storyline registry unavailable: ' + path.relative(ROOT, p) + ' (' + e.message + ')');
+  }
+  if (!signal || !Array.isArray(signal.storylineRegistry)) {
+    throw new Error('no storylineRegistry array in ' + path.relative(ROOT, p));
+  }
+  return signal.storylineRegistry;
+}
+
 // Pure: staged set × the cycle's registry → attaches. Deterministic, no model.
 // An article not already on an engine storyline attaches to a registry entry
 // (open, or closed this week — its ending is a story) when its hood is one of
-// the entry's hoods AND its text prints the entry's name. The hood is the
-// INTAKE hood; an article that declared none uses the entry hoods it prints.
-// Attaches only to an existing ID; never creates one, never edits an article.
+// the entry's hoods AND its reader copy prints the entry's name (the INTAKE
+// register is not the article, codex #5). The hood is the INTAKE hood; an
+// article that declared none uses the entry hoods it prints. Two stages of one
+// initiative share a name (C113: INIT-010 operational, vote-scheduled closed):
+// the name alone points at the stage that is running, so a collision goes to
+// the open stage only (codex #1). Attaches only to an existing ID; never
+// creates one, never edits an article.
 function attachStorylines(set, registry) {
   const entries = (Array.isArray(registry) ? registry : [])
     .filter(e => e && isEngineStorylineId(e.id) && (e.hoods || []).length);
@@ -810,31 +828,75 @@ function attachStorylines(set, registry) {
     const intake = entry && entry.sidecar && entry.sidecar.intake;
     if (!intake || !entry.sidecarFile) continue;
     if ((intake.storylines || []).some(s => s && isEngineStorylineId(s.slug))) continue;
-    const text = norm(entry.text);
+    const text = norm(readerCopy(entry.text));
     const declared = (intake.hoods || []).flatMap(h => String(h).split(','))
       .map(h => norm(h).trim()).filter(Boolean);
-    for (const e of entries) {
+    const matched = entries.filter(e => {
       const hoods = e.hoods.map(h => norm(h).trim());
       const inHood = declared.length ? declared.some(h => hoods.includes(h)) : hoods.some(h => prints(text, h));
-      if (!inHood || !storylineAttachNames(e).some(n => prints(text, n))) continue;
-      out.push({ stem: entry.stem, sidecarFile: entry.sidecarFile, id: e.id, status: e.status });
+      return inHood && storylineAttachNames(e).some(n => prints(text, n));
+    });
+    const stagesOf = id => matched.filter(m => m.type === 'initiative-stage' && m.initiativeId === id);
+    for (const e of matched) {
+      const same = e.type === 'initiative-stage' ? stagesOf(e.initiativeId) : [e];
+      if (same.length > 1 && (e.status !== 'open' || same.filter(m => m.status === 'open').length !== 1)) continue;
+      out.push({ stem: entry.stem, sidecarFile: entry.sidecarFile, articleSha256: entry.articleSha256, id: e.id, status: e.status });
     }
   }
   return out;
 }
 
+// Writes attaches into the staged sidecars in `dir` (codex #3). Each sidecar is
+// re-read and re-checked against the Article the match was made on — status,
+// cycle, Article in `dir`, the same Article bytes, no assigned storyline since —
+// then written to a temp file, renamed over the original (a crash leaves the old
+// sidecar whole) and read back. A changed sidecar is skipped by name, never
+// written. A slug already present is not added twice, so a retry after a
+// partial run writes only what is missing.
+function commitAttaches(dir, hits, cycle) {
+  const byFile = new Map();
+  for (const h of hits) {
+    if (!byFile.has(h.sidecarFile)) byFile.set(h.sidecarFile, []);
+    byFile.get(h.sidecarFile).push(h);
+  }
+  let written = 0;
+  const skipped = [];
+  for (const [f, list] of byFile) {
+    const p = path.join(dir, f);
+    const side = JSON.parse(fs.readFileSync(p, 'utf8'));   // a malformed sidecar throws here, loud
+    const artPath = path.resolve(ROOT, side.article || '');
+    const bytes = fs.existsSync(artPath) ? fs.readFileSync(artPath, 'utf8') : null;
+    const sha = bytes === null ? null : crypto.createHash('sha256').update(bytes).digest('hex');
+    const st = side.intake && Array.isArray(side.intake.storylines) ? side.intake.storylines
+      : (side.intake ? (side.intake.storylines = []) : null);
+    const why = side.status !== 'staged' ? 'status is ' + side.status
+      : String(side.cycle) !== String(cycle) ? 'cycle is ' + side.cycle
+      : path.dirname(artPath) !== path.resolve(dir) ? 'Article is outside the staged folder'
+      : sha !== list[0].articleSha256 ? 'Article bytes changed since the match'
+      : !st ? 'no INTAKE'
+      : st.some(s => s && isEngineStorylineId(s.slug) && !s.attachedBy) ? 'now on an assigned storyline' : null;
+    if (why) { skipped.push(f + ': ' + why); continue; }
+    const add = list.filter(h => !st.some(s => s && s.slug === h.id));
+    if (!add.length) continue;
+    for (const h of add) st.push({ slug: h.id, verb: 'referenced', attachedBy: 'stepAttach' });
+    const tmp = path.join(dir, '.' + f + '.attach-tmp');
+    fs.writeFileSync(tmp, JSON.stringify(side, null, 2));
+    fs.renameSync(tmp, p);
+    const back = JSON.parse(fs.readFileSync(p, 'utf8'));
+    const got = ((back.intake || {}).storylines || []).map(s => s && s.slug);
+    if (!add.every(h => got.includes(h.id))) throw new Error('attach readback failed: ' + f);
+    written += add.length;
+  }
+  return { written, files: byFile.size, skipped };
+}
+
 // Step 3b — the attach pass writes each attach into the staged sidecar's
 // intake.storylines as `referenced` (a printed name proves a mention, not
 // depth), stamped attachedBy. The proof hashes cover the Article bytes only,
-// so the sidecar write leaves every proof valid. Re-runs are no-ops: an
-// attached article is on an engine storyline and is skipped.
+// so the sidecar write leaves every proof valid.
 async function stepAttach(cycle) {
   console.log('--- step 3b: storyline attach (engine.270 Task 7 step 1) ---');
-  const registry = loadStorylineRegistry(cycle);
-  if (!registry.length) {
-    console.log('no storyline registry in desk_signal_c' + cycle + '.json — nothing to attach to');
-    return { attached: 0, written: 0 };
-  }
+  const registry = loadStorylineRegistryStrict(cycle);
   const hits = attachStorylines(loadStagedSetExcludingCanonViolations(cycle), registry);
   for (const h of hits) console.log('  ' + h.stem + ' → ' + h.id + (h.status === 'closed' ? ' (closed this week)' : ''));
   console.log(hits.length + ' attach(es) across ' + new Set(hits.map(h => h.stem)).size + ' article(s)');
@@ -842,25 +904,11 @@ async function stepAttach(cycle) {
     if (hits.length) console.log('(dry-run) sidecars unchanged');
     return { attached: hits.length, written: 0 };
   }
-  const byFile = new Map();
-  for (const h of hits) {
-    if (!byFile.has(h.sidecarFile)) byFile.set(h.sidecarFile, []);
-    byFile.get(h.sidecarFile).push(h);
-  }
-  let written = 0;
-  for (const [f, list] of byFile) {
-    const p = path.join(STAGED, f);
-    const side = JSON.parse(fs.readFileSync(p, 'utf8'));
-    const st = side.intake.storylines = side.intake.storylines || [];
-    for (const h of list) {
-      if (st.some(s => s && s.slug === h.id)) continue;
-      st.push({ slug: h.id, verb: 'referenced', attachedBy: 'stepAttach' });
-      written++;
-    }
-    fs.writeFileSync(p, JSON.stringify(side, null, 2));
-  }
-  console.log(written + ' storyline(s) written into ' + byFile.size + ' staged sidecar(s)');
-  return { attached: hits.length, written };
+  const res = commitAttaches(STAGED, hits, cycle);
+  for (const s of res.skipped) console.log('  [attach-skip] ' + s);
+  console.log(res.written + ' storyline(s) written into ' + res.files + ' staged sidecar(s)' +
+    (res.skipped.length ? ', ' + res.skipped.length + ' sidecar(s) changed since the match and left alone' : ''));
+  return { attached: hits.length, written: res.written };
 }
 
 async function stepSignals(cycle) {
@@ -1627,14 +1675,24 @@ async function main() {
     await stepNarrate(cycle);
     // engine.270 Task 7: the attach pass runs before the canon door so the sweep
     // metadata and the Storyline_Ledger see the same storylines. A local sidecar
-    // write: a failure is loud and fails the run at the end, never the door.
+    // write: a failure never blocks the door, and it HOLDS step 6b — the ledger
+    // merge adds counts, so a run that merged and then re-ran after recovery
+    // would count the week twice (codex 2026-10-28 #2). Recovery runs the merge once.
     let attachErr = null;
     try {
       await stepAttach(cycle);
     } catch (e) {
       attachErr = e;
+      const recover = 'node scripts/cron-saturday-run.js --cycle ' + cycle + ' --step attach --apply, then --step signals --apply';
       console.error('[ATTACH FAILED] ' + e.message);
-      console.error('  Recover: node scripts/cron-saturday-run.js --cycle ' + cycle + ' --step attach --apply, then --step signals --apply');
+      console.error('  Storyline_Ledger is held this run. Recover: ' + recover);
+      try {
+        const { sendDiscordText } = require(path.join(ROOT, 'scripts', 'notebooklmPush'));
+        await sendDiscordText('🚨 **Saturday storyline attach failed (c' + cycle + ')**: ' + e.message +
+          '\nStoryline_Ledger held. Recover: `' + recover + '`');
+      } catch (e2) {
+        console.error('[DISCORD PING FAILED] (non-blocking): ' + e2.message);
+      }
     }
     // engine.114 (S427): stepPublish can throw on either armed gate — the
     // ingestEdition exit-code check or the NotebookLM `source add` check —
@@ -1675,7 +1733,8 @@ async function main() {
       console.error('  Recover: node scripts/cron-saturday-run.js --cycle ' + cycle + ' --step index --apply');
     }
     await stepSheets(cycle);
-    await stepSignals(cycle);
+    if (!attachErr) await stepSignals(cycle);
+    else console.error('--- step 6b: storyline signals HELD (attach failed; see the recover line above) ---');
     if (publishErr) throw publishErr;
     if (attachErr) throw attachErr;
     if (indexErr) throw indexErr;
@@ -1693,6 +1752,6 @@ if (require.main === module) {
 
 module.exports = { loadStagedSet, loadArcSeeds, excludeCanonViolations, stepSweep, stepDaily, dailyPending, retractionIds, articleCustomId, articleDoc, usageRowsFor, printedStems, printedOnly, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
-  attachStorylines, storylineAttachNames, stepAttach,
+  attachStorylines, storylineAttachNames, stepAttach, commitAttaches, loadStorylineRegistryStrict, primarySlug,
   isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves,
   auditOne, auditPrompt, loadLedgerProfiles, worldSummaryText, livedEventsGroundTruth, livedDumpDir, deskSystem, crossoverCitizens, printedCrossovers, reserveDigestSeat, undockedGroundTruth, crossoverBonus, crossoverBlock, undockedBoardCandidates, NARRATOR_CHARGE, curationScore };

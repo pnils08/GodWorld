@@ -210,11 +210,16 @@ console.log('Test 6: mergeStorylineLedger');
   const { attachStorylines, storylineAttachNames } = require('./cron-saturday-run');
   const registry = [
     { id: 'CRISIS-105-WESTOAKL', type: 'crisis', name: 'The West Oakland Crime Spike', status: 'closed', hoods: ['West Oakland'] },
-    { id: 'INIT-003:design-phase', type: 'initiative-stage', stage: 'design-phase', status: 'open',
+    { id: 'INIT-003:design-phase', type: 'initiative-stage', initiativeId: 'INIT-003', stage: 'design-phase', status: 'open',
       name: 'Fruitvale Transit Hub Phase II — Visioning — design-phase', hoods: ['Fruitvale'] },
-    { id: 'INIT-002:dispatch-live', type: 'initiative-stage', stage: 'dispatch-live', status: 'open',
+    { id: 'INIT-002:dispatch-live', type: 'initiative-stage', initiativeId: 'INIT-002', stage: 'dispatch-live', status: 'open',
       name: 'Oakland Alternative Response Initiative — dispatch-live', hoods: ['West Oakland', 'Fruitvale'] },
-    { id: 'INIT-099:announced', type: 'initiative-stage', stage: 'announced', status: 'open', name: 'Nowhere Plan — announced', hoods: [] }
+    { id: 'INIT-099:announced', type: 'initiative-stage', initiativeId: 'INIT-099', stage: 'announced', status: 'open', name: 'Nowhere Plan — announced', hoods: [] },
+    // the live C113 collision (codex #1): one initiative, the stage that ended and the stage now running
+    { id: 'INIT-010:operational', type: 'initiative-stage', initiativeId: 'INIT-010', stage: 'operational', status: 'open',
+      name: 'West Oakland Tenant Defense Fund — operational', hoods: ['West Oakland'] },
+    { id: 'INIT-010:vote-scheduled', type: 'initiative-stage', initiativeId: 'INIT-010', stage: 'vote-scheduled', status: 'closed',
+      name: 'West Oakland Tenant Defense Fund — vote-scheduled', hoods: ['West Oakland'] }
   ];
   const art = (stem, text, intake) => ({ stem, sidecarFile: stem + '.staged.json', text, sidecar: { intake: Object.assign({ storylines: [], hoods: [] }, intake) } });
   const set = [
@@ -225,7 +230,9 @@ console.log('Test 6: mergeStorylineLedger');
     art('tagged', 'The West Oakland Crime Spike, again.', { storylines: [{ slug: 'INIT-001:disbursement-active', verb: 'advanced' }], hoods: ['West Oakland'] }),
     art('two', 'In West Oakland, the Oakland Alternative Response Initiative met the end of the West Oakland Crime Spike.', { hoods: ['West Oakland'] }),
     art('no-hood-entry', 'The Nowhere Plan, in Downtown.', { hoods: ['Downtown'] }),
-    art('legacy-slug', 'The West Oakland Crime Spike ended.', { storylines: [{ slug: 'west-oakland-elio-perez-crisis', verb: 'opened' }], hoods: ['West Oakland'] })
+    art('legacy-slug', 'The West Oakland Crime Spike ended.', { storylines: [{ slug: 'west-oakland-elio-perez-crisis', verb: 'opened' }], hoods: ['West Oakland'] }),
+    art('tenant-fund', 'Rent clinics opened under the West Oakland Tenant Defense Fund this week.', { hoods: ['West Oakland'] }),
+    art('intake-only', 'Fruitvale had a quiet week.\n\n## INTAKE\nHOOD: Fruitvale\nCLAIM: Fruitvale Transit Hub Phase II design record | Initiative_Tracker', { hoods: ['Fruitvale'] })
   ];
   const hits = attachStorylines(set, registry);
   const on = stem => hits.filter(h => h.stem === stem).map(h => h.id).sort().join(',');
@@ -242,12 +249,76 @@ console.log('Test 6: mergeStorylineLedger');
   assert('a retired slug is not an engine storyline: the piece can attach', on('legacy-slug') === 'CRISIS-105-WESTOAKL');
   assert('attach carries the sidecar file it will write', hits.every(h => h.sidecarFile === h.stem + '.staged.json'));
   assert('no registry, no attaches', attachStorylines(set, []).length === 0);
+  assert('codex #1: a name two stages share goes to the running stage only', on('tenant-fund') === 'INIT-010:operational');
+  assert('codex #5: a name only in the INTAKE register does not attach', on('intake-only') === '');
+
+  // codex #4: an unavailable registry is an error, never a quiet zero.
+  const { loadStorylineRegistryStrict } = require('./cron-saturday-run');
+  let regErr = null;
+  try { loadStorylineRegistryStrict('no-such-cycle'); } catch (e) { regErr = e; }
+  assert('codex #4: a missing desk signal throws', regErr && /storyline registry unavailable/.test(regErr.message));
 
   // Curation never reads an attached storyline: the print pick stays grade-first.
-  const { curationScore } = require('./cron-saturday-run');
+  const { curationScore, primarySlug } = require('./cron-saturday-run');
   const plain = { sidecar: { intake: { storylines: [], names: [] } } };
   const attached = { sidecar: { intake: { storylines: [{ slug: 'CRISIS-105-WESTOAKL', verb: 'referenced', attachedBy: 'stepAttach' }], names: [] } } };
   assert('an attached storyline does not move the curation score', curationScore(attached, null) === curationScore(plain, null));
+  assert('an attached storyline is never the print-dedup slug', primarySlug(attached) === null && primarySlug(plain) === null);
+  const both = { sidecar: { intake: { storylines: [{ slug: 'CRISIS-105-WESTOAKL', verb: 'referenced', attachedBy: 'stepAttach' },
+    { slug: 'INIT-001:disbursement-active', verb: 'advanced' }] } } };
+  assert('the assigned storyline stays the print-dedup slug', primarySlug(both) === 'INIT-001:disbursement-active');
+}
+
+// engine.270 codex #2/#3 — the on-disk write: re-checked, atomic, read back; a
+// retry after a partial run adds only what is missing, so the week counts once.
+{
+  const fs = require('fs'), os = require('os'), path = require('path'), crypto = require('crypto');
+  const { commitAttaches, aggregateStorylineSignals: agg, mergeStorylineLedger: merge } = require('./cron-saturday-run');
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'engine270-attach-'));
+  const sha = t => crypto.createHash('sha256').update(t).digest('hex');
+  const put = (stem, text) => {
+    fs.writeFileSync(path.join(dir, stem + '.staged.md'), text);
+    const side = { status: 'staged', desk: 'civic', cycle: '113', article: path.join(dir, stem + '.staged.md'),
+      intake: { storylines: [], hoods: ['Fruitvale'], names: [] } };
+    fs.writeFileSync(path.join(dir, stem + '.staged.json'), JSON.stringify(side, null, 2));
+    return { stem, sidecarFile: stem + '.staged.json', articleSha256: sha(text), id: 'INIT-003:design-phase', status: 'open' };
+  };
+  const a = put('a', 'Article A on the Fruitvale Transit Hub Phase II.');
+  const b = put('b', 'Article B on the Fruitvale Transit Hub Phase II.');
+  const goodB = fs.readFileSync(path.join(dir, 'b.staged.json'), 'utf8');
+  fs.writeFileSync(path.join(dir, 'b.staged.json'), '{ not json');
+  let partial = null;
+  try { commitAttaches(dir, [a, b], '113'); } catch (e) { partial = e; }
+  const readSide = stem => JSON.parse(fs.readFileSync(path.join(dir, stem + '.staged.json'), 'utf8'));
+  assert('a malformed sidecar throws, loud', Boolean(partial));
+  assert('the sidecar before it was written once', readSide('a').intake.storylines.length === 1
+    && readSide('a').intake.storylines[0].attachedBy === 'stepAttach' && readSide('a').intake.storylines[0].verb === 'referenced');
+  fs.writeFileSync(path.join(dir, 'b.staged.json'), goodB);
+  const retry = commitAttaches(dir, [a, b], '113');
+  assert('the retry writes only what is missing', retry.written === 1 && readSide('a').intake.storylines.length === 1
+    && readSide('b').intake.storylines.length === 1);
+  assert('no temp file is left behind', !fs.readdirSync(dir).some(f => f.endsWith('.attach-tmp')));
+  const set = ['a', 'b'].map(stem => ({ stem, sidecar: readSide(stem) }));
+  const sig = agg(set).find(s => s.slug === 'INIT-003:design-phase');
+  assert('the week counts each attach once', sig && sig.referenced === 2 && sig.articles.length === 2);
+  const H = ['StorylineId', 'FirstCycle', 'LastCycle', 'Status', 'Advanced', 'Opened', 'Closed', 'Referenced', 'Articles', 'Citizens', 'Hoods', 'Desks'];
+  const row = ['INIT-003:design-phase', '109', '', 'open', 0, 0, 0, 0, 0, '', 'Fruitvale', 'civic'];
+  const m = merge([H, row], [sig], '113', [{ id: 'INIT-003:design-phase', status: 'open', startCycle: null }]);
+  const u = m.updates[0] && m.updates[0].row;
+  assert('exact row deltas: Referenced +2, Articles +2, Status still the engine\'s, FirstCycle untouched',
+    u && u[7] === 2 && u[8] === 2 && u[3] === 'open' && u[1] === '109' && u[2] === '113' && m.appends.length === 0);
+  const c = put('c', 'Article C on the Fruitvale Transit Hub Phase II.');
+  fs.writeFileSync(path.join(dir, 'c.staged.md'), 'Article C, edited after the match.');
+  const changed = commitAttaches(dir, [c], '113');
+  assert('a sidecar whose Article changed since the match is skipped by name, never written',
+    changed.written === 0 && changed.skipped.length === 1 && /bytes changed/.test(changed.skipped[0])
+    && readSide('c').intake.storylines.length === 0);
+  const d = put('d', 'Article D on the Fruitvale Transit Hub Phase II.');
+  const dSide = readSide('d'); dSide.intake.storylines.push({ slug: 'INIT-001:disbursement-active', verb: 'advanced' });
+  fs.writeFileSync(path.join(dir, 'd.staged.json'), JSON.stringify(dSide, null, 2));
+  assert('a sidecar now on an assigned storyline is left alone', commitAttaches(dir, [d], '113').skipped.length === 1);
+  assert('a sidecar from another Cycle is left alone', commitAttaches(dir, [put('e', 'E on the Fruitvale Transit Hub Phase II.')], '112').skipped.length === 1);
+  fs.rmSync(dir, { recursive: true, force: true });
 }
 
 // engine.152 (S412) — coverage runs both ways: the snippet the light classifier reads

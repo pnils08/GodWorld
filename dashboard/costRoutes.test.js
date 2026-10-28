@@ -3,7 +3,7 @@ import assert from 'assert';
 import fs from 'fs';
 import os from 'os';
 import { join } from 'path';
-import { aggregateActivity, modelUsers } from './costRoutes.js';
+import { aggregateActivity, modelUsers, priceMap, buildPriceList } from './costRoutes.js';
 
 const now = new Date('2026-10-27T12:00:00Z');
 const rows = [
@@ -37,4 +37,21 @@ assert.strictEqual(u.get('anthropic/test-model-1')[0].name, 'scripts/thing.js');
 assert.ok(!u.has('anthropic/only-in-test'));
 assert.strictEqual(u.get('nvidia/x')[0].kind, 'claude-mem');
 assert.ok(!JSON.stringify([...u.values()]).includes('never-read'));
+
+// price list: per-million dollars, config-named + spending + watch models, cheapest output first
+const pm = priceMap([
+  { id: 'm/a', pricing: { prompt: '0.000002', completion: '0.00001' }, context_length: 1000, created: 1760000000 },
+  { id: 'w/cheap', pricing: { prompt: '0.0000001', completion: '0.0000005' }, context_length: 1000 },
+  { id: 'bad/none', pricing: {} },
+]);
+assert.strictEqual(pm.get('m/a').in, 2);
+assert.strictEqual(pm.get('m/a').out, 10);
+assert.ok(!pm.has('bad/none'));
+const list = buildPriceList(pm, u, [{ model: 'spend/only', usage30: 3 }, { model: 'm/a', usage30: 7 }], ['w/cheap', 'm/a']);
+assert.deepStrictEqual(list.map((r) => r.id).slice(0, 2), ['w/cheap', 'm/a']);
+assert.strictEqual(list.find((r) => r.id === 'w/cheap').watch, true);
+assert.strictEqual(list.find((r) => r.id === 'm/a').watch, false);       // already in use
+assert.strictEqual(list.find((r) => r.id === 'm/a').spend30, 7);
+assert.strictEqual(list.find((r) => r.id === 'spend/only').price, null); // priced unknown sorts last
+assert.strictEqual(list[list.length - 1].price, null);
 console.log('costRoutes tests: PASS');

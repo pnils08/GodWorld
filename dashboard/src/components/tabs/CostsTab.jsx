@@ -3,6 +3,7 @@ import { Loader, ChevronDown, ChevronRight, RefreshCw } from 'lucide-react';
 import { Card, Stat, Badge } from '../ui';
 
 const usd = (n) => '$' + (Number(n) || 0).toFixed(2);
+const per = (n) => '$' + (Number(n) || 0).toString();
 
 // "carmen-delaine" -> seats grouped as "carmen-delaine (write, report)"
 function groupRuns(runs) {
@@ -122,12 +123,28 @@ export default function CostsTab() {
                         <div className="flex flex-wrap gap-2">{g.scripts.map((s) => <Badge key={s}>{s}</Badge>)}</div>
                       </div>
                     )}
+                    {m.price && <div>Price: {per(m.price.in)} in / {per(m.price.out)} out per million tokens</div>}
                     <div>{m.promptTokens7.toLocaleString()} tokens in · {m.completionTokens7.toLocaleString()} out (7 days)</div>
                   </div>
                 )}
               </div>
             );
           })}
+        </div>
+      </Card>
+
+      <Card title="Price list — per million tokens, cheapest output first" pad={false}>
+        {!data.pricesReady && <div className="px-5 py-3 text-xs text-warn">Prices are still loading from OpenRouter (the list takes a minute or two) — reload shortly.</div>}
+        <div className="divide-y divide-edge">
+          {(data.priceList || []).map((r) => (
+            <div key={r.id} className="flex items-center gap-3 px-5 py-2 text-sm">
+              <span className="flex-1 break-all text-text">{r.id}</span>
+              {r.watch && <Badge tone="accent">watching</Badge>}
+              {!r.watch && r.uses === 0 && <Badge>no config uses it</Badge>}
+              <span className="w-28 text-right text-xs text-dim">{r.price ? `${per(r.price.in)} in / ${per(r.price.out)} out` : 'price unknown'}</span>
+              <span className="w-20 text-right text-xs text-dim hidden sm:block">{r.spend30 ? `${usd(r.spend30)} /30d` : '—'}</span>
+            </div>
+          ))}
         </div>
       </Card>
 

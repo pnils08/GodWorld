@@ -86,7 +86,59 @@ export function modelUsers({ root = ROOT, home = os.homedir() } = {}) {
   return users;
 }
 
+// Models the builder is watching but does not run yet (edit freely; shown in the price list as "not in use").
+export const WATCH_MODELS = ['openai/gpt-6.1-terra', 'openai/gpt-6-luna'];
+
+// OpenRouter's public model list -> { id: { in, out, ctx, created } } in dollars per million tokens
+export function priceMap(models) {
+  const out = new Map();
+  for (const m of models || []) {
+    const pin = Number(m.pricing && m.pricing.prompt), pout = Number(m.pricing && m.pricing.completion);
+    if (!Number.isFinite(pin) || !Number.isFinite(pout)) continue;
+    out.set(String(m.id).toLowerCase(), { in: +(pin * 1e6).toFixed(3), out: +(pout * 1e6).toFixed(3), ctx: m.context_length, created: m.created ? new Date(m.created * 1000).toISOString().slice(0, 10) : null });
+  }
+  return out;
+}
+
+// every model the config names, plus anything that cost money, plus the watch list — cheapest output first
+export function buildPriceList(prices, users, spendModels, watch = WATCH_MODELS) {
+  const ids = new Map();
+  for (const [id, runs] of users) ids.set(id, { id, uses: runs.length, spend30: 0, watch: false });
+  for (const m of spendModels) {
+    const id = baseModel(m.model);
+    const row = ids.get(id) || { id, uses: 0, spend30: 0, watch: false };
+    row.spend30 += m.usage30; ids.set(id, row);
+  }
+  for (const w of watch) { const id = baseModel(w); if (!ids.has(id)) ids.set(id, { id, uses: 0, spend30: 0, watch: true }); }
+  return [...ids.values()].map((r) => ({ ...r, price: prices.get(r.id) || null }))
+    .sort((a, b) => (a.price ? a.price.out : 1e9) - (b.price ? b.price.out : 1e9));
+}
+
 let cache = { at: 0, body: null };
+const PRICE_FILE = join(os.tmpdir(), 'godworld-openrouter-prices.json');
+let priceCache = { at: 0, map: new Map(), loading: false };
+try {   // survive a dashboard restart: OpenRouter's model list takes a minute or two to download
+  const saved = JSON.parse(fs.readFileSync(PRICE_FILE, 'utf8'));
+  priceCache = { at: saved.at, map: new Map(saved.entries), loading: false };
+} catch { /* first start: the list loads in the background */ }
+
+// Never makes the page wait: returns whatever is cached and refreshes in the background when stale.
+function getPrices() {
+  if (Date.now() - priceCache.at > 6 * 3600 * 1000 && !priceCache.loading) {
+    priceCache.loading = true;
+    fetch(`${OR}/models`, { signal: AbortSignal.timeout(240000) })
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error(`models ${res.status}`))))
+      .then((j) => {
+        const map = priceMap(j.data);
+        if (map.size) {
+          priceCache = { at: Date.now(), map, loading: false };
+          try { fs.writeFileSync(PRICE_FILE, JSON.stringify({ at: priceCache.at, entries: [...map.entries()] })); } catch { /* cache only */ }
+        } else priceCache.loading = false;
+      })
+      .catch(() => { priceCache.loading = false; });
+  }
+  return priceCache.map;
+}
 
 async function getJson(url, key) {
   const res = await fetch(url, { headers: { Authorization: `Bearer ${key}` }, signal: AbortSignal.timeout(15000) });
@@ -95,24 +147,27 @@ async function getJson(url, key) {
 }
 
 export async function buildCostBody(key, now = new Date()) {
-  const [rows, credits] = await Promise.all([getJson(`${OR}/activity`, key), getJson(`${OR}/credits`, key)]);
+  const [rows, credits, prices] = await Promise.all([getJson(`${OR}/activity`, key), getJson(`${OR}/credits`, key), Promise.resolve(getPrices())]);
   const agg = aggregateActivity(rows, now);
   const users = modelUsers();
-  const models = agg.models.map((m) => ({ ...m, runs: users.get(baseModel(m.model)) || [] }));
+  const models = agg.models.map((m) => ({ ...m, runs: users.get(baseModel(m.model)) || [], price: prices.get(baseModel(m.model)) || null }));
   return {
     fetchedAt: now.toISOString(),
     credits: { total: credits.total_credits, used: credits.total_usage, left: credits.total_credits - credits.total_usage },
     today: agg.today, week: agg.week, month: agg.month,
     days: agg.days,
     models,
+    priceList: buildPriceList(prices, users, agg.models),
+    pricesReady: prices.size > 0,
   };
 }
 
 export function registerCostRoutes(app) {
+  getPrices();   // warm the price list at start so the first page load is not waiting on it
   app.get('/api/costs', async (req, res) => {
     const key = process.env.OPENROUTER_MGMT_KEY;
     if (!key) return res.status(503).json({ error: 'OPENROUTER_MGMT_KEY is not set for the dashboard' });
-    const fresh = Date.now() - cache.at < TTL_MS && cache.body;
+    const fresh = cache.body && Date.now() - cache.at < (cache.body.pricesReady ? TTL_MS : 30000);   // retry soon while prices are still loading
     if (fresh && req.query.refresh !== '1') return res.json(cache.body);
     try {
       cache = { at: Date.now(), body: await buildCostBody(key) };

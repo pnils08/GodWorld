@@ -1,42 +1,13 @@
 {
-  "generatedAt": "2026-10-18T17:12:30.526Z",
+  "generatedAt": "2026-10-28T06:30:36.591Z",
   "sheet": "live",
-  "cycle": 111,
-  "scannedLines": 2771,
+  "cycle": 113,
+  "scannedLines": 2396,
   "inert": {
-    "total": 2342,
-    "share": 0.8451822446770119,
-    "byTag": {
-      "Sports": 146,
-      "Daily": 435,
-      "Personal": 254,
-      "Neighborhood": 704,
-      "Civic Perception": 324,
-      "PrevEvening": 182,
-      "Micro-Event": 74,
-      "Lifestyle": 76,
-      "Background": 74,
-      "Holiday": 29,
-      "QoL": 3,
-      "Weather": 2,
-      "Civic": 4,
-      "Team": 12,
-      "GAME-Micro": 4,
-      "CIVIC-Event": 6,
-      "MEDIA-Event": 13
-    },
-    "byEngine": {
-      "inferred:phase05-citizens/applyGameNightMoments.js": 8,
-      "unknown:no unique source evidence": 1575,
-      "inferred:phase05-citizens/generateCitizensEvents.js": 702,
-      "inferred:phase05-citizens/runRelationshipEngine.js": 1,
-      "inferred:phase05-citizens/runNeighborhoodEngine.js": 1,
-      "inferred:phase05-citizens/runYouthEngine.js": 15,
-      "inferred:phase04-events/generateGenericCitizenMicroEvent.js": 19,
-      "inferred:phase04-events/generateGameModeMicroEvents.js": 4,
-      "inferred:phase05-citizens/generateCivicModeEvents.js": 5,
-      "inferred:phase05-citizens/generateMediaModeEvents.js": 12
-    },
+    "total": 0,
+    "share": 0,
+    "byTag": {},
+    "byEngine": {},
     "codeSites": [
       {
         "file": "phase04-events/generateGameModeMicroEvents.js",
@@ -160,177 +131,172 @@
       },
       {
         "file": "phase04-events/generateGenericCitizenMicroEvent.js",
-        "line": 603,
+        "line": 616,
         "tag": "Background"
       },
       {
         "file": "phase04-events/generateGenericCitizenMicroEvent.js",
-        "line": 606,
+        "line": 619,
         "tag": "Neighborhood"
       },
       {
         "file": "phase04-events/generateGenericCitizenMicroEvent.js",
-        "line": 607,
+        "line": 620,
         "tag": "FirstFriday"
       },
       {
         "file": "phase04-events/generateGenericCitizenMicroEvent.js",
-        "line": 608,
+        "line": 621,
         "tag": "CreationDay"
       },
       {
         "file": "phase04-events/generateGenericCitizenMicroEvent.js",
-        "line": 609,
+        "line": 622,
         "tag": "Holiday"
       },
       {
         "file": "phase04-events/generateGenericCitizenMicroEvent.js",
-        "line": 610,
+        "line": 623,
         "tag": "Sports"
       },
       {
         "file": "phase04-events/generateGenericCitizenMicroEvent.js",
-        "line": 613,
+        "line": 626,
         "tag": "PrevEvening"
       },
       {
-        "file": "phase05-citizens/applyGameNightMoments.js",
-        "line": 178,
+        "file": "phase05-citizens/generateCitizensEvents.js",
+        "line": 458,
         "tag": "Neighborhood"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 346,
+        "line": 533,
         "tag": "Neighborhood"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 421,
+        "line": 559,
         "tag": "Neighborhood"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 447,
-        "tag": "Neighborhood"
-      },
-      {
-        "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 981,
+        "line": 1093,
         "tag": "Personal"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 990,
+        "line": 1102,
         "tag": "QoL"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 992,
+        "line": 1104,
         "tag": "Weather"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1010,
+        "line": 1122,
         "tag": "PrevEvening"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1015,
+        "line": 1127,
         "tag": "Lifestyle"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1016,
+        "line": 1128,
         "tag": "Neighborhood"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1019,
+        "line": 1131,
         "tag": "Neighborhood"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1020,
+        "line": 1132,
         "tag": "FirstFriday"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1021,
+        "line": 1133,
         "tag": "CreationDay"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1022,
+        "line": 1134,
         "tag": "Holiday"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1023,
+        "line": 1135,
         "tag": "Sports"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1029,
+        "line": 1141,
         "tag": "Background"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1030,
+        "line": 1142,
         "tag": "Personal"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1031,
+        "line": 1143,
         "tag": "Personal"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1032,
+        "line": 1144,
         "tag": "Personal"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1033,
+        "line": 1145,
         "tag": "Micro-Event"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1034,
+        "line": 1146,
         "tag": "Civic Perception"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1035,
+        "line": 1147,
         "tag": "Civic Perception"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1037,
+        "line": 1149,
         "tag": "Lifestyle"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1038,
+        "line": 1150,
         "tag": "Neighborhood"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1039,
+        "line": 1151,
         "tag": "Civic Perception"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 1041,
+        "line": 1153,
         "tag": "Daily"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 2329,
+        "line": 2435,
         "tag": "Neighborhood"
       },
       {
         "file": "phase05-citizens/generateCitizensEvents.js",
-        "line": 3294,
+        "line": 3422,
         "tag": "Neighborhood"
       },
       {
@@ -640,107 +606,82 @@
       },
       {
         "file": "phase05-citizens/runNeighborhoodEngine.js",
-        "line": 264,
+        "line": 286,
         "tag": "Neighborhood"
       },
       {
         "file": "phase05-citizens/runNeighborhoodEngine.js",
-        "line": 550,
+        "line": 573,
         "tag": "Neighborhood"
       },
       {
         "file": "phase05-citizens/runNeighborhoodEngine.js",
-        "line": 629,
+        "line": 657,
         "tag": "FirstFriday"
       },
       {
         "file": "phase05-citizens/runNeighborhoodEngine.js",
-        "line": 631,
+        "line": 659,
         "tag": "CreationDay"
       },
       {
         "file": "phase05-citizens/runNeighborhoodEngine.js",
-        "line": 633,
+        "line": 661,
         "tag": "Holiday"
-      },
-      {
-        "file": "phase05-citizens/runRelationshipEngine.js",
-        "line": 63,
-        "tag": "Neighborhood"
-      },
-      {
-        "file": "phase05-citizens/runRelationshipEngine.js",
-        "line": 213,
-        "tag": "Holiday"
-      },
-      {
-        "file": "phase05-citizens/runYouthEngine.js",
-        "line": 398,
-        "tag": "Neighborhood"
-      },
-      {
-        "file": "phase05-citizens/runYouthEngine.js",
-        "line": 603,
-        "tag": "Neighborhood"
-      },
-      {
-        "file": "phase05-citizens/runYouthEngine.js",
-        "line": 673,
-        "tag": "Neighborhood"
-      },
-      {
-        "file": "phase05-citizens/runYouthEngine.js",
-        "line": 1020,
-        "tag": "Team"
-      },
-      {
-        "file": "phase05-citizens/runYouthEngine.js",
-        "line": 1024,
-        "tag": "Civic"
-      },
-      {
-        "file": "phase05-citizens/runYouthEngine.js",
-        "line": 1026,
-        "tag": "Neighborhood"
       }
     ]
   },
   "structural": {
-    "total": 6,
+    "total": 9,
     "byTag": {
-      "Advancement": 5,
-      "CareerState": 1
+      "Advancement": 7,
+      "CareerState": 2
     },
     "rows": [
       {
         "tag": "Advancement",
-        "text": "Intake at Tier 1. Media usage C110 (mentioned): a Bay Tribune civic desk piece, C109",
+        "text": "Intake at Tier 1. Media usage C112 (byline-landed): a Bay Tribune sports desk piece, C111",
+        "popId": "POP-00007"
+      },
+      {
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C112 (quoted): a Bay Tribune civic desk piece, C111",
+        "popId": "POP-00034"
+      },
+      {
+        "tag": "Advancement",
+        "text": "Intake at Tier 1. Media usage C112 (quoted): a Bay Tribune sports desk piece, C111",
         "popId": "POP-00170"
       },
       {
         "tag": "Advancement",
-        "text": "Intake at Tier 1. Media usage C110 (quoted): a Bay Tribune civic desk piece, C109",
+        "text": "Intake at Tier 1. Media usage C112 (quoted): a Bay Tribune sports desk piece, C111",
         "popId": "POP-00198"
       },
       {
         "tag": "Advancement",
-        "text": "Intake at Tier 1. Media usage C110 (quoted): a Bay Tribune civic desk piece, C109",
-        "popId": "POP-00201"
+        "text": "Intake at Tier 1. Media usage C112 (quoted): a Bay Tribune sports desk piece, C111",
+        "popId": "POP-00527"
       },
       {
         "tag": "Advancement",
-        "text": "Intake at Tier 1. Media usage C110 (mentioned): a Bay Tribune civic desk piece, C109",
-        "popId": "POP-00170"
+        "text": "Intake at Tier 1. Media usage C112 (quoted): a Bay Tribune sports desk piece, C111",
+        "popId": "POP-00018"
       },
       {
         "tag": "Advancement",
-        "text": "Intake at Tier 1. Media usage C110 (quoted): a Bay Tribune civic desk piece, C109",
-        "popId": "POP-00201"
+        "text": "Intake at Tier 1. Media usage C112 (quoted): a Bay Tribune sports desk piece, C111",
+        "popId": "POP-00003"
       },
       {
         "tag": "CareerState",
         "text": "industry=service|employer=large|level=1|careerMod=0.92",
-        "popId": "POP-01017"
+        "popId": "POP-00971"
+      },
+      {
+        "tag": "CareerState",
+        "text": "industry=service|employer=large|level=1|careerMod=0.92",
+        "popId": "POP-00030"
       }
     ]
   },
@@ -814,7 +755,7 @@
     {
       "where": "code",
       "file": "phase05-citizens/bondEngine.js",
-      "line": 2675,
+      "line": 2900,
       "text": " envy, displacement grievance — are design-listed, not yet built.)",
       "kind": "comment",
       "prose": false
@@ -822,7 +763,7 @@
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
-      "line": 369,
+      "line": 481,
       "text": " engine.299 Task 4: the money lines gate on the row's own debt, not DisplacementRisk",
       "kind": "comment",
       "prose": false
@@ -830,7 +771,7 @@
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
-      "line": 370,
+      "line": 482,
       "text": "DisplacementRisk",
       "kind": "string",
       "prose": false
@@ -838,7 +779,7 @@
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
-      "line": 1152,
+      "line": 1264,
       "text": "displacement",
       "kind": "string",
       "prose": true,
@@ -848,7 +789,7 @@
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
-      "line": 1153,
+      "line": 1265,
       "text": "displacement",
       "kind": "string",
       "prose": true,
@@ -858,7 +799,7 @@
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
-      "line": 1172,
+      "line": 1284,
       "text": "displacementmove",
       "kind": "string",
       "prose": false,
@@ -868,7 +809,7 @@
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
-      "line": 1694,
+      "line": 1806,
       "text": " displacement crisis, C115/C116). Counts stay at city scale; only the",
       "kind": "comment",
       "prose": false
@@ -876,7 +817,7 @@
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
-      "line": 1702,
+      "line": 1814,
       "text": " gentrification stuck-emitter; the dial is now attached to live mechanics",
       "kind": "comment",
       "prose": false
@@ -884,7 +825,7 @@
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
-      "line": 2908,
+      "line": 3033,
       "text": " citywide mood alone. WealthLevel 0-10; DisplacementRisk 0-10 (≥7 = the",
       "kind": "comment",
       "prose": false
@@ -892,7 +833,7 @@
     {
       "where": "code",
       "file": "phase05-citizens/generateCitizensEvents.js",
-      "line": 2922,
+      "line": 3047,
       "text": " migration engine's DisplacementRisk — a real-Oakland displacement premise is not a fact about this citizen.",
       "kind": "comment",
       "prose": false
@@ -1464,5 +1405,5 @@
       "reason": "Owner-engine pool (lifeEvent.*): the life event belongs to its own engine, not a color pool."
     }
   ],
-  "acceptanceEmpty": false
+  "acceptanceEmpty": true
 }

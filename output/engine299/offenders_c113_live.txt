@@ -1,0 +1,2 @@
+◇ injected env (32) from ../.config/godworld/.env // tip: ⌘ suppress logs { quiet: true }
+{"sheet":"live","cycle":113,"scannedLines":2396,"inert":0,"share":0,"structural":9,"premise":62,"lifeVerbs":20,"acceptanceEmpty":true,"incomplete":false}

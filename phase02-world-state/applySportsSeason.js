@@ -105,6 +105,8 @@ function applySportsSeason_(ctx) {
     var lastEntry = entries[entries.length - 1];
     S.sportsFeedSeasonType = lastEntry.seasonType || "unknown";
     S.sportsWeek = deriveSportsWeekFromFeed_(entries, ctx._sportsWeekHistory || {}, currentCycle);
+    // engine.206 cut 2: a week on a run at the World_Config sportsStreakHeadline bar reaches the business desk
+    markSportsStreakHeadline_(S.sportsWeek, sportsStreakHeadlineConfig_(ctx));
     S.activeSports = deriveActiveSportsFromFeed_(entries);
     S.sportsSource = "oakland-feed";
 
@@ -305,15 +307,20 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
  * weekly result is the folded WeekRecord the reader anchored on the first game row.
  */
 function deriveSportsWeekFromFeed_(entries, history, currentCycle) {
-  var out = {}, lens = {}, weekly = {};
+  var out = {}, lens = {}, weekly = {}, streak = {};
   for (var i = 0; i < entries.length; i++) {
     var team = normalizeOaklandFeedTeam_(entries[i].teamsUsed);
     if (team !== "A's" && team !== 'Oaks') continue;
     lens[team] = entries[i].seasonType;
     if (entries[i].weekRecord && !weekly[team]) weekly[team] = parseSportsWeekRecord_(entries[i].weekRecord);
+    // engine.206 cut 2: the run the franchise is on at its last row with a typed streak
+    var run = parseSportsStreak_(entries[i].streak);
+    if (run) streak[team] = run.dir + run.n;
   }
   for (var t in lens) {
-    if (lens.hasOwnProperty(t)) out[t] = buildSportsWeek_(t, weekly[t] || null, lens[t], history[t] || {}, currentCycle);
+    if (!lens.hasOwnProperty(t)) continue;
+    out[t] = buildSportsWeek_(t, weekly[t] || null, lens[t], history[t] || {}, currentCycle);
+    if (streak[t]) out[t].streak = streak[t];
   }
   return out;
 }
@@ -366,7 +373,8 @@ function deriveSportsIntensity_(weeks, history, lensHistory, openings, currentCy
     Logger.log('  sportsWeek ' + k + ': g ' + w.g + ' h ' + w.h + ' w ' + w.w + ' l ' + w.l + ' lens ' + w.lens +
       ' vol ' + r2(w.vol) + ' stakes ' + r2(w.stakes) + ' reach ' + r2(w.reach) + ' exp ' + r2(w.expectation) +
       ' n ' + w.n + ' surprise ' + r2(w.surprise) + ' unsigned ' + r2(w.unsigned) + ' signed ' + r2(w.signed) +
-      ' venueShare ' + r2(w.venueShare) + ' venue ' + w.venue.join('/') + ' median ' + r2(w.median));
+      ' venueShare ' + r2(w.venueShare) + ' venue ' + w.venue.join('/') + ' median ' + r2(w.median) +
+      ' streak ' + (w.streak || '-') + (w.streakHeadline ? ' headline' : ''));
   }
   Logger.log('  sportsCity: intensity ' + r2(city.intensity) + ' signed ' + r2(city.signed) + ' reach ' +
     r2(city.reach) + ' games ' + city.games + ' median ' + r2(city.median) + ' band ' + city.band);

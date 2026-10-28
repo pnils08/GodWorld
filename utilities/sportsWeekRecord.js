@@ -418,12 +418,54 @@ function sportsFadeRateConfig_(ctx) {
   return null;
 }
 
+// engine.206 cut 2 (builder 2026-10-27: "the streaks or teams success and if is playoffs should be
+// what drives it to be a headline"; the bar, picked from 4 / 5 / 6: "5 in a row"). The feed's typed
+// Streak (W5 / L6) is the run the franchise is on at its last row of the Cycle. It never sizes the
+// week — signed and every reader of it stay as they are; it only carries a week whose own size sits
+// under the .15 gate to the business desk (economicRippleEngine SPORTS_WEEK).
+var SPORTS_STREAK_HEADLINE_DEFAULT_ = 5;
+
+function parseSportsStreak_(raw) {
+  var m = /^([WL])(\d+)$/i.exec(raw == null ? '' : String(raw).trim());
+  return m ? { dir: m[1].toUpperCase(), n: Number(m[2]) } : null;
+}
+
+// World_Config sportsStreakHeadline: absent = the default; an integer 2..30 is used; anything else =
+// Engine_Errors row and no streak headline this Cycle (the .15 gate still runs) — the fade-rate shape.
+function sportsStreakHeadlineConfig_(ctx) {
+  var raw = ctx && ctx.config ? ctx.config.sportsStreakHeadline : undefined;
+  if (raw === undefined) return SPORTS_STREAK_HEADLINE_DEFAULT_;
+  var n = (raw === '' || raw === null || typeof raw === 'boolean') ? NaN : Number(raw);
+  if (isFinite(n) && Math.floor(n) === n && n >= 2 && n <= 30) return n;
+  var err = new Error('engine.206: World_Config sportsStreakHeadline not usable (' + String(raw) +
+    ') — no streak headline this Cycle');
+  if (typeof logEngineError_ === 'function') logEngineError_(ctx, 'Phase2-SportsFeed', err);
+  if (typeof Logger !== 'undefined') Logger.log(err.message);
+  return null;
+}
+
+// In place on S.sportsWeek: wk.streakRun = the parsed run (when the feed typed one), wk.streakHeadline
+// = a game week on a run at or past the bar. bar null (unusable config) marks none.
+function markSportsStreakHeadline_(weeks, bar) {
+  for (var f in (weeks || {})) {
+    if (!weeks.hasOwnProperty(f) || !weeks[f]) continue;
+    var wk = weeks[f], run = parseSportsStreak_(wk.streak);
+    wk.streakRun = run;
+    wk.streakHeadline = !!(bar && run && wk.g > 0 && run.n >= bar);
+  }
+  return weeks;
+}
+
 if (typeof module !== 'undefined' && module.exports) {
   module.exports = {
     sportsLastGameWeek_: sportsLastGameWeek_,
     sportsAftermathKind_: sportsAftermathKind_,
     sportsAftermathShare_: sportsAftermathShare_,
     sportsFadeRateConfig_: sportsFadeRateConfig_,
+    SPORTS_STREAK_HEADLINE_DEFAULT_: SPORTS_STREAK_HEADLINE_DEFAULT_,
+    parseSportsStreak_: parseSportsStreak_,
+    sportsStreakHeadlineConfig_: sportsStreakHeadlineConfig_,
+    markSportsStreakHeadline_: markSportsStreakHeadline_,
     SPORTS_FADE_DEFAULT_: SPORTS_FADE_DEFAULT_,
     parseSportsWeekRecord_: parseSportsWeekRecord_,
     sportsWeekForEntry_: sportsWeekForEntry_,

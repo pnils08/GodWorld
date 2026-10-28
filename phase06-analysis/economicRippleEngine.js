@@ -482,15 +482,25 @@ function detectCalendarRipples_(ctx, currentCycle) {
     var hfw = sportsWeeks[hf], hfSigned = Math.abs(Number(hfw.signed) || 0);
     if ((Number(hfw.venueShare) || 0) >= 0.5 && hfw.venue && hfw.venue.length) {
       for (var hvi = 0; hvi < hfw.venue.length; hvi++) homeVenues[hfw.venue[hvi]] = true;
-    } else if (hfSigned > awayLeadSigned) { awayLead = hf; awayLeadSigned = hfSigned; }
+    } else if ((hfSigned >= 0.15 || (hfw.streakHeadline && hfw.streakRun)) && (awayLead === '' || hfSigned > awayLeadSigned)) {
+      // the away bars ride the larger week among those that file (engine.206 cut 2: a streak-carried week files too)
+      awayLead = hf; awayLeadSigned = hfSigned;
+    }
   }
   for (var sf in sportsWeeks) {
     if (!sportsWeeks.hasOwnProperty(sf)) continue;
     var swk = sportsWeeks[sf], swSigned = Number(swk.signed) || 0;
-    if (!(swk && swk.g > 0) || Math.abs(swSigned) < 0.15) continue;   // no games → no week (signed is 0 then anyway; agy review)
+    // engine.206 cut 2 (builder 2026-10-27): a run at the streak bar (Phase 2 wk.streakHeadline) carries a
+    // week under .15 to the business desk. It never sizes the week: the sign is the run's, the impact the
+    // week's own, at least 1 so the opened gate never files a zero-strength ripple. At/above .15: unchanged.
+    var swRun = (swk && swk.streakHeadline && swk.streakRun) ? swk.streakRun : null;
+    var swCarried = Math.abs(swSigned) < 0.15;
+    if (!(swk && swk.g > 0) || (swCarried && !swRun)) continue;   // no games → no week (signed is 0 then anyway; agy review)
+    var swUp = swCarried ? swRun.dir === 'W' : swSigned > 0;
     var swHome = (Number(swk.venueShare) || 0) >= 0.5 && swk.venue && swk.venue.length;
     var swBars = sportsWeekBarsFor_(weekBars, swHome ? swk.venue : null, homeVenues, !swHome && sf === awayLead);
-    var swText = sf + (swSigned > 0 ? ' game-week spending' : ' game-week slump');
+    var swText = sf + (swUp ? ' game-week spending' : ' game-week slump');
+    if (swCarried) swText += ' — ' + swRun.n + ' straight ' + (swRun.dir === 'W' ? 'wins' : 'losses');
     if (swBars.ids.length) {
       swText += ' — ' + swBars.ids.length + ' bar(s) and restaurant(s) ' +
         (swHome ? 'at ' + swk.venue.join(' / ') : 'across the nightlife hoods') +
@@ -500,7 +510,9 @@ function detectCalendarRipples_(ctx, currentCycle) {
       { description: swText, rippleKey: String(sf).replace(/[^A-Za-z]/g, '').toUpperCase() },
       swHome ? swk.venue[0] : 'all', cal);
     if (swRipple) {
-      swRipple.impact = swRipple.currentStrength = Math.round(15 * swSigned);
+      swRipple.impact = swRipple.currentStrength = swCarried
+        ? (swUp ? 1 : -1) * Math.max(1, Math.round(15 * Math.abs(swSigned)))
+        : Math.round(15 * swSigned);
       swRipple.neighborhoods = swHome ? swk.venue.slice() : ['all'];
       if (swBars.ids.length) { swRipple.bizIds = swBars.ids; swRipple.bizPp = swBars.pp; }
     }

@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-10-25 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-10-27 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -2442,8 +2442,13 @@
 
 - **mintNamedEmployer_(role)**
 
+- **mintGameTeam_(role)**
+
+- **mintSeedSlot_(seed, list)**
+
+- **mintHoodFirst_(list, hood)**
+
 - **pickMintEmployer_(roleType, hood, clockMode, seed, pool, hasRoom)**
-  RNG: ctx.rng / safeRand_(ctx)
 
 - **checkEmergencePromotions_(ss, cycle, maxQueue, simYear, ctx)**
   Sheets: Generic_Citizens
@@ -4761,6 +4766,13 @@
 - **sportsFadeRateConfig_(ctx)**
   Config: ctx.config.sportsFadeRate
 
+- **parseSportsStreak_(raw)**
+
+- **sportsStreakHeadlineConfig_(ctx)**
+  Config: ctx.config.sportsStreakHeadline
+
+- **markSportsStreakHeadline_(weeks, bar)**
+
 ### textCrawler.js
 - **crawlAllTxtFiles(rootFolderId, outputFileName)**
 
@@ -4842,4 +4854,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1753
+**Functions mapped:** 1759

@@ -297,6 +297,8 @@ var ENGINE209_CONFIG_SEEDS = [
   ['franchiseWeightFanRate', 0.01, 'engine.209 weight moved per game week by fan reach relative to the franchise\'s own trailing mean (rate × clamp(Δ/mean, −1, 1)); 0 while fandom is unseeded', 0, 1, false],
   ['franchiseWeightCap', 1.5, 'engine.209 the most any franchise can weigh on the city (the A\'s start at 1.0)', 0.1, 5, false],
   ['franchiseWeightFloor', 0.1, 'engine.209 the least any franchise can weigh once it has played (the Oaks start at 0.35)', 0, 1, false],
+  // engine.206 cut 2 rides it too: sportsStreakHeadlineConfig_ reads it in Phase 2 (builder 2026-10-27: 5)
+  ['sportsStreakHeadline', 5, 'engine.206 the run of straight wins or losses (the feed\'s Streak column, at the franchise\'s last row of the Cycle) that carries a game week to the business desk when the week alone sits under the .15 headline gate; wins file spending, losses a slump', 2, 30, true],
   // engine.203d rides this sports group's self-arm (no new ensure call): sportsAftermathShare_
   ['sportsFadeRate', 0.85, 'engine.203d how slowly the city lets go of a franchise\'s last game week once it stops playing: its mood share × rate per quiet Cycle (a title fades from week 1; a loss is held as an upset for one week, then fades). Lower = forgets faster', 0.01, 0.99, false]
 ];

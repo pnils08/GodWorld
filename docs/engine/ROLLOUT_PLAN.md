@@ -102,6 +102,7 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.206 | A streak of 5+ games (builder 2026-10-27) carries a game week past the .15 business-headline gate: W → spending, L → slump; an ordinary week stays under. World_Config sportsStreakHeadline. Opus | in-progress | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 6 §Streak bar (engine.206 cut 2) |
 | engine.319 | The intake mint places a citizen by clock: ClockMode folded at the door; GAME → the team in the title; unnamed CIVIC → City of Oakland; unnamed MEDIA → a news outlet. LIVE PROD @165 stage 29 2026-10-27 (builder go); first live fire C114. Opus | live-observing | engine-sheet | [[../plans/2026-07-27-employment-living-system]] Task 10 |
 | engine.320 | An off-map intake hood refuses the whole queue up front, as the engine.319 clock does (it threw mid-pass: earlier mints committed, no queue row cleared). LIVE PROD @166 stage 30 2026-10-27 (builder go); first live fire C114. Opus | live-observing | engine-sheet | [[../plans/2026-07-27-employment-living-system]] Task 11 |
 | pipeline.85 | Rhea gates the world's record, not the Packet (builder 10-25: gate the facts, not the color): writer fence + repair pass gone, audit never fails a draft, Rhea sees only what named citizens said + ledger + world state. Proof: 2026-10-26 fanout | live-observing | research-build | [[../plans/2026-10-11-media-extension]] §Status log pipeline.85 |
@@ -139,7 +140,7 @@
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.206 | Streaks drive a game week toward a business headline (builder 2026-10-27: ordinary weeks stay under the .15 gate; streaks, team success and playoffs push it over). Playoffs + team success already feed it; the streak does not. Bench streak options, builder picks the rate | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 6 §Builder's words (2026-10-27) |
+| infrastructure.13 | lib/wakePerception.test.js fails on main: "snippet capped at 180" (nightlyIntakeRow body cap), 107/108; fails on HEAD before engine.206, found by its full-suite run 2026-10-27 | ready |  | `lib/wakePerception.test.js:242` |
 | engine.321 | Is a tracked mint business growth (its headcount signal; 2+ at one business = BUSINESS_EXPANSION)? Builder 2026-10-27: "a citizen added to a buisness can result in a growth" — stands as built, no change | wontfix |  | [[../plans/2026-07-27-employment-living-system]] §Open questions |
 | pipeline.90 | Dashboard COSTS tab: OpenRouter spend by day and model, what runs each model, credit left; live behind login. Builder to view; claude-mem own-key line dropped (it is free-only now) | done-pending-archive | research-build | [[../plans/2026-10-11-media-extension]] §Status log |
 | pipeline.88 | Proposal, builder's call: daily seats (Ines, Tamsin) write angle/packet/draft under a Cycle-keyed stem, so five days share one file set and a failed day can see yesterday's plan (Ines Sun 10-25). Key their stems by day? | needs-info | research-build | [[../plans/2026-10-11-media-extension]] §Status log pipeline.87 |

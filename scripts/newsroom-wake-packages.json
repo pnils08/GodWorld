@@ -1211,7 +1211,7 @@
     }
   },
   "nia-rook": {
-    "version": "NIAROOK-UNDOCKED-1",
+    "version": "NIAROOK-UNDOCKED-2",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": true,
@@ -1237,6 +1237,9 @@
         "provider": "openrouter",
         "model": "openai/gpt-6-luna"
       }
+    },
+    "writerTools": {
+      "maxToolCalls": 6
     },
     "reviewProfile": {
       "id": "nia-rook-undocked-recap-v1",
@@ -1281,7 +1284,7 @@
     }
   },
   "nia-rook-weekly": {
-    "version": "NIAROOK-UNDOCKED-WEEKLY-1",
+    "version": "NIAROOK-UNDOCKED-WEEKLY-2",
     "rewardLoop": true,
     "active": true,
     "requiredDaily": false,
@@ -1307,6 +1310,9 @@
         "provider": "openrouter",
         "model": "openai/gpt-6-luna"
       }
+    },
+    "writerTools": {
+      "maxToolCalls": 6
     },
     "reviewProfile": {
       "id": "nia-rook-undocked-weekly-digest-v1",

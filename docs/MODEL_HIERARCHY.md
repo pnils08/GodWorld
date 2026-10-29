@@ -90,14 +90,14 @@ The out-of-band CLIs (**Kimi + Codex + Grok** as house guests; **Antigravity/Gem
 
 | Zone | Paths | Kimi / Codex / Grok | Antigravity / Gemini |
 |------|-------|--------------|----------------------|
-| **Control plane** (Claude-owned) | `.claude/**`, `.agents/**`, `CLAUDE.md`, `SESSION_CONTEXT.md` | read-only; sole exception is committing the agent's own `NEXT[...]` line alone at session close | read-only; same own-`NEXT[...]`-line-only close exception |
+| **Control plane** (Claude-owned) | `.claude/**`, `.agents/**`, `CLAUDE.md`, `SESSION_CONTEXT.md` | read-only, no exception (guest lanes carry no SESSION_CONTEXT line since 2026-10-28) | read-only, no exception |
 | **Ordinary CLI scope** | `scripts/**`, `output/**`, `docs/**` | read-write; commit/push only under `AGENTS.md` §Push authorization | read-only; proposed diffs only — except Antigravity's own review files in `output/antigravity/` |
 | **Engine substrate + deployed surfaces** | `phase*/`, `utilities/`, `lib/`, `schemas/`, `dashboard/`, `editions/`, configuration files, hooks, service manifests | no ordinary write authority; changes are proposed only and land through `engine-sheet` (es) | read-only; proposed diffs only |
 | **Protected documentation history** | `docs/archive/**`, `docs/research/papers/**`, `docs/drive-files/**` | immutable unless the builder explicitly names the scope | read-only; proposed diffs only |
 
 **Enforcement — soft tier (Mike's call, S274, under quota pressure):**
 - `.aiderignore` excludes the control plane from Aider's editable map — active enforcement again now that Aider is un-retired (§4), not legacy defense-in-depth.
-- `.githooks/pre-commit` (activate once: `git config core.hooksPath .githooks`) default-denies any commit touching the control plane unless a Claude session prefixes `CLAUDE_CTL=1`; the only external-agent carve-out is a commit whose sole control-plane change is that agent's own `NEXT[...]` line.
+- `.githooks/pre-commit` (activate once: `git config core.hooksPath .githooks`) default-denies any commit touching the control plane unless a Claude session prefixes `CLAUDE_CTL=1`; there is no external-agent carve-out (the NEXT-line one was retired 2026-10-28).
 - The CLIs run as root with bash, so these boundaries remain policy-enforced; Antigravity/Gemini have no project write or commit authority.
 
 **Hard tier (deferred follow-up):** kernel-enforced read-only requires running the cheap agents as a non-root user with `.claude/**` owned by Claude, or in a sandbox with the control plane mounted read-only. Adopt if the soft tier proves leaky.

@@ -41,7 +41,7 @@ The **Terminal-Specific Audit** table for your seat is §Terminal-Specific Detai
 
 ### Step 2: Update SESSION_CONTEXT PIN + NEXT + ROLLOUT_PLAN — model judgment
 
-**The carried-set contract (ADR-0009 §loop-tightening; hardened S283 Mike-direct): SESSION_CONTEXT is a minimal AI→AI handoff — one `#` header line + one `**PIN:**` line + one `**NEXT[<lane>]:**` line per lane. NOTHING else.** No STATUS narrative, no Shipped block, no prose sections, no tables. claude-mem saves the session; git history shows the work; ROLLOUT_PLAN carries open work — none of that goes in SESSION_CONTEXT. Displaced narrative rotates to `docs/mags-corliss/SESSION_HISTORY.md`. Both soft and hard close write the *same* two things — the modes differ only in the sweep overhead, not in what lands in SESSION_CONTEXT.
+**The carried-set contract (ADR-0009 §loop-tightening; hardened S283 Mike-direct): SESSION_CONTEXT is a minimal AI→AI handoff — one `#` header line + one `**PIN:**` line + one `**NEXT[<terminal>]:**` line per Claude terminal (research-build, engine-sheet). NOTHING else; guest lanes carry no line (builder 2026-10-28).** No STATUS narrative, no Shipped block, no prose sections, no tables. claude-mem saves the session; git history shows the work; ROLLOUT_PLAN carries open work — none of that goes in SESSION_CONTEXT. Displaced narrative rotates to `docs/mags-corliss/SESSION_HISTORY.md`. Both soft and hard close write the *same* two things — the modes differ only in the sweep overhead, not in what lands in SESSION_CONTEXT.
 
 **Length is model judgment, not a gate (Mike-direct S298).** The FATAL minimal-handoff guard that enforced NEXT ≤ 350 / PIN ≤ 450 was removed from `sessionEndMechanical.js` — nothing checks shape at close anymore. Keep the lines tight because a long one costs every terminal at every boot, not because a script will stop you.
 
@@ -50,14 +50,16 @@ Three sub-actions:
 1. **Update the PIN line** — pipe-delimited, whole-world state, shared by every lane. Live shape:
 
    ```
-   **PIN:** S<N> | Day <D> | canonical C<c> (bench state) | prod <engine range + what's pending> | <standing facts>
+   **PIN:** S<N> | Day <D> | Canon C<c> | PROD @<deployment> (stage <n>; history: DEPLOY_HISTORY §PROD) | next live fire C<c+1> <date>
    ```
+
+   World state outside the repo only. Deploy notes, stage history and landmines live in DEPLOY_HISTORY or memory, not the PIN.
 
    **Ownership:** when a governing doc hands the PIN to one seat (e.g. `docs/reference/overnight_autonomy_session.md` §4c — PIN is rb's), the other seat messages its PIN facts to the owner instead of writing the line.
 
    Bump `S<N>` +1 on every close, soft *or* hard — it's a boot odometer, a mechanical instance counter, not a span marker (ADR-0009 §loop-tightening refinement 1). Bump `Day <D>` only if a real day boundary crossed. Move the canonical cycle only if a cycle actually ran. Everything after that is standing world-state: prod engine range, the weekly cadence, frozen paths. Add a fact when it becomes true for all lanes; drop one when it stops being load-bearing. There is no `Session:` or `Edition:` field — a close that writes those is writing a PIN that no longer matches the file.
 
-2. **Rewrite your own `NEXT[<lane>]:` line** — one line, aim for ≤ 350 chars: where the work is + the next move, with a `(claude-mem: <hook>)` pointer when the thread is rich. NOT a task stub, and NOT a narrative paragraph — detail lives in ROLLOUT rows / plan changelogs / claude-mem; NEXT is just the entry point into them. Identical form soft or hard. **Default to not touching another lane's NEXT line** — their content is theirs; a verifiable stale fact is fair to correct (2026-08-20 lift, see §External lanes). The ≤350-char aim is the load-bearing part of this step and it is the one most often ignored: lines have reached 1,867 chars by absorbing session narrative that belongs in claude-mem. If your line needs a paragraph, the paragraph goes elsewhere and NEXT carries the pointer.
+2. **Rewrite your own `NEXT[<terminal>]:` line** — one line, aim for ≤ 350 chars, in the form `<job id> → <next step>. Hold: <standing word from Mike, if any>`. Never what was done this session — that is git and the plan's changelog; the ready check reads the row and plan. NOT a narrative paragraph. Identical form soft or hard. **Default to not touching another lane's NEXT line** — their content is theirs; a verifiable stale fact is fair to correct (2026-08-20 lift, see §External lanes). The ≤350-char aim is the load-bearing part of this step and it is the one most often ignored: lines have reached 1,867 chars by absorbing session narrative that belongs in claude-mem. If your line needs a paragraph, the paragraph goes elsewhere and NEXT carries the pointer.
 
 3. **Update ROLLOUT_PLAN.md** — flip closed rows to `done-pending-archive`; move fully-closed clusters to `ROLLOUT_ARCHIVE.md`. ROLLOUT is canonical for what's open.
 
@@ -122,15 +124,9 @@ One line, mechanism not audience-facing prose. Per S208 (work-is-canonization �
 
 ---
 
-## External Lanes — kimi, codex, antigravity (S340)
+## External Lanes — codex, agy, kimi, grok
 
-These are not Claude Code terminals. They have no tmux boot hook, no `.claude/terminals/` dir, and they never run this skill — it isn't reachable from their harness. They close by the contract in the repo-root `AGENTS.md` §Session close, which is the file they already read at boot.
-
-**Their close is two things:** rewrite their own `NEXT[<lane>]:` line in SESSION_CONTEXT.md, and commit path-specifically. Nothing else. No PIN bump — the PIN is whole-world state and a Claude terminal owns it. No ROLLOUT sweep, no mechanical script, no Supermemory bridge.
-
-**What a Claude terminal does about them: normally nothing** — a stale `NEXT[codex]` is Codex's line to fix at its next close, and rewriting another lane's handoff from outside its context loses detail only that lane holds. But correcting one is **judgment now, not a violation** (Mike-direct 2026-08-20): the S304 ownership guard was unwired with the rest of the behavior gates, and `session-context-ownership-guard.sh` remains on disk unwired. Correct a stale *fact* in another lane's line when you can verify it; leave their *content* for them.
-
-The one asymmetry worth knowing: when a Claude terminal reviews and lands an external agent's batch (engine-sheet did this for Codex at S338), the *landing* goes in the Claude terminal's own NEXT line and commit. The external lane still writes its own line for what it did.
+Guest lanes are adversarial reviewers and own no jobs (builder 2026-10-28). They carry no NEXT line and never edit SESSION_CONTEXT: a review lands as a file (`docs/for-claude-review/`, `output/antigravity/`) and the boot's REVIEW INBOX line reports it. Their close contract is the guest-lane rules file, section Session close.
 
 ---
 
@@ -194,7 +190,6 @@ Pulled out of the boot-loaded TERMINAL.md files (2026-08-15, HOUSE-PROCESS GATE)
 | Step 3 `auditPlanTagDrift` reports drift | Informational — does not fail close. Surface as next-session priority signal. |
 | Step 3 `--rotate-history` finds nothing | Expected — STATUS blocks no longer exist. The flag is vestigial; leave it off. |
 | Step 4 stack check shows other-terminal commits | Hold push. "Committed locally; push pending coordination" note in SESSION_CONTEXT. |
-| An external lane's NEXT goes stale | That lane fixes it at its next close. A Claude terminal may correct a verifiable stale fact in it (the ownership guard is unwired, 2026-08-20); leave the content. |
 | All terminals | Run Step 0 + 2 + 3 + 4. There is no Step 1. |
 
 ---
@@ -202,6 +197,8 @@ Pulled out of the boot-loaded TERMINAL.md files (2026-08-15, HOUSE-PROCESS GATE)
 ---
 
 ## Changelog
+
+- 2026-10-28 (S614, engine-sheet) — SESSION_CONTEXT = PIN (world state outside the repo) + one NEXT per Claude terminal (job → next step, holds); guest NEXT lines retired (builder). Step 2 + External Lanes rewritten.
 
 - 2026-10-23 (S594, engine-sheet) — Handoff check removed again (codex post-ship review FIX: a HEAD-relative baseline false-aborts a retried or concurrently committed close and passes when git fails). Builder: "This does nothing."
 - 2026-10-23 (S594, engine-sheet) — Step 3 gained a handoff check in `sessionEndMechanical.js`: the PIN odometer not above the committed one aborts the close; NEXT over 350 chars warns. Builder: skill text gets skipped, code does not — the S594 close skipped the bump (another lane's bump was swept in) and ran a 4,000-char NEXT.

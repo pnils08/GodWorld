@@ -201,7 +201,7 @@ EOF
   # only ever emitted its own NEXT line + a bare "stay in your lane" in CLAUDE.md.
   cat << 'ROSTER'
 TERMINAL ROSTER: research-build and engine-sheet — two builder terminals, one job each (CLAUDE.md §Jobs). Newsroom and city hall run unattended on crons.
-NON-CLAUDE LANES: kimi, codex, antigravity, grok — external CLIs, control-plane read-only (AGENTS.md); each carries its own NEXT line.
+NON-CLAUDE LANES: codex, agy (kimi, grok when run) — adversarial reviewers, control-plane read-only (AGENTS.md); their reviews arrive as files (REVIEW INBOX), no NEXT lines.
 ROSTER
   echo ""
 

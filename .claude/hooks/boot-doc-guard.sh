@@ -62,8 +62,11 @@ import re,sys
 c=sys.stdin.read()
 code=[]
 def hd(m):
-    if re.search(r"(^|[\s;&|(])(python3?|node|perl|ruby|bash|sh)(\s|$)", m.group(1)): code.append(m.group(0))
-    return m.group(1)
+    op = m.group(1)
+    if re.search(r"(^|[\s;&|(])(bash|sh)(\s|$)", op): code.append(m.group(0))   # shell body: analyse whole
+    elif re.search(r"(^|[\s;&|(])(python3?|node|perl|ruby)(\s|$)", op):
+        code.extend(re.findall(r"[\x27\x22]([^\x27\x22\s]*\.md)[\x27\x22]", m.group(0)))   # code body: path literals only
+    return op
 c=re.sub(r"([^\n]*<<-?\s*([\x27\x22]?)(\w+)\2[^\n]*)\n.*?\n\s*\3(?=\n|$)", hd, c, flags=re.S)
 c=re.sub(r"\x27[^\x27]*\s[^\x27]*\x27|\x22[^\x22]*\s[^\x22]*\x22", "", c)
 c=re.sub(r"\d*>&\d+|\d*>>?\s*/dev/null", "", c)

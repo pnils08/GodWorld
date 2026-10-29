@@ -41,7 +41,7 @@ A Claude instance in the phone app with the Drive, Sheets and Supermemory connec
 | T6 | Names: "Rafael Phillips" matches 2 ledger rows, so media usage was skipped; 6 background renames by family match (e.g. Omar Clark → Omar Horton) mean Tribune copy under the old names will not match. Check whether `canon-name-check` / the writer packets carry the rename. | rb | not started |
 | T7 | `[ContentLedger] 1 row(s) skipped fail-closed` (C113 log line 73). Name the row and the reason. C112 not checked. | rb | not started |
 | T8 | Data glitches, canon-facing, proposals only: Oakland_Sports_Feed row 250 Notes say "Austin Rivers", Stats say "Ausin Reaves" (typo too; the engine review shows "Austin Reaves (SG)" in NamesUsed); Story_Seed_Deck row 466 (C113, seed e99aa479) carries "A's W3 [hot-streak]" in the off-season (why is an off-season streak carried — es question). Sheet writes wait on the builder. | rb | not started |
-| T9 | Riley: from the repo, build the installer inventory (project, function, schedule, what it writes). Done already: nothing in scripts/lib/phase*/utilities/dashboard reads a "Feed" tab and the droplet crontab has no Riley or PressPulse entry. Live triggers need the Apps Script console. Builder 2026-10-29: much of the Riley layer is the old codex build still firing, so the table is a retire-or-keep list for that build. Delete nothing; hand the table to the builder. | rb | not started |
+| T9 | Riley: from the repo, build the installer inventory (project, function, schedule, what it writes). Done already: nothing in scripts/lib/phase*/utilities/dashboard reads a "Feed" tab and the droplet crontab has no Riley or PressPulse entry. Live triggers need the Apps Script console. Builder 2026-10-29: much of the Riley layer is the old codex build still firing, so the table is a retire-or-keep list for that build. Delete nothing; hand the table to the builder. | rb | inventory built (Appendix); live trigger list needs the Apps Script console; removals are the builder's |
 | T10 | C114 readback (live fire Sun 2026-11-01): business initiative lift non-zero (INIT-010 moved phase in C113 Phase 5, read via enginePhaseMoves, `applyInitiativeImplementationEffects.js:342`); INIT-001 `BudgetRemaining` 21,400,000 after the sixth engine tranche. | rb | not started |
 
 ## Acceptance
@@ -94,6 +94,35 @@ A Claude instance in the phone app with the Drive, Sheets and Supermemory connec
 | W2 | Story_Seed_Deck row 466 "uses a week label". | "W3" is a three-game win streak ("Oaks L7" in the same line is a losing streak). The open question is the off-season carry (T8). | beats Story_Seed_Deck.jsonl index 464 |
 | W3 | Harry Hayward "matched no citizen, so the moment was dropped". | Unresolved at game night, then minted as POP-01223 by the hiring engine in the same fire; the missing comma between Reaves and Hayward in NamesUsed was hand-fixed before the fire. | execution_log_c113.txt; engine_review_c113.md:11,22 |
 
+## Appendix — Riley trigger inventory (T9)
+
+Built 2026-10-29 from the `riley/` tree (24 `newTrigger` call sites; the same script is often copied into two or three project folders). **Schedules are what the repo installer sets; the live trigger list lives in the Apps Script console and is not reachable from here, so every row is "installed by the repo", not "confirmed firing"** — except Feed, confirmed live 2026-10-28 08:48 CDT. Manifest time zone is America/Chicago. Delete nothing; the lean column is a reading for the builder, not a ruling.
+
+Droplet check: none of `scripts/ lib/ phase*/ utilities/ dashboard/` references the tabs below (`Federation_Status_Log`, `Federation_Nodes`, `Vault Registry`, `Active_Season`, `Press_Pulse`, `Riley_System_Log`: 0 files each), and the droplet crontab has no Riley or PressPulse entry. This covers the repo only, not other Apps Script projects.
+
+| Script (project) | Schedule per installer | What it does | Read by the current sim? | Lean |
+|---|---|---|---|---|
+| buildPressPulseReader (bay-tribune-bound, newsroom-engine; identical) | daily hour 7 | Bay Tribune › Feed: clear, refill with #PressPulse lines from the January text mirror | No. Live rewrite seen 2026-10-28 08:48 | retire |
+| syncReaderQueue (same two + a `fullScript` copy) | daily hour 9 | Reader-queue cells in the bound sheet; the `fullScript` copy also appends to Federation_Status_Log | No | retire |
+| reportNodeStatus via setupHeartbeat (bay-tribune-bound, newsroom-engine, franchise-stats-master) | daily hour 2 | Riley_System_Log › Federation_Status_Log, one row per run. Matches the ~2:17 AM heartbeat row the duet saw | No | retire |
+| runHeartbeat (franchise-stats-master) | daily hour 2 | Riley_System_Log › Federation_Nodes row; calls reportNodeStatus | No | retire |
+| pushPressPulse (franchise-stats-master) | daily hour 3 | Bay Tribune › Intake (reads Active_Season / Stats) | No | retire |
+| Daily_Network_Heartbeat (franchise-stats-master) | daily hour 7 | Reads Vault Registry; emails the status (MailApp) | No | retire (sends mail) |
+| Daily_Network_Heartbeat_Notify (franchise-stats-master) | daily hour 7, via `Create_Daily_Webhook_Trigger` | Posts to Slack and Discord webhooks if the script properties were set; script properties not visible from here | No | retire; **outward-facing**, check first |
+| autoDailyVerify (franchise-stats-master) | daily hour 6 | verifyPlayerCards + activity log in the franchise sheet | No | retire |
+| rebuildFeeds_and_Email, generateFeedsTab, emailFeedsReport (franchise-stats-master) | Mondays hour 8 (report near 8:05) | Rebuilds the Feeds tab; emails the report | No | retire (sends mail) |
+| updateManifest, syncVaults (riley-system-log "setup once") | daily hour 7 | Vault Registry cells | No | retire |
+| handleCreativeData (riley-system-log) | trigger installed outside the repo; re-arms itself every minute while a run is incomplete | Appends a file index of 6 Drive folders (Creative_Vault, storyline dirs) to a creative sheet; reads that project's World_Config | No | retire |
+| runWeeklyImport (finances) | Mondays hour 8 | Finance sheets and rollups in Drive subfolders | No | builder: personal finance, not the sim |
+| buildUniversePDFExtract, mirror-auto / mirror-all-pdf handlers | chained `after(minutes)` | PDF and mirror extracts, self-rescheduling | No | retire |
+| Integrity trio: rileyIntegrityDashboard_v1, rileyVersionLogger_v1 (6-hourly), rileyChangeManifest_v1 (weekly) | triggers set outside the repo | Dashboard sheet + GW4_MasterVault folder trees | No | builder already chose to retire (dashboard); triggers not yet removed per the duet |
+
+**Files that read the live sim sheet (no triggers found; read-only):**
+- `riley/bay-tribune-bound/pressTools.gs` (+ newsroom-engine copy): menu items read `Simulation_Ledger` and `World_Population`.
+- `riley/*/pressEnginev2.gs`: carries the sim sheet id as `GODWORLD_SSID`; `onOpen` menu, drafts written to its own `Press_Drafts` tab.
+- `riley/riley-system-log/autoRegisterCitizen.gs`: reads `Simulation_Ledger`, then appends **random** `POP-#####` / `UNI-#####` ids (`Math.random`) for every citizen row into a separate Population_Ledger › Issued_IDs sheet. Called from `coreSync.gs` via `safeCall`. It writes nothing to the sim sheet, but its ids are not the ledger's POPIDs; nobody should read that Issued_IDs tab as canon.
+- No `riley/` code writes to the sim sheet that I found; the grep was for the sim sheet id and for `getSheetByName` writes in the functions above, not a full audit of every file.
+
 ## Open questions
 
 - N1 and N2 are the builder's calls (sheet write; trigger removal). They block no task.
@@ -103,3 +132,4 @@ A Claude instance in the phone app with the Drive, Sheets and Supermemory connec
 
 - 2026-10-29 (research-build) — Created from the duet handoff; verified against repo, logs and local dumps; W1-W3 recorded.
 - 2026-10-29 (research-build) — Feed rewrite confirmed live (P1); builder: the Riley layer is largely the old codex build still firing, T9 reframed as its retire-or-keep table.
+- 2026-10-29 (research-build) — T9 inventory table built from the riley/ tree (Appendix); three files read the live sim sheet, none writes it; autoRegisterCitizen issues random POP ids to a side sheet.

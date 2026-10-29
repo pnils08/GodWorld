@@ -54,9 +54,6 @@ check('id= fallback named on accept and on complete', (brief.match(/rejects miss
 check('flight plan opens on active contracts', /1\. While docked: spacemolt\/get_active_missions/.test(brief));
 check('plain run kept as the floor', /fly the plain run: mine, sell, refuel/.test(brief));
 check('too-sparse rule', /too sparse/.test(brief) && brief.includes('spacemolt/get_poi'));
-check('empty-belt rule: remaining 0 is named on the rules and on the flight plan', (brief.match(/remaining 0/g) || []).length >= 3);
-check('empty home space: pilot is told to jump to a neighboring system', /every belt in Sol reads remaining 0/.test(brief) && /jump to a neighboring system/.test(brief) && brief.includes('spacemolt/find_route'));
-check('home space no longer a hard wall', !/Stay in home space/.test(brief));
 check('two-night run rule', /about two nights/.test(brief));
 check('pilot does not bet', /You do not bet\. You fly\./.test(brief));
 check('fourth wall: no engine words', !/tier|UsageCount|FameScore|simulation|video game|MCP|openrouter|ledger|POPID/i.test(B.SHOW_RULES));

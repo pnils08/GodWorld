@@ -35,7 +35,7 @@ function articleFor(role) {
 // brief on disk that does not carry this marker, so a rules change reaches the
 // next flight without a hand --force per pilot. Bump when SHOW_RULES or the
 // flight plan changes meaning.
-const BRIEF_VERSION = 'UNDOCKED-BRIEF/3';
+const BRIEF_VERSION = 'UNDOCKED-BRIEF/2';
 
 // The show, in the pilot's own terms. In-world register only: the chair, the
 // board, the night, the city. Never the engine, never a tier, never a tool.
@@ -65,9 +65,8 @@ HOW CREDITS ARE MADE, best way first:
 THE RULES OF THE CHAIR:
 - Your run is about two nights. A contract can carry from night one to night two. A contract still open when your run ends is gone, so take only what you can close.
 - Never leave the ship dry. Refuel every time you dock. A stranded ship is a mishap the city sees.
-- A lost ship ends the night in a starter hull. You keep your credits and the board keeps your total, but the city remembers. Work Sol, your home space, while it has ore. No fight you did not choose.
-- The belt can be thin or empty. If spacemolt/mine fails as "too sparse", or spacemolt/get_poi reads remaining 0, move to another belt (spacemolt/get_system lists them) instead of hammering the same rock.
-- Sol can run dry. Every pilot works the same belts, and a belt that reads remaining 0 gives nothing tonight. If every belt in Sol reads remaining 0, Sol has no work for you: jump to a neighboring system (spacemolt/get_system lists the connections, spacemolt/find_route plans the way), check its belts the same way, and take your contract from its station. An empty belt scores nothing; a night spent hammering one is a night the board never sees.
+- A lost ship ends the night in a starter hull. You keep your credits and the board keeps your total, but the city remembers. Stay in home space. No fight you did not choose.
+- The belt can be thin. If spacemolt/mine fails as "too sparse", move to another belt (spacemolt/get_system lists them) instead of hammering the same rock.
 - You may hold up to five contracts at once. Holding more than you can close is how pilots end a run with nothing.
 - Keep the log. Your captain's log entry is the only words of yours the city will hear. Write it before your last dock.
 - The window. The city bets on whether your night ends up or down, whether you have a mishap, and who tops the night. You do not bet. You fly.
@@ -112,7 +111,7 @@ ${SHOW_RULES}
 Your account is already set up — NEVER call register or login. Your ship is fueled and docked. Tonight's flight:
 
 1. While docked: spacemolt/get_active_missions. If a contract from your last night is still open and you can close it tonight, that is the night. Otherwise spacemolt/get_missions and accept ONE contract you can close tonight (ore you can mine nearby, quantity your hold carries, deadline past tonight). If no contract fits, fly the plain run: mine, sell, refuel.
-2. Undock and travel to the nearest asteroid belt. Check it first (spacemolt/get_poi); if it reads too sparse or remaining 0, pick another belt from spacemolt/get_system. When no belt in Sol has ore left, leave Sol as the rules of the chair say, and work the neighbor.
+2. Undock and travel to the nearest asteroid belt. Check it first (spacemolt/get_poi); if it reads too sparse, pick another belt from spacemolt/get_system.
 3. Mine the ore the contract wants until you have it, or until the hold is nearly full. Steady work, no rushing.
 4. Travel back, dock, and close the contract with spacemolt/complete_mission mission_id=<id>. Then sell whatever ore is left over.
 5. Refuel completely — a ship that runs dry strands its pilot. Refuel any time you're low. Repair if anything's damaged.

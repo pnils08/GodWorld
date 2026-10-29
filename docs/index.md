@@ -209,6 +209,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[media/ARIANA_ANALYTICS_BAG]]** — Ariana Reyes sports-native deep analytics (grok). *(reference, media, sports, data, active)*
 - **[[media/SHARON_LIFESTYLE_BAG]]** — Sharon Okafor lifestyle (grok). *(reference, media, culture, active)*
 - **[[media/NIA_ROOK_UNDOCKED_BAG]]** — Nia Rook UNDOCKED recap bag. Current and earlier gate-approved feed facts; show-history and person/color boundaries. *(reference, media, culture, undocked, active)*
+- **[[for-claude-review/2026-10-29-codex-undocked-agency-and-reporting]]** — Codex proposal for pilot choice, approved flight evidence, and Nia's show reporting; builder review pending. *(plan, media, undocked, draft)*
 - **[[media/HARTLEY_VISUAL_BAG]]** — DJ Hartley visual record (grok). *(reference, media, sports, photo, active)*
 - **[[media/P_SLAYER_JOURNEY_INDEX]]** — P Slayer's journey across editions. *(entity, media, active)*
 - **[[media/PAULSON_CARPENTERS_LINE]]** — "The Carpenter's Line" — Mike Paulson backstory by Hal Richmond. *(entity, media, active)*

@@ -1,7 +1,7 @@
 ---
 title: Faith lane — engine routing fixes (storyHook deskMap, seed contract, faithStorySignals)
 created: 2026-09-10
-updated: 2026-09-10
+updated: 2026-10-28
 type: reference
 tags: [research, faith, newsroom, pipeline68, active]
 sources:
@@ -141,6 +141,8 @@ Faith lane routing. LANDED in engine.231/232 (PROD @93/@94): `FAITH` in the stor
 ### engine.248 — status (drained from ROLLOUT, 2026-09-20 / S477)
 
 **Faith organizations get a role in the sim, not window dressing for media (builder-direct 2026-09-20). OWN SESSION — opens as review/research, not code: inventory what each faith surface does today and who reads it, then design.** Starting facts: all 16 canon leaders (POP-00753…00768) carry `EmployerBizId` BIZ-00028 West Oakland Community Center (a mint-time placeholder; 53 ledger citizens sit on that row) instead of their own org's business row — a 16-cell repair that changes who works where, so it waits for the design; several leaders live outside their org's hood (Brenner Fruitvale / org East Oakland, Karim Rockridge / org Temescal). Today the 16 orgs live in three unlinked places: `Faith_Organizations` (canon names, LeaderPOPID, congregation), `Business_Ledger` faith rows (staff counts, no ledger citizen employed at the four checked; leader POP-00762's `EmployerBizId` points at BIZ-00028, not his masjid) and `Community_Programs` (6 faith-run programs, `Founder_POPID` blank). Design needed before code: what a congregation DOES to a citizen's week and a hood's numbers (membership as a bond/dial input, programs as relief on the illness/QoL channels, leaders as employed citizens). Known debris to clear in the same pass: `utilities/ensureFaithLedger.js` seed literals still carry the 9 legacy real-world names (fresh-tab seeding only; live tab is canon); `Faith_Ledger` C78–C93 rows and seeds/hooks ≤C107 hold legacy names (history, untouched). 2026-09-20 data pass done: Business_Ledger 8 renames + 2 duplicate rows retired to Business_Archive, Community_Programs 6, Event_Content_Ledger pool line, C108 seeds, and the pool line's residue on citizens (49 `Simulation_Ledger.LifeHistory` cells + 51 `LifeHistory_Log` lines, backup `output/engine-sheet/2026-09-20-lifehistory-faith-canon-subs.backup.json`)
+
+- 2026-10-28 (engine-sheet) — Status correction: faith **membership is already live**, since S325 (`a167d3d4`, 2026-07-19, engine.67 step 9b): `processFaithJoins_` (`phase05-citizens/bondEngine.js:997`, called at `:326`) lets a citizen join or drift from a congregation in their own hood by dice, recorded in `Faith_Organizations.MembersList` (own-tab write, listed at `docs/engine/SHEETS_MANIFEST.md:173`). The local beats snapshot `output/beats/Faith_Organizations.jsonl` holds 15 POPIDs across the 16 orgs. The "design-first" framing above predates this read. **Still open:** (1) a membership-gated dial nudge — today any drawn faith line nudges (`'Faith': { warmth: 3, composure: 2 }`, `utilities/citizenDialMap.js:94`), whether or not the citizen is a member; (2) member faith-life events (giving, volunteering); (3) a faith chaos car; (4) the 16 canon leaders (POP-00753…00768) are not seeded in `MembersList` — none of the 16 `LeaderPOPID`s appears in its own org's list in that snapshot. Source: `output/engine-sheet/2026-10-28-rollout-stale-check.json`.
 
 ## Builder ruling 2026-09-27 — what faith is for (engine.248)
 Verbatim (condensed only by removing nothing of substance): faith today "is mainly a system that provides color and

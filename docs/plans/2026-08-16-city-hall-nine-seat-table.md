@@ -1,7 +1,7 @@
 ---
 title: City-hall nine-seat table Plan
 created: 2026-08-16
-updated: 2026-08-29
+updated: 2026-10-28
 type: plan
 tags: [civic, architecture, active]
 sources:
@@ -27,7 +27,7 @@ pointers:
 
 **Goal:** Sunday city-hall is a nine-seat hearing: each district speaks as itself, faction-aware; the Mayor opens the floor then gavels last; the room writes a City Hall Ledger row-set and only the gavel may stamp Initiative_Tracker.
 
-**Architecture:** Split the three faction `agentDir`s. Each `COUNCIL-D1`…`D9` gets its own Sunday (and weekday) voice keyed by `officeId`. Shared council RULES/SKILL plus nine thin IDENTITY files — cheaper than nine full agent clones, and the existing faction IDENTITY files cannot be reused as-is because they are bloc microphones (Ashford speaks for CRC). Replace single `runDecide` with `runMayorOpen` (agenda, no `trackerUpdates`) → parallel nine-seat hearing → `runMayorGavel` (only political stamp) → Layer 3 projects → Clerk. New disk ledger `output/cron-civic/city-hall-ledger_c{N}.json`; sheet tab is engine-sheet after a dry Sunday, not this plan's first commit. civic.15 `--apply` stays off.
+**Architecture:** Split the three faction `agentDir`s. Each `COUNCIL-D1`…`D9` gets its own Sunday (and weekday) voice keyed by `officeId`. Shared council RULES/SKILL plus nine thin IDENTITY files — cheaper than nine full agent clones, and the existing faction IDENTITY files cannot be reused as-is because they are bloc microphones (Ashford speaks for CRC). Replace single `runDecide` with `runMayorOpen` (agenda, no `trackerUpdates`) → parallel nine-seat hearing → `runMayorGavel` (only political stamp) → Layer 3 projects → Clerk. New disk ledger `output/cron-civic/city-hall-ledger_c{N}.json`; sheet tab is engine-sheet after a dry Sunday, not this plan's first commit. civic.15 `--apply` is not flipped by this plan; as of 2026-10-28 the crontab runs the chain with `--apply` (see Acceptance 4).
 
 **Terminal:** research-build owns the plan. grok/kimi: `scripts/` + `docs/`. Claude lands `.claude/agents/**` (control plane). engine-sheet: sheet tab + any live write, after disk contract is dry.
 
@@ -40,7 +40,7 @@ pointers:
 1. A dry Sunday produces nine district voice JSONs (`council_d7_c{N}.json` etc.) plus mayor-open and mayor-gavel files. No faction-agent JSON speaks for a district.
 2. `city-hall-ledger_c{N}.json` has one hearing row per seated speaker and one gavel row. Initiative_Tracker dry-run (`applyTrackerUpdates.js` without `--apply`) shows `trackerUpdates` only from the gavel file.
 3. Every vote/tally in that run names all 9 seats (YES / NO / ABSENT). Recovering seats are ABSENT and statement-only. Vega and Tran never share a statement.
-4. civic.15 `--apply` is still absent from crontab. This plan does not write the live Initiative_Tracker sheet.
+4. civic.15 `--apply` is on in crontab (corrected 2026-10-28; drafted as "still absent"): `cron-civic-run.js --stage=chain --apply` runs Sundays 14:30 and 21:00, and `output/cron-civic/close_c108.json` through `close_c113.json` each carry `"applied": true`, so the Sunday chain writes Initiative_Tracker. The flip is civic.15's, not this plan's.
 
 ---
 
@@ -111,7 +111,7 @@ directive
 
 **close / assemble:** change priority list in `scripts/assembleDecisions.js` so “Mayor” means `mayor_gavel` only. Concatenated MilestoneNotes from nine hearing files is a defect, not a feature. S344 primary-only normalize becomes unnecessary if hearing files cannot carry ImplementationPhase.
 
-**Crontab:** still `--stage=chain` with no `--apply`. C103 `close_c103.json` remains a clean-exit guard; this chain first proves on the next fired cycle, not by un-closing C103.
+**Crontab:** `--stage=chain --apply` Sundays 14:30 and 21:00 (verified 2026-10-28; this plan was drafted when the chain ran without `--apply`). C103 `close_c103.json` remains a clean-exit guard; this chain first proves on the next fired cycle, not by un-closing C103.
 
 civic.md “Mayor speaks first” stays true (open). Clerk stays last. “Factions cannot react before Mayor has positioned” becomes “districts cannot react before the agenda exists.” They *can* speak before the gavel — that is the hearing.
 
@@ -332,6 +332,7 @@ Prep packets stop using the “CRC bloc (Crane, Ashford, Chen)” header for a s
 
 ## Changelog
 
+- 2026-10-28 (engine-sheet) — Stale `--apply` claims trued (Architecture, Acceptance 4, §2 Crontab note): crontab runs `cron-civic-run.js --stage=chain --apply` Sundays 14:30 and 21:00 (`crontab -l`), and `output/cron-civic/close_c108.json`..`close_c113.json` each have `"applied": true`. Task 10 (City_Hall_Ledger sheet tab) is still open and unbuilt: no hit in any schema or writer. Source: `output/engine-sheet/2026-10-28-rollout-stale-check.json` (civic.24).
 - 2026-08-29 (grok) — Task 9 shipped `b75bb28c`. Dry Sunday C104: nine hearings + gavel, applied=false. engine.125 closed in the same commit. Task 10 (sheet tab) is engine-sheet's.
 - 2026-08-16 (research-build) — Tasks 2/3 landed `7cecaa94` (CLAUDE_CTL). Reviewed D1/D6/D7 in full before landing — fact/voice split clean, no caucus-microphone leakage, Crane's status handled without overasserting. Tasks 1-8 now all done; only Task 9 (dry Sunday, needs a new cycle) remains.
 - 2026-08-16 (grok) — Tasks 2/3 drafted on disk under `.claude/agents/civic-office-council-seat/` and `civic-office-council-d{1-9}/`. Not committed. `readPersonaDir` now loads shared LENS+RULES then seat IDENTITY.

@@ -1,6 +1,6 @@
 # Engine-Output → Canon Coverage (chaos / texture / Riley wiring + seed-router)
 
-**Status:** Wires 1–3 BUILT + CLASP-DEPLOYED (smoke pending C101 — never executed yet); Wire 1b (chaos-seed scope + citizen-as-voice) SCOPED, holding for C101 — S275 (engine-sheet)
+**Status:** RETIRED 2026-10-28 (engine-sheet; ROLLOUT engine.41 wontfix). Wire 2 (texture) LIVE and Wire 1 (chaos) fixed `a5b03e96` 2026-09-27 — both shipped. Wire 1b (chaos-seed scope + citizen-as-voice, `SuggestedCitizenVoices` column) retired on dead-target grounds: it aims at the v3 `S.storySeeds` deck path retired at v4.0 (`phase10-persistence/saveV3Seeds.js:24-29`), its consumer `buildDeskPackets` was cut (`83a96482`, 2026-09-28), and the v4 deck's `Citizens` column (I) already names the engine-touched citizens. The builder had cleared the column on 2026-09-27 ("Yes cleared to add the column."); this retires it because its target is dead, not because the clearance was withdrawn. Wire 3a cut 2026-09-28 (`83a96482`/`f1f4dde0`); Wire 3b is DECK-DEAD (`phase07-evening-media/applyStorySeeds.js:1408`). See the 2026-10-28 line at the end of this doc. (Prior status, S275: Wires 1–3 BUILT + CLASP-DEPLOYED, smoke pending C101; Wire 1b SCOPED, holding for C101.)
 **Filed:** 2026-06-24
 **ROLLOUT:** engine.41 (file on add)
 **Owner:** engine-sheet (build) — design seam reviewed inline; taxonomy questions → research-build if they surface
@@ -141,3 +141,7 @@ Verbatim rows moved out of ROLLOUT_PLAN.md when it collapsed to pointer-only. Th
 **Builder ruling 2026-09-27 — Wire 1b column cleared.** Verbatim: "Yes cleared to add the column." Story_Seed_Deck
 gains `SuggestedCitizenVoices` (POPID list); chaos-hit citizens attach as voices on the co-located business/hood seed.
 Schema widen goes with SIMULATION_LEDGER/SCHEMA docs in the same commit, live replay at ship.
+
+## Changelog
+
+- 2026-10-28 (engine-sheet) — engine.41 retired (ROLLOUT `wontfix`). Header status corrected; this doc had no Changelog section, so the line is added here at the end of the status log. Reasons, all verified in the repo: Wire 1b targets the v3 `S.storySeeds` deck path, retired at v4.0 (`phase10-persistence/saveV3Seeds.js:24-29`); the v4 deck's `Citizens` column (I, header list at `saveV3Seeds.js:43`) already carries the engine-touched POPIDs, and 506/506 C113 deck rows have it filled (`output/engine-sheet/2026-10-28-rollout-stale-check.json`); its consumer `buildDeskPackets` was cut in `83a96482` (2026-09-28, `riley` hits 0 in `scripts/buildDeskPackets.js`); Wire 3a (Riley into `buildDeskPackets`) was cut in `83a96482`/`f1f4dde0` (2026-09-28), Wire 3b is marked DECK-DEAD at `phase07-evening-media/applyStorySeeds.js:1408`. The builder cleared the `SuggestedCitizenVoices` column on 2026-09-27; this retires it on dead-target grounds. Column-width note: the plan's "Story_Seed_Deck 20→21, col U" does not match the repo — the writer's header list is 18 columns, A–R (`saveV3Seeds.js:33-52`), and `SuggestedCitizenVoices` has 0 hits in `schemas/SCHEMA_HEADERS.md` and the writer.

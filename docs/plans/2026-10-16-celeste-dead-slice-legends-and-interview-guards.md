@@ -1,7 +1,7 @@
 ---
 title: Celeste's Dead Slice, Engine Legends, and the Interview Guards Plan
 created: 2026-10-16
-updated: 2026-10-17
+updated: 2026-10-28
 type: plan
 tags: [media, pipeline, engine, culture, draft]
 sources:
@@ -207,6 +207,8 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 **LIVE PROD @164 = stage 28 (2026-10-25 ~22:24 CDT).** Builder go before the C113 fire ("go: run the engine.318 live fix and push"), named exception for the propagation HOLD (`DEPLOY_HISTORY.md` §PROD stage 28). Live Status step: apply 105 → verify PASS. Push: PROD = stage 27, built = the benched manifest, pull-back identical, fire state + intake receipt clean at all four reads through +16 min. First live fire C113 Sun 2026-10-25.
 
+**CLOSED 2026-10-28 (engine-sheet).** C113 as expected (`output/engine_review_c113.md:17`): no Engine_Errors from `Phase11-MediaIntake`; `Citizen_Usage_Intake` 0 pending by Status, 912 rows unchanged; `Citizen_Media_Usage` 1,064 rows with no new `media-room` row.
+
 **Gate.** Codex diff review of the exact candidate + the bench receipt → PROD. engine.317 is not built, so the push needs the builder's named exception for the admission window again (the stage-27 one covered that push only); one go covers the data step and the push.
 
 ## Status log
@@ -215,12 +217,15 @@ The existing stale-beat check (`newsroom-fanout-beat-stale.test.js`) compares `s
 
 SPORTS_LEGENDS → retired MLB-origin ledger rows, no literal fallback (builder 2026-10-16). LIVE PROD @143 (stage 4l); Davis predicate (retired OR RoleType legend, 01ea836f, codex SHIP) LIVE PROD @144 (stage 4m) 2026-10-17; three template Cultural_Ledger rows Inactive on live; C112 read: 0 literal legend names in LifeHistory / WorldEvents, evening famous all ledger citizens; Celeste Fri 10-23
 
+- 2026-10-28 (engine-sheet) — engine.296 is now **Organic**: the legends pool draws only in a playoff or championship week, and it is unit-proven, not yet seen in a fire (this plan's own Build notes, line 75); C113 was not such a week. The row waits on the first such week, not on a build.
+
 ### engine.297 — status (drained from ROLLOUT, 2026-10-22 / S592)
 
 Fame sightings draw from the Cultural_Ledger (builder 2026-10-17: "the fame sightings and event Injection should come from there") — the twelve literal pools in `buildEveningFamous.js:92–172` become buckets filled from Active Cultural_Ledger rows by FameCategory/RoleType; context weighting and the sightings shape unchanged; an empty bucket is an empty bucket; bench carries the codex HOLD (synthetic playoff rung so legends are seen in a fire). A's players keep seeding from Simulation_Ledger and the fame seam stays as written (rb call 2026-10-17; plan §Open). Codex builds the patch (builder 2026-10-17: "Ask codex"); es benches + PROD when the builder routes
 
 ## Changelog
 
+- 2026-10-28 (engine-sheet) — engine.296 marked Organic (first playoff/championship week; unit-proven only, Build notes line 75); engine.318 closed (C113 as expected, `output/engine_review_c113.md:17`; closure line added under its section). Source: `output/engine-sheet/2026-10-28-rollout-stale-check.json`.
 - 2026-10-26 (engine-sheet) — engine.312 P4 re-base applied on C113 (builder go): 461 cells, readback PASS, receipt = rollback. Row done-pending-archive.
 - 2026-10-25 (engine-sheet) — engine.318 LIVE PROD @164 stage 28 (`5ed4ceba`) on the builder's go, named exception for codex recheck 4's propagation HOLD; live Status step 105 applied + verified first; 16-minute watch clean. Row → live-observing; first live fire C113.
 - 2026-10-25 (engine-sheet) — engine.318 codex recheck 3 folded: 16-minute post-deploy read (the /exec propagation window + the wall), usage rows of the first read held identical, Status step checks freeze shape before any write; gate test 19/19. Codex recheck 4 next.

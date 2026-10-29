@@ -468,9 +468,13 @@ Ships after the current stack's live fire (second ship), not inside it.
 
 Fixed-cohort proof: 48 citizens drawn at C110 (output/engine201). C111 resnap 2026-10-11, C112 resnap 2026-10-18 (48/48; run `--resnap` only after Step 5 writes the world summary — it reads its Cycle from there); resnap after C113; trace at the C113 fire, Sun 2026-10-25, codex leading
 
+- 2026-10-28 (engine-sheet) — C113 resnap done: `output/engine201/cohort-c113.json`, n 48, missing 0 (`output/engine_review_c113.md:20`). The C110→C113 fixed-cohort trace is still owed: none on disk (`output/engine201/` holds cohort snapshots and earlier measure files only), and codex's 2026-10-27 C113 spot-check (`docs/archive/for-claude-review/2026-10-27-codex-c113-reread-spotcheck.md`) has 0 cohort / engine.201 hits.
+
 ### engine.197 — status (drained from ROLLOUT, 2026-10-22 / S592)
 
 Dial drift: events reach 93% of citizens (961/1,032 mood ≠ 0 at C111) but base barely moves — 656 (63.6%) all-neutral, 9/48 cohort base moves C110→C111, max 1.33. Cause = the mood→base conversion (fade ×0.8/cycle, hardens only after 3 same-way cycles, 40% sticks), not event reach; the rate numbers are the builder's call (agy 2026-10-17). Future-stamp guard LIVE PROD @144; 13-spouse repair codex HOLD
+
+- 2026-10-28 (engine-sheet) — C113 drain is visible in the log: `output/execution_log_c113.txt:231` (`compressLifeHistory_ v3.0` … `reflections 194/118 citizens`). The POP-00005 DialState spot-check and the write-up are still owed.
 
 ## Dial read 2026-10-17 (engine-sheet, live C111, read only)
 
@@ -566,6 +570,7 @@ Not built. Rev 1 → codex HOLD (`docs/archive/for-claude-review/2026-10-17-code
 
 ## Changelog
 
+- 2026-10-28 (engine-sheet) — Status log trued against the C113 read (`output/engine_review_c113.md`, `output/execution_log_c113.txt`): engine.201 C113 resnap done, the C110→C113 trace still owed; engine.197 C113 drain on disk, POP-00005 spot-check and write-up owed. Source: `output/engine-sheet/2026-10-28-rollout-stale-check.json`.
 - 2026-10-22 (engine-sheet) — Wakes-no-rules MERGED: the 13 commits of `engine197-wakes-no-rules` replayed onto main (branch `engine197-wakes-merge`, fast-forward); one conflict, `lib/citizenPage.test.js` (engine.304 own-words cases + the M1 scrub cases, both kept, run in sequence); `scripts/wakeHealthPerception.test.js` admits `lib/provocationBank` (the draw hash). Tests on main: citizenPage 42, memoryFence 42, wakePerception 108, wakeHealthPerception 37; npm 297/297. Live from the next cron: discord-reflection 07:00, citizen-wake 07:30 Fri 2026-10-23. Proof to read: the wake log `pool:` line (under 7 skipped, no shaped/rule skips), the 19:00 nightly → one Reflection_Intake row for POP-00005, the C113 drain. No manual dry run (acceptance = the next scheduled run).
 - 2026-10-22 (engine-sheet, rollout stale check) — engine.197 is not waiting on the builder: he ruled 2026-10-17 that the rates stand (no HARDEN_STREAK / MOOD_DECAY change, §Builder rulings) and that citizens react to the city (→ engine.299, LIVE @147). What is left is engine-sheet's: the wakes-no-rules build (W1/W2 lottery, M1/M2 Mags's nightly journal, W3 Corliss in the pools — builder (b) "Yes that is allowed", under-7, Elias in the lottery) sits finished and codex-SHIP on branch `engine197-wakes-no-rules` (13 commits off 7d84c084), never merged after the C112 readback as planned. Next: merge onto main (engine.302/304 touched citizen-wake.js since), suite, then the first live proof = the next scheduled wake log + 19:00 nightly row + Cycle drain. ROLLOUT engine.197 → ready.
 - 2026-10-17 (engine-sheet S570) — Builder: Elias back in the lottery, journal unchanged (`58953a74`). Wake rulings all settled; merge the whole branch after the C112 readback.

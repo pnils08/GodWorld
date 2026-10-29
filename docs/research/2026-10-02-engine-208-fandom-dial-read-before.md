@@ -122,7 +122,7 @@ The `Phase5-Advancement` intake (the seam where engine.278 reads the carried emp
 6. **Bench, before any live fold (agy review hunt 7):** a synthetic 10-Cycle run over the 963 seeded rows at realistic received-event rates (the C101–C109 win/loss/run cadence, Oaks L-streak, a tone line a week) through `applyCycleEffects_` + `settleCycle_` at `MOOD_DECAY` 0.8 — print the band histogram each Cycle. If the decay pulls everyone back to the middle before the histogram separates, the magnitudes or the decay move *on bench*, not after ten live Cycles.
 
 ### 2.9 es build cut (engine-sheet, 2026-10-03) — what gets built; supersedes §2.3 half-gap, §2.6, §2.7 interim
-Folds §4 Rulings + the 2026-10-03 Amendment. Status: **for review (codex), not built.**
+Folds §4 Rulings + the 2026-10-03 Amendment. Status: **BUILT — C1–C10 shipped** (`23aa8c5a`, `0f4d5014`, `e881f616`, `cb122e45`, `a2cecddd`, `e59d8b14` on 2026-10-03; `a4cb20df` 2026-10-08, dropdown refresh + live seed; `38f19986` 2026-10-11, C10). Only the four follow-up lines under "Out of this build" remain (engine.280, blocked — see Status log).
 
 **Measured 2026-10-03 (live sheet + code):**
 
@@ -232,7 +232,10 @@ Asked in plain words: (2) the live seed as built (players/staff 65, canon fans a
 
 engine.208 follow-ups (§2.9 "Out of this build"): Sports-Soured/Lifted need a per-piece tone at post-publish (no article tone exists — pipeline seam); Sports-Gutted needs a negative flag on roster rows; Sports-Attended needs an authored ECL attendance tag (rb content lane); refresh the live dropdown (`setupSportsFeedValidation`) after the 208 deploy.
 
+**Update 2026-10-28 (engine-sheet):** C10's upset sign shipped — `38f19986` (2026-10-11; its message cites builder 2026-10-07): a loss or postseason-short week holds −|share| the first quiet week, then fades; the title branch fades from week 1. Read live: `output/engine_review_c113.md:44` shows the title branch (A's title quiet 3 since C110 = 0.061, the expectation 0.072 × 0.85). The `setupSportsFeedValidation` dropdown refresh shipped in `a4cb20df` (2026-10-08). engine.280 is `blocked`: the four follow-up lines — Sports-Soured, Sports-Lifted, Sports-Gutted, Sports-Attended — wait on upstream signals that do not exist yet (a per-piece tone at post-publish, a negative flag on roster rows, an authored ECL attendance tag); none has a hit in any `.js` file.
+
 ## Changelog
+- 2026-10-28 (engine-sheet) — Stale "for review (codex), not built" at §2.9 corrected: C1–C10 shipped (commits listed there). Status log updated: C10 upset sign `38f19986`, read live at `output/engine_review_c113.md:44`; dropdown refresh `a4cb20df`; engine.280 `blocked` on the four follow-up lines. Source: `output/engine-sheet/2026-10-28-rollout-stale-check.json`.
 - 2026-10-08 (engine-sheet, S536) — LIVE SEED APPLIED on the builder's go (scratchpad one-shot, dry-run first): 1,025 rows, DialState column read back 1,025/1,025. Fans (>=60) 141 — athlete/staff 58, canon 22, wager 38 + wager-in-zone 10, family of a fan 13; zone residents 132 at 55; 752 at 50. By team as 127 / oaks 12 / both 2. No row carried fandom before. First live fire on the seeded dial: C111.
 - 2026-10-07 (engine-sheet, S536) — Builder: live seed GO as built; overnight §6 02:39 (1) reach and (2) fan-making speed kept as built (verbatim under §4 Builder's words 2026-10-07). ROLLOUT engine.208 → section 3, seed before C111.
 - 2026-10-02 23:29 (research-build, S522) — Mike ruled all five §4 calls (recorded under §4 Rulings): athletes inert + feed-named citizens get signed life events per EventType; thin seed accepted + families and canon fans authored; round words go into the dropdown; magnitudes and the Oaks fan-side loss rule approved. Document is build-ready for es.

@@ -1,7 +1,7 @@
 ---
 title: Sports as a lived system — plan
 created: 2026-09-11
-updated: 2026-10-04
+updated: 2026-10-28
 type: plan
 status: draft
 tags: [plan, engine, sports, ingest, fandom, active]
@@ -597,11 +597,15 @@ Sentiment sums two franchises into one scalar; `cal.sportsSeason` resolves one c
 
 LIVE PROD @98 + `WeekRecord` column; dead `VideoGameDate`/`VideoGame` DELETED 2026-09-19 on Mike's go (139 cells archived, `2311bcec` accepts the 19-col layout, 0 cell mismatches) — the §0 "no new column" ruling's end state; bench C115 proof in DEPLOY_HISTORY §PROD @98; Node authoring header-aware (`a887b5da`), setup/handoff by header (`6319babf`), vocabulary single-sourced + pinned (`c4a3621c`), row-named rejection (`b2607ebe`). Column audit 2026-09-19 (plan 3d): hood dropdown = the 22 map hoods, authored EventTypes listed, notes rewritten from code. Remaining: trigger-word hooks (Mike), dashboard form `WeekRecord` input (3b), 3c contract needs, cuts 4–6 fold into Tasks 3–4. Was: reader/settlement cut landed (`34ef94ae`→`dcf92551`); NBA/Warriors retired per ruling; defect 7 closed. Next: header migration + vocabulary parity → plan Task 1 remaining cuts.
 
+- 2026-10-28 (engine-sheet) — Folded into engine.204: the remaining items above (trigger-word hooks, dashboard `WeekRecord` input, 3c residue) sit inside the 2026-10-22 engine.204 ruling (`docs/research/2026-10-03-engine-204-205-game-day-economy-read-before.md`, Changelog 2026-10-22), so engine.202 carries no scope of its own.
+
 ### Sports update 2026-09-18 (engine-sheet, moved from ROLLOUT header 2026-09-20 / S477)
 
 engine.210 LIVE on PROD @97; engine.202 LIVE on PROD @98 with the `WeekRecord` column on the live feed (dead VideoGame columns deleted 2026-09-19 — 19 columns, `WeekRecord` at S) — bench-proven C115 (weekly settlement, bad-cell rejection, payouts). Smoke both at live C108. Research for Tasks 3/4/10: [[../research/2026-09-18-sports-intensity-and-game-day-economy]]. Population/economy effects defer to record-driven impact. Event_Content_Ledger selection/feedback remains under engine.208 Task 8.
 
 ## Changelog
+
+- 2026-10-28 (engine-sheet) — engine.202 status marked folded into engine.204 (ROLLOUT stale check, `output/engine-sheet/2026-10-28-rollout-stale-check.json`); one line added under "### engine.202 — status".
 
 - 2026-10-11 overnight (engine-sheet) — engine.194 codex cut landed `ae9278aa`; stage 3 (stage 2 + 194) benched 1004 @22 C111–C112 clean; PROD = builder's pick of stage 2 / stage 3.
 

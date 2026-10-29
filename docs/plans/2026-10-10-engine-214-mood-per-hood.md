@@ -1,7 +1,7 @@
 ---
 title: Mood Per Hood Plan (engine.214 — the clusters go)
 created: 2026-10-10
-updated: 2026-10-10
+updated: 2026-10-28
 type: plan
 tags: [engine, active]
 sources:
@@ -343,6 +343,8 @@ Phase 5 is untouched: a level of 3 gives the carry its full weight (`carry / 3` 
 
 **LIVE 2026-10-25 ~12:23 CDT: PROD @163 = stage 27** — rode with engine.312 (`3e04d8a5`) on the builder's "Ok clear to push", the FIRE_ADMISSION_JSON window taken as his named exception for this push; stage 26 alone never deployed. Fresh pull = stage 25, built = the benched stage-27 manifest, pull-back identical, live C112 before / after / +8 min (DEPLOY_HISTORY §PROD stage 27). First live fire C113: crime lines only in hoods at level ≥ 1; `crimeWaveHoods` carried.
 
+**C113 read (engine-sheet, read 2026-10-27, `output/engine_review_c113.md:57`):** `crimeWaveHoods` `[]` (no wave), 2 spikes carried. The wave rung (level 3) is untested live and waits on the first organic wave; the bench's organic leg saw 0 waves in 25 Cycles (above).
+
 ## Open questions
 
 - **For the builder with engine.289 (agy 2026-10-19, es-verified, no proposal):** (a) the per-hood crime ladder's third rung (`n >= 3`, sentiment −0.30, `applyCityDynamics.js:816-822`) cannot fire — one hood carries at most two counted spikes a Cycle (property + violent increases, `finalizeCycleState.js:797-810`); rungs 1 and 2 fire. (b) the per-hood NIGHTLIFE seed thresholds (`wNight >= 3 / >= 6`, `:1187-1204`) kept their cluster-sum values, like the CULTURE ones engine.289 already holds.
@@ -359,12 +361,17 @@ Phase 5 is untouched: a level of 3 gives the carry its full weight (`carry / 3` 
 
 ## Status log
 
+### engine.214 — first live read, C113 (engine-sheet, read 2026-10-27)
+
+`output/engine_review_c113.md` §C113 re-reads (first live fire of stages 5–25): **Cut B** — the three old trajectory lines 21 at C112 → 0; 36 reaction lines in 8 hoods, 25 of 36 run with the hood's trend (69%, the mechanism's 2:1; bench 62%) (`:35`). **Cut C** — 33 spot lift lines against the watch's "low teens (bench 8–15)" = 7.4% of the 447 citizens holding a food spot in the 8 lifted hoods, under the weight-11 line's calibrated target of about 1 in 10 (`:36`). The read is done; what is next is **8b `$VENUE`** (plan §PROD wave procedure step 8) — a build, not a fire read.
+
 ### engine.306 — status (drained from ROLLOUT, 2026-10-22 / S592)
 
 Business mints for hood character (builder 2026-10-19). Walk complete 2026-10-21: 103 rows + Pulse District → Uptown (C92 print already says Uptown), roster `output/engine306-mint-roster.tsv`. Codex plan review HOLD 2026-10-21, all 7 folded: es = Business_Intake tab + processBusinessIntake with typed A:I readback/receipt, landmark owner-door exclusion, bench the expanded reader set; builder = Sports Bar vs Game-Day Bar name. LANDED 2026-10-21 on the builder's go: PROD stage 18 @155 (landmark owner-door term) + the 103 rows + realign on live, RECEIPT PASS; first live fire C113 (watch DEPLOY_HISTORY §PROD stage 18); codex gate 3 audits after
 
 ## Changelog
 
+- 2026-10-28 (engine-sheet) — C113 first-live read of the engine.214 cuts recorded (Status log): output/engine_review_c113.md §C113 re-reads (read 2026-10-27) — Cut B 69% with the hood's trend (`:35`), Cut C 33 spot lines = 7.4% (`:36`); next is 8b `$VENUE`, a build. engine.301 F1 C113 read added under its section: `crimeWaveHoods` `[]`, 2 spikes carried (`:57`); the wave rung waits on the first organic wave. Source: `output/engine-sheet/2026-10-28-rollout-stale-check.json`.
 - 2026-10-25 (engine-sheet) — engine.301 F1 LIVE PROD @163 stage 27 (`1e6beff5`, with engine.312): builder "Ok clear to push".
 - 2026-10-25 (engine-sheet) — Crime ladder third rung ruled: back-to-back-Cycle rise in one hood (builder "(a)"); rides engine.301 F1.
 - 2026-10-22 (engine-sheet) — engine.308 shipped: `c88b5012` (cap 2 per citizen, line cap = living + tier step, 12-Cycle cooldown on new col LastBizOpenedCycle seeded from the [Heritage] opened stamps); bench H1 C113–C116 PASS vs the B14 control (Varek Fellowship gone); codex SHIP; PROD stage 21 @158 before C113 (DEPLOY_HISTORY §PROD stage 21).

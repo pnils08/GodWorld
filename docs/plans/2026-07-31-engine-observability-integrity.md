@@ -1,7 +1,7 @@
 ---
 title: Engine Observability & Tab Integrity Plan
 created: 2026-07-31
-updated: 2026-08-16
+updated: 2026-10-28
 type: plan
 tags: [infrastructure, engine, dashboard, active]
 sources:
@@ -29,7 +29,7 @@ pointers:
 
 **Acceptance criteria:**
 1. `curl localhost:3001/api/sim-health` returns the latest audit cycle + pattern counts by type + anomaly count; panel renders in the dashboard UI. **Track A — still open.**
-2. Zero open rows remain in `docs/SPREADSHEET.md` §Ghost References — each of the 11 carries a recorded disposition (created / repointed / deleted). **Track B — recorded. 10 closed in `c3fe1780` + file-delete / stale-doc dispositions. `Health_Cause_Intake` stays PENDING CREATE (Mike-ruled; must reach engine-sheet from Mike, not a relay). `Chicago_Feed` was a false flag and is not a ghost.**
+2. Zero open rows remain in `docs/SPREADSHEET.md` §Ghost References — each of the 11 carries a recorded disposition (created / repointed / deleted). **Track B — recorded. 10 closed in `c3fe1780` + file-delete / stale-doc dispositions. `Health_Cause_Intake` was retired with no create (`1240a80a`, 2026-09-09, builder-direct: dead intake file `healthCauseIntake.js` deleted; the engine writes `Hospital_Ledger.Cause` at admission since engine.102 W4) — the pending-CREATE ruling of 2026-08-16 is superseded. `Chicago_Feed` was a false flag and is not a ghost.**
 3. `node scripts/tabReferenceIntegrity.test.js` passes, and fails when a fake tab reference is injected into engine code. **Track B — shipped `86f43999` (290 refs checked, self-test on Ghost_X/Ghost_Y).**
 
 ---
@@ -58,19 +58,19 @@ pointers:
 - **Files:** `docs/SPREADSHEET.md:155-174` — read; engine files per row — read
 - **Steps:** For each of the 11 open ghost references: grep the referencing code, then classify — **create** (tab should exist), **repoint** (code should read a real tab, e.g. `Simulation_Config` → `World_Config` per SPREADSHEET.md:168), or **delete** (reference is dead code). Record each disposition in a Build-notes table before touching code. Note: creating tabs or repointing live engine reads touches Sheets behavior — batch the dispositions for one Mike approval before Task 5.
 - **Verify:** disposition table (11 rows) in Build notes; Mike approval recorded
-- **Status:** [x] 2026-08-16 — dispositions recorded in Build notes + `docs/SPREADSHEET.md`. `Health_Cause_Intake` CREATE still needs Mike → engine-sheet.
+- **Status:** [x] 2026-08-16 — dispositions recorded in Build notes + `docs/SPREADSHEET.md`. `Health_Cause_Intake` CREATE superseded — retired no-create in `1240a80a` (2026-09-09).
 
 ### Task 5: Execute dispositions
 - **Files:** per Task 4 table — modify
 - **Steps:** Apply the approved dispositions. Code repoints/deletes in engine files; tab creations go through the normal sheet-change path (not ad-hoc). Update `docs/SPREADSHEET.md` §Ghost References rows with the disposition + date.
 - **Verify:** `rg` per tab name shows intended state; SPREADSHEET.md updated
-- **Status:** [x] 2026-08-16 — landed in `c3fe1780` (and the continuity parser file-delete / stale-doc rows). `Health_Cause_Intake` CREATE not executed.
+- **Status:** [x] 2026-08-16 — landed in `c3fe1780` (and the continuity parser file-delete / stale-doc rows). `Health_Cause_Intake` CREATE never executed; retired no-create in `1240a80a` (2026-09-09).
 
 ### Task 6: Tab-reference integrity test
 - **Files:** `scripts/tabReferenceIntegrity.test.js` — create
 - **Steps:** Deterministic test: extract every `getSheetByName('...')` literal in `phase*/`, `utilities/`, `lib/`; assert each exists as a `## <Tab>` header in `schemas/SCHEMA_HEADERS.md` OR is on an explicit allowlist (auto-created tabs like `Election_Log`, with a comment citing the creating code). Fail loud with the offender list.
 - **Verify:** test passes on clean tree; injecting `getSheetByName('Ghost_X')` into a scratch copy fails the test
-- **Status:** [x] 2026-08-16 (kimi) — `86f43999`. Allowlist cites `MediaRoom_Paste` (Election_Log class) and `Health_Cause_Intake` (pending CREATE).
+- **Status:** [x] 2026-08-16 (kimi) — `86f43999`. Allowlist cites `MediaRoom_Paste` (Election_Log class) and `Health_Cause_Intake` (pending CREATE then; entry removed in `1240a80a`, 2026-09-09).
 
 ---
 
@@ -90,7 +90,7 @@ Track B dispositions (what actually shipped):
 | Story_Hook_Archive | stale doc-only | zero live refs; `hookLifecycleEngine` gone |
 | Continuity_Intake / Raw_Continuity_Paste | file deleted | `continuityNotesParser.js` whole-file delete; never-existed tabs; zero live callers |
 | Chicago_Feed | **not a ghost** — false flag reverted | live writer `v3ChicagoWriter.js`; leave off the ghost table |
-| Health_Cause_Intake | **PENDING CREATE** | Mike-ruled; do not mark done; must reach engine-sheet from Mike |
+| Health_Cause_Intake | **RETIRED, no create** (2026-09-09; was PENDING CREATE) | `1240a80a` — `phase11-media-intake/healthCauseIntake.js` deleted, allowlist entry removed; `docs/SPREADSHEET.md` row closed |
 
 Regression guard: `node scripts/tabReferenceIntegrity.test.js` — 290 refs, exit 0 (`86f43999`).
 
@@ -99,11 +99,12 @@ Regression guard: `node scripts/tabReferenceIntegrity.test.js` — 290 refs, exi
 ## Open questions
 
 - [ ] The auditor runs on-demand, not on cron — should Track A also schedule it (cron change requires Mike approval per AGENTS.md), or does `/api/sim-health` just surface the last manual run with its staleness visible? Default: surface-only; scheduling is a separate approval. — informs Task 2
-- [ ] Any ghost tab whose data is actually *wanted* (e.g. `Health_Cause_Intake` at `phase11-media-intake/healthCauseIntake.js:273` currently no-ops returning `{processed:0}`) — create-the-tab dispositions mean a feature goes live, not just a fix; flag those explicitly in the Task 4 approval batch. — blocks Task 4
+- [ ] Any ghost tab whose data is actually *wanted* (e.g. `Health_Cause_Intake`, whose intake file `phase11-media-intake/healthCauseIntake.js` was a no-op returning `{processed:0}` and was retired no-create in `1240a80a`, 2026-09-09) — create-the-tab dispositions mean a feature goes live, not just a fix; flag those explicitly in the Task 4 approval batch. — blocks Task 4
 
 ---
 
 ## Changelog
 
+- 2026-10-28 (engine-sheet) — Stale Health_Cause_Intake claims trued (AC2, Tasks 4–6 status, Build notes, Open questions): `1240a80a` (2026-09-09) retired `healthCauseIntake.js` and the tab with no create; `docs/SPREADSHEET.md:240` already records it closed. Track A (Tasks 1–3, AC1) still not started: no `sim-health` route in `dashboard/*.js` or `dashboard/src`. Id note: `ROLLOUT_ARCHIVE.md:2014` reuses id infrastructure.6 for unrelated closed rb work. Source: `output/engine-sheet/2026-10-28-rollout-stale-check.json`.
 - 2026-08-16 (grok) — Track B Tasks 4–6 + acceptance 2+3 closed against what shipped: `c3fe1780` (six reviewed dispositions + Game_Intake full delete + Chicago_Feed revert) and `86f43999` (integrity test). SPREADSHEET.md ghost table updated. Health_Cause_Intake CREATE remains pending Mike → engine-sheet. Track A (Tasks 1–3 / AC1) untouched.
 - 2026-07-31 — Initial draft (Kimi CLI, builder-directed external-audit remediation batch). Audit gaps #7+#8 combined (both are "the builder can't see when the engine is lying"). Audit's arcs bug dropped as stale (arc loop retired S313); ghost-tab claim confirmed with the Election_Log reclassification.

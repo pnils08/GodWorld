@@ -22,6 +22,7 @@
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
 - [[../plans/2026-10-20-hood-character-standing]]: pipeline.71 needs-info
 - [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing
+- [[../canon/INSTITUTIONS]]: canon.5 needs-info
 - [[../plans/2026-10-19-bay-tribune-master-index]]: pipeline.84 live-observing
 - [[../plans/2026-07-31-citizen-memory-perception]]: engine.94 live-observing
 - [[../plans/2026-10-06-supermemory-v5-migration]]: infrastructure.10 blocked
@@ -40,7 +41,6 @@
 - [[../plans/2026-09-13-run-cycle-packages-the-world]]: pipeline.69 ready
 - [[../plans/2026-08-29-boot-doc-consolidation]]: governance.51 ready
 - [[../plans/2026-08-16-city-hall-nine-seat-table]]: civic.24 ready
-- [[../canon/INSTITUTIONS]]: canon.5 ready
 - [[../plans/2026-06-24-engine-output-canon-coverage]]: engine.41 wontfix
 - [[../plans/2026-07-31-canon-ingest-backfill]]: engine.91 ready
 - [[../plans/2026-08-02-neighborhood-truth-source-migration]]: engine.99 ready
@@ -59,7 +59,7 @@
 - [[../plans/2026-05-22-engine-regulatory-friction]]: engine.20d ready
 - [[../plans/2026-08-10-economy-native-rebuild]]: engine.104 ready
 - [[../research/2026-09-10-kimi-faith-lane-routing]]: engine.248 ready
-- [[../DEPLOY_HISTORY]]: engine.310 live-observing
+- [[../reference/DEPLOY_HISTORY]]: engine.310 live-observing
 <!-- /generated -->
 
 ## Pull order (builder, 2026-09-29; trued 2026-10-07)
@@ -78,6 +78,7 @@
 | pipeline.71 | Each hood read against its own canon: every hood's INSTITUTIONS character is its own baseline and its own numbers say whether it lives up to it (builder 2026-10-20; the one-axis tech-boom design is superseded). Rewrite with the builder: which numbers express each hood's character | needs-info | research-build | [[../plans/2026-10-20-hood-character-standing]] |
 | engine.286 | Life-event dice LIVE (`63754ca8`); forced sale, own-record wake, scoreboard live; C112 read 2026-10-25 in the plan. Builder call asked 2026-10-28: name the game (N31/N32) before wake-as-turn builds | live-observing | research-build | [[../plans/2026-10-08-engine-286-game-of-life-events]] |
 | pipeline.77 | Reward loop watch complete: all five seats 4/4 at C113 (Carmen, Luis, Marbury, Noah, Tanya; Rhea pass each). Mechanism 2 (two drafts, judge picks) is the builder's cost call; engine-sheet owes the per-piece cost numbers | needs-info | engine-sheet | [[../plans/2026-10-11-media-extension]] |
+| canon.5 | Sheet renames LANDED live 2026-10-12 (BIZ-00016 Oakland City Schools, BIZ-00035 OCCD, INIT-007 Notes). Employer column gone; old name left in POP-00317 RoleType + 12 LifeHistory lines — whether history keeps it is a canon call. INSTITUTIONS.md:75 still says Peralta row | needs-info |  | [[../canon/INSTITUTIONS]] §Education |
 
 ## 2. Waiting on a fire — dated or organic
 
@@ -116,18 +117,17 @@
 | engine.205 | Weekly game economy LIVE since 2026-10-06; its column surface is engine.204's open work (builder 2026-10-22, all three) | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 4, 10 |
 | engine.281 | Sports-week ladder + venue (a–d) LIVE since 2026-10-06. (e) the column surface rides engine.204 (builder 2026-10-22, all three) | ready | engine-sheet | [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] §5 |
 | engine.95 | Checkpoint/resume LIVE, gate armed (330000/60000/6000). C113: 205.9 s, no checkpoint, Phase11-MaintainLifeHistoryLog 34.0 s. Tail by the reserve's definition: C112 80.6 s, C113 59.8 s vs 60 s (recorded, not tuned). Next read C114 Sun 2026-11-01 | live-observing | engine-sheet | [[../plans/2026-07-31-platform-ceiling-resilience]] §Changelog bench steps 0–5 |
-| engine.193 | Adversity tiers LIVE; (b) settle LIVE `ae9278aa`; the per-institution settle log line LIVE since S553 (`9687e42f`) — C112's execution log carries 14 settle lines, the read is not written up (G-EC50). Then (a) public-employer budget squeeze; then CAT-layer design for the builder | ready |  | [[../plans/2026-09-10-inactivity-is-regression]] §engine.193 Builder's words (2026-10-07) |
+| engine.193 | Adversity tiers LIVE; (b) settle LIVE (code e3a85853, PROD stage 3); C112 log carries 9 `engine.193b settle:` lines, one per 1000+ employer — read not written up (G-EC50). Open: (a) public-employer budget squeeze, cut 4 (illness), then CAT-layer design for the builder | ready |  | [[../plans/2026-09-10-inactivity-is-regression]] §engine.193 Builder's words (2026-10-07) |
 | engine.53 | Organic: the first exchange-line candidate in a street pool. Mon 2026-10-05 fanout read 2026-10-08: none, because no transcript sentence named that day's highlights (fog, Oaks; 0 of 66 turns) | live-observing | research-build | [[../plans/2026-07-11-agent-exchange-engine]] |
 |  research.27 | Organic: a flight since the 2026-10-18 landing closes a contract and its credits reach the feed row + board (§3.2). Stations Bayline 6 / Oakland 12 minted, seats open until the pipeline.73 reporter walk (builder 2026-10-12) | live-observing | research-build | [[../plans/2026-08-07-spacemolt-game-show]] §3.2 + §Post-ship (e)  |
 | engine.48 | Organic: the first T8 tension-seed result off the cron; none recorded yet | live-observing | research-build | [[../plans/2026-07-06-citizen-loop-deepening]] |
 | engine.201 | Fixed-cohort proof (48 citizens from C110): C113 resnap done (`cohort-c113.json` n 48, missing 0); the C110→C113 trace is owed (none on disk) | live-observing | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §BUILD SPEC |
-| pipeline.69 | Run-cycle packages the world: T1 texture by hood, T2 wake tells a citizen their seed, T3 seed floor, T5 C108 slice readback | ready |  | [[../plans/2026-09-13-run-cycle-packages-the-world]] |
-| governance.51 | Boot docs: T8 (memory-write-gate hook, rotation to sl-memories). T3 memory dedup done — builder cleared the deletes (2026-10-22) | ready |  | [[../plans/2026-08-29-boot-doc-consolidation]] |
+| pipeline.69 | Run-cycle packages the world: T1 texture by hood, T2 wake carries the citizen's own seed event, T3 seed floor (none landed); T5 slice readback — artifacts on disk since C108, table never written | ready |  | [[../plans/2026-09-13-run-cycle-packages-the-world]] |
+| governance.51 | Boot docs: T8 rotation to sl-memories (its memory-write-gate half was removed by the builder 2026-10-07, 3b40ab48). T3 memory dedup done (2026-10-22). Plan T1/T2/T7 cite CLAUDE.md, removed from the tree 2026-10-28 (2590d587) | ready |  | [[../plans/2026-08-29-boot-doc-consolidation]] |
 | civic.24 | Sunday nine-seat table: Task 10 sheet tab | ready | engine-sheet | [[../plans/2026-08-16-city-hall-nine-seat-table]] |
-| canon.5 | Sheet renames LANDED live 2026-10-12: BIZ-00016 → Oakland City Schools, BIZ-00035 → Oakland Community College District, INIT-007 Notes (read back). Open: the Employer-column sweep (tied to engine.191 roster mismatch) | ready |  | [[canon/INSTITUTIONS]] §Education |
 | engine.41 | Retired 2026-10-28: Wire 1b's target (v3 seed-deck path) retired at v4.0 and its consumer (buildDeskPackets) cut 2026-09-28; the v4 deck's Citizens column already names engine-touched citizens. Wire 3a cut 2026-09-28, 3b deck-dead | wontfix | engine-sheet | [[../plans/2026-06-24-engine-output-canon-coverage]] |
 | engine.91 | Canon ingest: the wiki ingesters carry no customId | ready |  | [[../plans/2026-07-31-canon-ingest-backfill]] §S502 |
-| engine.99 | Hood truth-source: ~49 files of hood literals, migrated as each is touched | ready |  | [[../plans/2026-08-02-neighborhood-truth-source-migration]] |
+| engine.99 | Hood truth-source long tail: 67 files still carry canon hood-name literals (plain grep 2026-10-28; the ~49 was the plan's detector count); migrate-on-touch is not happening in the five largest. Cohorts 3-4 open | ready |  | [[../plans/2026-08-02-neighborhood-truth-source-migration]] |
 | engine.116 | Spreadsheet weight: T2 code repoint, T3 archives out, T5 dead-tab prune | ready |  | [[../plans/2026-08-17-sheet-weight-reduction]] |
 | engine.197 | Wakes have no rules MERGED 2026-10-22: one lottery over the whole pool, under 7 out, Corliss in, Mags's journal → one Reflection_Intake row a night. C113 drain in the log (`reflections 194/118 citizens`); POP-00005 DialState spot-check + write-up owed | live-observing | engine-sheet | [[../plans/2026-09-10-inactivity-is-regression]] §Changelog 2026-10-22 |
 | engine.202 | Folded into engine.204 2026-10-28: its remaining items (trigger-word hooks, dashboard WeekRecord input, 3c) sit inside the builder's 2026-10-22 engine.204 ruling; one build, one row | wontfix |  | [[../plans/2026-09-11-sports-as-a-lived-system]] Task 1 |
@@ -146,10 +146,10 @@
 |---|------|-------|----------|---------|
 | pipeline.91 | Writers' `canon_search` (`lib/mags.js searchDisk`) greps `docs/` — plans with real dates / builder text reachable as prior coverage; same function feeds mags-bot + discord-reflection. Decide roots per caller, cut. Found 2026-10-28 (pipeline.89 read) | ready | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 changelog 2026-10-28 |
 | pipeline.92 | One clock: wall-clock dates reach civic agents (move date/moveId, 54/64 packs) and writers (tracker `LastUpdated`, 2 MilestoneNotes, slice pointers); blast radius read 2026-10-28, each surface to Y/C. | ready | research-build | — |
-| infrastructure.13 | lib/wakePerception.test.js fails on main: "snippet capped at 180" (nightlyIntakeRow body cap), 107/108; fails on HEAD before engine.206, found by its full-suite run 2026-10-27 | ready |  | `lib/wakePerception.test.js:242` |
+| infrastructure.13 | Stale test, not a code fault: ebcf159d (rb, 2026-10-25, "reflections travel whole") dropped the 180-char cap from nightlyIntakeRow; the test still asserts it (107/108). Fix = the assertion follows the new contract — research-build's change | ready |  | `lib/wakePerception.test.js:242` |
 | engine.321 | Is a tracked mint business growth (its headcount signal; 2+ at one business = BUSINESS_EXPANSION)? Builder 2026-10-27: "a citizen added to a buisness can result in a growth" — stands as built, no change | wontfix |  | [[../plans/2026-07-27-employment-living-system]] §Open questions |
 | pipeline.88 | Proposal, builder's call: daily seats (Ines, Tamsin) write angle/packet/draft under a Cycle-keyed stem, so five days share one file set and a failed day can see yesterday's plan (Ines Sun 10-25). Key their stems by day? | needs-info | research-build | [[../plans/2026-10-11-media-extension]] §Status log pipeline.87 |
-| engine.317 | A read-only door for FIRE_ADMISSION_JSON (webTrigger getprop is carry-forward-only; a GET fires a Cycle), so a PROD push can prove no Cycle was admitted across it (codex engine.301 gate 3, 2026-10-25) | ready |  | `docs/archive/for-claude-review/2026-10-25-codex-engine301-gate3-recheck.md` |
+| engine.317 | A read-only door for FIRE_ADMISSION_JSON (webTrigger getprop is carry-forward-only; a GET fires a Cycle), so a PROD push can prove no Cycle was admitted across it. Waived as a named builder exception on PROD stages 27-31 (10-25 to 10-28) | ready | engine-sheet | `docs/archive/for-claude-review/2026-10-25-codex-engine301-gate3-recheck.md` |
 | engine.316 | Five hoods' texture pools are empty after textureSigned_: Eastlake, Baylight District, East Oakland have 0 up / 0 down lines; Grand Lake, San Antonio 0 down (agy 2026-10-19 F6, split from engine.301). Author signed lines → builder approves → land under the substrate gate | ready | research-build | `output/antigravity/2026-10-19-review-engine214-prod-candidate.md` F6 |
 | engine.290 | Transit rides the sim — LIVE PROD stage 4d; C113 clean (18 rows, the four C112 crew at BIZ-00014). Open: crew ECL rows + governor (plan Sequencing 4, a build). Trevor's slice read has its data (C112/C113 slices, his C113 piece 4/4); write-up owed | ready | engine-sheet | [[../plans/2026-10-15-engine-290-transit-rides-the-sim]]; `output/engine_review_c113.md` §C113 re-reads |
 | engine.295 | Owner draw → the money game: design session rb + builder, builds from the plan's Task 6. Household map written 2026-10-22; its §6: calls 1,2,4,5,6 ruled 2026-10-22 (Roots $25M, any household row, MaritalStatus; CIV/MED fame only; no rungs), call 3 left simple | needs-info | research-build | [[../plans/2026-10-16-the-money-game]] · [[../plans/2026-10-22-household-to-heritage-map]] |
@@ -167,4 +167,4 @@
 | engine.261 | Firm agents: three business owners get a wake slice to run their business | ready | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
 | engine.309 | Off-heritage ownership with ascent and crash (builder 2026-10-21): founder door for an existing citizen in their own field; ascent via owner draw → home → Door C; crash = back to the hiring pool. Door number = money-game Task 5. After engine.308 | needs-info | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8, engine.309 design |
 | engine.311 | Business entry by opportunity (builder 2026-10-22): line tier decides which business types open; every business class gets entry gates (none today); line contents in combination raise an opportunity to buy/open; the citizen's wake decides, not a roll. Covers 309's door | needs-info | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8, builder 2026-10-22 under engine.308 |
-| engine.310 | EventAttractiveness base: every staged city event once, whole words for the rest (builder option 2). PROD @156; C113 watch CLEAN (EA sum 114.29 → 114.12); C114 Sun 2026-11-01 reads migration drift + trajectory off the C113 map | live-observing | engine-sheet | DEPLOY_HISTORY §PROD stage 19; `docs/research/2026-10-21-engine310-diff-gate-TASK.md`; plan `docs/research/2026-10-21-engine310-plan-TASK.md`; `output/engine-sheet/2026-10-21-e310-check.json`; `output/engine_review_c113.md` §C113 re-reads |
+| engine.310 | EventAttractiveness base: every staged city event once, whole words for the rest (builder option 2). PROD @156; C113 watch CLEAN (EA sum 114.29 → 114.12); C114 Sun 2026-11-01 reads migration drift + trajectory off the C113 map | live-observing | engine-sheet | [[../reference/DEPLOY_HISTORY]] §PROD stage 19; `docs/research/2026-10-21-engine310-diff-gate-TASK.md`; plan `docs/research/2026-10-21-engine310-plan-TASK.md`; `output/engine-sheet/2026-10-21-e310-check.json`; `output/engine_review_c113.md` §C113 re-reads |

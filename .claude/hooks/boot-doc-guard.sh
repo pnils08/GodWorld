@@ -1,63 +1,98 @@
 #!/usr/bin/env bash
-# boot-doc-guard — boot docs are Mike's instructions. Edits get flagged, not blocked.
+# boot-doc-guard — boot docs are Mike's instructions.
 #
-#   PreToolUse hook. Reads tool JSON on stdin. Warn-only (S426, Mike-direct: loosened
-#   from a hard block to a warn hook — same class as block-memory-md-writes.local.md).
+#   PreToolUse hook. Reads tool JSON on stdin.
+#   LOCKED (hard block, exit 2) — builder 2026-10-28, "edited with deliberate edits, not notes":
+#     /root/GodWorld/CLAUDE.md, /root/GodWorld/AGENTS.md, .claude/terminals/*/TERMINAL.md.
+#     Unlock: Mike runs `! touch /root/GodWorld/.claude/.boot-doc-unlock` (or from any shell);
+#     the unlock holds for 60 minutes from that touch. Claude may not create or touch it.
+#   WARN-ONLY (S426): MEMORY.md, .claude/rules/*.md, the session-startup skill.
 #   Covers Write/Edit/NotebookEdit by file_path, and Bash by command inspection
 #   (heredoc/sed/tee/redirect were the hole that let a boot doc get edited without a Write call).
 
-# Boot docs: anything loaded before Mike asks a question.
-PROTECTED_RE='(^|/)(CLAUDE\.md|AGENTS\.md|MEMORY\.md)$|\.claude/rules/[^/]+\.md$|\.claude/terminals/[^/]+/TERMINAL\.md$|\.claude/skills/(boot|session-startup)/SKILL\.md$'
+ROOT="/root/GodWorld"
+UNLOCK="$ROOT/.claude/.boot-doc-unlock"
+UNLOCK_MIN=60
+LOCKED_RE="^$ROOT/(CLAUDE\.md|AGENTS\.md|\.claude/terminals/[^/]+/TERMINAL\.md)$"
+WARN_RE='(^|/)MEMORY\.md$|\.claude/rules/[^/]+\.md$|\.claude/skills/session-startup/SKILL\.md$'
 
 payload="$(cat)"
 
-tool="$(printf '%s' "$payload" | python3 -c "
-import sys,json
-try: print(json.load(sys.stdin).get('tool_name',''))
-except Exception: print('')
-" 2>/dev/null)"
-
-target=""
-case "$tool" in
-  Write|Edit|NotebookEdit)
-    target="$(printf '%s' "$payload" | python3 -c "
+field() {
+  printf '%s' "$payload" | python3 -c "
 import sys,json
 try:
-    d=json.load(sys.stdin).get('tool_input',{})
-    print(d.get('file_path') or d.get('notebook_path') or '')
+    d=json.load(sys.stdin)
+    v=d
+    for k in sys.argv[1].split('.'): v=v.get(k,'') if isinstance(v,dict) else ''
+    print(v or '')
 except Exception: print('')
-" 2>/dev/null)"
+" "$1" 2>/dev/null
+}
+
+tool="$(field tool_name)"
+cwd="$(field cwd)"; [ -z "$cwd" ] && cwd="$ROOT"
+
+abspath() { case "$1" in /*) printf '%s' "$1" ;; *) python3 -c 'import os,sys; print(os.path.normpath(os.path.join(sys.argv[1],sys.argv[2])))' "$cwd" "$1" ;; esac; }
+
+block() { echo "BLOCKED (boot-doc-guard, builder 2026-10-28): $1" >&2; exit 2; }
+
+unlocked() {
+  [ -f "$UNLOCK" ] || return 1
+  local age=$(( ( $(date +%s) - $(stat -c %Y "$UNLOCK" 2>/dev/null || echo 0) ) / 60 ))
+  [ "$age" -lt "$UNLOCK_MIN" ]
+}
+
+targets=""
+case "$tool" in
+  Write|Edit|NotebookEdit)
+    p="$(field tool_input.file_path)"; [ -z "$p" ] && p="$(field tool_input.notebook_path)"
+    [ -n "$p" ] && targets="$(abspath "$p")"
     ;;
   Bash)
-    cmd="$(printf '%s' "$payload" | python3 -c "
-import sys,json
-try: print(json.load(sys.stdin).get('tool_input',{}).get('command',''))
-except Exception: print('')
-" 2>/dev/null)"
-    # only a WRITE-shaped bash command counts; reading a boot doc stays free.
-    # heredoc bodies and quoted prose (commit messages, saved facts) are not write targets —
-    # drop them whole-command (they span lines; sed can't). The heredoc opener line stays, so
-    # `cat > CLAUDE.md <<EOF` still warns; a quoted bare path ("CLAUDE.md") stays visible.
+    cmd="$(field tool_input.command)"
+    # The unlock is Mike's hand only.
+    printf '%s' "$cmd" | grep -q 'boot-doc-unlock' && block "the boot-doc unlock is Mike's to set, by hand."
+    # Only a WRITE-shaped bash command counts; reading a boot doc stays free.
+    # Heredoc bodies and quoted prose (commit messages, saved facts) are not write targets —
+    # drop them, EXCEPT a heredoc fed to an interpreter (python/node/perl/ruby/sh), whose body
+    # is code that can write. The opener line stays, so `cat > CLAUDE.md <<EOF` still counts.
     cmdw="$(printf '%s' "$cmd" | python3 -c '
 import re,sys
 c=sys.stdin.read()
-c=re.sub(r"(<<-?\s*([\x27\x22]?)(\w+)\2[^\n]*)\n.*?\n\s*\3(?=\n|$)", r"\1", c, flags=re.S)
+code=[]
+def hd(m):
+    if re.search(r"(^|[\s;&|(])(python3?|node|perl|ruby|bash|sh)(\s|$)", m.group(1)): code.append(m.group(0))
+    return m.group(1)
+c=re.sub(r"([^\n]*<<-?\s*([\x27\x22]?)(\w+)\2[^\n]*)\n.*?\n\s*\3(?=\n|$)", hd, c, flags=re.S)
 c=re.sub(r"\x27[^\x27]*\s[^\x27]*\x27|\x22[^\x22]*\s[^\x22]*\x22", "", c)
 c=re.sub(r"\d*>&\d+|\d*>>?\s*/dev/null", "", c)
-print(c)')"
-    if printf '%s' "$cmdw" | grep -qE '>|>>|\b(sed +-i|tee|truncate|dd|mv|cp|install|patch|python3?|perl|ex|ed)\b'; then
+print(c + "\n" + "\n".join(code))')"
+    if printf '%s' "$cmdw" | grep -qE '>|>>|\b(sed +-i|tee|truncate|dd|mv|cp|install|patch|python3?|node|perl|ruby|ex|ed|rm)\b'; then
       for tok in $(printf '%s' "$cmdw" | grep -oE "[A-Za-z0-9_./-]+\.md"); do
-        printf '%s' "$tok" | grep -qE "$PROTECTED_RE" && { target="$tok"; break; }
+        targets="$targets $(abspath "$tok")"
       done
     fi
     ;;
+  *) exit 0 ;;
 esac
 
-[ -z "$target" ] && exit 0
-printf '%s' "$target" | grep -qE "$PROTECTED_RE" || exit 0
+[ -z "${targets// /}" ] && exit 0
 
-# A PreToolUse hook's stderr on exit 0 reaches the debug log only — Claude never sees it.
-# additionalContext is the non-blocking channel Claude reads (hooks docs, 2026-10-07).
-msg="boot-doc-guard: editing boot doc '$target' — Mike's instruction file, not a session scratchpad. Make sure this was requested (by him, or in-scope mechanism he asked for), not an unrequested add, rationale paragraph or session note. Warn-only (S426 Mike-direct)."
-python3 -c 'import json,sys; print(json.dumps({"hookSpecificOutput":{"hookEventName":"PreToolUse","additionalContext":sys.argv[1]}}))' "$msg"
+for t in $targets; do
+  [ "$t" = "$UNLOCK" ] && block "the boot-doc unlock is Mike's to set, by hand."
+  if printf '%s' "$t" | grep -qE "$LOCKED_RE"; then
+    unlocked || block "'$t' is locked — CLAUDE.md, AGENTS.md and TERMINAL.md change only by deliberate edit. Ask Mike; he unlocks with: ! touch $UNLOCK (60 min)."
+  fi
+done
+
+for t in $targets; do
+  if printf '%s' "$t" | grep -qE "$LOCKED_RE|$WARN_RE"; then
+    # A PreToolUse hook's stderr on exit 0 reaches the debug log only — Claude never sees it.
+    # additionalContext is the non-blocking channel Claude reads (hooks docs, 2026-10-07).
+    msg="boot-doc-guard: editing boot doc '$t' — Mike's instruction file, not a session scratchpad. Deliberate edits only: no notes, rationale paragraphs or session history."
+    python3 -c 'import json,sys; print(json.dumps({"hookSpecificOutput":{"hookEventName":"PreToolUse","additionalContext":sys.argv[1]}}))' "$msg"
+    exit 0
+  fi
+done
 exit 0

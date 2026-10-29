@@ -973,6 +973,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S617 Archive Pass (2026-10-29, research-build) — post-S616 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.*.
+
+- **pipeline.77** [engine-sheet] — Reward loop done (five seats 4/4 at C113). Two drafts dropped by the builder 2026-10-29 **State at archive:** wontfix. Pointer: [[../plans/2026-10-11-media-extension]]
+
+This pass: 1 rows — pipeline.77. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S614 Archive Pass (2026-10-29, engine-sheet) — post-S613 closures sweep
 
 4 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 3 engine.* + 1 pipeline.*.

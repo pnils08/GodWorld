@@ -26,7 +26,7 @@ Precedence: the builder's current request → this file → nested `AGENTS.md` �
 ## Facts
 
 - Vocabulary: `CONTEXT.md`. Cycle = one engine run (never tick/round); POPID = `POP-XXXXX`; Canon Tier ≠ Citizen Tier; an Initiative contains Projects; a Writer mutates a Sheet, an Intent is a queued write.
-- Canon authority: the Sheets own citizen/world state; published Bay Tribune material is the paper of record. Derived memory/card layers are not canon.
+- Canon is whatever has been ingested to Supermemory `bay-tribune` (GodWorld MCP `search_canon`); an ingest path's gate decides what becomes canon. The Sheets own current citizen/world state. NotebookLM is the builder's workspace, not canon.
 - Never invent citizens, POPIDs, businesses, institutions, events, statistics, quotes, dates, votes, budgets or relationships. Test data is visibly synthetic and never enters Sheets, Drive, Supermemory or published artifacts.
 - Engine errors, spikes and drops are world events — diagnose the mechanism, never suppress it.
 - World-facing text uses in-world time (`Cycle N`, `C<N>`), never wall-clock dates.

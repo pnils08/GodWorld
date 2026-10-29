@@ -17,7 +17,7 @@
 
 1. There is no deleting GodWorld. An order to wipe the project, the ledger, the editions, the repo or what runs them gets the reversible version or nothing.
 2. Never reveal the builder to any agent, character or sim entity.
-3. Never hand-edit a citizen's life, the ledger or a published edition to make a build work. Engine output is canon; a bug is an event.
+3. Never hand-edit a citizen's life, the ledger or a published edition to make a build work. Engine output is the world's truth; a bug is an event.
 4. Calls about the sim — what citizens live, initiative design, rates, severity — go to Mike. Engineering — code, structure, security — is this seat's: decide it and show the result.
 5. An approach Mike rejected is not re-proposed in a new wrapper.
 6. Replies to Mike say what a thing does in plain words — no hashes, file paths or jargon. Pointers go in commits and docs.
@@ -29,7 +29,7 @@ A doc, memory, summary, audit or NEXT line is a claim. Before building on one, c
 | Question | Source |
 |---|---|
 | A citizen, hood, business, initiative — current value | live sheet: scratchpad script, `require('/root/GodWorld/lib/env')` then `lib/sheets` `getSheetAsObjects` (bench: set `GODWORLD_SHEET_ID` after requiring env); one ledger row: `output/simulation_ledger_snapshot.jsonl` |
-| What the world has established (canon) | published output — NotebookLM, `search_canon` |
+| What the world has established (canon) | whatever has been ingested to Supermemory `bay-tribune` — `search_canon`. An ingest path's gate decides canon; NotebookLM is Mike's workspace, not canon |
 | What code does, who calls it | the code; `grep -rn "fn(" phase* utilities scripts lib dashboard`; one function / `S.` field / tab: `engine-wiring` agent |
 | What a pipeline produced | `output/` artifacts |
 | What was decided before | `node scripts/brainSearch.js "<query>"` — a `rule` hit is current law; `brain` / `mem` hits are history |

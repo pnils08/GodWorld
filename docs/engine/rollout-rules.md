@@ -101,7 +101,7 @@ Rollout is the index, not the encyclopedia. (S147 rule, ADR-0005 enforcement.)
 
 - The state cell is a **bare token** from the table below — no parenthetical, no added prose, no invented word. `queued` and `draft` are not states; a row using one is skipped by the sweep.
 - Exactly **one** cell in the line may equal a state token; a state word sitting loose in the summary creates a phantom state cell and the sweep may split on the wrong one.
-- No literal `|` anywhere in the summary cell; summary ≤ 280 chars. Over that, the row has become a notes blob — relocate the narrative to the owning plan's `## Status log` (`scripts/rolloutDrain.js`, dry-run by default), never delete it.
+- No literal `|` anywhere in the summary cell. A row a commit adds or changes: summary ≤ 160 chars — what it is + what it waits on or its next step (ratchet, builder 2026-10-28; `--gate` checks the staged diff); untouched rows ≤ 280 until trimmed. Over that, the row has become a notes blob — relocate the narrative to the owning plan's `## Status log` (`scripts/rolloutDrain.js`, dry-run by default), never delete it.
 - Verify before calling a row filed: `node scripts/docLoopStatus.js --lint` → expect `ROLLOUT LINT: clean`. Anything else means the row is not filed yet. The same lint runs as a pre-commit gate.
 
 ### State labels (S204 — adapted from Pocock's `triage` skill, MIT)
@@ -123,7 +123,7 @@ State answers "is this pickable right now"; terminal answers "by whom." They are
 
 ### Grouping
 
-**Sections (builder 2026-10-07):** ROLLOUT holds only current work and waits, in four sections — (1) waiting on the builder: named calls, `needs-info`; (2) waiting on a fire: the Cycle or date in the row, or `Organic:` when the world has to produce it; (3) now: `in-progress`, readbacks owed, pickable `ready`; (4) queue: ruled, not started. Ids keep their type prefix (`pipeline` / `engine` / `canon` / `civic` / `infrastructure` / `research` / `governance`) — numbers are identifiers, deletions don't renumber, cross-cutting work picks the primary group.
+**Sections (builder 2026-10-07):** ROLLOUT holds only current work and waits, in four sections — (1) waiting on the builder: named calls, `needs-info`; (2) waiting on a fire: the Cycle or date in the row, or `Organic:` when the world has to produce it; (3) now: `in-progress` only, one per terminal; (4) queue: `ready`, ruled, not started. State decides section (2026-10-28): 1 `needs-info`; 2 `live-observing` / `blocked` / `parked`; 3 `in-progress`; 4 `ready` (`wontfix` / `done-pending-archive` until the close sweeps them). The header above §1 holds the contract and the working order only (≤ 6 lines). `--gate` enforces all three. Ids keep their type prefix (`pipeline` / `engine` / `canon` / `civic` / `infrastructure` / `research` / `governance`) — numbers are identifiers, deletions don't renumber, cross-cutting work picks the primary group.
 
 **An id is never reused.** Once a row is archived its id is spent; new work takes the next free number. A reused id makes every older memory and commit about it read as current (2026-10-07: a 09-27 capture about the archived infrastructure.10 was recalled as fact about the new one).
 
@@ -183,6 +183,8 @@ The house-guest lanes (**kimi / codex / antigravity**, S340) work plans under th
 ---
 
 ## Changelog
+
+- 2026-10-28 (engine-sheet) — §3: state decides section, header ≤ 6 lines, touched-row ratchet ≤ 160; plans-in-motion block retired; close fails on a worked row whose plan was not updated (builder: guardrails).
 
 - 2026-10-07 (engine-sheet) — §3: four sections by what a row waits on; parked rows move to BACKLOG; ids never reused (builder: the rollout was unreadable).
 

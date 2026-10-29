@@ -14,39 +14,8 @@
 protected='^(\.claude/|CLAUDE\.md|SESSION_CONTEXT\.md)'
 staged="$(git diff --cached --name-only | grep -E "$protected" || true)"
 
-# --- EXTERNAL-LANE HANDOFF CARVE-OUT (S340) ---
-# kimi / codex / antigravity / grok carry a NEXT line in SESSION_CONTEXT.md and close by
-# rewriting it (AGENTS.md §Session close). Without this, that write is a
-# control-plane edit they cannot make, so their lanes would sit frozen at
-# whatever a Claude terminal typed once and the handoff would be decoration.
-#
-# SCOPE, precisely: `staged` holds PROTECTED paths only, so this fires when
-# SESSION_CONTEXT.md is the only protected file — non-protected files (scripts/,
-# output/, docs/) ride along in the same commit unchecked. That is fine for Codex
-# and Kimi, whose writable scope already covers them. For Antigravity, "your own
-# NEXT line is the one commit you may make" is POLICY in AGENTS.md, not something
-# this hook enforces. A diff that only DELETES a lane's NEXT line also passes.
-#
-# The carve-out is deliberately the narrowest thing that works: SESSION_CONTEXT.md
-# must be the ONLY protected path staged, and every changed line in it must be a
-# NEXT line for ONE external lane. A PIN edit, another lane's line, a second
-# control-plane file, or any prose all fall through to the block below. Telling
-# these agents to set CLAUDE_CTL=1 was the alternative and it would hand them the
-# whole control plane to fix one line.
-if [ "$staged" = "SESSION_CONTEXT.md" ] && [ "$CLAUDE_CTL" != "1" ]; then
-  sc_changes="$(git diff --cached -U0 -- SESSION_CONTEXT.md \
-    | grep -E '^[+-]' | grep -Ev '^(\+\+\+|---)' || true)"
-  sc_lanes="$(printf '%s\n' "$sc_changes" \
-    | sed -nE 's/^[+-]\*\*NEXT\[(kimi|codex|antigravity|grok)\]:\*\*.*/\1/p' \
-    | sort -u)"
-  sc_offending="$(printf '%s\n' "$sc_changes" \
-    | grep -Ev '^[+-]\*\*NEXT\[(kimi|codex|antigravity|grok)\]:\*\*' || true)"
-  if [ -n "$sc_changes" ] && [ -z "$sc_offending" ] \
-     && [ "$(printf '%s\n' "$sc_lanes" | grep -c .)" = "1" ]; then
-    echo "pre-commit: external-lane handoff — NEXT[$sc_lanes] only, control-plane gate waived (S340)."
-    staged=""
-  fi
-fi
+# (The S340 guest-lane NEXT-line carve-out was retired 2026-10-28: guest lanes carry no
+# SESSION_CONTEXT line; reviews arrive as files.)
 
 if [ -n "$staged" ] && [ "$CLAUDE_CTL" != "1" ]; then
   echo "" >&2
@@ -79,6 +48,20 @@ if git diff --cached --name-only | grep -q '^docs/engine/ROLLOUT_PLAN\.md$'; the
     echo "A malformed row never archives and its work stops being tracked." >&2
     echo "Fix the row, or drain the narrative to its plan doc:" >&2
     echo "  node scripts/rolloutDrain.js --id=<row> --title=\"...\" --state=<state>" >&2
+    echo "" >&2
+    exit 1
+  fi
+fi
+
+# ---------------------------------------------------------------------------
+# SESSION_CONTEXT shape gate (builder 2026-10-28): header, one PIN, one NEXT per
+# Claude terminal — nothing else; PIN and NEXT under their caps.
+# ---------------------------------------------------------------------------
+if git diff --cached --name-only | grep -q '^SESSION_CONTEXT\.md$'; then
+  if ! sc_out="$(node scripts/docLoopStatus.js --gate-handoff 2>&1)"; then
+    echo "" >&2
+    echo "BLOCKED — SESSION_CONTEXT.md is a handoff, not a log:" >&2
+    echo "$sc_out" | sed 's/^/  /' >&2
     echo "" >&2
     exit 1
   fi

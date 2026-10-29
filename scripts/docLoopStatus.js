@@ -46,6 +46,18 @@ const STATES = new Set([
 // drain it to its plan doc. 280 fits a real one-liner + pointer with headroom;
 // genuinely-lean rows run 40–215 chars. (governance.30 / S274.)
 const ITEM_BUDGET = 280;
+// Ratchet (builder 2026-10-28, "the docs need guardrails"): a row a commit adds or
+// changes must fit TOUCHED_BUDGET; untouched rows keep the old budget until trimmed.
+const TOUCHED_BUDGET = 160;
+// The header above section 1 stays a contract, not a status log.
+const HEADER_MAX_LINES = 6;
+// Section ↔ state (rollout-rules §Sections): a row sits in the section its state names.
+const SECTION_STATES = {
+  1: new Set(['needs-info']),
+  2: new Set(['live-observing', 'blocked', 'parked']),
+  3: new Set(['in-progress']),
+  4: new Set(['ready', 'done-pending-archive', 'wontfix']),
+};
 // Job model (builder 2026-10-23): the only values an in-progress row's Terminal cell may hold.
 const BUILDER_TERMINALS = new Set(['research-build', 'engine-sheet']);
 const VERDICTS = new Set(['adopt', 'watch', 'take-nothing']);
@@ -92,7 +104,15 @@ function parseRollout() {
 function lintRollout() {
   const problems = [];
   const lines = fs.readFileSync(ROLLOUT, 'utf8').split('\n');
+  const firstSec = lines.findIndex(l => /^## 1\./.test(l));
+  const headerLines = lines.slice(1, firstSec === -1 ? lines.length : firstSec).filter(l => l.trim()).length;
+  if (headerLines > HEADER_MAX_LINES) {
+    problems.push(`  header: ${headerLines} non-blank lines above section 1 > ${HEADER_MAX_LINES} → status notes crept into the header. Fix: the header holds the contract and the working order only.`);
+  }
+  let section = 0;
   lines.forEach((line, i) => {
+    const sec = line.match(/^## (\d)\./);
+    if (sec) section = Number(sec[1]);
     const idMatch = line.match(ROW_ID);
     if (!idMatch) return;
     const id = idMatch[1];
@@ -108,6 +128,9 @@ function lintRollout() {
       const itemLen = sIdx > 2 ? cells.slice(2, sIdx).join(' | ').length : line.length;
       if (itemLen > ITEM_BUDGET) {
         problems.push(`  L${i + 1} ${id}: item cell ${itemLen} chars > ${ITEM_BUDGET} budget → this row is a notes blob, not a pointer. Fix: drain the narrative to its plan/research MD (rolloutDrain.js), leave one actionable line + the → pointer.`);
+      }
+      if (SECTION_STATES[section] && !SECTION_STATES[section].has(cells[sIdx])) {
+        problems.push(`  L${i + 1} ${id}: state ${cells[sIdx]} in section ${section} → a row sits in the section its state names (1 needs-info; 2 live-observing/blocked/parked; 3 in-progress; 4 ready). Fix: move the row.`);
       }
       // Job model (builder 2026-10-23): an in-progress row names ONE terminal.
       if (cells[sIdx] === 'in-progress') {
@@ -143,8 +166,32 @@ function inHandReport() {
 // catch branch — suppressing the very lint output that caught two bad rows in
 // S335. post-write-check.sh and rolloutDrain.js also assume exit 0. So --lint
 // stays a surfacing report and --gate is the enforcing one.
+// Rows the staged commit adds or changes (the ratchet). Empty outside a commit.
+function stagedRowProblems() {
+  const { execSync } = require('child_process');
+  const diff = execSync('git diff --cached -U0 -- docs/engine/ROLLOUT_PLAN.md', { cwd: ROOT, stdio: ['ignore', 'pipe', 'pipe'] }).toString();
+  const out = [];
+  diff.split('\n').forEach(l => {
+    if (!l.startsWith('+') || l.startsWith('+++')) return;
+    const line = l.slice(1);
+    const idMatch = line.match(ROW_ID);
+    if (!idMatch) return;
+    const cells = line.split('|').map(c => c.trim());
+    const sIdx = cells.findIndex(c => STATES.has(c));
+    const itemLen = sIdx > 2 ? cells.slice(2, sIdx).join(' | ').length : line.length;
+    if (itemLen > TOUCHED_BUDGET) {
+      out.push(`  ${idMatch[1]}: touched in this commit, item cell ${itemLen} chars > ${TOUCHED_BUDGET} → what it is + what it waits on or its next step; history goes to the plan's changelog.`);
+    }
+  });
+  return out;
+}
+
 function runLint(gate) {
   const problems = lintRollout();
+  if (gate) {
+    try { problems.push(...stagedRowProblems()); }
+    catch (e) { problems.push(`  staged-row check could not read the staged diff: ${e.message.split('\n')[0]}`); }
+  }
   if (problems.length) {
     console.log(`ROLLOUT LINT: ${problems.length} non-conforming row(s) — state-cell breaks the sweep, or item cell over the ${ITEM_BUDGET}-char pointer budget:`);
     problems.forEach(p => console.log(p));
@@ -173,7 +220,7 @@ function currentCycle() {
     if (Number.isFinite(c)) return c;
   } catch (_) { /* fall through to the PIN */ }
   try {
-    const m = fs.readFileSync(path.join(ROOT, 'SESSION_CONTEXT.md'), 'utf8').match(/canonical C(\d+)/);
+    const m = fs.readFileSync(path.join(ROOT, 'SESSION_CONTEXT.md'), 'utf8').match(/Canon(?:ical)? C(\d+)/);
     if (m) return Number(m[1]);
   } catch (_) { /* no cycle source */ }
   return null;
@@ -295,8 +342,36 @@ function runPlans(write) {
   console.log(`PLANS: ${plans.length} plans written to ROLLOUT_PLAN.md${next === text ? ' (unchanged)' : ''}`);
 }
 
+// --gate-handoff (builder 2026-10-28; reverses the S298 "length is judgment" ruling on
+// his ask for guardrails): SESSION_CONTEXT is a header, one PIN, and one NEXT line per
+// Claude terminal — nothing else. Guest lanes carry no line.
+const PIN_MAX = 200;
+const NEXT_MAX = 350;
+function runHandoffGate() {
+  const lines = fs.readFileSync(path.join(ROOT, 'SESSION_CONTEXT.md'), 'utf8').split('\n').filter(l => l.trim());
+  const problems = [];
+  if (!/^# SESSION_CONTEXT/.test(lines[0] || '')) problems.push('  line 1 must be the `# SESSION_CONTEXT` header.');
+  const pins = lines.filter(l => l.startsWith('**PIN:**'));
+  if (pins.length !== 1) problems.push(`  ${pins.length} PIN lines → exactly one.`);
+  pins.forEach(l => { if (l.length > PIN_MAX) problems.push(`  PIN ${l.length} chars > ${PIN_MAX} → session | day | canon cycle | PROD deployment | next live fire; history lives in DEPLOY_HISTORY.`); });
+  for (const t of BUILDER_TERMINALS) {
+    const n = lines.filter(l => l.startsWith(`**NEXT[${t}]:**`));
+    if (n.length !== 1) problems.push(`  ${n.length} NEXT[${t}] lines → exactly one.`);
+    n.forEach(l => { if (l.length > NEXT_MAX) problems.push(`  NEXT[${t}] ${l.length} chars > ${NEXT_MAX} → job id → next step, holds; never what was done.`); });
+  }
+  const known = l => /^# SESSION_CONTEXT/.test(l) || l.startsWith('**PIN:**') || [...BUILDER_TERMINALS].some(t => l.startsWith(`**NEXT[${t}]:**`));
+  lines.slice(1).filter(l => !known(l)).forEach(l => problems.push(`  extra line → "${l.slice(0, 60)}…" (no other lanes, notes or sections).`));
+  if (problems.length) {
+    console.log('SESSION_CONTEXT shape:');
+    problems.forEach(p => console.log(p));
+    process.exit(1);
+  }
+  console.log('SESSION_CONTEXT shape: clean.');
+}
+
 function main() {
   const args = process.argv.slice(2);
+  if (args.includes('--gate-handoff')) { runHandoffGate(); return; }
   if (args.includes('--gate')) { runLint(true); return; }
   if (args.includes('--lint')) { runLint(false); return; }
   if (args.includes('--plans')) { runPlans(args.includes('--write')); return; }

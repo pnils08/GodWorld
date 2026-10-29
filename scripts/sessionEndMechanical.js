@@ -366,11 +366,53 @@ function subSessionSummaryBridge(args) {
 // Step list builder
 // ---------------------------------------------------------------------------
 
+// Plans updated when work is done (builder 2026-10-28: rows never complete because the
+// plans are not updated). Every ROLLOUT row named in the subject of one of THIS terminal's
+// commits since the session-start stamp must have its plan touched by some commit in the
+// same window. Window = the stamp, not HEAD (S594: a HEAD-relative baseline false-aborted
+// retried closes). A git error fails the close; a missing stamp skips with a warning.
+function subPlanTouched(args) {
+  let since;
+  try { since = Number(fs.readFileSync(path.join(ROOT, '.claude', 'state', 'session-start.txt'), 'utf8').trim()); }
+  catch (_) { console.log('  ⚠ no session-start stamp — check skipped'); return { ok: true }; }
+  if (!Number.isFinite(since)) { console.log('  ⚠ unreadable session-start stamp — check skipped'); return { ok: true }; }
+  let log;
+  try {
+    log = execSync(`git log --since=@${since} --format=%x1e%s --name-only`, { cwd: ROOT, stdio: ['ignore', 'pipe', 'pipe'] }).toString();
+  } catch (err) {
+    console.log(`  ✗ git log failed: ${err.message.split('\n')[0]}`);
+    return { ok: true, failed: true };
+  }
+  const commits = log.split('\x1e').filter(Boolean).map(c => {
+    const [subject, ...files] = c.split('\n').filter(Boolean);
+    return { subject, files };
+  });
+  const touched = new Set(commits.flatMap(c => c.files));
+  const plans = new Map();
+  fs.readFileSync(path.join(ROOT, 'docs/engine/ROLLOUT_PLAN.md'), 'utf8').split('\n').forEach(line => {
+    const id = (line.match(/^\|\s*([a-z][a-z-]*\.\d+[a-z]?)\s*\|/) || [])[1];
+    const plan = (line.match(/\[\[\.\.\/plans\/([^\]|#]+)\]\]/) || [])[1];
+    if (id && plan) plans.set(id, `docs/plans/${plan.replace(/\.md$/, '')}.md`);
+  });
+  const missing = new Map();
+  commits.filter(c => c.subject.endsWith(`[${args.terminal}]`)).forEach(c => {
+    for (const m of c.subject.matchAll(/\b([a-z][a-z-]*\.\d+[a-z]?)\b/g)) {
+      const plan = plans.get(m[1]);
+      if (plan && !touched.has(plan)) missing.set(m[1], plan);
+    }
+  });
+  if (!missing.size) { console.log(`  ✓ every row named in this session's [${args.terminal}] commits has its plan updated`); return { ok: true }; }
+  console.log(`  ✗ ${missing.size} row(s) worked this session with no plan update — flip the task Status and add a one-line changelog entry, then re-run:`);
+  missing.forEach((plan, id) => console.log(`    ${id} → ${plan}`));
+  return { ok: true, failed: true };
+}
+
 function buildSteps(args) {
   const steps = [];
   steps.push({ name: 'session summary → Supermemory (best-effort)', fn: subSessionSummaryBridge });
   steps.push({ name: 'auditPlanTagDrift (informational)', fn: subAuditPlanTagDrift });
   steps.push({ name: 'ROLLOUT conformance lint (informational)', fn: subRolloutLint });
+  steps.push({ name: 'worked rows have their plan updated', fn: subPlanTouched });
   steps.push({ name: 'cross-terminal git stack check (read-only)', fn: subStackCheck });
   if (args.rotateHistory) {
     steps.push({ name: 'SESSION_HISTORY rotation (opt-in)', fn: subRotateHistory });
@@ -434,4 +476,4 @@ function main() {
 
 if (require.main === module) main();
 
-module.exports = { subRolloutLint };
+module.exports = { subRolloutLint, subPlanTouched };

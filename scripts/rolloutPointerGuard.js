@@ -20,7 +20,9 @@ process.stdin.on('end', () => {
     // Same budget as docLoopStatus --lint: the ITEM cell (between the id and the
     // state token) is ≤ ITEM_BUDGET; the pointer cell is not counted (2026-10-07 —
     // a whole-line cap denied rows the lint passed).
-    const ITEM_BUDGET = 280;
+    // An Edit's new_string holds only rows being touched → the ratchet budget (builder
+    // 2026-10-28); a whole-file Write keeps the grandfathered budget for untouched rows.
+    const ITEM_BUDGET = input.tool_input.new_string !== undefined ? 160 : 280;
     const STATES = new Set(['ready', 'in-progress', 'live-observing', 'done-pending-archive', 'blocked', 'needs-info', 'wontfix', 'parked']);
     fat = lines.filter(l => {
       if (!/^\s*\|\s*[a-z][a-z-]*\.\d+[a-z]?\s*\|/.test(l)) return false;
@@ -28,15 +30,9 @@ process.stdin.on('end', () => {
       const s = cells.findIndex(c => STATES.has(c));
       return (s > 2 ? cells.slice(2, s).join(' | ').length : l.length) > ITEM_BUDGET;
     }).length;
-    const generated = /<!-- generated: plans in motion/.test(input.tool_input && input.tool_input.old_string || '');
-    if (generated && !fat) {
-      console.log(JSON.stringify({ hookSpecificOutput: { hookEventName: 'PreToolUse', permissionDecision: 'deny',
-        permissionDecisionReason: 'The plans-in-motion block is generated from the rows — edit the rows, then run node scripts/docLoopStatus.js --plans --write.' } }));
-      process.exit(0);
-    }
     reason = `ROLLOUT is a pointer index — ${fat} row(s) have an item cell over ${ITEM_BUDGET} chars. ` +
-      'Move the detail into the owning plan/research/triage doc and keep the rollout row to one pointer line (id | item | state | owner | plan link).';
-    context = 'Doctrine for this file: docs/engine/rollout-rules.md — row contract (§3: 5 cells, bare state token, item ≤280 chars), sections by what a row waits on, a waiting row names its Cycle or date (or starts `Organic:`), ids never reused. The plans-in-motion block is generated — never hand-edit it. Verify: node scripts/docLoopStatus.js --lint';
+      'A row is what it is + what it waits on or its next step; history goes to the plan\'s changelog.';
+    context = 'Doctrine for this file: docs/engine/rollout-rules.md — row contract (5 cells, bare state token; a touched row item ≤160 chars), a row sits in the section its state names (1 needs-info, 2 live-observing/blocked, 3 in-progress, 4 ready), a waiting row names its Cycle or date (or starts `Organic:`), ids never reused. Verify: node scripts/docLoopStatus.js --gate';
   } else if (/\/docs\/(plans|research)\/\d{4}-\d\d-\d\d-[^/]+\.md$/.test(fp) && input.tool_input.content !== undefined && !require('fs').existsSync(fp)) {
     // A NEW plan / research / review file: hand the writer the template at the
     // moment of writing (2026-10-07) and name any heading the checks key on that is missing.

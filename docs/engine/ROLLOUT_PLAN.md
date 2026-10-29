@@ -75,6 +75,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| governance.53 | Trim every row to what it is + what it waits on or next step; history into each plan's changelog first, then drop the 280 cap | ready | engine-sheet | [[rollout-rules]] §3 Row contract |
 | engine.214 | Mood per hood + 287/288 LIVE @148 (stage 5); Cut A @151, Cut B @152, Cut C + rate @153/@154 = stage 17. C113 first live fire read 2026-10-27 (hood reactions 69% with trend, spot lines 7.4%). Next: 8b `$VENUE` draws the citizen's spot (build) | ready | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] |
 | engine.204 | Builder 2026-10-22: remove HomeNeighborhood + EconomicFootprint (move no number); wire FranchiseStability + CommunityInvestment; dashboard gains WeekRecord + 11 sheet-only EventTypes; off-list triggers become hooks. Holds engine.202's 3c residue | ready | engine-sheet | [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]] §4 Builder ruling 2026-10-22, §5 |
 | engine.205 | Weekly game economy LIVE since 2026-10-06; its column surface is engine.204's open work (builder 2026-10-22, all three) | ready | engine-sheet | [[../plans/2026-09-11-sports-as-a-lived-system]] Tasks 4, 10 |

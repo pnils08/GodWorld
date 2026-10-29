@@ -43,7 +43,7 @@ The **Terminal-Specific Audit** table for your seat is §Terminal-Specific Detai
 
 **The carried-set contract (ADR-0009 §loop-tightening; hardened S283 Mike-direct): SESSION_CONTEXT is a minimal AI→AI handoff — one `#` header line + one `**PIN:**` line + one `**NEXT[<terminal>]:**` line per Claude terminal (research-build, engine-sheet). NOTHING else; guest lanes carry no line (builder 2026-10-28).** No STATUS narrative, no Shipped block, no prose sections, no tables. claude-mem saves the session; git history shows the work; ROLLOUT_PLAN carries open work — none of that goes in SESSION_CONTEXT. Displaced narrative rotates to `docs/mags-corliss/SESSION_HISTORY.md`. Both soft and hard close write the *same* two things — the modes differ only in the sweep overhead, not in what lands in SESSION_CONTEXT.
 
-**Length is model judgment, not a gate (Mike-direct S298).** The FATAL minimal-handoff guard that enforced NEXT ≤ 350 / PIN ≤ 450 was removed from `sessionEndMechanical.js` — nothing checks shape at close anymore. Keep the lines tight because a long one costs every terminal at every boot, not because a script will stop you.
+**Shape is gated again (builder 2026-10-28, reversing S298 on his ask for guardrails).** The pre-commit hook runs `docLoopStatus.js --gate-handoff` on any commit staging SESSION_CONTEXT: header, one PIN ≤ 200 chars, exactly one NEXT per Claude terminal ≤ 350 chars, nothing else.
 
 Three sub-actions:
 
@@ -81,7 +81,7 @@ node scripts/sessionEndMechanical.js --terminal=<name> > output/session_end_run.
 
 Redirect it — the run prints ~45 lines; read the file for the lint and stack-check lines only. A ROLLOUT lint row is fixed in this close, not carried (item cell ≤ 280 chars).
 
-Wraps: **session summary → Supermemory (best-effort S283 — mirrors claude-mem's session summary to `session-logs` ONLY (S341 — `sl-*` is hand-write; the shared hand-write container is `sl-godworld` as of S372); zero LLM calls, idempotent, never blocks a close)** → `auditPlanTagDrift` (informational — drift never fails close) → ROLLOUT conformance lint (informational) → cross-terminal git stack check (read-only report) → `pm2 restart`.
+Wraps: **session summary → Supermemory (best-effort S283 — mirrors claude-mem's session summary to `session-logs` ONLY (S341 — `sl-*` is hand-write; the shared hand-write container is `sl-godworld` as of S372); zero LLM calls, idempotent, never blocks a close)** → `auditPlanTagDrift` (informational — drift never fails close) → ROLLOUT conformance lint (informational) → **worked rows have their plan updated** (FAILS the close: every row named in this terminal's commit subjects since the session-start stamp needs its plan touched in the same window) → cross-terminal git stack check (read-only report) → `pm2 restart`.
 
 Retired sub-steps, so nobody goes looking for them: `minimalHandoffGuard` (S298, Mike-direct — shape/length caps are model judgment now), `rotateJournalRecent` + JOURNAL content-quality (S300 journal freeze), `writeShippedBlock` (ADR-0009 §loop-tightening — the carried set is hand-written in Step 2), `rolloutTriage` (S235).
 

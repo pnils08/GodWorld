@@ -7,7 +7,7 @@
 **Working order (builder 2026-10-22, "work through this list how you lay it out"):** ship what is already paid for (finished, reviewed code) first; then clear the builder's decisions; then builds ranked by "does it give the citizens a life", grouped by the file they touch; plumbing only when a build already has the file open. Nothing waits on the live fire (TERMINAL.md: the bench is the gate; a bench-proven change goes live the same session).
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
-**Plans in motion (52)** — each plan, its rows and the state each is in:
+**Plans in motion (53)** — each plan, its rows and the state each is in:
 
 - [[../plans/2026-10-11-media-extension]]: pipeline.77 needs-info, pipeline.85 live-observing, pipeline.89 in-progress, pipeline.83 live-observing, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.91 ready, pipeline.88 needs-info, pipeline.80 live-observing
 - [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.301 live-observing, engine.214 ready, engine.308 live-observing, engine.287 live-observing, engine.288 live-observing, engine.289 blocked, engine.309 needs-info, engine.311 needs-info
@@ -18,6 +18,8 @@
 - [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 ready, engine.201 live-observing, engine.197 live-observing
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 blocked
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 ready, engine.281 ready
+- [[../plans/2026-08-29-boot-doc-consolidation]]: governance.51 ready, pipeline.93 wontfix
+- [[../plans/2026-10-29-claude-duet-c113-handoff-verified]]: infrastructure.15 ready, engine.323 ready
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
 - [[../plans/2026-10-20-hood-character-standing]]: pipeline.71 needs-info
 - [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing
@@ -39,7 +41,6 @@
 - [[../plans/2026-08-07-spacemolt-game-show]]: research.27 live-observing
 - [[../plans/2026-07-06-citizen-loop-deepening]]: engine.48 live-observing
 - [[../plans/2026-09-13-run-cycle-packages-the-world]]: pipeline.69 ready
-- [[../plans/2026-08-29-boot-doc-consolidation]]: governance.51 ready
 - [[../plans/2026-08-16-city-hall-nine-seat-table]]: civic.24 ready
 - [[../plans/2026-06-24-engine-output-canon-coverage]]: engine.41 wontfix
 - [[../plans/2026-07-31-canon-ingest-backfill]]: engine.91 ready
@@ -48,9 +49,9 @@
 - [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]]: engine.27 ready
 - [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
 - [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 live-observing
-- [[../plans/2026-10-28-code-review-dirty-tree-findings]]: infrastructure.14 in-progress
 - [[../—]]: pipeline.92 ready
 - `lib/wakePerception.test.js:242`: infrastructure.13 ready
+- [[../plans/2026-10-28-code-review-dirty-tree-findings]]: engine.322 ready
 - `docs/archive/for-claude-review/2026-10-25-codex-engine301-gate3-recheck.md`: engine.317 ready
 - `output/antigravity/2026-10-19-review-engine214-prod-candidate.md`: engine.316 ready
 - [[../plans/2026-10-15-engine-290-transit-rides-the-sim]]: engine.290 ready
@@ -139,7 +140,6 @@
 | engine.270 | Storylines keyed to engine events: Review 1 build + codex fold 2026-10-28 (D1 anomaly tag, D2 no false age, Saturday attach pass). Read the first attach run Sat 2026-10-31 16:00 and the first D1/D2 build at the C114 fire Sun 2026-11-01 | live-observing | engine-sheet | [[../plans/2026-09-28-storylines-keyed-to-engine-events]] §Review 1 build |
 | pipeline.74 | The awaited writes happened: Tanya, Noah (grok-4.3) and P Slayer wrote in the unattended C112/C113 fan-outs. Read owed: off-season label, P Slayer POPIDs, Noah model. Angle cap 1600 PROVEN (capHits 0 on 10-15/16/19) | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |
 | pipeline.75 | Tanya wrote in the unattended C112/C113 fan-outs (C113 staged, 4/4). Read owed: feed names + Notes. Deterministic write checks PROVEN in every unattended fan-out results file 10-15 → 10-19 | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |
-| infrastructure.14 | Nine /code-review findings on the C113 tree, ranked, each verified in code before any fix: engine.318 double-archive, INIT-010 stale next-action, suffixed staged reruns unindexed, engineFiredAt from mtimes, sweep swallows errors, title/desk, test log pollution. Sonnet | done-pending-archive | research-build | [[../plans/2026-10-28-code-review-dirty-tree-findings]] |
 
 ## 4. Queue — ruled, not started
 

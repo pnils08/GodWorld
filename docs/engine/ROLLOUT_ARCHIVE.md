@@ -973,6 +973,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S614 Archive Pass (2026-10-29, engine-sheet) — post-S613 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 infrastructure.*.
+
+- **infrastructure.14** [research-build] — Nine /code-review findings on the C113 tree, ranked, each verified in code before any fix: engine.318 double-archive, INIT-010 stale next-action, suffixed staged reruns unindexed, engineFiredAt from mtimes, sweep swallows errors, title/desk, test log pollution. Sonnet **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-28-code-review-dirty-tree-findings]]
+
+This pass: 1 rows — infrastructure.14. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S612 Archive Pass (2026-10-28, research-build) — post-S611 closures sweep
 
 1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.

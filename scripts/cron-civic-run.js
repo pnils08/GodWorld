@@ -3574,15 +3574,18 @@ function engineInputsMissing(cycle, root) {
 
 // The engine fire is a manual event; its on-disk witness is the pair of
 // compile artifacts every fire produces plus the beat dump's stamp. firedAt =
-// the later of the two compile mtimes (the moment the pair was complete).
+// the world summary's mtime: the summary is built after the audit at every fire
+// (C110-C113: 4-8 min after), so it is the moment the pair was complete. The
+// audit's mtime is not used: the next run-cycle's Step 2.5 rebases the PREVIOUS
+// cycle's audit snapshot a week later (655f96b4, C111 at C112's fire), and that
+// rewrite moved a closed week's cutoff clock forward.
 // Never wall-clock-facing — this only feeds the verdict cutoff clock.
 function engineFireInfo(cycle, root) {
   root = root || ROOT;
-  const files = ['world_summary_c' + cycle + '.md', 'engine_audit_c' + cycle + '.json']
-    .map(f => path.join(root, 'output', f));
-  if (!files.every(f => fs.existsSync(f)) || !beatsDumpReady(cycle, root)) return { fired: false, firedAt: null };
-  const mtimes = files.map(f => fs.statSync(f).mtimeMs);
-  return { fired: true, firedAt: new Date(Math.max.apply(null, mtimes)).toISOString() };
+  const summary = path.join(root, 'output', 'world_summary_c' + cycle + '.md');
+  const audit = path.join(root, 'output', 'engine_audit_c' + cycle + '.json');
+  if (!fs.existsSync(summary) || !fs.existsSync(audit) || !beatsDumpReady(cycle, root)) return { fired: false, firedAt: null };
+  return { fired: true, firedAt: new Date(fs.statSync(summary).mtimeMs).toISOString() };
 }
 
 // Stage statuses: waiting | ready | done | failed | deferred (deferred is the

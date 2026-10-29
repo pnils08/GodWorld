@@ -1028,6 +1028,17 @@ test('filterDirectiveBlocks caps at the template maximum of 12 blocks', () => {
 console.log('\nG-EC44 — the beat dump is the third fire witness');
 // ────────────────────────────────────────────────────────────────────────────
 
+test('a later rewrite of the audit does not move firedAt (C111 rebase at the C112 fire)', () => {
+  const root = mkRoot();
+  fireEngine(root, 7 * 24 * 60 * 60 * 1000);
+  const before = civicRun.engineFireInfo(CYCLE, root).firedAt;
+  const later = new Date();
+  fs.utimesSync(path.join(root, 'output/engine_audit_c' + CYCLE + '.json'), later, later);
+  const after = civicRun.engineFireInfo(CYCLE, root);
+  assert.strictEqual(after.fired, true);
+  assert.strictEqual(after.firedAt, before, 'the rebase rewrite is not a fire');
+});
+
 test('a stale beat dump holds the fire; a current one releases it (C110 / C113 shape)', () => {
   const root = mkRoot();
   fireEngine(root);

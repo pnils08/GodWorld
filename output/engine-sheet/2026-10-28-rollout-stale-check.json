@@ -46,5 +46,19 @@
       {"claim": "agy: filter blind spot — 5 unowned ready rows omitted", "verdict": "scope choice: the check covered rows owned by engine-sheet; the 10 unowned ready rows are a separate pass"}
     ]
   },
+  "batch_2_unowned_ready_rows": {
+    "how": "source-search rollout-chase (Haiku, 4 dispatches); engine-sheet spot-checked the settle count, 3b40ab48, and ran the infrastructure.13 test; advisor reviewed. Rows trued in 2c78566a",
+    "rows": [
+      {"id": "engine.193", "verdict": "OPEN, text wrong", "evidence": ["C112 log has 9 `engine.193b settle:` lines (grep -c output/execution_log_c112.txt), not 14", "(b) code is e3a85853; ae9278aa is the stage-3 PROD sha", "cut 4 (illness) open per docs/plans/2026-09-10-inactivity-is-regression.md changelog", "anchor 'Builder's words (2026-10-07)' is a bold paragraph at plan:412, not a heading"]},
+      {"id": "engine.116", "verdict": "OPEN, accurate", "evidence": ["Task 2 code repoint not done: lib/diagnosticLedger.js:52 still Engine_Errors in-book", "Task 3 not done: utilities/archiveLifeHistory.js:203", "Task 5 not started"]},
+      {"id": "pipeline.69", "verdict": "OPEN", "evidence": ["T1: scripts/buildNeighborhoodTexture.js still v1.1.0", "T2: no own-seed line in scripts/citizen-wake.js or lib/wakePerception.js", "T3: no per-hood seed floor in buildContractSeeds.js", "T5: artifacts output/slices/c108/ exist, readback table never written"], "note": "row wording 'tells a citizen their seed' reworded to 'wake carries the citizen's own seed event' (plan :85-86 is a past-tense fact, not an instruction)"},
+      {"id": "engine.91", "verdict": "OPEN, accurate", "evidence": ["scripts/ingestEditionWiki.js and scripts/ingestCivicWiki.js POST to /v4/memories with no customId", "edition wiki has a --wipe-priors delete pass for citizen records only; the post-publish invocation omits the flag"]},
+      {"id": "governance.51", "verdict": "PARTLY STALE", "evidence": ["T8's memory-write-gate half: hook removed builder-direct 3b40ab48 (2026-10-07)", "T3 done 40e34826", "plan T1/T2/T7 cite CLAUDE.md, absent from the tree since 2590d587"]},
+      {"id": "canon.5", "verdict": "OPEN item undefined -> needs-info", "evidence": ["23c764b1 (2026-10-22): 'Employer column gone; one RoleType cell POP-00317'", "engine.191 archived (ROLLOUT_ARCHIVE.md:1270)", "'Oakland Unified' left in POP-00317 RoleType + 12 LifeHistory cells (POP-01183..01194) in output/simulation_ledger_snapshot.jsonl", "docs/canon/INSTITUTIONS.md:75 still 'Peralta row', no BIZ-00035"]},
+      {"id": "engine.99", "verdict": "OPEN, count refreshed", "evidence": ["67 non-test files carry quoted CANON_12 names outside scripts/auditHoodDrift.js MIGRATED_FILES (plain grep; the ~49 was the plan's detector count)", "five largest carriers have later commits and still hold their lists"]},
+      {"id": "engine.317", "verdict": "OPEN, owner set engine-sheet", "evidence": ["utilities/webTrigger.js:95-100 getprop whitelist lacks FIRE_ADMISSION_JSON; no read door since 2026-10-25", "proof waived as named builder exception on PROD stages 27-31 (DEPLOY_HISTORY.md:178,186,195,206; 63131dba)"]},
+      {"id": "infrastructure.13", "verdict": "STALE TEST", "evidence": ["ebcf159d (rb, 2026-10-25) removed the 180-char slice in lib/wakePerception.js nightlyIntakeRow; lib/wakePerception.test.js:242 still asserts it; node lib/wakePerception.test.js = 107 passed, 1 failed"]}
+    ]
+  },
   "not_checked": ["infrastructure.10 and engine.289 (dated Sun 2026-11-01)", "engine.309 (builder design call)", "observing rows with future dates or Organic waits not listed above"]
 }

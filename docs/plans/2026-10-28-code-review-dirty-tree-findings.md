@@ -22,7 +22,7 @@ pointers:
 
 **Goal:** every one of the nine findings is either confirmed in code/data and fixed, or refuted with evidence; no finding is carried on the review's word alone.
 
-**Rows:** infrastructure.14 · **Owner:** research-build
+**Rows:** infrastructure.14 (+ engine.322 split from T8) · **Owner:** research-build
 
 Grouping note: the findings scan different surfaces (index builder, tracker, cron-civic, session close, a test). They share one origin (one review pass) and one method (verify the claim, then fix), so they ride one row; each task below is its own commit. A fix that lands in engine substrate (`phase*/`, `utilities/`) is split out as its own ROLLOUT row for engine-sheet, not built here.
 
@@ -33,7 +33,7 @@ Ordered by blast radius if left, then by cost to fix. Verification column = what
 | Rank | Task | Why this rank |
 |------|------|---------------|
 | 1 | T2 — engine.318 double-archive | Silent tracker corruption on the next close; one-row fix. Verified. |
-| 2 | T8 — INIT-010 stale next-action | Desk packets tell reporters a vote is still ahead for a measure that passed. Canon-facing. Verified in artifact; writer not yet found. |
+| 2 | T8 — INIT-010 stale next-action | Desk packets tell reporters a vote is still ahead for a measure that passed. Canon-facing. Verified; writer is engine substrate, split to engine.322. |
 | 3 | T1 — suffixed staged reruns unindexed | Canon-gate-passed drafts unreachable by `search_articles`. Verified. |
 | 4 | T6 — `engineFiredAt` from mtimes | Verdict-cutoff clock for a closed week moved. Verified in artifact; cause of the second c111 audit write is **open** — diagnose, do not mask. |
 | 5 | T7 — sweep step swallows errors | A close can report clean with the tracker untouched. Verified in code. |
@@ -46,8 +46,8 @@ Finding 5 of the review (stale NEXT line) is closed: the files it named were res
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| T2 | `rolloutSweep.js parseRows` (:60-78) never checks the archive for an id; engine.318 sits in both ROLLOUT_PLAN.md:138 and the uncommitted ROLLOUT_ARCHIVE pass. Fix: remove the row from the plan, and make the sweep skip an id already archived. | rb | not started |
-| T8 | Find which writer sets `implementation.phase=operational` on a passed vote without clearing `nextScheduledAction`/`summary` (`applyTrackerUpdates.js` G-PREP2 :328-333 is the suspect). Fix at the writer; correct INIT-010 through the sanctioned path, not by hand-editing the tracker. | rb | not started |
+| T2 | `rolloutSweep.js parseRows` (:60-78) never checks the archive for an id; engine.318 sat in both ROLLOUT_PLAN.md:138 and the uncommitted ROLLOUT_ARCHIVE pass. Fix: sweep skips an id already archived; row removed from the plan. | rb | done `22843c66` |
+| T8 | Writer found: the engine stage step, not `applyTrackerUpdates.js`. `civicStageStep_` returns `{stage:'Standing', phase:'operational'}` (civicInitiativeEngine.js:4003-4006); `applyCivicStageStep_` (:4137) never touches NextScheduledAction / NextActionCycle. Substrate is gated: split to engine.322 for engine-sheet. | rb → es | split → engine.322 |
 | T1 | Staged reader matches `/\.staged\.json$/` only; six C112 suffixed reruns (Ines -1615/-1814/-2320, Tamsin -2320, Nia -2319/-2321) absent from `ARTICLE_INDEX.jsonl`. Fix: match `/\.staged(-\d+)?\.json$/`, derive stem the same way, rebuild the index, count rows. | rb | not started |
 | T6 | `engineFireInfo` (:3579) takes `firedAt` from artifact mtimes. `engine_audit_c111.json` mtime is 2026-10-18 22:15 CDT, a week after C111; `week_state_c111.json` `engineFiredAt` moved 2026-10-13 → 2026-10-19T03:15Z to match. Find what rewrote the audit. Fix the clock source only after the cause is named. | rb | not started |
 | T7 | `subRolloutLint` catch returns `{ ok: true }` on any error incl. a missing ROLLOUT_PLAN. Fix: fail the close (or at minimum return `ok:false` and print under the fatal header) when the plan file is unreadable. | rb | not started |
@@ -89,7 +89,7 @@ Finding 5 of the review (stale NEXT line) is closed: the files it named were res
 | # | Claim | Held by | Proof that settles it | Sources |
 |---|---|---|---|---|
 | P1 | T6: the second c111-labelled audit write came from engine.312 (review's guess, "not confirmed"). | review only | Find the process that wrote `engine_audit_c111.json` at 2026-10-18 22:15 (cron log / PM2 log / git log of the writer), before touching `engineFireInfo`. | `scripts/cron-civic-run.js:3579`; engine.312 row |
-| P2 | T8: `applyTrackerUpdates.js` is the writer that leaves the field stale. | review's pointer | Read the vote-pass path that sets `phase=operational`; reproduce with a fixture in a unit test. | `scripts/applyTrackerUpdates.js:328-333` |
+| P2 | T8: `applyTrackerUpdates.js` is the writer that leaves the field stale. **REFUTED 2026-10-28:** that file writes NextScheduledAction only from the seat's emitted update (:227) and G-PREP2 only advances NextActionCycle; the `operational` write is the engine stage step. | review's pointer | Read both paths: `grep NextScheduledAction` finds a write only at applyTrackerUpdates.js:227 and civicInitiativeEngine.js:3095 (create). | `phase05-citizens/civicInitiativeEngine.js:4003-4006,4137`; `scripts/applyTrackerUpdates.js:227` |
 | P3 | T1: the six reruns would be indexed with the fixed glob without duplicate rows against the printed copies. | rb | Rebuild into a temp file; diff row counts and fingerprints against the current index. | `scripts/buildArticleIndex.js:394-408` |
 
 ### New concepts
@@ -105,3 +105,4 @@ Finding 5 of the review (stale NEXT line) is closed: the files it named were res
 ## Changelog
 
 - 2026-10-28 (research-build) — Created from the /code-review run; priority set; eight findings verified in code or data, P1-P3 open.
+- 2026-10-28 (research-build) — T2 shipped `22843c66`. T8 cause corrected (engine stage step, not applyTrackerUpdates; P2 refuted) and split to engine.322.

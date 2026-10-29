@@ -4,7 +4,7 @@
 
 **NEXT[engine-sheet]:** engine.270 live-observing: read Sat 10-31 16:00 attach run, C114 D1/D2 build. Landed+pushed the 40-commit stack 10-28 (rb/codex/mine). Builder said he is stepping back; build nothing new without his word. 3 puppet strings ruled scaffolding 10-28: they stay, loosen on his word. Tonight: C113 grades, two-drafts cost.
 
-**NEXT[research-build]:** pipeline.89 in-progress: Wed 10-28 Ines+Jax first runs read (Jax 2/6 tool calls, Rhea PASS; Ines 0 calls, gate off, lede is a C112 PRESS line labeled 'own page this cycle'). Plan changelog entry NOT written. Next reads: Thu Graye, Mon Carmen/Lila/Trevor/Jordan. Boot S613: CLAUDE.md, identity.md, rb TERMINAL.md ABSENT on disk (hook said restored 10-28) — builder to restore or rule; nothing recreated. S613 did no work. Landed agy a1872430.
+**NEXT[research-build]:** pipeline.89 in-progress: Wed 10-28 Ines+Jax first runs read (Jax 2/6 tool calls, Rhea PASS; Ines 0 calls, gate off, lede is a C112 PRESS line labeled 'own page this cycle'). Plan changelog entry NOT written. Next reads: Thu Graye, Mon Carmen/Lila/Trevor/Jordan. Landed agy a1872430.
 **NEXT[kimi]:** OUT for the week (usage limit 2026-10-03). Nothing queued; its civic.38 renew-move check moved to codex 2026-10-04.
 
 **NEXT[codex]:** Verify board comparator/config/history export gaps per the same plan §Task 4; separate counter threshold-rounding defect in §Health numerator amendment.

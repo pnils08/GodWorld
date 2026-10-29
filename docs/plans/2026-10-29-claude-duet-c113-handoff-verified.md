@@ -23,6 +23,8 @@ pointers:
 
 **Rows:** infrastructure.15 (rb) · engine.323 (es) · **Owner:** split by task
 
+**Builder's words (2026-10-29, on the Riley findings):** "Yeah a lot of that is the old codex build that’s still firing"
+
 ## What the duet is
 
 A Claude instance in the phone app with the Drive, Sheets and Supermemory connectors and no local disk or droplet. It sees live sheet and Drive state this seat cannot; it reads repo code through a read-only clone of the public repo. Its handoff is a strong lead list, not a verified one: this seat checked it against the repo, the C112/C113 execution logs and the local beat dumps on 2026-10-29. Three claims were wrong (§Reviews reconciled).
@@ -39,7 +41,7 @@ A Claude instance in the phone app with the Drive, Sheets and Supermemory connec
 | T6 | Names: "Rafael Phillips" matches 2 ledger rows, so media usage was skipped; 6 background renames by family match (e.g. Omar Clark → Omar Horton) mean Tribune copy under the old names will not match. Check whether `canon-name-check` / the writer packets carry the rename. | rb | not started |
 | T7 | `[ContentLedger] 1 row(s) skipped fail-closed` (C113 log line 73). Name the row and the reason. C112 not checked. | rb | not started |
 | T8 | Data glitches, canon-facing, proposals only: Oakland_Sports_Feed row 250 Notes say "Austin Rivers", Stats say "Ausin Reaves" (typo too; the engine review shows "Austin Reaves (SG)" in NamesUsed); Story_Seed_Deck row 466 (C113, seed e99aa479) carries "A's W3 [hot-streak]" in the off-season (why is an off-season streak carried — es question). Sheet writes wait on the builder. | rb | not started |
-| T9 | Riley: from the repo, build the installer inventory (project, function, schedule, what it writes). Done already: nothing in scripts/lib/phase*/utilities/dashboard reads a "Feed" tab and the droplet crontab has no Riley or PressPulse entry. Live triggers need the Apps Script console. Delete nothing; hand the table to the builder. | rb | not started |
+| T9 | Riley: from the repo, build the installer inventory (project, function, schedule, what it writes). Done already: nothing in scripts/lib/phase*/utilities/dashboard reads a "Feed" tab and the droplet crontab has no Riley or PressPulse entry. Live triggers need the Apps Script console. Builder 2026-10-29: much of the Riley layer is the old codex build still firing, so the table is a retire-or-keep list for that build. Delete nothing; hand the table to the builder. | rb | not started |
 | T10 | C114 readback (live fire Sun 2026-11-01): business initiative lift non-zero (INIT-010 moved phase in C113 Phase 5, read via enginePhaseMoves, `applyInitiativeImplementationEffects.js:342`); INIT-001 `BudgetRemaining` 21,400,000 after the sixth engine tranche. | rb | not started |
 
 ## Acceptance
@@ -100,3 +102,4 @@ A Claude instance in the phone app with the Drive, Sheets and Supermemory connec
 ## Changelog
 
 - 2026-10-29 (research-build) — Created from the duet handoff; verified against repo, logs and local dumps; W1-W3 recorded.
+- 2026-10-29 (research-build) — Feed rewrite confirmed live (P1); builder: the Riley layer is largely the old codex build still firing, T9 reframed as its retire-or-keep table.

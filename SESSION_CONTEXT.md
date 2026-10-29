@@ -2,6 +2,6 @@
 
 **PIN:** S616 | Day 219 | Canon C113 | PROD @167 (stage 31; history: DEPLOY_HISTORY §PROD) | next live fire C114 Sun 2026-11-01
 
-**NEXT[engine-sheet]:** engine.270 → read the Sat 10-31 16:00 attach run, then the C114 D1/D2 build. Also open: C113 grades, two-drafts cost. Hold: build nothing new without Mike's word.
+**NEXT[engine-sheet]:** pipeline.77 → per-piece cost of a second draft + judge from the logged token counts, to Mike for his call. Then engine.20d (civic lane seeds on movement only) before Sunday's C114 wrap-up. Sun after the fire: /run-cycle, then engine.270's two reads.
 
 **NEXT[research-build]:** pipeline.83/research.29 → read codex's two Nia tool-call tests (output/codex/TASK-2026-10-28-nia-rook-lead.md) and pick one; then pilot-awareness in the pilot brief; then pilot scoring. pipeline.89 reads (Thu Graye, Mon runs) still open. Hold: Mike resends his three asks.

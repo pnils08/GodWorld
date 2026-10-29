@@ -36,7 +36,7 @@ Precedence: the builder's current request → this file → nested `AGENTS.md` �
 
 ## Off limits
 
-- Control plane, read-only: `.claude/**`, `.agents/**`, `CLAUDE.md`, `SESSION_CONTEXT.md` (except your own NEXT line, §Session close). The pre-commit hook blocks the rest. Never set `CLAUDE_CTL`; never `--no-verify`.
+- Control plane, read-only: `.claude/**`, `.agents/**`, `CLAUDE.md`, `SESSION_CONTEXT.md`. The pre-commit hook blocks the rest. Never set `CLAUDE_CTL`; never `--no-verify`.
 - Engine substrate — propose only; it lands through a Claude terminal: `phase*/`, `utilities/`, `lib/`, `schemas/`, `dashboard/`, `editions/`, config files, hooks, service manifests, anything deployed via clasp.
 - Immutable: `docs/archive/**`, `docs/research/papers/**`, `docs/drive-files/**`.
 - Pre-existing dirty or untracked files are not yours unless the builder names them.
@@ -56,7 +56,7 @@ Without explicit approval in the current conversation: no live `clasp push`/depl
 
 ### Push authorization
 
-codex and kimi may commit and push work lying entirely inside `scripts/**`, `output/**`, `docs/**`: every touched test passes; `node --check` is clean on every changed script; the message names the lane (`codex: …`); push right after committing. `git log origin/main..HEAD` shows another lane's commits → report and keep committing; don't push them. agy commits only its own review files and its NEXT line, each alone.
+codex and kimi may commit and push work lying entirely inside `scripts/**`, `output/**`, `docs/**`: every touched test passes; `node --check` is clean on every changed script; the message names the lane (`codex: …`); push right after committing. `git log origin/main..HEAD` shows another lane's commits → report and keep committing; don't push them. agy commits only its own review files, each alone.
 
 ## Research, plan, rollout, and archive
 
@@ -70,11 +70,11 @@ Fan grunt work (sweeps, mechanical edits, test runs) to the cheapest subagent ti
 
 ## Blocked on Claude
 
-A genuine blocker mid-session → message research-build (tmux window 1) per `docs/reference/CROSS_LANE_MESSAGING.md`. Anything that can wait goes in your NEXT line.
+A genuine blocker mid-session → message research-build (tmux window 1) per `docs/reference/CROSS_LANE_MESSAGING.md`. Anything that can wait goes in your review file or commit message.
 
 ## Session close
 
-Rewrite your own `**NEXT[<you>]:**` line in `SESSION_CONTEXT.md` in place — one line, ~350 chars: where the work landed and the next move. Commit that file alone (the pre-commit hook waives the gate for exactly that). Never touch the PIN, another lane's line, or anything else in the file. Steps: `.grok/skills/session-end/SKILL.md`.
+Guest lanes own no jobs and carry no line in `SESSION_CONTEXT.md` — never edit it. Your handoff is the work: the review file or your lane-prefixed commit; the Claude boot reports waiting reviews. Land authorized commits, push only your own, report the stack. Steps: `.grok/skills/session-end/SKILL.md`.
 
 ## Grok and Codex speech constraint (builder-direct, 2026-08-13)
 

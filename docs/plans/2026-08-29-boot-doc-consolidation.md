@@ -73,6 +73,8 @@ Nothing else. Rules, identity, terminal files must not state the same thing mult
 
 ## Changelog
 
+- 2026-10-28 (engine-sheet) — Builder yes: the 9 booted/duplicate lines dropped; MEMORY.md 98 lines, 14.9KB. Files stay in the memory dir (searchable via brainSearch).
+
 - 2026-10-28 (engine-sheet) — MEMORY.md 120→106 lines: 12 `_archive/` pointers dropped, 2 self-retired memories archived; 9 booted/duplicate lines await builder yes. Boot auto-load 53KB→30KB (AGENTS.md 27.6→8.0KB).
 
 - 2026-10-28 (engine-sheet) — Boot rebuilt fresh: one shared boot, identity.md folded into CLAUDE.md, TERMINAL.md cut to window/tag/close, hook boot text collapsed to the ready check; replaced files in `.claude/boot-legacy/`. T8 still open.

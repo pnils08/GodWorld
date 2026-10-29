@@ -53,7 +53,7 @@ Finding 5 of the review (stale NEXT line) is closed: the files it named were res
 | T7 | `subRolloutLint` catch returns `{ ok: true }` on any error incl. a missing ROLLOUT_PLAN. Fix: fail the close (or at minimum return `ok:false` and print under the fatal header) when the plan file is unreadable. | rb | done `9b46ec95` |
 | T3 | Title fallback `pick = cluster.length ? … : above[0]` skips the `plain()` ≤280 guard. Rows 758 (454 ch), 786 (527), 875 (513). Fix: apply the guard; those rows take `title:null` + a `lede`. | rb | done `2d2e7b46` |
 | T9 | Edition path stores `desk` raw ("Undocked-digest", 1 row); staged path uses `titleCase` ("Undocked-Digest", 3 rows; "Undocked", 9). Fix: normalise the edition path with the same `titleCase`. | rb | done `2d2e7b46` (review's titleCase fix would break "A's Beat" / "Editor-in-Chief"; most-common-spelling rule used) |
-| T4 | `lib/contextScan.js:44` `BLOCK_LOG_PATH` is a hard-coded constant; test 10 appends to the tracked `output/injection_blocks.log` on every run with a real ledger name. Fix: env/arg override, test writes to a temp file with a visibly synthetic name; the 368 `contextScan-bad` lines already in the tracked log come out. `lib/` is gated — propose, land through engine-sheet. | rb → es | not started |
+| T4 | `lib/contextScan.js:44` `BLOCK_LOG_PATH` is a hard-coded constant; test 10 appends to the tracked `output/injection_blocks.log` on every run with a real ledger name. Fix: env/arg override, test writes to a temp file with a visibly synthetic name; the 368 `contextScan-bad` lines already in the tracked log come out. `lib/` is gated — propose, land through engine-sheet. | rb → es | done `3e2b5fca` (lib/ touched by rb: one line + test; engine-sheet to review) |
 
 ## Acceptance
 
@@ -100,10 +100,10 @@ Finding 5 of the review (stale NEXT line) is closed: the files it named were res
 
 ## Open questions
 
-- T4 touches `lib/` (gated) — land through engine-sheet or the builder names the path. Blocks T4 only.
+- T4 changed `lib/contextScan.js` from research-build (one line). Engine-sheet reads it at next boot; revert if lib/ stays its surface.
 
 ## Changelog
 
 - 2026-10-28 (research-build) — Created from the /code-review run; priority set; eight findings verified in code or data, P1-P3 open.
 - 2026-10-28 (research-build) — T2 shipped `22843c66`. T8 cause corrected (engine stage step, not applyTrackerUpdates; P2 refuted) and split to engine.322.
-- 2026-10-28 (research-build) — T1/T3/T9 shipped `2d2e7b46` (P3 settled: +13 rows, 0 lost, no new dup fingerprints). T7 shipped `9b46ec95`. T6 cause named (run-cycle Step 2.5 rebase, P1 refuted) and fixed `1b8ee04f`. Open: T4 (lib/ gated).
+- 2026-10-28 (research-build) — T1/T3/T9 shipped `2d2e7b46` (P3 settled: +13 rows, 0 lost, no new dup fingerprints). T7 shipped `9b46ec95`. T6 cause named (run-cycle Step 2.5 rebase, P1 refuted) and fixed `1b8ee04f`. T4 shipped `3e2b5fca`. All nine closed except T8 (engine.322, engine-sheet).

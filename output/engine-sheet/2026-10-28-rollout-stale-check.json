@@ -2,63 +2,387 @@
   "what": "engine-sheet stale check of its own ROLLOUT rows, 2026-10-28. Ready rows chased by source-search rollout-chase (Haiku, 6 dispatches), key claims spot-checked by engine-sheet. Observing rows checked by engine-sheet against output/engine_review_c113.md and output/execution_log_c113.txt. Nothing in ROLLOUT_PLAN.md has been changed yet.",
   "verdicts": "OPEN = build work remains; STALE = the row's text or premise no longer matches the repo; CLOSE? = the read the row waits on is done",
   "ready_rows": [
-    {"id": "engine.204", "verdict": "OPEN, not stale", "evidence": ["builder ruling 2026-10-22 is newest (docs/research/2026-10-03-engine-204-205-game-day-economy-read-before.md:200-202, 40e34826)", "HomeNeighborhood still read: phase02-world-state/applySportsSeason.js:196", "dashboard/src/components/SportsIntakeWorkspace.jsx:17-26 has no WeekRecord control"], "issue": "engine.202 (ROLLOUT_PLAN.md:132, unowned, ready) carries the same WeekRecord hooks + dashboard input scope — duplicate row", "proposed": "mark the overlap; one row owns the scope"},
-    {"id": "engine.205", "verdict": "OPEN, text stale", "evidence": ["'its column surface is built under engine.204' reads as done; it is engine.204's open work", "LIVE-since-2026-10-06 rests on commit ancestry into the PROD record a4c19b6c; docs/reference/DEPLOY_HISTORY.md:469-474 does not name 205"], "proposed": "reword to 'column surface = engine.204 open work'"},
-    {"id": "engine.281", "verdict": "OPEN, item (e) only", "evidence": ["(a)-(d) hashes aa2eac7f e8b3d9a2 a0ccd111 debf1afd 78a9e36e on main, ancestors of a4c19b6c", "same DEPLOY_HISTORY naming gap as 205"], "proposed": "none"},
-    {"id": "civic.24", "verdict": "OPEN, plan stale", "evidence": ["City_Hall_Ledger tab (Task 10) in no schema or writer", "plan Acceptance 4 says chain --apply absent from crontab; crontab lines 37-38 run cron-civic-run.js --stage=chain --apply Sundays 14:30 and 21:00", "output/cron-civic/close_c111..c113.json applied=true"], "proposed": "true the plan's Task 9 status and Acceptance 4; row state stays"},
-    {"id": "engine.41", "verdict": "OPEN on Wire 1b, STALE on Wire 3", "evidence": ["SuggestedCitizenVoices: 0 hits in schemas/SCHEMA_HEADERS.md and phase10-persistence/saveV3Seeds.js", "Wire 3a (Riley_Digest into buildDeskPackets) removed by 83a96482 / f1f4dde0 2026-09-28; buildDeskPackets.js riley hits 0", "Wire 3b marked DECK-DEAD at phase07-evening-media/applyStorySeeds.js:1406-1408", "plan says Story_Seed_Deck width 20->21 col U; schema and writer say 18 cols A-R"], "proposed": "drop or re-scope 'then re-verify Wire 3'; true the plan's column width"},
-    {"id": "engine.27", "verdict": "OPEN, accurate", "evidence": ["Phase B tasks B1-B4, C1-C3 unstarted (plan :236-:332)", "Phase A daemon ticking: logs/wd-cards-daemon-out.log tick #9117 2026-10-28 19:39, failures 0"], "issue": "ecosystem.config.js:68 comment still says 'NOT auto-started'", "proposed": "none"},
-    {"id": "infrastructure.6", "verdict": "OPEN, row accurate, plan stale", "evidence": ["no 'sim-health' in dashboard/*.js|jsx", "plan still says Health_Cause_Intake CREATE pending; 1240a80a retired it", "ROLLOUT_ARCHIVE.md:2014 reuses id infrastructure.6 for unrelated closed rb work"], "proposed": "true the plan; note the id collision"},
-    {"id": "engine.20d", "verdict": "OPEN, accurate", "evidence": ["scripts/buildWorldSummary.js:1243-1250 pushes kind 'initiative' for every Initiative_Tracker row, no movement test", "spec docs/plans/2026-05-22-engine-regulatory-friction.md:107-108; plan's '~line 1195' pointer drifted"], "issue": "whether the every-row seed counts as 'scripted' under the 2026-10-25 no-puppeting rule is a sim call", "proposed": "none"},
-    {"id": "engine.280", "verdict": "OPEN, text stale", "evidence": ["its pointer §2.9 shipped: 23aa8c5a 0f4d5014 e881f616 cb122e45 a2cecddd e59d8b14 a4cb20df", "remaining = four follow-up lines Sports-Soured/Lifted/Gutted/Attended: 0 .js hits; blocked on per-piece tone, roster negative flag, ECL attendance tag", "research doc :125 still says 'not built'"], "proposed": "reword row to the four follow-ups + C10 upset-sign ruling, pointer to research doc Status log :229-233"},
-    {"id": "engine.248", "verdict": "PARTLY STALE", "evidence": ["membership already shipped: processFaithJoins_ phase05-citizens/bondEngine.js:326/:997, a167d3d4 2026-07-19", "faith dial nudge exists but fires on drawn faith lines, not membership (utilities/citizenDialMap.js:94, generateCitizensEvents.js:1130,1211)", "member faith-life events and faith chaos car: no code", "pointer doc :143 says design-first session; row says ready"], "proposed": "reword to the open parts (membership-gated nudge, member events, chaos car)"},
-    {"id": "engine.261", "verdict": "OPEN, accurate", "evidence": ["no business-owner wake in scripts/work-wake-packages.json or newsroom-wake-packages.json", "owners exist: processAdvancementIntake.js:2393/:2500", "not covered by engine.295/309/311", "cron-work-wake.js:9-10: work wakes never write dials"], "proposed": "none"},
-    {"id": "engine.303", "verdict": "OPEN, premise stale", "evidence": ["151 s is one bench Cycle: soak-at57-c123.json Phase9 151285 ms; soak c113 704 ms, c132 881 ms", "live Phase9 C107-C113: 492-1395 ms; C113 1172 ms (output/execution_log_c113.txt:277)", "live cost is Phase11-MaintainLifeHistoryLog: C112 45.7 s, C113 34.0 s", "pointer 'DEPLOY_HISTORY §SANDBOX 1004 @57 soak' is malformed; resolves docs/reference/DEPLOY_HISTORY.md:28", "8c79f951 records it as builder direction; row phrases it as a question"], "proposed": "re-premise on live numbers; fix pointer"}
+    {
+      "id": "engine.204",
+      "verdict": "OPEN, not stale",
+      "evidence": [
+        "builder ruling 2026-10-22 is newest (docs/research/2026-10-03-engine-204-205-game-day-economy-read-before.md:200-202, 40e34826)",
+        "HomeNeighborhood still read: phase02-world-state/applySportsSeason.js:196",
+        "dashboard/src/components/SportsIntakeWorkspace.jsx:17-26 has no WeekRecord control"
+      ],
+      "issue": "engine.202 (ROLLOUT_PLAN.md:132, unowned, ready) carries the same WeekRecord hooks + dashboard input scope — duplicate row",
+      "proposed": "mark the overlap; one row owns the scope"
+    },
+    {
+      "id": "engine.205",
+      "verdict": "OPEN, text stale",
+      "evidence": [
+        "'its column surface is built under engine.204' reads as done; it is engine.204's open work",
+        "LIVE-since-2026-10-06 rests on commit ancestry into the PROD record a4c19b6c; docs/reference/DEPLOY_HISTORY.md:469-474 does not name 205"
+      ],
+      "proposed": "reword to 'column surface = engine.204 open work'"
+    },
+    {
+      "id": "engine.281",
+      "verdict": "OPEN, item (e) only",
+      "evidence": [
+        "(a)-(d) hashes aa2eac7f e8b3d9a2 a0ccd111 debf1afd 78a9e36e on main, ancestors of a4c19b6c",
+        "same DEPLOY_HISTORY naming gap as 205"
+      ],
+      "proposed": "none"
+    },
+    {
+      "id": "civic.24",
+      "verdict": "OPEN, plan stale",
+      "evidence": [
+        "City_Hall_Ledger tab (Task 10) in no schema or writer",
+        "plan Acceptance 4 says chain --apply absent from crontab; crontab lines 37-38 run cron-civic-run.js --stage=chain --apply Sundays 14:30 and 21:00",
+        "output/cron-civic/close_c111..c113.json applied=true"
+      ],
+      "proposed": "true the plan's Task 9 status and Acceptance 4; row state stays"
+    },
+    {
+      "id": "engine.41",
+      "verdict": "OPEN on Wire 1b, STALE on Wire 3",
+      "evidence": [
+        "SuggestedCitizenVoices: 0 hits in schemas/SCHEMA_HEADERS.md and phase10-persistence/saveV3Seeds.js",
+        "Wire 3a (Riley_Digest into buildDeskPackets) removed by 83a96482 / f1f4dde0 2026-09-28; buildDeskPackets.js riley hits 0",
+        "Wire 3b marked DECK-DEAD at phase07-evening-media/applyStorySeeds.js:1406-1408",
+        "plan says Story_Seed_Deck width 20->21 col U; schema and writer say 18 cols A-R"
+      ],
+      "proposed": "drop or re-scope 'then re-verify Wire 3'; true the plan's column width"
+    },
+    {
+      "id": "engine.27",
+      "verdict": "OPEN, accurate",
+      "evidence": [
+        "Phase B tasks B1-B4, C1-C3 unstarted (plan :236-:332)",
+        "Phase A daemon ticking: logs/wd-cards-daemon-out.log tick #9117 2026-10-28 19:39, failures 0"
+      ],
+      "issue": "ecosystem.config.js:68 comment still says 'NOT auto-started'",
+      "proposed": "none"
+    },
+    {
+      "id": "infrastructure.6",
+      "verdict": "OPEN, row accurate, plan stale",
+      "evidence": [
+        "no 'sim-health' in dashboard/*.js|jsx",
+        "plan still says Health_Cause_Intake CREATE pending; 1240a80a retired it",
+        "ROLLOUT_ARCHIVE.md:2014 reuses id infrastructure.6 for unrelated closed rb work"
+      ],
+      "proposed": "true the plan; note the id collision"
+    },
+    {
+      "id": "engine.20d",
+      "verdict": "OPEN, accurate",
+      "evidence": [
+        "scripts/buildWorldSummary.js:1243-1250 pushes kind 'initiative' for every Initiative_Tracker row, no movement test",
+        "spec docs/plans/2026-05-22-engine-regulatory-friction.md:107-108; plan's '~line 1195' pointer drifted"
+      ],
+      "issue": "whether the every-row seed counts as 'scripted' under the 2026-10-25 no-puppeting rule is a sim call",
+      "proposed": "none"
+    },
+    {
+      "id": "engine.280",
+      "verdict": "OPEN, text stale",
+      "evidence": [
+        "its pointer §2.9 shipped: 23aa8c5a 0f4d5014 e881f616 cb122e45 a2cecddd e59d8b14 a4cb20df",
+        "remaining = four follow-up lines Sports-Soured/Lifted/Gutted/Attended: 0 .js hits; blocked on per-piece tone, roster negative flag, ECL attendance tag",
+        "research doc :125 still says 'not built'"
+      ],
+      "proposed": "reword row to the four follow-ups + C10 upset-sign ruling, pointer to research doc Status log :229-233"
+    },
+    {
+      "id": "engine.248",
+      "verdict": "PARTLY STALE",
+      "evidence": [
+        "membership already shipped: processFaithJoins_ phase05-citizens/bondEngine.js:326/:997, a167d3d4 2026-07-19",
+        "faith dial nudge exists but fires on drawn faith lines, not membership (utilities/citizenDialMap.js:94, generateCitizensEvents.js:1130,1211)",
+        "member faith-life events and faith chaos car: no code",
+        "pointer doc :143 says design-first session; row says ready"
+      ],
+      "proposed": "reword to the open parts (membership-gated nudge, member events, chaos car)"
+    },
+    {
+      "id": "engine.261",
+      "verdict": "OPEN, accurate",
+      "evidence": [
+        "no business-owner wake in scripts/work-wake-packages.json or newsroom-wake-packages.json",
+        "owners exist: processAdvancementIntake.js:2393/:2500",
+        "not covered by engine.295/309/311",
+        "cron-work-wake.js:9-10: work wakes never write dials"
+      ],
+      "proposed": "none"
+    },
+    {
+      "id": "engine.303",
+      "verdict": "OPEN, premise stale",
+      "evidence": [
+        "151 s is one bench Cycle: soak-at57-c123.json Phase9 151285 ms; soak c113 704 ms, c132 881 ms",
+        "live Phase9 C107-C113: 492-1395 ms; C113 1172 ms (output/execution_log_c113.txt:277)",
+        "live cost is Phase11-MaintainLifeHistoryLog: C112 45.7 s, C113 34.0 s",
+        "pointer 'DEPLOY_HISTORY §SANDBOX 1004 @57 soak' is malformed; resolves docs/reference/DEPLOY_HISTORY.md:28",
+        "8c79f951 records it as builder direction; row phrases it as a question"
+      ],
+      "proposed": "re-premise on live numbers; fix pointer"
+    }
   ],
   "observing_rows": [
-    {"id": "engine.201", "verdict": "CLOSE?", "evidence": ["C113 resnap done: output/engine_review_c113.md:20 (cohort-c113.json, n 48, missing 0)"], "open": "review says 'the C113 trace is codex's read' — whether that read exists not checked"},
-    {"id": "engine.318", "verdict": "CLOSE?", "evidence": ["C113 'as expected': engine_review_c113.md:17"]},
-    {"id": "engine.214", "verdict": "STALE text", "evidence": ["C113 reads done: engine_review_c113.md:35-36"], "open": "remaining '8b $VENUE' is a build, not a fire read"},
-    {"id": "engine.301", "verdict": "STALE text", "evidence": ["C113 read done: crimeWaveHoods [] , 2 spikes carried (engine_review_c113.md:57)"], "open": "wave rung untested — becomes Organic: first live wave"},
-    {"id": "engine.95", "verdict": "READ OWED + finding", "evidence": ["C113 read not written up", "execution_log_c113.txt:277: total 205.9 s, Phase11-MaintainLifeHistoryLog 34.0 s, no checkpoint", "tail as defined at phase01-config/engine94SheetContract.js:380 (executor + Phase 11): C112 30.2+2.6+0+2.2+45.7 = 80.6 s; C113 21.2+2.8+0+1.8+34.0 = 59.8 s vs tailReserveMs 60000"], "open": "live checkpointSaveMs not read (code default 0 = gate disarmed; row says 6000)"},
-    {"id": "engine.296", "verdict": "READ OWED", "evidence": ["row: re-read on C113; no engine.296 line in engine_review_c113.md"]},
-    {"id": "engine.197", "verdict": "READ OWED", "evidence": ["row: C113 drain; no engine.197 line in engine_review_c113.md"]},
-    {"id": "engine.290", "verdict": "WRONG STATE", "evidence": ["engine_review_c113.md:55: open work is plan Sequencing 4 (crew ECL rows + governor) and Trevor's slice read — not a fire read"], "proposed": "ready, not live-observing"},
-    {"id": "pipeline.74", "verdict": "READ OWED", "evidence": ["row: 'none has written unattended since'; output/cron-compare has civic_c112/c113 noah-tan, sports_c112/c113 p-slayer and tanya-cruz story files (unattended group runs per docs/plans/2026-10-11-media-extension.md:621)"]},
-    {"id": "pipeline.75", "verdict": "READ OWED", "evidence": ["same Tanya c112/c113 files as pipeline.74"]},
-    {"id": "pipeline.77", "verdict": "DUE TONIGHT", "evidence": ["output/cron-compare/reward-loop-c113.jsonl: 13 lines, none yet from Marbury/Noah/Tanya"]}
+    {
+      "id": "engine.201",
+      "verdict": "CLOSE?",
+      "evidence": [
+        "C113 resnap done: output/engine_review_c113.md:20 (cohort-c113.json, n 48, missing 0)"
+      ],
+      "open": "review says 'the C113 trace is codex's read' — whether that read exists not checked"
+    },
+    {
+      "id": "engine.318",
+      "verdict": "CLOSE?",
+      "evidence": [
+        "C113 'as expected': engine_review_c113.md:17"
+      ]
+    },
+    {
+      "id": "engine.214",
+      "verdict": "STALE text",
+      "evidence": [
+        "C113 reads done: engine_review_c113.md:35-36"
+      ],
+      "open": "remaining '8b $VENUE' is a build, not a fire read"
+    },
+    {
+      "id": "engine.301",
+      "verdict": "STALE text",
+      "evidence": [
+        "C113 read done: crimeWaveHoods [] , 2 spikes carried (engine_review_c113.md:57)"
+      ],
+      "open": "wave rung untested — becomes Organic: first live wave"
+    },
+    {
+      "id": "engine.95",
+      "verdict": "READ OWED + finding",
+      "evidence": [
+        "C113 read not written up",
+        "execution_log_c113.txt:277: total 205.9 s, Phase11-MaintainLifeHistoryLog 34.0 s, no checkpoint",
+        "tail as defined at phase01-config/engine94SheetContract.js:380 (executor + Phase 11): C112 30.2+2.6+0+2.2+45.7 = 80.6 s; C113 21.2+2.8+0+1.8+34.0 = 59.8 s vs tailReserveMs 60000"
+      ],
+      "open": "live checkpointSaveMs not read (code default 0 = gate disarmed; row says 6000)"
+    },
+    {
+      "id": "engine.296",
+      "verdict": "READ OWED",
+      "evidence": [
+        "row: re-read on C113; no engine.296 line in engine_review_c113.md"
+      ]
+    },
+    {
+      "id": "engine.197",
+      "verdict": "READ OWED",
+      "evidence": [
+        "row: C113 drain; no engine.197 line in engine_review_c113.md"
+      ]
+    },
+    {
+      "id": "engine.290",
+      "verdict": "WRONG STATE",
+      "evidence": [
+        "engine_review_c113.md:55: open work is plan Sequencing 4 (crew ECL rows + governor) and Trevor's slice read — not a fire read"
+      ],
+      "proposed": "ready, not live-observing"
+    },
+    {
+      "id": "pipeline.74",
+      "verdict": "READ OWED",
+      "evidence": [
+        "row: 'none has written unattended since'; output/cron-compare has civic_c112/c113 noah-tan, sports_c112/c113 p-slayer and tanya-cruz story files (unattended group runs per docs/plans/2026-10-11-media-extension.md:621)"
+      ]
+    },
+    {
+      "id": "pipeline.75",
+      "verdict": "READ OWED",
+      "evidence": [
+        "same Tanya c112/c113 files as pipeline.74"
+      ]
+    },
+    {
+      "id": "pipeline.77",
+      "verdict": "DUE TONIGHT",
+      "evidence": [
+        "output/cron-compare/reward-loop-c113.jsonl: 13 lines, none yet from Marbury/Noah/Tanya"
+      ]
+    }
   ],
   "fold_after_review": {
-    "reviews": ["advisor (in-session)", "agy: output/antigravity/2026-10-28-review-es-rollout-stale-check.md (00988342)"],
+    "reviews": [
+      "advisor (in-session)",
+      "agy: output/antigravity/2026-10-28-review-es-rollout-stale-check.md (00988342)"
+    ],
     "corrections_accepted": [
-      {"id": "pipeline.77", "now": "WATCH COMPLETE", "why": "reward-loop-c113.jsonl now 20 lines; 2026-10-28 Marbury 4, Noah 4, Tanya 4, all rheaPass true (es read the file; agy concurs). Two-drafts cost call goes to the builder"},
-      {"id": "engine.201", "now": "READ OWED", "why": "the C110->C113 fixed-cohort trace exists nowhere; codex spot-check docs/archive/for-claude-review/2026-10-27-codex-c113-reread-spotcheck.md has 0 cohort/engine.201 hits (es grep)"},
-      {"id": "engine.41", "now": "MOOT", "why": "Wire 1b targets the v3 S.storySeeds deck path retired at v4.0 (phase10-persistence/saveV3Seeds.js:24-29); v4 col I Citizens already carries the engine-touched POPIDs (saveV3Seeds.js header list) and 506/506 C113 deck rows have Citizens filled (output/beats/Story_Seed_Deck.jsonl); its consumer buildDeskPackets was cut 83a96482. Wire 3 already stale. Retire the row"},
-      {"id": "engine.280", "now": "BLOCKED", "why": "C10 upset-sign was built: 38f19986 (2026-10-11, builder 2026-10-07) and read live at engine_review_c113.md:44; the four follow-up lines wait on upstream signals"},
-      {"id": "engine.95", "now": "gate ARMED", "why": "checkpointSaveMs 6000 written to live World_Config and read back 2026-10-09 (docs/reference/DEPLOY_HISTORY.md:450); not re-read today. Tail finding stands (C112 80.6 s, C113 59.8 s, verified execution_log_c112.txt / c113.txt:277 vs tailReserveMs 60000); total 205.9 s of 330 s budget"},
-      {"id": "engine.296", "now": "Organic", "why": "legends pool draws only in a playoff/championship week; unit-proven, not yet seen in a fire (docs/plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards.md:75). C113 was not such a week"},
-      {"id": "engine.197", "now": "evidence on disk, write-up owed", "why": "execution_log_c113.txt:231 compressLifeHistory_ reflections 194/118 citizens"},
-      {"id": "engine.290", "now": "split", "why": "Sequencing 4 is a build (ready); Trevor's slice read has data on disk (transit_slice_c112/c113.json, reward-loop-c113.jsonl Trevor 4/4) — write-up owed"},
-      {"id": "engine.202", "now": "SUBSUMED by engine.204", "why": "its remaining items (trigger-word hooks, dashboard WeekRecord input, 3c) per docs/plans/2026-09-11-sports-as-a-lived-system.md:598 are inside the 2026-10-22 engine.204 ruling. agy's 'zero scope, all shipped' cited :386-388, which say something else — not accepted as 'done'"}
+      {
+        "id": "pipeline.77",
+        "now": "WATCH COMPLETE",
+        "why": "reward-loop-c113.jsonl now 20 lines; 2026-10-28 Marbury 4, Noah 4, Tanya 4, all rheaPass true (es read the file; agy concurs). Two-drafts cost call goes to the builder"
+      },
+      {
+        "id": "engine.201",
+        "now": "READ OWED",
+        "why": "the C110->C113 fixed-cohort trace exists nowhere; codex spot-check docs/archive/for-claude-review/2026-10-27-codex-c113-reread-spotcheck.md has 0 cohort/engine.201 hits (es grep)"
+      },
+      {
+        "id": "engine.41",
+        "now": "MOOT",
+        "why": "Wire 1b targets the v3 S.storySeeds deck path retired at v4.0 (phase10-persistence/saveV3Seeds.js:24-29); v4 col I Citizens already carries the engine-touched POPIDs (saveV3Seeds.js header list) and 506/506 C113 deck rows have Citizens filled (output/beats/Story_Seed_Deck.jsonl); its consumer buildDeskPackets was cut 83a96482. Wire 3 already stale. Retire the row"
+      },
+      {
+        "id": "engine.280",
+        "now": "BLOCKED",
+        "why": "C10 upset-sign was built: 38f19986 (2026-10-11, builder 2026-10-07) and read live at engine_review_c113.md:44; the four follow-up lines wait on upstream signals"
+      },
+      {
+        "id": "engine.95",
+        "now": "gate ARMED",
+        "why": "checkpointSaveMs 6000 written to live World_Config and read back 2026-10-09 (docs/reference/DEPLOY_HISTORY.md:450); not re-read today. Tail finding stands (C112 80.6 s, C113 59.8 s, verified execution_log_c112.txt / c113.txt:277 vs tailReserveMs 60000); total 205.9 s of 330 s budget"
+      },
+      {
+        "id": "engine.296",
+        "now": "Organic",
+        "why": "legends pool draws only in a playoff/championship week; unit-proven, not yet seen in a fire (docs/plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards.md:75). C113 was not such a week"
+      },
+      {
+        "id": "engine.197",
+        "now": "evidence on disk, write-up owed",
+        "why": "execution_log_c113.txt:231 compressLifeHistory_ reflections 194/118 citizens"
+      },
+      {
+        "id": "engine.290",
+        "now": "split",
+        "why": "Sequencing 4 is a build (ready); Trevor's slice read has data on disk (transit_slice_c112/c113.json, reward-loop-c113.jsonl Trevor 4/4) — write-up owed"
+      },
+      {
+        "id": "engine.202",
+        "now": "SUBSUMED by engine.204",
+        "why": "its remaining items (trigger-word hooks, dashboard WeekRecord input, 3c) per docs/plans/2026-09-11-sports-as-a-lived-system.md:598 are inside the 2026-10-22 engine.204 ruling. agy's 'zero scope, all shipped' cited :386-388, which say something else — not accepted as 'done'"
+      }
     ],
     "rejected_or_reframed": [
-      {"claim": "agy: processFaithJoins_ writes Faith_Organizations directly in Phase 5, bypassing intents", "verdict": "not a defect — listed carve-out at docs/engine/SHEETS_MANIFEST.md:173 (own-tab, heritage MembersList pattern)"},
-      {"claim": "agy: filter blind spot — 5 unowned ready rows omitted", "verdict": "scope choice: the check covered rows owned by engine-sheet; the 10 unowned ready rows are a separate pass"}
+      {
+        "claim": "agy: processFaithJoins_ writes Faith_Organizations directly in Phase 5, bypassing intents",
+        "verdict": "not a defect — listed carve-out at docs/engine/SHEETS_MANIFEST.md:173 (own-tab, heritage MembersList pattern)"
+      },
+      {
+        "claim": "agy: filter blind spot — 5 unowned ready rows omitted",
+        "verdict": "scope choice: the check covered rows owned by engine-sheet; the 10 unowned ready rows are a separate pass"
+      }
     ]
   },
   "batch_2_unowned_ready_rows": {
     "how": "source-search rollout-chase (Haiku, 4 dispatches); engine-sheet spot-checked the settle count, 3b40ab48, and ran the infrastructure.13 test; advisor reviewed. Rows trued in 2c78566a",
     "rows": [
-      {"id": "engine.193", "verdict": "OPEN, text wrong", "evidence": ["C112 log has 9 `engine.193b settle:` lines (grep -c output/execution_log_c112.txt), not 14", "(b) code is e3a85853; ae9278aa is the stage-3 PROD sha", "cut 4 (illness) open per docs/plans/2026-09-10-inactivity-is-regression.md changelog", "anchor 'Builder's words (2026-10-07)' is a bold paragraph at plan:412, not a heading"]},
-      {"id": "engine.116", "verdict": "OPEN, accurate", "evidence": ["Task 2 code repoint not done: lib/diagnosticLedger.js:52 still Engine_Errors in-book", "Task 3 not done: utilities/archiveLifeHistory.js:203", "Task 5 not started"]},
-      {"id": "pipeline.69", "verdict": "OPEN", "evidence": ["T1: scripts/buildNeighborhoodTexture.js still v1.1.0", "T2: no own-seed line in scripts/citizen-wake.js or lib/wakePerception.js", "T3: no per-hood seed floor in buildContractSeeds.js", "T5: artifacts output/slices/c108/ exist, readback table never written"], "note": "row wording 'tells a citizen their seed' reworded to 'wake carries the citizen's own seed event' (plan :85-86 is a past-tense fact, not an instruction)"},
-      {"id": "engine.91", "verdict": "OPEN, accurate", "evidence": ["scripts/ingestEditionWiki.js and scripts/ingestCivicWiki.js POST to /v4/memories with no customId", "edition wiki has a --wipe-priors delete pass for citizen records only; the post-publish invocation omits the flag"]},
-      {"id": "governance.51", "verdict": "PARTLY STALE", "evidence": ["T8's memory-write-gate half: hook removed builder-direct 3b40ab48 (2026-10-07)", "T3 done 40e34826", "plan T1/T2/T7 cite CLAUDE.md, absent from the tree since 2590d587"]},
-      {"id": "canon.5", "verdict": "OPEN item undefined -> needs-info", "evidence": ["23c764b1 (2026-10-22): 'Employer column gone; one RoleType cell POP-00317'", "engine.191 archived (ROLLOUT_ARCHIVE.md:1270)", "'Oakland Unified' left in POP-00317 RoleType + 12 LifeHistory cells (POP-01183..01194) in output/simulation_ledger_snapshot.jsonl", "docs/canon/INSTITUTIONS.md:75 still 'Peralta row', no BIZ-00035"]},
-      {"id": "engine.99", "verdict": "OPEN, count refreshed", "evidence": ["67 non-test files carry quoted CANON_12 names outside scripts/auditHoodDrift.js MIGRATED_FILES (plain grep; the ~49 was the plan's detector count)", "five largest carriers have later commits and still hold their lists"]},
-      {"id": "engine.317", "verdict": "OPEN, owner set engine-sheet", "evidence": ["utilities/webTrigger.js:95-100 getprop whitelist lacks FIRE_ADMISSION_JSON; no read door since 2026-10-25", "proof waived as named builder exception on PROD stages 27-31 (DEPLOY_HISTORY.md:178,186,195,206; 63131dba)"]},
-      {"id": "infrastructure.13", "verdict": "STALE TEST", "evidence": ["ebcf159d (rb, 2026-10-25) removed the 180-char slice in lib/wakePerception.js nightlyIntakeRow; lib/wakePerception.test.js:242 still asserts it; node lib/wakePerception.test.js = 107 passed, 1 failed"]}
+      {
+        "id": "engine.193",
+        "verdict": "OPEN, text wrong",
+        "evidence": [
+          "C112 log has 9 `engine.193b settle:` lines (grep -c output/execution_log_c112.txt), not 14",
+          "(b) code is e3a85853; ae9278aa is the stage-3 PROD sha",
+          "cut 4 (illness) open per docs/plans/2026-09-10-inactivity-is-regression.md changelog",
+          "anchor 'Builder's words (2026-10-07)' is a bold paragraph at plan:412, not a heading"
+        ]
+      },
+      {
+        "id": "engine.116",
+        "verdict": "OPEN, accurate",
+        "evidence": [
+          "Task 2 code repoint not done: lib/diagnosticLedger.js:52 still Engine_Errors in-book",
+          "Task 3 not done: utilities/archiveLifeHistory.js:203",
+          "Task 5 not started"
+        ]
+      },
+      {
+        "id": "pipeline.69",
+        "verdict": "OPEN",
+        "evidence": [
+          "T1: scripts/buildNeighborhoodTexture.js still v1.1.0",
+          "T2: no own-seed line in scripts/citizen-wake.js or lib/wakePerception.js",
+          "T3: no per-hood seed floor in buildContractSeeds.js",
+          "T5: artifacts output/slices/c108/ exist, readback table never written"
+        ],
+        "note": "row wording 'tells a citizen their seed' reworded to 'wake carries the citizen's own seed event' (plan :85-86 is a past-tense fact, not an instruction)"
+      },
+      {
+        "id": "engine.91",
+        "verdict": "OPEN, accurate",
+        "evidence": [
+          "scripts/ingestEditionWiki.js and scripts/ingestCivicWiki.js POST to /v4/memories with no customId",
+          "edition wiki has a --wipe-priors delete pass for citizen records only; the post-publish invocation omits the flag"
+        ]
+      },
+      {
+        "id": "governance.51",
+        "verdict": "PARTLY STALE",
+        "evidence": [
+          "T8's memory-write-gate half: hook removed builder-direct 3b40ab48 (2026-10-07)",
+          "T3 done 40e34826",
+          "plan T1/T2/T7 cite CLAUDE.md, absent from the tree since 2590d587"
+        ]
+      },
+      {
+        "id": "canon.5",
+        "verdict": "OPEN item undefined -> needs-info",
+        "evidence": [
+          "23c764b1 (2026-10-22): 'Employer column gone; one RoleType cell POP-00317'",
+          "engine.191 archived (ROLLOUT_ARCHIVE.md:1270)",
+          "'Oakland Unified' left in POP-00317 RoleType + 12 LifeHistory cells (POP-01183..01194) in output/simulation_ledger_snapshot.jsonl",
+          "docs/canon/INSTITUTIONS.md:75 still 'Peralta row', no BIZ-00035"
+        ]
+      },
+      {
+        "id": "engine.99",
+        "verdict": "OPEN, count refreshed",
+        "evidence": [
+          "67 non-test files carry quoted CANON_12 names outside scripts/auditHoodDrift.js MIGRATED_FILES (plain grep; the ~49 was the plan's detector count)",
+          "five largest carriers have later commits and still hold their lists"
+        ]
+      },
+      {
+        "id": "engine.317",
+        "verdict": "OPEN, owner set engine-sheet",
+        "evidence": [
+          "utilities/webTrigger.js:95-100 getprop whitelist lacks FIRE_ADMISSION_JSON; no read door since 2026-10-25",
+          "proof waived as named builder exception on PROD stages 27-31 (DEPLOY_HISTORY.md:178,186,195,206; 63131dba)"
+        ]
+      },
+      {
+        "id": "infrastructure.13",
+        "verdict": "STALE TEST",
+        "evidence": [
+          "ebcf159d (rb, 2026-10-25) removed the 180-char slice in lib/wakePerception.js nightlyIntakeRow; lib/wakePerception.test.js:242 still asserts it; node lib/wakePerception.test.js = 107 passed, 1 failed"
+        ]
+      }
     ]
   },
-  "not_checked": ["infrastructure.10 and engine.289 (dated Sun 2026-11-01)", "engine.309 (builder design call)", "observing rows with future dates or Organic waits not listed above"]
+  "not_checked": [
+    "infrastructure.10 and engine.289 (dated Sun 2026-11-01)",
+    "engine.309 (builder design call)",
+    "observing rows with future dates or Organic waits not listed above"
+  ],
+  "batch_2_review_fold": {
+    "review": "output/antigravity/2026-10-28-review-es-stale-check-batch2.md (a1872430)",
+    "accepted": [
+      "canon.5: POP-00317 RoleType is live state, not history: Phase 5 stamps occupation:<RoleType> on her new LifeHistory_Log rows (4 at Y3C9, LifeHistory_Log.jsonl:2961-2964). Row reframed as the builder call on her current title + the 12 C110 lines",
+      "engine.116: T5 part done (Storyline_Tracker + Storyline_Intake deleted 2026-10-02, SHEETS_MANIFEST.md:73,75; v3_legacy absent from SCHEMA_HEADERS)",
+      "engine.193: C113 log also carries the 9 settle lines (execution_log_c113.txt grep count 9); pointer moved to the heading at inactivity plan :367",
+      "pipeline.69: T4 sweep (= engine.99) named; T2 scoped to what livedFor does not already carry",
+      "engine.91: T7 single-artifact ingest open (plan :42); T4 held for the builder",
+      "governance.51: T8 design-first per plan :65; CLAUDE.md restored d4c33596 after the review was written",
+      "engine.99: testNeighborhoodLoop.js is a harness in the 67; Cohort 3 ripple-mapper blocker stale (economicRippleEngine.js:422 delegates to resolveHoodOrChild_) - plan changelog line added",
+      "infrastructure.13: Terminal research-build; plan :544 still says 180",
+      "Terminal cells set per owning plan (rollout-rules.md:138)"
+    ],
+    "rejected": [
+      "newsroomSourcing.js CIVIC_EMPLOYERS as a live defect: :194-195 matches the current ledger Name first, the OUSD/Oakland Unified aliases only keep older phrasing seating",
+      "BOARD-OUSD-1..7 in civicInitiativeEngine.js: already carried by civic.43 (ROLLOUT §1)",
+      "engine.91 §S502 pointer broken: it is the leading text of the :57 heading, unique in the file"
+    ]
+  }
 }

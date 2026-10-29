@@ -73,6 +73,8 @@ Nothing else. Rules, identity, terminal files must not state the same thing mult
 
 ## Changelog
 
+- 2026-10-28 (engine-sheet) — Corrected: NotebookLM holds the same canon (fast prose; crons query it), Supermemory is sim/build memory. pipeline.93 withdrawn (wontfix); CLAUDE.md + AGENTS.md canon lines trued.
+
 - 2026-10-28 (engine-sheet) — Builder ruling: canon = whatever is ingested to Supermemory `bay-tribune`; NotebookLM is his workspace. CLAUDE.md + AGENTS.md trued. Skills still checking canon via `notebooklmCanonSearch.js` → pipeline.93.
 
 - 2026-10-28 (engine-sheet) — Builder yes: the 9 booted/duplicate lines dropped; MEMORY.md 98 lines, 14.9KB. Files stay in the memory dir (searchable via brainSearch).

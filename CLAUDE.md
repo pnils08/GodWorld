@@ -29,7 +29,7 @@ A doc, memory, summary, audit or NEXT line is a claim. Before building on one, c
 | Question | Source |
 |---|---|
 | A citizen, hood, business, initiative — current value | live sheet: scratchpad script, `require('/root/GodWorld/lib/env')` then `lib/sheets` `getSheetAsObjects` (bench: set `GODWORLD_SHEET_ID` after requiring env); one ledger row: `output/simulation_ledger_snapshot.jsonl` |
-| What the world has established (canon) | whatever has been ingested to Supermemory `bay-tribune` — `search_canon`. An ingest path's gate decides canon; NotebookLM is Mike's workspace, not canon |
+| What the world has established (canon) | whatever the ingest paths send — an ingest path's gate decides canon. Query it in NotebookLM (fast, prose; what crons use) or Supermemory `search_canon` (search results). Supermemory is also the sim's and build's memory |
 | What code does, who calls it | the code; `grep -rn "fn(" phase* utilities scripts lib dashboard`; one function / `S.` field / tab: `engine-wiring` agent |
 | What a pipeline produced | `output/` artifacts |
 | What was decided before | `node scripts/brainSearch.js "<query>"` — a `rule` hit is current law; `brain` / `mem` hits are history |

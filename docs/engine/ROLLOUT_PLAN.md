@@ -7,7 +7,7 @@
 **Working order (builder 2026-10-22, "work through this list how you lay it out"):** ship what is already paid for (finished, reviewed code) first; then clear the builder's decisions; then builds ranked by "does it give the citizens a life", grouped by the file they touch; plumbing only when a build already has the file open. Nothing waits on the live fire (TERMINAL.md: the bench is the gate; a bench-proven change goes live the same session).
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
-**Plans in motion (51)** — each plan, its rows and the state each is in:
+**Plans in motion (52)** — each plan, its rows and the state each is in:
 
 - [[../plans/2026-10-11-media-extension]]: pipeline.77 needs-info, pipeline.85 live-observing, pipeline.89 in-progress, pipeline.83 live-observing, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.91 ready, pipeline.88 needs-info, pipeline.80 live-observing
 - [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.301 live-observing, engine.214 ready, engine.308 live-observing, engine.287 live-observing, engine.288 live-observing, engine.289 blocked, engine.309 needs-info, engine.311 needs-info
@@ -17,7 +17,6 @@
 - [[../plans/2026-07-27-employment-living-system]]: engine.319 live-observing, engine.320 live-observing, engine.321 wontfix
 - [[../plans/2026-09-10-inactivity-is-regression]]: engine.193 ready, engine.201 live-observing, engine.197 live-observing
 - [[../research/2026-10-02-engine-208-fandom-dial-read-before]]: engine.208 live-observing, engine.280 blocked
-- [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]: engine.296 live-observing, engine.318 done-pending-archive
 - [[../research/2026-10-03-engine-204-205-game-day-economy-read-before]]: engine.204 ready, engine.281 ready
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
 - [[../plans/2026-10-20-hood-character-standing]]: pipeline.71 needs-info
@@ -33,6 +32,7 @@
 - [[../plans/2026-09-24-initiatives-in-the-world]]: engine.260 live-observing
 - [[../plans/2026-08-29-employment-system-cascade]]: civic.33 live-observing
 - [[../plans/2026-10-19-discord-voices-connected]]: research.30 live-observing
+- [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]]: engine.296 live-observing
 - [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]]: research.29 live-observing
 - [[../plans/2026-07-31-platform-ceiling-resilience]]: engine.95 live-observing
 - [[../plans/2026-07-11-agent-exchange-engine]]: engine.53 live-observing
@@ -48,6 +48,7 @@
 - [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]]: engine.27 ready
 - [[../plans/2026-07-31-engine-observability-integrity]]: infrastructure.6 ready
 - [[../plans/2026-09-28-storylines-keyed-to-engine-events]]: engine.270 live-observing
+- [[../plans/2026-10-28-code-review-dirty-tree-findings]]: infrastructure.14 in-progress
 - [[../—]]: pipeline.92 ready
 - `lib/wakePerception.test.js:242`: infrastructure.13 ready
 - `docs/archive/for-claude-review/2026-10-25-codex-engine301-gate3-recheck.md`: engine.317 ready
@@ -135,7 +136,6 @@
 | infrastructure.6 | Sim-health observability: /api/sim-health + dashboard panel (Track A, not built). Track B ghost tabs + tab-reference test done (`c3fe1780`, `86f43999`, `1240a80a`; test 273 refs PASS 2026-10-22) | ready | engine-sheet | [[../plans/2026-07-31-engine-observability-integrity]] |
 | pipeline.83 | Failure review: whose failure. UNDOCKED digest 10-24 = reporter model → Nia on Luna 6 + 6 tool calls (pilot-as-citizen frame), both seats, built 10-28 on the builder's word. Read Sat 2026-10-31 08:15 digest + Mon 11-02 recap traces | live-observing | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.83 |
 | engine.308 | Heritage business cap + cadence (builder 2026-10-22): cap 2 per citizen, line cap = living members + tier step, 12-Cycle cooldown. PROD @158; C113 check PASS (armed, no opening); first possible opening Dillon C121 | live-observing | engine-sheet | DEPLOY_HISTORY §PROD stage 21; [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8, engine.308 design; `output/engine_review_c113.md` §C113 re-reads |
-| engine.318 | Citizen_Usage_Intake read and written by header name. LIVE PROD @164 stage 28 2026-10-25; C113 as expected (0 new errors, 0 pending, no media-room row), closed 2026-10-28 | done-pending-archive | engine-sheet | [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.318 |
 | engine.270 | Storylines keyed to engine events: Review 1 build + codex fold 2026-10-28 (D1 anomaly tag, D2 no false age, Saturday attach pass). Read the first attach run Sat 2026-10-31 16:00 and the first D1/D2 build at the C114 fire Sun 2026-11-01 | live-observing | engine-sheet | [[../plans/2026-09-28-storylines-keyed-to-engine-events]] §Review 1 build |
 | pipeline.74 | The awaited writes happened: Tanya, Noah (grok-4.3) and P Slayer wrote in the unattended C112/C113 fan-outs. Read owed: off-season label, P Slayer POPIDs, Noah model. Angle cap 1600 PROVEN (capHits 0 on 10-15/16/19) | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |
 | pipeline.75 | Tanya wrote in the unattended C112/C113 fan-outs (C113 staged, 4/4). Read owed: feed names + Notes. Deterministic write checks PROVEN in every unattended fan-out results file 10-15 → 10-19 | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |

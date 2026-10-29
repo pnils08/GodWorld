@@ -112,17 +112,24 @@ function main() {
 
   const rolloutText = fs.readFileSync(ROLLOUT, 'utf8');
   const archiveText = fs.readFileSync(ARCHIVE, 'utf8');
-  const rows = parseRows(rolloutText);
+  const allRows = parseRows(rolloutText);
 
-  if (!rows.length) { console.log('No done-pending-archive rows. Nothing to sweep.'); return; }
+  if (!allRows.length) { console.log('No done-pending-archive rows. Nothing to sweep.'); return; }
+
+  // An id already in the archive is spent: its row leaves ROLLOUT without a second archive entry
+  // (S612 left engine.318 in both files; the next close would have archived it twice).
+  const archivedIds = new Set([...archiveText.matchAll(/^- \*\*([a-z][a-z-]*\.\d+[a-z]?)\*\*/gm)].map(m => m[1]));
+  const stale = allRows.filter(r => archivedIds.has(r.id));
+  const rows = allRows.filter(r => !archivedIds.has(r.id));
+  for (const r of stale) console.log(`  already archived: ${r.id} — row removed from ROLLOUT, no second archive entry`);
 
   const INSERT_ANCHOR = findNewestPassAnchor(archiveText);
   if (!INSERT_ANCHOR) { console.error('FATAL: no "## S<N> Archive Pass" header found in ARCHIVE — cannot place new pass.'); process.exit(1); }
 
-  const section = buildPassSection(rows, session, date, label);
+  const section = rows.length ? buildPassSection(rows, session, date, label) : '';
 
   console.log(`# rolloutSweep — ${apply ? 'APPLY' : 'DRY-RUN'}`);
-  console.log(`\nWould move ${rows.length} rows:`);
+  console.log(`\nWould move ${rows.length} rows${stale.length ? ` (+${stale.length} already archived: row removed only)` : ''}:`);
   for (const r of rows) console.log(`  - ${r.id}  [${r.terminal}]`);
 
   if (!archiveText.includes(INSERT_ANCHOR)) {
@@ -138,8 +145,8 @@ function main() {
   }
 
   // APPLY: insert section above the anchor in ARCHIVE; remove rows from ROLLOUT.
-  const newArchive = archiveText.replace(INSERT_ANCHOR, section + '\n' + INSERT_ANCHOR);
-  const removeSet = new Set(rows.map(r => r.raw));
+  const newArchive = rows.length ? archiveText.replace(INSERT_ANCHOR, section + '\n' + INSERT_ANCHOR) : archiveText;
+  const removeSet = new Set(allRows.map(r => r.raw));
   const newRollout = rolloutText.split('\n').filter(l => !removeSet.has(l)).join('\n');
 
   fs.writeFileSync(ARCHIVE, newArchive);
@@ -150,7 +157,7 @@ function main() {
   console.log(`\nAPPLIED.`);
   console.log(`  ROLLOUT_PLAN:    ${beforeR} → ${afterR} lines (-${beforeR - afterR})`);
   console.log(`  ROLLOUT_ARCHIVE: ${beforeA} → ${afterA} lines (+${afterA - beforeA})`);
-  console.log(`  Rows moved: ${rows.length}`);
+  console.log(`  Rows moved: ${rows.length}${stale.length ? ` (+${stale.length} already archived, removed)` : ''}`);
 }
 
 main();

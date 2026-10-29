@@ -973,6 +973,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S612 Archive Pass (2026-10-28, research-build) — post-S611 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.
+
+- **engine.318** [engine-sheet] — Citizen_Usage_Intake read and written by header name. LIVE PROD @164 stage 28 2026-10-25; C113 as expected (0 new errors, 0 pending, no media-room row), closed 2026-10-28 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-16-celeste-dead-slice-legends-and-interview-guards]] §engine.318
+
+This pass: 1 rows — engine.318. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S609 Archive Pass (2026-10-28, engine-sheet) — post-S608 closures sweep
 
 3 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 2 pipeline.* + 1 engine.*.

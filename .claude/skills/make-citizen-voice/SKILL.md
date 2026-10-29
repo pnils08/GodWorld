@@ -5,6 +5,7 @@ version: "1.0"
 updated: 2026-06-17
 tags: [media, citizens, persona, active]
 effort: medium
+disable-model-invocation: true
 ---
 
 # /make-citizen-voice — Author a Citizen Voice Agent

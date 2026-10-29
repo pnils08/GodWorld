@@ -8,6 +8,7 @@ effort: medium
 sources:
   - https://github.com/affaan-m/everything-claude-code/blob/main/skills/context-budget/SKILL.md (MIT, Affaan Mustafa 2026)
 related_skills: [doc-audit, tech-debt-audit, skill-audit]
+disable-model-invocation: true
 ---
 
 # /context-budget — Token-overhead audit

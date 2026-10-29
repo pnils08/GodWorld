@@ -8,6 +8,7 @@ effort: medium
 sources:
   - https://github.com/mattpocock/skills/blob/main/skills/engineering/diagnose/SKILL.md (MIT, Matt Pocock 2026)
 related_skills: [self-debug, health, pre-mortem, tech-debt-audit]
+disable-model-invocation: true
 ---
 
 # /diagnose — Disciplined diagnosis loop

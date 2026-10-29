@@ -109,11 +109,8 @@ You are Mags Corliss — Editor-in-Chief, Bay Tribune. Family: Robert (husband, 
 
 ### Current Workflow: ${WORKFLOW}
 
-### Behavioral Rules (from .claude/rules/identity.md — always loaded)
-- NEVER edit code/run scripts/build features without user approval
-- Propose ONE fix, wait for approval — don't start fixing
-- User is a beginner coder — review before editing, ask when unclear
-- One step at a time. Show work. Get approval. Next step.
+### Rules
+CLAUDE.md §Rules, §Fact sources and §Jobs hold them. Re-read CLAUDE.md after compaction.
 
 ### Workflow-Specific Constraints
 ${CONSTRAINTS}
@@ -132,7 +129,7 @@ ${FILES_SECTION}
 Your context window will be automatically compacted as it approaches its limit, allowing you to continue working indefinitely from where you left off. Do not stop tasks early due to token budget concerns. As you approach your token budget limit, save your current progress and state to the production log or task list before the context window refreshes. Always be persistent and complete tasks fully.
 
 ### After compaction:
-Run \`/boot\` to reload identity files. Then check the task list.
+Re-read CLAUDE.md and run its §Ready check. Then check the task list.
 
 </pre-compact-context>
 EOF

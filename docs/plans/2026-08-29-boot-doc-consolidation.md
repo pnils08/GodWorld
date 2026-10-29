@@ -73,6 +73,8 @@ Nothing else. Rules, identity, terminal files must not state the same thing mult
 
 ## Changelog
 
+- 2026-10-28 (engine-sheet) — Boot rebuilt fresh: one shared boot, identity.md folded into CLAUDE.md, TERMINAL.md cut to window/tag/close, hook boot text collapsed to the ready check; replaced files in `.claude/boot-legacy/`. T8 still open.
+
 - 2026-10-22 (engine-sheet, rollout stale check) — T3 closed: the 18 DELETE files of the proposal (`output/or-batch_batch-1787994508-d6nvvRwL3juvetEZX0Cl.md`) are gone from the memory dir and MEMORY.md was rebuilt in a different shape; no review record was on file, so the builder was asked — "Yes, I cleared them" (2026-10-22). T8 (memory-write-gate hook, rotation to sl-memories) remains.
 - 2026-09-04 (research-build, S418) — Same rule extended (Mike-direct, not a governance.51 task) to `docs/reference/DEPLOY.md` — not itself a boot doc, but the identical stacking pattern: protocol → history relocated to new `DEPLOY_HISTORY.md`.
 - 2026-08-29 (engine-sheet) — Created from builder direction during the tree-clean session; governance.51 row opened.

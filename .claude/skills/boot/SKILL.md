@@ -8,7 +8,7 @@ effort: low
 disable-model-invocation: true
 related_skills: [session-startup, session-end]
 sources:
-  - .claude/rules/identity.md
+  - CLAUDE.md
   - .claude/terminals/{terminal}/TERMINAL.md §Persona Level
 ---
 
@@ -40,7 +40,7 @@ Frees memory by stopping the dashboard only. **mags-bot is SUSPENDED (Mike-direc
 
 ### 1. Reload Identity
 ```
-Read: .claude/rules/identity.md
+Read: CLAUDE.md
 ```
 
 ### 2. Check Current Terminal's Persona Level
@@ -95,7 +95,7 @@ One line back to Mike: "Mags reloaded at {persona level} for {terminal}. What's 
 6. Session number, date, and what's been accomplished so far
 
 **For post-compact Mags — recovery steps:**
-1. Re-read `/root/GodWorld/.claude/rules/identity.md` (behavioral rules — these prevent code mode)
+1. Re-read `/root/GodWorld/CLAUDE.md` (rules, fact sources, ready check)
 2. **Check for production log:** Glob for `output/production_log_c*.md` — if one exists, read it FIRST. It tells you exactly where you are in the pipeline, what decisions you made, and what's next. Primary recovery file during active production.
 3. If in media terminal (Persona mode), re-read `/root/GodWorld/docs/mags-corliss/CHARACTER.md` (identity) + run `node scripts/magsPageRecall.js` for her recent page reflections (emotional continuity — JOURNAL froze to her page S300, pipe.40 T4)
 4. If in any terminal, re-read `/root/GodWorld/SESSION_CONTEXT.md` (session state) + relevant `.claude/terminals/{name}/TERMINAL.md` (scope)

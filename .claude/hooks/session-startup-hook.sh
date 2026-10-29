@@ -200,7 +200,7 @@ EOF
   # rewrote NEXT[civic] because the OTHER lanes were never described to it — boot
   # only ever emitted its own NEXT line + a bare "stay in your lane" in CLAUDE.md.
   cat << 'ROSTER'
-TERMINAL ROSTER: research-build and engine-sheet — two builder terminals, each with one job in hand (JOB MODEL below); model per job. Newsroom and city hall run unattended on crons.
+TERMINAL ROSTER: research-build and engine-sheet — two builder terminals, one job each (CLAUDE.md §Jobs). Newsroom and city hall run unattended on crons.
 NON-CLAUDE LANES: kimi, codex, antigravity, grok — external CLIs, control-plane read-only (AGENTS.md); each carries its own NEXT line.
 ROSTER
   echo ""
@@ -247,29 +247,12 @@ still run; only the human-facing seats are gone. Rules still live at
 
 BOOT
         ;;
-      research-build)
-        cat << 'BOOT'
-BOOT SEQUENCE (research-build terminal — operational):
-1. Read .claude/rules/research-build.md
-2. Read .claude/terminals/research-build/TERMINAL.md
-3. Run `node scripts/queryFamily.js` — Robert, Sarah, Michael, Scout. One call.
-3b. Resume before open: `grep -n "| in-progress | research-build |" docs/engine/ROLLOUT_PLAN.md`. A row there is your job — resume it. None → claim one row from §4 Queue or §1 and set its Terminal to research-build before any other work.
-4. Know the fleet before you orchestrate it. Run `ListAgents` — live Claude lanes (busy/idle/offline) come back in one call. For house-guest presence only (kimi/codex/grok/antigravity), `tmux list-panes -a -F "#{window_name} | cmd=#{pane_current_command}"` — a roster, not a status check: confirms a pane exists and what's running in it, nothing about whether it's mid-task. Don't go further than that here — the full idle-confirm (`tmux capture-pane`) is real cost, reserved for the moment you're actually about to send something (`docs/reference/CROSS_LANE_MESSAGING.md`), not spent on every boot against lanes you may not touch this session.
-5. Greet Mike briefly. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand.
-
-SCOPE: the newsroom and city hall run unattended on crons; this seat tunes their pipelines (cron config, skills, agents). Read .claude/rules/newsroom.md or .claude/rules/civic.md on demand for that work.
-
-AT THIS TERMINAL: "I haven't checked yet" is a complete answer. Never assert a POPID, a name, an employer, or a ledger value you have not just read. Search before asserting.
-
-BOOT
-        ;;
-      engine-sheet)
-        cat << 'BOOT'
-BOOT SEQUENCE (engine-sheet terminal — operational):
-1. Read .claude/rules/engine.md
-2. Read .claude/terminals/engine-sheet/TERMINAL.md
-2b. Resume before open: `grep -n "| in-progress | engine-sheet |" docs/engine/ROLLOUT_PLAN.md`. A row there is your job — resume it. None → claim one row from §4 Queue or §1 and set its Terminal to engine-sheet before any other work.
-3. Greet Mike briefly. Your handoff is the NEXT line above. What shipped → git log; open work → ROLLOUT; why → claude-mem — pull on demand. Discipline: no new MDs, one session save per CLAUDE.md, nothing else, no journal.
+      research-build|engine-sheet)
+        # One shared boot for both builder terminals (2026-10-28); the ready
+        # check, job model and review rule live in CLAUDE.md, not here.
+        # Prior per-terminal text: .claude/boot-legacy/hook-boot-sequence.legacy.txt
+        cat << BOOT
+BOOT (${TERMINAL_NAME}): run CLAUDE.md §Ready check before any work. Terminal details: .claude/terminals/${TERMINAL_NAME}/TERMINAL.md
 
 BOOT
         ;;
@@ -280,25 +263,6 @@ BOOT
         ;;
     esac
 
-    # --- UNIVERSAL DISCIPLINE (gov.36 item 2, S356) ---
-    # The one pre-cognitive principle NOT already resident via identity.md
-    # (anti-guess + don't-build-beyond live there, base layer, always loaded).
-    # Emitted here per research 2026-07-27-boot-rebirth-model-fit-routing:
-    # pointers don't enforce; injection does. Domain applications (civic
-    # completion checklist, engine caller-graph procedure) stay in their own
-    # files — this is the shared principle only.
-    cat << 'DISCIPLINE'
-MEASURE TWICE (every lane): read what a change touches and check live state before changing it; attack the plan's 2-3 weakest assumptions first; reverse when evidence contradicts it.
-
-JOB MODEL (builder 2026-10-23):
-- One job in hand per terminal, plan → build → bench → deploy → close. No plan-here/build-there handoff.
-- Open: one ROLLOUT row in §3 Now, state in-progress, Terminal = this terminal alone (never two names). Name the model (substrate / multi-file code → Opus; plans, docs, config, single-file scripts → Sonnet); Mike types /model.
-- During: a fix the job cannot finish without is the job. Anything else surfaced is a ROLLOUT row (ready / needs-info / blocked), not a build.
-- Job done: done-pending-archive. Session ends mid-job: the row stays in-progress; NEXT line = this job and where it stopped (≤350 chars is judgment, the close script warns).
-- PROD needs bench proof on the exact candidate; codex reviews it as the adversarial check and the seat decides on the findings. A builder exception is named with its scope.
-- Mike reads the plan at open and the NEXT line at close. Codex / agy / aider review; they own no jobs.
-
-DISCIPLINE
   fi
 
   # --- LEDGER NOTE (removed S247/RB-6, G-SS11) ---

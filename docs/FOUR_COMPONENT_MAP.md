@@ -82,8 +82,8 @@ Three layers, smallest to largest surface.
 
 | Harness layer | Scope | File location | Reload trigger |
 |---------------|-------|---------------|----------------|
-| Identity (always loaded) | Mags persona, non-negotiables, canon facts | `.claude/rules/identity.md`, `CLAUDE.md`, `/root/.claude/CLAUDE.md` | Session boot, `/boot` after compaction |
-| Rules (path-scoped) | Engine, newsroom, dashboard, civic (S212), research-build (S212), plus identity.md (always-loaded) | `.claude/rules/{engine,newsroom,dashboard,civic,research-build,identity}.md` | Auto-loaded when paths match (identity always) |
+| Identity (always loaded) | project, rules, fact sources, ready check | `CLAUDE.md`, `/root/.claude/CLAUDE.md` | Session boot; re-read after compaction |
+| Rules (path-scoped) | Engine, newsroom, dashboard, civic (S212), research-build (S212) | `.claude/rules/{engine,newsroom,dashboard,civic,research-build}.md` | Auto-loaded when paths match |
 | Skills (invoked) | 54 skill files shaping specific workflows (2026-10-24) | `.claude/skills/*/SKILL.md` | Explicit invocation or description-triggered |
 
 Agents are harness + tool bindings packaged together: each of the 66 `.claude/agents/*` folders (plus 3 index files) holds a sub-agent's identity, allowed tools, and voice.

@@ -1,6 +1,8 @@
 ---
 paths:
-  - ".claude/terminals/research-build/TERMINAL.md"
+  - "docs/plans/**"
+  - "docs/research/**"
+  - "docs/adr/**"
 ---
 
 # Research-Build Rules

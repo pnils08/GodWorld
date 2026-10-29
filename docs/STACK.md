@@ -118,7 +118,7 @@ Phase 40.3 isolation: all GodWorld credentials live OUTSIDE the repo working dir
 
 All skill files conform to SCHEMA §11 as of Phase 41.4 S156 (required fields: name, description, version, updated, tags, effort). Full list in `.claude/skills/`. Groupings:
 
-Session lifecycle: (auto-boot), /session-startup, /session-end, /boot, /grill-me
+Session lifecycle: (auto-boot), /session-startup, /session-end, /grill-me
 Edition production: /write-edition, /write-supplemental, /podcast, /edition-print, /dispatch, /interview, /run-cycle, /sift, /pre-flight, /post-publish, /style-pass
 Engine health: /pre-mortem, /tech-debt-audit, /stub-engine, /health, /ctx-map, /deploy, /doc-audit, /skill-audit, /skill-check, /engine-review, /build-world-summary
 Review lanes: /cycle-review, /capability-review, /adversarial-review

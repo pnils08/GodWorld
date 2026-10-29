@@ -3,7 +3,7 @@ title: Boot Architecture
 created: 2026-02-15
 updated: 2026-06-01
 type: reference
-tags: [architecture, infrastructure, active]
+tags: [architecture, infrastructure, archived]
 sources:
   - CLAUDE.md §Session Boot
   - .claude/terminals/*/TERMINAL.md
@@ -17,6 +17,8 @@ pointers:
   - "[[WORKFLOWS]] — workflow reference (orthogonal to terminals)"
   - "[[adr/0009-session-context-on-demand]] — why boot no longer reads SESSION_CONTEXT"
 ---
+
+> **SUPERSEDED 2026-10-28.** The boot is now one shared `CLAUDE.md` (§Ready check) plus the SessionStart hook, which also fires after compaction. `/boot` and the persona levels are retired; replaced files in `.claude/boot-legacy/`. Kept below as history.
 
 # Boot Architecture — S165
 

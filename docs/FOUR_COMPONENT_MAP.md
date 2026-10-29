@@ -119,7 +119,6 @@ Full inventory is the skill files themselves. A few representative tuples to mak
 | `/city-hall` | Opus + civic-voice sub-agents | `.claude/skills/city-hall/SKILL.md` + `.claude/agents/civic-office-*` + `.claude/agents/civic-project-*` | City-hall-prep scripts, voice-output paths, tracker updater (dry-run by default) | civic terminal |
 | `/engine-review` | Opus | `.claude/skills/engine-review/SKILL.md` | engine-auditor JSON read, Read, Write | engine-sheet terminal (or research-build) |
 | `/post-publish` | Opus | `.claude/skills/post-publish/SKILL.md` | ingestEdition.js, buildCitizenCards.js, sheet writes to Edition_Coverage_Ratings, Supermemory writes to `bay-tribune` | media terminal |
-| `/boot` | Opus | `.claude/skills/boot/SKILL.md` + identity files | Read | any terminal |
 | AutoDream (external) | — disabled S228 | claude-mem daemon | claude-mem worker port 37777 (still serves MCP search) | host-level Bun daemon (not this repo's PM2) |
 
 New skills declare their slice in the skill-file frontmatter once that convention lands (not enforced yet — opportunistic backfill).

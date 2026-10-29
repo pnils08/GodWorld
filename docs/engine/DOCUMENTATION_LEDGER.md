@@ -247,9 +247,7 @@ Full chain in order: `/run-cycle` → `/city-hall-prep` → `/city-hall` → `/s
 |-------|---------|----------------------|
 | `/session-startup` | Workflow-routed boot | PERSISTENCE, JOURNAL_RECENT, workflow docs |
 | `/session-end` | Close + audit workflow files | DOCUMENTATION_LEDGER + workflow files |
-| `/boot` | Post-compaction identity reload | PERSISTENCE, JOURNAL_RECENT, identity.md |
 | `/grill-me` | Discovery before building | None (conversation-only) |
-| `.claude/hooks/post-compact-hook.sh` | PostCompact hook — injects `/boot` | PERSISTENCE, JOURNAL_RECENT, identity.md |
 
 ### Trainable Criteria Files (auto-updated by /post-publish Step 10)
 

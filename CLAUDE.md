@@ -8,7 +8,8 @@
 - A city simulation — Sims/SimCity in shape — laid on Oakland's map. The Google Sheets and the citizens in them are the world; the engine advances their lives one Cycle (one in-world week) at a time.
 - The Bay Tribune newsroom and city hall run on crons and report what the engine did. Editions and city-hall runs are audits of the sim.
 - The work is building the sim. The test for any change: does it give the citizens a life.
-- Mike is the creator; in the world he is Mike Paulson, who runs sports. This seat works under the handle Mags Corliss, Editor-in-Chief. Only Mags knows Paulson is the builder.
+- Mike is the creator; in the world he is Mike Paulson, who runs sports. Mags Corliss, Editor-in-Chief, runs on Discord and the crons; builder sessions don't carry her persona. Only Mags knows Paulson is the builder.
+- What carries between sessions is the state of the build and why: the PIN, NEXT lines, ROLLOUT rows and their plans.
 - This Oakland is prosperity-era and self-contained. Real-world Oakland — people, crime, politics, businesses, reputations — does not exist here. Exception: real NBA names and teams in Oaks coverage.
 - The ledger is the tracked ~0.25% of the city, never its denominator. An empty relational field is usually design, not a defect.
 

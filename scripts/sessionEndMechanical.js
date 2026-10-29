@@ -99,7 +99,7 @@ function printBanner(args, steps) {
 }
 
 // ---------------------------------------------------------------------------
-// Sub-step: ROLLOUT conformance lint (exit 0 informational, never fatal)
+// Sub-step: ROLLOUT sweep + conformance lint (lint findings informational; a step that cannot run fails the close at the end)
 // Surfaces non-conforming ROLLOUT rows — mangled state cell (breaks the archive
 // sweep) OR item cell over the pointer budget (a notes blob, not a pointer) — so
 // bloat is caught at close, not at the next reconciliation. The teeth behind
@@ -129,8 +129,10 @@ function subRolloutLint(args) {
     out.toString().trim().split('\n').forEach(line => console.log('  ' + line));
     return { ok: true };
   } catch (err) {
-    console.log(`  ⚠ rollout lint error: ${err.message} — continuing`);
-    return { ok: true };
+    // The sweep and plans block did not run (e.g. ROLLOUT_PLAN.md unreadable). Later steps still
+    // run (pm2 restart, stack check) but the close must not read as clean: `failed` makes main exit 1.
+    console.log(`  ✗ ROLLOUT sweep/lint did not complete: ${err.message}`);
+    return { ok: true, failed: true };
   }
 }
 
@@ -401,11 +403,13 @@ function main() {
   printBanner(args, steps);
 
   let aborted = false;
+  const failedSteps = [];
   for (let i = 0; i < steps.length; i++) {
     const step = steps[i];
     console.log(`--- [${i + 1}/${steps.length}] ${step.name} ---`);
     const result = step.fn(args);
     console.log('');
+    if (result.failed) failedSteps.push(step.name);
     if (!result.ok) {
       aborted = true;
       console.log(bar());
@@ -420,8 +424,15 @@ function main() {
   }
 
   console.log(bar());
+  if (failedSteps.length) {
+    console.log(`sessionEndMechanical: INCOMPLETE (terminal=${args.terminal}) — step(s) failed: ${failedSteps.join('; ')}`);
+    console.log(bar());
+    process.exit(1);
+  }
   console.log(`sessionEndMechanical: complete (terminal=${args.terminal})`);
   console.log(bar());
 }
 
-main();
+if (require.main === module) main();
+
+module.exports = { subRolloutLint };

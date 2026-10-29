@@ -48,11 +48,11 @@ Finding 5 of the review (stale NEXT line) is closed: the files it named were res
 |---|------|-------|--------|
 | T2 | `rolloutSweep.js parseRows` (:60-78) never checks the archive for an id; engine.318 sat in both ROLLOUT_PLAN.md:138 and the uncommitted ROLLOUT_ARCHIVE pass. Fix: sweep skips an id already archived; row removed from the plan. | rb | done `22843c66` |
 | T8 | Writer found: the engine stage step, not `applyTrackerUpdates.js`. `civicStageStep_` returns `{stage:'Standing', phase:'operational'}` (civicInitiativeEngine.js:4003-4006); `applyCivicStageStep_` (:4137) never touches NextScheduledAction / NextActionCycle. Substrate is gated: split to engine.322 for engine-sheet. | rb → es | split → engine.322 |
-| T1 | Staged reader matches `/\.staged\.json$/` only; six C112 suffixed reruns (Ines -1615/-1814/-2320, Tamsin -2320, Nia -2319/-2321) absent from `ARTICLE_INDEX.jsonl`. Fix: match `/\.staged(-\d+)?\.json$/`, derive stem the same way, rebuild the index, count rows. | rb | not started |
+| T1 | Staged reader matches `/\.staged\.json$/` only; six C112 suffixed reruns (Ines -1615/-1814/-2320, Tamsin -2320, Nia -2319/-2321) absent from `ARTICLE_INDEX.jsonl`. Fix: match `/\.staged(-\d+)?\.json$/`, derive stem the same way, rebuild the index, count rows. | rb | done `2d2e7b46` |
 | T6 | `engineFireInfo` (:3579) takes `firedAt` from artifact mtimes. `engine_audit_c111.json` mtime is 2026-10-18 22:15 CDT, a week after C111; `week_state_c111.json` `engineFiredAt` moved 2026-10-13 → 2026-10-19T03:15Z to match. Find what rewrote the audit. Fix the clock source only after the cause is named. | rb | not started |
-| T7 | `subRolloutLint` catch returns `{ ok: true }` on any error incl. a missing ROLLOUT_PLAN. Fix: fail the close (or at minimum return `ok:false` and print under the fatal header) when the plan file is unreadable. | rb | not started |
-| T3 | Title fallback `pick = cluster.length ? … : above[0]` skips the `plain()` ≤280 guard. Rows 758 (454 ch), 786 (527), 875 (513). Fix: apply the guard; those rows take `title:null` + a `lede`. | rb | not started |
-| T9 | Edition path stores `desk` raw ("Undocked-digest", 1 row); staged path uses `titleCase` ("Undocked-Digest", 3 rows; "Undocked", 9). Fix: normalise the edition path with the same `titleCase`. | rb | not started |
+| T7 | `subRolloutLint` catch returns `{ ok: true }` on any error incl. a missing ROLLOUT_PLAN. Fix: fail the close (or at minimum return `ok:false` and print under the fatal header) when the plan file is unreadable. | rb | done (this batch) |
+| T3 | Title fallback `pick = cluster.length ? … : above[0]` skips the `plain()` ≤280 guard. Rows 758 (454 ch), 786 (527), 875 (513). Fix: apply the guard; those rows take `title:null` + a `lede`. | rb | done `2d2e7b46` |
+| T9 | Edition path stores `desk` raw ("Undocked-digest", 1 row); staged path uses `titleCase` ("Undocked-Digest", 3 rows; "Undocked", 9). Fix: normalise the edition path with the same `titleCase`. | rb | done `2d2e7b46` (review's titleCase fix would break "A's Beat" / "Editor-in-Chief"; most-common-spelling rule used) |
 | T4 | `lib/contextScan.js:44` `BLOCK_LOG_PATH` is a hard-coded constant; test 10 appends to the tracked `output/injection_blocks.log` on every run with a real ledger name. Fix: env/arg override, test writes to a temp file with a visibly synthetic name; the 368 `contextScan-bad` lines already in the tracked log come out. `lib/` is gated — propose, land through engine-sheet. | rb → es | not started |
 
 ## Acceptance
@@ -106,3 +106,4 @@ Finding 5 of the review (stale NEXT line) is closed: the files it named were res
 
 - 2026-10-28 (research-build) — Created from the /code-review run; priority set; eight findings verified in code or data, P1-P3 open.
 - 2026-10-28 (research-build) — T2 shipped `22843c66`. T8 cause corrected (engine stage step, not applyTrackerUpdates; P2 refuted) and split to engine.322.
+- 2026-10-28 (research-build) — T1/T3/T9 shipped `2d2e7b46` (P3 settled: +13 rows, 0 lost, no new dup fingerprints). T7 shipped. Open: T6 (diagnose), T4 (lib/ gated).

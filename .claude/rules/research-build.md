@@ -9,13 +9,13 @@ paths:
 
 Craft rules for plan, research, doc-graph and apparatus jobs: planning rigor, research-synthesis discipline, blast-radius awareness, anti-feature-creep defaults, doc-registration enforcement, ADR-when-decision-is-load-bearing, rollout filing. They attach to the job type, not the window. (S212 — LLMs are bags of skills, not single tools: `docs/adr/0004-skill-bag-naming-principle.md`.)
 
-**Job model (builder 2026-10-23):** boot hook §JOB MODEL. One job in hand per terminal, owner carries it plan → close; model per job. The rb-plans / es-builds split is retired (why: `docs/MODEL_HIERARCHY.md` §Hierarchy status).
+**Job model (builder 2026-10-23):** `CLAUDE.md` §Jobs. One job in hand per terminal, owner carries it plan → close; model per job. The rb-plans / es-builds split is retired (why: `docs/MODEL_HIERARCHY.md` §Hierarchy status).
 
 ## Seats
 
 | Seat | What it is | Rules that govern the open job |
 |------|-----------|-------------------------------|
-| **research-build (rb)** | builder terminal — one job at a time, any type | this file for plan/research/doc jobs; `.claude/rules/engine.md` + engine-sheet `TERMINAL.md` §Authority for engine jobs |
+| **research-build (rb)** | builder terminal — one job at a time, any type | this file for plan/research/doc jobs; `.claude/rules/engine.md` + `CLAUDE.md` §Jobs for engine jobs |
 | **engine-sheet (es)** | builder terminal — one job at a time, any type | same |
 | **civic** (cron-only) | `cron-civic-run.js` — Mayor, factions, projects, Clerk | `.claude/rules/civic.md`; tuning is a job at either terminal |
 | **media** (cron-only) | `cron-desk-run.js` — desk reporters, grading, print | `.claude/rules/newsroom.md`; tuning is a job at either terminal |

@@ -73,6 +73,8 @@ Nothing else. Rules, identity, terminal files must not state the same thing mult
 
 ## Changelog
 
+- 2026-10-28 (engine-sheet) — Speeds were inverted: Supermemory is the fast query (crons), NotebookLM the slow prose one. CLAUDE.md, AGENTS.md, pipeline.93 reason trued.
+
 - 2026-10-28 (engine-sheet) — Corrected: NotebookLM holds the same canon (fast prose; crons query it), Supermemory is sim/build memory. pipeline.93 withdrawn (wontfix); CLAUDE.md + AGENTS.md canon lines trued.
 
 - 2026-10-28 (engine-sheet) — Builder ruling: canon = whatever is ingested to Supermemory `bay-tribune`; NotebookLM is his workspace. CLAUDE.md + AGENTS.md trued. Skills still checking canon via `notebooklmCanonSearch.js` → pipeline.93.

@@ -4,7 +4,7 @@
 
 **NEXT[engine-sheet]:** engine.270 live-observing: read Sat 10-31 16:00 attach run, C114 D1/D2 build. Landed+pushed the 40-commit stack 10-28 (rb/codex/mine). Builder said he is stepping back; build nothing new without his word. Awaiting his yes to remove 3 puppet strings ('angle is fixed', slice Angle/Hook, writer-frame rulebook). Tonight: C113 grades, two-drafts cost.
 
-**NEXT[research-build]:** pipeline.89 in-progress: read tool traces on first runs (Tue Luis/Rachel/Angela/Tamsin, Wed Jax+Ines, Thu Graye, Mon Carmen/Lila/Trevor). S611 close: CLAUDE.md and .claude/terminals/research-build/TERMINAL.md were deleted by Mike via /bin/rm, uncommitted; restore with git checkout before any commit touches them. pipeline.90 COSTS tab live.
+**NEXT[research-build]:** pipeline.89 in-progress: read tool traces on first runs (Tue Luis/Rachel/Angela/Tamsin, Wed Jax+Ines, Thu Graye, Mon Carmen/Lila/Trevor). CLAUDE.md and TERMINAL.md deleted by Mike via /bin/rm, uncommitted; restore before any commit touches them. (claude-mem: S611 close)
 **NEXT[kimi]:** OUT for the week (usage limit 2026-10-03). Nothing queued; its civic.38 renew-move check moved to codex 2026-10-04.
 
 **NEXT[codex]:** Verify board comparator/config/history export gaps per the same plan §Task 4; separate counter threshold-rounding defect in §Health numerator amendment.

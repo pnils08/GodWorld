@@ -173,7 +173,7 @@ function splitPieces(text, defaultCycle) {
         if (cluster.length && (gap > 1 || cluster.length >= 3 || last - k > 4)) break;
         cluster.push(k); last = k;
       }
-      pick = cluster.length ? cluster[cluster.length - 1] : above[0];
+      pick = cluster.length ? cluster[cluster.length - 1] : (plain(above[0]) ? above[0] : null); // a paragraph above the byline is not a headline
     }
     if (pick != null) { m.title = strip(lines[pick]); m.titleLine = pick; }
   }
@@ -370,10 +370,13 @@ function build() {
     return new Set((JSON.parse(fs.readFileSync(p, 'utf8')).articles || []).filter(a => a.verdict === 'canon-violation').map(a => a.stem));
   })());
   const staged = [];
-  if (fs.existsSync(STAGED)) for (const f of fs.readdirSync(STAGED).filter(n => n.endsWith('.staged.json')).sort()) {
+  // a same-day rerun lands beside the first filing as `<base>.staged-HHMM.json`; its published-set stem is `<base>-HHMM` (pipeline.78)
+  const STAGED_FILE = /^(.*)\.staged(?:-(\d{3,4}))?\.json$/;
+  if (fs.existsSync(STAGED)) for (const f of fs.readdirSync(STAGED).filter(n => STAGED_FILE.test(n)).sort()) {
     const s = JSON.parse(fs.readFileSync(path.join(STAGED, f), 'utf8'));
-    const stem = f.replace(/\.staged\.json$/, '');
-    const mdRel = 'output/cron-compare/staged/' + stem + '.staged.md';
+    const sm = STAGED_FILE.exec(f);
+    const stem = sm[2] ? sm[1] + '-' + sm[2] : sm[1];
+    const mdRel = 'output/cron-compare/staged/' + f.replace(/\.json$/, '.md');
     if (!fs.existsSync(path.join(ROOT, mdRel))) continue;
     const md = read(mdRel);
     let names = [];
@@ -412,6 +415,14 @@ function build() {
   // finish: desk, POPID by name, citizens by name scan
   for (const r of out) {
     r.desk = r.bylineDesk ? r.bylineDesk.replace(/^Bay Tribune\s*/i, '').trim() || r.bylineDesk : (r.desk || (r.byline && REPORTER_DESK[r.byline.toLowerCase()]) || null);
+  }
+  // one spelling per desk: the edition path keeps the byline's own case, the staged path title-cases, so "Undocked-digest" and
+  // "Undocked-Digest" split one desk in a case-sensitive filter. The most common spelling wins (first seen on a tie).
+  const deskSpell = new Map();
+  for (const r of out) if (r.desk) { const k = r.desk.toLowerCase(), m = deskSpell.get(k) || new Map(); m.set(r.desk, (m.get(r.desk) || 0) + 1); deskSpell.set(k, m); }
+  const deskPick = new Map([...deskSpell].map(([k, m]) => [k, [...m].sort((x, y) => y[1] - x[1])[0][0]]));
+  for (const r of out) {
+    if (r.desk) r.desk = deskPick.get(r.desk.toLowerCase());
     r.bylineName = r.byline ? (ALIAS[r.byline.toLowerCase()] || r.byline) : null;
     r.bylinePopid = popidFor(r.byline, byName);
     const seen = new Map();

@@ -46,3 +46,7 @@ Correct the plan's Eric timeline and replace the universal belt/scoring claim wi
 ## 2026-10-29 status correction
 
 While this review was being committed, research-build landed `873bc390`, reverting v3 to `UNDOCKED-BRIEF/2` after the builder ruled against further coaching of pilots (`scripts/undockedMissionBrief.js:38,68`; `docs/plans/2026-08-07-spacemolt-game-show.md:329`). The findings above review historical commit `b1402ec3`; the proposed v3 repair is no longer active, and the gate above is not a request to reinstate it. The remaining actionable review finding is the false causal attribution in the still-present plan line `:328`: Eric's saved credit and jump receipts establish that his 1,170 credits preceded travel to Sirius. Any future brief change needs a fresh builder decision.
+
+## 2026-10-29 plan correction follow-up
+
+Research-build then landed `d0131791`, marking the original plan lines wrong in part and adding the correct paid-before-jump finding at `docs/plans/2026-08-07-spacemolt-game-show.md:328-330`; this supersedes the preceding note's claim that the false attribution remains uncorrected. One sentence in the new correction still needs repair: line 330 says “accepted and completed Local Sector Survey,” but the saved event is `mission.objective_completed` with `objectives_remaining: 2` (`output/spacemolt-show/staged/archive/undocked-pop00597-2026-10-16T01-30-04.json:164-176`). The pilot's handoff also calls that mission active with 1/3 systems visited (`:279-283`). It produced none of the 1,170 credited in this episode.

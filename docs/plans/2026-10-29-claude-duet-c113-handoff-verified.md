@@ -25,6 +25,8 @@ pointers:
 
 **Builder's words (2026-10-29, on the Riley findings):** "Yeah a lot of that is the old codex build that’s still firing"
 
+**Builder's words (2026-10-29, after the inventory):** "I know these have nothing to do with GodWorld at this point, some of it was going to be looked into as if useful but honestly it’s just firing rn"
+
 ## What the duet is
 
 A Claude instance in the phone app with the Drive, Sheets and Supermemory connectors and no local disk or droplet. It sees live sheet and Drive state this seat cannot; it reads repo code through a read-only clone of the public repo. Its handoff is a strong lead list, not a verified one: this seat checked it against the repo, the C112/C113 execution logs and the local beat dumps on 2026-10-29. Three claims were wrong (§Reviews reconciled).
@@ -133,3 +135,4 @@ Droplet check: none of `scripts/ lib/ phase*/ utilities/ dashboard/` references 
 - 2026-10-29 (research-build) — Created from the duet handoff; verified against repo, logs and local dumps; W1-W3 recorded.
 - 2026-10-29 (research-build) — Feed rewrite confirmed live (P1); builder: the Riley layer is largely the old codex build still firing, T9 reframed as its retire-or-keep table.
 - 2026-10-29 (research-build) — T9 inventory table built from the riley/ tree (Appendix); three files read the live sim sheet, none writes it; autoRegisterCitizen issues random POP ids to a side sheet.
+- 2026-10-29 (research-build) — Builder: the Riley layer is unrelated to GodWorld and just firing; nothing in it is wanted. Removals still his to run; no task here blocks on them.

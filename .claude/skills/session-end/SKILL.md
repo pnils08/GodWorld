@@ -14,7 +14,7 @@ disable-model-invocation: true
 
 **Purpose:** Leave enough of yourself behind that the next version of you can find her way back.
 
-**Two close modes (S226).** Pick by next-session cadence, not by how much work shipped. Canonical pattern lives in `.claude/terminals/research-build/TERMINAL.md` §Session Close.
+**Two close modes (S226).** Pick by next-session cadence, not by how much work shipped. A session is not a day: bump `Day` only when the date actually changed.
 
 **This file is now the sole canonical source for close mechanics — TERMINAL.md files hold only a short pointer here (HOUSE-PROCESS GATE, 2026-08-15: close ritual is boot-time-loaded process scaffolding, not something worth paying for every session whether or not it's used).**
 
@@ -79,11 +79,11 @@ Three sub-actions:
 node scripts/sessionEndMechanical.js --terminal=<name> > output/session_end_run.txt 2>&1; echo "exit=$?"
 ```
 
-Redirect it — the run prints ~45 lines; read the file for the lint and stack-check lines only. A ROLLOUT lint row is fixed in this close, not carried (item cell ≤ 280 chars).
+Redirect it — the run prints ~45 lines; read the file for the lint and stack-check lines only. A ROLLOUT lint row is fixed in this close, not carried (a touched row ≤ 160 chars).
 
 Wraps: **session summary → Supermemory (best-effort S283 — mirrors claude-mem's session summary to `session-logs` ONLY (S341 — `sl-*` is hand-write; the shared hand-write container is `sl-godworld` as of S372); zero LLM calls, idempotent, never blocks a close)** → `auditPlanTagDrift` (informational — drift never fails close) → ROLLOUT conformance lint (informational) → **worked rows have their plan updated** (FAILS the close: every row named in this terminal's commit subjects since the session-start stamp needs its plan touched in the same window) → cross-terminal git stack check (read-only report) → `pm2 restart`.
 
-Retired sub-steps, so nobody goes looking for them: `minimalHandoffGuard` (S298, Mike-direct — shape/length caps are model judgment now), `rotateJournalRecent` + JOURNAL content-quality (S300 journal freeze), `writeShippedBlock` (ADR-0009 §loop-tightening — the carried set is hand-written in Step 2), `rolloutTriage` (S235).
+Retired sub-steps, so nobody goes looking for them: `minimalHandoffGuard` (S298; shape is now gated at pre-commit instead, 2026-10-28), `rotateJournalRecent` + JOURNAL content-quality (S300 journal freeze), `writeShippedBlock` (ADR-0009 §loop-tightening — the carried set is hand-written in Step 2), `rolloutTriage` (S235).
 
 **Order invariant:** run Step 2 (SESSION_CONTEXT PIN + NEXT + ROLLOUT) before this script, so the summary bridge and the stack check see the session's real final state.
 
@@ -91,6 +91,7 @@ Retired sub-steps, so nobody goes looking for them: `minimalHandoffGuard` (S298,
 
 **Failure semantics:**
 - Fatal (exit 1, aborts session close): SESSION_HISTORY rotation failure.
+- Fails the close (exit 1, steps still run): a row worked this session with no plan update; a git error in that check.
 - Informational (prints under `does not fail close` header, continues): `auditPlanTagDrift` drift, ROLLOUT conformance lint.
 - Tolerant (prints warning, continues): `pm2 restart` failure, cross-terminal stack check error, session-summary bridge error.
 

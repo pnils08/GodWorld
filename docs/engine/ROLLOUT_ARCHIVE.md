@@ -975,6 +975,17 @@ This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) �
 
 ## S614 Archive Pass (2026-10-29, engine-sheet) — post-S613 closures sweep
 
+4 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 3 engine.* + 1 pipeline.*.
+
+- **engine.41** [engine-sheet] — Retired 2026-10-28: Wire 1b's target (v3 seed-deck path) retired at v4.0 and its consumer (buildDeskPackets) cut 2026-09-28; the v4 deck's Citizens column already names engine-touched citizens. Wire 3a cut 2026-09-28, 3b deck-dead **State at archive:** wontfix. Pointer: [[../plans/2026-06-24-engine-output-canon-coverage]]
+- **engine.202** [[[../plans/2026-09-11-sports-as-a-lived-system]] Task 1] — Folded into engine.204 2026-10-28: its remaining items (trigger-word hooks, dashboard WeekRecord input, 3c) sit inside the builder's 2026-10-22 engine.204 ruling; one build, one row **State at archive:** wontfix. Pointer: 
+- **pipeline.93** [engine-sheet] — Withdrawn same night: premise wrong — NotebookLM holds the same canon as Supermemory (slow, prose answers); those four skills are the legacy manual media run; nothing to repoint **State at archive:** wontfix. Pointer: [[../plans/2026-08-29-boot-doc-consolidation]] changelog 2026-10-28
+- **engine.321** [[[../plans/2026-07-27-employment-living-system]] §Open questions] — Is a tracked mint business growth (its headcount signal; 2+ at one business = BUSINESS_EXPANSION)? Builder 2026-10-27: "a citizen added to a buisness can result in a growth" — stands as built, no change **State at archive:** wontfix. Pointer: 
+
+This pass: 4 rows — engine.41 + engine.202 + pipeline.93 + engine.321. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
+## S614 Archive Pass (2026-10-29, engine-sheet) — post-S613 closures sweep
+
 1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 infrastructure.*.
 
 - **infrastructure.14** [research-build] — Nine /code-review findings on the C113 tree, ranked, each verified in code before any fix: engine.318 double-archive, INIT-010 stale next-action, suffixed staged reruns unindexed, engineFiredAt from mtimes, sweep swallows errors, title/desk, test log pollution. Sonnet **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-28-code-review-dirty-tree-findings]]

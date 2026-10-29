@@ -63,7 +63,7 @@ Three sub-actions:
 
 3. **Update ROLLOUT_PLAN.md** — flip closed rows to `done-pending-archive`; move fully-closed clusters to `ROLLOUT_ARCHIVE.md`. ROLLOUT is canonical for what's open.
 
-   **Archive sweep is automatic:** `sessionEndMechanical.js` sweeps every `done-pending-archive` row to `ROLLOUT_ARCHIVE.md` at each close, then regenerates ROLLOUT's plans-in-motion block, then lints (overdue waits named). Closing a row = flip it to `done-pending-archive` with its evidence in the item cell; the close does the rest (builder 2026-10-07).
+   **Archive sweep is automatic:** `sessionEndMechanical.js` sweeps every `done-pending-archive` row to `ROLLOUT_ARCHIVE.md` at each close, then lints (overdue waits named). Closing a row = flip it to `done-pending-archive` with its evidence in the item cell; the close does the rest (builder 2026-10-07).
 
 **Optional model sub-actions:**
 

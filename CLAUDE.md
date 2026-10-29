@@ -33,7 +33,7 @@ A doc, memory, summary, audit or NEXT line is a claim. Before building on one, c
 | What code does, who calls it | the code; `grep -rn "fn(" phase* utilities scripts lib dashboard`; one function / `S.` field / tab: `engine-wiring` agent |
 | What a pipeline produced | `output/` artifacts |
 | What was decided before | `node scripts/brainSearch.js "<query>"` — a `rule` hit is current law; `brain` / `mem` hits are history |
-| Open work | the in-progress row in `docs/engine/ROLLOUT_PLAN.md`, then its plan |
+| Open work | `docs/engine/ROLLOUT_PLAN.md` (every job, one line each), then the row's plan |
 | What is deployed | `docs/reference/DEPLOY_HISTORY.md` §PROD |
 | Does the whole path work | run the real entry point against live data |
 
@@ -41,7 +41,7 @@ A doc, memory, summary, audit or NEXT line is a claim. Before building on one, c
 
 Every session, before work:
 
-1. Job: `grep -n "| in-progress | <terminal> |" docs/engine/ROLLOUT_PLAN.md`. None → claim one row from §4 Queue or §1 and set its Terminal to this terminal.
+1. Job: the row id the NEXT line names → its row in `docs/engine/ROLLOUT_PLAN.md` → its plan. No row named → ask Mike; a new row is claimed only on his word.
 2. Is the NEXT line still true: the commits it names are in `git log`; the plan's task status matches the row.
 3. Loose state: `git log origin/main..HEAD --oneline` and `git status --short`.
 4. Engine job: the PROD deployment in the PIN matches the top of DEPLOY_HISTORY §PROD.

@@ -7,7 +7,7 @@
 **Working order (builder 2026-10-22, "work through this list how you lay it out"):** ship what is already paid for (finished, reviewed code) first; then clear the builder's decisions; then builds ranked by "does it give the citizens a life", grouped by the file they touch; plumbing only when a build already has the file open. Nothing waits on the live fire (TERMINAL.md: the bench is the gate; a bench-proven change goes live the same session).
 
 <!-- generated: plans in motion (docLoopStatus.js --plans --write; do not hand-edit) -->
-**Plans in motion (52)** — each plan, its rows and the state each is in:
+**Plans in motion (51)** — each plan, its rows and the state each is in:
 
 - [[../plans/2026-10-11-media-extension]]: pipeline.77 needs-info, pipeline.85 live-observing, pipeline.89 in-progress, pipeline.83 live-observing, pipeline.74 live-observing, pipeline.75 live-observing, pipeline.91 ready, pipeline.88 needs-info, pipeline.80 live-observing
 - [[../plans/2026-10-10-engine-214-mood-per-hood]]: engine.301 live-observing, engine.214 ready, engine.308 live-observing, engine.287 live-observing, engine.288 live-observing, engine.289 blocked, engine.309 needs-info, engine.311 needs-info
@@ -22,7 +22,6 @@
 - [[../plans/2026-10-04-school-board]]: civic.43 needs-info
 - [[../plans/2026-10-20-hood-character-standing]]: pipeline.71 needs-info
 - [[../plans/2026-10-08-engine-286-game-of-life-events]]: engine.286 live-observing
-- [[../reference/DEPLOY_HISTORY]]: engine.303 needs-info
 - [[../plans/2026-10-19-bay-tribune-master-index]]: pipeline.84 live-observing
 - [[../plans/2026-07-31-citizen-memory-perception]]: engine.94 live-observing
 - [[../plans/2026-10-06-supermemory-v5-migration]]: infrastructure.10 blocked
@@ -79,7 +78,6 @@
 | pipeline.71 | Each hood read against its own canon: every hood's INSTITUTIONS character is its own baseline and its own numbers say whether it lives up to it (builder 2026-10-20; the one-axis tech-boom design is superseded). Rewrite with the builder: which numbers express each hood's character | needs-info | research-build | [[../plans/2026-10-20-hood-character-standing]] |
 | engine.286 | Life-event dice LIVE (`63754ca8`); forced sale, own-record wake, scoreboard live; C112 read 2026-10-25 in the plan. Builder call asked 2026-10-28: name the game (N31/N32) before wake-as-turn builds | live-observing | research-build | [[../plans/2026-10-08-engine-286-game-of-life-events]] |
 | pipeline.77 | Reward loop watch complete: all five seats 4/4 at C113 (Carmen, Luis, Marbury, Noah, Tanya; Rhea pass each). Mechanism 2 (two drafts, judge picks) is the builder's cost call; engine-sheet owes the per-piece cost numbers | needs-info | engine-sheet | [[../plans/2026-10-11-media-extension]] |
-| engine.303 | Compression/archive outside the Cycle (builder 2026-10-19). Re-read 2026-10-28: the 151 s was one bench Cycle; live Phase9 compression is 0.5-1.4 s, the live cost is Phase11-MaintainLifeHistoryLog (34-46 s). Builder call: keep, move to that phase, or drop | needs-info | engine-sheet | [[../reference/DEPLOY_HISTORY]] §SANDBOX 1004 @57; `output/execution_log_c113.txt:277` |
 
 ## 2. Waiting on a fire — dated or organic
 
@@ -162,7 +160,7 @@
 | engine.289 | Absolute CULTURE gates (`wCulture >= 3 / >= 6`, `applyCityDynamics.js`) were written while seed input was dead. C113 had none (first adoption), so C114 Sun 2026-11-01 is their first input: re-read, then keep, re-tier, or go relative (builder call) | blocked | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] §Tasks 17/18/19 — mechanism → Bench results; `output/engine_review_c113.md` §C113 re-reads |
 | engine.264 | The maker's hand — builder intake tab the sim never sees; after engine.94 (builder 2026-09-29). Plan verdict is needs-info (sim call: how visible is the builder's hand) — row trued 2026-10-16 | needs-info | research-build | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
 | engine.285 | Organic: Phase-11 + executor kill hazards — all LIVE @140/@141; item 4 waits on engine.95 receipts | live-observing | engine-sheet | `docs/research/2026-10-08-codex-engine95-design.md` §7; [[../research/2026-10-16-codex-engine285-hazards2-6-review]] |
-| engine.20d | Initiative seeds on movement only in buildWorldSummary's civic lane. Released from the engine.270 wait 2026-10-08; spec only, no code yet. Builder asked 2026-10-28 whether today's every-row seed is scripted under the 2026-10-25 no-puppeting rule (sets priority, not the build) | ready | engine-sheet | [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5 |
+| engine.20d | Initiative seeds on movement only in buildWorldSummary's civic lane — builder ruled 2026-10-28: "Just when it moves". Spec: plan §Task 5 item 2; the every-row push is `scripts/buildWorldSummary.js:1243` | ready | engine-sheet | [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5 |
 | engine.280 | Fandom follow-ups: four lines (Sports-Soured / Lifted / Gutted / Attended) wait on upstream signals: a per-piece tone at post-publish, a roster negative flag, an ECL attendance tag. §2.9 core shipped 2026-10-08; C10 upset sign shipped (38f19986), read live C113 | blocked | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §2.9 |
 | engine.104 | Mint economy: arrivals born right. Mint paths take job titles from lists outside the Economic_Parameters job table; revision owes legacy mutating-path disposition + D2 proof (agy 2026-10-17) | ready | research-build | [[../plans/2026-08-10-economy-native-rebuild]] §Read 2026-10-16 |
 | engine.248 | Faith orgs get a sim role. Membership LIVE since S325 (processFaithJoins_, MembersList). Open: membership-gated dial nudge (today any faith line nudges), member faith-life events, faith chaos car; the 16 leaders not in MembersList. Pointer says design first | ready | engine-sheet | [[../research/2026-09-10-kimi-faith-lane-routing]] |

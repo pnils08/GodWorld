@@ -574,6 +574,7 @@ Tracking for future adoption, not building. Dropped on the move: the Drive OAuth
 | **Blender MCP connector** (Anthropic Apr 28 2026) | Chaos-cars plan (`plans/2026-05-07-chaos-cars-engine`) ever wants visual scene-render hooks for typed municipal-vehicle events — Blender MCP + Python API is the path. Anthropic donated to Blender to support continued Python API development. Long-tail / idea-park. Source: S207 tech reading. |
 
 ---
+- **engine.303** — Compression and archive outside the Cycle run. Was `needs-info`, owner engine-sheet. Builder 2026-10-28: "The compression is work when we get closer to the time limits." Trigger: a live fire's total nears the 330 s wall budget (C113 205.9 s). Live cost today is Phase11-MaintainLifeHistoryLog (C112 45.7 s, C113 34.0 s); Phase9 compression runs 0.5–1.4 s live — the 151 s was one bench Cycle (C123). Evidence: `output/engine-sheet/2026-10-28-rollout-stale-check.json`.
 
 ## Changelog
 
@@ -582,3 +583,4 @@ Tracking for future adoption, not building. Dropped on the move: the Drive OAuth
 - 2026-10-22 — engine.98 (pets) parked from ROLLOUT on the builder's 2026-10-19 deferral (engine-sheet stale check, research-build agreed).
 - **Article name index** — promoted to a plan 2026-10-19 (builder: master Bay Tribune index + assignment-time pre-check): ROLLOUT pipeline.84, [[2026-10-19-bay-tribune-master-index]]. Entry kept as a pointer.
 - 2026-09-29 — Added §Parked ideas and external watches (research.3/5/7/8/10 moved from ROLLOUT_PLAN, which had no owning doc for them).
+- 2026-10-28 — engine.303 (compression out of the Cycle) parked from ROLLOUT on the builder's ruling: work for when fires near the time limit (engine-sheet).

@@ -139,7 +139,7 @@
 | engine.270 | Storylines keyed to engine events: Review 1 build + codex fold 2026-10-28 (D1 anomaly tag, D2 no false age, Saturday attach pass). Read the first attach run Sat 2026-10-31 16:00 and the first D1/D2 build at the C114 fire Sun 2026-11-01 | live-observing | engine-sheet | [[../plans/2026-09-28-storylines-keyed-to-engine-events]] §Review 1 build |
 | pipeline.74 | The awaited writes happened: Tanya, Noah (grok-4.3) and P Slayer wrote in the unattended C112/C113 fan-outs. Read owed: off-season label, P Slayer POPIDs, Noah model. Angle cap 1600 PROVEN (capHits 0 on 10-15/16/19) | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |
 | pipeline.75 | Tanya wrote in the unattended C112/C113 fan-outs (C113 staged, 4/4). Read owed: feed names + Notes. Deterministic write checks PROVEN in every unattended fan-out results file 10-15 → 10-19 | live-observing | engine-sheet | [[../plans/2026-10-11-media-extension]] |
-| infrastructure.14 | Nine /code-review findings on the C113 tree, ranked, each verified in code before any fix: engine.318 double-archive, INIT-010 stale next-action, suffixed staged reruns unindexed, engineFiredAt from mtimes, sweep swallows errors, title/desk, test log pollution. Sonnet | in-progress | research-build | [[../plans/2026-10-28-code-review-dirty-tree-findings]] |
+| infrastructure.14 | Nine /code-review findings on the C113 tree, ranked, each verified in code before any fix: engine.318 double-archive, INIT-010 stale next-action, suffixed staged reruns unindexed, engineFiredAt from mtimes, sweep swallows errors, title/desk, test log pollution. Sonnet | done-pending-archive | research-build | [[../plans/2026-10-28-code-review-dirty-tree-findings]] |
 
 ## 4. Queue — ruled, not started
 

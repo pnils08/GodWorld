@@ -71,4 +71,4 @@ Model: Opus for engine substrate or code across several files; Sonnet for plans,
 - Save: `npx supermemory add "<fact>" --namespace sl-godworld` — one hand-written fact per session, tagged with the terminal, before close. Never a log or diff.
 - `docs/index.md` (~40k tokens): grep it, never load it.
 - Git: commit path-specifically; control-plane files (`.claude/`, `CLAUDE.md`, `SESSION_CONTEXT.md`) need `CLAUDE_CTL=1`. Never amend — other lanes commit on this tree.
-- Close: `.claude/skills/session-end/SKILL.md`.
+- Skills in use: `/run-cycle` (its chain: pre-flight, pre-mortem, engine-review, build-world-summary) and `/session-end` (`.claude/skills/session-end/SKILL.md`). The rest stay runnable by name; the legacy manual media run (sift, deep-dispatch, city-hall-prep, write-edition) is kept for occasional use.

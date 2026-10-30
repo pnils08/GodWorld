@@ -1,0 +1,31 @@
+# engine.20d — read-only proof, 2026-10-29 22:22 CDT, engine-sheet
+## node scripts/buildWorldSummary.js 113 --dry-run (stderr; exit 0)
+[dry-run] would write to output/world_summary_c113.md
+[dry-run] would write 75939 bytes to output/desk_signal_c113.json — lanes: {"civic":49,"sports":9,"culture":23,"business":43}
+## published desk_signal_c113.json (built before engine.20d)
+civic 55 {"anomaly":19,"initiative":11,"vote":8,"civic-log":1,"ripple":16}
+## initiativeMoves per row (prior = engine_audit_c{N-1}.json)
+◇ injected env (32) from ../.config/godworld/.env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+C112
+  INIT-001 SEED LastDisburseCycle 111 → 112
+  INIT-002 SEED LastDisburseCycle 111 → 112
+  INIT-003 SEED VoteCycle — → 86; Status proposed → passed; Stage Proposed → —
+  INIT-005 SEED LastDisburseCycle 111 → 112
+  INIT-006 -
+  INIT-007 SEED ImplementationPhase operational → implementation-active
+  INIT-008 -
+  INIT-009 SEED ImplementationPhase announced → legislation-filed
+  INIT-010 SEED LastStageChangeCycle — → 112; MayoralActionCycle — → 112; VoteCycle — → 112; Status proposed → passed; ImplementationPhase announced → vote-scheduled; Stage Proposed → Funded; Outcome — → PASSED
+  INIT-011 SEED new filing
+C113
+  INIT-001 SEED LastDisburseCycle 112 → 113
+  INIT-002 SEED LastDisburseCycle 112 → 113
+  INIT-003 -
+  INIT-005 SEED LastDisburseCycle 112 → 113
+  INIT-006 -
+  INIT-007 -
+  INIT-008 -
+  INIT-009 -
+  INIT-010 SEED LastStageChangeCycle 112 → 113; ImplementationPhase vote-scheduled → operational; Stage Funded → Standing
+  INIT-011 -
+  INIT-012 SEED new filing

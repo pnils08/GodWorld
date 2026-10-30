@@ -1185,31 +1185,29 @@ function handleEntry(h) {
 }
 
 // engine.20d (builder 2026-10-28 "Just when it moves"; 2026-10-29 a new filing,
-// a status flip, a renewal and an opening count too). A clock moves when it
-// changed against last Cycle's snapshot — the civic chain stamps its own Cycle
-// after that snapshot is taken, so an equality test alone misses its votes and
-// filings — or when it lands on this Cycle (a scheduled vote or opening
-// arriving). LastWorkCycle, NextActionCycle and MilestoneNotes are the chain's
+// a status flip, a renewal and an opening count too). Movement is a change
+// against last Cycle's snapshot — the civic chain stamps its own Cycle after
+// that snapshot is taken, so a "clock == this Cycle" test misses its votes and
+// filings. A forward clock reaching this Cycle is a due date, not an event:
+// a held vote shows in Status / Outcome / RenewalOutcome (a quorum-delayed
+// renewal keeps its RenewalVoteCycle and writes RenewalOutcome a week later),
+// an opening shows as the phase going operational (a stalled build never
+// opens). LastWorkCycle, NextActionCycle and MilestoneNotes are the chain's
 // weekly tick, never movement.
 const INITIATIVE_MOVE_CLOCKS = ['LastStageChangeCycle', 'LastDisburseCycle', 'MayoralActionCycle',
   'VoteCycle', 'OverrideVoteCycle', 'ProposedCycle', 'RenewalVoteCycle', 'RenewalCreditCycle', 'OpensCycle'];
-const INITIATIVE_MOVE_STATES = ['Status', 'ImplementationPhase', 'Stage'];
+const INITIATIVE_MOVE_STATES = ['Status', 'ImplementationPhase', 'Stage', 'Outcome', 'OverrideOutcome', 'RenewalOutcome'];
 
 // What moved on one Initiative_Tracker row ([] = nothing). prior: last Cycle's
-// row; null = the row is new this week; undefined = no prior snapshot to read.
-function initiativeMoves(it, prior, cycle) {
+// row; null = the row is new this week; undefined = no prior snapshot, so
+// movement cannot be read and the row seeds as it did before the cut.
+function initiativeMoves(it, prior) {
   const v = x => (x === undefined || x === null) ? '' : String(x).trim();
+  if (prior === undefined) return ['movement unread (no prior snapshot)'];
   if (prior === null) return ['new filing'];
   const moves = [];
-  for (const col of INITIATIVE_MOVE_CLOCKS) {
-    const now = v(it[col]);
-    if (parseInt(now, 10) === Number(cycle)) moves.push(`${col} ${now}`);
-    else if (prior && now !== v(prior[col])) moves.push(`${col} ${v(prior[col]) || '—'} → ${now || '—'}`);
-  }
-  if (prior) {
-    for (const col of INITIATIVE_MOVE_STATES) {
-      if (v(it[col]) !== v(prior[col])) moves.push(`${col} ${v(prior[col]) || '—'} → ${v(it[col]) || '—'}`);
-    }
+  for (const col of INITIATIVE_MOVE_CLOCKS.concat(INITIATIVE_MOVE_STATES)) {
+    if (v(it[col]) !== v(prior[col])) moves.push(`${col} ${v(prior[col]) || '—'} → ${v(it[col]) || '—'}`);
   }
   return moves;
 }
@@ -1293,11 +1291,11 @@ function emitDeskSignal(cycle, data) {
   const priorById = priorRows ? new Map(priorRows.map(r => [String(r.InitiativeID || '').trim(), r])) : null;
   if (initiatives.length && !priorById) {
     const why = priorInitiatives && priorInitiatives.why ? ` (${priorInitiatives.why})` : '';
-    notes.push(`no engine_audit_c${cycle - 1} Initiative_Tracker snapshot${why} — initiative movement read from this Cycle's clocks only; status, phase and new filings unread`);
+    notes.push(`no engine_audit_c${cycle - 1} Initiative_Tracker snapshot${why} — initiative movement unread; every initiative seeds this Cycle`);
   }
   for (const it of initiatives) {
     const prior = priorById ? (priorById.get(String(it.InitiativeID || '').trim()) || null) : undefined;
-    if (initiativeMoves(it, prior, cycle).length) {
+    if (initiativeMoves(it, prior).length) {
       lanes.civic.push({
         kind: 'initiative',
         ref: `Initiative_Tracker (InitiativeID ${it.InitiativeID}); snapshot: engine_audit_c${cycle}.json snapshots.Initiative_Tracker`

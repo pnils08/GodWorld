@@ -548,12 +548,12 @@ console.log('\nTest 11d: emitDeskSignal (synthetic data)');
   const sig = helper.emitDeskSignal(100, data);
   const flat = JSON.stringify(sig);
 
-  // Lane counts: civic = anomaly + 1 vote + civic-log + 1 ripple = 4 (engine.20d:
-  // neither initiative moved on C100 and there is no prior snapshot, so neither
-  // seeds); sports = 1 feed + 1 ripple = 2; culture = 1 hood + 4 fixed pointers
-  // + 1 ripple = 6; business = 1 unmapped ripple.
-  assertEqual('civic lane count', sig.lanes.civic.length, 4);
-  assertEqual('engine.20d: no initiative seed without movement', sig.lanes.civic.filter(e => e.kind === 'initiative').length, 0);
+  // Lane counts: civic = anomaly + 2 initiatives + 1 vote + civic-log + 1 ripple = 6
+  // (engine.20d: no prior snapshot here, so movement is unread and both seed);
+  // sports = 1 feed + 1 ripple = 2; culture = 1 hood + 4 fixed pointers + 1 ripple = 6;
+  // business = 1 unmapped ripple.
+  assertEqual('civic lane count', sig.lanes.civic.length, 6);
+  assertEqual('engine.20d: no prior snapshot → every initiative seeds', sig.lanes.civic.filter(e => e.kind === 'initiative').length, 2);
   assert('engine.20d: missing prior snapshot is noted', sig.meta.notes.some(n => n.includes('no engine_audit_c99 Initiative_Tracker snapshot')));
   assertEqual('sports lane count', sig.lanes.sports.length, 2);
   assertEqual('culture lane count', sig.lanes.culture.length, 6);
@@ -676,16 +676,29 @@ console.log('\nTest 11e2: initiative seeds on movement only (engine.20d)');
     seeded(signal([row({ VoteCycle: '99' })], [base])), ['INIT-901']);
   assertEqual('status flip with no clock → seed', seeded(signal([row({ Status: 'vetoed' })], [base])), ['INIT-901']);
   assertEqual('phase change → seed', seeded(signal([row({ ImplementationPhase: 'operational' })], [base])), ['INIT-901']);
-  assertEqual('opening day (clock set weeks ago) → seed',
-    seeded(signal([row({ OpensCycle: '100' })], [row({ OpensCycle: '100' })])), ['INIT-901']);
+  // Opening day is the build going operational, not the date arriving (codex F3:
+  // a stalled build keeps its OpensCycle and never opens).
+  const building = row({ Stage: 'Standing', ImplementationPhase: 'construction-active', OpensCycle: '100' });
+  assertEqual('opening day (construction → operational) → seed',
+    seeded(signal([Object.assign({}, building, { ImplementationPhase: 'operational' })], [building])), ['INIT-901']);
+  const stalled = Object.assign({}, building, { ImplementationPhase: 'stalled' });
+  assertEqual('stalled build on its due Cycle, nothing changed → no seed', seeded(signal([stalled], [stalled])), []);
+  assertEqual('vote date reached, nothing held → no seed',
+    seeded(signal([row({ VoteCycle: '100', Status: 'pending-vote' })], [row({ VoteCycle: '100', Status: 'pending-vote' })])), []);
+  // A quorum-delayed renewal keeps RenewalVoteCycle and writes RenewalOutcome at the next fire (codex F1).
+  const staged = row({ RenewalVoteCycle: '99', RenewalAmount: '500000', RenewalOutcome: '' });
+  assertEqual('renewal delayed, still pending → no seed', seeded(signal([staged], [staged])), []);
+  assertEqual('delayed renewal resolved a week late → seed',
+    seeded(signal([Object.assign({}, staged, { RenewalOutcome: 'RENEWED 6-3 C100' })], [staged])), ['INIT-901']);
   assertEqual('renewal credited → seed', seeded(signal([row({ RenewalCreditCycle: '100' })], [base])), ['INIT-901']);
   assertEqual('row absent from last Cycle → seed (new filing)',
     seeded(signal([base, row({ InitiativeID: 'INIT-902', ProposedCycle: '99' })], [base])), ['INIT-902']);
 
-  // No prior snapshot: this Cycle's clocks still read; status/phase cannot.
-  const s2 = signal([row({ LastDisburseCycle: '100' }), row({ InitiativeID: 'INIT-903', ImplementationPhase: 'operational' })], undefined);
-  assertEqual('no prior: a clock on the Cycle still seeds, a phase change is unread', seeded(s2), ['INIT-901']);
-  assert('no prior: noted', s2.meta.notes.some(n => n.includes('no engine_audit_c99 Initiative_Tracker snapshot')));
+  // No prior snapshot: movement cannot be read, so nothing is dropped — every row
+  // seeds as before the cut (codex F2: a new filing or status flip must not vanish).
+  const s2 = signal([base, row({ InitiativeID: 'INIT-903', ProposedCycle: '99', Status: 'proposed' })], undefined);
+  assertEqual('no prior: every initiative seeds', seeded(s2), ['INIT-901', 'INIT-903']);
+  assert('no prior: noted', s2.meta.notes.some(n => n.includes('no engine_audit_c99 Initiative_Tracker snapshot') && n.includes('every initiative seeds')));
   const s3 = helper.emitDeskSignal(100, {
     auditJson: { snapshots: { Initiative_Tracker: [base] } },
     priorInitiatives: { priorCycle: 99, rows: null, why: 'unreadable: Unexpected token' },
@@ -695,10 +708,11 @@ console.log('\nTest 11e2: initiative seeds on movement only (engine.20d)');
   assert('prior present: no note', !signal([base], [base]).meta.notes.some(n => n.includes('Initiative_Tracker snapshot')));
 
   assertEqual('initiativeMoves names what moved',
-    helper.initiativeMoves(row({ LastDisburseCycle: '100', Status: 'vetoed' }), base, 100),
-    ['LastDisburseCycle 100', 'Status passed → vetoed']);
-  assertEqual('initiativeMoves: new row', helper.initiativeMoves(base, null, 100), ['new filing']);
-  assertEqual('initiativeMoves: numeric cycle cells compare as cycles', helper.initiativeMoves(row({ LastDisburseCycle: 100 }), base, '100'), ['LastDisburseCycle 100']);
+    helper.initiativeMoves(row({ LastDisburseCycle: '100', Status: 'vetoed' }), base),
+    ['LastDisburseCycle 99 → 100', 'Status passed → vetoed']);
+  assertEqual('initiativeMoves: new row', helper.initiativeMoves(base, null), ['new filing']);
+  assertEqual('initiativeMoves: no prior snapshot', helper.initiativeMoves(base, undefined), ['movement unread (no prior snapshot)']);
+  assertEqual('initiativeMoves: a numeric cell equal to its string prior is no move', helper.initiativeMoves(row({ LastDisburseCycle: 99 }), base), []);
   assertEqual('loadPriorInitiatives: no file → rows null with reason', helper.loadPriorInitiatives(1), { priorCycle: 0, rows: null, why: 'file not found' });
 }
 

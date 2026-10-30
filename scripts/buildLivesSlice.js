@@ -17,6 +17,8 @@
  *   The person's thread (beside every passage): their hospital stay in full, their other log lines
  *   in the dump window, what Lives already wrote them, and the Tribune pieces that named them
  *   (archive/ARTICLE_INDEX.jsonl, gate-passed only) — the record read in order, not the one event.
+ *   Their own words this Cycle (output/citizen_pages/index.jsonl): pipeline.97 (builder 2026-10-30) — every
+ *   page the collector admits, interviews, exchanges, debates and the questions they carry, not only the wakes.
  * Daily, not once a Cycle: the Cycle's events are stamped at the Sunday fire and she runs
  * Mon–Fri, so each day takes the next uncovered batch and marks it in the covered list
  * (output/cron-compare/lives_covered.json, keyed by event id — the Carmen/Luis failure was
@@ -73,6 +75,27 @@ const KIND_WORD = { death: 'the death in the house', hospital: 'the hospital sta
 const kindWord = k => KIND_WORD[String(k || '').toLowerCase()] || String(k || 'an event');
 const isMedia = p => !!p && (String(p.ClockMode || '').trim().toUpperCase() === 'MEDIA' || /^y/i.test(String(p['MED (y/n)'] || p.MED || '').trim()));
 const SELF_SLOTS = /^(morning|midday|afternoon|evening|night|work)$/;
+// pipeline.97 (builder 2026-10-30: "everything should be available to the media, I think Ines and Tamsin should have
+// access to all this"): Lives and Voices read every page the collector admits (scanCitizenPages SLOT_RE) — the
+// interview replies, exchanges, debates, talks and the questions a citizen carries — through citizenText, so a
+// TENSION[c<N>]: tag never reads as their words. One switch for both seats; held off until codex review.
+// The collector is required lazily: it loads the env, which the switch-off path never needed.
+const EVERY_PAGE = false;
+const scan = () => require('./scanCitizenPages');
+const VOICES_SLOTS = /^(morning|midday|afternoon|evening|night|work|CONVO)$/;
+function pageSlot(slot, seat, every = EVERY_PAGE) {
+  const s = String(slot || '');
+  return every ? scan().SLOT_RE.test(s) : (seat === 'voices' ? VOICES_SLOTS : SELF_SLOTS).test(s);
+}
+function pageText(content, every = EVERY_PAGE) { return (every ? scan().citizenText(content) : String(content || '')).trim(); }
+// Where the words were said, as the roster and the passage name it — never the slot key.
+const SLOT_WORD = { CONVO: 'in conversation', work: 'after work', PRESS: 'to a reporter', INTERVIEW: 'in an interview', DISCORD: 'in a talk', DEBATE: 'in a debate' };
+function slotWord(slot) {
+  const m = /^([A-Za-z]+)((?:-tension(?:-resolved)?)?)$/.exec(String(slot || ''));
+  const base = m ? m[1] : String(slot || '');
+  const tail = !m || !m[2] ? '' : m[2] === '-tension' ? ', a question they carry' : ', a question they settled';
+  return (SLOT_WORD[base] || 'the ' + base + ' page') + tail;
+}
 
 function coveredPath(root) { return path.join(root, 'output', 'cron-compare', 'lives_covered.json'); }
 function readCovered(root) { return K.loadJson(coveredPath(root)) || {}; }
@@ -124,7 +147,7 @@ function cameNext(logByPop, popid, afterCycle, notText) {
 }
 
 // The citizen's own page this Cycle (the lived wake lands the day it happened).
-function ownPageLines(root, cycle, popids) {
+function ownPageLines(root, cycle, popids, every = EVERY_PAGE) {
   const want = new Set(popids.map(p => String(p).toUpperCase()));
   const out = [];
   let text = '';
@@ -132,10 +155,10 @@ function ownPageLines(root, cycle, popids) {
   for (const line of text.split(/\r?\n/)) {
     if (!line.trim()) continue;
     let d; try { d = JSON.parse(line); } catch (_) { continue; }
-    if (Number(d.cycle) !== Number(cycle) || !SELF_SLOTS.test(String(d.slot || '')) || !want.has(String(d.popId || '').toUpperCase())) continue;
-    const content = String(d.content || '').trim();
+    if (Number(d.cycle) !== Number(cycle) || !pageSlot(d.slot, 'lives', every) || !want.has(String(d.popId || '').toUpperCase())) continue;
+    const content = pageText(d.content, every);
     if (!content) continue;
-    out.push({ popid: String(d.popId).toUpperCase(), slot: d.slot, customId: d.customId, text: content });
+    out.push({ popid: String(d.popId).toUpperCase(), slot: d.slot, where: every ? slotWord(d.slot) : d.slot, customId: d.customId, text: content });
   }
   return out;
 }
@@ -421,7 +444,7 @@ function build(cycle, { root, beats, profiles }) {
   const pages = ownPageLines(root, cycle, people.map(p => p.popid));
   const pageVoices = pages.slice(0, 5).map(pg => {
     const who = people.find(p => p.popid === pg.popid);
-    return (who ? who.name : pg.popid) + ', own page (' + pg.slot + ', C' + cycle + '): “' + pg.text.slice(0, 240) + (pg.text.length > 240 ? '…' : '') + '”';
+    return (who ? who.name : pg.popid) + ', own page (' + pg.where + ', C' + cycle + '): “' + pg.text.slice(0, 240) + (pg.text.length > 240 ? '…' : '') + '”';
   });
 
   const hooks = K.domainHooks(beats, cycle, SEAT.name,
@@ -472,4 +495,4 @@ const sitsOutWhenEmpty = true;
 if (require.main === module) W.main();
 module.exports = { plainLife, lifeRank, SEAT, sitsOutWhenEmpty, kindWord, loadSlice, dayToken, buildLivesSlice: W.build, writeLivesSlice: W.write, loadLivesSlice: loadSlice,
   isLivesSeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment, slicePaths: W.paths,
-  kindLine, cameNext, localDay, coveredPath };
+  kindLine, cameNext, localDay, coveredPath, EVERY_PAGE, pageSlot, pageText, slotWord, ownPageLines };

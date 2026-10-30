@@ -22,8 +22,11 @@
  *   - metadata.type `reflection` or `tension` — never `office-position` (civic office statements,
  *     CIVIC-cascade-STMT-* / CIVIC-datawake-*, ~425 docs; they have their own record)
  *   - slot in the wake allowlist: morning|midday|afternoon|evening|night|work|PRESS|CONVO|INTERVIEW|
- *     DISCORD, each with an optional -tension / -tension-resolved tail. Rejected by default: NIGHTLY-*
- *     (the editor's desk journal, not a citizen's page), deskwork-*, SIFT, backfills, anything new.
+ *     DISCORD|DEBATE, each with an optional -tension / -tension-resolved tail (DEBATE: pipeline.97, builder
+ *     2026-10-30 "everything should be available to the media" — a citizen's words in a debate were the one
+ *     citizen page the collector turned away). Rejected by default: NIGHTLY-* (the editor's desk journal,
+ *     composed from builder-side material — lib/memoryFence engine.197), PRESS-graded-* (a reporter's own
+ *     grade record, read back through their own memory_recall), deskwork-*, SIFT, backfills, anything new.
  *   - cycle <= the live cycle (lib/getCurrentCycle) — C119/C126 docs are bench-run artefacts
  *   - non-empty content
  *   The rule is written into meta.json so an outside check can recompute it.
@@ -51,12 +54,12 @@ const INDEX_PATH = path.join(INDEX_DIR, 'index.jsonl');
 const META_PATH = path.join(INDEX_DIR, 'meta.json');
 
 const ID_RE = /^cp-(POP-\d{5})-c(\d+)-(.+)$/;
-const SLOT_RE = /^(?:morning|midday|afternoon|evening|night|work|PRESS|CONVO|INTERVIEW|DISCORD)(?:-tension(?:-resolved)?)?$/;
+const SLOT_RE = /^(?:morning|midday|afternoon|evening|night|work|PRESS|CONVO|INTERVIEW|DISCORD|DEBATE)(?:-tension(?:-resolved)?)?$/;
 // pipeline.94: a page written with a weekday (citizenPage `day`) carries it after the daypart — `morning-thu`,
 // `morning-thu-tension`. The weekday is split off here, so `slot` stays the daypart grammar every reader matches.
 // pipeline.96: an interview page carries six letters a–p after the weekday (citizenPage `ref`) — `PRESS-thu-kfbmdp`,
 // `PRESS-thu-kfbmdp-tension` — split off as `ref` the same way.
-const DAY_SPLIT_RE = /^(morning|midday|afternoon|evening|night|work|PRESS|CONVO|INTERVIEW|DISCORD)-(sun|mon|tue|wed|thu|fri|sat)(?:-([a-p]{6}))?((?:-tension(?:-resolved)?)?)$/;
+const DAY_SPLIT_RE = /^(morning|midday|afternoon|evening|night|work|PRESS|CONVO|INTERVIEW|DISCORD|DEBATE)-(sun|mon|tue|wed|thu|fri|sat)(?:-([a-p]{6}))?((?:-tension(?:-resolved)?)?)$/;
 const TYPES = new Set(['reflection', 'tension']);
 const RULE = 'customId cp-POP-xxxxx-c<N>-<slot>, an optional -<weekday>[-<ref a-p x6>] after the daypart split off as day/ref; metadata.type in {reflection,tension}; slot matches ' +
   SLOT_RE.source + '; cycle <= live cycle; non-empty content';

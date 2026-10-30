@@ -21,6 +21,14 @@ assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c113-PRESS-kfbmdp', metadat
 assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c113-PRESS-thu-kfbmdz', metadata: { type: 'reflection' } }, 113).reject, 'slot', 'a ref is letters a-p only');
 assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c113-PRESS-thu-kfbmd', metadata: { type: 'reflection' } }, 113).reject, 'slot', 'a ref is exactly six letters');
 assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c113-PRESS-thu-tension-kfbmdp', metadata: { type: 'tension' } }, 113).reject, 'slot', 'the ref sits before the key, never after it');
+// pipeline.97 (builder 2026-10-30): a citizen's words in a debate land like any other page — before pipeline.96's
+// weekday and after it; the editor's journal and a reporter's grade record stay out.
+assert.deepStrictEqual(p.admit({ customId: 'cp-POP-00488-c112-DEBATE', metadata: { type: 'reflection' } }, 113), { popId: 'POP-00488', cycle: 112, slot: 'DEBATE', type: 'reflection', day: null, ref: null });
+assert.deepStrictEqual(p.admit({ customId: 'cp-POP-00488-c113-DEBATE-fri', metadata: { type: 'reflection' } }, 113), { popId: 'POP-00488', cycle: 113, slot: 'DEBATE', type: 'reflection', day: 'fri', ref: null });
+assert.strictEqual(p.admit({ customId: 'cp-POP-00488-c113-DEBATE-fri-tension', metadata: { type: 'tension' } }, 113).slot, 'DEBATE-tension');
+assert.strictEqual(p.admit({ customId: 'cp-POP-00488-c112-DEBATE-tension', metadata: { type: 'tension' } }, 113).slot, 'DEBATE-tension');
+assert.strictEqual(p.admit({ customId: 'cp-POP-00012-c113-PRESS-graded-hal-richmond', metadata: { type: 'reflection' } }, 113).reject, 'slot', 'a reporter\'s grade record never lands');
+assert.ok(p.SLOT_RE.test('DEBATE') && p.SLOT_RE.test('DEBATE-tension-resolved') && !p.SLOT_RE.test('NIGHTLY'));
 assert.strictEqual(p.admit({ customId: 'cp-POP-00005-c109-NIGHTLY-2026-10-02', metadata: { type: 'reflection' } }, 109).reject, 'slot', 'the desk journal never lands');
 assert.strictEqual(p.admit({ customId: 'cp-POP-00100-c109-CIVIC-cascade-STMT-109-mayor_open-001', metadata: { type: 'office-position' } }, 109).reject, 'type', 'office statements never land');
 assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c119-PRESS-tension', metadata: { type: 'tension' } }, 109).reject, 'cycle', 'bench cycles never land');

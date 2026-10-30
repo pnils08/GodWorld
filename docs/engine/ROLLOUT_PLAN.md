@@ -72,6 +72,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
+| pipeline.97 | Debate pages never reach the newsroom; Ines and Tamsin read only self-started pages (builder 10-30: all of it to media). Admit debates, open both | in-progress | research-build | [[../plans/2026-10-03-citizen-pages-drive-canon]] §6 |
 
 ## 4. Queue — ruled, not started (ready)
 

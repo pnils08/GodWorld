@@ -91,7 +91,42 @@ After the life-line pass (unchanged), a page-line pass over the same `ledgerRows
 
 **Report in one line:** files touched, tests pass/fail, anything in the brief that the code made impossible (do not work around it — say it).
 
+## 6. pipeline.97 — every citizen page to the newsroom (builder 2026-10-30)
+
+**Builder, 2026-10-30 (answering "debate pages have never reached the newsroom — a job?"):** "I mean everything should be available to the media, I think Ines and tasmin should have access to all this. As far as the other journalist, not sure how well their tools access this in a search but I have no issues with media using anything the project generates, the idea of "privacy" isn't really a thing as if a media doesn't cover it it's likely I'll never know about it." Same ruling as §0 (2026-10-03), now reaching the two seats that read pages by slot.
+
+**Measured 2026-10-30 (live store 3,103 docs, index 2,203 / 444 citizens):**
+
+| What the collector turns away | Docs | Stays out because |
+|---|---|---|
+| civic office statements (`office-position`: CIVIC-cascade-STMT-*, CIVIC-datawake-*) | ~680 | their own record (§ header of `scanCitizenPages.js`) |
+| `NIGHTLY-*` | 90 | the editor's desk journal, composed from builder-side material (`lib/memoryFence.js` engine.197 M1) — never reveal the builder |
+| `PRESS-graded-*` | 63 | a reporter's grade record (MEDIA); the reporter reads it back through `memory_recall` |
+| `journal`, `SIFT`, `deskwork-*` | 7 | tooling and smoke artefacts, not pages |
+| above the live Cycle | 24 | admitted after the fire (bench rule, §2) |
+| **`DEBATE`, `DEBATE-tension`** | **3** | **nothing — the one citizen page turned away. Admitted now.** |
+
+| Reader | Read before | Reads now |
+|---|---|---|
+| Ines (`buildVoicesSlice.js`) | morning–night, work, CONVO: **251** citizens on the C113 roster | every admitted slot: **408** citizens; newest line is a reply to a reporter for 220 of them |
+| Tamsin (`buildLivesSlice.js` `ownPageLines`) | morning–night, work: 22 own-page lines across C113's citizens | every admitted slot: 159 |
+| every other seat — street sourcing (`newsroomSourcing.js` page-line) | every admitted `reflection` slot, when a page names the day's highlight | unchanged; debate pages reach it once admitted |
+| every other seat — `canon_search` (every wake package since pipeline.89) | `lib/mags.js searchDisk` greps `output/`, so `index.jsonl` is one of six files returned, one excerpt line | unchanged — not this build (reported to the builder, no row) |
+
+**Build (one switch, `buildLivesSlice.js` `EVERY_PAGE`, held off for codex):**
+
+1. `scanCitizenPages.js` — `DEBATE` in `SLOT_RE` and `DAY_SPLIT_RE` (pipeline.96 writes `DEBATE-<day>`). Live at once: the index is append-only, so a switch could not take an admitted row back, and a debate line is a citizen's words like CONVO.
+2. `buildLivesSlice.js` — `pageSlot(slot, seat, every)` / `pageText(content, every)`: with `every`, any slot the collector admits (`scan.SLOT_RE`), text through `citizenText` (676 non-MEDIA docs carry a `TENSION[c<N>]:` tag that would otherwise print as the citizen's words); without, today's rule exactly. `slotWord` names where it was said ("to a reporter", "in a debate", "in an interview", "in a talk", "…, a question they carry / settled"); `ownPageLines` carries it as `where`. The collector is required lazily — it loads the env, which the switch-off path never did.
+3. `buildVoicesSlice.js` — roster, empty reason, ref and `pagesForPicks` take `everyPage` (default the switch); approach text follows the switch.
+
+**Stays as it was:** MEDIA citizens out of both seats — editorial (the newsroom does not cover itself), not privacy. Tamsin's five-page-voice cap. Pages merged before pipeline.96 (178 PRESS docs) reach Ines with the store's `---` joins inside — fixed going forward by 96, no code here.
+
+**Proof:** `buildVoicesSlice.test.js` and `buildLivesSlice.test.js` run both rules (`everyPage` false / true) and assert the default follows the switch; both suites also pass with the switch flipped in memory (module loader, disk untouched). `scanCitizenPages.test.js`: `DEBATE`, `DEBATE-fri`, `DEBATE-fri-tension` admitted; NIGHTLY and PRESS-graded refused. Live C113 read: roster 251 → 408, zero `TENSION[` in any roster line or own-page line. Suites green: citizenPage, checkLetterEligibility, cronRheaPersonaGate, newsroomSourcing, beatSlices, livedExperiencePacket.
+
+**Watch after LIVE:** Ines's next angle (Sat 07:15) roster carries interview and debate lines; Tamsin's next run (Mon 06:15) names "to a reporter" on a page voice; the next angle-stage dump admits the three debate docs.
+
 ## Changelog
+- 2026-10-30 (research-build) — §6 pipeline.97 built: debate pages admitted (live); Ines and Tamsin read every admitted page behind `EVERY_PAGE` (off) for codex.
 - 2026-10-19 21:55 (research-build) — **pipeline.70 flipped to done-pending-archive on the 2026-10-19 unattended fan-out.** `[pages] pulse c112` built at 11:15 (15 themes over C105–C112, `output/cron-compare/pulse_c112.json`); six C112 pieces staged, Rhea PASS on all, incl. the first unattended Opus 5.5 business write (Jordan Velez, 923 words, contractScore 4, 9 citizens verified). Not confirmed: a `page-line` candidate reaching a packet — the write-stage `state.json` carries no sourcing kind and the report-stage results carry `checks: null`, so page-line reach cannot be read from today's artifacts. Open observation, not a defect finding: the next read needs the `[pages]` log lines of a report wake or a packet field that names the evidence kind.
 - 2026-10-04 02:53 (research-build) — a third evidence kind shares the street pool: `exchange-line` (engine.53 T6, citizen exchange transcripts), after life-line and page-line, same admission rules, packeted as INTERPRETATION. Monday's `[pages]` log lines may show it beside `page-line`.
 - 2026-10-03 03:55 (research-build) — codex review of 2f2c7bac folded (`docs/research/2026-10-03-codex-pipeline70-seams45-review.md`, HOLD → fixed): letters gate screens every POPID and fails a line with two (one writer per line) and cross-checks every pool POPID against a screened line; the detector binds polarity and entity in the same sentence on both sides (`stances()`), removes only the quote's own sentences from a PRESS record, and the gate skips a page-line record for that citizen only; the stale C99 invented-writer sentence in letters RULES is historicised; the changelog's affect-tag claim corrected. Accepted, not changed: a literal ` --- ` inside one citizen sentence is read as a boundary (the wake's joiner; no live page has one). Smoke after the fold: the same one real conflict (Adash Stanley, the Oaks), now seen from both of his interviews.

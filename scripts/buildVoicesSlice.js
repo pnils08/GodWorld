@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 /**
  * buildVoicesSlice.js — Ines Sorensen's Voices slice (pipeline.73; the seat mints at C112).
- * What citizens said in their own words: the self-initiated wake pages (morning, midday,
- * afternoon, evening, night), the work-wake pages and their own lines in the day's exchange
- * (CONVO), read from output/citizen_pages/index.jsonl. PRESS replies are a reporter's
- * interview and already fed that day's article — never her subject. INTERVIEW and DISCORD
- * pages are the same: someone else asked.
+ * What citizens said in their own words, read from output/citizen_pages/index.jsonl. Until pipeline.97: the
+ * self-initiated wake pages (morning, midday, afternoon, evening, night), the work-wake pages and their own
+ * lines in the day's exchange (CONVO); PRESS, INTERVIEW and DISCORD were left out because someone else asked.
+ * pipeline.97 (builder 2026-10-30: "everything should be available to the media, I think Ines and Tamsin should
+ * have access to all this"): every page the collector admits — interview replies, debates, talks and the
+ * questions a citizen carries too — through citizenText (buildLivesSlice EVERY_PAGE, one switch for both seats).
  *
  * pipeline.89 (builder 2026-10-25): the slice is a roster, not the pick. Every citizen with a
  * self-initiated page on the record, one line each; the last 36h are marked "new since your last
@@ -30,12 +31,14 @@ const SEAT = {
   kind: 'beat-voices', domain: 'voices', artifact: 'voices', builder: 'buildVoicesSlice.js',
   version: 'VOICES-SLICE-2', nameRe: /ines\s*sorensen/i,
   tabs: [],
-  approach: 'Voices approach: this slice is a roster, a tip sheet, not your assignment — every citizen with a self-initiated page on the record, one line each. You pick whose own words carry the day, and why. The person\'s own line first, before their name; then who they are in one plain clause; then what in the city they were answering, from the page\'s own tags. Fewer, longer passages; the words are the product. Never a count, never a statistic, never an explanation of what they meant.',
+  approach: 'Voices approach: this slice is a roster, a tip sheet, not your assignment — every citizen with a ' + (lives.EVERY_PAGE ? '' : 'self-initiated ') + 'page on the record, one line each. You pick whose own words carry the day, and why. The person\'s own line first, before their name; then who they are in one plain clause; then what in the city they were answering, from the page\'s own tags. Fewer, longer passages; the words are the product. Never a count, never a statistic, never an explanation of what they meant.',
   roomIsYours: 'where they were standing when they wrote it, the one plain clause that says who this is, the silence after their last line — never a word inside the quotation marks that is not on the page',
   build
 };
 
-const SELF_SLOTS = /^(morning|midday|afternoon|evening|night|work|CONVO)$/;
+// every: buildLivesSlice EVERY_PAGE by default; a caller (the tests) may name either rule.
+const onPage = every => d => d && d.docId && lives.pageSlot(d.slot, 'voices', every);
+const what = every => every ? 'page' : 'self-initiated page';
 const WINDOW_HOURS = 36;      // marks a page "new since your last piece" — information only, picks nothing
 const MIN_CHARS = 80;         // a line too short to carry a passage
 
@@ -65,9 +68,7 @@ function isMedia(profile) {
     /^y/i.test(String(profile['MED (y/n)'] || profile.MED || '').trim());
 }
 
-function slotWord(slot) {
-  return slot === 'CONVO' ? 'in conversation' : slot === 'work' ? 'after work' : 'the ' + slot + ' page';
-}
+const slotWord = lives.slotWord;
 
 const ROSTER_SRC = 'output/citizen_pages/index.jsonl roster';
 const OPENING_CHARS = 150;    // the opening of a citizen's latest line, so the roster reads like a tip sheet
@@ -80,16 +81,16 @@ function opening(text) {
 // pipeline.89 (builder 2026-10-25): the slice is the roster, not the pick. Every citizen with a
 // self-initiated page in the store, one line each; the 36h set is marked "new since your last piece"
 // as information. Nothing here chooses, caps, or counts her — covered is her memory, shown, never enforced.
-function build(cycle, { root, profiles, now = new Date() }) {
+function build(cycle, { root, profiles, now = new Date(), everyPage = lives.EVERY_PAGE }) {
   const covered = readCovered(root);
   const day = lives.localDay(now);
   const since = now.getTime() - WINDOW_HOURS * 3600 * 1000;
   const livesCovered = K.loadJson(lives.coveredPath(root)) || {};
 
   const all = readPages(root);
-  const self = all.filter(d => d && d.docId && SELF_SLOTS.test(String(d.slot || '')));
+  const self = all.filter(onPage(everyPage));
   const eligible = self
-    .map(d => ({ ...d, popid: String(d.popId || '').toUpperCase(), text: String(d.content || '').trim() }))
+    .map(d => ({ ...d, popid: String(d.popId || '').toUpperCase(), text: lives.pageText(d.content, everyPage) }))
     .filter(d => d.popid && d.text.length >= MIN_CHARS)
     .filter(d => { const p = profiles.get(d.popid); return p && String(p.Name || '').trim() && !isMedia(p); });
   const ranBefore = new Map();
@@ -104,10 +105,10 @@ function build(cycle, { root, profiles, now = new Date() }) {
     if (Number.isFinite(t) && t >= since && !covered[d.docId]) cur.fresh = true;
     byPop.set(d.popid, cur);
   }
-  const trail = 'index ' + all.length + ', self-initiated ' + self.length + ', long enough and on the ledger ' + eligible.length +
+  const trail = 'index ' + all.length + ', ' + (everyPage ? 'readable ' : 'self-initiated ') + self.length + ', long enough and on the ledger ' + eligible.length +
     ', citizens ' + byPop.size;
   if (!byPop.size) {
-    return K.emptySlice(SEAT, cycle, 'no self-initiated citizen page on the ledger (output/citizen_pages/index.jsonl) — ' + trail);
+    return K.emptySlice(SEAT, cycle, 'no ' + (everyPage ? '' : 'self-initiated ') + 'citizen page on the ledger (output/citizen_pages/index.jsonl) — ' + trail);
   }
 
   // Newest latest-page first: an order to read in, not a choice made for her.
@@ -117,7 +118,7 @@ function build(cycle, { root, profiles, now = new Date() }) {
   for (const r of roster) {
     const d = r.latest;
     const eventCovered = Object.values(livesCovered).find(v => v && v.popid === r.popid && Number(v.cycle) >= Number(cycle) - 1);
-    const person = K.personFromProfile(profiles, r.popid, 'has ' + r.pages + ' self-initiated page' + (r.pages === 1 ? '' : 's') + ' on the record', null);
+    const person = K.personFromProfile(profiles, r.popid, 'has ' + r.pages + ' ' + what(everyPage) + (r.pages === 1 ? '' : 's') + ' on the record', null);
     if (!person) continue;
     people.push(person);
     const notes = [r.pages + ' page' + (r.pages === 1 ? '' : 's'),
@@ -138,7 +139,7 @@ function build(cycle, { root, profiles, now = new Date() }) {
   const label = 'Voices roster, C' + cycle + ': ' + people.length + ' citizens with pages' + (fresh ? ', ' + fresh + ' new since your last piece' : '');
   return K.makeSlice(SEAT, cycle, {}, {
     // the day in the ref: the fanout's staleBeatRef drops a seat whose ref was filed this Cycle
-    ref: 'output/citizen_pages/index.jsonl (self-initiated pages, whole store) ' + lives.dayToken(day),
+    ref: 'output/citizen_pages/index.jsonl (' + what(everyPage) + 's, whole store) ' + lives.dayToken(day),
     hood: null, label,
     angle: 'Voices, C' + cycle + ': you pick whose own words carry the day',
     hookLine: 'Pick whoever you want from the roster; open on their own line, verbatim. Their words are the piece; yours are the frame.',
@@ -149,16 +150,16 @@ function build(cycle, { root, profiles, now = new Date() }) {
   });
 }
 
-// What Ines picked, resolved: every self-initiated page of each citizen she named, whole, as FACT lines in
+// What Ines picked, resolved: every readable page (onPage) of each citizen she named, whole, as FACT lines in
 // the slice's own shape. Read at the write stage from the angle's targets; the roster lines drop out there.
-function pagesForPicks(pops, { root = K.ROOT, profiles } = {}) {
+function pagesForPicks(pops, { root = K.ROOT, profiles, everyPage = lives.EVERY_PAGE } = {}) {
   const want = new Set((pops || []).map(p => String(p).toUpperCase()));
   const prof = profiles || K.loadProfiles(root);
   const out = [];
   if (!want.size) return out;
   const mine = readPages(root)
-    .filter(d => d && d.docId && SELF_SLOTS.test(String(d.slot || '')))
-    .map(d => ({ ...d, popid: String(d.popId || '').toUpperCase(), text: String(d.content || '').trim() }))
+    .filter(onPage(everyPage))
+    .map(d => ({ ...d, popid: String(d.popId || '').toUpperCase(), text: lives.pageText(d.content, everyPage) }))
     .filter(d => want.has(d.popid) && d.text)
     .sort((a, b) => Date.parse(a.createdAt || '') - Date.parse(b.createdAt || ''));
   for (const d of mine) {
@@ -186,7 +187,7 @@ const W = K.wire(SEAT);
 function buildSlice(cycle, opts = {}) {
   const root = opts.root || K.ROOT;
   const profiles = opts.profiles || K.loadProfiles(root);
-  const slice = SEAT.build(Number(cycle), { root, profiles, now: opts.now });
+  const slice = SEAT.build(Number(cycle), { root, profiles, now: opts.now, everyPage: opts.everyPage });
   if (slice && !slice.empty) slice.seat.builder = SEAT.builder;
   return slice;
 }

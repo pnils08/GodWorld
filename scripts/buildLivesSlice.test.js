@@ -106,8 +106,22 @@ try {
   fs.mkdirSync(path.join(root, 'output', 'citizen_pages'), { recursive: true });
   fs.writeFileSync(path.join(root, 'output', 'citizen_pages', 'index.jsonl'), [
     JSON.stringify({ docId: 'd1', customId: 'cp-POP-90004-c111-night', popId: 'POP-90004', cycle, slot: 'night', content: 'Home. The kitchen smelled like someone else had been cooking in it all week.', createdAt: '2026-01-01T00:00:00Z' }),
-    JSON.stringify({ docId: 'd2', customId: 'cp-POP-90004-c111-PRESS', popId: 'POP-90004', cycle, slot: 'PRESS', content: 'a reporter asked and this is not her source', createdAt: '2026-01-01T00:00:00Z' })
+    JSON.stringify({ docId: 'd2', customId: 'cp-POP-90004-c111-PRESS', popId: 'POP-90004', cycle, slot: 'PRESS', content: 'A reporter asked and I told her the ward was quieter than the waiting room.', createdAt: '2026-01-01T00:00:00Z' }),
+    JSON.stringify({ docId: 'd3', customId: 'cp-POP-90004-c111-night-tension', popId: 'POP-90004', cycle, slot: 'night-tension', type: 'tension', content: 'TENSION[c111]: Who is going to drive me to the follow-up?', createdAt: '2026-01-01T00:00:00Z' })
   ].join('\n') + '\n');
+
+  // pipeline.97 (builder 2026-10-30): the self-initiated rule reads the wake page only; every admitted page reads
+  // the interview reply and the question too, the tag stripped, each named where it was said.
+  const selfOnly = L.ownPageLines(root, cycle, ['POP-90004'], false);
+  assert.deepStrictEqual(selfOnly.map(p => [p.customId, p.where]), [['cp-POP-90004-c111-night', 'night']]);
+  const everyLine = L.ownPageLines(root, cycle, ['POP-90004'], true);
+  assert.deepStrictEqual(everyLine.map(p => [p.customId, p.where]), [
+    ['cp-POP-90004-c111-night', 'the night page'], ['cp-POP-90004-c111-PRESS', 'to a reporter'], ['cp-POP-90004-c111-night-tension', 'the night page, a question they carry']]);
+  assert.equal(everyLine[2].text, 'Who is going to drive me to the follow-up?');
+  assert.deepStrictEqual(L.ownPageLines(root, cycle, ['POP-90004']).map(p => p.customId), L.ownPageLines(root, cycle, ['POP-90004'], L.EVERY_PAGE).map(p => p.customId), 'the default follows the switch');
+  assert.equal(L.slotWord('DEBATE-tension-resolved'), 'in a debate, a question they settled');
+  assert.equal(L.slotWord('INTERVIEW'), 'in an interview');
+  assert.ok(L.pageSlot('CONVO', 'voices', false) && !L.pageSlot('CONVO', 'lives', false) && L.pageSlot('DEBATE', 'lives', true) && !L.pageSlot('NIGHTLY', 'lives', true));
 
 
   // The thread: the discharged patient's stay in full, his other log lines (event lines and texture
@@ -167,7 +181,8 @@ try {
   assert.ok(day1.facts.find(f => f.kind === 'retirement').text.includes('Since then, on the record: walked the lake'));
   assert.ok(day1.facts.find(f => f.kind === 'birth').text.includes('the record does not say yet'));
   assert.ok(day1.citizens.some(c => c.popid === 'POP-90005' && /lost Test Departed/.test(c.why)));
-  assert.ok(day1.prewrite.pageVoices.length === 1 && /Test Patient, own page \(night/.test(day1.prewrite.pageVoices[0]), 'the person\'s own page, never a PRESS reply');
+  if (L.EVERY_PAGE) assert.ok(day1.prewrite.pageVoices.length === 3 && /Test Patient, own page \(the night page, C111\)/.test(day1.prewrite.pageVoices[0]) && /own page \(to a reporter, C111\)/.test(day1.prewrite.pageVoices[1]) && !/TENSION\[/.test(day1.prewrite.pageVoices.join(' ')), day1.prewrite.pageVoices.join(' | '));
+  else assert.ok(day1.prewrite.pageVoices.length === 1 && /Test Patient, own page \(night/.test(day1.prewrite.pageVoices[0]), 'the person\'s own page, never a PRESS reply');
   assert.deepStrictEqual(day1.prewrite.hooks.map(h => h.text), ['A block welcomes a newborn']);
   assert.ok(day1.story.ref.endsWith(' ' + L.dayToken(day1.day)), 'the ref carries a per-day token so the fanout never drops a daily seat as stale');
   assert.ok(!/\b20\d\d-\d\d-\d\d\b/.test(JSON.stringify([day1.story, day1.pulse, day1.prewrite, day1.facts])), 'no wall-clock date reaches the writer (builder 2026-10-28)');

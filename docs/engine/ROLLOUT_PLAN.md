@@ -8,6 +8,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| pipeline.93 | Owed responses: a listed event hitting a named citizen reserves them a wake. Waits on builder's thresholds, reserved wakes R, expiry M | needs-info | research-build | [[../plans/2026-10-29-owed-responses]] |
 | civic.43 | School board: T1 + T3 LIVE. T2 seating HELD (builder 2026-10-07): schools half built (hood school data, no schools in hoods); deep review first, then the canon-name fix | needs-info | research-build | [[../plans/2026-10-04-school-board]] §Builder's words (2026-10-07) |
 | pipeline.71 | Each hood read against its own canon: every hood's INSTITUTIONS character is its own baseline and its own numbers say whether it lives up to it (builder 2026-10-20; the one-axis tech-boom design is superseded). Rewrite with the builder: which numbers express each hood's character | needs-info | research-build | [[../plans/2026-10-20-hood-character-standing]] |
 | canon.5 | Renames LANDED live 2026-10-12 (BIZ-00016 Oakland City Schools, BIZ-00035 OCCD). Builder call: POP-00317's RoleType still says Oakland Unified and stamps it on her new LifeHistory rows each Cycle (4 at C113); 12 C110 LifeHistory lines carry it. INSTITUTIONS.md:75 says Peralta row | needs-info | engine-sheet | [[../canon/INSTITUTIONS]] §Education |

@@ -81,6 +81,18 @@ Derived each wake from the record that proves the event; owed receipts live only
 
 Known, not this build: `--dry-run` appends to `logs/citizen-wake-offered.jsonl` (keyed `pop|cycle|daypart`; replay used `evening`, which no cron runs).
 
+## pipeline.94 — the wake page keyed by weekday (2026-10-30, research-build)
+
+**The store's duplicate rule (read 2026-10-30).** Supermemory docs: "same customId = same document"; a resend is processed as an update. In this store that means append: a write under a taken customId lands in that doc as `old\n\n---\n\nnew` — no second doc, no refusal. Measured in `output/citizen_pages/index.jsonl` (C113 dump): 328 of 2,167 page docs carry it; wake dayparts 22 of ~460 (morning 2, midday 7, night 4, evening 6, afternoon 3), PRESS 176 of 752, work 9 of 59. So the round-5 premise (first write wins) was wrong; the effect is a merged doc — Lives shows its first 240 characters (the older words), Voices marks the doc id covered and never surfaces the later reflection, and the later write's metadata stands for both.
+
+**Build.** `appendReflection_` takes `day` — the in-world weekday (`pageDayOf`, Central, `sun`..`sat`) — after the daypart, before any key: `cp-POP-x-c113-morning-thu`, `…-morning-thu-tension`. A Cycle is one week, and the wake's Cycle flips between Sunday night and Monday morning (`logs/citizen-wake.log`, C111→C113), so daypart + weekday is one wake. A weekday, not a calendar date: the customId reaches models (Rhea's review context, slice source lines, letter cites — `checkLetterEligibility` reads `[A-Za-z-]+` after the Cycle, so a date would also break letters). `scanCitizenPages` splits the weekday off into `day`; `slot` keeps the daypart grammar every reader matches. The owed journal's page key carries the same weekday (`owedPageKey`). Own-words family usage is keyed on daypart + key, so a weekday-keyed reflection still records. A malformed day is refused before any write. Switch `PAGE_DAY_KEY` in `scripts/citizen-wake.js`, off until codex reviews (the crons run this tree).
+
+**Residual.** A Cycle longer than a week (a missed fire) brings a weekday round twice: that wake appends into the first doc, as every same-daypart wake does today, and the owed journal sees the key taken and receipts nothing. Docs already merged stay as written.
+
+**Proof.** Unit: `lib/citizenPage.test.js` (key shape, refusal, Central weekday at the UTC boundary, own words), `scripts/scanCitizenPages.test.js` (split, rejects a date or a misplaced weekday), `lib/wakePerception.test.js` (two weekdays = two docs and the event spent; the same weekday = one appended doc, nothing spent; the store stub now appends). Live scanner run on the new admission: 3,073 listed, 36 new admitted, no old doc's admission changed. A live double same-daypart wake is rare (0 in the 36 live wakes on disk), so the unit tests carry it.
+
+Surfaced, not this build: PRESS and work pages merge the same way (one doc per citizen per Cycle).
+
 ## Measured volume (C113)
 
 4 chaos cars on citizens, 2 casino losses, 0 open hospital stays (3 rows, all discharged), 0 judicial rows → ~6–8 owed per cycle against ~21 wakes.
@@ -99,6 +111,7 @@ Wake selection is `lib/` — engine substrate: bench proof on the candidate, rev
 
 ## Changelog
 
+- 2026-10-30 (research-build) — pipeline.94 built (§pipeline.94): the store appends under a taken page id; wake page keyed by weekday, scanner splits it off, owed page key matches; switch held off for codex.
 - 2026-10-30 (research-build) — PROD: `OWED_RESERVE = 6`; round 6 cancelled under the round cap (§Build "Review closed"). Row done-pending-archive; live proof at the C114 fire.
 - 2026-10-29 (research-build) — Codex round 5 HOLD (2) folded: page occupancy keyed by citizen + Cycle + daypart (no date), two-date test; Build intro trued; pipeline.94 filed. Round 6 sent.
 - 2026-10-29 (research-build) — Codex round 4 HOLD (1) folded: the lock loser does not run; every owed-on wake journaled; a taken page key receipts nothing; Build table trued (journal, not shared state). Round 5 sent.

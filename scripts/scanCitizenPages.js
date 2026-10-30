@@ -16,7 +16,8 @@
  * ADMISSION (the office/journal/slot/type classes are decided HERE, once, and every reader inherits it;
  * the cycle cap is dropped when no live cycle is on disk (meta.liveCycle null) and real-world dates in page
  * TEXT are not a dump concern — both consumers re-filter: cycle window + content leak guard):
- *   - customId `cp-POP-xxxxx-c<N>-<slot>` (every doc is Cycle-addressable)
+ *   - customId `cp-POP-xxxxx-c<N>-<slot>` (every doc is Cycle-addressable); a weekday after the daypart
+ *     (`morning-thu`, `morning-thu-tension` — pipeline.94) is split off into `day`, slot keeps the daypart
  *   - metadata.type `reflection` or `tension` — never `office-position` (civic office statements,
  *     CIVIC-cascade-STMT-* / CIVIC-datawake-*, ~425 docs; they have their own record)
  *   - slot in the wake allowlist: morning|midday|afternoon|evening|night|work|PRESS|CONVO|INTERVIEW|
@@ -50,8 +51,11 @@ const META_PATH = path.join(INDEX_DIR, 'meta.json');
 
 const ID_RE = /^cp-(POP-\d{5})-c(\d+)-(.+)$/;
 const SLOT_RE = /^(?:morning|midday|afternoon|evening|night|work|PRESS|CONVO|INTERVIEW|DISCORD)(?:-tension(?:-resolved)?)?$/;
+// pipeline.94: a page written with a weekday (citizenPage `day`) carries it after the daypart — `morning-thu`,
+// `morning-thu-tension`. The weekday is split off here, so `slot` stays the daypart grammar every reader matches.
+const DAY_SPLIT_RE = /^(morning|midday|afternoon|evening|night|work|PRESS|CONVO|INTERVIEW|DISCORD)-(sun|mon|tue|wed|thu|fri|sat)((?:-tension(?:-resolved)?)?)$/;
 const TYPES = new Set(['reflection', 'tension']);
-const RULE = 'customId cp-POP-xxxxx-c<N>-<slot>; metadata.type in {reflection,tension}; slot matches ' +
+const RULE = 'customId cp-POP-xxxxx-c<N>-<slot>, an optional -<weekday> after the daypart split off as day; metadata.type in {reflection,tension}; slot matches ' +
   SLOT_RE.source + '; cycle <= live cycle; non-empty content';
 
 function arg(name, dflt) { const i = process.argv.indexOf('--' + name); return i > 0 ? process.argv[i + 1] : dflt; }
@@ -60,16 +64,18 @@ function auth() {
   return { Authorization: 'Bearer ' + process.env.SUPERMEMORY_CC_API_KEY, 'Content-Type': 'application/json' };
 }
 
-/** admit(listRow, liveCycle) -> { popId, cycle, slot, type } | { reject: 'id'|'type'|'slot'|'cycle' } */
+/** admit(listRow, liveCycle) -> { popId, cycle, slot, type, day } | { reject: 'id'|'type'|'slot'|'cycle' } */
 function admit(m, liveCycle) {
   const mm = ID_RE.exec(String(m.customId || ''));
   if (!mm) return { reject: 'id' };
   const type = String(m.metadata && m.metadata.type || '');
   if (!TYPES.has(type)) return { reject: 'type' };
-  if (!SLOT_RE.test(mm[3])) return { reject: 'slot' };
+  const dm = DAY_SPLIT_RE.exec(mm[3]);
+  const slot = dm ? dm[1] + dm[3] : mm[3];
+  if (!SLOT_RE.test(slot)) return { reject: 'slot' };
   const cycle = Number(mm[2]);
   if (liveCycle != null && cycle > liveCycle) return { reject: 'cycle' };
-  return { popId: mm[1], cycle, slot: mm[3], type };
+  return { popId: mm[1], cycle, slot, type, day: dm ? dm[2] : null };
 }
 
 async function listAll() {
@@ -251,7 +257,7 @@ async function dumpIndex({ quiet = false, concurrency = 2, paceMs = 250 } = {}) 
         if (!content) { excluded.empty++; continue; }
         const md = Object.assign({}, m.metadata || {}, g.metadata || {});
         const row = {
-          docId: m.id, customId: m.customId, popId: a.popId, cycle: a.cycle, slot: a.slot, type: a.type,
+          docId: m.id, customId: m.customId, popId: a.popId, cycle: a.cycle, slot: a.slot, day: a.day, type: a.type,
           daypart: md.daypart || null, affect: md.affect || null, event: md.event || null,
           createdAt: m.createdAt || null, content
         };

@@ -49,6 +49,9 @@ const FORCE_POP = arg('pop', null);
 // pipeline.93 — reserved owed wakes a Cycle; --owed-reserve=N overrides the library value (the dry replay).
 const OWED_RES = arg('owed-reserve', null) != null ? Math.max(0, Number(arg('owed-reserve')) || 0) : OWED_RESERVE;
 const OWED_JOURNAL = path.join(__dirname, '..', 'logs', 'citizen-wake-owed.jsonl'); // owed receipts, append-only, two-phase
+// pipeline.94 — the page doc is keyed by the wake's weekday too: the store appends a second write under a taken key into
+// the first doc, so two same-daypart wakes in one Cycle merged into one. Held off until codex reviews (the crons run this tree).
+const PAGE_DAY_KEY = false;
 // Append one journal line and read it back; one retry. false = not durable.
 function appendOwedJournal(line) {
   for (let t = 0; t < 2; t++) {
@@ -256,6 +259,7 @@ async function generateVoice(system, user) {
   if (admit === 'skip') { logLine('owed lock held by another live wake — this wake does not run (owed on: one live wake at a time)'); process.exit(0); }
   if (release) process.on('exit', release);
   const seedKey = wakeSeedKey(cycle, WAKE, new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' }));
+  const pageDay = PAGE_DAY_KEY ? page.pageDayOf(new Date()) : null; // one weekday for every page doc this wake writes
   let owed = [], owedView = state, owedAbsorb = true, owedPageKeys = new Set();
   if (owedRes > 0 && cycle) {
     let held = '';
@@ -399,14 +403,14 @@ async function generateVoice(system, user) {
   // that run's write would only duplicate the earlier page, so it receipts nothing.
   const owedOn = owedRes > 0 && !!cycle;
   const owedKey = seedKey + '|' + c.popId + '|' + new Date().toISOString();
-  const owedPage = owedPageKey(c.popId, cycle, WAKE);
+  const owedPage = owedPageKey(c.popId, cycle, WAKE, pageDay);
   const pageTaken = owedPageKeys.has(owedPage);
   if (owedOn && pageTaken && shownOwed.length) logLine(`owed: ${c.popId} already has a ${WAKE} page this cycle — ${shownOwed.map((e) => e.id).join(',')} not receipted, still owed`);
   const receipted = pageTaken ? [] : shownOwed;
   const owedLine = (status) => owedJournalLine({ key: owedKey, page: owedPage, cycle, pop: c.popId, slot: pageTaken ? 'repeat' : picked.slot, ids: receipted, status });
   const step = await owedPageStep({ on: owedOn, journal: appendOwedJournal, line: owedLine,
     page: () => page.appendReflection_(c.popId, reflection, {
-      cycle, daypart: WAKE,
+      cycle, daypart: WAKE, day: pageDay,
       extra: { affect: cls.affect || null, event: cls.event || null }, // recall affectWeight input (B4)
     }) });
   if (step.outcome === 'pending-not-saved') {
@@ -432,7 +436,7 @@ async function generateVoice(system, user) {
     const t = openTensions[cls.resolves]; // reference into tensionState — status flip persists on save
     t.status = 'resolved'; t.resolvedCy = cycle;
     resolvedText = t.q;
-    await page.appendReflection_(c.popId, `TENSION-RESOLVED[c${cycle}]: ${t.q}`, { cycle, daypart: WAKE, key: 'tension-resolved', extra: { type: 'tension' } });
+    await page.appendReflection_(c.popId, `TENSION-RESOLVED[c${cycle}]: ${t.q}`, { cycle, daypart: WAKE, day: pageDay, key: 'tension-resolved', extra: { type: 'tension' } });
     logLine(`tension RESOLVED <- "${t.q.slice(0, 80)}"`);
   }
   if (cls.tension && !tlist.some((t) => t.status === 'open' && t.q.toLowerCase() === cls.tension.toLowerCase())) {
@@ -442,7 +446,7 @@ async function generateVoice(system, user) {
       tlist.splice(tlist.indexOf(oldest), 1);
     }
     tlist.push({ q: cls.tension, cy: cycle, status: 'open' });
-    await page.appendReflection_(c.popId, `TENSION[c${cycle}]: ${cls.tension}`, { cycle, daypart: WAKE, key: 'tension', extra: { type: 'tension' } });
+    await page.appendReflection_(c.popId, `TENSION[c${cycle}]: ${cls.tension}`, { cycle, daypart: WAKE, day: pageDay, key: 'tension', extra: { type: 'tension' } });
     logLine(`tension OPENED <- "${cls.tension.slice(0, 80)}"`);
   }
   saveTensionState(tensionState); // also persists this wake's silent expiry pass

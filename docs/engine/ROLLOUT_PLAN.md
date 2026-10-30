@@ -71,6 +71,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
+| pipeline.94 | A citizen woken twice at one daypart in one Cycle writes the same page doc (customId has no date): read Supermemory's duplicate rule, then key by date | in-progress | research-build | [[../plans/2026-10-29-owed-responses]] §Build, round 5 fold |
 
 ## 4. Queue — ruled, not started (ready)
 
@@ -95,7 +96,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.92 | One clock: wall-clock dates reach civic agents (move date/moveId, 54/64 packs) and writers (tracker `LastUpdated`, 2 MilestoneNotes, slice pointers); blast radius read 2026-10-28, each surface to Y/C. | ready | research-build | — |
 | infrastructure.13 | Stale test, not a code fault: ebcf159d (rb, 2026-10-25, "reflections travel whole") dropped the 180-char cap from nightlyIntakeRow; the test still asserts it (107/108) and the inactivity plan :544 still says 180. Fix = both follow the new contract | ready | research-build | `lib/wakePerception.test.js:242` |
 | engine.322 | Stage step Funded→Standing (`applyCivicStageStep_`, civicInitiativeEngine.js:4137) writes phase `operational` but leaves NextScheduledAction/NextActionCycle on pre-vote text; INIT-010 passed C112 still reads "Committee hearing and vote" in desk packets | ready | engine-sheet | [[../plans/2026-10-28-code-review-dirty-tree-findings]] T8 |
-| pipeline.94 | A citizen woken twice at one daypart in one Cycle writes the same page doc (customId has no date): read Supermemory's duplicate rule, then key by date | ready | research-build | [[../plans/2026-10-29-owed-responses]] §Build, round 5 fold |
 | pipeline.95 | UNDOCKED contestants get a sure wake each Cycle carrying their show record, speak to it, and it saves to their wiki page (builder 10-30). After pipeline.94 | ready | research-build | [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]] |
 | infrastructure.15 | Claude-duet C113 handoff, verified: Riley installer inventory (nothing on the droplet reads a Feed tab), canon-glitch proposals (sports feed row 250, seed row 466), name/ContentLedger classification, C114 readback | ready | research-build | [[../plans/2026-10-29-claude-duet-c113-handoff-verified]] T6-T10 |
 | engine.323 | Duet handoff, engine side, all seen in the C113 log: stale sentimentBoost comment/log label, 13 future-stamped watermarks, hospital admits 0 vs census 35, crime spikes compacted twice, Urban-garden pay rule. Call each intended or bug | ready | engine-sheet | [[../plans/2026-10-29-claude-duet-c113-handoff-verified]] T1-T5 |

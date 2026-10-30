@@ -216,9 +216,15 @@ function runLint(gate) {
 // row sees it. --staged reads the index — the content that will commit — not the
 // working tree, which a partial stage can leave different.
 function printStale(staged) {
-  const read = rel => (staged ? stagedOr(rel) : readOr(path.join(ROOT, rel)));
-  const stale = staleNextLeads(read('SESSION_CONTEXT.md'), parseRollout(read('docs/engine/ROLLOUT_PLAN.md')),
-    read('docs/engine/ROLLOUT_ARCHIVE.md'), read('docs/plans/BACKLOG.md'));
+  const read = rel => (staged ? stagedText(rel) : readOr(path.join(ROOT, rel)));
+  let stale;
+  try {
+    stale = staleNextLeads(read('SESSION_CONTEXT.md'), parseRollout(read('docs/engine/ROLLOUT_PLAN.md')),
+      read('docs/engine/ROLLOUT_ARCHIVE.md'), read('docs/plans/BACKLOG.md'));
+  } catch (e) {
+    console.log(`NEXT STALE: not checked — could not read the index: ${String(e.message).split('\n')[0]}`);
+    return;
+  }
   if (stale.length) {
     console.log(`NEXT STALE: ${stale.length} handoff line(s) lead with a row that is no longer open — the owner rewrites its line; a closer may correct the stale fact:`);
     stale.forEach(p => console.log(p));
@@ -229,11 +235,14 @@ function readOr(p) {
   try { return fs.readFileSync(p, 'utf8'); } catch (_) { return ''; }
 }
 
-// The index copy of a tracked file; the working copy if git cannot show one.
-function stagedOr(rel) {
+// The index copy of a file — the content that will commit. A path absent from the
+// index (never added, or staged for removal) is absent content; any other git
+// failure throws, and printStale reports it instead of reading the working tree.
+function stagedText(rel) {
   const { execFileSync } = require('child_process');
-  try { return execFileSync('git', ['show', `:${rel}`], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }); }
-  catch (_) { return readOr(path.join(ROOT, rel)); }
+  const git = args => execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  if (!git(['ls-files', '--cached', '--', rel]).trim()) return '';
+  return git(['show', `:${rel}`]);
 }
 
 // --- stale handoff: a NEXT line that leads with a closed row -----------------

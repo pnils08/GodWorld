@@ -101,6 +101,10 @@ console.log('\nCLI (--stale-next, --lint) on a scratch repo');
     // a staged close with the working copy restored must still warn, and the inverse must not.
     const git = (...a) => execFileSync('git', ['-c', 'core.hooksPath=/dev/null', '-c', 'user.name=t', '-c', 'user.email=t@t', ...a], { cwd: root, encoding: 'utf8' });
     const planPath = path.join(root, 'docs', 'engine', 'ROLLOUT_PLAN.md');
+    // No index to read: a visible note, never the working tree (codex re-review 2).
+    const noRepo = execFileSync('node', [path.join(root, 'scripts', 'docLoopStatus.js'), '--stale-next', '--staged'],
+      { cwd: root, encoding: 'utf8', env: Object.assign({}, process.env, { GIT_CEILING_DIRECTORIES: path.dirname(root) }) });
+    assertEqual('--staged outside a repo → says it could not read the index', noRepo.startsWith('NEXT STALE: not checked — could not read the index'), true);
     git('init', '-q');
     fs.writeFileSync(planPath, plan('ready'));
     git('add', '-A');
@@ -115,6 +119,11 @@ console.log('\nCLI (--stale-next, --lint) on a scratch repo');
     git('reset', '-q', 'docs/engine/ROLLOUT_PLAN.md');
     fs.writeFileSync(planPath, plan('done-pending-archive'));
     assertEqual('--staged: close only in the working copy → silent (not in the commit)', staged(), '');
+    // The plan staged for removal, its working copy still open: the commit holds no row.
+    fs.writeFileSync(planPath, plan('ready'));
+    git('rm', '-q', '--cached', 'docs/engine/ROLLOUT_PLAN.md');
+    assertEqual('--staged: plan staged for removal → the lead reads as no such row',
+      staged().includes('NEXT[engine-sheet] leads with engine.920 — no such row'), true);
   } finally { fs.rmSync(root, { recursive: true, force: true }); }
 }
 

@@ -1,3 +1,16 @@
+---
+title: stale NEXT lint diff review of d79f9eb5
+created: 2026-10-29
+updated: 2026-10-29
+type: reference
+tags: [docs, review, active]
+sources:
+  - output/codex/TASK-2026-10-29-stale-next-lint-review.md
+  - commit d79f9eb5
+pointers:
+  - "[[../engine/ROLLOUT_PLAN]] — row states checked by the lint"
+---
+
 # Codex review — stale NEXT lint (`d79f9eb5`)
 
 **Verdict: HOLD** on the builder's notification guarantee. The detector flags a closed lead when its output is displayed, but the row-close hooks suppress a successful warning. The README change matches the current resolved-review path.

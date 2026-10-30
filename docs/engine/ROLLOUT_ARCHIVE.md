@@ -973,6 +973,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S622 Archive Pass (2026-10-30, research-build) — post-S621 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.
+
+- **engine.20d** [engine-sheet] — Initiative seeds only the week the initiative moved. Shipped `ddf5c5b2`, codex SHIP round 4; C113: 11 → 5 seeds. First live use C114 /run-cycle **State at archive:** done-pending-archive. Pointer: [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5
+
+This pass: 1 rows — engine.20d. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S617 Archive Pass (2026-10-29, research-build) — post-S616 closures sweep
 
 1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.*.

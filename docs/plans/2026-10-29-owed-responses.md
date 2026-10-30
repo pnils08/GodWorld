@@ -66,6 +66,8 @@ Derived each wake from the record that proves the event; the state file holds re
 
 **Bench (C113 live, read-only, 2026-10-29):** 6 owed — tier 1 from C112: POP-00121 (mail theft), POP-00646 (UNDOCKED win, net 733); tier 2 absorbed from C113 (no severe event fired): POP-00494 (parking ticket), POP-01160, POP-00518 (train delays), POP-00787 (document delivered). Every event line found and in the block. Full `--dry-run --owed-reserve=6`: slot `owed`, POP-00121, the theft line in perception, no instruction; he reflected on two friends, not the theft (the rule working). Unit: Test O in `lib/wakePerception.test.js`, 30 asserts. Not proven until a live fire: marks forming at C114 and lapsing at C116.
 
+**Codex HOLD fold (review `docs/for-claude-review/2026-10-29-codex-pipeline93-owed-diff-review.md`, all six verified against the code):** F1 a hospital mark is shown only by its own admission as the lived line (`livedFor` prefer); F2 casino pins split by settled status, so a win never stands in for a loss (two same-status slips in one Cycle write one identical line — the record cannot tell them apart); F3 a Judicial `SourceSystem=reconcile` row is bookkeeping, skipped out loud; F4 + all kinds: only events whose evidence is in the final perception are receipted (`owedShown`), the rest stay owed, and an event with nothing in the record to show is never reserved (`unshowable`, logged); F5 one read per tab (`allSettled`), a failed tab or missing column is logged by name and the others still owe; F6 receipts aged on every owed-on wake, and read back after `saveState` (`OWED STATE NOT SAVED` on a miss, as the lived spend). Remaining limits: a tab failing every wake for two Cycles loses its marks (logged each wake); a state write that fails is loud, not retried.
+
 Known, not this build: `--dry-run` appends to `logs/citizen-wake-offered.jsonl` (keyed `pop|cycle|daypart`; replay used `evening`, which no cron runs).
 
 ## Measured volume (C113)
@@ -86,6 +88,7 @@ Wake selection is `lib/` — engine substrate: bench proof on the candidate, rev
 
 ## Changelog
 
+- 2026-10-29 (research-build) — Codex HOLD (6 findings) folded: shown-only receipts, admission-preferred lived line, status-split casino pins, reconcile rows skipped, per-tab reads, ageing + read-back. C113 replay unchanged (6 owed, all shown). Re-review sent.
 - 2026-10-29 (research-build) — Built (§Build): owed list, per-Cycle absorption, owed slot, pinned event line, receipts; reserve held at 0 pending codex review. C113 live replay: 6 owed, all lines in perception.
 - 2026-10-29 (research-build) — Builder: owed picks who wakes, the citizen is never told it owes a response (§What the citizen is shown). Proof plan: overnight dry replay of the owed draw on C113 hits, no writes; mark formation/expiry across cycles waits for the C114 fire.
 - 2026-10-29 (research-build) — Builder ruled thresholds (casino: wager over 1,000, winnings over 500), R=6, M=2, absorption as set; row ready, build not started.

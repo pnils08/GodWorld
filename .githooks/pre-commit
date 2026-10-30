@@ -68,6 +68,20 @@ if git diff --cached --name-only | grep -q '^SESSION_CONTEXT\.md$'; then
 fi
 
 # ---------------------------------------------------------------------------
+# Stale handoff notice (2026-10-29): a commit that closes or sweeps a row some
+# NEXT line still leads with, or writes a NEXT onto a closed row, says so here,
+# where the committer sees it. Notice only — never blocks.
+# ---------------------------------------------------------------------------
+if git diff --cached --name-only | grep -qE '^(docs/engine/ROLLOUT_PLAN|docs/engine/ROLLOUT_ARCHIVE|SESSION_CONTEXT)\.md$'; then
+  stale_out="$(node scripts/docLoopStatus.js --stale-next 2>&1)" || true
+  if [ -n "$stale_out" ]; then
+    echo "" >&2
+    echo "$stale_out" >&2
+    echo "" >&2
+  fi
+fi
+
+# ---------------------------------------------------------------------------
 # Canon-leak gate — sim-facing/agent-read files (.claude/agents/,
 # .claude/agent-memory/, docs/canon/, docs/media/) must never gain real-world
 # dates or builder references. Catches Bash-side writes (sed/echo/python) the

@@ -23,6 +23,7 @@
 //   node scripts/docLoopStatus.js --plans    # the rollout read by plan: each plan in motion, its rows and states
 //   node scripts/docLoopStatus.js --plans --write  # same, written into ROLLOUT_PLAN.md's generated block
 //   node scripts/docLoopStatus.js --gate     # same, but exit 1 on problems (pre-commit gate)
+//   node scripts/docLoopStatus.js --stale-next  # only NEXT lines leading with a closed row; silent when none (exit 0)
 //
 // Exits 0 in every mode EXCEPT --gate (S335) — it's a surfacing report by default.
 
@@ -206,6 +207,12 @@ function runLint(gate) {
     console.log(`ROLLOUT OVERDUE: ${overdue.length} waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:`);
     overdue.forEach(p => console.log(p));
   }
+  printStale();
+}
+
+// Also run alone by .githooks/pre-commit (--stale-next) on any commit staging the
+// rollout, the archive or SESSION_CONTEXT, so the terminal closing a row sees it.
+function printStale() {
   const stale = staleNextLeads(readOr(path.join(ROOT, 'SESSION_CONTEXT.md')), parseRollout(),
     readOr(path.join(ROOT, 'docs', 'engine', 'ROLLOUT_ARCHIVE.md')), readOr(path.join(ROOT, 'docs', 'plans', 'BACKLOG.md')));
   if (stale.length) {
@@ -228,7 +235,11 @@ const CLOSED_STATES = new Set(['done-pending-archive', 'wontfix']);
 const ROW_TOKEN = /\b[a-z][a-z-]*\.\d+[a-z]?\b/g;
 function staleNextLeads(sessionText, rows, archiveText, backlogText) {
   const state = new Map(rows.map(r => [r.id, r.state]));
-  const bolded = (text, id) => new RegExp(`\\*\\*${id.replace(/\./g, '\\.')}\\*\\*`).test(text);
+  // Archive and BACKLOG list a row two ways: `- **id** …` or a table row `| id | …`.
+  const listed = (text, id) => {
+    const esc = id.replace(/\./g, '\\.');
+    return new RegExp(`\\*\\*${esc}\\*\\*|^\\|\\s*${esc}\\s*\\|`, 'm').test(String(text));
+  };
   const out = [];
   for (const line of String(sessionText).split('\n')) {
     const m = line.match(/^\*\*NEXT\[([a-z-]+)\]:\*\*\s*(.*)$/);
@@ -238,8 +249,8 @@ function staleNextLeads(sessionText, rows, archiveText, backlogText) {
       const st = state.get(id);
       let why = null;
       if (st) why = CLOSED_STATES.has(st) ? st : null;
-      else if (bolded(archiveText, id)) why = 'archived';
-      else if (bolded(backlogText, id)) why = 'parked in BACKLOG';
+      else if (listed(archiveText, id)) why = 'archived';
+      else if (listed(backlogText, id)) why = 'parked in BACKLOG';
       else why = 'no such row';
       if (why) out.push(`  NEXT[${m[1]}] leads with ${id} — ${why}`);
     }
@@ -411,6 +422,7 @@ function runHandoffGate() {
 function main() {
   const args = process.argv.slice(2);
   if (args.includes('--gate-handoff')) { runHandoffGate(); return; }
+  if (args.includes('--stale-next')) { printStale(); return; }
   if (args.includes('--gate')) { runLint(true); return; }
   if (args.includes('--lint')) { runLint(false); return; }
   if (args.includes('--plans')) { runPlans(args.includes('--write')); return; }

@@ -61,6 +61,43 @@ assertEqual('every NEXT line is read', staleNextLeads(
   ['  NEXT[research-build] leads with pipeline.905 — wontfix']);
 assertEqual('PIN and other lines ignored', staleNextLeads('**PIN:** S1 | engine.904 | x\n', rows, archive, backlog), []);
 assertEqual('empty files → nothing', staleNextLeads('', [], '', ''), []);
+// The real archive also holds swept rows as table rows (codex review F2).
+const tableArchive = '| # | Item | State |\n|---|---|---|\n| pipeline.910 | a swept table row | done-pending-archive | engine-sheet | [[x]] |\n';
+assertEqual('archive table row → archived', staleNextLeads(next('engine-sheet', 'pipeline.910 → x.'), rows, tableArchive, ''),
+  ['  NEXT[engine-sheet] leads with pipeline.910 — archived']);
+assertEqual('a table cell that is not the row id does not count', staleNextLeads(next('engine-sheet', 'engine.911 → x.'), rows,
+  '| pipeline.912 | follows engine.911 | done-pending-archive |\n', ''), ['  NEXT[engine-sheet] leads with engine.911 — no such row']);
+
+// The CLI path the pre-commit hook and session close call: a scratch copy of
+// the script beside synthetic repo files (the script reads ../docs, ../SESSION_CONTEXT.md).
+console.log('\nCLI (--stale-next, --lint) on a scratch repo');
+{
+  const fs = require('fs');
+  const os = require('os');
+  const path = require('path');
+  const { execFileSync } = require('child_process');
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'docloop-'));
+  try {
+    fs.mkdirSync(path.join(root, 'scripts'));
+    fs.mkdirSync(path.join(root, 'docs', 'engine'), { recursive: true });
+    fs.mkdirSync(path.join(root, 'docs', 'plans'));
+    fs.mkdirSync(path.join(root, 'docs', 'research'));
+    fs.copyFileSync(path.join(__dirname, 'docLoopStatus.js'), path.join(root, 'scripts', 'docLoopStatus.js'));
+    const plan = state => `# GodWorld — Rollout Plan\n\n## 4. Queue — ruled, not started (ready)\n\n| # | Item | State | Terminal | Pointer |\n|---|------|-------|----------|---------|\n| engine.920 | a synthetic job | ${state} | engine-sheet | [[x]] |\n`;
+    fs.writeFileSync(path.join(root, 'docs', 'engine', 'ROLLOUT_ARCHIVE.md'), tableArchive);
+    fs.writeFileSync(path.join(root, 'docs', 'plans', 'BACKLOG.md'), backlog);
+    fs.writeFileSync(path.join(root, 'SESSION_CONTEXT.md'), next('engine-sheet', 'engine.920 → build it.'));
+    const cli = flag => execFileSync('node', [path.join(root, 'scripts', 'docLoopStatus.js'), flag], { encoding: 'utf8' });
+    fs.writeFileSync(path.join(root, 'docs', 'engine', 'ROLLOUT_PLAN.md'), plan('ready'));
+    assertEqual('--stale-next: open lead → silent', cli('--stale-next'), '');
+    fs.writeFileSync(path.join(root, 'docs', 'engine', 'ROLLOUT_PLAN.md'), plan('done-pending-archive'));
+    assertEqual('--stale-next: row closed under the lead → the notice',
+      cli('--stale-next').trim().split('\n'),
+      ['NEXT STALE: 1 handoff line(s) lead with a row that is no longer open — the owner rewrites its line; a closer may correct the stale fact:',
+        '  NEXT[engine-sheet] leads with engine.920 — done-pending-archive']);
+    assertEqual('--lint carries the same notice', cli('--lint').includes('NEXT[engine-sheet] leads with engine.920 — done-pending-archive'), true);
+  } finally { fs.rmSync(root, { recursive: true, force: true }); }
+}
 
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed > 0 ? 1 : 0);

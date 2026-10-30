@@ -1,0 +1,9 @@
+# Stale-NEXT notice — real pre-commit hook replay, 2026-10-29, engine-sheet
+# Detached worktree at HEAD + the candidate scripts/docLoopStatus.js and .githooks/pre-commit.
+# In the worktree only: NEXT[engine-sheet] lead set to engine.324; engine.324 flipped ready → done-pending-archive
+# (stays in section 4, item 147 chars); ROLLOUT_PLAN.md staged; `bash .githooks/pre-commit` run; worktree removed.
+NEXT STALE: 1 handoff line(s) lead with a row that is no longer open — the owner rewrites its line; a closer may correct the stale fact:
+  NEXT[engine-sheet] leads with engine.324 — done-pending-archive
+hook exit 0
+# First attempt flipped engine.270 in place (section 2, 235-char item): the S335 rollout gate blocked it (exit 1) before the notice —
+# the gate runs first and a malformed close never reaches the commit, so the notice only ever rides a conforming close.

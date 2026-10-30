@@ -1,0 +1,93 @@
+AIM = BENCH (script read the bench marker)
+== research.31 bench, candidate 59e4ce18
+== leg A (stage 31 = PROD @167)
+bench pulled = stage 31
+Script is already up to date.
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @158
+pull-back 167 js + manifest byte-identical to stage31-e206.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C113
+bench frozen: 912 rows, width 6 (rows with cells past F: 0); manifest (Status blank, Reporter processed) 105 = rows 809..913; Status processed 807; other Status 0; pending by name outside the manifest 0 → /root/GodWorld/output/engine-sheet/2026-10-25-e318-status-bench.json
+bench applied: Status := processed on 105 rows; run verify
+bench verify: 105 manifest rows, 912 rows; rows the by-name reader would take as pending: 0
+PASS — every manifest Status reads processed, every other cell = the freeze
+bench Undocked_Feed: 58 baseline rows -> 69 live rows {"104":3,"105":6,"106":7,"107":7,"108":6,"109":8,"110":6,"111":7,"112":8,"113":7,"114":4}, 13 columns; bench-only +15 pts on undocked-pop00143-Y2C51 (POP-00143); read back
+version cut; waiting 50 s more for /exec propagation
+leg A-c113 fire rc=0 "verdict": "PASS" "wallS": 195 (208 s)
+leg A-c114 fire rc=0 "verdict": "PASS" "wallS": 191 (205 s)
+{
+ "leg": "A",
+ "cycle": 114,
+ "leaderNames": {
+  "C113 Eric Taveras": 11,
+  "C114 Eric Taveras": 3
+ },
+ "night": {},
+ "ee": 4
+}
+== leg B (stage 32 = stage 31 + research.31 at 59e4ce18)
+bench pulled = stage 31
+stage 32 = stage 31 + research.31 engine at 59e4ce18; manifest output/engine-sheet/stage32-r31.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @159
+pull-back 167 js + manifest byte-identical to stage32-r31.sha256
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+compared 85 tabs, 68513 rows; tabs with diffs: 0
+backup /root/GodWorld/output/engine-sheet/2026-10-19-engine302-marital-backup-bench.json 156 cells
+applied 156 | read back mismatches 0 | remaining changes 0 | dist {"married":520,"single":317,"divorced":117,"widowed":43,"youth":47}
+bench "Sandox_104_c109-live_Simulation_Narrative" Generic_Citizens: 12 headers (First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId); grid 27 cols; missing: FamilyOf, FamilyRole, MaidenName
+read back: First, Last, Age, BirthYear, Neighborhood, Occupation, EmergenceCount, EmergedCycle, EmergenceContext, Status, Sex, EmployerBizId, FamilyOf, FamilyRole, MaidenName — OK
+cleared fire record C114
+bench frozen: 912 rows, width 6 (rows with cells past F: 0); manifest (Status blank, Reporter processed) 105 = rows 809..913; Status processed 807; other Status 0; pending by name outside the manifest 0 → /root/GodWorld/output/engine-sheet/2026-10-25-e318-status-bench.json
+bench applied: Status := processed on 105 rows; run verify
+bench verify: 105 manifest rows, 912 rows; rows the by-name reader would take as pending: 0
+PASS — every manifest Status reads processed, every other cell = the freeze
+bench Undocked_Feed: 58 baseline rows -> 69 live rows {"104":3,"105":6,"106":7,"107":7,"108":6,"109":8,"110":6,"111":7,"112":8,"113":7,"114":4}, 13 columns; bench-only +15 pts on undocked-pop00143-Y2C51 (POP-00143); read back
+version cut; waiting 61 s more for /exec propagation
+leg B-c113 fire rc=0 "verdict": "PASS" "wallS": 168 (181 s)
+leg B-c114 fire rc=0 "verdict": "PASS" "wallS": 170 (182 s)
+{
+ "leg": "B",
+ "cycle": 114,
+ "leaderNames": {
+  "C113 Clarissa Dane": 11,
+  "C114 Clarissa Dane": 3
+ },
+ "night": {},
+ "ee": 4
+}
+{
+ "leader": [
+  {
+   "C113 Eric Taveras": 11,
+   "C114 Eric Taveras": 3
+  },
+  {
+   "C113 Clarissa Dane": 11,
+   "C114 Clarissa Dane": 3
+  }
+ ],
+ "night": [
+  {},
+  {}
+ ],
+ "ee": [
+  4,
+  4
+ ],
+ "cycle": [
+  114,
+  114
+ ]
+}
+== restore bench code to stage 31 (= PROD)
+bench pulled = stage 32; the two research.31 files back at 59e4ce18^ = stage 31
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @160
+pull-back 167 js + manifest byte-identical to stage31-e206.sha256
+research.31 bench done

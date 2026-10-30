@@ -36,8 +36,9 @@ if (!leg) { console.error('usage: <leg> | --compare A B'); process.exit(2); }
   const cl = await get('Casino_Ledger');
   const ch = cl[0], col = n => ch.indexOf(n);
   const night = {};
-  cl.slice(1).filter(r => r[col('MarketId')] === 'night_winner' && /^night-11[34]$/.test(String(r[col('EventId')]))).forEach(r => {
-    const k = r[col('EventId')] + ' side ' + r[col('Side')] + ' -> ' + r[col('Status')];
+  // A settled night slip's EventId is rewritten to the winning episode, so select by CyclePlaced, not 'night-<c>'.
+  cl.slice(1).filter(r => r[col('MarketId')] === 'night_winner' && Number(r[col('CyclePlaced')]) >= 112).forEach(r => {
+    const k = 'placed C' + r[col('CyclePlaced')] + ' ' + r[col('EventId')] + ' side ' + r[col('Side')] + ' -> ' + r[col('Status')];
     night[k] = (night[k] || 0) + 1;
   });
   const ee = (await get('Engine_Errors')).length - 1;

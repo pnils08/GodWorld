@@ -6,13 +6,16 @@
 #   leg A = stage 31 (PROD @167): $LEADER names Taveras; night-114 slips void (no C114 pilot brought credits home)
 #   leg B = stage 32 (candidate): $LEADER names Dane; night-114 slips settle on Cristina Booker (10 pts, 0 cr)
 # night-113 goes to Sammie Alvarez on both boards (30 cr on one night; 10 pts on another). End: bench code = stage 31.
-#   usage: 2026-10-30-r31-bench.sh <commit>
+#   usage: 2026-10-30-r31-bench.sh <commit> [<leg label>]
+#   With a leg label (e.g. B2) only the candidate leg runs under that label and is compared with the saved leg A
+#   (stage 31 has not changed) — the re-bench after a fold.
 set -uo pipefail
 cd /root/GodWorld
 O=output/engine-sheet
 SP=/tmp/claude-0/-root-GodWorld/94b00c82-9f80-4936-82b1-e0e60e44f21c/scratchpad
 TMP=$SP/r31fire.$$
 SRC=${1:?commit}
+ONLY=${2:-}
 awk '/^(reset_leg|drop_tab)\(\) \{/{f=1} f{print} f&&/^}$/{f=0} /^wait_cut\(\) \{/{print}' $O/2026-10-22-e308-bench.sh > $SP/r31-fns.sh
 bash -n $SP/r31-fns.sh && source $SP/r31-fns.sh && type reset_leg wait_cut >/dev/null || { echo "HALT bench helpers did not load"; exit 9; }
 AIM=$(node $O/2026-10-19-aimcheck.js 2>&1 | grep -v "injected env"); echo "$AIM" | tail -1
@@ -35,13 +38,16 @@ fire() {   # fire <expect> <label>
 }
 leg() { prep; fire 112 "$1-c113"; fire 113 "$1-c114"; step $O/2026-10-30-r31-check.js "$1"; }
 echo "== research.31 bench, candidate $SRC"
-echo "== leg A (stage 31 = PROD @167)"
-bash $O/2026-10-30-push-r31-bench.sh stage31 || exit 4; CODE=stage31; CUT=$(date +%s)
-leg A
-echo "== leg B (stage 32 = stage 31 + research.31 at $SRC)"
+BL=${ONLY:-B}
+if [ -z "$ONLY" ]; then
+  echo "== leg A (stage 31 = PROD @167)"
+  bash $O/2026-10-30-push-r31-bench.sh stage31 || exit 4; CODE=stage31; CUT=$(date +%s)
+  leg A
+fi
+echo "== leg $BL (stage 32 = stage 31 + research.31 at $SRC)"
 bash $O/2026-10-30-push-r31-bench.sh "$SRC" $O/stage32-r31.sha256 || exit 4; CODE=stage32; CUT=$(date +%s)
-leg B
-step $O/2026-10-30-r31-check.js --compare A B
+leg "$BL"
+step $O/2026-10-30-r31-check.js --compare A "$BL"
 echo "== restore bench code to stage 31 (= PROD)"
 bash $O/2026-10-30-push-r31-bench.sh stage31 && CODE=stage31 || { echo "HALT restore to stage 31 failed"; exit 8; }
 echo "research.31 bench done"

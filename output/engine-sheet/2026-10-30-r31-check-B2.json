@@ -1,0 +1,76 @@
+{
+ "leg": "B2",
+ "at": "2026-10-30T23:24:59.686Z",
+ "cycle": 114,
+ "leaderNames": {
+  "C113 Clarissa Dane": 11,
+  "C114 Clarissa Dane": 3
+ },
+ "night": {
+  "placed C112 undocked-pop00775-Y3C8 side POP-01203 -> settled-loss": 1,
+  "placed C112 undocked-pop00775-Y3C8 side POP-01077 -> settled-loss": 1
+ },
+ "ee": 4,
+ "leaderLines": [
+  {
+   "cycle": 113,
+   "pop": "POP-00117",
+   "text": "did the math on how many nights it would take to catch Clarissa Dane and kept the number to themselves"
+  },
+  {
+   "cycle": 113,
+   "pop": "POP-00367",
+   "text": "argued at the bar that Clarissa Dane only leads because nobody has flown a real contract yet"
+  },
+  {
+   "cycle": 113,
+   "pop": "POP-00438",
+   "text": "argued at the bar that Clarissa Dane only leads because nobody has flown a real contract yet"
+  },
+  {
+   "cycle": 113,
+   "pop": "POP-00535",
+   "text": "did the math on how many nights it would take to catch Clarissa Dane and kept the number to themselves"
+  },
+  {
+   "cycle": 113,
+   "pop": "POP-00573",
+   "text": "did the math on how many nights it would take to catch Clarissa Dane and kept the number to themselves"
+  },
+  {
+   "cycle": 113,
+   "pop": "POP-00630",
+   "text": "argued at the bar that Clarissa Dane only leads because nobody has flown a real contract yet"
+  },
+  {
+   "cycle": 113,
+   "pop": "POP-00665",
+   "text": "checked the board on the walk to work and Clarissa Dane was still the name at the top"
+  },
+  {
+   "cycle": 113,
+   "pop": "POP-00669",
+   "text": "checked the board on the walk to work and Clarissa Dane was still the name at the top"
+  },
+  {
+   "cycle": 113,
+   "pop": "POP-00729",
+   "text": "argued at the bar that Clarissa Dane only leads because nobody has flown a real contract yet"
+  },
+  {
+   "cycle": 113,
+   "pop": "POP-00775",
+   "text": "checked the board on the walk to work and Clarissa Dane was still the name at the top"
+  },
+  {
+   "cycle": 113,
+   "pop": "POP-01077",
+   "text": "argued at the bar that Clarissa Dane only leads because nobody has flown a real contract yet"
+  },
+  {
+   "cycle": 114,
+   "pop": "POP-00052",
+   "text": "checked the board on the walk to work and Clarissa Dane was still the name at the top"
+  }
+ ]
+}

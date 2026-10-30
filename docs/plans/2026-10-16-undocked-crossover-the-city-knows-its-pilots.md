@@ -223,3 +223,4 @@ UNDOCKED rows name the pilot: `$PILOT`/`$PILOTROLE`/`$LEADER`. LIVE PROD @138 (s
 - 2026-10-30 (rb): builder ruled both (own 3 on top of the 6; fill in the 69). Built behind `ON=false`, dry-run proven on C113 (§6.5); codex next.
 - 2026-10-30 (rb): codex HOLD F1–F7 verified; F1, F3–F7 folded, F2 decided (the guarantee starts at the flip Cycle) (§6.6); re-review next, the last round.
 - 2026-10-30 (rb): codex re-review HOLD R1–R3 verified; R1 and R2 folded, R3 decided (§6.7). Review closed under the round cap.
+- 2026-10-30 18:41 (rb): **LIVE** — `ON = true` with no flight, wake or newsroom stage running; suites green (wakePerception 200/201, the pre-existing snippet test). First reads: the 20:30 flight writes 69 past nights + tonight's to the pilots' pages; the 21:30 wake is the first show slot. Row done-pending-archive.

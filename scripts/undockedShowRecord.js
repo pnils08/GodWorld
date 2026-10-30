@@ -8,9 +8,10 @@
 const fs = require('fs');
 const path = require('path');
 
-// One switch for the three readers — the page stage, the wake (block + reserve) and the interview block. Flipped after
-// codex review with no flight and no wake in flight.
-const ON = false;
+// One switch for the three readers — the page stage, the wake (block + reserve) and the interview block. On 2026-10-30
+// 18:41 CDT after codex review (HOLD folded) + re-review (R1, R2 folded; R3 decided), flipped with no flight, wake or
+// newsroom stage running. The first page run (20:30 flight) fills in every past night.
+const ON = true;
 const SHOW = path.join(path.resolve(__dirname, '..'), 'output', 'spacemolt-show');
 const DAY_NAMES = { sun: 'Sunday', mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday' };
 const LOG_CAP = 300;

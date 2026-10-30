@@ -182,6 +182,16 @@ Rulings: **(1)** pilots' own reserve, 3 a Cycle, beside the 6 owed. **(2)** Back
 
 Proof after the fold: the suites pass (new cases for F1, F3, F5 and F6). An unforced C113 night wake dry run (ON in memory) took the show slot for Father Miguel (POP-00734, a C113 pilot), spent only `undocked:POP-00734:c113`, and his reflection named the show unprompted.
 
+### 6.7 Codex re-review (HOLD, R1–R3) — last round; this seat decided `docs/for-claude-review/2026-10-30-codex-pipeline95-show-wake-rereview.md`
+
+| # | Finding | Verified | Disposition |
+|---|---|---|---|
+| R1 | A returned error can follow a landed POST (the response lost); deleting pending and resending doubles the night | yes (`appendReflection_` returns `{error}` from a throw after the send) | **Folded.** Pending carries the doc key (`citizenPage.pageCustomId_`, the one source `appendReflection_` now uses). Each run first asks the store (`pageHasDoc_`, the list read, 200 a page): present → landed; absent → sent again; unreadable or more docs than it reads → left pending and said. An error keeps pending. This also closes the strand from a crash before the send. Live read check: a known key → true, an absent key → false |
+| R2 | `recentPage_` takes the newest n before the type filter, so show docs use up the persona's 6 (and the wake's 15 candidates) | yes | **Folded.** `recentPage_(…, { skipTypes: ['show'] })` drops on the list's own metadata (list items carry `metadata.type`, read live) before the slice; used by `personaProvider.augment` and `loadOwnPageReadback`, and the post-fetch filter stays as a backstop. Unchanged output while no show doc exists |
+| R3 | A malformed owed-journal line hides every later receipt, so a held-journal spend can't be read back | yes, and it predates this build (pipeline.93's hold) | **Decided, not folded.** A held journal is loud every wake, and the held state holds every reserved slot, owed and show alike, so no reserved wake doubles. A pilot drawn by the lottery seeing their record again is the design (the block rides any wake of a pilot). Repairing the bad line makes every later receipt readable again. No change to what a citizen lives |
+
+The persona Discord bot is a long-running process: the R2 skip reaches it at its next restart. The crons start fresh each run.
+
 ### 6.4 Not in scope
 - The engine's pilot line (`ecl:kind:pilot`, a draw at the airing Cycle that moves Reputation, `generateCitizensEvents.js:1114`) is left as it is; the block doesn't restate it.
 - The exchange and the work wake: not asked for. A new row, if wanted.
@@ -212,3 +222,4 @@ UNDOCKED rows name the pilot: `$PILOT`/`$PILOTROLE`/`$LEADER`. LIVE PROD @138 (s
 - 2026-10-30 (rb): §6 pipeline.95 written: three pieces (flight → page, show block, sure wake), measured on 69 nights; two builder's calls open (reserve, backfill).
 - 2026-10-30 (rb): builder ruled both (own 3 on top of the 6; fill in the 69). Built behind `ON=false`, dry-run proven on C113 (§6.5); codex next.
 - 2026-10-30 (rb): codex HOLD F1–F7 verified; F1, F3–F7 folded, F2 decided (the guarantee starts at the flip Cycle) (§6.6); re-review next, the last round.
+- 2026-10-30 (rb): codex re-review HOLD R1–R3 verified; R1 and R2 folded, R3 decided (§6.7). Review closed under the round cap.

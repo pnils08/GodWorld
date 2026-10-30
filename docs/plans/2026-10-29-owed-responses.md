@@ -27,11 +27,23 @@ pointers:
 2. Each cycle reserves R wakes for owed citizens, most severe first; the rest stay the normal weighted draw.
 3. An owed mark lapses after M cycles unreached.
 
-## Builder's calls (open)
+## Builder's rulings (2026-10-29)
 
-- Thresholds per kind: casino/UNDOCKED stake, hospital cycles in care, judicial offense types.
-- Chaos cars: every citizen-hit car, or severity only.
-- R (start small, ~5 per cycle) and M.
+Thresholds, from measured rates (chaos: 11 cycles of world_summary; casino: 164 settled wagers C107–C113; hospital: 3 stays; court ledger empty):
+
+| Event | Owes a response | Expected / cycle |
+|---|---|---|
+| Chaos car | the engine's `severity: 'high'` citizen outcomes (arrested, medical_emergency, workplace_accident, substance_intervention, deescalated, mail_theft_reported) | ~0.7 |
+| Casino / UNDOCKED | stake ≥ 500 (4 in C113), or net win ≥ 500 | ~4 at C113 volume, growing |
+| Hospital stay | any admission | ~0.4 |
+| Court case | any detention, any offense | ~0.2 |
+
+- **Reserved wakes R = 6** a cycle (builder raised it from 3), most severe first.
+- **Expiry M = 2 cycles.**
+- **Absorption (builder):** a cycle where no high-severity event fired lets the low-severity citizen-hit chaos events (tickets, warnings, delays) take the reserved wakes, severity then recency. Read as: zero severe events → low ones absorbed. If the builder meant "leftover slots fill with low ones every cycle", that is a one-line change.
+- Casino volume tripled C107→C113 (12→40 settled); revisit the 500 stake bar in ~5 cycles. The engine rates a train held for a medical emergency low; it is not in the high class.
+
+Build not started. Wake selection is `lib/` (engine substrate): bench proof, review, PROD.
 
 ## Measured volume (C113)
 
@@ -51,4 +63,5 @@ Wake selection is `lib/` — engine substrate: bench proof on the candidate, rev
 
 ## Changelog
 
+- 2026-10-29 (research-build) — Builder ruled thresholds, R=6, M=2, absorption rule (table above); row ready, build not started.
 - 2026-10-29 (research-build) — Plan opened from the Tamsin C113 flag (stance lines quoted as speech; slice fed moods on a thin day). Slice side shipped same day: 7c5f390a, b26a4184, cf0e995f, bd1f0c28, 253cdde4.

@@ -217,6 +217,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[for-claude-review/2026-10-29-codex-pipeline93-owed-round5]]** — Codex review of 4d12ef62: concurrent lock fold passes; date-bearing journal key can false-receipt a duplicate page; HOLD on R=6. *(reference, media, citizens, active)*
 - **[[for-claude-review/2026-10-29-codex-stale-next-lint-review]]** — Codex review of d79f9eb5: HOLD on suppressed row-close warnings; archive table rows receive the wrong reason. *(reference, docs, review, active)*
 - **[[for-claude-review/2026-10-29-codex-stale-next-lint-rereview]]** — Codex re-review of 312c4254: archive-table fix passes; commit-time notice still misses a staged/working split. *(reference, docs, review, active)*
+- **[[for-claude-review/2026-10-29-codex-stale-next-lint-rereview-2]]** — Codex re-review of 87c3bfab: staged row edits pass; absent index input silently falls back to working content. *(reference, docs, review, active)*
 - **[[media/HARTLEY_VISUAL_BAG]]** — DJ Hartley visual record (grok). *(reference, media, sports, photo, active)*
 - **[[media/P_SLAYER_JOURNEY_INDEX]]** — P Slayer's journey across editions. *(entity, media, active)*
 - **[[media/PAULSON_CARPENTERS_LINE]]** — "The Carpenter's Line" — Mike Paulson backstory by Hal Richmond. *(entity, media, active)*

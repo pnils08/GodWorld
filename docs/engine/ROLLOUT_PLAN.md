@@ -68,7 +68,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| pipeline.93 | Owed responses: a listed event hitting a named citizen reserves them a wake (6 a cycle). Building: reserve held at 0 until codex review; C113 dry replay | in-progress | research-build | [[../plans/2026-10-29-owed-responses]] §Build |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 
 ## 4. Queue — ruled, not started (ready)
@@ -101,6 +100,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.316 | Five hoods' texture pools are empty after textureSigned_: Eastlake, Baylight District, East Oakland have 0 up / 0 down lines; Grand Lake, San Antonio 0 down (agy 2026-10-19 F6, split from engine.301). Author signed lines → builder approves → land under the substrate gate | ready | research-build | `output/antigravity/2026-10-19-review-engine214-prod-candidate.md` F6 |
 | engine.290 | Transit rides the sim — LIVE PROD stage 4d; C113 clean (18 rows, the four C112 crew at BIZ-00014). Open: crew ECL rows + governor (plan Sequencing 4, a build). Trevor's slice read has its data (C112/C113 slices, his C113 piece 4/4); write-up owed | ready | engine-sheet | [[../plans/2026-10-15-engine-290-transit-rides-the-sim]]; `output/engine_review_c113.md` §C113 re-reads |
 | engine.20d | Initiative seeds only the week the initiative moved. Shipped `ddf5c5b2`, codex SHIP round 4; C113: 11 → 5 seeds. First live use C114 /run-cycle | done-pending-archive | engine-sheet | [[../plans/2026-05-22-engine-regulatory-friction]] §Task 5 |
+| pipeline.93 | Owed responses: a listed event hitting a named citizen reserves them a wake (6 a cycle). Live 2026-10-30; check marks at the C114 fire | done-pending-archive | research-build | [[../plans/2026-10-29-owed-responses]] §Build |
 | engine.104 | Mint economy: arrivals born right. Mint paths take job titles from lists outside the Economic_Parameters job table; revision owes legacy mutating-path disposition + D2 proof (agy 2026-10-17) | ready | research-build | [[../plans/2026-08-10-economy-native-rebuild]] §Read 2026-10-16 |
 | engine.248 | Faith orgs get a sim role. Membership LIVE since S325 (processFaithJoins_, MembersList). Open: membership-gated dial nudge (today any faith line nudges), member faith-life events, faith chaos car; the 16 leaders not in MembersList. Pointer says design first | ready | engine-sheet | [[../research/2026-09-10-kimi-faith-lane-routing]] |
 | engine.261 | Firm agents: three business owners get a wake slice to run their business | ready | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |

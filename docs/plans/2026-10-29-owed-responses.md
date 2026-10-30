@@ -1,7 +1,7 @@
 ---
 title: Owed responses — a listed event hitting a named citizen reserves that citizen a wake
 created: 2026-10-29
-updated: 2026-10-29
+updated: 2026-10-30
 type: plan
 tags: [media, citizens, wakes, draft]
 sources:
@@ -63,7 +63,7 @@ Derived each wake from the record that proves the event; owed receipts live only
 | What the citizen sees | `lifeTailOf` + `owedShownSet` | The event's own LifeHistory line occurrence (stamp + exact chaos text, or the status-split casino / arrest line) is pinned in the five-line life block; each event needs its own occurrence. No new words, no instruction. Hospital = the lived admission line (`livedFor` prefer). No pin = `lifeTailPlain`, the old block (1,053/1,053 live rows identical) |
 | Spend | `owedPageStep` + `owedStateFrom`, journal `logs/citizen-wake-owed.jsonl` | Every owed-on live wake: `pending` (read back) before the page, `shown` after it lands; a page error adds nothing (pending stands). Receipts = the events shown; an `owed` slot counts one reserved wake; only the window's Cycles are read. A page key (citizen + Cycle + daypart) already journaled receipts nothing. The shared wake state holds no owed data |
 | Concurrency | `acquireFileLock` + `wakeAdmission` | A live owed-on wake holds `logs/citizen-wake-owed.jsonl.lock` from before the journal read to exit; an overlapping live wake does not run. Dry runs take no lock and write nothing |
-| Gate | `OWED_RESERVE = 0` | The crons run this working tree, so R is held at 0 until codex review passes; `--owed-reserve=N` is the replay override. PROD = `OWED_RESERVE = 6` + its test line |
+| Gate | `OWED_RESERVE = 6` | The crons run this working tree, so R was held at 0 through review; PROD 2026-10-30 = `OWED_RESERVE = 6` + its test line. `--owed-reserve=N` is the replay override (0 turns it off) |
 
 **Bench (C113 live, read-only, 2026-10-29):** 6 owed — tier 1 from C112: POP-00121 (mail theft), POP-00646 (UNDOCKED win, net 733); tier 2 absorbed from C113 (no severe event fired): POP-00494 (parking ticket), POP-01160, POP-00518 (train delays), POP-00787 (document delivered). Every event line found and in the block. Full `--dry-run --owed-reserve=6`: slot `owed`, POP-00121, the theft line in perception, no instruction; he reflected on two friends, not the theft (the rule working). Unit: Test O in `lib/wakePerception.test.js`, 30 asserts. Not proven until a live fire: marks forming at C114 and lapsing at C116.
 
@@ -76,6 +76,8 @@ Derived each wake from the record that proves the event; owed receipts live only
 **Codex round 4 HOLD fold (`docs/for-claude-review/2026-10-29-codex-pipeline93-owed-round4.md`, one finding, verified):** only citizen-wake writes the morning/midday/night/evening page keys (every other page writer has its own daypart: work, CIVIC, journal, exchange, deskwork, DISCORD, PRESS), so the only collider is another citizen-wake run. Concurrent: the lock loser no longer runs at all (`wakeAdmission` → skip), so no page can land under the owed wake's key while it holds the lock. Sequential (a later run of the same citizen + daypart): every owed-on wake is journaled, and a page key already in the journal receipts nothing for the later run (its write would duplicate the earlier page). Residual: a same-daypart page written before the reserve turns on is not in the journal — the flip day only.
 
 **Codex round 5 HOLD fold (`docs/for-claude-review/2026-10-29-codex-pipeline93-owed-round5.md`, two findings, verified):** the journal's page occupancy is now the page key itself — `owedPageKey(POPID, Cycle, daypart)`, the same three parts `citizenPage.appendReflection_` builds its customId from, with no date — carried on every journal line (`page`), so a second morning in one Cycle sees the first morning's page; tested with two dates in one Cycle against a first-write-wins store. Build intro sentence corrected. Claim narrowed: the crons' page writers use their own dayparts; `scripts/magsPageAppend.js` (Mags's page only, operator-run) accepts any daypart. Surfaced, not this build: a citizen woken twice at one daypart in one Cycle writes one page doc twice (pipeline.94).
+
+**Review closed, PROD (2026-10-30):** round 6 cancelled under the round cap (one review + one re-review, then the seat decides). Rounds 1–2 caught what changes what a citizen lives (wrong citizen reserved, an event receipted that was never in the perception); rounds 3–5 hardened conditions the cron schedule does not produce (overlapping runs, a crash between two writes, a second same-daypart wake in one Cycle) — worst case one missed wake. The round-5 fold is unit-tested (suite 177/178, the 1 = infrastructure.13). Flip-Cycle residual checked: none of the six C113 owed citizens has a non-dry wake in `logs/citizen-wake.log` this Cycle, so no pre-flip page can sit under their keys. Live proof open: marks form from the C114 fire (Sun 2026-11-01), C112 marks lapse at C114, C113 marks at C115 (window 2).
 
 Known, not this build: `--dry-run` appends to `logs/citizen-wake-offered.jsonl` (keyed `pop|cycle|daypart`; replay used `evening`, which no cron runs).
 
@@ -97,6 +99,7 @@ Wake selection is `lib/` — engine substrate: bench proof on the candidate, rev
 
 ## Changelog
 
+- 2026-10-30 (research-build) — PROD: `OWED_RESERVE = 6`; round 6 cancelled under the round cap (§Build "Review closed"). Row done-pending-archive; live proof at the C114 fire.
 - 2026-10-29 (research-build) — Codex round 5 HOLD (2) folded: page occupancy keyed by citizen + Cycle + daypart (no date), two-date test; Build intro trued; pipeline.94 filed. Round 6 sent.
 - 2026-10-29 (research-build) — Codex round 4 HOLD (1) folded: the lock loser does not run; every owed-on wake journaled; a taken page key receipts nothing; Build table trued (journal, not shared state). Round 5 sent.
 - 2026-10-29 (research-build) — Codex round 3 HOLD (3) folded: occurrence pins, no `failed` status, owed lock across live wakes, `owedPageStep` tested. Replay unchanged. Round 4 sent.

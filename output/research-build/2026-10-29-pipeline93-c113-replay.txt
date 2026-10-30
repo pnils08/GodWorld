@@ -607,3 +607,8 @@ Renata's different. We go way back, but it's more of a comfortable habit now —
 rows 1053, differ with no pins 0, differ with a non-matching pin 0
 # node lib/wakePerception.test.js
 175 passed, 1 failed
+
+# ===== round 6 (2026-10-30T04:54:47Z) — page-key fold; life block untouched
+rows 1053, differ with no pins 0, differ with a non-matching pin 0
+# node lib/wakePerception.test.js
+177 passed, 1 failed

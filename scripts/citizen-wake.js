@@ -37,7 +37,7 @@ const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTe
   loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory,
   loadCardAnchor, loadVoiceTexture, renderStanding, renderOwnRecord,
   loadLivedEvents, renderLivedLine, livedFor, recordLivedSpend, selectWakeCitizen, wakeSeedKey,
-  lifeTailOf, OWED_RESERVE, chaosOutcomeIndex, owedFrom, owedCandidates, owedFor, owedLivedPrefer, owedShownSet, owedWakesUsed, owedStateFrom, owedJournalLine, owedPageKeyOf, wakeAdmission, owedPageStep, loadOwedRecords, acquireFileLock } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice; pipeline.93 owed
+  lifeTailOf, OWED_RESERVE, chaosOutcomeIndex, owedFrom, owedCandidates, owedFor, owedLivedPrefer, owedShownSet, owedWakesUsed, owedStateFrom, owedJournalLine, owedPageKey, wakeAdmission, owedPageStep, loadOwedRecords, acquireFileLock } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice; pipeline.93 owed
 const { selectProvocation } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.101 — intake BondTarget (col I) + T4 ripple share one match
 
@@ -399,10 +399,11 @@ async function generateVoice(system, user) {
   // that run's write would only duplicate the earlier page, so it receipts nothing.
   const owedOn = owedRes > 0 && !!cycle;
   const owedKey = seedKey + '|' + c.popId + '|' + new Date().toISOString();
-  const pageTaken = owedPageKeys.has(owedPageKeyOf(owedKey));
+  const owedPage = owedPageKey(c.popId, cycle, WAKE);
+  const pageTaken = owedPageKeys.has(owedPage);
   if (owedOn && pageTaken && shownOwed.length) logLine(`owed: ${c.popId} already has a ${WAKE} page this cycle — ${shownOwed.map((e) => e.id).join(',')} not receipted, still owed`);
   const receipted = pageTaken ? [] : shownOwed;
-  const owedLine = (status) => owedJournalLine({ key: owedKey, cycle, pop: c.popId, slot: pageTaken ? 'repeat' : picked.slot, ids: receipted, status });
+  const owedLine = (status) => owedJournalLine({ key: owedKey, page: owedPage, cycle, pop: c.popId, slot: pageTaken ? 'repeat' : picked.slot, ids: receipted, status });
   const step = await owedPageStep({ on: owedOn, journal: appendOwedJournal, line: owedLine,
     page: () => page.appendReflection_(c.popId, reflection, {
       cycle, daypart: WAKE,

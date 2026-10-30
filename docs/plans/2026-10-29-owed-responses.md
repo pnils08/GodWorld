@@ -53,7 +53,7 @@ Read against the code (2026-10-29): `buildVoicePrompts` (`scripts/citizen-wake.j
 
 ## Build (2026-10-29, research-build)
 
-Derived each wake from the record that proves the event; the state file holds receipts only.
+Derived each wake from the record that proves the event; owed receipts live only in the owed journal `logs/citizen-wake-owed.jsonl` (the shared wake state file holds none).
 
 | Piece | Where | What |
 |---|---|---|
@@ -75,6 +75,8 @@ Derived each wake from the record that proves the event; the state file holds re
 
 **Codex round 4 HOLD fold (`docs/for-claude-review/2026-10-29-codex-pipeline93-owed-round4.md`, one finding, verified):** only citizen-wake writes the morning/midday/night/evening page keys (every other page writer has its own daypart: work, CIVIC, journal, exchange, deskwork, DISCORD, PRESS), so the only collider is another citizen-wake run. Concurrent: the lock loser no longer runs at all (`wakeAdmission` → skip), so no page can land under the owed wake's key while it holds the lock. Sequential (a later run of the same citizen + daypart): every owed-on wake is journaled, and a page key already in the journal receipts nothing for the later run (its write would duplicate the earlier page). Residual: a same-daypart page written before the reserve turns on is not in the journal — the flip day only.
 
+**Codex round 5 HOLD fold (`docs/for-claude-review/2026-10-29-codex-pipeline93-owed-round5.md`, two findings, verified):** the journal's page occupancy is now the page key itself — `owedPageKey(POPID, Cycle, daypart)`, the same three parts `citizenPage.appendReflection_` builds its customId from, with no date — carried on every journal line (`page`), so a second morning in one Cycle sees the first morning's page; tested with two dates in one Cycle against a first-write-wins store. Build intro sentence corrected. Claim narrowed: the crons' page writers use their own dayparts; `scripts/magsPageAppend.js` (Mags's page only, operator-run) accepts any daypart. Surfaced, not this build: a citizen woken twice at one daypart in one Cycle writes one page doc twice (pipeline.94).
+
 Known, not this build: `--dry-run` appends to `logs/citizen-wake-offered.jsonl` (keyed `pop|cycle|daypart`; replay used `evening`, which no cron runs).
 
 ## Measured volume (C113)
@@ -95,6 +97,7 @@ Wake selection is `lib/` — engine substrate: bench proof on the candidate, rev
 
 ## Changelog
 
+- 2026-10-29 (research-build) — Codex round 5 HOLD (2) folded: page occupancy keyed by citizen + Cycle + daypart (no date), two-date test; Build intro trued; pipeline.94 filed. Round 6 sent.
 - 2026-10-29 (research-build) — Codex round 4 HOLD (1) folded: the lock loser does not run; every owed-on wake journaled; a taken page key receipts nothing; Build table trued (journal, not shared state). Round 5 sent.
 - 2026-10-29 (research-build) — Codex round 3 HOLD (3) folded: occurrence pins, no `failed` status, owed lock across live wakes, `owedPageStep` tested. Replay unchanged. Round 4 sent.
 - 2026-10-29 (research-build) — Codex re-review HOLD (4) folded: per-occurrence shown matching, absorption held on an unread listed tab, SourceSystem required, two-phase owed journal. Replay unchanged (6 owed, all shown). Round 3 sent.

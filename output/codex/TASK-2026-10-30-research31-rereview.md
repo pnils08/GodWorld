@@ -30,7 +30,7 @@ Also: `undockedStandings.js` `POINTS_FROM_CYCLE = 114` — cycles aired before C
 
 ## Evidence on disk
 - Back-score: `fde41a8e` message; Undocked_Feed M 69/69 filled, sum 200 = the 24 accounts' game totals.
-- Bench: `output/engine-sheet/2026-10-30-r31-bench.log`, `output/engine-sheet/2026-10-30-r31-check-A.json` (stage 31 = PROD @167), `…-check-B.json` (stage 32 = candidate, manifest `output/engine-sheet/stage32-r31.sha256`); scripts `2026-10-30-push-r31-bench.sh`, `2026-10-30-r31-bench.sh`, `2026-10-30-r31-feed.js`, `2026-10-30-r31-check.js`.
+- Bench (done, `8285a9d3`; DEPLOY_HISTORY §Current sandbox top entry): all four fires PASS, EE 4 → 4; `$LEADER` 11 + 3 lines name Taveras on A, the same lines name Dane on B; night-113 settled on `undocked-pop00775-Y3C8` on B (the A receipt has no night entry: the first check filter missed settled slips, fixed before B's re-read); no night slip was placed at C113, so C114's night is unit-proven only. Files: `output/engine-sheet/2026-10-30-r31-bench.log`, `output/engine-sheet/2026-10-30-r31-check-A.json` (stage 31 = PROD @167), `…-check-B.json` (stage 32 = candidate, manifest `output/engine-sheet/stage32-r31.sha256`); scripts `2026-10-30-push-r31-bench.sh`, `2026-10-30-r31-bench.sh`, `2026-10-30-r31-feed.js`, `2026-10-30-r31-check.js`.
 
 ## Scope
 Read-only plus your review file. No game-server call, no sheet read/write, no cron edit, no deploy. Wiring card for `S.undockedBoard` per AGENTS.md (Haiku). Write to `docs/for-claude-review/2026-10-30-codex-research31-rereview.md` (file:line + input → wrong output per finding; verdict SHIP / SHIP-WITH-FIXES / HOLD), commit it alone.

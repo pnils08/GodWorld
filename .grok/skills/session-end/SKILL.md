@@ -2,7 +2,7 @@
 name: session-end
 description: >
   Close a GodWorld guest-lane session (grok, codex, kimi, agy) cleanly: land
-  authorized commits, report the git stack and push status. Guest lanes carry no
+  authorized commits, report the git stack (guests never push). Guest lanes carry no
   NEXT line and never edit SESSION_CONTEXT.md. Use when the user says session
   end, close session, wrap up, done for now, or runs /session-end. Not the
   Claude Code session-end skill.
@@ -24,9 +24,9 @@ Claude boot reports waiting reviews. Do not touch `SESSION_CONTEXT.md`.
    path-specifically (never `git add .` / `-A`); commit with your lane prefix
    (`grok: …`, `codex: …`); leave unrelated dirt alone; never stage control-plane
    paths (`.claude/**`, `.agents/**`, `CLAUDE.md`, `SESSION_CONTEXT.md`).
-3. **Stack and push:** push only your own commits under `AGENTS.md` §Push
-   authorization. Another lane's commits stacked → report, don't push them.
+3. **Stack, no push:** guests never push (`AGENTS.md` §Commit authorization).
+   Report `git log origin/main..HEAD`; a Claude terminal lands it.
 4. **Close line to the builder:** one line, mechanism only — e.g.
-   `Session-end clean. Review filed (<path>). Pushed.`
+   `Session-end clean. Review filed (<path>). Committed, not pushed.`
 
 Never set `CLAUDE_CTL=1`, never `--no-verify`, never edit the PIN or SESSION_CONTEXT.

@@ -46,6 +46,10 @@ Precedence: the builder's current request → this file → nested `AGENTS.md` �
 
 Without explicit approval in the current conversation: no live `clasp push`/deploy; no live Cycle; no writes to any Sheet, ledger, intake tab or queue; no `--apply`/`--write`/`--record`/ingest/migration modes; no Drive saves; no publishing or ingesting an Edition, Dispatch, Supplemental or Interview; no PM2, crontab or service changes; no Discord, GitHub or other external messages; no paid API runs (wiring card excepted); no dependency installs. A `--dry-run` flag is not proof of safety — read its implementation. Approval to change code is not approval to deploy it.
 
+Reads count too (builder 2026-10-29): without explicit approval, run no script that contacts Sheets, Drive, Discord, a model API or another network service — the shared-memory search and the wiring card excepted.
+
+Unsure whether an action changes canon, external state, production, credentials, schedules or protected files → stop and ask (builder 2026-10-29).
+
 **Sandbox carve-out:** codex and kimi may run the groundhog proving loop against the sandbox bench only — `clasp push`/deploy to the sandbox deployment, token-fired bench cycles, sandbox reads. Procedure: `docs/reference/DEPLOY.md` §Groundhog. Cron jobs and PM2 processes are live production — never edit them.
 
 ## Git
@@ -54,9 +58,9 @@ Without explicit approval in the current conversation: no live `clasp push`/depl
 - Before a non-trivial change, show the builder the diff. Stage path-specifically — never `git add .` or `-A`.
 - New Markdown registers in its index in the same commit (`docs/index.md`; research → `docs/research/index.md`); shape per `docs/SCHEMA.md`.
 
-### Push authorization
+### Commit authorization
 
-codex and kimi may commit and push work lying entirely inside `scripts/**`, `output/**`, `docs/**`: every touched test passes; `node --check` is clean on every changed script; the message names the lane (`codex: …`); push right after committing. `git log origin/main..HEAD` shows another lane's commits → report and keep committing; don't push them. agy commits only its own review files, each alone.
+Guests commit; they never push (builder 2026-10-29). codex and kimi may commit work lying entirely inside `scripts/**`, `output/**`, `docs/**`: every touched test passes; `node --check` is clean on every changed script; the message names the lane (`codex: …`). agy commits only its own review files, each alone. A Claude terminal lands guest commits: it checks each is inside its author's scope, then pushes.
 
 ## Research, plan, rollout, and archive
 
@@ -74,7 +78,7 @@ A genuine blocker mid-session → message research-build (tmux window 1) per `do
 
 ## Session close
 
-Guest lanes own no jobs and carry no line in `SESSION_CONTEXT.md` — never edit it. Your handoff is the work: the review file or your lane-prefixed commit; the Claude boot reports waiting reviews. Land authorized commits, push only your own, report the stack. Steps: `.grok/skills/session-end/SKILL.md`.
+Guest lanes own no jobs and carry no line in `SESSION_CONTEXT.md` — never edit it. Your handoff is the work: the review file or your lane-prefixed commit; the Claude boot reports waiting reviews. Commit authorized work, never push, report the stack — a Claude terminal lands it. Steps: `.grok/skills/session-end/SKILL.md`.
 
 ## Grok and Codex speech constraint (builder-direct, 2026-08-13)
 

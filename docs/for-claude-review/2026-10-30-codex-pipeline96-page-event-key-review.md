@@ -1,0 +1,33 @@
+---
+title: pipeline.96 page event key adversarial review of 967305d8
+created: 2026-10-30
+updated: 2026-10-30
+type: reference
+tags: [media, citizens, wakes, active]
+sources:
+  - commit 967305d8
+pointers:
+  - "[[../plans/2026-10-29-owed-responses]] — pipeline.96 contract"
+---
+
+# pipeline.96 page event key review
+
+**Verdict: HOLD.** Keep the three new switches off until the event identities and scanner admission below are settled. This is a source review of commit `967305d8`; no tests, page service, Sheets, model, cron, or network calls were run.
+
+## Findings
+
+1. **F1 — two different exchanges can share one weekday page.** `scripts/citizen-exchange.js:67,425,452-454` guards with `today()`, a **UTC calendar date** written only after a successful exchange. `scripts/citizen-exchange.js:172-175` keys the proposed page by `pageDayOf(new Date())`, which is the **Chicago weekday** (`lib/citizenPage.js:70-74`). Input: one successful CONVO involving a citizen finishes at `2026-10-29T23:00:00Z`; a second CONVO involving that citizen finishes at `2026-10-30T00:30:00Z`, in the same Cycle. The UTC guard sees October 29 then October 30 and admits both, while both writes are Thursday in Chicago. Both therefore post `cp-<same POPID>-c<N>-CONVO-thu`, so the second exchange appends into the first document and an already fetched index row stays stale (`scripts/scanCitizenPages.js:240-249`). The same mismatch affects INTERVIEW or DEBATE when a citizen participates twice. The one-exchange-per-day premise in `docs/plans/2026-10-29-owed-responses.md:108,113` is false at the UTC boundary. An overlapping pair of processes can also pass the check before either saves `lastRunDate`; the boundary input alone establishes the failure.
+
+2. **F2 — two distinct filings can have an identical PRESS ref.** Both desk self-record paths reduce the draft's first nonempty line to its first 100 characters before calling `--record-text=filed: ...` (`scripts/cron-desk-run.js:3347-3355,3552-3559`). The record path constructs the ask solely from that shortened text (`scripts/citizenVoice.js:301-309`), and the new ref hashes only that ask (`scripts/citizenVoice.js:202-205`; `lib/citizenPage.js:81-83,145-146`). Input: two passed drafts by the same byline, in the same Cycle and Chicago weekday, with synthetic headings `# ` + `A` repeated 100 times + ` East` and `# ` + `A` repeated 100 times + ` West`. These are different filings, but both become the same `filed:` text and the same ask/ref. Wrong output: the second filing appends into the first PRESS document, contrary to the plan's “each filing is its own doc” claim (`docs/plans/2026-10-29-owed-responses.md:105-106`); a prior scanner fetch cannot see the later append (`scripts/scanCitizenPages.js:240-249`). The legacy batch path has a similar 160-character label cut before forming its ask (`scripts/cron-desk-run.js:478-505`), though the filing path suffices as a concrete repro. This is a caller identity issue, independent of SHA-1 collision probability.
+
+3. **F3 — the scanner rejects the DEBATE IDs this change writes.** `scripts/citizen-exchange.js:405-407` records debate participants with daypart `DEBATE`; when the switch is on, `scripts/citizen-exchange.js:172-175` writes a weekday ID such as `cp-<POPID>-c<N>-DEBATE-thu`. Neither scanner grammar contains `DEBATE` (`scripts/scanCitizenPages.js:53-59`), so `admit()` returns `{ reject: 'slot' }` at `scripts/scanCitizenPages.js:76-81`, and `dumpIndex` drops the document at `:244-249`. Input: any successful Thursday debate under `PAGE_DAY_KEY=true`. Wrong output: the citizen's page gets a reflection, but the local corpus and all its readers get no debate row. This omission predates the switch, but the pipeline.96 claim covers CONVO / INTERVIEW / DEBATE together (`docs/plans/2026-10-29-owed-responses.md:108-109`) and the new proof says every constructed ID is admitted (`:117`). The fixture samples PRESS, work, and CONVO only (`lib/citizenPage.test.js:106-117`; `scripts/scanCitizenPages.test.js:15-23`).
+
+## Checked seams and proof boundary
+
+The packet-mode desk ask includes the W2 Packet (`scripts/cron-desk-run.js:487-510`; `scripts/livedExperiencePacket.js:821-865,1002-1004`), and `runBatch` passes each `entry.ask` to `voiceOne` (`scripts/citizenVoice.js:268-282`). A changed packet text producing a second ref follows the stated rerun contract (`docs/plans/2026-10-29-owed-responses.md:113`). `reporterWall.js` reads posts and only documents the `--record-text` hook (`scripts/reporterWall.js:14-17,41-57`); `cron-saturday-run.js` does not call `citizenVoice` to record again. Scheduled work packages presently have distinct POPIDs (`scripts/work-wake-packages.json:6-203`); `selectDue` guards by POPID and scheduler day, while a forced same-day pack run bypasses that guard as the stated rerun contract permits (`scripts/cron-work-wake.js:224-239,318-326`). I found no separate scheduled work collision.
+
+For IDs admitted by the scanner, `day` and `ref` are split off while `slot` remains the existing grammar (`scripts/scanCitizenPages.js:76-81,261-267`). The letter citation regex accepts the letters-only ref (`scripts/checkLetterEligibility.js:133,153-166`); Pulse, Rhea's page check, and newsroom sourcing use indexed custom IDs or rows (`scripts/buildPulseSlice.js:149-162`; `scripts/scanCitizenPages.js:184-205`; `scripts/newsroomSourcing.js:345-373`). Lives and Voices match the normalized work/CONVO slots (`scripts/buildLivesSlice.js:75,126-139`; `scripts/buildVoicesSlice.js:38,89-92,159-171`). Citizen recall still fetches recent page documents and caps each candidate at 320 characters (`lib/citizenPage.js:244-272`; `lib/wakePerception.js:323-346`); family-own-words still checks daypart plus optional key rather than the day/ref (`lib/citizenPage.js:91-95,180-181`). These are source observations, not live readback proof.
+
+The added append-store fixture uses the real `appendReflection_` and `scan.admit`, and its mock appends under the posted customId (`lib/citizenPage.test.js:98-117`). It does not exercise the recording callers, the UTC/Chicago guard, or DEBATE. The reported test counts in the commit and plan are author claims, not runs in this review. No wiring card was attached because the task expressly forbids network calls.
+
+**Gate:** align the exchange admission day with the page-key day (and make the same-day rule reliable for two admitted exchanges), give distinct filings a distinct recorded ask or event identity, and resolve whether DEBATE pages belong in the local corpus. Then re-review the affected source and fixtures before enabling the switches.

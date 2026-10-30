@@ -72,6 +72,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
+| pipeline.96 | Interview, work-shift and exchange pages merge per citizen per Cycle; later answers never reach the index (builder 10-30). Key per event | in-progress | research-build | [[../plans/2026-10-29-owed-responses]] §pipeline.96 |
 
 ## 4. Queue — ruled, not started (ready)
 

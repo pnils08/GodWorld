@@ -45,6 +45,9 @@ const NAMES_TSV = path.join(__dirname, '..', 'output', 'citizen-names.tsv');
 const STATE_FILE = path.join(__dirname, '..', 'logs', 'work-wake-state.json');
 const LOG_FILE = path.join(__dirname, '..', 'logs', 'cron-work-wake.log');
 const DAYPART = 'work'; // Reflection_Intake col D token — the gated reader filters on `applied`, not daypart
+// pipeline.96 — the shift's page doc is keyed by its weekday (citizenPage `day`): the shift fires Tue and Thu, and the
+// store appends a second write under a taken key into the first doc, so one Cycle's two shifts merged into one.
+const PAGE_DAY_KEY = false;
 const RECENT_MEMORY = 50;
 
 function logLine(s) {
@@ -280,7 +283,7 @@ async function wakeOne(pkg, cycle, state) {
   const ptr = await page.ensurePagePointer_(pkg.popid);
   if (ptr.error) { logLine('ensurePagePointer_ ERROR: ' + ptr.error); return false; }
   const appended = await page.appendReflection_(pkg.popid, reflection, {
-    cycle, daypart: DAYPART,
+    cycle, daypart: DAYPART, day: PAGE_DAY_KEY ? page.pageDayOf(new Date()) : null,
     extra: { affect: cls.affect || null, event: cls.event || null, workWake: pkg.persona },
   });
   if (appended.error) { logLine('appendReflection_ ERROR: ' + appended.error); return false; }

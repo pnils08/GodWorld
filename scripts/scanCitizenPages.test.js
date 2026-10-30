@@ -4,14 +4,23 @@ const assert = require('assert');
 const p = require('./scanCitizenPages');
 
 // admission gate
-assert.deepStrictEqual(p.admit({ customId: 'cp-POP-00324-c109-morning', metadata: { type: 'reflection' } }, 109), { popId: 'POP-00324', cycle: 109, slot: 'morning', type: 'reflection', day: null });
+assert.deepStrictEqual(p.admit({ customId: 'cp-POP-00324-c109-morning', metadata: { type: 'reflection' } }, 109), { popId: 'POP-00324', cycle: 109, slot: 'morning', type: 'reflection', day: null, ref: null });
 // pipeline.94 — a weekday-keyed page: the weekday is split off, the slot keeps the daypart grammar
-assert.deepStrictEqual(p.admit({ customId: 'cp-POP-00324-c113-morning-thu', metadata: { type: 'reflection' } }, 113), { popId: 'POP-00324', cycle: 113, slot: 'morning', type: 'reflection', day: 'thu' });
-assert.deepStrictEqual(p.admit({ customId: 'cp-POP-00324-c113-night-sun-tension-resolved', metadata: { type: 'tension' } }, 113), { popId: 'POP-00324', cycle: 113, slot: 'night-tension-resolved', type: 'tension', day: 'sun' });
+assert.deepStrictEqual(p.admit({ customId: 'cp-POP-00324-c113-morning-thu', metadata: { type: 'reflection' } }, 113), { popId: 'POP-00324', cycle: 113, slot: 'morning', type: 'reflection', day: 'thu', ref: null });
+assert.deepStrictEqual(p.admit({ customId: 'cp-POP-00324-c113-night-sun-tension-resolved', metadata: { type: 'tension' } }, 113), { popId: 'POP-00324', cycle: 113, slot: 'night-tension-resolved', type: 'tension', day: 'sun', ref: null });
 assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c113-morning-thu-tension', metadata: { type: 'tension' } }, 113).slot, 'morning-tension');
 assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c113-morning-2026-10-29', metadata: { type: 'reflection' } }, 113).reject, 'slot', 'a calendar date is not a page day');
 assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c113-morning-tension-thu', metadata: { type: 'tension' } }, 113).reject, 'slot', 'the weekday sits after the daypart, never after the key');
 assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c113-deskwork-thu', metadata: { type: 'reflection' } }, 113).reject, 'slot', 'a weekday never opens a slot the allowlist shuts');
+// pipeline.96 — an interview page: six letters a–p after the weekday, split off as ref; the slot stays PRESS
+assert.deepStrictEqual(p.admit({ customId: 'cp-POP-00324-c113-PRESS-thu-kfbmdp', metadata: { type: 'reflection' } }, 113), { popId: 'POP-00324', cycle: 113, slot: 'PRESS', type: 'reflection', day: 'thu', ref: 'kfbmdp' });
+assert.deepStrictEqual(p.admit({ customId: 'cp-POP-00324-c113-PRESS-thu-kfbmdp-tension-resolved', metadata: { type: 'tension' } }, 113), { popId: 'POP-00324', cycle: 113, slot: 'PRESS-tension-resolved', type: 'tension', day: 'thu', ref: 'kfbmdp' });
+assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c113-work-tue', metadata: { type: 'reflection' } }, 113).slot, 'work');
+assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c113-CONVO-wed', metadata: { type: 'reflection' } }, 113).day, 'wed');
+assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c113-PRESS-kfbmdp', metadata: { type: 'reflection' } }, 113).reject, 'slot', 'a ref rides only after a weekday');
+assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c113-PRESS-thu-kfbmdz', metadata: { type: 'reflection' } }, 113).reject, 'slot', 'a ref is letters a-p only');
+assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c113-PRESS-thu-kfbmd', metadata: { type: 'reflection' } }, 113).reject, 'slot', 'a ref is exactly six letters');
+assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c113-PRESS-thu-tension-kfbmdp', metadata: { type: 'tension' } }, 113).reject, 'slot', 'the ref sits before the key, never after it');
 assert.strictEqual(p.admit({ customId: 'cp-POP-00005-c109-NIGHTLY-2026-10-02', metadata: { type: 'reflection' } }, 109).reject, 'slot', 'the desk journal never lands');
 assert.strictEqual(p.admit({ customId: 'cp-POP-00100-c109-CIVIC-cascade-STMT-109-mayor_open-001', metadata: { type: 'office-position' } }, 109).reject, 'type', 'office statements never land');
 assert.strictEqual(p.admit({ customId: 'cp-POP-00324-c119-PRESS-tension', metadata: { type: 'tension' } }, 109).reject, 'cycle', 'bench cycles never land');

@@ -53,6 +53,9 @@ const EXCHANGE_DIR = path.join(__dirname, '..', 'output', 'exchanges');
 const TENSION_CAP = 3;
 const TENSION_EXPIRY_CYCLES = 12;
 const RIPPLE_EXPIRY_CYCLES = 12;
+// pipeline.96 — a participant's page doc is keyed by the exchange's weekday (citizenPage `day`): one exchange a day,
+// and the store appends a second write under a taken key into the first doc, so two exchanges in one Cycle merged.
+const PAGE_DAY_KEY = false;
 
 function logLine(s) {
   const line = `[${new Date().toISOString()}] ${s}\n`;
@@ -166,8 +169,9 @@ async function recordParticipant(c, ownText, daypart, cycle, tensionState, bondT
   try { cls = await classifier.classifyTripleReflection_(ownText, openTensions.map((t) => t.q)); } catch (e) { cls = { raw: 'classify threw: ' + e.message }; }
   const ptr = await page.ensurePagePointer_(c.popId);
   if (ptr.error) throw new Error('ensurePagePointer_: ' + ptr.error);
+  const day = PAGE_DAY_KEY ? page.pageDayOf(new Date()) : null;
   const appended = await page.appendReflection_(c.popId, ownText, {
-    cycle, daypart, extra: { affect: cls.affect || null, event: cls.event || null },
+    cycle, daypart, day, extra: { affect: cls.affect || null, event: cls.event || null },
   });
   if (appended.error) throw new Error('appendReflection_: ' + appended.error);
   logLine(`[record] ${c.popId} page ${ptr.tag} <- ${daypart} doc ${appended.id || '?'}`);
@@ -177,7 +181,7 @@ async function recordParticipant(c, ownText, daypart, cycle, tensionState, bondT
     const t = openTensions[cls.resolves];
     t.status = 'resolved'; t.resolvedCy = cycle;
     resolvedText = t.q;
-    await page.appendReflection_(c.popId, `TENSION-RESOLVED[c${cycle}]: ${t.q}`, { cycle, daypart, key: 'tension-resolved', extra: { type: 'tension' } });
+    await page.appendReflection_(c.popId, `TENSION-RESOLVED[c${cycle}]: ${t.q}`, { cycle, daypart, day, key: 'tension-resolved', extra: { type: 'tension' } });
   }
   if (cls.tension && !tlist.some((t) => t.status === 'open' && t.q.toLowerCase() === cls.tension.toLowerCase())) {
     const openNow = tlist.filter((t) => t.status === 'open');
@@ -186,7 +190,7 @@ async function recordParticipant(c, ownText, daypart, cycle, tensionState, bondT
       tlist.splice(tlist.indexOf(oldest), 1);
     }
     tlist.push({ q: cls.tension, cy: cycle, status: 'open' });
-    await page.appendReflection_(c.popId, `TENSION[c${cycle}]: ${cls.tension}`, { cycle, daypart, key: 'tension', extra: { type: 'tension' } });
+    await page.appendReflection_(c.popId, `TENSION[c${cycle}]: ${cls.tension}`, { cycle, daypart, day, key: 'tension', extra: { type: 'tension' } });
   }
   if (cls.event || cls.affect) {
     await sheets.appendRows('Reflection_Intake', [[

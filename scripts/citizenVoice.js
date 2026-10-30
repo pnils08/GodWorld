@@ -64,6 +64,10 @@ const MODEL = arg('model', DEFAULT_MODEL);
 // the durable surface). PRESS quotes participate in the same open-question lifecycle.
 const TENSION_FILE = path.join(__dirname, '..', 'logs', 'citizen-tension-state.json');
 const TENSION_CAP = 3;
+// pipeline.96 — an interview's page doc is keyed by its weekday and the ask (citizenPage `day` + `ref`): a citizen is
+// asked many times a Cycle, and the store appends a second write under a taken key into the first doc — one PRESS doc
+// held up to five answers, and an answer appended after the scanner fetched the doc never reached the index.
+const PAGE_EVENT_KEY = false;
 const TENSION_EXPIRY_CYCLES = 12;
 function loadTensionState() { try { return JSON.parse(fs.readFileSync(TENSION_FILE, 'utf8')); } catch (e) { return {}; } }
 function saveTensionState(st) { try { fs.writeFileSync(TENSION_FILE, JSON.stringify(st, null, 2)); } catch (e) {} }
@@ -195,13 +199,16 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
     // 2) narrative store: page pointer + reflection doc.
     const ptr = await page.ensurePagePointer_(c.popId);
     if (ptr.error) throw new Error('ensurePagePointer_: ' + ptr.error);
+    const graded = preText != null && /^graded: /.test(String(preText));
+    // pipeline.96: the same ask rerun the same day is that interview again (one doc); a grade keeps its own key below.
+    const slot = PAGE_EVENT_KEY && !graded ? { day: page.pageDayOf(new Date()), ref: page.pageRefOf(ask) } : {};
     const appended = await page.appendReflection_(c.popId, said.spoken, {
-      cycle, daypart: 'PRESS',
+      cycle, daypart: 'PRESS', ...slot,
       // pipeline.77: a reporter's "graded:" line keeps its own doc — one PRESS id per Cycle let it
       // overwrite the same Cycle's "filed:" line (C111 reruns, 2026-10-15).
       // pipeline.79 (codex #4): keyed per package (graded-<persona>) so two seats on one POPID
       // (Nia daily + weekly) never share a grade doc.
-      ...(preText != null && /^graded: /.test(String(preText)) ? { key: pageKey || 'graded' } : {}),
+      ...(graded ? { key: pageKey || 'graded' } : {}),
       extra: { affect: cls.affect || null, event: cls.event || null, ask: String(ask).slice(0, 120) },
     });
     if (appended.error) throw new Error('appendReflection_: ' + appended.error);
@@ -214,7 +221,7 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
       const t = openTensions[cls.resolves];
       t.status = 'resolved'; t.resolvedCy = cycle;
       resolvedText = t.q;
-      await page.appendReflection_(c.popId, `TENSION-RESOLVED[c${cycle}]: ${t.q}`, { cycle, daypart: 'PRESS', key: 'tension-resolved', extra: { type: 'tension' } });
+      await page.appendReflection_(c.popId, `TENSION-RESOLVED[c${cycle}]: ${t.q}`, { cycle, daypart: 'PRESS', ...slot, key: 'tension-resolved', extra: { type: 'tension' } });
       console.error(`[record] tension RESOLVED <- "${t.q.slice(0, 80)}"`);
     }
     if (cls.tension && !tlist.some((t) => t.status === 'open' && t.q.toLowerCase() === cls.tension.toLowerCase())) {
@@ -224,7 +231,7 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
         tlist.splice(tlist.indexOf(oldest), 1);
       }
       tlist.push({ q: cls.tension, cy: cycle, status: 'open' });
-      await page.appendReflection_(c.popId, `TENSION[c${cycle}]: ${cls.tension}`, { cycle, daypart: 'PRESS', key: 'tension', extra: { type: 'tension' } });
+      await page.appendReflection_(c.popId, `TENSION[c${cycle}]: ${cls.tension}`, { cycle, daypart: 'PRESS', ...slot, key: 'tension', extra: { type: 'tension' } });
       console.error(`[record] tension OPENED <- "${cls.tension.slice(0, 80)}"`);
     }
     saveTensionState(tensionState);

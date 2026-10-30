@@ -91,7 +91,30 @@ Known, not this build: `--dry-run` appends to `logs/citizen-wake-offered.jsonl` 
 
 **Proof.** Unit: `lib/citizenPage.test.js` (key shape, refusal, Central weekday at the UTC boundary, own words), `scripts/scanCitizenPages.test.js` (split, rejects a date or a misplaced weekday), `lib/wakePerception.test.js` — through the real `appendReflection_` and `pageDayOf` against an append store: Thursday then Friday = two docs, the event spent; a same-day rerun and a Thursday a week later = one appended doc, nothing spent, the event still owed. Live scanner run on the new admission: 3,073 listed, 36 new admitted, no old doc's admission changed. A live double same-daypart wake is rare (0 in the 36 live wakes on disk), so the unit tests carry it.
 
-Surfaced, not this build: PRESS and work pages merge the same way (one doc per citizen per Cycle).
+Surfaced, not this build: PRESS and work pages merge the same way (one doc per citizen per Cycle) — pipeline.96 below.
+
+## pipeline.96 — interview, work-shift and exchange pages keyed per event (2026-10-30, research-build)
+
+Builder 2026-10-30: "if the interviews and work shifts are all appending to the same memory entry and it's causing issues we should change it."
+
+**It causes issues (measured 2026-10-30).** Local index (`output/citizen_pages/index.jsonl`): PRESS 178 of 768 docs merged, those 178 holding 783 answers; PRESS-tension 80 of 364; work 9 of 62; CONVO 11 of 131. That count is a floor — the scanner fetches a doc id once (`scanCitizenPages.js` dump: `existing.has(docId)`), so an answer appended after the first fetch never shows. The cron logs show it directly: `<- PRESS doc <id>` lines in `logs/{newsroom-fanout,pre-saturday-sweep,undocked-weekly,ines-weekend}.log` name 28 docs written 2+ times — 72 answers; the index holds 30 of them, 21 lost on indexed docs, 6 docs never indexed. What each reader loses on a merged doc:
+- the newsroom (Pulse, letters pool, newsroom sourcing, Rhea's page lines — all read the index): every answer appended after the fetch.
+- the citizen's own memory (`loadOwnPageReadback` → `recentPage_`, 15 newest docs by `createdAt`, each cut at 320 chars): the first answer only, dated by the first write — a citizen interviewed four times in a Cycle remembers one.
+- Lives (work slot, first 240 chars) and Voices (work + CONVO, docId marked covered): the first shift or exchange only.
+
+**Build.** One page doc per event:
+- **PRESS** (`scripts/citizenVoice.js`, switch `PAGE_EVENT_KEY`): `day` (the weekday, pipeline.94) + `ref` — `pageRefOf(ask)`, six letters a–p from a sha1 of what was asked: `cp-POP-x-c113-PRESS-thu-kfbmdp`, its tension lines `…-PRESS-thu-kfbmdp-tension`. A weekday alone is not enough — one citizen takes several interviews a day (up to 5 on one doc). Letters only, like the weekday: the id reaches models and a letter cite matches `[A-Za-z-]+` (`checkLetterEligibility.js` PAGE_CITE_RE). A "filed:" line's ask carries its headline, so each filing is its own doc. A "graded:" line keeps its own key (pipeline.77/79) and gets no day/ref; the scanner does not admit it either way.
+- **work** (`scripts/cron-work-wake.js`, switch `PAGE_DAY_KEY`): `day` only — the shift fires Tue and Thu, so weekday separates a Cycle's two.
+- **CONVO / INTERVIEW / DEBATE** (`scripts/citizen-exchange.js`, switch `PAGE_DAY_KEY`): `day` only — the exchange holds itself to one a day (`state.lastRunDate`). Folded because the exchange's INTERVIEW format is an interview and all three formats share the one write (`recordParticipant`).
+- `lib/citizenPage.js`: `ref` rides after the day, before any key, only with a day; a malformed ref is refused before any write. Own-words family usage still tests daypart + key, so a day/ref-keyed answer still records. `scripts/scanCitizenPages.js` splits `ref` off with the weekday; `slot` stays the daypart grammar, rows carry `day` and `ref`.
+
+Switches held off through codex review — every one of these runs on a cron against this tree (`citizenVoice` on every desk run).
+
+**The rerun contract (stated up front, pipeline.94's).** An interview is citizen, Cycle, weekday, ask: the same ask rerun the same day lands in its own doc again (the store appends), never a second doc. An ask whose text differs on the rerun (a regenerated packet) is a second interview — a second doc. A shift or an exchange is citizen, Cycle, weekday; a same-day rerun appends. None of the three writes the owed journal, so nothing is receipted either way.
+
+**Ceilings.** Docs already merged stay as written. A doc appended after it was indexed still never refreshes in the index — now only on a rerun. A heavily interviewed citizen's 15 memory candidates fill with more interview docs than before (each answer is now its own candidate); the scorer still picks 3.
+
+**Proof.** `lib/citizenPage.test.js`: ref shape and sha1→letters, refusal (no day, bad letters), day-then-ref-then-key, own words with day + ref; through an append store, three asks one Thursday = three docs and the rerun ask appends into its own; every id the writer builds is admitted by the real scanner with the slot back to `PRESS` / `PRESS-tension-resolved` / `work` / `CONVO-tension`. `scripts/scanCitizenPages.test.js`: the split, and rejects a ref with no day, outside a–p, not six letters, or after the key. Page-reader suites green (articleContamination, beatSlices, buildLivesSlice, buildVoicesSlice, checkLetterEligibility, cronRheaPersonaGate, livedExperiencePacket, newsroomSourcing, wakeHealthPerception, cron-work-wake); wakePerception 182/183, the known snippet-cap failure.
 
 ## Measured volume (C113)
 
@@ -111,6 +134,7 @@ Wake selection is `lib/` — engine substrate: bench proof on the candidate, rev
 
 ## Changelog
 
+- 2026-10-30 (research-build) — pipeline.96 built (§pipeline.96, builder's word 2026-10-30): interview pages keyed by weekday + ask, work-shift and exchange pages by weekday, scanner splits both off; switches held off for codex.
 - 2026-10-30 (research-build) — pipeline.94 LIVE: codex re-review SHIP-WITH-FIXES, its one fix (the plan promised a later wake past the window) folded; `PAGE_DAY_KEY` on. Row done-pending-archive; live proof at the next wake's page id.
 - 2026-10-30 (research-build) — pipeline.94 codex HOLD (1) folded: rerun contract stated (a slot's second run is that wake — appended, nothing receipted); fixtures run through the real writer, same-day rerun added. Re-review sent (round 2 of 2).
 - 2026-10-30 (research-build) — pipeline.94 built (§pipeline.94): the store appends under a taken page id; wake page keyed by weekday, scanner splits it off, owed page key matches; switch held off for codex.

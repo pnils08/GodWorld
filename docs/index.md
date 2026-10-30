@@ -214,6 +214,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[for-claude-review/2026-10-29-codex-pipeline93-owed-rereview]]** — Codex re-review of fold 15e44d0d: F1–F6 dispositions, four remaining reservation and receipt findings; HOLD on R=6. *(reference, media, citizens, active)*
 - **[[for-claude-review/2026-10-29-codex-pipeline93-owed-round3]]** — Codex round 3 review of c67d4aac: R2/R3 ship, three remaining pinning and journal findings; HOLD on R=6. *(reference, media, citizens, active)*
 - **[[for-claude-review/2026-10-29-codex-pipeline93-owed-round4]]** — Codex review of dd73a5ec: three direct fixes pass, one overlapping page-key race remains; HOLD on R=6. *(reference, media, citizens, active)*
+- **[[for-claude-review/2026-10-29-codex-pipeline93-owed-round5]]** — Codex review of 4d12ef62: concurrent lock fold passes; date-bearing journal key can false-receipt a duplicate page; HOLD on R=6. *(reference, media, citizens, active)*
 - **[[for-claude-review/2026-10-29-codex-stale-next-lint-review]]** — Codex review of d79f9eb5: HOLD on suppressed row-close warnings; archive table rows receive the wrong reason. *(reference, docs, review, active)*
 - **[[media/HARTLEY_VISUAL_BAG]]** — DJ Hartley visual record (grok). *(reference, media, sports, photo, active)*
 - **[[media/P_SLAYER_JOURNEY_INDEX]]** — P Slayer's journey across editions. *(entity, media, active)*

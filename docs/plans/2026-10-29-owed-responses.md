@@ -34,14 +34,14 @@ Thresholds, from measured rates (chaos: 11 cycles of world_summary; casino: 164 
 | Event | Owes a response | Expected / cycle |
 |---|---|---|
 | Chaos car | the engine's `severity: 'high'` citizen outcomes (arrested, medical_emergency, workplace_accident, substance_intervention, deescalated, mail_theft_reported) | ~0.7 |
-| Casino / UNDOCKED | stake ≥ 500 (4 in C113), or net win ≥ 500 | ~4 at C113 volume, growing |
+| Casino / UNDOCKED | wager over 1,000, or winnings over 500 (builder, second pass: not a 500 stake) | ~0.5 (3 wagers ≥1,000 and 2 net wins ≥500 in C107–C113) |
 | Hospital stay | any admission | ~0.4 |
 | Court case | any detention, any offense | ~0.2 |
 
-- **Reserved wakes R = 6** a cycle (builder raised it from 3), most severe first.
+- **Reserved wakes R = 6** a cycle (builder raised it from 3; agreed), most severe first. At ~2 owed a cycle on these bars, R=6 is headroom plus room for absorbed tickets.
 - **Expiry M = 2 cycles.**
-- **Absorption (builder):** a cycle where no high-severity event fired lets the low-severity citizen-hit chaos events (tickets, warnings, delays) take the reserved wakes, severity then recency. Read as: zero severe events → low ones absorbed. If the builder meant "leftover slots fill with low ones every cycle", that is a one-line change.
-- Casino volume tripled C107→C113 (12→40 settled); revisit the 500 stake bar in ~5 cycles. The engine rates a train held for a medical emergency low; it is not in the high class.
+- **Absorption (builder):** a cycle where no high-severity event fired lets the low-severity citizen-hit chaos events (tickets, warnings, delays) take the reserved wakes, severity then recency. Read as: zero severe events → low ones absorbed (builder: "how you set it is fine"). Leftover-slots-every-cycle would be a one-line change.
+- Casino volume tripled C107→C113 (12→40 settled); revisit the 1,000 wager bar in ~5 cycles. The engine rates a train held for a medical emergency low; it is not in the high class.
 
 Build not started. Wake selection is `lib/` (engine substrate): bench proof, review, PROD.
 
@@ -63,5 +63,5 @@ Wake selection is `lib/` — engine substrate: bench proof on the candidate, rev
 
 ## Changelog
 
-- 2026-10-29 (research-build) — Builder ruled thresholds, R=6, M=2, absorption rule (table above); row ready, build not started.
+- 2026-10-29 (research-build) — Builder ruled thresholds (casino: wager over 1,000, winnings over 500), R=6, M=2, absorption as set; row ready, build not started.
 - 2026-10-29 (research-build) — Plan opened from the Tamsin C113 flag (stance lines quoted as speech; slice fed moods on a thin day). Slice side shipped same day: 7c5f390a, b26a4184, cf0e995f, bd1f0c28, 253cdde4.

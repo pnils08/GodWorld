@@ -26,12 +26,17 @@ const path = require('path');
 const K = require('./beatSliceKit');
 const lives = require('./buildLivesSlice');
 
+// The writer's approach names the rule the roster ran (codex pipeline.97 F4).
+function approachFor(every) {
+  return 'Voices approach: this slice is a roster, a tip sheet, not your assignment — every citizen with a ' + (every ? '' : 'self-initiated ') + 'page on the record, one line each. You pick whose own words carry the day, and why. The person\'s own line first, before their name; then who they are in one plain clause; then what in the city they were answering, from the page\'s own tags. Fewer, longer passages; the words are the product. Never a count, never a statistic, never an explanation of what they meant.';
+}
+
 const SEAT = {
   slug: 'ines-sorensen', name: 'Ines Sorensen', popid: null, desk: 'culture',
   kind: 'beat-voices', domain: 'voices', artifact: 'voices', builder: 'buildVoicesSlice.js',
   version: 'VOICES-SLICE-2', nameRe: /ines\s*sorensen/i,
   tabs: [],
-  approach: 'Voices approach: this slice is a roster, a tip sheet, not your assignment — every citizen with a ' + (lives.EVERY_PAGE ? '' : 'self-initiated ') + 'page on the record, one line each. You pick whose own words carry the day, and why. The person\'s own line first, before their name; then who they are in one plain clause; then what in the city they were answering, from the page\'s own tags. Fewer, longer passages; the words are the product. Never a count, never a statistic, never an explanation of what they meant.',
+  approach: approachFor(lives.EVERY_PAGE),
   roomIsYours: 'where they were standing when they wrote it, the one plain clause that says who this is, the silence after their last line — never a word inside the quotation marks that is not on the page',
   build
 };
@@ -82,6 +87,7 @@ function opening(text) {
 // self-initiated page in the store, one line each; the 36h set is marked "new since your last piece"
 // as information. Nothing here chooses, caps, or counts her — covered is her memory, shown, never enforced.
 function build(cycle, { root, profiles, now = new Date(), everyPage = lives.EVERY_PAGE }) {
+  const seat = { ...SEAT, approach: approachFor(everyPage) };
   const covered = readCovered(root);
   const day = lives.localDay(now);
   const since = now.getTime() - WINDOW_HOURS * 3600 * 1000;
@@ -108,7 +114,7 @@ function build(cycle, { root, profiles, now = new Date(), everyPage = lives.EVER
   const trail = 'index ' + all.length + ', ' + (everyPage ? 'readable ' : 'self-initiated ') + self.length + ', long enough and on the ledger ' + eligible.length +
     ', citizens ' + byPop.size;
   if (!byPop.size) {
-    return K.emptySlice(SEAT, cycle, 'no ' + (everyPage ? '' : 'self-initiated ') + 'citizen page on the ledger (output/citizen_pages/index.jsonl) — ' + trail);
+    return K.emptySlice(seat, cycle, 'no ' + (everyPage ? '' : 'self-initiated ') + 'citizen page on the ledger (output/citizen_pages/index.jsonl) — ' + trail);
   }
 
   // Newest latest-page first: an order to read in, not a choice made for her.
@@ -133,11 +139,11 @@ function build(cycle, { root, profiles, now = new Date(), everyPage = lives.EVER
       docId: d.docId, popid: r.popid, slot: d.slot, cycle: Number(d.cycle)
     });
   }
-  if (!facts.length) return K.emptySlice(SEAT, cycle, 'the pages belong to citizens not on the ledger snapshot — ' + trail);
+  if (!facts.length) return K.emptySlice(seat, cycle, 'the pages belong to citizens not on the ledger snapshot — ' + trail);
 
   const fresh = roster.filter(r => r.fresh).length;
   const label = 'Voices roster, C' + cycle + ': ' + people.length + ' citizens with pages' + (fresh ? ', ' + fresh + ' new since your last piece' : '');
-  return K.makeSlice(SEAT, cycle, {}, {
+  return K.makeSlice(seat, cycle, {}, {
     // the day in the ref: the fanout's staleBeatRef drops a seat whose ref was filed this Cycle
     ref: 'output/citizen_pages/index.jsonl (' + what(everyPage) + 's, whole store) ' + lives.dayToken(day),
     hood: null, label,
@@ -157,10 +163,13 @@ function pagesForPicks(pops, { root = K.ROOT, profiles, everyPage = lives.EVERY_
   const prof = profiles || K.loadProfiles(root);
   const out = [];
   if (!want.size) return out;
+  // A pick is hers (the resolver does not second-guess it); a reporter she names reads by the old rule (readsEvery).
   const mine = readPages(root)
-    .filter(onPage(everyPage))
-    .map(d => ({ ...d, popid: String(d.popId || '').toUpperCase(), text: lives.pageText(d.content, everyPage) }))
-    .filter(d => want.has(d.popid) && d.text)
+    .map(d => ({ ...d, popid: String(d.popId || '').toUpperCase() }))
+    .map(d => ({ ...d, rule: lives.readsEvery(everyPage, prof.get(d.popid)) }))
+    .filter(d => want.has(d.popid) && onPage(d.rule)(d))
+    .map(d => ({ ...d, text: lives.pageText(d.content, d.rule) }))
+    .filter(d => d.text)
     .sort((a, b) => Date.parse(a.createdAt || '') - Date.parse(b.createdAt || ''));
   for (const d of mine) {
     const person = K.personFromProfile(prof, d.popid, '', null);

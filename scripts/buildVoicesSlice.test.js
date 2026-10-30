@@ -39,6 +39,7 @@ const pages = [
   { docId: 'p9', customId: 'cp-POP-90006-c111-morning', popId: 'POP-90006', cycle, slot: 'morning', affect: 'Calm', event: 'Daily', createdAt: fresh, content: 'Too short to carry a passage.' },
   { docId: 'p11', customId: 'cp-POP-90007-c111-DEBATE-fri', popId: 'POP-90007', cycle, slot: 'DEBATE', day: 'fri', affect: null, event: null, createdAt: fresh, content: long('I said it at the forum: the bus line matters more to this block than the stadium does.') },
   { docId: 'p12', customId: 'cp-POP-90008-c111-PRESS-tension', popId: 'POP-90008', cycle, slot: 'PRESS-tension', affect: null, event: null, createdAt: fresh, content: 'TENSION[c111]: ' + long('Who decides whether the clinic stays open on Sundays, and do they ever ride the bus there?') },
+  { docId: 'p13', customId: 'cp-POP-90004-c111-PRESS', popId: 'POP-90004', cycle, slot: 'PRESS', affect: null, event: null, createdAt: fresh, content: 'filed: Sample headline on the reporter\'s own page, her filing record and never her words' },
   { docId: 'p10', customId: 'cp-POP-99999-c111-morning', popId: 'POP-99999', cycle, slot: 'morning', affect: 'Calm', event: 'Daily', createdAt: fresh, content: long('Not on the ledger snapshot — no name to attribute to.') }
 ];
 
@@ -73,7 +74,7 @@ try {
   assert.ok(day1.story.ref.endsWith(' ' + L.dayToken(day1.day)), 'the ref carries a per-day token, never a wall-clock date (builder 2026-10-28)');
   assert.deepStrictEqual(day1.prewrite.pageVoices, []);
   assert.ok(/pick whoever you want/i.test(day1.story.hookLine));
-  assert.ok(/not your assignment/.test(day1.approach));
+  assert.ok(/not your assignment/.test(day1.approach) && /every citizen with a self-initiated page on the record/.test(day1.approach));
   // Building the roster chooses nothing and remembers nothing.
   assert.ok(!fs.existsSync(V.coveredPath(root)), 'building the slice writes no covered file');
   // A page from before the window is still on the roster, marked as not new.
@@ -122,13 +123,16 @@ try {
     assert.ok(/Test Debater, Bus Driver, Fruitvale \(POP-90007\) — 1 page; latest in a debate, C111; new since your last piece: “I said it at the forum/.test(text), text);
     assert.ok(/\(POP-90008\) — 1 page; latest to a reporter, a question they carry, C111; new since your last piece: “Who decides whether the clinic/.test(text), text);
     assert.ok(/\(POP-90001\) — 3 pages;/.test(text) && /\(POP-90005\) — 2 pages;/.test(text), 'the PRESS reply and the question count as their pages');
-    assert.ok((L.EVERY_PAGE ? /every citizen with a page on the record/ : /every citizen with a self-initiated page on the record/).test(all.approach), 'the approach names the rule the switch runs');
+    assert.ok(/every citizen with a page on the record/.test(all.approach) && !/self-initiated/.test(all.approach), 'the approach names the rule this build ran (codex F4)');
     const picks = V.pagesForPicks(['POP-90001', 'POP-90005'], { root: everyRoot, profiles, everyPage: true });
     assert.deepStrictEqual(picks.map(f => f.docId), ['p1', 'p1b', 'p5', 'p6', 'p7']);
     const q = picks.find(f => f.docId === 'p7').text;
     assert.ok(q.startsWith('“Will the night shift ever get a second medic') && !/TENSION\[/.test(q), q);
     assert.ok(/\(own page, the morning page, a question they carry, C111\)$/.test(q), q);
     assert.ok(/\(own page, to a reporter, C111\)$/.test(picks.find(f => f.docId === 'p6').text));
+    // codex F2: a reporter she names resolves by the old rule — her own wake page, never her filing record.
+    const reporterPick = V.pagesForPicks(['POP-90004'], { root: everyRoot, profiles, everyPage: true });
+    assert.deepStrictEqual(reporterPick.map(f => f.docId), ['p4']);
     // The default follows the one switch in buildLivesSlice.
     const dflt = V.buildVoicesSlice(cycle, { root: everyRoot, profiles, now });
     const named = V.buildVoicesSlice(cycle, { root: everyRoot, profiles, now, everyPage: L.EVERY_PAGE });

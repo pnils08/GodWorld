@@ -107,18 +107,25 @@ try {
   fs.writeFileSync(path.join(root, 'output', 'citizen_pages', 'index.jsonl'), [
     JSON.stringify({ docId: 'd1', customId: 'cp-POP-90004-c111-night', popId: 'POP-90004', cycle, slot: 'night', content: 'Home. The kitchen smelled like someone else had been cooking in it all week.', createdAt: '2026-01-01T00:00:00Z' }),
     JSON.stringify({ docId: 'd2', customId: 'cp-POP-90004-c111-PRESS', popId: 'POP-90004', cycle, slot: 'PRESS', content: 'A reporter asked and I told her the ward was quieter than the waiting room.', createdAt: '2026-01-01T00:00:00Z' }),
+    JSON.stringify({ docId: 'd4', customId: 'cp-POP-90021-c111-evening', popId: 'POP-90021', cycle, slot: 'evening', content: 'Long day on the desk; the copy was clean by nine.', createdAt: '2026-01-01T00:00:00Z' }),
+    JSON.stringify({ docId: 'd5', customId: 'cp-POP-90021-c111-PRESS', popId: 'POP-90021', cycle, slot: 'PRESS', content: 'filed: Sample headline', createdAt: '2026-01-01T00:00:00Z' }),
     JSON.stringify({ docId: 'd3', customId: 'cp-POP-90004-c111-night-tension', popId: 'POP-90004', cycle, slot: 'night-tension', type: 'tension', content: 'TENSION[c111]: Who is going to drive me to the follow-up?', createdAt: '2026-01-01T00:00:00Z' })
   ].join('\n') + '\n');
 
   // pipeline.97 (builder 2026-10-30): the self-initiated rule reads the wake page only; every admitted page reads
   // the interview reply and the question too, the tag stripped, each named where it was said.
-  const selfOnly = L.ownPageLines(root, cycle, ['POP-90004'], false);
+  const selfOnly = L.ownPageLines(root, cycle, ['POP-90004'], profiles, false);
   assert.deepStrictEqual(selfOnly.map(p => [p.customId, p.where]), [['cp-POP-90004-c111-night', 'night']]);
-  const everyLine = L.ownPageLines(root, cycle, ['POP-90004'], true);
+  const everyLine = L.ownPageLines(root, cycle, ['POP-90004'], profiles, true);
   assert.deepStrictEqual(everyLine.map(p => [p.customId, p.where]), [
     ['cp-POP-90004-c111-night', 'the night page'], ['cp-POP-90004-c111-PRESS', 'to a reporter'], ['cp-POP-90004-c111-night-tension', 'the night page, a question they carry']]);
   assert.equal(everyLine[2].text, 'Who is going to drive me to the follow-up?');
-  assert.deepStrictEqual(L.ownPageLines(root, cycle, ['POP-90004']).map(p => p.customId), L.ownPageLines(root, cycle, ['POP-90004'], L.EVERY_PAGE).map(p => p.customId), 'the default follows the switch');
+  assert.deepStrictEqual(L.ownPageLines(root, cycle, ['POP-90004'], profiles).map(p => p.customId), L.ownPageLines(root, cycle, ['POP-90004'], profiles, L.EVERY_PAGE).map(p => p.customId), 'the default follows the switch');
+  // codex F1: a reporter's filing record is never their words — a reporter's pages read by the old rule under either switch.
+  const reporterLines = L.ownPageLines(root, cycle, ['POP-90021'], profiles, true);
+  assert.deepStrictEqual(reporterLines.map(p => [p.customId, p.where]), [['cp-POP-90021-c111-evening', 'the evening page']]);
+  assert.ok(!reporterLines.some(p => /filed:/.test(p.text)));
+  assert.ok(L.readsEvery(true, profiles.get('POP-90004')) && !L.readsEvery(true, profiles.get('POP-90021')) && !L.readsEvery(false, profiles.get('POP-90004')));
   assert.equal(L.slotWord('DEBATE-tension-resolved'), 'in a debate, a question they settled');
   assert.equal(L.slotWord('INTERVIEW'), 'in an interview');
   assert.ok(L.pageSlot('CONVO', 'voices', false) && !L.pageSlot('CONVO', 'lives', false) && L.pageSlot('DEBATE', 'lives', true) && !L.pageSlot('NIGHTLY', 'lives', true));

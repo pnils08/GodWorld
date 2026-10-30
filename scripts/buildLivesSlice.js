@@ -88,6 +88,9 @@ function pageSlot(slot, seat, every = EVERY_PAGE) {
   return every ? scan().SLOT_RE.test(s) : (seat === 'voices' ? VOICES_SLOTS : SELF_SLOTS).test(s);
 }
 function pageText(content, every = EVERY_PAGE) { return (every ? scan().citizenText(content) : String(content || '')).trim(); }
+// A reporter's pages keep the old rule in both seats: their PRESS docs hold their own filing record ("filed: <headline>",
+// 194 docs, none on a citizen's page), never their words — and the newsroom does not cover itself (codex pipeline.97 F1/F2).
+const readsEvery = (every, profile) => !!every && !isMedia(profile);
 // Where the words were said, as the roster and the passage name it — never the slot key.
 const SLOT_WORD = { CONVO: 'in conversation', work: 'after work', PRESS: 'to a reporter', INTERVIEW: 'in an interview', DISCORD: 'in a talk', DEBATE: 'in a debate' };
 function slotWord(slot) {
@@ -146,8 +149,9 @@ function cameNext(logByPop, popid, afterCycle, notText) {
   return rows[0] || null;
 }
 
-// The citizen's own page this Cycle (the lived wake lands the day it happened).
-function ownPageLines(root, cycle, popids, every = EVERY_PAGE) {
+// The citizen's own page this Cycle (the lived wake lands the day it happened). profiles: the ledger Map, so a
+// reporter's pages read by the old rule (readsEvery).
+function ownPageLines(root, cycle, popids, profiles, every = EVERY_PAGE) {
   const want = new Set(popids.map(p => String(p).toUpperCase()));
   const out = [];
   let text = '';
@@ -155,10 +159,13 @@ function ownPageLines(root, cycle, popids, every = EVERY_PAGE) {
   for (const line of text.split(/\r?\n/)) {
     if (!line.trim()) continue;
     let d; try { d = JSON.parse(line); } catch (_) { continue; }
-    if (Number(d.cycle) !== Number(cycle) || !pageSlot(d.slot, 'lives', every) || !want.has(String(d.popId || '').toUpperCase())) continue;
-    const content = pageText(d.content, every);
+    const pop = String(d.popId || '').toUpperCase();
+    if (Number(d.cycle) !== Number(cycle) || !want.has(pop)) continue;
+    const rule = readsEvery(every, profiles.get(pop));
+    if (!pageSlot(d.slot, 'lives', rule)) continue;
+    const content = pageText(d.content, rule);
     if (!content) continue;
-    out.push({ popid: String(d.popId).toUpperCase(), slot: d.slot, where: every ? slotWord(d.slot) : d.slot, customId: d.customId, text: content });
+    out.push({ popid: pop, slot: d.slot, where: every ? slotWord(d.slot) : d.slot, customId: d.customId, text: content });
   }
   return out;
 }
@@ -441,7 +448,7 @@ function build(cycle, { root, beats, profiles }) {
   }
 
   // The person's own words this Cycle, when the lived wake landed: colour and sourcing, verbatim.
-  const pages = ownPageLines(root, cycle, people.map(p => p.popid));
+  const pages = ownPageLines(root, cycle, people.map(p => p.popid), profiles);
   const pageVoices = pages.slice(0, 5).map(pg => {
     const who = people.find(p => p.popid === pg.popid);
     return (who ? who.name : pg.popid) + ', own page (' + pg.where + ', C' + cycle + '): “' + pg.text.slice(0, 240) + (pg.text.length > 240 ? '…' : '') + '”';
@@ -495,4 +502,4 @@ const sitsOutWhenEmpty = true;
 if (require.main === module) W.main();
 module.exports = { plainLife, lifeRank, SEAT, sitsOutWhenEmpty, kindWord, loadSlice, dayToken, buildLivesSlice: W.build, writeLivesSlice: W.write, loadLivesSlice: loadSlice,
   isLivesSeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment, slicePaths: W.paths,
-  kindLine, cameNext, localDay, coveredPath, EVERY_PAGE, pageSlot, pageText, slotWord, ownPageLines };
+  kindLine, cameNext, localDay, coveredPath, EVERY_PAGE, pageSlot, pageText, readsEvery, slotWord, ownPageLines };

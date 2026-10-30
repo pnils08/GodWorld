@@ -1,9 +1,9 @@
 ---
 title: Engine Regulatory Friction Removal + Auditor Reweight Plan
 created: 2026-05-22
-updated: 2026-05-22
+updated: 2026-10-29
 type: plan
-tags: [engine, initiative-engine, auditor, draft]
+tags: [engine, initiative-engine, auditor, done]
 sources:
   - "docs/plans/2026-05-22-c94-gap-log-triage.md §3 Cluster C13"
   - "output/production_log_edition_c94_sift_gaps.md G-S4 (engine generates regulatory-friction content with zero editorial payoff)"
@@ -59,7 +59,7 @@ pointers:
   2. Document current phase-tenure thresholds for: design-development-active, pilot_evaluation, disbursement-active, construction-active, plus any other phases that exceed 3-cycle tenure.
   3. Find the auditor's HIGH-severity gate logic in `detectStuckInitiatives`.
 - **Verify:** Single file/function per concern; no duplicate threshold sites.
-- **Status:** [ ] not started
+- **Status:** [x] DONE S227 (engine-sheet) — answered empirically: phase tenure is neither code nor sheet config; it is emergent from voice-agent decision cadence (changelog 2026-05-23). No `phase15-initiative-engine/` exists.
 
 ### Task 2: Phase-tenure threshold reduction
 
@@ -96,18 +96,19 @@ pointers:
   3. Test fixtures: Stab Fund effects-firing → LOW; Stab Fund effects-not-firing + 5 cycles → HIGH.
   4. Bump detectorVersion in audit JSON.
 - **Verify:** `npm test scripts/engine-auditor/detectStuckInitiatives.test.js` green; C94 audit re-run shows expected HIGH-band drop.
-- **Status:** [ ] not started
+- **Status:** [x] SHIPPED S227 as engine.20a (`detectStuckInitiatives` v1.2 → v1.3, remedy-firing-aware severity); the detector has since moved on to v1.4.0.
 
 ### Task 5: Initiative content audit — re-pointed to the live surface (2026-10-02)
 
 `/sift` left the chain at S456 (run-cycle §What Happens After: no sift, no edition step). The two items now read against the cron newsroom:
 
-1. **`covered-by-feature` — done by structure.** `scripts/newsroom-fanout.js` `assignedStoryRefs()` refuses a story ref already assigned in the same cycle-week, and engine.270 keys every initiative stage to one storyline (`<InitiativeID>:<stage>`) that the packet shows as a running story. One dedicated piece per initiative per cycle is enforced; the rest of the desk sees it as background.
-2. **Movement-only — OPEN, the cut:** `scripts/buildWorldSummary.js` (civic lane, ~line 1195) pushes a `kind: 'initiative'` seed for **every** `Initiative_Tracker` row every cycle, so a process-tick initiative is a weekly dedicated-article seed. At C109 all seven rows seeded; the only one that moved was INIT-001 (a disbursement, `LastDisburseCycle` 109). `LastWorkCycle` and `NextActionCycle` are the civic chain's own tick (108/109 on every standing row) and do not count as movement.
+1. **`covered-by-feature` — done by structure.** `scripts/newsroom-fanout.js` `assignedStoryRefs()` refuses a story ref already assigned in the same cycle-week, and engine.270 keys every initiative stage to one storyline (`<InitiativeID>:<stage>`) that the packet shows as a running story. One dedicated piece per initiative per cycle is enforced; the rest of the desk sees it as background. **Corrected 2026-10-29 (engine-sheet, codex engine.20d review):** the dedup is on the exact ref, and an initiative's `initiative` and `vote` seeds carry different refs (the first adds the snapshot pointer), so both could be assigned in one week; observed C110–C113 fanouts held one assignment per initiative per week.
+2. **Movement-only — SHIPPED 2026-10-29 (engine.20d), the cut:** `scripts/buildWorldSummary.js` (civic lane, ~line 1195) pushes a `kind: 'initiative'` seed for **every** `Initiative_Tracker` row every cycle, so a process-tick initiative is a weekly dedicated-article seed. At C109 all seven rows seeded; the only one that moved was INIT-001 (a disbursement, `LastDisburseCycle` 109). `LastWorkCycle` and `NextActionCycle` are the civic chain's own tick (108/109 on every standing row) and do not count as movement.
    - **Movement** = any of `LastStageChangeCycle`, `LastDisburseCycle`, `MayoralActionCycle`, `VoteCycle`, `OverrideVoteCycle` equal to the cycle, or `ImplementationPhase` differing from the previous audit snapshot (`output/beats/prev/Initiative_Tracker.jsonl`).
    - **Cut:** emit the `initiative` seed only on movement; keep the `vote` seed as is (an upcoming vote or scheduled action is its own signal); the storyline entry still reaches the packet through engine.270's registry, which reads the tracker directly. Test in `buildWorldSummary.test.js`: a row with no movement columns on the cycle emits no `initiative` seed; a disbursement on the cycle does.
+   - **As built (2026-10-29, engine-sheet):** movement is a change against last Cycle's audit snapshot (`output/engine_audit_c{N-1}.json`, not `beats/prev`, which rotates on its own clock), never a clock equal to the Cycle — the civic chain stamps its own Cycle after that snapshot is taken (INIT-012 filed with `ProposedCycle` 112, first seen at C113), and a forward clock reaching the Cycle is only a due date (a stalled build keeps its `OpensCycle`; a quorum-delayed renewal keeps `RenewalVoteCycle`). Watched: the five clocks above plus `ProposedCycle`, `RenewalVoteCycle`, `RenewalCreditCycle`, `OpensCycle` (builder 2026-10-29: a new filing, a status flip, a renewal vote, a renewal payout and an opening day count), and `Status`, `ImplementationPhase`, `Stage`, `Outcome`, `OverrideOutcome`, `RenewalOutcome`; a row absent from the prior snapshot is a new filing; a date first set (vote, renewal vote, opening scheduled) counts (builder 2026-10-29: "Yes, counts"). An unavailable prior (missing, unreadable, or empty — the auditor writes `[]` on a failed read) with initiatives on the tracker stops the build; `--allow-missing-prior` builds with no initiative seeds that Cycle (unknown is not movement), noted in `meta.notes`. C113 dry run: initiative seeds 11 → 5 (three payouts, INIT-010 going operational, INIT-012 filed), civic lane 55 → 49. The three funds pay out every Cycle, so they still seed weekly.
    - **Released 2026-10-08:** the engine.270 review week has passed (Review 1 read 2026-10-07) and the cut does not depend on its Task 7 (that fixes undercounting; this lowers how many initiative articles exist). The C113 storyline read will note the thinner lanes. Code is a one-function change; nothing else waits on it.
-- **Status:** [~] item 1 done by structure; item 2 is spec only (no code exists as of 2026-10-08), released, ready row engine.20d
+- **Status:** [x] DONE 2026-10-29 — item 1 by structure (claim corrected above); item 2 shipped as engine.20d (`ad53bf15` + codex folds `dde78ab3`, `83e05f7c`, `ddf5c5b2`), codex SHIP on round 4 (`docs/archive/for-claude-review/2026-10-29-codex-engine20d-rereview-3.md`).
 
 ### Task 6: Backfill INIT-001/002/005/006 phase clocks
 
@@ -117,7 +118,7 @@ pointers:
   1. Reset `cyclesInState` on stuck initiatives to a starting value consistent with new thresholds (e.g., halve current values OR snap to threshold-1 so next cycle triggers advancement check).
   2. Optionally: advance phase manually on initiatives that should already be past their current phase under new thresholds.
 - **Verify:** Initiative_Tracker post-state has no `cyclesInState > new_threshold` for active initiatives.
-- **Status:** [ ] not started
+- **Status:** [x] CLOSED-MOOT S270 (engine.20c, ROLLOUT_ARCHIVE) — the premise was wrong: the initiatives read stuck because `assembleDecisions.js` silently skipped their owners (G-R1), fixed by the trackerOwner dispatch (ES-5 / RB-4), not a stuck clock. No backfill was ever needed.
 
 ### Task 7: Dry-run vs C94 audit + C95 live-run
 
@@ -129,16 +130,16 @@ pointers:
   2. Confirm INIT-001/002/005/006 drop from HIGH-band; remaining HIGH entries are genuine stuck cases.
   3. Live C95 verification: stuck-initiative editorial content count.
 - **Verify:** C94 dry-run drops 4 HIGH; C95 edition does not lead with "Stab Fund still disbursing" or "Baylight still constructing."
-- **Status:** [ ] not started
+- **Status:** [x] SUPERSEDED 2026-10-29 (engine-sheet) — C94/C95 are long past and the reweighted detector has run on every live audit since S227. Acceptance read on the latest live audit instead: `output/engine_audit_c113.json` carries 19 patterns, 0 stuck-initiative patterns (INIT-001/002/005/006 not flagged).
 
 ---
 
 ## Open questions
 
-- [ ] Are phase-tenure values defined in code or in sheet config? If sheet config, Task 2 becomes a sheet edit instead of code change. (Task 1 confirms.)
-- [ ] Does the engine support phase-skip (jump 2 phases when conditions warrant), or only sequential? (Task 3 dependency.)
-- [ ] Does `effectsFiringPositively` need per-initiative thresholds, or is one global threshold sufficient? (Task 3 dependency — current direction: per-initiative threshold field, default 1.0× expected.)
-- [ ] Do we keep the regulatory-friction *content surfaces* (HCAI, MOU, etc.) in the canon as flavor for occasional reference, or strip them entirely from initiative state? (Current direction: keep as occasional flavor in canon, strip from per-cycle phase modeling.)
+- [x] Are phase-tenure values defined in code or in sheet config? If sheet config, Task 2 becomes a sheet edit instead of code change. (Task 1 confirms.) **Answered S227: neither — voice-emergent.**
+- [x] Does the engine support phase-skip (jump 2 phases when conditions warrant), or only sequential? (Task 3 dependency.) **Moot S249: the phase is proposed by the owning voice agent (Task 3), not an engine step.**
+- [x] Does `effectsFiringPositively` need per-initiative thresholds, or is one global threshold sufficient? (Task 3 dependency — current direction: per-initiative threshold field, default 1.0× expected.) **Moot S249: the predicate was never built (Task 3 close note).**
+- [x] Do we keep the regulatory-friction *content surfaces* (HCAI, MOU, etc.) in the canon as flavor for occasional reference, or strip them entirely from initiative state? (Current direction: keep as occasional flavor in canon, strip from per-cycle phase modeling.) **Settled as the current direction: per-cycle phase modeling never existed in the engine (Task 1); HCAI and the like live on only as flavor in the project agents' RULES.md.**
 
 ---
 
@@ -149,3 +150,4 @@ pointers:
 - 2026-10-02 — Task 5 re-pointed off `/sift` (retired S456) to the cron newsroom: `covered-by-feature` is structural (fanout ref dedup + engine.270 storylines); movement-only is a `buildWorldSummary.js` civic-lane cut, written, held for the engine.270 review week (research-build S519, overnight).
 - 2026-10-08 (research-build) — Task 5 item 2 (movement-only cut) released from the engine.270 wait; spec only, ready for engine-sheet, not dispatched.
 - 2026-10-28 (engine-sheet) — Task 5 item 2 RULED by the builder: "Just when it moves" — the `initiative` seed is emitted only on movement (spec above); the `vote` seed stays. The every-row push is now `scripts/buildWorldSummary.js:1243` (was ~1195). On the 2026-10-25 no-puppeting rule the builder added: "the puppeting comment is a bit over stated as we are building this so getting them started on what they should talk about and how to grade it needs to be established as we loosen the harness."
+- 2026-10-29 (engine-sheet) — Task 5 item 2 shipped as engine.20d: `ad53bf15`, codex HOLD (`docs/archive/for-claude-review/2026-10-29-codex-engine20d-diff-review.md`: delayed renewal missed, no-prior drop, stalled opening) folded in `dde78ab3`; re-review (`2026-10-29-codex-engine20d-rereview.md`: F1/F3 SHIP, F2 HOLD — the no-prior fallback seeded stationary rows) folded in `83e05f7c`; re-review 2 (`…-rereview-2.md`: an unavailable prior still shipped a normal-looking lane; an empty prior read every row as new) folded in `ddf5c5b2` — the build stops at load with an operator override; re-review 3 SHIP. Codex's out-of-scope note (an empty *current* snapshot after a failed auditor read) filed as engine.324. Builder 2026-10-29 widened movement to a new filing, a status flip, a renewal vote, a renewal payout and an opening day, and ruled a date first set counts. Tasks 1/4/6/7 and the four open questions trued to what shipped or was mooted (S227, S249, S270, C113 audit). Plan closed: every task done, superseded or moot.

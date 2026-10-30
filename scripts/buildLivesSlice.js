@@ -43,25 +43,26 @@ const PER_DAY = { events: 5, households: 2, casino: 2, seeds: 3, moments: 4, sta
 const KIND_ORDER = { death: 0, hospital: 1, birth: 2, retirement: 3, promotion: 4 };
 // The log's event tags that are something that happened to the person, ranked: 0 shapes a life, 1 is
 // pressure, 2 a tie or a standing, 3 work as lived. A dial suffix (Strain-Composure-Down-S) still ranks.
+// A stance (Maneuver-Climb/Hold/Retreat) is a mood, not something that happened: it is colour, never a lead.
 // The day's colour (Daily, Neighborhood, Civic Perception, Personal, PrevEvening, Lifestyle, Sports…) and
 // the ambient tags that read as colour on the live log (Education, Career, Faith, Health, Recovering) never
 // lead a passage; they ride the thread. CareerState is a key=value persistence marker, never prose.
 const LIFE_TAGS = [
-  [/^(Wedding|Marriage|Graduation|Stabilized|Setback|Maneuver-(Climb|Hold|Retreat)|Career-FieldChange|Career-Hired|LifeEvent-Promotion|Relocation|PostCareer|Business-Gain)(?=$|-)/i, 0],
+  [/^(Wedding|Marriage|Graduation|Stabilized|Setback|Career-FieldChange|Career-Hired|LifeEvent-Promotion|Relocation|PostCareer|Business-Gain)(?=$|-)/i, 0],
   [/^(Strain|Friction|Stumble)(?=$|-)/i, 1],
   [/^(Relationship|Reputation|Community|Cultural|Rivalry|Alliance|Public|BoundaryKept|BoundaryCompromised|CivicRole|Civic|QoL|Household)(?=$|-)/i, 2],
   [/^(Work)(?=$|-)/i, 3]
 ];
 // The maneuver rule writes its stance as a short phrase ("playing to climb — the house first"). On the page
-// that reads like something the person said; the packet says what it is — where they are reaching to.
-const MANEUVER_GOAL = { 'a place of their own first': ['for a place of their own', 'a place of their own'], 'the house first': ['to buy a house', 'buying a house'], 'the money next': ['for more money', 'more money'] };
+// that reads like something the person said; the packet says what it is — a mood, and the step it points at.
+const MANEUVER_GOAL = { 'a place of their own first': ['a place of their own', 'a place of their own'], 'the house first': ['buying a house', 'buying a house'], 'the money next': ['more money', 'more money'] };
 function plainLife(tag, text) {
   const t = String(text || '').trim();
   if (!/^Maneuver-/i.test(cleanTag(tag))) return t;
   let m = /^playing to climb — (.+)$/.exec(t);
-  if (m && MANEUVER_GOAL[m[1]]) return 'reaching ' + MANEUVER_GOAL[m[1]][0];
+  if (m && MANEUVER_GOAL[m[1]]) return 'feeling bold, ' + MANEUVER_GOAL[m[1]][0] + ' the next step';
   m = /^settling — (.+)$/.exec(t);
-  if (m && MANEUVER_GOAL[m[1]]) return 'holding steady, ' + MANEUVER_GOAL[m[1]][1] + ' still the goal';
+  if (m && MANEUVER_GOAL[m[1]]) return 'holding steady, ' + MANEUVER_GOAL[m[1]][1] + ' still the next step';
   if (t === 'pulling in — the debt says so') return 'pulling in because of their debt';
   return t;
 }
@@ -142,7 +143,7 @@ function ownPageLines(root, cycle, popids) {
 // the event row already says these; a Promotion line stays — it carries the employer and the years the event row lacks
 const OWN_EVENT_TAG = /^(Recovery|Hospitalized|Critical|Birth|Retirement|Death)$/i;
 // what happened to the person vs. the day's colour: the signal tags rank first on a thread
-const SIGNAL_TAG = /^(Strain|Friction|Relationship|Work|Career|Advancement|Education|Reputation|Household|Wedding|Marriage|Graduation|Stabilized|Faith|Promotion|LifeEvent-Promotion|Maneuver)/i;
+const SIGNAL_TAG = /^(Strain|Friction|Relationship|Work|Career|Advancement|Education|Reputation|Household|Wedding|Marriage|Graduation|Stabilized|Faith|Promotion|LifeEvent-Promotion)/i;
 const THREAD_MAX = { log: 4, tribune: 3 };
 const cleanTag = t => String(t || '').split('|')[0].trim();
 
@@ -469,6 +470,6 @@ function enrichAssignment(assign, cycle, root = K.ROOT) {
 }
 const sitsOutWhenEmpty = true;
 if (require.main === module) W.main();
-module.exports = { plainLife, SEAT, sitsOutWhenEmpty, kindWord, loadSlice, dayToken, buildLivesSlice: W.build, writeLivesSlice: W.write, loadLivesSlice: loadSlice,
+module.exports = { plainLife, lifeRank, SEAT, sitsOutWhenEmpty, kindWord, loadSlice, dayToken, buildLivesSlice: W.build, writeLivesSlice: W.write, loadLivesSlice: loadSlice,
   isLivesSeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment, slicePaths: W.paths,
   kindLine, cameNext, localDay, coveredPath };

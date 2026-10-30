@@ -61,6 +61,7 @@ const beats = {
     { Timestamp: 't', POPID: 'POP-90011', Name: '', EventTag: 'Strain', EventText: 'counted the boxes twice', Neighborhood: '', Cycle: String(cycle) },
     { Timestamp: 't', POPID: 'POP-90010', Name: '', EventTag: 'Daily', EventText: 'measured the window for curtains', Neighborhood: '', Cycle: String(cycle) },
     { Timestamp: 't', POPID: 'POP-90025', Name: '', EventTag: 'Relocation-Drive-Up-M', EventText: 'moved from Uptown to West Oakland — moving up', Neighborhood: 'West Oakland', Cycle: String(cycle) },
+    { Timestamp: 't', POPID: 'POP-90016', Name: '', EventTag: 'Maneuver-Climb', EventText: 'playing to climb — the house first', Neighborhood: 'Montclair', Cycle: String(cycle) },
     { Timestamp: 't', POPID: 'POP-90026', Name: '', EventTag: 'Relocation-Drive-Up-M', EventText: 'moved from Uptown to West Oakland — moving up', Neighborhood: 'West Oakland', Cycle: String(cycle) },
     { Timestamp: 't', POPID: 'POP-90027', Name: '', EventTag: 'Relocation-Drive-Up-M', EventText: 'moved from Uptown to West Oakland — moving up', Neighborhood: 'West Oakland', Cycle: String(cycle) }
   ],
@@ -257,10 +258,14 @@ try {
   fs.rmSync(root, { recursive: true, force: true });
 }
 // the maneuver stance is told as where the person is reaching, not as a phrase that reads like speech
-assert.strictEqual(L.plainLife('Maneuver-Climb', 'playing to climb — the house first'), 'reaching to buy a house');
-assert.strictEqual(L.plainLife('Maneuver-Climb', 'playing to climb — a place of their own first'), 'reaching for a place of their own');
-assert.strictEqual(L.plainLife('Maneuver-Hold', 'settling — the house first'), 'holding steady, buying a house still the goal');
+assert.strictEqual(L.plainLife('Maneuver-Climb', 'playing to climb — the house first'), 'feeling bold, buying a house the next step');
+assert.strictEqual(L.plainLife('Maneuver-Climb', 'playing to climb — a place of their own first'), 'feeling bold, a place of their own the next step');
+assert.strictEqual(L.plainLife('Maneuver-Hold', 'settling — the house first'), 'holding steady, buying a house still the next step');
 assert.strictEqual(L.plainLife('Maneuver-Retreat', 'pulling in — the debt says so'), 'pulling in because of their debt');
 assert.strictEqual(L.plainLife('Maneuver-Climb', 'playing to climb — said so out loud, and meant it'), 'playing to climb — said so out loud, and meant it');
 assert.strictEqual(L.plainLife('Strain', 'the third late night this week'), 'the third late night this week');
+// a stance is a mood, not something that happened — it never ranks as a life event that can lead a passage
+for (const t of ['Maneuver-Climb', 'Maneuver-Hold', 'Maneuver-Retreat']) assert.strictEqual(L.lifeRank(t), null, t + ' is colour, not a lead');
+assert.strictEqual(L.lifeRank('Strain'), 1);
+assert.strictEqual(L.lifeRank('Relocation-Drive-Up-M'), 0);
 console.log('buildLivesSlice.test.js OK');

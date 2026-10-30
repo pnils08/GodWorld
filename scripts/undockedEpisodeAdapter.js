@@ -249,13 +249,23 @@ function deriveSystems(entries) {
 
 // research.31 (builder ruling C, 2026-10-30): the night's achievement points —
 // the game's own score, read from the pilot's account (get_achievements, each
-// unlock carries earned_at). A pilot account acts only in its flights, so an
-// unlock belongs to the pilot's latest night that started at or before it —
-// NOT to the runner's window: a jump logs at departure and lands ~2 min later,
-// and the arrival unlock (Maiden Jump, Wanderer) falls after the window closes
-// (Taveras 10-19: last jump 01:40:04, window end 01:40:14, Wanderer 01:43:10).
-// `until` is the same pilot's next night's start (null for the latest night).
-// Measured zero needs gameplay evidence; otherwise unknown, as for credits.
+// unlock carries earned_at). An unlock belongs to the night whose flight it
+// falls in, plus ARRIVAL_GRACE_MS after the window closes: a jump logs at
+// departure and lands ~2 min later, and the arrival unlock (Maiden Jump,
+// Wanderer) falls after the window (Taveras 10-19: last jump 01:40:04, window
+// end 01:40:14, Wanderer 01:43:10). `until` = nightUntil(): the earlier of that
+// end + grace and the same pilot's next night's start. An unlock outside every
+// night is reported, never placed (codex research.31 re-review F5: the account
+// acting outside the show must not score the last show night).
+const ARRIVAL_GRACE_MS = 15 * 60000; // 39 unlocks through 10-30: latest 2.9 min after window end (Wanderer)
+
+function nightUntil(endedAt, nextStartedAt) {
+  const end = Date.parse(endedAt);
+  const cap = isNaN(end) ? NaN : end + ARRIVAL_GRACE_MS;
+  const next = nextStartedAt ? Date.parse(nextStartedAt) : Infinity;
+  return new Date(Math.min(cap, next)).toISOString();
+}
+
 function derivePoints(account, startedAt, until) {
   if (!account) return fact(null, { source: 'get_achievements', note: 'pilot account not read — unknown' });
   if (account.invalid) {
@@ -379,7 +389,11 @@ function assemble(episode, byCategory, captains, account) {
         return c;
       })(),
       // the night being adapted is the pilot's latest, so no `until`
-      points_delta: derivePoints(account || null, episode.startedAt, null),
+      points_delta: (function () {
+        let until = null;
+        try { until = nightUntil(episode.endedAt, null); } catch (_) { /* unreadable end -> derivePoints says unknown */ }
+        return derivePoints(account || null, episode.startedAt, until || 'invalid');
+      })(),
       systems_visited: deriveSystems(all),
       combat_results: deriveCombat(all),
       cargo: deriveCargo(all),
@@ -745,7 +759,8 @@ function accountFrom(sc) {
     if (isNaN(Date.parse(a.earned_at))) problems.push((a.id || a.name) + ' earned_at ' + JSON.stringify(a.earned_at));
     return { id: a.id, name: a.name, points: pts, at: a.earned_at || null };
   });
-  const total = sc.summary ? num(sc.summary.points) : null;
+  const st = sc.summary ? sc.summary.points : null;
+  const total = (st === '' || st == null) ? null : num(st); // a blank total is not 0 (re-review F2)
   if (total == null) problems.push('no summary points total');
   else if (!problems.length) {
     const sum = earned.reduce(function (s, a) { return s + a.points; }, 0);
@@ -819,13 +834,19 @@ function planPointsRescore(accounts, nightsIn) {
     const list = bySession[session].sort(function (a, b) {
       return String(a.staged.window.startedAt).localeCompare(String(b.staged.window.startedAt));
     });
-    const firstStart = Date.parse(list[0].staged.window.startedAt);
+    const spans = list.map(function (n, i) {
+      let until = null;
+      try { until = nightUntil(n.staged.window.endedAt, i + 1 < list.length ? list[i + 1].staged.window.startedAt : null); }
+      catch (_) { /* an unreadable end leaves the night unknown */ }
+      return { from: n.staged.window.startedAt, until: until };
+    });
     acct.earned.forEach(function (a) {
-      if (!(Date.parse(a.at) >= firstStart)) unplaced.push({ session: session, name: a.name, points: a.points, at: a.at });
+      const t = Date.parse(a.at);
+      const inside = spans.some(function (w) { return w.until && t >= Date.parse(w.from) && t < Date.parse(w.until); });
+      if (!inside) unplaced.push({ session: session, name: a.name, points: a.points, at: a.at });
     });
     list.forEach(function (n, i) {
-      const until = i + 1 < list.length ? list[i + 1].staged.window.startedAt : null;
-      const f = derivePoints(acct, n.staged.window.startedAt, until);
+      const f = derivePoints(acct, n.staged.window.startedAt, spans[i].until || 'invalid');
       const before = n.staged.facts && n.staged.facts.points_delta ? n.staged.facts.points_delta.value : undefined;
       const ik = intake[n.file] || null;
       const cycle = ik ? ik.row.Cycle : null;
@@ -839,7 +860,7 @@ function planPointsRescore(accounts, nightsIn) {
       nights.push({
         file: n.file, stagedPath: n.stagedPath, popid: n.staged.popid, holder: n.staged.holder || '',
         session: session, fact: f, before: before,
-        stale: stale, changed: stale.length > 0,
+        stale: stale, changed: stale.length > 0, packEvent: ev !== undefined,
         intakePath: ik ? ik.path : null,
         applied: ik ? ik.row.Applied : null,
         cycle: cycle,
@@ -872,7 +893,7 @@ function printPointsRescore(plan) {
     console.log('  SKIPPED ' + k.session + ' — account record unusable, nights left as they are: ' + k.problems.join('; '));
   });
   if (plan.unplaced.length) {
-    console.log('  NOT PLACED (earned before the pilot\'s first archived night):');
+    console.log('  NOT PLACED (earned outside every archived night of the pilot, grace included):');
     plan.unplaced.forEach(function (u) { console.log('    ' + u.session + ' ' + u.name + ' ' + u.points + ' @ ' + u.at); });
   }
 }
@@ -937,9 +958,14 @@ async function applyPointsRescore(plan) {
   // the re-read tab must hold the derived value on every approved row.
   const again = planPointsRescore(plan.accounts, archivedNights());
   const t2 = await readTab();
+  // re-review F1: a copy that should exist and does not is a mismatch too — the
+  // back-score cannot create it, so it must not report "every copy agrees".
   again.nights.forEach(function (n) {
     const where = n.stale.slice();
     if (tabStale(t2, n)) where.push('tab');
+    if (!n.intakePath) where.push('no intake row');
+    if (n.applied === 'yes' && !(n.episodeId && t2.rowOf[n.episodeId])) where.push('approved, no tab row');
+    if (n.applied === 'yes' && !n.packEvent) where.push('approved, no feed-pack event');
     if (where.length) report.mismatched.push((n.episodeId || n.file) + ' [' + where.join(',') + ']');
   });
   return report;

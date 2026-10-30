@@ -229,6 +229,7 @@ function nightWinner(feedEntries) {
   };
   for (var i = 0; i < rows.length; i++) {
     var e = rows[i];
+    if (e.pointsDelta === null || e.pointsDelta === '') return null; // points not read yet: undecided, void
     var n = known(e.creditsDelta), p = known(e.pointsDelta);
     if (!((p !== null && p > 0) || (n !== null && n > 0))) continue;
     if (p === null) p = 0;

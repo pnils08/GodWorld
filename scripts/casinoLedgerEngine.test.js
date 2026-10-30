@@ -315,8 +315,11 @@ check('night_winner: points alone crown a night with no credits gained', ures('n
   [{ popId: 'POP-00096', episodeId: 'q1', creditsDelta: -5, pointsDelta: 5 }, { popId: 'POP-00095', episodeId: 'q2', creditsDelta: 0, pointsDelta: 0 }]) === E.CASINO_ST.WIN);
 check('night_winner: full tie goes to the lower POPID', ures('night_winner', 'night-106', 'POP-00093', 106,
   [{ popId: 'POP-00094', episodeId: 'r1', creditsDelta: 3, pointsDelta: 5 }, { popId: 'POP-00093', episodeId: 'r2', creditsDelta: 3, pointsDelta: 5 }]) === E.CASINO_ST.WIN);
-check('night_winner: blank points rank as 0 and the night still goes on credits', ures('night_winner', 'night-106', 'POP-00092', 106,
-  [{ popId: 'POP-00092', episodeId: 's1', creditsDelta: 50, pointsDelta: null }, { popId: 'POP-00091', episodeId: 's2', creditsDelta: 20, pointsDelta: 0 }]) === E.CASINO_ST.WIN);
+check('night_winner: a pilot whose points are not read yet leaves the night undecided — void, not settled early (re-review F4)',
+  ures('night_winner', 'night-106', 'POP-00092', 106,
+  [{ popId: 'POP-00092', episodeId: 's1', creditsDelta: 50, pointsDelta: 0 }, { popId: 'POP-00091', episodeId: 's2', creditsDelta: -5, pointsDelta: null }]) === E.CASINO_ST.VOID_GATE);
+check('night_winner: a tab without the points column (undefined) is judged on credits as before', ures('night_winner', 'night-106', 'POP-00092', 106,
+  [{ popId: 'POP-00092', episodeId: 's1', creditsDelta: 50 }, { popId: 'POP-00091', episodeId: 's2', creditsDelta: 20 }]) === E.CASINO_ST.WIN);
 check('night_winner: zero points and no credits gained still crowns nobody — void', ures('night_winner', 'night-106', 'POP-00090', 106,
   [{ popId: 'POP-00090', episodeId: 't1', creditsDelta: 0, pointsDelta: 0 }, { popId: 'POP-00089', episodeId: 't2', creditsDelta: -9, pointsDelta: null }]) === E.CASINO_ST.VOID_GATE);
 

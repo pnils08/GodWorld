@@ -203,6 +203,10 @@ function casinoNightWinner_(feed) {
     // engine.292 (agy research.29 review hunt 3) still holds: a night with no
     // points and no credits gained crowns nobody — before it, a 0 beat null and the
     // lowest POPID "won" a night where every pilot came back empty.
+    // A pilot whose points are not read yet (null; the daily settle fills it) leaves
+    // the night undecided: void, stake back — never settled early (codex research.31
+    // re-review F4). undefined = a tab without the points column: credits decide.
+    if (e.pointsDelta === null || e.pointsDelta === '') return null;
     n = known(e.creditsDelta);
     p = known(e.pointsDelta);
     if (!((p !== null && p > 0) || (n !== null && n > 0))) continue;

@@ -381,7 +381,9 @@ function loadUndockedFeed_(ctx) {
       episodeId: iEp >= 0 ? String(row[iEp] || '').trim() : '',
       flownCycle: num(row, iCycle),
       creditsDelta: num(row, iCredits),
-      pointsDelta: num(row, iPoints),
+      // undefined = the tab has no PointsDelta column (pre-research.31); null = this
+      // night's points are not read yet — the night bet will not settle on it.
+      pointsDelta: iPoints < 0 ? undefined : num(row, iPoints),
       combatEvents: num(row, iCombat),
       mishapCount: num(row, iMishap),
       magnitude: num(row, iMag),

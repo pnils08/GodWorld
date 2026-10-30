@@ -480,6 +480,7 @@ console.log('═══ engine.291 (research.29 Move 4): the city names who is fl
   assert('board: points approved for a later cycle do not count yet', pb.leaderPopId === 'POP-P2' && pb.points['POP-P3'] === undefined, JSON.stringify(pb));
   const airing = run(1, FIXTURE, [ptsHdr, pe(100, 'POP-P1', 7, 5), pe(100, 'POP-P3', 7, '')], 2).summary.undockedFeedEntries;
   assert('airing entries carry pointsDelta, blank stays null', airing.length === 2 && airing[0].pointsDelta === 5 && airing[1].pointsDelta === null, JSON.stringify(airing));
+  assert('a tab without the column leaves pointsDelta undefined (credits decide the night)', ctxB.summary.undockedFeedEntries.every(e => e.pointsDelta === undefined), JSON.stringify(ctxB.summary.undockedFeedEntries));
   assert('airing index holds tonight\'s pilots only', ctxB.summary.undockedPilots['POP-P1'] && ctxB.summary.undockedPilots['POP-P4'] && ctxB.summary.undockedPilots['POP-P9'] && !ctxB.summary.undockedPilots['POP-P2'], JSON.stringify(ctxB.summary.undockedPilots));
 
   // The composer

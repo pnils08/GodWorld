@@ -197,6 +197,8 @@ check('accountFrom: an earned unlock with no points is unusable',
 check('accountFrom: unlocks that miss the summary total are unusable',
   /add to 5, summary says 10/.test((A.accountFrom({ summary: { points: 10 }, achievements: [ach('x', 5, '2026-10-13T01:34:00Z')] }).invalid || []).join()));
 check('accountFrom: no summary total is unusable', !!A.accountFrom({ achievements: [] }).invalid);
+check('accountFrom: a blank summary total is unusable, not 0 (re-review F2)',
+  !!A.accountFrom({ summary: { points: '' }, achievements: [] }).invalid && !!A.accountFrom({ summary: { points: null }, achievements: [] }).invalid);
 
 const night = (start, value) => ({ file: 'TEST-ONLY-' + start + '.json', stagedPath: '/dev/null', staged: {
   session: 'undocked-pop99991', popid: 'POP-99991', holder: 'TEST-ONLY Pilot',
@@ -215,10 +217,20 @@ check('rescore: a wrong old value is corrected', byStart['TEST-ONLY-2026-10-16T0
 const early = A.planPointsRescore({ 'undocked-pop99991': { total: 5, earned: [{ id: 'x', name: 'Early', points: 5, at: '2026-01-01T00:00:00Z' }] } },
   [night('2026-10-13T01:30:05Z')]);
 check('rescore: an unlock before the first night is reported, never placed', early.unplaced.length === 1 && early.nights[0].fact.value === 0);
+// re-review F5: a night's points window closes 15 min after its flight ends —
+// an unlock the account earned outside every flight is reported, never placed.
+const late = A.planPointsRescore({ 'undocked-pop99991': { total: 15, invalid: null, earned: [
+  { id: 'a', name: 'In Flight', points: 5, at: '2026-10-13T01:38:00Z' },
+  { id: 'b', name: 'Arrival', points: 5, at: '2026-10-13T01:52:00Z' },
+  { id: 'c', name: 'Off Show', points: 5, at: '2026-10-14T12:00:00Z' }] } },
+  [{ file: 'TEST-ONLY-late.json', stagedPath: '/dev/null', staged: { session: 'undocked-pop99991', popid: 'POP-99991',
+    window: { startedAt: '2026-10-13T01:30:00Z', endedAt: '2026-10-13T01:40:00Z' }, facts: {} } }]);
+check('an arrival unlock inside the grace counts; one earned off the show is unplaced',
+  late.nights[0].fact.value === 10 && late.unplaced.length === 1 && late.unplaced[0].name === 'Off Show');
 const skip = A.planPointsRescore({ 'undocked-pop99991': badAt }, [night('2026-10-13T01:30:05Z', 5)]);
 check('rescore: an unusable account is skipped, its nights untouched', skip.nights.length === 0 && skip.skipped.length === 1);
 check('rescore: a sheet-string value equal to the derived one is not rewritten',
-  A.planPointsRescore({ 'undocked-pop99991': acct }, [night('2026-10-13T01:30:05Z', '20')]).nights[0].changed === false);
+  A.planPointsRescore({ 'undocked-pop99991': acct }, [night('2026-10-13T01:30:05Z', '5')]).nights[0].changed === false);
 check('rescore: a night lists which copies are stale', byStart['TEST-ONLY-2026-10-13T01:30:05Z.json'].stale.join() === 'archive');
 
 const sys = A.deriveSystems([

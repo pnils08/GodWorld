@@ -73,6 +73,8 @@ check('night_winner: the one positive pilot wins', C.resolveUndocked({ marketId:
 // research.31: the Node helper mirrors the engine — points first, then credits
 check('nightWinner: points beat credits', C.nightWinner([{ popId: 'POP-TEST-8', episodeId: 'a', creditsDelta: 900, pointsDelta: 0 },
   { popId: 'POP-TEST-9', episodeId: 'b', creditsDelta: -4, pointsDelta: 5 }]).popId === 'POP-TEST-9');
+check('nightWinner: unread points leave the night undecided', C.nightWinner([{ popId: 'POP-TEST-8', episodeId: 'a', creditsDelta: 900, pointsDelta: 0 },
+  { popId: 'POP-TEST-9', episodeId: 'b', creditsDelta: -4, pointsDelta: null }]) === null);
 const blankVoid = C.resolveUndocked({ marketId: 'credits_sign', eventId: 'ep-c', side: 'pos' }, undocked);
 check('blank CreditsDelta is void-gate not a loss', blankVoid.status === C.STATUS.VOID_GATE);
 const missingCarry = C.resolveUndocked({ marketId: 'credits_sign', eventId: 'ep-zzz', side: 'pos' }, undocked);

@@ -548,10 +548,13 @@ console.log('\nTest 11d: emitDeskSignal (synthetic data)');
   const sig = helper.emitDeskSignal(100, data);
   const flat = JSON.stringify(sig);
 
-  // Lane counts: civic = anomaly + 2 initiatives + 1 vote + civic-log + 1 ripple = 6;
-  // sports = 1 feed + 1 ripple = 2; culture = 1 hood + 4 fixed pointers + 1 ripple = 6;
-  // business = 1 unmapped ripple.
-  assertEqual('civic lane count', sig.lanes.civic.length, 6);
+  // Lane counts: civic = anomaly + 1 vote + civic-log + 1 ripple = 4 (engine.20d:
+  // neither initiative moved on C100 and there is no prior snapshot, so neither
+  // seeds); sports = 1 feed + 1 ripple = 2; culture = 1 hood + 4 fixed pointers
+  // + 1 ripple = 6; business = 1 unmapped ripple.
+  assertEqual('civic lane count', sig.lanes.civic.length, 4);
+  assertEqual('engine.20d: no initiative seed without movement', sig.lanes.civic.filter(e => e.kind === 'initiative').length, 0);
+  assert('engine.20d: missing prior snapshot is noted', sig.meta.notes.some(n => n.includes('no engine_audit_c99 Initiative_Tracker snapshot')));
   assertEqual('sports lane count', sig.lanes.sports.length, 2);
   assertEqual('culture lane count', sig.lanes.culture.length, 6);
   assertEqual('business lane count', sig.lanes.business.length, 1);
@@ -640,6 +643,63 @@ console.log('\nTest 11e: emitDeskSignal (degraded inputs)');
 
   // Fully empty data object
   trySignal('empty data object does not throw', 104, {});
+}
+
+// ────────────────────────────────────────────────────────────────────────────
+// Test 11e2: engine.20d — an initiative seeds the civic lane only when it moved
+// ────────────────────────────────────────────────────────────────────────────
+console.log('\nTest 11e2: initiative seeds on movement only (engine.20d)');
+{
+  // Synthetic rows, shaped like the C112 → C113 snapshots.
+  const base = {
+    InitiativeID: 'INIT-901', Name: 'Synthetic Fund', Status: 'passed', ImplementationPhase: 'disbursement-active',
+    Stage: 'Standing', LastStageChangeCycle: '90', LastDisburseCycle: '99', MayoralActionCycle: '80', VoteCycle: '80',
+    OverrideVoteCycle: '', ProposedCycle: '', RenewalVoteCycle: '', RenewalCreditCycle: '', OpensCycle: '',
+    LastWorkCycle: '99', NextActionCycle: '100', NextScheduledAction: 'Month-ten review', MilestoneNotes: 'week 9'
+  };
+  const row = over => Object.assign({}, base, over);
+  const signal = (rows, priorRows) => helper.emitDeskSignal(100, {
+    auditJson: { snapshots: { Initiative_Tracker: rows } },
+    priorInitiatives: priorRows === undefined ? undefined : { priorCycle: 99, rows: priorRows },
+    rippleAll: [], sportsAll: [], neighborhoodsC: [], rileyCurr: {}
+  });
+  const seeded = sig => sig.lanes.civic.filter(e => e.kind === 'initiative').map(e => e.ref.match(/INIT-\d+/)[0]);
+
+  // The civic chain's weekly tick alone is not movement; the vote seed stays.
+  const tick = row({ LastWorkCycle: '100', NextActionCycle: '101', NextScheduledAction: 'Month-eleven review', MilestoneNotes: 'week 10' });
+  const s1 = signal([tick], [base]);
+  assertEqual('chain tick only → no initiative seed', seeded(s1), []);
+  assertEqual('chain tick only → the vote seed still fires', s1.lanes.civic.filter(e => e.kind === 'vote').length, 1);
+
+  assertEqual('disbursement on the Cycle → seed', seeded(signal([row({ LastDisburseCycle: '100' })], [base])), ['INIT-901']);
+  assertEqual('vote the chain stamped last Cycle, after its snapshot → seed',
+    seeded(signal([row({ VoteCycle: '99' })], [base])), ['INIT-901']);
+  assertEqual('status flip with no clock → seed', seeded(signal([row({ Status: 'vetoed' })], [base])), ['INIT-901']);
+  assertEqual('phase change → seed', seeded(signal([row({ ImplementationPhase: 'operational' })], [base])), ['INIT-901']);
+  assertEqual('opening day (clock set weeks ago) → seed',
+    seeded(signal([row({ OpensCycle: '100' })], [row({ OpensCycle: '100' })])), ['INIT-901']);
+  assertEqual('renewal credited → seed', seeded(signal([row({ RenewalCreditCycle: '100' })], [base])), ['INIT-901']);
+  assertEqual('row absent from last Cycle → seed (new filing)',
+    seeded(signal([base, row({ InitiativeID: 'INIT-902', ProposedCycle: '99' })], [base])), ['INIT-902']);
+
+  // No prior snapshot: this Cycle's clocks still read; status/phase cannot.
+  const s2 = signal([row({ LastDisburseCycle: '100' }), row({ InitiativeID: 'INIT-903', ImplementationPhase: 'operational' })], undefined);
+  assertEqual('no prior: a clock on the Cycle still seeds, a phase change is unread', seeded(s2), ['INIT-901']);
+  assert('no prior: noted', s2.meta.notes.some(n => n.includes('no engine_audit_c99 Initiative_Tracker snapshot')));
+  const s3 = helper.emitDeskSignal(100, {
+    auditJson: { snapshots: { Initiative_Tracker: [base] } },
+    priorInitiatives: { priorCycle: 99, rows: null, why: 'unreadable: Unexpected token' },
+    rippleAll: [], sportsAll: [], neighborhoodsC: [], rileyCurr: {}
+  });
+  assert('unreadable prior: the reason rides the note', s3.meta.notes.some(n => n.includes('(unreadable: Unexpected token)')));
+  assert('prior present: no note', !signal([base], [base]).meta.notes.some(n => n.includes('Initiative_Tracker snapshot')));
+
+  assertEqual('initiativeMoves names what moved',
+    helper.initiativeMoves(row({ LastDisburseCycle: '100', Status: 'vetoed' }), base, 100),
+    ['LastDisburseCycle 100', 'Status passed → vetoed']);
+  assertEqual('initiativeMoves: new row', helper.initiativeMoves(base, null, 100), ['new filing']);
+  assertEqual('initiativeMoves: numeric cycle cells compare as cycles', helper.initiativeMoves(row({ LastDisburseCycle: 100 }), base, '100'), ['LastDisburseCycle 100']);
+  assertEqual('loadPriorInitiatives: no file → rows null with reason', helper.loadPriorInitiatives(1), { priorCycle: 0, rows: null, why: 'file not found' });
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -810,6 +870,8 @@ console.log('\nTest 11g: storyline registry (engine.270)');
   const R = helper.buildStorylineRegistry({ arcRows, initiatives, cycle: 106 });
   const sig = helper.emitDeskSignal(106, {
     auditJson: { snapshots: { Initiative_Tracker: initiatives } },
+    // engine.20d: INIT-005 moved into construction-active this week, so it seeds.
+    priorInitiatives: { priorCycle: 105, rows: [Object.assign({}, initiatives[0], { ImplementationPhase: 'construction-planning' }), initiatives[1]] },
     rippleAll: [
       { Cycle: '106', CauseType: 'crisis-event', CauseId: 'CRISIS-105-WESTOAKL', CauseDetail: 'crisis', EffectType: 'sentiment', Neighborhood: 'West Oakland' },
       { Cycle: '106', CauseType: 'initiative-implementation', CauseId: 'Temescal Community Health Center', CauseDetail: 'x', EffectType: 'health' },

@@ -690,6 +690,23 @@ function loadPriorApprovals(cycle) {
   return { present: map.size > 0, priorCycle, map };
 }
 
+// engine.20d: last Cycle's Initiative_Tracker snapshot, the base emitDeskSignal
+// reads initiative movement against. Absent or unreadable → rows null plus the
+// reason; the signal notes it rather than reading every row as moved.
+function loadPriorInitiatives(cycle) {
+  const priorCycle = cycle - 1;
+  const p = path.join(REPO_ROOT, `output/engine_audit_c${priorCycle}.json`);
+  if (!fs.existsSync(p)) return { priorCycle, rows: null, why: 'file not found' };
+  let snap;
+  try {
+    const j = JSON.parse(fs.readFileSync(p, 'utf-8'));
+    snap = j && j.snapshots && j.snapshots.Initiative_Tracker;
+  } catch (e) {
+    return { priorCycle, rows: null, why: `unreadable: ${e.message}` };
+  }
+  return Array.isArray(snap) ? { priorCycle, rows: snap } : { priorCycle, rows: null, why: 'no snapshot in the file' };
+}
+
 // Signed point-delta cell for one office vs prior cycle. Raw signed number only —
 // the >5pt escalation judgment (S215 G-6) is the operator's, not the builder's;
 // baking a threshold here is the fabrication-adjacent move the no-LLM ethos rejects.
@@ -1167,12 +1184,42 @@ function handleEntry(h) {
   return out;
 }
 
+// engine.20d (builder 2026-10-28 "Just when it moves"; 2026-10-29 a new filing,
+// a status flip, a renewal and an opening count too). A clock moves when it
+// changed against last Cycle's snapshot — the civic chain stamps its own Cycle
+// after that snapshot is taken, so an equality test alone misses its votes and
+// filings — or when it lands on this Cycle (a scheduled vote or opening
+// arriving). LastWorkCycle, NextActionCycle and MilestoneNotes are the chain's
+// weekly tick, never movement.
+const INITIATIVE_MOVE_CLOCKS = ['LastStageChangeCycle', 'LastDisburseCycle', 'MayoralActionCycle',
+  'VoteCycle', 'OverrideVoteCycle', 'ProposedCycle', 'RenewalVoteCycle', 'RenewalCreditCycle', 'OpensCycle'];
+const INITIATIVE_MOVE_STATES = ['Status', 'ImplementationPhase', 'Stage'];
+
+// What moved on one Initiative_Tracker row ([] = nothing). prior: last Cycle's
+// row; null = the row is new this week; undefined = no prior snapshot to read.
+function initiativeMoves(it, prior, cycle) {
+  const v = x => (x === undefined || x === null) ? '' : String(x).trim();
+  if (prior === null) return ['new filing'];
+  const moves = [];
+  for (const col of INITIATIVE_MOVE_CLOCKS) {
+    const now = v(it[col]);
+    if (parseInt(now, 10) === Number(cycle)) moves.push(`${col} ${now}`);
+    else if (prior && now !== v(prior[col])) moves.push(`${col} ${v(prior[col]) || '—'} → ${now || '—'}`);
+  }
+  if (prior) {
+    for (const col of INITIATIVE_MOVE_STATES) {
+      if (v(it[col]) !== v(prior[col])) moves.push(`${col} ${v(prior[col]) || '—'} → ${v(it[col]) || '—'}`);
+    }
+  }
+  return moves;
+}
+
 // Pure: builds the desk-signal object from the same loaded cycle data the
 // summary emitters consume. No sheet reads of its own.
 function emitDeskSignal(cycle, data) {
   // Degraded-input guards: never throw on missing pieces — emit what exists.
   const { auditJson = {}, rippleAll, sportsAll = [], neighborhoodsC = [], rileyCurr = {},
-    storylineLedger = [], arcRows = [], liveArcs = [] } = data;
+    storylineLedger = [], arcRows = [], liveArcs = [], priorInitiatives = null } = data;
   const notes = [];
   const lanes = { civic: [], sports: [], culture: [], business: [] };
 
@@ -1240,14 +1287,25 @@ function emitDeskSignal(cycle, data) {
   });
 
   // ── civic: initiatives + votes (audit snapshot — same-cycle, zero extra reads) ──
+  // engine.20d: an initiative seeds only the week it moved, read against last
+  // Cycle's snapshot. The vote seed below stays on every pending row.
+  const priorRows = priorInitiatives && Array.isArray(priorInitiatives.rows) ? priorInitiatives.rows : null;
+  const priorById = priorRows ? new Map(priorRows.map(r => [String(r.InitiativeID || '').trim(), r])) : null;
+  if (initiatives.length && !priorById) {
+    const why = priorInitiatives && priorInitiatives.why ? ` (${priorInitiatives.why})` : '';
+    notes.push(`no engine_audit_c${cycle - 1} Initiative_Tracker snapshot${why} — initiative movement read from this Cycle's clocks only; status, phase and new filings unread`);
+  }
   for (const it of initiatives) {
-    lanes.civic.push({
-      kind: 'initiative',
-      ref: `Initiative_Tracker (InitiativeID ${it.InitiativeID}); snapshot: engine_audit_c${cycle}.json snapshots.Initiative_Tracker`
-        + stageTag(it),
-      label: signalLabel(it.Name, `Status ${it.Status || '—'}`, it.ImplementationPhase ? `phase ${it.ImplementationPhase}` : null),
-      hood: it.AffectedNeighborhoods || undefined
-    });
+    const prior = priorById ? (priorById.get(String(it.InitiativeID || '').trim()) || null) : undefined;
+    if (initiativeMoves(it, prior, cycle).length) {
+      lanes.civic.push({
+        kind: 'initiative',
+        ref: `Initiative_Tracker (InitiativeID ${it.InitiativeID}); snapshot: engine_audit_c${cycle}.json snapshots.Initiative_Tracker`
+          + stageTag(it),
+        label: signalLabel(it.Name, `Status ${it.Status || '—'}`, it.ImplementationPhase ? `phase ${it.ImplementationPhase}` : null),
+        hood: it.AffectedNeighborhoods || undefined
+      });
+    }
     // Upcoming action = vote signal. Cycle indices are pointers, not figures.
     const nextCycle = parseInt(it.NextActionCycle, 10);
     const voteCycle = parseInt(it.VoteCycle, 10);
@@ -1378,7 +1436,7 @@ function emitDeskSignal(cycle, data) {
       cycle,
       script: `buildWorldSummary.js v${SCRIPT_VERSION} (deskSignal v${DESK_SIGNAL_VERSION})`,
       builtAt: new Date().toISOString(),
-      laneRule: 'civic=anomalies/votes/initiatives, sports=feed, culture=hoods/faith, business=ripples-default; ripples route by CauseType (rippleLaneMap); storylines route by engine type (crisis: civic + its domain desk; initiative stage: civic)',
+      laneRule: 'civic=anomalies/votes/initiatives that moved this Cycle, sports=feed, culture=hoods/faith, business=ripples-default; ripples route by CauseType (rippleLaneMap); storylines route by engine type (crisis: civic + its domain desk; initiative stage: civic)',
       storylineContract: 'storylines (a SIBLING of lanes, never inside one) are ENGINE EVENTS with their own ID, stage and ending: crisis arcs and initiative stages. The engine opens and closes them; a desk covers them. An assignment belongs to a storyline only when its ref names it (`; storyline <ID>`).',
       rippleLaneMap: RIPPLE_LANE_MAP,
       counts: Object.fromEntries(Object.entries(lanes).map(([k, v]) => [k, v.length])),
@@ -1480,9 +1538,10 @@ async function loadCycleData(cycle) {
   let bylinePools = null;
   try { bylinePools = await buildLanePools(); } catch (e) { /* roster unreachable — candidates omitted */ }
   const bylineUsage = loadBylineUsage(cycle);
+  const priorInitiatives = loadPriorInitiatives(cycle);
 
   return {
-    auditJson,
+    auditJson, priorInitiatives,
     rileyCurr, rileyPrev1, rileyPrev2,
     sportsAll, calendarAll, chaosAll, censusAll,
     rippleAll, lhlAll, householdAll, storylineLedger,
@@ -1588,6 +1647,8 @@ module.exports = {
   loadCycleData,
   // W5 desk-signal partition (pure — testable without sheet access)
   emitDeskSignal,
+  initiativeMoves,
+  loadPriorInitiatives,
   buildStorylineRegistry,
   resolveStoryline,
   rippleEntry,

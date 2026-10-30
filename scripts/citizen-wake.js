@@ -50,8 +50,8 @@ const FORCE_POP = arg('pop', null);
 const OWED_RES = arg('owed-reserve', null) != null ? Math.max(0, Number(arg('owed-reserve')) || 0) : OWED_RESERVE;
 const OWED_JOURNAL = path.join(__dirname, '..', 'logs', 'citizen-wake-owed.jsonl'); // owed receipts, append-only, two-phase
 // pipeline.94 — the page doc is keyed by the wake's weekday too: the store appends a second write under a taken key into
-// the first doc, so two same-daypart wakes in one Cycle merged into one. Held off until codex reviews (the crons run this tree).
-const PAGE_DAY_KEY = false;
+// the first doc, so two same-daypart wakes in one Cycle merged into one. On 2026-10-30 after codex review + re-review.
+const PAGE_DAY_KEY = true;
 // Append one journal line and read it back; one retry. false = not durable.
 function appendOwedJournal(line) {
   for (let t = 0; t < 2; t++) {

@@ -24,6 +24,7 @@
 //   node scripts/docLoopStatus.js --plans --write  # same, written into ROLLOUT_PLAN.md's generated block
 //   node scripts/docLoopStatus.js --gate     # same, but exit 1 on problems (pre-commit gate)
 //   node scripts/docLoopStatus.js --stale-next  # only NEXT lines leading with a closed row; silent when none (exit 0)
+//   node scripts/docLoopStatus.js --stale-next --staged  # same, read from the index (pre-commit)
 //
 // Exits 0 in every mode EXCEPT --gate (S335) — it's a surfacing report by default.
 
@@ -69,9 +70,9 @@ const ROW_ID = /^\|\s*([a-z][a-z-]*\.\d+[a-z]?)\s*\|/;
 // Rows are markdown tables: | id | desc | state | terminal | pointer |
 // We locate the STATE cell by controlled-vocab value (robust to pipes earlier
 // in the desc), then terminal = next cell, pointer = last non-empty cell.
-function parseRollout() {
+function parseRollout(text) {
   const rows = [];
-  const lines = fs.readFileSync(ROLLOUT, 'utf8').split('\n');
+  const lines = (text === undefined ? fs.readFileSync(ROLLOUT, 'utf8') : text).split('\n');
   for (const line of lines) {
     const idMatch = line.match(ROW_ID);
     if (!idMatch) continue;
@@ -210,11 +211,14 @@ function runLint(gate) {
   printStale();
 }
 
-// Also run alone by .githooks/pre-commit (--stale-next) on any commit staging the
-// rollout, the archive or SESSION_CONTEXT, so the terminal closing a row sees it.
-function printStale() {
-  const stale = staleNextLeads(readOr(path.join(ROOT, 'SESSION_CONTEXT.md')), parseRollout(),
-    readOr(path.join(ROOT, 'docs', 'engine', 'ROLLOUT_ARCHIVE.md')), readOr(path.join(ROOT, 'docs', 'plans', 'BACKLOG.md')));
+// Also run alone by .githooks/pre-commit (--stale-next --staged) on any commit
+// staging the rollout, the archive or SESSION_CONTEXT, so the terminal closing a
+// row sees it. --staged reads the index — the content that will commit — not the
+// working tree, which a partial stage can leave different.
+function printStale(staged) {
+  const read = rel => (staged ? stagedOr(rel) : readOr(path.join(ROOT, rel)));
+  const stale = staleNextLeads(read('SESSION_CONTEXT.md'), parseRollout(read('docs/engine/ROLLOUT_PLAN.md')),
+    read('docs/engine/ROLLOUT_ARCHIVE.md'), read('docs/plans/BACKLOG.md'));
   if (stale.length) {
     console.log(`NEXT STALE: ${stale.length} handoff line(s) lead with a row that is no longer open — the owner rewrites its line; a closer may correct the stale fact:`);
     stale.forEach(p => console.log(p));
@@ -223,6 +227,13 @@ function printStale() {
 
 function readOr(p) {
   try { return fs.readFileSync(p, 'utf8'); } catch (_) { return ''; }
+}
+
+// The index copy of a tracked file; the working copy if git cannot show one.
+function stagedOr(rel) {
+  const { execFileSync } = require('child_process');
+  try { return execFileSync('git', ['show', `:${rel}`], { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }); }
+  catch (_) { return readOr(path.join(ROOT, rel)); }
 }
 
 // --- stale handoff: a NEXT line that leads with a closed row -----------------
@@ -422,7 +433,7 @@ function runHandoffGate() {
 function main() {
   const args = process.argv.slice(2);
   if (args.includes('--gate-handoff')) { runHandoffGate(); return; }
-  if (args.includes('--stale-next')) { printStale(); return; }
+  if (args.includes('--stale-next')) { printStale(args.includes('--staged')); return; }
   if (args.includes('--gate')) { runLint(true); return; }
   if (args.includes('--lint')) { runLint(false); return; }
   if (args.includes('--plans')) { runPlans(args.includes('--write')); return; }

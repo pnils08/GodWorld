@@ -73,7 +73,7 @@ fi
 # where the committer sees it. Notice only — never blocks.
 # ---------------------------------------------------------------------------
 if git diff --cached --name-only | grep -qE '^(docs/engine/ROLLOUT_PLAN|docs/engine/ROLLOUT_ARCHIVE|SESSION_CONTEXT)\.md$'; then
-  stale_out="$(node scripts/docLoopStatus.js --stale-next 2>&1)" || true
+  stale_out="$(node scripts/docLoopStatus.js --stale-next --staged 2>&1)" || true
   if [ -n "$stale_out" ]; then
     echo "" >&2
     echo "$stale_out" >&2

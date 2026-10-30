@@ -96,6 +96,25 @@ console.log('\nCLI (--stale-next, --lint) on a scratch repo');
       ['NEXT STALE: 1 handoff line(s) lead with a row that is no longer open — the owner rewrites its line; a closer may correct the stale fact:',
         '  NEXT[engine-sheet] leads with engine.920 — done-pending-archive']);
     assertEqual('--lint carries the same notice', cli('--lint').includes('NEXT[engine-sheet] leads with engine.920 — done-pending-archive'), true);
+
+    // --staged reads the index, the content that will commit (codex re-review F1):
+    // a staged close with the working copy restored must still warn, and the inverse must not.
+    const git = (...a) => execFileSync('git', ['-c', 'core.hooksPath=/dev/null', '-c', 'user.name=t', '-c', 'user.email=t@t', ...a], { cwd: root, encoding: 'utf8' });
+    const planPath = path.join(root, 'docs', 'engine', 'ROLLOUT_PLAN.md');
+    git('init', '-q');
+    fs.writeFileSync(planPath, plan('ready'));
+    git('add', '-A');
+    git('commit', '-q', '-m', 'base');
+    const staged = () => execFileSync('node', [path.join(root, 'scripts', 'docLoopStatus.js'), '--stale-next', '--staged'], { cwd: root, encoding: 'utf8' });
+    fs.writeFileSync(planPath, plan('done-pending-archive'));
+    git('add', 'docs/engine/ROLLOUT_PLAN.md');
+    fs.writeFileSync(planPath, plan('ready'));
+    assertEqual('--staged: close staged, working copy restored → the notice',
+      staged().includes('NEXT[engine-sheet] leads with engine.920 — done-pending-archive'), true);
+    assertEqual('--stale-next without --staged reads the working copy → silent here', cli('--stale-next'), '');
+    git('reset', '-q', 'docs/engine/ROLLOUT_PLAN.md');
+    fs.writeFileSync(planPath, plan('done-pending-archive'));
+    assertEqual('--staged: close only in the working copy → silent (not in the commit)', staged(), '');
   } finally { fs.rmSync(root, { recursive: true, force: true }); }
 }
 

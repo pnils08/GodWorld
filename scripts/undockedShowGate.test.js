@@ -20,11 +20,12 @@ const srcC = fs.readFileSync(path.join(__dirname, 'undockedShowContract.js'), 'u
 // (research.27 2.3 item 4, d01e0486). The real invariant is "no sheet touch
 // outside push", not "the string never appears anywhere" -- a whole-file scan
 // also caught its own explaining comment. Strip comments and exclude the
-// pushFeed function body before checking the rest stays sheet-pure.
+// push transport (ensureFeedHeader, called only by pushFeed with its client,
+// then pushFeed) before checking the rest stays sheet-pure.
 function stripComments(src) {
   return src.replace(/\/\*[\s\S]*?\*\//g, '').replace(/\/\/.*$/gm, '');
 }
-const pushFeedStart = srcG.indexOf('async function pushFeed(');
+const pushFeedStart = srcG.indexOf('async function ensureFeedHeader(');
 const pushFeedEnd = srcG.indexOf('function enqueueStagedDir(');
 const srcGDiskOnly = stripComments(srcG.slice(0, pushFeedStart) + srcG.slice(pushFeedEnd));
 check('no sheet client outside push transport',
@@ -170,5 +171,53 @@ check('auto-gate stamped as decider',
 check('sequenced id passes real-world-date wall',
   !/\d{4}-\d{2}-\d{2}/.test(ids104[1]));
 
-if (failed) { console.error(failed + ' failed'); process.exit(1); }
-console.log('undockedShowGate: ok');
+// research.31 ensureFeedHeader: the push is positional, so the header is byte-exact.
+(async function () {
+  const mock = function (start) {
+    const m = { tab: [start.slice()], writes: 0 };
+    m.updateRangeByPosition = async function (tab, row, col, vals) {
+      m.writes++; vals[0].forEach(function (v, i) { m.tab[0][col + i] = v; });
+    };
+    m.getSheetData = async function () { return m.tab; };
+    return m;
+  };
+  const twelve = G.TAB_HEADERS.slice(0, 12);
+  let m = mock(twelve);
+  check('12-col header gains PointsDelta', (await G.ensureFeedHeader(m, m.tab[0])) === true &&
+    m.writes === 1 && m.tab[0][12] === 'PointsDelta');
+  m = mock(G.TAB_HEADERS);
+  check('exact header writes nothing', (await G.ensureFeedHeader(m, m.tab[0])) === false && m.writes === 0);
+  m = mock(twelve.concat(['PointsDelta ']));
+  let threw = false;
+  try { await G.ensureFeedHeader(m, m.tab[0]); } catch (e) { threw = true; }
+  check('padded PointsDelta refuses (no trim)', threw && m.writes === 0);
+  m = mock([' TargetCycle'].concat(twelve.slice(1)));
+  threw = false;
+  try { await G.ensureFeedHeader(m, m.tab[0]); } catch (e) { threw = true; }
+  check('padded existing cell refuses', threw && m.writes === 0);
+  m = mock(twelve);
+  m.width = 12; m.appended = 0;
+  const upd = m.updateRangeByPosition;
+  m.updateRangeByPosition = async function (tab, row, col, vals) {
+    if (col + vals[0].length > m.width) throw new Error('Range (Undocked_Feed!M1) exceeds grid limits. Max rows: 170, max columns: 12');
+    return upd(tab, row, col, vals);
+  };
+  m.getSheetIds = async function (names) { return { Undocked_Feed: 7 }; };
+  m.batchUpdateSpreadsheet = async function (reqs) {
+    const a = reqs[0].appendDimension; m.appended += a.length; m.width += a.length;
+    m.dim = a.dimension; m.sheetId = a.sheetId;
+  };
+  check('a 12-wide grid grows by the missing column, then writes',
+    (await G.ensureFeedHeader(m, m.tab[0])) === true && m.appended === 1 && m.dim === 'COLUMNS' &&
+    m.sheetId === 7 && m.tab[0][12] === 'PointsDelta');
+  m = mock(twelve);
+  m.updateRangeByPosition = async function () { throw new Error('quota exceeded'); };
+  threw = false;
+  try { await G.ensureFeedHeader(m, m.tab[0]); } catch (e) { threw = /quota/.test(e.message); }
+  check('any other write error is not swallowed', threw);
+  m = mock(twelve.concat(['', '']));
+  check('trailing blank cells are not columns', (await G.ensureFeedHeader(m, m.tab[0])) === true && m.tab[0][12] === 'PointsDelta');
+
+  if (failed) { console.error(failed + ' failed'); process.exit(1); }
+  console.log('undockedShowGate: ok');
+})();

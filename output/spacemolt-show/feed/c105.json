@@ -19,7 +19,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-09-01T01-30-10.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-09-01T01-30-10.json",
+      "PointsDelta": 5
     },
     {
       "v": "UNDOCKED-FEED/1",
@@ -36,7 +37,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00962-2026-09-02T01-30-05.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00962-2026-09-02T01-30-05.json",
+      "PointsDelta": 0
     },
     {
       "v": "UNDOCKED-FEED/1",
@@ -56,7 +58,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00688-2026-09-03T01-30-07.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00688-2026-09-03T01-30-07.json",
+      "PointsDelta": 0
     },
     {
       "v": "UNDOCKED-FEED/1",
@@ -76,7 +79,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-09-04T01-30-08.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-09-04T01-30-08.json",
+      "PointsDelta": 0
     },
     {
       "v": "UNDOCKED-FEED/1",
@@ -96,7 +100,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00962-2026-09-05T01-30-07.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00962-2026-09-05T01-30-07.json",
+      "PointsDelta": 5
     },
     {
       "v": "UNDOCKED-FEED/1",
@@ -117,7 +122,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00688-2026-09-06T01-30-09.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00688-2026-09-06T01-30-09.json",
+      "PointsDelta": 0
     },
     {
       "v": "UNDOCKED-FEED/1",
@@ -136,7 +142,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-09-07T01-30-04.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00143-2026-09-07T01-30-04.json",
+      "PointsDelta": 0
     }
   ]
 }

@@ -294,6 +294,20 @@
           }
         ]
       }
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "earned": [
+        {
+          "id": "first_steps",
+          "name": "First Steps",
+          "points": 5,
+          "at": "2026-08-16T07:58:20.341990408Z"
+        }
+      ],
+      "value": 5,
+      "rescoredAt": "2026-10-30T22:17:10.257Z"
     }
   },
   "captains_log": {

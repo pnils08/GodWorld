@@ -1,0 +1,41 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-10-29T01:35:17.936Z",
+  "POPID": "POP-00816",
+  "Cycle": 113,
+  "Seq": 1,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00816-2026-10-29T01-30-06",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00816-2026-10-29T01-30-06.json",
+  "Holder": "Daphne Stafford",
+  "CreditsDelta": null,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Daphne Stafford credits=null systems=",
+  "DecidedAt": "2026-10-29T01:35:17.940Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 113,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00816",
+    "Holder": "Daphne Stafford",
+    "EpisodeId": "undocked-pop00816-Y3C9",
+    "CreditsDelta": null,
+    "Systems": [],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00816-2026-10-29T01-30-06.json",
+    "PointsDelta": 5
+  },
+  "PointsDelta": 5
+}

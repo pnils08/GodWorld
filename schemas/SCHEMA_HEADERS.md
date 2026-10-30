@@ -1656,8 +1656,8 @@ pointers:
 
 ## Undocked_Standings
 
-- **Rows:** 13
-- **Columns:** 11
+- **Rows:** 25
+- **Columns:** 12
 
 | Col | Header |
 |-----|--------|
@@ -1665,13 +1665,14 @@ pointers:
 | B | POPID |
 | C | Holder |
 | D | Episodes |
-| E | CreditsTotal |
-| F | CombatTotal |
-| G | MishapTotal |
-| H | BestMagnitude |
-| I | LastAiredCycle |
-| J | CyclesLed |
-| K | CurrentStreak |
+| E | PointsTotal |
+| F | CreditsTotal |
+| G | CombatTotal |
+| H | MishapTotal |
+| I | BestMagnitude |
+| J | LastAiredCycle |
+| K | CyclesLed |
+| L | CurrentStreak |
 
 ---
 

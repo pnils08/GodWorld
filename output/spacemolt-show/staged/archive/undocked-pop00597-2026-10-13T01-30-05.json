@@ -274,6 +274,20 @@
           }
         ]
       }
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "earned": [
+        {
+          "id": "maiden_jump",
+          "name": "Maiden Jump",
+          "points": 5,
+          "at": "2026-10-13T01:37:22.066632064Z"
+        }
+      ],
+      "value": 5,
+      "rescoredAt": "2026-10-30T22:17:10.244Z"
     }
   },
   "captains_log": {

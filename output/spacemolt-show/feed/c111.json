@@ -19,7 +19,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop01053-2026-10-12T01-30-06.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop01053-2026-10-12T01-30-06.json",
+      "PointsDelta": 5
     },
     {
       "v": "UNDOCKED-FEED/1",
@@ -40,7 +41,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00597-2026-10-13T01-30-05.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00597-2026-10-13T01-30-05.json",
+      "PointsDelta": 5
     },
     {
       "v": "UNDOCKED-FEED/1",
@@ -59,7 +61,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00926-2026-10-14T01-30-06.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00926-2026-10-14T01-30-06.json",
+      "PointsDelta": 5
     },
     {
       "v": "UNDOCKED-FEED/1",
@@ -82,7 +85,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop01053-2026-10-15T01-30-04.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop01053-2026-10-15T01-30-04.json",
+      "PointsDelta": 5
     },
     {
       "v": "UNDOCKED-FEED/1",
@@ -101,7 +105,80 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00597-2026-10-16T01-30-04.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00597-2026-10-16T01-30-04.json",
+      "PointsDelta": 5
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 111,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00926",
+      "Holder": "Briar Soto",
+      "EpisodeId": "undocked-pop00926-Y3C7-e2",
+      "CreditsDelta": 0,
+      "Systems": [
+        "sol",
+        "alpha_centauri",
+        "sirius"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 1,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00926-2026-10-17T01-30-04.json",
+      "PointsDelta": 5
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 111,
+      "EventType": "undocked-episode",
+      "POPID": "POP-01053",
+      "Holder": "Rosario Medina",
+      "EpisodeId": "undocked-pop01053-Y3C7-e3",
+      "CreditsDelta": 0,
+      "Systems": [
+        "markab",
+        "procyon",
+        "proxima_centauri",
+        "epsilon_eridani"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 1,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop01053-2026-10-18T01-30-04.json",
+      "PointsDelta": 0
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 111,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00597",
+      "Holder": "Eric Taveras",
+      "EpisodeId": "undocked-pop00597-Y3C7-e3",
+      "CreditsDelta": 0,
+      "Systems": [
+        "node_alpha",
+        "synchrony",
+        "pherkad",
+        "gsc_0041",
+        "antares",
+        "homam",
+        "furud",
+        "nova_terra"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00597-2026-10-19T01-30-04.json",
+      "PointsDelta": 10
     }
   ]
 }

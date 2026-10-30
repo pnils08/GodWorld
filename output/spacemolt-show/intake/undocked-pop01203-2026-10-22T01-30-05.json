@@ -1,0 +1,43 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-10-22T01:36:02.196Z",
+  "POPID": "POP-01203",
+  "Cycle": 112,
+  "Seq": 1,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop01203-2026-10-22T01-30-05",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop01203-2026-10-22T01-30-05.json",
+  "Holder": "Iris Pham",
+  "CreditsDelta": 1,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Iris Pham credits=1 systems=Sol",
+  "DecidedAt": "2026-10-22T01:36:02.201Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 112,
+    "EventType": "undocked-episode",
+    "POPID": "POP-01203",
+    "Holder": "Iris Pham",
+    "EpisodeId": "undocked-pop01203-Y3C8",
+    "CreditsDelta": 1,
+    "Systems": [
+      "Sol"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop01203-2026-10-22T01-30-05.json",
+    "PointsDelta": 5
+  },
+  "PointsDelta": 5
+}

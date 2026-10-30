@@ -14,15 +14,23 @@
  * mobility engine's input. NOTHING promotes on these numbers yet (§2.4 build
  * split: the mobility engine gets its own daylight design).
  *
- * Columns: Rank, POPID, Holder, Episodes, CreditsTotal, CombatTotal,
- * MishapTotal, BestMagnitude, LastAiredCycle, CyclesLed, CurrentStreak.
- *  - Rank/CyclesLed/CurrentStreak rank on cumulative CreditsTotal; ties break
- *    by POPID so the output is stable under re-runs.
+ * Columns: Rank, POPID, Holder, Episodes, PointsTotal, CreditsTotal,
+ * CombatTotal, MishapTotal, BestMagnitude, LastAiredCycle, CyclesLed,
+ * CurrentStreak.
+ *  - Rank/CyclesLed/CurrentStreak rank on cumulative PointsTotal (the game's
+ *    own achievement points), then CreditsTotal, then POPID so the output is
+ *    stable under re-runs (builder ruling C, research.31, 2026-10-30).
  *  - CyclesLed replays aired cycles in order: after each TargetCycle's rows
- *    land, whoever leads cumulative credits logs one led cycle. CurrentStreak
- *    is the run of consecutive aired cycles led up to the latest one.
- *  - Blank CreditsDelta is NOT zero (nullable by contract) — it just doesn't
- *    move the total. Episodes still counts the flight.
+ *    land, the leader logs one led cycle. CurrentStreak is the run of
+ *    consecutive aired cycles led up to the latest one. A cycle that aired
+ *    before POINTS_FROM_CYCLE keeps the leader it was awarded under the credits
+ *    board ("Eric Taveras should not lose what he was awarded" — builder
+ *    2026-10-30); from it on, the leader is the points board's.
+ *  - Blank CreditsDelta / PointsDelta is NOT zero (nullable by contract) — it
+ *    just doesn't move the total. Episodes still counts the flight. A blank
+ *    PointsDelta means the pilot's account was not read that night; the next
+ *    daily settle fills it. The sidecar carries PointsPending (count of such
+ *    nights) so a reader can say the total is not final (codex research.31 F7).
  *
  * Usage: node scripts/undockedStandings.js [--dry-run]
  */
@@ -38,7 +46,10 @@ const TAB = 'Undocked_Standings';
 // where the slice builders can read it without a live-sheet call — Nia's
 // slice reads this file, never the tab (her data contract is local packs).
 const SIDECAR = path.join(__dirname, '..', 'output', 'spacemolt-show', 'standings.json');
-const HEADERS = ['Rank', 'POPID', 'Holder', 'Episodes', 'CreditsTotal',
+// The points board was ruled mid-cycle 114 (C113 had already aired). Cycles
+// through 113 were led, and named on air, under the credits board.
+const POINTS_FROM_CYCLE = 114;
+const HEADERS = ['Rank', 'POPID', 'Holder', 'Episodes', 'PointsTotal', 'CreditsTotal',
   'CombatTotal', 'MishapTotal', 'BestMagnitude', 'LastAiredCycle',
   'CyclesLed', 'CurrentStreak'];
 
@@ -52,7 +63,7 @@ function compute(feedRows) {
   const hdr = feedRows[0];
   const col = name => hdr.indexOf(name);
   const iTarget = col('TargetCycle'), iPop = col('POPID'), iHolder = col('Holder'),
-        iEp = col('EpisodeId'), iCredits = col('CreditsDelta'),
+        iEp = col('EpisodeId'), iCredits = col('CreditsDelta'), iPoints = col('PointsDelta'),
         iCombat = col('CombatEvents'), iMishap = col('MishapCount'), iMag = col('Magnitude');
   if (iTarget < 0 || iPop < 0 || iEp < 0) {
     throw new Error(FEED_TAB + ' missing TargetCycle/POPID/EpisodeId — refusing to compute');
@@ -69,6 +80,7 @@ function compute(feedRows) {
       pop, ep, target,
       holder: iHolder >= 0 ? String(row[iHolder] || '').trim() : '',
       credits: num(row[iCredits]),
+      points: iPoints >= 0 ? num(row[iPoints]) : null,
       combat: num(row[iCombat]) || 0,
       mishaps: num(row[iMishap]) || 0,
       magnitude: num(row[iMag]),
@@ -79,12 +91,14 @@ function compute(feedRows) {
   const byCycle = {};
   for (const e of events) {
     const p = pilots[e.pop] || (pilots[e.pop] = {
-      pop: e.pop, holder: '', episodes: 0, credits: 0, combat: 0,
+      pop: e.pop, holder: '', episodes: 0, points: 0, pointsPending: 0, credits: 0, combat: 0,
       mishaps: 0, bestMag: null, lastAired: null,
     });
     p.episodes++;
     if (e.holder) p.holder = e.holder;
     if (e.credits != null) p.credits += e.credits;
+    if (e.points != null) p.points += e.points;
+    else p.pointsPending++;
     p.combat += e.combat;
     p.mishaps += e.mishaps;
     if (e.magnitude != null && (p.bestMag == null || e.magnitude > p.bestMag)) p.bestMag = e.magnitude;
@@ -95,6 +109,7 @@ function compute(feedRows) {
   // Replay aired cycles for CyclesLed / CurrentStreak.
   const cycles = Object.keys(byCycle).map(Number).sort((a, b) => a - b);
   const running = {};
+  const runningPts = {};
   const led = {};
   let lastLeader = null;
   let streak = 0;
@@ -102,9 +117,11 @@ function compute(feedRows) {
     for (const e of byCycle[c]) {
       if (e.credits != null) running[e.pop] = (running[e.pop] || 0) + e.credits;
       else if (!(e.pop in running)) running[e.pop] = 0;
+      runningPts[e.pop] = (runningPts[e.pop] || 0) + (e.points || 0);
     }
+    const byPoints = c >= POINTS_FROM_CYCLE;
     const leader = Object.keys(running).sort((a, b) =>
-      (running[b] - running[a]) || (a < b ? -1 : 1))[0];
+      (byPoints ? (runningPts[b] - runningPts[a]) : 0) || (running[b] - running[a]) || (a < b ? -1 : 1))[0];
     if (leader) {
       led[leader] = (led[leader] || 0) + 1;
       streak = leader === lastLeader ? streak + 1 : 1;
@@ -113,12 +130,31 @@ function compute(feedRows) {
   }
 
   const ranked = Object.values(pilots).sort((a, b) =>
-    (b.credits - a.credits) || (a.pop < b.pop ? -1 : 1));
-  return ranked.map((p, i) => [
-    i + 1, p.pop, p.holder, p.episodes, p.credits, p.combat, p.mishaps,
+    (b.points - a.points) || (b.credits - a.credits) || (a.pop < b.pop ? -1 : 1));
+  const rows = ranked.map((p, i) => [
+    i + 1, p.pop, p.holder, p.episodes, p.points, p.credits, p.combat, p.mishaps,
     p.bestMag == null ? '' : p.bestMag, p.lastAired == null ? '' : p.lastAired,
     led[p.pop] || 0, p.pop === lastLeader ? streak : 0,
   ]);
+  // Sidecar-only (not a tab column): nights whose points are not read yet.
+  rows.pending = Object.fromEntries(ranked.map(p => [p.pop, p.pointsPending]));
+  return rows;
+}
+
+// research.31: the live grid was exactly 11 columns wide (2026-10-30) and the
+// board is now 12. Widen it (appendDimension only adds), never shrink.
+async function writeGrown(tab, values) {
+  try {
+    await sheets.updateRangeByPosition(tab, 1, 0, values); // startCol is 0-indexed: col A
+  } catch (e) {
+    const m = /exceeds grid limits.*max columns: (\d+)/i.exec(e && e.message || '');
+    const need = m ? values[0].length - Number(m[1]) : 0;
+    if (!(need > 0)) throw e;
+    const ids = await sheets.getSheetIds([tab]);
+    await sheets.batchUpdateSpreadsheet([{ appendDimension: {
+      sheetId: ids[tab], dimension: 'COLUMNS', length: need } }]);
+    await sheets.updateRangeByPosition(tab, 1, 0, values);
+  }
 }
 
 async function main() {
@@ -140,7 +176,7 @@ async function main() {
   }
   console.log('[standings] ' + rows.length + ' pilot(s):');
   rows.forEach(r => console.log('  #' + r[0] + ' ' + r[2] + ' (' + r[1] + ') — ' +
-    r[3] + ' ep, credits ' + r[4] + ', led ' + r[9] + ', streak ' + r[10]));
+    r[3] + ' ep, points ' + r[4] + ', credits ' + r[5] + ', led ' + r[10] + ', streak ' + r[11]));
   if (dryRun) { console.log('[standings] dry-run — no write'); return; }
 
   const existing = await sheets.getSheetData(TAB).catch(() => null);
@@ -152,7 +188,7 @@ async function main() {
   const values = [HEADERS].concat(rows);
   const oldLen = existing ? existing.length : 0;
   while (values.length < oldLen) values.push(HEADERS.map(() => ''));
-  await sheets.updateRangeByPosition(TAB, 1, 0, values); // startCol is 0-indexed: col A
+  await writeGrown(TAB, values);
 
   // Verify-after-write (engine rule): read back and confirm shape.
   const back = await sheets.getSheetData(TAB);
@@ -165,19 +201,23 @@ async function main() {
   // Sidecar for the slice builders (same data, local file, no sheet read).
   fs.mkdirSync(path.dirname(SIDECAR), { recursive: true });
   fs.writeFileSync(SIDECAR, JSON.stringify({
-    v: 'UNDOCKED-STANDINGS/1',
+    v: 'UNDOCKED-STANDINGS/2',
     computedAt: new Date().toISOString(),
     rows: rows.map(r => ({
-      Rank: r[0], POPID: r[1], Holder: r[2], Episodes: r[3], CreditsTotal: r[4],
-      CombatTotal: r[5], MishapTotal: r[6],
-      BestMagnitude: r[7] === '' ? null : r[7], LastAiredCycle: r[8] === '' ? null : r[8],
-      CyclesLed: r[9], CurrentStreak: r[10],
+      Rank: r[0], POPID: r[1], Holder: r[2], Episodes: r[3], PointsTotal: r[4], CreditsTotal: r[5],
+      CombatTotal: r[6], MishapTotal: r[7],
+      BestMagnitude: r[8] === '' ? null : r[8], LastAiredCycle: r[9] === '' ? null : r[9],
+      CyclesLed: r[10], CurrentStreak: r[11], PointsPending: rows.pending[r[1]] || 0,
     })),
   }, null, 2) + '\n');
   console.log('[standings] sidecar written: ' + path.relative(path.join(__dirname, '..'), SIDECAR));
 }
 
-main().catch(e => {
-  console.error('[standings] FATAL: ' + (e && e.message || e));
-  process.exit(1);
-});
+module.exports = { compute, HEADERS, POINTS_FROM_CYCLE };
+
+if (require.main === module) {
+  main().catch(e => {
+    console.error('[standings] FATAL: ' + (e && e.message || e));
+    process.exit(1);
+  });
+}

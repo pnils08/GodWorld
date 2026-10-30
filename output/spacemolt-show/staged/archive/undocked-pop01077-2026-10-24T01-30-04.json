@@ -1,0 +1,228 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop01077-2026-10-24T01-30-04",
+  "popid": "POP-01077",
+  "holder": "Rafael Phillips",
+  "session": "undocked-pop01077",
+  "window": {
+    "startedAt": "2026-10-24T01:30:04.452Z",
+    "endedAt": "2026-10-24T01:40:12.019Z"
+  },
+  "runner": {
+    "turns": 45,
+    "exitCode": 0,
+    "capped": true,
+    "toolErrors": 13,
+    "estCostUsd": 0.0063,
+    "tokensIn": 39157,
+    "tokensOut": 3052,
+    "log": "output/spacemolt-show/episodes/undocked-pop01077-2026-10-24T01-30-04.log"
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-24T01:40:13.159Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "procyon",
+        "nova_terra",
+        "sirius"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 0,
+        "mission": 2,
+        "combat": 0,
+        "navigation": 3,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [],
+        "mission": [
+          {
+            "id": 217348642,
+            "created_at": "2026-10-24T01:34:15Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Titanium Extraction Contract",
+            "data": {
+              "mission_id": "6a0b75d97b127a6225db7bdc09dd18b9",
+              "template_id": "titanium_extraction_contract",
+              "title": "Titanium Extraction Contract",
+              "type": "mining"
+            }
+          },
+          {
+            "id": 217341648,
+            "created_at": "2026-10-24T01:30:15Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Iron Supply Run",
+            "data": {
+              "mission_id": "64bfe9681a0e1580955151fdeb4d3ead",
+              "template_id": "iron_supply_run",
+              "title": "Iron Supply Run",
+              "type": "mining"
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 217360588,
+            "created_at": "2026-10-24T01:40:04Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Nova Terra to Procyon",
+            "data": {
+              "arrival_poi": "procyon_a",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "nova_terra",
+              "is_pathfinder": false,
+              "to_system": "procyon",
+              "to_system_name": "Procyon"
+            }
+          },
+          {
+            "id": 217358379,
+            "created_at": "2026-10-24T01:38:36Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sirius to Nova Terra",
+            "data": {
+              "arrival_poi": "nova_terra_ice_shelf",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "sirius",
+              "is_pathfinder": false,
+              "to_system": "nova_terra",
+              "to_system_name": "Nova Terra"
+            }
+          },
+          {
+            "id": 217351843,
+            "created_at": "2026-10-24T01:36:33Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Nova Terra to Sirius",
+            "data": {
+              "arrival_poi": "sirius_a",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "nova_terra",
+              "is_pathfinder": false,
+              "to_system": "sirius",
+              "to_system_name": "Sirius"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 217360734,
+            "created_at": "2026-10-24T01:40:12Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "RafaelPhillips logged in",
+            "data": {
+              "last_login_at": "2026-10-24T01:30:05Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 217341403,
+            "created_at": "2026-10-24T01:30:05Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "RafaelPhillips logged in",
+            "data": {
+              "last_login_at": "2026-10-21T01:40:21Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "earned": [
+        {
+          "id": "first_steps",
+          "name": "First Steps",
+          "points": 5,
+          "at": "2026-10-24T01:33:57.818381092Z"
+        }
+      ],
+      "value": 5,
+      "rescoredAt": "2026-10-30T22:17:10.307Z"
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 1,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-10-24 01:40:11",
+        "text": "[Session Handoff] - **Current Action**: Preparing to mine Titanium Ore at **Procyon Belt**, an active mining location.  \n- **Next Step**: Begin mining operations to fulfill the **Titanium Extraction Contract**.  \n- **Location**: Procyon Belt, Procyon system. Ship: Theoria. Credits: 500cr. Cargo: Empty.  \n- **Active Goal**: Complete the Titanium Extraction Contract by mining Titanium Ore.  \n- **Recent Events**: Traveled from Nova Terra to Sirius, found no viable mining belts, returned to Nova Terra, and jumped to Procyon for active mining opportunities."
+      }
+    ],
+    "unwindowed": []
+  }
+}

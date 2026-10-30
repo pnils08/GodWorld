@@ -131,6 +131,26 @@
           }
         ]
       }
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "earned": [
+        {
+          "id": "first_steps",
+          "name": "First Steps",
+          "points": 5,
+          "at": "2026-10-05T01:36:06.823217287Z"
+        },
+        {
+          "id": "maiden_jump",
+          "name": "Maiden Jump",
+          "points": 5,
+          "at": "2026-10-05T01:33:59.289243089Z"
+        }
+      ],
+      "value": 10,
+      "rescoredAt": "2026-10-30T22:17:10.278Z"
     }
   },
   "captains_log": {

@@ -1,0 +1,288 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00775-2026-10-20T01-30-06",
+  "popid": "POP-00775",
+  "holder": "Sammie Alvarez",
+  "session": "undocked-pop00775",
+  "window": {
+    "startedAt": "2026-10-20T01:30:06.345Z",
+    "endedAt": "2026-10-20T01:40:18.174Z"
+  },
+  "runner": {
+    "turns": 37,
+    "exitCode": 0,
+    "capped": true,
+    "toolErrors": 8,
+    "estCostUsd": 0.0082,
+    "tokensIn": 51570,
+    "tokensOut": 3471,
+    "log": "output/spacemolt-show/episodes/undocked-pop00775-2026-10-20T01-30-06.log"
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-20T01:40:19.386Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 2,
+      "basis": [
+        {
+          "id": 207194413,
+          "event_type": "trading.exchange_fill",
+          "n": -210
+        },
+        {
+          "id": 207194136,
+          "event_type": "trading.exchange_fill",
+          "n": 1
+        }
+      ],
+      "value": -209
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "Sol",
+        "sol",
+        "alpha_centauri"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "iron_ore": 1,
+          "copper_ore": 2
+        },
+        "sold": {
+          "iron_ore": 1
+        }
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 2,
+        "trading": 2,
+        "mission": 1,
+        "combat": 0,
+        "navigation": 2,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 207186940,
+            "created_at": "2026-10-20T01:35:33Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 207186687,
+            "created_at": "2026-10-20T01:35:32Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 2 Copper Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 2,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 2
+            }
+          }
+        ],
+        "trading": [
+          {
+            "id": 207194413,
+            "created_at": "2026-10-20T01:39:47Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Bought 30x Iron Ore @ 7 each (210 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "iron_ore",
+              "price": 7,
+              "quantity": 30,
+              "role": "buyer",
+              "sales_tax": 2,
+              "source": "spot",
+              "total": 210
+            }
+          },
+          {
+            "id": 207194136,
+            "created_at": "2026-10-20T01:39:38Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 1x Iron Ore @ 1 each (1 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "iron_ore",
+              "price": 1,
+              "quantity": 1,
+              "role": "seller",
+              "source": "spot",
+              "total": 1
+            }
+          }
+        ],
+        "mission": [
+          {
+            "id": 207175089,
+            "created_at": "2026-10-20T01:30:27Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Iron Supply Run",
+            "data": {
+              "mission_id": "e377920cd658fe619e0de1e5db5c2118",
+              "template_id": "iron_supply_run",
+              "title": "Iron Supply Run",
+              "type": "mining"
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 207191073,
+            "created_at": "2026-10-20T01:37:35Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Alpha Centauri to Sol",
+            "data": {
+              "arrival_poi": "neptune",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "alpha_centauri",
+              "is_pathfinder": false,
+              "to_system": "sol",
+              "to_system_name": "Sol"
+            }
+          },
+          {
+            "id": 207188975,
+            "created_at": "2026-10-20T01:36:13Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Alpha Centauri",
+            "data": {
+              "arrival_poi": "alpha_centauri_a",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "alpha_centauri",
+              "to_system_name": "Alpha Centauri"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 207195118,
+            "created_at": "2026-10-20T01:40:18Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "SammieAlvarez logged in",
+            "data": {
+              "last_login_at": "2026-10-20T01:30:07Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 207174400,
+            "created_at": "2026-10-20T01:30:07Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "SammieAlvarez logged in",
+            "data": {
+              "last_login_at": "2026-10-20T01:30:06Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "earned": [
+        {
+          "id": "first_steps",
+          "name": "First Steps",
+          "points": 5,
+          "at": "2026-10-20T01:39:06.249666289Z"
+        },
+        {
+          "id": "maiden_jump",
+          "name": "Maiden Jump",
+          "points": 5,
+          "at": "2026-10-20T01:36:37.170069051Z"
+        }
+      ],
+      "value": 10,
+      "rescoredAt": "2026-10-30T22:17:10.281Z"
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 1,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-10-20 01:40:18",
+        "text": "[Session Handoff] - **Current Action**: Attempting to complete the \"Iron Supply Run\" mission by delivering 30 units of Iron Ore to Confederacy Central Command.  \n- **Next Step**: Confirm purchase of remaining Iron Ore units (29/30 completed) and finalize mission completion.  \n- **Location**: Docked at Confederacy Central Command (Sol system).  \n- **Ship & Credits**: Current balance: ~290cr (after purchasing 30 Iron Ore for 210cr).  \n- **Cargo**: 30 Iron Ore.  \n- **Active Goal**: Finish \"Iron Supply Run\" mission for 1,500cr and +15 mining XP.  \n- **Recent Events**:  \n  - Jumped from Alpha Centauri to Sol.  \n  - Purchased Iron Ore at Confederacy Central Command.  \n  - Encountered a mission completion error; verifying mission ID."
+      }
+    ],
+    "unwindowed": []
+  }
+}

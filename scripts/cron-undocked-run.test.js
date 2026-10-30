@@ -62,7 +62,13 @@ for (let i = 0; i < 5; i++) t.push(te);
 t.push(call('spacemolt/get_status'));
 for (let i = 0; i < 7; i++) t.push(te);
 check('a tool call resets the idle count', !t.complete && t.idleTurns === 7);
-check('IDLE_TURNS default is 8', E.IDLE_TURNS === 8);
+// codex research.31 F4: the default tracker uses IDLE_TURNS (the saved-flight
+// replay in undockedEpisode.test.js is what justifies its value).
+t = E.createCompletionTracker();
+for (let i = 0; i < E.IDLE_TURNS - 1; i++) t.push(te);
+check('default tracker: IDLE_TURNS - 1 idle turns keep flying', !t.complete);
+t.push(te);
+check('default tracker: the IDLE_TURNS-th idle turn ends the night', t.complete);
 
 // research.31: the runner window defaults to the brief's window (builder 20).
 const B = require('./undockedMissionBrief');

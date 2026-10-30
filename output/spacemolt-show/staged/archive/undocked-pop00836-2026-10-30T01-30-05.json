@@ -1,0 +1,145 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00836-2026-10-30T01-30-05",
+  "popid": "POP-00836",
+  "holder": "Cristina Booker",
+  "session": "undocked-pop00836",
+  "window": {
+    "startedAt": "2026-10-30T01:30:05.689Z",
+    "endedAt": "2026-10-30T01:35:23.075Z"
+  },
+  "runner": {
+    "turns": 11,
+    "exitCode": 0,
+    "capped": false,
+    "toolErrors": 2,
+    "estCostUsd": 0.0034,
+    "tokensIn": 23763,
+    "tokensOut": 85,
+    "log": "output/spacemolt-show/episodes/undocked-pop00836-2026-10-30T01-30-05.log"
+  },
+  "stall": {
+    "idleTurns": 8,
+    "toolCalls": 1,
+    "limit": 8
+  },
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-30T01:35:24.724Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "note": "runner stall — pilot never flew; unknown, not zero",
+      "value": null
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 0,
+        "mission": 0,
+        "combat": 0,
+        "navigation": 0,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [],
+        "mission": [],
+        "combat": [],
+        "navigation": [],
+        "session": [
+          {
+            "id": 232692716,
+            "created_at": "2026-10-30T01:35:23Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "CristinaBooker logged in",
+            "data": {
+              "last_login_at": "2026-10-30T01:30:08Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 232683824,
+            "created_at": "2026-10-30T01:30:08Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "CristinaBooker logged in",
+            "data": {
+              "last_login_at": "2026-10-27T01:40:21Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "earned": [],
+      "note": "no achievement earned in window — measured zero",
+      "value": 0,
+      "rescoredAt": "2026-10-30T22:17:10.287Z"
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 1,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-10-30 01:35:23",
+        "text": "[Session Handoff] - **Current Action**: Docked at Alpha Centauri Colonial Station. Just checked active missions - one mining contract open (15 Iron Ore for Sol Central, expires in 2 ticks).\n- **Next Step**: Undock and proceed to nearest asteroid belt to mine 15 Iron Ore for active contract, prioritizing this before considering new missions.\n- **Status**: \n  - Credits: 2,500cr (Fixer network allowance)\n  - Cargo: Empty (0/50)\n  - Fuel: Assumed full (standard undock state)\n- **Active Goal**: Complete initial mining contract (1,000cr reward) to establish earnings baseline. No other contracts held (1/5 slots used).\n- **Recent Events**: First session start - no combat/trades yet. Initial mining contract from Sol Central is simple starting objective."
+      }
+    ],
+    "unwindowed": []
+  }
+}

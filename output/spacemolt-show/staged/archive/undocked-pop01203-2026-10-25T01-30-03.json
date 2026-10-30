@@ -1,0 +1,294 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop01203-2026-10-25T01-30-03",
+  "popid": "POP-01203",
+  "holder": "Iris Pham",
+  "session": "undocked-pop01203",
+  "window": {
+    "startedAt": "2026-10-25T01:30:03.989Z",
+    "endedAt": "2026-10-25T01:40:19.058Z"
+  },
+  "runner": {
+    "turns": 30,
+    "exitCode": null,
+    "capped": true,
+    "toolErrors": 1,
+    "estCostUsd": 0.0774,
+    "tokensIn": 547707,
+    "tokensOut": 2525,
+    "log": "output/spacemolt-show/episodes/undocked-pop01203-2026-10-25T01-30-03.log"
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-25T01:40:20.316Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "Nihal",
+        "Nova Terra",
+        "Furud",
+        "nihal",
+        "furud",
+        "nova_terra",
+        "sirius"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "copper_ore": 1,
+          "iridium_ore": 1,
+          "carbon_ore": 3
+        },
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 3,
+        "trading": 0,
+        "mission": 1,
+        "combat": 0,
+        "navigation": 4,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 219770359,
+            "created_at": "2026-10-25T01:40:10Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Copper Ore at Nihal Containment Fracture",
+            "data": {
+              "poi_name": "Nihal Containment Fracture",
+              "quantity": 1,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "nihal",
+              "system_name": "Nihal",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 219769949,
+            "created_at": "2026-10-25T01:40:10Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Iridium Ore at Nova Terra Industrial Belt",
+            "data": {
+              "poi_name": "Nova Terra Industrial Belt",
+              "quantity": 1,
+              "resource_id": "iridium_ore",
+              "resource_name": "Iridium Ore",
+              "system_id": "nova_terra",
+              "system_name": "Nova Terra",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 219769761,
+            "created_at": "2026-10-25T01:40:10Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 3 Carbon Ore at Furud Belt",
+            "data": {
+              "poi_name": "Furud Belt",
+              "quantity": 3,
+              "resource_id": "carbon_ore",
+              "resource_name": "Carbon Ore",
+              "system_id": "furud",
+              "system_name": "Furud",
+              "ticks": 1
+            }
+          }
+        ],
+        "trading": [],
+        "mission": [
+          {
+            "id": 219755606,
+            "created_at": "2026-10-25T01:30:22Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Iron Supply Run",
+            "data": {
+              "mission_id": "cd00f86c63cf38f52a8c8efe5ff42168",
+              "template_id": "iron_supply_run",
+              "title": "Iron Supply Run",
+              "type": "mining"
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 219767586,
+            "created_at": "2026-10-25T01:38:41Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Furud to Nihal",
+            "data": {
+              "arrival_poi": "nihal_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "furud",
+              "is_pathfinder": false,
+              "to_system": "nihal",
+              "to_system_name": "Nihal"
+            }
+          },
+          {
+            "id": 219764659,
+            "created_at": "2026-10-25T01:36:31Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Nova Terra to Furud",
+            "data": {
+              "arrival_poi": "furud_ice_shelf",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "nova_terra",
+              "is_pathfinder": false,
+              "to_system": "furud",
+              "to_system_name": "Furud"
+            }
+          },
+          {
+            "id": 219760477,
+            "created_at": "2026-10-25T01:34:11Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sirius to Nova Terra",
+            "data": {
+              "arrival_poi": "nova_terra_ice_shelf",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sirius",
+              "is_pathfinder": false,
+              "to_system": "nova_terra",
+              "to_system_name": "Nova Terra"
+            }
+          },
+          {
+            "id": 219758903,
+            "created_at": "2026-10-25T01:33:01Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Sirius",
+            "data": {
+              "arrival_poi": "sirius_gas_pocket",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "sirius",
+              "to_system_name": "Sirius"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 219771006,
+            "created_at": "2026-10-25T01:40:19Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "IrisPham logged in",
+            "data": {
+              "last_login_at": "2026-10-25T01:30:05Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 219753864,
+            "created_at": "2026-10-25T01:30:05Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "IrisPham logged in",
+            "data": {
+              "last_login_at": "2026-10-22T01:36:00Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "earned": [
+        {
+          "id": "maiden_jump",
+          "name": "Maiden Jump",
+          "points": 5,
+          "at": "2026-10-25T01:33:13.594167516Z"
+        }
+      ],
+      "value": 5,
+      "rescoredAt": "2026-10-30T22:17:10.311Z"
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 0,
+    "listed": 2,
+    "note": "entries exist but created_at is outside startedAt/endedAt (often written at handoff)",
+    "entries": [],
+    "unwindowed": [
+      {
+        "index": 0,
+        "created_at": "2026-10-22 01:36:00",
+        "text": "[Session Handoff] - **Current Action**: Preparing to undock from **Sol Central** to resume mining for the **Copper Requisition** mission.  \n- **Next Step**: Travel to **Main Belt** and mine copper ore (1/25 collected so far).  \n- **Status**:  \n  - Location: Sol system (just undocked from Sol Central)  \n  - Credits: ~2,462cr (after fuel and iron ore sale)  \n  - Cargo: 1 **Copper Ore**  \n- **Active Goal**: Complete the **Copper Requisition** mission (25 units needed).  \n- **Recent Events**:  \n  - Mined in Main Belt (depleted).  \n  - Attempted/failed to mine in Kuiper Ice Fields (missing ice harvester).  \n  - Sold iron ore and refueled at Sol Central."
+      },
+      {
+        "index": 1,
+        "created_at": "2026-10-22 01:35:32",
+        "text": "Tonight's run was a steady grind. Started with a copper mining contract at Sol Central. Hit the Main Belt first, pulled a bit of copper and iron, but the belt was thin. Tried the Kuiper Ice Fields, but my ship couldn’t handle the ice. Came back with modest haul, sold the iron, and refueled. Not a big night on the board, but the ship’s home safe. Next run, I’ll aim for a cleaner contract."
+      }
+    ]
+  }
+}

@@ -21,7 +21,7 @@
  *
  * Usage:
  *   node scripts/undockedEpisode.js --session undocked-pop00962 \
- *       --mission-file missions/pop00962.txt [--minutes 10] \
+ *       --mission-file missions/pop00962.txt [--minutes 20] \
  *       [--model openrouter/deepseek/deepseek-chat]
  *   node scripts/undockedEpisode.js --session X --preflight-only
  *
@@ -42,7 +42,10 @@ const LOCK = path.join(EP_DIR, '.runner.lock');
 const GRACE_MS = 15000;
 
 function parseArgs(argv) {
-  const a = { session: null, mission: null, missionFile: null, minutes: 10,
+  // codex research.31 F5: the default window is the brief's, so a direct run
+  // never cuts a pilot the brief promised twenty minutes.
+  const a = { session: null, mission: null, missionFile: null,
+              minutes: require('./undockedMissionBrief').WINDOW_MINUTES,
               model: 'openrouter/deepseek/deepseek-chat', preflightOnly: false };
   for (let i = 2; i < argv.length; i++) {
     const k = argv[i], v = argv[i + 1];
@@ -53,6 +56,9 @@ function parseArgs(argv) {
     else if (k === '--model') { a.model = v; i++; }
     else if (k === '--preflight-only') { a.preflightOnly = true; }
     else { console.error('unknown arg: ' + k); process.exit(2); }
+  }
+  if (!(Number.isFinite(a.minutes) && a.minutes > 0)) {
+    console.error('--minutes needs a positive number, got ' + JSON.stringify(a.minutes)); process.exit(2);
   }
   return a;
 }
@@ -121,7 +127,12 @@ const ANSI_RE = /\x1b\[[0-9;]*m/g;
 // research.29 Move 3: Simone Adesanya 2026-10-10 made 2 real tool_calls, then
 // 153 turn_end events of command-shaped prose until the cap (2.71M tokens in).
 // Eric Taveras's 29-call mission night (2026-10-16) never passed 2 idle turns.
-const IDLE_TURNS = 8;
+// codex research.31 F4: 8 cut pilots who were thinking, not done. Across the 69
+// saved flights the longest idle run that was followed by more play is 10 turns
+// (Belle Lopez 09-28; Merkin Jumper 09-03 ran 9, then took a mission); only 2
+// flights ever paused 8+ and came back. 15 clears that with margin; a narrator
+// still stops well before the window (the dead runs were 22-23 idle turns).
+const IDLE_TURNS = 15;
 
 function createCompletionTracker(idleTurns) {
   const limit = idleTurns || IDLE_TURNS;
@@ -242,7 +253,7 @@ async function main() {
   console.log('[episode] sidecar: ' + path.relative(ROOT, sidePath));
 }
 
-module.exports = { createCompletionTracker, parseLog, IDLE_TURNS };
+module.exports = { createCompletionTracker, parseLog, parseArgs, IDLE_TURNS };
 
 if (require.main === module) {
   main().catch(e => { console.error('[episode] FATAL: ' + (e && e.message || e)); process.exit(1); });

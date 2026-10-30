@@ -1,0 +1,230 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop01203-2026-10-22T01-30-05",
+  "popid": "POP-01203",
+  "holder": "Iris Pham",
+  "session": "undocked-pop01203",
+  "window": {
+    "startedAt": "2026-10-22T01:30:05.548Z",
+    "endedAt": "2026-10-22T01:36:00.581Z"
+  },
+  "runner": {
+    "turns": 25,
+    "exitCode": 0,
+    "capped": false,
+    "toolErrors": 3,
+    "estCostUsd": 0.0576,
+    "tokensIn": 406784,
+    "tokensOut": 2197,
+    "log": "output/spacemolt-show/episodes/undocked-pop01203-2026-10-22T01-30-05.log"
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-22T01:36:02.168Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 1,
+      "basis": [
+        {
+          "id": 212595940,
+          "event_type": "trading.exchange_fill",
+          "n": 1
+        }
+      ],
+      "value": 1
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "Sol"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {
+          "copper_ore": 1,
+          "iron_ore": 1
+        },
+        "sold": {
+          "iron_ore": 1
+        }
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 2,
+        "trading": 1,
+        "mission": 1,
+        "combat": 0,
+        "navigation": 0,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [
+          {
+            "id": 212593226,
+            "created_at": "2026-10-22T01:34:21Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Copper Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "copper_ore",
+              "resource_name": "Copper Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          },
+          {
+            "id": 212593127,
+            "created_at": "2026-10-22T01:34:21Z",
+            "category": "mining",
+            "event_type": "mining.yield",
+            "summary": "Mined 1 Iron Ore at Main Belt",
+            "data": {
+              "poi_name": "Main Belt",
+              "quantity": 1,
+              "resource_id": "iron_ore",
+              "resource_name": "Iron Ore",
+              "system_id": "sol",
+              "system_name": "Sol",
+              "ticks": 1
+            }
+          }
+        ],
+        "trading": [
+          {
+            "id": 212595940,
+            "created_at": "2026-10-22T01:35:14Z",
+            "category": "trading",
+            "event_type": "trading.exchange_fill",
+            "summary": "Sold 1x Iron Ore @ 1 each (1 credits)",
+            "data": {
+              "base_id": "confederacy_central_command",
+              "item_id": "iron_ore",
+              "price": 1,
+              "quantity": 1,
+              "role": "seller",
+              "source": "spot",
+              "total": 1
+            }
+          }
+        ],
+        "mission": [
+          {
+            "id": 212586994,
+            "created_at": "2026-10-22T01:30:24Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Copper Requisition",
+            "data": {
+              "mission_id": "7b8cfcb84b8fb81c4de70280a301a4db",
+              "template_id": "copper_requisition",
+              "title": "Copper Requisition",
+              "type": "mining"
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [],
+        "session": [
+          {
+            "id": 212597048,
+            "created_at": "2026-10-22T01:36:00Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "IrisPham logged in",
+            "data": {
+              "last_login_at": "2026-10-22T01:30:07Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 212586498,
+            "created_at": "2026-10-22T01:30:07Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "IrisPham logged in",
+            "data": {
+              "last_login_at": "2026-10-22T01:30:05Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "earned": [
+        {
+          "id": "first_steps",
+          "name": "First Steps",
+          "points": 5,
+          "at": "2026-10-22T01:34:53.175784831Z"
+        }
+      ],
+      "value": 5,
+      "rescoredAt": "2026-10-30T22:17:10.309Z"
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 2,
+    "listed": 2,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-10-22 01:36:00",
+        "text": "[Session Handoff] - **Current Action**: Preparing to undock from **Sol Central** to resume mining for the **Copper Requisition** mission.  \n- **Next Step**: Travel to **Main Belt** and mine copper ore (1/25 collected so far).  \n- **Status**:  \n  - Location: Sol system (just undocked from Sol Central)  \n  - Credits: ~2,462cr (after fuel and iron ore sale)  \n  - Cargo: 1 **Copper Ore**  \n- **Active Goal**: Complete the **Copper Requisition** mission (25 units needed).  \n- **Recent Events**:  \n  - Mined in Main Belt (depleted).  \n  - Attempted/failed to mine in Kuiper Ice Fields (missing ice harvester).  \n  - Sold iron ore and refueled at Sol Central."
+      },
+      {
+        "index": 1,
+        "created_at": "2026-10-22 01:35:32",
+        "text": "Tonight's run was a steady grind. Started with a copper mining contract at Sol Central. Hit the Main Belt first, pulled a bit of copper and iron, but the belt was thin. Tried the Kuiper Ice Fields, but my ship couldn’t handle the ice. Came back with modest haul, sold the iron, and refueled. Not a big night on the board, but the ship’s home safe. Next run, I’ll aim for a cleaner contract."
+      }
+    ],
+    "unwindowed": []
+  }
+}

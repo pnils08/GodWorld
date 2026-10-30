@@ -1,0 +1,183 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00836-2026-10-27T01-30-05",
+  "popid": "POP-00836",
+  "holder": "Cristina Booker",
+  "session": "undocked-pop00836",
+  "window": {
+    "startedAt": "2026-10-27T01:30:05.764Z",
+    "endedAt": "2026-10-27T01:40:20.809Z"
+  },
+  "runner": {
+    "turns": 0,
+    "exitCode": null,
+    "capped": true,
+    "toolErrors": 4,
+    "estCostUsd": 0,
+    "tokensIn": 0,
+    "tokensOut": 0,
+    "log": "output/spacemolt-show/episodes/undocked-pop00836-2026-10-27T01-30-05.log"
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-27T01:40:22.179Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "alpha_centauri"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 0,
+        "mission": 2,
+        "combat": 0,
+        "navigation": 1,
+        "session": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [],
+        "mission": [
+          {
+            "id": 224901005,
+            "created_at": "2026-10-27T01:35:47Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Copper Requisition",
+            "data": {
+              "mission_id": "5adeba70a8478d02de764c316ef91ba4",
+              "template_id": "copper_requisition",
+              "title": "Copper Requisition",
+              "type": "mining"
+            }
+          },
+          {
+            "id": 224891317,
+            "created_at": "2026-10-27T01:30:37Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Welcome to Sol Central",
+            "data": {
+              "mission_id": "f3898c7edd09fc325ec4a00af9891035",
+              "template_id": "welcome_to_sol_central",
+              "title": "Welcome to Sol Central",
+              "type": "mining"
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 224905601,
+            "created_at": "2026-10-27T01:38:15Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Alpha Centauri",
+            "data": {
+              "arrival_poi": "alpha_centauri_a",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "alpha_centauri",
+              "to_system_name": "Alpha Centauri"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 224890485,
+            "created_at": "2026-10-27T01:30:07Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "CristinaBooker logged in",
+            "data": {
+              "last_login_at": "2026-10-27T01:30:05Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "earned": [
+        {
+          "id": "first_steps",
+          "name": "First Steps",
+          "points": 5,
+          "at": "2026-10-27T01:35:36.970136503Z"
+        },
+        {
+          "id": "maiden_jump",
+          "name": "Maiden Jump",
+          "points": 5,
+          "at": "2026-10-27T01:38:37.293906307Z"
+        }
+      ],
+      "value": 10,
+      "rescoredAt": "2026-10-30T22:17:10.286Z"
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 0,
+    "listed": 0,
+    "entries": [],
+    "unwindowed": []
+  }
+}

@@ -19,7 +19,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00121-2026-09-29T01-30-06.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00121-2026-09-29T01-30-06.json",
+      "PointsDelta": 5
     },
     {
       "v": "UNDOCKED-FEED/1",
@@ -36,7 +37,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00190-2026-09-30T01-30-05.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00190-2026-09-30T01-30-05.json",
+      "PointsDelta": 5
     },
     {
       "v": "UNDOCKED-FEED/1",
@@ -55,7 +57,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00141-2026-10-01T01-30-07.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00141-2026-10-01T01-30-07.json",
+      "PointsDelta": 5
     },
     {
       "v": "UNDOCKED-FEED/1",
@@ -72,7 +75,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00121-2026-10-02T01-30-05.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00121-2026-10-02T01-30-05.json",
+      "PointsDelta": 0
     },
     {
       "v": "UNDOCKED-FEED/1",
@@ -89,7 +93,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00190-2026-10-03T01-30-04.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00190-2026-10-03T01-30-04.json",
+      "PointsDelta": 0
     },
     {
       "v": "UNDOCKED-FEED/1",
@@ -109,7 +114,8 @@
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00141-2026-10-04T01-30-04.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00141-2026-10-04T01-30-04.json",
+      "PointsDelta": 5
     }
   ]
 }

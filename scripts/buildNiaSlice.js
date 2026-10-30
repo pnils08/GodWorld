@@ -59,7 +59,12 @@ function standingsLeader(standings) {
 
 function standingsNote(leader) {
   if (!leader) return '';
-  return ' Standings: ' + leader.Holder + ' leads the board — rank #1, ' +
+  // research.31: the board ranks achievement points first, credits beside;
+  // PointsPending = nights whose points the next settle has yet to read
+  const pts = leader.PointsTotal == null ? '' : leader.PointsTotal + ' achievement points' +
+    (leader.PointsPending ? ' (' + leader.PointsPending + ' night(s) not yet counted)' : '') + ', ' +
+    (leader.CreditsTotal == null ? '' : leader.CreditsTotal + ' credits, ');
+  return ' Standings: ' + leader.Holder + ' leads the board — rank #1, ' + pts +
     leader.CyclesLed + ' cycle(s) led, current streak ' + leader.CurrentStreak + '.';
 }
 

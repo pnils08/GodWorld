@@ -1,0 +1,230 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop01077-2026-10-21T01-30-05",
+  "popid": "POP-01077",
+  "holder": "Rafael Phillips",
+  "session": "undocked-pop01077",
+  "window": {
+    "startedAt": "2026-10-21T01:30:05.922Z",
+    "endedAt": "2026-10-21T01:40:20.981Z"
+  },
+  "runner": {
+    "turns": 21,
+    "exitCode": null,
+    "capped": true,
+    "toolErrors": 2,
+    "estCostUsd": 0.0066,
+    "tokensIn": 45071,
+    "tokensOut": 1066,
+    "log": "output/spacemolt-show/episodes/undocked-pop01077-2026-10-21T01-30-05.log"
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-21T01:40:22.392Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "sirius",
+        "sol",
+        "alpha_centauri"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 0,
+        "mission": 1,
+        "combat": 0,
+        "navigation": 5,
+        "session": 1
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [],
+        "mission": [
+          {
+            "id": 209792823,
+            "created_at": "2026-10-21T01:30:34Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Iron Supply Run",
+            "data": {
+              "mission_id": "3f051d7b69203adb7d754ca1f7f551fc",
+              "template_id": "iron_supply_run",
+              "title": "Iron Supply Run",
+              "type": "mining"
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 209810791,
+            "created_at": "2026-10-21T01:39:31Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Sirius",
+            "data": {
+              "arrival_poi": "sirius_gas_pocket",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "sirius",
+              "to_system_name": "Sirius"
+            }
+          },
+          {
+            "id": 209809003,
+            "created_at": "2026-10-21T01:38:22Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Alpha Centauri to Sol",
+            "data": {
+              "arrival_poi": "neptune",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "alpha_centauri",
+              "is_pathfinder": false,
+              "to_system": "sol",
+              "to_system_name": "Sol"
+            }
+          },
+          {
+            "id": 209805260,
+            "created_at": "2026-10-21T01:36:42Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Alpha Centauri",
+            "data": {
+              "arrival_poi": "alpha_centauri_a",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "alpha_centauri",
+              "to_system_name": "Alpha Centauri"
+            }
+          },
+          {
+            "id": 209802737,
+            "created_at": "2026-10-21T01:35:22Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sirius to Sol",
+            "data": {
+              "arrival_poi": "saturn",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "sirius",
+              "is_pathfinder": false,
+              "to_system": "sol",
+              "to_system_name": "Sol"
+            }
+          },
+          {
+            "id": 209800707,
+            "created_at": "2026-10-21T01:33:52Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Sirius",
+            "data": {
+              "arrival_poi": "sirius_gas_pocket",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "sirius",
+              "to_system_name": "Sirius"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 209792155,
+            "created_at": "2026-10-21T01:30:07Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "RafaelPhillips logged in",
+            "data": {
+              "last_login_at": "2026-10-21T01:30:05Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "earned": [
+        {
+          "id": "maiden_jump",
+          "name": "Maiden Jump",
+          "points": 5,
+          "at": "2026-10-21T01:34:14.181719786Z"
+        }
+      ],
+      "value": 5,
+      "rescoredAt": "2026-10-30T22:17:10.306Z"
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 0,
+    "listed": 0,
+    "entries": [],
+    "unwindowed": []
+  }
+}

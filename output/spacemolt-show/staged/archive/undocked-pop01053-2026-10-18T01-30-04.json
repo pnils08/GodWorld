@@ -1,0 +1,237 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop01053-2026-10-18T01-30-04",
+  "popid": "POP-01053",
+  "holder": "Rosario Medina",
+  "session": "undocked-pop01053",
+  "window": {
+    "startedAt": "2026-10-18T01:30:04.008Z",
+    "endedAt": "2026-10-18T01:40:19.050Z"
+  },
+  "runner": {
+    "turns": 27,
+    "exitCode": null,
+    "capped": true,
+    "toolErrors": 3,
+    "estCostUsd": 0.0624,
+    "tokensIn": 442631,
+    "tokensOut": 1709,
+    "log": "output/spacemolt-show/episodes/undocked-pop01053-2026-10-18T01-30-04.log"
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-18T01:40:22.481Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "markab",
+        "procyon",
+        "proxima_centauri",
+        "epsilon_eridani"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 0,
+        "mission": 1,
+        "combat": 0,
+        "navigation": 4,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [],
+        "mission": [
+          {
+            "id": 201888569,
+            "created_at": "2026-10-18T01:30:19Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Copper Requisition",
+            "data": {
+              "mission_id": "ab752ecb5f8fe7709e3c322aeb1f4cd2",
+              "template_id": "copper_requisition",
+              "title": "Copper Requisition",
+              "type": "mining"
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 201902094,
+            "created_at": "2026-10-18T01:38:57Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Procyon to Markab",
+            "data": {
+              "arrival_poi": "markab_ice_fields",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "procyon",
+              "is_pathfinder": false,
+              "to_system": "markab",
+              "to_system_name": "Markab"
+            }
+          },
+          {
+            "id": 201900479,
+            "created_at": "2026-10-18T01:37:47Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Proxima Centauri to Procyon",
+            "data": {
+              "arrival_poi": "procyon_ice_fields",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "proxima_centauri",
+              "is_pathfinder": false,
+              "to_system": "procyon",
+              "to_system_name": "Procyon"
+            }
+          },
+          {
+            "id": 201897678,
+            "created_at": "2026-10-18T01:36:27Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Epsilon Eridani to Proxima Centauri",
+            "data": {
+              "arrival_poi": "pollux_major_star",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "epsilon_eridani",
+              "is_pathfinder": false,
+              "to_system": "proxima_centauri",
+              "to_system_name": "Proxima Centauri"
+            }
+          },
+          {
+            "id": 201894816,
+            "created_at": "2026-10-18T01:34:17Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Procyon to Epsilon Eridani",
+            "data": {
+              "arrival_poi": "epsilon_eridani_ice_fields",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "procyon",
+              "is_pathfinder": false,
+              "to_system": "epsilon_eridani",
+              "to_system_name": "Epsilon Eridani"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 201903918,
+            "created_at": "2026-10-18T01:40:19Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "RosarioMedina logged in",
+            "data": {
+              "last_login_at": "2026-10-18T01:30:05Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 201888197,
+            "created_at": "2026-10-18T01:30:05Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "RosarioMedina logged in",
+            "data": {
+              "last_login_at": "2026-10-15T01:40:17Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "earned": [],
+      "note": "no achievement earned in window — measured zero",
+      "value": 0,
+      "rescoredAt": "2026-10-30T22:17:10.304Z"
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 0,
+    "listed": 3,
+    "note": "entries exist but created_at is outside startedAt/endedAt (often written at handoff)",
+    "entries": [],
+    "unwindowed": [
+      {
+        "index": 0,
+        "created_at": "2026-10-15 01:40:17",
+        "text": "[Session Handoff] - **Current Action:** Just arrived in Epsilon Eridani system after jumping from Sirius.  \n- **Immediate Next Step:** Locate an asteroid belt to mine copper ore for the Copper Requisition mission.  \n- **Location:** Epsilon Eridani system (delta_major_star).  \n- **Ship:** Active, cargo space 0/70 used.  \n- **Credits:** 570cr.  \n- **Cargo:** 1 Nickel Ore (not mission-critical).  \n- **Active Goal:** Mine 25 Copper Ore for the Copper Requisition mission.  \n- Recent Events: Failed to mine copper in Sol and Sirius; Main Belt depleted, Kuiper Ice Fields unsuitable, no asteroid belts in Sirius."
+      },
+      {
+        "index": 1,
+        "created_at": "2026-10-12 01:37:20",
+        "text": "[Session Handoff] **Handoff Note:**  \n- **Current Action:** Preparing for the next flight by checking for active missions.  \n- **Next Step:** Use `spacemolt/get_active_missions` to identify and resume any unfinished missions.  \n- **Location/Ship/Credits/Cargo:**  \n  - Location: Docked at Confederacy Central Command, Sol Central.  \n  - Ship: Theoria (theoria), hull 100/100, cargo 0/70.  \n  - Credits: 500cr.  \n  - Cargo: Empty.  \n- **Active Goals:** Maximize earnings in the next session.  \n- **Recent Events:**  \n  - Successfully mined and sold 2 Iron Ore and 2 Nickel Ore for 110cr.  \n  - Refueled to 100/100.  \n  - Recorded a captain’s log summarizing the activities."
+      },
+      {
+        "index": 2,
+        "created_at": "2026-10-12 01:36:48",
+        "text": "Tonight was a quiet run. I mined 2 Iron Ore and 2 Nickel Ore in the Main Belt, selling them for a modest 110 credits. The belt was thin, but I worked steadily and brought the ship home. Refueled completely to avoid any mishaps. The board will see a small gain tonight, but it’s honest work."
+      }
+    ]
+  }
+}

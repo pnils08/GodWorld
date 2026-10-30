@@ -1,0 +1,46 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-10-28T01:40:14.428Z",
+  "POPID": "POP-00734",
+  "Cycle": 113,
+  "Seq": 1,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00734-2026-10-28T01-30-06",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00734-2026-10-28T01-30-06.json",
+  "Holder": "Father Miguel",
+  "CreditsDelta": 0,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Father Miguel credits=0 systems=lacaille_9352,sirius,sol,alpha_centauri",
+  "DecidedAt": "2026-10-28T01:40:14.436Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 113,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00734",
+    "Holder": "Father Miguel",
+    "EpisodeId": "undocked-pop00734-Y3C9",
+    "CreditsDelta": 0,
+    "Systems": [
+      "lacaille_9352",
+      "sirius",
+      "sol",
+      "alpha_centauri"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00734-2026-10-28T01-30-06.json",
+    "PointsDelta": 5
+  },
+  "PointsDelta": 5
+}

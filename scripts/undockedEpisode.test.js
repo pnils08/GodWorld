@@ -55,5 +55,32 @@ t = E.createCompletionTracker();
 idle(t, E.IDLE_TURNS);
 check('ended stays ended', t.push(call('spacemolt/undock')) === true);
 
+// codex research.31 F4: replay every saved flight through the tracker. No pilot
+// who came back to the console after a pause may be cut before that call.
+const fs = require('fs'), path = require('path');
+const epDir = path.join(__dirname, '..', 'output', 'spacemolt-show', 'episodes');
+const logs = fs.existsSync(epDir) ? fs.readdirSync(epDir).filter(f => f.endsWith('.log')) : [];
+const cut = [];
+let resumedAfter8 = 0;
+logs.forEach(function (f) {
+  t = E.createCompletionTracker();
+  let endedAt = -1, lastCall = -1, idleRun = 0, maxResumed = 0;
+  fs.readFileSync(path.join(epDir, f), 'utf8').split('\n').forEach(function (line, i) {
+    if (t.push(line) && endedAt < 0) endedAt = i;
+    let e; try { e = JSON.parse(line); } catch (_) { return; }
+    if (e.event === 'turn_end') idleRun++;
+    if (e.event === 'tool_call' && e.args && typeof e.args.command === 'string') {
+      lastCall = i; maxResumed = Math.max(maxResumed, idleRun); idleRun = 0;
+    }
+  });
+  if (maxResumed >= 8) resumedAfter8++;
+  if (endedAt >= 0 && endedAt < lastCall) cut.push(f);
+});
+check('saved flights replay: the idle stop never cuts a pilot who resumed (' + logs.length + ' logs)',
+  logs.length > 0 && cut.length === 0, cut.join(', '));
+check('the replay includes the pauses that 8 turns cut (Jumper 09-03, Lopez 09-28)', resumedAfter8 >= 2);
+check('the default window is the brief\'s twenty minutes',
+  E.parseArgs(['node', 'x', '--session', 's']).minutes === require('./undockedMissionBrief').WINDOW_MINUTES);
+
 if (failed) { console.error('undockedEpisode: ' + failed + ' FAIL'); process.exit(1); }
 console.log('undockedEpisode: ok');

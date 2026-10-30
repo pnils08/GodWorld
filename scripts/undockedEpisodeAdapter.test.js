@@ -142,6 +142,14 @@ check('loadEpisode carries the runner stall verdict', (function () {
   const ep = A.loadEpisode(p); fs2.unlinkSync(p);
   return ep.stall && ep.stall.idleTurns === 8;
 })());
+check('a pilot-stopped runner (stopReason, 10-30 on) still carries the stop verdict', (function () {
+  const fs2 = require('fs'), os2 = require('os'), p = require('path').join(os2.tmpdir(), 'ep-stop-' + process.pid + '.json');
+  fs2.writeFileSync(p, JSON.stringify({ session: 'undocked-pop00287', startedAt: '2026-10-30T01:30:04Z', endedAt: '2026-10-30T01:42:04Z', stopReason: 'pilot-stopped', toolCalls: 3 }));
+  const ep = A.loadEpisode(p); fs2.unlinkSync(p);
+  const w = JSON.stringify({ session: 'undocked-pop00287', startedAt: '2026-10-30T01:30:04Z', endedAt: '2026-10-30T01:50:04Z', stopReason: 'window', toolCalls: 30 });
+  const p2 = p + '.w'; fs2.writeFileSync(p2, w); const ep2 = A.loadEpisode(p2); fs2.unlinkSync(p2);
+  return ep.stall && ep.stall.stopReason === 'pilot-stopped' && ep.stall.toolCalls === 3 && ep2.stall === null;
+})());
 const scored = A.deriveCredits(mined.concat([fuel]));
 check('fuel sale on a mining night -> 14', scored.value === 14 && scored.hits === 1);
 check('entriesOf flattens the staged category map with category restored',
@@ -169,10 +177,26 @@ const p1 = A.derivePoints(acct, '2026-10-19T01:30:04Z', null, play);
 check('an arrival unlock after the window still belongs to the night (Wanderer 10)', p1.value === 10 && p1.earned[0].name === 'Wanderer');
 const p2 = A.derivePoints(acct, '2026-10-16T01:30:04Z', '2026-10-19T01:30:04Z', play);
 check('`until` stops at the next night: 10-16 keeps Maiden Jump only', p2.value === 5 && p2.earned.length === 1);
-check('no unlock + gameplay -> measured zero', A.derivePoints(acct, '2026-10-20T00:00:00Z', null, play).value === 0);
-check('no unlock + no gameplay -> unknown, never zero', A.derivePoints(acct, '2026-10-20T00:00:00Z', null,
-  [{ category: 'session', event_type: 'session.login' }]).value === null);
-check('account not read -> unknown', A.derivePoints(null, '2026-10-19T01:30:04Z', null, play).value === null);
+check('no unlock in a read window -> measured zero (the account is the game\'s own record)',
+  A.derivePoints(acct, '2026-10-20T00:00:00Z', null).value === 0);
+check('account not read -> unknown', A.derivePoints(null, '2026-10-19T01:30:04Z', null).value === null);
+check('night window unreadable -> unknown, never zero', A.derivePoints(acct, 'not-a-time', null).value === null);
+
+// codex research.31 F2: an account the game's own total does not reconcile with
+// is unusable — its nights stay unknown and the back-score leaves them alone.
+const ach = (id, pts, at) => ({ id: id, name: id, points: pts, earned: true, earned_at: at });
+const good = A.accountFrom({ summary: { points: 10 }, achievements: [
+  ach('first_steps', 5, '2026-10-13T01:34:00Z'), ach('maiden_jump', 5, '2026-10-16T01:41:00Z'),
+  { id: 'locked', points: 50, earned: false, earned_at: null }] });
+check('accountFrom: a reconciled record is usable', good.invalid === null && good.earned.length === 2 && good.total === 10);
+const badAt = A.accountFrom({ summary: { points: 5 }, achievements: [ach('first_steps', 5, null)] });
+check('accountFrom: an earned unlock with no earned_at is unusable', !!badAt.invalid);
+check('...and its nights are unknown, not zero', A.derivePoints(badAt, '2026-10-13T01:30:00Z', null).value === null);
+check('accountFrom: an earned unlock with no points is unusable',
+  !!A.accountFrom({ summary: { points: 0 }, achievements: [ach('x', undefined, '2026-10-13T01:34:00Z')] }).invalid);
+check('accountFrom: unlocks that miss the summary total are unusable',
+  /add to 5, summary says 10/.test((A.accountFrom({ summary: { points: 10 }, achievements: [ach('x', 5, '2026-10-13T01:34:00Z')] }).invalid || []).join()));
+check('accountFrom: no summary total is unusable', !!A.accountFrom({ achievements: [] }).invalid);
 
 const night = (start, value) => ({ file: 'TEST-ONLY-' + start + '.json', stagedPath: '/dev/null', staged: {
   session: 'undocked-pop99991', popid: 'POP-99991', holder: 'TEST-ONLY Pilot',
@@ -191,6 +215,11 @@ check('rescore: a wrong old value is corrected', byStart['TEST-ONLY-2026-10-16T0
 const early = A.planPointsRescore({ 'undocked-pop99991': { total: 5, earned: [{ id: 'x', name: 'Early', points: 5, at: '2026-01-01T00:00:00Z' }] } },
   [night('2026-10-13T01:30:05Z')]);
 check('rescore: an unlock before the first night is reported, never placed', early.unplaced.length === 1 && early.nights[0].fact.value === 0);
+const skip = A.planPointsRescore({ 'undocked-pop99991': badAt }, [night('2026-10-13T01:30:05Z', 5)]);
+check('rescore: an unusable account is skipped, its nights untouched', skip.nights.length === 0 && skip.skipped.length === 1);
+check('rescore: a sheet-string value equal to the derived one is not rewritten',
+  A.planPointsRescore({ 'undocked-pop99991': acct }, [night('2026-10-13T01:30:05Z', '20')]).nights[0].changed === false);
+check('rescore: a night lists which copies are stale', byStart['TEST-ONLY-2026-10-13T01:30:05Z.json'].stale.join() === 'archive');
 
 const sys = A.deriveSystems([
   { created_at: '2026-10-16T01:35:00Z', category: 'trading', data: { base_id: 'x' } },

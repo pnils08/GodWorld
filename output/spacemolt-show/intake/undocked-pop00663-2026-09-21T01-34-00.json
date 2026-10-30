@@ -36,6 +36,8 @@
     "Flags": [
       "credits_delta_windowed"
     ],
-    "StagedPath": "output/spacemolt-show/staged/undocked-pop00663-2026-09-21T01-34-00.json"
-  }
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00663-2026-09-21T01-34-00.json",
+    "PointsDelta": 5
+  },
+  "PointsDelta": 5
 }

@@ -1,0 +1,45 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-10-24T01:40:13.209Z",
+  "POPID": "POP-01077",
+  "Cycle": 112,
+  "Seq": 2,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop01077-2026-10-24T01-30-04",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop01077-2026-10-24T01-30-04.json",
+  "Holder": "Rafael Phillips",
+  "CreditsDelta": 0,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Rafael Phillips credits=0 systems=procyon,nova_terra,sirius",
+  "DecidedAt": "2026-10-24T01:40:13.213Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 112,
+    "EventType": "undocked-episode",
+    "POPID": "POP-01077",
+    "Holder": "Rafael Phillips",
+    "EpisodeId": "undocked-pop01077-Y3C8-e2",
+    "CreditsDelta": 0,
+    "Systems": [
+      "procyon",
+      "nova_terra",
+      "sirius"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop01077-2026-10-24T01-30-04.json",
+    "PointsDelta": 5
+  },
+  "PointsDelta": 5
+}

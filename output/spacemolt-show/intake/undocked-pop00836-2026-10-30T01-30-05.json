@@ -1,0 +1,41 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-10-30T01:35:24.765Z",
+  "POPID": "POP-00836",
+  "Cycle": 113,
+  "Seq": 2,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00836-2026-10-30T01-30-05",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00836-2026-10-30T01-30-05.json",
+  "Holder": "Cristina Booker",
+  "CreditsDelta": null,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Cristina Booker credits=null systems=",
+  "DecidedAt": "2026-10-30T01:35:24.770Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 113,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00836",
+    "Holder": "Cristina Booker",
+    "EpisodeId": "undocked-pop00836-Y3C9-e2",
+    "CreditsDelta": null,
+    "Systems": [],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00836-2026-10-30T01-30-05.json",
+    "PointsDelta": 0
+  },
+  "PointsDelta": 0
+}

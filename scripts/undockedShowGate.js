@@ -246,18 +246,30 @@ const TAB_HEADERS = Object.freeze([
 // TAB_HEADERS before a row goes in. A tab still on the 12-column header (pre
 // 2026-10-30) gains the missing trailing cells — header cells only, read back.
 // Any other mismatch refuses: a value landing under the wrong column is the
-// silent failure this guard exists for.
+// silent failure this guard exists for. Byte-exact, no trim (codex research.31
+// F3): readers look columns up by exact name, so a padded `PointsDelta ` would
+// pass a trimmed check while every reader saw no points column.
 async function ensureFeedHeader(sheets, hdr) {
-  const have = (hdr || []).map(function (h) { return String(h == null ? '' : h).trim(); });
-  while (have.length && !have[have.length - 1]) have.pop();
+  const have = (hdr || []).map(function (h) { return String(h == null ? '' : h); });
+  while (have.length && have[have.length - 1] === '') have.pop();
   const prefixOk = have.every(function (h, i) { return h === TAB_HEADERS[i]; });
   if (!prefixOk || have.length > TAB_HEADERS.length) {
     throw new Error(FEED_TAB + ' header ' + JSON.stringify(have) + ' does not match ' + JSON.stringify(TAB_HEADERS) + ' — refusing a positional push');
   }
   if (have.length === TAB_HEADERS.length) return false;
   const missing = TAB_HEADERS.slice(have.length);
-  await sheets.updateRangeByPosition(FEED_TAB, 1, have.length, [missing]);
-  const back = (await sheets.getSheetData(FEED_TAB))[0].map(function (h) { return String(h == null ? '' : h).trim(); });
+  try {
+    await sheets.updateRangeByPosition(FEED_TAB, 1, have.length, [missing]);
+  } catch (e) {
+    // The live grid was exactly 12 columns wide (2026-10-30): widen it, never
+    // shrink (appendDimension only adds), then write once more.
+    if (!/exceeds grid limits/.test(e && e.message || '')) throw e;
+    const ids = await sheets.getSheetIds([FEED_TAB]);
+    await sheets.batchUpdateSpreadsheet([{ appendDimension: {
+      sheetId: ids[FEED_TAB], dimension: 'COLUMNS', length: missing.length } }]);
+    await sheets.updateRangeByPosition(FEED_TAB, 1, have.length, [missing]);
+  }
+  const back = (await sheets.getSheetData(FEED_TAB))[0].map(function (h) { return String(h == null ? '' : h); });
   if (TAB_HEADERS.some(function (h, i) { return back[i] !== h; })) {
     throw new Error(FEED_TAB + ' header write did not read back: ' + JSON.stringify(back));
   }

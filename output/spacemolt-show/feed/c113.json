@@ -1,0 +1,85 @@
+{
+  "v": "UNDOCKED-FEED/1",
+  "cycle": 113,
+  "events": [
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 113,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00836",
+      "Holder": "Cristina Booker",
+      "EpisodeId": "undocked-pop00836-Y3C9",
+      "CreditsDelta": 0,
+      "Systems": [
+        "alpha_centauri"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 1,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00836-2026-10-27T01-30-05.json",
+      "PointsDelta": 10
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 113,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00734",
+      "Holder": "Father Miguel",
+      "EpisodeId": "undocked-pop00734-Y3C9",
+      "CreditsDelta": 0,
+      "Systems": [
+        "lacaille_9352",
+        "sirius",
+        "sol",
+        "alpha_centauri"
+      ],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00734-2026-10-28T01-30-06.json",
+      "PointsDelta": 5
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 113,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00816",
+      "Holder": "Daphne Stafford",
+      "EpisodeId": "undocked-pop00816-Y3C9",
+      "CreditsDelta": null,
+      "Systems": [],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00816-2026-10-29T01-30-06.json",
+      "PointsDelta": 5
+    },
+    {
+      "v": "UNDOCKED-FEED/1",
+      "Cycle": 113,
+      "EventType": "undocked-episode",
+      "POPID": "POP-00836",
+      "Holder": "Cristina Booker",
+      "EpisodeId": "undocked-pop00836-Y3C9-e2",
+      "CreditsDelta": null,
+      "Systems": [],
+      "CombatEvents": 0,
+      "MishapCount": 0,
+      "Magnitude": 2,
+      "Flags": [
+        "credits_delta_windowed"
+      ],
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00836-2026-10-30T01-30-05.json",
+      "PointsDelta": 0
+    }
+  ]
+}

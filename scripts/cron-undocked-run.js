@@ -279,6 +279,17 @@ async function main() {
   fs.writeFileSync(LOCK, String(process.pid));
   process.on('exit', () => { try { fs.unlinkSync(LOCK); } catch (_) {} });
 
+  // 2b. points settle (research.31) — an arrival unlock lands ~2 min after the
+  // jump that earned it, often after last night's adapter ran. Re-read the
+  // accounts of the past week's pilots and write any changed night's
+  // PointsDelta (tab + disk); step 7 recomputes the board. Never blocks tonight.
+  try {
+    execFileSync('node', [path.join(ROOT, 'scripts', 'undockedEpisodeAdapter.js'),
+      '--rescore-points', '--recent', '7', '--apply'], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
+  } catch (e) {
+    log('points settle failed (tonight flies anyway): ' + (e && e.message || e));
+  }
+
   const { pilot, session, missionFile } = resolvePilot(roster, cycle);
   log('pilot ' + pilot.name + ' (' + pilot.popid + ')' +
     (pilot.slot ? ', slot ' + pilot.slot : ''));

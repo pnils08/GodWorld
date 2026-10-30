@@ -73,8 +73,11 @@ function loadEpisode(jsonPath) {
     popid: popidFromSession(raw.session),
     startedAt: raw.startedAt,
     endedAt: raw.endedAt,
-    // research.29 Move 3: the runner's idle-stop verdict rides into the staged night
-    stall: raw.stall || null,
+    // research.29 Move 3: the runner's idle-stop verdict rides into the staged night.
+    // research.31: runners since 10-30 write stopReason instead; a pilot-stopped
+    // night is the same idle stop, so the credit annotation still fires.
+    stall: raw.stall || (raw.stopReason === 'pilot-stopped'
+      ? { stopReason: 'pilot-stopped', toolCalls: raw.toolCalls == null ? null : raw.toolCalls } : null),
     runner: {
       turns: raw.turns,
       exitCode: raw.exitCode,
@@ -253,21 +256,27 @@ function deriveSystems(entries) {
 // (Taveras 10-19: last jump 01:40:04, window end 01:40:14, Wanderer 01:43:10).
 // `until` is the same pilot's next night's start (null for the latest night).
 // Measured zero needs gameplay evidence; otherwise unknown, as for credits.
-function derivePoints(account, startedAt, until, entries) {
+function derivePoints(account, startedAt, until) {
   if (!account) return fact(null, { source: 'get_achievements', note: 'pilot account not read — unknown' });
+  if (account.invalid) {
+    return fact(null, { source: 'get_achievements', note: 'pilot account record unusable (' + account.invalid.join('; ') + ') — unknown' });
+  }
   const t0 = Date.parse(startedAt);
   const t1 = until ? Date.parse(until) : Infinity;
+  if (isNaN(t0) || isNaN(t1)) return fact(null, { source: 'get_achievements', note: 'night window unreadable — unknown' });
   const earned = (account.earned || []).filter(function (a) {
     const t = Date.parse(a.at);
-    return !isNaN(t) && t >= t0 && t < t1;
+    return t >= t0 && t < t1;
   });
   if (earned.length) {
     return fact(earned.reduce(function (s, a) { return s + a.points; }, 0),
       { source: 'get_achievements', earned: earned });
   }
-  const gameplay = (entries || []).some(function (e) { return e.category && e.category !== 'session'; });
-  if (!gameplay) return fact(null, { source: 'get_achievements', note: 'no gameplay recorded in window — unknown' });
-  return fact(0, { source: 'get_achievements', earned: [], note: 'gameplay in window, no achievement earned — measured zero' });
+  // The account is the game's own timestamped record, reconciled to its total
+  // (accountFrom): no unlock inside the window is a measured zero whether or not
+  // the pilot moved. Blank therefore means only "account not read", which the
+  // next daily settle retries (codex research.31 F7).
+  return fact(0, { source: 'get_achievements', earned: [], note: 'no achievement earned in window — measured zero' });
 }
 
 function deriveCombat(entries) {
@@ -370,7 +379,7 @@ function assemble(episode, byCategory, captains, account) {
         return c;
       })(),
       // the night being adapted is the pilot's latest, so no `until`
-      points_delta: derivePoints(account || null, episode.startedAt, null, all),
+      points_delta: derivePoints(account || null, episode.startedAt, null),
       systems_visited: deriveSystems(all),
       combat_results: deriveCombat(all),
       cargo: deriveCargo(all),
@@ -720,12 +729,29 @@ async function readAccount(sid) {
   const body = await api(sid, 'spacemolt/get_achievements', {});
   const sc = body.structuredContent || body;
   if (!Array.isArray(sc.achievements)) throw new Error('get_achievements returned no achievements list');
-  return {
-    total: sc.summary ? num(sc.summary.points) : null,
-    earned: sc.achievements.filter(function (a) { return a.earned; }).map(function (a) {
-      return { id: a.id, name: a.name, points: num(a.points) || 0, at: a.earned_at || null };
-    }),
-  };
+  return accountFrom(sc);
+}
+
+// codex research.31 F2: an earned unlock without finite points or a parseable
+// earned_at cannot be placed, and an account whose earned unlocks do not add up
+// to the game's own summary total cannot be trusted with any night. Either marks
+// the account invalid — its nights stay unknown (never zero) and the back-score
+// leaves them as they are.
+function accountFrom(sc) {
+  const problems = [];
+  const earned = (sc.achievements || []).filter(function (a) { return a.earned; }).map(function (a) {
+    const pts = (a.points === '' || a.points == null) ? null : num(a.points);
+    if (pts == null) problems.push((a.id || a.name) + ' points ' + JSON.stringify(a.points));
+    if (isNaN(Date.parse(a.earned_at))) problems.push((a.id || a.name) + ' earned_at ' + JSON.stringify(a.earned_at));
+    return { id: a.id, name: a.name, points: pts, at: a.earned_at || null };
+  });
+  const total = sc.summary ? num(sc.summary.points) : null;
+  if (total == null) problems.push('no summary points total');
+  else if (!problems.length) {
+    const sum = earned.reduce(function (s, a) { return s + a.points; }, 0);
+    if (sum !== total) problems.push('earned unlocks add to ' + sum + ', summary says ' + total);
+  }
+  return { total: total, earned: earned, invalid: problems.length ? problems : null };
 }
 
 async function fetchAchievements(session) {
@@ -753,11 +779,32 @@ function archivedNights() {
   });
 }
 
-// accounts: { session: {total, earned[]} } — a session missing here is not
-// re-scored (its nights keep what they have).
+// One value, four copies: the tab cell, the archive fact, the intake row (+ its
+// FeedEvent), the feed-pack event. `undefined` = the copy has no value yet.
+function samePoints(have, want) {
+  if (have === undefined) return false;
+  const h = (have === '' || have == null) ? null : Number(have);
+  return h === (want == null ? null : want);
+}
+
+// accounts: { session: {total, earned[], invalid} } — a session missing here,
+// or whose record is invalid, is not re-scored (its nights keep what they have).
+// codex research.31 F1: `stale` names every disk copy that disagrees with the
+// derived value, so a run that died between copies is finished by the next run;
+// the tab copy is compared in applyPointsRescore, where the tab is read.
 function planPointsRescore(accounts, nightsIn) {
   const intake = intakeByStagedName();
   const all = nightsIn || archivedNights();
+  const packs = {};
+  const packEvent = function (cycle, episodeId) {
+    if (!episodeId || cycle == null) return undefined;
+    if (!(cycle in packs)) {
+      const fp = path.join(FEED_DIR, 'c' + cycle + '.json');
+      packs[cycle] = fs.existsSync(fp) ? JSON.parse(fs.readFileSync(fp, 'utf8')) : null;
+    }
+    return ((packs[cycle] && packs[cycle].events) || []).find(function (e) { return e.EpisodeId === episodeId; });
+  };
+  const skipped = [];
   const bySession = {};
   all.forEach(function (n) {
     const s = n.staged.session;
@@ -768,6 +815,7 @@ function planPointsRescore(accounts, nightsIn) {
   Object.keys(bySession).forEach(function (session) {
     const acct = accounts[session];
     if (!acct) return;
+    if (acct.invalid) { skipped.push({ session: session, problems: acct.invalid }); return; }
     const list = bySession[session].sort(function (a, b) {
       return String(a.staged.window.startedAt).localeCompare(String(b.staged.window.startedAt));
     });
@@ -777,21 +825,29 @@ function planPointsRescore(accounts, nightsIn) {
     });
     list.forEach(function (n, i) {
       const until = i + 1 < list.length ? list[i + 1].staged.window.startedAt : null;
-      const f = derivePoints(acct, n.staged.window.startedAt, until, entriesOf(n.staged));
+      const f = derivePoints(acct, n.staged.window.startedAt, until);
       const before = n.staged.facts && n.staged.facts.points_delta ? n.staged.facts.points_delta.value : undefined;
       const ik = intake[n.file] || null;
+      const cycle = ik ? ik.row.Cycle : null;
+      const episodeId = ik && ik.row.FeedEvent ? ik.row.FeedEvent.EpisodeId : null;
+      const stale = [];
+      if (!samePoints(before, f.value)) stale.push('archive');
+      if (ik && (!samePoints(ik.row.PointsDelta, f.value) ||
+          (ik.row.FeedEvent && !samePoints(ik.row.FeedEvent.PointsDelta, f.value)))) stale.push('intake');
+      const ev = packEvent(cycle, episodeId);
+      if (ev && !samePoints(ev.PointsDelta, f.value)) stale.push('pack');
       nights.push({
         file: n.file, stagedPath: n.stagedPath, popid: n.staged.popid, holder: n.staged.holder || '',
-        session: session, fact: f, before: before === undefined ? undefined : before,
-        changed: before === undefined || before !== f.value,
+        session: session, fact: f, before: before,
+        stale: stale, changed: stale.length > 0,
         intakePath: ik ? ik.path : null,
         applied: ik ? ik.row.Applied : null,
-        cycle: ik ? ik.row.Cycle : null,
-        episodeId: ik && ik.row.FeedEvent ? ik.row.FeedEvent.EpisodeId : null,
+        cycle: cycle,
+        episodeId: episodeId,
       });
     });
   });
-  return { scanned: all.length, nights: nights, unplaced: unplaced, accounts: accounts };
+  return { scanned: all.length, nights: nights, unplaced: unplaced, skipped: skipped, accounts: accounts };
 }
 
 function printPointsRescore(plan) {
@@ -812,6 +868,9 @@ function printPointsRescore(plan) {
       + ' (game total ' + total + ')' + (b.unknown ? ', ' + b.unknown + ' unknown' : '') + ', ' + b.changed + ' to write'
       + (b.names.length ? ' — ' + b.names.join(', ') : ''));
   });
+  (plan.skipped || []).forEach(function (k) {
+    console.log('  SKIPPED ' + k.session + ' — account record unusable, nights left as they are: ' + k.problems.join('; '));
+  });
   if (plan.unplaced.length) {
     console.log('  NOT PLACED (earned before the pilot\'s first archived night):');
     plan.unplaced.forEach(function (u) { console.log('    ' + u.session + ' ' + u.name + ' ' + u.points + ' @ ' + u.at); });
@@ -821,55 +880,75 @@ function printPointsRescore(plan) {
 async function applyPointsRescore(plan) {
   require('../lib/env');
   const sheets = require('../lib/sheets');
-  const todo = plan.nights.filter(function (n) { return n.changed; });
-  const report = { disk: 0, tab: 0, noFeedRow: [] };
-  if (!todo.length) return report;
-  const tab = await sheets.getSheetData(FEED_TAB);
-  if (!tab || !tab.length) throw new Error(FEED_TAB + ' unreadable — refusing to backfill');
-  const hdr = tab[0];
-  const iEp = hdr.indexOf('EpisodeId'), iPt = hdr.indexOf('PointsDelta');
-  if (iEp < 0 || iPt < 0) throw new Error(FEED_TAB + ' missing EpisodeId/PointsDelta — the header cell comes first (undockedShowGate ensureFeedHeader)');
-  const rowOf = {};
-  for (let r = 1; r < tab.length; r++) {
-    const v = String(tab[r][iEp] == null ? '' : tab[r][iEp]).trim();
-    if (v) rowOf[v] = r + 1;
-  }
+  const report = { disk: 0, tab: 0, noFeedRow: [], mismatched: [] };
+  const readTab = async function () {
+    const tab = await sheets.getSheetData(FEED_TAB);
+    if (!tab || !tab.length) throw new Error(FEED_TAB + ' unreadable — refusing to backfill');
+    const hdr = tab[0];
+    const iEp = hdr.indexOf('EpisodeId'), iPt = hdr.indexOf('PointsDelta');
+    if (iEp < 0 || iPt < 0) throw new Error(FEED_TAB + ' missing EpisodeId/PointsDelta — the header cell comes first (undockedShowGate ensureFeedHeader)');
+    const cell = {};
+    const rowOf = {};
+    for (let r = 1; r < tab.length; r++) {
+      const v = String(tab[r][iEp] == null ? '' : tab[r][iEp]).trim();
+      if (!v) continue;
+      rowOf[v] = r + 1;
+      cell[v] = tab[r][iPt] === undefined ? '' : tab[r][iPt];
+    }
+    return { iPt: iPt, rowOf: rowOf, cell: cell };
+  };
+  // Only approved rows live on the tab.
+  const tabStale = function (t, n) {
+    return n.applied === 'yes' && n.episodeId && t.rowOf[n.episodeId] && !samePoints(t.cell[n.episodeId], n.fact.value);
+  };
+  const t = await readTab();
   const updates = [];
-  // Tab first, then disk — same repair-by-rerun order as applyRescore.
-  todo.forEach(function (n) {
-    if (n.applied === 'yes' && n.episodeId && rowOf[n.episodeId]) {
-      updates.push({ range: FEED_TAB + '!' + sheets.columnIndexToLetter(iPt) + rowOf[n.episodeId],
+  plan.nights.forEach(function (n) {
+    if (tabStale(t, n)) {
+      updates.push({ range: FEED_TAB + '!' + sheets.columnIndexToLetter(t.iPt) + t.rowOf[n.episodeId],
         values: [[n.fact.value == null ? '' : n.fact.value]] });
       report.tab++;
-    } else if (n.applied === 'yes') {
+    } else if (n.applied === 'yes' && !(n.episodeId && t.rowOf[n.episodeId])) {
       report.noFeedRow.push(n.episodeId || n.file);
     }
   });
   if (updates.length) await sheets.batchUpdate(updates);
-  todo.forEach(function (n) {
-    const staged = JSON.parse(fs.readFileSync(n.stagedPath, 'utf8'));
-    staged.facts.points_delta = Object.assign({}, n.fact, { rescoredAt: new Date().toISOString() });
-    fs.writeFileSync(n.stagedPath, JSON.stringify(staged, null, 2) + '\n');
-    report.disk++;
-    if (!n.intakePath) return;
-    const row = JSON.parse(fs.readFileSync(n.intakePath, 'utf8'));
-    row.PointsDelta = n.fact.value;
-    if (row.FeedEvent) row.FeedEvent.PointsDelta = n.fact.value;
-    fs.writeFileSync(n.intakePath, JSON.stringify(row, null, 2) + '\n');
-    if (n.episodeId && n.cycle != null) {
-      const fp = path.join(FEED_DIR, 'c' + n.cycle + '.json');
-      if (fs.existsSync(fp)) {
-        const pack = JSON.parse(fs.readFileSync(fp, 'utf8'));
-        (pack.events || []).forEach(function (e) { if (e.EpisodeId === n.episodeId) e.PointsDelta = n.fact.value; });
-        fs.writeFileSync(fp, JSON.stringify(pack, null, 2) + '\n');
-      }
+  plan.nights.filter(function (n) { return n.changed; }).forEach(function (n) {
+    if (n.stale.indexOf('archive') >= 0) {
+      const staged = JSON.parse(fs.readFileSync(n.stagedPath, 'utf8'));
+      staged.facts.points_delta = Object.assign({}, n.fact, { rescoredAt: new Date().toISOString() });
+      fs.writeFileSync(n.stagedPath, JSON.stringify(staged, null, 2) + '\n');
     }
+    if (n.stale.indexOf('intake') >= 0) {
+      const row = JSON.parse(fs.readFileSync(n.intakePath, 'utf8'));
+      row.PointsDelta = n.fact.value;
+      if (row.FeedEvent) row.FeedEvent.PointsDelta = n.fact.value;
+      fs.writeFileSync(n.intakePath, JSON.stringify(row, null, 2) + '\n');
+    }
+    if (n.stale.indexOf('pack') >= 0) {
+      const fp = path.join(FEED_DIR, 'c' + n.cycle + '.json');
+      const pack = JSON.parse(fs.readFileSync(fp, 'utf8'));
+      (pack.events || []).forEach(function (e) { if (e.EpisodeId === n.episodeId) e.PointsDelta = n.fact.value; });
+      fs.writeFileSync(fp, JSON.stringify(pack, null, 2) + '\n');
+    }
+    report.disk++;
+  });
+  // Read every copy back: a fresh plan from disk must find nothing stale, and
+  // the re-read tab must hold the derived value on every approved row.
+  const again = planPointsRescore(plan.accounts, archivedNights());
+  const t2 = await readTab();
+  again.nights.forEach(function (n) {
+    const where = n.stale.slice();
+    if (tabStale(t2, n)) where.push('tab');
+    if (where.length) report.mismatched.push((n.episodeId || n.file) + ' [' + where.join(',') + ']');
   });
   return report;
 }
 
 // recentDays: only pilots with a night started within that many days (the
-// daily settle); null = every pilot ever archived (the one-time back-score).
+// daily settle) — then ALL archived nights of those pilots are checked, since a
+// late unlock can belong to any of them; null = every pilot ever archived (the
+// one-time back-score).
 async function readAccounts(nights, recentDays) {
   const cutoff = recentDays ? Date.now() - recentDays * 86400000 : -Infinity;
   const sessions = [];
@@ -904,7 +983,7 @@ module.exports = {
   V, CATEGORIES,
   loadEpisode, popidFromSession, inWindow, filterWindow,
   deriveCredits, deriveSystems, deriveCombat, deriveCargo, deriveMishaps, derivePoints,
-  planPointsRescore,
+  accountFrom, planPointsRescore,
   assemble, assertSplit, slimEntry,
   creditDeltaForEntry, entriesOf, planRescore, applyRescore,
 };
@@ -920,7 +999,14 @@ if (require.main === module) {
     else if (argv[i] === '--all-three') paths = paths.concat(threeEpisodePaths());
     else if (argv[i] === '--rescore-archive') rescore = true;
     else if (argv[i] === '--rescore-points') rescorePoints = true;
-    else if (argv[i] === '--recent') recentDays = Number(argv[++i]);
+    else if (argv[i] === '--recent') {
+      // codex research.31 F8: a bad bound must not silently widen to every pilot
+      recentDays = Number(argv[++i]);
+      if (!(Number.isFinite(recentDays) && recentDays > 0)) {
+        console.error('--recent needs a positive number of days, got ' + JSON.stringify(argv[i]));
+        process.exit(2);
+      }
+    }
     else if (argv[i] === '--apply') apply = true;
     else {
       console.error('unknown arg ' + argv[i]);
@@ -929,6 +1015,9 @@ if (require.main === module) {
   }
   if (rescorePoints) {
     const nights = archivedNights();
+    console.log('[rescore-points] scope: ' + (recentDays
+      ? 'pilots with a night in the last ' + recentDays + ' day(s), every archived night of each'
+      : 'every archived pilot, every night'));
     readAccounts(nights, recentDays).then(function (accounts) {
       const plan = planPointsRescore(accounts, nights);
       printPointsRescore(plan);
@@ -936,6 +1025,11 @@ if (require.main === module) {
       return applyPointsRescore(plan).then(function (rep) {
         console.log('[rescore-points] wrote ' + rep.disk + ' archive/intake/feed set(s), ' + rep.tab + ' tab row(s)'
           + (rep.noFeedRow.length ? '; approved but not on the tab: ' + rep.noFeedRow.join(', ') : ''));
+        if (rep.mismatched.length) {
+          console.error('[rescore-points] READBACK MISMATCH (re-run --apply to finish): ' + rep.mismatched.join(', '));
+          process.exit(1);
+        }
+        console.log('[rescore-points] read back: every copy agrees');
         console.log('[rescore-points] next: node scripts/undockedStandings.js');
       });
     }).catch(function (err) { console.error(err.message || err); process.exit(1); });

@@ -201,6 +201,14 @@
           }
         ]
       }
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "earned": [],
+      "note": "no achievement earned in window — measured zero",
+      "value": 0,
+      "rescoredAt": "2026-10-30T22:17:10.202Z"
     }
   },
   "captains_log": {

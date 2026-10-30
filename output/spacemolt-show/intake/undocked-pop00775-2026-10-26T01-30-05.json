@@ -1,0 +1,43 @@
+{
+  "v": "UNDOCKED-INTAKE/1",
+  "Timestamp": "2026-10-26T01:40:15.764Z",
+  "POPID": "POP-00775",
+  "Cycle": 112,
+  "Seq": 3,
+  "Daypart": "SHOW",
+  "Tag": "undocked-episode",
+  "EpisodeId": "undocked-pop00775-2026-10-26T01-30-05",
+  "Applied": "yes",
+  "StagedPath": "output/spacemolt-show/staged/archive/undocked-pop00775-2026-10-26T01-30-05.json",
+  "Holder": "Sammie Alvarez",
+  "CreditsDelta": 30,
+  "Magnitude": 2,
+  "Flags": [
+    "credits_delta_windowed"
+  ],
+  "Excerpt": "Sammie Alvarez credits=30 systems=Sol",
+  "DecidedAt": "2026-10-26T01:40:15.767Z",
+  "DecidedBy": "auto-gate",
+  "Note": "auto-approved on contract validation (§2.5)",
+  "FeedEvent": {
+    "v": "UNDOCKED-FEED/1",
+    "Cycle": 112,
+    "EventType": "undocked-episode",
+    "POPID": "POP-00775",
+    "Holder": "Sammie Alvarez",
+    "EpisodeId": "undocked-pop00775-Y3C8-e3",
+    "CreditsDelta": 30,
+    "Systems": [
+      "Sol"
+    ],
+    "CombatEvents": 0,
+    "MishapCount": 0,
+    "Magnitude": 2,
+    "Flags": [
+      "credits_delta_windowed"
+    ],
+    "StagedPath": "output/spacemolt-show/staged/undocked-pop00775-2026-10-26T01-30-05.json",
+    "PointsDelta": 0
+  },
+  "PointsDelta": 0
+}

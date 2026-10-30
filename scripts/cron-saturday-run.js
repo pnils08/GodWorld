@@ -1181,10 +1181,12 @@ function undockedGroundTruth(rows) {
   const board = (rows || []).filter(r => r && r.Holder);
   if (!board.length) return '';
   return 'UNDOCKED is a serialized in-world reality program the city watches: real citizens fly a ship each episode and are scored. ' +
-    'Its own scoring words (flights, episodes, standings, credits, combat, mishaps, magnitude, cycles led, streak) are in-world, not engine vocabulary, ' +
+    'The board ranks achievement points first (the galaxy\'s own record of what a captain has done), credits beside them and breaking ties. ' +
+    'Its own scoring words (flights, episodes, standings, achievements, points, credits, combat, mishaps, magnitude, cycles led, streak) are in-world, not engine vocabulary, ' +
     'and a citizen who flies is still the citizen the ledger says — flying is not bending them. ' +
     'The board is as of this audit and standings move every episode: a daily written earlier in the week may state an earlier standing, which is not a violation — only the weekly digest is held to these totals.\nBOARD (authoritative for who flew and their totals):\n' +
-    board.map(r => r.Rank + '. ' + r.Holder + (r.POPID ? ' (' + r.POPID + ')' : '') + ' — ' + r.Episodes + ' episodes, ' + r.CreditsTotal +
+    board.map(r => r.Rank + '. ' + r.Holder + (r.POPID ? ' (' + r.POPID + ')' : '') + ' — ' + r.Episodes + ' episodes, ' +
+      (r.PointsTotal == null ? '' : r.PointsTotal + ' achievement points, ') + r.CreditsTotal +
       ' credits, combat ' + r.CombatTotal + ', mishaps ' + r.MishapTotal + ', best magnitude ' + r.BestMagnitude + ', cycles led ' + r.CyclesLed +
       ', streak ' + r.CurrentStreak + ', last aired C' + r.LastAiredCycle).join('\n');
 }

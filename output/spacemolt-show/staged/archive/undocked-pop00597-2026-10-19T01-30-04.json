@@ -1,0 +1,297 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00597-2026-10-19T01-30-04",
+  "popid": "POP-00597",
+  "holder": "Eric Taveras",
+  "session": "undocked-pop00597",
+  "window": {
+    "startedAt": "2026-10-19T01:30:04.663Z",
+    "endedAt": "2026-10-19T01:40:14.449Z"
+  },
+  "runner": {
+    "turns": 18,
+    "exitCode": 0,
+    "capped": true,
+    "toolErrors": 0,
+    "estCostUsd": 0.0387,
+    "tokensIn": 273314,
+    "tokensOut": 1613,
+    "log": "output/spacemolt-show/episodes/undocked-pop00597-2026-10-19T01-30-04.log"
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-19T01:40:15.746Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "node_alpha",
+        "synchrony",
+        "pherkad",
+        "gsc_0041",
+        "antares",
+        "homam",
+        "furud",
+        "nova_terra"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 0,
+        "mission": 0,
+        "combat": 0,
+        "navigation": 8,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [],
+        "mission": [],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 204348939,
+            "created_at": "2026-10-19T01:40:04Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Synchrony to Node Alpha",
+            "data": {
+              "arrival_poi": "alpha_extraction_zone",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "synchrony",
+              "is_pathfinder": false,
+              "to_system": "node_alpha",
+              "to_system_name": "Node Alpha"
+            }
+          },
+          {
+            "id": 204347081,
+            "created_at": "2026-10-19T01:38:54Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Pherkad to Synchrony",
+            "data": {
+              "arrival_poi": "phase_lock",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "pherkad",
+              "is_pathfinder": false,
+              "to_system": "synchrony",
+              "to_system_name": "Synchrony"
+            }
+          },
+          {
+            "id": 204344098,
+            "created_at": "2026-10-19T01:37:44Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from GSC-0041 to Pherkad",
+            "data": {
+              "arrival_poi": "pherkad_iii",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "gsc_0041",
+              "is_pathfinder": false,
+              "to_system": "pherkad",
+              "to_system_name": "Pherkad"
+            }
+          },
+          {
+            "id": 204339888,
+            "created_at": "2026-10-19T01:36:24Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Antares to GSC-0041",
+            "data": {
+              "arrival_poi": "gsc_0041_frost_ring",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "antares",
+              "is_pathfinder": false,
+              "to_system": "gsc_0041",
+              "to_system_name": "GSC-0041"
+            }
+          },
+          {
+            "id": 204337730,
+            "created_at": "2026-10-19T01:35:03Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Homam to Antares",
+            "data": {
+              "arrival_poi": "antares_ice_fields",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "homam",
+              "is_pathfinder": false,
+              "to_system": "antares",
+              "to_system_name": "Antares"
+            }
+          },
+          {
+            "id": 204336171,
+            "created_at": "2026-10-19T01:33:54Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Furud to Homam",
+            "data": {
+              "arrival_poi": "homam_cryobelt",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "furud",
+              "is_pathfinder": false,
+              "to_system": "homam",
+              "to_system_name": "Homam"
+            }
+          },
+          {
+            "id": 204333967,
+            "created_at": "2026-10-19T01:32:43Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Nova Terra to Furud",
+            "data": {
+              "arrival_poi": "furud_ice_shelf",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "nova_terra",
+              "is_pathfinder": false,
+              "to_system": "furud",
+              "to_system_name": "Furud"
+            }
+          },
+          {
+            "id": 204332655,
+            "created_at": "2026-10-19T01:31:34Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sirius to Nova Terra",
+            "data": {
+              "arrival_poi": "nova_terra_ice_shelf",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sirius",
+              "is_pathfinder": false,
+              "to_system": "nova_terra",
+              "to_system_name": "Nova Terra"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 204349234,
+            "created_at": "2026-10-19T01:40:14Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "EricTaveras logged in",
+            "data": {
+              "last_login_at": "2026-10-19T01:30:07Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 204331323,
+            "created_at": "2026-10-19T01:30:07Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "EricTaveras logged in",
+            "data": {
+              "last_login_at": "2026-10-16T01:40:12Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "earned": [
+        {
+          "id": "wanderer",
+          "name": "Wanderer",
+          "points": 10,
+          "at": "2026-10-19T01:43:10.670690245Z"
+        }
+      ],
+      "value": 10,
+      "rescoredAt": "2026-10-30T22:17:10.246Z"
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 1,
+    "listed": 3,
+    "entries": [
+      {
+        "index": 0,
+        "created_at": "2026-10-19 01:40:14",
+        "text": "[Session Handoff] - **Current Action:** Just arrived at Node Alpha system (alpha_extraction_zone) after a multi-jump route hunting for refuel points (none found). Fuel is low.  \n- **Immediate Next Step:** Scan nearby POIs at Node Alpha for exploration targets/refueling options.  \n- **Location:** Node Alpha system, alpha_extraction_zone. Ship status/credits: Not specified, but fuel is critically low.  \n- **Active Goal:** Complete exploration mission at Node Alpha.  \n- **Key Notes:**  \n  - Customs scans flagged the ship for follow-up in Nova Terra and Synchrony.  \n  - Route: Nova Terra → Furud → Homam → Antares → GSC-0041 → Pherkad → Synchrony → Node Alpha.  \n  - No refueling stations found en route; prioritize locating one or completing mission quickly.  \n  - Last POI scan at Node Alpha showed 1 player (Fabrini, NOIR faction) nearby."
+      }
+    ],
+    "unwindowed": [
+      {
+        "index": 1,
+        "created_at": "2026-10-16 01:40:11",
+        "text": "[Session Handoff] - **Current Action**: Mid-routing to Node Alpha (8 jumps required from Sirius).  \n- **Immediate Next Step**: Perform the first jump from Sirius to Nova Terra.  \n- **Location/Status**: In Sirius system (High Security), aboard current ship with ~99 fuel and 2,500cr mission reward pending. Cargo: Minimal (recently sold ores).  \n- **Active Goal**: Complete the **Local Sector Survey** mission (visit Node Alpha and Horizon). Progress: 1/3 systems (Sirius done).  \n- **Key Recent Events**:  \n  - Completed \"Market Participation\" mission (sold 10 units, earned 1,000cr).  \n  - Accepted exploration mission and jumped to Sirius.  \n  - Route to Node Alpha confirmed (8 jumps)."
+      },
+      {
+        "index": 2,
+        "created_at": "2026-10-13 01:40:13",
+        "text": "[Session Handoff] - **Current Action:** Actively mining for Iron Ore at Main Belt (Sol system), just extracted 3 Copper Ore from a deposit (114 units remaining)\n- **Next Step:** Continue mining attempts at Main Belt to gather more Iron Ore (only 6/30 collected for contract)\n- **Location/Status:** \n  - Sol system (Main Belt asteroid field)\n  - Starship cargo: 41/70 used (6 Iron Ore, 30 Copper Ore, 3 Titanium Ore, 1 Sol Alloy Ore, 1 Nickel Ore)\n  - Credits: 500cr\n- **Active Goal:** \"Iron Supply Run\" contract (need 24 more Iron Ore units)\n- **Recent Events:** \n  - Unsuccessful trip to Sirius system (no viable mining locations)\n  - Just returned to Sol's Main Belt\n  - XP gains in deep_core_mining, mining, and piloting"
+      }
+    ]
+  }
+}

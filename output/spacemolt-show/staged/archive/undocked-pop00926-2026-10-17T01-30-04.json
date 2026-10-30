@@ -1,0 +1,245 @@
+{
+  "v": "UNDOCKED-ADAPTER/1",
+  "show": "UNDOCKED",
+  "episode_id": "undocked-pop00926-2026-10-17T01-30-04",
+  "popid": "POP-00926",
+  "holder": "Briar Soto",
+  "session": "undocked-pop00926",
+  "window": {
+    "startedAt": "2026-10-17T01:30:04.333Z",
+    "endedAt": "2026-10-17T01:40:19.378Z"
+  },
+  "runner": {
+    "turns": 0,
+    "exitCode": null,
+    "capped": true,
+    "toolErrors": 2,
+    "estCostUsd": 0,
+    "tokensIn": 0,
+    "tokensOut": 0,
+    "log": "output/spacemolt-show/episodes/undocked-pop00926-2026-10-17T01-30-04.log"
+  },
+  "stall": null,
+  "source": {
+    "kind": "get_action_log",
+    "categories": [
+      "mining",
+      "trading",
+      "mission",
+      "combat",
+      "navigation",
+      "session"
+    ],
+    "fetchedAt": "2026-10-17T01:40:21.752Z"
+  },
+  "facts": {
+    "credits_delta": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "hits": 0,
+      "note": "gameplay in window carries no credit event — measured zero",
+      "value": 0
+    },
+    "systems_visited": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": [
+        "sol",
+        "alpha_centauri",
+        "sirius"
+      ]
+    },
+    "combat_results": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "events": 0,
+        "kills": 0,
+        "deaths": 0,
+        "other": 0
+      }
+    },
+    "cargo": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mined": {},
+        "sold": {}
+      }
+    },
+    "mishaps": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": []
+    },
+    "event_counts": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": 0,
+        "trading": 0,
+        "mission": 2,
+        "combat": 0,
+        "navigation": 4,
+        "session": 2
+      }
+    },
+    "entries": {
+      "type": "FACT",
+      "source": "get_action_log",
+      "value": {
+        "mining": [],
+        "trading": [],
+        "mission": [
+          {
+            "id": 199663705,
+            "created_at": "2026-10-17T01:39:04Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Local Sector Survey",
+            "data": {
+              "mission_id": "b5af420608b7f0ac265be4a56de7d1be",
+              "template_id": "local_sector_survey",
+              "title": "Local Sector Survey",
+              "type": "exploration"
+            }
+          },
+          {
+            "id": 199651855,
+            "created_at": "2026-10-17T01:30:34Z",
+            "category": "mission",
+            "event_type": "mission.accepted",
+            "summary": "Accepted mission: Iron Supply Run",
+            "data": {
+              "mission_id": "d2645b3b7dd6a5c487556e68581f66e8",
+              "template_id": "iron_supply_run",
+              "title": "Iron Supply Run",
+              "type": "mining"
+            }
+          }
+        ],
+        "combat": [],
+        "navigation": [
+          {
+            "id": 199661038,
+            "created_at": "2026-10-17T01:37:03Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Alpha Centauri to Sol",
+            "data": {
+              "arrival_poi": "neptune",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "alpha_centauri",
+              "is_pathfinder": false,
+              "to_system": "sol",
+              "to_system_name": "Sol"
+            }
+          },
+          {
+            "id": 199659218,
+            "created_at": "2026-10-17T01:35:43Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Alpha Centauri",
+            "data": {
+              "arrival_poi": "alpha_centauri_a",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "alpha_centauri",
+              "to_system_name": "Alpha Centauri"
+            }
+          },
+          {
+            "id": 199656738,
+            "created_at": "2026-10-17T01:34:33Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sirius to Sol",
+            "data": {
+              "arrival_poi": "saturn",
+              "cloaked": false,
+              "first_visit": false,
+              "from_system": "sirius",
+              "is_pathfinder": false,
+              "to_system": "sol",
+              "to_system_name": "Sol"
+            }
+          },
+          {
+            "id": 199655112,
+            "created_at": "2026-10-17T01:33:13Z",
+            "category": "navigation",
+            "event_type": "navigation.jumped",
+            "summary": "Jumped from Sol to Sirius",
+            "data": {
+              "arrival_poi": "sirius_gas_pocket",
+              "cloaked": false,
+              "first_visit": true,
+              "from_system": "sol",
+              "is_pathfinder": false,
+              "to_system": "sirius",
+              "to_system_name": "Sirius"
+            }
+          }
+        ],
+        "session": [
+          {
+            "id": 199666101,
+            "created_at": "2026-10-17T01:40:19Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "BriarSoto logged in",
+            "data": {
+              "last_login_at": "2026-10-17T01:30:05Z",
+              "source": "password"
+            }
+          },
+          {
+            "id": 199651293,
+            "created_at": "2026-10-17T01:30:05Z",
+            "category": "session",
+            "event_type": "session.login",
+            "summary": "BriarSoto logged in",
+            "data": {
+              "last_login_at": "2026-10-14T01:40:15Z",
+              "source": "password"
+            }
+          }
+        ]
+      }
+    },
+    "points_delta": {
+      "type": "FACT",
+      "source": "get_achievements",
+      "earned": [
+        {
+          "id": "maiden_jump",
+          "name": "Maiden Jump",
+          "points": 5,
+          "at": "2026-10-17T01:33:36.62745241Z"
+        }
+      ],
+      "value": 5,
+      "rescoredAt": "2026-10-30T22:17:10.290Z"
+    }
+  },
+  "captains_log": {
+    "kind": "QUOTED_SUBJECTIVE_COLOR",
+    "type": "INTERPRETATION",
+    "provenance": "captains_log_list",
+    "windowed": 0,
+    "listed": 1,
+    "note": "entries exist but created_at is outside startedAt/endedAt (often written at handoff)",
+    "entries": [],
+    "unwindowed": [
+      {
+        "index": 0,
+        "created_at": "2026-10-14 01:40:14",
+        "text": "[Session Handoff] - **Mid-action state**: Actively mining in the Main Belt (metallic asteroid belt), just collected 1 Copper Ore (100% depletion).  \n- **Next step**: Continue mining to gather resources for active missions or check belt conditions if depleted.  \n- **Current location/ship**: Main Belt, credits: 500cr, cargo: 5 Iron Ore, 5 Copper Ore, 1 Sol Alloy Ore, 1 Titanium Ore.  \n- **Active missions**:  \n  1. *Iron Supply Run*: 5/30 Iron Ore mined.  \n  2. *Copper Requisition*: 5/25 Copper Ore mined.  \n- **Recent events**:  \n  - Accepted *Copper Requisition* mission.  \n  - Mined 1 Iron Ore and 3 Copper Ore in current session.  \n  - Belt has fluctuating deposits (Iron/Copper dwindling)."
+      }
+    ]
+  }
+}

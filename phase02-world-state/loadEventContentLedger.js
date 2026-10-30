@@ -314,12 +314,15 @@ function loadUndockedFeed_(ctx) {
   S.undockedFeedEntries = [];
   S.undockedPilots = {};
   // research.29 Move 4 (engine.291): the board, as the engine knows it. The same
-  // recompute scripts/undockedStandings.js runs — cumulative KNOWN CreditsDelta
-  // per POPID over every row that has aired (TargetCycle <= this cycle), blank is
-  // not zero, ties break by POPID. Read by the Phase-5 $LEADER entity slot; a
-  // Holder cell can be blank on the feed, so the reader resolves the name from
-  // the ledger and falls back to leaderHolder.
-  S.undockedBoard = { leaderPopId: '', leaderHolder: '', leaderCredits: null, totals: {} };
+  // recompute scripts/undockedStandings.js runs over every row that has aired
+  // (TargetCycle <= this cycle). research.31 (builder ruling C, 2026-10-30): the
+  // board ranks cumulative PointsDelta (the game's own achievement points), then
+  // cumulative CreditsDelta, then POPID. Blank is not zero — a blank cell moves
+  // no total — and every pilot with an aired row is on the board. Read by the
+  // Phase-5 $LEADER entity slot; a Holder cell can be blank on the feed, so the
+  // reader resolves the name from the ledger and falls back to leaderHolder.
+  S.undockedBoard = { leaderPopId: '', leaderHolder: '', leaderPoints: null, leaderCredits: null,
+    points: {}, totals: {} };
 
   var ss = ctx.ss;
   if (!ss) return;
@@ -338,7 +341,7 @@ function loadUndockedFeed_(ctx) {
 
   var col = function (name) { return h.indexOf(name); };
   var iCycle = col('Cycle'), iHolder = col('Holder'), iEp = col('EpisodeId'),
-      iCredits = col('CreditsDelta'), iSystems = col('Systems'),
+      iCredits = col('CreditsDelta'), iPoints = col('PointsDelta'), iSystems = col('Systems'),
       iCombat = col('CombatEvents'), iMishap = col('MishapCount'),
       iMag = col('Magnitude'), iFlags = col('Flags');
   var num = function (row, i) {
@@ -365,7 +368,9 @@ function loadUndockedFeed_(ctx) {
     if (!pop) continue;
     if (target <= cycle) {
       var aired = num(row, iCredits);
-      if (aired !== null) S.undockedBoard.totals[pop] = (S.undockedBoard.totals[pop] || 0) + aired;
+      var airedPts = num(row, iPoints);
+      S.undockedBoard.totals[pop] = (S.undockedBoard.totals[pop] || 0) + (aired === null ? 0 : aired);
+      S.undockedBoard.points[pop] = (S.undockedBoard.points[pop] || 0) + (airedPts === null ? 0 : airedPts);
       var bh = iHolder >= 0 ? String(row[iHolder] || '').trim() : '';
       if (bh) boardHolder[pop] = bh;
     }
@@ -376,6 +381,7 @@ function loadUndockedFeed_(ctx) {
       episodeId: iEp >= 0 ? String(row[iEp] || '').trim() : '',
       flownCycle: num(row, iCycle),
       creditsDelta: num(row, iCredits),
+      pointsDelta: num(row, iPoints),
       combatEvents: num(row, iCombat),
       mishapCount: num(row, iMishap),
       magnitude: num(row, iMag),
@@ -389,10 +395,14 @@ function loadUndockedFeed_(ctx) {
 
   var boardPops = Object.keys(S.undockedBoard.totals).sort();
   for (var bp = 0; bp < boardPops.length; bp++) {
-    var bt = S.undockedBoard.totals[boardPops[bp]];
-    if (S.undockedBoard.leaderCredits === null || bt > S.undockedBoard.leaderCredits) {
-      S.undockedBoard.leaderPopId = boardPops[bp];
-      S.undockedBoard.leaderHolder = boardHolder[boardPops[bp]] || '';
+    var bpop = boardPops[bp];
+    var bpts = S.undockedBoard.points[bpop], bt = S.undockedBoard.totals[bpop];
+    // POPIDs run ascending, so a strict "better" keeps the lower POPID on a full tie.
+    if (S.undockedBoard.leaderPoints === null || bpts > S.undockedBoard.leaderPoints ||
+        (bpts === S.undockedBoard.leaderPoints && bt > S.undockedBoard.leaderCredits)) {
+      S.undockedBoard.leaderPopId = bpop;
+      S.undockedBoard.leaderHolder = boardHolder[bpop] || '';
+      S.undockedBoard.leaderPoints = bpts;
       S.undockedBoard.leaderCredits = bt;
     }
   }

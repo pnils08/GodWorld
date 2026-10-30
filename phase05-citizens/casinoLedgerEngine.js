@@ -189,20 +189,29 @@ function casinoFindEpisode_(feed, episodeId) {
 function casinoNightWinner_(feed) {
   var rows = feed || [];
   var best = null;
-  var i, e, n, pop;
+  var i, e, n, p, pop;
+  var known = function (v) {
+    if (v == null || v === '') return null;
+    var x = Number(v);
+    return isNaN(x) ? null : x;
+  };
   for (i = 0; i < rows.length; i++) {
     e = rows[i];
-    if (e.creditsDelta == null || e.creditsDelta === '') continue;
-    n = Number(e.creditsDelta);
-    if (isNaN(n)) continue;
-    // engine.292 (agy research.29 review hunt 3): the night is won by credits brought
-    // home. A measured 0 (real play, no sale — the adapter writes it since 2026-10-16)
-    // or a loss crowns nobody; before this, a 0 beat null and the lowest POPID "won"
-    // a night where every pilot came back empty.
-    if (!(n > 0)) continue;
+    // research.31 (builder 2026-10-30: align the bets with the board): the night is
+    // won the way the board ranks — achievement points earned, then credits brought
+    // home, then POPID. A blank is not zero but moves nothing (ranks as 0).
+    // engine.292 (agy research.29 review hunt 3) still holds: a night with no
+    // points and no credits gained crowns nobody — before it, a 0 beat null and the
+    // lowest POPID "won" a night where every pilot came back empty.
+    n = known(e.creditsDelta);
+    p = known(e.pointsDelta);
+    if (!((p !== null && p > 0) || (n !== null && n > 0))) continue;
+    if (p === null) p = 0;
+    if (n === null) n = 0;
     pop = String(e.popId || '').trim().toUpperCase();
-    if (!best || n > best.creditsDelta || (n === best.creditsDelta && pop < best.popId)) {
-      best = { popId: pop, creditsDelta: n, episodeId: e.episodeId };
+    if (!best || p > best.pointsDelta || (p === best.pointsDelta &&
+        (n > best.creditsDelta || (n === best.creditsDelta && pop < best.popId)))) {
+      best = { popId: pop, pointsDelta: p, creditsDelta: n, episodeId: e.episodeId };
     }
   }
   return best;

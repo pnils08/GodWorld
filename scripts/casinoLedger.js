@@ -218,21 +218,25 @@ function findEpisode(feedEntries, episodeId) {
 }
 
 function nightWinner(feedEntries) {
+  // research.31: mirrors phase05 casinoNightWinner_ — points, then credits, then
+  // POPID; a night with no points and no credits gained crowns nobody (engine.292).
   var rows = feedEntries || [];
   var best = null;
+  var known = function (v) {
+    if (v == null || v === '') return null;
+    var x = Number(v);
+    return isNaN(x) ? null : x;
+  };
   for (var i = 0; i < rows.length; i++) {
     var e = rows[i];
-    if (e.creditsDelta == null || e.creditsDelta === '') continue;
-    var n = Number(e.creditsDelta);
-    if (isNaN(n)) continue;
-    if (!(n > 0)) continue; // engine.292: the night is won by credits brought home — 0 or a loss crowns nobody
+    var n = known(e.creditsDelta), p = known(e.pointsDelta);
+    if (!((p !== null && p > 0) || (n !== null && n > 0))) continue;
+    if (p === null) p = 0;
+    if (n === null) n = 0;
     var pop = String(e.popId || '').trim().toUpperCase();
-    if (!best) {
-      best = { popId: pop, creditsDelta: n, episodeId: e.episodeId };
-      continue;
-    }
-    if (n > best.creditsDelta || (n === best.creditsDelta && pop < best.popId)) {
-      best = { popId: pop, creditsDelta: n, episodeId: e.episodeId };
+    if (!best || p > best.pointsDelta || (p === best.pointsDelta &&
+        (n > best.creditsDelta || (n === best.creditsDelta && pop < best.popId)))) {
+      best = { popId: pop, pointsDelta: p, creditsDelta: n, episodeId: e.episodeId };
     }
   }
   return best;

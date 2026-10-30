@@ -464,7 +464,22 @@ console.log('═══ engine.291 (research.29 Move 4): the city names who is fl
   const board = ctxB.summary.undockedBoard;
   assert('board: leader is cumulative known credits over aired rows, tie -> lower POPID', board.leaderPopId === 'POP-P1' && board.leaderCredits === 300, JSON.stringify(board));
   assert('board: a row approved for a later cycle does not count yet', board.totals['POP-P3'] === 100, JSON.stringify(board.totals));
-  assert('board: blank CreditsDelta is not zero', board.totals['POP-P4'] === undefined, JSON.stringify(board.totals));
+  assert('board: blank CreditsDelta moves no total (P1 250 + blank + 50 = 300); an all-blank pilot is on the board at 0',
+    board.totals['POP-P1'] === 300 && board.totals['POP-P4'] === 0, JSON.stringify(board.totals));
+  // research.31 (builder ruling C, 2026-10-30): points first, then credits, then POPID.
+  const ptsHdr = FEED_HDR.concat(['PointsDelta']);
+  const pe = (target, pop, credits, points) => ep(target, pop, credits).concat([points == null ? '' : points]);
+  const boardOf = rows => run(1, FIXTURE, [ptsHdr].concat(rows), 2).summary.undockedBoard;
+  let pb = boardOf([pe(98, 'POP-P2', 1000, 5), pe(99, 'POP-P3', 5, 10), pe(100, 'POP-P1', 0, '')]);
+  assert('board: points outrank credits (10 pts / 5 cr leads 5 pts / 1,000 cr)', pb.leaderPopId === 'POP-P3' && pb.leaderPoints === 10 && pb.leaderCredits === 5, JSON.stringify(pb));
+  pb = boardOf([pe(98, 'POP-P3', 300, 10), pe(99, 'POP-P2', 400, 10), pe(100, 'POP-P1', 0, 5)]);
+  assert('board: equal points fall to credits', pb.leaderPopId === 'POP-P2', JSON.stringify(pb));
+  pb = boardOf([pe(98, 'POP-P3', 300, 10), pe(99, 'POP-P2', 300, 10)]);
+  assert('board: a full tie goes to the lower POPID', pb.leaderPopId === 'POP-P2', JSON.stringify(pb));
+  pb = boardOf([pe(98, 'POP-P2', 0, 10), pe(101, 'POP-P3', 0, 50)]);
+  assert('board: points approved for a later cycle do not count yet', pb.leaderPopId === 'POP-P2' && pb.points['POP-P3'] === undefined, JSON.stringify(pb));
+  const airing = run(1, FIXTURE, [ptsHdr, pe(100, 'POP-P1', 7, 5), pe(100, 'POP-P3', 7, '')], 2).summary.undockedFeedEntries;
+  assert('airing entries carry pointsDelta, blank stays null', airing.length === 2 && airing[0].pointsDelta === 5 && airing[1].pointsDelta === null, JSON.stringify(airing));
   assert('airing index holds tonight\'s pilots only', ctxB.summary.undockedPilots['POP-P1'] && ctxB.summary.undockedPilots['POP-P4'] && ctxB.summary.undockedPilots['POP-P9'] && !ctxB.summary.undockedPilots['POP-P2'], JSON.stringify(ctxB.summary.undockedPilots));
 
   // The composer

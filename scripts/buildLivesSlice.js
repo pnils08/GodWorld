@@ -390,7 +390,7 @@ function build(cycle, { root, beats, profiles }) {
   for (const m of moments) {
     const all = [m.pop].concat(m.family);
     for (const pop of all) addPerson(pop, m.tag.toLowerCase() + ' this Cycle: ' + m.text, m.hood);
-    passage({ text: all.map(pop => nameOf(pop)).join(' and ') + ' — ' + m.text + (m.hood ? ', ' + m.hood : '') + ' (C' + cycle + ', ' + m.tag + ')', src: logSrc, id: m.id, kind: 'moment', popid: m.pop },
+    passage({ text: all.map(pop => nameOf(pop)).join(' and ') + ' — ' + m.text + (m.hood ? ', ' + m.hood : '') + ' (C' + cycle + ', on the log as ' + m.tag + ' — the log\'s words, not spoken)', src: logSrc, id: m.id, kind: 'moment', popid: m.pop },
       { name: nameOf(m.pop), skipTexts: [m.text], includeStay: false, dropOwn: false });
     for (const pop of m.family) {
       for (const t of threadFor(pop, { beats, logByPop, covered, tribune, ownId: m.id, name: nameOf(pop), skipTexts: [m.text], includeStay: false, dropOwn: false })) facts.push({ ...t, kind: 'thread', popid: pop });

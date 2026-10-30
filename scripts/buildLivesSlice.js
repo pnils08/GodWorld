@@ -78,9 +78,11 @@ const SELF_SLOTS = /^(morning|midday|afternoon|evening|night|work)$/;
 // pipeline.97 (builder 2026-10-30: "everything should be available to the media, I think Ines and Tamsin should have
 // access to all this"): Lives and Voices read every page the collector admits (scanCitizenPages SLOT_RE) — the
 // interview replies, exchanges, debates, talks and the questions a citizen carries — through citizenText, so a
-// TENSION[c<N>]: tag never reads as their words. One switch for both seats; held off until codex review.
+// TENSION[c<N>]: tag never reads as their words. One switch for both seats; on 2026-10-30 after codex review
+// (HOLD folded, re-review SHIP-WITH-FIXES; flipped with no newsroom stage in flight — a stage must never
+// resume across a day boundary, the same-day cache has no rule marker).
 // The collector is required lazily: it loads the env, which the switch-off path never needed.
-const EVERY_PAGE = false;
+const EVERY_PAGE = true;
 const scan = () => require('./scanCitizenPages');
 const VOICES_SLOTS = /^(morning|midday|afternoon|evening|night|work|CONVO)$/;
 function pageSlot(slot, seat, every = EVERY_PAGE) {

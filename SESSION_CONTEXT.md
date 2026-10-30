@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** engine.270 → Sun 2026-11-01 after the C114 fire: /run-cycle (first live use of engine.20d), then engine.270's two reads. Hold: governance.54/55 wait on Mike's boot-doc unlock.
 
-**NEXT[research-build]:** pipeline.97 → codex reviewing a6d7e979; verify, flip EVERY_PAGE, close. Then pipeline.95. Watch: wake id weekday (94); interview day+6 letters, work-tue, exchange -fri (96); debate docs indexed (97); pipeline.93 owed marks C114. Then Tamsin C113 release; Nia test; pipeline.89 reads. Hold: Mike resends three asks.
+**NEXT[research-build]:** pipeline.95 (UNDOCKED sure wake) → read its plan, build. Watch: wake id weekday (94); interview day+6 letters, work-tue, exchange -fri (96); Ines Sat + Tamsin Mon read interview/debate lines, debates indexed (97); pipeline.93 owed marks C114. Then Tamsin C113 release; Nia test; 89 reads. Hold: Mike resends three asks.

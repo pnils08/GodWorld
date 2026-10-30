@@ -206,6 +206,45 @@ function runLint(gate) {
     console.log(`ROLLOUT OVERDUE: ${overdue.length} waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:`);
     overdue.forEach(p => console.log(p));
   }
+  const stale = staleNextLeads(readOr(path.join(ROOT, 'SESSION_CONTEXT.md')), parseRollout(),
+    readOr(path.join(ROOT, 'docs', 'engine', 'ROLLOUT_ARCHIVE.md')), readOr(path.join(ROOT, 'docs', 'plans', 'BACKLOG.md')));
+  if (stale.length) {
+    console.log(`NEXT STALE: ${stale.length} handoff line(s) lead with a row that is no longer open — the owner rewrites its line; a closer may correct the stale fact:`);
+    stale.forEach(p => console.log(p));
+  }
+}
+
+function readOr(p) {
+  try { return fs.readFileSync(p, 'utf8'); } catch (_) { return ''; }
+}
+
+// --- stale handoff: a NEXT line that leads with a closed row -----------------
+// A row closed or swept in another terminal's close leaves its owner's NEXT line
+// pointing at finished work, and the owner boots onto it (2026-10-29:
+// NEXT[engine-sheet] led with pipeline.77, closed wontfix and archived that day).
+// Only the lead job ids — before the first → — are read; later mentions are often
+// deliberate context. Warning only, like overdue. Pure: the caller reads the files.
+const CLOSED_STATES = new Set(['done-pending-archive', 'wontfix']);
+const ROW_TOKEN = /\b[a-z][a-z-]*\.\d+[a-z]?\b/g;
+function staleNextLeads(sessionText, rows, archiveText, backlogText) {
+  const state = new Map(rows.map(r => [r.id, r.state]));
+  const bolded = (text, id) => new RegExp(`\\*\\*${id.replace(/\./g, '\\.')}\\*\\*`).test(text);
+  const out = [];
+  for (const line of String(sessionText).split('\n')) {
+    const m = line.match(/^\*\*NEXT\[([a-z-]+)\]:\*\*\s*(.*)$/);
+    if (!m) continue;
+    const lead = m[2].split('→')[0];
+    for (const id of new Set(lead.match(ROW_TOKEN) || [])) {
+      const st = state.get(id);
+      let why = null;
+      if (st) why = CLOSED_STATES.has(st) ? st : null;
+      else if (bolded(archiveText, id)) why = 'archived';
+      else if (bolded(backlogText, id)) why = 'parked in BACKLOG';
+      else why = 'no such row';
+      if (why) out.push(`  NEXT[${m[1]}] leads with ${id} — ${why}`);
+    }
+  }
+  return out;
 }
 
 // --- overdue: a waiting row whose every named Cycle/date is behind us ------
@@ -387,4 +426,5 @@ function main() {
   console.log('');
 }
 
-main();
+if (require.main === module) main();
+module.exports = { staleNextLeads };

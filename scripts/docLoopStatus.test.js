@@ -1,0 +1,66 @@
+#!/usr/bin/env node
+/**
+ * docLoopStatus.test.js — staleNextLeads (a NEXT line that leads with a row no
+ * longer open). Pure: synthetic SESSION_CONTEXT / ROLLOUT / archive / backlog text.
+ * Run: node scripts/docLoopStatus.test.js
+ */
+
+'use strict';
+
+const { staleNextLeads } = require('./docLoopStatus');
+
+let passed = 0;
+let failed = 0;
+function assertEqual(label, actual, expected) {
+  const a = JSON.stringify(actual);
+  const e = JSON.stringify(expected);
+  if (a === e) { console.log(`  ok   ${label}`); passed++; }
+  else { console.error(`  FAIL ${label}: expected ${e}, got ${a}`); failed++; }
+}
+
+const rows = [
+  { id: 'engine.901', state: 'ready' },
+  { id: 'engine.902', state: 'in-progress' },
+  { id: 'engine.903', state: 'live-observing' },
+  { id: 'engine.904', state: 'done-pending-archive' },
+  { id: 'pipeline.905', state: 'wontfix' },
+  { id: 'research.906', state: 'blocked' }
+];
+const archive = '- **pipeline.907** [engine-sheet] — closed thing\n- **engine.908d** [engine-sheet] — sibling with a suffix\n';
+const backlog = '- **research.909** — parked idea\n';
+const next = (lane, body) => `# SESSION_CONTEXT — x\n\n**PIN:** S1 | Day 1\n\n**NEXT[${lane}]:** ${body}\n`;
+const run = body => staleNextLeads(next('engine-sheet', body), rows, archive, backlog);
+
+console.log('\nstaleNextLeads');
+assertEqual('open lead (ready) → clean', run('engine.901 → build it.'), []);
+assertEqual('open lead (in-progress) → clean', run('engine.902 → bench it.'), []);
+assertEqual('open lead (live-observing) → clean', run('engine.903 → read the fire.'), []);
+assertEqual('open lead (blocked) → clean', run('research.906 → wait.'), []);
+assertEqual('done-pending-archive lead → flagged', run('engine.904 → ship it.'),
+  ['  NEXT[engine-sheet] leads with engine.904 — done-pending-archive']);
+assertEqual('wontfix lead → flagged', run('pipeline.905 → price it.'),
+  ['  NEXT[engine-sheet] leads with pipeline.905 — wontfix']);
+assertEqual('swept to the archive → flagged', run('pipeline.907 → price it. Then engine.901.'),
+  ['  NEXT[engine-sheet] leads with pipeline.907 — archived']);
+assertEqual('parked in BACKLOG → flagged', run('research.909 → look again.'),
+  ['  NEXT[engine-sheet] leads with research.909 — parked in BACKLOG']);
+assertEqual('id in no file → flagged', run('engine.999 → build it.'),
+  ['  NEXT[engine-sheet] leads with engine.999 — no such row']);
+assertEqual('a closed row after the arrow is context, not the lead', run('engine.901 → build it, then engine.904 reads.'), []);
+assertEqual('two lead ids: only the closed one flagged', run('engine.901/engine.904 → both.'),
+  ['  NEXT[engine-sheet] leads with engine.904 — done-pending-archive']);
+assertEqual('no arrow: the whole line is the lead', run('engine.904 still to ship'),
+  ['  NEXT[engine-sheet] leads with engine.904 — done-pending-archive']);
+assertEqual('archive match is exact: engine.908 is not engine.908d', run('engine.908 → x.'),
+  ['  NEXT[engine-sheet] leads with engine.908 — no such row']);
+assertEqual('non-row tokens ignored (cycle, version, file, date)', run('C114 Sun 2026-11-01, v1.3, buildWorldSummary.js → x.'), []);
+assertEqual('the lead is the repeated id once', run('engine.904 engine.904 → x.'),
+  ['  NEXT[engine-sheet] leads with engine.904 — done-pending-archive']);
+assertEqual('every NEXT line is read', staleNextLeads(
+  next('engine-sheet', 'engine.901 → x.') + '**NEXT[research-build]:** pipeline.905 → y.\n', rows, archive, backlog),
+  ['  NEXT[research-build] leads with pipeline.905 — wontfix']);
+assertEqual('PIN and other lines ignored', staleNextLeads('**PIN:** S1 | engine.904 | x\n', rows, archive, backlog), []);
+assertEqual('empty files → nothing', staleNextLeads('', [], '', ''), []);
+
+console.log(`\n${passed} passed, ${failed} failed`);
+process.exit(failed > 0 ? 1 : 0);

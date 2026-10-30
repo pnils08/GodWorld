@@ -77,6 +77,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.325 | Casino overview (builder 10-30, own session): bet types safe→risky, how bets settle without credits or failure, house odds; mishap bet never pays | ready | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §Changelog 2026-10-30 |
 | engine.324 | engineAuditor saves `[]` for a tab whose read failed, recorded nowhere, so audit readers see an empty world. Record read failures in the audit file | ready | engine-sheet | [[../archive/for-claude-review/2026-10-29-codex-engine20d-rereview-3]] §Override and remaining boundary |
 | governance.53 | Trim every row to what it is + what it waits on or next step; history into each plan's changelog first, then drop the 280 cap | ready | engine-sheet | [[rollout-rules]] §3 Row contract |
 | engine.214 | Mood per hood + 287/288 LIVE @148 (stage 5); Cut A @151, Cut B @152, Cut C + rate @153/@154 = stage 17. C113 first live fire read 2026-10-27 (hood reactions 69% with trend, spot lines 7.4%). Next: 8b `$VENUE` draws the citizen's spot (build) | ready | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] |

@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** pipeline.77 → per-piece cost of a second draft + judge from the logged token counts, to Mike for his call. Then engine.20d (civic lane seeds on movement only) before Sunday's C114 wrap-up. Sun after the fire: /run-cycle, then engine.270's two reads.
 
-**NEXT[research-build]:** pipeline.93 → pull sheet numbers (casino/UNDOCKED stakes, hospital cycles, chaos hits), take thresholds, reserved wakes and expiry to Mike; then the flagged-draft release step (Tamsin C113 sits flagged). Then pipeline.83/research.29 Nia test; pipeline.89 reads open. Hold: Mike resends his three asks.
+**NEXT[research-build]:** pipeline.93 → thresholds ruled (plan §rulings): build the owed-wake list in the wake draw, bench proof, review, PROD; then the flagged-draft release step (Tamsin C113 sits flagged). Then pipeline.83/research.29 Nia test; pipeline.89 reads open. Hold: Mike resends his three asks.

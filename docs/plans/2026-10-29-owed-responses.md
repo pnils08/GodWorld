@@ -45,6 +45,29 @@ Thresholds, from measured rates (chaos: 11 cycles of world_summary; casino: 164 
 
 Build not started. Wake selection is `lib/` (engine substrate): bench proof, review, PROD.
 
+## What the citizen is shown (builder, 2026-10-29)
+
+Owed changes who wakes, never what the citizen is told. No line says "you owe a response." The event or the draw wakes them; they see their own life, the city and the events, and speak freely, which makes them interviewable. They may not reflect on the event; that is theirs to decide. Guardrails and commands shape the LLM call; the citizen gets it as their life. The dials give the voice a structured personality and must move with events and wakes.
+
+Read against the code (2026-10-29): `buildVoicePrompts` (`scripts/citizen-wake.js:146`) already shows only life — LifeHistory tail, arc, lived line, health, family, bonds, paper, hood texture — and the user turn is a provocation latched to a real signal. Temperament + trajectory come from DialState (`dials.disposition(c.cur)`); the TraitProfile column is read only for journalist matching (`lib/wakePerception.js:444`), not in the wake prompt. Dial loop exists: LifeHistory tag → `nudgesForEvent_` at the cycle; wake affect → Reflection_Intake (applied=no) → `nudgesForReflection_` at the next cycle. Build check: each owed class (chaos, casino, hospital, court) must reach the owed citizen's perception, or the wake has nothing to reflect on.
+
+## Build (2026-10-29, research-build)
+
+Derived each wake from the record that proves the event; the state file holds receipts only.
+
+| Piece | Where | What |
+|---|---|---|
+| Owed list | `lib/wakePerception.js` `owedFrom` | Chaos_Cars `TargetScope=citizen`, severity read from `utilities/chaosCarsConfig.js` by vehicle+outcome (derived set = the ruled six; test pins it); Casino_Ledger settled-win/loss with `Stake > 1000` or `Payout − Stake > 500` (void-gate, void-house, open never owe — nothing settled); Hospital_Ledger `AdmitCycle`; Judicial_Ledger `ArrestCycle` (a civil case with no arrest never owes). Window: the event's Cycle and the next (`OWED_WINDOW = 2`) |
+| Tiers | `owedCandidates` | Tier 1 = the ruled classes. Tier 2 = low chaos citizen hits, eligible only from a Cycle in which no tier 1 fired (absorption per Cycle). Order: tier, the citizen's own `eventMag` (the engine's dial-nudge magnitude — no hand severity table), newest, id. One place per citizen; an owed citizen outside the wake pool is logged, never dropped silently |
+| Draw | `selectWakeCitizen` | forced → owed (while `owedWakes[cycle] < R`) → the weighted lottery |
+| What the citizen sees | `lifeTailOf` + `citizen-wake.js` | The event's own LifeHistory line (stamp + exact chaos text, or the casino/arrest line) is pinned in the five-line life block. No new words, no instruction. Hospital rides the existing lived line. No pin = the old block (1,053/1,053 live rows identical) |
+| Spend | `recordOwedSpend` | After the landed page write: each of the woken citizen's window events is receipted (any slot); an `owed` slot counts one reserved wake. Receipts age out with the window |
+| Gate | `OWED_RESERVE = 0` | The crons run this working tree, so R is held at 0 until codex review passes; `--owed-reserve=N` is the replay override. PROD = `OWED_RESERVE = 6` + its test line |
+
+**Bench (C113 live, read-only, 2026-10-29):** 6 owed — tier 1 from C112: POP-00121 (mail theft), POP-00646 (UNDOCKED win, net 733); tier 2 absorbed from C113 (no severe event fired): POP-00494 (parking ticket), POP-01160, POP-00518 (train delays), POP-00787 (document delivered). Every event line found and in the block. Full `--dry-run --owed-reserve=6`: slot `owed`, POP-00121, the theft line in perception, no instruction; he reflected on two friends, not the theft (the rule working). Unit: Test O in `lib/wakePerception.test.js`, 30 asserts. Not proven until a live fire: marks forming at C114 and lapsing at C116.
+
+Known, not this build: `--dry-run` appends to `logs/citizen-wake-offered.jsonl` (keyed `pop|cycle|daypart`; replay used `evening`, which no cron runs).
+
 ## Measured volume (C113)
 
 4 chaos cars on citizens, 2 casino losses, 0 open hospital stays (3 rows, all discharged), 0 judicial rows → ~6–8 owed per cycle against ~21 wakes.
@@ -63,5 +86,7 @@ Wake selection is `lib/` — engine substrate: bench proof on the candidate, rev
 
 ## Changelog
 
+- 2026-10-29 (research-build) — Built (§Build): owed list, per-Cycle absorption, owed slot, pinned event line, receipts; reserve held at 0 pending codex review. C113 live replay: 6 owed, all lines in perception.
+- 2026-10-29 (research-build) — Builder: owed picks who wakes, the citizen is never told it owes a response (§What the citizen is shown). Proof plan: overnight dry replay of the owed draw on C113 hits, no writes; mark formation/expiry across cycles waits for the C114 fire.
 - 2026-10-29 (research-build) — Builder ruled thresholds (casino: wager over 1,000, winnings over 500), R=6, M=2, absorption as set; row ready, build not started.
 - 2026-10-29 (research-build) — Plan opened from the Tamsin C113 flag (stance lines quoted as speech; slice fed moods on a thin day). Slice side shipped same day: 7c5f390a, b26a4184, cf0e995f, bd1f0c28, 253cdde4.

@@ -36,7 +36,8 @@ const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
   loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory,
   loadCardAnchor, loadVoiceTexture, renderStanding, renderOwnRecord,
-  loadLivedEvents, renderLivedLine, livedFor, recordLivedSpend, selectWakeCitizen, wakeSeedKey } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice
+  loadLivedEvents, renderLivedLine, livedFor, recordLivedSpend, selectWakeCitizen, wakeSeedKey,
+  lifeTailOf, OWED_RESERVE, chaosOutcomeIndex, owedFrom, owedCandidates, owedFor, owedWakesUsed, recordOwedSpend, loadOwedRecords } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice; pipeline.93 owed
 const { selectProvocation } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.101 — intake BondTarget (col I) + T4 ripple share one match
 
@@ -45,6 +46,8 @@ const DRY = ARGV.includes('--dry-run');
 const arg = (k, d) => { const m = ARGV.find((a) => a.startsWith(`--${k}=`)); return m ? m.split('=')[1] : d; };
 const WAKE = (arg('wake', 'evening') || 'evening').toLowerCase();
 const FORCE_POP = arg('pop', null);
+// pipeline.93 — reserved owed wakes a Cycle; --owed-reserve=N overrides the library value (the dry replay).
+const OWED_RES = arg('owed-reserve', null) != null ? Math.max(0, Number(arg('owed-reserve')) || 0) : OWED_RESERVE;
 // engine.197 — a child under 7 is not drawn (builder 2026-10-17: "under 7 years old"). Unknown age stays in.
 const MIN_WAKE_AGE = 7;
 
@@ -237,9 +240,30 @@ async function generateVoice(system, user) {
 
   const state = loadState();
   const seedKey = wakeSeedKey(cycle, WAKE, new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' }));
-  const picked = selectWakeCitizen(pool, { forcePop: FORCE_POP, seedKey });
+  let owed = [];
+  if (OWED_RES > 0 && cycle) {
+    const rec = await loadOwedRecords();
+    if (rec.error) logLine('owed records read failed (non-fatal, no owed slot this wake): ' + rec.error);
+    else {
+      const of = owedFrom(rec, cycle, chaosOutcomeIndex(require('/root/GodWorld/utilities/chaosCarsConfig').VEHICLE_CONFIGS));
+      owed = of.owed;
+      for (const s of of.skipped) logLine('owed skip: ' + s);
+    }
+  }
+  const owedUsed = owedWakesUsed(state, cycle);
+  const oc = owedCandidates(pool, owed, state);
+  for (const e of oc.notInPool) logLine(`owed ${e.id} ${e.pop}: not in the wake pool (no dials, no name/hood, or under ${MIN_WAKE_AGE}) — not reached`);
+  if (OWED_RES > 0) {
+    logLine(`owed: ${owed.length} in window, severe in [${oc.severeCycles.join(',')}], ${oc.ready.length} waiting, ${owedUsed}/${OWED_RES} reserved wakes used this cycle`);
+    if (DRY) for (const e of oc.ready) logLine(`  [dry-run] owed ${e.pop} ${e.kind} tier ${e.tier} c${e.cycle} mag=${e.mag.toFixed(2)} ${e.id}`);
+  }
+  const picked = selectWakeCitizen(pool, { forcePop: FORCE_POP, seedKey, owedReady: oc.ready, owedReserve: OWED_RES, owedUsed });
   if (FORCE_POP && picked.slot !== 'forced') logLine(`--pop ${FORCE_POP} not in the pool; falling back to the draw`);
   const c = picked.c;
+  // pipeline.93 — the woken citizen's own owed events stay in the life block they read; nothing else is added.
+  const mineOwed = owedFor(c.popId, owed, state);
+  const pins = mineOwed.map((e) => e.pin).filter(Boolean);
+  if (pins.length) c.life = lifeTailOf(c.lifeLines || [], pins);
   const lived = cycle ? livedFor(c.popId, livedList, state) : null;
   const livedLine = lived ? renderLivedLine(lived.event, cycle, lived.rel) : '';
   const neighbors = await coResidents(c.nh, c.popId);
@@ -314,7 +338,7 @@ async function generateVoice(system, user) {
     }) + '\n');
   } catch (e) { logLine('offered-names log failed (non-fatal): ' + e.message); }
 
-  logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE} slot=${picked.slot} seed=${seedKey}${lived ? ' event=' + lived.event.id : ''}`);
+  logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE} slot=${picked.slot} seed=${seedKey}${lived ? ' event=' + lived.event.id : ''}${mineOwed.length ? ' owed=' + mineOwed.map((e) => e.id).join(',') : ''}`);
   if (DRY) console.log('\n--- perception (system prompt) ---\n' + system + '\n----------------------------------');
   if (DRY) console.log('\n--- provocation (user prompt, T5) ---\n' + user + '\n----------------------------------');
   const reflection = await generateVoice(system, user);
@@ -406,6 +430,7 @@ async function generateVoice(system, user) {
   // page write landed (a failed append exits above and the event waits). engine.197: spent per recipient,
   // eventId:POPID — another survivor of the same death still perceives it if drawn. Receipts age out.
   const spentKey = recordLivedSpend(state, lived, c.popId, cycle);
+  if (recordOwedSpend(state, mineOwed, cycle, picked.slot)) logLine(`owed spent: ${mineOwed.map((e) => e.id).join(',')} (slot=${picked.slot})`);
   saveState(state);
   if (spentKey && !((loadState().livedSpent || {})[spentKey])) {
     logLine(`LIVED STATE NOT SAVED — ${spentKey} will render again (the page already holds this reflection)`);

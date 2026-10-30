@@ -37,7 +37,7 @@ const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTe
   loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory,
   loadCardAnchor, loadVoiceTexture, renderStanding, renderOwnRecord,
   loadLivedEvents, renderLivedLine, livedFor, recordLivedSpend, selectWakeCitizen, wakeSeedKey,
-  lifeTailOf, OWED_RESERVE, chaosOutcomeIndex, owedFrom, owedCandidates, owedFor, owedLivedPrefer, owedShownSet, owedWakesUsed, owedStateFrom, owedJournalLine, loadOwedRecords } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice; pipeline.93 owed
+  lifeTailOf, OWED_RESERVE, chaosOutcomeIndex, owedFrom, owedCandidates, owedFor, owedLivedPrefer, owedShownSet, owedWakesUsed, owedStateFrom, owedJournalLine, owedPageStep, loadOwedRecords, acquireFileLock } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice; pipeline.93 owed
 const { selectProvocation } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.101 — intake BondTarget (col I) + T4 ripple share one match
 
@@ -247,9 +247,16 @@ async function generateVoice(system, user) {
   if (!pool.length) { logLine('empty pool — nothing to wake'); process.exit(0); }
 
   const state = loadState();
+  // pipeline.93 — one live wake at a time holds the owed slot; an overlapping live wake runs without it (codex round 3 F3).
+  let owedRes = OWED_RES;
+  if (owedRes > 0 && !DRY) {
+    const release = acquireFileLock(OWED_JOURNAL + '.lock', logLine);
+    if (!release) { logLine('owed lock held by another live wake — this wake runs without the owed slot'); owedRes = 0; }
+    else process.on('exit', release);
+  }
   const seedKey = wakeSeedKey(cycle, WAKE, new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' }));
   let owed = [], owedView = state, owedAbsorb = true;
-  if (OWED_RES > 0 && cycle) {
+  if (owedRes > 0 && cycle) {
     let held = '';
     try {
       let jt = '';
@@ -274,11 +281,11 @@ async function generateVoice(system, user) {
   const oc = owedCandidates(pool, owed, owedView, livedList, { absorb: owedAbsorb });
   for (const e of oc.notInPool) logLine(`owed ${e.id} ${e.pop}: not in the wake pool (no dials, no name/hood, or under ${MIN_WAKE_AGE}) — not reached`);
   for (const e of oc.unshowable) logLine(`owed ${e.id} ${e.pop}: nothing in their record to show them (no matching life line${e.kind === 'hospital' ? ', no unspent lived admission' : ''}) — not reserved`);
-  if (OWED_RES > 0) {
-    logLine(`owed: ${owed.length} in window, severe in [${oc.severeCycles.join(',')}], ${oc.ready.length} waiting, ${owedUsed}/${OWED_RES} reserved wakes used this cycle`);
+  if (owedRes > 0) {
+    logLine(`owed: ${owed.length} in window, severe in [${oc.severeCycles.join(',')}], ${oc.ready.length} waiting, ${owedUsed}/${owedRes} reserved wakes used this cycle`);
     if (DRY) for (const e of oc.ready) logLine(`  [dry-run] owed ${e.pop} ${e.kind} tier ${e.tier} c${e.cycle} mag=${e.mag.toFixed(2)} ${e.id}`);
   }
-  const picked = selectWakeCitizen(pool, { forcePop: FORCE_POP, seedKey, owedReady: oc.ready, owedReserve: OWED_RES, owedUsed });
+  const picked = selectWakeCitizen(pool, { forcePop: FORCE_POP, seedKey, owedReady: oc.ready, owedReserve: owedRes, owedUsed });
   if (FORCE_POP && picked.slot !== 'forced') logLine(`--pop ${FORCE_POP} not in the pool; falling back to the draw`);
   const c = picked.c;
   // pipeline.93 — the woken citizen's own owed events stay in the life block they read; nothing else is added.
@@ -386,21 +393,25 @@ async function generateVoice(system, user) {
   const ptr = await page.ensurePagePointer_(c.popId);
   if (ptr.error) { logLine('ensurePagePointer_ ERROR: ' + ptr.error); process.exit(1); }
   // pipeline.93 — the owed receipt is pending BEFORE the page lands: if it cannot be saved, no page is written.
-  const owedOn = OWED_RES > 0 && (shownOwed.length > 0 || picked.slot === 'owed');
+  const owedOn = owedRes > 0 && (shownOwed.length > 0 || picked.slot === 'owed');
   const owedKey = seedKey + '|' + c.popId + '|' + new Date().toISOString();
   const owedLine = (status) => owedJournalLine({ key: owedKey, cycle, pop: c.popId, slot: picked.slot, ids: shownOwed, status });
-  if (owedOn && !appendOwedJournal(owedLine('pending'))) {
+  const step = await owedPageStep({ on: owedOn, journal: appendOwedJournal, line: owedLine,
+    page: () => page.appendReflection_(c.popId, reflection, {
+      cycle, daypart: WAKE,
+      extra: { affect: cls.affect || null, event: cls.event || null }, // recall affectWeight input (B4)
+    }) });
+  if (step.outcome === 'pending-not-saved') {
     logLine('OWED RECEIPT NOT SAVED — the pending line failed, so the page is not written and this wake cannot double an owed one');
     process.exit(1);
   }
-  const appended = await page.appendReflection_(c.popId, reflection, {
-    cycle, daypart: WAKE,
-    extra: { affect: cls.affect || null, event: cls.event || null }, // recall affectWeight input (B4)
-  });
+  const appended = step.page;
   if (appended.error) {
-    if (owedOn && !appendOwedJournal(owedLine('failed'))) logLine('owed: failed line not saved — the pending line will count this wake as spent');
+    if (owedOn) logLine('owed: the page did not confirm; the pending receipt stands — counted as reached (a possible missed wake, never a double)');
     logLine('appendReflection_ ERROR: ' + appended.error); process.exit(1);
   }
+  if (step.outcome === 'shown') logLine(`owed spent: ${shownOwed.map((e) => e.id).join(',') || '(none shown)'} (slot=${picked.slot})`);
+  if (step.outcome === 'shown-not-saved') logLine('owed: shown line not saved — the pending line already counts this wake as spent');
   logLine(`page ${ptr.tag} (${ptr.created ? 'created' : 'existing'}) <- reflection doc ${appended.id || '?'}`);
 
   // 3) B2 tension register (seams Task 3) — voice-memory only: page lines + local index, NEVER
@@ -465,10 +476,6 @@ async function generateVoice(system, user) {
   // page write landed (a failed append exits above and the event waits). engine.197: spent per recipient,
   // eventId:POPID — another survivor of the same death still perceives it if drawn. Receipts age out.
   const spentKey = recordLivedSpend(state, lived, c.popId, cycle);
-  if (owedOn) {
-    if (appendOwedJournal(owedLine('shown'))) logLine(`owed spent: ${shownOwed.map((e) => e.id).join(',') || '(none shown)'} (slot=${picked.slot})`);
-    else logLine('owed: shown line not saved — the pending line already counts this wake as spent');
-  }
   saveState(state);
   if (spentKey && !((loadState().livedSpent || {})[spentKey])) {
     logLine(`LIVED STATE NOT SAVED — ${spentKey} will render again (the page already holds this reflection)`);

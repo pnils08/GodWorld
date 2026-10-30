@@ -148,10 +148,10 @@ try {
   assert.ok(/^Test Texture — traded an extra ticket for a promise, Montclair — one of 2 people the Cycle's community turn reached \(C111\)$/.test(seeds[1].text), 'another citizen\'s relocation line is not this person\'s why: ' + seeds[1].text);
   assert.ok(!day1.facts.some(f => /Test Other/.test(f.text) && f.kind === 'seed'), 'a bookkeeping CitizenEvents line never rides');
   const mm = day1.facts.filter(f => f.kind === 'moment');
-  assert.ok(/^Test MoverA and Test MoverB — moved from Uptown to West Oakland — moving up, West Oakland \(C111, Relocation-Drive-Up-M — what happened in their life, not words they said\)$/.test(mm[0].text), 'a family event: one passage for the household, life-shape rank first: ' + mm[0].text);
+  assert.ok(/^Test MoverA and Test MoverB — moved from Uptown to West Oakland — moving up, West Oakland \(C111 — what happened in their life, not words they said\)$/.test(mm[0].text), 'a family event: one passage for the household, life-shape rank first: ' + mm[0].text);
   assert.ok(day1.facts.some(f => f.kind === 'thread' && f.popid === 'POP-90026') || !day1.facts.some(f => f.kind === 'thread' && f.popid === 'POP-90025'), 'each mover carries their own thread when they have one');
   assert.ok(/^Test Stranger — moved from Uptown to West Oakland — moving up/.test(mm[1].text), 'a stranger with the same line is their own passage: ' + mm[1].text);
-  assert.ok(/^Test Strained — the third late night this week, Eastlake \(C111, Strain — what happened in their life, not words they said\)$/.test(mm[2].text), 'pressure ranks above a tie, whatever the file order: ' + mm[2].text);
+  assert.ok(/^Test Strained — the third late night this week, Eastlake \(C111 — what happened in their life, not words they said\)$/.test(mm[2].text), 'pressure ranks above a tie, whatever the file order: ' + mm[2].text);
   assert.ok(/Test Friend — reconnected/.test(mm[3].text), 'then the ties in file order; the QoL row waits for day 2');
   assert.ok(!day1.facts.some(f => /Test Student|Test Marker|industry=/.test(f.text)), 'Education colour and the CareerState marker never ride');
     assert.ok(!day1.facts.some(f => f.kind === 'seed' && f.popid === 'POP-90003'), 'the climber already has his passage — not a second one from the seed');

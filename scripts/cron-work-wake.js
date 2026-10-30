@@ -47,7 +47,8 @@ const LOG_FILE = path.join(__dirname, '..', 'logs', 'cron-work-wake.log');
 const DAYPART = 'work'; // Reflection_Intake col D token — the gated reader filters on `applied`, not daypart
 // pipeline.96 — the shift's page doc is keyed by its weekday (citizenPage `day`): the shift fires Tue and Thu, and the
 // store appends a second write under a taken key into the first doc, so one Cycle's two shifts merged into one.
-const PAGE_DAY_KEY = false;
+// On 2026-10-30 after codex review.
+const PAGE_DAY_KEY = true;
 const RECENT_MEMORY = 50;
 
 function logLine(s) {

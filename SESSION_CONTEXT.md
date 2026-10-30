@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** engine.270 → Sun 2026-11-01 after the C114 fire: /run-cycle (first live use of engine.20d), then engine.270's two reads. Hold: governance.54/55 wait on Mike's boot-doc unlock.
 
-**NEXT[research-build]:** pipeline.95 (UNDOCKED sure wake) → read its plan, build. Watch: pipeline.94 next wake page id ends in its weekday; pipeline.93 owed marks at the C114 fire. Then Tamsin C113 flagged-draft release; pipeline.83/research.29 Nia test; pipeline.89 reads. Asked Mike: PRESS + work merges a row? Hold: Mike resends three asks.
+**NEXT[research-build]:** pipeline.95 (UNDOCKED sure wake) → read its plan, build. Watch: wake page id ends in weekday (94); interview id day+6 letters, work-tue, exchange -fri, scanner admits (96); pipeline.93 owed marks at C114. Then Tamsin C113 flagged release; pipeline.83/research.29 Nia test; pipeline.89 reads. Hold: Mike resends three asks.

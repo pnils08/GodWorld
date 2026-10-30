@@ -55,7 +55,8 @@ const TENSION_EXPIRY_CYCLES = 12;
 const RIPPLE_EXPIRY_CYCLES = 12;
 // pipeline.96 — a participant's page doc is keyed by the exchange's weekday (citizenPage `day`): one exchange a day,
 // and the store appends a second write under a taken key into the first doc, so two exchanges in one Cycle merged.
-const PAGE_DAY_KEY = false;
+// On 2026-10-30 after codex review.
+const PAGE_DAY_KEY = true;
 
 function logLine(s) {
   const line = `[${new Date().toISOString()}] ${s}\n`;

@@ -67,7 +67,8 @@ const TENSION_CAP = 3;
 // pipeline.96 — an interview's page doc is keyed by its weekday and the ask (citizenPage `day` + `ref`): a citizen is
 // asked many times a Cycle, and the store appends a second write under a taken key into the first doc — one PRESS doc
 // held up to five answers, and an answer appended after the scanner fetched the doc never reached the index.
-const PAGE_EVENT_KEY = false;
+// On 2026-10-30 after codex review.
+const PAGE_EVENT_KEY = true;
 const TENSION_EXPIRY_CYCLES = 12;
 function loadTensionState() { try { return JSON.parse(fs.readFileSync(TENSION_FILE, 'utf8')); } catch (e) { return {}; } }
 function saveTensionState(st) { try { fs.writeFileSync(TENSION_FILE, JSON.stringify(st, null, 2)); } catch (e) {} }

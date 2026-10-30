@@ -88,7 +88,11 @@ This manifest is the registry of all active Google Sheets tabs hooked into the P
   `TargetCycle <= current`, blank is not zero, ties by POPID — the
   `scripts/undockedStandings.js` rule — for the Phase-5 `$LEADER` entity slot.
   TargetCycle is when an episode AIRS, Cycle is when it
-  was flown — they differ when approval lands after a cycle closes. Transport
+  was flown — they differ when approval lands after a cycle closes.
+  `PointsDelta` (col M, research.31, 2026-10-30): the night's achievement
+  points from the pilot's game account — the board's first score. The push
+  is positional, so `ensureFeedHeader` writes the header cell before the
+  first 13-column row and refuses any other header mismatch. Transport
   window, not an archive: the git-tracked feed packs under
   `output/spacemolt-show/feed/` are the track record.
 - **`Undocked_Draw`**: next cycle's UNDOCKED cast (engine.175, S438). `undockedDrawCast_`

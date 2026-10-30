@@ -17,7 +17,7 @@
  *                  scripts/undockedMintAccount.js — the runner never
  *                  self-registers), mission brief (generated on demand via
  *                  scripts/undockedMissionBrief.js); failure falls to alt-1…
- *   3. flight    — scripts/undockedEpisode.js (bounded runner, 10-min cap)
+ *   3. flight    — scripts/undockedEpisode.js (bounded runner, WINDOW_MINUTES cap — 20)
  *   4. adapter   — scripts/undockedEpisodeAdapter.js (deterministic facts)
  *   5. gate      — enqueue -> autoDecide (auto-approve on contract validation;
  *                  invalid parks Applied=no for human review, §2.5 decision 2)
@@ -28,7 +28,7 @@
  * exits 0 and says PARKED loudly. Missing creds/mission for a drawn pilot is a
  * real failure (succession wiring not done) and exits non-zero.
  *
- * Usage: node scripts/cron-undocked-run.js [--minutes 10] [--dry-run]
+ * Usage: node scripts/cron-undocked-run.js [--minutes 20] [--dry-run]
  *   --dry-run: resolve cycle + pilot, print the plan, run nothing.
  */
 
@@ -243,9 +243,16 @@ function newestEpisodeSidecar(session, sinceMs) {
   return hits.length ? path.join(dir, hits[0].f) : null;
 }
 
+// research.31: one night's window, in minutes — the brief tells the pilot the
+// same number (builder approved 20, 2026-10-30). --minutes overrides.
+function windowMinutes(argv) {
+  return argv.includes('--minutes') ? argv[argv.indexOf('--minutes') + 1]
+    : String(require('./undockedMissionBrief').WINDOW_MINUTES);
+}
+
 async function main() {
   const argv = process.argv.slice(2);
-  const minutes = argv.includes('--minutes') ? argv[argv.indexOf('--minutes') + 1] : '10';
+  const minutes = windowMinutes(argv);
   const dryRun = argv.includes('--dry-run');
 
   const cycle = await currentCycle();
@@ -320,7 +327,7 @@ async function main() {
   log('done');
 }
 
-module.exports = { drawRowsToRoster, tabPilot, sessionName, employerNameFor };
+module.exports = { drawRowsToRoster, tabPilot, sessionName, employerNameFor, windowMinutes };
 
 if (require.main === module) {
   main().catch(e => {

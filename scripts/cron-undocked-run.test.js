@@ -38,34 +38,37 @@ check('null rows -> empty', O.drawRowsToRoster(null, 121).cast.length === 0);
 
 check('session name convention', O.sessionName('POP-01101') === 'undocked-pop01101');
 
-// research.29 Move 3 (builder 2026-10-16): the flight's completion tracker also
-// stops a pilot who has stopped flying — IDLE_TURNS turn_end events with no
-// tool_call between them (Simone Adesanya 2026-10-10: 2 calls, then 153 idle
-// turns to the cap). A mission night with calls every turn never trips it.
+// research.29 Move 3 (builder 2026-10-16) + research.31 (2026-10-30): a night
+// ends when the pilot stops calling the console — IDLE_TURNS turn_end events
+// with no tool_call between them (Simone Adesanya 2026-10-10: 2 calls, then 153
+// idle turns to the cap). The captain's log no longer ends a night; a night
+// with calls every turn never trips the idle stop.
 const E = require('./undockedEpisode');
 const te = JSON.stringify({ event: 'turn_end', tick: 1 });
 const call = cmd => JSON.stringify({ event: 'tool_call', tool: 'game', args: { command: cmd } });
 let t = E.createCompletionTracker(8);
 for (let i = 0; i < 7; i++) t.push(te);
-check('7 idle turns: still flying', !t.complete && !t.stalled);
+check('7 idle turns: still flying', !t.complete);
 t.push(te);
-check('8th idle turn: stalled and done', t.complete && t.stalled && t.idleTurns === 8);
+check('8th idle turn: the pilot stopped, night over', t.complete && t.idleTurns === 8);
 t = E.createCompletionTracker(8);
 for (let i = 0; i < 30; i++) { t.push(call('spacemolt/mine')); t.push(te); if (i % 3 === 0) t.push(te); }
-check('a flight with a call every turn or two never stalls (Eric 10-16 shape: 29 calls, max 2 idle)', !t.complete && !t.stalled && t.toolCalls === 30);
+check('a flight with a call every turn or two keeps flying (Eric 10-16 shape: 29 calls, max 2 idle)', !t.complete && t.toolCalls === 30);
 t = E.createCompletionTracker(8);
-t.push(call('spacemolt/undock')); t.push(te); t.push(call('spacemolt/captains_log_add')); t.push(te); t.push(call('spacemolt/dock'));
-check('mission completion still ends the flight, not as a stall', t.complete && !t.stalled);
+t.push(call('spacemolt/undock')); t.push(te); t.push(call('spacemolt_social/captains_log_add')); t.push(te); t.push(call('spacemolt/dock'));
+check('log + dock does not end the night (research.31)', !t.complete);
 t = E.createCompletionTracker(8);
 for (let i = 0; i < 5; i++) t.push(te);
 t.push(call('spacemolt/get_status'));
 for (let i = 0; i < 7; i++) t.push(te);
 check('a tool call resets the idle count', !t.complete && t.idleTurns === 7);
 check('IDLE_TURNS default is 8', E.IDLE_TURNS === 8);
-t = E.createCompletionTracker(8);
-t.push(call('spacemolt/undock')); t.push(te); t.push(call('spacemolt/sell')); t.push(call('spacemolt_social/captains_log_add')); t.push(te);
-for (let i = 0; i < 8; i++) t.push(te);
-check('server auto-dock (sell) + log written + obeying the stop rule = complete, NOT a stall (Soo Loo 09-24 shape)', t.complete && !t.stalled);
+
+// research.31: the runner window defaults to the brief's window (builder 20).
+const B = require('./undockedMissionBrief');
+const R = require('./cron-undocked-run');
+check('window default is the brief window', R.windowMinutes([]) === String(B.WINDOW_MINUTES) && B.WINDOW_MINUTES === 20);
+check('--minutes overrides the window', R.windowMinutes(['--minutes', '5']) === '5');
 
 if (failed) { console.error('cron-undocked-run: ' + failed + ' FAIL'); process.exit(1); }
 console.log('cron-undocked-run: ok');

@@ -13,11 +13,11 @@
  *     commander's sessions/<name>/credentials.json. This wrapper refuses to
  *     run without it, and every mission brief must forbid register/login —
  *     a self-registering agent burns the episode hallucinating codes.
- *   - Stop = mission completion (captains_log written while docked -> graceful
- *     SIGINT) or wall-clock timeout -> SIGINT -> commander's AbortSignal seam
- *     (clean exit, handoff written), SIGKILL only after a grace period. The
- *     LLM's obedience to "dock and stop" is NOT a stop mechanism (2026-09-08:
- *     pop00143 finished its mission and burned 6 more minutes to the cap).
+ *   - Stop = the pilot stops calling the console (IDLE_TURNS idle turns ->
+ *     graceful SIGINT) or wall-clock timeout -> SIGINT -> commander's
+ *     AbortSignal seam (clean exit, handoff written), SIGKILL only after a
+ *     grace period. research.31 (2026-10-30): the captain's log is no longer
+ *     a stop token; the sidecar's stopReason says how the night ended.
  *
  * Usage:
  *   node scripts/undockedEpisode.js --session undocked-pop00962 \
@@ -107,53 +107,40 @@ function parseLog(logText) {
   return { turns, tokensIn, tokensOut, toolErrors };
 }
 
-// Completion detection: the mission contract is "write one captains_log
-// entry, then dock and stop" — watch the telemetry stream for that instead of
-// trusting the model's obedience. Only SUCCESSFUL tool_call events move state
-// (tool_error events are failed attempts). The ship starts docked per the
-// mission brief's preconditions. The tracker can only end an episode EARLY;
-// the wall-clock cap remains the backstop either way.
+// Stop detection (research.31, builder 2026-10-30, codex agency proposal §2):
+// the pilot decides when the night is over. The old end condition — "captain's
+// log written while docked" — made the log a stop token: Daphne Stafford
+// (10-29) wrote it after a dry belt and the night ended at ~5 minutes; Simone
+// Adesanya (10-10) declined a live MAYDAY citing the hard stop. Now a night
+// ends only when the pilot stops calling the console (IDLE_TURNS turn_end
+// events with no tool_call — the research.29 Move 3 idle stop, which also ends
+// a model that narrates instead of flying), or at the window (wall-clock cap),
+// or when the client exits on its own. The sidecar records which: stopReason.
+// Only SUCCESSFUL tool_call events reset the idle count.
 const ANSI_RE = /\x1b\[[0-9;]*m/g;
-// After the end condition is seen, give the current turn a moment to flush,
-// then take the same graceful SIGINT path the cap uses.
-const COMPLETION_SETTLE_MS = 20000;
-// research.29 Move 3 (builder 2026-10-16): a flight that has stopped flying
-// stops. Simone Adesanya 2026-10-10: 2 real tool_calls, then 153 turn_end
-// events of command-shaped prose until the 10-minute cap (2.71M tokens in).
-// Count turn_end events since the last tool_call; at IDLE_TURNS the episode
-// ends by the same graceful path the mission end uses, and the sidecar says
-// so (`stall`) so the night is labelled a runner stall, never a blank. Eric
-// Taveras's 29-call mission night (2026-10-16) never passed 2 idle turns.
+// research.29 Move 3: Simone Adesanya 2026-10-10 made 2 real tool_calls, then
+// 153 turn_end events of command-shaped prose until the cap (2.71M tokens in).
+// Eric Taveras's 29-call mission night (2026-10-16) never passed 2 idle turns.
 const IDLE_TURNS = 8;
 
 function createCompletionTracker(idleTurns) {
   const limit = idleTurns || IDLE_TURNS;
-  let docked = true, logWritten = false, done = false, idle = 0, stalled = false, calls = 0;
+  let done = false, idle = 0, calls = 0;
   return {
     push(line) {
       let e;
       try { e = JSON.parse(line); } catch (_) { return done; }
       if (e.event === 'turn_end') {
         idle++;
-        // agy review 2026-10-16 hunt 4: sell/refuel/repair auto-dock the ship on
-        // the server, so the pilot's explicit `dock` errors and `docked` never
-        // flips here — 2 archived flights wrote their log, obeyed the stop rule,
-        // and would have read as stalls. Log written + stopped calling = done.
-        if (!done && idle >= limit) { stalled = !logWritten; done = true; }
+        if (!done && idle >= limit) done = true;
         return done;
       }
       if (e.event !== 'tool_call' || !e.args || typeof e.args.command !== 'string') return done;
       idle = 0;
       calls++;
-      const cmd = e.args.command;
-      if (/(^|\/)undock$/.test(cmd)) docked = false;
-      else if (/(^|\/)dock$/.test(cmd)) docked = true;
-      else if (/captains_log_add$/.test(cmd)) logWritten = true;
-      if (logWritten && docked) done = true;
       return done;
     },
     get complete() { return done; },
-    get stalled() { return stalled; },
     get idleTurns() { return idle; },
     get toolCalls() { return calls; },
   };
@@ -210,15 +197,9 @@ async function main() {
       if (!line.startsWith('{"event"')) continue;
       if (!completed && tracker.push(line)) {
         completed = true;
-        if (tracker.stalled) {
-          console.log('[episode] runner stall — ' + tracker.idleTurns + ' turns with no tool call after ' +
-            tracker.toolCalls + ' call(s); graceful stop now');
-          try { child.kill('SIGINT'); } catch (_) {}
-        } else {
-          console.log('[episode] mission complete (captains_log written, docked) — settling ' +
-            (COMPLETION_SETTLE_MS / 1000) + 's then graceful stop');
-          setTimeout(() => { try { child.kill('SIGINT'); } catch (_) {} }, COMPLETION_SETTLE_MS).unref();
-        }
+        console.log('[episode] pilot stopped — ' + tracker.idleTurns + ' turns with no console call after ' +
+          tracker.toolCalls + ' call(s); graceful stop now');
+        try { child.kill('SIGINT'); } catch (_) {}
       }
     }
   });
@@ -243,10 +224,10 @@ async function main() {
     capMinutes: a.minutes,
     exitCode: code,
     capped: timedOut,              // wall-clock cap fired (was: any non-clean exit)
-    completedCleanly: completed && !tracker.stalled,   // mission end condition seen before the cap
-    // research.29: the pilot stopped flying — IDLE_TURNS turn_end events with no
-    // tool call. The adapter carries this into the staged night's note.
-    stall: tracker.stalled ? { idleTurns: tracker.idleTurns, toolCalls: tracker.toolCalls, limit: IDLE_TURNS } : null,
+    // research.31: how the night ended — 'pilot-stopped' (IDLE_TURNS with no
+    // console call), 'window' (the cap), or 'exit' (the client ended on its own).
+    stopReason: completed ? 'pilot-stopped' : (timedOut ? 'window' : 'exit'),
+    toolCalls: tracker.toolCalls,
     ...stats,
     // deepseek-chat list prices; cache reads push real cost lower
     estCostUsd: +((stats.tokensIn * 0.14 + stats.tokensOut * 0.28) / 1e6).toFixed(4),

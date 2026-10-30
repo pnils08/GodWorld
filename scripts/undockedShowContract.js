@@ -12,7 +12,7 @@ const EVENT_TYPE = 'undocked-episode';
 const FEED_HEADERS = Object.freeze([
   'Cycle', 'EventType', 'POPID', 'Holder', 'EpisodeId',
   'CreditsDelta', 'Systems', 'CombatEvents', 'MishapCount',
-  'Magnitude', 'Flags', 'StagedPath',
+  'Magnitude', 'Flags', 'StagedPath', 'PointsDelta',
 ]);
 
 const FOURTH_WALL = /videogame|video game|commander|get_action_log|mcp__|openrouter|tool_error|spacemolt-lib/i;
@@ -90,6 +90,9 @@ function projectFeed(staged, cycle, stagedPath, seq) {
     Holder: staged.holder || '',
     EpisodeId: worldFacingEpisodeId_(staged, cycle, seq),
     CreditsDelta: factValue(staged.facts.credits_delta, null),
+    // research.31: the night's achievement points (the board's first score).
+    // Nullable like CreditsDelta — a night staged before 10-30 has none.
+    PointsDelta: factValue(staged.facts.points_delta, null),
     Systems: systems.slice(),
     CombatEvents: Number(combat.events) || 0,
     MishapCount: mishaps.length,

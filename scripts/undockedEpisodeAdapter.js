@@ -29,7 +29,11 @@ const UA = 'GodWorld-UNDOCKED-adapter/1';
 // (get_action_log: combat, trading, ship, crafting, faction, mission, skill,
 // salvage, storage, achievement, mining, navigation, exploration, reputation,
 // drone, session, other).
-const CATEGORIES = ['mining', 'trading', 'mission', 'combat', 'navigation', 'session'];
+// 'achievement' added 2026-10-30 (research.31, builder ruling C): the board
+// ranks the game's own achievement points first, credits alongside. The game
+// logs each unlock as `achievement.unlocked` with data.points (verified live
+// 2026-10-30 on POP-00816's First Steps, 5 pts).
+const CATEGORIES = ['mining', 'trading', 'mission', 'combat', 'navigation', 'session', 'achievement'];
 // Reward credit keys a mission-completion entry may carry. The game's typed
 // MissionRewardsInfo names `credits`; the action-log data map is untyped, so
 // the first key present wins. Only a completion entry counts — an accept entry
@@ -80,6 +84,9 @@ function loadEpisode(jsonPath) {
       tokensIn: raw.tokensIn,
       tokensOut: raw.tokensOut,
       log: raw.log || null,
+      // research.31: how the night ended (pilot-stopped / window / exit)
+      stopReason: raw.stopReason || null,
+      toolCalls: raw.toolCalls == null ? null : raw.toolCalls,
     },
   };
 }
@@ -213,16 +220,54 @@ function deriveCredits(entries) {
   return fact(sum, { hits: hits, basis: basis.slice(0, 40) });
 }
 
+// research.31: a jump names both ends. Before, the first SYSTEM_KEYS hit kept
+// only `to_system`, so Eric Taveras's Sol sale + Sol-to-Sirius jump (10-16)
+// read Systems ["sirius"] and the city was told he scored in Sirius.
 function deriveSystems(entries) {
   const seen = [];
-  entries.forEach(function (e) {
-    const d = e.data || {};
-    const v = pickFirst(d, SYSTEM_KEYS);
-    if (v == null) return;
+  const add = function (v) {
+    if (v == null || v === '') return;
     const s = String(v);
     if (seen.indexOf(s) < 0) seen.push(s);
+  };
+  entries.slice().sort(function (a, b) {
+    return String(entryTime(a) || '').localeCompare(String(entryTime(b) || ''));
+  }).forEach(function (e) {
+    const d = e.data || {};
+    if (d.from_system != null && d.to_system != null) {
+      add(d.from_system);
+      add(d.to_system);
+      return;
+    }
+    add(pickFirst(d, SYSTEM_KEYS));
   });
   return fact(seen);
+}
+
+// research.31 (builder ruling C, 2026-10-30): the night's achievement points —
+// the game's own score, read from the pilot's account (get_achievements, each
+// unlock carries earned_at). A pilot account acts only in its flights, so an
+// unlock belongs to the pilot's latest night that started at or before it —
+// NOT to the runner's window: a jump logs at departure and lands ~2 min later,
+// and the arrival unlock (Maiden Jump, Wanderer) falls after the window closes
+// (Taveras 10-19: last jump 01:40:04, window end 01:40:14, Wanderer 01:43:10).
+// `until` is the same pilot's next night's start (null for the latest night).
+// Measured zero needs gameplay evidence; otherwise unknown, as for credits.
+function derivePoints(account, startedAt, until, entries) {
+  if (!account) return fact(null, { source: 'get_achievements', note: 'pilot account not read — unknown' });
+  const t0 = Date.parse(startedAt);
+  const t1 = until ? Date.parse(until) : Infinity;
+  const earned = (account.earned || []).filter(function (a) {
+    const t = Date.parse(a.at);
+    return !isNaN(t) && t >= t0 && t < t1;
+  });
+  if (earned.length) {
+    return fact(earned.reduce(function (s, a) { return s + a.points; }, 0),
+      { source: 'get_achievements', earned: earned });
+  }
+  const gameplay = (entries || []).some(function (e) { return e.category && e.category !== 'session'; });
+  if (!gameplay) return fact(null, { source: 'get_achievements', note: 'no gameplay recorded in window — unknown' });
+  return fact(0, { source: 'get_achievements', earned: [], note: 'gameplay in window, no achievement earned — measured zero' });
 }
 
 function deriveCombat(entries) {
@@ -261,6 +306,8 @@ function deriveCargo(entries) {
 function deriveMishaps(entries) {
   const mishaps = [];
   entries.forEach(function (e) {
+    // An unlock is never a mishap, even when its name reads like one.
+    if (e.category === 'achievement') return;
     const blob = [e.event_type, e.summary, e.category].join(' ');
     if (!MISHAP_RE.test(blob)) return;
     mishaps.push({
@@ -285,7 +332,7 @@ function slimEntry(e) {
   };
 }
 
-function assemble(episode, byCategory, captains) {
+function assemble(episode, byCategory, captains, account) {
   const all = [];
   CATEGORIES.forEach(function (c) {
     (byCategory[c] || []).forEach(function (e) { all.push(e); });
@@ -322,6 +369,8 @@ function assemble(episode, byCategory, captains) {
         if (episode.stall && c.value == null) c.note = 'runner stall — pilot never flew; unknown, not zero';
         return c;
       })(),
+      // the night being adapted is the pilot's latest, so no `until`
+      points_delta: derivePoints(account || null, episode.startedAt, null, all),
       systems_visited: deriveSystems(all),
       combat_results: deriveCombat(all),
       cargo: deriveCargo(all),
@@ -459,7 +508,10 @@ async function adaptEpisode(jsonPath, holder) {
     );
   }
   const captains = await fetchCaptains(sid);
-  const staged = assemble(episode, byCategory, captains);
+  let account = null;
+  try { account = await readAccount(sid); }
+  catch (e) { console.error('[adapter] get_achievements failed — points unknown tonight, the daily settle retries: ' + (e.message || e)); }
+  const staged = assemble(episode, byCategory, captains, account);
   assertSplit(staged);
   return staged;
 }
@@ -647,6 +699,194 @@ async function applyRescore(plan) {
   return report;
 }
 
+// ---------------------------------------------------------------------------
+// research.31 — POINTS BACK-SCORE + DAILY SETTLE (builder ruling C,
+// 2026-10-30). Archived nights before 10-30 never read points; and a live
+// night's arrival unlocks can land after its adapter ran. Both are settled from
+// the game's own record of the pilot's account (get_achievements, earned_at),
+// attributed by derivePoints: the pilot's latest night that started at or
+// before the unlock. An unlock older than every night is reported, never placed.
+// Only nights whose value changes are written. One account read per pilot.
+//
+//   node scripts/undockedEpisodeAdapter.js --rescore-points                  # all pilots, table only
+//   node scripts/undockedEpisodeAdapter.js --rescore-points --apply          # writes
+//   node scripts/undockedEpisodeAdapter.js --rescore-points --recent 7 --apply   # daily settle (cron)
+//
+// --apply writes PointsDelta to the Undocked_Feed tab (approved rows, by
+// EpisodeId), then facts.points_delta on the archive file, the intake row and
+// the feed pack event. Then `node scripts/undockedStandings.js`.
+// ---------------------------------------------------------------------------
+async function readAccount(sid) {
+  const body = await api(sid, 'spacemolt/get_achievements', {});
+  const sc = body.structuredContent || body;
+  if (!Array.isArray(sc.achievements)) throw new Error('get_achievements returned no achievements list');
+  return {
+    total: sc.summary ? num(sc.summary.points) : null,
+    earned: sc.achievements.filter(function (a) { return a.earned; }).map(function (a) {
+      return { id: a.id, name: a.name, points: num(a.points) || 0, at: a.earned_at || null };
+    }),
+  };
+}
+
+async function fetchAchievements(session) {
+  const creds = loadCredentials(session);
+  let lastErr = null;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      let sid = await createSession();
+      sid = await login(sid, creds);
+      return await readAccount(sid);
+    } catch (e) {
+      lastErr = e;
+      await new Promise(function (r) { setTimeout(r, 20000); });
+    }
+  }
+  throw lastErr;
+}
+
+function archivedNights() {
+  const files = fs.existsSync(ARCHIVE_DIR)
+    ? fs.readdirSync(ARCHIVE_DIR).filter(function (f) { return f.endsWith('.json'); }).sort() : [];
+  return files.map(function (f) {
+    const p = path.join(ARCHIVE_DIR, f);
+    return { file: f, stagedPath: p, staged: JSON.parse(fs.readFileSync(p, 'utf8')) };
+  });
+}
+
+// accounts: { session: {total, earned[]} } — a session missing here is not
+// re-scored (its nights keep what they have).
+function planPointsRescore(accounts, nightsIn) {
+  const intake = intakeByStagedName();
+  const all = nightsIn || archivedNights();
+  const bySession = {};
+  all.forEach(function (n) {
+    const s = n.staged.session;
+    (bySession[s] || (bySession[s] = [])).push(n);
+  });
+  const nights = [];
+  const unplaced = [];
+  Object.keys(bySession).forEach(function (session) {
+    const acct = accounts[session];
+    if (!acct) return;
+    const list = bySession[session].sort(function (a, b) {
+      return String(a.staged.window.startedAt).localeCompare(String(b.staged.window.startedAt));
+    });
+    const firstStart = Date.parse(list[0].staged.window.startedAt);
+    acct.earned.forEach(function (a) {
+      if (!(Date.parse(a.at) >= firstStart)) unplaced.push({ session: session, name: a.name, points: a.points, at: a.at });
+    });
+    list.forEach(function (n, i) {
+      const until = i + 1 < list.length ? list[i + 1].staged.window.startedAt : null;
+      const f = derivePoints(acct, n.staged.window.startedAt, until, entriesOf(n.staged));
+      const before = n.staged.facts && n.staged.facts.points_delta ? n.staged.facts.points_delta.value : undefined;
+      const ik = intake[n.file] || null;
+      nights.push({
+        file: n.file, stagedPath: n.stagedPath, popid: n.staged.popid, holder: n.staged.holder || '',
+        session: session, fact: f, before: before === undefined ? undefined : before,
+        changed: before === undefined || before !== f.value,
+        intakePath: ik ? ik.path : null,
+        applied: ik ? ik.row.Applied : null,
+        cycle: ik ? ik.row.Cycle : null,
+        episodeId: ik && ik.row.FeedEvent ? ik.row.FeedEvent.EpisodeId : null,
+      });
+    });
+  });
+  return { scanned: all.length, nights: nights, unplaced: unplaced, accounts: accounts };
+}
+
+function printPointsRescore(plan) {
+  const byPop = {};
+  plan.nights.forEach(function (n) {
+    const b = byPop[n.popid] || (byPop[n.popid] = { holder: n.holder, nights: 0, points: 0, unknown: 0, changed: 0, names: [] });
+    b.nights++;
+    if (n.changed) b.changed++;
+    if (n.fact.value == null) b.unknown++;
+    else b.points += n.fact.value;
+    (n.fact.earned || []).forEach(function (a) { b.names.push(a.name + ' ' + a.points); });
+  });
+  console.log('[rescore-points] ' + plan.scanned + ' archived night(s), ' + Object.keys(plan.accounts).length + ' account(s) read');
+  Object.keys(byPop).sort(function (a, b) { return byPop[b].points - byPop[a].points; }).forEach(function (k) {
+    const b = byPop[k];
+    const total = (plan.accounts[plan.nights.find(function (n) { return n.popid === k; }).session] || {}).total;
+    console.log('  ' + k + ' ' + (b.holder || '(blank)') + ' | ' + b.points + ' pts over ' + b.nights + ' night(s)'
+      + ' (game total ' + total + ')' + (b.unknown ? ', ' + b.unknown + ' unknown' : '') + ', ' + b.changed + ' to write'
+      + (b.names.length ? ' — ' + b.names.join(', ') : ''));
+  });
+  if (plan.unplaced.length) {
+    console.log('  NOT PLACED (earned before the pilot\'s first archived night):');
+    plan.unplaced.forEach(function (u) { console.log('    ' + u.session + ' ' + u.name + ' ' + u.points + ' @ ' + u.at); });
+  }
+}
+
+async function applyPointsRescore(plan) {
+  require('../lib/env');
+  const sheets = require('../lib/sheets');
+  const todo = plan.nights.filter(function (n) { return n.changed; });
+  const report = { disk: 0, tab: 0, noFeedRow: [] };
+  if (!todo.length) return report;
+  const tab = await sheets.getSheetData(FEED_TAB);
+  if (!tab || !tab.length) throw new Error(FEED_TAB + ' unreadable — refusing to backfill');
+  const hdr = tab[0];
+  const iEp = hdr.indexOf('EpisodeId'), iPt = hdr.indexOf('PointsDelta');
+  if (iEp < 0 || iPt < 0) throw new Error(FEED_TAB + ' missing EpisodeId/PointsDelta — the header cell comes first (undockedShowGate ensureFeedHeader)');
+  const rowOf = {};
+  for (let r = 1; r < tab.length; r++) {
+    const v = String(tab[r][iEp] == null ? '' : tab[r][iEp]).trim();
+    if (v) rowOf[v] = r + 1;
+  }
+  const updates = [];
+  // Tab first, then disk — same repair-by-rerun order as applyRescore.
+  todo.forEach(function (n) {
+    if (n.applied === 'yes' && n.episodeId && rowOf[n.episodeId]) {
+      updates.push({ range: FEED_TAB + '!' + sheets.columnIndexToLetter(iPt) + rowOf[n.episodeId],
+        values: [[n.fact.value == null ? '' : n.fact.value]] });
+      report.tab++;
+    } else if (n.applied === 'yes') {
+      report.noFeedRow.push(n.episodeId || n.file);
+    }
+  });
+  if (updates.length) await sheets.batchUpdate(updates);
+  todo.forEach(function (n) {
+    const staged = JSON.parse(fs.readFileSync(n.stagedPath, 'utf8'));
+    staged.facts.points_delta = Object.assign({}, n.fact, { rescoredAt: new Date().toISOString() });
+    fs.writeFileSync(n.stagedPath, JSON.stringify(staged, null, 2) + '\n');
+    report.disk++;
+    if (!n.intakePath) return;
+    const row = JSON.parse(fs.readFileSync(n.intakePath, 'utf8'));
+    row.PointsDelta = n.fact.value;
+    if (row.FeedEvent) row.FeedEvent.PointsDelta = n.fact.value;
+    fs.writeFileSync(n.intakePath, JSON.stringify(row, null, 2) + '\n');
+    if (n.episodeId && n.cycle != null) {
+      const fp = path.join(FEED_DIR, 'c' + n.cycle + '.json');
+      if (fs.existsSync(fp)) {
+        const pack = JSON.parse(fs.readFileSync(fp, 'utf8'));
+        (pack.events || []).forEach(function (e) { if (e.EpisodeId === n.episodeId) e.PointsDelta = n.fact.value; });
+        fs.writeFileSync(fp, JSON.stringify(pack, null, 2) + '\n');
+      }
+    }
+  });
+  return report;
+}
+
+// recentDays: only pilots with a night started within that many days (the
+// daily settle); null = every pilot ever archived (the one-time back-score).
+async function readAccounts(nights, recentDays) {
+  const cutoff = recentDays ? Date.now() - recentDays * 86400000 : -Infinity;
+  const sessions = [];
+  nights.forEach(function (n) {
+    const s = n.staged.session;
+    if (s && sessions.indexOf(s) < 0 && Date.parse(n.staged.window.startedAt) >= cutoff) sessions.push(s);
+  });
+  const accounts = {};
+  for (let i = 0; i < sessions.length; i++) {
+    try { accounts[sessions[i]] = await fetchAchievements(sessions[i]); }
+    catch (e) { console.error('[rescore-points] ' + sessions[i] + ': ' + (e.message || e) + ' — not re-scored'); }
+    // 60 req/min per IP across the fleet; 3 calls per account
+    await new Promise(function (r) { setTimeout(r, 4000); });
+  }
+  return accounts;
+}
+
 function summarize(staged) {
   const f = staged.facts;
   return staged.episode_id
@@ -663,7 +903,8 @@ function summarize(staged) {
 module.exports = {
   V, CATEGORIES,
   loadEpisode, popidFromSession, inWindow, filterWindow,
-  deriveCredits, deriveSystems, deriveCombat, deriveCargo, deriveMishaps,
+  deriveCredits, deriveSystems, deriveCombat, deriveCargo, deriveMishaps, derivePoints,
+  planPointsRescore,
   assemble, assertSplit, slimEntry,
   creditDeltaForEntry, entriesOf, planRescore, applyRescore,
 };
@@ -672,17 +913,33 @@ if (require.main === module) {
   const argv = process.argv.slice(2);
   let paths = [];
   let holder = null;
-  let rescore = false, apply = false;
+  let rescore = false, rescorePoints = false, apply = false, recentDays = null;
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--episode') paths.push(argv[++i]);
     else if (argv[i] === '--holder') holder = argv[++i];
     else if (argv[i] === '--all-three') paths = paths.concat(threeEpisodePaths());
     else if (argv[i] === '--rescore-archive') rescore = true;
+    else if (argv[i] === '--rescore-points') rescorePoints = true;
+    else if (argv[i] === '--recent') recentDays = Number(argv[++i]);
     else if (argv[i] === '--apply') apply = true;
     else {
       console.error('unknown arg ' + argv[i]);
       process.exit(2);
     }
+  }
+  if (rescorePoints) {
+    const nights = archivedNights();
+    readAccounts(nights, recentDays).then(function (accounts) {
+      const plan = planPointsRescore(accounts, nights);
+      printPointsRescore(plan);
+      if (!apply) { console.log('[rescore-points] dry-run — no write (add --apply)'); return; }
+      return applyPointsRescore(plan).then(function (rep) {
+        console.log('[rescore-points] wrote ' + rep.disk + ' archive/intake/feed set(s), ' + rep.tab + ' tab row(s)'
+          + (rep.noFeedRow.length ? '; approved but not on the tab: ' + rep.noFeedRow.join(', ') : ''));
+        console.log('[rescore-points] next: node scripts/undockedStandings.js');
+      });
+    }).catch(function (err) { console.error(err.message || err); process.exit(1); });
+    return;
   }
   if (rescore) {
     const plan = planRescore();

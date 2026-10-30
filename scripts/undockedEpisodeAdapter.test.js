@@ -154,5 +154,51 @@ check('planRescore: every approved change maps to a feed EpisodeId and a cycle (
 check('planRescore never turns a real payout into a blank (a 0 may revert to unknown when no gameplay was recorded)',
   plan.changes.every(c => !(c.before != null && Number(c.before) !== 0 && c.after == null)));
 
+// research.31 (builder ruling C, 2026-10-30) — points from the pilot's
+// account, attributed to the latest night that started at or before the
+// unlock. Synthetic accounts and nights only; the shapes are the live
+// get_achievements / staged-archive shapes read 2026-10-30.
+const acct = { total: 20, earned: [
+  { id: 'first_steps', name: 'First Steps', points: 5, at: '2026-10-13T01:34:00Z' },
+  { id: 'maiden_jump', name: 'Maiden Jump', points: 5, at: '2026-10-16T01:41:00Z' },
+  // jump logged 01:40:04, window closed 01:40:14, arrival unlock 01:43:10
+  { id: 'wanderer', name: 'Wanderer', points: 10, at: '2026-10-19T01:43:10Z' },
+] };
+const play = [{ category: 'navigation', event_type: 'navigation.jumped', data: {} }];
+const p1 = A.derivePoints(acct, '2026-10-19T01:30:04Z', null, play);
+check('an arrival unlock after the window still belongs to the night (Wanderer 10)', p1.value === 10 && p1.earned[0].name === 'Wanderer');
+const p2 = A.derivePoints(acct, '2026-10-16T01:30:04Z', '2026-10-19T01:30:04Z', play);
+check('`until` stops at the next night: 10-16 keeps Maiden Jump only', p2.value === 5 && p2.earned.length === 1);
+check('no unlock + gameplay -> measured zero', A.derivePoints(acct, '2026-10-20T00:00:00Z', null, play).value === 0);
+check('no unlock + no gameplay -> unknown, never zero', A.derivePoints(acct, '2026-10-20T00:00:00Z', null,
+  [{ category: 'session', event_type: 'session.login' }]).value === null);
+check('account not read -> unknown', A.derivePoints(null, '2026-10-19T01:30:04Z', null, play).value === null);
+
+const night = (start, value) => ({ file: 'TEST-ONLY-' + start + '.json', stagedPath: '/dev/null', staged: {
+  session: 'undocked-pop99991', popid: 'POP-99991', holder: 'TEST-ONLY Pilot',
+  window: { startedAt: start, endedAt: start },
+  facts: { entries: { value: { navigation: play } }, points_delta: value === undefined ? undefined : { value: value } },
+} });
+const pp = A.planPointsRescore({ 'undocked-pop99991': acct },
+  [night('2026-10-19T01:30:04Z', 10), night('2026-10-13T01:30:05Z'), night('2026-10-16T01:30:04Z', 0)]);
+const byStart = Object.fromEntries(pp.nights.map(n => [n.file, n]));
+check('rescore: every unlock placed, sums to the game total',
+  pp.unplaced.length === 0 && pp.nights.reduce((s, n) => s + (n.fact.value || 0), 0) === acct.total);
+check('rescore: an unchanged night is not rewritten', byStart['TEST-ONLY-2026-10-19T01:30:04Z.json'].changed === false);
+check('rescore: a night never scored is written', byStart['TEST-ONLY-2026-10-13T01:30:05Z.json'].changed === true);
+check('rescore: a wrong old value is corrected', byStart['TEST-ONLY-2026-10-16T01:30:04Z.json'].changed === true
+  && byStart['TEST-ONLY-2026-10-16T01:30:04Z.json'].fact.value === 5);
+const early = A.planPointsRescore({ 'undocked-pop99991': { total: 5, earned: [{ id: 'x', name: 'Early', points: 5, at: '2026-01-01T00:00:00Z' }] } },
+  [night('2026-10-13T01:30:05Z')]);
+check('rescore: an unlock before the first night is reported, never placed', early.unplaced.length === 1 && early.nights[0].fact.value === 0);
+
+const sys = A.deriveSystems([
+  { created_at: '2026-10-16T01:35:00Z', category: 'trading', data: { base_id: 'x' } },
+  { created_at: '2026-10-16T01:39:33Z', category: 'navigation', data: { from_system: 'sol', to_system: 'sirius', to_system_name: 'Sirius' } },
+]);
+check('a jump records both ends, departure first (Taveras 10-16: sol, sirius)', sys.value.join(',') === 'sol,sirius');
+check('an unlock is never a mishap', A.deriveMishaps([{ category: 'achievement', event_type: 'achievement.unlocked',
+  summary: 'Unlocked achievement: Yo Ho Ho and a Hold Full of Hulls' }]).value.length === 0);
+
 if (failed) { console.error(failed + ' failed'); process.exit(1); }
 console.log('undockedEpisodeAdapter: ok');

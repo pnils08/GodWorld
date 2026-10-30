@@ -239,7 +239,30 @@ const FEED_TAB = 'Undocked_Feed';
 const TAB_HEADERS = Object.freeze([
   'TargetCycle', 'Cycle', 'EventType', 'POPID', 'Holder', 'EpisodeId',
   'CreditsDelta', 'Systems', 'CombatEvents', 'MishapCount', 'Magnitude', 'Flags',
+  'PointsDelta',
 ]);
+
+// research.31: appendRows is positional, so the tab's header row must equal
+// TAB_HEADERS before a row goes in. A tab still on the 12-column header (pre
+// 2026-10-30) gains the missing trailing cells — header cells only, read back.
+// Any other mismatch refuses: a value landing under the wrong column is the
+// silent failure this guard exists for.
+async function ensureFeedHeader(sheets, hdr) {
+  const have = (hdr || []).map(function (h) { return String(h == null ? '' : h).trim(); });
+  while (have.length && !have[have.length - 1]) have.pop();
+  const prefixOk = have.every(function (h, i) { return h === TAB_HEADERS[i]; });
+  if (!prefixOk || have.length > TAB_HEADERS.length) {
+    throw new Error(FEED_TAB + ' header ' + JSON.stringify(have) + ' does not match ' + JSON.stringify(TAB_HEADERS) + ' — refusing a positional push');
+  }
+  if (have.length === TAB_HEADERS.length) return false;
+  const missing = TAB_HEADERS.slice(have.length);
+  await sheets.updateRangeByPosition(FEED_TAB, 1, have.length, [missing]);
+  const back = (await sheets.getSheetData(FEED_TAB))[0].map(function (h) { return String(h == null ? '' : h).trim(); });
+  if (TAB_HEADERS.some(function (h, i) { return back[i] !== h; })) {
+    throw new Error(FEED_TAB + ' header write did not read back: ' + JSON.stringify(back));
+  }
+  return true;
+}
 
 async function pushFeed(cycle, targetCycle, root) {
   const sheets = require('../lib/sheets');
@@ -254,6 +277,7 @@ async function pushFeed(cycle, targetCycle, root) {
   const hdr = existing[0];
   const iEp = hdr.indexOf('EpisodeId');
   if (iEp < 0) throw new Error(FEED_TAB + ' has no EpisodeId column — refusing to push');
+  await ensureFeedHeader(sheets, hdr);
   const already = {};
   for (let r = 1; r < existing.length; r++) {
     const v = String(existing[r][iEp] == null ? '' : existing[r][iEp]).trim();
@@ -313,7 +337,7 @@ function autoDecide(cycle, root) {
 
 module.exports = {
   INTAKE_V, intakePath, feedPath, enqueue, decide, appendFeed, enqueueStagedDir,
-  archiveStaged, listSweepEligible, pushFeed, autoDecide, FEED_TAB, TAB_HEADERS,
+  archiveStaged, listSweepEligible, pushFeed, autoDecide, FEED_TAB, TAB_HEADERS, ensureFeedHeader,
 };
 
 if (require.main === module) {

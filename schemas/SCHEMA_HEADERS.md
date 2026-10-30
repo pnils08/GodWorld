@@ -1633,8 +1633,8 @@ pointers:
 
 ## Undocked_Feed
 
-- **Rows:** 42
-- **Columns:** 12
+- **Rows:** 69
+- **Columns:** 13
 
 | Col | Header |
 |-----|--------|
@@ -1650,6 +1650,7 @@ pointers:
 | J | MishapCount |
 | K | Magnitude |
 | L | Flags |
+| M | PointsDelta |
 
 ---
 

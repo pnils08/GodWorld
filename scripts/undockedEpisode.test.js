@@ -10,50 +10,50 @@ function check(name, cond, detail) {
 
 const call = cmd => JSON.stringify({ event: 'tool_call', tick: 0, ts: 'x', tool: 'game', args: { command: cmd } });
 const err = cmd => JSON.stringify({ event: 'tool_error', tick: 0, ts: 'x', tool: 'game', args: { command: cmd } });
+const turn = () => JSON.stringify({ event: 'turn_end', tick: 0, ts: 'x' });
+const idle = (t, n) => { let r = false; for (let i = 0; i < n; i++) r = t.push(turn()); return r; };
 
-// Ship starts docked (mission brief preconditions): a log entry written
-// without ever undocking is still a completion signal.
+// research.31 (2026-10-30): the captain's log is not a stop token. Daphne
+// Stafford's 10-29 night ended at ~5 min on log + dock under the old rule.
 let t = E.createCompletionTracker();
-check('log while docked completes', t.push(call('spacemolt_social/captains_log_add')) === true);
+t.push(call('spacemolt/dock'));
+check('log while docked does not end the night', t.push(call('spacemolt_social/captains_log_add')) === false && t.complete === false);
+check('the pilot keeps flying after the log', t.push(call('spacemolt/undock')) === false);
 
-// Canonical mission order: undock, fly, dock, then log.
+// The night ends when the pilot stops calling the console for IDLE_TURNS turns.
 t = E.createCompletionTracker();
 t.push(call('spacemolt/undock'));
-check('dock after undock does not complete', t.push(call('spacemolt/dock')) === false && t.complete === false);
-check('log after dock completes', t.push(call('spacemolt_social/captains_log_add')) === true);
+check('IDLE_TURNS - 1 idle turns do not end it', idle(t, E.IDLE_TURNS - 1) === false);
+check('the IDLE_TURNS-th idle turn ends it', t.push(turn()) === true && t.complete === true);
+check('calls are counted', t.toolCalls === 1);
 
-// Reverse order (2026-09-08 episode): log while flying, then dock.
+// A console call resets the idle count (Taveras 10-16 never passed 2 idle turns).
+t = E.createCompletionTracker();
+idle(t, E.IDLE_TURNS - 1);
+t.push(call('spacemolt/get_status'));
+check('a call resets the idle count', idle(t, E.IDLE_TURNS - 1) === false);
+
+// tool_error events are failed attempts: they do not reset the idle count.
+t = E.createCompletionTracker();
+idle(t, E.IDLE_TURNS - 1);
+t.push(err('spacemolt/mine'));
+check('a failed call does not reset the idle count', t.push(turn()) === true);
+
+// Simone Adesanya 10-10: 2 calls, then narration — ends at the idle limit.
 t = E.createCompletionTracker();
 t.push(call('spacemolt/undock'));
-check('log while flying does not complete', t.push(call('spacemolt_social/captains_log_add')) === false);
-check('dock after log completes', t.push(call('spacemolt/dock')) === true);
-
-// tool_error events never move state.
-t = E.createCompletionTracker();
-t.push(err('spacemolt_social/captains_log_add'));
-check('failed log attempt ignored', t.push(call('spacemolt/dock')) === false);
-
-// The 2026-09-08 pattern: wrong-namespace error, then right-namespace success.
-t = E.createCompletionTracker();
-t.push(err('spacemolt/captains_log_add'));
-check('wrong-namespace error ignored', t.complete === false);
-check('right-namespace success completes', t.push(call('spacemolt_social/captains_log_add')) === true);
-
-// 'undock' ends in 'dock' but must not read as docking: a log written after
-// undocking must NOT complete. (If undock were misread as dock, it would.)
-t = E.createCompletionTracker();
-t.push(call('spacemolt/undock'));
-check('undock is not dock', t.push(call('spacemolt_social/captains_log_add')) === false);
+t.push(call('spacemolt/get_poi'));
+check('a narrating pilot ends at the idle limit', idle(t, E.IDLE_TURNS) === true && t.toolCalls === 2);
 
 // Non-command lines are inert (status_log has no args.command; junk fails parse).
 t = E.createCompletionTracker();
 check('non-JSON inert', t.push('not json at all') === false);
-check('status_log inert', t.push(JSON.stringify({ event: 'tool_call', tool: 'status_log', args: { category: 'info', message: 'docking now' } })) === false);
+check('status_log inert', t.push(JSON.stringify({ event: 'tool_call', tool: 'status_log', args: { category: 'info', message: 'docking now' } })) === false && t.toolCalls === 0);
 
-// Completion is sticky: a later undock does not un-complete.
+// The end is sticky: a later call does not reopen the night.
 t = E.createCompletionTracker();
-t.push(call('spacemolt_social/captains_log_add'));
-check('complete stays complete', t.push(call('spacemolt/undock')) === true);
+idle(t, E.IDLE_TURNS);
+check('ended stays ended', t.push(call('spacemolt/undock')) === true);
 
 if (failed) { console.error('undockedEpisode: ' + failed + ' FAIL'); process.exit(1); }
 console.log('undockedEpisode: ok');

@@ -188,7 +188,7 @@ function threadFor(pop, { name, skipTexts, includeStay, dropOwn, beats, logByPop
   }
   const kept = fresh.filter(signal).concat(fresh.filter(r => !signal(r))).slice(0, THREAD_MAX.log)
     .sort((a, b) => Number(a.Cycle) - Number(b.Cycle));
-  for (const r of kept) out.push({ text: who + 'on the log, C' + r.Cycle + ': ' + String(r.EventText).trim(), src: 'output/beats/LifeHistory_Log.jsonl @C' + r.Cycle });
+  for (const r of kept) out.push({ text: who + 'in their life, C' + r.Cycle + ': ' + String(r.EventText).trim(), src: 'output/beats/LifeHistory_Log.jsonl @C' + r.Cycle });
   const before = Object.entries(covered).filter(([id, v]) => id !== ownId && v && String(v.popid || '').toUpperCase() === P);
   if (before.length) out.push({ text: who + 'Lives already wrote this person: ' + before.map(([, v]) => kindWord(v.kind) + ' (C' + (v.eventCycle != null ? v.eventCycle : v.cycle) + ')').join(', '), src: 'output/cron-compare/lives_covered.json' });
   const seen = (tribune.get(P) || []).slice().sort((a, b) => Number(b.cycle || 0) - Number(a.cycle || 0)).slice(0, THREAD_MAX.tribune);
@@ -390,7 +390,7 @@ function build(cycle, { root, beats, profiles }) {
   for (const m of moments) {
     const all = [m.pop].concat(m.family);
     for (const pop of all) addPerson(pop, m.tag.toLowerCase() + ' this Cycle: ' + m.text, m.hood);
-    passage({ text: all.map(pop => nameOf(pop)).join(' and ') + ' — ' + m.text + (m.hood ? ', ' + m.hood : '') + ' (C' + cycle + ', on the log as ' + m.tag + ' — the log\'s words, not spoken)', src: logSrc, id: m.id, kind: 'moment', popid: m.pop },
+    passage({ text: all.map(pop => nameOf(pop)).join(' and ') + ' — ' + m.text + (m.hood ? ', ' + m.hood : '') + ' (C' + cycle + ', ' + m.tag + ' — what happened in their life, not words they said)', src: logSrc, id: m.id, kind: 'moment', popid: m.pop },
       { name: nameOf(m.pop), skipTexts: [m.text], includeStay: false, dropOwn: false });
     for (const pop of m.family) {
       for (const t of threadFor(pop, { beats, logByPop, covered, tribune, ownId: m.id, name: nameOf(pop), skipTexts: [m.text], includeStay: false, dropOwn: false })) facts.push({ ...t, kind: 'thread', popid: pop });

@@ -378,7 +378,7 @@ for (const why of ['assignment', 'stink-handle', 'feed-names', 'on Hospital_Ledg
   const who = candidates[0];
   const lead = 'Someone Else — filler fact ';
   const known = []; for (let i = 0; i < 12; i++) known.push({ t: 'FACT', text: lead + i, src: 's' });
-  known.push({ t: 'FACT', text: who.name + ' — on the log, C111: a line about this person', src: 's' });
+  known.push({ t: 'FACT', text: who.name + ' — in their life, C111: a line about this person', src: 's' });
   const pk = p.buildReportPacket({ cycle: 999, desk: 'civic', reporter: { name: 'Test Reporter' },
     angleInput: { ...w1, known }, anglePlan: plan, story, candidate: who });
   assert.ok(JSON.stringify(pk.evidence || pk).includes('a line about this person'), 'the interviewee\'s own fact reaches the report packet past the first 8');

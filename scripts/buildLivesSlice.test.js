@@ -148,10 +148,10 @@ try {
   assert.ok(/^Test Texture — traded an extra ticket for a promise, Montclair — one of 2 people the Cycle's community turn reached \(C111\)$/.test(seeds[1].text), 'another citizen\'s relocation line is not this person\'s why: ' + seeds[1].text);
   assert.ok(!day1.facts.some(f => /Test Other/.test(f.text) && f.kind === 'seed'), 'a bookkeeping CitizenEvents line never rides');
   const mm = day1.facts.filter(f => f.kind === 'moment');
-  assert.ok(/^Test MoverA and Test MoverB — moved from Uptown to West Oakland — moving up, West Oakland \(C111, on the log as Relocation-Drive-Up-M — the log's words, not spoken\)$/.test(mm[0].text), 'a family event: one passage for the household, life-shape rank first: ' + mm[0].text);
+  assert.ok(/^Test MoverA and Test MoverB — moved from Uptown to West Oakland — moving up, West Oakland \(C111, Relocation-Drive-Up-M — what happened in their life, not words they said\)$/.test(mm[0].text), 'a family event: one passage for the household, life-shape rank first: ' + mm[0].text);
   assert.ok(day1.facts.some(f => f.kind === 'thread' && f.popid === 'POP-90026') || !day1.facts.some(f => f.kind === 'thread' && f.popid === 'POP-90025'), 'each mover carries their own thread when they have one');
   assert.ok(/^Test Stranger — moved from Uptown to West Oakland — moving up/.test(mm[1].text), 'a stranger with the same line is their own passage: ' + mm[1].text);
-  assert.ok(/^Test Strained — the third late night this week, Eastlake \(C111, on the log as Strain — the log's words, not spoken\)$/.test(mm[2].text), 'pressure ranks above a tie, whatever the file order: ' + mm[2].text);
+  assert.ok(/^Test Strained — the third late night this week, Eastlake \(C111, Strain — what happened in their life, not words they said\)$/.test(mm[2].text), 'pressure ranks above a tie, whatever the file order: ' + mm[2].text);
   assert.ok(/Test Friend — reconnected/.test(mm[3].text), 'then the ties in file order; the QoL row waits for day 2');
   assert.ok(!day1.facts.some(f => /Test Student|Test Marker|industry=/.test(f.text)), 'Education colour and the CareerState marker never ride');
     assert.ok(!day1.facts.some(f => f.kind === 'seed' && f.popid === 'POP-90003'), 'the climber already has his passage — not a second one from the seed');
@@ -175,8 +175,8 @@ try {
 
   const patientThread = day1.facts.filter(f => f.kind === 'thread' && f.popid === 'POP-90004').map(f => f.text);
   assert.ok(patientThread[0].startsWith('Test Patient — on the hospital record: admitted C106 for severe seasonal flu, discharged C111 after 5 cycles in care, recovered'), patientThread[0]);
-  assert.ok(patientThread.some(t => /on the log, C111: borrowed against next month/.test(t)) && !patientThread.some(t => /the statement was the first thing read/.test(t)) && /Since then, on the record: the statement was the first thing read/.test(day1.facts.find(f => f.kind === 'hospital').text), 'same-cycle lines ride the thread; the later line stays in "since then" and is not said twice');
-  assert.ok(patientThread.some(t => /on the log, C111: sorted a box/.test(t)) && !patientThread.some(t => /made a full recovery/.test(t)), 'texture rides clean-tagged; the event\'s own line never repeats');
+  assert.ok(patientThread.some(t => /in their life, C111: borrowed against next month/.test(t)) && !patientThread.some(t => /the statement was the first thing read/.test(t)) && /Since then, on the record: the statement was the first thing read/.test(day1.facts.find(f => f.kind === 'hospital').text), 'same-cycle lines ride the thread; the later line stays in "since then" and is not said twice');
+  assert.ok(patientThread.some(t => /in their life, C111: sorted a box/.test(t)) && !patientThread.some(t => /made a full recovery/.test(t)), 'texture rides clean-tagged; the event\'s own line never repeats');
   assert.ok(patientThread.some(t => /passed piece naming Test Patient/.test(t)) && !patientThread.some(t => /flagged piece/.test(t)), 'only gate-passed Tribune pieces');
   const hIdx = day1.facts.findIndex(f => f.kind === 'hospital');
   assert.ok(patientThread.every((t, i) => day1.facts[hIdx + 1 + i].text === t), 'the whole thread sits directly under its person\'s event');

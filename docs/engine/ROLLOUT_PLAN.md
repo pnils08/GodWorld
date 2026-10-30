@@ -72,7 +72,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 |---|------|-------|----------|---------|
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | research.31 | UNDOCKED scoring (builder 10-30 C): board = game achievement points, credits tie-break; 20-min free-play brief. Board live; engine leader + night bet on bench | in-progress | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §Changelog 2026-10-30 |
-| pipeline.95 | UNDOCKED pilots get a sure wake each Cycle carrying their show record; the flight saves to their page (builder 10-30). Plan §6; calls open: reserve, backfill | in-progress | research-build | [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]] §6 |
+| pipeline.95 | UNDOCKED pilots get a sure wake each Cycle carrying their show record; the flight saves to their page (builder 10-30: own 3, fill in). Built, switch off; codex | in-progress | research-build | [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]] §6 |
 
 ## 4. Queue — ruled, not started (ready)
 

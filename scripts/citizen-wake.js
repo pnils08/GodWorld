@@ -37,7 +37,9 @@ const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTe
   loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory,
   loadCardAnchor, loadVoiceTexture, renderStanding, renderOwnRecord,
   loadLivedEvents, renderLivedLine, livedFor, recordLivedSpend, selectWakeCitizen, wakeSeedKey,
-  lifeTailOf, OWED_RESERVE, chaosOutcomeIndex, owedFrom, owedCandidates, owedFor, owedLivedPrefer, owedShownSet, owedWakesUsed, owedStateFrom, owedJournalLine, owedPageKey, wakeAdmission, owedPageStep, loadOwedRecords, acquireFileLock } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice; pipeline.93 owed
+  lifeTailOf, OWED_RESERVE, chaosOutcomeIndex, owedFrom, owedCandidates, owedFor, owedLivedPrefer, owedShownSet, owedWakesUsed, owedStateFrom, owedJournalLine, owedPageKey, wakeAdmission, owedPageStep, loadOwedRecords, acquireFileLock,
+  SHOW_RESERVE, owedFromShow, showCandidates, showWakesUsed } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice; pipeline.93 owed; pipeline.95 show
+const showRecord = require('./undockedShowRecord'); // pipeline.95 — a pilot's UNDOCKED nights, read from the show's files
 const { selectProvocation } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.101 — intake BondTarget (col I) + T4 ripple share one match
 
@@ -49,6 +51,10 @@ const FORCE_POP = arg('pop', null);
 // pipeline.93 — reserved owed wakes a Cycle; --owed-reserve=N overrides the library value (the dry replay).
 const OWED_RES = arg('owed-reserve', null) != null ? Math.max(0, Number(arg('owed-reserve')) || 0) : OWED_RESERVE;
 const OWED_JOURNAL = path.join(__dirname, '..', 'logs', 'citizen-wake-owed.jsonl'); // owed receipts, append-only, two-phase
+// pipeline.95 — an UNDOCKED pilot's wake carries their show record, and a pilot who flew is owed one wake a Cycle from its
+// own reserve (builder 2026-10-30). One switch for both; --show-reserve=N overrides the reserve (the dry replay).
+const SHOW_WAKE = showRecord.ON;
+const SHOW_RES = !SHOW_WAKE ? 0 : arg('show-reserve', null) != null ? Math.max(0, Number(arg('show-reserve')) || 0) : SHOW_RESERVE;
 // pipeline.94 — the page doc is keyed by the wake's weekday too: the store appends a second write under a taken key into
 // the first doc, so two same-daypart wakes in one Cycle merged into one. On 2026-10-30 after codex review + re-review.
 const PAGE_DAY_KEY = true;
@@ -157,7 +163,7 @@ function loadEditionSlice(popId, name, nh, cycle) {
   } catch (e) { return ''; }
 }
 
-function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine, livedLine) {
+function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine, livedLine, showBlock) {
   const disp = dials.disposition(c.cur);
   const who = neighbors.length
     ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.`
@@ -196,7 +202,9 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   // engine.286 R2-6 (builder 2026-10-12) — the citizen knows its own record, numbers included.
   const recordLine = renderOwnRecord(c);
   const record = recordLine ? `\n\n${recordLine}` : '';
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}${health}${anchor}${talk}${record}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
+  // pipeline.95 — a pilot's nights on UNDOCKED, fenced upstream (a captain's log is model-written text); continuity group.
+  const show = showBlock ? `\n\nYour time on UNDOCKED:\n${showBlock}` : '';
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}${health}${anchor}${talk}${record}${show}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
   // T5 — varied-provocation question bank. The fixed "small things on your mind"
   // prompt becomes a deterministically-seeded pick latching a real signal this
   // citizen perceives, so two citizens woken the same cycle are prompted
@@ -253,16 +261,17 @@ async function generateVoice(system, user) {
   // pipeline.93 — with owed on, one live wake runs at a time: the lock is held to exit, and an overlapping live
   // wake does not run (it could take the owed citizen's page key first — codex round 4).
   const owedRes = OWED_RES;
+  const showRes = SHOW_RES; // pipeline.95 — the pilots' reserve shares the journal and the lock
+  const journalOn = owedRes > 0 || showRes > 0;
   let release = null;
-  if (owedRes > 0 && !DRY) release = acquireFileLock(OWED_JOURNAL + '.lock', logLine);
-  const admit = wakeAdmission({ owedRes, dry: DRY, lockTaken: !!release });
+  if (journalOn && !DRY) release = acquireFileLock(OWED_JOURNAL + '.lock', logLine);
+  const admit = wakeAdmission({ owedRes: owedRes + showRes, dry: DRY, lockTaken: !!release });
   if (admit === 'skip') { logLine('owed lock held by another live wake — this wake does not run (owed on: one live wake at a time)'); process.exit(0); }
   if (release) process.on('exit', release);
   const seedKey = wakeSeedKey(cycle, WAKE, new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' }));
   const pageDay = PAGE_DAY_KEY ? page.pageDayOf(new Date()) : null; // one weekday for every page doc this wake writes
-  let owed = [], owedView = state, owedAbsorb = true, owedPageKeys = new Set();
-  if (owedRes > 0 && cycle) {
-    let held = '';
+  let owed = [], owedView = state, owedAbsorb = true, owedPageKeys = new Set(), held = '';
+  if (journalOn && cycle) {
     try {
       let jt = '';
       try { jt = fs.readFileSync(OWED_JOURNAL, 'utf8'); } catch (e) { if (e.code !== 'ENOENT') throw e; }
@@ -272,7 +281,7 @@ async function generateVoice(system, user) {
       if (os.unconfirmed.length) logLine(`owed: ${os.unconfirmed.length} receipt(s) pending with no shown/failed line, counted as spent: ${os.unconfirmed.join(',')}`);
     } catch (e) { held = e.message; }
     if (held) logLine('OWED HELD — the owed journal could not be read, no owed slot this wake: ' + held);
-    else {
+    else if (owedRes > 0) {
       const rec = await loadOwedRecords();
       for (const er of rec.errors) logLine('OWED READ FAILED — that tab owes nothing this wake, the next wake retries: ' + er);
       const of = owedFrom(rec, cycle, chaosOutcomeIndex(require('/root/GodWorld/utilities/chaosCarsConfig').VEHICLE_CONFIGS));
@@ -291,7 +300,19 @@ async function generateVoice(system, user) {
     logLine(`owed: ${owed.length} in window, severe in [${oc.severeCycles.join(',')}], ${oc.ready.length} waiting, ${owedUsed}/${owedRes} reserved wakes used this cycle`);
     if (DRY) for (const e of oc.ready) logLine(`  [dry-run] owed ${e.pop} ${e.kind} tier ${e.tier} c${e.cycle} mag=${e.mag.toFixed(2)} ${e.id}`);
   }
-  const picked = selectWakeCitizen(pool, { forcePop: FORCE_POP, seedKey, owedReady: oc.ready, owedReserve: owedRes, owedUsed });
+  // pipeline.95 — every applied UNDOCKED night on disk. Unreadable = no show block and no show slot this wake, said loudly.
+  let nights = [];
+  if (SHOW_WAKE) { try { nights = showRecord.loadNights(); } catch (e) { logLine('SHOW RECORD UNREADABLE — no show block, no show slot this wake: ' + e.message); } }
+  const showOwed = showRes > 0 && cycle && !held ? owedFromShow(nights, cycle) : [];
+  const showUsed = showWakesUsed(owedView, cycle);
+  const sc = showCandidates(pool, showOwed, owedView);
+  for (const e of sc.notInPool) logLine(`show ${e.id}: not in the wake pool (no dials, no name/hood, or under ${MIN_WAKE_AGE}) — not reached`);
+  if (showRes > 0) {
+    logLine(`show: ${showOwed.length} pilot-Cycle(s) in window, ${sc.ready.length} waiting, ${showUsed}/${showRes} reserved wakes used this cycle`);
+    if (DRY) for (const e of sc.ready) logLine(`  [dry-run] show ${e.pop} c${e.cycle} ${e.id}`);
+  }
+  const picked = selectWakeCitizen(pool, { forcePop: FORCE_POP, seedKey, owedReady: oc.ready, owedReserve: owedRes, owedUsed,
+    showReady: sc.ready, showReserve: showRes, showUsed });
   if (FORCE_POP && picked.slot !== 'forced') logLine(`--pop ${FORCE_POP} not in the pool; falling back to the draw`);
   const c = picked.c;
   // pipeline.93 — the woken citizen's own owed events stay in the life block they read; nothing else is added.
@@ -303,6 +324,11 @@ async function generateVoice(system, user) {
   const shownOwed = owedShownSet(mineOwed, c.life, lived);
   if (shownOwed.length < mineOwed.length) logLine(`owed not shown this wake, stays owed: ${mineOwed.filter((e) => !shownOwed.includes(e)).map((e) => e.id).join(',')}`);
   const livedLine = lived ? renderLivedLine(lived.event, cycle, lived.rel) : '';
+  // pipeline.95 — the pilot's record rides any wake of theirs; an unspent show mark is spent when it is in front of them.
+  const myNights = showRecord.nightsFor(nights, c.popId);
+  const showText = cycle ? showRecord.showBlockFor(nights, c.popId, cycle, { log: logLine }) : '';
+  const showFenced = showText ? memoryFence.wrap(showText, 'undocked-show:' + c.popId) : '';
+  const shownShow = showText ? owedFor(c.popId, showOwed, owedView) : [];
   const neighbors = await coResidents(c.nh, c.popId);
   const sportsLine = await loadSportsSlice();                 // T1b — one feed read, shared across the wake
   const lifeArc = await loadLifeArc(c.popId);                 // T1a — canonical milestone arc from LifeHistory_Log
@@ -346,7 +372,7 @@ async function generateVoice(system, user) {
   const tensionBlock = openTensions.length
     ? memoryFence.wrap(openTensions.map((t) => t.q).join('\n'), 'citizen-tension:' + c.popId)
     : '';
-  const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine, livedLine);
+  const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine, livedLine, showFenced);
 
   // Record what this wake put in front of the citizen, BEFORE they answer. Names come
   // from two shapes: POPIDs we know structurally (neighbours, bonds), and names that
@@ -375,7 +401,7 @@ async function generateVoice(system, user) {
     }) + '\n');
   } catch (e) { logLine('offered-names log failed (non-fatal): ' + e.message); }
 
-  logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE} slot=${picked.slot} seed=${seedKey}${lived ? ' event=' + lived.event.id : ''}${shownOwed.length ? ' owed=' + shownOwed.map((e) => e.id).join(',') : ''}`);
+  logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE} slot=${picked.slot} seed=${seedKey}${lived ? ' event=' + lived.event.id : ''}${shownOwed.length ? ' owed=' + shownOwed.map((e) => e.id).join(',') : ''}${shownShow.length ? ' show=' + shownShow.map((e) => e.id).join(',') : ''}${showText ? ' show-block=' + myNights.length + ' night(s)' : ''}`);
   if (DRY) console.log('\n--- perception (system prompt) ---\n' + system + '\n----------------------------------');
   if (DRY) console.log('\n--- provocation (user prompt, T5) ---\n' + user + '\n----------------------------------');
   const reflection = await generateVoice(system, user);
@@ -401,12 +427,13 @@ async function generateVoice(system, user) {
   // pipeline.93 — the owed receipt is pending BEFORE the page lands: if it cannot be saved, no page is written.
   // Every owed-on live wake is journaled, so a later run of the same citizen + daypart knows its page key is taken:
   // that run's write would only duplicate the earlier page, so it receipts nothing.
-  const owedOn = owedRes > 0 && !!cycle;
+  const owedOn = journalOn && !!cycle;
   const owedKey = seedKey + '|' + c.popId + '|' + new Date().toISOString();
   const owedPage = owedPageKey(c.popId, cycle, WAKE, pageDay);
   const pageTaken = owedPageKeys.has(owedPage);
-  if (owedOn && pageTaken && shownOwed.length) logLine(`owed: ${c.popId} already has a ${WAKE} page this cycle — ${shownOwed.map((e) => e.id).join(',')} not receipted, still owed`);
-  const receipted = pageTaken ? [] : shownOwed;
+  const shownMarks = shownOwed.concat(shownShow); // pipeline.95 — owed and show marks share the receipt
+  if (owedOn && pageTaken && shownMarks.length) logLine(`owed: ${c.popId} already has a ${WAKE} page this cycle — ${shownMarks.map((e) => e.id).join(',')} not receipted, still owed`);
+  const receipted = pageTaken ? [] : shownMarks;
   const owedLine = (status) => owedJournalLine({ key: owedKey, page: owedPage, cycle, pop: c.popId, slot: pageTaken ? 'repeat' : picked.slot, ids: receipted, status });
   const step = await owedPageStep({ on: owedOn, journal: appendOwedJournal, line: owedLine,
     page: () => page.appendReflection_(c.popId, reflection, {

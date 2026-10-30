@@ -134,30 +134,39 @@ Original questions kept for the record:
 
 **The trap:** a flight doc on the page does not reach the wake. The readback is 3 scored picks from 15 recent docs, so a flight competes with every other memory and usually loses. The page satisfies the container ask; a disk-read block is what makes the wake and the interview know. Both are built.
 
-### 6.2 Build
+### 6.2 Build (as built 2026-10-30, all three behind one switch: `ON` in `scripts/undockedShowRecord.js`)
 
-1. **Flight → page** (`scripts/cron-undocked-run.js`, a new stage after standings). One `appendReflection_` per applied night. customId `cp-POP-x-c<intake Cycle>-UNDOCKED-<weekday>`; `day` = `pageDayOf(new Date(window.startedAt))`, never the filename's date. `extra: { type: 'show' }`.
-   - Content is plain in-world words: points by achievement name, credits ("dead even", or "the books can't settle" for null), systems as names, missions, cargo, combat, mishaps, and how the night ended. The captain's log is quoted once, cleaned and capped. No date, no ids.
-   - A receipt file (`output/spacemolt-show/paged.json`, episode → customId) makes the stage idempotent: each run writes every applied night that has no receipt. A page failure logs loudly and leaves no receipt, so the next night retries it. The show is never unwound.
-   - Type `show` stays out of the own-words index (`scanCitizenPages` admits reflection and tension only) and out of family mentions (`isOwnWords_`). It's a record of the night, not the citizen's words. Nia already reads the archive.
-2. **The show block** (`lib/wakePerception.js`, one pure renderer plus a disk loader). Input: that POPID's intake and archive files and the `standings.json` row. Output: a plain-words block.
-   - Every flight of this Cycle and the last, one line per night (weekday, what they did).
-   - Earlier Cycles as one line: nights flown, which Cycles.
-   - The board: rank, points, credits, Cycles led.
-   - Lived wording ("you flew"), never "the record shows".
-   - Consumers: `citizen-wake.js` (the 10-30 ask) and `citizenVoice.js` (the interview, ask 2 of 10-29). In the interview's no-exposure branch it rides only when the asking desk is `undocked`.
-   - `loadOwnPageReadback` drops type `show` docs from its candidates: the block carries them, and they aren't "private reflections".
-3. **Sure wake** (pipeline.93 machinery). `owedFromShow(intakes, cycle)` is a second pure producer over the intake files, not a row in the sheet-tab `OWED_TABS`.
-   - Kind `undocked`; id `undocked:<POPID>:c<Cycle>`, so one wake per pilot per Cycle (the row says "each Cycle"). It runs in the same window as owed: this Cycle and the next.
-   - Showable = the block renders. Spent when shown, through the same two-phase journal, slot `show`.
-   - It owes whatever the gate applied: a night where the runner never reached the game owes too, and the block says so plainly.
-   - Nothing asks for a response. The record is in front of them, and what they say is theirs (no puppeting).
-4. **Switches off** (`SHOW_RESERVE = 0`, page stage off) → codex review (multi-file plus lib) → flip with nothing in flight. Avoid the 20:30 orchestrator and the 21:30, 07:30, 12:30 and 17:00 wakes.
+1. **The night in words** (`scripts/undockedShowRecord.js`, new). `loadNights` = intake rows with Applied=yes joined to `staged/archive/<EpisodeId>.json`, oldest first. The weekday is read from `window.startedAt` in Central (the archive name is UTC). `pageText` / `nightLine` / `showBlock` are pure.
+   - Only the archive's FACT values are used: systems by name (deduped across case), contracts taken and finished with their pay, cargo mined and sold, fights and mishaps, points by achievement name, and credits up, down, even or "never settled".
+   - How the night ended: "flew until the show's time ran out", "stopped flying before the time ran out" (an idle stop), or "never got the ship moving". A night with no archive and no feed systems claims nothing: "flew a night whose details never came back".
+   - The captain's log: the last windowed entry that isn't a working note (54 of 104 are runner handoffs), cleaned and capped at 300 characters.
+   - No date, no POPID or episode id.
+2. **Flight → page** (`cron-undocked-run.js` stage 8, after standings). `pageNights` writes every applied night with no receipt: `appendReflection_(pop, pageText, { cycle: intake Cycle, daypart: 'UNDOCKED', day, ref: pageRefOf(EpisodeId), extra: { type: 'show', episode } })`.
+   - The receipt (`output/spacemolt-show/paged.json`, episode → customId) is written after each doc that lands. A failed doc gets no receipt and retries the next night. A stage failure logs loudly and never unwinds the show.
+   - The first run writes all 69 past nights (ruling 2).
+   - The ref makes the key unique even when one pilot's two nights in a Cycle share a weekday. Type `show` stays out of the own-words index (`scanCitizenPages` admits reflection and tension only) and out of family mentions (`isOwnWords_`).
+   - The ledger page pointer (col AW) isn't written here; the pilot's wake writes it.
+3. **The show block in the voice.** `citizen-wake.js`: a fenced "Your time on UNDOCKED" block in the continuity group, for any wake of a pilot. `citizenVoice.js`: the same block in the lived-context branch, read once per batch.
+   - Like the rest of their life, it stays out of the no-exposure interview branch. Nia's C113 interview of the pilot carried lived evidence (asks: interview=true, lived=true), so no desk switch was added to the newsroom run.
+   - The block: the latest 3 nights told one by one, grouped "This week / Last week / N weeks ago"; earlier nights as one line; then the board (rank of N, points, credits, weeks led, streak). An unreadable board drops only the board line.
+   - `loadOwnPageReadback` drops type `show` docs from recall candidates.
+4. **Sure wake** (`lib/wakePerception.js`): `SHOW_RESERVE = 3` (ruling 1); `owedFromShow(nights, cycle)` gives one mark per pilot per flown Cycle (id `undocked:<POPID>:c<N>`), in the owed window (this Cycle and the last).
+   - `showCandidates` orders the newest Cycle first. At the flip, 6 are waiting for 3 wakes; serving the oldest first would push every later pilot a week late.
+   - `selectWakeCitizen` checks the show reserve ahead of owed. The journal counts `show` wakes apart from `owed` wakes (`showWakesUsed`). The mark is spent whenever the block is in front of the pilot, including a lottery draw.
+   - An unreadable journal or show record means no show slot that wake, said loudly. Nothing asks for a response.
+5. **Switch off** → codex → flip with no flight or wake running. Avoid the 20:30 flight and the 21:30, 07:30, 12:30 and 17:00 wakes.
 
-### 6.3 Builder's calls (open)
+### 6.3 Builder's calls — answered (verbatim, 2026-10-30 ~17:20 CDT)
 
-1. **Reserve.** Do pilots get their own 3 a Cycle on top of the 6, or share the 6? Shared means a pilot displaces a hospital stay, arrest, big bet or chaos hit; C113 already has 6 waiting for 6.
-2. **Backfill.** On its first run, the page stage can write all 69 past nights onto the 24 past pilots' pages, or mark them as done and write from the next flight on. Past pilots know their run either way, because the block reads the disk; this only decides what the container holds.
+> 1. These are on top of the 6.
+> 2. Fill Them in
+
+Rulings: **(1)** pilots' own reserve, 3 a Cycle, beside the 6 owed. **(2)** Backfill: the first run writes all 69 past nights onto the 24 pilots' pages.
+
+### 6.5 Proof (switch off as committed; switch on in memory only, nothing written)
+- Tests: `undockedShowRecord.test.js` all ok (synthetic POP-9xxxx); `cron-undocked-run.test.js` ok (page stage: receipt, retry, never twice, key shape); `lib/wakePerception.test.js` 197/198. The one failure, "snippet capped at 180", fails the same way on the code before this change (exported and run); this build doesn't touch it.
+- Live C113 wake dry run, Cristina Booker (POP-00836), night: `show: 6 pilot-Cycle(s) in window, 6 waiting, 0/3`; her block named both her nights and the board (10th of 24). The reflection spoke to it unprompted: "Thursday night, I couldn't get the ship moving on the show, and I walked home feeling flat."
+- Interview dry run, Eric Taveras (POP-00597): the block carries his three C111 nights (the 1,170-credit night included) and "1st of 24 … led the board 3 weeks". With the switch off the prompt is unchanged (its one UNDOCKED mention is a pre-existing audience line from his life).
 
 ### 6.4 Not in scope
 - The engine's pilot line (`ecl:kind:pilot`, a draw at the airing Cycle that moves Reputation, `generateCitizensEvents.js:1114`) is left as it is; the block doesn't restate it.
@@ -187,3 +196,4 @@ UNDOCKED rows name the pilot: `$PILOT`/`$PILOTROLE`/`$LEADER`. LIVE PROD @138 (s
 - 2026-10-19 (rb, S580): **C112 live readback done** from the ledger snapshot (cycle 112, Y3C8 lines): 46 `Undocked-Audience` lines, 15 name a C112 pilot (Eric Taveras, Briar Soto, Rosario Medina), 0 raw `$` tokens in any C112 line, 0 self-naming. Nothing further owed on Moves 1–5; the Sat 10-24 digest is the next read of the crossover block (ROLLOUT research.29).
 - 2026-10-25 (rb): **Sat 10-24 crossover read** (`output/edition_curation_c112.json`): 10 citizens crossed ≥2 systems in the staged set; printed on both sides — Yu Zen (culture Ines Sorensen + wire Celeste Tran; also civic Lila Mezran unprinted) and Vinnie Keane (sports Marbury + P Slayer, wire Celeste Tran); the UNDOCKED crossing (Iris Pham, civic Jax Caldera + undocked Nia Rook) printed on the undocked side only; the digest seat reserved and printed (nia-rook-weekly). The block works unattended; the narrator's printed-both-sides rule held. Next read Sat 2026-10-31.
 - 2026-10-30 (rb): §6 pipeline.95 written: three pieces (flight → page, show block, sure wake), measured on 69 nights; two builder's calls open (reserve, backfill).
+- 2026-10-30 (rb): builder ruled both (own 3 on top of the 6; fill in the 69). Built behind `ON=false`, dry-run proven on C113 (§6.5); codex next.

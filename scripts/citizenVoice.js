@@ -47,7 +47,8 @@ const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 const interviewContract = require('./newsroomInterviewContract');
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.130 — PRESS rows carry BondTarget (col I) like the wake
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
-  loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory, renderStanding } = require('/root/GodWorld/lib/wakePerception'); // loadHealthState engine.101 health slice; renderStanding engine.147
+  loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory, renderStanding } = require('/root/GodWorld/lib/wakePerception'); // loadHealthState engine.101
+const showRecord = require('./undockedShowRecord'); // pipeline.95 — an UNDOCKED pilot knows they flew health slice; renderStanding engine.147
 
 const ARGV = process.argv.slice(2);
 const DRY = ARGV.includes('--dry-run');
@@ -116,6 +117,17 @@ async function generate(system, user, maxTokens, temperature, model) {
 /* Voice one citizen. Returns {popId,name,nh,occ,disposition,text,recorded}.
  * Throws {code:2} when unvoiceable (no dials / not in ledger) so single-call
  * mode keeps its exit-2 contract and batch mode maps it to a fallback. */
+// pipeline.95 — the show's nights, read once per process (a batch voices many citizens); unreadable = no block, said once.
+let showNights = null;
+function showFor(popId, cycle) {
+  if (!showRecord.ON || !cycle) return '';
+  try {
+    if (!showNights) showNights = showRecord.loadNights();
+    const t = showRecord.showBlockFor(showNights, popId, cycle, { log: (m) => console.error('[show] ' + m) });
+    return t ? memoryFence.wrap(t, 'undocked-show:' + String(popId).toUpperCase()) : '';
+  } catch (e) { showNights = []; console.error('[show] record unreadable, no show block this run: ' + e.message); return ''; }
+}
+
 async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preText, pageKey, evidenceBound,
   interviewMode, livedContextAllowed, model }) {
   const c = pool.find((p) => p.popId === popId);
@@ -146,6 +158,8 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   const standing = standingLine ? `\n\n${standingLine}` : '';
   const health = healthLine ? `\n\n${healthLine}` : ''; // engine.101 health slice — current health state reaches the voice
   const arcLine = lifeArc ? `\n\nYour life so far: ${lifeArc}.` : '';
+  const showBlock = showFor(c.popId, cycle);
+  const show = showBlock ? `\n\nYour time on UNDOCKED:\n${showBlock}` : ''; // lived context: out of the no-exposure branch, like the rest of their life
   const trajLine = traj ? ` Lately you've been ${traj}.` : '';
   const sports = sportsLine ? `\n\nAround Oakland: ${sportsLine}` : '';
   const texture = textureLine ? `\n\nAround your neighborhood: ${textureLine}` : '';
@@ -153,7 +167,7 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   const identity = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.`;
   const system = interviewMode && !livedContextAllowed
     ? identity + '\n\nThis interview has no story-linked personal exposure. Stay in your own voice, but do not project unrelated life history onto the story.'
-    : identity + `${trajLine}${arcLine}${health}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${sports}${texture}${memory}`;
+    : identity + `${trajLine}${arcLine}${health}${show}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${sports}${texture}${memory}`;
 
   // The ask arrives from the caller (letters desk, interview brief). Fence it — desk-authored
   // context is instructions TO the citizen, but anything quoted inside it must not be able to

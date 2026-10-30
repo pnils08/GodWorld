@@ -23,6 +23,9 @@
  *                  invalid parks Applied=no for human review, §2.5 decision 2)
  *   6. push      — approved events -> Undocked_Feed tab, TargetCycle=cycle+1
  *   7. standings — scripts/undockedStandings.js recompute (if present)
+ *   8. pages     — pipeline.95: every applied night with no receipt goes to its
+ *                  pilot's citizen page as a show record (undockedShowRecord);
+ *                  a failed write logs loudly and retries the next night
  *
  * A parked (invalid) episode is the gate WORKING, not a failure: the run still
  * exits 0 and says PARKED loudly. Missing creds/mission for a drawn pilot is a
@@ -40,6 +43,7 @@ const { execFileSync } = require('child_process');
 const ROOT = path.resolve(__dirname, '..');
 const SHOW = path.join(ROOT, 'output', 'spacemolt-show');
 const LOCK = path.join(SHOW, '.orchestrator.lock');
+const PAGED = path.join(SHOW, 'paged.json'); // pipeline.95 — episode -> page customId, one receipt per night written
 
 function log(msg) {
   console.log('[undocked-run ' + new Date().toISOString() + '] ' + msg);
@@ -250,6 +254,40 @@ function windowMinutes(argv) {
     : String(require('./undockedMissionBrief').WINDOW_MINUTES);
 }
 
+// ---- pipeline.95: the night onto the pilot's page ---------------------------
+// Builder 2026-10-30: "the details of the flights should load to their supermemory containers"; the first run fills in
+// every past night ("Fill them in"). One doc per night, keyed by its flown Cycle, weekday and episode, typed `show`: a
+// record of the night, kept out of the own-words readers. The receipt is written after each landed doc, so a crash
+// repeats at most the doc in hand (the store merges a repeat into the same doc, never a second one).
+
+// Pure: applied nights with no receipt, in flight order.
+function nightsToPage(nights, paged) {
+  return (nights || []).filter(n => !(paged && paged[n.episodeId]));
+}
+
+async function pageNights(io) {
+  const R = io.record || require('./undockedShowRecord');
+  const page = io.page || require('../lib/citizenPage');
+  const file = io.file || PAGED;
+  let paged = {};
+  try { paged = JSON.parse(fs.readFileSync(file, 'utf8')); } catch (e) { if (e.code !== 'ENOENT') throw e; }
+  const todo = nightsToPage(io.nights || R.loadNights(), paged);
+  let wrote = 0, left = 0;
+  for (const n of todo) {
+    if (!n.day) { log('pages: ' + n.episodeId + ' has no weekday for its start — left for a look'); left++; continue; }
+    const r = await page.appendReflection_(n.pop, R.pageText(n), {
+      cycle: n.cycle, daypart: 'UNDOCKED', day: n.day, ref: page.pageRefOf(n.episodeId),
+      extra: { type: 'show', episode: n.episodeId },
+    });
+    if (r.error) { log('pages: FAILED ' + n.episodeId + ' (' + n.pop + ') — ' + r.error + '; retried next run'); left++; continue; }
+    paged[n.episodeId] = r.customId;
+    fs.writeFileSync(file, JSON.stringify(paged, null, 2) + '\n'); // throws: the stage stops, the doc in hand repeats once
+    wrote++;
+  }
+  log('pages: ' + wrote + ' night(s) written to pilots\' pages, ' + left + ' left for the next run, ' + Object.keys(paged).length + ' on record');
+  return { wrote, left };
+}
+
 async function main() {
   const argv = process.argv.slice(2);
   const minutes = windowMinutes(argv);
@@ -335,10 +373,15 @@ async function main() {
     execFileSync('node', [standings], { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
   }
 
+  // 8. pages (pipeline.95) — after the show is out; a failure here never unwinds it.
+  if (require('./undockedShowRecord').ON) {
+    try { await pageNights({}); } catch (e) { log('pages: STAGE FAILED (the show is out; the next run retries): ' + (e && e.message || e)); }
+  }
+
   log('done');
 }
 
-module.exports = { drawRowsToRoster, tabPilot, sessionName, employerNameFor, windowMinutes };
+module.exports = { drawRowsToRoster, tabPilot, sessionName, employerNameFor, windowMinutes, nightsToPage, pageNights };
 
 if (require.main === module) {
   main().catch(e => {

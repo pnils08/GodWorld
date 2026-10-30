@@ -1,0 +1,1834 @@
+{
+  "meta": {
+    "cycle": 113,
+    "script": "buildWorldSummary.js v2.3.0 (deskSignal v1.3)",
+    "builtAt": "candidate (engine-sheet read-only build, not published)",
+    "laneRule": "civic=anomalies/votes/initiatives that moved this Cycle, sports=feed, culture=hoods/faith, business=ripples-default; ripples route by CauseType (rippleLaneMap); storylines route by engine type (crisis: civic + its domain desk; initiative stage: civic)",
+    "storylineContract": "storylines (a SIBLING of lanes, never inside one) are ENGINE EVENTS with their own ID, stage and ending: crisis arcs and initiative stages. The engine opens and closes them; a desk covers them. An assignment belongs to a storyline only when its ref names it (`; storyline <ID>`).",
+    "rippleLaneMap": {
+      "initiative-implementation": "civic",
+      "approval-shift": "civic",
+      "sports": "sports",
+      "transit-event": "civic",
+      "faith-event": "culture",
+      "fame-event": "culture",
+      "lifestyle-sighting": "culture",
+      "trajectory": "business",
+      "migration": "business",
+      "edition-coverage": "business"
+    },
+    "counts": {
+      "civic": 49,
+      "sports": 9,
+      "culture": 23,
+      "business": 43
+    },
+    "contract": "POINTERS ONLY — labels are verbatim source strings (they may embed source-native deltas); no derived stats, no career numbers, no angles. The desk reaches the raw material itself.",
+    "bylineContract": "bylineCandidates is a WHO-assist HINT — one name + POPID per lane, usage-rotated off the Bay_Tribune_Oakland roster. The desk still assigns; no angle, no story, no subject rides here (engine.76 W5h2 locked rule).",
+    "notes": []
+  },
+  "lanes": {
+    "civic": [
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[0]; evidence: Neighborhood_Map row(s) 2; storyline INIT-006:construction-active",
+        "label": "math-imbalance (low) | Downtown: decay [RetailVitality -2.18, HousingPressure +1.000] — RetailVitality now 11.31 (6 of 22, city median 7.165); HousingPressure now 10 (21 of 22, city median 0); Sentiment now 0.16 (5 of 22, city median 0.03) — despite 1 active mitigator(s) [INIT-006]",
+        "popids": [
+          "POP-00127",
+          "POP-00597",
+          "POP-00790"
+        ],
+        "hood": "Downtown",
+        "handle": {
+          "angle": "Baylight District — Final Council Vote stalled in construction-active — remedy path + responsible office",
+          "hookLine": "The civic initiative carrying Downtown has not advanced in 3 cycles.",
+          "citizens": [
+            "Marcus Webb (POP-00790)",
+            "Mason Miller (POP-00127)",
+            "Eric Taveras (POP-00597)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[1]; evidence: Neighborhood_Map row(s) 3",
+        "label": "math-imbalance (medium) | Temescal: decay [Sentiment -0.060, RetailVitality -1.11] — Sentiment now 0.08 (6 of 22, city median 0.03); RetailVitality now 5.29 (17 of 22, city median 7.165) — with no matching active initiative",
+        "popids": [
+          "POP-00206",
+          "POP-00290",
+          "POP-00761"
+        ],
+        "hood": "Temescal",
+        "handle": {
+          "angle": "civic gap in Temescal — who is accountable, what council has or hasn't done",
+          "hookLine": "No civic initiative addresses the Temescal signal surfaced this cycle.",
+          "citizens": [
+            "Idris Karim (POP-00761)",
+            "Omar Lingio (POP-00206)",
+            "Omar Cleo (POP-00290)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[2]; evidence: Neighborhood_Map row(s) 5",
+        "label": "math-imbalance (low) | West Oakland: decay [RetailVitality -1.87, HousingPressure +1.000] — RetailVitality now 9.68 (8 of 22, city median 7.165); HousingPressure now 2.5 (16 of 22, city median 0); Sentiment now 0.25 (1 of 22, city median 0.03) — despite 2 active mitigator(s) [INIT-001, INIT-007]",
+        "popids": [
+          "POP-00143",
+          "POP-01022",
+          "POP-01027"
+        ],
+        "hood": "West Oakland",
+        "handle": {
+          "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+          "hookLine": "The civic initiative carrying West Oakland has not advanced in 6 cycles.",
+          "citizens": [
+            "Wilson Shepard (POP-01022)",
+            "Austin Reaves (POP-01027)",
+            "Clarissa Dane (POP-00143)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[3]; evidence: Neighborhood_Map row(s) 6; storyline INIT-007:implementation-active",
+        "label": "math-imbalance (low) | Fruitvale: decay [RetailVitality -1.48, HousingPressure +1.000] — RetailVitality now 11.35 (5 of 22, city median 7.165); HousingPressure now 6.5 (18 of 22, city median 0); Sentiment now 0.24 (2 of 22, city median 0.03) — despite 1 active mitigator(s) [INIT-007]",
+        "popids": [
+          "POP-00636",
+          "POP-00762",
+          "POP-00766"
+        ],
+        "hood": "Fruitvale",
+        "handle": {
+          "angle": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active — remedy path + responsible office",
+          "hookLine": "The transit initiative carrying Fruitvale has not advanced in 1 cycles.",
+          "citizens": [
+            "Aziz Rahimi (POP-00762)",
+            "Manjit Singh (POP-00766)",
+            "Luis Navarro (POP-00636)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[4]; evidence: Neighborhood_Map row(s) 7; storyline INIT-006:construction-active",
+        "label": "math-imbalance (low) | Jack London: decay [RetailVitality -1.79, HousingPressure +1.000] — RetailVitality now 13.4 (1 of 22, city median 7.165); HousingPressure now 8.5 (20 of 22, city median 0); Sentiment now 0.17 (4 of 22, city median 0.03) — despite 1 active mitigator(s) [INIT-006]",
+        "popids": [
+          "POP-00003",
+          "POP-00030",
+          "POP-00156"
+        ],
+        "hood": "Jack London",
+        "handle": {
+          "angle": "Baylight District — Final Council Vote stalled in construction-active — remedy path + responsible office",
+          "hookLine": "The civic initiative carrying Jack London has not advanced in 3 cycles.",
+          "citizens": [
+            "Derek Simmons (POP-00030)",
+            "Mark Aitken (POP-00003)",
+            "Angela Reyes (POP-00156)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[5]; evidence: Neighborhood_Map row(s) 10",
+        "label": "math-imbalance (medium) | Grand Lake: decay [RetailVitality -1.18, HousingPressure +1.000] — RetailVitality now 11.57 (4 of 22, city median 7.165); HousingPressure now 6.5 (19 of 22, city median 0); Sentiment now -0.03 (17 of 22, city median 0.03) — with no matching active initiative",
+        "popids": [
+          "POP-00628",
+          "POP-00848",
+          "POP-01080"
+        ],
+        "hood": "Grand Lake",
+        "handle": {
+          "angle": "civic gap in Grand Lake — who is accountable, what council has or hasn't done",
+          "hookLine": "No civic initiative addresses the Grand Lake signal surfaced this cycle.",
+          "citizens": [
+            "Louis Cross (POP-01080)",
+            "Tina Kozlov (POP-00628)",
+            "Tanisha Freeman (POP-00848)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[6]; evidence: Neighborhood_Map row(s) 12",
+        "label": "math-imbalance (high) | Chinatown: decay [Sentiment -0.050, RetailVitality -2.07, HousingPressure +1.000] — Sentiment now -0.06 (20 of 22, city median 0.03); RetailVitality now 7.78 (9 of 22, city median 7.165); HousingPressure now 1.5 (14 of 22, city median 0) — with no matching active initiative",
+        "popids": [
+          "POP-00439",
+          "POP-00599",
+          "POP-00635"
+        ],
+        "hood": "Chinatown",
+        "handle": {
+          "angle": "civic gap in Chinatown — who is accountable, what council has or hasn't done",
+          "hookLine": "No civic initiative addresses the Chinatown signal surfaced this cycle.",
+          "citizens": [
+            "Jose Colon (POP-00599)",
+            "Mei Chen (POP-00635)",
+            "Timmie Hall (POP-00439)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[7]; evidence: Neighborhood_Map row(s) 21",
+        "label": "math-imbalance (medium) | Uptown: decay [RetailVitality -1.60, HousingPressure +1.000] — RetailVitality now 11.07 (7 of 22, city median 7.165); HousingPressure now 10 (22 of 22, city median 0); Sentiment now 0.05 (9 of 22, city median 0.03) — with no matching active initiative",
+        "popids": [
+          "POP-00035",
+          "POP-00435",
+          "POP-00437"
+        ],
+        "hood": "Uptown",
+        "handle": {
+          "angle": "civic gap in Uptown — who is accountable, what council has or hasn't done",
+          "hookLine": "No civic initiative addresses the Uptown signal surfaced this cycle.",
+          "citizens": [
+            "Laila Cortez (POP-00035)",
+            "Driscoll Fester (POP-00435)",
+            "Amelia Kim (POP-00437)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[8]; evidence: WorldEvents_V3_Ledger row(s) ",
+        "label": "coverage-gap (medium) | Domain \"faith\" produced 5 events this cycle with zero Tribune coverage last cycle",
+        "handle": {
+          "angle": "civic gap in city — who is accountable, what council has or hasn't done",
+          "hookLine": "No civic initiative addresses the city signal surfaced this cycle."
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[9]; evidence: Initiative_Tracker row(s) 7; storyline INIT-007:implementation-active",
+        "label": "cascade-failure (medium) | Initiative \"Oakland Youth Apprenticeship Pipeline\" active but 2/3 affected neighborhoods show no signal",
+        "popids": [
+          "POP-00011",
+          "POP-00591",
+          "POP-00789"
+        ],
+        "hood": "West Oakland, East Oakland",
+        "handle": {
+          "angle": "Oakland Youth Apprenticeship Pipeline stalled in implementation-active — remedy path + responsible office",
+          "hookLine": "The civic initiative carrying West Oakland has not advanced in 1 cycles.",
+          "citizens": [
+            "Elias Varek (POP-00789)",
+            "Carmen Delaine (POP-00011)",
+            "Selena Grant (POP-00591)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[10]; evidence: Neighborhood_Map row(s) ",
+        "label": "production-imbalance (medium) | 20 neighborhoods report migration flow with zero economic events this cycle",
+        "popids": [
+          "POP-01128",
+          "POP-01137",
+          "POP-01194"
+        ],
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Uptown, East Oakland",
+        "handle": {
+          "angle": "West Oakland Stabilization Fund stalled in disbursement-active — remedy path + responsible office",
+          "hookLine": "The economic initiative carrying Downtown has not advanced in 6 cycles.",
+          "citizens": [
+            "Liliana Salazar (POP-01128)",
+            "Wren Choi (POP-01137)",
+            "Solveig Anand (POP-01194)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[11]; evidence: Initiative_Tracker row(s) 10; storyline INIT-010:operational",
+        "label": "improvement (low) | Initiative \"West Oakland Tenant Defense Fund\" advanced: vote-scheduled → operational",
+        "popids": [
+          "POP-00024",
+          "POP-00722",
+          "POP-00961"
+        ],
+        "hood": "West Oakland",
+        "handle": {
+          "angle": "West Oakland Tenant Defense Fund advanced from vote-scheduled to operational — what the milestone delivers and who carried it",
+          "hookLine": "West Oakland Tenant Defense Fund advanced from vote-scheduled to operational; a milestone worth covering, not burying.",
+          "citizens": [
+            "Daniel Cloak (POP-00722)",
+            "Darius Clark (POP-00961)",
+            "Henry Rivas (POP-00024)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[12]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Adams Point sentiment rose 0.10 (-0.14 → -0.04)",
+        "popids": [
+          "POP-01206",
+          "POP-01217",
+          "POP-01222"
+        ],
+        "hood": "Adams Point",
+        "handle": {
+          "angle": "civic gain in Adams Point — the positive outcome and its driver",
+          "hookLine": "A civic metric improved in Adams Point this cycle.",
+          "citizens": [
+            "Debra Walker (POP-01206)",
+            "Elijah Campbell (POP-01217)",
+            "Astrid Freeman (POP-01222)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[13]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Brooklyn sentiment rose 0.12 (-0.12 → 0)",
+        "popids": [
+          "POP-00714",
+          "POP-00988",
+          "POP-01010"
+        ],
+        "hood": "Brooklyn",
+        "handle": {
+          "angle": "civic gain in Brooklyn — the positive outcome and its driver",
+          "hookLine": "A civic metric improved in Brooklyn this cycle.",
+          "citizens": [
+            "Drago Helio (POP-00714)",
+            "Sefu Helio (POP-00988)",
+            "Minh Raimon (POP-01010)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[14]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Glenview sentiment rose 0.12 (-0.09 → 0.03)",
+        "popids": [
+          "POP-01102",
+          "POP-01121",
+          "POP-01209"
+        ],
+        "hood": "Glenview",
+        "handle": {
+          "angle": "civic gain in Glenview — the positive outcome and its driver",
+          "hookLine": "A civic metric improved in Glenview this cycle.",
+          "citizens": [
+            "Colin Perez (POP-01102)",
+            "Guadalupe Holloway (POP-01121)",
+            "Daniela Kapoor (POP-01209)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[15]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Dimond sentiment rose 0.16 (-0.18 → -0.02)",
+        "popids": [
+          "POP-01146",
+          "POP-01181",
+          "POP-01199"
+        ],
+        "hood": "Dimond",
+        "handle": {
+          "angle": "civic gain in Dimond — the positive outcome and its driver",
+          "hookLine": "A civic metric improved in Dimond this cycle.",
+          "citizens": [
+            "Devin Castellanos (POP-01146)",
+            "Ingeborg Hallstrom (POP-01181)",
+            "Patrick Clark (POP-01199)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[16]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | East Oakland sentiment rose 0.17 (0.03 → 0.2)",
+        "popids": [
+          "POP-01047",
+          "POP-01147",
+          "POP-01164"
+        ],
+        "hood": "East Oakland",
+        "handle": {
+          "angle": "civic gain in East Oakland — the positive outcome and its driver",
+          "hookLine": "A civic metric improved in East Oakland this cycle.",
+          "citizens": [
+            "Ruth Anyanwu (POP-01147)",
+            "Maria Conteras (POP-01047)",
+            "Hector Quintanilla (POP-01164)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[17]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Remedy overshot expectation on Neighborhood_Map.RetailVitality: observed 2.9 (expected 0.02) — from prior \"math-imbalance\"",
+        "popids": [
+          "POP-00024",
+          "POP-00143",
+          "POP-00961"
+        ],
+        "hood": "West Oakland",
+        "handle": {
+          "angle": "INIT-001 posted a positive, named-cause result — what the milestone delivers and who carried it",
+          "hookLine": "INIT-001 posted a positive, named-cause result; a milestone worth covering, not burying.",
+          "citizens": [
+            "Clarissa Dane (POP-00143)",
+            "Darius Clark (POP-00961)",
+            "Henry Rivas (POP-00024)"
+          ]
+        }
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[18]; evidence: Neighborhood_Map row(s) ",
+        "label": "improvement (low) | Remedy overshot expectation on Neighborhood_Map.RetailVitality: observed 2.9 (expected 0.02) — from prior \"production-imbalance\"",
+        "popids": [
+          "POP-00127",
+          "POP-01203",
+          "POP-01208"
+        ],
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Chinatown, Brooklyn, Eastlake, Glenview, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District",
+        "handle": {
+          "angle": "economic gain in Downtown — the positive outcome and its driver",
+          "hookLine": "A economic metric improved in Downtown this cycle.",
+          "citizens": [
+            "Iris Pham (POP-01203)",
+            "Pooja Coleman (POP-01208)",
+            "Mason Miller (POP-00127)"
+          ]
+        }
+      },
+      {
+        "kind": "initiative",
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); snapshot: engine_audit_c113.json snapshots.Initiative_Tracker; storyline INIT-001:disbursement-active",
+        "label": "West Oakland Stabilization Fund | Status passed | phase disbursement-active",
+        "hood": "West Oakland"
+      },
+      {
+        "kind": "vote",
+        "ref": "Initiative_Tracker (InitiativeID INIT-001); storyline INIT-001:disbursement-active",
+        "label": "West Oakland Stabilization Fund | Month-twelve disbursement review C113"
+      },
+      {
+        "kind": "initiative",
+        "ref": "Initiative_Tracker (InitiativeID INIT-002); snapshot: engine_audit_c113.json snapshots.Initiative_Tracker; storyline INIT-002:dispatch-live",
+        "label": "Oakland Alternative Response Initiative | Status passed | phase dispatch-live",
+        "hood": "West Oakland, Fruitvale, East Oakland"
+      },
+      {
+        "kind": "vote",
+        "ref": "Initiative_Tracker (InitiativeID INIT-002); storyline INIT-002:dispatch-live",
+        "label": "Oakland Alternative Response Initiative | District-level data report and D3 community briefing C113"
+      },
+      {
+        "kind": "vote",
+        "ref": "Initiative_Tracker (InitiativeID INIT-003); storyline INIT-003:design-phase",
+        "label": "Fruitvale Transit Hub Phase II — Visioning | Preliminary schematics community review C114"
+      },
+      {
+        "kind": "initiative",
+        "ref": "Initiative_Tracker (InitiativeID INIT-005); snapshot: engine_audit_c113.json snapshots.Initiative_Tracker; storyline INIT-005:operational",
+        "label": "Temescal Community Health Center | Status passed | phase operational",
+        "hood": "Temescal"
+      },
+      {
+        "kind": "vote",
+        "ref": "Initiative_Tracker (InitiativeID INIT-005); storyline INIT-005:operational",
+        "label": "Temescal Community Health Center | First quarterly utilization audit report filed to D7 office and public data portal C113"
+      },
+      {
+        "kind": "vote",
+        "ref": "Initiative_Tracker (InitiativeID INIT-006); storyline INIT-006:construction-active",
+        "label": "Baylight District — Final Council Vote | Construction milestone review C115"
+      },
+      {
+        "kind": "vote",
+        "ref": "Initiative_Tracker (InitiativeID INIT-008); storyline INIT-008:legislation-filed",
+        "label": "Downtown Economic Revitalization | Committee vote and Uptown stabilization planning C113"
+      },
+      {
+        "kind": "vote",
+        "ref": "Initiative_Tracker (InitiativeID INIT-009); storyline INIT-009:legislation-filed",
+        "label": "Commercial Stabilization for Grand Lake | Committee hearing and vote C113"
+      },
+      {
+        "kind": "initiative",
+        "ref": "Initiative_Tracker (InitiativeID INIT-010); snapshot: engine_audit_c113.json snapshots.Initiative_Tracker; storyline INIT-010:operational",
+        "label": "West Oakland Tenant Defense Fund | Status passed | phase operational",
+        "hood": "West Oakland"
+      },
+      {
+        "kind": "vote",
+        "ref": "Initiative_Tracker (InitiativeID INIT-010); storyline INIT-010:operational",
+        "label": "West Oakland Tenant Defense Fund | Committee hearing and vote C113"
+      },
+      {
+        "kind": "initiative",
+        "ref": "Initiative_Tracker (InitiativeID INIT-012); snapshot: engine_audit_c113.json snapshots.Initiative_Tracker; storyline INIT-012:announced",
+        "label": "Dimond Revitalization Initiative | Status proposed | phase announced",
+        "hood": "Dimond"
+      },
+      {
+        "kind": "civic-log",
+        "ref": "output/production_log_c113.md \"## /city-hall\"",
+        "label": "Council decisions, votes, voices — written by /city-hall after this build; read at consume time"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "initiative-implementation",
+        "ref": "Ripple_Ledger cycle 113 (CauseType initiative-implementation); rendered: world_summary_c113.md \"## What Moved\" > \"### initiative-implementation\"; storyline INIT-001:disbursement-active",
+        "label": "retail/sentiment/nightlife | West Oakland Stabilization Fund is disbursement-active — ongoing economic effects in West Oakland; the city feels it through these neighborhoods",
+        "hood": "West Oakland"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "initiative-implementation",
+        "ref": "Ripple_Ledger cycle 113 (CauseType initiative-implementation); rendered: world_summary_c113.md \"## What Moved\" > \"### initiative-implementation\"; storyline INIT-002:dispatch-live",
+        "label": "sentiment/communityEngagement/nightlife | Oakland Alternative Response Initiative is dispatch-live — ongoing safety effects in West Oakland, Fruitvale, East Oakland; the city feels it through these neighborhoods"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "initiative-implementation",
+        "ref": "Ripple_Ledger cycle 113 (CauseType initiative-implementation); rendered: world_summary_c113.md \"## What Moved\" > \"### initiative-implementation\"; storyline INIT-003:design-phase",
+        "label": "retail/traffic/sentiment | Fruitvale Transit Hub Phase II — Visioning is design-phase — ongoing transit effects in Fruitvale; the city feels it through these neighborhoods",
+        "hood": "Fruitvale"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "initiative-implementation",
+        "ref": "Ripple_Ledger cycle 113 (CauseType initiative-implementation); rendered: world_summary_c113.md \"## What Moved\" > \"### initiative-implementation\"; storyline INIT-005:operational",
+        "label": "sentiment/communityEngagement/publicSpaces | Temescal Community Health Center is operational — ongoing health effects in Temescal; the city feels it through these neighborhoods",
+        "hood": "Temescal"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "initiative-implementation",
+        "ref": "Ripple_Ledger cycle 113 (CauseType initiative-implementation); rendered: world_summary_c113.md \"## What Moved\" > \"### initiative-implementation\"; storyline INIT-006:construction-active",
+        "label": "retail/nightlife/traffic/sentiment | Baylight District — Final Council Vote is construction-active — ongoing sports effects in Jack London, Downtown; the city feels it through these neighborhoods"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "initiative-implementation",
+        "ref": "Ripple_Ledger cycle 113 (CauseType initiative-implementation); rendered: world_summary_c113.md \"## What Moved\" > \"### initiative-implementation\"; storyline INIT-007:implementation-active",
+        "label": "sentiment/communityEngagement/retail | Oakland Youth Apprenticeship Pipeline is implementation-active — ongoing workforce effects in West Oakland, East Oakland, Fruitvale; the city feels it through these neighborhoods"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "initiative-implementation",
+        "ref": "Ripple_Ledger cycle 113 (CauseType initiative-implementation); rendered: world_summary_c113.md \"## What Moved\" > \"### initiative-implementation\"; storyline INIT-008:legislation-filed",
+        "label": "retail/sentiment/nightlife | Downtown Economic Revitalization is legislation-filed — ongoing economic effects in Downtown; the city feels it through these neighborhoods",
+        "hood": "Downtown"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "initiative-implementation",
+        "ref": "Ripple_Ledger cycle 113 (CauseType initiative-implementation); rendered: world_summary_c113.md \"## What Moved\" > \"### initiative-implementation\"; storyline INIT-009:legislation-filed",
+        "label": "retail/sentiment/nightlife | Commercial Stabilization for Grand Lake is legislation-filed — ongoing economic effects in Grand Lake; the city feels it through these neighborhoods",
+        "hood": "Grand Lake"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "transit-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType transit-event); rendered: world_summary_c113.md \"## What Moved\" > \"### transit-event\"",
+        "label": "game-day-crowds | Oaks home week — 1 home game; game-day crowds through Jack London, Downtown, station ridership up to +1%",
+        "hood": "Jack London"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "approval-shift",
+        "ref": "Ripple_Ledger cycle 113 (CauseType approval-shift); rendered: world_summary_c113.md \"## What Moved\" > \"### approval-shift\"",
+        "label": "approval/district-sentiment | West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub Phase II — Visioning sitting (0, capped); Temescal Community Health Center sitting (0, capped); Baylight District — Final Council Vote sitting (0, capped); Oakland…",
+        "hood": "CITYWIDE"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "approval-shift",
+        "ref": "Ripple_Ledger cycle 113 (CauseType approval-shift); rendered: world_summary_c113.md \"## What Moved\" > \"### approval-shift\"",
+        "label": "approval/district-sentiment | West Oakland Stabilization Fund sitting (0, capped); Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth Apprenticeship Pipeline silence (-3); West Oakland Tenant Defense Fund advanced (+2); level target 62 (mood +1.14 (district 1.21, city 1.08), district -0.04 vs middle, pre…",
+        "hood": "D1"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "approval-shift",
+        "ref": "Ripple_Ledger cycle 113 (CauseType approval-shift); rendered: world_summary_c113.md \"## What Moved\" > \"### approval-shift\"",
+        "label": "approval/district-sentiment | Baylight District — Final Council Vote sitting (0, capped); Downtown Economic Revitalization sitting (0, capped); Commercial Stabilization for Grand Lake sitting (0, capped); level target 65 (mood +1.15 (district 1.23, city 1.08), district +0.55 vs middle, press +1) → -1",
+        "hood": "D2"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "approval-shift",
+        "ref": "Ripple_Ledger cycle 113 (CauseType approval-shift); rendered: world_summary_c113.md \"## What Moved\" > \"### approval-shift\"",
+        "label": "approval/district-sentiment | Oakland Alternative Response Initiative sitting (0, capped); Fruitvale Transit Hub Phase II — Visioning sitting (0, capped); Oakland Youth Apprenticeship Pipeline silence (-3); level target 63 (mood +1.16 (district 1.25, city 1.08), district +0.12 vs middle, press +1) → +0",
+        "hood": "D3"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "approval-shift",
+        "ref": "Ripple_Ledger cycle 113 (CauseType approval-shift); rendered: world_summary_c113.md \"## What Moved\" > \"### approval-shift\"",
+        "label": "approval/district-sentiment | Ivy Hill Revitalization Initiative sitting (0, capped); Dimond Revitalization Initiative sitting (0, capped); level target 55 (mood +0.89 (district 0.71, city 1.08), district -1.12 vs middle, press +1) → -1; integrity band 1 scales scandal chance x0.75",
+        "hood": "D4"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "approval-shift",
+        "ref": "Ripple_Ledger cycle 113 (CauseType approval-shift); rendered: world_summary_c113.md \"## What Moved\" > \"### approval-shift\"",
+        "label": "approval/district-sentiment | Oakland Alternative Response Initiative sitting (0, capped); Oakland Youth Apprenticeship Pipeline silence (-3); level target 61 (mood +1.20 (district 1.33, city 1.08), district -0.34 vs middle, press +1) → -1",
+        "hood": "D5"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "approval-shift",
+        "ref": "Ripple_Ledger cycle 113 (CauseType approval-shift); rendered: world_summary_c113.md \"## What Moved\" > \"### approval-shift\"",
+        "label": "approval/district-sentiment | Commercial Stabilization for Grand Lake sitting (0, capped); level target 61 (mood +0.99 (district 0.91, city 1.08), district -0.06 vs middle, press +1) → -1",
+        "hood": "D8"
+      }
+    ],
+    "sports": [
+      {
+        "kind": "feed",
+        "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+        "label": "Oaks | game-result | (early-season) | Adash Stanley, Austin Reaves, AJ Dybantsa, Wilson Shepard",
+        "popids": [
+          "POP-01023",
+          "POP-01027",
+          "POP-01024",
+          "POP-01022"
+        ]
+      },
+      {
+        "kind": "feed",
+        "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+        "label": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves, Harry Hayward",
+        "popids": [
+          "POP-01023",
+          "POP-01024",
+          "POP-01027",
+          "POP-01223"
+        ]
+      },
+      {
+        "kind": "feed",
+        "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+        "label": "Oaks | game-result | (early-season) | Adash Stanley, AJ Dybantsa, Austin Reaves, Harry Hayward",
+        "popids": [
+          "POP-01023",
+          "POP-01024",
+          "POP-01027",
+          "POP-01223"
+        ]
+      },
+      {
+        "kind": "feed",
+        "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+        "label": "A's | rumor | (off-season) | Desmond Morton, Frank Reyna, Danny Horn, Vladimir Gonzalez, JR Rosado",
+        "popids": [
+          "POP-00051",
+          "POP-00079",
+          "POP-00022",
+          "POP-00598",
+          "POP-00054"
+        ]
+      },
+      {
+        "kind": "feed",
+        "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+        "label": "A's | community-outreach | (off-season) | Darrin Davis, Rafael Montez",
+        "popids": [
+          "POP-00021",
+          "POP-00136"
+        ]
+      },
+      {
+        "kind": "feed",
+        "ref": "Oakland_Sports_Feed cycle 113; rendered: world_summary_c113.md \"## Sports\" C113 (StoryAngle at the pointer)",
+        "label": "A's | rumor | (off-season) | Mark Aitken, Mike Paulson",
+        "popids": [
+          "POP-00003",
+          "POP-00527"
+        ]
+      },
+      {
+        "kind": "ripple",
+        "causeType": "sports",
+        "ref": "Ripple_Ledger cycle 113 (CauseType sports); rendered: world_summary_c113.md \"## What Moved\" > \"### sports\"",
+        "label": "sentiment | A's W3 [hot-streak]; Oaks W4 [hot-streak]"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "sports",
+        "ref": "Ripple_Ledger cycle 113 (CauseType sports); rendered: world_summary_c113.md \"## What Moved\" > \"### sports\"",
+        "label": "sentiment | aftermath: A's title week 3 after C110"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "sports",
+        "ref": "Ripple_Ledger cycle 113 (CauseType sports); rendered: world_summary_c113.md \"## What Moved\" > \"### sports\"",
+        "label": "game-night | The sports week reached 22 citizen(s) — 19 named, 10 staff week lines, 4 fan week lines",
+        "popids": [
+          "POP-00003",
+          "POP-00021",
+          "POP-00022",
+          "POP-00051",
+          "POP-00054",
+          "POP-00079",
+          "POP-00136",
+          "POP-00198",
+          "POP-00212",
+          "POP-00224",
+          "POP-00273",
+          "POP-00527",
+          "POP-00598",
+          "POP-01022",
+          "POP-01023",
+          "POP-01024",
+          "POP-01025",
+          "POP-01026",
+          "POP-01027",
+          "POP-01028"
+        ]
+      }
+    ],
+    "culture": [
+      {
+        "kind": "hood",
+        "ref": "output/neighborhood_texture_c113.md \"### Chinatown\"; events: world_summary_c113.md \"## World Events\"",
+        "label": "Chinatown | 1 world event(s) this cycle",
+        "hood": "Chinatown"
+      },
+      {
+        "kind": "hood",
+        "ref": "output/neighborhood_texture_c113.md \"### Downtown\"; events: world_summary_c113.md \"## World Events\"",
+        "label": "Downtown | 2 world event(s) this cycle",
+        "hood": "Downtown"
+      },
+      {
+        "kind": "hood",
+        "ref": "output/neighborhood_texture_c113.md \"### Fruitvale\"; events: world_summary_c113.md \"## World Events\"",
+        "label": "Fruitvale | 1 world event(s) this cycle",
+        "hood": "Fruitvale"
+      },
+      {
+        "kind": "hood",
+        "ref": "output/neighborhood_texture_c113.md \"### Jack London\"; events: world_summary_c113.md \"## World Events\"",
+        "label": "Jack London | 1 world event(s) this cycle",
+        "hood": "Jack London"
+      },
+      {
+        "kind": "hood",
+        "ref": "output/neighborhood_texture_c113.md \"### Lake Merritt\"; events: world_summary_c113.md \"## World Events\"",
+        "label": "Lake Merritt | 1 world event(s) this cycle",
+        "hood": "Lake Merritt"
+      },
+      {
+        "kind": "hood",
+        "ref": "output/neighborhood_texture_c113.md \"### Temescal\"; events: world_summary_c113.md \"## World Events\"",
+        "label": "Temescal | 1 world event(s) this cycle",
+        "hood": "Temescal"
+      },
+      {
+        "kind": "hood-index",
+        "ref": "output/neighborhood_texture_c113.md",
+        "label": "Per-hood texture blocks, all 22 neighborhoods (quiet hoods carry a quiet-week line)"
+      },
+      {
+        "kind": "evening",
+        "ref": "output/world_summary_c113.md \"## Evening Texture\"",
+        "label": "Named venues that moved — restaurants, fast food, nightlife spots, city events, media"
+      },
+      {
+        "kind": "milestones",
+        "ref": "output/world_summary_c113.md \"## Who Lived It\"; source: LifeHistory_Log cycle 113",
+        "label": "Citizen milestones with POPIDs — weddings, births, graduations, retirements, households formed"
+      },
+      {
+        "kind": "faith-registry",
+        "ref": "Faith_Organizations tab (LeaderPOPID-linked)",
+        "label": "Faith org registry — congregations, leaders, neighborhood, character"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "faith-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType faith-event); rendered: world_summary_c113.md \"## What Moved\" > \"### faith-event\"",
+        "label": "community_program | after-school tutoring program expands",
+        "hood": "Fruitvale"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "faith-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType faith-event); rendered: world_summary_c113.md \"## What Moved\" > \"### faith-event\"",
+        "label": "community_program | job training workshop begins new session",
+        "hood": "Temescal"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "faith-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType faith-event); rendered: world_summary_c113.md \"## What Moved\" > \"### faith-event\"",
+        "label": "community_program | youth program graduation ceremony",
+        "hood": "Downtown"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "faith-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType faith-event); rendered: world_summary_c113.md \"## What Moved\" > \"### faith-event\"",
+        "label": "community_program | after-school tutoring program expands",
+        "hood": "Lake Merritt"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "faith-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType faith-event); rendered: world_summary_c113.md \"## What Moved\" > \"### faith-event\"",
+        "label": "regular_service | special sermon addresses community concerns",
+        "hood": "Downtown"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "fame-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType fame-event); rendered: world_summary_c113.md \"## What Moved\" > \"### fame-event\"",
+        "label": "fame-rise | Rowan Pierce — the city is watching: wrote half a letter to family, then decided to call instead",
+        "hood": "Piedmont Ave",
+        "popids": [
+          "POP-00545"
+        ]
+      },
+      {
+        "kind": "ripple",
+        "causeType": "fame-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType fame-event); rendered: world_summary_c113.md \"## What Moved\" > \"### fame-event\"",
+        "label": "fame-rise | Dax Monroe — the city is watching: caught the recap of last night's game at the counter and stayed for the second retelling",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00769"
+        ]
+      },
+      {
+        "kind": "ripple",
+        "causeType": "fame-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType fame-event); rendered: world_summary_c113.md \"## What Moved\" > \"### fame-event\"",
+        "label": "tier-climb | Elliot Marbury — the city keeps saying the name: Tier 4 -> 3",
+        "hood": "Piedmont Ave",
+        "popids": [
+          "POP-00166"
+        ]
+      },
+      {
+        "kind": "ripple",
+        "causeType": "fame-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType fame-event); rendered: world_summary_c113.md \"## What Moved\" > \"### fame-event\"",
+        "label": "tier-climb | Tara Ellison — the city keeps saying the name: Tier 4 -> 3",
+        "hood": "Rockridge",
+        "popids": [
+          "POP-00546"
+        ]
+      },
+      {
+        "kind": "ripple",
+        "causeType": "fame-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType fame-event); rendered: world_summary_c113.md \"## What Moved\" > \"### fame-event\"",
+        "label": "tier-climb | Ines Sorensen — the city keeps saying the name: Tier 4 -> 3",
+        "hood": "Uptown",
+        "popids": [
+          "POP-01211"
+        ]
+      },
+      {
+        "kind": "ripple",
+        "causeType": "lifestyle-sighting",
+        "ref": "Ripple_Ledger cycle 113 (CauseType lifestyle-sighting); rendered: world_summary_c113.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "label": "sighting | Marisol Rivera spotted at Mercado Fruitvale",
+        "hood": "Fruitvale"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "lifestyle-sighting",
+        "ref": "Ripple_Ledger cycle 113 (CauseType lifestyle-sighting); rendered: world_summary_c113.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "label": "sighting | Claire Ashford spotted at Midnight Norae Karaoke",
+        "hood": "KONO"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "lifestyle-sighting",
+        "ref": "Ripple_Ledger cycle 113 (CauseType lifestyle-sighting); rendered: world_summary_c113.md \"## What Moved\" > \"### lifestyle-sighting\"",
+        "label": "sighting | Deacon Seymour spotted at Lakeshore Cigar Club",
+        "hood": "Lake Merritt"
+      }
+    ],
+    "business": [
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[3]; evidence: Neighborhood_Map row(s) 6; storyline INIT-007:implementation-active",
+        "label": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale | Business conditions in Fruitvale track the transit picture.",
+        "handle": {
+          "angle": "transit ailment — economic footprint, affected businesses, workforce impact in Fruitvale",
+          "hookLine": "Business conditions in Fruitvale track the transit picture.",
+          "citizens": [
+            "Aziz Rahimi (POP-00762)",
+            "Manjit Singh (POP-00766)",
+            "Luis Navarro (POP-00636)"
+          ]
+        },
+        "popids": [
+          "POP-00636",
+          "POP-00762",
+          "POP-00766"
+        ],
+        "hood": "Fruitvale"
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[10]; evidence: Neighborhood_Map row(s) ",
+        "label": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown | Business conditions in Downtown track the economic picture.",
+        "handle": {
+          "angle": "economic ailment — economic footprint, affected businesses, workforce impact in Downtown",
+          "hookLine": "Business conditions in Downtown track the economic picture.",
+          "citizens": [
+            "Liliana Salazar (POP-01128)",
+            "Wren Choi (POP-01137)",
+            "Solveig Anand (POP-01194)"
+          ]
+        },
+        "popids": [
+          "POP-01128",
+          "POP-01137",
+          "POP-01194"
+        ],
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Uptown, East Oakland"
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[11]; evidence: Initiative_Tracker row(s) 10; storyline INIT-010:operational",
+        "label": "West Oakland Tenant Defense Fund — economic upside, jobs and footprint in West Oakland | Business momentum in West Oakland tracks the civic gain.",
+        "handle": {
+          "angle": "West Oakland Tenant Defense Fund — economic upside, jobs and footprint in West Oakland",
+          "hookLine": "Business momentum in West Oakland tracks the civic gain.",
+          "citizens": [
+            "Daniel Cloak (POP-00722)",
+            "Darius Clark (POP-00961)",
+            "Henry Rivas (POP-00024)"
+          ]
+        },
+        "popids": [
+          "POP-00024",
+          "POP-00722",
+          "POP-00961"
+        ],
+        "hood": "West Oakland"
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[12]; evidence: Neighborhood_Map row(s) ",
+        "label": "civic — economic upside, jobs and footprint in Adams Point | Business momentum in Adams Point tracks the civic gain.",
+        "handle": {
+          "angle": "civic — economic upside, jobs and footprint in Adams Point",
+          "hookLine": "Business momentum in Adams Point tracks the civic gain.",
+          "citizens": [
+            "Debra Walker (POP-01206)",
+            "Elijah Campbell (POP-01217)",
+            "Astrid Freeman (POP-01222)"
+          ]
+        },
+        "popids": [
+          "POP-01206",
+          "POP-01217",
+          "POP-01222"
+        ],
+        "hood": "Adams Point"
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[13]; evidence: Neighborhood_Map row(s) ",
+        "label": "civic — economic upside, jobs and footprint in Brooklyn | Business momentum in Brooklyn tracks the civic gain.",
+        "handle": {
+          "angle": "civic — economic upside, jobs and footprint in Brooklyn",
+          "hookLine": "Business momentum in Brooklyn tracks the civic gain.",
+          "citizens": [
+            "Drago Helio (POP-00714)",
+            "Sefu Helio (POP-00988)",
+            "Minh Raimon (POP-01010)"
+          ]
+        },
+        "popids": [
+          "POP-00714",
+          "POP-00988",
+          "POP-01010"
+        ],
+        "hood": "Brooklyn"
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[14]; evidence: Neighborhood_Map row(s) ",
+        "label": "civic — economic upside, jobs and footprint in Glenview | Business momentum in Glenview tracks the civic gain.",
+        "handle": {
+          "angle": "civic — economic upside, jobs and footprint in Glenview",
+          "hookLine": "Business momentum in Glenview tracks the civic gain.",
+          "citizens": [
+            "Colin Perez (POP-01102)",
+            "Guadalupe Holloway (POP-01121)",
+            "Daniela Kapoor (POP-01209)"
+          ]
+        },
+        "popids": [
+          "POP-01102",
+          "POP-01121",
+          "POP-01209"
+        ],
+        "hood": "Glenview"
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[15]; evidence: Neighborhood_Map row(s) ",
+        "label": "civic — economic upside, jobs and footprint in Dimond | Business momentum in Dimond tracks the civic gain.",
+        "handle": {
+          "angle": "civic — economic upside, jobs and footprint in Dimond",
+          "hookLine": "Business momentum in Dimond tracks the civic gain.",
+          "citizens": [
+            "Devin Castellanos (POP-01146)",
+            "Ingeborg Hallstrom (POP-01181)",
+            "Patrick Clark (POP-01199)"
+          ]
+        },
+        "popids": [
+          "POP-01146",
+          "POP-01181",
+          "POP-01199"
+        ],
+        "hood": "Dimond"
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[16]; evidence: Neighborhood_Map row(s) ",
+        "label": "civic — economic upside, jobs and footprint in East Oakland | Business momentum in East Oakland tracks the civic gain.",
+        "handle": {
+          "angle": "civic — economic upside, jobs and footprint in East Oakland",
+          "hookLine": "Business momentum in East Oakland tracks the civic gain.",
+          "citizens": [
+            "Ruth Anyanwu (POP-01147)",
+            "Maria Conteras (POP-01047)",
+            "Hector Quintanilla (POP-01164)"
+          ]
+        },
+        "popids": [
+          "POP-01047",
+          "POP-01147",
+          "POP-01164"
+        ],
+        "hood": "East Oakland"
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[17]; evidence: Neighborhood_Map row(s) ",
+        "label": "INIT-001 — economic upside, jobs and footprint in West Oakland | Business momentum in West Oakland tracks the economic gain.",
+        "handle": {
+          "angle": "INIT-001 — economic upside, jobs and footprint in West Oakland",
+          "hookLine": "Business momentum in West Oakland tracks the economic gain.",
+          "citizens": [
+            "Clarissa Dane (POP-00143)",
+            "Darius Clark (POP-00961)",
+            "Henry Rivas (POP-00024)"
+          ]
+        },
+        "popids": [
+          "POP-00024",
+          "POP-00143",
+          "POP-00961"
+        ],
+        "hood": "West Oakland"
+      },
+      {
+        "kind": "anomaly",
+        "ref": "output/engine_audit_c113.json patterns[18]; evidence: Neighborhood_Map row(s) ",
+        "label": "economic — economic upside, jobs and footprint in Downtown | Business momentum in Downtown tracks the economic gain.",
+        "handle": {
+          "angle": "economic — economic upside, jobs and footprint in Downtown",
+          "hookLine": "Business momentum in Downtown tracks the economic gain.",
+          "citizens": [
+            "Iris Pham (POP-01203)",
+            "Pooja Coleman (POP-01208)",
+            "Mason Miller (POP-00127)"
+          ]
+        },
+        "popids": [
+          "POP-00127",
+          "POP-01203",
+          "POP-01208"
+        ],
+        "hood": "Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Chinatown, Brooklyn, Eastlake, Glenview, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, Baylight District"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "neighborhood-fold",
+        "ref": "Ripple_Ledger cycle 113 (CauseType neighborhood-fold); rendered: world_summary_c113.md \"## What Moved\" > \"### neighborhood-fold\"",
+        "label": "fold-applied/initiative-implementation | Initiative work landed in 7 neighborhood(s): Downtown, Temescal, West Oakland, Fruitvale, Jack London, Grand Lake, East Oakland"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "neighborhood-fold",
+        "ref": "Ripple_Ledger cycle 113 (CauseType neighborhood-fold); rendered: world_summary_c113.md \"## What Moved\" > \"### neighborhood-fold\"",
+        "label": "fold-applied/approval-shift | Cycle 112 shifts in how residents rate their officials reached 22 neighborhood(s): Downtown, Temescal, Laurel, West Oakland, Fruitvale, Jack London, Rockridge, Adams Point, Grand Lake, Piedmont Ave, Chinatown, Brooklyn, Eastlake, Glenview, Dimond, Ivy Hill, San Antonio, KONO, Lake Merritt, Uptown, …"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "edition-coverage",
+        "ref": "Ripple_Ledger cycle 113 (CauseType edition-coverage); rendered: world_summary_c113.md \"## What Moved\" > \"### edition-coverage\"",
+        "label": "traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity | Edition coverage lifted the city: traffic -0.02, retail -0.042, nightlife -0.04, publicSpaces +0.01, communityEngagement +0.028, culturalActivity -0.044"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "edition-coverage",
+        "ref": "Ripple_Ledger cycle 113 (CauseType edition-coverage); rendered: world_summary_c113.md \"## What Moved\" > \"### edition-coverage\"",
+        "label": "sentiment | prior-cycle coverage ratings × sentimentWeight × 0.015, clamped ±0.20"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "chaos-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType chaos-event); rendered: world_summary_c113.md \"## What Moved\" > \"### chaos-event\"",
+        "label": "lost_contract_notice | A letter ends the biggest account on the books — the owner reads it twice before telling the staff.",
+        "hood": "Chinatown"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "chaos-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType chaos-event); rendered: world_summary_c113.md \"## What Moved\" > \"### chaos-event\"",
+        "label": "stalled_train | A train dead on the track between stations — riders walked the tunnel, and the morning never recovered.",
+        "hood": "Rockridge"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "chaos-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType chaos-event); rendered: world_summary_c113.md \"## What Moved\" > \"### chaos-event\"",
+        "label": "medical_emergency | Lights and sirens at the curb — a medical emergency the neighbors will retell.",
+        "hood": "Chinatown"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "chaos-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType chaos-event); rendered: world_summary_c113.md \"## What Moved\" > \"### chaos-event\"",
+        "label": "forced_temporary_closure | Shuttered pending compliance — staff sent home, regulars turned away at the door.",
+        "hood": "Chinatown"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "faith-join",
+        "ref": "Ripple_Ledger cycle 113 (CauseType faith-join); rendered: world_summary_c113.md \"## What Moved\" > \"### faith-join\"",
+        "label": "congregation-growth | 3 citizen(s) joined the congregation at Lakeshore Unitarian Universalist Fellowship",
+        "hood": "Lake Merritt",
+        "popids": [
+          "POP-00079",
+          "POP-00707",
+          "POP-00783"
+        ]
+      },
+      {
+        "kind": "ripple",
+        "causeType": "trajectory",
+        "ref": "Ripple_Ledger cycle 113 (CauseType trajectory); rendered: world_summary_c113.md \"## What Moved\" > \"### trajectory\"",
+        "label": "NEIGHBORHOOD_BOOM | Downtown boom sustained — momentum 10/10, the block everyone wants onto",
+        "hood": "Downtown"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "trajectory",
+        "ref": "Ripple_Ledger cycle 113 (CauseType trajectory); rendered: world_summary_c113.md \"## What Moved\" > \"### trajectory\"",
+        "label": "HOUSING_PRESSURE_HIGH | Downtown housing pressure at 10/10: rents climbing, households stretching to stay",
+        "hood": "Downtown"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "trajectory",
+        "ref": "Ripple_Ledger cycle 113 (CauseType trajectory); rendered: world_summary_c113.md \"## What Moved\" > \"### trajectory\"",
+        "label": "NEIGHBORHOOD_COOLING | Laurel cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "hood": "Laurel"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "trajectory",
+        "ref": "Ripple_Ledger cycle 113 (CauseType trajectory); rendered: world_summary_c113.md \"## What Moved\" > \"### trajectory\"",
+        "label": "NEIGHBORHOOD_BOOM | Fruitvale boom sustained — momentum 10/10, the block everyone wants onto",
+        "hood": "Fruitvale"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "trajectory",
+        "ref": "Ripple_Ledger cycle 113 (CauseType trajectory); rendered: world_summary_c113.md \"## What Moved\" > \"### trajectory\"",
+        "label": "NEIGHBORHOOD_BOOM | Jack London boom sustained — momentum 10/10, the block everyone wants onto",
+        "hood": "Jack London"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "trajectory",
+        "ref": "Ripple_Ledger cycle 113 (CauseType trajectory); rendered: world_summary_c113.md \"## What Moved\" > \"### trajectory\"",
+        "label": "HOUSING_PRESSURE_HIGH | Jack London housing pressure at 8.5/10: rents climbing, households stretching to stay",
+        "hood": "Jack London"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "trajectory",
+        "ref": "Ripple_Ledger cycle 113 (CauseType trajectory); rendered: world_summary_c113.md \"## What Moved\" > \"### trajectory\"",
+        "label": "NEIGHBORHOOD_RISING | Grand Lake turning upward: retail busy, events drawing crowds, people moving in",
+        "hood": "Grand Lake"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "trajectory",
+        "ref": "Ripple_Ledger cycle 113 (CauseType trajectory); rendered: world_summary_c113.md \"## What Moved\" > \"### trajectory\"",
+        "label": "NEIGHBORHOOD_BOOM | Grand Lake boom sustained — momentum 10/10, the block everyone wants onto",
+        "hood": "Grand Lake"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "trajectory",
+        "ref": "Ripple_Ledger cycle 113 (CauseType trajectory); rendered: world_summary_c113.md \"## What Moved\" > \"### trajectory\"",
+        "label": "NEIGHBORHOOD_BOOM | Uptown boom sustained — momentum 10/10, the block everyone wants onto",
+        "hood": "Uptown"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "trajectory",
+        "ref": "Ripple_Ledger cycle 113 (CauseType trajectory); rendered: world_summary_c113.md \"## What Moved\" > \"### trajectory\"",
+        "label": "HOUSING_PRESSURE_HIGH | Uptown housing pressure at 10/10: rents climbing, households stretching to stay",
+        "hood": "Uptown"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "trajectory",
+        "ref": "Ripple_Ledger cycle 113 (CauseType trajectory); rendered: world_summary_c113.md \"## What Moved\" > \"### trajectory\"",
+        "label": "NEIGHBORHOOD_COOLING | East Oakland cooling off: foot traffic down, storefronts quieter than the rest of the city",
+        "hood": "East Oakland"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "migration",
+        "ref": "Ripple_Ledger cycle 113 (CauseType migration); rendered: world_summary_c113.md \"## What Moved\" > \"### migration\"",
+        "label": "CITIZEN_RELOCATED | Desmond Morton moved from Jack London to Chinatown — leaving Jack London for a better fit",
+        "hood": "Chinatown",
+        "popids": [
+          "POP-00051"
+        ]
+      },
+      {
+        "kind": "ripple",
+        "causeType": "migration",
+        "ref": "Ripple_Ledger cycle 113 (CauseType migration); rendered: world_summary_c113.md \"## What Moved\" > \"### migration\"",
+        "label": "CITIZEN_RELOCATED | Ariana Reyes moved from Downtown to West Oakland — moving up from Downtown — sold the house in Downtown to rent up",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00133"
+        ]
+      },
+      {
+        "kind": "ripple",
+        "causeType": "migration",
+        "ref": "Ripple_Ledger cycle 113 (CauseType migration); rendered: world_summary_c113.md \"## What Moved\" > \"### migration\"",
+        "label": "CITIZEN_RELOCATED | Tina Kozlov moved from Temescal to Grand Lake — moving up from Temescal",
+        "hood": "Grand Lake",
+        "popids": [
+          "POP-00628"
+        ]
+      },
+      {
+        "kind": "ripple",
+        "causeType": "migration",
+        "ref": "Ripple_Ledger cycle 113 (CauseType migration); rendered: world_summary_c113.md \"## What Moved\" > \"### migration\"",
+        "label": "CITIZEN_RELOCATED | Linda Chow moved from Rockridge to West Oakland — leaving Rockridge for a better fit — sold up and bought in West Oakland",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-00749"
+        ]
+      },
+      {
+        "kind": "ripple",
+        "causeType": "migration",
+        "ref": "Ripple_Ledger cycle 113 (CauseType migration); rendered: world_summary_c113.md \"## What Moved\" > \"### migration\"",
+        "label": "CITIZEN_RELOCATED | Austin Reaves moved from Downtown to West Oakland — moving up from Downtown — sold up and bought in West Oakland",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-01027"
+        ]
+      },
+      {
+        "kind": "ripple",
+        "causeType": "migration",
+        "ref": "Ripple_Ledger cycle 113 (CauseType migration); rendered: world_summary_c113.md \"## What Moved\" > \"### migration\"",
+        "label": "CITIZEN_RELOCATED | Amara Osei moved from Jack London to West Oakland — moving up from Jack London",
+        "hood": "West Oakland",
+        "popids": [
+          "POP-01110"
+        ]
+      },
+      {
+        "kind": "ripple",
+        "causeType": "economic-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType economic-event); rendered: world_summary_c113.md \"## What Moved\" > \"### economic-event\"",
+        "label": "carryover | carryover: cycle 1 of 3",
+        "hood": "Downtown"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "economic-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType economic-event); rendered: world_summary_c113.md \"## What Moved\" > \"### economic-event\"",
+        "label": "carryover | carryover: cycle 5 of 6"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "economic-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType economic-event); rendered: world_summary_c113.md \"## What Moved\" > \"### economic-event\"",
+        "label": "sector-impact:services/retail | Ivy Hill Market lost 2 employees",
+        "hood": "Ivy Hill"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "initiative",
+        "ref": "Ripple_Ledger cycle 113 (CauseType initiative); rendered: world_summary_c113.md \"## What Moved\" > \"### initiative\"",
+        "label": "carryover | carryover: cycle 1 of 15",
+        "hood": "West Oakland"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "city-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType city-event); rendered: world_summary_c113.md \"## What Moved\" > \"### city-event\"",
+        "label": "city-event | Jack London Cozy Nights Film Series (Jack London)",
+        "hood": "Jack London"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "city-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType city-event); rendered: world_summary_c113.md \"## What Moved\" > \"### city-event\"",
+        "label": "city-event | The Villanueva Family Block Party (San Antonio)",
+        "hood": "San Antonio"
+      },
+      {
+        "kind": "ripple",
+        "causeType": "city-event",
+        "ref": "Ripple_Ledger cycle 113 (CauseType city-event); rendered: world_summary_c113.md \"## What Moved\" > \"### city-event\"",
+        "label": "city-event | Lake Merritt Lantern Parade (Lake Merritt)",
+        "hood": "Lake Merritt"
+      }
+    ]
+  },
+  "storylines": {
+    "civic": [
+      {
+        "id": "INIT-001:disbursement-active",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-001",
+        "name": "West Oakland Stabilization Fund — disbursement-active",
+        "stage": "disbursement-active",
+        "status": "open",
+        "startCycle": null,
+        "endCycle": null,
+        "age": null,
+        "firstSeen": true,
+        "hoods": [
+          "West Oakland"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-001)",
+        "hasLedgerRow": true
+      },
+      {
+        "id": "INIT-002:dispatch-live",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-002",
+        "name": "Oakland Alternative Response Initiative — dispatch-live",
+        "stage": "dispatch-live",
+        "status": "open",
+        "startCycle": null,
+        "endCycle": null,
+        "age": null,
+        "firstSeen": true,
+        "hoods": [
+          "West Oakland",
+          "Fruitvale",
+          "East Oakland"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-002)",
+        "hasLedgerRow": true
+      },
+      {
+        "id": "INIT-003:design-phase",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-003",
+        "name": "Fruitvale Transit Hub Phase II — Visioning — design-phase",
+        "stage": "design-phase",
+        "status": "open",
+        "startCycle": null,
+        "endCycle": null,
+        "age": null,
+        "firstSeen": true,
+        "hoods": [
+          "Fruitvale"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-003)",
+        "hasLedgerRow": true
+      },
+      {
+        "id": "INIT-005:operational",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-005",
+        "name": "Temescal Community Health Center — operational",
+        "stage": "operational",
+        "status": "open",
+        "startCycle": null,
+        "endCycle": null,
+        "age": null,
+        "firstSeen": true,
+        "hoods": [
+          "Temescal"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-005)",
+        "hasLedgerRow": true
+      },
+      {
+        "id": "INIT-006:construction-active",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-006",
+        "name": "Baylight District — Final Council Vote — construction-active",
+        "stage": "construction-active",
+        "status": "open",
+        "startCycle": null,
+        "endCycle": null,
+        "age": null,
+        "firstSeen": true,
+        "hoods": [
+          "Jack London",
+          "Downtown"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-006)",
+        "hasLedgerRow": true
+      },
+      {
+        "id": "INIT-007:implementation-active",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-007",
+        "name": "Oakland Youth Apprenticeship Pipeline — implementation-active",
+        "stage": "implementation-active",
+        "status": "open",
+        "startCycle": null,
+        "endCycle": null,
+        "age": null,
+        "firstSeen": true,
+        "hoods": [
+          "West Oakland",
+          "East Oakland",
+          "Fruitvale"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-007)",
+        "hasLedgerRow": true
+      },
+      {
+        "id": "INIT-008:legislation-filed",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-008",
+        "name": "Downtown Economic Revitalization — legislation-filed",
+        "stage": "legislation-filed",
+        "status": "open",
+        "startCycle": null,
+        "endCycle": null,
+        "age": null,
+        "firstSeen": true,
+        "hoods": [
+          "Downtown"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-008)",
+        "hasLedgerRow": true
+      },
+      {
+        "id": "INIT-009:legislation-filed",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-009",
+        "name": "Commercial Stabilization for Grand Lake — legislation-filed",
+        "stage": "legislation-filed",
+        "status": "open",
+        "startCycle": null,
+        "endCycle": null,
+        "age": null,
+        "firstSeen": true,
+        "hoods": [
+          "Grand Lake"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-009)",
+        "hasLedgerRow": true
+      },
+      {
+        "id": "INIT-010:operational",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-010",
+        "name": "West Oakland Tenant Defense Fund — operational",
+        "stage": "operational",
+        "status": "open",
+        "startCycle": null,
+        "endCycle": null,
+        "age": null,
+        "firstSeen": true,
+        "hoods": [
+          "West Oakland"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-010)",
+        "hasLedgerRow": false
+      },
+      {
+        "id": "INIT-011:announced",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-011",
+        "name": "Ivy Hill Revitalization Initiative — announced",
+        "stage": "announced",
+        "status": "open",
+        "startCycle": null,
+        "endCycle": null,
+        "age": null,
+        "firstSeen": true,
+        "hoods": [
+          "Ivy Hill"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-011)",
+        "hasLedgerRow": true
+      },
+      {
+        "id": "INIT-012:announced",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-012",
+        "name": "Dimond Revitalization Initiative — announced",
+        "stage": "announced",
+        "status": "open",
+        "startCycle": null,
+        "endCycle": null,
+        "age": null,
+        "firstSeen": true,
+        "hoods": [
+          "Dimond"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-012)",
+        "hasLedgerRow": false
+      },
+      {
+        "id": "INIT-010:vote-scheduled",
+        "type": "initiative-stage",
+        "initiativeId": "INIT-010",
+        "name": "West Oakland Tenant Defense Fund — vote-scheduled",
+        "stage": "vote-scheduled",
+        "movedTo": "operational",
+        "status": "closed",
+        "startCycle": null,
+        "endCycle": 113,
+        "age": null,
+        "firstSeen": true,
+        "hoods": [
+          "West Oakland"
+        ],
+        "desks": [
+          "civic"
+        ],
+        "ref": "Initiative_Tracker (InitiativeID INIT-010)",
+        "hasLedgerRow": true
+      }
+    ],
+    "sports": [],
+    "culture": [],
+    "business": []
+  },
+  "storylineRegistry": [
+    {
+      "id": "INIT-001:disbursement-active",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-001",
+      "name": "West Oakland Stabilization Fund — disbursement-active",
+      "stage": "disbursement-active",
+      "status": "open",
+      "startCycle": null,
+      "endCycle": null,
+      "age": null,
+      "firstSeen": true,
+      "hoods": [
+        "West Oakland"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-001)",
+      "hasLedgerRow": true
+    },
+    {
+      "id": "INIT-002:dispatch-live",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-002",
+      "name": "Oakland Alternative Response Initiative — dispatch-live",
+      "stage": "dispatch-live",
+      "status": "open",
+      "startCycle": null,
+      "endCycle": null,
+      "age": null,
+      "firstSeen": true,
+      "hoods": [
+        "West Oakland",
+        "Fruitvale",
+        "East Oakland"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-002)",
+      "hasLedgerRow": true
+    },
+    {
+      "id": "INIT-003:design-phase",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-003",
+      "name": "Fruitvale Transit Hub Phase II — Visioning — design-phase",
+      "stage": "design-phase",
+      "status": "open",
+      "startCycle": null,
+      "endCycle": null,
+      "age": null,
+      "firstSeen": true,
+      "hoods": [
+        "Fruitvale"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-003)",
+      "hasLedgerRow": true
+    },
+    {
+      "id": "INIT-005:operational",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-005",
+      "name": "Temescal Community Health Center — operational",
+      "stage": "operational",
+      "status": "open",
+      "startCycle": null,
+      "endCycle": null,
+      "age": null,
+      "firstSeen": true,
+      "hoods": [
+        "Temescal"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-005)",
+      "hasLedgerRow": true
+    },
+    {
+      "id": "INIT-006:construction-active",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-006",
+      "name": "Baylight District — Final Council Vote — construction-active",
+      "stage": "construction-active",
+      "status": "open",
+      "startCycle": null,
+      "endCycle": null,
+      "age": null,
+      "firstSeen": true,
+      "hoods": [
+        "Jack London",
+        "Downtown"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-006)",
+      "hasLedgerRow": true
+    },
+    {
+      "id": "INIT-007:implementation-active",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-007",
+      "name": "Oakland Youth Apprenticeship Pipeline — implementation-active",
+      "stage": "implementation-active",
+      "status": "open",
+      "startCycle": null,
+      "endCycle": null,
+      "age": null,
+      "firstSeen": true,
+      "hoods": [
+        "West Oakland",
+        "East Oakland",
+        "Fruitvale"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-007)",
+      "hasLedgerRow": true
+    },
+    {
+      "id": "INIT-008:legislation-filed",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-008",
+      "name": "Downtown Economic Revitalization — legislation-filed",
+      "stage": "legislation-filed",
+      "status": "open",
+      "startCycle": null,
+      "endCycle": null,
+      "age": null,
+      "firstSeen": true,
+      "hoods": [
+        "Downtown"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-008)",
+      "hasLedgerRow": true
+    },
+    {
+      "id": "INIT-009:legislation-filed",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-009",
+      "name": "Commercial Stabilization for Grand Lake — legislation-filed",
+      "stage": "legislation-filed",
+      "status": "open",
+      "startCycle": null,
+      "endCycle": null,
+      "age": null,
+      "firstSeen": true,
+      "hoods": [
+        "Grand Lake"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-009)",
+      "hasLedgerRow": true
+    },
+    {
+      "id": "INIT-010:operational",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-010",
+      "name": "West Oakland Tenant Defense Fund — operational",
+      "stage": "operational",
+      "status": "open",
+      "startCycle": null,
+      "endCycle": null,
+      "age": null,
+      "firstSeen": true,
+      "hoods": [
+        "West Oakland"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-010)",
+      "hasLedgerRow": false
+    },
+    {
+      "id": "INIT-011:announced",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-011",
+      "name": "Ivy Hill Revitalization Initiative — announced",
+      "stage": "announced",
+      "status": "open",
+      "startCycle": null,
+      "endCycle": null,
+      "age": null,
+      "firstSeen": true,
+      "hoods": [
+        "Ivy Hill"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-011)",
+      "hasLedgerRow": true
+    },
+    {
+      "id": "INIT-012:announced",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-012",
+      "name": "Dimond Revitalization Initiative — announced",
+      "stage": "announced",
+      "status": "open",
+      "startCycle": null,
+      "endCycle": null,
+      "age": null,
+      "firstSeen": true,
+      "hoods": [
+        "Dimond"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-012)",
+      "hasLedgerRow": false
+    },
+    {
+      "id": "INIT-010:vote-scheduled",
+      "type": "initiative-stage",
+      "initiativeId": "INIT-010",
+      "name": "West Oakland Tenant Defense Fund — vote-scheduled",
+      "stage": "vote-scheduled",
+      "movedTo": "operational",
+      "status": "closed",
+      "startCycle": null,
+      "endCycle": 113,
+      "age": null,
+      "firstSeen": true,
+      "hoods": [
+        "West Oakland"
+      ],
+      "desks": [
+        "civic"
+      ],
+      "ref": "Initiative_Tracker (InitiativeID INIT-010)",
+      "hasLedgerRow": true
+    }
+  ],
+  "bylineCandidates": {
+    "civic": {
+      "name": "Carmen Delaine",
+      "popid": "POP-00011",
+      "basis": "beat",
+      "recentUse": 0
+    },
+    "sports": {
+      "name": "Anthony Raines",
+      "popid": "POP-00017",
+      "basis": "beat",
+      "recentUse": 0
+    },
+    "culture": {
+      "name": "Angela Reyes",
+      "popid": "POP-00156",
+      "basis": "beat",
+      "recentUse": 0
+    },
+    "business": {
+      "name": "Jordan Velez",
+      "popid": "POP-00153",
+      "basis": "beat",
+      "recentUse": 0
+    }
+  }
+}

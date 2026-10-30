@@ -548,12 +548,12 @@ console.log('\nTest 11d: emitDeskSignal (synthetic data)');
   const sig = helper.emitDeskSignal(100, data);
   const flat = JSON.stringify(sig);
 
-  // Lane counts: civic = anomaly + 2 initiatives + 1 vote + civic-log + 1 ripple = 6
-  // (engine.20d: no prior snapshot here, so movement is unread and both seed);
+  // Lane counts: civic = anomaly + 1 vote + civic-log + 1 ripple = 4 (engine.20d:
+  // no prior snapshot here, so movement is unread and no initiative seeds);
   // sports = 1 feed + 1 ripple = 2; culture = 1 hood + 4 fixed pointers + 1 ripple = 6;
   // business = 1 unmapped ripple.
-  assertEqual('civic lane count', sig.lanes.civic.length, 6);
-  assertEqual('engine.20d: no prior snapshot → every initiative seeds', sig.lanes.civic.filter(e => e.kind === 'initiative').length, 2);
+  assertEqual('civic lane count', sig.lanes.civic.length, 4);
+  assertEqual('engine.20d: no prior snapshot → no initiative seed', sig.lanes.civic.filter(e => e.kind === 'initiative').length, 0);
   assert('engine.20d: missing prior snapshot is noted', sig.meta.notes.some(n => n.includes('no engine_audit_c99 Initiative_Tracker snapshot')));
   assertEqual('sports lane count', sig.lanes.sports.length, 2);
   assertEqual('culture lane count', sig.lanes.culture.length, 6);
@@ -694,11 +694,17 @@ console.log('\nTest 11e2: initiative seeds on movement only (engine.20d)');
   assertEqual('row absent from last Cycle → seed (new filing)',
     seeded(signal([base, row({ InitiativeID: 'INIT-902', ProposedCycle: '99' })], [base])), ['INIT-902']);
 
-  // No prior snapshot: movement cannot be read, so nothing is dropped — every row
-  // seeds as before the cut (codex F2: a new filing or status flip must not vanish).
+  // A date first set is city hall acting that week (builder 2026-10-29).
+  assertEqual('renewal vote newly staged → seed',
+    seeded(signal([row({ RenewalVoteCycle: '101', RenewalAmount: '500000' })], [base])), ['INIT-901']);
+
+  // No prior snapshot: movement cannot be read, and unknown is not movement —
+  // a stationary row and a would-be new filing are both withheld, never both
+  // presented as moved (codex re-review F2); the vote seed still fires.
   const s2 = signal([base, row({ InitiativeID: 'INIT-903', ProposedCycle: '99', Status: 'proposed' })], undefined);
-  assertEqual('no prior: every initiative seeds', seeded(s2), ['INIT-901', 'INIT-903']);
-  assert('no prior: noted', s2.meta.notes.some(n => n.includes('no engine_audit_c99 Initiative_Tracker snapshot') && n.includes('every initiative seeds')));
+  assertEqual('no prior: no initiative seeds', seeded(s2), []);
+  assertEqual('no prior: vote seeds unaffected', s2.lanes.civic.filter(e => e.kind === 'vote').length, 2);
+  assert('no prior: noted', s2.meta.notes.some(n => n.includes('no engine_audit_c99 Initiative_Tracker snapshot') && n.includes('no initiative seeds')));
   const s3 = helper.emitDeskSignal(100, {
     auditJson: { snapshots: { Initiative_Tracker: [base] } },
     priorInitiatives: { priorCycle: 99, rows: null, why: 'unreadable: Unexpected token' },
@@ -711,7 +717,7 @@ console.log('\nTest 11e2: initiative seeds on movement only (engine.20d)');
     helper.initiativeMoves(row({ LastDisburseCycle: '100', Status: 'vetoed' }), base),
     ['LastDisburseCycle 99 → 100', 'Status passed → vetoed']);
   assertEqual('initiativeMoves: new row', helper.initiativeMoves(base, null), ['new filing']);
-  assertEqual('initiativeMoves: no prior snapshot', helper.initiativeMoves(base, undefined), ['movement unread (no prior snapshot)']);
+  assertEqual('initiativeMoves: no prior snapshot → nothing known to have moved', helper.initiativeMoves(base, undefined), []);
   assertEqual('initiativeMoves: a numeric cell equal to its string prior is no move', helper.initiativeMoves(row({ LastDisburseCycle: 99 }), base), []);
   assertEqual('loadPriorInitiatives: no file → rows null with reason', helper.loadPriorInitiatives(1), { priorCycle: 0, rows: null, why: 'file not found' });
 }

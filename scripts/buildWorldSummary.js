@@ -1192,18 +1192,19 @@ function handleEntry(h) {
 // a held vote shows in Status / Outcome / RenewalOutcome (a quorum-delayed
 // renewal keeps its RenewalVoteCycle and writes RenewalOutcome a week later),
 // an opening shows as the phase going operational (a stalled build never
-// opens). LastWorkCycle, NextActionCycle and MilestoneNotes are the chain's
-// weekly tick, never movement.
+// opens). A clock first set counts too — a vote, renewal vote or opening
+// scheduled is city hall acting that week (builder 2026-10-29). LastWorkCycle,
+// NextActionCycle and MilestoneNotes are the chain's weekly tick, never movement.
 const INITIATIVE_MOVE_CLOCKS = ['LastStageChangeCycle', 'LastDisburseCycle', 'MayoralActionCycle',
   'VoteCycle', 'OverrideVoteCycle', 'ProposedCycle', 'RenewalVoteCycle', 'RenewalCreditCycle', 'OpensCycle'];
 const INITIATIVE_MOVE_STATES = ['Status', 'ImplementationPhase', 'Stage', 'Outcome', 'OverrideOutcome', 'RenewalOutcome'];
 
 // What moved on one Initiative_Tracker row ([] = nothing). prior: last Cycle's
 // row; null = the row is new this week; undefined = no prior snapshot, so
-// movement cannot be read and the row seeds as it did before the cut.
+// movement cannot be read — unknown is not movement, nothing seeds.
 function initiativeMoves(it, prior) {
   const v = x => (x === undefined || x === null) ? '' : String(x).trim();
-  if (prior === undefined) return ['movement unread (no prior snapshot)'];
+  if (prior === undefined) return [];
   if (prior === null) return ['new filing'];
   const moves = [];
   for (const col of INITIATIVE_MOVE_CLOCKS.concat(INITIATIVE_MOVE_STATES)) {
@@ -1291,7 +1292,7 @@ function emitDeskSignal(cycle, data) {
   const priorById = priorRows ? new Map(priorRows.map(r => [String(r.InitiativeID || '').trim(), r])) : null;
   if (initiatives.length && !priorById) {
     const why = priorInitiatives && priorInitiatives.why ? ` (${priorInitiatives.why})` : '';
-    notes.push(`no engine_audit_c${cycle - 1} Initiative_Tracker snapshot${why} — initiative movement unread; every initiative seeds this Cycle`);
+    notes.push(`no engine_audit_c${cycle - 1} Initiative_Tracker snapshot${why} — initiative movement unread; no initiative seeds this Cycle (vote seeds and storylines still carry them)`);
   }
   for (const it of initiatives) {
     const prior = priorById ? (priorById.get(String(it.InitiativeID || '').trim()) || null) : undefined;

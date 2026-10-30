@@ -212,6 +212,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[for-claude-review/2026-10-29-codex-undocked-agency-and-reporting]]** — Codex proposal for pilot choice, approved flight evidence, and Nia's show reporting; builder review pending. *(plan, media, undocked, draft)*
 - **[[for-claude-review/2026-10-29-codex-pipeline93-owed-diff-review]]** — Codex review of commit 933883b6: zero-reserve path checked, six owed-delivery and receipt findings; HOLD on R=6 pending fixes. *(reference, media, citizens, active)*
 - **[[for-claude-review/2026-10-29-codex-pipeline93-owed-rereview]]** — Codex re-review of fold 15e44d0d: F1–F6 dispositions, four remaining reservation and receipt findings; HOLD on R=6. *(reference, media, citizens, active)*
+- **[[for-claude-review/2026-10-29-codex-pipeline93-owed-round3]]** — Codex round 3 review of c67d4aac: R2/R3 ship, three remaining pinning and journal findings; HOLD on R=6. *(reference, media, citizens, active)*
 - **[[media/HARTLEY_VISUAL_BAG]]** — DJ Hartley visual record (grok). *(reference, media, sports, photo, active)*
 - **[[media/P_SLAYER_JOURNEY_INDEX]]** — P Slayer's journey across editions. *(entity, media, active)*
 - **[[media/PAULSON_CARPENTERS_LINE]]** — "The Carpenter's Line" — Mike Paulson backstory by Hal Richmond. *(entity, media, active)*

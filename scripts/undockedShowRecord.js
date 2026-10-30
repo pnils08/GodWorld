@@ -14,8 +14,11 @@ const ON = false;
 const SHOW = path.join(path.resolve(__dirname, '..'), 'output', 'spacemolt-show');
 const DAY_NAMES = { sun: 'Sunday', mon: 'Monday', tue: 'Tuesday', wed: 'Wednesday', thu: 'Thursday', fri: 'Friday', sat: 'Saturday' };
 const LOG_CAP = 300;
-// A captain's log entry shaped as a working note (54 of 104 on 2026-10-30) is the runner's handoff, not the pilot talking.
-const HANDOFF_RE = /session handoff|next step|active goal/i;
+// A captain's log entry shaped as a working note (54 of 104 on 2026-10-30) is the runner's handoff, not the pilot talking;
+// one that carries an id, a date or a model name is not quoted either (codex F6). Whole entries drop — nothing is scrubbed.
+const { LEAK_DATE_PAT, LEAK_MODEL_PAT } = require('../lib/memoryFence');
+const HANDOFF_RE = /session handoff|\bhandoff\b|next step|active goal/i;
+const NOT_QUOTED = [HANDOFF_RE, /POP-\d|undocked-pop|\bepisode\b/i, new RegExp(LEAK_DATE_PAT), new RegExp(LEAK_MODEL_PAT, 'i'), /\b20\d\d-\d\d-\d\d/];
 const DETAIL_NIGHTS = 3; // the latest nights told one by one, whatever their Cycle; the rest as one line
 
 function readJson(p) { return JSON.parse(fs.readFileSync(p, 'utf8')); }
@@ -86,8 +89,9 @@ function nightClauses(night) {
   const fe = (night.intake && night.intake.FeedEvent) || {};
   const val = (k) => (F[k] && F[k].value !== undefined ? F[k].value : undefined);
   const out = [];
-  // No archive and no feed systems: nothing says what the night held, so nothing is claimed about it.
-  if (!night.archive && !Array.isArray(fe.Systems)) return { clauses: ['flew a night whose details never came back'], ended: '', moved: null };
+  // No archive and no feed systems: nothing says what the night held, so nothing is claimed about it. An empty feed list
+  // is no evidence either way (a night can mine without a jump), so it is unknown too (codex F5).
+  if (!night.archive && !(Array.isArray(fe.Systems) && fe.Systems.length)) return { clauses: ['flew a night whose details never came back'], ended: '', moved: null };
 
   const seen = new Set();
   const systems = (Array.isArray(val('systems_visited')) ? val('systems_visited') : (Array.isArray(fe.Systems) ? fe.Systems : []))
@@ -138,7 +142,7 @@ function nightClauses(night) {
 // The pilot's own sign-off for the night: the last windowed log entry that is not a working note, cleaned and capped.
 function captainsLog(night) {
   const L = (night.archive && night.archive.captains_log) || {};
-  const own = (Array.isArray(L.entries) ? L.entries : []).map((e) => String((e && e.text) || '')).filter((t) => t.trim() && !HANDOFF_RE.test(t));
+  const own = (Array.isArray(L.entries) ? L.entries : []).map((e) => String((e && e.text) || '')).filter((t) => t.trim() && !NOT_QUOTED.some((re) => re.test(t)));
   if (!own.length) return '';
   // a log written with escaped line breaks (backslash-n) reads as one; list dashes and markdown marks drop
   let t = own[own.length - 1].replace(/\\n/g, '\n').replace(/[*`#>]/g, '').replace(/^\s*[-•]\s*/gm, '').replace(/\s+/g, ' ').trim();

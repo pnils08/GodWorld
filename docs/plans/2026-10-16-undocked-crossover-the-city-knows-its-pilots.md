@@ -168,6 +168,20 @@ Rulings: **(1)** pilots' own reserve, 3 a Cycle, beside the 6 owed. **(2)** Back
 - Live C113 wake dry run, Cristina Booker (POP-00836), night: `show: 6 pilot-Cycle(s) in window, 6 waiting, 0/3`; her block named both her nights and the board (10th of 24). The reflection spoke to it unprompted: "Thursday night, I couldn't get the ship moving on the show, and I walked home feeling flat."
 - Interview dry run, Eric Taveras (POP-00597): the block carries his three C111 nights (the 1,170-credit night included) and "1st of 24 … led the board 3 weeks". With the switch off the prompt is unchanged (its one UNDOCKED mention is a pre-existing audience line from his life).
 
+### 6.6 Codex review (HOLD, F1–F7) — folded `docs/for-claude-review/2026-10-30-codex-pipeline95-show-wake-review.md`
+
+| # | Finding | Verified | Disposition |
+|---|---|---|---|
+| F1 | One wake spent both marks of a pilot who flew in two Cycles | yes (`owedFor` returns all) | `showMarkSpent`: one wake spends the newest unspent flown Cycle; the older mark stays open |
+| F2 | At the flip, the C112 pilots' marks lapse (3 C112 + 3 C113 against 3 C113 wakes, newest first) | yes | **Decided.** The guarantee starts with the Cycle it is switched on in. The three C112 pilots flew before it existed: their nights still go on their pages (backfill) and the block rides any wake they draw. Steady state is 3 pilots against 3 wakes, each served at the first reserved wake after their flight; a lottery draw spends a mark without using the reserve, which frees a wake for a leftover |
+| F3 | A crash between a landed doc and its receipt resends the night (the store appends it into the same doc); an in-place write can tear the file | yes | Two-phase receipts (`pending` before the send, `landed` after), and a pending night is never resent; the file is replaced whole (temp + rename); an unreadable file stops the stage loudly. A returned error clears pending and the night is resent |
+| F4 | `personaProvider.augment` (the Discord persona voices) reads 6 recent page docs with no type check | yes (`lib/personaProvider.js:440-453`) | type `show` filtered there too |
+| F5 | No archive plus an empty feed `Systems` list claimed "never got the ship moving" | yes | an empty list is no evidence: the night is unknown |
+| F6 | The log filter caught three phrases only; ids, dates and other handoff wording passed | yes | a whole entry drops if it names a POPID, an episode, a date, a model, or "handoff" in any wording; nothing is scrubbed mid-entry |
+| F7 | An unreadable journal hid the show slot and the spend too: a pilot drawn anyway saw the block and the mark stayed open | yes | the slot is held, the spend isn't (`showOwed` derived regardless; `held` only empties the ready list) |
+
+Proof after the fold: the suites pass (new cases for F1, F3, F5 and F6). An unforced C113 night wake dry run (ON in memory) took the show slot for Father Miguel (POP-00734, a C113 pilot), spent only `undocked:POP-00734:c113`, and his reflection named the show unprompted.
+
 ### 6.4 Not in scope
 - The engine's pilot line (`ecl:kind:pilot`, a draw at the airing Cycle that moves Reputation, `generateCitizensEvents.js:1114`) is left as it is; the block doesn't restate it.
 - The exchange and the work wake: not asked for. A new row, if wanted.
@@ -197,3 +211,4 @@ UNDOCKED rows name the pilot: `$PILOT`/`$PILOTROLE`/`$LEADER`. LIVE PROD @138 (s
 - 2026-10-25 (rb): **Sat 10-24 crossover read** (`output/edition_curation_c112.json`): 10 citizens crossed ≥2 systems in the staged set; printed on both sides — Yu Zen (culture Ines Sorensen + wire Celeste Tran; also civic Lila Mezran unprinted) and Vinnie Keane (sports Marbury + P Slayer, wire Celeste Tran); the UNDOCKED crossing (Iris Pham, civic Jax Caldera + undocked Nia Rook) printed on the undocked side only; the digest seat reserved and printed (nia-rook-weekly). The block works unattended; the narrator's printed-both-sides rule held. Next read Sat 2026-10-31.
 - 2026-10-30 (rb): §6 pipeline.95 written: three pieces (flight → page, show block, sure wake), measured on 69 nights; two builder's calls open (reserve, backfill).
 - 2026-10-30 (rb): builder ruled both (own 3 on top of the 6; fill in the 69). Built behind `ON=false`, dry-run proven on C113 (§6.5); codex next.
+- 2026-10-30 (rb): codex HOLD F1–F7 verified; F1, F3–F7 folded, F2 decided (the guarantee starts at the flip Cycle) (§6.6); re-review next, the last round.

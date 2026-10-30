@@ -257,35 +257,56 @@ function windowMinutes(argv) {
 // ---- pipeline.95: the night onto the pilot's page ---------------------------
 // Builder 2026-10-30: "the details of the flights should load to their supermemory containers"; the first run fills in
 // every past night ("Fill them in"). One doc per night, keyed by its flown Cycle, weekday and episode, typed `show`: a
-// record of the night, kept out of the own-words readers. The receipt is written after each landed doc, so a crash
-// repeats at most the doc in hand (the store merges a repeat into the same doc, never a second one).
+// record of the night, kept out of the own-words readers.
+// Receipts are two-phase (codex F3): `pending` is saved before the send, `landed` after. The store appends a repeat
+// under the same key into the same doc, so a night left pending (a crash between the send and the receipt) is never
+// resent: a possible missing night, never a doubled one, said every run. A returned error removes the pending mark and
+// the night is resent next run. The file is replaced whole (temp + rename), so a crash never leaves it half-written.
 
 // Pure: applied nights with no receipt, in flight order.
 function nightsToPage(nights, paged) {
   return (nights || []).filter(n => !(paged && paged[n.episodeId]));
 }
 
+function writeReceipts(file, paged) {
+  const tmp = file + '.tmp';
+  fs.writeFileSync(tmp, JSON.stringify(paged, null, 2) + '\n');
+  fs.renameSync(tmp, file);
+}
+
 async function pageNights(io) {
   const R = io.record || require('./undockedShowRecord');
   const page = io.page || require('../lib/citizenPage');
   const file = io.file || PAGED;
+  const save = io.save || writeReceipts;
   let paged = {};
-  try { paged = JSON.parse(fs.readFileSync(file, 'utf8')); } catch (e) { if (e.code !== 'ENOENT') throw e; }
+  try { paged = JSON.parse(fs.readFileSync(file, 'utf8')); } catch (e) { if (e.code !== 'ENOENT') throw e; } // unreadable: the stage stops loudly
+  const stuck = Object.keys(paged).filter(k => paged[k] && paged[k].status === 'pending');
+  if (stuck.length) log('pages: ' + stuck.length + ' night(s) pending from an interrupted run — may have landed, not resent: ' + stuck.join(','));
   const todo = nightsToPage(io.nights || R.loadNights(), paged);
   let wrote = 0, left = 0;
   for (const n of todo) {
     if (!n.day) { log('pages: ' + n.episodeId + ' has no weekday for its start — left for a look'); left++; continue; }
+    paged[n.episodeId] = { status: 'pending' };
+    save(file, paged); // throws: the stage stops before the send
     const r = await page.appendReflection_(n.pop, R.pageText(n), {
       cycle: n.cycle, daypart: 'UNDOCKED', day: n.day, ref: page.pageRefOf(n.episodeId),
       extra: { type: 'show', episode: n.episodeId },
     });
-    if (r.error) { log('pages: FAILED ' + n.episodeId + ' (' + n.pop + ') — ' + r.error + '; retried next run'); left++; continue; }
-    paged[n.episodeId] = r.customId;
-    fs.writeFileSync(file, JSON.stringify(paged, null, 2) + '\n'); // throws: the stage stops, the doc in hand repeats once
+    if (r.error) {
+      delete paged[n.episodeId];
+      save(file, paged);
+      log('pages: FAILED ' + n.episodeId + ' (' + n.pop + ') — ' + r.error + '; resent next run');
+      left++;
+      continue;
+    }
+    paged[n.episodeId] = { status: 'landed', id: r.customId };
+    save(file, paged); // throws: the night stays pending, never resent
     wrote++;
   }
-  log('pages: ' + wrote + ' night(s) written to pilots\' pages, ' + left + ' left for the next run, ' + Object.keys(paged).length + ' on record');
-  return { wrote, left };
+  log('pages: ' + wrote + ' night(s) written to pilots\' pages, ' + left + ' left for the next run, ' +
+    Object.keys(paged).filter(k => paged[k].status === 'landed').length + ' on record');
+  return { wrote, left, pending: stuck.length };
 }
 
 async function main() {

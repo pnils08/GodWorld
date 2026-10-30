@@ -112,6 +112,24 @@ check('--minutes overrides the window', R.windowMinutes(['--minutes', '5']) === 
   calls.length = 0;
   await R.pageNights({ nights, page, file, record: SR });
   check('a receipted night is never written twice', calls.length === 0);
+  check('receipts are landed with the doc id', JSON.parse(fs.readFileSync(file, 'utf8'))['undocked-pop90001-a'].status === 'landed');
+  // codex F3: the doc lands, then the receipt write dies — the night stays pending and is never resent
+  const file2 = path.join(path.dirname(file), 'paged2.json');
+  const one = [nights[0]];
+  let writes = 0;
+  const dies = (f, p) => { writes++; if (writes === 2) throw new Error('synthetic crash after the send'); fs.writeFileSync(f, JSON.stringify(p)); };
+  calls.length = 0;
+  let threw = false;
+  try { await R.pageNights({ nights: one, page, file: file2, record: SR, save: dies }); } catch (e) { threw = /synthetic crash/.test(e.message); }
+  check('a crash after the send stops the stage', threw && calls.length === 1);
+  calls.length = 0;
+  const r3 = await R.pageNights({ nights: one, page, file: file2, record: SR });
+  check('the interrupted night is pending, reported, and never resent (no doubled doc)', calls.length === 0 && r3.pending === 1 && r3.wrote === 0);
+  fs.writeFileSync(file2, '{"undocked-pop90001-a": {"status": "pend');
+  let loud = false;
+  try { await R.pageNights({ nights: one, page, file: file2, record: SR }); } catch (e) { loud = true; }
+  check('an unreadable receipt file stops the stage loudly, sends nothing', loud && calls.length === 0);
+  check('receipts are replaced whole (no temp file left behind)', !fs.existsSync(file + '.tmp'));
   fs.rmSync(path.dirname(file), { recursive: true, force: true });
 
   if (failed) { console.error('cron-undocked-run: ' + failed + ' FAIL'); process.exit(1); }

@@ -38,7 +38,7 @@ const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTe
   loadCardAnchor, loadVoiceTexture, renderStanding, renderOwnRecord,
   loadLivedEvents, renderLivedLine, livedFor, recordLivedSpend, selectWakeCitizen, wakeSeedKey,
   lifeTailOf, OWED_RESERVE, chaosOutcomeIndex, owedFrom, owedCandidates, owedFor, owedLivedPrefer, owedShownSet, owedWakesUsed, owedStateFrom, owedJournalLine, owedPageKey, wakeAdmission, owedPageStep, loadOwedRecords, acquireFileLock,
-  SHOW_RESERVE, owedFromShow, showCandidates, showWakesUsed } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice; pipeline.93 owed; pipeline.95 show
+  SHOW_RESERVE, owedFromShow, showCandidates, showWakesUsed, showMarkSpent } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice; pipeline.93 owed; pipeline.95 show
 const showRecord = require('./undockedShowRecord'); // pipeline.95 — a pilot's UNDOCKED nights, read from the show's files
 const { selectProvocation } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.101 — intake BondTarget (col I) + T4 ripple share one match
@@ -303,9 +303,10 @@ async function generateVoice(system, user) {
   // pipeline.95 — every applied UNDOCKED night on disk. Unreadable = no show block and no show slot this wake, said loudly.
   let nights = [];
   if (SHOW_WAKE) { try { nights = showRecord.loadNights(); } catch (e) { logLine('SHOW RECORD UNREADABLE — no show block, no show slot this wake: ' + e.message); } }
-  const showOwed = showRes > 0 && cycle && !held ? owedFromShow(nights, cycle) : [];
+  // An unreadable journal holds the show slot, not the spend: a pilot drawn anyway still spends what they were shown (codex F7).
+  const showOwed = showRes > 0 && cycle ? owedFromShow(nights, cycle) : [];
   const showUsed = showWakesUsed(owedView, cycle);
-  const sc = showCandidates(pool, showOwed, owedView);
+  const sc = showCandidates(pool, held ? [] : showOwed, owedView);
   for (const e of sc.notInPool) logLine(`show ${e.id}: not in the wake pool (no dials, no name/hood, or under ${MIN_WAKE_AGE}) — not reached`);
   if (showRes > 0) {
     logLine(`show: ${showOwed.length} pilot-Cycle(s) in window, ${sc.ready.length} waiting, ${showUsed}/${showRes} reserved wakes used this cycle`);
@@ -328,7 +329,7 @@ async function generateVoice(system, user) {
   const myNights = showRecord.nightsFor(nights, c.popId);
   const showText = cycle ? showRecord.showBlockFor(nights, c.popId, cycle, { log: logLine }) : '';
   const showFenced = showText ? memoryFence.wrap(showText, 'undocked-show:' + c.popId) : '';
-  const shownShow = showText ? owedFor(c.popId, showOwed, owedView) : [];
+  const shownShow = showText ? showMarkSpent(c.popId, showOwed, owedView) : []; // one flown Cycle per wake (codex F1)
   const neighbors = await coResidents(c.nh, c.popId);
   const sportsLine = await loadSportsSlice();                 // T1b — one feed read, shared across the wake
   const lifeArc = await loadLifeArc(c.popId);                 // T1a — canonical milestone arc from LifeHistory_Log

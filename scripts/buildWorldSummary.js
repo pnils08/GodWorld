@@ -691,11 +691,12 @@ function loadPriorApprovals(cycle) {
 }
 
 // engine.20d: last Cycle's Initiative_Tracker snapshot, the base emitDeskSignal
-// reads initiative movement against. Absent or unreadable → rows null plus the
-// reason; the signal notes it rather than reading every row as moved.
-function loadPriorInitiatives(cycle) {
+// reads initiative movement against. Absent, unreadable or empty → rows null
+// plus the reason. Empty counts as unavailable: the auditor writes [] when its
+// tracker read fails and records the failure only on the console.
+function loadPriorInitiatives(cycle, root = REPO_ROOT) {
   const priorCycle = cycle - 1;
-  const p = path.join(REPO_ROOT, `output/engine_audit_c${priorCycle}.json`);
+  const p = path.join(root, `output/engine_audit_c${priorCycle}.json`);
   if (!fs.existsSync(p)) return { priorCycle, rows: null, why: 'file not found' };
   let snap;
   try {
@@ -704,7 +705,19 @@ function loadPriorInitiatives(cycle) {
   } catch (e) {
     return { priorCycle, rows: null, why: `unreadable: ${e.message}` };
   }
-  return Array.isArray(snap) ? { priorCycle, rows: snap } : { priorCycle, rows: null, why: 'no snapshot in the file' };
+  if (!Array.isArray(snap)) return { priorCycle, rows: null, why: 'no snapshot in the file' };
+  if (!snap.length) return { priorCycle, rows: null, why: 'empty snapshot — the auditor writes [] on a failed tracker read' };
+  return { priorCycle, rows: snap };
+}
+
+// The gate: with initiatives on the tracker and no readable prior, movement
+// cannot be read, so the build stops rather than ship a civic lane that looks
+// whole. The operator may build without initiative seeds this Cycle.
+function requirePriorInitiatives(prior, currentRows, allowMissing) {
+  const hasCurrent = Array.isArray(currentRows) && currentRows.length > 0;
+  if (!hasCurrent || (prior && Array.isArray(prior.rows)) || allowMissing) return prior;
+  throw new Error(`buildWorldSummary: engine_audit_c${prior.priorCycle}.json Initiative_Tracker snapshot unavailable (${prior.why}) — `
+    + 'initiative movement cannot be read. Pass --allow-missing-prior to build with no initiative seeds this Cycle (vote seeds and the storyline registry are unaffected).');
 }
 
 // Signed point-delta cell for one office vs prior cycle. Raw signed number only —
@@ -1292,7 +1305,7 @@ function emitDeskSignal(cycle, data) {
   const priorById = priorRows ? new Map(priorRows.map(r => [String(r.InitiativeID || '').trim(), r])) : null;
   if (initiatives.length && !priorById) {
     const why = priorInitiatives && priorInitiatives.why ? ` (${priorInitiatives.why})` : '';
-    notes.push(`no engine_audit_c${cycle - 1} Initiative_Tracker snapshot${why} — initiative movement unread; no initiative seeds this Cycle (vote seeds and storylines still carry them)`);
+    notes.push(`no engine_audit_c${cycle - 1} Initiative_Tracker snapshot${why} — initiative movement unread; no initiative seeds this Cycle (vote seeds and the storyline registry are unaffected)`);
   }
   for (const it of initiatives) {
     const prior = priorById ? (priorById.get(String(it.InitiativeID || '').trim()) || null) : undefined;
@@ -1464,7 +1477,7 @@ function emitFooter(cycle) {
 
 // Load everything the emitters (summary + desk signal) need, once. W5: split
 // out of buildWorldSummary so main() can feed both artifacts from one pull.
-async function loadCycleData(cycle) {
+async function loadCycleData(cycle, opts = {}) {
   if (!Number.isInteger(cycle) || cycle < 1) {
     throw new Error(`buildWorldSummary: cycle must be a positive integer, got ${cycle}`);
   }
@@ -1475,6 +1488,8 @@ async function loadCycleData(cycle) {
     throw new Error(`buildWorldSummary: engine_audit_c${cycle}.json not found at ${auditPath} — run /engine-review first`);
   }
   const auditJson = JSON.parse(fs.readFileSync(auditPath, 'utf-8'));
+  const priorInitiatives = requirePriorInitiatives(loadPriorInitiatives(cycle),
+    auditJson.snapshots && auditJson.snapshots.Initiative_Tracker, opts.allowMissingPrior);
 
   // Pull sheets
   const [
@@ -1537,7 +1552,6 @@ async function loadCycleData(cycle) {
   let bylinePools = null;
   try { bylinePools = await buildLanePools(); } catch (e) { /* roster unreachable — candidates omitted */ }
   const bylineUsage = loadBylineUsage(cycle);
-  const priorInitiatives = loadPriorInitiatives(cycle);
 
   return {
     auditJson, priorInitiatives,
@@ -1609,7 +1623,7 @@ async function main() {
   const cycleStr = args[0];
   const cycle = parseInt(cycleStr, 10);
   if (!Number.isInteger(cycle)) {
-    console.error('Usage: node scripts/buildWorldSummary.js <cycle> [--output <path>] [--dry-run]');
+    console.error('Usage: node scripts/buildWorldSummary.js <cycle> [--output <path>] [--dry-run] [--allow-missing-prior]');
     process.exit(1);
   }
   const outIdx = args.indexOf('--output');
@@ -1618,7 +1632,7 @@ async function main() {
     : path.join('output', `world_summary_c${cycle}.md`);
   const dryRun = args.includes('--dry-run');
 
-  const data = await loadCycleData(cycle);
+  const data = await loadCycleData(cycle, { allowMissingPrior: args.includes('--allow-missing-prior') });
   const body = await buildWorldSummary(cycle, data);
 
   // W5: desk-signal partition rides the same load — sibling artifact.
@@ -1648,6 +1662,7 @@ module.exports = {
   emitDeskSignal,
   initiativeMoves,
   loadPriorInitiatives,
+  requirePriorInitiatives,
   buildStorylineRegistry,
   resolveStoryline,
   rippleEntry,

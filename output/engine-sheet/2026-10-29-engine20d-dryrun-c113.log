@@ -29,3 +29,11 @@ C113
   INIT-010 SEED LastStageChangeCycle 112 → 113; ImplementationPhase vote-scheduled → operational; Stage Funded → Standing
   INIT-011 -
   INIT-012 SEED new filing
+
+# re-review 2 fold — prior gate, 2026-10-29 22:47 CDT
+## buildWorldSummary.js 113 --dry-run (exit 0)
+[dry-run] would write 75939 bytes to output/desk_signal_c113.json — lanes: {"civic":49,"sports":9,"culture":23,"business":43}
+## buildWorldSummary.js 103 --dry-run — no engine_audit_c102.json on disk (exit 1)
+buildWorldSummary FAILED: buildWorldSummary: engine_audit_c102.json Initiative_Tracker snapshot unavailable (file not found) — initiative movement cannot be read. Pass --allow-missing-prior to build with no initiative seeds this Cycle (vote seeds and the storyline registry are unaffected).
+## buildWorldSummary.js 103 --dry-run --allow-missing-prior (exit 0)
+[dry-run] would write 45222 bytes to output/desk_signal_c103.json — lanes: {"civic":26,"sports":9,"culture":23,"business":18}

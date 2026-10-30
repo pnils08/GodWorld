@@ -720,6 +720,38 @@ console.log('\nTest 11e2: initiative seeds on movement only (engine.20d)');
   assertEqual('initiativeMoves: no prior snapshot → nothing known to have moved', helper.initiativeMoves(base, undefined), []);
   assertEqual('initiativeMoves: a numeric cell equal to its string prior is no move', helper.initiativeMoves(row({ LastDisburseCycle: 99 }), base), []);
   assertEqual('loadPriorInitiatives: no file → rows null with reason', helper.loadPriorInitiatives(1), { priorCycle: 0, rows: null, why: 'file not found' });
+
+  // The gate (codex re-review 2): an unavailable prior with initiatives on the
+  // tracker stops the build unless the operator passes --allow-missing-prior.
+  const gate = (prior, rows, allow) => { try { return { ok: helper.requirePriorInitiatives(prior, rows, allow) }; } catch (e) { return { err: e.message }; } };
+  const missing = { priorCycle: 99, rows: null, why: 'file not found' };
+  const g1 = gate(missing, [base], false);
+  assert('gate: missing prior + current rows → stops', Boolean(g1.err));
+  assertIncludes('gate: the stop names the file and reason', g1.err || '', 'engine_audit_c99.json Initiative_Tracker snapshot unavailable (file not found)');
+  assertIncludes('gate: the stop teaches the way through', g1.err || '', '--allow-missing-prior');
+  assertEqual('gate: operator override passes the unavailable prior through', gate(missing, [base], true).ok, missing);
+  assertEqual('gate: no current initiatives → nothing to gate', gate(missing, [], false).ok, missing);
+  const usable = { priorCycle: 99, rows: [base] };
+  assertEqual('gate: readable prior passes', gate(usable, [base], false).ok, usable);
+  assert('gate: empty-snapshot prior (the auditor\'s failed-read value) stops',
+    Boolean(gate({ priorCycle: 99, rows: null, why: 'empty snapshot — the auditor writes [] on a failed tracker read' }, [base], false).err));
+}
+
+// loadPriorInitiatives against real-shaped files: empty snapshot is unavailable.
+console.log('\nTest 11e3: prior snapshot loader (engine.20d)');
+{
+  const root = fs.mkdtempSync(path.join(require('os').tmpdir(), 'e20d-'));
+  const auditDir = path.join(root, 'output');
+  fs.mkdirSync(auditDir);
+  const at = (snapText) => { fs.writeFileSync(path.join(auditDir, 'engine_audit_c99.json'), snapText); return helper.loadPriorInitiatives(100, root); };
+  try {
+    const e = at(JSON.stringify({ snapshots: { Initiative_Tracker: [] } }));
+    assert('empty prior snapshot → rows null', e.rows === null);
+    assertIncludes('empty prior snapshot → reason names the failed-read value', e.why, 'empty snapshot');
+    assertEqual('one-row prior snapshot → rows', at(JSON.stringify({ snapshots: { Initiative_Tracker: [{ InitiativeID: 'INIT-901' }] } })).rows.length, 1);
+    assertIncludes('unreadable prior → reason', at('{not json').why, 'unreadable');
+    assertEqual('no tracker key → reason', at(JSON.stringify({ snapshots: {} })).why, 'no snapshot in the file');
+  } finally { fs.rmSync(root, { recursive: true, force: true }); }
 }
 
 // ────────────────────────────────────────────────────────────────────────────

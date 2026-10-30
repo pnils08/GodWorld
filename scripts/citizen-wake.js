@@ -37,7 +37,7 @@ const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTe
   loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory,
   loadCardAnchor, loadVoiceTexture, renderStanding, renderOwnRecord,
   loadLivedEvents, renderLivedLine, livedFor, recordLivedSpend, selectWakeCitizen, wakeSeedKey,
-  lifeTailOf, OWED_RESERVE, chaosOutcomeIndex, owedFrom, owedCandidates, owedFor, owedLivedPrefer, owedShownSet, owedWakesUsed, owedStateFrom, owedJournalLine, owedPageStep, loadOwedRecords, acquireFileLock } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice; pipeline.93 owed
+  lifeTailOf, OWED_RESERVE, chaosOutcomeIndex, owedFrom, owedCandidates, owedFor, owedLivedPrefer, owedShownSet, owedWakesUsed, owedStateFrom, owedJournalLine, owedPageKeyOf, wakeAdmission, owedPageStep, loadOwedRecords, acquireFileLock } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice; pipeline.93 owed
 const { selectProvocation } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.101 — intake BondTarget (col I) + T4 ripple share one match
 
@@ -247,15 +247,16 @@ async function generateVoice(system, user) {
   if (!pool.length) { logLine('empty pool — nothing to wake'); process.exit(0); }
 
   const state = loadState();
-  // pipeline.93 — one live wake at a time holds the owed slot; an overlapping live wake runs without it (codex round 3 F3).
-  let owedRes = OWED_RES;
-  if (owedRes > 0 && !DRY) {
-    const release = acquireFileLock(OWED_JOURNAL + '.lock', logLine);
-    if (!release) { logLine('owed lock held by another live wake — this wake runs without the owed slot'); owedRes = 0; }
-    else process.on('exit', release);
-  }
+  // pipeline.93 — with owed on, one live wake runs at a time: the lock is held to exit, and an overlapping live
+  // wake does not run (it could take the owed citizen's page key first — codex round 4).
+  const owedRes = OWED_RES;
+  let release = null;
+  if (owedRes > 0 && !DRY) release = acquireFileLock(OWED_JOURNAL + '.lock', logLine);
+  const admit = wakeAdmission({ owedRes, dry: DRY, lockTaken: !!release });
+  if (admit === 'skip') { logLine('owed lock held by another live wake — this wake does not run (owed on: one live wake at a time)'); process.exit(0); }
+  if (release) process.on('exit', release);
   const seedKey = wakeSeedKey(cycle, WAKE, new Date().toLocaleDateString('en-CA', { timeZone: 'America/Chicago' }));
-  let owed = [], owedView = state, owedAbsorb = true;
+  let owed = [], owedView = state, owedAbsorb = true, owedPageKeys = new Set();
   if (owedRes > 0 && cycle) {
     let held = '';
     try {
@@ -263,6 +264,7 @@ async function generateVoice(system, user) {
       try { jt = fs.readFileSync(OWED_JOURNAL, 'utf8'); } catch (e) { if (e.code !== 'ENOENT') throw e; }
       const os = owedStateFrom(jt, cycle);
       owedView = Object.assign({}, state, os);
+      owedPageKeys = os.pageKeys;
       if (os.unconfirmed.length) logLine(`owed: ${os.unconfirmed.length} receipt(s) pending with no shown/failed line, counted as spent: ${os.unconfirmed.join(',')}`);
     } catch (e) { held = e.message; }
     if (held) logLine('OWED HELD — the owed journal could not be read, no owed slot this wake: ' + held);
@@ -393,9 +395,14 @@ async function generateVoice(system, user) {
   const ptr = await page.ensurePagePointer_(c.popId);
   if (ptr.error) { logLine('ensurePagePointer_ ERROR: ' + ptr.error); process.exit(1); }
   // pipeline.93 — the owed receipt is pending BEFORE the page lands: if it cannot be saved, no page is written.
-  const owedOn = owedRes > 0 && (shownOwed.length > 0 || picked.slot === 'owed');
+  // Every owed-on live wake is journaled, so a later run of the same citizen + daypart knows its page key is taken:
+  // that run's write would only duplicate the earlier page, so it receipts nothing.
+  const owedOn = owedRes > 0 && !!cycle;
   const owedKey = seedKey + '|' + c.popId + '|' + new Date().toISOString();
-  const owedLine = (status) => owedJournalLine({ key: owedKey, cycle, pop: c.popId, slot: picked.slot, ids: shownOwed, status });
+  const pageTaken = owedPageKeys.has(owedPageKeyOf(owedKey));
+  if (owedOn && pageTaken && shownOwed.length) logLine(`owed: ${c.popId} already has a ${WAKE} page this cycle — ${shownOwed.map((e) => e.id).join(',')} not receipted, still owed`);
+  const receipted = pageTaken ? [] : shownOwed;
+  const owedLine = (status) => owedJournalLine({ key: owedKey, cycle, pop: c.popId, slot: pageTaken ? 'repeat' : picked.slot, ids: receipted, status });
   const step = await owedPageStep({ on: owedOn, journal: appendOwedJournal, line: owedLine,
     page: () => page.appendReflection_(c.popId, reflection, {
       cycle, daypart: WAKE,
@@ -410,7 +417,7 @@ async function generateVoice(system, user) {
     if (owedOn) logLine('owed: the page did not confirm; the pending receipt stands — counted as reached (a possible missed wake, never a double)');
     logLine('appendReflection_ ERROR: ' + appended.error); process.exit(1);
   }
-  if (step.outcome === 'shown') logLine(`owed spent: ${shownOwed.map((e) => e.id).join(',') || '(none shown)'} (slot=${picked.slot})`);
+  if (step.outcome === 'shown' && receipted.length) logLine(`owed spent: ${receipted.map((e) => e.id).join(',')} (slot=${picked.slot})`);
   if (step.outcome === 'shown-not-saved') logLine('owed: shown line not saved — the pending line already counts this wake as spent');
   logLine(`page ${ptr.tag} (${ptr.created ? 'created' : 'existing'}) <- reflection doc ${appended.id || '?'}`);
 

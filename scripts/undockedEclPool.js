@@ -82,11 +82,17 @@ const SHOW_ROWS = [
   row(POOL_SHOW, 'aspire', 'watched UNDOCKED like someone who already knew what a camera does to a week', 0.75, 'undocked;fame>=25'),
 
   // §3.2 objective lines (builder-direct 2026-10-11): the city knows what the
-  // board scores — credits brought home, added up across every night a pilot
-  // has flown. Low weights so a wake is not saturated with the rule.
-  row(POOL_SHOW, 'watch', 'explained to the table that the board is only credits brought home, added up over every night a pilot has flown, and nothing else on the screen counts', 1.0, 'undocked'),
-  row(POOL_SHOW, 'argue', 'argued that one closed contract is worth a season of ore and that the board does not care how the credits got there', 0.95, 'undocked'),
-  row(POOL_SHOW, 'lottery', 'knew the rules cold — one night in the chair, bring credits home, the board adds them up — and had never been drawn', 1.0, 'undocked;fame=0;lifestate=working'),
+  // board scores. research.31 (builder 10-30, ruling C): the board counts the
+  // galaxy's own achievement points, credits beside and breaking ties — the
+  // credits-only lines are retagged in place. Every named mark is a real game
+  // achievement (First Steps, Maiden Jump, Wanderer, Helping Hand / First Aid).
+  // Low weights so a wake is not saturated with the rule.
+  retag(row(POOL_SHOW, 'watch', 'explained to the table that the board counts what the galaxy itself writes down — a first jump, ten systems seen, fuel handed to another captain — and credits only break a tie', 1.0, 'undocked'),
+    'explained to the table that the board is only credits brought home, added up over every night a pilot has flown, and nothing else on the screen counts'),
+  retag(row(POOL_SHOW, 'argue', 'argued over whether a night spent chasing contracts beats a night chasing the galaxy\'s own marks, now that the board counts the marks first', 0.95, 'undocked'),
+    'argued that one closed contract is worth a season of ore and that the board does not care how the credits got there'),
+  retag(row(POOL_SHOW, 'lottery', 'knew the rules cold — two nights in the chair, the galaxy keeps the score, the board adds it up — and had never been drawn', 1.0, 'undocked;fame=0;lifestate=working'),
+    'knew the rules cold — one night in the chair, bring credits home, the board adds them up — and had never been drawn'),
 
   // 4a wager talk — the window, the napkin, the board. No numbers (numbers
   // become canon the moment they print). No money moves. Plan:

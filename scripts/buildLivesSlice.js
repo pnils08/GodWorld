@@ -52,6 +52,19 @@ const LIFE_TAGS = [
   [/^(Relationship|Reputation|Community|Cultural|Rivalry|Alliance|Public|BoundaryKept|BoundaryCompromised|CivicRole|Civic|QoL|Household)(?=$|-)/i, 2],
   [/^(Work)(?=$|-)/i, 3]
 ];
+// The maneuver rule writes its stance as a short phrase ("playing to climb — the house first"). On the page
+// that reads like something the person said; the packet says what it is — where they are reaching to.
+const MANEUVER_GOAL = { 'a place of their own first': ['for a place of their own', 'a place of their own'], 'the house first': ['to buy a house', 'buying a house'], 'the money next': ['for more money', 'more money'] };
+function plainLife(tag, text) {
+  const t = String(text || '').trim();
+  if (!/^Maneuver-/i.test(cleanTag(tag))) return t;
+  let m = /^playing to climb — (.+)$/.exec(t);
+  if (m && MANEUVER_GOAL[m[1]]) return 'reaching ' + MANEUVER_GOAL[m[1]][0];
+  m = /^settling — (.+)$/.exec(t);
+  if (m && MANEUVER_GOAL[m[1]]) return 'holding steady, ' + MANEUVER_GOAL[m[1]][1] + ' still the goal';
+  if (t === 'pulling in — the debt says so') return 'pulling in because of their debt';
+  return t;
+}
 const lifeRank = tag => { for (const [re, r] of LIFE_TAGS) if (re.test(tag)) return r; return null; };
 const BOOKKEEPING = /Emerged into Tier|Added to Simulation_Ledger|Updated to Tier|Promoted to Tier|Intake at Tier|Media usage C\d|^[a-z]+=[^|]*\|[a-z]+=/i;
 // The words a covered kind reads as on the page — the Voices seat and the thread say them, never the key.
@@ -188,7 +201,7 @@ function threadFor(pop, { name, skipTexts, includeStay, dropOwn, beats, logByPop
   }
   const kept = fresh.filter(signal).concat(fresh.filter(r => !signal(r))).slice(0, THREAD_MAX.log)
     .sort((a, b) => Number(a.Cycle) - Number(b.Cycle));
-  for (const r of kept) out.push({ text: who + 'in their life, C' + r.Cycle + ': ' + String(r.EventText).trim(), src: 'output/beats/LifeHistory_Log.jsonl @C' + r.Cycle });
+  for (const r of kept) out.push({ text: who + 'in their life, C' + r.Cycle + ': ' + plainLife(r.EventTag, r.EventText), src: 'output/beats/LifeHistory_Log.jsonl @C' + r.Cycle });
   const before = Object.entries(covered).filter(([id, v]) => id !== ownId && v && String(v.popid || '').toUpperCase() === P);
   if (before.length) out.push({ text: who + 'Lives already wrote this person: ' + before.map(([, v]) => kindWord(v.kind) + ' (C' + (v.eventCycle != null ? v.eventCycle : v.cycle) + ')').join(', '), src: 'output/cron-compare/lives_covered.json' });
   const seen = (tribune.get(P) || []).slice().sort((a, b) => Number(b.cycle || 0) - Number(a.cycle || 0)).slice(0, THREAD_MAX.tribune);
@@ -390,7 +403,7 @@ function build(cycle, { root, beats, profiles }) {
   for (const m of moments) {
     const all = [m.pop].concat(m.family);
     for (const pop of all) addPerson(pop, m.tag.toLowerCase() + ' this Cycle: ' + m.text, m.hood);
-    passage({ text: all.map(pop => nameOf(pop)).join(' and ') + ' — ' + m.text + (m.hood ? ', ' + m.hood : '') + ' (C' + cycle + ' — what happened in their life, not words they said)', src: logSrc, id: m.id, kind: 'moment', popid: m.pop },
+    passage({ text: all.map(pop => nameOf(pop)).join(' and ') + ' — ' + plainLife(m.tag, m.text) + (m.hood ? ', ' + m.hood : '') + ' (C' + cycle + ' — what happened in their life, not words they said)', src: logSrc, id: m.id, kind: 'moment', popid: m.pop },
       { name: nameOf(m.pop), skipTexts: [m.text], includeStay: false, dropOwn: false });
     for (const pop of m.family) {
       for (const t of threadFor(pop, { beats, logByPop, covered, tribune, ownId: m.id, name: nameOf(pop), skipTexts: [m.text], includeStay: false, dropOwn: false })) facts.push({ ...t, kind: 'thread', popid: pop });
@@ -456,6 +469,6 @@ function enrichAssignment(assign, cycle, root = K.ROOT) {
 }
 const sitsOutWhenEmpty = true;
 if (require.main === module) W.main();
-module.exports = { SEAT, sitsOutWhenEmpty, kindWord, loadSlice, dayToken, buildLivesSlice: W.build, writeLivesSlice: W.write, loadLivesSlice: loadSlice,
+module.exports = { plainLife, SEAT, sitsOutWhenEmpty, kindWord, loadSlice, dayToken, buildLivesSlice: W.build, writeLivesSlice: W.write, loadLivesSlice: loadSlice,
   isLivesSeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment, slicePaths: W.paths,
   kindLine, cameNext, localDay, coveredPath };

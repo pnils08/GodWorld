@@ -256,4 +256,11 @@ try {
 } finally {
   fs.rmSync(root, { recursive: true, force: true });
 }
+// the maneuver stance is told as where the person is reaching, not as a phrase that reads like speech
+assert.strictEqual(L.plainLife('Maneuver-Climb', 'playing to climb — the house first'), 'reaching to buy a house');
+assert.strictEqual(L.plainLife('Maneuver-Climb', 'playing to climb — a place of their own first'), 'reaching for a place of their own');
+assert.strictEqual(L.plainLife('Maneuver-Hold', 'settling — the house first'), 'holding steady, buying a house still the goal');
+assert.strictEqual(L.plainLife('Maneuver-Retreat', 'pulling in — the debt says so'), 'pulling in because of their debt');
+assert.strictEqual(L.plainLife('Maneuver-Climb', 'playing to climb — said so out loud, and meant it'), 'playing to climb — said so out loud, and meant it');
+assert.strictEqual(L.plainLife('Strain', 'the third late night this week'), 'the third late night this week');
 console.log('buildLivesSlice.test.js OK');

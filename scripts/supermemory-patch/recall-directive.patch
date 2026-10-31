@@ -1,6 +1,8 @@
 --- a/recall-directive.js
 +++ b/recall-directive.js
-@@ -121,6 +121,7 @@
+@@ -119,10 +119,11 @@
+     const title =
+       typeof r.title === 'string' && r.title.trim() ? r.title.trim() : null;
      const prefix = title && !text.startsWith(title) ? `${title} — ` : '';
 -    return `- ◪ ${prefix}${text}${typeof r.filepath === 'string' && r.filepath ? ` (${r.filepath})` : ''}`;
 +    const when = String(r.createdAt || r.updatedAt || r.system?.createdAt || r.metadata?.createdAt || '').slice(0, 10);
@@ -10,7 +12,11 @@
 -◪ Recalled from supermemory for this prompt (relevance-ranked):
 +◪ Recalled from supermemory for this prompt (relevance-ranked; each line is history as of its date — check the file before stating it as current):
  ${lines.join('\n')}
-@@ -165,15 +166,54 @@
+ 
+ When one of these shapes your answer, credit it naturally with the ◪ prefix (e.g. "◪ earlier you decided X"); if you name the source, say "from supermemory" — never "from memory". For deeper history, call the supermemory search_memory tool — it defaults to this project's container (${namespace}). Pass containerTag only to search a different space. Or launch the context-gatherer agent.
+@@ -164,19 +165,59 @@
+     }
+ 
      const namespace = getNamespace(cwd);
 -    const response = await searchMemories(
 -      getBaseUrl(cwd, projectConfig),
@@ -18,7 +24,7 @@
 -      namespace,
 -      prompt.slice(0, MAX_QUERY_LENGTH),
 -      {
--        timeoutMs: SEARCH_TIMEOUT_MS,
+-        timeoutMs: Math.max(1, SEARCH_TIMEOUT_MS - (Date.now() - requestStarted)),
 -        apiVersion: getApiVersion(cwd, projectConfig),
 -      },
 -    );
@@ -30,9 +36,10 @@
 +    // extraction alone drops it. Top chunk per source file, capped, tagged [rule].
 +    const baseUrl = getBaseUrl(cwd, projectConfig);
 +    const q = prompt.slice(0, MAX_QUERY_LENGTH);
++    const remainingMs = Math.max(1, SEARCH_TIMEOUT_MS - (Date.now() - requestStarted));
 +    const searchRules = () => {
 +      const ctl = new AbortController();
-+      const timer = setTimeout(() => ctl.abort(), SEARCH_TIMEOUT_MS);
++      const timer = setTimeout(() => ctl.abort(), remainingMs);
 +      return fetch(`${baseUrl.replace(/\/+$/, '')}/v4/search`, {
 +        method: 'POST',
 +        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${apiKey}` },
@@ -64,7 +71,7 @@
 +      searchRules(),
 +      ...recallTags.map((tag) =>
 +        searchMemories(baseUrl, apiKey, tag, q, {
-+          timeoutMs: SEARCH_TIMEOUT_MS,
++          timeoutMs: remainingMs,
 +          apiVersion: getApiVersion(cwd, projectConfig),
 +        }).catch(() => []),
 +      ),
@@ -76,3 +83,5 @@
 +      .flat()
 +      .sort((a, b) => (b.similarity || 0) - (a.similarity || 0))
        .filter((r) => resultText(r))
+       .filter(
+         (r) => !Number.isFinite(r.similarity) || r.similarity >= MIN_SIMILARITY,

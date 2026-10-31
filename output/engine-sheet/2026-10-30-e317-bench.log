@@ -1,20 +1,20 @@
-== engine.317 bench, candidate 3b746f0c
-bench pulled = stage 31; + research.31 at 7b0a93f5 = stage 32
-stage 33 = stage 32 + engine.317 at 3b746f0c; manifest output/engine-sheet/stage33-e317.sha256
+== engine.317 bench, candidate 1e8d125f
+bench pulled = stage 32
+stage 33 = stage 32 + engine.317 at 1e8d125f; manifest output/engine-sheet/stage33-e317.sha256
 └─ utilities/writeIntents.js
-Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @163
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @165
 pull-back 167 js + manifest byte-identical to stage33-e317.sha256
 version cut; waiting 300 s for /exec propagation
-bench cycleCount 114
-door read 1: {"target":"bench","http":200,"ok":true,"record":{"cycle":114,"startedMs":1793402499029,"state":"done","finishedMs":1793402689471},"raw":"{\"cycle\":114,\"startedMs\":1793402499029,\"state\":\"done\",\"finishedMs\":1793402689471}","valid":true}
-door read 2: {"target":"bench","http":200,"ok":true,"record":{"cycle":114,"startedMs":1793402499029,"state":"done","finishedMs":1793402689471},"raw":"{\"cycle\":114,\"startedMs\":1793402499029,\"state\":\"done\",\"finishedMs\":1793402689471}","valid":true}
-reads equal, cycleCount unchanged (114)
-fire C115 rc=0 "verdict": "PASS" "wallS": 139
-door read 3: {"target":"bench","http":200,"ok":true,"record":{"cycle":115,"startedMs":1793406987634,"state":"done","finishedMs":1793407122464},"raw":"{\"cycle\":115,\"startedMs\":1793406987634,\"state\":\"done\",\"finishedMs\":1793407122464}","valid":true}
+bench cycleCount 115
+door read 1: {"target":"bench","http":200,"ok":true,"record":{"cycle":115,"startedMs":1793406987634,"state":"done","finishedMs":1793407122464},"raw":"{\"cycle\":115,\"startedMs\":1793406987634,\"state\":\"done\",\"finishedMs\":1793407122464}","valid":true}
+door read 2: {"target":"bench","http":200,"ok":true,"record":{"cycle":115,"startedMs":1793406987634,"state":"done","finishedMs":1793407122464},"raw":"{\"cycle\":115,\"startedMs\":1793406987634,\"state\":\"done\",\"finishedMs\":1793407122464}","valid":true}
+reads equal, cycleCount unchanged (115)
+fire C116 rc=0 "verdict": "PASS" "wallS": 145
+door read 3: {"target":"bench","http":200,"ok":true,"record":{"cycle":116,"startedMs":1793407763028,"state":"done","finishedMs":1793407903878},"raw":"{\"cycle\":116,\"startedMs\":1793407763028,\"state\":\"done\",\"finishedMs\":1793407903878}","valid":true}
 the door shows the fired Cycle done
 == restore bench code to stage 32 (= PROD)
 bench pulled = stage 33; webTrigger.js back at 3b746f0c^ = stage 32
 └─ utilities/writeIntents.js
-Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @164
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @166
 pull-back 167 js + manifest byte-identical to stage32-r31.sha256
 engine.317 bench done

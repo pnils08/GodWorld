@@ -16,6 +16,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.309 | Off-heritage ownership with ascent and crash (builder 2026-10-21): founder door for an existing citizen in their own field; ascent via owner draw → home → Door C; crash = back to the hiring pool. Door number = money-game Task 5. After engine.308 | needs-info | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8, engine.309 design |
 | engine.311 | Business entry by opportunity (builder 2026-10-22): line tier decides which business types open; every business class gets entry gates (none today); line contents in combination raise an opportunity to buy/open; the citizen's wake decides, not a roll. Covers 309's door | needs-info | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8, builder 2026-10-22 under engine.308 |
 | engine.327 | Hood events for the ECL: 81 rows for the 16 thin hoods, each grounded in a ledger or canon fact and bound to its hood. Waits on the builder's go to write them | needs-info | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] §engine.327 |
+| engine.328 | Ledger OriginGame column: remove it, free the column (builder 10-31). Own session first: blast radius (22 files, 11 engine refs), naming, then his go | needs-info | research-build | `docs/SIMULATION_LEDGER.md` |
 
 ## 2. Waiting on a fire — dated or organic (live-observing, blocked)
 
@@ -71,7 +72,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 |---|------|-------|----------|---------|
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | engine.316 | Five hoods get signed texture lines. Bench PASS, review decided. PROD waits on the door's read key in PROD Script Properties (the push script reads it) | in-progress | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] §engine.316 |
-| pipeline.99 | Build words out of newsroom inputs (builder 10-30): cut. Left: 17 life rows + 6 ledger cells with a model name (his word), staged file names (own build) | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §Changelog 2026-10-30 |
+| pipeline.99 | Build words out of newsroom inputs: cut; model names gone from 23 life records, events kept. Left: 497 old usage rows (his word), staged file names (own build) | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §Changelog 2026-10-31 |
 | engine.317 | Read-only door to FIRE_ADMISSION_JSON LIVE PROD @169 (stage 33). Next: read key into PROD Script Properties, then a door read = C113 done | in-progress | engine-sheet | `docs/archive/for-claude-review/2026-10-25-codex-engine301-gate3-recheck.md` |
 
 ## 4. Queue — ruled, not started (ready)

@@ -230,7 +230,6 @@ function makeSlice(seat, cycle, beats, body) {
     },
     ...(body.extra || {}),
     pointers: [body.ref].concat((body.hooks || []).length ? ['output/beats/Story_Hook_Deck.jsonl (hooks for ' + seat.name + ' this cycle)'] : [])
-      .concat(['docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4'])
   };
 }
 

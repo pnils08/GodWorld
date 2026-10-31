@@ -158,7 +158,7 @@ function buildTanyaSlice(cycle, opts) {
     scene: { colorRoom: 'Clubhouse SET is authorized. Invented player quotes and real-world venues are not.' },
     candidates: ranked.slice(0, 8).map(item => ({ score: item.score,
       label: item.row.storyAngle || item.row.rawHeader, cycle: item.row.cycle })),
-    pointers: ['output/world_summary_c' + cycle + '.md ## Sports', 'scripts/sportsSubstrate.js',
+    pointers: ['output/world_summary_c' + cycle + '.md ## Sports',
       'docs/media/TANYA_SIDELINE_BAG.md'].concat(
         (hooks.length || seeds.length)
           ? ['output/beats/Story_Hook_Deck.jsonl + Story_Seed_Deck.jsonl (sports, this cycle)']

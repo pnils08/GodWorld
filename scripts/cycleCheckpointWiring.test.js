@@ -70,7 +70,7 @@ function world(opts) {
       deleteTrigger: (t) => { w.triggers = w.triggers.filter(x => x !== t); }
     },
     ContentService: { MimeType: { JSON: 'json' }, createTextOutput: s => ({ setMimeType: () => JSON.parse(s) }) },
-    Utilities: { DigestAlgorithm: { SHA_1: 'SHA_1' }, computeDigest: (_a, input) => Array.from(crypto.createHash('sha1').update(String(input), 'utf8').digest()).map(b => (b > 127 ? b - 256 : b)) },
+    Utilities: { DigestAlgorithm: { SHA_1: 'SHA_1', SHA_256: 'SHA_256' }, Charset: { UTF_8: 'UTF_8' }, computeDigest: (a, input) => Array.from(crypto.createHash(a === 'SHA_256' ? 'sha256' : 'sha1').update(String(input), 'utf8').digest()).map(b => (b > 127 ? b - 256 : b)) },
     initializeModeFlags_: (ctx) => { ctx.mode = ctx.mode || { dryRun: false, replay: false }; ctx.persist = ctx.persist || { updates: [], logs: [], replaceOps: [] }; }
   };
   vm.createContext(box);
@@ -388,7 +388,18 @@ console.log('═══ engine.317 — the read-only door to the fire record');
   const n = world();
   delete n.props.CYCLE_TRIGGER_TOKEN;
   const nr = n.box.doGet({ parameter: { token: 'x', action: 'admission' } });
-  assert('no key set at all: the door is shut', nr.ok === false && /ADMISSION_READ_TOKEN/.test(nr.error), nr);
+  assert('no property set and a key that does not match the fingerprint: refused', nr.ok === false && nr.error === 'bad token', nr);
+  // the fingerprint in code: a key whose SHA-256 matches reads with no property set (PROD shape)
+  n.box.ADMISSION_READ_SHA256 = crypto.createHash('sha256').update('TEST-ONLY-read', 'utf8').digest('hex');
+  const nf = n.box.doGet({ parameter: { token: 'TEST-ONLY-read', action: 'admission' } });
+  assert('fingerprint: the matching key reads with no property set', nf.ok === true && nf.admission === null, nf);
+  const nx = n.box.doGet({ parameter: { token: 'TEST-ONLY-read', expect: '110' } });
+  assert('fingerprint: the read key never fires', nx.ok === false && !n.calls.includes('body'), nx);
+  n.props.CYCLE_TRIGGER_TOKEN = 'TEST-ONLY-read';
+  assert('fingerprint equal to the fire key: every door shut', /distinct/.test(n.box.doGet({ parameter: { token: 'TEST-ONLY-read', action: 'admission' } }).error) &&
+    /distinct/.test(n.box.doGet({ parameter: { token: 'TEST-ONLY-read', expect: '110' } }).error));
+  const real = crypto.createHash('sha256').update('x', 'utf8').digest('hex');
+  assert('the shipped fingerprint is a 64-hex SHA-256', /^[0-9a-f]{64}$/.test(world().box.ADMISSION_READ_SHA256) && real.length === 64);
   // codex engine.317 review F2: a read key equal to the fire key would be a fire key
   const q = world(); q.props.ADMISSION_READ_TOKEN = 'tok';
   const qr = q.get({ action: 'admission' });

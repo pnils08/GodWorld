@@ -53,6 +53,8 @@ function world(opts) {
       deleteProperty: k => { delete w.props[k]; } }) },
     SpreadsheetApp: { flush: () => { w.flushes++; if (w.flushThrows) throw new Error('Service Spreadsheets timed out'); } },
     ContentService: { MimeType: { JSON: 'json' }, createTextOutput: s => ({ setMimeType: () => JSON.parse(s) }) },
+    // engine.317: the web trigger checks the read key's fingerprint (SHA-256) on every call
+    Utilities: { DigestAlgorithm: { SHA_256: 'SHA_256' }, Charset: { UTF_8: 'UTF_8' }, computeDigest: (a, input) => Array.from(require('crypto').createHash('sha256').update(String(input), 'utf8').digest()).map(b => (b > 127 ? b - 256 : b)) },
     computeShortHash_: () => 'hash'
   };
   vm.createContext(box);

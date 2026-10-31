@@ -14,9 +14,9 @@ count() { node -e "
 require('/root/GodWorld/lib/env'); const L=process.env.GODWORLD_SHEET_ID; process.env.GODWORLD_SHEET_ID='1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA';
 if (process.env.GODWORLD_SHEET_ID===L) process.exit(9);
 require('/root/GodWorld/lib/sheets').getSheetData('World_Config').then(d=>console.log((d.find(r=>r[0]==='cycleCount')||[])[1]));" 2>&1 | grep -v "injected env"; }
-door() { node $O/2026-10-30-e317-door.js bench 2>&1 | grep -v "injected env"; }
+door() { node $O/2026-10-30-e317-door.js ${DOOR_MODE:-bench} 2>&1 | grep -v "injected env"; }
 echo "== engine.317 bench, candidate $SRC"
-bash $O/2026-10-30-push-e317-bench.sh "$SRC" $O/stage33-e317.sha256 || exit 4; CODE=stage33; CUT=$(date +%s)
+bash $O/2026-10-30-push-e317-bench.sh "$SRC" ${MAN_OUT:-$O/stage33-e317.sha256} || exit 4; CODE=stage33; CUT=$(date +%s)
 left=$(( 300 - ($(date +%s) - CUT) )); [ $left -gt 0 ] && { echo "version cut; waiting $left s for /exec propagation"; sleep $left; }
 C0=$(count); echo "bench cycleCount $C0"
 R1=$(door); echo "door read 1: $R1"; echo "$R1" | grep -q '"valid":true' || { echo "HALT door read 1 not valid"; exit 2; }

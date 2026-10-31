@@ -10,11 +10,12 @@
 require('/root/GodWorld/lib/env');
 const https = require('https');
 const DEP = { bench: 'AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC',
+              'bench-read': 'AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC',
               prod: 'AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ' };
 const target = process.argv[2];
 const nofire = target === 'prod-nofire';
 const dep = DEP[nofire ? 'prod' : target];
-if (!dep) { console.error('usage: bench|prod|prod-nofire'); process.exit(2); }
+if (!dep) { console.error('usage: bench|bench-read|prod|prod-nofire'); process.exit(2); }
 if (process.env.DOOR_EXPECT_DEP && process.env.DOOR_EXPECT_DEP !== dep) { console.log(JSON.stringify({ target, error: 'deployment differs from the pinned one', valid: false })); process.exit(1); }
 const key = target === 'bench' ? process.env.CYCLE_TRIGGER_TOKEN : process.env.ADMISSION_READ_TOKEN;
 const url = 'https://script.google.com/macros/s/' + dep + '/exec?' + new URLSearchParams(nofire

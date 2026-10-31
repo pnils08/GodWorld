@@ -30,13 +30,27 @@
  * script carries this code but stays inert unless a deployment + token are
  * ever created there.
  */
+// engine.317: the read key's SHA-256 fingerprint, in code. A one-way scramble —
+// the key cannot be read back from it — so nothing secret is stored here and no
+// script property has to be set by hand (PROD's settings page would not save one,
+// 2026-10-30). ADMISSION_READ_TOKEN as a script property still works too.
+var ADMISSION_READ_SHA256 = 'cc4f20ea971861fc6db4e871f18100fe75654fb3fb577a849480362671dc0f03';
+
+function webSha256Hex_(str) {
+  var d = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(str), Utilities.Charset.UTF_8);
+  var hex = '';
+  for (var i = 0; i < d.length; i++) { var b = d[i] < 0 ? d[i] + 256 : d[i]; hex += (b < 16 ? '0' : '') + b.toString(16); }
+  return hex;
+}
+
 // engine.317 (codex re-review F1): a read key equal to the fire key would make the
-// read credential a fire credential. Equal keys shut every door here — read, fire
-// and POST — until one is changed.
+// read credential a fire credential. Equal keys — by property or by fingerprint —
+// shut every door here (read, fire and POST) until one is changed.
 function webKeysCollide_(props) {
   var fireToken = props.getProperty('CYCLE_TRIGGER_TOKEN');
   var readToken = props.getProperty('ADMISSION_READ_TOKEN');
-  return !!(fireToken && readToken && fireToken === readToken);
+  if (fireToken && readToken && fireToken === readToken) return true;
+  return !!(fireToken && webSha256Hex_(fireToken) === ADMISSION_READ_SHA256);
 }
 var WEB_KEYS_COLLIDE_ERROR = 'ADMISSION_READ_TOKEN equals the fire key — set a distinct read key';
 
@@ -46,9 +60,8 @@ function readFireAdmission_(param) {
     var fireToken = props.getProperty('CYCLE_TRIGGER_TOKEN');
     var readToken = props.getProperty('ADMISSION_READ_TOKEN');
     var given = String((param && param.token) || '');
-    if (!readToken && !fireToken) return { ok: false, error: 'no ADMISSION_READ_TOKEN script property set' };
     if (webKeysCollide_(props)) return { ok: false, error: WEB_KEYS_COLLIDE_ERROR };
-    if (!given || (given !== readToken && given !== fireToken)) return { ok: false, error: 'bad token' };
+    if (!given || (given !== readToken && given !== fireToken && webSha256Hex_(given) !== ADMISSION_READ_SHA256)) return { ok: false, error: 'bad token' };
     return { ok: true, admission: props.getProperty(FIRE_ADMISSION_PROP) };
   } catch (err) {
     return { ok: false, error: 'fire record read failed' };

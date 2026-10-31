@@ -22,7 +22,7 @@
  * Usage:
  *   node scripts/undockedEpisode.js --session undocked-pop00962 \
  *       --mission-file missions/pop00962.txt [--minutes 20] \
- *       [--model openrouter/deepseek/deepseek-chat]
+ *       [--model openrouter/deepseek/deepseek-v4-flash-0731]
  *   node scripts/undockedEpisode.js --session X --preflight-only
  *
  * Env: OPENROUTER_API_KEY (loaded from the canonical godworld env file).
@@ -46,7 +46,11 @@ function parseArgs(argv) {
   // never cuts a pilot the brief promised twenty minutes.
   const a = { session: null, mission: null, missionFile: null,
               minutes: require('./undockedMissionBrief').WINDOW_MINUTES,
-              model: 'openrouter/deepseek/deepseek-chat', preflightOnly: false };
+              // research.31 (builder 2026-10-30): the newer DeepSeek the house's other
+              // crons already run (37 call sites) — OpenRouter list $0.119 / $0.238 per M
+              // in/out vs deepseek-chat $0.257 / $1.029: cheaper. deepseek-chat flew all 70
+              // nights to 10-30 (10-30: six docks fired mid-flight, 0 points).
+              model: 'openrouter/deepseek/deepseek-v4-flash-0731', preflightOnly: false };
   for (let i = 2; i < argv.length; i++) {
     const k = argv[i], v = argv[i + 1];
     if (k === '--session') { a.session = v; i++; }
@@ -240,8 +244,8 @@ async function main() {
     stopReason: completed ? 'pilot-stopped' : (timedOut ? 'window' : 'exit'),
     toolCalls: tracker.toolCalls,
     ...stats,
-    // deepseek-chat list prices; cache reads push real cost lower
-    estCostUsd: +((stats.tokensIn * 0.14 + stats.tokensOut * 0.28) / 1e6).toFixed(4),
+    // deepseek-v4-flash-0731 OpenRouter list prices (2026-10-30); cache reads push real cost lower
+    estCostUsd: +((stats.tokensIn * 0.119 + stats.tokensOut * 0.238) / 1e6).toFixed(4),
     log: path.relative(ROOT, logPath),
     runner: 'scripts/undockedEpisode.js',
   };

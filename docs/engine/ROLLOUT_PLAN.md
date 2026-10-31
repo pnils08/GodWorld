@@ -75,6 +75,9 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| infrastructure.16 | PRIORITY (builder 10-30): crons run on Node 20, end of life Apr 2026 (kimi on 22). Move system node + crons to 22; every suite + one cron dry pass | ready | engine-sheet | [[../reference/DEPLOY]] |
+| infrastructure.17 | PRIORITY (builder 10-30): Supermemory plugin self-updated to 0.2.0, recall patch no longer applies (boot banner). Re-port the patch, pin the plugin | ready | engine-sheet | [[../reference/DEPLOY]] |
+| infrastructure.18 | Weekly version-drift report in the existing health check, no model: runtime end of life, npm behind (majors flagged), Claude Code, plugin vs patch | ready | engine-sheet | [[../reference/DEPLOY]] |
 | engine.325 | Casino overview (builder 10-30, own session): bet types safe→risky, how bets settle without credits or failure, house odds; mishap bet never pays | ready | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §Changelog 2026-10-30 |
 | governance.53 | Trim every row to what it is + what it waits on or next step; history into each plan's changelog first, then drop the 280 cap | ready | engine-sheet | [[rollout-rules]] §3 Row contract |
 | engine.214 | Mood per hood + 287/288 LIVE @148 (stage 5); Cut A @151, Cut B @152, Cut C + rate @153/@154 = stage 17. C113 first live fire read 2026-10-27 (hood reactions 69% with trend, spot lines 7.4%). Next: 8b `$VENUE` draws the citizen's spot (build) | ready | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] |

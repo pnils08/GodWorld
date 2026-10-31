@@ -336,7 +336,7 @@ async function main() {
     return;
   }
 
-  if (fs.existsSync(LOCK)) {
+  if (require('./undockedEpisode').lockHeld(LOCK, '[undocked-run]')) {
     throw new Error('orchestrator lock held (' + LOCK + ') — refusing to overlap');
   }
   fs.writeFileSync(LOCK, String(process.pid));

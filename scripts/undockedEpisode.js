@@ -138,6 +138,23 @@ const ANSI_RE = /\x1b\[[0-9;]*m/g;
 // still stops well before the window (the dead runs were 22-23 idle turns).
 const IDLE_TURNS = 15;
 
+// A lock names the pid that took it. It is held only while that process lives:
+// a runner killed mid-flight (SIGKILL, a closed session) never runs its exit
+// unlink, and before 2026-10-30 its lock refused every later flight, the
+// nightly show included. A lock whose pid is gone, or that names no pid, is
+// cleared and reported. A live pid — even one reused by another process —
+// keeps the lock (the safe side: refuse, never overlap).
+function lockHeld(lockPath, tag) {
+  if (!fs.existsSync(lockPath)) return false;
+  const pid = Number(String(fs.readFileSync(lockPath, 'utf8')).trim());
+  if (Number.isInteger(pid) && pid > 0) {
+    try { process.kill(pid, 0); return true; } catch (e) { if (e && e.code === 'EPERM') return true; }
+  }
+  console.error((tag || '[lock]') + ' stale lock ' + lockPath + ' (pid ' + (pid || 'none') + ' not running) — cleared');
+  fs.unlinkSync(lockPath);
+  return false;
+}
+
 function createCompletionTracker(idleTurns) {
   const limit = idleTurns || IDLE_TURNS;
   let done = false, idle = 0, calls = 0;
@@ -175,7 +192,7 @@ async function main() {
   console.log('[episode] preflight OK — session ' + a.session + ', cap ' + a.minutes + ' min, model ' + a.model);
   if (a.preflightOnly) return;
 
-  if (fs.existsSync(LOCK)) {
+  if (lockHeld(LOCK, '[episode]')) {
     console.error('[episode] another runner holds ' + LOCK + ' — refusing to overlap (plan principle 5)');
     process.exit(1);
   }
@@ -257,7 +274,7 @@ async function main() {
   console.log('[episode] sidecar: ' + path.relative(ROOT, sidePath));
 }
 
-module.exports = { createCompletionTracker, parseLog, parseArgs, IDLE_TURNS };
+module.exports = { createCompletionTracker, parseLog, parseArgs, lockHeld, IDLE_TURNS };
 
 if (require.main === module) {
   main().catch(e => { console.error('[episode] FATAL: ' + (e && e.message || e)); process.exit(1); });

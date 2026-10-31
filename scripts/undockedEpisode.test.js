@@ -82,5 +82,16 @@ check('the replay includes the pauses that 8 turns cut (Jumper 09-03, Lopez 09-2
 check('the default window is the brief\'s twenty minutes',
   E.parseArgs(['node', 'x', '--session', 's']).minutes === require('./undockedMissionBrief').WINDOW_MINUTES);
 
+// 2026-10-30: a runner killed mid-flight left its lock and refused every later flight.
+const os = require('os');
+const lk = path.join(os.tmpdir(), 'undocked-lock-test-' + process.pid);
+fs.writeFileSync(lk, '2147483646');           // a pid that is not running
+check('a dead pid\'s lock is cleared, the flight may start', E.lockHeld(lk, '[test]') === false && !fs.existsSync(lk));
+fs.writeFileSync(lk, String(process.pid));     // a live pid
+check('a live pid\'s lock is held', E.lockHeld(lk, '[test]') === true && fs.existsSync(lk));
+fs.writeFileSync(lk, '');                      // names no pid (a torn write)
+check('a lock naming no pid is cleared', E.lockHeld(lk, '[test]') === false && !fs.existsSync(lk));
+check('no lock is not held', E.lockHeld(lk, '[test]') === false);
+
 if (failed) { console.error('undockedEpisode: ' + failed + ' FAIL'); process.exit(1); }
 console.log('undockedEpisode: ok');

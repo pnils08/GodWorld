@@ -1,0 +1,34 @@
+== engine.316 bench, candidate 32b07eb7
+AIM = BENCH (script read the bench marker)
+bench pulled = stage 34
+stage 35 = stage 34 + the three files at 32b07eb7; manifest output/engine-sheet/stage35-e316.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @174
+pull-back 167 js + manifest byte-identical to stage35-e316.sha256
+version cut; waiting 300 s for /exec propagation
+bench cycleCount 124
+fire C125 rc=0 "verdict": "PASS" "wallS": 163
+fire C126 rc=0 "verdict": "PASS" "wallS": 176
+fire C127 rc=0 "verdict": "PASS" "wallS": 188
+drafted lines 28 | bench cycle 127
+  Eastlake           trajectory decay character mixed
+  Baylight District  trajectory decay character stadium
+  East Oakland       trajectory decay character construction
+  Grand Lake         trajectory steady character retail
+  San Antonio        trajectory decay character service-labor
+   C125 POP-01226 Eastlake | down | Neighborhood-Outabout-Down-S | got a table at the pho house without waiting
+   C125 POP-01239 Eastlake | down | Neighborhood-Outabout-Down-S | noticed the corner market closing earlier than it used to
+   C125 POP-01256 San Antonio | down | Neighborhood-Outabout-Down-S | noticed the lunch counters on International quieter than usual this week
+   C126 POP-01088 Eastlake | down | Neighborhood-Outabout-Down-S | noticed the corner market closing earlier than it used to
+   C126 POP-01201 Baylight District | down | Neighborhood-Outabout-Down-S | got served right away at a counter that usually has a line
+   C126 POP-01203 Baylight District | down | Neighborhood-Outabout-Down-S | had the harbor-side block to themselves on an evening it is usually busy
+   C126 POP-01208 Baylight District | down | Neighborhood-Outabout-Down-S | walked the new blocks on a weekday and barely passed anyone
+   C126 POP-01238 San Antonio | down | Neighborhood-Outabout-Down-S | noticed the lunch counters on International quieter than usual this week
+   C127 POP-00347 Baylight District | down | Neighborhood-Outabout-Down-S | walked the new blocks on a weekday and barely passed anyone
+RESULT lines written 9 | outside their own hood 0 | by hood {"Eastlake":3,"San Antonio":2,"Baylight District":4} | after C124
+== restore bench code to stage 34 (= PROD)
+bench pulled = stage 35; three files back at 6b0732f4^ = stage 34
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @175
+pull-back 167 js + manifest byte-identical to stage34-e317b.sha256
+engine.316 bench PASS

@@ -18,6 +18,9 @@
  *
  * FIRE:  curl -L "<url>?token=<token>&expect=<cycleCount now on the sheet>"
  * Response: JSON {ok:true} on success; {ok:false, error:...} otherwise.
+ * READ THE FIRE RECORD (engine.317, runs nothing):
+ *        curl -L "<url>?token=<ADMISSION_READ_TOKEN or the fire token>&action=admission"
+ *        -> {ok:true, admission:"<FIRE_ADMISSION_JSON raw>"|null}
  *
  * Safety: token-gated; expect= is mandatory (engine.275) — a repeated or retried
  * call names a cycleCount the first run has already moved and is refused. The
@@ -31,7 +34,21 @@ function doGet(e) {
   var out = { ok: false };
   try {
     var token = PropertiesService.getScriptProperties().getProperty('CYCLE_TRIGGER_TOKEN');
-    if (!token) {
+    if (e && e.parameter && String(e.parameter.action || '') === 'admission') {
+      // engine.317: a read-only door to this script's fire record, so a PROD push can
+      // prove no Cycle was admitted across it. Its own key, ADMISSION_READ_TOKEN: PROD
+      // carries no CYCLE_TRIGGER_TOKEN (cannot be fired from outside), and turning on
+      // this read must not turn that on. The fire key reads too. Runs nothing, writes
+      // nothing; returns the raw record (null when absent) for the caller to validate.
+      var readToken = PropertiesService.getScriptProperties().getProperty('ADMISSION_READ_TOKEN');
+      var given = String(e.parameter.token || '');
+      if (!readToken && !token) out.error = 'no ADMISSION_READ_TOKEN script property set';
+      else if (!given || (given !== readToken && given !== token)) out.error = 'bad token';
+      else {
+        out.ok = true;
+        out.admission = PropertiesService.getScriptProperties().getProperty(FIRE_ADMISSION_PROP);
+      }
+    } else if (!token) {
       out.error = 'CYCLE_TRIGGER_TOKEN script property not set';
     } else if (!e || !e.parameter || String(e.parameter.token || '') !== token) {
       out.error = 'bad token';

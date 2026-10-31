@@ -367,5 +367,29 @@ console.log('═══ 12 — engine.285: the real executor under a lost acknowl
   assert('ensure with no tab creates it with the header (unchanged path)', er.success && made && made.rows[0].join() === 'BIZ_ID,Name');
 }
 
+console.log('═══ engine.317 — the read-only door to the fire record');
+{
+  const w = world();
+  w.get({ expect: '110' });
+  const rec = w.props.FIRE_ADMISSION_JSON, calls = w.calls.length, count = w.cycleCount();
+  const r = w.get({ action: 'admission' });
+  assert('the fire key reads the raw record', r.ok === true && r.admission === rec, r);
+  assert('the read runs nothing and moves nothing', w.calls.length === calls && w.cycleCount() === count && w.props.FIRE_ADMISSION_JSON === rec);
+  const p = world();
+  delete p.props.CYCLE_TRIGGER_TOKEN; p.props.ADMISSION_READ_TOKEN = 'readtok';
+  const pr = p.box.doGet({ parameter: { token: 'readtok', action: 'admission' } });
+  assert('PROD shape (no fire key): the read key reads; no record yet is null', pr.ok === true && pr.admission === null, pr);
+  const pf = p.box.doGet({ parameter: { token: 'readtok', expect: '110' } });
+  assert('the read key never fires', pf.ok === false && /CYCLE_TRIGGER_TOKEN/.test(pf.error) && !p.calls.includes('body'), pf);
+  const pb = p.box.doGet({ parameter: { token: 'nope', action: 'admission' } });
+  assert('a wrong key reads nothing', pb.ok === false && pb.error === 'bad token' && pb.admission === undefined, pb);
+  const pe = p.box.doGet({ parameter: { token: '', action: 'admission' } });
+  assert('an empty key reads nothing', pe.ok === false && pe.error === 'bad token', pe);
+  const n = world();
+  delete n.props.CYCLE_TRIGGER_TOKEN;
+  const nr = n.box.doGet({ parameter: { token: 'x', action: 'admission' } });
+  assert('no key set at all: the door is shut', nr.ok === false && /ADMISSION_READ_TOKEN/.test(nr.error), nr);
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

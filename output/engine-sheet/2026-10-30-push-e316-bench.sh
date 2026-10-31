@@ -35,6 +35,9 @@ else echo "bench is neither stage 32, 33 nor 34 — stop"; exit 1; fi
 if [ "$SRC" = "stage33" ]; then
   LABEL="bench 1004 restored = stage 33 (PROD @169)"
 else
+  git merge-base --is-ancestor 6b0732f4 "$SRC" || { echo "$SRC does not carry engine.316 — stop"; exit 1; }
+  OTHER=$(git log --format=%h "6b0732f4..$SRC" -- $F316 | while read h; do git log -1 --format=%s "$h" | grep -q '^engine.316' || echo "$h"; done)
+  [ -z "$OTHER" ] || { echo "non-engine.316 commit(s) touch the engine file after 6b0732f4: $OTHER — stop"; exit 1; }
   git show "$SRC:$F316" > "$W/stage/$F316"
   tree > "$MAN"
   grep -v -e "./$F316$" "$MAN" | diff -q - <(grep -v -e "./$F316$" "$S33_MAN") >/dev/null \

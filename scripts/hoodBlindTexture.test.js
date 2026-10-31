@@ -106,7 +106,7 @@ ENGINES.forEach(([file, byLabel, bespoke]) => {
     Object.keys(extra).forEach(h => assert.ok(HOODS.indexOf(h) >= 0, bespoke + ' keys "' + h + '", not on the map'));
     assert.deepStrictEqual(Object.keys(extra).sort(), bespokeHoods(bespoke).slice().sort(), bespoke + ' should carry exactly its bespoke hoods');
   });
-  t(byLabel + ': all 22 hoods draw a non-empty pool; the twelve get their bespoke lines on top', () => {
+  t(byLabel + ': all 22 hoods draw a non-empty pool; its bespoke hoods get their lines on top', () => {
     const ctx = makeCtx(sb);
     HOODS.forEach(h => {
       const pool = sb.hoodTexturePool_(ctx, h, sb[byLabel], sb[bespoke], 'test');

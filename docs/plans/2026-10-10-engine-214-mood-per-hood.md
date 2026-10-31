@@ -373,7 +373,7 @@ Business mints for hood character (builder 2026-10-19). Walk complete 2026-10-21
 
 Read 2026-10-30, every hood counted from the code + the live map: Eastlake, Baylight District and East Oakland hold 0 up / 0 down; San Antonio 1 / 0; Grand Lake 2 / 0. Every other hood has at least one line each way (Adams Point, Brooklyn, Glenview, Ivy Hill, Dimond run 1 / 1: thin, not empty, not this row). Trajectories at C113: Eastlake, Baylight, East Oakland, San Antonio are decay, so those four are empty today (46 citizens): a winning drift roll there writes nothing. Grand Lake is growth, empty only on a decay week.
 
-Lands as `NEIGHBORHOOD_DRIFT_BESPOKE_` entries (`runNeighborhoodEngine.js:83`), the convention of the other twelve; each label pool feeds exactly one of these hoods, so bespoke vs label is only where the text sits. Each line says activity changed (codex 2026-10-18), names only what `Business_Ledger` holds (pho house, tap room, Foothill, sports bar by the Coliseum, burger counter, Saturday market, theater, bakery on Twelfth, International Boulevard), asserts nothing the row does not carry (no game crowds, no cranes, no finished amenity: INIT-006 is `construction-active`), and a down line is a quieter street, never a decline premise.
+Lands as `NEIGHBORHOOD_DRIFT_BESPOKE_` entries (`runNeighborhoodEngine.js:83`), the convention of the other twelve; each label pool feeds exactly one of these hoods, so bespoke vs label is only where the text sits. Each line says activity changed (codex 2026-10-18), names only what `Business_Ledger` holds (pho house, tap room, Foothill, sports bar by the Coliseum, burger counter, Saturday market, theater, bakery on Twelfth, International Boulevard), asserts nothing the row does not carry (no game crowds, no cranes, no finished amenity: INIT-006 is `construction-active`, and the ten citizens the ledger lists in Baylight are why its new units and blocks stand), and a down line is a quieter street, never a decline premise.
 
 ```js
 'Eastlake': [
@@ -390,7 +390,7 @@ Lands as `NEIGHBORHOOD_DRIFT_BESPOKE_` entries (`runNeighborhoodEngine.js:83`), 
   ["waited in a longer line than usual at the burger counter", "up"],
   ["walked the new blocks on a weekday and barely passed anyone", "down"],
   ["got served right away at a counter that usually has a line", "down"],
-  ["had the waterfront walk to themselves on an evening it is usually busy", "down"]
+  ["had the harbor-side block to themselves on an evening it is usually busy", "down"]
 ],
 'East Oakland': [
   ["waited in a longer line than usual at a Foothill lunch counter", "up"],

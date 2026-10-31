@@ -211,8 +211,8 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
     ["saw the avenue's cafes full well into the evening", "up"]
   ],
   // engine.316 (rb, data, builder 2026-10-30): these five held no line one way or both, so a winning drift
-  // roll on a moving week wrote nothing. Places are the Business_Ledger's; Baylight is construction-active,
-  // so its lines assert no finished amenity.
+  // roll on a moving week wrote nothing. Places are the Business_Ledger's; Baylight is construction-active
+  // with residents on the ledger, so its lines hold the blocks people live on and no finished amenity.
   'Eastlake': [
     ["waited longer than usual for a table at the pho house", "up"],
     ["noticed the tap room crowd out on the sidewalk on a weeknight", "up"],
@@ -227,7 +227,7 @@ var NEIGHBORHOOD_DRIFT_BESPOKE_ = {
     ["waited in a longer line than usual at the burger counter", "up"],
     ["walked the new blocks on a weekday and barely passed anyone", "down"],
     ["got served right away at a counter that usually has a line", "down"],
-    ["had the waterfront walk to themselves on an evening it is usually busy", "down"]
+    ["had the harbor-side block to themselves on an evening it is usually busy", "down"]
   ],
   'East Oakland': [
     ["waited in a longer line than usual at a Foothill lunch counter", "up"],

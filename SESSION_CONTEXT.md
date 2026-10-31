@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** research.31 → read the 10-31 20:30 flight (first on deepseek-v4-flash-0731 + progress scoring: points, failed commands, cost); verify codex progress review. engine.317 PROD push on Mike's go. After C114: stage 32 watch + engine.270. Then infra.16/17, engine.325.
 
-**NEXT[research-build]:** no job in hand — ask Mike. Watch: 21:30 first show wake (95; pages 70/70 landed); Sat 08:15 Nia digest carries the nights as flown (83); Sat 11:15 Ines on Sonnet + first full every-page run (73/97); 94/96 key shapes; 93 owed marks C114; 89 reads.
+**NEXT[research-build]:** no job in hand — ask Mike. Watch: Sat 08:15 Nia digest carries the nights as flown (83); Sat 11:15 Ines on Sonnet + first full every-page run (73/97); 94/96 key shapes; 93 owed marks C114; 89 reads.

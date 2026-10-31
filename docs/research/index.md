@@ -1,7 +1,7 @@
 ---
 title: Research Sub-Catalog
 created: 2026-06-01
-updated: 2026-10-08
+updated: 2026-10-31
 type: reference
 tags: [research, architecture, active]
 sources:
@@ -25,6 +25,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 | File | Purpose | Verdict |
 |------|---------|---------|
+| **[[../for-claude-review/2026-10-31-codex-civic-autonomy-research]]** | Source trace of district/mayor wakes, slices, executable civic choices, vote/approval gaps, C113 receipts, major-event routing and configured models; companion autonomy implementation plan | adopt — source research; awaiting Claude review |
 | **[[2026-10-08-codex-engine95-review2]]** | codex Review 2 of the engine.95 Revision 1 design: receipts discard resume-time state, save-exception states undefined, admission/result contract, tail-match dedup unsound (failed cell + landed append), `failed` not `unpersisted`, codec and bench-baseline requirements | HOLD — 5 BLOCK / 2 FIX / 1 NOTE; folded into Revision 2 (one resume, no retry) |
 | **[[2026-10-08-codex-engine95-design]]** | codex Review 1 of the engine.95 2026-10-04 checkpoint/resume design: the Phase-9 gate was not an intent-only boundary (20 producers before the executor), queue is `ctx.persist`, executor clears queues on error, 25 append targets with no uniform cycle/hash schema, Task 5 premises false | HOLD — 6 BLOCK / 3 FIX / 1 NOTE; folded into Revision 1 then 2; engine.285 filed |
 | **[[2026-10-07-codex-rb-cronpath-fixes]]** | codex review of rb's two cron-path fixes (8b923371): the Rhea INTAKE POPID exemption reached readers through the Edition, the canon sweep and the daily brief; the `appendReflection_` error-string fix passed with a small test gap | HOLD (exemption) / SHIP-WITH-FIXES (error string); resolved by the builder's names-not-IDs principle |
@@ -152,6 +153,7 @@ Grep here before grepping the tree. Each row: file · one-line purpose · verdic
 
 ## Changelog
 
+- 2026-10-31 (codex) — Registered civic autonomy source research in the review inbox, with a companion implementation plan.
 - 2026-10-21 (research-build) — Accepted [[../archive/for-claude-review/2026-10-21-codex-engine306-mint-plan-review]] (HOLD, 7 hunts) from the review inbox; every finding folded into [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8 engine.306 (codex review fold).
 - 2026-10-21 (research-build) — [[2026-10-21-engine306-mint-plan-TASK]] — codex plan review of engine.306 (103 business mints for hood character, roster `output/engine306-mint-roster.tsv`); review lands in `docs/for-claude-review/2026-10-21-codex-engine306-mint-plan-review.md`.
 - 2026-10-08 (engine-sheet) — Accepted [[2026-10-08-codex-engine95-design]] and [[2026-10-08-codex-engine95-review2]] from the review inbox; both folded into the engine.95 plan §Build notes Revision 2.

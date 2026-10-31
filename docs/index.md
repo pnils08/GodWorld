@@ -1,7 +1,7 @@
 ---
 title: GodWorld Documentation Index
 created: 2026-04-14
-updated: 2026-09-28
+updated: 2026-10-31
 type: reference
 tags: [architecture, infrastructure, active]
 sources:
@@ -391,6 +391,8 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 
 ## `docs/plans/` — in-flight plans not yet promoted
 
+- **[[for-claude-review/2026-10-31-codex-civic-autonomy-plan]]** — proposed civic autonomy build: grounded choices, event-aware mayor/district briefs, sufficient work opportunities, executable events/programs, binding ballots, citizen/media feedback, attributable approval and model/context evaluation. Ten tasks across research-build and engine-sheet; awaiting Claude review. *(plan, civic, citizens, media, draft)*
+
 - **[[plans/2026-09-11-sports-as-a-lived-system]]** — Sports feed contract, recorded city effects, weekly economic ripples and crossover seeds; engine.210 first local cut, fandom through Event_Content_Ledger, and per-franchise drifting weight. *(plan, engine, sports, citizens, active)*
 - **[[plans/2026-09-16-work-wake-packs]]** — civic.37. Cron work-day wakes for working citizens: the medical examiner and EMS director on their civic beats, A's players on the sports feed; page reflection + gated Reflection_Intake row, no dial writes. *(plan, civic, citizens, sports, cron, active)*
 - **[[plans/2026-09-19-civic-wake-game-loop]]** — civic.38. The wake-as-turn build: seats choose from a closed move set whose moves reach Initiative_Tracker through the existing Sunday gate; three-stage initiative clearance (Funded → Standing → Delivering) with a 4–5-cycle losing clock and a stall that pays; petitions counted deterministically from citizen condition data with Civic reflections as the visibility signal; Mara-style confrontation re-aimed at the elected seats; datawake rota split — elected seats keep the political turn, project directors move to work-wake shifts. *(plan, civic, citizens, engine, cron, active)*
@@ -700,6 +702,7 @@ Small, dated decision records. Created only when a choice is (a) hard to reverse
 
 ## Changelog
 
+- 2026-10-31 (codex) — Registered the proposed civic autonomy plan in the review inbox; companion source research is registered in research/index.
 - 2026-09-28 (codex) — Registered the care/justice intake review amendment under engine.254; pending Claude review in the inbox.
 - 2026-09-21 (codex) — Registered [[plans/2026-09-21-safety-lever]], the safety-second design under civic.38.
 - 2026-09-19 (kimi) — Registered [[plans/2026-09-19-civic-wake-game-loop]] (row civic.38; the wake-as-turn build plan).

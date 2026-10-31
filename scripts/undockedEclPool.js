@@ -93,6 +93,17 @@ const SHOW_ROWS = [
     'argued that one closed contract is worth a season of ore and that the board does not care how the credits got there'),
   retag(row(POOL_SHOW, 'lottery', 'knew the rules cold — two nights in the chair, the galaxy keeps the score, the board adds it up — and had never been drawn', 1.0, 'undocked;fame=0;lifestate=working'),
     'knew the rules cold — one night in the chair, bring credits home, the board adds them up — and had never been drawn'),
+  // research.31 depth (builder 10-30 "the more depth the better"; the seven kept 10-30):
+  // the marks the city talks about, each a real game achievement — First Blood,
+  // Wanderer, Maiden Jump, Helping Hand, First Salvage. No numbers (a printed number
+  // becomes canon).
+  row(POOL_SHOW, 'watch', 'went quiet with the rest of the room when a pilot fired on another ship for the first time, because everyone knew the board would count it', 1.0, 'undocked'),
+  row(POOL_SHOW, 'watch', 'kept count of the systems a pilot had seen out loud, waiting for the tenth like it was a home run', 1.0, 'undocked'),
+  row(POOL_SHOW, 'argue', 'argued that the first jump out of home space is the only mark that matters and everything after it is just distance', 0.95, 'undocked'),
+  row(POOL_SHOW, 'argue', 'said a captain who hands fuel to a stranger out there has done more than one who sold a full hold, and the board agrees', 0.95, 'undocked'),
+  row(POOL_SHOW, 'lottery', 'had a plan for their night in the chair that started with picking through a wreck, since a first salvage counts on the board like anything else', 1.0, 'undocked;fame=0;lifestate=working'),
+  row(POOL_SHOW, 'aspire', 'knew the first mark is easy and the tenth system is not, and watched the pilots like someone pricing the distance', 0.75, 'undocked;fame>=25'),
+  row(POOL_SHOW, 'sting', 'said the board rewards tourists now, a first dock and a first jump and a pat on the head, and watched anyway', 0.85, 'undocked;warmth<=39'),
 
   // 4a wager talk — the window, the napkin, the board. No numbers (numbers
   // become canon the moment they print). No money moves. Plan:

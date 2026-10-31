@@ -101,6 +101,7 @@ echo "pinned deployment $DEP serves $VER"
   || { echo "PULL-BACK MISMATCH — PROD is not the benched stage"; exit 1; }
 echo "pull-back $(find "$W/pullback" -name '*.js' | wc -l) js + manifest byte-identical to $MAN"
 fire_state "after the pull-back" || { echo "STOP: live moved off Cycle $CYC, or the queue / ledger moved, across the deploy; read which version ran before anything else"; exit 3; }
+echo "waiting 300 s: /exec serves the old version for minutes after a cut (2026-10-30, @169)"; sleep 300
 door "after the pull-back" || { echo "STOP: PROD's fire record through the door is not a valid Cycle $CYC done record — read it before anything else"; exit 3; }
 echo "waiting 480 s: a fire or intake run admitted before the deploy would persist inside this window"; sleep 480
 fire_state "8 minutes after" || { echo "STOP: a Cycle or an intake run persisted inside the window — read which version ran before anything else"; exit 3; }

@@ -1,0 +1,13 @@
+fresh PROD pull = stage 32
+stage = the benched tree (output/engine-sheet/stage33-e317.sha256), byte for byte
+◇ injected env (33) from ../.config/godworld/.env // tip: ⌘ custom filepath { path: '/custom/path/.env' }
+live fire state before the push: cycleCount 113, Neighborhood_Map [113], Riley last 113, checkpoint none, Engine_Errors at C114+ 0, intake queue 148 rows identical, ledger rows 1053 (first read 1053) — C114 not fired, queue still
+fire key before the push: {"target":"prod-nofire","http":200,"error":"CYCLE_TRIGGER_TOKEN script property not set","noFireKey":true}
+└─ utilities/writeIntents.js
+pinned deployment AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ serves @169
+pull-back 167 js + manifest byte-identical to output/engine-sheet/stage33-e317.sha256
+live fire state after the pull-back: cycleCount 113, Neighborhood_Map [113], Riley last 113, checkpoint none, Engine_Errors at C114+ 0, intake queue 148 rows identical, ledger rows 1053 (first read 1053) — C114 not fired, queue still
+fire key after the pull-back: {"target":"prod-nofire","http":200,"error":"CYCLE_TRIGGER_TOKEN script property not set","noFireKey":true}
+fire record after the pull-back: {"target":"prod","http":200,"ok":false,"error":"CYCLE_TRIGGER_TOKEN script property not set","record":null,"valid":false,"expectOk":false}
+STOP: PROD's fire record through the door is not a valid Cycle 113 done record — read it before anything else
+rc=3

@@ -1010,6 +1010,7 @@ async function processBylinePublished(fullPath, type, cycle, sheetsClient, sheet
   const cmuRes = await sheetsClient.spreadsheets.values.get({
     spreadsheetId: sheetId, range: 'Citizen_Media_Usage!A1:ZZ',
   });
+  const { modelFreeStem } = require('../lib/mags');
   const cmu = cmuRes.data.values || [];
   const ch = cmu[0] || [];
   const cN = ch.indexOf('CitizenName'), cT = ch.indexOf('UsageType'), cC = ch.indexOf('Context');
@@ -1019,7 +1020,7 @@ async function processBylinePublished(fullPath, type, cycle, sheetsClient, sheet
   }
   const existingKeys = new Set(cmu.slice(1)
     .filter(r => String(r[cT] || '').trim() === 'byline-published')
-    .map(r => String(r[cN] || '').trim() + '|' + String(r[cC] || '').trim()));
+    .map(r => String(r[cN] || '').trim() + '|' + modelFreeStem(String(r[cC] || '').trim())));   // pipeline.99: both forms match
 
   const plannedKeys = [];
   const plannedRows = [];
@@ -1028,7 +1029,7 @@ async function processBylinePublished(fullPath, type, cycle, sheetsClient, sheet
     const hit = byName.get(BYLINE_ALIASES[norm] ? normalizeFullName(BYLINE_ALIASES[norm]) : norm);
     if (!hit) { out.unresolved.push(c.reporter); continue; }
     if (hit.hits > 1) { out.ambiguous.push(c.reporter); continue; }
-    const key = hit.canonical + '|' + c.context;
+    const key = hit.canonical + '|' + modelFreeStem(c.context);
     if (existingKeys.has(key) || plannedKeys.includes(key)) { out.duplicates++; continue; }
     plannedKeys.push(key);
     out.resolved.push({ citizen: hit.canonical, context: c.context });
@@ -1038,7 +1039,7 @@ async function processBylinePublished(fullPath, type, cycle, sheetsClient, sheet
         case 'Cycle':       return String(cycle);
         case 'CitizenName': return hit.canonical;
         case 'UsageType':   return 'byline-published';
-        case 'Context':     return c.context;
+        case 'Context':     return modelFreeStem(c.context);
         case 'Reporter':    return hit.canonical;
         default:            return '';
       }

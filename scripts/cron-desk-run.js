@@ -313,10 +313,12 @@ async function recordBylineUsage(cycle, byline, context) {
     const h = data[0] || [];
     const iN = h.indexOf('CitizenName'), iT = h.indexOf('UsageType'), iC = h.indexOf('Context');
     if (iN < 0 || iT < 0) return { recorded: false, reason: 'Citizen_Media_Usage headers missing CitizenName/UsageType' };
+    const { modelFreeStem } = require(path.join(ROOT, 'lib', 'mags'));
+    const key = modelFreeStem(context);   // pipeline.99: rows written before the cut carry the model; both forms match
     const dup = data.slice(1).some(r =>
       String(r[iN] || '').trim() === byline.name &&
       String(r[iT] || '').trim() === 'byline-landed' &&
-      (iC < 0 || String(r[iC] || '').trim() === context));
+      (iC < 0 || modelFreeStem(String(r[iC] || '').trim()) === key));
     if (dup) return { recorded: false, reason: 'duplicate — this stem already credited' };
     const row = h.map(col => {
       switch (String(col).trim()) {
@@ -324,7 +326,7 @@ async function recordBylineUsage(cycle, byline, context) {
         case 'Cycle':       return String(cycle);
         case 'CitizenName': return byline.name;
         case 'UsageType':   return 'byline-landed';
-        case 'Context':     return context;
+        case 'Context':     return key;
         case 'Reporter':    return byline.name;
         default:            return '';
       }

@@ -155,7 +155,7 @@ function buildCitizenArchive(usageRaw, simLedgerRaw) {
     if (!popId) return;
     var entry = archive[name] || (archive[name] = { popId: popId, name: name, totalRefs: 0, articles: [] });
     entry.totalRefs++;
-    entry.articles.push({ source: u.Reporter || '', title: u.Context || '', cycle: u.Cycle || '' });
+    entry.articles.push({ source: u.Reporter || '', title: require('../lib/mags').modelFreeStem(u.Context), cycle: u.Cycle || '' });
   });
   Object.keys(archive).forEach(function(n) {
     archive[n].articles = archive[n].articles.slice(-ARCHIVE_ARTICLE_CAP);

@@ -1,0 +1,128 @@
+[
+ {
+  "row": 162,
+  "pool": "hood.jack-london",
+  "text": "haggled for a flat of bruised peaches at the Saturday market just to have a reason to talk to someone",
+  "before": "wealth<=5",
+  "after": "hood=Jack London;wealth<=5"
+ },
+ {
+  "row": 164,
+  "pool": "hood.fruitvale",
+  "text": "smelled the al pastor roasting from three blocks down International and realized they hadn't eaten all day",
+  "before": "",
+  "after": "hood=Fruitvale"
+ },
+ {
+  "row": 178,
+  "pool": "hood.west-oakland",
+  "text": "heard the freight trains clanking near the Port and timed their breathing to the rhythm",
+  "before": "",
+  "after": "hood=West Oakland"
+ },
+ {
+  "row": 179,
+  "pool": "hood.rockridge",
+  "text": "navigated the stroller traffic on College Avenue and silently judged the parking jobs",
+  "before": "",
+  "after": "hood=Rockridge"
+ },
+ {
+  "row": 180,
+  "pool": "hood.temescal",
+  "text": "noticed three new pop-up restaurants on Telegraph and wondered how long any of them would last",
+  "before": "band!=child",
+  "after": "hood=Temescal;band!=child"
+ },
+ {
+  "row": 181,
+  "pool": "hood.downtown",
+  "text": "stepped over a puddle reflecting the Tribune Tower neon and thought about taking a picture",
+  "before": "",
+  "after": "hood=Downtown"
+ },
+ {
+  "row": 182,
+  "pool": "hood.lake-merritt",
+  "text": "dodged the running groups circling the lake and found a quiet bench near the pergola",
+  "before": "",
+  "after": "hood=Lake Merritt"
+ },
+ {
+  "row": 216,
+  "pool": "hood.coliseum",
+  "text": "walked the perimeter of the Coliseum District Development and tried to picture what it would look like in five years",
+  "before": "band!=child",
+  "after": "hood=East Oakland;band!=child"
+ },
+ {
+  "row": 217,
+  "pool": "hood.west-oakland",
+  "text": "watched the fog roll over the port cranes from their front window",
+  "before": "",
+  "after": "hood=West Oakland"
+ },
+ {
+  "row": 218,
+  "pool": "hood.west-oakland",
+  "text": "noticed another renovated Victorian on the block and calculated what the property taxes must be",
+  "before": "wealth>=5",
+  "after": "hood=West Oakland;wealth>=5"
+ },
+ {
+  "row": 219,
+  "pool": "hood.west-oakland",
+  "text": "walked the Mandela Parkway median under the trees and took the long way home",
+  "before": "band!=child",
+  "after": "hood=West Oakland;band!=child"
+ },
+ {
+  "row": 220,
+  "pool": "hood.fruitvale",
+  "text": "heard the steady thump of a bassline from three cars down at the stoplight and nodded along",
+  "before": "",
+  "after": "hood=Fruitvale"
+ },
+ {
+  "row": 221,
+  "pool": "hood.fruitvale",
+  "text": "passed the community clinic line and recognized three people they went to high school with",
+  "before": "band!=child",
+  "after": "hood=Fruitvale;band!=child"
+ },
+ {
+  "row": 222,
+  "pool": "hood.fruitvale",
+  "text": "argued about the best tamale cart on International Boulevard and refused to back down",
+  "before": "",
+  "after": "hood=Fruitvale"
+ },
+ {
+  "row": 223,
+  "pool": "hood.jack-london",
+  "text": "watched the ferry cut across the bay at sunset and felt lucky to live this close to the water",
+  "before": "wealth>=6",
+  "after": "hood=Jack London;wealth>=6"
+ },
+ {
+  "row": 224,
+  "pool": "hood.jack-london",
+  "text": "navigated around a film crew blocking the sidewalk near the waterfront and rolled their eyes",
+  "before": "band!=child",
+  "after": "hood=Jack London;band!=child"
+ },
+ {
+  "row": 225,
+  "pool": "hood.temescal",
+  "text": "waited thirty minutes for a table at a brunch spot because the out-of-town friends insisted on it",
+  "before": "wealth>=6",
+  "after": "hood=Temescal;wealth>=6"
+ },
+ {
+  "row": 226,
+  "pool": "hood.temescal",
+  "text": "walked through the alleyways behind Telegraph to avoid the weekend crowd",
+  "before": "",
+  "after": "hood=Temescal"
+ }
+]

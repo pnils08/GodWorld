@@ -577,18 +577,19 @@ async function stepSheets(cycle) {
     console.log('light: ' + w.name + ' -> ' + (res.light || '(unclassified: ' + String(res.raw).slice(0, 60) + ')'));
   }
   if (iN < 0 || iT < 0) throw new Error('Citizen_Media_Usage headers missing CitizenName/UsageType');
+  const { modelFreeStem } = require(path.join(ROOT, 'lib', 'mags'));   // pipeline.99: both forms match
   const existing = new Set(data.slice(1).map(r =>
-    [String(r[iN] || '').trim(), String(r[iT] || '').trim(), iC < 0 ? '' : String(r[iC] || '').trim()].join('|')));
+    [String(r[iN] || '').trim(), String(r[iT] || '').trim(), iC < 0 ? '' : modelFreeStem(String(r[iC] || '').trim())].join('|')));
   const rows = [];
   for (const w of wanted) {
-    if (existing.has([w.name, w.usageType, w.context].join('|'))) { console.log('dup skip: ' + w.name + ' | ' + w.context); continue; }
+    if (existing.has([w.name, w.usageType, modelFreeStem(w.context)].join('|'))) { console.log('dup skip: ' + w.name + ' | ' + w.context); continue; }
     rows.push(h.map(col => {
       switch (String(col).trim()) {
         case 'Timestamp':   return 'C' + cycle;      // sim clock, never Gregorian
         case 'Cycle':       return String(cycle);
         case 'CitizenName': return w.name;
         case 'UsageType':   return w.usageType;
-        case 'Context':     return w.context;
+        case 'Context':     return modelFreeStem(w.context);
         case 'Reporter':    return w.byline ? w.name : entryByline(w.context);
         case 'Sentiment':   return w.sentiment || '';   // engine.152
         default:            return '';

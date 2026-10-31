@@ -34,9 +34,9 @@ Past these dates, re-verify with `tmux capture-pane` rather than trusting this t
 tmux list-panes -a -F "#{window_index}.#{pane_index} #{window_name} | cmd=#{pane_current_command} | #{pane_id}"
 ```
 
-Layout as of 2026-10-29: `1 research-build`(claude) `2 engine-sheet`(claude) `3 codex`(node) `4 [agy]`(agy) `5 aider`(bash) `6 codex-es`(node). Address windows by name.
+Layout as of 2026-10-30: `1 research-build`(claude) `2 codex-rb`(node) `3 engine-sheet`(claude) `4 codex-es`(node) `5 agy-all`(agy) `6 aider-all`(bash). Address windows by name.
 
-**One codex per Claude terminal (builder 2026-10-29):** research-build sends to `codex`, engine-sheet to `codex-es` — never the other terminal's. Idle means no `esc to interrupt` in the footer; the `Ask Codex` prompt line shows even while it works.
+**One codex per Claude terminal (builder 2026-10-29):** research-build sends to `codex-rb`, engine-sheet to `codex-es` — never the other terminal's. Idle means no `esc to interrupt` in the footer; the `Ask Codex` prompt line shows even while it works.
 
 **Re-read this every time.** Pane ids are not stable across restarts, and a pane sitting at bare `bash` means that agent is not booted.
 

@@ -27,7 +27,8 @@ if (!Number.isInteger(from) || from < 112) { console.error('fromCycle required')
   let hits = 0, wrong = 0; const byHood = {};
   for (const r of log) {
     if (!(Number(r.Cycle) > from)) continue;
-    const txt = String(r.EventText || ''); const m = Object.keys(lines).find(t => txt.includes(t)); if (!m) continue;
+    const txt = String(r.EventText || ''); const m = lines[txt] ? txt : null; if (!m) continue;
+    if (!/^Neighborhood-Outabout-(Up|Down)-/.test(String(r.EventTag))) continue;   // only the drift writer's own rows
     hits++; const h = lines[m].hood; byHood[h] = (byHood[h] || 0) + 1;
     if (r.Neighborhood !== h) wrong++;
     if (hits <= 14) console.log('  ', 'C' + r.Cycle, r.POPID, r.Neighborhood, '|', lines[m].dir, '|', r.EventTag, '|', txt.slice(0, 90));

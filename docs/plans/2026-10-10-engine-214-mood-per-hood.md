@@ -418,6 +418,8 @@ Lands as `NEIGHBORHOOD_DRIFT_BESPOKE_` entries (`runNeighborhoodEngine.js:83`), 
 
 After the yes: `hoodBlindTexture.test.js` asserts every hood on the map holds one line each way; bench, review, PROD under the substrate gate.
 
+ECL read 2026-10-30 (engine.326): a `hood.*` PoolKey binds nothing. Eligibility is the row's Conditions alone (`generateCitizensEvents.js` injection loop), so 18 of the 24 active `hood.*` place rows, with no `hood=` term, draw for every citizen in the city. Ten hoods hold no ECL line at all (Uptown, KONO, Piedmont Ave, Adams Point, Brooklyn, Dimond, Glenview, Ivy Hill, San Antonio, East Oakland).
+
 ## Changelog
 
 - 2026-10-30 (research-build) — engine.316: 28 signed lines drafted for the five hoods (§engine.316), awaiting the builder's yes; four of the five are empty at C113 trajectories (46 citizens).

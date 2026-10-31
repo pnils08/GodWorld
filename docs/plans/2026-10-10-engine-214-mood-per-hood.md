@@ -369,8 +369,58 @@ Phase 5 is untouched: a level of 3 gives the carry its full weight (`carry / 3` 
 
 Business mints for hood character (builder 2026-10-19). Walk complete 2026-10-21: 103 rows + Pulse District → Uptown (C92 print already says Uptown), roster `output/engine306-mint-roster.tsv`. Codex plan review HOLD 2026-10-21, all 7 folded: es = Business_Intake tab + processBusinessIntake with typed A:I readback/receipt, landmark owner-door exclusion, bench the expanded reader set; builder = Sports Bar vs Game-Day Bar name. LANDED 2026-10-21 on the builder's go: PROD stage 18 @155 (landmark owner-door term) + the 103 rows + realign on live, RECEIPT PASS; first live fire C113 (watch DEPLOY_HISTORY §PROD stage 18); codex gate 3 audits after
 
+## engine.316 — signed texture lines for the five empty hoods (draft 2026-10-30, research-build; waits on the builder's yes)
+
+Read 2026-10-30, every hood counted from the code + the live map: Eastlake, Baylight District and East Oakland hold 0 up / 0 down; San Antonio 1 / 0; Grand Lake 2 / 0. Every other hood has at least one line each way (Adams Point, Brooklyn, Glenview, Ivy Hill, Dimond run 1 / 1: thin, not empty, not this row). Trajectories at C113: Eastlake, Baylight, East Oakland, San Antonio are decay, so those four are empty today (46 citizens): a winning drift roll there writes nothing. Grand Lake is growth, empty only on a decay week.
+
+Lands as `NEIGHBORHOOD_DRIFT_BESPOKE_` entries (`runNeighborhoodEngine.js:83`), the convention of the other twelve; each label pool feeds exactly one of these hoods, so bespoke vs label is only where the text sits. Each line says activity changed (codex 2026-10-18), names only what `Business_Ledger` holds (pho house, tap room, Foothill, sports bar by the Coliseum, burger counter, Saturday market, theater, bakery on Twelfth, International Boulevard), asserts nothing the row does not carry (no game crowds, no cranes, no finished amenity: INIT-006 is `construction-active`), and a down line is a quieter street, never a decline premise.
+
+```js
+'Eastlake': [
+  ["waited longer than usual for a table at the pho house", "up"],
+  ["noticed the tap room crowd out on the sidewalk on a weeknight", "up"],
+  ["passed more people walking the blocks between the lake and the flats than last season", "up"],
+  ["got a table at the pho house without waiting", "down"],
+  ["noticed the corner market closing earlier than it used to", "down"],
+  ["walked from the lake down to the flats and barely passed anyone", "down"]
+],
+'Baylight District': [
+  ["noticed lights on in more of the new units than last season", "up"],
+  ["passed more strollers on the new blocks than a season ago", "up"],
+  ["waited in a longer line than usual at the burger counter", "up"],
+  ["walked the new blocks on a weekday and barely passed anyone", "down"],
+  ["got served right away at a counter that usually has a line", "down"],
+  ["had the waterfront walk to themselves on an evening it is usually busy", "down"]
+],
+'East Oakland': [
+  ["waited in a longer line than usual at a Foothill lunch counter", "up"],
+  ["noticed the sidewalks along Foothill busier than last season", "up"],
+  ["found the sports bar by the Coliseum full on a weeknight", "up"],
+  ["found Foothill quiet on a Saturday afternoon", "down"],
+  ["noticed the Foothill shops closing up earlier than they used to", "down"],
+  ["got a stool at the sports bar by the Coliseum without trying", "down"]
+],
+'Grand Lake': [
+  ["found the Saturday market packed by mid-morning", "up"],
+  ["stood in a line down the block for the theater", "up"],
+  ["walked the Saturday market with room to spare between the stalls", "down"],
+  ["found half the theater seats empty on a weekend night", "down"],
+  ["noticed the Lakeshore shops closing earlier than a usual weekend", "down"]
+],
+'San Antonio': [
+  ["saw the bakery on Twelfth sell out before the morning was over", "up"],
+  ["stood in a longer line than usual at an International Boulevard lunch counter", "up"],
+  ["saw the bakery on Twelfth still holding trays at closing", "down"],
+  ["had a row of seats to themselves on the early bus", "down"],
+  ["noticed the lunch counters on International quieter than usual this week", "down"]
+]
+```
+
+After the yes: `hoodBlindTexture.test.js` asserts every hood on the map holds one line each way; bench, review, PROD under the substrate gate.
+
 ## Changelog
 
+- 2026-10-30 (research-build) — engine.316: 27 signed lines drafted for the five hoods (§engine.316), awaiting the builder's yes; four of the five are empty at C113 trajectories (46 citizens).
 - 2026-10-28 (engine-sheet) — C113 first-live read of the engine.214 cuts recorded (Status log): output/engine_review_c113.md §C113 re-reads (read 2026-10-27) — Cut B 69% with the hood's trend (`:35`), Cut C 33 spot lines = 7.4% (`:36`); next is 8b `$VENUE`, a build. engine.301 F1 C113 read added under its section: `crimeWaveHoods` `[]`, 2 spikes carried (`:57`); the wave rung waits on the first organic wave. Source: `output/engine-sheet/2026-10-28-rollout-stale-check.json`.
 - 2026-10-25 (engine-sheet) — engine.301 F1 LIVE PROD @163 stage 27 (`1e6beff5`, with engine.312): builder "Ok clear to push".
 - 2026-10-25 (engine-sheet) — Crime ladder third rung ruled: back-to-back-Cycle rise in one hood (builder "(a)"); rides engine.301 F1.

@@ -2,6 +2,6 @@
 
 **PIN:** S625 | Day 220 | Canon C113 | PROD @170 (stage 34; history: DEPLOY_HISTORY §PROD) | next live fire C114 Sun 2026-11-01
 
-**NEXT[engine-sheet]:** research.31 → BEFORE the 10-31 20:30 flight: settle codex's progress-scoring HOLD (2026-10-30 review, 5 findings, none folded; finding 1 confirmed in `progressPoints`). Then read that flight (first on claude-haiku-5.5). Then infrastructure.16/17, engine.325 (own session).
+**NEXT[engine-sheet]:** research.31 → read the 10-31 20:30 flight (first on claude-haiku-5.5, 5-min arrival wait): points, failed commands, cost; deepseek-v4-flash-0731 is the fallback. Then infrastructure.16/17, engine.325 (own session).
 
 **NEXT[research-build]:** engine.316 + hard-light fix (99) → es stage 34 landed: rebuild both on it, re-bench, codex, push. pipeline.99 → 23 bare file names: clean only if one causes an issue; staged names. engine.328 own session. Watch: Sat 08:15 Nia (83); Sat 11:15 Ines (73/97); next writer canon_search (91); C114 reads 85 hood rows.

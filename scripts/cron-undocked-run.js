@@ -207,7 +207,7 @@ function ensureBrief(pilot) {
   return p;
 }
 
-const ARRIVAL_WAIT_S = 180;
+const ARRIVAL_WAIT_S = 300; // latest of 39 unlocks: 176 s after landing, and a progress night's after-read is final (codex progress review F5)
 
 function resolvePilot(roster, cycle) {
   const first = pickPilot(roster.cast, cycle);

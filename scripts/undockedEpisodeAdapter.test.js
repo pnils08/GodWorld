@@ -250,12 +250,19 @@ const mAfter = meters([
   { id: 'first_steps', points: 5, earned: true },
   { id: 'prospector_i', points: 10, earned: false, progress: { current: 1000, target: 10000 } },
   { id: 'secret', points: 60, earned: false, hidden: true }]);
+const mHeld = () => meters([{ id: 'secret', points: 60, earned: true }]);
 const prog = A.progressPoints(mBefore, mAfter);
 check('progress: 3 new systems pay 3 of Wanderer\'s 10, a first dock its 5, 1,000 ore 1 of Prospector\'s 10',
   prog.value === 9 && prog.items.map(i => i.id + ':' + i.gained).join() === 'first_steps:5,wanderer:3,prospector_i:1', JSON.stringify(prog));
 check('progress: a mark already held pays nothing again', !prog.items.some(i => i.id === 'maiden_jump'));
 check('progress: no before read -> null (the unlock rule scores)', A.progressPoints(null, mAfter) === null);
 check('progress: a night that moves nothing is a measured 0', A.progressPoints(mAfter, mAfter).value === 0);
+// codex progress review F1: a mark the before-read could not show
+const progHidden = A.progressPoints(mBefore, meters([{ id: 'maiden_jump', points: 5, earned: true }, { id: 'secret', points: 60, earned: true }]));
+check('progress: a hidden mark earned tonight pays its full points', progHidden.value === 60 && progHidden.items[0].id === 'secret', JSON.stringify(progHidden));
+const progNew = A.progressPoints(mBefore, meters([{ id: 'maiden_jump', points: 5, earned: true }, { id: 'new_mark', points: 10, earned: false, progress: { current: 5, target: 10 } }]));
+check('progress: an unearned mark with no before-read pays nothing', progNew.value === 0, JSON.stringify(progNew));
+check('progress: a mark held before and after still pays nothing once earned', !A.progressPoints(mHeld(), mHeld()).items.length);
 const epP = { show: 'UNDOCKED', episode_id: 'TEST-ONLY', popid: 'POP-99991', session: 'undocked-pop99991',
   startedAt: '2026-10-31T01:30:00Z', endedAt: '2026-10-31T01:50:00Z', runner: {} };
 const scoredP = A.assemble(epP, { mining: [], trading: [], mission: [], combat: [], navigation: [], session: [] }, [], mAfter,

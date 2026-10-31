@@ -824,7 +824,10 @@ function progressPoints(before, after) {
   let total = 0;
   const items = [];
   Object.keys(after.progress).forEach(function (id) {
-    const a = after.progress[id], b = before.progress[id];
+    const a = after.progress[id];
+    // Not on the before-read and earned now: earned tonight, pays in full (codex
+    // progress review F1). Not earned, no baseline: nothing until it is earned.
+    const b = before.progress[id] || (a.frac === 1 ? { frac: 0 } : null);
     if (!b) return;
     const gained = a.points * (a.frac - b.frac);
     if (gained > 0.0001) { total += gained; items.push({ id: id, name: a.name, gained: Math.round(gained * 100) / 100 }); }

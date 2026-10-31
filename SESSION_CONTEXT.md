@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** research.31 → read the 10-30 20:30 flight (brief /4, 20-min cap, stopReason, points_delta, PointsDelta row); after the C114 fire read DEPLOY_HISTORY §PROD stage 32 watch. engine.270 after C114: /run-cycle, two reads. Hold: governance.54/55.
 
-**NEXT[research-build]:** no job in hand — asked Mike: Ines write → Sonnet? Nia slice gets plain-words nights? (media-extension 10-30). Watch: tonight 20:30 pages 69+1 nights, 21:30 first show wake (95); Sat 08:15 Nia digest (83); Ines Sat first full every-page run (73/97); 94/96 key shapes; 93 owed marks C114; 89 reads.
+**NEXT[research-build]:** no job in hand — asked Mike: Nia slice gets plain-words nights? (media-extension 10-30). Watch: tonight 20:30 pages 69+1 nights, 21:30 first show wake (95); Sat 08:15 Nia digest (83); Sat 11:15 Ines on Sonnet + first full every-page run (73/97); 94/96 key shapes; 93 owed marks C114; 89 reads.

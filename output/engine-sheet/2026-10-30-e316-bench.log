@@ -1,0 +1,27 @@
+== engine.316 bench, candidate a1201be2
+AIM = BENCH (script read the bench marker)
+bench pulled = stage 33
+stage 34 = stage 33 + engine.316 at a1201be2; manifest output/engine-sheet/stage34-e316.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @171
+pull-back 167 js + manifest byte-identical to stage34-e316.sha256
+version cut; waiting 300 s for /exec propagation
+bench cycleCount 119
+fire C120 rc=0 "verdict": "PASS" "wallS": 240
+fire C121 rc=0 "verdict": "PASS" "wallS": 189
+fire C122 rc=0 "verdict": "PASS" "wallS": 239
+drafted lines 28 | bench cycle 122
+  Eastlake           trajectory decay character mixed
+  Baylight District  trajectory decay character stadium
+  East Oakland       trajectory steady character construction
+  Grand Lake         trajectory growth character retail
+  San Antonio        trajectory decay character service-labor
+   C120 POP-01203 Baylight District | down | Neighborhood-Outabout-Down-S | had the harbor-side block to themselves on an evening it is usually busy
+   C121 POP-00367 Baylight District | down | Neighborhood-Outabout-Down-S | got served right away at a counter that usually has a line
+RESULT lines written 2 | outside their own hood 0 | by hood {"Baylight District":2} | after C119
+== restore bench code to stage 33 (= PROD)
+bench pulled = stage 34; engine file back at 6b0732f4^ = stage 33
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @172
+pull-back 167 js + manifest byte-identical to stage33-e317.sha256
+engine.316 bench PASS

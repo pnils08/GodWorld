@@ -70,7 +70,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
-| engine.316 | Five hoods get signed texture lines so a moving week writes one (builder yes 10-30): 28 lines built, every hood holds one each way. Next: bench, codex, PROD | in-progress | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] §engine.316 |
+| engine.316 | Five hoods get signed texture lines. Bench PASS, review decided. PROD waits on the door's read key in PROD Script Properties (the push script reads it) | in-progress | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] §engine.316 |
 | engine.317 | Read-only door to FIRE_ADMISSION_JSON LIVE PROD @169 (stage 33). Next: read key into PROD Script Properties, then a door read = C113 done | in-progress | engine-sheet | `docs/archive/for-claude-review/2026-10-25-codex-engine301-gate3-recheck.md` |
 
 ## 4. Queue — ruled, not started (ready)

@@ -61,8 +61,9 @@ Model: Opus for engine substrate or code across several files; Sonnet for plans,
 ## Review
 
 1. Check who is up: `tmux list-panes -a -F '#{window_name} #{pane_current_command}'` — the pane exists, `capture-pane` shows it idle, its NEXT line does not say out.
-2. Engine code or a change across several files → codex. Anything smaller → agy.
+2. Engine code or a change across several files → this terminal's codex window (its `TERMINAL.md`). Anything smaller → agy.
 3. Send per `docs/reference/CROSS_LANE_MESSAGING.md`. Verify every finding against the code; this seat decides.
+4. One review, at most one re-review of the fold. Then this seat decides what is left: fix it in place, or record it and close. No third round.
 
 ## Boot and memory
 

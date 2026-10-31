@@ -92,9 +92,10 @@ check('mission accept alone is a measured zero (entries, no payout), never null'
 check('mission completion scores its credits', A.deriveCredits([mission[1]]).value === 1500);
 check('credits is FACT', staged.facts.credits_delta.type === 'FACT'
   && staged.facts.credits_delta.source === 'get_action_log');
-check('systems from nav+mine', staged.facts.systems_visited.value.indexOf('Haven') >= 0
-  && staged.facts.systems_visited.value.indexOf('Belt-4') >= 0);
-check('old system excluded', staged.facts.systems_visited.value.indexOf('OldSys') < 0);
+// systems are written in id form since 2026-10-30 ('Haven' -> 'haven')
+check('systems from nav+mine', staged.facts.systems_visited.value.indexOf('haven') >= 0
+  && staged.facts.systems_visited.value.indexOf('belt-4') >= 0);
+check('old system excluded', staged.facts.systems_visited.value.indexOf('oldsys') < 0);
 check('combat kill counted', staged.facts.combat_results.value.kills === 1);
 check('cargo mined iron 12 not 99', staged.facts.cargo.value.mined.iron === 12);
 check('cargo sold iron 12', staged.facts.cargo.value.sold.iron_ore === 12);
@@ -238,6 +239,10 @@ const sys = A.deriveSystems([
   { created_at: '2026-10-16T01:39:33Z', category: 'navigation', data: { from_system: 'sol', to_system: 'sirius', to_system_name: 'Sirius' } },
 ]);
 check('a jump records both ends, departure first (Taveras 10-16: sol, sirius)', sys.value.join(',') === 'sol,sirius');
+check('a mined system and a jump to it are one system, written as its id (Father Miguel 10-30)', A.deriveSystems([
+  { created_at: '2026-10-31T01:32:00Z', category: 'navigation', data: { from_system: 'sirius', to_system: 'lacaille_9352', to_system_name: 'Lacaille 9352' } },
+  { created_at: '2026-10-31T01:35:00Z', category: 'mining', data: { system_id: 'lacaille_9352', system_name: 'Lacaille 9352' } },
+]).value.join(',') === 'sirius,lacaille_9352');
 check('an unlock is never a mishap', A.deriveMishaps([{ category: 'achievement', event_type: 'achievement.unlocked',
   summary: 'Unlocked achievement: Yo Ho Ho and a Hold Full of Hulls' }]).value.length === 0);
 

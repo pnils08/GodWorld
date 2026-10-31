@@ -226,12 +226,17 @@ function deriveCredits(entries) {
 // research.31: a jump names both ends. Before, the first SYSTEM_KEYS hit kept
 // only `to_system`, so Eric Taveras's Sol sale + Sol-to-Sirius jump (10-16)
 // read Systems ["sirius"] and the city was told he scored in Sirius.
+// research.31 (2026-10-30): one system is one place. A mining.yield carries both
+// system_id ('grumium') and system_name ('Grumium') while a jump carries ids, so the
+// night listed one system twice (Father Miguel 10-30: 6 systems for 4). Every place
+// is written as its id (a bare name folds to the id form: 'Lacaille 9352' ->
+// 'lacaille_9352'), deduplicated. A jump records both ends, departure first.
 function deriveSystems(entries) {
   const seen = [];
   const add = function (v) {
     if (v == null || v === '') return;
-    const s = String(v);
-    if (seen.indexOf(s) < 0) seen.push(s);
+    const k = String(v).trim().toLowerCase().replace(/\s+/g, '_');
+    if (k && seen.indexOf(k) < 0) seen.push(k);
   };
   entries.slice().sort(function (a, b) {
     return String(entryTime(a) || '').localeCompare(String(entryTime(b) || ''));
@@ -242,7 +247,7 @@ function deriveSystems(entries) {
       add(d.to_system);
       return;
     }
-    add(pickFirst(d, SYSTEM_KEYS));
+    add(d.system_id != null && d.system_id !== '' ? d.system_id : pickFirst(d, SYSTEM_KEYS));
   });
   return fact(seen);
 }

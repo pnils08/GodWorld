@@ -19,6 +19,9 @@ const load = (sandbox, rel) => vm.runInContext(fs.readFileSync(path.join(ROOT, r
 
 const HOODS = ['Temescal','Downtown','Fruitvale','Lake Merritt','West Oakland','Laurel','Rockridge','Jack London','Uptown','KONO','Chinatown','Piedmont Ave','East Oakland','Baylight District','Glenview','Dimond','Ivy Hill','Adams Point','Grand Lake','Eastlake','Brooklyn','San Antonio'];
 const BESPOKE_12 = HOODS.slice(0, 12);
+// engine.316: the drift pool's five extra bespoke hoods, signed lines for moving weeks.
+const DRIFT_SIGNED_5 = ['Eastlake', 'Baylight District', 'East Oakland', 'Grand Lake', 'San Antonio'];
+const bespokeHoods = (bespoke) => (bespoke === 'NEIGHBORHOOD_DRIFT_BESPOKE_' ? BESPOKE_12.concat(DRIFT_SIGNED_5) : BESPOKE_12);
 // Live Neighborhood_Map.EmployerCharacter, read 2026-09-05 (17 distinct labels).
 const CHAR = { Downtown:'institutional', Temescal:'clinic', Laurel:'schools-retail', 'West Oakland':'campus', Fruitvale:'transit-retail', 'Jack London':'nightlife', Rockridge:'professional', 'Adams Point':'residential', 'Grand Lake':'retail', 'Piedmont Ave':'medical', Chinatown:'family-retail', Brooklyn:'residential', Eastlake:'mixed', Glenview:'residential', Dimond:'village-retail', 'Ivy Hill':'residential', 'San Antonio':'service-labor', KONO:'arts', 'Lake Merritt':'residential', Uptown:'nightlife', 'Baylight District':'stadium', 'East Oakland':'construction' };
 const LABELS = Array.from(new Set(Object.values(CHAR)));
@@ -89,12 +92,19 @@ t('blank character, malformed scene, missing columns, off-map hood all fail loud
 });
 
 console.log('T2 texture pools — every hood, every label, every engine');
+t('engine.316: every hood on the map holds a drift line each way, so a moving week writes a line', () => {
+  const ctx = makeCtx(sb);
+  HOODS.forEach(h => {
+    const pool = sb.hoodTexturePool_(ctx, h, sb.NEIGHBORHOOD_DRIFT_BY_CHARACTER_, sb.NEIGHBORHOOD_DRIFT_BESPOKE_, 'test');
+    ['up', 'down'].forEach(dir => assert.ok(pool.some(line => Array.isArray(line) && line[1] === dir), h + ' has no ' + dir + ' line'));
+  });
+});
 ENGINES.forEach(([file, byLabel, bespoke]) => {
   t(byLabel + ' covers the 17 live labels; bespoke keys are hoods on the map', () => {
     const pools = sb[byLabel], extra = sb[bespoke];
     LABELS.forEach(l => assert.ok(Array.isArray(pools[l]) && pools[l].length >= 2, byLabel + ' has no pool for ' + l));
     Object.keys(extra).forEach(h => assert.ok(HOODS.indexOf(h) >= 0, bespoke + ' keys "' + h + '", not on the map'));
-    assert.deepStrictEqual(Object.keys(extra).sort(), BESPOKE_12.slice().sort(), bespoke + ' should carry exactly the twelve');
+    assert.deepStrictEqual(Object.keys(extra).sort(), bespokeHoods(bespoke).slice().sort(), bespoke + ' should carry exactly its bespoke hoods');
   });
   t(byLabel + ': all 22 hoods draw a non-empty pool; the twelve get their bespoke lines on top', () => {
     const ctx = makeCtx(sb);
@@ -103,7 +113,7 @@ ENGINES.forEach(([file, byLabel, bespoke]) => {
       assert.ok(pool.length >= 2, h + ' drew an empty pool');
       const base = sb[byLabel][CHAR[h]];
       base.forEach(line => assert.ok(pool.indexOf(line) >= 0, h + ' missing its ' + CHAR[h] + ' line'));
-      if (BESPOKE_12.indexOf(h) >= 0) sb[bespoke][h].forEach(line => assert.ok(pool.indexOf(line) >= 0, h + ' missing bespoke line'));
+      if (bespokeHoods(bespoke).indexOf(h) >= 0) sb[bespoke][h].forEach(line => assert.ok(pool.indexOf(line) >= 0, h + ' missing bespoke line'));
       else assert.strictEqual(pool.length, base.length, h + ' should have only its label pool');
     });
   });

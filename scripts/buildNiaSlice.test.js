@@ -69,10 +69,44 @@ fs.writeFileSync(path.join(tmpRoot, 'output', 'simulation_ledger_snapshot.jsonl'
 const tmpScriptsDir = path.join(tmpRoot, 'scripts');
 fs.mkdirSync(tmpScriptsDir, { recursive: true });
 fs.copyFileSync(path.join(__dirname, 'buildNiaSlice.js'), path.join(tmpScriptsDir, 'buildNiaSlice.js'));
+// pipeline.95: the slice reads each night through undockedShowRecord (which reads the fence's leak patterns)
+fs.copyFileSync(path.join(__dirname, 'undockedShowRecord.js'), path.join(tmpScriptsDir, 'undockedShowRecord.js'));
+fs.mkdirSync(path.join(tmpRoot, 'lib'), { recursive: true });
+fs.copyFileSync(path.join(__dirname, '..', 'lib', 'memoryFence.js'), path.join(tmpRoot, 'lib', 'memoryFence.js'));
+// Marcus Walker's two nights are on disk; Clarissa Dane's is not (her totals stay the feed's)
+fs.mkdirSync(path.join(showDir, 'intake'), { recursive: true });
+fs.mkdirSync(path.join(showDir, 'staged', 'archive'), { recursive: true });
+for (const [ep, fid, at, facts, log] of [
+  ['ep-a', 'undocked-pop00962-a', '2026-10-27T01:30:00Z', { systems_visited: { value: ['sol', 'sirius'] }, credits_delta: { value: 40 }, points_delta: { value: 5, earned: [{ name: 'Test Jump', points: 5 }] } }, 'Quiet night, sold the iron.'],
+  ['ep-b', 'undocked-pop00962-b', '2026-10-28T01:30:00Z', { systems_visited: { value: [] }, credits_delta: { value: -100 }, event_counts: { value: { session: 2 } } }, ''],
+]) {
+  fs.writeFileSync(path.join(showDir, 'intake', ep + '.json'), JSON.stringify({ POPID: 'POP-00962', Cycle: 999, EpisodeId: ep, Applied: 'yes', FeedEvent: { EpisodeId: fid } }));
+  fs.writeFileSync(path.join(showDir, 'staged', 'archive', ep + '.json'), JSON.stringify({ window: { startedAt: at }, runner: { capped: true }, facts, captains_log: { entries: log ? [{ text: log }] : [] } }));
+}
 delete require.cache[require.resolve(path.join(tmpScriptsDir, 'buildNiaSlice.js'))];
 const NW = require(path.join(tmpScriptsDir, 'buildNiaSlice.js'));
 
 const weekly = NW.buildNiaWeeklySlice(999);
+
+console.log('pipeline.95: the night as flown in her assignment');
+{
+  const walkerP = weekly.pilots.find(p => p.POPID === 'POP-00962'), daneP = weekly.pilots.find(p => p.POPID === 'POP-00143');
+  check('weekly: a pilot whose nights are on disk gets them in plain words', walkerP.nightSource === 'record' &&
+    weekly.story.facts.includes("Marcus Walker's Monday night on UNDOCKED: went through Sol and Sirius; earned Test Jump (5 points); came out 40 credits up; flew until the show's time ran out.") &&
+    weekly.story.facts.includes("Marcus Walker's Tuesday night on UNDOCKED: never got the ship moving."), JSON.stringify(weekly.story.facts));
+  check('weekly: a pilot with no night on disk keeps the feed totals, said', daneP.nightSource === 'feed' && weekly.story.facts.some(f => f.startsWith('Clarissa Dane — 1 episode(s)')));
+  check('weekly: no captain\'s log reaches her facts', !weekly.story.facts.some(f => /sold the iron/.test(f)));
+  const NS = require(path.join(tmpScriptsDir, 'undockedShowRecord.js'));
+  const tmpNights = NS.loadNights({ root: showDir });
+  const ev = { EpisodeId: 'undocked-pop00962-a', POPID: 'POP-00962', Holder: 'Marcus Walker', CreditsDelta: 40, Systems: ['Sol'], CombatEvents: 0, MishapCount: 0, Magnitude: 3, Flags: ['open_escrow'] };
+  const rec = NW.laneEntryFor(ev, { name: 'Marcus Walker' }, null, 999, NS.nightForFeedEvent(tmpNights, ev.EpisodeId));
+  check('daily: the night rides as the first fact', rec.nightSource === 'record' && rec.handle.facts[0].startsWith("Marcus Walker's Monday night on UNDOCKED: went through Sol and Sirius"));
+  check('daily: the angle names the night, not the feed numbers or the magnitude', rec.handle.angle.startsWith('UNDOCKED episode: Marcus Walker, Monday night, open escrow position.') &&
+    !/magnitude|Credits 40|systems/i.test(rec.handle.angle) && rec.handle.angle.length <= 500, rec.handle.angle);
+  check('daily: the label is the night', rec.label === 'UNDOCKED: Marcus Walker, Monday night');
+  const feedOnly = NW.laneEntryFor(ev, { name: 'Marcus Walker' }, null, 999, null);
+  check('daily: no night on disk -> the feed fields, said', feedOnly.nightSource === 'feed' && /Credits 40, systems Sol, combat 0, mishaps 0, magnitude 3\/5, open escrow position\./.test(feedOnly.handle.angle));
+}
 check('weekly slice not empty when feed has events', weekly.empty === false, JSON.stringify(weekly));
 check('weekly slice rosters both pilots', weekly.pilots.length === 2, JSON.stringify(weekly.pilots));
 const walker = weekly.pilots.find(p => p.POPID === 'POP-00962');

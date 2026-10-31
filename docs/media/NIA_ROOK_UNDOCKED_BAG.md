@@ -40,6 +40,7 @@ Solo `nia-rook`. Entertainment recap. Not culture-desk average. Not sports.
 ## Authority
 
 - **Episode facts:** the current `output/spacemolt-show/feed/c{N}.json` pack and earlier gate-approved packs through `undocked_history`. The history tool reads no raw episode or staged episode file and returns no inferred earlier rank. Never the `Undocked_Feed` tab.
+- **The night as flown:** each gate-approved night also reaches her in plain words: where the pilot went, contracts taken and finished, cargo, points by name, credits and how the night ended. It comes from that night's approved record (`scripts/undockedShowRecord.js`, the same record the pilot carries) and stands in for the feed's summary fields; the show's magnitude score is no longer handed to her. The captain's log never rides with it.
 - **People and color:** a named person has a ledger row. New in-world places and businesses can be scene color; a named business goes on INTAKE BIZ. A scene does not establish a measured audience reaction or another episode event.
 - **Quotes:** only if the approved feed row already carries marked quote text. If it doesn't, write color without quoting the pilot.
 - **Cadence:** file when a feed event has no write-up yet. No empty-cycle recap.

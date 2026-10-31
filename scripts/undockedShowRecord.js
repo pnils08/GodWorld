@@ -162,6 +162,19 @@ function pageText(night) {
   return `UNDOCKED, ${dayName(night)} night, Cycle ${night.cycle}. ${body}${log ? ` Captain's log: "${log}"` : ''}`.trim();
 }
 
+// One night for a reporter (pipeline.95, Nia's lane, builder 2026-10-30 "go on nia"): the night as flown, third person,
+// the archive's FACT values only. No captain's log — the pilot's words reach a reporter through the interview (her bag).
+function nightFact(night, name) {
+  const { clauses, ended } = nightClauses(night);
+  const all = clauses.concat(ended ? [ended] : []);
+  return `${name || night.holder || 'The pilot'}'s ${dayName(night)} night on UNDOCKED: ${all.join('; ')}.`;
+}
+// The night behind a feed event: the intake row carries the feed's world id (FeedEvent.EpisodeId).
+function nightForFeedEvent(nights, feedEpisodeId) {
+  const id = String(feedEpisodeId || '');
+  return (nights || []).find((n) => n.intake && n.intake.FeedEvent && String(n.intake.FeedEvent.EpisodeId) === id) || null;
+}
+
 // One night as the pilot would remember it. Pure.
 function nightLine(night) {
   const { clauses, ended } = nightClauses(night);
@@ -211,4 +224,4 @@ function showBlockFor(nights, popId, cycle, opts) {
   return showBlock(mine, standing, cycle);
 }
 
-module.exports = { ON, showBlockFor, loadNights, nightsFor, loadStanding, nightDay, placeName, nightClauses, captainsLog, pageText, nightLine, showBlock, DETAIL_NIGHTS };
+module.exports = { ON, showBlockFor, nightFact, nightForFeedEvent, dayName, loadNights, nightsFor, loadStanding, nightDay, placeName, nightClauses, captainsLog, pageText, nightLine, showBlock, DETAIL_NIGHTS };

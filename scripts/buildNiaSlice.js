@@ -25,6 +25,14 @@
  * so a daily-cadence pack never re-litigates already-covered episodes.
  * Empty slice (no unwritten events) => Nia's desk has no lane => every wake
  * stage skips cleanly. That skip IS the conditional dispatch.
+ *
+ * pipeline.95 (builder 2026-10-30, "go on nia"): each event's night rides in
+ * plain words — where the pilot went, contracts, cargo, points, credits, how
+ * it ended — from the gate-approved night itself (undockedShowRecord, the
+ * record the pilot carries), in place of the feed's summary fields; the
+ * show's own magnitude score no longer reaches her. A night with no record on
+ * disk keeps the feed fields, said on the entry (nightSource). The captain's
+ * log still never rides into her copy.
  */
 
 const fs = require('fs');
@@ -36,6 +44,12 @@ const RECAPS = path.join(SHOW, 'recaps.json');
 const STANDINGS = path.join(SHOW, 'standings.json');
 const SNAPSHOT = path.join(ROOT, 'output', 'simulation_ledger_snapshot.jsonl');
 const V = 'NIA-SLICE/1';
+const SR = require('./undockedShowRecord');
+
+// Every applied night on disk, or null when it cannot be read (the slice then carries the feed fields and says so).
+function loadNightsOrNull() {
+  try { return SR.loadNights({ root: SHOW }); } catch (e) { console.error('[nia slice] night record unreadable, feed fields used: ' + e.message); return null; }
+}
 
 function loadJson(p, fallback) {
   try { return JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return fallback; }
@@ -189,30 +203,37 @@ function creditsPhrase(delta) {
   return 'dead even on the night';
 }
 
-function laneEntryFor(e, info, leader, cycle) {
+function laneEntryFor(e, info, leader, cycle, night) {
   const hood = info && info.hood;
   const name = e.Holder || (info && info.name) || e.POPID;
   const career = careerLinesFor((info && info.name) || e.Holder, cycle);
   const who = whoLine(name, info, career);
-  const label = 'UNDOCKED: ' + name + ' — ' + creditsPhrase(e.CreditsDelta) +
-    (e.CombatEvents ? ', ' + e.CombatEvents + ' combat event(s)' : '') +
-    (e.MishapCount ? ', ' + e.MishapCount + ' mishap(s)' : '');
+  const escrow = (e.Flags || []).indexOf('open_escrow') >= 0 ? ', open escrow position' : '';
+  // pipeline.95: the night as flown is a typed fact; the angle names the night and the chair (the 500-char cap holds)
+  const label = night ? 'UNDOCKED: ' + name + ', ' + SR.dayName(night) + ' night'
+    : 'UNDOCKED: ' + name + ' — ' + creditsPhrase(e.CreditsDelta) +
+      (e.CombatEvents ? ', ' + e.CombatEvents + ' combat event(s)' : '') +
+      (e.MishapCount ? ', ' + e.MishapCount + ' mishap(s)' : '');
+  const angle = night
+    ? 'UNDOCKED episode: ' + (name || 'the pilot') + ', ' + SR.dayName(night) + ' night' + escrow + '.' +
+      standingsNote(leader) + ' In the chair: ' + inChair(name, info) + '.'
+    : 'UNDOCKED episode: ' + (name || 'the pilot') + '. Credits ' +
+      (e.CreditsDelta == null ? 'unsettled' : e.CreditsDelta) +
+      ', systems ' + ((e.Systems || []).join(', ') || 'unlisted') +
+      ', combat ' + (e.CombatEvents || 0) + ', mishaps ' + (e.MishapCount || 0) +
+      ', magnitude ' + (e.Magnitude || 1) + '/5' + escrow + '.' +
+      standingsNote(leader) +
+      ' In the chair: ' + inChair(name, info) + '.';
   const entry = {
     ref: 'undocked:' + e.EpisodeId,
     label,
     kind: 'undocked',
     popids: [e.POPID],
+    nightSource: night ? 'record' : 'feed',
     handle: {
-      angle: 'UNDOCKED episode: ' + (name || 'the pilot') + '. Credits ' +
-        (e.CreditsDelta == null ? 'unsettled' : e.CreditsDelta) +
-        ', systems ' + ((e.Systems || []).join(', ') || 'unlisted') +
-        ', combat ' + (e.CombatEvents || 0) + ', mishaps ' + (e.MishapCount || 0) +
-        ', magnitude ' + (e.Magnitude || 1) + '/5' +
-        ((e.Flags || []).indexOf('open_escrow') >= 0 ? ', open escrow position' : '') + '.' +
-        standingsNote(leader) +
-        ' In the chair: ' + inChair(name, info) + '.',
+      angle,
       citizens: [name + ' — ' + ((info && info.roleType) ? info.roleType + ', ' : '') + 'UNDOCKED cast pilot'],
-      facts: whoFacts(name, info, career),
+      facts: (night ? [SR.nightFact(night, name)] : []).concat(whoFacts(name, info, career)),
     },
     // research.29: the ledger record + career the writer sees (daily and weekly)
     who: { name, roleType: (info && info.roleType) || null, employerBizId: (info && info.employerBizId) || null,
@@ -278,9 +299,18 @@ function buildNiaWeeklySlice(cycle) {
   const angle = 'UNDOCKED week: pilots who flew this cycle (' +
     pilots.map(p => p.name).join(', ') + ').' +
     standingsNote(leader) + ' In the chair: ' + pilots.map(p => inChair(p.name, p)).join('; ') + '.';
+  // pipeline.95: a pilot whose every night this cycle is on disk gets those nights in plain words; otherwise the feed's
+  // per-pilot totals, as before (said on the pilot: nightSource)
+  const nights = loadNightsOrNull();
+  const nightLines = p => {
+    const mine = pack.events.filter(e => e && String(e.POPID).toUpperCase() === String(p.POPID).toUpperCase());
+    const found = nights ? mine.map(e => SR.nightForFeedEvent(nights, e.EpisodeId)) : [];
+    return mine.length && found.length === mine.length && found.every(Boolean) ? found.map(n => SR.nightFact(n, p.name)) : null;
+  };
+  for (const p of pilots) { p.nights = nightLines(p); p.nightSource = p.nights ? 'record' : 'feed'; }
   const facts = [].concat(
-    pilots.map(p => p.name + ' — ' + p.episodes + ' episode(s) this cycle, ' + (p.hasWindowed ? 'partial ' : '') +
-      'credits ' + p.creditsDelta + ', combat ' + p.combatEvents + ', mishaps ' + p.mishapCount + ' (UNDOCKED feed)'),
+    ...pilots.map(p => p.nights || [p.name + ' — ' + p.episodes + ' episode(s) this cycle, ' + (p.hasWindowed ? 'partial ' : '') +
+      'credits ' + p.creditsDelta + ', combat ' + p.combatEvents + ', mishaps ' + p.mishapCount + ' (UNDOCKED feed)']),
     ...pilots.map(p => whoFacts(p.name, p, p.career))
   );
   return {
@@ -329,12 +359,14 @@ function buildNiaSlice(cycle) {
   const citizenInfo = citizenInfoFor(unwritten.map(e => e.POPID));
   const standings = loadStandings();
   const leader = standingsLeader(standings);
+  const nights = loadNightsOrNull();
   return {
     v: V,
     cycle: c,
     empty: false,
     events: unwritten,
-    laneEntries: unwritten.map(e => laneEntryFor(e, citizenInfo[String(e.POPID).toUpperCase()], leader, c)),
+    laneEntries: unwritten.map(e => laneEntryFor(e, citizenInfo[String(e.POPID).toUpperCase()], leader, c,
+      nights ? SR.nightForFeedEvent(nights, e.EpisodeId) : null)),
     standings: leader ? { asOf: standings.computedAt, leader } : null,
     generatedAt: new Date().toISOString(),
   };
@@ -374,4 +406,5 @@ module.exports = {
   V, buildNiaSlice, writeNiaSlice, loadNiaSlice, markRecapped, slicePath, standingsLeader, standingsNote,
   weeklyKey, buildNiaWeeklySlice, writeNiaWeeklySlice, loadNiaWeeklySlice, weeklySlicePath,
   citizenInfoFor, careerLinesFor, whoLine, whoFacts, sanitizeCareerText,
+  laneEntryFor, // pipeline.95 — the night as flown on the lane entry
 };

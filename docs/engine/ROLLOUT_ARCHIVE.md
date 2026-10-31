@@ -973,6 +973,27 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S626 Archive Pass (2026-10-31, research-build) — post-S625 closures sweep
+
+6 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 4 engine.* + 1 pipeline.* + 1 civic.*.
+
+- **engine.327** [research-build] — Hood events on the live ECL: 85 rows for the 16 thin hoods, agy review folded, bound to their hoods, 886 -> 971, read back (builder go 10-31) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-10-engine-214-mood-per-hood]] §engine.327
+- **engine.316** [research-build] — Five hoods' signed texture lines LIVE PROD @171 (stage 35): bench 9 lines in their own hoods, door clean to +16 min. C114 is the first live read **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-10-engine-214-mood-per-hood]] §engine.316
+- **pipeline.99** [research-build] — Build words out of newsroom inputs: done, hard-light seam LIVE @171, model off every usage and life record, one key per piece. Staged names stay **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-11-media-extension]] §Changelog 2026-10-31
+- **engine.326** [research-build] — 18 of 24 hood.* ECL rows had no hood= term and drew citywide. All 18 bound to their hood on the live sheet, read back, 0 citywide left (builder go 10-30) **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-10-engine-214-mood-per-hood]] §engine.316
+- **engine.317** [engine-sheet] — Read-only door to the fire record LIVE PROD @170 (stage 34), key by fingerprint. Door read C113 done; pushes read it from here **State at archive:** done-pending-archive. Pointer: `docs/archive/for-claude-review/2026-10-25-codex-engine301-gate3-recheck.md`
+- **civic.45** [engine-sheet] — C113 review (builder 10-20): no pickup. D9 no moves, D2 none on housing, no tracker row, INIT-006 unchanged; HousingPressure 9 → 10 on both **State at archive:** done-pending-archive. Pointer: `output/production_log_run_cycle_c112_gaps.md` §G-EC41
+
+This pass: 6 rows — engine.327 + engine.316 + pipeline.99 + engine.326 + engine.317 + civic.45. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
+## S625 Archive Pass (2026-10-30, engine-sheet) — post-S624 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.*.
+
+- **pipeline.91** [research-build] — In-world disk search reads named city shelves only; review + re-review folded, 32 replayed searches lost no record, mags-bot reloaded **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-11-media-extension]] §Changelog 2026-10-30
+
+This pass: 1 rows — pipeline.91. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S624 Archive Pass (2026-10-30, engine-sheet) — post-S623 closures sweep
 
 1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 infrastructure.*.

@@ -23,8 +23,11 @@ OUT=/root/GodWorld/output/engine-sheet
 F317="utilities/webTrigger.js"
 [[ "$CYC" =~ ^[0-9]+$ ]] && [ "$CYC" -ge 113 ] || { echo "cycle must be the live Cycle (>= 113) — stop"; exit 1; }
 [ "$(realpath "$MAN")" = "$OUT/stage33-e317.sha256" ] || { echo "manifest must be the benched stage33-e317.sha256 — stop"; exit 1; }
-door() {   # door <when> — PROD's fire record through the read-only door; first read saved to $W/door, later reads must equal it
-  local j; j=$(node $OUT/2026-10-30-e317-door.js prod 2>&1 | grep -v "injected env")
+door() {   # door <when> — PROD still has no fire key, and its fire record through the read-only door of the PINNED
+           # deployment is valid (HTTP 200, writer shape, clock bound), Cycle $CYC done, and byte-identical to the first read
+  local n; n=$(DOOR_EXPECT_DEP="$DEP" node $OUT/2026-10-30-e317-door.js prod-nofire 2>&1 | grep -v "injected env")
+  echo "fire key $1: $n"; echo "$n" | grep -q '"noFireKey":true' || return 1
+  local j; j=$(DOOR_EXPECT_DEP="$DEP" node $OUT/2026-10-30-e317-door.js prod 2>&1 | grep -v "injected env")
   echo "fire record $1: $j"
   echo "$j" | grep -q '"valid":true' || return 1
   echo "$j" | grep -q "\"cycle\":$CYC,.*\"state\":\"done\"" || return 1
@@ -84,6 +87,8 @@ if [ "$DRY" = "--dry-run" ]; then echo "dry run: stopping before the push ($W/st
 DEP=$(grep -o '"deploymentId": "[^"]*"' /root/GodWorld/.clasp.json | cut -d'"' -f4)
 [ -n "$DEP" ] || { echo "no pinned deploymentId in the repo .clasp.json — STOP"; exit 1; }
 /root/GodWorld/node_modules/.bin/clasp-real deployments 2>/dev/null | grep -q "$DEP" || { echo "pinned deployment $DEP not in the listing — STOP"; exit 1; }
+N0=$(DOOR_EXPECT_DEP="$DEP" node $OUT/2026-10-30-e317-door.js prod-nofire 2>&1 | grep -v "injected env"); echo "fire key before the push: $N0"
+echo "$N0" | grep -q '"noFireKey":true' || { echo "PROD answers with a fire key, or the door's deployment is not the pinned one — STOP"; exit 1; }
 ( cd "$W/stage" && CLAUDE_CTL=1 "$CLASP" push --force | tail -1 )
 VER=$( cd "$W/stage" && CLAUDE_CTL=1 "$CLASP" deploy -i "$DEP" -d "engine.317 = $BASE + webTrigger.js at $SRC (a read-only door to the fire record) — bench 1004" | tail -1 | grep -o '@[0-9]*$' )
 [ -n "$VER" ] || { echo "deploy printed no version — STOP, read the deployment listing by hand"; exit 1; }

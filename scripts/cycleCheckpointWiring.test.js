@@ -389,6 +389,18 @@ console.log('═══ engine.317 — the read-only door to the fire record');
   delete n.props.CYCLE_TRIGGER_TOKEN;
   const nr = n.box.doGet({ parameter: { token: 'x', action: 'admission' } });
   assert('no key set at all: the door is shut', nr.ok === false && /ADMISSION_READ_TOKEN/.test(nr.error), nr);
+  // codex engine.317 review F2: a read key equal to the fire key would be a fire key
+  const q = world(); q.props.ADMISSION_READ_TOKEN = 'tok';
+  const qr = q.get({ action: 'admission' });
+  assert('a read key equal to the fire key is refused', qr.ok === false && /distinct/.test(qr.error) && qr.admission === undefined, qr);
+  // F1: a failed read is ok:false and carries nothing but the error
+  const t = world(); t.props.ADMISSION_READ_TOKEN = 'readtok';
+  t.box.ENGINE95_PERSIST_DIAG = { executed: 3, errors: ['TEST-ONLY executor detail'] };
+  const realProps = t.box.PropertiesService.getScriptProperties;
+  t.box.PropertiesService.getScriptProperties = () => { const p = realProps(); return { getProperty: k => { if (k === 'FIRE_ADMISSION_JSON') throw new Error('TEST-ONLY quota'); return p.getProperty(k); } }; };
+  const tr = t.box.doGet({ parameter: { token: 'readtok', action: 'admission' } });
+  assert('a failed read is ok:false with no diagnostics', tr.ok === false && tr.error === 'fire record read failed' &&
+    Object.keys(tr).sort().join() === 'error,ok', tr);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

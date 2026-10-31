@@ -30,25 +30,38 @@
  * script carries this code but stays inert unless a deployment + token are
  * ever created there.
  */
+function readFireAdmission_(param) {
+  try {
+    var props = PropertiesService.getScriptProperties();
+    var fireToken = props.getProperty('CYCLE_TRIGGER_TOKEN');
+    var readToken = props.getProperty('ADMISSION_READ_TOKEN');
+    var given = String((param && param.token) || '');
+    if (!readToken && !fireToken) return { ok: false, error: 'no ADMISSION_READ_TOKEN script property set' };
+    if (readToken && fireToken && readToken === fireToken) return { ok: false, error: 'ADMISSION_READ_TOKEN equals the fire key — set a distinct read key' };
+    if (!given || (given !== readToken && given !== fireToken)) return { ok: false, error: 'bad token' };
+    return { ok: true, admission: props.getProperty(FIRE_ADMISSION_PROP) };
+  } catch (err) {
+    return { ok: false, error: 'fire record read failed' };
+  }
+}
+
 function doGet(e) {
+  if (e && e.parameter && String(e.parameter.action || '') === 'admission') {
+    // engine.317: a read-only door to this script's fire record, so a PROD push can
+    // prove no Cycle was admitted across it. Its own key, ADMISSION_READ_TOKEN: PROD
+    // carries no CYCLE_TRIGGER_TOKEN (cannot be fired from outside), and turning on
+    // this read must not turn that on — so a read key equal to the fire key is
+    // refused (it would be a fire key). The fire key reads too. Runs nothing, writes
+    // nothing; returns the raw record (null when absent) for the caller to validate.
+    // Its own response, before the fire path's try: a failed read is ok:false with no
+    // fire diagnostics (codex engine.317 F1/F2).
+    return ContentService.createTextOutput(JSON.stringify(readFireAdmission_(e.parameter)))
+      .setMimeType(ContentService.MimeType.JSON);
+  }
   var out = { ok: false };
   try {
     var token = PropertiesService.getScriptProperties().getProperty('CYCLE_TRIGGER_TOKEN');
-    if (e && e.parameter && String(e.parameter.action || '') === 'admission') {
-      // engine.317: a read-only door to this script's fire record, so a PROD push can
-      // prove no Cycle was admitted across it. Its own key, ADMISSION_READ_TOKEN: PROD
-      // carries no CYCLE_TRIGGER_TOKEN (cannot be fired from outside), and turning on
-      // this read must not turn that on. The fire key reads too. Runs nothing, writes
-      // nothing; returns the raw record (null when absent) for the caller to validate.
-      var readToken = PropertiesService.getScriptProperties().getProperty('ADMISSION_READ_TOKEN');
-      var given = String(e.parameter.token || '');
-      if (!readToken && !token) out.error = 'no ADMISSION_READ_TOKEN script property set';
-      else if (!given || (given !== readToken && given !== token)) out.error = 'bad token';
-      else {
-        out.ok = true;
-        out.admission = PropertiesService.getScriptProperties().getProperty(FIRE_ADMISSION_PROP);
-      }
-    } else if (!token) {
+    if (!token) {
       out.error = 'CYCLE_TRIGGER_TOKEN script property not set';
     } else if (!e || !e.parameter || String(e.parameter.token || '') !== token) {
       out.error = 'bad token';

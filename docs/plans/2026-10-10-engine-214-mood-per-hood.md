@@ -420,8 +420,17 @@ After the yes: `hoodBlindTexture.test.js` asserts every hood on the map holds on
 
 ECL read 2026-10-30 (engine.326): a `hood.*` PoolKey binds nothing. Eligibility is the row's Conditions alone (`generateCitizensEvents.js` injection loop), so 18 of the 24 active `hood.*` place rows, with no `hood=` term, draw for every citizen in the city. Ten hoods hold no ECL line at all (Uptown, KONO, Piedmont Ave, Adams Point, Brooklyn, Dimond, Glenview, Ivy Hill, San Antonio, East Oakland).
 
+## engine.327 — hood events for the Event_Content_Ledger (draft 2026-10-30, research-build; waits on the builder's go to write the rows)
+
+Builder 2026-10-30: map hood events to add to the ECL, real sim-related events that support INSTITUTIONS, what the hood would expect in this world, not the real one. Sixteen hoods held under four lines, ten of them none. Fact packs built from INSTITUTIONS, `Neighborhood_Map`, `Business_Ledger`, `Faith_Organizations`, `Community_Programs`, `Cultural_Ledger`, `Initiative_Tracker` and the ECL; two Haiku agents drafted 91 rows, each citing its pack fact. All 91 passed `parseContentConditions_` and the source whitelist.
+
+Read line by line, 30 changed, 81 left (`output/research-build/2026-10-30-ecl-hood-proposals.jsonl`; agent drafts `-a`, `-b` beside it). Classes: a named holiday fires in any week and the DSL has no holiday term, so those are dropped or made timeless, the holiday pools already carry them; a line resting on an initiative's current phase goes false when the tracker moves, so dropped; a line asserting what the ledger does not hold (moved house, enrolled, a job at a named firm) becomes something seen or helped with; a faith line must not seat a citizen in a congregation `MembersList` does not, so those are passing observation under `source:neighborhood`; a game-night line in an off-season week; one line reading East Oakland through a crisis call. Who draws: all rows `band!=child`, kid lines `children>=1;age<=50`, bar lines `age>=21`.
+
+Each row carries `hood=`, so it draws only for its hood's citizens (the defect in engine.326). A new PoolKey holds one equal share of that citizen's ECL draw mass (`generateCitizensEvents.js:51`), so the rate call is real: these citizens draw a hood line about as often as any other ECL pool. No deploy: rows load in Phase 2 of the next Cycle. Baylight's construction lines retire when the build completes.
+
 ## Changelog
 
+- 2026-10-30 (research-build) — engine.327: 81 hood ECL rows for the 16 thin hoods drafted and corrected line by line (§engine.327), awaiting the builder's go; nothing on the sheet.
 - 2026-10-30 (research-build) — engine.316: 28 signed lines drafted for the five hoods (§engine.316), awaiting the builder's yes; four of the five are empty at C113 trajectories (46 citizens).
 - 2026-10-28 (engine-sheet) — C113 first-live read of the engine.214 cuts recorded (Status log): output/engine_review_c113.md §C113 re-reads (read 2026-10-27) — Cut B 69% with the hood's trend (`:35`), Cut C 33 spot lines = 7.4% (`:36`); next is 8b `$VENUE`, a build. engine.301 F1 C113 read added under its section: `crimeWaveHoods` `[]`, 2 spikes carried (`:57`); the wave rung waits on the first organic wave. Source: `output/engine-sheet/2026-10-28-rollout-stale-check.json`.
 - 2026-10-25 (engine-sheet) — engine.301 F1 LIVE PROD @163 stage 27 (`1e6beff5`, with engine.312): builder "Ok clear to push".

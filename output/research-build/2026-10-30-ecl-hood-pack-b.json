@@ -1,0 +1,1223 @@
+[
+ {
+  "hood": "San Antonio",
+  "poolKey": "hood.san-antonio",
+  "institutions": [
+   "- **San Antonio** — dense working core between Fruitvale and the lake. Did not get a transit hub and did not get a stadium; absorbs the pressure from both neighbours. Where the people who service the boom actually live. **Council district anchor: D3 (Rose Delgado, OPP) Demographics character: diverse working, pressured."
+  ],
+  "institutionsMentions": [],
+  "map": {
+   "trajectory": "decay",
+   "employerCharacter": "service-labor",
+   "nightlife": "0.79",
+   "retail": "5.03",
+   "medianIncome": "69650",
+   "medianRent": "1625",
+   "scenes": "CincoDeMayo:1, DiaDeMuertos:1",
+   "adjacent": "Eastlake, Brooklyn, Fruitvale, Ivy Hill",
+   "weatherZone": "inland"
+  },
+  "Business_Ledger": [
+   {
+    "BIZ_ID": "BIZ-00172",
+    "Name": "Shift Change Kitchen",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "12"
+   },
+   {
+    "BIZ_ID": "BIZ-00173",
+    "Name": "Twelfth Avenue Market",
+    "Sector": "Retail",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00174",
+    "Name": "Sunny Day Laundry",
+    "Sector": "Services",
+    "Employee_Count": "5"
+   },
+   {
+    "BIZ_ID": "BIZ-00175",
+    "Name": "San Antonio Pharmacy",
+    "Sector": "Retail",
+    "Employee_Count": "7"
+   },
+   {
+    "BIZ_ID": "BIZ-00176",
+    "Name": "Park Boulevard Cafe",
+    "Sector": "Cafe / dining",
+    "Employee_Count": "8"
+   },
+   {
+    "BIZ_ID": "BIZ-00177",
+    "Name": "Crew Cut Barbers",
+    "Sector": "Services",
+    "Employee_Count": "5"
+   },
+   {
+    "BIZ_ID": "BIZ-00260",
+    "Name": "International Boulevard Staffing",
+    "Sector": "Staffing Agency / Professional Services",
+    "Employee_Count": "26"
+   },
+   {
+    "BIZ_ID": "BIZ-00261",
+    "Name": "Early Shift Childcare",
+    "Sector": "Preschool & Early Education",
+    "Employee_Count": "15"
+   },
+   {
+    "BIZ_ID": "BIZ-00262",
+    "Name": "Panadería La Doce",
+    "Sector": "Bakery",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00263",
+    "Name": "San Antonio Transmission & Tire",
+    "Sector": "Auto Repair / Services",
+    "Employee_Count": "6"
+   }
+  ],
+  "Faith_Organizations": [],
+  "Community_Programs": [],
+  "Cultural_Ledger": [],
+  "initiatives": [
+   {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "status": "passed",
+    "phase": "operational"
+   }
+  ],
+  "existingEclLines": []
+ },
+ {
+  "hood": "East Oakland",
+  "poolKey": "hood.east-oakland",
+  "institutions": [
+   "- **East Oakland** — the flatlands. Twenty years of boom reached here last and is arriving fast: the Coliseum sits here (the A's are leaving it for Baylight, and what the site becomes is an open story — see §Arts, Oakland Coliseum), and so does the Stabilization Fund's disbursement office (its own Business_Ledger row from engine.306; the fund's main office stays in West Oakland). The city's most contested square — the ground that has to hold while the money arrives. **Council district anchor: D5 (Janae Rivers, OPP) Baylight is not Rivers's district Demographics character: east flatlands, arriving frontier."
+  ],
+  "institutionsMentions": [
+   "- **Oakland Coliseum** — public-municipal stadium, A's home venue until the move to Baylight (DJ LENS §Vantage Points). A's branding inside the frame is canon — see Sports §Tier 1 Oakland Athletics. **After the A's leave, whether the Coliseum remains or someth",
+   "- **Baylight District** — Oakland's flagship new-build neighborhood and **the city's sports mecca — state-of-the-art living built around the game** (INIT-006, $2.1B). Built on 65 acres of underutilized harbor land on the estuary waterfront, beside Jack London "
+  ],
+  "map": {
+   "trajectory": "decay",
+   "employerCharacter": "construction",
+   "nightlife": "0.71",
+   "retail": "6.1",
+   "medianIncome": "72072",
+   "medianRent": "1562",
+   "scenes": "",
+   "adjacent": "Fruitvale, Laurel",
+   "weatherZone": "inland"
+  },
+  "Business_Ledger": [
+   {
+    "BIZ_ID": "BIZ-00078",
+    "Name": "Foothill Baptist Tabernacle",
+    "Sector": "Faith Organization",
+    "Employee_Count": "26"
+   },
+   {
+    "BIZ_ID": "BIZ-00079",
+    "Name": "Masjid An-Nur Oakland",
+    "Sector": "Faith Organization",
+    "Employee_Count": "5"
+   },
+   {
+    "BIZ_ID": "BIZ-00129",
+    "Name": "Eastside Family Market",
+    "Sector": "Retail",
+    "Employee_Count": "13"
+   },
+   {
+    "BIZ_ID": "BIZ-00130",
+    "Name": "Sunrise Cafe",
+    "Sector": "Cafe / dining",
+    "Employee_Count": "8"
+   },
+   {
+    "BIZ_ID": "BIZ-00131",
+    "Name": "Eastside Auto",
+    "Sector": "Services",
+    "Employee_Count": "9"
+   },
+   {
+    "BIZ_ID": "BIZ-00132",
+    "Name": "Foothill Kitchen",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "12"
+   },
+   {
+    "BIZ_ID": "BIZ-00272",
+    "Name": "Coliseum Way Builders",
+    "Sector": "Construction",
+    "Employee_Count": "30"
+   },
+   {
+    "BIZ_ID": "BIZ-00273",
+    "Name": "Hegenberger Concrete & Steel",
+    "Sector": "Construction Supply",
+    "Employee_Count": "30"
+   },
+   {
+    "BIZ_ID": "BIZ-00274",
+    "Name": "Coliseum Corner Sports Bar",
+    "Sector": "Sports Bar & Grill",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00275",
+    "Name": "Flatlands Soul Kitchen",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00276",
+    "Name": "Eastside Braids & Barbers",
+    "Sector": "Hair Salon / Services",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00277",
+    "Name": "Stabilization Fund East Oakland Disbursement Office",
+    "Sector": "Community Development",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00278",
+    "Name": "Oakland Coliseum",
+    "Sector": "Stadium / Historic Landmark",
+    "Employee_Count": "6"
+   }
+  ],
+  "Faith_Organizations": [
+   {
+    "Organization": "Foothill Baptist Tabernacle",
+    "FaithTradition": "Baptist",
+    "Neighborhood": "East Oakland",
+    "Founded": "1919",
+    "Congregation": "5000",
+    "Leader": "Dr. Ophelia Brenner",
+    "Character": "anchor institution, community programs",
+    "ActiveStatus": "active",
+    "LeaderPOPID": "POP-00754"
+   },
+   {
+    "Organization": "Masjid An-Nur Oakland",
+    "FaithTradition": "Muslim",
+    "Neighborhood": "East Oakland",
+    "Founded": "1978",
+    "Congregation": "400",
+    "Leader": "Imam Aziz Rahimi",
+    "Character": "African American Muslim heritage",
+    "ActiveStatus": "active",
+    "LeaderPOPID": "POP-00762"
+   }
+  ],
+  "Community_Programs": [
+   {
+    "Program_ID": "PRG-003",
+    "Name": "Mark Aitken Youth Baseball League",
+    "Founder_POPID": "POP-00003",
+    "Neighborhood": "East Oakland",
+    "Type": "youth-sports",
+    "Status": "active"
+   },
+   {
+    "Program_ID": "PRG-005",
+    "Name": "Eastside Hoopers Coalition",
+    "Founder_POPID": "POP-00532",
+    "Neighborhood": "East Oakland",
+    "Type": "youth-sports",
+    "Status": "active"
+   },
+   {
+    "Program_ID": "PRG-009",
+    "Name": "Coliseum District Vendor Incubator",
+    "Neighborhood": "East Oakland",
+    "Type": "economic",
+    "Status": "active"
+   },
+   {
+    "Program_ID": "PRG-014",
+    "Name": "East Bay Harm Reduction Alliance",
+    "Neighborhood": "East Oakland",
+    "Type": "health",
+    "Status": "active"
+   },
+   {
+    "Program_ID": "PRG-022",
+    "Name": "Foothill Baptist Tabernacle Food Pantry",
+    "Neighborhood": "East Oakland",
+    "Type": "mutual-aid",
+    "Status": "active"
+   },
+   {
+    "Program_ID": "PRG-023",
+    "Name": "Foothill Baptist Tabernacle Seniors Lunch Program",
+    "Neighborhood": "East Oakland",
+    "Type": "health",
+    "Status": "active"
+   },
+   {
+    "Program_ID": "PRG-025",
+    "Name": "Masjid An-Nur Oakland Emergency Assistance Fund",
+    "Neighborhood": "East Oakland",
+    "Type": "mutual-aid",
+    "Status": "active"
+   },
+   {
+    "Program_ID": "PRG-030",
+    "Name": "Foothill Baptist Tabernacle Academy",
+    "Neighborhood": "East Oakland",
+    "Type": "tech-education",
+    "Status": "active"
+   }
+  ],
+  "Cultural_Ledger": [],
+  "initiatives": [
+   {
+    "id": "INIT-002",
+    "name": "Oakland Alternative Response Initiative",
+    "status": "passed",
+    "phase": "dispatch-live"
+   },
+   {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "status": "passed",
+    "phase": "operational"
+   },
+   {
+    "id": "INIT-007",
+    "name": "Oakland Youth Apprenticeship Pipeline",
+    "status": "announced",
+    "phase": "implementation-active"
+   }
+  ],
+  "existingEclLines": []
+ },
+ {
+  "hood": "Chinatown",
+  "poolKey": "hood.chinatown",
+  "institutions": [
+   "- **Chinatown** — the neighborhood that refused. Dense, culturally anchored, multigenerational; the boom priced *around* it rather than through it, and the continuity is the point. Family businesses that predate every campus in West Oakland. The strongest counter-example in the city to the idea that prosperity has to mean replacement. **Council district anchor: D2 (Leonard Tran, IND) Demographics character: cultural enclave, multigenerational."
+  ],
+  "institutionsMentions": [
+   "- **Oakland Asian Cultural Center (OACC)** — public-affiliated cultural institution, Chinatown."
+  ],
+  "map": {
+   "trajectory": "growth",
+   "employerCharacter": "family-retail",
+   "nightlife": "0.8",
+   "retail": "7.78",
+   "medianIncome": "84843",
+   "medianRent": "1980",
+   "scenes": "LunarNewYear:5",
+   "adjacent": "Downtown, Lake Merritt, Jack London, Eastlake",
+   "weatherZone": "urban-core"
+  },
+  "Business_Ledger": [
+   {
+    "BIZ_ID": "BIZ-00042",
+    "Name": "Dragon Gate Lounge",
+    "Sector": "Nightlife & Entertainment",
+    "Employee_Count": "30"
+   },
+   {
+    "BIZ_ID": "BIZ-00119",
+    "Name": "Ninth Street Kitchen",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "14"
+   },
+   {
+    "BIZ_ID": "BIZ-00120",
+    "Name": "Golden Lotus Market",
+    "Sector": "Retail",
+    "Employee_Count": "12"
+   },
+   {
+    "BIZ_ID": "BIZ-00121",
+    "Name": "Jade Thread Tailors",
+    "Sector": "Services",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00122",
+    "Name": "Lantern Pharmacy",
+    "Sector": "Retail",
+    "Employee_Count": "7"
+   },
+   {
+    "BIZ_ID": "BIZ-00123",
+    "Name": "Heritage Bakehouse",
+    "Sector": "Food & Beverage",
+    "Employee_Count": "9"
+   },
+   {
+    "BIZ_ID": "BIZ-00203",
+    "Name": "Oakland Asian Cultural Center",
+    "Sector": "Cultural Center / Community / Historic Landmark",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00204",
+    "Name": "Eight Treasures Dim Sum House",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00205",
+    "Name": "Wong Family Seafood & Produce",
+    "Sector": "Wholesale Grocery",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00206",
+    "Name": "Lucky Harbor Herbalist & Tea",
+    "Sector": "Herbalist & Tea Shop",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00207",
+    "Name": "Harrison Street Chinese School",
+    "Sector": "Education",
+    "Employee_Count": "15"
+   }
+  ],
+  "Faith_Organizations": [
+   {
+    "Organization": "Bay Pure Land Buddhist Temple",
+    "FaithTradition": "Buddhist",
+    "Neighborhood": "Chinatown",
+    "Founded": "1926",
+    "Congregation": "300",
+    "Leader": "Rev. Kenji Tanaka",
+    "Character": "Jodo Shinshu, Japanese-American heritage",
+    "ActiveStatus": "active",
+    "LeaderPOPID": "POP-00763"
+   }
+  ],
+  "Community_Programs": [],
+  "Cultural_Ledger": [
+   {
+    "CUL-ID": "CUL-0FBABAC4",
+    "Name": "Marin Tao",
+    "RoleType": "Celebrity",
+    "FameCategory": "musician",
+    "CulturalDomain": "Arts",
+    "Status": "Active",
+    "UniverseLinks": "POP-00537",
+    "MediaCount": "25",
+    "FameScore": "153"
+   },
+   {
+    "CUL-ID": "CUL-BA80115F",
+    "Name": "Mei Chen",
+    "RoleType": "gallery curator",
+    "FameCategory": "curator",
+    "CulturalDomain": "Arts",
+    "Status": "Active",
+    "UniverseLinks": "POP-00635",
+    "MediaCount": "5",
+    "FameScore": "32"
+   },
+   {
+    "CUL-ID": "CUL-F8C4B785",
+    "Name": "Jose Colon",
+    "RoleType": "A's player",
+    "FameCategory": "athlete",
+    "CulturalDomain": "Sports",
+    "Status": "Active",
+    "UniverseLinks": "POP-00599",
+    "MediaCount": "1",
+    "FameScore": "0"
+   }
+  ],
+  "initiatives": [
+   {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "status": "passed",
+    "phase": "operational"
+   }
+  ],
+  "existingEclLines": [
+   "the bartender wipes down the counter between rounds of A's highlights"
+  ]
+ },
+ {
+  "hood": "Grand Lake",
+  "poolKey": "hood.grand-lake",
+  "institutions": [
+   "- **Grand Lake** — the lake ring's public face: theater, weekend market, family retail. Where the elite districts meet everyone else on neutral ground. **Council district anchor: D8 (Nina Chen, CRC) Demographics character: theater district, family retail."
+  ],
+  "institutionsMentions": [
+   "- **Lake Merritt** — central lakeside neighborhood ringing the lake, civic-center adjacent. Thriving-Oakland register: **old Oakland's elite address, and the one the boom did not have to touch.** Inherited money rather than made money — the lake ring kept its "
+  ],
+  "map": {
+   "trajectory": "growth",
+   "employerCharacter": "retail",
+   "nightlife": "0.83",
+   "retail": "11.57",
+   "medianIncome": "106479",
+   "medianRent": "2662",
+   "scenes": "OaklandPride:1",
+   "adjacent": "Lake Merritt, Adams Point, Eastlake, Glenview, Piedmont Ave",
+   "weatherZone": "lake"
+  },
+  "Business_Ledger": [
+   {
+    "BIZ_ID": "BIZ-00076",
+    "Name": "Port Grind",
+    "Sector": "Food & Beverage",
+    "Employee_Count": "9"
+   },
+   {
+    "BIZ_ID": "BIZ-00145",
+    "Name": "Marquee Grocer",
+    "Sector": "Retail",
+    "Employee_Count": "12"
+   },
+   {
+    "BIZ_ID": "BIZ-00146",
+    "Name": "Intermission Cafe",
+    "Sector": "Cafe / dining",
+    "Employee_Count": "8"
+   },
+   {
+    "BIZ_ID": "BIZ-00147",
+    "Name": "Grand Lake Books",
+    "Sector": "Retail",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00148",
+    "Name": "Market Day Kitchen",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "14"
+   },
+   {
+    "BIZ_ID": "BIZ-00149",
+    "Name": "Lakeshore Outfitters",
+    "Sector": "Retail",
+    "Employee_Count": "7"
+   },
+   {
+    "BIZ_ID": "BIZ-00185",
+    "Name": "Keane Mercantile",
+    "Sector": "Retail",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00247",
+    "Name": "Lakeshore Grand Theatre",
+    "Sector": "Movie Theater",
+    "Employee_Count": "9"
+   },
+   {
+    "BIZ_ID": "BIZ-00248",
+    "Name": "Grand Lake Saturday Market",
+    "Sector": "Farmers Market",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00249",
+    "Name": "Splash Pad Toys",
+    "Sector": "Toy Store",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00250",
+    "Name": "Lakeshore Creamery",
+    "Sector": "Ice Cream / Dessert Cafe",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00251",
+    "Name": "Grand Slice",
+    "Sector": "Pizzeria / Restaurant & Dining",
+    "Employee_Count": "11"
+   }
+  ],
+  "Faith_Organizations": [
+   {
+    "Organization": "Or Hashalom Renewal Community",
+    "FaithTradition": "Jewish Renewal",
+    "Neighborhood": "Grand Lake",
+    "Founded": "1984",
+    "Congregation": "400",
+    "Leader": "Rabbi Miriam Goldstein",
+    "Character": "progressive, social justice",
+    "ActiveStatus": "active",
+    "LeaderPOPID": "POP-00767"
+   }
+  ],
+  "Community_Programs": [],
+  "Cultural_Ledger": [
+   {
+    "CUL-ID": "CUL-978D65AE",
+    "Name": "Vinnie Keane",
+    "RoleType": "A's player",
+    "FameCategory": "athlete",
+    "CulturalDomain": "Sports",
+    "Status": "Active",
+    "UniverseLinks": "POP-00001",
+    "MediaCount": "5",
+    "FameScore": "34"
+   }
+  ],
+  "initiatives": [
+   {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "status": "passed",
+    "phase": "operational"
+   },
+   {
+    "id": "INIT-009",
+    "name": "Commercial Stabilization for Grand Lake",
+    "status": "proposed",
+    "phase": "vote-ready"
+   }
+  ],
+  "existingEclLines": [
+   "the electric hum of a neighborhood on the upswing"
+  ]
+ },
+ {
+  "hood": "Laurel",
+  "poolKey": "hood.laurel",
+  "institutions": [
+   "- **Laurel** — the family belt that stayed reachable. Where people priced out of the boom's districts went and stayed — schools, small commercial, ordinary streets. The largest concentration of people who work in the prosperity economy without living inside it. **Council district anchor: D9 (Terrence Mobley, OPP) Demographics character: family oriented, reachable."
+  ],
+  "institutionsMentions": [
+   "- **Uptown** — central arts, dining, and nightlife district immediately north of Downtown, south of KONO. Thriving-Oakland register: dense young-professional entertainment district. **Council district anchor: D9 (Terrence Mobley, OPP)(89 residents untracked pr"
+  ],
+  "map": {
+   "trajectory": "decay",
+   "employerCharacter": "schools-retail",
+   "nightlife": "0.71",
+   "retail": "7.34",
+   "medianIncome": "85828",
+   "medianRent": "2146",
+   "scenes": "",
+   "adjacent": "Fruitvale, Dimond, East Oakland",
+   "weatherZone": "valley"
+  },
+  "Business_Ledger": [
+   {
+    "BIZ_ID": "BIZ-00077",
+    "Name": "Nino's",
+    "Sector": "Food & Beverage",
+    "Employee_Count": "13"
+   },
+   {
+    "BIZ_ID": "BIZ-00160",
+    "Name": "Laurel Market",
+    "Sector": "Retail",
+    "Employee_Count": "12"
+   },
+   {
+    "BIZ_ID": "BIZ-00161",
+    "Name": "Schoolgate Cafe",
+    "Sector": "Cafe / dining",
+    "Employee_Count": "8"
+   },
+   {
+    "BIZ_ID": "BIZ-00162",
+    "Name": "Laurel Pharmacy",
+    "Sector": "Retail",
+    "Employee_Count": "7"
+   },
+   {
+    "BIZ_ID": "BIZ-00163",
+    "Name": "MacArthur Kitchen",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00164",
+    "Name": "Laurel Cleaners",
+    "Sector": "Services",
+    "Employee_Count": "5"
+   },
+   {
+    "BIZ_ID": "BIZ-00279",
+    "Name": "MacArthur Tutoring Center",
+    "Sector": "Tutoring",
+    "Employee_Count": "15"
+   },
+   {
+    "BIZ_ID": "BIZ-00280",
+    "Name": "Maxwell Park Youth League",
+    "Sector": "Youth Recreation / Community",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00281",
+    "Name": "Laurel Music School",
+    "Sector": "Music School",
+    "Employee_Count": "9"
+   },
+   {
+    "BIZ_ID": "BIZ-00282",
+    "Name": "High Street Hardware",
+    "Sector": "Hardware Store",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00283",
+    "Name": "Laurel Family Realty",
+    "Sector": "Real Estate",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00284",
+    "Name": "Oakland City College — Laurel Campus",
+    "Sector": "Education",
+    "Employee_Count": "15"
+   }
+  ],
+  "Faith_Organizations": [],
+  "Community_Programs": [],
+  "Cultural_Ledger": [
+   {
+    "CUL-ID": "CUL-1D834E5A",
+    "Name": "Kato Rivers",
+    "RoleType": "athlete",
+    "FameCategory": "athlete",
+    "CulturalDomain": "Sports",
+    "Status": "Active",
+    "UniverseLinks": "POP-00770",
+    "MediaCount": "16",
+    "FameScore": "76"
+   },
+   {
+    "CUL-ID": "CUL-905CBDE8",
+    "Name": "Brody Kale",
+    "RoleType": "influencer",
+    "FameCategory": "influencer",
+    "CulturalDomain": "Media",
+    "Status": "Active",
+    "UniverseLinks": "POP-01059",
+    "MediaCount": "6",
+    "FameScore": "33"
+   },
+   {
+    "CUL-ID": "CUL-0E82EF6C",
+    "Name": "Alma Vasquez",
+    "RoleType": "sculptor",
+    "FameCategory": "artist",
+    "CulturalDomain": "Arts",
+    "Status": "Active",
+    "UniverseLinks": "POP-01063",
+    "MediaCount": "8",
+    "FameScore": "52"
+   },
+   {
+    "CUL-ID": "CUL-EBD601D2",
+    "Name": "Sienna Vale",
+    "RoleType": "influencer",
+    "FameCategory": "influencer",
+    "CulturalDomain": "Media",
+    "Status": "Active",
+    "UniverseLinks": "POP-01067",
+    "MediaCount": "5",
+    "FameScore": "21"
+   },
+   {
+    "CUL-ID": "CUL-3D28D67B",
+    "Name": "Marcus Duval",
+    "RoleType": "actor",
+    "FameCategory": "actor",
+    "CulturalDomain": "Arts",
+    "Status": "Active",
+    "UniverseLinks": "POP-01075",
+    "MediaCount": "2",
+    "FameScore": "11"
+   },
+   {
+    "CUL-ID": "CUL-B68BBF3B",
+    "Name": "Arturo Ramos",
+    "RoleType": "A's player",
+    "FameCategory": "athlete",
+    "CulturalDomain": "Sports",
+    "Status": "Active",
+    "UniverseLinks": "POP-00025",
+    "MediaCount": "3",
+    "FameScore": "24"
+   },
+   {
+    "CUL-ID": "CUL-E46BC2A0",
+    "Name": "John Ellis",
+    "RoleType": "A's player",
+    "FameCategory": "athlete",
+    "CulturalDomain": "Sports",
+    "Status": "Active",
+    "UniverseLinks": "POP-00033",
+    "MediaCount": "1",
+    "FameScore": "11"
+   }
+  ],
+  "initiatives": [
+   {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "status": "passed",
+    "phase": "operational"
+   }
+  ],
+  "existingEclLines": [
+   "Laurel feels alive with sports energy, the streets busier as fans gather to celebrate the season.",
+   "a stack of garbage bags grows at the curb, drawing complaints from passersby"
+  ]
+ },
+ {
+  "hood": "Baylight District",
+  "poolKey": "hood.baylight-district",
+  "institutions": [
+   "- **Baylight District** — Oakland's flagship new-build neighborhood and **the city's sports mecca — state-of-the-art living built around the game** (INIT-006, $2.1B). Built on 65 acres of underutilized harbor land on the estuary waterfront, beside Jack London and West Oakland (Baylight District Project v1.1): a 35,000-seat open-air waterfront stadium (the A's anchor tenant — see PRODUCT_VISION), 3,200 residential units, a 180-slip marina, a ferry terminal, a 1.2-mile public promenade, and a 0.4-mile pedestrian bridge to Lake Merritt BART. **Not the Coliseum site** — the Coliseum is the A's current home in East Oakland; Baylight is where they are moving. The prosperity-era centerpiece — sports + development showcase, the opposite of a struggle zone. **Council district anchor: D2 (Leonard Tran, IND) Rationale: the Neighborhood_Map adjacency places Baylight beside West Oakland and Jack London; INIT-006's affected neighborhoods are Jack London and Downtown, both D2; Tran was the bond's swing vote. Residents grow as the build completes. Demographics character: new stadium district (young professionals + incoming families, few seniors — units are brand new)."
+  ],
+  "institutionsMentions": [],
+  "map": {
+   "trajectory": "decay",
+   "employerCharacter": "stadium",
+   "nightlife": "0.47",
+   "retail": "5.13",
+   "medianIncome": "139162",
+   "medianRent": "3479",
+   "scenes": "",
+   "adjacent": "West Oakland, Jack London",
+   "weatherZone": "waterfront"
+  },
+  "Business_Ledger": [
+   {
+    "BIZ_ID": "BIZ-00001",
+    "Name": "Anthropic",
+    "Sector": "AI Research",
+    "Employee_Count": "86"
+   },
+   {
+    "BIZ_ID": "BIZ-00002",
+    "Name": "DigitalOcean",
+    "Sector": "Cloud Infrastructure",
+    "Employee_Count": "800"
+   },
+   {
+    "BIZ_ID": "BIZ-00003",
+    "Name": "Discord",
+    "Sector": "Community Platform",
+    "Employee_Count": "350"
+   },
+   {
+    "BIZ_ID": "BIZ-00004",
+    "Name": "Moltbook",
+    "Sector": "Agent Communication",
+    "Employee_Count": "100"
+   },
+   {
+    "BIZ_ID": "BIZ-00005",
+    "Name": "Oakland Athletics",
+    "Sector": "Sports Franchise",
+    "Employee_Count": "520"
+   },
+   {
+    "BIZ_ID": "BIZ-00006",
+    "Name": "Baylight District Management",
+    "Sector": "Development",
+    "Employee_Count": "25"
+   },
+   {
+    "BIZ_ID": "BIZ-00020",
+    "Name": "Baylight Construction Authority",
+    "Sector": "Construction",
+    "Employee_Count": "451"
+   },
+   {
+    "BIZ_ID": "BIZ-00063",
+    "Name": "Civis Systems Field \"The Town\"",
+    "Sector": "As Stadium",
+    "Employee_Count": "110"
+   },
+   {
+    "BIZ_ID": "BIZ-00074",
+    "Name": "Oakland Oaks",
+    "Sector": "Sports",
+    "Employee_Count": "250"
+   },
+   {
+    "BIZ_ID": "BIZ-00100",
+    "Name": "Oakland Casino Town",
+    "Sector": "Nightlife & Entertainment",
+    "Employee_Count": "100"
+   },
+   {
+    "BIZ_ID": "BIZ-00104",
+    "Name": "Bubic Burgers",
+    "Sector": "Food & Beverage",
+    "Employee_Count": "15"
+   },
+   {
+    "BIZ_ID": "BIZ-00105",
+    "Name": "Marine Systems",
+    "Sector": "Science",
+    "Employee_Count": "6"
+   }
+  ],
+  "Faith_Organizations": [],
+  "Community_Programs": [
+   {
+    "Program_ID": "PRG-001",
+    "Name": "Vinnie Keane Gala",
+    "Founder_POPID": "POP-00001",
+    "Neighborhood": "Baylight District",
+    "Type": "gala",
+    "Status": "active"
+   },
+   {
+    "Program_ID": "PRG-008",
+    "Name": "Oakland Youth Apprenticeship Pipeline",
+    "Neighborhood": "Baylight District",
+    "Type": "economic",
+    "Status": "active"
+   },
+   {
+    "Program_ID": "PRG-013",
+    "Name": "Keane Gala Arts Fund",
+    "Founder_POPID": "POP-00001",
+    "Neighborhood": "Baylight District",
+    "Type": "arts",
+    "Status": "active"
+   },
+   {
+    "Program_ID": "PRG-020",
+    "Name": "Oaks Community Night Fund",
+    "Founder_POPID": "POP-00789",
+    "Neighborhood": "Baylight District",
+    "Type": "civic",
+    "Status": "active"
+   }
+  ],
+  "Cultural_Ledger": [],
+  "initiatives": [
+   {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "status": "passed",
+    "phase": "operational"
+   },
+   {
+    "id": "INIT-006",
+    "name": "Baylight District — Final Council Vote",
+    "status": "passed",
+    "phase": "construction-active"
+   }
+  ],
+  "existingEclLines": [
+   "watched the morning shuttles roll along the waterfront into the Baylight District and timed their own walk to ",
+   "heard someone at the cafe complain about the Baylight District noise and bit their tongue"
+  ]
+ },
+ {
+  "hood": "Rockridge",
+  "poolKey": "hood.rockridge",
+  "institutions": [
+   "- **Rockridge** — affluent, professional, tree-lined. Distinct from Lake Merritt: earned money rather than inherited, doctors and directors rather than families with a name. Sits directly north of Temescal, and the contrast across that line is the sharpest in the city. **Council district anchor: D7 (Warren Ashford, CRC) Demographics character: established affluent, professional."
+  ],
+  "institutionsMentions": [],
+  "map": {
+   "trajectory": "steady",
+   "employerCharacter": "professional",
+   "nightlife": "0.75",
+   "retail": "13.14",
+   "medianIncome": "161607",
+   "medianRent": "4040",
+   "scenes": "Halloween:2",
+   "adjacent": "Temescal, Piedmont Ave",
+   "weatherZone": "hills"
+  },
+  "Business_Ledger": [
+   {
+    "BIZ_ID": "BIZ-00043",
+    "Name": "OakHouse",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "22"
+   },
+   {
+    "BIZ_ID": "BIZ-00085",
+    "Name": "Temple Beth Or",
+    "Sector": "Faith Organization",
+    "Employee_Count": "12"
+   },
+   {
+    "BIZ_ID": "BIZ-00168",
+    "Name": "Canopy Market",
+    "Sector": "Retail",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00169",
+    "Name": "Claremont Table",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "15"
+   },
+   {
+    "BIZ_ID": "BIZ-00170",
+    "Name": "College Avenue Dental",
+    "Sector": "Healthcare",
+    "Employee_Count": "8"
+   },
+   {
+    "BIZ_ID": "BIZ-00171",
+    "Name": "Rockridge Pharmacy",
+    "Sector": "Retail",
+    "Employee_Count": "7"
+   },
+   {
+    "BIZ_ID": "BIZ-00180",
+    "Name": "Kelley Mercantile",
+    "Sector": "Retail",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00182",
+    "Name": "Dillon Clinic",
+    "Sector": "Healthcare",
+    "Employee_Count": "38"
+   },
+   {
+    "BIZ_ID": "BIZ-00223",
+    "Name": "College Avenue Medical Group",
+    "Sector": "Medical Specialists",
+    "Employee_Count": "38"
+   },
+   {
+    "BIZ_ID": "BIZ-00224",
+    "Name": "Claremont Advisory Partners",
+    "Sector": "Management Consulting",
+    "Employee_Count": "26"
+   },
+   {
+    "BIZ_ID": "BIZ-00225",
+    "Name": "Rockridge Wine Merchants",
+    "Sector": "Wine Shop",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00226",
+    "Name": "Hillside Preparatory",
+    "Sector": "Private School",
+    "Employee_Count": "15"
+   }
+  ],
+  "Faith_Organizations": [
+   {
+    "Organization": "Temple Beth Or",
+    "FaithTradition": "Reform Jewish",
+    "Neighborhood": "Rockridge",
+    "Founded": "1875",
+    "Congregation": "700",
+    "Leader": "Rabbi Naomi Sterling",
+    "Character": "oldest Jewish congregation, interfaith active",
+    "ActiveStatus": "active",
+    "LeaderPOPID": "POP-00759"
+   }
+  ],
+  "Community_Programs": [],
+  "Cultural_Ledger": [
+   {
+    "CUL-ID": "CUL-3913E3E5",
+    "Name": "Dax Monroe",
+    "RoleType": "Celebrity",
+    "FameCategory": "artist",
+    "CulturalDomain": "Arts",
+    "Status": "Active",
+    "UniverseLinks": "POP-00769",
+    "MediaCount": "20",
+    "FameScore": "83"
+   },
+   {
+    "CUL-ID": "CUL-0F9D85B2",
+    "Name": "Tara Ellison",
+    "RoleType": "journalist",
+    "FameCategory": "journalist",
+    "CulturalDomain": "Media",
+    "Status": "Active",
+    "UniverseLinks": "POP-00546",
+    "MediaCount": "12",
+    "FameScore": "69"
+   },
+   {
+    "CUL-ID": "CUL-BEF5B8CE",
+    "Name": "Pixel Pete",
+    "RoleType": "streamer",
+    "FameCategory": "streamer",
+    "CulturalDomain": "Media",
+    "Status": "Active",
+    "UniverseLinks": "POP-01064",
+    "MediaCount": "4",
+    "FameScore": "22"
+   },
+   {
+    "CUL-ID": "CUL-66EDE7C6",
+    "Name": "Lumi Crest",
+    "RoleType": "influencer",
+    "FameCategory": "influencer",
+    "CulturalDomain": "Media",
+    "Status": "Active",
+    "UniverseLinks": "POP-01072",
+    "MediaCount": "2",
+    "FameScore": "6"
+   },
+   {
+    "CUL-ID": "CUL-8A4E3B04",
+    "Name": "Steve Conrad",
+    "RoleType": "A's player",
+    "FameCategory": "athlete",
+    "CulturalDomain": "Sports",
+    "Status": "Active",
+    "UniverseLinks": "POP-00124",
+    "MediaCount": "1",
+    "FameScore": "5"
+   },
+   {
+    "CUL-ID": "CUL-C485F452",
+    "Name": "Benji Dillon",
+    "RoleType": "A's player",
+    "FameCategory": "athlete",
+    "CulturalDomain": "Sports",
+    "Status": "Active",
+    "UniverseLinks": "POP-00018",
+    "MediaCount": "1",
+    "FameScore": "25"
+   },
+   {
+    "CUL-ID": "CUL-8F6DDFE5",
+    "Name": "Isley Kelley",
+    "RoleType": "Shortstop, Oakland A's Legend",
+    "FameCategory": "athlete",
+    "CulturalDomain": "Sports",
+    "Status": "Active",
+    "UniverseLinks": "POP-00019",
+    "MediaCount": "1",
+    "FameScore": "25"
+   }
+  ],
+  "initiatives": [
+   {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "status": "passed",
+    "phase": "operational"
+   }
+  ],
+  "existingEclLines": [
+   "checked the housing market in Rockridge on their lunch break and realized they could actually afford it",
+   "the Rockridge streets are bustling with shoppers and diners"
+  ]
+ },
+ {
+  "hood": "Eastlake",
+  "poolKey": "hood.eastlake",
+  "institutions": [
+   "- **Eastlake** — the ring's eastern edge, where lake money thins into the flatlands. Mixed in a way none of its neighbours are, and the boundary is visible walking it. **Council district anchor: D8 (Nina Chen, CRC) Demographics character: lakeside mixed, transitional."
+  ],
+  "institutionsMentions": [
+   "- **Lake Merritt** — central lakeside neighborhood ringing the lake, civic-center adjacent. Thriving-Oakland register: **old Oakland's elite address, and the one the boom did not have to touch.** Inherited money rather than made money — the lake ring kept its ",
+   "- **Ivy Hill** — the smallest and quietest of the D4 villages, on the slope above Eastlake. Residential to the point of invisibility. **Council district anchor: D4 (Ramon Vega, IND) Demographics character: quiet residential."
+  ],
+  "map": {
+   "trajectory": "decay",
+   "employerCharacter": "mixed",
+   "nightlife": "0.74",
+   "retail": "6.11",
+   "medianIncome": "83748",
+   "medianRent": "1815",
+   "scenes": "",
+   "adjacent": "Lake Merritt, Chinatown, Brooklyn, San Antonio, Grand Lake",
+   "weatherZone": "lake"
+  },
+  "Business_Ledger": [
+   {
+    "BIZ_ID": "BIZ-00133",
+    "Name": "Eastlake Corner Market",
+    "Sector": "Retail",
+    "Employee_Count": "10"
+   },
+   {
+    "BIZ_ID": "BIZ-00134",
+    "Name": "Eastlake Kitchen",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "12"
+   },
+   {
+    "BIZ_ID": "BIZ-00135",
+    "Name": "Eastlake Barbers",
+    "Sector": "Services",
+    "Employee_Count": "5"
+   },
+   {
+    "BIZ_ID": "BIZ-00136",
+    "Name": "Parkedge Diner",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "9"
+   },
+   {
+    "BIZ_ID": "BIZ-00137",
+    "Name": "Eastlake Pharmacy",
+    "Sector": "Retail",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00138",
+    "Name": "Eastlake Laundry",
+    "Sector": "Services",
+    "Employee_Count": "5"
+   },
+   {
+    "BIZ_ID": "BIZ-00252",
+    "Name": "Lakeshore Pho House",
+    "Sector": "Vietnamese Restaurant",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00253",
+    "Name": "Eastlake Tap Room",
+    "Sector": "Bar",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00254",
+    "Name": "Eastlake Community Credit Union",
+    "Sector": "Credit Union / Finance",
+    "Employee_Count": "26"
+   },
+   {
+    "BIZ_ID": "BIZ-00255",
+    "Name": "East Lake Garden Supply",
+    "Sector": "Garden Center / Retail",
+    "Employee_Count": "4"
+   }
+  ],
+  "Faith_Organizations": [],
+  "Community_Programs": [],
+  "Cultural_Ledger": [],
+  "initiatives": [
+   {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "status": "passed",
+    "phase": "operational"
+   }
+  ],
+  "existingEclLines": [
+   "overheard a group debating the A’s playoff chances while waiting for the bus",
+   "a line forms early at the sports bar for the A's game replay",
+   "a group debates whether to splurge on A's merch after the title win"
+  ]
+ }
+]

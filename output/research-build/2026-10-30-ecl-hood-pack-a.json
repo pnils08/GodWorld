@@ -1,0 +1,909 @@
+[
+ {
+  "hood": "Uptown",
+  "poolKey": "hood.uptown",
+  "institutions": [
+   "- **Uptown** — central arts, dining, and nightlife district immediately north of Downtown, south of KONO. Thriving-Oakland register: dense young-professional entertainment district. **Council district anchor: D9 (Terrence Mobley, OPP)(89 residents untracked pre-alignment). Legacy assignment in `lib/districtMap.js` (paired with Laurel under Mobley) Demographics character: arts & nightlife district."
+  ],
+  "institutionsMentions": [
+   "- **Downtown** — the civic and corporate spine. Where the boom's money is *administered* rather than made: towers, headquarters, City Hall, the courts. Dense on weekdays, thinner after dark than Uptown or Jack London. The district that gained the most institut"
+  ],
+  "map": {
+   "trajectory": "growth",
+   "employerCharacter": "nightlife",
+   "nightlife": "1.11",
+   "retail": "11.07",
+   "medianIncome": "97742",
+   "medianRent": "2444",
+   "scenes": "arts, FirstFriday:4, OaklandPride:3, NewYearsEve:2",
+   "adjacent": "Downtown, KONO, Temescal, Lake Merritt, West Oakland, Adams Point",
+   "weatherZone": "urban-corridor"
+  },
+  "Business_Ledger": [
+   {
+    "BIZ_ID": "BIZ-00030",
+    "Name": "Oakland Tech Collective",
+    "Sector": "Coworking / Tech Hub",
+    "Employee_Count": "62"
+   },
+   {
+    "BIZ_ID": "BIZ-00039",
+    "Name": "Pulse District",
+    "Sector": "Nightlife & Entertainment",
+    "Employee_Count": "30"
+   },
+   {
+    "BIZ_ID": "BIZ-00053",
+    "Name": "Ridgeline Studio",
+    "Sector": "Architecture",
+    "Employee_Count": "61"
+   },
+   {
+    "BIZ_ID": "BIZ-00064",
+    "Name": "Art Walk Cafe",
+    "Sector": "Cafe / gallery",
+    "Employee_Count": "30"
+   },
+   {
+    "BIZ_ID": "BIZ-00066",
+    "Name": "Gallery Night Lounge",
+    "Sector": "Bar / lounge",
+    "Employee_Count": "30"
+   },
+   {
+    "BIZ_ID": "BIZ-00178",
+    "Name": "First Lamp Club",
+    "Sector": "Nightlife & Entertainment",
+    "Employee_Count": "16"
+   },
+   {
+    "BIZ_ID": "BIZ-00179",
+    "Name": "Night Walk Records",
+    "Sector": "Retail",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00208",
+    "Name": "Paramount Theatre",
+    "Sector": "Theater / Historic Landmark",
+    "Employee_Count": "9"
+   },
+   {
+    "BIZ_ID": "BIZ-00209",
+    "Name": "Uptown Playhouse",
+    "Sector": "Theater Company / Performance Space",
+    "Employee_Count": "9"
+   },
+   {
+    "BIZ_ID": "BIZ-00210",
+    "Name": "Nineteenth Street Gallery",
+    "Sector": "Art Gallery",
+    "Employee_Count": "9"
+   },
+   {
+    "BIZ_ID": "BIZ-00211",
+    "Name": "Telegraph Supper Club",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00212",
+    "Name": "Neon Alley Cocktails",
+    "Sector": "Bar / Lounge",
+    "Employee_Count": "11"
+   }
+  ],
+  "Faith_Organizations": [],
+  "Community_Programs": [
+   {
+    "Program_ID": "PRG-012",
+    "Name": "Oakland Sound Archive",
+    "Neighborhood": "Uptown",
+    "Type": "arts",
+    "Status": "active"
+   }
+  ],
+  "Cultural_Ledger": [
+   {
+    "CUL-ID": "CUL-9E72118C",
+    "Name": "Evan Morello",
+    "RoleType": "actor",
+    "FameCategory": "actor",
+    "CulturalDomain": "Arts",
+    "Status": "Active",
+    "UniverseLinks": "POP-00536",
+    "MediaCount": "15",
+    "FameScore": "70"
+   },
+   {
+    "CUL-ID": "CUL-6A0BC6CC",
+    "Name": "Theo Banks",
+    "RoleType": "rapper",
+    "FameCategory": "musician",
+    "CulturalDomain": "Arts",
+    "Status": "Active",
+    "UniverseLinks": "POP-01056",
+    "MediaCount": "7",
+    "FameScore": "46"
+   }
+  ],
+  "initiatives": [
+   {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "status": "passed",
+    "phase": "operational"
+   },
+   {
+    "id": "INIT-008",
+    "name": "Downtown Economic Revitalization",
+    "status": "proposed",
+    "phase": "vote-scheduled"
+   }
+  ],
+  "existingEclLines": []
+ },
+ {
+  "hood": "KONO",
+  "poolKey": "hood.kono",
+  "institutions": [],
+  "institutionsMentions": [
+   "- **Fox Theater Oakland** — historic restored theater, 1928, Telegraph & 19th, KONO district. Marquee + signage canon-allowed in frame.",
+   "- **Telegraph Avenue** — public street, KONO/Temescal corridor.",
+   "- **KONO (Koreatown-Northgate)** — emerging neighborhood, Telegraph Avenue corridor north of Downtown and south of Temescal. Approximate boundaries: 20th Street (south) to 30th/MacArthur (north), Telegraph Avenue as spine. Cultural-event density (Fox Theater O",
+   "- **Uptown** — central arts, dining, and nightlife district immediately north of Downtown, south of KONO. Thriving-Oakland register: dense young-professional entertainment district. **Council district anchor: D9 (Terrence Mobley, OPP)(89 residents untracked pr",
+   "- **Temescal** — **the area the boom left behind**, and the city's one true counter-example. A health crisis it is still battling (INIT-005, Temescal Community Health Center) held the neighborhood back while every district around it rose; the corridor that sho"
+  ],
+  "map": {
+   "trajectory": "steady",
+   "employerCharacter": "arts",
+   "nightlife": "1.07",
+   "retail": "7.44",
+   "medianIncome": "82328",
+   "medianRent": "2058",
+   "scenes": "arts, FirstFriday:3",
+   "adjacent": "Uptown, Temescal, Lake Merritt, Piedmont Ave",
+   "weatherZone": "urban-corridor"
+  },
+  "Business_Ledger": [
+   {
+    "BIZ_ID": "BIZ-00046",
+    "Name": "KONO Kitchen",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "2"
+   },
+   {
+    "BIZ_ID": "BIZ-00091",
+    "Name": "KONO Hardware",
+    "Sector": "Retail",
+    "Employee_Count": "8"
+   },
+   {
+    "BIZ_ID": "BIZ-00156",
+    "Name": "Northgate Kitchen",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "13"
+   },
+   {
+    "BIZ_ID": "BIZ-00157",
+    "Name": "Telegraph Press",
+    "Sector": "Services",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00158",
+    "Name": "The Northgate Bar",
+    "Sector": "Nightlife & Entertainment",
+    "Employee_Count": "12"
+   },
+   {
+    "BIZ_ID": "BIZ-00159",
+    "Name": "Twentieth Street Gallery",
+    "Sector": "Retail",
+    "Employee_Count": "5"
+   },
+   {
+    "BIZ_ID": "BIZ-00213",
+    "Name": "Fox Theater Oakland",
+    "Sector": "Theater / Historic Landmark",
+    "Employee_Count": "9"
+   },
+   {
+    "BIZ_ID": "BIZ-00214",
+    "Name": "Han River BBQ",
+    "Sector": "Korean Restaurant",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00215",
+    "Name": "Seoul Corner Market",
+    "Sector": "Korean Grocery",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00216",
+    "Name": "Telegraph Studio Collective",
+    "Sector": "Artist Studios",
+    "Employee_Count": "9"
+   },
+   {
+    "BIZ_ID": "BIZ-00217",
+    "Name": "Midnight Norae Karaoke",
+    "Sector": "Karaoke Bar",
+    "Employee_Count": "11"
+   }
+  ],
+  "Faith_Organizations": [],
+  "Community_Programs": [],
+  "Cultural_Ledger": [
+   {
+    "CUL-ID": "CUL-732EA822",
+    "Name": "Celeste Moon",
+    "RoleType": "singer",
+    "FameCategory": "musician",
+    "CulturalDomain": "Arts",
+    "Status": "Active",
+    "UniverseLinks": "POP-01061",
+    "MediaCount": "3",
+    "FameScore": "20"
+   },
+   {
+    "CUL-ID": "CUL-C13B0483",
+    "Name": "Claire Ashford",
+    "RoleType": "author",
+    "FameCategory": "author",
+    "CulturalDomain": "Literature",
+    "Status": "Active",
+    "UniverseLinks": "POP-01071",
+    "MediaCount": "3",
+    "FameScore": "16"
+   }
+  ],
+  "initiatives": [
+   {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "status": "passed",
+    "phase": "operational"
+   }
+  ],
+  "existingEclLines": []
+ },
+ {
+  "hood": "Piedmont Ave",
+  "poolKey": "hood.piedmont-ave",
+  "institutions": [
+   "- **Piedmont Ave** — boutique and medical corridor serving the lake-ring money. Clinics, specialists, small storefront retail; the street the elite districts actually use. Steady rather than booming. **Council district anchor: D6 (Elliott Crane, CRC) Demographics character: upscale residential, medical corridor."
+  ],
+  "institutionsMentions": [],
+  "map": {
+   "trajectory": "steady",
+   "employerCharacter": "medical",
+   "nightlife": "0.64",
+   "retail": "11.61",
+   "medianIncome": "150000",
+   "medianRent": "3750",
+   "scenes": "",
+   "adjacent": "KONO, Adams Point, Grand Lake, Rockridge, Glenview, Temescal",
+   "weatherZone": "piedmont-edge"
+  },
+  "Business_Ledger": [
+   {
+    "BIZ_ID": "BIZ-00025",
+    "Name": "Piedmont Avenue Medical Center",
+    "Sector": "Healthcare",
+    "Employee_Count": "2601"
+   },
+   {
+    "BIZ_ID": "BIZ-00092",
+    "Name": "B'nai Tikvah Synagogue",
+    "Sector": "Synagogue",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00165",
+    "Name": "Piedmont Avenue Specialists",
+    "Sector": "Healthcare",
+    "Employee_Count": "14"
+   },
+   {
+    "BIZ_ID": "BIZ-00166",
+    "Name": "Piedmont Avenue Clothiers",
+    "Sector": "Retail",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00167",
+    "Name": "Piedmont Avenue Pharmacy",
+    "Sector": "Retail",
+    "Employee_Count": "8"
+   },
+   {
+    "BIZ_ID": "BIZ-00181",
+    "Name": "Mayday Movers",
+    "Sector": "Services",
+    "Employee_Count": "8"
+   },
+   {
+    "BIZ_ID": "BIZ-00227",
+    "Name": "Piedmont Avenue Bistro",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00228",
+    "Name": "Montclair Patisserie",
+    "Sector": "Bakery / Patisserie",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00229",
+    "Name": "Avenue Florist",
+    "Sector": "Florist Shop",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00230",
+    "Name": "Glass & Frame Optometry",
+    "Sector": "Optometry Clinic",
+    "Employee_Count": "38"
+   },
+   {
+    "BIZ_ID": "BIZ-00231",
+    "Name": "Lakeview Salon",
+    "Sector": "Hair Salon / Services",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00232",
+    "Name": "Marguerite's",
+    "Sector": "Women's Boutique",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00233",
+    "Name": "Pleasant Valley Menswear",
+    "Sector": "Men's Clothing Store",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00234",
+    "Name": "Little Avenue",
+    "Sector": "Children's Boutique",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00235",
+    "Name": "Linden Street Jewelers",
+    "Sector": "Jewelry Store",
+    "Employee_Count": "4"
+   }
+  ],
+  "Faith_Organizations": [
+   {
+    "Organization": "B'nai Tikvah Synagogue",
+    "FaithTradition": "Orthodox Jewish",
+    "Neighborhood": "Piedmont Ave",
+    "Founded": "1924",
+    "Congregation": "250",
+    "Leader": "Rabbi Yael Bauer",
+    "Character": "traditional observance, community eruv",
+    "ActiveStatus": "active",
+    "LeaderPOPID": "POP-00760"
+   }
+  ],
+  "Community_Programs": [],
+  "Cultural_Ledger": [
+   {
+    "CUL-ID": "CUL-6D596907",
+    "Name": "Lena Cross",
+    "RoleType": "Celebrity",
+    "FameCategory": "actor",
+    "CulturalDomain": "Arts",
+    "Status": "Active",
+    "UniverseLinks": "POP-00539",
+    "MediaCount": "17",
+    "FameScore": "92"
+   },
+   {
+    "CUL-ID": "CUL-3A2CD59D",
+    "Name": "Rowan Pierce",
+    "RoleType": "journalist",
+    "FameCategory": "journalist",
+    "CulturalDomain": "Media",
+    "Status": "Active",
+    "UniverseLinks": "POP-00545",
+    "MediaCount": "14",
+    "FameScore": "66"
+   },
+   {
+    "CUL-ID": "CUL-85DD5B45",
+    "Name": "Darrin Davis",
+    "RoleType": "A's player",
+    "FameCategory": "athlete",
+    "CulturalDomain": "Sports",
+    "Status": "Active",
+    "UniverseLinks": "POP-00021",
+    "MediaCount": "2",
+    "FameScore": "20"
+   }
+  ],
+  "initiatives": [
+   {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "status": "passed",
+    "phase": "operational"
+   }
+  ],
+  "existingEclLines": []
+ },
+ {
+  "hood": "Adams Point",
+  "poolKey": "hood.adams-point",
+  "institutions": [
+   "- **Adams Point** — dense lake-ring spillover immediately north of the lake. Younger and renting where Lake Merritt is settled and owning; the address for people who want the lake without the lineage. **Council district anchor: D8 (Nina Chen, CRC) Demographics character: lakeside residential, young dense."
+  ],
+  "institutionsMentions": [
+   "- **KONO (Koreatown-Northgate)** — emerging neighborhood, Telegraph Avenue corridor north of Downtown and south of Temescal. Approximate boundaries: 20th Street (south) to 30th/MacArthur (north), Telegraph Avenue as spine. Cultural-event density (Fox Theater O",
+   "- **Lake Merritt** — central lakeside neighborhood ringing the lake, civic-center adjacent. Thriving-Oakland register: **old Oakland's elite address, and the one the boom did not have to touch.** Inherited money rather than made money — the lake ring kept its "
+  ],
+  "map": {
+   "trajectory": "decay",
+   "employerCharacter": "residential",
+   "nightlife": "0.53",
+   "retail": "5.67",
+   "medianIncome": "94810",
+   "medianRent": "2370",
+   "scenes": "",
+   "adjacent": "Lake Merritt, Grand Lake, Piedmont Ave, Uptown",
+   "weatherZone": "urban-corridor"
+  },
+  "Business_Ledger": [
+   {
+    "BIZ_ID": "BIZ-00061",
+    "Name": "Adams Point United Methodist Church",
+    "Sector": "Faith / Methodist",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00108",
+    "Name": "Lakeshore Cafe",
+    "Sector": "Cafe / dining",
+    "Employee_Count": "8"
+   },
+   {
+    "BIZ_ID": "BIZ-00109",
+    "Name": "Vernon Street Market",
+    "Sector": "Retail",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00110",
+    "Name": "Northshore Dental",
+    "Sector": "Healthcare",
+    "Employee_Count": "7"
+   },
+   {
+    "BIZ_ID": "BIZ-00111",
+    "Name": "Lakeside Cycles",
+    "Sector": "Retail",
+    "Employee_Count": "5"
+   },
+   {
+    "BIZ_ID": "BIZ-00112",
+    "Name": "Point Press Laundry",
+    "Sector": "Services",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00243",
+    "Name": "Perkins Street Taqueria",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00244",
+    "Name": "Point Climbing Gym",
+    "Sector": "Climbing Gym / Services",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00245",
+    "Name": "Bellevue Coffee Roasters",
+    "Sector": "Coffee Roaster",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00246",
+    "Name": "Lakeside Paws",
+    "Sector": "Veterinary Clinic",
+    "Employee_Count": "38"
+   }
+  ],
+  "Faith_Organizations": [
+   {
+    "Organization": "Adams Point United Methodist",
+    "FaithTradition": "Methodist",
+    "Neighborhood": "Adams Point",
+    "Founded": "1892",
+    "Congregation": "300",
+    "Leader": "Rev. Daniel Han",
+    "Character": "progressive, LGBTQ affirming",
+    "ActiveStatus": "active",
+    "LeaderPOPID": "POP-00757"
+   }
+  ],
+  "Community_Programs": [],
+  "Cultural_Ledger": [],
+  "initiatives": [
+   {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "status": "passed",
+    "phase": "operational"
+   }
+  ],
+  "existingEclLines": []
+ },
+ {
+  "hood": "Brooklyn",
+  "poolKey": "hood.brooklyn",
+  "institutions": [
+   "- **Brooklyn** — Basin waterfront north of the estuary. The newest mid-rise housing in the city after Baylight, and the quieter of the two new builds: residential rather than spectacle, no stadium, no anchor tenant. Where people move when they want the new stock without the crowd. **Council district anchor: D1 (Denise Carter, OPP) Demographics character: new waterfront residential."
+  ],
+  "institutionsMentions": [],
+  "map": {
+   "trajectory": "decay",
+   "employerCharacter": "residential",
+   "nightlife": "0.5",
+   "retail": "5.12",
+   "medianIncome": "129480",
+   "medianRent": "3237",
+   "scenes": "",
+   "adjacent": "Jack London, Eastlake, San Antonio",
+   "weatherZone": "waterfront"
+  },
+  "Business_Ledger": [
+   {
+    "BIZ_ID": "BIZ-00113",
+    "Name": "Quay Coffee",
+    "Sector": "Cafe / dining",
+    "Employee_Count": "9"
+   },
+   {
+    "BIZ_ID": "BIZ-00114",
+    "Name": "Basin Grocer",
+    "Sector": "Retail",
+    "Employee_Count": "14"
+   },
+   {
+    "BIZ_ID": "BIZ-00115",
+    "Name": "Basin Athletic Club",
+    "Sector": "Services",
+    "Employee_Count": "12"
+   },
+   {
+    "BIZ_ID": "BIZ-00116",
+    "Name": "Slip Street Kitchen",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "16"
+   },
+   {
+    "BIZ_ID": "BIZ-00117",
+    "Name": "Brooklyn Pharmacy",
+    "Sector": "Retail",
+    "Employee_Count": "8"
+   },
+   {
+    "BIZ_ID": "BIZ-00118",
+    "Name": "Estuary Cleaners",
+    "Sector": "Services",
+    "Employee_Count": "5"
+   },
+   {
+    "BIZ_ID": "BIZ-00256",
+    "Name": "Basin Residential Management",
+    "Sector": "Property Management / Real Estate",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00257",
+    "Name": "Estuary Pediatrics",
+    "Sector": "Pediatric Clinic",
+    "Employee_Count": "38"
+   },
+   {
+    "BIZ_ID": "BIZ-00258",
+    "Name": "Shoreline Kayak & Paddle",
+    "Sector": "Outdoor Rental / Services",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00259",
+    "Name": "Ninth Avenue Bottle Shop",
+    "Sector": "Wine & Spirits Shop",
+    "Employee_Count": "4"
+   }
+  ],
+  "Faith_Organizations": [],
+  "Community_Programs": [],
+  "Cultural_Ledger": [],
+  "initiatives": [
+   {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "status": "passed",
+    "phase": "operational"
+   }
+  ],
+  "existingEclLines": []
+ },
+ {
+  "hood": "Dimond",
+  "poolKey": "hood.dimond",
+  "institutions": [
+   "- **Dimond** — a small commercial village on the hill approach, and **the district still living down a past era**. The strip's cash businesses were the home of an organized-crime operation in the decades before the boom; the operation is gone and the name is not. Nothing current, everything remembered — the city's one place where prosperity arrived late because people chose not to look. The last living link is **Gregory Mims (POP-00023)**, who holds a $25M inheritance drawn down to roughly half and lives, pointedly, in West Oakland rather than here. **Council district anchor: D4 (Ramon Vega, IND) Demographics character: village commercial, living down a name."
+  ],
+  "institutionsMentions": [
+   "- **West Oakland** — the industrial flats where the tech boom was *born*, and where **Civis Systems was founded**. The city's origin story for the prosperity era: warehouses and rail yards that became the first campuses, before Downtown had towers worth the na",
+   "- **Glenview** — quiet hill-adjacent residential above the Dimond strip. Nothing happened here, which is the character: intact, small, unremarkable, and cheap for exactly as long as its district's reputation held. **Council district anchor: D4 (Ramon Vega, IND"
+  ],
+  "map": {
+   "trajectory": "steady",
+   "employerCharacter": "village-retail",
+   "nightlife": "0.7",
+   "retail": "6.92",
+   "medianIncome": "79760",
+   "medianRent": "1595",
+   "scenes": "",
+   "adjacent": "Laurel, Fruitvale, Glenview, Ivy Hill",
+   "weatherZone": "valley"
+  },
+  "Business_Ledger": [
+   {
+    "BIZ_ID": "BIZ-00075",
+    "Name": "Romano's",
+    "Sector": "Food & Beverage",
+    "Employee_Count": "16"
+   },
+   {
+    "BIZ_ID": "BIZ-00124",
+    "Name": "Sausal Creek Cafe",
+    "Sector": "Cafe / dining",
+    "Employee_Count": "7"
+   },
+   {
+    "BIZ_ID": "BIZ-00125",
+    "Name": "Village Lock and Hardware",
+    "Sector": "Retail",
+    "Employee_Count": "8"
+   },
+   {
+    "BIZ_ID": "BIZ-00126",
+    "Name": "Dimond Pharmacy",
+    "Sector": "Retail",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00127",
+    "Name": "Two Tables Kitchen",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00128",
+    "Name": "Dimond Cleaners",
+    "Sector": "Services",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00285",
+    "Name": "Fruitvale Avenue Social Club",
+    "Sector": "Social Club",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00286",
+    "Name": "Dimond Billiards",
+    "Sector": "Pool Hall & Bar",
+    "Employee_Count": "11"
+   },
+   {
+    "BIZ_ID": "BIZ-00287",
+    "Name": "Sausal Creek Pawn & Jewelry",
+    "Sector": "Pawn & Jewelry Shop",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00288",
+    "Name": "Old Dimond Butcher",
+    "Sector": "Butcher Shop",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00289",
+    "Name": "Tops n Tassels",
+    "Sector": "Gentlemen's Club / Adult Entertainment",
+    "Employee_Count": "11"
+   }
+  ],
+  "Faith_Organizations": [],
+  "Community_Programs": [
+   {
+    "Program_ID": "PRG-007",
+    "Name": "Oakland A's Alumni Youth Clinics",
+    "Founder_POPID": "POP-00003",
+    "Neighborhood": "Dimond",
+    "Type": "youth-sports",
+    "Status": "active"
+   }
+  ],
+  "Cultural_Ledger": [],
+  "initiatives": [
+   {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "status": "passed",
+    "phase": "operational"
+   },
+   {
+    "id": "INIT-012",
+    "name": "Dimond Revitalization Initiative",
+    "status": "proposed",
+    "phase": "announced"
+   }
+  ],
+  "existingEclLines": []
+ },
+ {
+  "hood": "Glenview",
+  "poolKey": "hood.glenview",
+  "institutions": [
+   "- **Glenview** — quiet hill-adjacent residential above the Dimond strip. Nothing happened here, which is the character: intact, small, unremarkable, and cheap for exactly as long as its district's reputation held. **Council district anchor: D4 (Ramon Vega, IND) Demographics character: family suburban, untouched."
+  ],
+  "institutionsMentions": [],
+  "map": {
+   "trajectory": "decay",
+   "employerCharacter": "residential",
+   "nightlife": "0.48",
+   "retail": "5.23",
+   "medianIncome": "81508",
+   "medianRent": "1630",
+   "scenes": "",
+   "adjacent": "Dimond, Ivy Hill, Grand Lake, Piedmont Ave",
+   "weatherZone": "hills"
+  },
+  "Business_Ledger": [
+   {
+    "BIZ_ID": "BIZ-00139",
+    "Name": "Hillside Family Market",
+    "Sector": "Retail",
+    "Employee_Count": "9"
+   },
+   {
+    "BIZ_ID": "BIZ-00140",
+    "Name": "Glenview Cafe",
+    "Sector": "Cafe / dining",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00141",
+    "Name": "Hillside Family Dental",
+    "Sector": "Healthcare",
+    "Employee_Count": "6"
+   },
+   {
+    "BIZ_ID": "BIZ-00142",
+    "Name": "Parkridge Cleaners",
+    "Sector": "Services",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00143",
+    "Name": "Slopeview Hardware",
+    "Sector": "Retail",
+    "Employee_Count": "7"
+   },
+   {
+    "BIZ_ID": "BIZ-00144",
+    "Name": "Glenview Kitchen",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "10"
+   }
+  ],
+  "Faith_Organizations": [],
+  "Community_Programs": [],
+  "Cultural_Ledger": [],
+  "initiatives": [
+   {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "status": "passed",
+    "phase": "operational"
+   }
+  ],
+  "existingEclLines": []
+ },
+ {
+  "hood": "Ivy Hill",
+  "poolKey": "hood.ivy-hill",
+  "institutions": [
+   "- **Ivy Hill** — the smallest and quietest of the D4 villages, on the slope above Eastlake. Residential to the point of invisibility. **Council district anchor: D4 (Ramon Vega, IND) Demographics character: quiet residential."
+  ],
+  "institutionsMentions": [],
+  "map": {
+   "trajectory": "decay",
+   "employerCharacter": "residential",
+   "nightlife": "0.52",
+   "retail": "4.67",
+   "medianIncome": "77688",
+   "medianRent": "1554",
+   "scenes": "",
+   "adjacent": "San Antonio, Dimond, Glenview, Fruitvale",
+   "weatherZone": "hills"
+  },
+  "Business_Ledger": [
+   {
+    "BIZ_ID": "BIZ-00150",
+    "Name": "Ivy Hill Market",
+    "Sector": "Retail",
+    "Employee_Count": "3"
+   },
+   {
+    "BIZ_ID": "BIZ-00151",
+    "Name": "Ivy Hill Cafe",
+    "Sector": "Cafe / dining",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00152",
+    "Name": "Ivy Cleaners",
+    "Sector": "Services",
+    "Employee_Count": "3"
+   },
+   {
+    "BIZ_ID": "BIZ-00153",
+    "Name": "Ivy Hill Family Dental",
+    "Sector": "Healthcare",
+    "Employee_Count": "4"
+   },
+   {
+    "BIZ_ID": "BIZ-00154",
+    "Name": "Hillcrest Kitchen",
+    "Sector": "Restaurant & Dining",
+    "Employee_Count": "7"
+   },
+   {
+    "BIZ_ID": "BIZ-00155",
+    "Name": "Fold Laundry",
+    "Sector": "Services",
+    "Employee_Count": "3"
+   }
+  ],
+  "Faith_Organizations": [],
+  "Community_Programs": [],
+  "Cultural_Ledger": [],
+  "initiatives": [
+   {
+    "id": "INIT-005",
+    "name": "Temescal Community Health Center",
+    "status": "passed",
+    "phase": "operational"
+   },
+   {
+    "id": "INIT-011",
+    "name": "Ivy Hill Revitalization Initiative",
+    "status": "proposed",
+    "phase": "legislation-filed"
+   },
+   {
+    "id": "INIT-013",
+    "name": "Ivy Hill Community Revitalization",
+    "status": "proposed",
+    "phase": "announced"
+   }
+  ],
+  "existingEclLines": []
+ }
+]

@@ -420,7 +420,7 @@ After the yes: `hoodBlindTexture.test.js` asserts every hood on the map holds on
 
 ## Changelog
 
-- 2026-10-30 (research-build) — engine.316: 27 signed lines drafted for the five hoods (§engine.316), awaiting the builder's yes; four of the five are empty at C113 trajectories (46 citizens).
+- 2026-10-30 (research-build) — engine.316: 28 signed lines drafted for the five hoods (§engine.316), awaiting the builder's yes; four of the five are empty at C113 trajectories (46 citizens).
 - 2026-10-28 (engine-sheet) — C113 first-live read of the engine.214 cuts recorded (Status log): output/engine_review_c113.md §C113 re-reads (read 2026-10-27) — Cut B 69% with the hood's trend (`:35`), Cut C 33 spot lines = 7.4% (`:36`); next is 8b `$VENUE`, a build. engine.301 F1 C113 read added under its section: `crimeWaveHoods` `[]`, 2 spikes carried (`:57`); the wave rung waits on the first organic wave. Source: `output/engine-sheet/2026-10-28-rollout-stale-check.json`.
 - 2026-10-25 (engine-sheet) — engine.301 F1 LIVE PROD @163 stage 27 (`1e6beff5`, with engine.312): builder "Ok clear to push".
 - 2026-10-25 (engine-sheet) — Crime ladder third rung ruled: back-to-back-Cycle rise in one hood (builder "(a)"); rides engine.301 F1.

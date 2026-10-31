@@ -1,6 +1,6 @@
 #!/bin/bash
 # engine.316 bench on the exact candidate: SANDBOX 1004 as engine.317 left it. Stage 34 = stage 33 + the five hoods' signed
-# lines. Proof: two fires PASS under the completion contract, and a drafted line lands only in its own hood. End: bench code
+# lines. Proof: three fires PASS under the completion contract, and a drafted line lands only in its own hood. End: bench code
 # = stage 33 (= PROD).
 #   usage: 2026-10-30-e316-bench.sh <commit>
 set -uo pipefail
@@ -21,7 +21,7 @@ echo "$AIM" | grep -q "^AIM = BENCH" || { echo "HALT aim not proven"; exit 5; }
 bash $O/2026-10-30-push-e316-bench.sh "$SRC" $O/stage34-e316.sha256 || exit 4; CODE=stage34; CUT=$(date +%s)
 left=$(( 300 - ($(date +%s) - CUT) )); [ $left -gt 0 ] && { echo "version cut; waiting $left s for /exec propagation"; sleep $left; }
 C0=$(count); echo "bench cycleCount $C0"
-for i in 1 2; do
+for i in 1 2 3; do
   C=$(count)
   node $O/2026-10-19-benchfire.js "$C" "e316-fire$i" > $SP/e316fire.$$ 2>&1; rc=$?
   v=$(grep -o '"verdict": "[^"]*"' $SP/e316fire.$$ | head -1); echo "fire C$((C + 1)) rc=$rc $v $(grep -o '"wallS": [0-9]*' $SP/e316fire.$$)"

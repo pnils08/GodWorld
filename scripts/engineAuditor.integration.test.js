@@ -346,6 +346,29 @@ function buildFixtureCtx() {
       result.auditOutput.citizenScoreboard && typeof result.auditOutput.citizenStates === 'object');
   }
 
+  // ─── engine.324: a failed sheet read is recorded, never saved as an empty world ───
+  console.log('\nTest: engine.324 read failures');
+  {
+    const ok = await runEngineAudit(Object.assign(buildFixtureCtx(), { readFailures: [] }));
+    assert('no failure: readFailures is [] and every snapshot key is present',
+      Array.isArray(ok.auditOutput.readFailures) && ok.auditOutput.readFailures.length === 0 &&
+      ['Initiative_Tracker', 'Neighborhood_Map', 'Civic_Office_Ledger', 'Crime_Metrics'].every(k => Array.isArray(ok.auditOutput.snapshots[k])));
+    const fx = buildFixtureCtx();
+    fx.snapshot.Initiative_Tracker = [];
+    fx.readFailures = [{ name: 'Initiative_Tracker', error: 'TEST-ONLY read timeout' }];
+    const r = await runEngineAudit(fx);
+    assert('a failed tab is left out of the saved snapshots', !('Initiative_Tracker' in r.auditOutput.snapshots) &&
+      Array.isArray(r.auditOutput.snapshots.Neighborhood_Map), JSON.stringify(Object.keys(r.auditOutput.snapshots)));
+    assert('the audit file records which read failed and why', r.auditOutput.readFailures.length === 1 &&
+      r.auditOutput.readFailures[0].name === 'Initiative_Tracker' && /timeout/.test(r.auditOutput.readFailures[0].error));
+    const lx = buildFixtureCtx();
+    lx.snapshot.Simulation_Ledger = [];
+    lx.readFailures = [{ name: 'Simulation_Ledger', error: 'TEST-ONLY quota' }];
+    const l = await runEngineAudit(lx);
+    assert('an unread ledger leaves no empty-world baseline (citizen maps null, scoreboard skipped)',
+      l.auditOutput.citizenStates === null && l.auditOutput.citizenIncomes === null && l.auditOutput.citizenScoreboard === null);
+  }
+
   console.log('\n' + '═'.repeat(60));
   console.log(`${passed} passed, ${failed} failed`);
   process.exit(failed === 0 ? 0 : 1);

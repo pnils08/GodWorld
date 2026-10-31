@@ -122,7 +122,8 @@ async function loadSnapshot() {
     console.error(`  ⚠ ${failures.length} of ${SHEETS_TO_READ.length} sheet read(s) FAILED — detectors consuming them run on empty data:`);
     for (const f of failures) console.error(`    - ${f.name}: ${f.error}`);
   }
-  return Object.fromEntries(results);
+  // engine.324: the failures travel with the snapshot so the audit file records them.
+  return { snapshot: Object.fromEntries(results), readFailures: failures };
 }
 
 function loadPreviousAudits(cycle, outputDir, count = 6) {
@@ -317,6 +318,12 @@ async function runEngineAudit(ctx) {
     detectorVersions.generateBaselineBriefs = 'ERROR';
   }
 
+  // engine.324 (codex engine.20d re-review 3): a tab whose read FAILED ran its
+  // detectors on [] above, but it is not saved as an empty snapshot — that read as
+  // an empty world to every later audit reader (next Cycle's movement compare, the
+  // initiative tracker rebuild). Its key is left out, and readFailures says why.
+  const readFailures = ctx.readFailures || [];
+  const failed = new Set(readFailures.map(f => f.name));
   const persistedSnapshots = {
     Initiative_Tracker: snapshot.Initiative_Tracker || [],
     Neighborhood_Map: snapshot.Neighborhood_Map || [],
@@ -326,10 +333,17 @@ async function runEngineAudit(ctx) {
     })),
     Crime_Metrics: snapshot.Crime_Metrics || [],
   };
-  const citizenIncomes = buildCitizenIncomes(snapshot.Simulation_Ledger || []);
-  const citizenStates = buildCitizenStates(snapshot.Simulation_Ledger || [], snapshot.Household_Ledger || []);
+  Object.keys(persistedSnapshots).forEach(k => { if (failed.has(k)) delete persistedSnapshots[k]; });
+  // The citizen maps are the next audit's baseline (citizenStates diff, income Δ):
+  // built from an unread ledger they would be an empty world, so they stay null.
+  const ledgerRead = !failed.has('Simulation_Ledger') && !failed.has('Household_Ledger');
+  const citizenIncomes = failed.has('Simulation_Ledger') ? null : buildCitizenIncomes(snapshot.Simulation_Ledger || []);
+  const citizenStates = ledgerRead ? buildCitizenStates(snapshot.Simulation_Ledger || [], snapshot.Household_Ledger || []) : null;
   let citizenScoreboard = null;
-  try {
+  if (!ledgerRead) {
+    console.error('  citizenScoreboard SKIPPED: the ledger read failed');
+    detectorVersions.citizenScoreboard = 'SKIPPED-READ-FAILED';
+  } else try {
     citizenScoreboard = buildCitizenScoreboard(cycle, snapshot.Simulation_Ledger || [], citizenStates, ctx.prior || []);
     console.log('Citizen scoreboard: ' + JSON.stringify(citizenScoreboard.counts));
   } catch (err) {
@@ -347,6 +361,8 @@ async function runEngineAudit(ctx) {
     measurementHistory: ctx.measurementHistory || [],
     // detectors that could not run their check this cycle say so here (blind ≠ clean)
     detectorNotes: ctx.detectorNotes || [],
+    // engine.324: the tabs that could not be read this Cycle (their snapshot keys are absent)
+    readFailures,
     snapshots: persistedSnapshots,
     citizenIncomes,
     // engine.286 R2-3 — the Cycle's outcomes by citizen + the state the next audit diffs against.
@@ -479,7 +495,7 @@ async function main() {
   if (!fs.existsSync(outputDir)) fs.mkdirSync(outputDir, { recursive: true });
 
   console.log('Reading sheets...');
-  const snapshot = await loadSnapshot();
+  const { snapshot, readFailures } = await loadSnapshot();
   const prior = loadPreviousAudits(cycle, outputDir);
 
   const fixturePrior = loadPriorFixture();
@@ -488,7 +504,7 @@ async function main() {
     prior.unshift(fixturePrior);
   }
 
-  const ctx = { cycle, snapshot, prior };
+  const ctx = { cycle, snapshot, prior, readFailures };
 
   const { auditOutput, anomaliesOutput, briefsOutput, patterns, anomalies, briefs } =
     await runEngineAudit(ctx);

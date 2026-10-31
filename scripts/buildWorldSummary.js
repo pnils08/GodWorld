@@ -1239,7 +1239,11 @@ function emitDeskSignal(cycle, data) {
   // anomaly, initiative and vote entries all tag their storyline from it.
   const snapIT = auditJson.snapshots && auditJson.snapshots.Initiative_Tracker;
   const initiatives = Array.isArray(snapIT) ? snapIT : [];
-  if (!initiatives.length) notes.push('no Initiative_Tracker snapshot in engine_audit — initiative/vote entries omitted');
+  // engine.324: say so when the tab's read failed, not just that it is empty
+  const itFail = (auditJson.readFailures || []).find(f => f && f.name === 'Initiative_Tracker');
+  if (!initiatives.length) notes.push(itFail
+    ? 'Initiative_Tracker read FAILED in engine_audit (' + itFail.error + ') — initiative/vote entries omitted'
+    : 'no Initiative_Tracker snapshot in engine_audit — initiative/vote entries omitted');
   // engine.270: the assignment's ref names the storyline it belongs to. The ref
   // string is the one field every downstream path carries intact.
   const stageTag = it => {

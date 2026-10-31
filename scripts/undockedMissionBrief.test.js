@@ -53,7 +53,9 @@ check('contract commands exact, proven arg form first', brief.includes('spacemol
 
 // research.31 (builder 2026-10-30, ruling C): the board's score is named — the
 // game's achievement points first, credits beside — and where to read it.
-check('board names achievement points as the score', /achievement points/i.test(B.SHOW_RULES) && /credits/i.test(B.SHOW_RULES));
+check('board names achievement points as the score', /achievements, each worth points/i.test(B.SHOW_RULES) && /credits/i.test(B.SHOW_RULES));
+// builder 2026-10-30: what a pilot does scores — progress toward an achievement pays its share
+check('the rule says progress scores, not only finishing', /every step toward an achievement scores its share/i.test(B.SHOW_RULES) && /your progress/i.test(B.SHOW_RULES));
 check('the score is readable from the console', brief.includes('spacemolt/get_achievements'));
 check('the window is the runner cap', B.WINDOW_MINUTES === 20 && brief.includes(String(B.WINDOW_MINUTES) + ' minutes'));
 

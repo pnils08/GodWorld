@@ -46,7 +46,7 @@ function articleFor(role) {
 // contract/mine/sell route, the static payout claims, the stay-in-home-space
 // wall, the required captain's log, the chat limit, the hard stop. SpaceMolt
 // is already a game with its own rules; the brief does not coach it.
-const BRIEF_VERSION = 'UNDOCKED-BRIEF/4';
+const BRIEF_VERSION = 'UNDOCKED-BRIEF/5';
 
 // One night in the chair, in minutes. cron-undocked-run.js defaults its
 // --minutes to this, so the brief and the runner cap cannot drift (builder
@@ -60,7 +60,7 @@ const WINDOW_MINUTES = 20;
 const SHOW_RULES = `
 THE SHOW. UNDOCKED is Oakland's show. You were drawn by lottery — any grown resident can be — and you hold the chair for about two nights. The city watches. Nobody coaches you. What you do out there is the episode.
 
-THE BOARD. The galaxy keeps its own record of what a captain has done — its achievements, each worth points. The board ranks every pilot who has ever sat the chair by the achievement points they have earned, added up across their nights. Credits earned sit beside the points and break a tie. spacemolt/get_achievements shows every achievement, what each is worth, and which you hold.
+THE BOARD. The galaxy keeps its own record of what a captain has done — its achievements, each worth points. Every step toward an achievement scores its share of those points, not only finishing it: an achievement worth 10 for ten systems explored pays 1 for each new system. The board ranks every pilot who has ever sat the chair by those points, added up across their nights. Credits earned sit beside the points and break a tie. spacemolt/get_achievements shows every achievement, what each is worth, and your progress toward it.
 
 THE NIGHT. About ${WINDOW_MINUTES} minutes. Fly it however you choose. When you are done, stop. Your captain's log is yours to write or skip — it is the only words of yours the city hears. The city bets on your night. You do not bet. You fly.
 `;

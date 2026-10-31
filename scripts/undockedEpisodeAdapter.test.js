@@ -234,6 +234,38 @@ check('rescore: a sheet-string value equal to the derived one is not rewritten',
   A.planPointsRescore({ 'undocked-pop99991': acct }, [night('2026-10-13T01:30:05Z', '5')]).nights[0].changed === false);
 check('rescore: a night lists which copies are stale', byStart['TEST-ONLY-2026-10-13T01:30:05Z.json'].stale.join() === 'archive');
 
+// builder 2026-10-30: what a pilot does scores — the night pays the share of each
+// achievement it moved, at the game's own points. Shapes are the live get_achievements read.
+const meters = (list) => A.accountFrom({ summary: { points: list.filter(a => a.earned).reduce((t, a) => t + a.points, 0) },
+  achievements: list.map(a => Object.assign({ name: a.id }, a, { earned_at: a.earned ? '2026-10-28T01:35:23Z' : undefined })) });
+const mBefore = meters([
+  { id: 'maiden_jump', points: 5, earned: true },
+  { id: 'wanderer', points: 10, earned: false, progress: { current: 2, target: 10 } },
+  { id: 'first_steps', points: 5, earned: false, progress: { current: 0, target: 1 } },
+  { id: 'prospector_i', points: 10, earned: false, progress: { current: 0, target: 10000 } },
+  { id: 'secret', points: 60, earned: false, hidden: true }]);
+const mAfter = meters([
+  { id: 'maiden_jump', points: 5, earned: true },
+  { id: 'wanderer', points: 10, earned: false, progress: { current: 5, target: 10 } },
+  { id: 'first_steps', points: 5, earned: true },
+  { id: 'prospector_i', points: 10, earned: false, progress: { current: 1000, target: 10000 } },
+  { id: 'secret', points: 60, earned: false, hidden: true }]);
+const prog = A.progressPoints(mBefore, mAfter);
+check('progress: 3 new systems pay 3 of Wanderer\'s 10, a first dock its 5, 1,000 ore 1 of Prospector\'s 10',
+  prog.value === 9 && prog.items.map(i => i.id + ':' + i.gained).join() === 'first_steps:5,wanderer:3,prospector_i:1', JSON.stringify(prog));
+check('progress: a mark already held pays nothing again', !prog.items.some(i => i.id === 'maiden_jump'));
+check('progress: no before read -> null (the unlock rule scores)', A.progressPoints(null, mAfter) === null);
+check('progress: a night that moves nothing is a measured 0', A.progressPoints(mAfter, mAfter).value === 0);
+const epP = { show: 'UNDOCKED', episode_id: 'TEST-ONLY', popid: 'POP-99991', session: 'undocked-pop99991',
+  startedAt: '2026-10-31T01:30:00Z', endedAt: '2026-10-31T01:50:00Z', runner: {} };
+const scoredP = A.assemble(epP, { mining: [], trading: [], mission: [], combat: [], navigation: [], session: [] }, [], mAfter,
+  { takenAt: '2026-10-31T01:29:30Z', account: mBefore });
+check('assemble: a before read makes the night progress-scored', scoredP.facts.points_delta.value === 9 && scoredP.facts.points_delta.basis === 'progress');
+const keptP = A.planPointsRescore({ 'undocked-pop99991': mAfter }, [{ file: 'TEST-ONLY-p.json', stagedPath: '/dev/null', staged: {
+  session: 'undocked-pop99991', popid: 'POP-99991', window: { startedAt: epP.startedAt, endedAt: epP.endedAt },
+  facts: { points_delta: scoredP.facts.points_delta } } }]);
+check('rescore: a progress-scored night keeps its measure', keptP.nights[0].fact.value === 9 && keptP.nights[0].changed === false);
+
 const sys = A.deriveSystems([
   { created_at: '2026-10-16T01:35:00Z', category: 'trading', data: { base_id: 'x' } },
   { created_at: '2026-10-16T01:39:33Z', category: 'navigation', data: { from_system: 'sol', to_system: 'sirius', to_system_name: 'Sirius' } },

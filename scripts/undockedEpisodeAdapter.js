@@ -356,7 +356,7 @@ function slimEntry(e) {
   };
 }
 
-function assemble(episode, byCategory, captains, account) {
+function assemble(episode, byCategory, captains, account, before) {
   const all = [];
   CATEGORIES.forEach(function (c) {
     (byCategory[c] || []).forEach(function (e) { all.push(e); });
@@ -395,6 +395,9 @@ function assemble(episode, byCategory, captains, account) {
       })(),
       // the night being adapted is the pilot's latest, so no `until`
       points_delta: (function () {
+        // The progress rule when tonight has a before-flight read of the meters.
+        const pp = before && progressPoints(before.account, account);
+        if (pp) return fact(pp.value, { source: 'get_achievements', basis: 'progress', items: pp.items, beforeTakenAt: before.takenAt });
         let until = null;
         try { until = nightUntil(episode.endedAt, null); } catch (_) { /* unreadable end -> derivePoints says unknown */ }
         return derivePoints(account || null, episode.startedAt, until || 'invalid');
@@ -539,9 +542,32 @@ async function adaptEpisode(jsonPath, holder) {
   let account = null;
   try { account = await readAccount(sid); }
   catch (e) { console.error('[adapter] get_achievements failed — points unknown tonight, the daily settle retries: ' + (e.message || e)); }
-  const staged = assemble(episode, byCategory, captains, account);
+  const staged = assemble(episode, byCategory, captains, account, beforeSnapshot(episode));
   assertSplit(staged);
   return staged;
+}
+
+// The before-flight read of the pilot's meters (cron-undocked-run takes it just
+// before launch). Used only when it was taken before this flight started and no
+// more than 30 min earlier — anything else is not this night's starting line.
+const PROGRESS_DIR = path.join(ROOT, 'output', 'spacemolt-show', 'progress');
+function beforeSnapshot(episode) {
+  const p = path.join(PROGRESS_DIR, episode.session + '.json');
+  if (!fs.existsSync(p)) return null;
+  let snap = null;
+  try { snap = JSON.parse(fs.readFileSync(p, 'utf8')); } catch (_) { return null; }
+  const t = Date.parse(snap && snap.takenAt), s0 = Date.parse(episode.startedAt);
+  if (!(t <= s0 && s0 - t <= 30 * 60000) || !snap.account) return null;
+  return snap;
+}
+
+async function snapshotProgress(session) {
+  const account = await fetchAchievements(session);
+  if (account.invalid) throw new Error('account record unusable: ' + account.invalid.join('; '));
+  fs.mkdirSync(PROGRESS_DIR, { recursive: true });
+  const out = { session: session, takenAt: new Date().toISOString(), account: account };
+  fs.writeFileSync(path.join(PROGRESS_DIR, session + '.json'), JSON.stringify(out, null, 2) + '\n');
+  return out;
 }
 
 function writeStaged(staged) {
@@ -771,7 +797,40 @@ function accountFrom(sc) {
     const sum = earned.reduce(function (s, a) { return s + a.points; }, 0);
     if (sum !== total) problems.push('earned unlocks add to ' + sum + ', summary says ' + total);
   }
-  return { total: total, earned: earned, invalid: problems.length ? problems : null };
+  // Progress meters (builder 2026-10-30: what a pilot does should score). Every
+  // shown achievement's share done, 0..1: earned = 1, else progress.current /
+  // progress.target. A hidden unearned one shows no meter and counts only on unlock.
+  const progress = {};
+  (sc.achievements || []).forEach(function (a) {
+    const pts = (a.points === '' || a.points == null) ? null : num(a.points);
+    if (!a.id || pts == null) return;
+    let frac = null;
+    if (a.earned) frac = 1;
+    else if (a.progress && num(a.progress.target) > 0 && num(a.progress.current) != null) {
+      frac = Math.max(0, Math.min(1, num(a.progress.current) / num(a.progress.target)));
+    } else if (!a.hidden) frac = 0;
+    if (frac != null) progress[a.id] = { name: a.name, points: pts, frac: frac };
+  });
+  return { total: total, earned: earned, progress: progress, invalid: problems.length ? problems : null };
+}
+
+// The night's score from the progress meters (builder 2026-10-30): each
+// achievement pays its own points times the share of it the night completed —
+// Wanderer, 10 points for 10 systems, pays 1 per new system; finishing a mark
+// from nothing pays its full points. Rates are the game's, nothing authored.
+// null when either read is missing or unusable (then the unlock rule scores).
+function progressPoints(before, after) {
+  if (!before || !after || before.invalid || after.invalid || !before.progress || !after.progress) return null;
+  let total = 0;
+  const items = [];
+  Object.keys(after.progress).forEach(function (id) {
+    const a = after.progress[id], b = before.progress[id];
+    if (!b) return;
+    const gained = a.points * (a.frac - b.frac);
+    if (gained > 0.0001) { total += gained; items.push({ id: id, name: a.name, gained: Math.round(gained * 100) / 100 }); }
+  });
+  items.sort(function (x, y) { return y.gained - x.gained; });
+  return { value: Math.round(total * 100) / 100, items: items };
 }
 
 async function fetchAchievements(session) {
@@ -851,7 +910,10 @@ function planPointsRescore(accounts, nightsIn) {
       if (!inside) unplaced.push({ session: session, name: a.name, points: a.points, at: a.at });
     });
     list.forEach(function (n, i) {
-      const f = derivePoints(acct, n.staged.window.startedAt, spans[i].until || 'invalid');
+      // A night scored from its own before/after meter reads keeps that measure; the
+      // unlock rule would re-score it differently (and its window still holds its unlocks).
+      const kept = n.staged.facts && n.staged.facts.points_delta;
+      const f = (kept && kept.basis === 'progress') ? kept : derivePoints(acct, n.staged.window.startedAt, spans[i].until || 'invalid');
       const before = n.staged.facts && n.staged.facts.points_delta ? n.staged.facts.points_delta.value : undefined;
       const ik = intake[n.file] || null;
       const cycle = ik ? ik.row.Cycle : null;
@@ -1014,7 +1076,7 @@ module.exports = {
   V, CATEGORIES,
   loadEpisode, popidFromSession, inWindow, filterWindow,
   deriveCredits, deriveSystems, deriveCombat, deriveCargo, deriveMishaps, derivePoints,
-  accountFrom, planPointsRescore,
+  accountFrom, progressPoints, planPointsRescore,
   assemble, assertSplit, slimEntry,
   creditDeltaForEntry, entriesOf, planRescore, applyRescore,
 };
@@ -1030,6 +1092,15 @@ if (require.main === module) {
     else if (argv[i] === '--all-three') paths = paths.concat(threeEpisodePaths());
     else if (argv[i] === '--rescore-archive') rescore = true;
     else if (argv[i] === '--rescore-points') rescorePoints = true;
+    else if (argv[i] === '--snapshot-progress') {
+      const session = argv[++i];
+      snapshotProgress(session).then(function (o) {
+        const shown = Object.keys(o.account.progress).length;
+        console.log('[progress] ' + session + ' meters read before the flight (' + shown + ' achievements, ' + o.account.total + ' pts held) at ' + o.takenAt);
+        process.exit(0);
+      }).catch(function (e) { console.error('[progress] ' + session + ': ' + (e.message || e)); process.exit(1); });
+      return;
+    }
     else if (argv[i] === '--recent') {
       // codex research.31 F8: a bad bound must not silently widen to every pilot
       recentDays = Number(argv[++i]);

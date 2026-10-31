@@ -207,6 +207,8 @@ function ensureBrief(pilot) {
   return p;
 }
 
+const ARRIVAL_WAIT_S = 180;
+
 function resolvePilot(roster, cycle) {
   const first = pickPilot(roster.cast, cycle);
   const candidates = [first].concat(roster.alternates || []);
@@ -355,6 +357,15 @@ async function main() {
   log('pilot ' + pilot.name + ' (' + pilot.popid + ')' +
     (pilot.slot ? ', slot ' + pilot.slot : ''));
 
+  // 2c. the pilot's progress meters, read just before launch (builder 2026-10-30:
+  // what a pilot does should score). The adapter reads them again after the
+  // flight; the night scores what it moved. A failed read never blocks the
+  // flight — the night then scores on unlocks only.
+  try {
+    execFileSync('node', [path.join(ROOT, 'scripts', 'undockedEpisodeAdapter.js'),
+      '--snapshot-progress', session], { cwd: ROOT, stdio: 'inherit', timeout: 120000 });
+  } catch (e) { log('progress read before the flight failed (scores on unlocks tonight): ' + (e && e.message || e)); }
+
   // 3. flight — the runner does its own preflight (creds, mission, key) and
   // exits non-zero on any miss; that propagates as this run's failure.
   const flightStart = Date.now();
@@ -367,7 +378,11 @@ async function main() {
   if (!sidecar) throw new Error('flight produced no episode sidecar for ' + session);
   log('flight done: ' + path.relative(ROOT, sidecar));
 
-  // 4. adapter — deterministic fact extraction, writes staged/
+  // 4. adapter — deterministic fact extraction, writes staged/. A jump lands ~2-3
+  // min after it is logged (latest arrival unlock seen: 2.9 min after the window),
+  // so the after-read waits ARRIVAL_WAIT_S first.
+  log('waiting ' + ARRIVAL_WAIT_S + ' s for arrival unlocks before reading the meters');
+  execFileSync('sleep', [String(ARRIVAL_WAIT_S)]);
   execFileSync('node', [path.join(ROOT, 'scripts', 'undockedEpisodeAdapter.js'),
     '--episode', sidecar].concat(pilot.name ? ['--holder', pilot.name] : []), { cwd: ROOT, stdio: 'inherit', timeout: 300000 });
 

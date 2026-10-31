@@ -973,6 +973,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S624 Archive Pass (2026-10-30, engine-sheet) — post-S623 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 infrastructure.*.
+
+- **infrastructure.13** [research-build] — Stale test fixed: the nightly row snippet travels whole (no cap since ebcf159d); test and plan spec follow. wakePerception 201/0 **State at archive:** done-pending-archive. Pointer: `lib/wakePerception.test.js:454`
+
+This pass: 1 rows — infrastructure.13. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S624 Archive Pass (2026-10-30, research-build) — post-S623 closures sweep
 
 8 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.* + 2 governance.* + 1 canon.* + 4 pipeline.*.

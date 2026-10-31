@@ -973,6 +973,21 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S624 Archive Pass (2026-10-30, research-build) — post-S623 closures sweep
+
+8 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.* + 2 governance.* + 1 canon.* + 4 pipeline.*.
+
+- **engine.324** [engine-sheet] — engineAuditor: a failed tab read is recorded (readFailures), its snapshot key left out, citizen baselines null — never saved as an empty world **State at archive:** done-pending-archive. Pointer: [[../archive/for-claude-review/2026-10-29-codex-engine20d-rereview-3]] §Override and remaining boundary
+- **governance.54** [engine-sheet] — Codex round cap in CLAUDE.md §Review item 4: one review + one re-review, then the seat decides (builder 2026-10-29). Landed 2026-10-30 **State at archive:** done-pending-archive. Pointer: [[../../../.claude/projects/-root-GodWorld/memory/feedback_codex-approves-code-edits]]
+- **governance.55** [engine-sheet] — Each TERMINAL.md names its codex window: research-build → codex, engine-sheet → codex-es; CLAUDE.md §Review points to it. Landed 2026-10-30 **State at archive:** done-pending-archive. Pointer: [[../../../.claude/projects/-root-GodWorld/memory/feedback_dont-message-an-active-lane]]
+- **canon.5** [engine-sheet] — Renames LIVE 10-12 (BIZ-00016, BIZ-00035). POP-00317 RoleType → Oakland City Schools Elementary Teacher (builder 10-30); INSTITUTIONS OCCD → BIZ-00035 **State at archive:** done-pending-archive. Pointer: [[../canon/INSTITUTIONS]] §Education
+- **pipeline.94** [research-build] — A citizen woken twice at one daypart in one Cycle writes the same page doc (customId has no date): read Supermemory's duplicate rule, then key by date **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-29-owed-responses]] §Build, round 5 fold
+- **pipeline.97** [research-build] — Debate pages never reach the newsroom; Ines and Tamsin read only self-started pages (builder 10-30: all of it to media). Admit debates, open both **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-03-citizen-pages-drive-canon]] §6
+- **pipeline.96** [research-build] — Interview, work-shift and exchange pages merge per citizen per Cycle; later answers never reach the index (builder 10-30). Key per event **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-29-owed-responses]] §pipeline.96
+- **pipeline.95** [research-build] — UNDOCKED pilots get a sure wake each Cycle carrying their show record; the flight saves to their page (builder 10-30: own 3, fill in). LIVE 10-30 18:41 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-16-undocked-crossover-the-city-knows-its-pilots]] §6
+
+This pass: 8 rows — engine.324 + governance.54 + governance.55 + canon.5 + pipeline.94 + pipeline.97 + pipeline.96 + pipeline.95. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S622 Archive Pass (2026-10-30, research-build) — post-S621 closures sweep
 
 1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.

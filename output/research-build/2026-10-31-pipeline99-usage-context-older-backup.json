@@ -1,0 +1,2497 @@
+[
+ {
+  "row": 569,
+  "before": "civic_c103_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c103_freelance-firebrand"
+ },
+ {
+  "row": 570,
+  "before": "sports_c103_anthony-raines_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c103_anthony-raines"
+ },
+ {
+  "row": 571,
+  "before": "civic_c103_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c103_luis-navarro"
+ },
+ {
+  "row": 572,
+  "before": "civic_c103_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c103_trevor-shimizu"
+ },
+ {
+  "row": 573,
+  "before": "sports_c103_simon-leary_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c103_simon-leary"
+ },
+ {
+  "row": 574,
+  "before": "sports_c103_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c103_tanya-cruz"
+ },
+ {
+  "row": 575,
+  "before": "sports_c103_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c103_p-slayer"
+ },
+ {
+  "row": 576,
+  "before": "culture_c103_mason-ortega_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c103_mason-ortega"
+ },
+ {
+  "row": 577,
+  "before": "business_c103_business-desk_packet-v2_deepseek-deepseek-chat",
+  "after": "business_c103_business-desk"
+ },
+ {
+  "row": 578,
+  "before": "civic_c104_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c104_noah-tan"
+ },
+ {
+  "row": 579,
+  "before": "sports_c104_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c104_tanya-cruz"
+ },
+ {
+  "row": 580,
+  "before": "sports_c104_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c104_p-slayer"
+ },
+ {
+  "row": 581,
+  "before": "civic_c104_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c104_noah-tan"
+ },
+ {
+  "row": 582,
+  "before": "civic_c104_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c104_noah-tan"
+ },
+ {
+  "row": 583,
+  "before": "sports_c104_anthony-raines_packet-v2_deepseek-deepseek-chat-almanzar-debut",
+  "after": "sports_c104_anthony-raines"
+ },
+ {
+  "row": 584,
+  "before": "sports_c104_anthony-raines_packet-v2_deepseek-deepseek-chat-almanzar-debut",
+  "after": "sports_c104_anthony-raines"
+ },
+ {
+  "row": 585,
+  "before": "business_c104_business-desk_packet-v2_deepseek-deepseek-chat",
+  "after": "business_c104_business-desk"
+ },
+ {
+  "row": 586,
+  "before": "culture_c104_sharon-okafor_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c104_sharon-okafor"
+ },
+ {
+  "row": 587,
+  "before": "undocked_c104_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "undocked_c104_nia-rook"
+ },
+ {
+  "row": 588,
+  "before": "culture_c104_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "culture_c104_kai-marston"
+ },
+ {
+  "row": 589,
+  "before": "civic_c105_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_noah-tan"
+ },
+ {
+  "row": 590,
+  "before": "civic_c105_rachel-torres_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_rachel-torres"
+ },
+ {
+  "row": 591,
+  "before": "sports_c105_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c105_tanya-cruz"
+ },
+ {
+  "row": 592,
+  "before": "culture_c105_maria-keen_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c105_maria-keen"
+ },
+ {
+  "row": 593,
+  "before": "business_c105_business-desk_packet-v2_deepseek-deepseek-chat",
+  "after": "business_c105_business-desk"
+ },
+ {
+  "row": 594,
+  "before": "civic_c105_angela-reyes_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_angela-reyes"
+ },
+ {
+  "row": 595,
+  "before": "sports_c105_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c105_p-slayer"
+ },
+ {
+  "row": 596,
+  "before": "undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "undocked_c105_nia-rook"
+ },
+ {
+  "row": 597,
+  "before": "civic_c105_lila-mezran_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_lila-mezran"
+ },
+ {
+  "row": 598,
+  "before": "civic_c105_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c105_freelance-firebrand"
+ },
+ {
+  "row": 599,
+  "before": "sports_c105_simon-leary_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c105_simon-leary"
+ },
+ {
+  "row": 600,
+  "before": "sports_c105_anthony-raines_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c105_anthony-raines"
+ },
+ {
+  "row": 601,
+  "before": "culture_c105_sharon-okafor_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c105_sharon-okafor"
+ },
+ {
+  "row": 602,
+  "before": "civic_c105_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_carmen-delaine"
+ },
+ {
+  "row": 603,
+  "before": "civic_c105_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c105_luis-navarro"
+ },
+ {
+  "row": 604,
+  "before": "sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c105_hal-richmond"
+ },
+ {
+  "row": 605,
+  "before": "culture_c105_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "culture_c105_kai-marston"
+ },
+ {
+  "row": 606,
+  "before": "culture_c105_elliot-graye_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c105_elliot-graye"
+ },
+ {
+  "row": 607,
+  "before": "business_c105_business-desk_packet-v2_deepseek-deepseek-chat",
+  "after": "business_c105_business-desk"
+ },
+ {
+  "row": 608,
+  "before": "civic_c105_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_carmen-delaine"
+ },
+ {
+  "row": 609,
+  "before": "civic_c105_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_carmen-delaine"
+ },
+ {
+  "row": 610,
+  "before": "civic_c105_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_carmen-delaine"
+ },
+ {
+  "row": 611,
+  "before": "civic_c105_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_carmen-delaine"
+ },
+ {
+  "row": 612,
+  "before": "civic_c105_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c105_freelance-firebrand"
+ },
+ {
+  "row": 613,
+  "before": "civic_c105_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c105_freelance-firebrand"
+ },
+ {
+  "row": 614,
+  "before": "civic_c105_lila-mezran_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_lila-mezran"
+ },
+ {
+  "row": 615,
+  "before": "civic_c105_lila-mezran_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_lila-mezran"
+ },
+ {
+  "row": 616,
+  "before": "civic_c105_lila-mezran_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_lila-mezran"
+ },
+ {
+  "row": 617,
+  "before": "civic_c105_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c105_luis-navarro"
+ },
+ {
+  "row": 618,
+  "before": "civic_c105_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c105_luis-navarro"
+ },
+ {
+  "row": 619,
+  "before": "civic_c105_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_noah-tan"
+ },
+ {
+  "row": 620,
+  "before": "civic_c105_rachel-torres_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_rachel-torres"
+ },
+ {
+  "row": 621,
+  "before": "civic_c105_rachel-torres_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_rachel-torres"
+ },
+ {
+  "row": 622,
+  "before": "civic_c105_rachel-torres_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_rachel-torres"
+ },
+ {
+  "row": 623,
+  "before": "civic_c105_rachel-torres_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_rachel-torres"
+ },
+ {
+  "row": 624,
+  "before": "culture_c105_elliot-graye_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c105_elliot-graye"
+ },
+ {
+  "row": 625,
+  "before": "culture_c105_elliot-graye_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c105_elliot-graye"
+ },
+ {
+  "row": 626,
+  "before": "culture_c105_elliot-graye_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c105_elliot-graye"
+ },
+ {
+  "row": 627,
+  "before": "culture_c105_elliot-graye_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c105_elliot-graye"
+ },
+ {
+  "row": 628,
+  "before": "culture_c105_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "culture_c105_kai-marston"
+ },
+ {
+  "row": 629,
+  "before": "culture_c105_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "culture_c105_kai-marston"
+ },
+ {
+  "row": 630,
+  "before": "culture_c105_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "culture_c105_kai-marston"
+ },
+ {
+  "row": 631,
+  "before": "culture_c105_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "culture_c105_kai-marston"
+ },
+ {
+  "row": 632,
+  "before": "culture_c105_maria-keen_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c105_maria-keen"
+ },
+ {
+  "row": 633,
+  "before": "culture_c105_maria-keen_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c105_maria-keen"
+ },
+ {
+  "row": 634,
+  "before": "culture_c105_sharon-okafor_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c105_sharon-okafor"
+ },
+ {
+  "row": 635,
+  "before": "culture_c105_sharon-okafor_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c105_sharon-okafor"
+ },
+ {
+  "row": 636,
+  "before": "culture_c105_sharon-okafor_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c105_sharon-okafor"
+ },
+ {
+  "row": 637,
+  "before": "culture_c105_sharon-okafor_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c105_sharon-okafor"
+ },
+ {
+  "row": 638,
+  "before": "sports_c105_anthony-raines_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c105_anthony-raines"
+ },
+ {
+  "row": 639,
+  "before": "sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c105_hal-richmond"
+ },
+ {
+  "row": 640,
+  "before": "sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c105_hal-richmond"
+ },
+ {
+  "row": 641,
+  "before": "sports_c105_hal-richmond_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c105_hal-richmond"
+ },
+ {
+  "row": 642,
+  "before": "sports_c105_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c105_p-slayer"
+ },
+ {
+  "row": 643,
+  "before": "sports_c105_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c105_p-slayer"
+ },
+ {
+  "row": 644,
+  "before": "sports_c105_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c105_p-slayer"
+ },
+ {
+  "row": 645,
+  "before": "sports_c105_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c105_tanya-cruz"
+ },
+ {
+  "row": 646,
+  "before": "sports_c105_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c105_tanya-cruz"
+ },
+ {
+  "row": 647,
+  "before": "undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "undocked_c105_nia-rook"
+ },
+ {
+  "row": 648,
+  "before": "undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "undocked_c105_nia-rook"
+ },
+ {
+  "row": 649,
+  "before": "undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "undocked_c105_nia-rook"
+ },
+ {
+  "row": 650,
+  "before": "undocked_c105_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "undocked_c105_nia-rook"
+ },
+ {
+  "row": 651,
+  "before": "civic_c105_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c105_trevor-shimizu"
+ },
+ {
+  "row": 652,
+  "before": "culture_c105_mason-ortega_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c105_mason-ortega"
+ },
+ {
+  "row": 653,
+  "before": "civic_c106_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c106_carmen-delaine"
+ },
+ {
+  "row": 654,
+  "before": "business_c106_business-desk_packet-v2_deepseek-deepseek-chat",
+  "after": "business_c106_business-desk"
+ },
+ {
+  "row": 655,
+  "before": "civic_c106_lila-mezran_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c106_lila-mezran"
+ },
+ {
+  "row": 656,
+  "before": "civic_c106_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c106_trevor-shimizu"
+ },
+ {
+  "row": 657,
+  "before": "civic_c106_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c106_luis-navarro"
+ },
+ {
+  "row": 658,
+  "before": "civic_c106_angela-reyes_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c106_angela-reyes"
+ },
+ {
+  "row": 659,
+  "before": "undocked_c106_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "undocked_c106_nia-rook"
+ },
+ {
+  "row": 660,
+  "before": "civic_c106_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c106_freelance-firebrand"
+ },
+ {
+  "row": 661,
+  "before": "civic_c106_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c106_noah-tan"
+ },
+ {
+  "row": 662,
+  "before": "sports_c106_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c106_p-slayer"
+ },
+ {
+  "row": 663,
+  "before": "culture_c106_elliot-graye_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c106_elliot-graye"
+ },
+ {
+  "row": 664,
+  "before": "sports_c106_simon-leary_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c106_simon-leary"
+ },
+ {
+  "row": 665,
+  "before": "sports_c106_hal-richmond_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c106_hal-richmond"
+ },
+ {
+  "row": 666,
+  "before": "sports_c106_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c106_talia-finch"
+ },
+ {
+  "row": 667,
+  "before": "culture_c106_mason-ortega_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c106_mason-ortega"
+ },
+ {
+  "row": 668,
+  "before": "culture_c106_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "culture_c106_kai-marston"
+ },
+ {
+  "row": 669,
+  "before": "culture_c106_sharon-okafor_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c106_sharon-okafor"
+ },
+ {
+  "row": 670,
+  "before": "culture_c106_maria-keen_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c106_maria-keen"
+ },
+ {
+  "row": 671,
+  "before": "sports_c106_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c106_selena-grant"
+ },
+ {
+  "row": 672,
+  "before": "business_c106_business-desk_packet-v2_deepseek-deepseek-chat",
+  "after": "business_c106_business-desk"
+ },
+ {
+  "row": 673,
+  "before": "civic_c106_angela-reyes_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c106_angela-reyes"
+ },
+ {
+  "row": 674,
+  "before": "civic_c106_angela-reyes_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c106_angela-reyes"
+ },
+ {
+  "row": 675,
+  "before": "civic_c106_angela-reyes_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c106_angela-reyes"
+ },
+ {
+  "row": 676,
+  "before": "civic_c106_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c106_carmen-delaine"
+ },
+ {
+  "row": 677,
+  "before": "civic_c106_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c106_carmen-delaine"
+ },
+ {
+  "row": 678,
+  "before": "civic_c106_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c106_carmen-delaine"
+ },
+ {
+  "row": 679,
+  "before": "civic_c106_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c106_freelance-firebrand"
+ },
+ {
+  "row": 680,
+  "before": "civic_c106_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c106_freelance-firebrand"
+ },
+ {
+  "row": 681,
+  "before": "civic_c106_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c106_freelance-firebrand"
+ },
+ {
+  "row": 682,
+  "before": "civic_c106_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c106_luis-navarro"
+ },
+ {
+  "row": 683,
+  "before": "civic_c106_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c106_luis-navarro"
+ },
+ {
+  "row": 684,
+  "before": "civic_c106_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c106_noah-tan"
+ },
+ {
+  "row": 685,
+  "before": "civic_c106_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c106_noah-tan"
+ },
+ {
+  "row": 686,
+  "before": "civic_c106_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c106_noah-tan"
+ },
+ {
+  "row": 687,
+  "before": "civic_c106_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c106_noah-tan"
+ },
+ {
+  "row": 688,
+  "before": "culture_c106_elliot-graye_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c106_elliot-graye"
+ },
+ {
+  "row": 689,
+  "before": "culture_c106_elliot-graye_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c106_elliot-graye"
+ },
+ {
+  "row": 690,
+  "before": "culture_c106_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "culture_c106_kai-marston"
+ },
+ {
+  "row": 691,
+  "before": "culture_c106_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "culture_c106_kai-marston"
+ },
+ {
+  "row": 692,
+  "before": "culture_c106_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "culture_c106_kai-marston"
+ },
+ {
+  "row": 693,
+  "before": "culture_c106_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "culture_c106_kai-marston"
+ },
+ {
+  "row": 694,
+  "before": "culture_c106_maria-keen_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c106_maria-keen"
+ },
+ {
+  "row": 695,
+  "before": "culture_c106_maria-keen_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c106_maria-keen"
+ },
+ {
+  "row": 696,
+  "before": "culture_c106_mason-ortega_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c106_mason-ortega"
+ },
+ {
+  "row": 697,
+  "before": "culture_c106_mason-ortega_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c106_mason-ortega"
+ },
+ {
+  "row": 698,
+  "before": "culture_c106_mason-ortega_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c106_mason-ortega"
+ },
+ {
+  "row": 699,
+  "before": "culture_c106_sharon-okafor_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c106_sharon-okafor"
+ },
+ {
+  "row": 700,
+  "before": "culture_c106_sharon-okafor_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c106_sharon-okafor"
+ },
+ {
+  "row": 701,
+  "before": "culture_c106_sharon-okafor_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c106_sharon-okafor"
+ },
+ {
+  "row": 702,
+  "before": "sports_c106_hal-richmond_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c106_hal-richmond"
+ },
+ {
+  "row": 703,
+  "before": "sports_c106_hal-richmond_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c106_hal-richmond"
+ },
+ {
+  "row": 704,
+  "before": "sports_c106_hal-richmond_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c106_hal-richmond"
+ },
+ {
+  "row": 705,
+  "before": "sports_c106_hal-richmond_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c106_hal-richmond"
+ },
+ {
+  "row": 706,
+  "before": "sports_c106_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c106_p-slayer"
+ },
+ {
+  "row": 707,
+  "before": "sports_c106_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c106_p-slayer"
+ },
+ {
+  "row": 708,
+  "before": "sports_c106_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c106_p-slayer"
+ },
+ {
+  "row": 709,
+  "before": "sports_c106_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c106_p-slayer"
+ },
+ {
+  "row": 710,
+  "before": "sports_c106_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c106_selena-grant"
+ },
+ {
+  "row": 711,
+  "before": "sports_c106_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c106_selena-grant"
+ },
+ {
+  "row": 712,
+  "before": "sports_c106_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c106_selena-grant"
+ },
+ {
+  "row": 713,
+  "before": "sports_c106_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c106_selena-grant"
+ },
+ {
+  "row": 714,
+  "before": "sports_c106_simon-leary_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c106_simon-leary"
+ },
+ {
+  "row": 715,
+  "before": "sports_c106_simon-leary_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c106_simon-leary"
+ },
+ {
+  "row": 716,
+  "before": "sports_c106_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c106_talia-finch"
+ },
+ {
+  "row": 717,
+  "before": "sports_c106_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c106_talia-finch"
+ },
+ {
+  "row": 718,
+  "before": "sports_c106_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c106_talia-finch"
+ },
+ {
+  "row": 719,
+  "before": "sports_c106_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c106_talia-finch"
+ },
+ {
+  "row": 720,
+  "before": "business_c107_business-desk_packet-v2_deepseek-deepseek-chat",
+  "after": "business_c107_business-desk"
+ },
+ {
+  "row": 721,
+  "before": "civic_c107_lila-mezran_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_lila-mezran"
+ },
+ {
+  "row": 722,
+  "before": "civic_c107_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_trevor-shimizu"
+ },
+ {
+  "row": 723,
+  "before": "civic_c107_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c107_luis-navarro"
+ },
+ {
+  "row": 724,
+  "before": "civic_c107_rachel-torres_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_rachel-torres"
+ },
+ {
+  "row": 725,
+  "before": "civic_c107_angela-reyes_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_angela-reyes"
+ },
+ {
+  "row": 726,
+  "before": "sports_c107_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c107_selena-grant"
+ },
+ {
+  "row": 727,
+  "before": "sports_c107_anthony-raines_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c107_anthony-raines"
+ },
+ {
+  "row": 728,
+  "before": "civic_c107_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_noah-tan"
+ },
+ {
+  "row": 729,
+  "before": "culture_c107_elliot-graye_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c107_elliot-graye"
+ },
+ {
+  "row": 730,
+  "before": "sports_c107_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c107_talia-finch"
+ },
+ {
+  "row": 731,
+  "before": "culture_c107_mason-ortega_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c107_mason-ortega"
+ },
+ {
+  "row": 732,
+  "before": "undocked_c107_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "undocked_c107_nia-rook"
+ },
+ {
+  "row": 733,
+  "before": "civic_c107_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_carmen-delaine"
+ },
+ {
+  "row": 734,
+  "before": "business_c107_business-desk_packet-v2_deepseek-deepseek-chat",
+  "after": "business_c107_business-desk"
+ },
+ {
+  "row": 735,
+  "before": "business_c107_business-desk_packet-v2_deepseek-deepseek-chat",
+  "after": "business_c107_business-desk"
+ },
+ {
+  "row": 736,
+  "before": "business_c107_business-desk_packet-v2_deepseek-deepseek-chat",
+  "after": "business_c107_business-desk"
+ },
+ {
+  "row": 737,
+  "before": "business_c107_business-desk_packet-v2_deepseek-deepseek-chat",
+  "after": "business_c107_business-desk"
+ },
+ {
+  "row": 738,
+  "before": "civic_c107_angela-reyes_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_angela-reyes"
+ },
+ {
+  "row": 739,
+  "before": "civic_c107_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_carmen-delaine"
+ },
+ {
+  "row": 740,
+  "before": "civic_c107_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_carmen-delaine"
+ },
+ {
+  "row": 741,
+  "before": "civic_c107_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_carmen-delaine"
+ },
+ {
+  "row": 742,
+  "before": "civic_c107_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_carmen-delaine"
+ },
+ {
+  "row": 743,
+  "before": "civic_c107_lila-mezran_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_lila-mezran"
+ },
+ {
+  "row": 744,
+  "before": "civic_c107_lila-mezran_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_lila-mezran"
+ },
+ {
+  "row": 745,
+  "before": "civic_c107_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c107_luis-navarro"
+ },
+ {
+  "row": 746,
+  "before": "civic_c107_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_noah-tan"
+ },
+ {
+  "row": 747,
+  "before": "civic_c107_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_noah-tan"
+ },
+ {
+  "row": 748,
+  "before": "civic_c107_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_noah-tan"
+ },
+ {
+  "row": 749,
+  "before": "civic_c107_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_trevor-shimizu"
+ },
+ {
+  "row": 750,
+  "before": "civic_c107_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_trevor-shimizu"
+ },
+ {
+  "row": 751,
+  "before": "civic_c107_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_trevor-shimizu"
+ },
+ {
+  "row": 752,
+  "before": "civic_c107_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c107_trevor-shimizu"
+ },
+ {
+  "row": 753,
+  "before": "culture_c107_elliot-graye_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c107_elliot-graye"
+ },
+ {
+  "row": 754,
+  "before": "culture_c107_elliot-graye_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c107_elliot-graye"
+ },
+ {
+  "row": 755,
+  "before": "culture_c107_elliot-graye_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c107_elliot-graye"
+ },
+ {
+  "row": 756,
+  "before": "sports_c107_anthony-raines_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c107_anthony-raines"
+ },
+ {
+  "row": 757,
+  "before": "sports_c107_anthony-raines_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c107_anthony-raines"
+ },
+ {
+  "row": 758,
+  "before": "sports_c107_anthony-raines_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c107_anthony-raines"
+ },
+ {
+  "row": 759,
+  "before": "sports_c107_anthony-raines_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c107_anthony-raines"
+ },
+ {
+  "row": 760,
+  "before": "sports_c107_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c107_p-slayer"
+ },
+ {
+  "row": 761,
+  "before": "sports_c107_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c107_p-slayer"
+ },
+ {
+  "row": 762,
+  "before": "sports_c107_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c107_p-slayer"
+ },
+ {
+  "row": 763,
+  "before": "sports_c107_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c107_p-slayer"
+ },
+ {
+  "row": 764,
+  "before": "sports_c107_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c107_selena-grant"
+ },
+ {
+  "row": 765,
+  "before": "sports_c107_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c107_selena-grant"
+ },
+ {
+  "row": 766,
+  "before": "sports_c107_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c107_talia-finch"
+ },
+ {
+  "row": 767,
+  "before": "sports_c107_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c107_talia-finch"
+ },
+ {
+  "row": 768,
+  "before": "sports_c107_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c107_talia-finch"
+ },
+ {
+  "row": 769,
+  "before": "sports_c107_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c107_talia-finch"
+ },
+ {
+  "row": 770,
+  "before": "sports_c107_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c107_tanya-cruz"
+ },
+ {
+  "row": 771,
+  "before": "sports_c107_tanya-cruz_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c107_tanya-cruz"
+ },
+ {
+  "row": 772,
+  "before": "civic_c108_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_carmen-delaine"
+ },
+ {
+  "row": 773,
+  "before": "business_c108_business-desk_packet-v2_deepseek-deepseek-chat",
+  "after": "business_c108_business-desk"
+ },
+ {
+  "row": 774,
+  "before": "civic_c108_lila-mezran_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_lila-mezran"
+ },
+ {
+  "row": 775,
+  "before": "civic_c108_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_trevor-shimizu"
+ },
+ {
+  "row": 776,
+  "before": "sports_c108_anthony-raines_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c108_anthony-raines"
+ },
+ {
+  "row": 777,
+  "before": "undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "undocked_c108_nia-rook"
+ },
+ {
+  "row": 778,
+  "before": "civic_c108_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c108_luis-navarro"
+ },
+ {
+  "row": 779,
+  "before": "civic_c108_rachel-torres_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_rachel-torres"
+ },
+ {
+  "row": 780,
+  "before": "civic_c108_angela-reyes_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_angela-reyes"
+ },
+ {
+  "row": 781,
+  "before": "sports_c108_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c108_selena-grant"
+ },
+ {
+  "row": 782,
+  "before": "civic_c108_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c108_freelance-firebrand"
+ },
+ {
+  "row": 783,
+  "before": "civic_c108_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_noah-tan"
+ },
+ {
+  "row": 784,
+  "before": "sports_c108_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c108_p-slayer"
+ },
+ {
+  "row": 785,
+  "before": "culture_c108_elliot-graye_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c108_elliot-graye"
+ },
+ {
+  "row": 786,
+  "before": "sports_c108_simon-leary_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c108_simon-leary"
+ },
+ {
+  "row": 787,
+  "before": "sports_c108_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c108_talia-finch"
+ },
+ {
+  "row": 788,
+  "before": "culture_c108_mason-ortega_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c108_mason-ortega"
+ },
+ {
+  "row": 789,
+  "before": "culture_c108_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "culture_c108_kai-marston"
+ },
+ {
+  "row": 790,
+  "before": "wire_c108_celeste-tran_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "wire_c108_celeste-tran"
+ },
+ {
+  "row": 791,
+  "before": "culture_c108_maria-keen_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c108_maria-keen"
+ },
+ {
+  "row": 792,
+  "before": "business_c108_business-desk_packet-v2_deepseek-deepseek-chat",
+  "after": "business_c108_business-desk"
+ },
+ {
+  "row": 793,
+  "before": "business_c108_business-desk_packet-v2_deepseek-deepseek-chat",
+  "after": "business_c108_business-desk"
+ },
+ {
+  "row": 794,
+  "before": "business_c108_business-desk_packet-v2_deepseek-deepseek-chat",
+  "after": "business_c108_business-desk"
+ },
+ {
+  "row": 795,
+  "before": "civic_c108_angela-reyes_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_angela-reyes"
+ },
+ {
+  "row": 796,
+  "before": "civic_c108_angela-reyes_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_angela-reyes"
+ },
+ {
+  "row": 797,
+  "before": "civic_c108_angela-reyes_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_angela-reyes"
+ },
+ {
+  "row": 798,
+  "before": "civic_c108_angela-reyes_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_angela-reyes"
+ },
+ {
+  "row": 799,
+  "before": "civic_c108_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_carmen-delaine"
+ },
+ {
+  "row": 800,
+  "before": "civic_c108_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_carmen-delaine"
+ },
+ {
+  "row": 801,
+  "before": "civic_c108_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_carmen-delaine"
+ },
+ {
+  "row": 802,
+  "before": "civic_c108_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_carmen-delaine"
+ },
+ {
+  "row": 803,
+  "before": "civic_c108_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c108_luis-navarro"
+ },
+ {
+  "row": 804,
+  "before": "civic_c108_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c108_luis-navarro"
+ },
+ {
+  "row": 805,
+  "before": "civic_c108_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c108_luis-navarro"
+ },
+ {
+  "row": 806,
+  "before": "civic_c108_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c108_luis-navarro"
+ },
+ {
+  "row": 807,
+  "before": "civic_c108_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_noah-tan"
+ },
+ {
+  "row": 808,
+  "before": "civic_c108_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_noah-tan"
+ },
+ {
+  "row": 809,
+  "before": "civic_c108_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_trevor-shimizu"
+ },
+ {
+  "row": 810,
+  "before": "civic_c108_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_trevor-shimizu"
+ },
+ {
+  "row": 811,
+  "before": "civic_c108_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_trevor-shimizu"
+ },
+ {
+  "row": 812,
+  "before": "civic_c108_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c108_trevor-shimizu"
+ },
+ {
+  "row": 813,
+  "before": "culture_c108_elliot-graye_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c108_elliot-graye"
+ },
+ {
+  "row": 814,
+  "before": "culture_c108_kai-marston_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "culture_c108_kai-marston"
+ },
+ {
+  "row": 815,
+  "before": "culture_c108_maria-keen_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c108_maria-keen"
+ },
+ {
+  "row": 816,
+  "before": "culture_c108_maria-keen_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c108_maria-keen"
+ },
+ {
+  "row": 817,
+  "before": "culture_c108_mason-ortega_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c108_mason-ortega"
+ },
+ {
+  "row": 818,
+  "before": "culture_c108_mason-ortega_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c108_mason-ortega"
+ },
+ {
+  "row": 819,
+  "before": "culture_c108_mason-ortega_packet-v2_deepseek-deepseek-chat",
+  "after": "culture_c108_mason-ortega"
+ },
+ {
+  "row": 820,
+  "before": "sports_c108_anthony-raines_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c108_anthony-raines"
+ },
+ {
+  "row": 821,
+  "before": "sports_c108_anthony-raines_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c108_anthony-raines"
+ },
+ {
+  "row": 822,
+  "before": "sports_c108_anthony-raines_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c108_anthony-raines"
+ },
+ {
+  "row": 823,
+  "before": "sports_c108_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c108_p-slayer"
+ },
+ {
+  "row": 824,
+  "before": "sports_c108_p-slayer_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c108_p-slayer"
+ },
+ {
+  "row": 825,
+  "before": "sports_c108_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c108_selena-grant"
+ },
+ {
+  "row": 826,
+  "before": "sports_c108_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c108_selena-grant"
+ },
+ {
+  "row": 827,
+  "before": "sports_c108_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c108_selena-grant"
+ },
+ {
+  "row": 828,
+  "before": "sports_c108_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c108_selena-grant"
+ },
+ {
+  "row": 829,
+  "before": "sports_c108_simon-leary_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c108_simon-leary"
+ },
+ {
+  "row": 830,
+  "before": "sports_c108_simon-leary_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c108_simon-leary"
+ },
+ {
+  "row": 831,
+  "before": "sports_c108_simon-leary_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c108_simon-leary"
+ },
+ {
+  "row": 832,
+  "before": "sports_c108_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c108_talia-finch"
+ },
+ {
+  "row": 833,
+  "before": "sports_c108_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c108_talia-finch"
+ },
+ {
+  "row": 834,
+  "before": "sports_c108_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c108_talia-finch"
+ },
+ {
+  "row": 835,
+  "before": "sports_c108_talia-finch_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c108_talia-finch"
+ },
+ {
+  "row": 836,
+  "before": "undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "undocked_c108_nia-rook"
+ },
+ {
+  "row": 837,
+  "before": "undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "undocked_c108_nia-rook"
+ },
+ {
+  "row": 838,
+  "before": "undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "undocked_c108_nia-rook"
+ },
+ {
+  "row": 839,
+  "before": "undocked_c108_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "undocked_c108_nia-rook"
+ },
+ {
+  "row": 840,
+  "before": "wire_c108_celeste-tran_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "wire_c108_celeste-tran"
+ },
+ {
+  "row": 841,
+  "before": "wire_c108_celeste-tran_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "wire_c108_celeste-tran"
+ },
+ {
+  "row": 842,
+  "before": "wire_c108_celeste-tran_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "wire_c108_celeste-tran"
+ },
+ {
+  "row": 843,
+  "before": "wire_c108_celeste-tran_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "wire_c108_celeste-tran"
+ },
+ {
+  "row": 844,
+  "before": "civic_c109_carmen-delaine_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c109_carmen-delaine"
+ },
+ {
+  "row": 845,
+  "before": "business_c109_business-desk_packet-v2_deepseek-deepseek-chat",
+  "after": "business_c109_business-desk"
+ },
+ {
+  "row": 846,
+  "before": "civic_c109_lila-mezran_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c109_lila-mezran"
+ },
+ {
+  "row": 847,
+  "before": "civic_c109_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c109_trevor-shimizu"
+ },
+ {
+  "row": 848,
+  "before": "sports_c109_anthony-raines_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c109_anthony-raines"
+ },
+ {
+  "row": 849,
+  "before": "civic_c109_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c109_luis-navarro"
+ },
+ {
+  "row": 850,
+  "before": "sports_c109_selena-grant_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "sports_c109_selena-grant"
+ },
+ {
+  "row": 851,
+  "before": "civic_c109_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c109_noah-tan"
+ },
+ {
+  "row": 852,
+  "before": "undocked_c109_nia-rook_packet-v2_meta-llama-llama-3-3-70b-instruct",
+  "after": "undocked_c109_nia-rook"
+ },
+ {
+  "row": 853,
+  "before": "sports_c109_simon-leary_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c109_simon-leary"
+ },
+ {
+  "row": 854,
+  "before": "sports_c109_talia-finch_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c109_talia-finch"
+ },
+ {
+  "row": 855,
+  "before": "undocked_c109_nia-rook_packet-v2_x-ai-grok-4-3",
+  "after": "undocked_c109_nia-rook"
+ },
+ {
+  "row": 856,
+  "before": "culture_c109_elliot-graye_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "culture_c109_elliot-graye"
+ },
+ {
+  "row": 857,
+  "before": "civic_c109_angela-reyes_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c109_angela-reyes"
+ },
+ {
+  "row": 858,
+  "before": "civic_c109_rachel-torres_packet-v2_x-ai-grok-4-3",
+  "after": "civic_c109_rachel-torres"
+ },
+ {
+  "row": 859,
+  "before": "culture_c109_mason-ortega_packet-v2_x-ai-grok-4-3",
+  "after": "culture_c109_mason-ortega"
+ },
+ {
+  "row": 860,
+  "before": "culture_c109_kai-marston_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "culture_c109_kai-marston"
+ },
+ {
+  "row": 861,
+  "before": "culture_c109_maria-keen_packet-v2_anthropic-claude-sonnet-5",
+  "after": "culture_c109_maria-keen"
+ },
+ {
+  "row": 862,
+  "before": "undocked-digest_c109_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+  "after": "undocked-digest_c109_nia-rook-weekly"
+ },
+ {
+  "row": 863,
+  "before": "business_c109_business-desk_packet-v2_openai-gpt-5-6-luna",
+  "after": "business_c109_business-desk"
+ },
+ {
+  "row": 864,
+  "before": "civic_c109_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c109_carmen-delaine"
+ },
+ {
+  "row": 865,
+  "before": "business_c109_business-desk_packet-v2_openai-gpt-5-6-luna",
+  "after": "business_c109_business-desk"
+ },
+ {
+  "row": 866,
+  "before": "business_c109_business-desk_packet-v2_openai-gpt-5-6-luna",
+  "after": "business_c109_business-desk"
+ },
+ {
+  "row": 867,
+  "before": "business_c109_business-desk_packet-v2_openai-gpt-5-6-luna",
+  "after": "business_c109_business-desk"
+ },
+ {
+  "row": 868,
+  "before": "civic_c109_angela-reyes_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c109_angela-reyes"
+ },
+ {
+  "row": 869,
+  "before": "civic_c109_angela-reyes_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c109_angela-reyes"
+ },
+ {
+  "row": 870,
+  "before": "civic_c109_angela-reyes_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c109_angela-reyes"
+ },
+ {
+  "row": 871,
+  "before": "civic_c109_angela-reyes_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c109_angela-reyes"
+ },
+ {
+  "row": 872,
+  "before": "civic_c109_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c109_carmen-delaine"
+ },
+ {
+  "row": 873,
+  "before": "civic_c109_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c109_carmen-delaine"
+ },
+ {
+  "row": 874,
+  "before": "civic_c109_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c109_carmen-delaine"
+ },
+ {
+  "row": 875,
+  "before": "civic_c109_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c109_carmen-delaine"
+ },
+ {
+  "row": 876,
+  "before": "civic_c109_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c109_luis-navarro"
+ },
+ {
+  "row": 877,
+  "before": "civic_c109_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c109_luis-navarro"
+ },
+ {
+  "row": 878,
+  "before": "civic_c109_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c109_luis-navarro"
+ },
+ {
+  "row": 879,
+  "before": "civic_c109_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c109_luis-navarro"
+ },
+ {
+  "row": 880,
+  "before": "civic_c109_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c109_noah-tan"
+ },
+ {
+  "row": 881,
+  "before": "civic_c109_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c109_noah-tan"
+ },
+ {
+  "row": 882,
+  "before": "civic_c109_noah-tan_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c109_noah-tan"
+ },
+ {
+  "row": 883,
+  "before": "civic_c109_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c109_trevor-shimizu"
+ },
+ {
+  "row": 884,
+  "before": "civic_c109_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c109_trevor-shimizu"
+ },
+ {
+  "row": 885,
+  "before": "civic_c109_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c109_trevor-shimizu"
+ },
+ {
+  "row": 886,
+  "before": "civic_c109_trevor-shimizu_packet-v2_deepseek-deepseek-chat",
+  "after": "civic_c109_trevor-shimizu"
+ },
+ {
+  "row": 887,
+  "before": "culture_c109_maria-keen_packet-v2_anthropic-claude-sonnet-5",
+  "after": "culture_c109_maria-keen"
+ },
+ {
+  "row": 888,
+  "before": "culture_c109_maria-keen_packet-v2_anthropic-claude-sonnet-5",
+  "after": "culture_c109_maria-keen"
+ },
+ {
+  "row": 889,
+  "before": "culture_c109_maria-keen_packet-v2_anthropic-claude-sonnet-5",
+  "after": "culture_c109_maria-keen"
+ },
+ {
+  "row": 890,
+  "before": "culture_c109_maria-keen_packet-v2_anthropic-claude-sonnet-5",
+  "after": "culture_c109_maria-keen"
+ },
+ {
+  "row": 891,
+  "before": "sports_c109_anthony-raines_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c109_anthony-raines"
+ },
+ {
+  "row": 892,
+  "before": "sports_c109_anthony-raines_packet-v2_deepseek-deepseek-chat",
+  "after": "sports_c109_anthony-raines"
+ },
+ {
+  "row": 893,
+  "before": "sports_c109_talia-finch_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c109_talia-finch"
+ },
+ {
+  "row": 894,
+  "before": "sports_c109_talia-finch_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c109_talia-finch"
+ },
+ {
+  "row": 895,
+  "before": "civic_c110_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c110_carmen-delaine"
+ },
+ {
+  "row": 896,
+  "before": "civic_c110_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+  "after": "civic_c110_trevor-shimizu"
+ },
+ {
+  "row": 897,
+  "before": "sports_c110_anthony-raines_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "sports_c110_anthony-raines"
+ },
+ {
+  "row": 898,
+  "before": "undocked_c110_nia-rook_packet-v2_x-ai-grok-4-3",
+  "after": "undocked_c110_nia-rook"
+ },
+ {
+  "row": 899,
+  "before": "civic_c110_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c110_luis-navarro"
+ },
+ {
+  "row": 900,
+  "before": "civic_c110_rachel-torres_packet-v2_x-ai-grok-4-3",
+  "after": "civic_c110_rachel-torres"
+ },
+ {
+  "row": 901,
+  "before": "civic_c110_angela-reyes_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c110_angela-reyes"
+ },
+ {
+  "row": 902,
+  "before": "sports_c110_selena-grant_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c110_selena-grant"
+ },
+ {
+  "row": 903,
+  "before": "business_c110_business-desk_packet-v2_openai-gpt-5-6-luna",
+  "after": "business_c110_business-desk"
+ },
+ {
+  "row": 904,
+  "before": "civic_c110_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c110_freelance-firebrand"
+ },
+ {
+  "row": 905,
+  "before": "civic_c110_noah-tan_packet-v2_openai-gpt-5-6-luna",
+  "after": "civic_c110_noah-tan"
+ },
+ {
+  "row": 906,
+  "before": "sports_c110_p-slayer_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c110_p-slayer"
+ },
+ {
+  "row": 907,
+  "before": "sports_c110_tanya-cruz_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c110_tanya-cruz"
+ },
+ {
+  "row": 908,
+  "before": "undocked-digest_c109_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+  "after": "undocked-digest_c109_nia-rook-weekly"
+ },
+ {
+  "row": 909,
+  "before": "undocked-digest_c109_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+  "after": "undocked-digest_c109_nia-rook-weekly"
+ },
+ {
+  "row": 910,
+  "before": "undocked-digest_c109_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+  "after": "undocked-digest_c109_nia-rook-weekly"
+ },
+ {
+  "row": 911,
+  "before": "culture_c110_elliot-graye_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "culture_c110_elliot-graye"
+ },
+ {
+  "row": 912,
+  "before": "sports_c110_simon-leary_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c110_simon-leary"
+ },
+ {
+  "row": 913,
+  "before": "sports_c110_hal-richmond_packet-v2_anthropic-claude-sonnet-5",
+  "after": "sports_c110_hal-richmond"
+ },
+ {
+  "row": 914,
+  "before": "sports_c110_talia-finch_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c110_talia-finch"
+ },
+ {
+  "row": 915,
+  "before": "culture_c110_mason-ortega_packet-v2_x-ai-grok-4-3",
+  "after": "culture_c110_mason-ortega"
+ },
+ {
+  "row": 916,
+  "before": "culture_c110_maria-keen_packet-v2_anthropic-claude-sonnet-5",
+  "after": "culture_c110_maria-keen"
+ },
+ {
+  "row": 917,
+  "before": "wire_c110_celeste-tran_packet-v2_x-ai-grok-4-3",
+  "after": "wire_c110_celeste-tran"
+ },
+ {
+  "row": 918,
+  "before": "undocked-digest_c110_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+  "after": "undocked-digest_c110_nia-rook-weekly"
+ },
+ {
+  "row": 919,
+  "before": "civic_c110_lila-mezran_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c110_lila-mezran"
+ },
+ {
+  "row": 920,
+  "before": "business_c110_business-desk_packet-v2_openai-gpt-5-6-luna",
+  "after": "business_c110_business-desk"
+ },
+ {
+  "row": 921,
+  "before": "civic_c110_angela-reyes_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c110_angela-reyes"
+ },
+ {
+  "row": 922,
+  "before": "civic_c110_angela-reyes_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c110_angela-reyes"
+ },
+ {
+  "row": 923,
+  "before": "civic_c110_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c110_carmen-delaine"
+ },
+ {
+  "row": 924,
+  "before": "civic_c110_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c110_carmen-delaine"
+ },
+ {
+  "row": 925,
+  "before": "civic_c110_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c110_carmen-delaine"
+ },
+ {
+  "row": 926,
+  "before": "civic_c110_carmen-delaine_packet-v2_anthropic-claude-haiku-4-5",
+  "after": "civic_c110_carmen-delaine"
+ },
+ {
+  "row": 927,
+  "before": "civic_c110_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c110_luis-navarro"
+ },
+ {
+  "row": 928,
+  "before": "civic_c110_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c110_luis-navarro"
+ },
+ {
+  "row": 929,
+  "before": "civic_c110_luis-navarro_packet-v2_anthropic-claude-sonnet-5",
+  "after": "civic_c110_luis-navarro"
+ },
+ {
+  "row": 930,
+  "before": "civic_c110_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+  "after": "civic_c110_trevor-shimizu"
+ },
+ {
+  "row": 931,
+  "before": "culture_c110_mason-ortega_packet-v2_x-ai-grok-4-3",
+  "after": "culture_c110_mason-ortega"
+ },
+ {
+  "row": 932,
+  "before": "sports_c110_p-slayer_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c110_p-slayer"
+ },
+ {
+  "row": 933,
+  "before": "sports_c110_p-slayer_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c110_p-slayer"
+ },
+ {
+  "row": 934,
+  "before": "sports_c110_talia-finch_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c110_talia-finch"
+ },
+ {
+  "row": 935,
+  "before": "sports_c110_talia-finch_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c110_talia-finch"
+ },
+ {
+  "row": 936,
+  "before": "sports_c110_talia-finch_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c110_talia-finch"
+ },
+ {
+  "row": 937,
+  "before": "sports_c110_talia-finch_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c110_talia-finch"
+ },
+ {
+  "row": 938,
+  "before": "sports_c110_tanya-cruz_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c110_tanya-cruz"
+ },
+ {
+  "row": 939,
+  "before": "sports_c110_tanya-cruz_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c110_tanya-cruz"
+ },
+ {
+  "row": 940,
+  "before": "business_c111_business-desk_packet-v2_anthropic-claude-opus-5-5",
+  "after": "business_c111_business-desk"
+ },
+ {
+  "row": 941,
+  "before": "civic_c111_lila-mezran_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c111_lila-mezran"
+ },
+ {
+  "row": 942,
+  "before": "civic_c111_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+  "after": "civic_c111_trevor-shimizu"
+ },
+ {
+  "row": 943,
+  "before": "sports_c111_anthony-raines_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "sports_c111_anthony-raines"
+ },
+ {
+  "row": 944,
+  "before": "undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3",
+  "after": "undocked_c111_nia-rook"
+ },
+ {
+  "row": 945,
+  "before": "civic_c111_rachel-torres_packet-v2_x-ai-grok-4-3",
+  "after": "civic_c111_rachel-torres"
+ },
+ {
+  "row": 946,
+  "before": "sports_c111_selena-grant_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c111_selena-grant"
+ },
+ {
+  "row": 947,
+  "before": "civic_c111_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "civic_c111_freelance-firebrand"
+ },
+ {
+  "row": 948,
+  "before": "civic_c111_noah-tan_packet-v2_openai-gpt-5-6-luna",
+  "after": "civic_c111_noah-tan"
+ },
+ {
+  "row": 949,
+  "before": "sports_c111_p-slayer_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c111_p-slayer"
+ },
+ {
+  "row": 950,
+  "before": "sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c111_tanya-cruz"
+ },
+ {
+  "row": 951,
+  "before": "sports_c111_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "sports_c111_elliot-marbury"
+ },
+ {
+  "row": 952,
+  "before": "civic_c111_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "civic_c111_luis-navarro"
+ },
+ {
+  "row": 953,
+  "before": "civic_c111_noah-tan_packet-v2_x-ai-grok-4-3",
+  "after": "civic_c111_noah-tan"
+ },
+ {
+  "row": 954,
+  "before": "civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c111_carmen-delaine"
+ },
+ {
+  "row": 955,
+  "before": "culture_c111_elliot-graye_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "culture_c111_elliot-graye"
+ },
+ {
+  "row": 956,
+  "before": "sports_c111_simon-leary_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c111_simon-leary"
+ },
+ {
+  "row": 957,
+  "before": "sports_c111_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "sports_c111_hal-richmond"
+ },
+ {
+  "row": 958,
+  "before": "sports_c111_talia-finch_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c111_talia-finch"
+ },
+ {
+  "row": 959,
+  "before": "culture_c111_mason-ortega_packet-v2_x-ai-grok-4-3",
+  "after": "culture_c111_mason-ortega"
+ },
+ {
+  "row": 960,
+  "before": "culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "culture_c111_kai-marston"
+ },
+ {
+  "row": 961,
+  "before": "culture_c111_sharon-okafor_packet-v2_openai-gpt-5-6-luna",
+  "after": "culture_c111_sharon-okafor"
+ },
+ {
+  "row": 962,
+  "before": "culture_c111_maria-keen_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "culture_c111_maria-keen"
+ },
+ {
+  "row": 963,
+  "before": "undocked-digest_c111_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+  "after": "undocked-digest_c111_nia-rook-weekly"
+ },
+ {
+  "row": 964,
+  "before": "business_c111_business-desk_packet-v2_anthropic-claude-opus-5-5",
+  "after": "business_c111_business-desk"
+ },
+ {
+  "row": 965,
+  "before": "business_c111_business-desk_packet-v2_anthropic-claude-opus-5-5",
+  "after": "business_c111_business-desk"
+ },
+ {
+  "row": 966,
+  "before": "business_c111_business-desk_packet-v2_anthropic-claude-opus-5-5",
+  "after": "business_c111_business-desk"
+ },
+ {
+  "row": 967,
+  "before": "business_c111_business-desk_packet-v2_anthropic-claude-opus-5-5",
+  "after": "business_c111_business-desk"
+ },
+ {
+  "row": 968,
+  "before": "civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c111_carmen-delaine"
+ },
+ {
+  "row": 969,
+  "before": "civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c111_carmen-delaine"
+ },
+ {
+  "row": 970,
+  "before": "civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c111_carmen-delaine"
+ },
+ {
+  "row": 971,
+  "before": "civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c111_carmen-delaine"
+ },
+ {
+  "row": 972,
+  "before": "civic_c111_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+  "after": "civic_c111_trevor-shimizu"
+ },
+ {
+  "row": 973,
+  "before": "civic_c111_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+  "after": "civic_c111_trevor-shimizu"
+ },
+ {
+  "row": 974,
+  "before": "civic_c111_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+  "after": "civic_c111_trevor-shimizu"
+ },
+ {
+  "row": 975,
+  "before": "civic_c111_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+  "after": "civic_c111_trevor-shimizu"
+ },
+ {
+  "row": 976,
+  "before": "culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "culture_c111_kai-marston"
+ },
+ {
+  "row": 977,
+  "before": "culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "culture_c111_kai-marston"
+ },
+ {
+  "row": 978,
+  "before": "culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "culture_c111_kai-marston"
+ },
+ {
+  "row": 979,
+  "before": "culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "culture_c111_kai-marston"
+ },
+ {
+  "row": 980,
+  "before": "culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "culture_c111_kai-marston"
+ },
+ {
+  "row": 981,
+  "before": "sports_c111_talia-finch_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c111_talia-finch"
+ },
+ {
+  "row": 982,
+  "before": "sports_c111_talia-finch_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c111_talia-finch"
+ },
+ {
+  "row": 983,
+  "before": "sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c111_tanya-cruz"
+ },
+ {
+  "row": 984,
+  "before": "sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c111_tanya-cruz"
+ },
+ {
+  "row": 985,
+  "before": "sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c111_tanya-cruz"
+ },
+ {
+  "row": 986,
+  "before": "business_c111_business-desk_packet-v2_anthropic-claude-opus-5-5",
+  "after": "business_c111_business-desk"
+ },
+ {
+  "row": 987,
+  "before": "civic_c111_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c111_carmen-delaine"
+ },
+ {
+  "row": 988,
+  "before": "civic_c111_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "civic_c111_freelance-firebrand"
+ },
+ {
+  "row": 989,
+  "before": "civic_c111_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+  "after": "civic_c111_trevor-shimizu"
+ },
+ {
+  "row": 990,
+  "before": "culture_c111_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "culture_c111_kai-marston"
+ },
+ {
+  "row": 991,
+  "before": "sports_c111_anthony-raines_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "sports_c111_anthony-raines"
+ },
+ {
+  "row": 992,
+  "before": "sports_c111_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "sports_c111_elliot-marbury"
+ },
+ {
+  "row": 993,
+  "before": "sports_c111_talia-finch_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c111_talia-finch"
+ },
+ {
+  "row": 994,
+  "before": "sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c111_tanya-cruz"
+ },
+ {
+  "row": 995,
+  "before": "civic_c112_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c112_carmen-delaine"
+ },
+ {
+  "row": 996,
+  "before": "business_c112_business-desk_packet-v2_anthropic-claude-opus-5-5",
+  "after": "business_c112_business-desk"
+ },
+ {
+  "row": 997,
+  "before": "civic_c112_lila-mezran_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c112_lila-mezran"
+ },
+ {
+  "row": 998,
+  "before": "civic_c112_trevor-shimizu_packet-v2_openai-gpt-5-6-luna",
+  "after": "civic_c112_trevor-shimizu"
+ },
+ {
+  "row": 999,
+  "before": "sports_c112_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "sports_c112_anthony-raines"
+ },
+ {
+  "row": 1000,
+  "before": "culture_c112_tamsin-pruitt_packet-v2_x-ai-grok-4-3",
+  "after": "culture_c112_tamsin-pruitt"
+ },
+ {
+  "row": 1001,
+  "before": "civic_c112_luis-navarro_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "civic_c112_luis-navarro"
+ },
+ {
+  "row": 1002,
+  "before": "civic_c112_rachel-torres_packet-v2_x-ai-grok-4-3",
+  "after": "civic_c112_rachel-torres"
+ },
+ {
+  "row": 1003,
+  "before": "civic_c112_angela-reyes_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c112_angela-reyes"
+ },
+ {
+  "row": 1004,
+  "before": "sports_c112_selena-grant_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c112_selena-grant"
+ },
+ {
+  "row": 1005,
+  "before": "civic_c112_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "civic_c112_freelance-firebrand"
+ },
+ {
+  "row": 1006,
+  "before": "civic_c112_noah-tan_packet-v2_x-ai-grok-4-3",
+  "after": "civic_c112_noah-tan"
+ },
+ {
+  "row": 1007,
+  "before": "sports_c112_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "sports_c112_elliot-marbury"
+ },
+ {
+  "row": 1008,
+  "before": "sports_c112_p-slayer_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c112_p-slayer"
+ },
+ {
+  "row": 1009,
+  "before": "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3",
+  "after": "culture_c112_ines-sorensen"
+ },
+ {
+  "row": 1010,
+  "before": "undocked_c112_nia-rook_packet-v2_x-ai-grok-4-3",
+  "after": "undocked_c112_nia-rook"
+ },
+ {
+  "row": 1011,
+  "before": "culture_c112_elliot-graye_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "culture_c112_elliot-graye"
+ },
+ {
+  "row": 1012,
+  "before": "sports_c112_simon-leary_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c112_simon-leary"
+ },
+ {
+  "row": 1013,
+  "before": "sports_c112_talia-finch_packet-v2_openai-gpt-5-6-luna",
+  "after": "sports_c112_talia-finch"
+ },
+ {
+  "row": 1014,
+  "before": "culture_c112_mason-ortega_packet-v2_x-ai-grok-4-3",
+  "after": "culture_c112_mason-ortega"
+ },
+ {
+  "row": 1015,
+  "before": "culture_c112_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "culture_c112_kai-marston"
+ },
+ {
+  "row": 1016,
+  "before": "culture_c112_sharon-okafor_packet-v2_openai-gpt-5-6-luna",
+  "after": "culture_c112_sharon-okafor"
+ },
+ {
+  "row": 1017,
+  "before": "culture_c112_maria-keen_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "culture_c112_maria-keen"
+ },
+ {
+  "row": 1018,
+  "before": "wire_c112_celeste-tran_packet-v2_x-ai-grok-4-3",
+  "after": "wire_c112_celeste-tran"
+ },
+ {
+  "row": 1019,
+  "before": "undocked-digest_c112_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+  "after": "undocked-digest_c112_nia-rook-weekly"
+ },
+ {
+  "row": 1020,
+  "before": "sports_c112_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "sports_c112_hal-richmond"
+ },
+ {
+  "row": 1021,
+  "before": "civic_c112_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c112_carmen-delaine"
+ },
+ {
+  "row": 1022,
+  "before": "civic_c112_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c112_carmen-delaine"
+ },
+ {
+  "row": 1023,
+  "before": "civic_c112_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c112_carmen-delaine"
+ },
+ {
+  "row": 1024,
+  "before": "civic_c112_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c112_carmen-delaine"
+ },
+ {
+  "row": 1025,
+  "before": "civic_c112_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c112_carmen-delaine"
+ },
+ {
+  "row": 1026,
+  "before": "civic_c112_noah-tan_packet-v2_x-ai-grok-4-3",
+  "after": "civic_c112_noah-tan"
+ },
+ {
+  "row": 1027,
+  "before": "civic_c112_noah-tan_packet-v2_x-ai-grok-4-3",
+  "after": "civic_c112_noah-tan"
+ },
+ {
+  "row": 1028,
+  "before": "civic_c112_noah-tan_packet-v2_x-ai-grok-4-3",
+  "after": "civic_c112_noah-tan"
+ },
+ {
+  "row": 1029,
+  "before": "civic_c112_noah-tan_packet-v2_x-ai-grok-4-3",
+  "after": "civic_c112_noah-tan"
+ },
+ {
+  "row": 1030,
+  "before": "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3-1615",
+  "after": "culture_c112_ines-sorensen"
+ },
+ {
+  "row": 1031,
+  "before": "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3-1615",
+  "after": "culture_c112_ines-sorensen"
+ },
+ {
+  "row": 1032,
+  "before": "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3-1615",
+  "after": "culture_c112_ines-sorensen"
+ },
+ {
+  "row": 1033,
+  "before": "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3-1615",
+  "after": "culture_c112_ines-sorensen"
+ },
+ {
+  "row": 1034,
+  "before": "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3-1615",
+  "after": "culture_c112_ines-sorensen"
+ },
+ {
+  "row": 1035,
+  "before": "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3-1814",
+  "after": "culture_c112_ines-sorensen"
+ },
+ {
+  "row": 1036,
+  "before": "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3-1814",
+  "after": "culture_c112_ines-sorensen"
+ },
+ {
+  "row": 1037,
+  "before": "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3-1814",
+  "after": "culture_c112_ines-sorensen"
+ },
+ {
+  "row": 1038,
+  "before": "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3-1814",
+  "after": "culture_c112_ines-sorensen"
+ },
+ {
+  "row": 1039,
+  "before": "culture_c112_maria-keen_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "culture_c112_maria-keen"
+ },
+ {
+  "row": 1040,
+  "before": "culture_c112_maria-keen_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "culture_c112_maria-keen"
+ },
+ {
+  "row": 1041,
+  "before": "culture_c112_maria-keen_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "culture_c112_maria-keen"
+ },
+ {
+  "row": 1042,
+  "before": "sports_c112_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "sports_c112_elliot-marbury"
+ },
+ {
+  "row": 1043,
+  "before": "sports_c112_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "sports_c112_elliot-marbury"
+ },
+ {
+  "row": 1044,
+  "before": "sports_c112_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "sports_c112_elliot-marbury"
+ },
+ {
+  "row": 1045,
+  "before": "sports_c112_p-slayer_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c112_p-slayer"
+ },
+ {
+  "row": 1046,
+  "before": "sports_c112_p-slayer_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c112_p-slayer"
+ },
+ {
+  "row": 1047,
+  "before": "sports_c112_p-slayer_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c112_p-slayer"
+ },
+ {
+  "row": 1048,
+  "before": "sports_c112_p-slayer_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c112_p-slayer"
+ },
+ {
+  "row": 1049,
+  "before": "undocked-digest_c112_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+  "after": "undocked-digest_c112_nia-rook-weekly"
+ },
+ {
+  "row": 1050,
+  "before": "undocked-digest_c112_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+  "after": "undocked-digest_c112_nia-rook-weekly"
+ },
+ {
+  "row": 1051,
+  "before": "undocked-digest_c112_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+  "after": "undocked-digest_c112_nia-rook-weekly"
+ },
+ {
+  "row": 1052,
+  "before": "undocked-digest_c112_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+  "after": "undocked-digest_c112_nia-rook-weekly"
+ },
+ {
+  "row": 1053,
+  "before": "wire_c112_celeste-tran_packet-v2_x-ai-grok-4-3",
+  "after": "wire_c112_celeste-tran"
+ },
+ {
+  "row": 1054,
+  "before": "wire_c112_celeste-tran_packet-v2_x-ai-grok-4-3",
+  "after": "wire_c112_celeste-tran"
+ },
+ {
+  "row": 1055,
+  "before": "wire_c112_celeste-tran_packet-v2_x-ai-grok-4-3",
+  "after": "wire_c112_celeste-tran"
+ },
+ {
+  "row": 1056,
+  "before": "wire_c112_celeste-tran_packet-v2_x-ai-grok-4-3",
+  "after": "wire_c112_celeste-tran"
+ },
+ {
+  "row": 1057,
+  "before": "civic_c112_carmen-delaine_packet-v2_anthropic-claude-haiku-5-5",
+  "after": "civic_c112_carmen-delaine"
+ },
+ {
+  "row": 1058,
+  "before": "civic_c112_noah-tan_packet-v2_x-ai-grok-4-3",
+  "after": "civic_c112_noah-tan"
+ },
+ {
+  "row": 1059,
+  "before": "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3-1615",
+  "after": "culture_c112_ines-sorensen"
+ },
+ {
+  "row": 1060,
+  "before": "culture_c112_ines-sorensen_packet-v2_x-ai-grok-4-3-1814",
+  "after": "culture_c112_ines-sorensen"
+ },
+ {
+  "row": 1061,
+  "before": "culture_c112_maria-keen_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "culture_c112_maria-keen"
+ },
+ {
+  "row": 1062,
+  "before": "sports_c112_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5",
+  "after": "sports_c112_elliot-marbury"
+ },
+ {
+  "row": 1063,
+  "before": "sports_c112_p-slayer_packet-v2_x-ai-grok-4-3",
+  "after": "sports_c112_p-slayer"
+ },
+ {
+  "row": 1064,
+  "before": "undocked-digest_c112_nia-rook-weekly_packet-v2_x-ai-grok-4-3",
+  "after": "undocked-digest_c112_nia-rook-weekly"
+ },
+ {
+  "row": 1065,
+  "before": "wire_c112_celeste-tran_packet-v2_x-ai-grok-4-3",
+  "after": "wire_c112_celeste-tran"
+ },
+ {
+  "row": 562,
+  "before": "business_c102_jordan-velez_deepseek-deepseek-chat",
+  "after": "business_c102_jordan-velez"
+ },
+ {
+  "row": 563,
+  "before": "business_c102_dana-reeve_deepseek-deepseek-chat",
+  "after": "business_c102_dana-reeve"
+ }
+]

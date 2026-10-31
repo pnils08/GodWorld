@@ -565,8 +565,8 @@ function routeCitizenUsageToIntake_(ctx, ss, cycle, cal) {
  */
 /**
  * engine.163 — the Citizen_Media_Usage Context column is an OPS key: the
- * writer-wake packet stem (`<desk>_c<N>_<persona>[_packet-v2][_<model id>]`),
- * kept verbatim there because recordBylineUsage() dedupes on it. It is NOT
+ * writer-wake packet stem (`<desk>_c<N>_<persona>`, model name off since
+ * pipeline.99), kept there because recordBylineUsage() dedupes on it. It is NOT
  * world text: folded raw into the Advancement_Intake1 note it reached
  * LifeHistory_Log EventText — 58 live rows carried model-provider ids and
  * internal filenames in a citizen's life record (measured C105). This is the

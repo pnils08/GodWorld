@@ -16,6 +16,9 @@ const ROOT = path.join(__dirname, '..');
 const sandbox = vm.createContext({ Logger: { log() {} }, SpreadsheetApp: {}, Utilities: {} });
 vm.runInContext(fs.readFileSync(path.join(ROOT, 'phase07-evening-media/mediaRoomIntake.js'), 'utf8'), sandbox, { filename: 'mediaRoomIntake.js' });
 const describe = sandbox.describeUsageContext_;
+// pipeline.99: the stem carries no model now, and the seam still turns it into words
+assert.strictEqual(describe('sports_c112_p-slayer'), 'a Bay Tribune sports desk piece, C112');
+assert.strictEqual(describe('civic_c113_carmen-delaine'), 'a Bay Tribune civic desk piece, C113');
 
 let n = 0;
 function eq(a, b, msg) { assert.strictEqual(a, b, msg); n++; }

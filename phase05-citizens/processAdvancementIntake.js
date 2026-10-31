@@ -623,14 +623,16 @@ function processMediaUsage_(ctx, now, cycle) {
       // engine.152: the hard light is a moment in the life, and a log row
       var lLife152 = findColByName_(ledgerHeaders, 'LifeHistory');
       var stamp152 = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
+      // pipeline.99: Context is an ops key; engine.163's seam turns it into words before it reaches a life
+      var said152 = (typeof describeUsageContext_ === 'function') ? describeUsageContext_(update.context) : update.context;
       // engine.118: a famous name does not shrink; engine.312: the hard light's −2 rides the paper credit
       var line152 = stamp152 + (update.famous
-        ? ' — [Media] Named in a hard light — the coverage was not kind, and a name this big does not shrink; the shine dims (' + (update.context || 'the paper') + ')'
-        : ' — [Media] Named in a hard light — the coverage was not kind (' + (update.context || 'the paper') + ')');
+        ? ' — [Media] Named in a hard light — the coverage was not kind, and a name this big does not shrink; the shine dims (' + (said152 || 'the paper') + ')'
+        : ' — [Media] Named in a hard light — the coverage was not kind (' + (said152 || 'the paper') + ')');
       if (lLife152 >= 0) ledgerRows[rowIdx][lLife152] = (ledgerRows[rowIdx][lLife152] ? ledgerRows[rowIdx][lLife152] + '\n' : '') + line152;
       if (typeof queueAppendIntent_ === 'function') {
         queueAppendIntent_(ctx, 'LifeHistory_Log', ['C' + cycle, update.popId, update.name || '', 'Media|hard-light',
-          'Named in a hard light — UsageCount now ' + update.usageCount + ' (' + (update.context || '') + ')', '', cycle], 'engine.152 hard light', 'citizens', 100);
+          'Named in a hard light — UsageCount now ' + update.usageCount + ' (' + (said152 || '') + ')', '', cycle], 'engine.152 hard light', 'citizens', 100);
       }
       ledgerDirtied = true;
     }

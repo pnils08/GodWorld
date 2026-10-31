@@ -69,8 +69,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
-| engine.316 | Five hoods get signed texture lines. Bench PASS, review decided. PROD waits on the door's read key in PROD Script Properties (the push script reads it) | in-progress | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] §engine.316 |
-| pipeline.99 | Build words out of newsroom inputs: cut, no model left in the usage tab. Left: hard-light fix rides engine.316's next stage; staged file names | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §Changelog 2026-10-31 |
 
 ## 4. Queue — ruled, not started (ready)
 
@@ -96,6 +94,8 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | infrastructure.6 | Sim-health observability: /api/sim-health + dashboard panel (Track A, not built). Track B ghost tabs + tab-reference test done (`c3fe1780`, `86f43999`, `1240a80a`; test 273 refs PASS 2026-10-22) | ready | engine-sheet | [[../plans/2026-07-31-engine-observability-integrity]] |
 | engine.327 | Hood events on the live ECL: 85 rows for the 16 thin hoods, agy review folded, bound to their hoods, 886 -> 971, read back (builder go 10-31) | done-pending-archive | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] §engine.327 |
 | engine.329 | A hard-light line can name the wrong piece: the last usage row sets the context while `hard` ORs across rows (codex 10-31). Carry the hard row's context | ready | research-build | `phase05-citizens/processAdvancementIntake.js:528` |
+| engine.316 | Five hoods' signed texture lines LIVE PROD @171 (stage 35): bench 9 lines in their own hoods, door clean to +16 min. C114 is the first live read | done-pending-archive | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] §engine.316 |
+| pipeline.99 | Build words out of newsroom inputs: done, hard-light seam LIVE @171, model off every usage and life record, one key per piece. Staged names stay | done-pending-archive | research-build | [[../plans/2026-10-11-media-extension]] §Changelog 2026-10-31 |
 | pipeline.92 | One clock: wall-clock dates reach civic agents (move date/moveId, 54/64 packs) and writers (tracker `LastUpdated`, 2 MilestoneNotes, slice pointers); blast radius read 2026-10-28, each surface to Y/C. | ready | research-build | — |
 | pipeline.98 | 29 project papers and templates sit on the published shelves (search shuts them by name). Move them, then drop BUILD_PAPER_RE; check the indexes first | ready | research-build | `lib/mags.js` BUILD_PAPER_RE |
 | engine.326 | 18 of 24 hood.* ECL rows had no hood= term and drew citywide. All 18 bound to their hood on the live sheet, read back, 0 citywide left (builder go 10-30) | done-pending-archive | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] §engine.316 |

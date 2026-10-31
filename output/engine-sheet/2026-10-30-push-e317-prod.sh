@@ -27,10 +27,10 @@ door() {   # door <when> — PROD still has no fire key, and its fire record thr
            # deployment is valid (HTTP 200, writer shape, clock bound), Cycle $CYC done, and byte-identical to the first read
   local n; n=$(DOOR_EXPECT_DEP="$DEP" node $OUT/2026-10-30-e317-door.js prod-nofire 2>&1 | grep -v "injected env")
   echo "fire key $1: $n"; echo "$n" | grep -q '"noFireKey":true' || return 1
-  local j; j=$(DOOR_EXPECT_DEP="$DEP" node $OUT/2026-10-30-e317-door.js prod 2>&1 | grep -v "injected env")
+  local j; j=$(DOOR_EXPECT_DEP="$DEP" DOOR_EXPECT_CYCLE="$CYC" node $OUT/2026-10-30-e317-door.js prod 2>&1 | grep -v "injected env")
   echo "fire record $1: $j"
   echo "$j" | grep -q '"valid":true' || return 1
-  echo "$j" | grep -q "\"cycle\":$CYC,.*\"state\":\"done\"" || return 1
+  echo "$j" | grep -q '"expectOk":true' || return 1   # typed top-level cycle + state (re-review F2), not a text search
   [ -f "$W/door" ] || echo "$j" > "$W/door"      # the whole line: same record => same line
   [ "$j" = "$(cat "$W/door")" ] || return 1
 }

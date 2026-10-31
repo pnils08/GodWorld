@@ -3,6 +3,8 @@
 //   node output/engine-sheet/2026-10-30-e317-door.js prod             — PROD, with ADMISSION_READ_TOKEN
 //   node output/engine-sheet/2026-10-30-e317-door.js prod-nofire      — PROD has no fire key (a junk-key checkpoint read
 //                                                                        answers "CYCLE_TRIGGER_TOKEN script property not set")
+// DOOR_EXPECT_CYCLE=<n> (re-review F2): also require the TOP-LEVEL record.cycle === n and record.state === 'done' as typed
+// fields (never a text search of the line) -> expectOk.
 // Prints one JSON line {target, http, ok, error, record, valid}; never prints a key. Exit 0 only for a valid record
 // (HTTP 200, the writer's shape, startedMs no later than now + 5 min — godWorldEngine2.js FIRE_CLOCK_SLACK_MS).
 require('/root/GodWorld/lib/env');
@@ -36,6 +38,8 @@ get(url).then(r => {
       record.startedMs <= Date.now() + 5 * 60000 && STATES.includes(record.state) &&
       ((record.state === 'running' || record.state === 'checkpointed') ? record.finishedMs === undefined : (whole(record.finishedMs) && record.finishedMs >= record.startedMs));
   }
-  console.log(JSON.stringify({ target, http: r.status, ok: j ? j.ok : null, error: j ? j.error : 'non-JSON', record, raw: j && j.admission, valid }));
-  process.exit(valid ? 0 : 1);
+  const want = process.env.DOOR_EXPECT_CYCLE;
+  const expectOk = want === undefined ? null : (valid && record.cycle === Number(want) && record.state === 'done');
+  console.log(JSON.stringify({ target, http: r.status, ok: j ? j.ok : null, error: j ? j.error : 'non-JSON', record, raw: j && j.admission, valid, expectOk }));
+  process.exit(valid && expectOk !== false ? 0 : 1);
 }).catch(e => { console.log(JSON.stringify({ target, error: e.message, valid: false })); process.exit(1); });

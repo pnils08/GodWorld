@@ -30,6 +30,16 @@
  * script carries this code but stays inert unless a deployment + token are
  * ever created there.
  */
+// engine.317 (codex re-review F1): a read key equal to the fire key would make the
+// read credential a fire credential. Equal keys shut every door here — read, fire
+// and POST — until one is changed.
+function webKeysCollide_(props) {
+  var fireToken = props.getProperty('CYCLE_TRIGGER_TOKEN');
+  var readToken = props.getProperty('ADMISSION_READ_TOKEN');
+  return !!(fireToken && readToken && fireToken === readToken);
+}
+var WEB_KEYS_COLLIDE_ERROR = 'ADMISSION_READ_TOKEN equals the fire key — set a distinct read key';
+
 function readFireAdmission_(param) {
   try {
     var props = PropertiesService.getScriptProperties();
@@ -37,7 +47,7 @@ function readFireAdmission_(param) {
     var readToken = props.getProperty('ADMISSION_READ_TOKEN');
     var given = String((param && param.token) || '');
     if (!readToken && !fireToken) return { ok: false, error: 'no ADMISSION_READ_TOKEN script property set' };
-    if (readToken && fireToken && readToken === fireToken) return { ok: false, error: 'ADMISSION_READ_TOKEN equals the fire key — set a distinct read key' };
+    if (webKeysCollide_(props)) return { ok: false, error: WEB_KEYS_COLLIDE_ERROR };
     if (!given || (given !== readToken && given !== fireToken)) return { ok: false, error: 'bad token' };
     return { ok: true, admission: props.getProperty(FIRE_ADMISSION_PROP) };
   } catch (err) {
@@ -63,6 +73,8 @@ function doGet(e) {
     var token = PropertiesService.getScriptProperties().getProperty('CYCLE_TRIGGER_TOKEN');
     if (!token) {
       out.error = 'CYCLE_TRIGGER_TOKEN script property not set';
+    } else if (webKeysCollide_(PropertiesService.getScriptProperties())) {
+      out.error = WEB_KEYS_COLLIDE_ERROR;
     } else if (!e || !e.parameter || String(e.parameter.token || '') !== token) {
       out.error = 'bad token';
     } else if (String(e.parameter.action || '') === 'checkpoint') {
@@ -136,6 +148,8 @@ function doPost(e) {
     var p = (e && e.parameter) || {};
     if (!token) {
       out.error = 'CYCLE_TRIGGER_TOKEN script property not set';
+    } else if (webKeysCollide_(PropertiesService.getScriptProperties())) {
+      out.error = WEB_KEYS_COLLIDE_ERROR;
     } else if (String(p.token || '') !== token) {
       out.error = 'bad token';
     } else if (p.action === 'clearcheckpoint') {

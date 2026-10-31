@@ -393,6 +393,14 @@ console.log('═══ engine.317 — the read-only door to the fire record');
   const q = world(); q.props.ADMISSION_READ_TOKEN = 'tok';
   const qr = q.get({ action: 'admission' });
   assert('a read key equal to the fire key is refused', qr.ok === false && /distinct/.test(qr.error) && qr.admission === undefined, qr);
+  // re-review F1: equal keys shut the fire GET and every POST too — the shared value fires nothing
+  const qc = q.calls.length, qn = q.cycleCount();
+  const qf = q.get({ expect: String(qn) });
+  assert('equal keys: the fire GET is refused and runs nothing', qf.ok === false && /distinct/.test(qf.error) && q.calls.length === qc && q.cycleCount() === qn, qf);
+  const qp = q.post({ action: 'getprop', key: 'PREV_EVENING_JSON' });
+  assert('equal keys: POST is refused', qp.ok === false && /distinct/.test(qp.error), qp);
+  delete q.props.ADMISSION_READ_TOKEN;
+  assert('a distinct (here: no) read key restores the fire key', q.get({ action: 'checkpoint' }).ok === true);
   // F1: a failed read is ok:false and carries nothing but the error
   const t = world(); t.props.ADMISSION_READ_TOKEN = 'readtok';
   t.box.ENGINE95_PERSIST_DIAG = { executed: 3, errors: ['TEST-ONLY executor detail'] };

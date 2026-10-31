@@ -1,0 +1,25 @@
+== engine.316 bench, candidate 6b0732f4
+AIM = BENCH (script read the bench marker)
+bench pulled = stage 32; + engine.317 at eb1ed5fa = stage 33
+stage 34 = stage 33 + engine.316 at 6b0732f4; manifest output/engine-sheet/stage34-e316.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @169
+pull-back 167 js + manifest byte-identical to stage34-e316.sha256
+version cut; waiting 300 s for /exec propagation
+bench cycleCount 117
+fire C118 rc=0 "verdict": "PASS" "wallS": 199
+fire C119 rc=0 "verdict": "PASS" "wallS": 199
+drafted lines 28 | bench cycle 119
+  Eastlake           trajectory decay character mixed
+  Baylight District  trajectory decay character stadium
+  East Oakland       trajectory steady character construction
+  Grand Lake         trajectory steady character retail
+  San Antonio        trajectory decay character service-labor
+   C118 POP-00796 San Antonio | down | Neighborhood-Outabout-Down-S | noticed the lunch counters on International quieter than usual this week
+RESULT lines written 1 | outside their own hood 0 | by hood {"San Antonio":1} | after C117
+== restore bench code to stage 33 (= PROD)
+bench pulled = stage 34; engine file back at 6b0732f4^ = stage 33
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @170
+pull-back 167 js + manifest byte-identical to stage33-e317.sha256
+engine.316 bench done

@@ -65,13 +65,13 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.285 | Organic: Phase-11 + executor kill hazards — all LIVE @140/@141; item 4 waits on engine.95 receipts | live-observing | engine-sheet | `docs/research/2026-10-08-codex-engine95-design.md` §7; [[../research/2026-10-16-codex-engine285-hazards2-6-review]] |
 | engine.280 | Fandom follow-ups: four lines (Sports-Soured / Lifted / Gutted / Attended) wait on upstream signals: a per-piece tone at post-publish, a roster negative flag, an ECL attendance tag. §2.9 core shipped 2026-10-08; C10 upset sign shipped (38f19986), read live C113 | blocked | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §2.9 |
 | engine.310 | EventAttractiveness base: every staged city event once, whole words for the rest (builder option 2). PROD @156; C113 watch CLEAN (EA sum 114.29 → 114.12); C114 Sun 2026-11-01 reads migration drift + trajectory off the C113 map | live-observing | engine-sheet | [[../reference/DEPLOY_HISTORY]] §PROD stage 19; `docs/research/2026-10-21-engine310-diff-gate-TASK.md`; plan `docs/research/2026-10-21-engine310-plan-TASK.md`; `output/engine-sheet/2026-10-21-e310-check.json`; `output/engine_review_c113.md` §C113 re-reads |
+| research.31 | UNDOCKED scoring (builder 10-30 C): points board + engine leader/night bet LIVE PROD @168. Watch: 10-30 flight, then C114 fire (night bet = Booker) | live-observing | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §Changelog 2026-10-30 |
 
 ## 3. Now — being worked, one per terminal (in-progress)
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
-| research.31 | UNDOCKED scoring (builder 10-30 C): points board LIVE; engine leader + night bet bench PASS, review closed; PROD push waits builder go, before C114 | in-progress | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §Changelog 2026-10-30 |
 
 ## 4. Queue — ruled, not started (ready)
 

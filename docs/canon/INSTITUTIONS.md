@@ -72,7 +72,7 @@ When filling a tier-2 canon substitute, pick something that fits the prosperity-
 ### Tier 1 — Canon institutions (GodWorld-native)
 
 - **Oakland City Schools** — K-12 public district | ledger: BIZ-00016 | MOU: INIT-007 C76 | older text saying "OUSD"/"Oakland Unified" means this institution
-- **Oakland Community College District** — community-college district | ledger: Peralta row | MOU: INIT-007 C78 | older text saying "Peralta CCD" means this institution; "Peralta" as a street name stays valid
+- **Oakland Community College District** — community-college district | ledger: BIZ-00035 | MOU: INIT-007 C78 | older text saying "Peralta CCD" means this institution; "Peralta" as a street name stays valid
   - **Oakland City College — Laurel Campus** — the district's first named campus, in Laurel (the family belt; the campus the people who work in the prosperity economy without living inside it send their kids to) | ledger: Business_Ledger row minted under engine.306 (builder's call) | the district row above stays city-wide
 - **UC Berkeley** — out-of-Oakland; backstory/credential references only; never an in-world actor
 

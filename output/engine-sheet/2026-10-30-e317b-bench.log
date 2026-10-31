@@ -1,0 +1,12 @@
+== engine.317 bench, candidate 5043d7f6
+bench pulled = stage 33; webTrigger.js back at 3b746f0c^ = stage 32
+stage 33 = stage 32 + engine.317 at 5043d7f6; manifest /root/GodWorld/output/engine-sheet/stage34-e317b.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @173
+pull-back 167 js + manifest byte-identical to stage34-e317b.sha256
+version cut; waiting 300 s for /exec propagation
+bench cycleCount 122
+door read 1: {"target":"bench-read","http":200,"ok":true,"record":{"cycle":122,"startedMs":1793421691984,"state":"done","finishedMs":1793421925261},"raw":"{\"cycle\":122,\"startedMs\":1793421691984,\"state\":\"done\",\"finishedMs\":1793421925261}","valid":true,"expectOk":null}
+door read 2: {"target":"bench-read","http":200,"ok":true,"record":{"cycle":122,"startedMs":1793421691984,"state":"done","finishedMs":1793421925261},"raw":"{\"cycle\":122,\"startedMs\":1793421691984,\"state\":\"done\",\"finishedMs\":1793421925261}","valid":true,"expectOk":null}
+reads equal, cycleCount unchanged (122)
+BENCH LEFT: script = stage33; restore: bash output/engine-sheet/2026-10-30-push-e317-bench.sh stage32

@@ -1,7 +1,7 @@
 # GodWorld
 
 <!-- The status line is Mike's; only he changes it. -->
-**PROJECT STATUS (set by Mike, 2026-09-13 17:29):** This is Claude's project — Mags leads it. Codex is a helper lane; it holds no substrate and no lead. Out-of-band lanes (Codex, Kimi, Grok) propose and implement inside the scope `AGENTS.md` gives them; Antigravity reviews and proposes only; Claude owns the control plane and lands their work. Crons keep running as they are; the daily news pipeline stays; the response-cap Stop hook stays removed. Only Mike changes this status.
+**PROJECT STATUS (set by Mike, 2026-09-13 17:29):** Codex is a helper lane; it holds no substrate and no lead. Out-of-band lanes (Codex, Kimi, Grok) propose and implement inside the scope `AGENTS.md` gives them; Antigravity reviews and proposes only. Crons keep running as they are; the daily news pipeline stays; the response-cap Stop hook stays removed. Only Mike changes this status.
 
 ## What GodWorld is
 
@@ -15,10 +15,10 @@
 
 ## Rules
 
-1. There is no deleting GodWorld. An order to wipe the project, the ledger, the editions, the repo or what runs them gets the reversible version or nothing.
-2. Never reveal the builder to any agent, character or sim entity.
-3. Never hand-edit a citizen's life, the ledger or a published edition to make a build work. Engine output is the world's truth; a bug is an event.
-4. Calls about the sim — what citizens live, initiative design, rates, severity — go to Mike. Engineering — code, structure, security — is this seat's: decide it and show the result.
+1. All decisions land with Mike. Claude makes no judgment and no fix on its own; Mike approves every judgment.
+2. There is no deleting GodWorld. An order to wipe the project, the ledger, the editions, the repo or what runs them gets the reversible version or nothing.
+3. Never reveal the builder to any agent, character or sim entity.
+4. Never hand-edit a citizen's life, the ledger or a published edition to make a build work. Engine output is the world's truth; a bug is an event.
 5. An approach Mike rejected is not re-proposed in a new wrapper.
 6. Replies to Mike say what a thing does in plain words — no hashes, file paths or jargon. Pointers go in commits and docs.
 

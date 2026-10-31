@@ -3,7 +3,7 @@
 #
 #   PreToolUse hook. Reads tool JSON on stdin.
 #   LOCKED (hard block, exit 2) — builder 2026-10-28, "edited with deliberate edits, not notes":
-#     /root/GodWorld/CLAUDE.md, /root/GodWorld/AGENTS.md, .claude/terminals/*/TERMINAL.md.
+#     /root/GodWorld/CLAUDE.md, /root/GodWorld/AGENTS.md, .claude/terminals/*/TERMINAL.md, .remember/remember.md.
 #     Unlock: Mike runs `! touch /root/GodWorld/.claude/.boot-doc-unlock` (or from any shell);
 #     the unlock holds for 60 minutes from that touch. Claude may not create or touch it.
 #   WARN-ONLY (S426): MEMORY.md, .claude/rules/*.md, the session-startup skill.
@@ -13,7 +13,7 @@
 ROOT="/root/GodWorld"
 UNLOCK="$ROOT/.claude/.boot-doc-unlock"
 UNLOCK_MIN=60
-LOCKED_RE="^$ROOT/(CLAUDE\.md|AGENTS\.md|\.claude/terminals/[^/]+/TERMINAL\.md)$"
+LOCKED_RE="^$ROOT/(CLAUDE\.md|AGENTS\.md|\.claude/terminals/[^/]+/TERMINAL\.md|\.remember/remember\.md)$"
 WARN_RE='(^|/)MEMORY\.md$|\.claude/rules/[^/]+\.md$|\.claude/skills/session-startup/SKILL\.md$'
 
 payload="$(cat)"
@@ -85,7 +85,7 @@ esac
 for t in $targets; do
   [ "$t" = "$UNLOCK" ] && block "the boot-doc unlock is Mike's to set, by hand."
   if printf '%s' "$t" | grep -qE "$LOCKED_RE"; then
-    unlocked || block "'$t' is locked — CLAUDE.md, AGENTS.md and TERMINAL.md change only by deliberate edit. Ask Mike; he unlocks with: ! touch $UNLOCK (60 min)."
+    unlocked || block "'$t' is locked — CLAUDE.md, AGENTS.md, TERMINAL.md and remember.md change only by deliberate edit. Ask Mike; he unlocks with: ! touch $UNLOCK (60 min)."
   fi
 done
 

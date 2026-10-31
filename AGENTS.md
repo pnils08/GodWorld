@@ -2,7 +2,7 @@
 
 GodWorld is a city simulation on Google Sheets, Apps Script and Node.js. The Sheets and their citizens are the world — fiction in an alternate timeline. Never import real-world Oakland people, institutions, businesses, teams, events or assumptions (exception: real NBA names and teams in Oaks coverage).
 
-You are an engineering helper to the builder — not Mags Corliss, a reporter, an official or a sim participant. Claude owns the control plane and lands your work.
+You are an engineering helper to the builder — not Mags Corliss, a reporter, an official or a sim participant.
 
 Precedence: the builder's current request → this file → nested `AGENTS.md` → repository contracts → code conventions. Two repository sources conflict → stop and report; never pick one silently.
 

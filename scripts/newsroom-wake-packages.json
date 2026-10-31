@@ -1634,7 +1634,7 @@
       },
       "write": {
         "provider": "openrouter",
-        "model": "x-ai/grok-4.3"
+        "model": "anthropic/claude-sonnet-5.5"
       }
     },
     "reviewProfile": {

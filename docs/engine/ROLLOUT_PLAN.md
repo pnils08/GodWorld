@@ -69,7 +69,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
-| pipeline.91 | In-world disk search reads named city shelves only: docs, lane folders, project papers out; 32 replayed searches, 0 record lost. Next: codex, bot restart | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §Changelog 2026-10-30 |
 | engine.317 | Read-only door to FIRE_ADMISSION_JSON LIVE PROD @169 (stage 33). Next: read key into PROD Script Properties, then a door read = C113 done | in-progress | engine-sheet | `docs/archive/for-claude-review/2026-10-25-codex-engine301-gate3-recheck.md` |
 
 ## 4. Queue — ruled, not started (ready)
@@ -94,6 +93,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.116 | Spreadsheet weight: T2 code repoint (Engine_Errors), T3 archives out, T5 dead-tab prune — part done (Storyline pair deleted 2026-10-02, engine.268; v3_legacy gone); left: WorldEvents_Ledger dual-write, Chicago tabs, hidden tabs | ready | engine-sheet | [[../plans/2026-08-17-sheet-weight-reduction]] |
 | engine.27 | Card auto-invalidation Phase B (cycle-end marker hook); Phase A daemon live | ready | engine-sheet | [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]] |
 | infrastructure.6 | Sim-health observability: /api/sim-health + dashboard panel (Track A, not built). Track B ghost tabs + tab-reference test done (`c3fe1780`, `86f43999`, `1240a80a`; test 273 refs PASS 2026-10-22) | ready | engine-sheet | [[../plans/2026-07-31-engine-observability-integrity]] |
+| pipeline.91 | In-world disk search reads named city shelves only; review + re-review folded, 32 replayed searches lost no record, mags-bot reloaded | done-pending-archive | research-build | [[../plans/2026-10-11-media-extension]] §Changelog 2026-10-30 |
 | pipeline.92 | One clock: wall-clock dates reach civic agents (move date/moveId, 54/64 packs) and writers (tracker `LastUpdated`, 2 MilestoneNotes, slice pointers); blast radius read 2026-10-28, each surface to Y/C. | ready | research-build | — |
 | pipeline.98 | 29 project papers and templates sit on the published shelves (search shuts them by name). Move them, then drop BUILD_PAPER_RE; check the indexes first | ready | research-build | `lib/mags.js` BUILD_PAPER_RE |
 | pipeline.99 | Build words in newsroom inputs: world summary footnote + footer (code), a Fruitvale tracker note (live cell, builder's call), model tags in staged names | ready | research-build | `scripts/buildWorldSummary.js:746` |

@@ -12,6 +12,7 @@ const path = require('path');
 const { getNeighborhoodsForDistricts } = require('../lib/districtMap');
 const trackerSnapshot = require('./initiativeTrackerSnapshot');
 const { categoryIssue, renewRowIssue } = require('./civicInterventionValidation');
+const { loadMajorSportsEvents } = require('./civicMajorEvents');
 
 const ROOT = path.join(__dirname, '..');
 const CONSTITUENT_CAP = 8;
@@ -1250,6 +1251,22 @@ function gamePromptView(game) {
     confrontation: game.confrontation ? { id: game.confrontation.id, demand: clip(game.confrontation.demand, BLOCK_CAP), expectsMove: 'answer' } : null,
     confrontationIds: ((game.confrontations || {}).open || []).map(c => c.id),
     confrontationEvidence: game.confrontations && game.confrontations.available === false ? game.confrontations.text : undefined,
+    majorEvents: game.majorEvents && {
+      available: game.majorEvents.available,
+      reason: game.majorEvents.reason,
+      snapshotCycle: game.majorEvents.snapshotCycle,
+      snapshotGeneratedAt: game.majorEvents.snapshotGeneratedAt,
+      snapshotHash: game.majorEvents.snapshotHash,
+      coverageNote: game.majorEvents.coverageNote,
+      omitted: game.majorEvents.omitted,
+      items: (game.majorEvents.items || []).map(e => ({
+        eventId: e.eventId, sourceRef: e.sourceRef, sourceRevision: e.sourceRevision,
+        occurredCycle: e.occurredCycle, status: e.status, category: e.category,
+        hoods: e.hoods, unresolvedPlace: e.unresolvedPlace,
+        citywideRelevance: e.citywideRelevance, team: e.team,
+        fact: clip(e.fact, 220),
+      })),
+    },
   };
 }
 
@@ -1417,6 +1434,10 @@ function buildPack(opts) {
   // civic.38 Task 3 — board / petition pool / working city / last move /
   // confrontation. boardIds feed the datawake move gate (Task 1 step 2).
   const game = buildGameBlocks({ root, cycle, office, officeMap, hoods, audit });
+  game.majorEvents = loadMajorSportsEvents({
+    root, cycle, office, hoods,
+    canonicalHoods: (((audit || {}).snapshots || {}).Neighborhood_Map || []).map(r => r.Neighborhood),
+  });
 
   return {
     v: 'OFFICE/1',

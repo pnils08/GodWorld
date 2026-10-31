@@ -1,6 +1,6 @@
 # TASK 2026-10-31 — codex: re-review of the fold, pipeline.99 (last round)
 
-Fold commit `dc73c44c`. Diff: `git show dc73c44c`. Your review: `docs/for-claude-review/2026-10-31-codex-pipeline99-world-facing-review.md`. All findings verified. This is the one re-review; the seat decides whatever is left.
+Fold commit `f9947738`. Diff: `git show f9947738`. Your review: `docs/for-claude-review/2026-10-31-codex-pipeline99-world-facing-review.md`. All findings verified. This is the one re-review; the seat decides whatever is left.
 
 **The fold.** F1: `modelFreeStem` keeps `-HHMM` (`-\d{3,4}`), and treats a tail after `flash` as the model's own name; 11 Ines C112 rows repaired from the backup. F2: Tanya's script pointer and the beat kit's plan pointer removed at the producer. F4: the OriginGame filter takes a last field and spaced JSON. F5: the stale assertion removed. F3: `typeof` stays, decided. The attribution defect is filed as engine.329.
 

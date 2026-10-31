@@ -2379,8 +2379,9 @@ function datawakeUserPrompt(pack, wallInj, office) {
     hay,
     'JSON only: {"office":"' + voiceSlug(office.agentDir) + '","holder":"' + office.holder + '","statement":"","moves":[],"numberMoved":""}',
     'statement is one string that answers THIS WEEK\'S LEVER from the pack. Not a statement object. Not a prior-wall quote.',
-    // civic.38 Task 1 — the closed move set. One consequential move per wake.
-    'moves: at most ONE move from this closed set — {"type":"propose","title":"","problem":"","category":"<one category from your pack>","reach":"hood|district|all","hoods":[""],"budget":"$12.5M"} | {"type":"work","initiativeId":"INIT-…"} | {"type":"answer","confrontationId":"…","text":""} | {"type":"canvass","hood":"","note":""} | {"type":"call-vote","initiativeId":"INIT-…"} | {"type":"renew","initiativeId":"INIT-…","amount":"$4M"}. ' +
+    // An answer acknowledges a directive; it must not consume the seat's
+    // opportunity to take one executable move in the same wake.
+    'moves: at most ONE work/decision move, plus one answer for EACH unanswered directive named in game.confrontationIds. Closed set — {"type":"propose","title":"","problem":"","category":"<one category from your pack>","reach":"hood|district|all","hoods":[""],"budget":"$12.5M"} | {"type":"work","initiativeId":"INIT-…"} | {"type":"answer","confrontationId":"…","text":""} | {"type":"canvass","hood":"","note":""} | {"type":"call-vote","initiativeId":"INIT-…"} | {"type":"renew","initiativeId":"INIT-…","amount":"$4M"}. ' +
       'work only names an initiative on YOUR board (game.boardIds). propose and canvass name only hoods inside your own district' +
       (/^D\d$/.test(String(office.district || '')) ? '' : ' (your seat is citywide — any real neighborhood)') +
       '. call-vote names a petition-pending row (proposed, no vote scheduled) whose domain has no petition rule — the mayor may call any such row, a district seat only one whose hoods sit in their district, once per row per week' +
@@ -2556,10 +2557,8 @@ function hoodAuthorityReason(office, hoodRaw, childToParent) {
   return null;
 }
 
-// Validate one wake's moves. ctx: { office, boardIds:Set,
-// childToParent }. Returns { accepted:[{type,payload}], rejected:[{move,reason}] }.
-// Every move type is consequential — the first valid one stands, the rest are
-// rejected on their own lines (plan Task 1 step 1).
+// Validate one wake's moves. A directive answer is recorded independently of
+// one work/decision move. Each open directive can receive one answer.
 function validateDatawakeMoves(rawMoves, ctx) {
   const accepted = [];
   const rejected = [];
@@ -2571,6 +2570,7 @@ function validateDatawakeMoves(rawMoves, ctx) {
   const boardIds = ctx.boardIds || new Set();
   const c2p = ctx.childToParent || {};
   const isChief = String(office.officeId || '') === 'CHIEF-POLICE';
+  const answeredThisWake = new Set();
 
   for (const m of rawMoves) {
     const type = m && typeof m === 'object' ? m.type : null;
@@ -2609,6 +2609,7 @@ function validateDatawakeMoves(rawMoves, ctx) {
       if (!String(m.text || '').trim()) reason = 'answer-missing-text';
       else if (ctx.answerEvidenceAvailable === false) reason = 'answer-evidence-unavailable';
       else if ((ctx.answeredConfrontationIds || new Set()).has(m.confrontationId)) reason = 'directive-already-answered';
+      else if (answeredThisWake.has(m.confrontationId)) reason = 'malformed-duplicate-answer';
       else {
         const directive = (ctx.confrontations || []).find(c => c.id === m.confrontationId);
         if (!directive || directive.agentDir !== office.agentDir ||
@@ -2636,7 +2637,7 @@ function validateDatawakeMoves(rawMoves, ctx) {
       rejected.push({ move: m, reason });
       continue;
     }
-    if (accepted.length) {
+    if (type !== 'answer' && accepted.some(a => a.type !== 'answer')) {
       rejected.push({ move: m, reason: 'second-consequential-move(one per wake — the first valid one stands)' });
       continue;
     }
@@ -2656,6 +2657,7 @@ function validateDatawakeMoves(rawMoves, ctx) {
       const directive = ctx.confrontations.find(c => c.id === m.confrontationId);
       payload.directiveCycle = directive.cycle;
       payload.confrontationSeat = office.agentDir;
+      answeredThisWake.add(m.confrontationId);
     }
     accepted.push({ type, payload });
   }
@@ -2664,8 +2666,8 @@ function validateDatawakeMoves(rawMoves, ctx) {
 
 // Append-only move ledger (Task 2 step 1): one JSON line per event, status
 // changes are new lines for the same moveId, a reader folds last-line-wins.
-// moveId = MV-{cycle}-{agentDir}-{date} — one consequential move per wake
-// makes it unique; a re-run of the same wake writes the same id.
+// The work/decision retains the legacy base ID. Answers add their bound
+// directive ID so two accepted moves cannot overwrite each other on fold.
 function appendMoveLedger(root, cycle, lines) {
   if (!lines.length) return null;
   const dir = path.join(root, 'output', 'cron-civic', 'moves');
@@ -2679,7 +2681,8 @@ function moveLedgerLines(office, cycle, date, mv) {
   const moveId = 'MV-' + cycle + '-' + office.agentDir + '-' + date;
   const at = new Date().toISOString();
   const lines = mv.accepted.map(m => ({
-    moveId, cycle: Number(cycle), date, agentDir: office.agentDir, popid: office.popid || null,
+    moveId: m.type === 'answer' ? moveId + ':answer:' + m.payload.confrontationId : moveId,
+    cycle: Number(cycle), date, agentDir: office.agentDir, popid: office.popid || null,
     type: m.type, payload: m.payload, status: 'pending', at,
   }));
   mv.rejected.forEach((r, i) => lines.push({
@@ -3301,8 +3304,8 @@ async function runDatawake() {
       for (const rj of mv.rejected) {
         log('[datawake] MOVE REJECTED ' + office.agentDir + ' — ' + rj.reason + ' :: ' + JSON.stringify(rj.move).slice(0, 160));
       }
-      if (mv.accepted.length) {
-        log('[datawake] MOVE ' + office.agentDir + ' — ' + mv.accepted[0].type + ' ' + JSON.stringify(mv.accepted[0].payload).slice(0, 120));
+      for (const accepted of mv.accepted) {
+        log('[datawake] MOVE ' + office.agentDir + ' — ' + accepted.type + ' ' + JSON.stringify(accepted.payload).slice(0, 120));
       }
       const rec = datawakeRecord({ office, cycle, date, answeredModel, j, mv });
       const outPath = path.join(DATAWAKE_DIR, office.agentDir + '_' + date + '.json');

@@ -194,7 +194,7 @@ test('T1.2: Live validateDatawakeMoves validates closed move types & rejects unk
   assert.equal(res.rejected[1].reason, 'unknown-move-type(spin)');
 });
 
-test('T1.3: Live validateDatawakeMoves enforces at most one consequential move per wake (first valid wins)', () => {
+test('T1.3: Live validateDatawakeMoves enforces one work/decision move while answers remain independent', () => {
   const office = { officeId: 'COUNCIL-D1', agentDir: 'civic-office-council-d1', district: 'D1' };
   const boardIds = new Set(['INIT-001', 'INIT-002']);
   const catalog = phaseContract.INTERVENTION_CATALOG;
@@ -206,12 +206,41 @@ test('T1.3: Live validateDatawakeMoves enforces at most one consequential move p
   ];
 
   const res = civicRun.validateDatawakeMoves(rawMoves, { office, boardIds, catalog, childToParent: CHILD_TO_PARENT_HOOD });
-  assert.equal(res.accepted.length, 1, 'Exactly one consequential move is accepted per wake');
+  assert.equal(res.accepted.length, 1, 'Exactly one work/decision move is accepted per wake');
   assert.equal(res.accepted[0].type, 'work');
 
   assert.equal(res.rejected.length, 2);
   assert.match(res.rejected[0].reason, /second-consequential-move/);
   assert.match(res.rejected[1].reason, /second-consequential-move/);
+});
+
+test('A3: directive answer and work survive the same wake with distinct durable IDs', () => {
+  const ws = createTempWorkspace();
+  try {
+    const office = { officeId: 'COUNCIL-D1', agentDir: 'civic-office-council-d1', district: 'D1' };
+    const directive = { id: 'CONF-108-' + office.agentDir, cycle: 108, agentDir: office.agentDir };
+    const answer = { type: 'answer', confrontationId: directive.id, text: 'I will report what the work changes.' };
+    const work = { type: 'work', initiativeId: 'INIT-001' };
+    const ctx = { office, cycle: 108, boardIds: new Set(['INIT-001']),
+      confrontations: [directive], answerEvidenceAvailable: true };
+    const mv = civicRun.validateDatawakeMoves([answer, work, answer, { type: 'work', initiativeId: 'INIT-001' }], ctx);
+    assert.deepEqual(mv.accepted.map(m => m.type), ['answer', 'work']);
+    assert.deepEqual(mv.rejected.map(r => r.reason), [
+      'malformed-duplicate-answer', 'second-consequential-move(one per wake — the first valid one stands)'
+    ]);
+    const lines = civicRun.moveLedgerLines(office, 108, '2026-09-21', mv);
+    assert.equal(new Set(lines.map(l => l.moveId)).size, lines.length);
+    assert.equal(lines[0].moveId, 'MV-108-' + office.agentDir + '-2026-09-21:answer:' + directive.id);
+    assert.equal(lines[1].moveId, 'MV-108-' + office.agentDir + '-2026-09-21');
+    civicRun.appendMoveLedger(ws.dir, 108, lines);
+    const folded = civicRun.loadMoveLedgerFolded(ws.dir, 108);
+    assert.equal(folded.get(lines[0].moveId).type, 'answer');
+    assert.equal(folded.get(lines[1].moveId).type, 'work');
+    const reversed = civicRun.validateDatawakeMoves([work, answer], ctx);
+    assert.deepEqual(reversed.accepted.map(m => m.type), ['work', 'answer']);
+  } finally {
+    ws.cleanup();
+  }
 });
 
 test('T1.4: Live validateDatawakeMoves rejects work move when initiative is off-board', () => {

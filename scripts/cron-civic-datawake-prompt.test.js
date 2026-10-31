@@ -25,6 +25,8 @@ check('wall before lever', wallAt !== -1 && wallAt < leverAt);
 check('lever before pack json', leverAt !== -1 && leverAt < packAt);
 check('pack json before output format', packAt !== -1 && packAt < formatAt);
 check('format present', formatAt !== -1);
+check('prompt permits a directive answer alongside work',
+  prompt.includes('at most ONE work/decision move, plus one answer for EACH unanswered directive'));
 
 const noGoal = datawakeUserPrompt({ task: { a: 'district-week' } }, wall, office);
 check('missing goal still puts wall before pack', noGoal.indexOf(wall) < noGoal.indexOf('{"task":'));

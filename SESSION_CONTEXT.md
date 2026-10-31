@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** engine.317 → PROD @169 live; once ADMISSION_READ_TOKEN is in PROD Script Properties, door read must show C113 done (e317-door.js prod). research.31 → read the 10-31 20:30 flight (first on claude-haiku-5.5); verify codex progress review. After C114: stage 32 watch + engine.270. Then infra.16/17, engine.325.
 
-**NEXT[research-build]:** no job in hand — ask Mike. Watch: Sat 08:15 Nia digest carries the nights as flown (83); Sat 11:15 Ines on Sonnet + first full every-page run (73/97); 94/96 key shapes; 93 owed marks C114; 89 reads.
+**NEXT[research-build]:** engine.316 → run `2026-10-30-push-e316-prod.sh` once the door's read key is in PROD (Mike). engine.327 → 81 ECL rows wait on Mike's go; engine.326; pipeline.99 tracker note = his call. Watch: Sat 08:15 Nia digest (83); Sat 11:15 Ines (73/97); next writer wake's canon_search (91); 93 owed marks C114.

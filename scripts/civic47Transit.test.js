@@ -36,8 +36,9 @@ const levels = Object.values(baseline.rows).map(r => r.RidershipVolume).sort((a,
 const mid = Math.floor(levels.length / 2);
 const cityMiddle = levels.length % 2 ? levels[mid] : (levels[mid - 1] + levels[mid]) / 2;
 const initiative = { PolicyDomain: 'transit', AffectedNeighborhoods: 'Downtown',
-  StageBaseline: JSON.stringify({ v: 1, origin: 'vote', cycle: 114,
-    tab: 'Transit_Metrics', columns: ['RidershipVolume'], scope: 'station-serving-hood',
+  StageBaseline: JSON.stringify({ v: 1, origin: 'vote', cycle: 114, captureCycle: 115,
+    tab: 'Transit_Metrics', columns: ['RidershipVolume'], scope: 'station-serving-hood', direction: 'up',
+    cityN: stationHoods.length, city: stationHoods,
     keys: { Downtown: baseline.rows.Downtown }, cityMiddle: { RidershipVolume: cityMiddle } }) };
 const measured = measureStageMovement(initiative, { cycle: 117,
   config: { civicDeliverMargin: 0.01, civicDeliverHoldCycles: 3 },
@@ -50,8 +51,18 @@ assert(measured.observations.every(o => o.differences.RidershipVolume > 0));
 const framed = (extra) => ({ ...initiative, StageBaseline: JSON.stringify({ ...JSON.parse(initiative.StageBaseline), ...extra }) });
 const measure = row => measureStageMovement(row, { cycle: 117, config: { civicDeliverMargin: 0.01, civicDeliverHoldCycles: 3 },
   readAudit: c => ({ cycle: c, snapshots: { Neighborhood_Map: map(c), Transit_Metrics: [...rows(c - 5, 900), ...rows(c, 80)] } }) });
-const same = measure(framed({ cityN: stationHoods.length, city: stationHoods }));
+const same = measure(framed({}));
 assert(same.available && same.metricMoved, same.reason);
+// The baseline owns the target membership: editing AffectedNeighborhoods afterwards changes nothing that was frozen.
+const edited = measure({ ...initiative, AffectedNeighborhoods: 'Downtown, Fruitvale' });
+assert(edited.available && edited.metricMoved, edited.reason);
+// The descriptor's required fields are checked at the read boundary: a flipped direction or a missing city reference is unusable.
+const flipped = measure(framed({ direction: 'down' }));
+assert.strictEqual(flipped.available, false);
+assert.match(flipped.reason, /baseline descriptor unavailable/);
+const noCity = measure(framed({ cityN: undefined, city: undefined }));
+assert.strictEqual(noCity.available, false);
+assert.match(noCity.reason, /baseline descriptor unavailable/);
 const grown = measure(framed({ cityN: stationHoods.length + 1 }));
 assert.strictEqual(grown.available, false);
 assert.match(grown.reason, /city membership changed/);

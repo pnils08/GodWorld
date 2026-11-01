@@ -4264,7 +4264,9 @@ function freezeCivicStageCohort_(ctx) {
     var co = { available: false, reason: null, cycle: obs, tab: tab, scope: wantedScopes[tab] || 'hood', rows: {} };
     out.tabs[tab] = co;
     if (!(obs >= 1)) { co.reason = 'no-prior-cycle'; return; }
-    if (!canon || !canon.length || typeof resolveHoodOrChild_ !== 'function') { co.reason = 'canon-hoods-unavailable'; return; }
+    // resolveHoodOrChild_ THROWS unless the whole canon seed (list, set, children) is there; a throw here would
+    // leave no cohort published at all, so a partial seed reads as an unavailable tab, never an exception.
+    if (!canon || !canon.length || typeof resolveHoodOrChild_ !== 'function' || !S.canonHoods.set || !S.canonHoods.children) { co.reason = 'canon-hoods-unavailable'; return; }
     var sheet = ss.getSheetByName(tab);
     if (!sheet) { co.reason = 'tab-missing'; return; }
     var data = sheet.getDataRange().getValues();

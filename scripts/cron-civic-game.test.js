@@ -1758,7 +1758,7 @@ test('T9.7: Live measureStageMovement detects incomplete hold windows and broken
 
   const validBaseline = {
     v: 1, origin: 'conversion', cycle: 105, tab: 'Neighborhood_Demographics',
-    columns: ['Sick'], scope: 'hood',
+    columns: ['Sick'], scope: 'hood', direction: 'down', cityN: 3, city: ['Downtown', 'East Oakland', 'West Oakland'],
     keys: { 'West Oakland': { Sick: 10 } },
     cityMiddle: { Sick: 10 }
   };
@@ -1811,7 +1811,7 @@ test('T9.8: Live measureStageMovement fails closed on missing World_Config, stal
     PolicyDomain: 'health', AffectedNeighborhoods: 'West Oakland',
     StageBaseline: JSON.stringify({
       v: 1, origin: 'conversion', cycle: 104, tab: 'Neighborhood_Demographics',
-      columns: ['Sick'], scope: 'hood',
+      columns: ['Sick'], scope: 'hood', direction: 'down', cityN: 2, city: ['East Oakland', 'West Oakland'],
       keys: { 'West Oakland': { Sick: 10 } },
       cityMiddle: { Sick: 10 }
     })
@@ -1853,7 +1853,7 @@ test('T9.8: Live measureStageMovement fails closed on missing World_Config, stal
     PolicyDomain: 'health', AffectedNeighborhoods: 'West Oakland',
     StageBaseline: JSON.stringify({
       v: 1, origin: 'conversion', cycle: 104, tab: 'Neighborhood_Demographics',
-      columns: ['Sick'], scope: 'hood',
+      columns: ['Sick'], scope: 'hood', direction: 'down', cityN: 2, city: ['East Oakland', 'West Oakland'],
       keys: { 'West Oakland': { Sick: 10 } },
       cityMiddle: { Sick: 10 }
     })

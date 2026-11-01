@@ -96,6 +96,8 @@ function buildFixtureCtx() {
         { Cycle: 92, Station: 'Fruitvale', RidershipVolume: '4000' },
         { Cycle: 93, Station: 'Fruitvale', RidershipVolume: '4553' },
         { Cycle: 93, Station: '', RidershipVolume: '' },
+        { Cycle: '93', Station: 'Lake Merritt', RidershipVolume: '4825' },
+        { Cycle: '', Station: 'Rockridge', RidershipVolume: '3506' },
       ],
       Event_Arc_Ledger: [],
       LifeHistory_Log: [],
@@ -193,7 +195,7 @@ function buildFixtureCtx() {
     assert('snapshots.Crime_Metrics is array (empty)',
       Array.isArray(s.Crime_Metrics));
     assert('snapshots.Transit_Metrics keeps only this Cycle\'s rows (the tab is an append log)',
-      Array.isArray(s.Transit_Metrics) && s.Transit_Metrics.length === 2 && s.Transit_Metrics.every(r => Number(r.Cycle) === 93),
+      Array.isArray(s.Transit_Metrics) && s.Transit_Metrics.length === 3 && s.Transit_Metrics.every(r => Number(r.Cycle) === 93),
       JSON.stringify(s.Transit_Metrics));
   }
 

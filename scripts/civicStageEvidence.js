@@ -28,6 +28,7 @@ function measureStageMovement(row, context = {}) {
     if (!baseline || baseline.v !== 1 || !['conversion','vote'].includes(baseline.origin) ||
         baseline.tab !== metric.tab || baseline.scope !== metric.scope ||
         JSON.stringify(baseline.columns) !== JSON.stringify(metric.column) ||
+        baseline.direction !== metric.direction || !Number.isFinite(Number(baseline.cityN)) || !Array.isArray(baseline.city) ||
         !baseline.keys || Array.isArray(baseline.keys) || !baseline.cityMiddle) throw new Error('baseline descriptor unavailable/unsupported');
     const baselineCycle = number(baseline.cycle, 'baseline Cycle');
     if (!Number.isInteger(baselineCycle) || baselineCycle < 1 || baselineCycle >= cycle) throw new Error('baseline must precede observation');
@@ -55,10 +56,9 @@ function measureStageMovement(row, context = {}) {
       if (!audit || number(audit.cycle, 'audit Cycle') !== c) throw new Error('metric observation C'+c+' unavailable/stale');
       const snapshots = audit.snapshots || {};
       const resolver = buildHoodResolver(snapshots.Neighborhood_Map);
-      const targets = [...new Set(String(row.AffectedNeighborhoods || '').split(/[,;]+/).filter(s=>s.trim()).map(h=>resolver.resolve(h)))].sort();
-      if (targets.includes(null) || targets.includes(undefined) || JSON.stringify(targets) !== JSON.stringify(keys) || keys.some(h=>resolver.resolve(h)!==h)) {
-        throw new Error('target cohort changed/unknown');
-      }
+      // The baseline owns the target membership (frozen at capture, as the engine's delivery edge reads it); a later
+      // edit to AffectedNeighborhoods does not change what was frozen. The frozen hoods must still be canon hoods.
+      if (keys.some(h=>resolver.resolve(h)!==h)) throw new Error('baseline target hood unknown');
       const rows = snapshots[metric.tab];
       if (!Array.isArray(rows)) throw new Error(metric.tab+' observation unavailable');
       const byHood = new Map();

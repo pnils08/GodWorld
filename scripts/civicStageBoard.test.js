@@ -35,7 +35,7 @@ function fixture() {
   }});
   const row = {InitiativeID:'INIT-SYNTHETIC',Stage:'Standing',ImplementationPhase:'operational',PolicyDomain:'health',
     AffectedNeighborhoods:'SYNTHETIC-child',StageBaseline:JSON.stringify({v:1,origin:'conversion',cycle:995,
-      tab:'Neighborhood_Demographics',columns:['Sick'],scope:'hood',keys:{'SYNTHETIC-A':{Sick:10}},cityMiddle:{Sick:10}})};
+      tab:'Neighborhood_Demographics',columns:['Sick'],scope:'hood',direction:'down',cityN:3,city:['SYNTHETIC-A','SYNTHETIC-B','SYNTHETIC-C'],keys:{'SYNTHETIC-A':{Sick:10}},cityMiddle:{Sick:10}})};
   return {row,context:{cycle:999,readAudit:audit,config:{civicDeliverMargin:0.2,civicDeliverHoldCycles:3}}};
 }
 test('board caller computes held city-relative movement and preserves the shared requirement result', () => {
@@ -59,7 +59,6 @@ test('missing dials, stale or invalid observations and changed cohorts state abs
     f=>{const read=f.context.readAudit;f.context.readAudit=c=>({...read(c),cycle:c-1});},
     f=>{f.row.StageBaseline='{bad';},
     f=>{const b=JSON.parse(f.row.StageBaseline);b.cycle=998;f.row.StageBaseline=JSON.stringify(b);},
-    f=>{f.row.AffectedNeighborhoods='SYNTHETIC-B';},
     f=>{const read=f.context.readAudit;f.context.readAudit=c=>{const a=read(c);a.snapshots.Neighborhood_Demographics[1].Sick='';return a;};},
   ]) {
     const f=fixture(); mutate(f);
@@ -67,6 +66,13 @@ test('missing dials, stale or invalid observations and changed cohorts state abs
     assert.equal(b.metricEvidence.available,false);assert.equal(b.requirement.clears,false);
     assert.match(b.needsNext,/metric evidence unavailable/);
   }
+});
+test('the baseline owns the target membership: a later AffectedNeighborhoods edit changes nothing that was frozen', () => {
+  const {row,context}=fixture();
+  const before=slice.boardRowsFor({officeId:'MAYOR-01'},[{...row}],{},context)[0].metricEvidence;
+  row.AffectedNeighborhoods='SYNTHETIC-B';
+  const after=slice.boardRowsFor({officeId:'MAYOR-01'},[row],{},context)[0].metricEvidence;
+  assert.equal(after.available,before.available);assert.deepEqual(after.observations,before.observations);
 });
 test('raw health improvement without relative improvement is insufficient', () => {
   const {row,context}=fixture();
@@ -119,7 +125,7 @@ test('invalid domain margins fail closed instead of silently using the default',
 });
 test('domain margin selection is isolated to the row domain', () => {
   const {row,context}=fixture();row.PolicyDomain='education';
-  const b=JSON.parse(row.StageBaseline);b.columns=['SchoolQualityIndex'];
+  const b=JSON.parse(row.StageBaseline);b.columns=['SchoolQualityIndex'];b.direction='up';
   b.keys={'SYNTHETIC-A':{SchoolQualityIndex:50}};b.cityMiddle={SchoolQualityIndex:50};row.StageBaseline=JSON.stringify(b);
   const read=context.readAudit;
   context.readAudit=c=>{const a=read(c);a.snapshots.Neighborhood_Demographics.forEach((r,i)=>{r.SchoolQualityIndex=i===0?59:50;});return a;};

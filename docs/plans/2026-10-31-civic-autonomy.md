@@ -26,7 +26,7 @@ pointers:
 
 **Goal:** Officials independently choose grounded actions, events and programs; eligible choices change the world on a declared clock; exposed citizens and independent media can respond; the results and their attribution return to officials and approval without routine builder intervention.
 
-**Rows:** No new rollout ID assigned; Claude registers a single coordinating pointer after accepting this plan. Existing `engine.260` organic civic-hire watch remains separate evidence. **Owner:** research-build coordinates Track A; engine-sheet owns Track B and engine landing.
+**Row:** `civic.47` — one plan, one row (builder 2026-11-01). **Owner:** research-build, end to end; engine pieces are benched and pushed by this seat like any engine job. Existing `engine.260` organic civic-hire watch remains separate evidence.
 
 This is a completed design proposal awaiting Claude review, not runtime authorization or a claim that its defaults are builder rulings. The request authorizes these documents. Model spend, production scheduling, Sheet changes, deployment and live proof retain their existing gates. Once implemented and activated under an approved policy, ordinary eligible decisions must not require another builder approval. Exceptions enter a visible technical/authority queue and never masquerade as successful civic work.
 
@@ -74,16 +74,16 @@ Task status lives only in this table. Task detail specifies scope and acceptance
 
 | # | Task | Owner | Status |
 |---|---|---|---|
-| A1 | Reconcile civic facts, permissions and old contracts; freeze source/receipt baseline | research-build | not started |
+| A1 | Reconcile civic facts, permissions and old contracts; freeze source/receipt baseline | research-build | persona facts landed 2026-11-01; slice fields → A2 |
 | A2 | Build event-aware, model-budgeted seat briefs and bounded evidence retrieval | research-build | not started |
 | A3 | Give each seat sufficient duty turns, independent replies, action batches and continuation receipts | research-build | not started |
-| B1 | Implement action authority, durable execution journal, resource reservations and migration contract | engine-sheet, research-build | not started |
-| B2 | Connect events, programs and project actions to real receivers; close typed gate defects | engine-sheet | not started |
-| B3 | Make official ballots and mayor decisions binding through one vote authority | engine-sheet, research-build | not started |
-| B4 | Connect committed outcomes to citizen exposure, diverse reactions and measured accountability | engine-sheet | not started |
+| B1 | Implement action authority, durable execution journal, resource reservations and migration contract | research-build | not started |
+| B2 | Connect events, programs and project actions to real receivers; close typed gate defects | research-build | not started |
+| B3 | Make official ballots and mayor decisions binding through one vote authority | research-build | not started |
+| B4 | Connect committed outcomes to citizen exposure, diverse reactions and measured accountability | research-build | not started |
 | A4 | Give newsroom and next official wake source-linked choices, outcomes and responses | research-build | not started |
 | A5 | Evaluate actual seat models, context/output limits and fallback behavior on frozen scenarios | research-build | not started |
-| AB6 | Run composed sandbox proof, pilot mayor/D2, then extend to all districts | engine-sheet, research-build | not started |
+| AB6 | Run composed sandbox proof, pilot mayor/D2, then extend to all districts | research-build | not started |
 
 ### Implementation map
 
@@ -296,6 +296,7 @@ No single unit test, applied=true file, stage transition, quoted reaction or agg
 
 ## Changelog
 
+- 2026-11-01 (research-build) — Builder: "it's 1 plan, 1 pointer." One row, `civic.47`, carries the whole plan on research-build; the two-track owner split in the proposal and engine-sheet's draft `civic.46` row are withdrawn. Task owners set to research-build.
 - 2026-11-01 (research-build) — **A1 persona facts LANDED** (civic.47): the 17 persona files the civic rota loads (mayor, shared council lens/rules, D1–D9 identities, chief) replaced by codex's reviewed proposal. Changing facts (approval numbers, term lines, seat status, turf lists, colleague health, program state) are out of the personas and come from the brief; premises the builder's rulings bar (housing hardship, crisis story, pre-assigned task) are out; character, dated vote history and operating rules stay. Codex drew it up, agy reviewed (4/33 → fold → 18/0), this seat landed; five civic suites pass. Review trail: [[../archive/for-claude-review/2026-11-01-codex-civic-a1-persona-facts]], `output/antigravity/2026-11-01-review-civic-a1-persona-facts.md` + `-rereview.md`. The rest of A1 (typed brief fields in the slice, the office map) is A2's; its field list is in the archived doc.
 - 2026-11-01 (research-build) — Builder read the full readout and accepted the direction ("pretty exciting, has potential"); **A1 persona rewrite starts first**: codex draws up the proposed persona files (what moves out, what stays, which brief field supplies each moved fact), agy reviews the delivery, this seat lands them. Still awaiting the builder's rulings before A2/A3/B: turn counts (2 duty + 2 event per week), token budgets (8k/12k in, 3k/5k out), the new Civic_Action_Ledger tab, the event-duty exception, the paid A5 ceiling, the fixture commit, the coordinating row owner (engine-sheet holds an uncommitted civic.46 claiming the whole plan; research-build holds civic.47 for A1). Plan moved from the inbox to its home; research to `docs/research/`.
 - 2026-10-31 (codex) — Created proposed two-track civic autonomy plan from source research: decision opportunity, major-event awareness, executable actions, binding votes, citizen/media feedback, attribution, model fit and composed proof.

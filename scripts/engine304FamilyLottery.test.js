@@ -537,6 +537,32 @@ t('two rows for one member on one page (a race) tick once; a row already counted
   E2.processMediaUsage_(w2.ctx, 'C' + C2, C2);
   eq(w2.sheets.Generic_Citizens.rows[1][g2('EmergenceCount')], 0);
 });
+t('engine.329: the hard-light line names the hard row\'s piece, not the last row\'s', () => {
+  // a negative sports row first, then a neutral civic row, one citizen, one pass — the bug named the civic piece
+  const d = darrin(); d[c2('UsageCount')] = 3; d[c2('LifeHistory')] = '';
+  const w = world2([d], [famRow()]);
+  w.sheets.Citizen_Media_Usage = mkSheet([USAGE_H.slice(),
+    usageRow({ Cycle: '113', CitizenName: 'Darrin Davis', UsageType: 'mentioned', Context: 'sports_c113_p-slayer', Sentiment: 'negative' }),
+    usageRow({ Cycle: '113', CitizenName: 'Darrin Davis', UsageType: 'mentioned', Context: 'civic_c113_carmen-delaine' })]);
+  w.ctx.ss.getSheetByName = n => w.sheets[n] || null;
+  const res = E2.processMediaUsage_(w.ctx, 'C' + C2, C2);
+  eq(res.hardLight, 1);
+  const life = String(w.ctx.ledger.rows[0][c2('LifeHistory')]);
+  assert.ok(/hard light/.test(life), 'a hard-light line was written: ' + life);
+  assert.ok(/sports_c113/.test(life) && !/civic_c113/.test(life), 'the line names the sports piece: ' + life);
+  eq(w.ctx.ledger.rows[0][c2('UsageCount')], 3);   // −1 for the hard row, +1 for the civic one
+  // two hard rows: the first one's piece sticks
+  const d2 = darrin(); d2[c2('UsageCount')] = 3; d2[c2('LifeHistory')] = '';
+  const w2 = world2([d2], [famRow()]);
+  w2.sheets.Citizen_Media_Usage = mkSheet([USAGE_H.slice(),
+    usageRow({ Cycle: '113', CitizenName: 'Darrin Davis', UsageType: 'mentioned', Context: 'sports_c113_p-slayer', Sentiment: 'negative' }),
+    usageRow({ Cycle: '113', CitizenName: 'Darrin Davis', UsageType: 'mentioned', Context: 'civic_c113_luis-navarro', Sentiment: 'negative' })]);
+  w2.ctx.ss.getSheetByName = n => w2.sheets[n] || null;
+  E2.processMediaUsage_(w2.ctx, 'C' + C2, C2);
+  const life2 = String(w2.ctx.ledger.rows[0][c2('LifeHistory')]);
+  assert.ok(/sports_c113/.test(life2) && !/civic_c113/.test(life2), 'the first hard row sticks: ' + life2);
+  eq(w2.ctx.ledger.rows[0][c2('UsageCount')], 1);
+});
 t('decay, Intake routing and the citizen-context readers skip it', () => {
   const pa = src('phase05-citizens/processAdvancementIntake.js'), mr = src('phase07-evening-media/mediaRoomIntake.js'), cb = src('phase05-citizens/citizenContextBuilder.js');
   assert.ok(/if \(iUType >= 0 && isFamilyUsage_\(uv\[ur\]\[iUType\]\)\) continue;/.test(pa));

@@ -524,12 +524,20 @@ function processMediaUsage_(ctx, now, cycle) {
           // cell never carries a citizen up on its own. Only the count moves here.
           var newTier = currentTier;
           var popId = lPopIdCol >= 0 ? ledgerRows[lr][lPopIdCol] : '';
-          
+
+          // engine.329 (codex 10-31): `hard` ORs across this citizen's rows, so the
+          // context the hard-light line names must be the hard row's own. The first
+          // hard row of the pass sticks; a later neutral row (or a later hard one)
+          // never overwrites the piece that was not kind.
+          var priorUpdate = ledgerUpdates[lr];
+          var priorHard = !!(priorUpdate && priorUpdate.hard);
           ledgerUpdates[lr] = {
             usageCount: newUsage, tier: newTier,
             name: String(ledgerRows[lr][lFirstCol] || '').trim() + ' ' + String(ledgerRows[lr][lLastCol] || '').trim(),
-            popId: popId, oldTier: currentTier, usageType: usageType, context: context,
-            hard: hardLight || (ledgerUpdates[lr] && ledgerUpdates[lr].hard) || false,
+            popId: popId, oldTier: currentTier,
+            usageType: priorHard ? priorUpdate.usageType : usageType,
+            context: priorHard ? priorUpdate.context : context,
+            hard: hardLight || priorHard,
             famous: isFamous
           };
 

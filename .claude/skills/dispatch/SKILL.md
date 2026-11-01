@@ -5,7 +5,7 @@ version: "1.2"
 updated: 2026-04-30
 tags: [media, active]
 effort: high
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: "[scene description]"
 ---
 

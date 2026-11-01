@@ -5,7 +5,7 @@ version: "1.1"
 updated: 2026-06-20
 tags: [media, active]
 effort: low
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 # /capability-review — Editorial Capability Verification

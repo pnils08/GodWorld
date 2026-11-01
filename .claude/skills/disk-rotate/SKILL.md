@@ -5,7 +5,7 @@ version: "1.1"
 updated: 2026-05-06
 tags: [architecture, infrastructure, active]
 effort: medium
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 # /disk-rotate — Per-Target Retention + Cleanup

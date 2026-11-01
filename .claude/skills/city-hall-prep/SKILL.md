@@ -5,7 +5,7 @@ version: "1.12"
 updated: 2026-09-05
 tags: [civic, active]
 effort: high
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: "[cycle-number]"
 ---
 

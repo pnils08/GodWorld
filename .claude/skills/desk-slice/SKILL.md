@@ -5,7 +5,7 @@ version: "1.0"
 updated: 2026-07-11
 tags: [media, pipeline-44, fork, active]
 effort: low
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: "[cycle-number]"
 related_skills: [deep-dispatch, city-hall, build-world-summary]
 sources:

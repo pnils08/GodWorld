@@ -5,7 +5,7 @@ version: "1.0"
 updated: 2026-04-17
 tags: [infrastructure, active]
 effort: medium
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 # /grill-me — Discovery Before Building

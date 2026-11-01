@@ -5,7 +5,7 @@ version: "1.2"
 updated: 2026-05-24
 tags: [media, active]
 effort: high
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: "[topic]"
 ---
 

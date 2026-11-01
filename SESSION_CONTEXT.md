@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** research.31 → read the 10-31 20:30 flight (first on claude-haiku-5.5, 5-min arrival wait): points, failed commands, cost; deepseek-v4-flash-0731 is the fallback. Then infrastructure.16/17, engine.325 (own session).
 
-**NEXT[research-build]:** civic.47 → the one civic plan row (builder 11-01: one plan, one pointer). A1 landed; A2/B1 start on Mike's rulings (turns, token budgets, new tab, event-wakes-a-seat, paid eval ceiling). After C114: read hood lines, 85 ECL rows, first live hard-light line. Mon 05:45: first civic wakes on the new personas.
+**NEXT[research-build]:** civic.47 → the one civic plan row (builder 11-01: one plan, one pointer). A1 landed; A2/B1 start on Mike's rulings (turns, token budgets, new tab, event-wakes-a-seat, paid eval ceiling). After C114: read hood lines, 85 ECL rows, first live hard-light line. First live use: Sun 14:30 chamber, then Mon 05:45.

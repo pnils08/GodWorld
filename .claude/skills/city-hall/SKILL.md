@@ -33,6 +33,10 @@ Less data, stronger identity, one clear decision. Bounded input — data is chao
 - Show the user what each voice decided before applying tracker updates.
 - USER APPROVAL GATE before writing to the Initiative_Tracker sheet.
 
+## civic.47 pilot boundary
+
+The existing Sunday voice and tracker path remains authoritative until the approved civic.47 schema, authority policy and engine reader are installed together. `ballot-intent_c{XX}.json` and `mayor-decision-intent_c{XX}.json` are local proposals; their existence does not prove a vote, signature, veto, funded initiative or world effect. On an approved civic.47 pilot turn, a reasoned no-op is a valid official choice and must be recorded as such. A seat cannot be charged for an ignored duty until its evidence, authority and completed opportunity are verified. The rule above requiring a decision describes the legacy city-hall cascade only.
+
 ## Agent Coordination (from Paperclip patterns)
 
 **Heartbeat model:** Voices don't run as long sessions. They wake, receive their decision, produce output, done. If a voice has no pending decision this cycle, it doesn't run. No idle agents.

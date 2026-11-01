@@ -237,6 +237,8 @@ Plan: `docs/archive/plans/2026-05-03-run-cycle-gap-log-surface.md` (Phase 2 done
 
 ## What Happens After — the crons (S456; no sift, no manual edition chain)
 
+The civic.47 `Civic_Action_Ledger` beat export is conditional on an approved, installed sheet schema and an explicit pilot flag. The ordinary beat dump and current civic crons do not enable that flag. Before switching a schedule, verify the journal readback, the binding ballot reader, resource reservation recovery, the approved authority policy and the composed sandbox receipt; a local intent or dry run cannot stand in for those checks.
+
 Nothing downstream is hand-run. The artifacts this chain leaves on disk are read by the scheduled jobs in `crontab -l`:
 
 | Artifact | Cron consumers |

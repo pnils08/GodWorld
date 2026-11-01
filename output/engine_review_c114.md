@@ -59,9 +59,9 @@ Since C113: tier up 8 — Maria Keen (POP-00013), Anthony Raines (POP-00017), No
 
 ## Anomalies
 
-**Harry Hayward (POP-01223), KONO — income 100,000 → 4,500,000.** Oakland Oaks power forward, second-round pick, Tier 4 since C113. Ruled 2026-11-01: an Oaks rookie contract. Cleared for story use.
+**Harry Hayward (POP-01223), KONO — income 100,000 → 4,500,000.** Oakland Oaks power forward, second-round pick, Tier 4 since C113.
 
-**Trevor Henderson (POP-01224), Lake Merritt — income 100,000 → 1,400,000.** Oakland Oaks center, second-round pick, Tier 4 since C113. Same ruling: Oaks rookie contract. Cleared for story use.
+**Trevor Henderson (POP-01224), Lake Merritt — income 100,000 → 1,400,000.** Oakland Oaks center, second-round pick, Tier 4 since C113.
 
 ## Improvements
 
@@ -99,7 +99,7 @@ Win callout: none.
 ## Summary
 
 - Ailments: 4 (1 high, 3 medium)
-- Anomalies: 2, both ruled world events
+- Anomalies: 2
 - Improvements: 14
 - Baseline briefs: 96 (54 with promotion hints)
 - Measurements: 0 of 1 as expected; 1 overshot

@@ -68,7 +68,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| civic.47 | Civic autonomy A1 persona facts (builder 11-01): codex draws up the rewrite, agy reviews, this seat lands; changing facts out, brief fields named | in-progress | research-build | [[../plans/2026-10-31-civic-autonomy]] §A1 |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 
 ## 4. Queue — ruled, not started (ready)
@@ -94,6 +93,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.27 | Card auto-invalidation Phase B (cycle-end marker hook); Phase A daemon live | ready | engine-sheet | [[../plans/2026-05-26-engine-27-wd-card-auto-invalidation]] |
 | infrastructure.6 | Sim-health observability: /api/sim-health + dashboard panel (Track A, not built). Track B ghost tabs + tab-reference test done (`c3fe1780`, `86f43999`, `1240a80a`; test 273 refs PASS 2026-10-22) | ready | engine-sheet | [[../plans/2026-07-31-engine-observability-integrity]] |
 | engine.329 | Hard-light line named the last usage row's piece, not the hard row's (codex 10-31). LIVE PROD @172 stage 36, 2026-11-01 | done-pending-archive | research-build | [[../plans/2026-10-11-media-extension]] §Changelog 2026-11-01 |
+| civic.47 | Civic autonomy A1 persona facts (builder 11-01): changing facts out of the 17 rota personas, LANDED 2026-11-01 after codex draw-up + agy 18/0 | done-pending-archive | research-build | [[../plans/2026-10-31-civic-autonomy]] §Changelog 2026-11-01 |
 | pipeline.92 | One clock: wall-clock dates reach civic agents (move date/moveId, 54/64 packs) and writers (tracker `LastUpdated`, 2 MilestoneNotes, slice pointers); blast radius read 2026-10-28, each surface to Y/C. | ready | research-build | — |
 | pipeline.98 | 29 project papers and templates sit on the published shelves (search shuts them by name). Move them, then drop BUILD_PAPER_RE; check the indexes first | ready | research-build | `lib/mags.js` BUILD_PAPER_RE |
 | engine.322 | Stage step Funded→Standing (`applyCivicStageStep_`, civicInitiativeEngine.js:4137) writes phase `operational` but leaves NextScheduledAction/NextActionCycle on pre-vote text; INIT-010 passed C112 still reads "Committee hearing and vote" in desk packets | ready | engine-sheet | [[../plans/2026-10-28-code-review-dirty-tree-findings]] T8 |

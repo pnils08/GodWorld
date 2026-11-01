@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** research.31 → read the 10-31 20:30 flight (first on claude-haiku-5.5, 5-min arrival wait): points, failed commands, cost; deepseek-v4-flash-0731 is the fallback. Then infrastructure.16/17, engine.325 (own session).
 
-**NEXT[research-build]:** civic.47 → codex is drawing up the A1 persona files (brief sent 11-01 00:55). When the review doc lands: spot-check 3–4 STALE claims against the exports, agy review, land under the control-plane flag outside the Sunday civic windows (14:30, 21:00). After C114: read hood lines, 85 ECL rows, any first live hard-light line.
+**NEXT[research-build]:** no job in hand — ask Mike. A1 persona facts landed 11-01 (civic.47 done-pending-archive); first civic wakes on them Mon 05:45. Civic plan A2/A3/B wait on Mike's rulings (turns, token budgets, new tab, event-wakes-a-seat, paid eval ceiling, row owner). After C114: read hood lines, 85 ECL rows, first live hard-light line.

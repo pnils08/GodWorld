@@ -1,0 +1,9 @@
+# TASK — agy: re-review of codex's folded A1 persona proposal (last round)
+
+Read-only. Do not edit, commit or push anything. Write your review to `output/antigravity/2026-11-01-review-civic-a1-persona-facts-rereview.md`, under ~80 lines.
+
+**Read.** Your first review: `output/antigravity/2026-11-01-review-civic-a1-persona-facts.md`. The fold brief the seat sent codex, which lists what stood from your review and what the seat overruled (pack field names the runner's own prompt already uses may stay; `Crime_Metrics.jsonl` and `Reflection_Intake.jsonl` do exist in `output/beats/`): `output/codex/TASK-2026-11-01-civic-a1-persona-facts-fold.md`. Codex's fold: `docs/for-claude-review/2026-11-01-codex-civic-a1-persona-facts.md` §Fold — 2026-11-01, and the 17 files now under `output/codex/civic-a1/` (the nine district LENS/RULES and the shared IDENTITY are gone). The current live files: `.claude/agents/civic-office-mayor/`, `civic-office-council-seat/`, `civic-office-council-d1` … `d9/IDENTITY.md`, `civic-office-police-chief/`. Truth: `output/beats/Civic_Office_Ledger.jsonl`, `output/beats/Initiative_Tracker.jsonl`, `lib/districtMap.js`, `scripts/cron-civic-run.js:1238-1300`.
+
+Same seven rules as your first review. This round, check only: (a) each item of the fold brief is done as written; (b) nothing restored brought a changing fact or a ruling-barred premise back in (an approval number, a turf list, a seat status, a housing-problem or crisis premise, a real-Oakland import, a builder reference, a pre-assigned task); (c) no build label remains; (d) the 17 files match the layout the runner loads today.
+
+**Format.** First line: `VERDICT: <n> pass, <n> fail` over the 17 files plus the disposition doc. Then one entry per failed item only (seat and file, exact line, rule number, conflicting record, one-line fix). Then `PER FILE`: LAND or HOLD per file with a clause. Nothing else.

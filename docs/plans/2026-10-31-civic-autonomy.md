@@ -75,15 +75,15 @@ Task status lives only in this table. Task detail specifies scope and acceptance
 | # | Task | Owner | Status |
 |---|---|---|---|
 | A1 | Reconcile civic facts, permissions and old contracts; freeze source/receipt baseline | research-build | persona facts landed 2026-11-01; slice fields → A2 |
-| A2 | Build event-aware, model-budgeted seat briefs and bounded evidence retrieval | research-build | not started |
-| A3 | Give each seat sufficient duty turns, independent replies, action batches and continuation receipts | research-build | not started |
-| B1 | Implement action authority, durable execution journal, resource reservations and migration contract | research-build | not started |
-| B2 | Connect events, programs and project actions to real receivers; close typed gate defects | research-build | not started |
-| B3 | Make official ballots and mayor decisions binding through one vote authority | research-build | not started |
-| B4 | Connect committed outcomes to citizen exposure, diverse reactions and measured accountability | research-build | not started |
-| A4 | Give newsroom and next official wake source-linked choices, outcomes and responses | research-build | not started |
-| A5 | Evaluate actual seat models, context/output limits and fallback behavior on frozen scenarios | research-build | not started |
-| AB6 | Run composed sandbox proof, pilot mayor/D2, then extend to all districts | research-build | not started |
+| A2 | Build event-aware, model-budgeted seat briefs and bounded evidence retrieval | research-build | offline candidate `fe5746d41`; ordinary-wake proof open |
+| A3 | Give each seat sufficient duty turns, independent replies, action batches and continuation receipts | research-build | offline candidate `fe5746d41`; policy and week proof open |
+| B1 | Implement action authority, durable execution journal, resource reservations and migration contract | research-build | local contract `fe5746d41`; authoritative journal and migration open |
+| B2 | Connect events, programs and project actions to real receivers; close typed gate defects | research-build | protected patch proposed `fe5746d41`; receivers open |
+| B3 | Make official ballots and mayor decisions binding through one vote authority | research-build | local intents `fe5746d41`; engine binding open |
+| B4 | Connect committed outcomes to citizen exposure, diverse reactions and measured accountability | research-build | strict local feed `fe5746d41`; experience and approval writers open |
+| A4 | Give newsroom and next official wake source-linked choices, outcomes and responses | research-build | local source and brief adapter `fe5746d41`; composed trace open |
+| A5 | Evaluate actual seat models, context/output limits and fallback behavior on frozen scenarios | research-build | synthetic offline rubric `fe5746d41`; approved model runs open |
+| AB6 | Run composed sandbox proof, pilot mayor/D2, then extend to all districts | research-build | blocked on engine, policy, schema and model gates |
 
 ### Implementation map
 
@@ -296,6 +296,7 @@ No single unit test, applied=true file, stage transition, quoted reaction or agg
 
 ## Changelog
 
+- 2026-11-01 (codex) — Built civic.47 local brief, duty, authority, ballot-intent, outcome-feed and offline-fit candidates in `fe5746d41`; protected patch artifacts await Claude, and no task has composed activation proof.
 - 2026-11-01 (research-build) — **Builder answers recorded verbatim, 04:30–04:50 CDT.** Asked about the plan's turn counts (2 duty + 2 event per week): "No clue what this is and codex plan not mine". Asked about event wakes outside a seat's duty day: not answered (builder: "I didn't answer number 2"). Asked about token budgets (8k/12k in, 3k/5k out): "No cap is the rule stayed over 29 times". Also: "Nothing pushes without codex sign off". "Never heard of event awareness as my doctrine and your making a judgment that applies here, Claude is restricted from applying its judgment". "Nothing is built until my answers are recorded". Last night (01:34–01:52 CDT): "The cap goes up according to codex plan"; "You're call on the cap, I wasn't sure if they spend their whole turn writing otherwise but we can watch for it"; "we can leverage es for the sake of time". No build started on these answers; the builder's go is still required.
 - 2026-11-01 (research-build) — **No character caps (builder: "if we need a number it's there, capping serves who")**: the civic pack's 600-character block cut is gone (a block carries its whole text — the board no longer drops later rows, F5 closed), the directive's approval section is no longer cut at 1,500 characters, and the weekday answer limit (1,500 tokens) is the call's own 4,000 default until A3 sizes it per model. Agy's model-swap review folded: a third fallback family (Gemini 3.8 flash) so the mayor keeps two fallbacks outside Kimi; the Sunday directive default and the gate candidates on Gemini 3.8 flash; the carry test exercises the real mayor chain.
 - 2026-11-01 (research-build) — **Civic seat models brought to each family's current model (builder: "mandatory fix"; "don't put everything on Claude")**: Kimi K2 → K3.1 Pro (mayor, DA), DeepSeek V4 flash → V4.1 flash 1017 (OPP seats, chief, staff, clerk), Llama 4 Maverick → GPT-6 Luna (independents D2/D4; no newer Llama), Gemini 3.7 flash → 3.8 flash (CRC seats), Qwen3 235B → 2507 (PD); fallbacks Kimi K3.1 Pro / DeepSeek V4.1 flash. Sunday chain default stays Gemini 3.7 flash: the only batch-proven route; 3.8 flash's batch endpoint needs a live one-request probe before the hearing may use it (A5). One live probe per new id passed. The 1,500-token weekday cap rises under A3, per the plan. Rough civic spend after the swap: well under $1/week at today's volume (A5 keeps the receipts).

@@ -5,7 +5,7 @@ version: "2.1"
 updated: 2026-06-17
 tags: [media, active]
 effort: medium
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: "[mode] [subject]"
 ---
 

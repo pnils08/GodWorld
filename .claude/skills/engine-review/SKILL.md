@@ -5,7 +5,7 @@ version: "1.1"
 updated: 2026-05-30
 tags: [engine, active]
 effort: medium
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 # /engine-review — Engine State Diagnostic

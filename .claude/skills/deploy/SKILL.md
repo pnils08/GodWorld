@@ -4,7 +4,7 @@ description: Deploy engine to Google Apps Script via clasp push with pre-flight 
 version: "2.1"
 updated: 2026-09-12
 tags: [engine, active]
-disable-model-invocation: true
+disable-model-invocation: false
 effort: medium
 ---
 

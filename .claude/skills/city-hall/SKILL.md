@@ -5,7 +5,7 @@ version: "2.2"
 updated: 2026-08-05
 tags: [civic, active]
 effort: high
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: "[cycle-number]"
 related_skills: [city-hall-prep, sift, post-publish]
 sources:

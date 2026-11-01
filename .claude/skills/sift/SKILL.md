@@ -5,7 +5,7 @@ version: "2.8"
 updated: 2026-09-22
 tags: [media, active]
 effort: high
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: "[cycle-number]"
 ---
 

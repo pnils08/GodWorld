@@ -5,7 +5,7 @@ version: "1.2"
 updated: 2026-05-30
 tags: [engine-sheet, active]
 effort: low
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 # /pre-flight — Pre-Cycle Input Check

@@ -5,7 +5,7 @@ version: "1.0"
 updated: 2026-05-06
 tags: [architecture, infrastructure, active]
 effort: medium
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 # /disk-audit — Filesystem Inventory + Dead-File Detection

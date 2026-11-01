@@ -5,7 +5,7 @@ version: "1.1"
 updated: 2026-05-24
 tags: [engine-sheet, active]
 effort: high
-disable-model-invocation: true
+disable-model-invocation: false
 argument-hint: "[cycle-number]"
 ---
 

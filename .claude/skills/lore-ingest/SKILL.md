@@ -5,7 +5,7 @@ version: "1.0"
 updated: 2026-08-20
 tags: [canon, lore, notebooklm, supermemory, active]
 effort: medium
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 # lore-ingest — Promote or Reject a Quarantined Lore Piece

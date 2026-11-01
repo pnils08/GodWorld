@@ -5,7 +5,7 @@ version: "1.2"
 updated: 2026-05-23
 tags: [engine, active]
 effort: medium
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 # skill-check

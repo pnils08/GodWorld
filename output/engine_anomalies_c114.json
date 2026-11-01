@@ -1,0 +1,87 @@
+{
+  "cycle": 114,
+  "generatedAt": "C114",
+  "detectorVersion": "1.2.0",
+  "anomalies": [
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-01223"
+        ],
+        "neighborhoods": [
+          "KONO"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-01223",
+          "previousIncome": 100000,
+          "currentIncome": 4500000,
+          "ratio": "45.000",
+          "peerShare": "0.00",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-01223 income Δ 4400% (100000 → 4500000); peer move share 0%",
+      "historicalContext": {
+        "priorCycles": [
+          100000
+        ],
+        "currentCycle": 4500000
+      },
+      "triagePath": "route-to-engine-debug",
+      "confidence": "high",
+      "detectorVersion": "1.2.0"
+    },
+    {
+      "type": "anomaly",
+      "severity": "high",
+      "cyclesInState": 1,
+      "affectedEntities": {
+        "citizens": [
+          "POP-01224"
+        ],
+        "neighborhoods": [
+          "Lake Merritt"
+        ],
+        "initiatives": [],
+        "councilSeats": []
+      },
+      "evidence": {
+        "sheet": "Simulation_Ledger",
+        "rows": [],
+        "fields": {
+          "POPID": "POP-01224",
+          "previousIncome": 100000,
+          "currentIncome": 1400000,
+          "ratio": "14.000",
+          "peerShare": "0.00",
+          "subCheck": "citizen-income"
+        }
+      },
+      "description": "POPID POP-01224 income Δ 1300% (100000 → 1400000); peer move share 0%",
+      "historicalContext": {
+        "priorCycles": [
+          100000
+        ],
+        "currentCycle": 1400000
+      },
+      "triagePath": "route-to-engine-debug",
+      "confidence": "high",
+      "detectorVersion": "1.2.0"
+    }
+  ],
+  "summary": {
+    "total": 2,
+    "byTriage": {
+      "route-to-engine-debug": 2
+    }
+  }
+}

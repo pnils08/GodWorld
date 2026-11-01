@@ -1,7 +1,7 @@
 ---
 title: Civic autonomy, official wakes, and city awareness — research
 created: 2026-10-31
-updated: 2026-10-31
+updated: 2026-11-01
 type: reference
 tags: [research, civic, citizens, media, active]
 sources:
@@ -14,7 +14,7 @@ sources:
   - output/cron-civic/packs/MAYOR-01_c113.json
   - output/world_summary_c113.md
 pointers:
-  - "[[for-claude-review/2026-10-31-codex-civic-autonomy-plan]] — proposed implementation and proof"
+  - "[[../plans/2026-10-31-civic-autonomy]] — proposed implementation and proof"
   - "[[plans/2026-09-19-civic-wake-game-loop]] — existing move and stage design"
   - "[[plans/2026-09-24-initiatives-in-the-world]] — existing delivery and upkeep work"
   - "[[PRODUCT_VISION]] — one city and programs that deploy"
@@ -31,7 +31,7 @@ pointers:
 
 **Verdict:** adopt — use this source trace as the basis for the companion plan; it establishes gaps in the current mechanism, not proof of a replacement's behavior.
 
-**Ignited plans:** [[for-claude-review/2026-10-31-codex-civic-autonomy-plan]].
+**Ignited plans:** [[../plans/2026-10-31-civic-autonomy]].
 
 ## Builder direction
 

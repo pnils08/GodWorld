@@ -392,7 +392,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 
 ## `docs/plans/` — in-flight plans not yet promoted
 
-- **[[for-claude-review/2026-10-31-codex-civic-autonomy-plan]]** — proposed civic autonomy build: grounded choices, event-aware mayor/district briefs, sufficient work opportunities, executable events/programs, binding ballots, citizen/media feedback, attributable approval and model/context evaluation. Ten tasks across research-build and engine-sheet; awaiting Claude review. *(plan, civic, citizens, media, draft)*
+- **[[plans/2026-10-31-civic-autonomy]]** — proposed civic autonomy build: grounded choices, event-aware mayor/district briefs, sufficient work opportunities, executable events/programs, binding ballots, citizen/media feedback, attributable approval and model/context evaluation. Ten tasks across research-build and engine-sheet; awaiting Claude review. *(plan, civic, citizens, media, draft)*
 
 - **[[plans/2026-09-11-sports-as-a-lived-system]]** — Sports feed contract, recorded city effects, weekly economic ripples and crossover seeds; engine.210 first local cut, fandom through Event_Content_Ledger, and per-franchise drifting weight. *(plan, engine, sports, citizens, active)*
 - **[[plans/2026-09-16-work-wake-packs]]** — civic.37. Cron work-day wakes for working citizens: the medical examiner and EMS director on their civic beats, A's players on the sports feed; page reflection + gated Reflection_Intake row, no dial writes. *(plan, civic, citizens, sports, cron, active)*

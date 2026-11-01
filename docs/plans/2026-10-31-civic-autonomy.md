@@ -1,21 +1,21 @@
 ---
 title: Civic autonomy — decisions, city events, consequences and accountability
 created: 2026-10-31
-updated: 2026-10-31
+updated: 2026-11-01
 type: plan
-tags: [civic, citizens, media, draft]
+tags: [civic, citizens, media, active]
 sources:
   - Builder conversation 2026-10-31 — research and plan authorization
-  - docs/for-claude-review/2026-10-31-codex-civic-autonomy-research.md
+  - docs/research/2026-10-31-codex-civic-autonomy-research.md
   - docs/PRODUCT_VISION.md
   - docs/plans/2026-09-19-civic-wake-game-loop.md
   - docs/plans/2026-09-24-initiatives-in-the-world.md
   - docs/plans/2026-09-22-agent-model-fit-test.md
 pointers:
-  - "[[for-claude-review/2026-10-31-codex-civic-autonomy-research]] — source findings F1–F12 and saved evidence"
-  - "[[plans/2026-09-19-civic-wake-game-loop]] — existing move/store/stage machinery to extend"
-  - "[[plans/2026-09-24-initiatives-in-the-world]] — existing project delivery, budgets and hiring"
-  - "[[plans/2026-09-22-agent-model-fit-test]] — reusable model comparison apparatus"
+  - "[[../research/2026-10-31-codex-civic-autonomy-research]] — source findings F1–F12 and saved evidence"
+  - "[[2026-09-19-civic-wake-game-loop]] — existing move/store/stage machinery to extend"
+  - "[[2026-09-24-initiatives-in-the-world]] — existing project delivery, budgets and hiring"
+  - "[[2026-09-22-agent-model-fit-test]] — reusable model comparison apparatus"
   - "[[EDITION_PIPELINE_DEEP_DISPATCH]] — existing publication boundaries"
   - "[[index]] — plan registration"
 ---
@@ -257,7 +257,7 @@ No single unit test, applied=true file, stage transition, quoted reaction or agg
 
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
-| Source investigation and C113 examples | codex | [[for-claude-review/2026-10-31-codex-civic-autonomy-research]] | read-only; F1–F12 carried into tasks |
+| Source investigation and C113 examples | codex | [[../research/2026-10-31-codex-civic-autonomy-research]] | read-only; F1–F12 carried into tasks |
 
 ### Agreed
 
@@ -296,4 +296,5 @@ No single unit test, applied=true file, stage transition, quoted reaction or agg
 
 ## Changelog
 
+- 2026-11-01 (research-build) — Builder read the full readout and accepted the direction ("pretty exciting, has potential"); **A1 persona rewrite starts first**: codex draws up the proposed persona files (what moves out, what stays, which brief field supplies each moved fact), agy reviews the delivery, this seat lands them. Still awaiting the builder's rulings before A2/A3/B: turn counts (2 duty + 2 event per week), token budgets (8k/12k in, 3k/5k out), the new Civic_Action_Ledger tab, the event-duty exception, the paid A5 ceiling, the fixture commit, the coordinating row owner (engine-sheet holds an uncommitted civic.46 claiming the whole plan; research-build holds civic.47 for A1). Plan moved from the inbox to its home; research to `docs/research/`.
 - 2026-10-31 (codex) — Created proposed two-track civic autonomy plan from source research: decision opportunity, major-event awareness, executable actions, binding votes, citizen/media feedback, attribution, model fit and composed proof.

@@ -68,6 +68,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| civic.47 | Civic autonomy A1 persona facts (builder 11-01): codex draws up the rewrite, agy reviews, this seat lands; changing facts out, brief fields named | in-progress | research-build | [[../plans/2026-10-31-civic-autonomy]] §A1 |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 
 ## 4. Queue — ruled, not started (ready)

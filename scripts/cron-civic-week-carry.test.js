@@ -92,18 +92,18 @@ console.log('cron-civic-week-carry: ok');
 // hearing down with it.
 console.log('\ncivic.26 — model fallback chain');
 
-var mayorChain = modelChainFor('mistralai/mistral-large');
-check('primary model leads the chain', mayorChain[0] === 'mistralai/mistral-large', JSON.stringify(mayorChain));
+var mayorChain = modelChainFor('moonshotai/kimi-k3.1-pro');   // the real mayor model: same family as the first fallback, which the chain must skip
+check('primary model leads the chain', mayorChain[0] === 'moonshotai/kimi-k3.1-pro', JSON.stringify(mayorChain));
 check('chain offers fallbacks', mayorChain.length > 1, JSON.stringify(mayorChain));
 check('no same-family fallback (a provider 429 takes every slug it serves)',
-  mayorChain.slice(1).every(function (m) { return m.split('/')[0] !== 'mistralai'; }), JSON.stringify(mayorChain));
+  mayorChain.slice(1).every(function (m) { return m.split('/')[0] !== 'moonshotai'; }), JSON.stringify(mayorChain));
 check('fallbacks ordered least-used-first, so a borrowed voice stays distinct',
-  mayorChain[1] === 'moonshotai/kimi-k3.1-pro', JSON.stringify(mayorChain));
+  mayorChain[1] === 'deepseek/deepseek-v4.1-flash-1017' && mayorChain[2] === 'google/gemini-3.8-flash', JSON.stringify(mayorChain));
 
 // A seat already ON a fallback model must not list itself twice.
-var deepseekChain = modelChainFor('deepseek/deepseek-chat');
+var deepseekChain = modelChainFor('deepseek/deepseek-v4.1-flash-1017');   // a seat already on a fallback model
 check('primary is not duplicated in its own chain',
-  deepseekChain.filter(function (m) { return m === 'deepseek/deepseek-chat'; }).length === 1, JSON.stringify(deepseekChain));
+  deepseekChain.filter(function (m) { return m === 'deepseek/deepseek-v4.1-flash-1017'; }).length === 1, JSON.stringify(deepseekChain));
 check('same-family fallback dropped for a fallback-model seat',
   deepseekChain.every(function (m, i) { return i === 0 || m.split('/')[0] !== 'deepseek'; }), JSON.stringify(deepseekChain));
 

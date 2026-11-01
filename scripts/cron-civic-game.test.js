@@ -745,7 +745,7 @@ test('T3.3: Live loadConfrontation extracts verbatim demand for targeted seat in
   }
 });
 
-test('T3.4: Pack blocks cap length (~600 chars) and degrade gracefully to stated absence', () => {
+test('T3.4: Pack blocks carry their whole text (builder 2026-11-01: no character caps) and degrade gracefully to stated absence', () => {
   const ws = createTempWorkspace();
   try {
     const longAddress = 'A'.repeat(800);
@@ -758,8 +758,8 @@ test('T3.4: Pack blocks cap length (~600 chars) and degrade gracefully to stated
 
     const conf = civicSlice.loadConfrontation(ws.dir, 108, 'civic-office-council-d1');
     assert(conf !== null);
-    assert(conf.demand.length <= 605, `Block should be capped at ~600 chars, got ${conf.demand.length}`);
-    assert(conf.demand.endsWith('…'), 'Clipped demand should end with ellipsis');
+    assert(conf.demand.indexOf(longAddress) >= 0, 'the whole demand reaches the seat, no cut');
+    assert(!conf.demand.endsWith('…'), 'nothing is clipped');
 
     const missingConf = civicSlice.loadConfrontation(ws.dir, 108, 'civic-office-council-d6');
     assert.strictEqual(missingConf, null, 'Seats without a confrontation directive return null');

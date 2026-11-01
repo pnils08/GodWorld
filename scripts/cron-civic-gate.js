@@ -84,7 +84,7 @@ const GATE_MODEL_CANDIDATES = [
   // builder 2026-10-12: newer and cheaper first. Anthropic is never a civic writer
   // family, so Haiku 5.5 always clears the independence rule; mistral-large (2024,
   // $2/$6 per MTok, picked every Cycle) stays only as a fallback.
-  'anthropic/claude-haiku-5.5', 'google/gemini-3.7-flash', 'mistralai/mistral-large'
+  'anthropic/claude-haiku-5.5', 'google/gemini-3.8-flash', 'mistralai/mistral-large'
 ];
 
 // Every manifest a chain stage writes. decide_c is the interactive-era name;

@@ -17,7 +17,7 @@ const ROOT = path.join(__dirname, '..');
 const CONSTITUENT_CAP = 8;
 const KNOWN_CAP = 20;
 const PLACE_CAP = 8;
-const BLOCK_CAP = 600;   // civic.38 Task 3.5 — same discipline as the civic.37 node builders
+const BLOCK_CAP = Infinity;   // builder 2026-11-01: "no character caps" — a block carries its whole text (was 600, civic.38 Task 3.5; it dropped later board rows)
 
 // civic.38: a complaint = Tag Civic + negative Affect (plan §Reconciliation,
 // measured 2026-09-20). Same closed affect vocab as compressLifeHistory.js.

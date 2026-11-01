@@ -985,7 +985,7 @@ async function runDirective() {
   // Friction rule (plan Task 2.2): the directive's model family must differ
   // from the Mayor's writer family.
   const mayorModel = (officeMap.offices.find(o => o.officeId === 'MAYOR-01') || {}).model || '';
-  const MODEL = arg('--model', 'google/gemini-3.7-flash');
+  const MODEL = arg('--model', 'google/gemini-3.8-flash');
   if (modelFamily(MODEL) === modelFamily(mayorModel)) {
     console.error('FRICTION VIOLATION: directive model family "' + modelFamily(MODEL) + '" matches the Mayor\'s writer family. Pick a different --model.');
     process.exit(2);
@@ -1182,7 +1182,7 @@ async function runDirective() {
     findSection(sections, 'Three-Cycle Trends').slice(0, 2000),
     '',
     '## Approval Ratings',
-    findSection(sections, 'Approval Ratings').slice(0, 1500),
+    findSection(sections, 'Approval Ratings'),   // builder 2026-11-01: no character caps
     '',
     '## Engine review HIGH-severity patterns (' + highs.length + ')',
     ...highs,
@@ -1411,7 +1411,7 @@ function composeChecks() {
 // ~30, a per-seat rate roughly 10x worse. A fallback exists to rescue a seat
 // from a CALL failure (429/timeout); one that reliably reintroduces the exact
 // defect the two-attempt VALIDITY gate exists to catch is not a rescue.
-const FALLBACK_MODELS = ['moonshotai/kimi-k3.1-pro', 'deepseek/deepseek-v4.1-flash-1017']; // 2026-11-01 builder: each family on its current model
+const FALLBACK_MODELS = ['moonshotai/kimi-k3.1-pro', 'deepseek/deepseek-v4.1-flash-1017', 'google/gemini-3.8-flash']; // 2026-11-01 builder: each family on its current model; three families so every seat keeps two fallbacks outside its own
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -3252,7 +3252,7 @@ async function runDatawake() {
         for (let attempt = 1; attempt <= 2; attempt++) {
           let r;
           try {
-            r = await callOpenRouter(active, persona, attemptUser, 1500);
+            r = await callOpenRouter(active, persona, attemptUser, 4000);   // builder 2026-11-01: no caps — the call's own default; A3 sizes per model
           } catch (e) {
             log(office.agentDir + ' ' + active + ' attempt ' + attempt + ' call failed: ' + e.message);
             if (attempt < 2) { await sleep(2000 * attempt); continue; }

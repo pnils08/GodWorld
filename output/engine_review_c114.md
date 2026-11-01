@@ -9,7 +9,7 @@
 - `output/engine_anomalies_c114.json` — 2 anomalies
 - `output/baseline_briefs_c114.json` — 96 briefs
 
-Written for the next engine session and the civic chain's reader. What is real: the citizen outcomes, the initiative moves, the hood sentiment lift, the two rookie contracts. What is mechanism: the two decay flags are first-cycle signals with no prior to measure against; the "overshot" verdict is the auditor measuring against an expectation of 0.02 that nothing set. Routed to engine-debug: the two income anomalies (see `output/engine_anomalies_c114_followup.md`).
+Written for the next engine session and the civic chain's reader. What is real: the citizen outcomes, the initiative moves, the hood sentiment lift, the two rookie contracts. What is mechanism: the two decay flags are first-cycle signals with no prior to measure against; the "overshot" verdict is the auditor measuring against an expectation of 0.02 that nothing set. Routed to engine-debug: nothing — the two income anomalies are the builder's hand-set Oaks rookie contracts (ruled 2026-11-01).
 
 ## Citizen Scoreboard
 
@@ -68,9 +68,9 @@ Finding: no wedding, no promotion, no layoff across ~1,058 citizens; five of the
 
 ## Anomalies
 
-**Harry Hayward (POP-01223), KONO — income 100,000 → 4,500,000 (×45).** Oaks power forward, second-round pick, promoted to Tier 4 in C113. Triage: **route to engine debug** (detector call, confidence high; `historicalContext` one prior value, the 100,000 placeholder). The number is a rookie contract landing on a row the mint seeded at a placeholder — a world event in shape, but the detector cannot tell that from a bug, and the builder has not ruled. Suppressed from story use until cleared. Followup: `output/engine_anomalies_c114_followup.md`.
+**Harry Hayward (POP-01223), KONO — income 100,000 → 4,500,000 (×45).** Oaks power forward, second-round pick, promoted to Tier 4 in C113. Detector call: route to engine debug. **Builder ruling 2026-11-01: the salaries were set by hand — the Oaks' rookie contracts. World event, not a bug.** Cleared for story use; nothing for engine-debug. Simulation_Ledger income is not a tab the hand-write check covers, which is why the detector saw it cold.
 
-**Trevor Henderson (POP-01224), Lake Merritt — income 100,000 → 1,400,000 (×14).** Oaks center, second-round pick, promoted to Tier 4 in C113. Same shape, same triage, same followup.
+**Trevor Henderson (POP-01224), Lake Merritt — income 100,000 → 1,400,000 (×14).** Oaks center, second-round pick, promoted to Tier 4 in C113. Same ruling: hand-set rookie contract, world event.
 
 Neither sits on a tab the hand-write check covers (Simulation_Ledger income); the check cannot clear or convict them.
 
@@ -87,7 +87,7 @@ Neither sits on a tab the hand-write check covers (Simulation_Ledger income); th
 - Total: 96 briefs (world-event 12, council-vote 1, initiative-milestone 3, citizen-life-event 80)
 - With promotion hints: 54
 - Cluster note: West Oakland 14, Rockridge 12, Uptown 10, Lake Merritt 8, Jack London 7, Fruitvale 6, Piedmont Ave 6, Downtown 5; 4 unassigned. Rockridge and West Oakland lead both the briefs and the ailment/improvement lists — the civic chain will see the HIGH ailment's hood with the most material.
-- Hand-write artifacts: none expected — the post-fire check read 0 cells on the three covered tabs; the two income anomalies are on an uncovered tab and are routed, not briefed.
+- Hand-write artifacts: none expected — the post-fire check read 0 cells on the three covered tabs; the two income anomalies are the builder's hand-set rookie salaries (ruled), on a tab the check does not cover.
 - Source: `output/baseline_briefs_c114.json`
 
 ## Measurement Check (from previous review)
@@ -111,7 +111,7 @@ Win callout: none — no pattern flipped from `remedy-not-firing` to `remedy-fir
 ## Summary
 
 - Ailments: 4 (1 high, 3 medium) — Rockridge decay (high), Laurel decay, faith coverage gap, INIT-007 cascade check (remedy working)
-- Anomalies: 2 (route-to-engine-debug 2)
+- Anomalies: 2 (detector: route-to-engine-debug; builder ruled both world events — hand-set Oaks rookie salaries)
 - Improvements: 14 (3 initiative moves, 9 hood sentiment lifts, 2 overshoot measurements)
 - Baseline briefs: 96 (54 with promotion hints)
 - Measurements: 0 / 1 firing as expected; 0 not firing; 1 overshot

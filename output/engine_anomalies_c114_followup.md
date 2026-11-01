@@ -1,6 +1,6 @@
 # C114 anomalies — routed to engine-debug
 
-Source: `output/engine_anomalies_c114.json` (detectAnomalies 1.2.0). Both `route-to-engine-debug`, confidence high. Suppressed from story use until cleared. Builder rules whether each is a world event or a bug.
+Source: `output/engine_anomalies_c114.json` (detectAnomalies 1.2.0). Both `route-to-engine-debug`, confidence high. **CLOSED 2026-11-01 — builder: the salaries were set by hand (Oaks rookie contracts). World event. Nothing for engine-debug.**
 
 | POPID | Name | Hood | Role | Income C113 → C114 | Ratio |
 |---|---|---|---|---|---|

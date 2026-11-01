@@ -216,8 +216,8 @@
 - **Status:** OPEN (pipeline.68)
 
 ### G-EC35 — Anomalies POP-01223 / POP-01224 income ×45 / ×14 routed to engine-debug [judgment] [anomaly] [MED]
-- Oaks 2nd-round picks promoted Tier 4 C113; income 100000 → 4.5M / 1.4M at C114. Rookie contract on a mint placeholder, or a bug — detector cannot tell; builder has not ruled. `output/engine_anomalies_c114_followup.md`.
-- **Status:** OPEN (builder)
+- Oaks 2nd-round picks promoted Tier 4 C113; income 100000 → 4.5M / 1.4M at C114. Builder: salaries set by hand (rookie contracts). World event. Detector flagged correctly — Simulation_Ledger income is outside the Step 2.5 hand-write tabs, so a builder sheet write there always reads as an anomaly.
+- **Status:** CLOSED (builder ruling 2026-11-01)
 
 ### G-EC36 — Citizen scoreboard: 6 outcomes / 2528 lines; 0 married, 0 promoted, 0 laid off [judgment] [dice] [MED]
 - 1 born, 3 hired, 1 bought, 1 sold. 8 tier-ups, 5 of them journalists. Second quiet life-week read; rate/severity are the builder's dials. Recorded, not tuned.

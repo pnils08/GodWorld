@@ -1,20 +1,20 @@
 {
-  "ranAt": "2026-10-11T21:47:48.233Z",
+  "ranAt": "2026-10-30T20:02:40.247Z",
   "target": {
-    "popid": "POP-00021",
-    "name": "Darrin Davis",
+    "popid": "POP-00025",
+    "name": "Arturo Ramos",
     "tier": "1"
   },
   "ok": true,
   "errorMessage": null,
   "newQuarantineFiles": [
-    "darrin_davis_deep_dive.md"
+    "arturo_ramos_deep_dive.md"
   ],
   "driveUploads": [
     {
-      "file": "darrin_davis_deep_dive.md",
+      "file": "arturo_ramos_deep_dive.md",
       "uploaded": true
     }
   ],
-  "nextStep": "Run /lore-ingest on darrin_davis_deep_dive.md at next research-build session."
+  "nextStep": "Run /lore-ingest on arturo_ramos_deep_dive.md at next research-build session."
 }

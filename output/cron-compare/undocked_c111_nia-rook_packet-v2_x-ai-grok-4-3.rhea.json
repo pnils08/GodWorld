@@ -3,12 +3,12 @@
   "cycle": "111",
   "backend": "api",
   "model": "google/gemini-3.7-flash",
-  "draftSha256": "8820c1e07aa618e7325b7b0d4f754b998cba12184f54aa6798fd8b483f3cfa7b",
+  "draftSha256": "05ababf990ede95cfa84b5a87b191cc93c6fc2fb4af3e3e152898f11d94ff650",
   "pass": true,
   "flags": [],
   "flagCount": 0,
   "highSeverityCount": 0,
-  "summary": "Draft strictly adheres to the UNDOCKED recap profile guidelines with authorized texture, verified citizen reference, and zero canon violations.",
+  "summary": "All sports references and citizen details match Ground Truth; UNDOCKED recap texture and audience reactions conform to persona guidelines with zero canon violations.",
   "review": {
     "profileId": "nia-rook-undocked-recap-v1",
     "canonIntegrity": "pass",
@@ -17,14 +17,18 @@
   "reviewProfile": {
     "id": "nia-rook-undocked-recap-v1",
     "packageVersion": "NIAROOK-UNDOCKED-1",
-    "manifestId": "AM-2db04e6da6d9",
+    "manifestId": "AM-746a5805d54b",
     "lexicalObservations": []
   },
   "nameCheck": {
     "verified": [
-      "Eric Taveras"
+      "Eric Taveras",
+      "Mike Paulson"
     ],
-    "unverified": []
+    "unverified": [
+      "Second Baseman",
+      "World Series"
+    ]
   },
   "intake": {
     "found": true,
@@ -32,7 +36,7 @@
       "names": 0,
       "businesses": 0,
       "storylines": 0,
-      "hoods": 0,
+      "hoods": 1,
       "claims": 1
     },
     "grammarErrors": 0,
@@ -41,8 +45,21 @@
     "pageContradictions": [],
     "packetChecked": true
   },
-  "apiCostUsd": 0.0091,
-  "durationMs": 6083,
+  "apiCostUsd": 0.0095,
+  "durationMs": 7401,
   "parseError": false,
-  "ranAt": "2026-10-13T23:16:30.686Z"
+  "ranAt": "2026-10-16T23:19:15.247Z",
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "code floor 350",
+    "words": 318,
+    "short": "The piece falls short of the 350-word minimum target.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "05ababf990ede95cfa84b5a87b191cc93c6fc2fb4af3e3e152898f11d94ff650",
+    "costUsd": 0.001
+  }
 }

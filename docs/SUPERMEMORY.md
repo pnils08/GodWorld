@@ -590,7 +590,9 @@ the patched hook described in the 2026-09-24 Changelog entry: `sl-rules` +
 `sl-godworld` + the auto repo container, searched together on every
 UserPromptSubmit.
 
-**Plugin version: `supermemory` v0.1.8** (upstream). The old
+**Plugin version: `supermemory` v0.2.0, pinned 2026-10-31** (`autoUpdate: false`
+on `supermemory-plugins` in `~/.claude/plugins/known_marketplaces.json`, infrastructure.17).
+An upgrade is now by hand and re-ports `scripts/supermemory-patch/`. The old
 `claude-supermemory` plugin entry is disabled.
 
 **Source attribution (new in 0.0.4):** the writer scripts (`add-memory.cjs`, `save-project-memory.cjs`) now stamp `sm_source: "claude-code"` metadata on every memory they write. This distinguishes plugin-written memories from records written by other paths (Mara's connector, the curl `/v4` API used for multi-tag `world-data` writes). Useful for provenance filtering; no action required — additive, doesn't change read/search behavior.

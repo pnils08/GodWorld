@@ -6,19 +6,19 @@
     "to": 111,
     "cycles": 8
   },
-  "generatedAt": "2026-10-14T11:15:14.370Z",
+  "generatedAt": "2026-10-17T13:15:14.972Z",
   "index": {
-    "generatedAt": "2026-10-14T11:15:14.234Z",
-    "rows": 1748,
+    "generatedAt": "2026-10-17T13:15:14.822Z",
+    "rows": 1833,
     "liveCycle": 111
   },
   "counted": {
-    "docs": 780,
-    "citizens": 253,
-    "thisCycleDocs": 45,
+    "docs": 832,
+    "citizens": 267,
+    "thisCycleDocs": 97,
     "excluded": {
-      "media": 196,
-      "officials": 76,
+      "media": 221,
+      "officials": 84,
       "noLedger": 0,
       "outOfWindow": 696,
       "leak": 0
@@ -30,11 +30,11 @@
       "label": "the A's",
       "adHoc": false,
       "pattern": "\\b(?:A['’]s|Athletics|Coliseum|ballpark|the dugout|box score)\\b",
-      "docs": 69,
-      "citizens": 54,
-      "thisCycle": 2,
+      "docs": 72,
+      "citizens": 57,
+      "thisCycle": 5,
       "prevCycle": 9,
-      "score": 39.3,
+      "score": 42.3,
       "trend": "fading",
       "voices": [
         {
@@ -77,12 +77,12 @@
       "label": "transit",
       "adHoc": false,
       "pattern": "\\b(?:BART|the bus|AC Transit|commute|the train|transit|the platform|the station)\\b",
-      "docs": 34,
-      "citizens": 16,
-      "thisCycle": 2,
+      "docs": 37,
+      "citizens": 18,
+      "thisCycle": 5,
       "prevCycle": 3,
-      "score": 21.4,
-      "trend": "fading",
+      "score": 24.4,
+      "trend": "rising",
       "voices": [
         {
           "popid": "POP-00170",
@@ -107,15 +107,15 @@
           "excerpt": "I’ve heard folks around here talking about the Fruitvale Transit Hub Phase II, but honestly, it feels like the council’s been dragging their feet."
         },
         {
-          "popid": "POP-00210",
-          "name": "Depak Ying",
-          "hood": "Rockridge",
-          "role": "Server",
+          "popid": "POP-00280",
+          "name": "Jerald Jensen",
+          "hood": "West Oakland",
+          "role": "Janitor",
           "docs": 3,
-          "cycle": 109,
-          "customId": "cp-POP-00210-c109-PRESS",
-          "docId": "nZ99mRXCQKBnEDbGjrZK5W",
-          "excerpt": "I’ve heard people talking about the Fruitvale Transit Hub delays, and it feels like no one’s stepping up to take responsibility—it’s frustrating because we need that progress."
+          "cycle": 111,
+          "customId": "cp-POP-00280-c111-night",
+          "docId": "RXkLqCAB45pnbDs4VizrMc",
+          "excerpt": "Still, there's a weight to it: more eyes on me, more of the blame when the trash overflows and the station gets flooded with people who don't see us until something's wrong."
         }
       ]
     },
@@ -124,11 +124,11 @@
       "label": "faith",
       "adHoc": false,
       "pattern": "\\b(?:church|mosque|temple|synagogue|pastor|imam|rabbi|prayer|congregation|the service|scripture|faith)\\b",
-      "docs": 33,
-      "citizens": 18,
-      "thisCycle": 0,
+      "docs": 37,
+      "citizens": 19,
+      "thisCycle": 4,
       "prevCycle": 6,
-      "score": 18.5,
+      "score": 22.5,
       "trend": "fading",
       "voices": [
         {
@@ -136,11 +136,22 @@
           "name": "Eunice Marston",
           "hood": "Downtown",
           "role": "Senior Pastor / Faith Leader",
-          "docs": 5,
-          "cycle": 110,
-          "customId": "cp-POP-00753-c110-PRESS",
-          "docId": "1JpKXeYTr1ni1p29Xpvqk6",
-          "excerpt": "I haven't had any direct involvement with the Or Hashalom Renewal Community, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of…"
+          "docs": 6,
+          "cycle": 111,
+          "customId": "cp-POP-00753-c111-PRESS",
+          "docId": "9q6ujcgANB5MiKivcJ3DRx",
+          "excerpt": "As a faith leader, you just keep your focus on the people and their needs, whether that means providing emergency aid or coming together for a holy day."
+        },
+        {
+          "popid": "POP-00763",
+          "name": "Kenji Tanaka",
+          "hood": "Chinatown",
+          "role": "Senior Pastor / Faith Leader",
+          "docs": 4,
+          "cycle": 111,
+          "customId": "cp-POP-00763-c111-PRESS",
+          "docId": "h2xRfvq8X49M1rGHMsMsaw",
+          "excerpt": "I know the Bay Pure Land Buddhist Temple is a place of peace for our community, but I haven't seen their crisis response efforts in action myself, so I can't say what specifically brought those people in."
         },
         {
           "popid": "POP-00759",
@@ -152,17 +163,6 @@
           "customId": "cp-POP-00759-c110-PRESS",
           "docId": "6h7VSwJQ9NW8CX6ktHWb8y",
           "excerpt": "To be honest, I don't have much personal connection to the Or Hashalom Renewal Community, but as a faith leader, I appreciate the role that different faith organizations play in supporting their communities."
-        },
-        {
-          "popid": "POP-00763",
-          "name": "Kenji Tanaka",
-          "hood": "Chinatown",
-          "role": "Senior Pastor / Faith Leader",
-          "docs": 2,
-          "cycle": 109,
-          "customId": "cp-POP-00763-c109-PRESS",
-          "docId": "nTeKYAcyXebD4PFChMTRUe",
-          "excerpt": "To be honest, I haven't really seen the Bay Pure Land Buddhist Temple's crisis response efforts in action, so I don't want to speculate."
         }
       ]
     },
@@ -214,6 +214,53 @@
       ]
     },
     {
+      "key": "clinic",
+      "label": "the clinic",
+      "adHoc": false,
+      "pattern": "\\b(?:clinic|hospital|the ER|urgent care|the nurse|my doctor|health center|waiting room)\\b",
+      "docs": 24,
+      "citizens": 12,
+      "thisCycle": 6,
+      "prevCycle": 2,
+      "score": 16.7,
+      "trend": "rising",
+      "voices": [
+        {
+          "popid": "POP-00194",
+          "name": "Yu Zen",
+          "hood": "Rockridge",
+          "role": "Commercial Insurance Broker",
+          "docs": 6,
+          "cycle": 111,
+          "customId": "cp-POP-00194-c111-PRESS",
+          "docId": "5nWsYF9gsTZWtYuSmx5uqA",
+          "excerpt": "From where I'm lying in this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard."
+        },
+        {
+          "popid": "POP-00801",
+          "name": "Maurice Franklin",
+          "hood": "Rockridge",
+          "role": "Drone Fleet Coordinator",
+          "docs": 5,
+          "cycle": 111,
+          "customId": "cp-POP-00801-c111-midday",
+          "docId": "jG6kqTGzeCkmyoZPgxkxmq",
+          "excerpt": "But I've been laid up, watching the games from a hospital bed and then from my couch, and the money's been tight—borrowing against next month just to close this one."
+        },
+        {
+          "popid": "POP-00977",
+          "name": "Mai Tse",
+          "hood": "Chinatown",
+          "role": "student",
+          "docs": 2,
+          "cycle": 111,
+          "customId": "cp-POP-00977-c111-PRESS",
+          "docId": "xyBhMoKxshG6rVGJFTPjFN",
+          "excerpt": "I see the clinic lines every morning when I walk to school."
+        }
+      ]
+    },
+    {
       "key": "council",
       "label": "the council",
       "adHoc": false,
@@ -237,6 +284,17 @@
           "excerpt": "I’ve heard people talking about the Fruitvale Transit Hub Phase II, but it feels like the council’s been dragging their feet."
         },
         {
+          "popid": "POP-00210",
+          "name": "Depak Ying",
+          "hood": "Rockridge",
+          "role": "Server",
+          "docs": 6,
+          "cycle": 107,
+          "customId": "cp-POP-00210-c107-PRESS",
+          "docId": "ji6TfpJnUaG9WuuwgRAVNx",
+          "excerpt": "Honestly, I hear people at the diner talking about how nobody's taking responsibility for the gaps in services, but I'm too busy keeping up with orders to follow council meetings."
+        },
+        {
           "popid": "POP-00573",
           "name": "Calvin Mwangi",
           "hood": "West Oakland",
@@ -246,64 +304,6 @@
           "customId": "cp-POP-00573-c111-PRESS",
           "docId": "m6wn8NacSDQ5ZqsDqUWQSa",
           "excerpt": "But no, nothing about the council vote coming up in conversation."
-        },
-        {
-          "popid": "POP-00271",
-          "name": "Luca Petrov",
-          "hood": "Uptown",
-          "role": "Dance Choreographer",
-          "docs": 1,
-          "cycle": 108,
-          "customId": "cp-POP-00271-c108-morning",
-          "docId": "isQwBTY1LtQz3aWojYTLtp",
-          "excerpt": "Elliott’s been out front of City Hall a lot, talking to folks, but it feels..."
-        }
-      ]
-    },
-    {
-      "key": "clinic",
-      "label": "the clinic",
-      "adHoc": false,
-      "pattern": "\\b(?:clinic|hospital|the ER|urgent care|the nurse|my doctor|health center|waiting room)\\b",
-      "docs": 23,
-      "citizens": 12,
-      "thisCycle": 5,
-      "prevCycle": 2,
-      "score": 15.7,
-      "trend": "rising",
-      "voices": [
-        {
-          "popid": "POP-00194",
-          "name": "Yu Zen",
-          "hood": "Rockridge",
-          "role": "Commercial Insurance Broker",
-          "docs": 6,
-          "cycle": 111,
-          "customId": "cp-POP-00194-c111-PRESS",
-          "docId": "5nWsYF9gsTZWtYuSmx5uqA",
-          "excerpt": "From where I'm lying in this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard."
-        },
-        {
-          "popid": "POP-00801",
-          "name": "Maurice Franklin",
-          "hood": "Rockridge",
-          "role": "Drone Fleet Coordinator",
-          "docs": 4,
-          "cycle": 111,
-          "customId": "cp-POP-00801-c111-PRESS",
-          "docId": "1bxuyy2ksrq8hurKpZgx8b",
-          "excerpt": "Lying here in the hospital, you hear things."
-        },
-        {
-          "popid": "POP-00977",
-          "name": "Mai Tse",
-          "hood": "Chinatown",
-          "role": "student",
-          "docs": 2,
-          "cycle": 111,
-          "customId": "cp-POP-00977-c111-PRESS",
-          "docId": "xyBhMoKxshG6rVGJFTPjFN",
-          "excerpt": "I see the clinic lines every morning when I walk to school."
         }
       ]
     },
@@ -355,6 +355,53 @@
       ]
     },
     {
+      "key": "rent",
+      "label": "rent",
+      "adHoc": false,
+      "pattern": "\\b(?:rent|landlord|lease|evict\\w*|the deposit|move out|priced out)\\b",
+      "docs": 14,
+      "citizens": 11,
+      "thisCycle": 3,
+      "prevCycle": 5,
+      "score": 10.2,
+      "trend": "fading",
+      "voices": [
+        {
+          "popid": "POP-00148",
+          "name": "Gordon Tate",
+          "hood": "Downtown",
+          "role": "SUPERIOR COURT LIAISON",
+          "docs": 2,
+          "cycle": 111,
+          "customId": "cp-POP-00148-c111-PRESS",
+          "docId": "HarWKm9teJ8vnCVQeGSVA8",
+          "excerpt": "It's always something new popping up, which is fine, but with the rent going up the way it is, you start wondering who these places are actually for."
+        },
+        {
+          "popid": "POP-00351",
+          "name": "Ryan Stark",
+          "hood": "Downtown",
+          "role": "Housing Policy Analyst",
+          "docs": 1,
+          "cycle": 111,
+          "customId": "cp-POP-00351-c111-PRESS",
+          "docId": "19HfQrPcw4F8yjHoiw37gA",
+          "excerpt": "I walked by SpeedyBurger on Broadway and saw a new lease sign go up above it."
+        },
+        {
+          "popid": "POP-00691",
+          "name": "Tom Jilner",
+          "hood": "Rockridge",
+          "role": "Wine Bar Owner",
+          "docs": 1,
+          "cycle": 110,
+          "customId": "cp-POP-00691-c110-CONVO",
+          "docId": "6A8zq7d3sNoEthsEFG6hqi",
+          "excerpt": "More stable hours for Mateo's little league games.\" *Gestures vaguely toward the eviction notice down the block* \"Unlike some spots around here.\" *Tugs at my suit sleeve absentmindedly* \"Kid's tougher than I was at…"
+        }
+      ]
+    },
+    {
       "key": "safety",
       "label": "safety",
       "adHoc": false,
@@ -398,53 +445,6 @@
           "customId": "cp-POP-00002-c109-CONVO",
           "docId": "DZcrkjfG1U9spAUxkbugUn",
           "excerpt": "Chen next door still keeps hers by the door.\" *Winks* \"Your call, slugger.\" *Clutching the bag of cookies like stolen treasure* \"Our little secret."
-        }
-      ]
-    },
-    {
-      "key": "rent",
-      "label": "rent",
-      "adHoc": false,
-      "pattern": "\\b(?:rent|landlord|lease|evict\\w*|the deposit|move out|priced out)\\b",
-      "docs": 11,
-      "citizens": 9,
-      "thisCycle": 0,
-      "prevCycle": 5,
-      "score": 7.2,
-      "trend": "fading",
-      "voices": [
-        {
-          "popid": "POP-00691",
-          "name": "Tom Jilner",
-          "hood": "Rockridge",
-          "role": "Wine Bar Owner",
-          "docs": 1,
-          "cycle": 110,
-          "customId": "cp-POP-00691-c110-CONVO",
-          "docId": "6A8zq7d3sNoEthsEFG6hqi",
-          "excerpt": "More stable hours for Mateo's little league games.\" *Gestures vaguely toward the eviction notice down the block* \"Unlike some spots around here.\" *Tugs at my suit sleeve absentmindedly* \"Kid's tougher than I was at…"
-        },
-        {
-          "popid": "POP-00546",
-          "name": "Tara Ellison",
-          "hood": "Rockridge",
-          "role": "Journalist",
-          "docs": 1,
-          "cycle": 108,
-          "customId": "cp-POP-00546-c108-PRESS",
-          "docId": "XihSruez1f8nKKc7dDJY1z",
-          "excerpt": "I've just been going about my daily life, noticing the usual things in Rockridge like the busy aisles at Canopy Market and the 'For Rent' sign at Denise Simmons' house."
-        },
-        {
-          "popid": "POP-01112",
-          "name": "Tariq Harris",
-          "hood": "Chinatown",
-          "role": "Dental assistant",
-          "docs": 1,
-          "cycle": 107,
-          "customId": "cp-POP-01112-c107-PRESS",
-          "docId": "kSsDbcGDPtPLuzG4TexDtL",
-          "excerpt": "I've seen new people moving in from West Oakland, but it's not like that's necessarily a good thing - it just means they're being priced out of their own neighborhood."
         }
       ]
     },
@@ -621,47 +621,52 @@
   "hoods": [
     {
       "hood": "Rockridge",
-      "docs": 120,
-      "citizens": 32
+      "docs": 128,
+      "citizens": 33
     },
     {
       "hood": "West Oakland",
-      "docs": 104,
-      "citizens": 25
+      "docs": 111,
+      "citizens": 28
     },
     {
       "hood": "Downtown",
-      "docs": 96,
-      "citizens": 26
+      "docs": 103,
+      "citizens": 29
     },
     {
       "hood": "Fruitvale",
-      "docs": 74,
-      "citizens": 23
+      "docs": 80,
+      "citizens": 24
+    },
+    {
+      "hood": "Jack London",
+      "docs": 72,
+      "citizens": 17
     },
     {
       "hood": "Temescal",
-      "docs": 66,
+      "docs": 67,
       "citizens": 26
     },
     {
       "hood": "Lake Merritt",
-      "docs": 65,
-      "citizens": 22
-    },
-    {
-      "hood": "Jack London",
-      "docs": 62,
-      "citizens": 16
+      "docs": 66,
+      "citizens": 23
     },
     {
       "hood": "Laurel",
-      "docs": 39,
-      "citizens": 16
+      "docs": 46,
+      "citizens": 19
     },
     {
       "hood": "Chinatown",
-      "docs": 35,
+      "docs": 37,
+      "citizens": 16
+    },
+    {
+      "hood": "Uptown",
+      "docs": 31,
       "citizens": 16
     },
     {
@@ -670,13 +675,8 @@
       "citizens": 18
     },
     {
-      "hood": "Uptown",
-      "docs": 30,
-      "citizens": 15
-    },
-    {
       "hood": "Grand Lake",
-      "docs": 20,
+      "docs": 22,
       "citizens": 2
     },
     {

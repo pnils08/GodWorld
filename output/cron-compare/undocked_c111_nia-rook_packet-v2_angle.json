@@ -15,18 +15,18 @@
     },
     "task": {
       "goal": "Plan one Article chase without choosing a new assignment",
-      "assignment": "Recap Briar Soto's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems Sol, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 8 cycle(s) led, current streak 8.",
+      "assignment": "Recap Eric Taveras's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 1170, systems sirius, combat 0, mishaps 0, magnitude 3/5. Standings: Eric Taveras leads the board — rank #1, 1 cycle(s) led, current streak 1. In the chair: Eric Taveras — Second Baseman, Oakland A's. The career is who they are, not the story; the story is the flight.",
       "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
     },
     "signal": {
       "kind": "undocked",
-      "hood": "Jack London",
+      "hood": "Downtown",
       "score": null,
-      "src": "undocked:undocked-pop00926-Y3C7",
+      "src": "undocked:undocked-pop00597-Y3C7-e2",
       "nearby": [
         {
-          "text": "UNDOCKED: Briar Soto — a night the books can't settle yet",
-          "src": "undocked:undocked-pop00926-Y3C7"
+          "text": "UNDOCKED: Eric Taveras — up 1170 on the night",
+          "src": "undocked:undocked-pop00597-Y3C7-e2"
         }
       ]
     },
@@ -37,17 +37,17 @@
       ],
       "candidates": [
         {
-          "pop": "POP-00926",
-          "name": "Briar Soto",
-          "profile": "Briar Soto — UNDOCKED pilot",
+          "pop": "POP-00597",
+          "name": "Eric Taveras",
+          "profile": "Eric Taveras — UNDOCKED pilot",
           "role": "UNDOCKED pilot",
           "hood": null,
           "mode": "named",
           "sourceKind": "undocked-feed-row",
           "evidence": {
             "source": "output/spacemolt-show/feed/c111.json",
-            "episodeId": "undocked-pop00926-Y3C7",
-            "pop": "POP-00926"
+            "episodeId": "undocked-pop00597-Y3C7-e2",
+            "pop": "POP-00597"
           }
         }
       ]
@@ -61,9 +61,33 @@
       },
       {
         "t": "FACT",
-        "text": "UNDOCKED: Briar Soto — a night the books can't settle yet",
-        "src": "undocked:undocked-pop00926-Y3C7",
-        "id": "F-266e9c48cb19"
+        "text": "UNDOCKED: Eric Taveras — up 1170 on the night",
+        "src": "undocked:undocked-pop00597-Y3C7-e2",
+        "id": "F-cfc861424129"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras — Second Baseman, Oakland A's (ledger)",
+        "src": "undocked:undocked-pop00597-Y3C7-e2",
+        "id": "F-397a2e54ef94"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras, Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern...",
+        "src": "undocked:undocked-pop00597-Y3C7-e2",
+        "id": "F-c708af7819cd"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras, Championship: Eric Taveras win World Series MVP to go along with his post-season MVP for the earlier rounds, Taveras showing tremendous value in signing him this past off-season.",
+        "src": "undocked:undocked-pop00597-Y3C7-e2",
+        "id": "F-beb6533459f2"
+      },
+      {
+        "t": "FACT",
+        "text": "Eric Taveras, Playoffs: Eric Taveras continues his amazing playoff campaign with 2 homeruns.",
+        "src": "undocked:undocked-pop00597-Y3C7-e2",
+        "id": "F-7e774218508a"
       }
     ],
     "limits": {
@@ -113,17 +137,17 @@
     "mode": "named",
     "candidates": [
       {
-        "pop": "POP-00926",
-        "name": "Briar Soto",
+        "pop": "POP-00597",
+        "name": "Eric Taveras",
         "role": "UNDOCKED pilot",
         "hood": null,
-        "profile": "Briar Soto — UNDOCKED pilot",
+        "profile": "Eric Taveras — UNDOCKED pilot",
         "mode": "named",
         "sourceKind": "undocked-feed-row",
         "evidence": {
           "source": "output/spacemolt-show/feed/c111.json",
-          "episodeId": "undocked-pop00926-Y3C7",
-          "pop": "POP-00926"
+          "episodeId": "undocked-pop00597-Y3C7-e2",
+          "pop": "POP-00597"
         }
       }
     ],
@@ -135,17 +159,23 @@
   },
   "assignment": {
     "story": {
-      "ref": "undocked:undocked-pop00926-Y3C7",
-      "label": "UNDOCKED: Briar Soto — a night the books can't settle yet",
+      "ref": "undocked:undocked-pop00597-Y3C7-e2",
+      "label": "UNDOCKED: Eric Taveras — up 1170 on the night",
       "kind": "undocked",
-      "angle": "Recap Briar Soto's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems Sol, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 8 cycle(s) led, current streak 8.",
+      "angle": "Recap Eric Taveras's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 1170, systems sirius, combat 0, mishaps 0, magnitude 3/5. Standings: Eric Taveras leads the board — rank #1, 1 cycle(s) led, current streak 1. In the chair: Eric Taveras — Second Baseman, Oakland A's. The career is who they are, not the story; the story is the flight.",
+      "facts": [
+        "Eric Taveras — Second Baseman, Oakland A's (ledger)",
+        "Eric Taveras, Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern...",
+        "Eric Taveras, Championship: Eric Taveras win World Series MVP to go along with his post-season MVP for the earlier rounds, Taveras showing tremendous value in signing him this past off-season.",
+        "Eric Taveras, Playoffs: Eric Taveras continues his amazing playoff campaign with 2 homeruns."
+      ],
       "citizens": [
-        "Briar Soto — UNDOCKED cast pilot"
+        "Eric Taveras — Second Baseman, Oakland A's, UNDOCKED cast pilot"
       ],
       "popids": [
-        "POP-00926"
+        "POP-00597"
       ],
-      "hood": "Jack London"
+      "hood": "Downtown"
     },
     "approach": "Recap approach (UNDOCKED show beat): open on the CITY watching, not the cockpit. Pick 1-2 bag modes and hold them. The typed episode facts are the spine — credits, systems, combat, mishaps, magnitude — but lead with what it MEANS for who's up and who's down, never with the numbers. The pilot's packet interview is the only place their voice comes from. End on the one sentence the hallway will argue about tomorrow. This is the desk that's allowed to have fun."
   },
@@ -164,40 +194,42 @@
   "angleRead": {
     "name": "Nia Rook",
     "popid": "POP-01076",
-    "text": "I'm leaning into the vibe in Jack London—the kind of energy where people are still talking about the episode long after the screen goes dark. Briar Soto put on a show that left the books unsettled, and that's where the story is. I'll focus on the friction between the clean technical run—no mishaps, no combat—and the fact that the credits are still a mess. While Clarissa Dane keeps her grip on the top spot, Briar's night is the one people are actually chewing on. I'll keep the technicals as the skeleton but lead with the social fallout.",
+    "text": "I'm leaning into the contrast between the dirt of the diamond and the coldness of the cockpit. Taveras is the city's golden boy right now—World Series MVP, the guy carrying the A's—so I want to capture that specific energy in Downtown. I'll frame this as the city watching a champion transition from the field to the flight. I need to make sure I don't just list the credits; I want to describe the feeling of the win and how it settles into the streets. I'm going to push the word count by dwelling on the atmosphere of the watch-parties, making sure the piece breathes before I hit the hard numbers.",
     "plan": {
-      "chase": "I'm leaning into the vibe in Jack London—the kind of energy where people are still talking about the episode long after the screen goes dark. Briar Soto put on a show that left the books unsettled, and that's where the story is. I'll focus on the friction between the clean technical run—no mishaps, no combat—and the fact that the credits are still a mess. While Clarissa Dane keeps her grip on the top spot, Briar's night is the one people are actually chewing on. I'll keep the technicals as the skeleton but lead with the social fallout.",
-      "focus": "The gap between a clean flight and an unsettled ledger.",
-      "why": "The city cares less about the magnitude 2/5 and more about who is actually winning the narrative when the numbers don't add up.",
+      "chase": "I'm leaning into the contrast between the dirt of the diamond and the coldness of the cockpit. Taveras is the city's golden boy right now—World Series MVP, the guy carrying the A's—so I want to capture that specific energy in Downtown. I'll frame this as the city watching a champion transition from the field to the flight. I need to make sure I don't just list the credits; I want to describe the feeling of the win and how it settles into the streets. I'm going to push the word count by dwelling on the atmosphere of the watch-parties, making sure the piece breathes before I hit the hard numbers.",
+      "focus": "The intersection of professional athletic dominance and the high-stakes momentum of the UNDOCKED board.",
+      "why": "Taveras isn't just a pilot; he's a local hero on a streak. The story isn't the flight path, it's the weight of being #1 in both the league and the chair.",
       "checks": [
-        "Verify the specific tension in the pilot's packet interview regarding the unsettled credits.",
-        "Confirm the current gap between Briar's performance and Clarissa Dane's #1 rank."
+        "Ensure the narrative opens with the city's reaction, not the technical specs.",
+        "Verify that the credit count and magnitude are woven in as meaning, not a list.",
+        "Confirm the final sentence is a sharp, debatable hook for the hallway."
       ],
       "targets": [
         {
-          "pop": "POP-00926",
-          "question": "How do you reconcile a flight with zero mishaps and solid systems with a ledger that the books can't settle yet?",
-          "basis": "undocked:undocked-pop00926-Y3C7"
+          "pop": "POP-00597",
+          "question": "How does the transition from the pressure of a World Series MVP run translate to the mental state required for a magnitude 3/5 flight?",
+          "basis": "The contrast between his A's career success and his current #1 rank on the board."
         }
       ],
-      "interpretation": "A technically sound performance that fails to translate into a clean win, creating a vacuum for public debate.",
+      "interpretation": "The flight is a victory lap that became a leaderboard takeover.",
       "unverifiedLead": [
-        "The specific nature of the 'unsettled' credits and why they aren't closing."
+        "The specific mood of the Downtown crowds during the feed."
       ],
-      "closeQuestion": "Is a perfect flight worth anything if the books don't agree?"
+      "closeQuestion": "Does the momentum of a championship ring make a pilot fearless, or just more careful?"
     }
   },
   "lanePicks": [
     {
-      "label": "UNDOCKED: Briar Soto — a night the books can't settle yet",
+      "label": "UNDOCKED: Eric Taveras — up 1170 on the night",
       "kind": "undocked",
-      "hood": "Jack London",
-      "ref": "undocked:undocked-pop00926-Y3C7",
+      "hood": "Downtown",
+      "ref": "undocked:undocked-pop00597-Y3C7-e2",
       "popids": [
-        "POP-00926"
+        "POP-00597"
       ]
     }
   ],
   "laneEntries": 1,
-  "ranAt": "2026-10-14T11:17:14.176Z"
+  "angleCapHits": 0,
+  "ranAt": "2026-10-16T11:17:04.738Z"
 }

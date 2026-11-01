@@ -118,11 +118,17 @@ function loadEventView(root, cycle) {
   let parsedMeta = null;
   try { parsedMeta = meta.exists ? JSON.parse(meta.body) : null; } catch (_) { /* unavailable */ }
   const observedAt = parsedMeta && typeof parsedMeta.generatedAt === 'string' ? parsedMeta.generatedAt : null;
-  const sportsFresh = sports.exists && parsedMeta && Number(parsedMeta.cycle) === at && observedAt;
+  // dumpBeatTabs publishes file bytes and sourceHashes in one directory swap.
+  // A Cycle stamp alone cannot certify a later partial overwrite or a file
+  // copied from another generation as the export this watermark describes.
+  const expectedSportsHash = parsedMeta && parsedMeta.sourceHashes &&
+    parsedMeta.sourceHashes.Oakland_Sports_Feed;
+  const sportsFresh = sports.exists && parsedMeta && Number(parsedMeta.cycle) === at &&
+    observedAt && typeof expectedSportsHash === 'string' && expectedSportsHash === sports.hash;
   const summaryFresh = summary.exists && new RegExp('^# World Summary \\u2014 Cycle ' + at + '\\s*$', 'm').test(summary.body);
   const events = [];
   const issues = [];
-  if (!sportsFresh) issues.push('sports export missing, invalid or from another Cycle');
+  if (!sportsFresh) issues.push('sports export missing, invalid, from another Cycle or hash-mismatched');
   if (!summaryFresh) issues.push('world summary missing or from another Cycle for C' + cycle);
   if (sportsFresh) {
     const lines = sports.body.split(/\r?\n/);

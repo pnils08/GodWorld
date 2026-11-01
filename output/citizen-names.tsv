@@ -46,7 +46,7 @@ POP-00047	Babe Bono	Lake Merritt
 POP-00048	Carlos Presti	Downtown
 POP-00049	Pamela Amelia	Piedmont Ave
 POP-00050	Ernesto Quintero	Baylight District
-POP-00051	Desmond Morton	Jack London
+POP-00051	Desmond Morton	Chinatown
 POP-00052	Clark Saryan	Downtown
 POP-00053	Kevin Clark	Jack London
 POP-00054	JR Rosado	Piedmont Ave
@@ -84,7 +84,7 @@ POP-00128	Kris Bubic	West Oakland
 POP-00129	Dalton Rushing	Chinatown
 POP-00131	Lorenzo Jordan	Downtown
 POP-00132	Tobias Jurko	Piedmont Ave
-POP-00133	Ariana Reyes	Downtown
+POP-00133	Ariana Reyes	West Oakland
 POP-00134	Brianna Lee	Laurel
 POP-00135	Mina Linas	Lake Merritt
 POP-00136	Rafael Montez	Piedmont Ave
@@ -294,7 +294,7 @@ POP-00341	Emilia Wurford	Chinatown
 POP-00342	Leo Ling	Lake Merritt
 POP-00343	Iman Horton	Chinatown
 POP-00344	Tobert Lewis	Downtown
-POP-00345	Bonnie Brown	Uptown
+POP-00345	Bonnie Brown	West Oakland
 POP-00346	Ingmar Jordan	Uptown
 POP-00347	Dawson Nguyen	Baylight District
 POP-00348	Melony Foster	Uptown
@@ -414,7 +414,7 @@ POP-00523	Serg Cerrano	Fruitvale
 POP-00524	Maston Burke	West Oakland
 POP-00525	Miguel King	Fruitvale
 POP-00526	Marisol Achebe	Fruitvale
-POP-00527	Mike Paulson	Jack London
+POP-00527	Mike Paulson	West Oakland
 POP-00528	Deacon Seymour	Lake Merritt
 POP-00529	Tomas Aguilar	Jack London
 POP-00530	Lena Okafor	Fruitvale
@@ -423,7 +423,7 @@ POP-00532	Marcus Whitfield	Fruitvale
 POP-00533	Travis Coles	Downtown
 POP-00534	Dak Leo	Lake Merritt
 POP-00535	Lisa Tanaka	Chinatown
-POP-00536	Everson Morello	Uptown
+POP-00536	Evan Morello	Uptown
 POP-00537	Marin Tao	Chinatown
 POP-00538	Nila James	Temescal
 POP-00539	Lena Cross	Piedmont Ave
@@ -464,7 +464,7 @@ POP-00624	Aisha Toure	Downtown
 POP-00625	Gregory Cho	Chinatown
 POP-00626	Fatima Al-Hassan	Uptown
 POP-00627	Emma Washington	Fruitvale
-POP-00628	Tina Kozlov	Temescal
+POP-00628	Tina Kozlov	Grand Lake
 POP-00629	Marcus Ibarra	Jack London
 POP-00630	Patricia Leung	Lake Merritt
 POP-00631	Derry Webb	Uptown
@@ -484,7 +484,7 @@ POP-00644	Rafael Pilgrim	Fruitvale
 POP-00645	Ezekiel Campbell	Adams Point
 POP-00646	Tiro Worso	Piedmont Ave
 POP-00647	Ronald Silk	Chinatown
-POP-00648	Mart Johns	Adams Point
+POP-00648	Mart Johns	KONO
 POP-00649	Jire Hilt	Jack London
 POP-00650	Mesi Westin	Jack London
 POP-00651	Howard Yell	Rockridge
@@ -493,7 +493,7 @@ POP-00653	Jerome Jessup	Uptown
 POP-00654	Willy Wally	Rockridge
 POP-00656	Brianna Scott	Jack London
 POP-00657	Aida Jackson	Piedmont Ave
-POP-00658	Darius Cike	Rockridge
+POP-00658	Darius Cike	West Oakland
 POP-00659	Ripley Court	Rockridge
 POP-00660	Ala Lewis	Piedmont Ave
 POP-00661	Bianca Crook	Lake Merritt
@@ -502,12 +502,12 @@ POP-00663	Soo Loo	Downtown
 POP-00664	Lilan Cert	Lake Merritt
 POP-00665	Art Scott	Lake Merritt
 POP-00666	Kaila Raimon	Brooklyn
-POP-00667	Lo Thoop	Temescal
+POP-00667	Lo Thoop	Jack London
 POP-00668	Tobias Wing	West Oakland
 POP-00669	Tank Fiester	Lake Merritt
 POP-00670	Drew Lemon	Downtown
 POP-00671	Siu Niu	Piedmont Ave
-POP-00672	Waymen Brown	Uptown
+POP-00672	Waymen Brown	West Oakland
 POP-00673	Lilac Hint	Uptown
 POP-00674	Reggio Leo	Uptown
 POP-00675	Ilandra Tain	West Oakland
@@ -582,7 +582,7 @@ POP-00745	Sonia Parikh	Fruitvale
 POP-00746	Shawn Neighbor	Fruitvale
 POP-00747	Gloria Meeks	Downtown
 POP-00748	Vince Okoye	Lake Merritt
-POP-00749	Linda Chow	Rockridge
+POP-00749	Linda Chow	West Oakland
 POP-00750	Sandra Liu	Downtown
 POP-00753	Eunice Marston	Downtown
 POP-00754	Ophelia Brenner	Fruitvale
@@ -645,7 +645,7 @@ POP-00811	Inez Mendoza	Lake Merritt
 POP-00812	Millicent Kumar	Chinatown
 POP-00813	Akemi Fukuda	Uptown
 POP-00815	Amal Nair	KONO
-POP-00816	Daphne Stafford	Chinatown
+POP-00816	Daphne Stafford	West Oakland
 POP-00817	Habiba Ward	West Oakland
 POP-00818	Latasha Rivera	Rockridge
 POP-00819	Jada Alvarez	Temescal
@@ -685,7 +685,7 @@ POP-00853	Winifred Jordan	Lake Merritt
 POP-00854	Kasumi Norwood	West Oakland
 POP-00855	Estrella Mehta	Chinatown
 POP-00856	Emiko Suzuki	KONO
-POP-00857	Juliet Choi	Downtown
+POP-00857	Juliet Choi	East Oakland
 POP-00858	Nandini Rojas	Uptown
 POP-00859	Tatiana Flores	KONO
 POP-00860	Saniya Williams	Rockridge
@@ -736,7 +736,7 @@ POP-00904	Josephine Holloway	Piedmont Ave
 POP-00905	Kalyani Alvarez	Temescal
 POP-00906	Idalia Okonkwo	Lake Merritt
 POP-00907	Jia Reyes	Fruitvale
-POP-00908	Cristina Norwood	Rockridge
+POP-00908	Cristina Norwood	West Oakland
 POP-00909	Nguyet Mukherjee	KONO
 POP-00910	Carmen Hong	Jack London
 POP-00911	Devika Wu	KONO
@@ -751,7 +751,7 @@ POP-00919	Imogen Muhammad	Temescal
 POP-00920	Tanisha Salazar	Uptown
 POP-00921	Constanza Doan	Downtown
 POP-00922	Rasha Brown	Fruitvale
-POP-00923	Eshe Norwood	Rockridge
+POP-00923	Eshe Norwood	West Oakland
 POP-00924	Donna Xu	Downtown
 POP-00925	Makayla Hashimoto	Uptown
 POP-00926	Briar Soto	Jack London
@@ -855,7 +855,7 @@ POP-01023	Adash Stanley	Downtown
 POP-01024	AJ Dybantsa	KONO
 POP-01025	Dame Sarr	Downtown
 POP-01026	Coen Carr	Uptown
-POP-01027	Austin Reaves	Downtown
+POP-01027	Austin Reaves	West Oakland
 POP-01028	Wendell Carter Jr.	Piedmont Ave
 POP-01046	Elliot Abraham	Jack London
 POP-01029	Miguel Allen	Fruitvale
@@ -905,7 +905,7 @@ POP-01074	Denise Simmons	Fruitvale
 POP-01075	Marcus Duval	Laurel
 POP-01076	Nia Rook	West Oakland
 POP-01077	Rafael Phillips	Rockridge
-POP-01078	Pablo Almanzar	Jack London
+POP-01078	Pablo Almanzar	Chinatown
 POP-01079	Dillon Brooks	West Oakland
 POP-01080	Louis Cross	Grand Lake
 POP-01081	Hitoki Ka	KONO
@@ -926,7 +926,7 @@ POP-01095	Helena Voss-Adeyemi	Rockridge
 POP-01096	Priyanka Raman	West Oakland
 POP-01097	Theodore Lindqvist	West Oakland
 POP-01098	Naomi Castellanos	Piedmont Ave
-POP-01099	Wendell Price	Lake Merritt
+POP-01099	Wendell Price	West Oakland
 POP-01100	Marco Davis	Brooklyn
 POP-01101	Mateo Baker	Ivy Hill
 POP-01102	Colin Perez	Glenview
@@ -935,10 +935,10 @@ POP-01104	Nala Okonkwo	Dimond
 POP-01105	Rashida Foster	Eastlake
 POP-01106	Priya Chandrasekaran	Lake Merritt
 POP-01107	Daniel Yoon	West Oakland
-POP-01108	Christine Nakamura	Temescal
+POP-01108	Christine Nakamura	Jack London
 POP-01109	Marcus Tan	Fruitvale
-POP-01110	Amara Osei	Jack London
-POP-01111	Jasmine Torres	Downtown
+POP-01110	Amara Osei	West Oakland
+POP-01111	Jasmine Torres	Chinatown
 POP-01112	Tariq Harris	Chinatown
 POP-01113	Quinn Adeyemi	East Oakland
 POP-01114	Marcus Skenes	Lake Merritt
@@ -975,7 +975,7 @@ POP-01144	Benjamin Tsai	Chinatown
 POP-01145	Marisol Ibarra	Fruitvale
 POP-01146	Devin Castellanos	Dimond
 POP-01147	Ruth Anyanwu	East Oakland
-POP-01148	Jerome Lindqvist	Eastlake
+POP-01148	Jerome Lindqvist	Fruitvale
 POP-01149	Hana Petrosyan	San Antonio
 POP-01150	Calvin Mokoena	Downtown
 POP-01151	Luis Ferreira-Nash	Glenview
@@ -983,7 +983,7 @@ POP-01152	Ingrid Solberg	Rockridge
 POP-01153	Omar Haddad	West Oakland
 POP-01154	Felicia Grandberry	East Oakland
 POP-01155	Teodoro Villalpando	Fruitvale
-POP-01156	Nadia Rasmussen	Temescal
+POP-01156	Nadia Rasmussen	Fruitvale
 POP-01157	Wesley Oduya	Jack London
 POP-01158	Priscilla Chang	Fruitvale
 POP-01159	Dmitri Volkov	Brooklyn
@@ -1009,7 +1009,7 @@ POP-01178	Gideon Abramowitz	Rockridge
 POP-01179	Ximena Salcedo	San Antonio
 POP-01180	Kofi Boateng	Eastlake
 POP-01181	Ingeborg Hallstrom	Dimond
-POP-01182	Tariq Mansouri	Glenview
+POP-01182	Tariq Mansouri	West Oakland
 POP-01183	Rosalind Achterberg	Rockridge
 POP-01184	Dominic Okeke-Brandt	Laurel
 POP-01185	Lourdes Quiroga	Fruitvale
@@ -1031,3 +1031,24 @@ POP-01200	Mina Kapoor	Grand Lake
 POP-01201	Sakura Dubois	Baylight District
 POP-01202	Dahlia Cruz	Baylight District
 POP-01203	Iris Pham	Baylight District
+POP-01204	Jose Johnson	Eastlake
+POP-01205	Xavier Green	Dimond
+POP-01206	Debra Walker	Adams Point
+POP-01207	Maya Inoue	Grand Lake
+POP-01208	Pooja Coleman	Baylight District
+POP-01209	Daniela Kapoor	Glenview
+POP-01210	Tamsin Pruitt	Fruitvale
+POP-01211	Ines Sorensen	Uptown
+POP-01212	Marisol Quintero	Fruitvale
+POP-01213	Darnell Oyelaran	West Oakland
+POP-01214	Priya Raghunathan	Temescal
+POP-01215	Tomás Villaseñor	East Oakland
+POP-01216	Theo Bautista	Chinatown
+POP-01217	Elijah Campbell	Adams Point
+POP-01218	Jerri Brown	Grand Lake
+POP-01219	Adriana Bello	Glenview
+POP-01220	Clara Dubois	Ivy Hill
+POP-01221	Margot Crenshaw	Eastlake
+POP-01222	Astrid Freeman	Adams Point
+POP-01223	Harry Hayward	KONO
+POP-01224	Trevor Henderson	Lake Merritt

@@ -15,3 +15,10 @@ I'm ditching the press riser. I'm standing on a greasy curb in Downtown, feeling
 - Janelle Rourke (POP-00145): "I bought a new A's jersey and, honestly, it's been really exciting to put it on. There's this sense of anticipation hanging in the air that I just can't shake. I'm looking forward to the next season, maybe even catching a game or two."
 - Inga Creator (POP-00196): "I'm still on cloud nine after last night's win! I celebrated by buying a new A's jersey - it's my way of showing team spirit. The energy around here is electric, and I'm loving every minute of it."
 
+## §4 THE ARTICLE (wake 3)
+- draft: output/cron-compare/staged/sports_c111_p-slayer_packet-v2_x-ai-grok-4-3.staged.md
+- disposition: staged
+- rhea: PASS
+- self-score footer: present
+- tool use: none
+

@@ -1,11 +1,11 @@
 {
   "doc:boot": {
-    "lastTouched": "2026-10-14T05:06:15.247Z",
-    "reportPath": "output/audit-reports/session-audit_2026-10-14_000615.md"
+    "lastTouched": "2026-10-31T08:46:01.025Z",
+    "reportPath": "output/audit-reports/session-audit_2026-10-31_034600.md"
   },
   "doc:engine": {
-    "lastTouched": "2026-10-11T06:19:32.323Z",
-    "reportPath": "output/audit-reports/session-audit_2026-10-11_011932.md"
+    "lastTouched": "2026-11-01T02:44:15.924Z",
+    "reportPath": "output/audit-reports/session-audit_2026-10-31_214415.md"
   },
   "skill:cycle-pipeline": {
     "lastTouched": "2026-08-21T07:18:49.808Z",

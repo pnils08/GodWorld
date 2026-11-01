@@ -28,5 +28,6 @@
     "recorded": true,
     "out": "config/godworld/.env // tip: ⌁ auth for agents [www.vestauth.com]\n{\n  \"popId\": \"POP-00154\",\n  \"name\": \"Lila Mezran\",\n  \"recorded\": true,\n  \"text\": \"filed: Chinatown's Line Is Shorter Than Its Count\"\n}"
   },
-  "ranAt": "2026-10-12T23:17:29.537Z"
+  "ranAt": "2026-10-12T23:17:29.537Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:02.635Z"
 }

@@ -1,5 +1,5 @@
 {
-  "version": "TRENDS-SLICE-3",
+  "version": "TRENDS-SLICE-4",
   "empty": false,
   "cycle": 111,
   "kind": "beat-trends",
@@ -11,30 +11,30 @@
     "domain": "trends",
     "builder": "buildTrendsSlice.js"
   },
-  "hood": "Chinatown",
+  "hood": "Laurel",
   "pulse": {
-    "generatedAt": "2026-10-14T11:15:14.370Z",
-    "docs": 780,
-    "citizens": 253
+    "generatedAt": "2026-10-17T13:15:14.972Z",
+    "docs": 832,
+    "citizens": 267
   },
   "story": {
     "kind": "beat-trends",
-    "angle": "Marin Tao leads the conversation (25 mentions); West Oakland moves the most — what Oakland is doing together this week",
-    "label": "Marin Tao leads the conversation (25 mentions); West Oakland moves the most",
-    "hookLine": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
-    "hood": "Chinatown",
+    "angle": "Sienna Vale gained 1 mention this cycle (5 total); West Oakland moves the most — what Oakland is doing together this week",
+    "label": "Sienna Vale gained 1 mention this cycle (5 total); West Oakland moves the most",
+    "hookLine": "Sienna Vale — gained 1 mention this cycle (5 total), surging. The trend is the story; the mood is yours.",
+    "hood": "Laurel",
     "citizens": [
-      "Marin Tao (POP-00537)",
-      "Dax Monroe (POP-00769)",
-      "Rico Valez (POP-00632)",
+      "Sienna Vale (POP-01067)",
+      "Pixel Pete (POP-01064)",
+      "Lumi Crest (POP-01072)",
       "Vinnie Keane (POP-00001)",
       "Melton Neilon (POP-00170)",
       "Eunice Marston (POP-00753)"
     ],
     "popids": [
-      "POP-00537",
-      "POP-00769",
-      "POP-00632",
+      "POP-01067",
+      "POP-01064",
+      "POP-01072",
       "POP-00001",
       "POP-00170",
       "POP-00753"
@@ -42,33 +42,33 @@
     "ref": "output/beats/Cultural_Ledger.jsonl @C111",
     "cycle": 111
   },
-  "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the engine's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "approach": "Social-trends approach: this slice is what the city is doing together — the names climbing the culture record, where people are moving, what the city's hooks say is shifting. Fast, reactive, grounded: a trend claim needs a window and a number from this slice. The names and moves are real; the group chat, the binge-night, the collective mood swing are yours. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
   "citizens": [
     {
-      "popid": "POP-00537",
-      "name": "Marin Tao",
-      "role": "Musician",
-      "neighborhood": "Chinatown",
+      "popid": "POP-01067",
+      "name": "Sienna Vale",
+      "role": "influencer",
+      "neighborhood": "Laurel",
       "business": null,
-      "profile": "Marin Tao — Musician — Chinatown",
+      "profile": "Sienna Vale — influencer — Laurel",
       "why": "the city is talking about them (Cultural_Ledger)"
     },
     {
-      "popid": "POP-00769",
-      "name": "Dax Monroe",
-      "role": "Artist",
+      "popid": "POP-01064",
+      "name": "Pixel Pete",
+      "role": "streamer",
       "neighborhood": "Rockridge",
       "business": null,
-      "profile": "Dax Monroe — Artist — Rockridge",
+      "profile": "Pixel Pete — streamer — Rockridge",
       "why": "the city is talking about them (Cultural_Ledger)"
     },
     {
-      "popid": "POP-00632",
-      "name": "Rico Valez",
-      "role": "Musician",
-      "neighborhood": "Fruitvale",
+      "popid": "POP-01072",
+      "name": "Lumi Crest",
+      "role": "influencer",
+      "neighborhood": "Rockridge",
       "business": null,
-      "profile": "Rico Valez — Musician — Fruitvale",
+      "profile": "Lumi Crest — influencer — Rockridge",
       "why": "the city is talking about them (Cultural_Ledger)"
     },
     {
@@ -96,25 +96,21 @@
       "neighborhood": "Downtown",
       "business": null,
       "profile": "Eunice Marston — Senior Pastor / Faith Leader — Downtown",
-      "why": "has been saying it on their own page — faith, C110: “I haven't had any direct involvement with the Or Hashalom Renewal Community, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of…”"
+      "why": "has been saying it on their own page — faith, C111: “As a faith leader, you just keep your focus on the people and their needs, whether that means providing emergency aid or coming together for a holy day.”"
     }
   ],
   "facts": [
     {
-      "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
-      "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      "text": "Sienna Vale (influencer), Media — gained 1 mention this cycle (5 total), surging, fame 21",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111 vs output/beats/prev/Cultural_Ledger.jsonl @C110"
     },
     {
-      "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 85",
-      "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      "text": "Pixel Pete (streamer), Media — gained 1 mention this cycle (4 total), rising, fame 22",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111 vs output/beats/prev/Cultural_Ledger.jsonl @C110"
     },
     {
-      "text": "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
-      "src": "output/beats/Cultural_Ledger.jsonl @C111"
-    },
-    {
-      "text": "Warriors Alumni Thompson (Sports) — new on the culture record C110",
-      "src": "output/beats/Cultural_Ledger.jsonl @C111"
+      "text": "Lumi Crest (influencer), Media — gained 1 mention this cycle (2 total), rising, fame 6",
+      "src": "output/beats/Cultural_Ledger.jsonl @C111 vs output/beats/prev/Cultural_Ledger.jsonl @C110"
     },
     {
       "text": "Movement vs C110: West Oakland +18 people, Jack London +8 people, Grand Lake +8 people, East Oakland +8 people, Adams Point +7 people",
@@ -125,31 +121,26 @@
     "schema": "BEAT-SLICE-1",
     "method": "BEAT_TAB_FACTS",
     "missing": [],
-    "angle": "Marin Tao leads the conversation (25 mentions); West Oakland moves the most — what Oakland is doing together this week",
-    "hookLine": "Marin Tao — 25 mentions, viral. The trend is the story; the mood is yours.",
+    "angle": "Sienna Vale gained 1 mention this cycle (5 total); West Oakland moves the most — what Oakland is doing together this week",
+    "hookLine": "Sienna Vale — gained 1 mention this cycle (5 total), surging. The trend is the story; the mood is yours.",
     "anchorFacts": [
-      "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
-      "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 85",
-      "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
-      "Warriors Alumni Thompson (Sports) — new on the culture record C110",
+      "Sienna Vale (influencer), Media — gained 1 mention this cycle (5 total), surging, fame 21",
+      "Pixel Pete (streamer), Media — gained 1 mention this cycle (4 total), rising, fame 22",
+      "Lumi Crest (influencer), Media — gained 1 mention this cycle (2 total), rising, fame 6",
       "Movement vs C110: West Oakland +18 people, Jack London +8 people, Grand Lake +8 people, East Oakland +8 people, Adams Point +7 people"
     ],
     "evidence": [
       {
-        "text": "Marin Tao (Celebrity), Arts — 25 media mentions, viral, fame 153",
-        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        "text": "Sienna Vale (influencer), Media — gained 1 mention this cycle (5 total), surging, fame 21",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111 vs output/beats/prev/Cultural_Ledger.jsonl @C110"
       },
       {
-        "text": "Dax Monroe (Celebrity), Sports — 20 media mentions, established, fame 85",
-        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        "text": "Pixel Pete (streamer), Media — gained 1 mention this cycle (4 total), rising, fame 22",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111 vs output/beats/prev/Cultural_Ledger.jsonl @C110"
       },
       {
-        "text": "Rico Valez (Celebrity), Arts — 19 media mentions, viral, fame 116",
-        "src": "output/beats/Cultural_Ledger.jsonl @C111"
-      },
-      {
-        "text": "Warriors Alumni Thompson (Sports) — new on the culture record C110",
-        "src": "output/beats/Cultural_Ledger.jsonl @C111"
+        "text": "Lumi Crest (influencer), Media — gained 1 mention this cycle (2 total), rising, fame 6",
+        "src": "output/beats/Cultural_Ledger.jsonl @C111 vs output/beats/prev/Cultural_Ledger.jsonl @C110"
       },
       {
         "text": "Movement vs C110: West Oakland +18 people, Jack London +8 people, Grand Lake +8 people, East Oakland +8 people, Adams Point +7 people",
@@ -226,15 +217,15 @@
     "note": null,
     "pageVoices": [
       "the A's — fading; most of the city over the last two months, still talking this week. Loudest: Vinnie Keane (Grand Lake), on their own page at C109 (not an interview — colour only, never a quote): “Not just the Coliseum, but the soul of the place.”",
-      "transit — fading; dozens of citizens over the last two months, still talking this week. Loudest: Melton Neilon (Temescal), on their own page at C109 (not an interview — colour only, never a quote): “I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward.”",
-      "faith — fading; dozens of citizens over the last two months, quiet this week. Loudest: Eunice Marston (Downtown), on their own page at C110 (not an interview — colour only, never a quote): “I haven't had any direct involvement with the Or Hashalom Renewal Community, but as a faith leader in Downtown, I appreciate the various initiatives and organizations that bring people together and foster a sense of…”",
+      "transit — rising; dozens of citizens over the last two months, still talking this week. Loudest: Melton Neilon (Temescal), on their own page at C109 (not an interview — colour only, never a quote): “I’ve heard folks at the farmers market talking about the Fruitvale Transit Hub delays, but honestly, I’m not sure who’s supposed to be steering it forward.”",
+      "faith — fading; dozens of citizens over the last two months, still talking this week. Loudest: Eunice Marston (Downtown), on their own page at C111 (not an interview — colour only, never a quote): “As a faith leader, you just keep your focus on the people and their needs, whether that means providing emergency aid or coming together for a holy day.”",
       "the Oaks — fading; dozens of citizens over the last two months, quiet this week. Loudest: Jessie Hess (Downtown), on their own page at C110 (not an interview — colour only, never a quote): “I was really hyped about the Oaks' starting five and their chances this season, but losing to the Miami Heat doesn't exactly fill me with confidence.”",
-      "the council — steady; a dozen or so citizens over the last two months, still talking this week. Loudest: Elio Perez (Rockridge), on their own page at C108 (not an interview — colour only, never a quote): “I’ve heard people talking about the Fruitvale Transit Hub Phase II, but it feels like the council’s been dragging their feet.”"
+      "the clinic — rising; a dozen or so citizens over the last two months, still talking this week. Loudest: Yu Zen (Rockridge), on their own page at C111 (not an interview — colour only, never a quote): “From where I'm lying in this hospital bed, all I hear are the nurses talking about how Chinatown's been hit hard.”"
     ],
     "roomIsYours": "the group chat, the third rewatch, who suddenly has an opinion about something nobody mentioned last month, what the city collectively decided to care about"
   },
-  "talkedAbout": 53,
-  "appeared": 1,
+  "talkedAbout": 3,
+  "appeared": 0,
   "moves": 22,
   "pointers": [
     "output/beats/Cultural_Ledger.jsonl @C111",

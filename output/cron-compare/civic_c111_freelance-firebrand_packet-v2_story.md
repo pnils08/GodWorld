@@ -12,3 +12,10 @@ I'm heading over to Fruitvale. I've seen the numbers—the sentiment is spiking 
 ## §3 INTERVIEWS (wake 2 — real citizens, real quotes)
 
 
+## §4 THE ARTICLE (wake 3)
+- draft: output/cron-compare/staged/civic_c111_freelance-firebrand_packet-v2_anthropic-claude-sonnet-5-5.staged.md
+- disposition: staged
+- rhea: PASS
+- self-score footer: present
+- tool use: none
+

@@ -1,6 +1,6 @@
 {
   "cycle": 111,
-  "builtAt": "2026-10-14T11:15:04.251Z",
+  "builtAt": "2026-10-16T11:15:04.839Z",
   "empty": false,
   "journalist": {
     "name": "P Slayer",
@@ -128,9 +128,9 @@
       "POP-00018"
     ],
     "citizens": [
-      "Mike Paulson — General Manager, Oakland A's & The Oaks, Jack London",
-      "Vinnie Keane — Designated Hitter, Oakland A's Legend, Grand Lake",
-      "Benji Dillon — Pitcher, Oakland A's Legend, Rockridge"
+      "Mike Paulson (POP-00527)",
+      "Vinnie Keane (POP-00001)",
+      "Benji Dillon (POP-00018)"
     ],
     "pulseClass": "award-board",
     "pulseScore": 44,

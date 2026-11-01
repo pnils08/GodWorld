@@ -1,72 +1,87 @@
 ========================================================================
-sessionEndMechanical: terminal=engine-sheet, rotate-history=false, dry-run=false
+sessionEndMechanical: terminal=research-build, rotate-history=false, dry-run=false
 ========================================================================
 Expected upstream model step (BEFORE this script):
   1. SESSION_CONTEXT.md PIN + NEXT[terminal] line + ROLLOUT_PLAN.md updated
 
-Mechanical sub-steps (5):
-  [1/5] session summary → Supermemory (best-effort)
-  [2/5] auditPlanTagDrift (informational)
-  [3/5] ROLLOUT conformance lint (informational)
-  [4/5] cross-terminal git stack check (read-only)
-  [5/5] pm2 restart
+Mechanical sub-steps (6):
+  [1/6] session summary → Supermemory (best-effort)
+  [2/6] auditPlanTagDrift (informational)
+  [3/6] ROLLOUT conformance lint (informational)
+  [4/6] worked rows have their plan updated
+  [5/6] cross-terminal git stack check (read-only)
+  [6/6] pm2 restart
 ========================================================================
 
---- [1/5] session summary → Supermemory (best-effort) ---
-✓ session log → Supermemory [session-logs] doc 6SjQTMWvuZ5x7TkzSo8FbF (2759 chars, 16 summary rows folded)
+--- [1/6] session summary → Supermemory (best-effort) ---
+✓ session log → Supermemory [session-logs] doc BPZtHGvao6MngmaMjunzKb (2892 chars, 32 summary rows folded)
 
---- [2/5] auditPlanTagDrift (informational) ---
+--- [2/6] auditPlanTagDrift (informational) ---
   # Plan tag drift audit
   
-  Generated: 2026-10-28T05:59:55.997Z
-  Plans scanned: 148
+  Generated: 2026-11-01T08:19:12.434Z
+  Plans scanned: 152
   No frontmatter: 7
   No changelog: 8
-  No status-verb match: 131
+  No status-verb match: 135
   Drifts found: 0
   
   No plan-tag drift detected.
   ✓ no drift detected
 
---- [3/5] ROLLOUT conformance lint (informational) ---
-  # rolloutSweep — APPLY
-  
-  Would move 13 rows:
-    - pipeline.90  [research-build]
-    - engine.294  [engine-sheet]
-    - engine.293  [engine-sheet]
-    - engine.291  [engine-sheet]
-    - engine.297  [engine-sheet]
-    - engine.203d  [engine-sheet]
-    - engine.194  [engine-sheet]
-    - engine.298  [engine-sheet]
-    - engine.302  [engine-sheet]
-    - engine.304  [engine-sheet]
-    - engine.305  [engine-sheet]
-    - engine.306  [engine-sheet]
-    - engine.307  [engine-sheet]
-  
-  APPLIED.
-    ROLLOUT_PLAN:    187 → 174 lines (-13)
-    ROLLOUT_ARCHIVE: 2076 → 2096 lines (+20)
-    Rows moved: 13
+--- [3/6] ROLLOUT conformance lint (informational) ---
   ROLLOUT LINT: clean — every row is a sweep-safe pointer within budget.
-  ROLLOUT OVERDUE: 8 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
-    L107 pipeline.85: latest date named 2026-10-26, today is 2026-10-28
-    L134 pipeline.83: latest Cycle named C111, live is C113; latest date named 2026-10-27, today is 2026-10-28
-    L149 pipeline.73: latest date named 2026-10-26, today is 2026-10-28
-    L152 pipeline.77: latest Cycle named C112, live is C113
-    L153 pipeline.78: latest Cycle named C112, live is C113
-    L154 pipeline.79: latest Cycle named C112, live is C113
-    L162 engine.286: latest Cycle named C112, live is C113; latest date named 2026-10-25, today is 2026-10-28
-    L168 engine.299: latest Cycle named C112, live is C113
+  ROLLOUT OVERDUE: 5 waiting row(s) past their Cycle/date or naming none — read the record, then flip, re-date or close:
+    L25 engine.286: latest Cycle named C112, live is C113; latest date named 2026-10-28, today is 2026-11-01
+    L46 research.29: latest Cycle named C112, live is C113; latest date named 2026-10-31, today is 2026-11-01
+    L53 pipeline.83: latest date named 2026-10-31, today is 2026-11-01
+    L58 pipeline.73: latest date named 2026-10-31, today is 2026-11-01
+    L59 pipeline.80: latest date named 2026-10-31, today is 2026-11-01
 
---- [4/5] cross-terminal git stack check (read-only) ---
-  ✓ stack clean (origin/main..HEAD empty)
+--- [4/6] worked rows have their plan updated ---
+  ✓ every row named in this session's [research-build] commits has its plan updated
 
---- [5/5] pm2 restart ---
+--- [5/6] cross-terminal git stack check (read-only) ---
+  ⚠ 34 unpushed commit(s) ahead of origin/main:
+    567b5ab4f S627 six seat initiatives rejected on live, bench record, engine.330 filed [engine-sheet]
+    7fe64207f civic: usage receipt on every weekday wake record + a spend reader for the no-caps watch (builder 2026-11-01)
+    3e7823ea6 civic: no character caps (builder 2026-11-01); agy model-swap review folded
+    82669cd91 civic seats on each family's current model (builder 2026-11-01: mandatory; keep the families, not everything on Claude)
+    4ca272a33 NEXT[research-build]: the new personas' first live use is today's 14:30 Sunday chamber, not Monday [research-build]
+    f735409f1 civic autonomy: one plan, one row — civic.47 carries the whole plan on research-build (builder 2026-11-01)
+    9d275ace9 civic.47 A1 persona facts LANDED: 17 rota persona files replaced by codex's reviewed proposal (research-build)
+    f82d99bed codex: fold civic A1 persona review corrections
+    9cc3b01f6 agy review of codex's A1 persona proposal: 4 land, 33 hold (research-build)
+    a3434a4cd codex: document A1 persona fact dispositions and A2 gaps
+    d67fca4e4 codex: propose A1 police chief persona facts
+    da76ce9db codex: propose A1 D8 persona facts
+    aa9558865 codex: propose A1 D7 persona facts
+    57675beb7 codex: propose A1 D6 persona facts
+    f9451224b codex: propose A1 D5 persona facts
+    35b65c3ef codex: propose A1 D4 persona facts
+    a4881a1a8 codex: propose A1 D3 persona facts
+    65a6fdf0e codex: propose A1 D1 persona facts
+    576b0052a codex: propose A1 D9 persona facts
+    0cc2b51cd codex: propose A1 D2 persona facts
+    cdabf351f codex: propose A1 shared council persona facts
+    e5eabcb9d codex: propose A1 mayor persona facts
+    33e1fbff6 NEXT[research-build]: civic.47 A1 in flight at codex; what to do when it lands [research-build]
+    56b84d525 civic autonomy plan accepted to start: A1 persona rewrite under civic.47 (research-build); plan and research moved to their homes
+    a7ba9a10f NEXT[research-build]: lead with the state, not a closed row id (boot lint) [research-build]
+    cc017619d engine.329 LIVE PROD @172 stage 36: the hard-light line names the hard row's piece; row done-pending-archive; codex SHIP review archived (research-build)
+    68b81c129 codex: review engine.329 hard-light attribution
+    feb5f4810 engine.329 bench PASS: SANDBOX 1004 @176 stage 36 = stage 35 (PROD) + processAdvancementIntake.js at 41160fe3 (research-build)
+    c03f3c79d Review inbox swept: 19 resolved codex reviews archived, the owning plans point at them (research-build)
+    41160fe3d engine.329: the hard-light line names the hard row's piece (research-build)
+    905e4da99 Supermemory recall patch re-ported to plugin 0.2.0 (sign-in is now async, request clock shared); patch file regenerated against the 0.2.0 vendor, round-trips identical [research-build]
+    9a00c241d codex: keep directive replies alongside civic work moves
+    2afe1c06a Revert 063b965b: codex-rb civic sports-events change, built from a misdirected order with no plan behind it (builder: throw it away) [research-build]
+    063b965b8 codex: route major sports events into civic briefs
+  Model decision: push if all yours, hold if other terminals stacked.
+
+--- [6/6] pm2 restart ---
   ✓ godworld-dashboard restarted
 
 ========================================================================
-sessionEndMechanical: complete (terminal=engine-sheet)
+sessionEndMechanical: complete (terminal=research-build)
 ========================================================================

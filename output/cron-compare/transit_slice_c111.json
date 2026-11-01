@@ -1,5 +1,5 @@
 {
-  "version": "TRANSIT-SLICE-1",
+  "version": "TRANSIT-SLICE-2",
   "empty": false,
   "cycle": 111,
   "kind": "beat-transit",
@@ -23,7 +23,7 @@
     "kind": "beat-transit",
     "angle": "12th St Oakland City Center ridership down 15,192 vs C110 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
     "label": "12th St Oakland City Center ridership down 15,192 vs C110 | 8 stations + 10 corridors on the record",
-    "hookLine": "12th St Oakland City Center moved down the most this cycle — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active; 10 transit workers on the roster.",
+    "hookLine": "12th St Oakland City Center moved down the most this cycle — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active; 10 transit workers on the roster, 6 citizens who lived a transit line.",
     "hood": null,
     "citizens": [
       "Evan Lewis (POP-00200)",
@@ -35,7 +35,13 @@
       "Calvin Mwangi (POP-00573)",
       "Eleanor Rivera (POP-00617)",
       "Elena Soria-Dominguez (POP-00791)",
-      "Ximena Mehta (POP-01039)"
+      "Ximena Mehta (POP-01039)",
+      "Lucia Polito (POP-00004)",
+      "Martin Richards (POP-00031)",
+      "Laila Cortez (POP-00035)",
+      "Rachel Torres (POP-00057)",
+      "Paul Skenes (POP-00125)",
+      "Helena Morr (POP-00150)"
     ],
     "popids": [
       "POP-00200",
@@ -47,12 +53,18 @@
       "POP-00573",
       "POP-00617",
       "POP-00791",
-      "POP-01039"
+      "POP-01039",
+      "POP-00004",
+      "POP-00031",
+      "POP-00035",
+      "POP-00057",
+      "POP-00125",
+      "POP-00150"
     ],
     "ref": "output/beats/Transit_Metrics.jsonl Cycle 111",
     "cycle": 111
   },
-  "approach": "Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
+  "approach": "Transit approach: this slice is every station on the record this cycle, what moved against last cycle, and the transit workers on the roster. The week header (weather, home games, the union of causes), the chaos car on the line and the citizens who lived a transit line are record; the Factors on each station row are the engine's own causes — the frame at their head (weather; weekend; holiday: <name> (major) or (no cut)) is the citywide day-type cut, and the rest are the row's own reasons (holiday lift in its hood, First Friday, game day, events, a stalled train, a short crew, crowded platforms). Riders rise and fall for the reasons written there, never for a reason you add. A BART-train chaos hit this cycle reaches the platforms NEXT cycle. Dry, technical, timestamp and pattern — but it is a place with people in it. One system, one claim about what changed. Facts on this slice: the names, places, roles and numbers listed. Those are real; do not invent people or places. Everything else about this beat — what it looks like, who is there, what they want and hate — is yours to paint.",
   "citizens": [
     {
       "popid": "POP-00200",
@@ -143,9 +155,83 @@
       "business": "BART Oakland Division",
       "profile": "Ximena Mehta — Bart Transit PR — BART Oakland Division",
       "why": "works at BART Oakland Division (Employment_Roster)"
+    },
+    {
+      "popid": "POP-00004",
+      "name": "Lucia Polito",
+      "role": "Aura Wellness Practitioner",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Lucia Polito — Aura Wellness Practitioner — Fruitvale",
+      "why": "lived it this cycle (transit line): \"read during the commute\" (LifeHistory_Log)"
+    },
+    {
+      "popid": "POP-00031",
+      "name": "Martin Richards",
+      "role": "Third Baseman, New York Mets",
+      "neighborhood": "Fruitvale",
+      "business": null,
+      "profile": "Martin Richards — Third Baseman, New York Mets — Fruitvale",
+      "why": "lived it this cycle (transit line): \"thought about an old friend on the walk home near Fruitvale BART area\" (LifeHistory_Log)"
+    },
+    {
+      "popid": "POP-00035",
+      "name": "Laila Cortez",
+      "role": "Chief of Staff",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Laila Cortez — Chief of Staff — Uptown",
+      "why": "lived it this cycle (transit line): \"read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline\" (LifeHistory_Log)"
+    },
+    {
+      "popid": "POP-00057",
+      "name": "Rachel Torres",
+      "role": "Public Safety",
+      "neighborhood": "Uptown",
+      "business": null,
+      "profile": "Rachel Torres — Public Safety — Uptown",
+      "why": "lived it this cycle (transit line): \"read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline near a bar patio\" (LifeHistory_Log)"
+    },
+    {
+      "popid": "POP-00125",
+      "name": "Paul Skenes",
+      "role": "Retired former As",
+      "neighborhood": "Lake Merritt",
+      "business": null,
+      "profile": "Paul Skenes — Retired former As — Lake Merritt",
+      "why": "lived it this cycle (transit line): \"memorized the starting rotation for the Oaks and tested themselves on the BART ride home near the pergola\" (LifeHistory_Log); lived it this cycle (transit line): \"attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard\" (LifeHistory_Log)"
+    },
+    {
+      "popid": "POP-00150",
+      "name": "Helena Morr",
+      "role": "City Ombudsman",
+      "neighborhood": "Jack London",
+      "business": null,
+      "profile": "Helena Morr — City Ombudsman — Jack London",
+      "why": "lived it this cycle (transit line): \"heard the commute horror stories secondhand and felt lucky, this once\" (LifeHistory_Log)"
     }
   ],
   "facts": [
+    {
+      "text": "Day type this cycle: holiday named on the row (pre-engine.290 format — no cut rule recorded). A station that moved more than the citywide rule names its own reason on its row.",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111 Factors (frame)"
+    },
+    {
+      "text": "The week on the line — every cause the engine named this cycle, once: mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active; events in Fruitvale, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland; events in Jack London, Downtown; events in Rockridge; events in Rockridge, Piedmont Ave",
+      "src": "output/beats/Transit_Metrics.jsonl Cycle 111 Factors"
+    },
+    {
+      "text": "Weather this cycle: mild, 57°F",
+      "src": "output/beats/Cycle_Weather.jsonl CycleID 111"
+    },
+    {
+      "text": "No game-result row on the sports feed this cycle — no game-day crowds on the platforms",
+      "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 111"
+    },
+    {
+      "text": "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+      "src": "output/world_summary_c111.md ## Chaos Events"
+    },
     {
       "text": "8 stations + 10 corridors on the record this cycle; total ridership 36,303 (C110: 91,564)",
       "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
@@ -228,8 +314,13 @@
     "method": "BEAT_TAB_FACTS",
     "missing": [],
     "angle": "12th St Oakland City Center ridership down 15,192 vs C110 | 8 stations + 10 corridors on the record — the platforms and the people who run them",
-    "hookLine": "12th St Oakland City Center moved down the most this cycle — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active; 10 transit workers on the roster.",
+    "hookLine": "12th St Oakland City Center moved down the most this cycle — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active; 10 transit workers on the roster, 6 citizens who lived a transit line.",
     "anchorFacts": [
+      "Day type this cycle: holiday named on the row (pre-engine.290 format — no cut rule recorded). A station that moved more than the citywide rule names its own reason on its row.",
+      "The week on the line — every cause the engine named this cycle, once: mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active; events in Fruitvale, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland; events in Jack London, Downtown; events in Rockridge; events in Rockridge, Piedmont Ave",
+      "Weather this cycle: mild, 57°F",
+      "No game-result row on the sports feed this cycle — no game-day crowds on the platforms",
+      "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
       "8 stations + 10 corridors on the record this cycle; total ridership 36,303 (C110: 91,564)",
       "12th St Oakland City Center: ridership 8,293 (-15,192 vs C110), on-time 86% (+5 pts) — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active",
       "19th St Oakland: ridership 5,155 (-10,950 vs C110), on-time 77% (-2 pts) — mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active",
@@ -251,6 +342,26 @@
       "Grand Ave: traffic index 30 (-37 vs C110) — mild; holiday"
     ],
     "evidence": [
+      {
+        "text": "Day type this cycle: holiday named on the row (pre-engine.290 format — no cut rule recorded). A station that moved more than the citywide rule names its own reason on its row.",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111 Factors (frame)"
+      },
+      {
+        "text": "The week on the line — every cause the engine named this cycle, once: mild; holiday; events in Downtown; Baylight District — Final Council Vote: construction-active; events in Fruitvale, Dimond, East Oakland; Fruitvale Transit Hub Phase II — Visioning: design-phase; events in East Oakland; events in Jack London, Downtown; events in Rockridge; events in Rockridge, Piedmont Ave",
+        "src": "output/beats/Transit_Metrics.jsonl Cycle 111 Factors"
+      },
+      {
+        "text": "Weather this cycle: mild, 57°F",
+        "src": "output/beats/Cycle_Weather.jsonl CycleID 111"
+      },
+      {
+        "text": "No game-result row on the sports feed this cycle — no game-day crowds on the platforms",
+        "src": "output/beats/Oakland_Sports_Feed.jsonl Cycle 111"
+      },
+      {
+        "text": "No chaos car touched the trains or the transit agencies this cycle (Chaos_Cars rows read; none on bart_train, BART or AC Transit)",
+        "src": "output/world_summary_c111.md ## Chaos Events"
+      },
       {
         "text": "8 stations + 10 corridors on the record this cycle; total ridership 36,303 (C110: 91,564)",
         "src": "output/beats/Transit_Metrics.jsonl Cycle 111"
@@ -337,7 +448,24 @@
       "state": "PRIOR_CYCLE_IN_TABLE",
       "vs": 110
     },
-    "hooks": [],
+    "hooks": [
+      {
+        "text": "Story seed 08156f4b (Fruitvale): Rose Delgado, Lillian Gebre, Ramon Solano, Mateus Albuquerque — Rose Delgado — felt quietly proud of how they handled something small; Lillian Gebre — navigated the stroller traffic on College Avenue and silently judged the parking jobs; Ramon Solano — caught themselves bragging a little about the neighborhood lately; Mateus Albuquerque — counted cranes on the skyline from the bus stop and got a different number than yesterday",
+        "angle": "GENERAL"
+      },
+      {
+        "text": "Story seed 2666d3d5 (Downtown): Austin Reaves, Dexter Patel, Kwame Ellis, Mark Fisher — Austin Reaves — caught their reflection in a shop window and stood a little straighter; Dexter Patel — saw a stranger laugh at their phone and invented the joke all the way home; Kwame Ellis — watched the Anthropic shuttles roll into the Baylight District and wondered if the neighborhood was changing too fast; Mark Fisher — checked the Civis Systems Field livestream just to see if the grass had been laid down yet",
+        "angle": "SAFETY"
+      },
+      {
+        "text": "Story seed 0329812a (Fruitvale): Sonia Parikh, Li Wei, Rick Walker, Rupert Ochoa — Sonia Parikh — closed their eyes during the choir solo and actually felt the tension leave their shoulders; Li Wei — stared at the Stabilization Fund application requirements until the numbers blurred together; Rick Walker — navigated the stroller traffic on College Avenue and silently judged the parking jobs near a taqueria patio; Rupert Ochoa — wondered if a decision from years back had been the right one near the station plaza",
+        "angle": "GENERAL"
+      },
+      {
+        "text": "Story seed b07d88d2 (Uptown): Minka Slayton, Omar Amici, Coen Cartier, Janelle Rourke — Minka Slayton — walked through the alleyways behind Telegraph to avoid the weekend crowd; Omar Amici — the Oakland Alternative Response Initiative is making waves, with residents feeling safer and more connected than ever.; Coen Cartier — read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline; Janelle Rourke — saw someone running for the bus make it, and felt weirdly invested",
+        "angle": "GENERAL"
+      }
+    ],
     "note": null,
     "pageVoices": [],
     "roomIsYours": "the platform at 7:40, the operator's cab, who is late and why, what the fare gate sounds like, what a regular rider notices first"
@@ -478,8 +606,82 @@
       "dTraffic": -37
     }
   ],
+  "week": {
+    "causes": [
+      "mild",
+      "holiday",
+      "events in Downtown",
+      "Baylight District — Final Council Vote: construction-active",
+      "events in Fruitvale, Dimond, East Oakland",
+      "Fruitvale Transit Hub Phase II — Visioning: design-phase",
+      "events in East Oakland",
+      "events in Jack London, Downtown",
+      "events in Rockridge",
+      "events in Rockridge, Piedmont Ave"
+    ],
+    "weather": {
+      "CycleID": "111",
+      "Type": "mild",
+      "Temp": "57",
+      "Impact": "1",
+      "Advisory": "",
+      "Comfort": "0.75",
+      "Mood": "content",
+      "Alerts": "",
+      "Streak": "1",
+      "StreakType": "clear",
+      "Timestamp": "Y3C7"
+    },
+    "homeGames": 0
+  },
+  "chaos": [],
+  "lived": [
+    {
+      "popid": "POP-00004",
+      "text": "read during the commute",
+      "tag": "Education"
+    },
+    {
+      "popid": "POP-00031",
+      "text": "thought about an old friend on the walk home near Fruitvale BART area",
+      "tag": "Personal|source:reflection|source:base|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|venue:local|occupation:Third Baseman, New York Mets|ageGroup:youngAdult|neighborhood:Fruitvale|tier:1|archetype:Striver"
+    },
+    {
+      "popid": "POP-00035",
+      "text": "read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+      "tag": "Civic Perception|source:civicNews|auth:library-s325|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:Chief of Staff|ageGroup:adult|neighborhood:Uptown|tier:3"
+    },
+    {
+      "popid": "POP-00057",
+      "text": "read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline near a bar patio",
+      "tag": "Civic Perception|source:civicNews|auth:library-s325|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|venue:local|occupation:Public Safety|ageGroup:adult|neighborhood:Uptown|tier:2|archetype:Connector"
+    },
+    {
+      "popid": "POP-00125",
+      "text": "memorized the starting rotation for the Oaks and tested themselves on the BART ride home near the pergola",
+      "tag": "Sports|source:sports|auth:library-s325|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|venue:local|occupation:Retired former As|ageGroup:adult|neighborhood:Lake Merritt|tier:1"
+    },
+    {
+      "popid": "POP-00125",
+      "text": "attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard",
+      "tag": "Civic Perception|source:civicNews|auth:library-s325|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:Retired former As|ageGroup:adult|neighborhood:Lake Merritt|tier:1"
+    },
+    {
+      "popid": "POP-00150",
+      "text": "heard the commute horror stories secondhand and felt lucky, this once",
+      "tag": "Daily|source:chaos|chaos:TRAFFIC|source:base|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:City Ombudsman|ageGroup:adult|neighborhood:Jack London|tier:4|qol:high"
+    },
+    {
+      "popid": "POP-00155",
+      "text": "read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline",
+      "tag": "Civic Perception|source:civicNews|auth:library-s325|holiday:Valentine|holidayPriority:minor|sportsSeason:early-season|occupation:Journalist, Transit & Infastructure|ageGroup:adult|neighborhood:Laurel|tier:3|archetype:Connector"
+    }
+  ],
   "pointers": [
     "output/beats/Transit_Metrics.jsonl Cycle 111",
-    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4"
+    "output/beats/Story_Hook_Deck.jsonl (hooks for Trevor Shimizu this cycle)",
+    "docs/plans/2026-09-07-beat-slices-from-sheets-plan.md Task 4",
+    "output/beats/LifeHistory_Log.jsonl Cycle 111 (transit lines)",
+    "output/world_summary_c111.md ## Chaos Events"
   ]
 }

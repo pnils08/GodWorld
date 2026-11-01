@@ -51,8 +51,24 @@
   "game": {
     "geographyIssue": null,
     "lastMove": {
-      "text": "Latest moves:\nC110 - call-vote: applied to the tracker\nLatest terminal outcome (C110):\n- call-vote: applied to the tracker",
+      "text": "Latest moves:\nC111 - answer CONF-111-civic-office-council-d1: awaiting the Sunday fold\nLatest terminal outcome (C110):\n- call-vote: applied to the tracker",
       "moves": [
+        {
+          "moveId": "MV-111-civic-office-council-d1-2026-10-12",
+          "cycle": 111,
+          "date": "2026-10-12",
+          "agentDir": "civic-office-council-d1",
+          "popid": "POP-00501",
+          "type": "answer",
+          "payload": {
+            "confrontationId": "CONF-111-civic-office-council-d1",
+            "text": "Co-sponsoring INIT-010 West Oakland Tenant Defense Fund ordinance and requiring Brooklyn commercial corridor service plans.",
+            "directiveCycle": 111,
+            "confrontationSeat": "civic-office-council-d1"
+          },
+          "status": "pending",
+          "at": "2026-10-12T10:45:33.677Z"
+        },
         {
           "moveId": "MV-110-civic-office-council-d1-2026-10-06",
           "cycle": 110,
@@ -239,6 +255,12 @@
       "available": true,
       "complaints": [
         {
+          "cycle": "111",
+          "hood": "West Oakland",
+          "snippet": "\"Keisha, good to see you. Been thinking about that project we worked on last spring—still…",
+          "affect": "Frustrated"
+        },
+        {
           "cycle": "109",
           "hood": "West Oakland",
           "snippet": "I feel like the city's response to what's been going on has been really slow, and it's…",
@@ -251,6 +273,18 @@
           "hood": "West Oakland",
           "snippet": "filed: Here's the corrected civic section for cycle 109:",
           "affect": "Content"
+        },
+        {
+          "cycle": "111",
+          "hood": "West Oakland",
+          "snippet": "Nah, can't say I've heard my regulars talk much about avoiding 12th Street specifically…",
+          "affect": "Calm"
+        },
+        {
+          "cycle": "111",
+          "hood": "West Oakland",
+          "snippet": "filed: In Fruitvale the screens glowed against the night while the city watched Rosario…",
+          "affect": "Calm"
         }
       ],
       "unlocatedRows": 0,
@@ -258,13 +292,13 @@
       "sinceCycle": 109,
       "throughCycle": 111,
       "window": "Complaint display C109–C111; condition counter C111 only.",
-      "text": "Complaint display C109–C111; condition counter C111 only.\nPeople are talking (1 complaint):\n- I feel like the city's response to what's been going on has been really slow, and it's… (West Oakland, C109)\nConstructive civic participation (not complaints): 1."
+      "text": "Complaint display C109–C111; condition counter C111 only.\nPeople are talking (2 complaints):\n- \"Keisha, good to see you. Been thinking about that project we worked on last spring—still… (West Oakland, C111)\n- I feel like the city's response to what's been going on has been really slow, and it's… (West Oakland, C109)\nConstructive civic participation (not complaints): 3."
     },
     "workingCity": {
       "available": true,
       "totalStaff": 4,
       "shownStaff": 4,
-      "text": "The working city:\n- Elena Soria Dominguez: I can already trace the walk from the staging lot to the panadería in my sleep – counted every curb cut… (C110)\n- Bobby Chen-Ramirez: The crane’s shadows stretched long today, and I caught myself staring up at it like it was some kind of… (C110)\n- Vanessa Tran-Muñoz: Today was heavy — another call for an elder in Chinatown took too long to get a response. I keep thinking… (C110)\n- Marcus Webb: I keep circling back to the Johnson application—missing proof of residence from April. One document holding… (C110)"
+      "text": "The working city:\n- Vanessa Tran-Muñoz: Two dispatches came out of the blue tonight—one at 6:12, one at 7:40—both in the same stretch near the… (C111)\n- Marcus Webb: Ninety-one households this cycle. That number’s real, but so’s the stack waiting for the next review — I can… (C111)\n- Elena Soria Dominguez: I can already trace the walk from the staging lot to the panadería in my sleep – counted every curb cut… (C110)\n- Bobby Chen-Ramirez: The crane’s shadows stretched long today, and I caught myself staring up at it like it was some kind of… (C110)"
     },
     "patrol": {
       "available": true,
@@ -311,31 +345,13 @@
           "expectsMove": "answer"
         }
       ],
-      "open": [
-        {
-          "id": "CONF-111-civic-office-council-d1",
-          "cycle": 111,
-          "agentDir": "civic-office-council-d1",
-          "demand": "Denise Carter — City Council District 1 — Co-sponsor and file the ordinance for INIT-010 and submit a municipal service plan for the Brooklyn commercial corridor.",
-          "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Co-sponsor and file the ordinance for INIT-010 and submit a municipal service plan for the Brooklyn commercial corridor.\n- **Why:** INIT-010 sits at announced status with its C110 filing milestone missed and C112 stall clock closing, while Brooklyn records sentiment of 0.21, a crime index of 0.60, and a decay momentum of 4.\n- **Acceptance:** Co-sponsorship and filing of the INIT-010 Tenant Defense Fund ordinance with the City Clerk, plus a filed service audit for Brooklyn in C112.\n- **Silence consequence:** Tenant defense legislation fails to reach committee before the C112 clock expires, and Brooklyn's commercial vitality (7.63) deteriorates without intervention.\n",
-          "src": "output/mara-directives/mara_directive_c111_AUTO.txt",
-          "expectsMove": "answer"
-        }
-      ],
+      "open": [],
       "answeredIds": [
         "CONF-106-civic-office-council-d1",
         "CONF-108-civic-office-council-d1",
-        "CONF-109-civic-office-council-d1"
+        "CONF-109-civic-office-council-d1",
+        "CONF-111-civic-office-council-d1"
       ]
-    },
-    "confrontation": {
-      "id": "CONF-111-civic-office-council-d1",
-      "cycle": 111,
-      "agentDir": "civic-office-council-d1",
-      "demand": "Denise Carter — City Council District 1 — Co-sponsor and file the ordinance for INIT-010 and submit a municipal service plan for the Brooklyn commercial corridor.",
-      "sourceText": "## Denise Carter — City Council District 1\n\n- **Agent:** `.claude/agents/civic-office-council-d1/`\n- **Address:** Co-sponsor and file the ordinance for INIT-010 and submit a municipal service plan for the Brooklyn commercial corridor.\n- **Why:** INIT-010 sits at announced status with its C110 filing milestone missed and C112 stall clock closing, while Brooklyn records sentiment of 0.21, a crime index of 0.60, and a decay momentum of 4.\n- **Acceptance:** Co-sponsorship and filing of the INIT-010 Tenant Defense Fund ordinance with the City Clerk, plus a filed service audit for Brooklyn in C112.\n- **Silence consequence:** Tenant defense legislation fails to reach committee before the C112 clock expires, and Brooklyn's commercial vitality (7.63) deteriorates without intervention.\n",
-      "src": "output/mara-directives/mara_directive_c111_AUTO.txt",
-      "expectsMove": "answer"
     },
     "conditions": {
       "available": true,
@@ -405,24 +421,6 @@
       ],
       "visibleProblems": [
         {
-          "id": "[\"Brooklyn\",\"health.sickResidents\"]",
-          "hood": "Brooklyn",
-          "conditionKey": "health.sickResidents",
-          "label": "sick residents",
-          "count": 76,
-          "cycle": 111,
-          "passedOverCycle": 108
-        },
-        {
-          "id": "[\"Brooklyn\",\"safety.aboveMedianHoods\"]",
-          "hood": "Brooklyn",
-          "conditionKey": "safety.aboveMedianHoods",
-          "label": "hoods above city violent-level median",
-          "count": 1,
-          "cycle": 111,
-          "passedOverCycle": 108
-        },
-        {
           "id": "[\"West Oakland\",\"health.sickResidents\"]",
           "hood": "West Oakland",
           "conditionKey": "health.sickResidents",
@@ -430,17 +428,14 @@
           "count": 88,
           "cycle": 111,
           "passedOverCycle": 109
-        }
-      ],
-      "passedOver": [
+        },
         {
           "id": "[\"Brooklyn\",\"health.sickResidents\"]",
           "hood": "Brooklyn",
           "conditionKey": "health.sickResidents",
           "label": "sick residents",
           "count": 76,
-          "cycle": 111,
-          "passedOverCycle": 108
+          "cycle": 111
         },
         {
           "id": "[\"Brooklyn\",\"safety.aboveMedianHoods\"]",
@@ -448,9 +443,10 @@
           "conditionKey": "safety.aboveMedianHoods",
           "label": "hoods above city violent-level median",
           "count": 1,
-          "cycle": 111,
-          "passedOverCycle": 108
-        },
+          "cycle": 111
+        }
+      ],
+      "passedOver": [
         {
           "id": "[\"West Oakland\",\"health.sickResidents\"]",
           "hood": "West Oakland",
@@ -463,7 +459,7 @@
       ],
       "issues": [],
       "missingFoldCycles": [],
-      "text": "Condition problems at C111; prior Sunday folds through C110.\n- Brooklyn: sick residents 76 [passed over C108]\n- Brooklyn: hoods above city violent-level median 1 [passed over C108]\n- West Oakland: sick residents 88 [passed over C109]\n"
+      "text": "Condition problems at C111; prior Sunday folds through C110.\n- West Oakland: sick residents 88 [passed over C109]\n- Brooklyn: sick residents 76\n- Brooklyn: hoods above city violent-level median 1\n"
     }
   },
   "signal": {

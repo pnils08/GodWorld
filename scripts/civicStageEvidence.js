@@ -4,6 +4,7 @@
 // No dial defaults: the current, Cycle-matched dump must supply World_Config.
 const { stageCatalogByDomain } = require('../lib/initiativePhaseContract');
 const { buildHoodResolver } = require('./civicPetitions');
+const { stationServingHoodCohort } = require('./civicTransitCohort');
 const unavailable = reason => ({ available:false, metricMoved:false, reason });
 function number(value, label) {
   if (!['number','string'].includes(typeof value) || String(value).trim() === '' || !Number.isFinite(Number(value))) {
@@ -20,9 +21,7 @@ function measureStageMovement(row, context = {}) {
     const entry = Object.hasOwn(catalog, domain) ? catalog[domain] : null;
     if (!entry || !entry.playable) return unavailable('no delivering gate');
     const metric = entry.stage3Metric;
-    // Transit needs the engine's station-serving-hood membership contract; do
-    // not guess it from station names. Derived housing ratios are also separate.
-    if (metric.scope !== 'hood' || metric.column.some(c => /[*/]/.test(c))) return unavailable('metric membership/reader not available');
+    if (!['hood', 'station-serving-hood'].includes(metric.scope) || metric.column.some(c => /[*/]/.test(c))) return unavailable('metric membership/reader not available');
     let baseline;
     try { baseline = JSON.parse(row.StageBaseline); }
     catch (_) { throw new Error('StageBaseline missing/malformed'); }
@@ -63,16 +62,23 @@ function measureStageMovement(row, context = {}) {
       const rows = snapshots[metric.tab];
       if (!Array.isArray(rows)) throw new Error(metric.tab+' observation unavailable');
       const byHood = new Map();
-      for (const r of rows) {
-        const hood = resolver.resolve(r.Neighborhood);
-        if (!hood || byHood.has(hood)) throw new Error(metric.tab+' unknown/duplicate hood');
-        const stamp = metric.tab === 'Neighborhood_Map' ? r.Cycle : r.LastUpdated;
-        if (number(stamp, metric.tab+' row Cycle') !== c) throw new Error(metric.tab+' row Cycle stale');
-        byHood.set(hood,r);
+      if (metric.scope === 'station-serving-hood') {
+        const cohort = stationServingHoodCohort(rows, c, resolver);
+        if (!cohort.available) throw new Error(cohort.reason);
+        for (const [hood, values] of Object.entries(cohort.rows)) byHood.set(hood, values);
+      } else {
+        for (const r of rows) {
+          const hood = resolver.resolve(r.Neighborhood);
+          if (!hood || byHood.has(hood)) throw new Error(metric.tab+' unknown/duplicate hood');
+          const stamp = metric.tab === 'Neighborhood_Map' ? r.Cycle : r.LastUpdated;
+          if (number(stamp, metric.tab+' row Cycle') !== c) throw new Error(metric.tab+' row Cycle stale');
+          byHood.set(hood,r);
+        }
       }
       const differences = {};
       for (const column of metric.column) {
-        const levels = resolver.hoods.map(h=>number((byHood.get(h)||{})[column], h+'.'+column)).sort((a,b)=>a-b);
+        const cohortHoods = metric.scope === 'station-serving-hood' ? [...byHood.keys()] : resolver.hoods;
+        const levels = cohortHoods.map(h=>number((byHood.get(h)||{})[column], h+'.'+column)).sort((a,b)=>a-b);
         if (!levels.length) throw new Error('city metric cohort empty');
         const mid = Math.floor(levels.length/2);
         const middle = levels.length%2 ? levels[mid] : (levels[mid-1]+levels[mid])/2;

@@ -7,73 +7,105 @@
       "v": "UNDOCKED-FEED/1",
       "Cycle": 111,
       "EventType": "undocked-episode",
-      "POPID": "POP-00926",
-      "Holder": "Briar Soto",
-      "EpisodeId": "undocked-pop00926-Y3C7",
-      "CreditsDelta": null,
+      "POPID": "POP-00597",
+      "Holder": "Eric Taveras",
+      "EpisodeId": "undocked-pop00597-Y3C7-e2",
+      "CreditsDelta": 1170,
       "Systems": [
-        "Sol"
+        "sirius"
       ],
       "CombatEvents": 0,
       "MishapCount": 0,
-      "Magnitude": 2,
+      "Magnitude": 3,
       "Flags": [
         "credits_delta_windowed"
       ],
-      "StagedPath": "output/spacemolt-show/staged/undocked-pop00926-2026-10-14T01-30-06.json"
+      "StagedPath": "output/spacemolt-show/staged/undocked-pop00597-2026-10-16T01-30-04.json"
     }
   ],
   "laneEntries": [
     {
-      "ref": "undocked:undocked-pop00926-Y3C7",
-      "label": "UNDOCKED: Briar Soto — a night the books can't settle yet",
+      "ref": "undocked:undocked-pop00597-Y3C7-e2",
+      "label": "UNDOCKED: Eric Taveras — up 1170 on the night",
       "kind": "undocked",
       "popids": [
-        "POP-00926"
+        "POP-00597"
       ],
       "handle": {
-        "angle": "Recap Briar Soto's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems Sol, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 8 cycle(s) led, current streak 8.",
+        "angle": "Recap Eric Taveras's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 1170, systems sirius, combat 0, mishaps 0, magnitude 3/5. Standings: Eric Taveras leads the board — rank #1, 1 cycle(s) led, current streak 1. In the chair: Eric Taveras — Second Baseman, Oakland A's. The career is who they are, not the story; the story is the flight.",
         "citizens": [
-          "Briar Soto — UNDOCKED cast pilot"
+          "Eric Taveras — Second Baseman, Oakland A's, UNDOCKED cast pilot"
+        ],
+        "facts": [
+          "Eric Taveras — Second Baseman, Oakland A's (ledger)",
+          "Eric Taveras, Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern...",
+          "Eric Taveras, Championship: Eric Taveras win World Series MVP to go along with his post-season MVP for the earlier rounds, Taveras showing tremendous value in signing him this past off-season.",
+          "Eric Taveras, Playoffs: Eric Taveras continues his amazing playoff campaign with 2 homeruns."
+        ]
+      },
+      "who": {
+        "name": "Eric Taveras",
+        "roleType": "Second Baseman, Oakland A's",
+        "employerBizId": "BIZ-00005",
+        "tier": "1",
+        "career": [
+          {
+            "cycle": 110,
+            "seasonType": "playoffs",
+            "eventType": "game-result",
+            "line": "Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern..."
+          },
+          {
+            "cycle": 110,
+            "seasonType": "championship",
+            "eventType": "game-result",
+            "line": "Championship: Eric Taveras win World Series MVP to go along with his post-season MVP for the earlier rounds, Taveras showing tremendous value in signing him this past off-season."
+          },
+          {
+            "cycle": 109,
+            "seasonType": "playoffs",
+            "eventType": "game-result",
+            "line": "Playoffs: Eric Taveras continues his amazing playoff campaign with 2 homeruns."
+          }
         ]
       },
       "undockedEvent": {
         "v": "UNDOCKED-FEED/1",
         "Cycle": 111,
         "EventType": "undocked-episode",
-        "POPID": "POP-00926",
-        "Holder": "Briar Soto",
-        "EpisodeId": "undocked-pop00926-Y3C7",
-        "CreditsDelta": null,
+        "POPID": "POP-00597",
+        "Holder": "Eric Taveras",
+        "EpisodeId": "undocked-pop00597-Y3C7-e2",
+        "CreditsDelta": 1170,
         "Systems": [
-          "Sol"
+          "sirius"
         ],
         "CombatEvents": 0,
         "MishapCount": 0,
-        "Magnitude": 2,
+        "Magnitude": 3,
         "Flags": [
           "credits_delta_windowed"
         ],
-        "StagedPath": "output/spacemolt-show/staged/undocked-pop00926-2026-10-14T01-30-06.json"
+        "StagedPath": "output/spacemolt-show/staged/undocked-pop00597-2026-10-16T01-30-04.json"
       },
-      "hood": "Jack London"
+      "hood": "Downtown"
     }
   ],
   "standings": {
-    "asOf": "2026-10-14T01:40:22.758Z",
+    "asOf": "2026-10-16T05:52:57.610Z",
     "leader": {
       "Rank": 1,
-      "POPID": "POP-00143",
-      "Holder": "Clarissa Dane",
-      "Episodes": 9,
-      "CreditsTotal": 303,
+      "POPID": "POP-00597",
+      "Holder": "Eric Taveras",
+      "Episodes": 2,
+      "CreditsTotal": 1170,
       "CombatTotal": 0,
       "MishapTotal": 0,
       "BestMagnitude": 3,
-      "LastAiredCycle": 107,
-      "CyclesLed": 8,
-      "CurrentStreak": 8
+      "LastAiredCycle": 112,
+      "CyclesLed": 1,
+      "CurrentStreak": 1
     }
   },
-  "generatedAt": "2026-10-14T11:15:04.092Z"
+  "generatedAt": "2026-10-16T11:15:04.640Z"
 }

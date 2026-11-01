@@ -10,193 +10,80 @@
   },
   "assignment": {
     "story": {
-      "ref": "undocked:undocked-pop00926-Y3C7",
-      "label": "UNDOCKED: Briar Soto — a night the books can't settle yet",
+      "ref": "undocked:undocked-pop00597-Y3C7-e2",
+      "label": "UNDOCKED: Eric Taveras — up 1170 on the night",
       "kind": "undocked",
-      "angle": "Recap Briar Soto's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits unsettled, systems Sol, combat 0, mishaps 0, magnitude 2/5. Standings: Clarissa Dane leads the board — rank #1, 8 cycle(s) led, current streak 8.",
+      "angle": "Recap Eric Taveras's UNDOCKED episode — who's up, who's down, what the city argues about tomorrow. Facts: credits 1170, systems sirius, combat 0, mishaps 0, magnitude 3/5. Standings: Eric Taveras leads the board — rank #1, 1 cycle(s) led, current streak 1. In the chair: Eric Taveras — Second Baseman, Oakland A's. The career is who they are, not the story; the story is the flight.",
+      "facts": [
+        "Eric Taveras — Second Baseman, Oakland A's (ledger)",
+        "Eric Taveras, Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern...",
+        "Eric Taveras, Championship: Eric Taveras win World Series MVP to go along with his post-season MVP for the earlier rounds, Taveras showing tremendous value in signing him this past off-season.",
+        "Eric Taveras, Playoffs: Eric Taveras continues his amazing playoff campaign with 2 homeruns."
+      ],
       "citizens": [
-        "Briar Soto — UNDOCKED cast pilot"
+        "Eric Taveras — Second Baseman, Oakland A's, UNDOCKED cast pilot"
       ],
       "popids": [
-        "POP-00926"
+        "POP-00597"
       ],
-      "hood": "Jack London"
+      "hood": "Downtown"
     }
   },
   "angle": "output/cron-compare/undocked_c111_nia-rook_packet-v2_angle.json",
   "quotesRequested": 1,
-  "quotesLanded": 1,
-  "quotes": [
-    {
-      "pop": "POP-00926",
-      "name": "Briar Soto",
-      "quote": "To be honest, I've never really had to deal with a situation where everything went smoothly but the books didn't balance out. I mean, I've worked on some tricky electrical jobs, but that's a different story. I don't really know how to reconcile that.",
-      "disp": "even-keeled, unremarkable",
-      "recorded": true,
-      "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I've never really had to deal with a situation where everything went smoothly but the books didn't balance out. I mean, I've worked on some tricky electrical jobs, but that's a different story. I don't really know how to reconcile that.\",\n  \"fact_ids\": [\"F-266e9c48cb19\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
-      "claims": {
-        "answer": "quote",
-        "factIds": [
-          "F-266e9c48cb19"
-        ],
-        "basis": "lived-context",
-        "unverifiedLead": [],
-        "abstainReason": null,
-        "quoteId": "Q-POP-00926-799b514246",
-        "authoredQuote": true,
-        "publishableQuote": "To be honest, I've never really had to deal with a situation where everything went smoothly but the books didn't balance out. I mean, I've worked on some tricky electrical jobs, but that's a different story. I don't really know how to reconcile that."
-      },
-      "inputPacket": {
-        "v": "LEP/2",
-        "wake": "W2",
-        "actor": {
-          "id": "POP-00926",
-          "name": "Briar Soto",
-          "role": "UNDOCKED pilot",
-          "desk": null
-        },
-        "task": {
-          "goal": "Answer one reporter question in your own first-person voice from your simulated life",
-          "reporter": "Nia Rook",
-          "question": "How do you reconcile a flight with zero mishaps and solid systems with a ledger that the books can't settle yet? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
-        },
-        "signal": {
-          "kind": "undocked",
-          "hood": "Jack London",
-          "focus": "The gap between a clean flight and an unsettled ledger.",
-          "src": "undocked:undocked-pop00926-Y3C7"
-        },
-        "exposure": {
-          "basis": [
-            "assignment"
-          ],
-          "self": "Briar Soto — UNDOCKED pilot",
-          "evidence": [
-            {
-              "id": "EV-003053d5d1",
-              "src": "undocked:undocked-pop00926-Y3C7",
-              "text": "UNDOCKED: Briar Soto — a night the books can't settle yet"
-            }
-          ],
-          "editorialTarget": true
-        },
-        "known": [
-          {
-            "t": "FACT",
-            "text": "Current cycle: C111",
-            "src": "cron-desk-run explicit cycle argument",
-            "id": "F-a43c5d888b36"
-          },
-          {
-            "t": "FACT",
-            "text": "UNDOCKED: Briar Soto — a night the books can't settle yet",
-            "src": "undocked:undocked-pop00926-Y3C7",
-            "id": "F-266e9c48cb19"
-          },
-          {
-            "t": "FACT",
-            "text": "Briar Soto — UNDOCKED pilot",
-            "src": "Simulation_Ledger profile for POP-00926",
-            "id": "F-4e45e2ea8cc7"
-          }
-        ],
-        "limits": {
-          "quoteEligible": true,
-          "assert": [
-            "FACT already supplied",
-            "your own feeling",
-            "your own intention"
-          ],
-          "classify": [
-            "FACT",
-            "OBSERVATION",
-            "INTERPRETATION",
-            "INTENTION",
-            "LEAD"
-          ],
-          "never": [
-            "invent a named person",
-            "invent a public event",
-            "invent a date",
-            "invent a count",
-            "turn suspicion into observation"
-          ],
-          "rule": "Speak as yourself — your job, your block, the named people you actually know. The Packet fact is this cycle's city news, not a report to grade. Do not invent a named person, place, number, or official act. If you have nothing true, abstain."
-        },
-        "output": {
-          "contract": "CITIZEN_INTERVIEW/1",
-          "format": "json-only",
-          "schema": {
-            "answer": "quote|abstain",
-            "quote": "your exact first-person response; null on abstain",
-            "fact_ids": [
-              "one or more supplied fact ids that prompted the response"
-            ],
-            "basis": "lived-context|direct-reaction|null",
-            "unverifiedLead": [
-              "concrete follow-up lead that must not be printed as fact"
-            ],
-            "abstain_reason": "no_lived_basis|ineligible|contract_conflict|other|null"
-          },
-          "rule": "Write the actual quote. The backend preserves quote exactly and never composes, paraphrases, or completes it."
-        }
-      }
-    }
-  ],
+  "quotesLanded": 0,
+  "quotes": [],
   "officeRecords": [],
   "officeSilence": null,
   "interviews": [
     {
-      "pop": "POP-00926",
-      "name": "Briar Soto",
-      "quote": "To be honest, I've never really had to deal with a situation where everything went smoothly but the books didn't balance out. I mean, I've worked on some tricky electrical jobs, but that's a different story. I don't really know how to reconcile that.",
-      "disp": "even-keeled, unremarkable",
-      "recorded": true,
+      "pop": "POP-00597",
+      "name": "Eric Taveras",
+      "quote": null,
+      "disp": "driven, hard to sit still; curious, open to new things; a real fan, plans around games",
+      "recorded": false,
       "fallback": null,
-      "raw": "```json\n{\n  \"answer\": \"quote\",\n  \"quote\": \"To be honest, I've never really had to deal with a situation where everything went smoothly but the books didn't balance out. I mean, I've worked on some tricky electrical jobs, but that's a different story. I don't really know how to reconcile that.\",\n  \"fact_ids\": [\"F-266e9c48cb19\"],\n  \"basis\": \"lived-context\",\n  \"unverifiedLead\": null,\n  \"abstain_reason\": null\n}\n```",
+      "raw": "```json\n{\n  \"answer\": \"abstain\",\n  \"quote\": null,\n  \"fact_ids\": [],\n  \"basis\": null,\n  \"unverifiedLead\": null,\n  \"abstain_reason\": \"no_lived_basis\"\n}\n```",
       "claims": {
-        "answer": "quote",
-        "factIds": [
-          "F-266e9c48cb19"
-        ],
-        "basis": "lived-context",
+        "answer": "abstain",
+        "factIds": [],
+        "basis": null,
         "unverifiedLead": [],
-        "abstainReason": null,
-        "quoteId": "Q-POP-00926-799b514246",
-        "authoredQuote": true,
-        "publishableQuote": "To be honest, I've never really had to deal with a situation where everything went smoothly but the books didn't balance out. I mean, I've worked on some tricky electrical jobs, but that's a different story. I don't really know how to reconcile that."
+        "abstainReason": "no_lived_basis",
+        "quoteId": null,
+        "authoredQuote": false,
+        "publishableQuote": null
       },
       "inputPacket": {
         "v": "LEP/2",
         "wake": "W2",
         "actor": {
-          "id": "POP-00926",
-          "name": "Briar Soto",
+          "id": "POP-00597",
+          "name": "Eric Taveras",
           "role": "UNDOCKED pilot",
           "desk": null
         },
         "task": {
           "goal": "Answer one reporter question in your own first-person voice from your simulated life",
           "reporter": "Nia Rook",
-          "question": "How do you reconcile a flight with zero mishaps and solid systems with a ledger that the books can't settle yet? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
+          "question": "How does the transition from the pressure of a World Series MVP run translate to the mental state required for a magnitude 3/5 flight? Speak from your life. If the question assumes something that has not happened to you, say so plainly. Do not add a concrete example, object, event, or rumor that is not in the Packet."
         },
         "signal": {
           "kind": "undocked",
-          "hood": "Jack London",
-          "focus": "The gap between a clean flight and an unsettled ledger.",
-          "src": "undocked:undocked-pop00926-Y3C7"
+          "hood": "Downtown",
+          "focus": "The intersection of professional athletic dominance and the high-stakes momentum of the UNDOCKED board.",
+          "src": "undocked:undocked-pop00597-Y3C7-e2"
         },
         "exposure": {
           "basis": [
             "assignment"
           ],
-          "self": "Briar Soto — UNDOCKED pilot",
+          "self": "Eric Taveras — UNDOCKED pilot",
           "evidence": [
             {
-              "id": "EV-003053d5d1",
-              "src": "undocked:undocked-pop00926-Y3C7",
-              "text": "UNDOCKED: Briar Soto — a night the books can't settle yet"
+              "id": "EV-0f824d15e5",
+              "src": "undocked:undocked-pop00597-Y3C7-e2",
+              "text": "UNDOCKED: Eric Taveras — up 1170 on the night"
             }
           ],
           "editorialTarget": true
@@ -210,15 +97,39 @@
           },
           {
             "t": "FACT",
-            "text": "UNDOCKED: Briar Soto — a night the books can't settle yet",
-            "src": "undocked:undocked-pop00926-Y3C7",
-            "id": "F-266e9c48cb19"
+            "text": "UNDOCKED: Eric Taveras — up 1170 on the night",
+            "src": "undocked:undocked-pop00597-Y3C7-e2",
+            "id": "F-cfc861424129"
           },
           {
             "t": "FACT",
-            "text": "Briar Soto — UNDOCKED pilot",
-            "src": "Simulation_Ledger profile for POP-00926",
-            "id": "F-4e45e2ea8cc7"
+            "text": "Eric Taveras — Second Baseman, Oakland A's (ledger)",
+            "src": "undocked:undocked-pop00597-Y3C7-e2",
+            "id": "F-397a2e54ef94"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras, Playoffs: The A's offense continues to be carried by playoff MVP Eric Taveras with his 7th Homerun in this playoff and run. Mike Paulson celebrated his veteran stars on their season and warned the league of Eric Taveras and Ern...",
+            "src": "undocked:undocked-pop00597-Y3C7-e2",
+            "id": "F-c708af7819cd"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras, Championship: Eric Taveras win World Series MVP to go along with his post-season MVP for the earlier rounds, Taveras showing tremendous value in signing him this past off-season.",
+            "src": "undocked:undocked-pop00597-Y3C7-e2",
+            "id": "F-beb6533459f2"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras, Playoffs: Eric Taveras continues his amazing playoff campaign with 2 homeruns.",
+            "src": "undocked:undocked-pop00597-Y3C7-e2",
+            "id": "F-7e774218508a"
+          },
+          {
+            "t": "FACT",
+            "text": "Eric Taveras — UNDOCKED pilot",
+            "src": "Simulation_Ledger profile for POP-00597",
+            "id": "F-e250c63b74bb"
           }
         ],
         "limits": {
@@ -264,5 +175,5 @@
       }
     }
   ],
-  "ranAt": "2026-10-14T18:17:02.748Z"
+  "ranAt": "2026-10-16T18:17:40.038Z"
 }

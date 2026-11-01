@@ -47,10 +47,11 @@
     "recorded": true,
     "line": "graded: 4/4 — nothing fell short"
   },
-  "article": "output/cron-compare/staged/sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3.staged-0356.md",
+  "article": "output/cron-compare/staged/sports_c111_tanya-cruz_packet-v2_x-ai-grok-4-3.staged.md",
   "selfRecord": {
     "recorded": true,
     "out": "/.env' }\n{\n  \"popId\": \"POP-00014\",\n  \"name\": \"Tanya Cruz\",\n  \"recorded\": true,\n  \"text\": \"filed: The A's parade rolled through Downtown, the double-decker bus carrying Mike Paulson, Vinnie Keane, a\"\n}"
   },
-  "ranAt": "2026-10-15T03:56:39.810Z"
+  "ranAt": "2026-10-15T03:56:39.810Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:03.168Z"
 }

@@ -28,5 +28,6 @@
     "recorded": true,
     "out": "/.env // tip: ⌘ override existing { override: true }\n{\n  \"popId\": \"POP-00591\",\n  \"name\": \"Selena Grant\",\n  \"recorded\": true,\n  \"text\": \"filed: The Oaks’ Draymond Question Is Now a Test of the Build\"\n}"
   },
-  "ranAt": "2026-10-13T23:16:14.872Z"
+  "ranAt": "2026-10-13T23:16:14.872Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:03.091Z"
 }

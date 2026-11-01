@@ -52,5 +52,6 @@
     "recorded": true,
     "out": "dworld/.env // tip: ⌘ override existing { override: true }\n{\n  \"popId\": \"POP-00636\",\n  \"name\": \"Luis Navarro\",\n  \"recorded\": true,\n  \"text\": \"filed: The Pipeline Is Running. The Count Isn't Moving.\"\n}"
   },
-  "ranAt": "2026-10-15T03:50:59.671Z"
+  "ranAt": "2026-10-15T03:50:59.671Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:02.676Z"
 }

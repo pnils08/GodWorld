@@ -28,5 +28,6 @@
     "recorded": true,
     "out": " // tip: ⌁ auth for agents [www.vestauth.com]\n{\n  \"popId\": \"POP-00153\",\n  \"name\": \"Jordan Velez\",\n  \"recorded\": true,\n  \"text\": \"filed: The Port Got Louder. Down the Block, the Ledger Barely Moved.\"\n}"
   },
-  "ranAt": "2026-10-12T23:16:36.969Z"
+  "ranAt": "2026-10-12T23:16:36.969Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:02.257Z"
 }

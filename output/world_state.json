@@ -1,36 +1,36 @@
 {
   "meta": {
-    "cycle": 112,
-    "builtAt": "2026-10-19T03:37:04.928Z",
+    "cycle": 113,
+    "builtAt": "2026-10-26T05:32:51.430Z",
     "sheetId": "1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk",
     "script": "buildWorldState.js v1.0",
     "notes": []
   },
   "orientation": {
-    "cycle": 112,
+    "cycle": 113,
     "simYear": "3",
     "simMonth": "2",
-    "simDay": "3",
+    "simDay": "4",
     "season": "Winter",
     "holiday": "none",
     "weather": {
-      "temp": 48,
-      "temperature": 48,
+      "temp": 58,
+      "temperature": 58,
       "type": "clear",
       "impact": 1,
-      "humidity": 51,
+      "humidity": 56,
       "windSpeed": 8,
       "windDirection": "W",
-      "windDirectionDeg": 283,
+      "windDirectionDeg": 266,
       "precipitationIntensity": 0,
       "precipitationType": "none",
       "frontState": "CLEAR",
-      "frontStrength": 0.41,
+      "frontStrength": 0.43,
       "visibility": 10
     },
-    "citySentiment": "0.32",
+    "citySentiment": "0.1",
     "cycleWeight": "high-signal",
-    "cycleWeightReason": "1 high-severity event(s); High event volume (11); Elevated activity; 38 high-priority story hooks; Wide domain spread (7 active).",
+    "cycleWeightReason": "High event volume (11); Elevated activity; 34 high-priority story hooks; Domain saturation (4 in one domain).",
     "patternFlag": "elevated-activity",
     "shockFlag": "none",
     "civicLoad": "minor-variance",
@@ -38,7 +38,7 @@
     "firstFriday": false
   },
   "canon": {
-    "sourceCycle": 112,
+    "sourceCycle": 113,
     "stale": false,
     "sourceSheetId": "1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk",
     "asRoster": [
@@ -223,7 +223,7 @@
         "name": "Desmond Morton",
         "tier": "2",
         "roleType": "Left Fielder, Oakland A's",
-        "neighborhood": "Jack London",
+        "neighborhood": "Chinatown",
         "status": "Active",
         "position": null,
         "overall": null,
@@ -831,7 +831,7 @@
         "name": "Austin Reaves",
         "tier": "2",
         "roleType": "SG / The Oaks",
-        "neighborhood": "Downtown",
+        "neighborhood": "West Oakland",
         "status": "Active",
         "position": null,
         "overall": null,
@@ -969,6 +969,38 @@
         "seasonStats": null,
         "awards": null,
         "playerStatus": null
+      },
+      {
+        "popId": "POP-01223",
+        "name": "Harry Hayward",
+        "tier": "4",
+        "roleType": "Oakland Oaks - Power Forward",
+        "neighborhood": "KONO",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
+      },
+      {
+        "popId": "POP-01224",
+        "name": "Trevor Henderson",
+        "tier": "4",
+        "roleType": "Oakland Oaks - Center",
+        "neighborhood": "Lake Merritt",
+        "status": "Active",
+        "position": null,
+        "overall": null,
+        "potential": null,
+        "contract": null,
+        "quirks": null,
+        "seasonStats": null,
+        "awards": null,
+        "playerStatus": null
       }
     ],
     "statusAlerts": [],
@@ -1005,9 +1037,9 @@
         "affectedNeighborhoods": "West Oakland",
         "policyDomain": "economic",
         "implementationPhase": "disbursement-active",
-        "milestoneNotes": "C107: Downtown canvass deployment authorized alongside month-eight disbursement review.\nC108 conversion: passed C78 before the mayoral-action step existed; the mayor's own bill, recorded signed at C78.\nC108 conversion: Stage Standing — Stabilization Fund, disbursement-active since C78 (economic — not playable, no Delivering gate yet; the untended clock still runs). | C108 retag economic→housing (ruled 2026-09-22 — the Fund is a household anti-displacement fund in canon; engine.255 wires it as the first budgeted disbursement).\nC108: scope recorded as chartered — stabilization grants for long-tenure West Oakland residents priced out as the flats built out (the remnant the charter named), not hood-wide relief; 47 checks (~$4.2M) disbursed under Deputy Mayor Okoro’s authority C84–C90; authorization $28M, ~$23.8M remaining.\nC108: retag reversed — housing→economic (the 2026-09-22 retag was engine-sheet error; the Fund is not a housing fund).\nC109 scope correction: the Fund serves West Oakland businesses and residents. The C107 'Downtown canvass' line and the C108 'residents only' reading are superseded.\nC109: month-eight tranche $400,000 released in West Oakland (2 household grants, $81,188). Downtown is outside the Fund's area — that is INIT-008, proposed, not voted.\nC110: Month-nine disbursement $400K approved; 23-day avg processing time achieved\nC111: Month-ten disbursement $400K approved; 23-day processing standard maintained.",
-        "nextScheduledAction": "Month-eleven disbursement review",
-        "nextActionCycle": 112
+        "milestoneNotes": "C107: Downtown canvass deployment authorized alongside month-eight disbursement review.\nC108 conversion: passed C78 before the mayoral-action step existed; the mayor's own bill, recorded signed at C78.\nC108 conversion: Stage Standing — Stabilization Fund, disbursement-active since C78 (economic — not playable, no Delivering gate yet; the untended clock still runs). | C108 retag economic→housing (ruled 2026-09-22 — the Fund is a household anti-displacement fund in canon; engine.255 wires it as the first budgeted disbursement).\nC108: scope recorded as chartered — stabilization grants for long-tenure West Oakland residents priced out as the flats built out (the remnant the charter named), not hood-wide relief; 47 checks (~$4.2M) disbursed under Deputy Mayor Okoro’s authority C84–C90; authorization $28M, ~$23.8M remaining.\nC108: retag reversed — housing→economic (the 2026-09-22 retag was engine-sheet error; the Fund is not a housing fund).\nC109 scope correction: the Fund serves West Oakland businesses and residents. The C107 'Downtown canvass' line and the C108 'residents only' reading are superseded.\nC109: month-eight tranche $400,000 released in West Oakland (2 household grants, $81,188). Downtown is outside the Fund's area — that is INIT-008, proposed, not voted.\nC110: Month-nine disbursement $400K approved; 23-day avg processing time achieved\nC111: Month-ten disbursement $400K approved; 23-day processing standard maintained.\nC112: Month-eleven disbursement $400K approved; 23-day processing standard maintained; cumulative $5M+ disbursed\nC113: Month-11 audit published; Month-12 $400K approved with charter scope preservation directive",
+        "nextScheduledAction": "Month-12 disbursement execution and charter renewal drafting",
+        "nextActionCycle": 114
       },
       {
         "name": "Oakland Alternative Response Initiative",
@@ -1021,9 +1053,9 @@
         "affectedNeighborhoods": "West Oakland, Fruitvale, East Oakland",
         "policyDomain": "safety",
         "implementationPhase": "dispatch-live",
-        "milestoneNotes": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.\nC108 conversion: Stage Standing — OARI, dispatch-live, signed C82 (safety — not playable until the safety lever lands; the untended clock still runs).\nC109: Expanded to District 1 with evaluation metrics",
-        "nextScheduledAction": "Quarterly outcome report",
-        "nextActionCycle": 112
+        "milestoneNotes": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.\nC108 conversion: Stage Standing — OARI, dispatch-live, signed C82 (safety — not playable until the safety lever lands; the untended clock still runs).\nC109: Expanded to District 1 with evaluation metrics\nC112: Quarterly report accepted; D3 condition added for district-level data breakdown and community briefing before expansion\nC113: Quarterly report published; D3 East Oakland briefing directed with Fruitvale data and Baylight feasibility review",
+        "nextScheduledAction": "D3 community briefing execution",
+        "nextActionCycle": 114
       },
       {
         "name": "Fruitvale Transit Hub Phase II — Visioning",
@@ -1053,9 +1085,9 @@
         "affectedNeighborhoods": "Temescal",
         "policyDomain": "health",
         "implementationPhase": "operational",
-        "milestoneNotes": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule\nC108 conversion: passed C80 before the mayoral-action step existed; the mayor's own bill, recorded signed at C80.\nC108 conversion: Stage Standing — Temescal health center, construction-active since C80 (health — playable; delivers once a treating phase moves hood Sick against its conversion baseline).\nC109: opened — construction complete, open to the public.\nC109: Opened 2 weeks early, $1.2M under budget\nC111: Implemented pre-opening clinical intake workflow audits and expenditure reconciliations per D7 directive",
-        "nextScheduledAction": "First quarter utilization review",
-        "nextActionCycle": 113
+        "milestoneNotes": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule\nC108 conversion: passed C80 before the mayoral-action step existed; the mayor's own bill, recorded signed at C80.\nC108 conversion: Stage Standing — Temescal health center, construction-active since C80 (health — playable; delivers once a treating phase moves hood Sick against its conversion baseline).\nC109: opened — construction complete, open to the public.\nC109: Opened 2 weeks early, $1.2M under budget\nC111: Implemented pre-opening clinical intake workflow audits and expenditure reconciliations per D7 directive\nC112: Adopted D7 quarterly utilization audit benchmarks as standing procedure; first reporting cycle scheduled with public-data commitment.\nC113: First quarterly utilization audit filed to D7 and public portal",
+        "nextScheduledAction": "Second quarterly audit cycle",
+        "nextActionCycle": 116
       },
       {
         "name": "Baylight District — Final Council Vote",
@@ -1069,7 +1101,7 @@
         "affectedNeighborhoods": "Jack London, Downtown",
         "policyDomain": "sports",
         "implementationPhase": "construction-active",
-        "milestoneNotes": "C107: Construction contracts executed; site preparation mobilization begins\nC109: Phase II remediation commenced with independent oversight\nC110: Soil test verification complete; Phase II remediation proceeds with independent oversight\nC111: Construction milestone review scheduled for Cycle 115; remediation proceeds with oversight.",
+        "milestoneNotes": "C107: Construction contracts executed; site preparation mobilization begins\nC109: Phase II remediation commenced with independent oversight\nC110: Soil test verification complete; Phase II remediation proceeds with independent oversight\nC111: Construction milestone review scheduled for Cycle 115; remediation proceeds with oversight.\nC112: Independent oversight verified; remediation continues; construction milestone review held for C115\nC113: Phase II remediation on schedule with independent oversight; 48hr construction hotline live; dust control active on haul routes; Jack London workforce coordination meeting set pre-C115 review.",
         "nextScheduledAction": "Construction milestone review",
         "nextActionCycle": 115
       },
@@ -1084,42 +1116,41 @@
         "voteBreakdown": "Proposed by Denise Carter in the C109 week — eviction filings outpacing Stabilization Fund relief.\nCycle 112: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Leonard Tran voted yes. Ramon Vega voted yes.",
         "affectedNeighborhoods": "West Oakland",
         "policyDomain": "economic",
-        "implementationPhase": "vote-scheduled",
+        "implementationPhase": "operational",
         "milestoneNotes": "C111: Referred to Housing and Community Development Committee with legal support analysis.",
         "nextScheduledAction": "Committee hearing and vote",
-        "nextActionCycle": 112
+        "nextActionCycle": 113
       }
     ]
   },
   "hoods": {
-    "Downtown": "The sidewalks feel busier than ever, with people spilling out of Midnight Bistro and SpeedyBurger. A choir performance at Telegraph Presbyterian Fellowship draws a small crowd, and volunteers gather for a rally near City Hall.",
-    "Temescal": "Street vendors line Telegraph Avenue, offering food and crafts to passersby. The new Temescal Community Health Center buzzes with activity, while Brie Bouquets sees a steady stream of customers.",
-    "Laurel": "Neighbors gather outside, talking quietly about the ambulance that pulled up earlier. The street feels calm otherwise, with kids playing and families going about their evening.",
-    "West Oakland": "New faces appear on the block, with people moving in from Uptown and Rockridge. The West Side Cafe fills up with regulars, and the Stabilization Fund payouts bring a sense of relief to some households.",
-    "Fruitvale": "The Fruitvale Transit Hub buzzes with activity as Phase II planning takes shape. New residents arrive from Eastlake and Temescal, adding to the neighborhood's growing energy.",
-    "Jack London": "The waterfront promenade fills with people enjoying the evening stroll. Businesses near the port seem busier now that the berths are active again, and Heinold's First and Last Chance Saloon draws a lively crowd.",
-    "Rockridge": "A quiet week — nothing much out of the ordinary around the neighborhood.",
+    "Downtown": "The sidewalks are packed with young professionals heading to Temple Lounge after work, while a crowd gathers outside Telegraph Presbyterian Fellowship for the special sermon. At SpeedyBurger, the line stretches out the door during lunch hour.",
+    "Temescal": "A new group starts at the job training workshop, filling the Temescal Islamic Center with chatter. The health center has its usual steady stream of patients coming in and out. Telegraph Avenue feels quieter than usual this week.",
+    "Laurel": "The bookshop and cafes along MacArthur are nearly empty, even on the weekend. Fewer kids play in the park after school.",
+    "West Oakland": "Neighbors chat about the Stabilization Fund payouts while unloading groceries. Someone new keeps moving boxes into the upstairs apartment.",
+    "Fruitvale": "The mercado buzzes with shoppers grabbing lunch between train transfers. Posters for the expanded tutoring program hang outside St. Esperanza Parish.",
+    "Jack London": "The film series draws a crowd to the square, lingering over drinks afterward. A water main break near the markets slows foot traffic for a day.",
+    "Rockridge": "The delayed train leaves commuters grumbling at the station. At the diner, regulars debate last night’s game over coffee.",
     "Adams Point": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "Grand Lake": "A community health fair at Or Hashalom Renewal Community brings neighbors together. Keane Mercantile sees steady foot traffic, and the streets feel quieter than usual despite the public works activity.",
-    "Piedmont Ave": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "Chinatown": "The Winter Lights festival draws crowds, lighting up the streets with color and sound. New residents arrive from Jack London and Downtown, adding to the neighborhood's bustling energy.",
+    "Grand Lake": "The theater line stretches around the block for the weekend matinee. New faces move into the apartment above Port Grind.",
+    "Piedmont Ave": "The pharmacy and boutique cafes hum with midweek shoppers. A neighbor pauses halfway through writing a letter, deciding to call instead.",
+    "Chinatown": "A medical team rushes to an emergency on the sidewalk, drawing a small crowd. The usual lunch spot is suddenly closed, with a notice taped to the door.",
     "Brooklyn": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "Eastlake": "Foot traffic slows along the commercial strip, with storefronts quieter than usual. The neighborhood feels subdued, though a few families still stroll by the lake.",
-    "Glenview": "A quiet week — nothing much out of the ordinary around the neighborhood.",
+    "Eastlake": "A quiet week — nothing much out of the ordinary around the neighborhood.",
+    "Glenview": "The Glenview Cafe regulars sip coffee in silence, watching the street. Nothing much changes.",
     "Dimond": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "Ivy Hill": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "San Antonio": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "KONO": "Northgate Kitchen buzzes with diners, and new residents arrive from Adams Point. The Fox Theater anchors the neighborhood’s growing energy, with more people walking Telegraph Avenue.",
-    "Lake Merritt": "Volunteers from Cathedral of the Living Word clean up the streets, chatting with neighbors as they work. The lake feels serene, with joggers and walkers enjoying the calm evening.",
-    "Uptown": "The streets hum with activity, from bars to restaurants, as new arrivals continue moving in. Rent signs go up quickly, and the neighborhood feels busier than ever.",
-    "Baylight District": "The waterfront feels unusually quiet, with fewer people out on the promenade. A high-severity civic spike disrupts the usual rhythm, leaving the area feeling tense.",
-    "East Oakland": "A new resident arrives from Downtown, adding to the mix of households on the block. The neighborhood feels steady, with people going about their daily routines.\n\n---\n\n_Generated by `scripts/buildNeighborhoodTexture.js` v1.1.0 from Riley_Digest + Neighborhood_Map + Story_Seed_Deck (cycle 112). One batched generation, frozen for the cycle. 14/22 hoods with engine signal; 8 quiet._"
+    "Ivy Hill": "A \"help wanted\" sign goes up at the market. The streets stay quiet.",
+    "San Antonio": "Music and laughter echo from the block party, spilling onto the sidewalk. The smell of grilled food lingers late.",
+    "KONO": "Midnight Norae Karaoke pulses with laughter well past midnight. The Fox Theater marquee advertises next week’s show.",
+    "Lake Merritt": "Lanterns flicker along the lake path in the evening. The tutoring program’s new flyers appear in café windows.",
+    "Uptown": "The bars and galleries stay packed until closing. Rent signs keep appearing, then disappearing just as fast.",
+    "Baylight District": "A quiet week — nothing much out of the ordinary around the neighborhood.",
+    "East Oakland": "The Coliseum lot sits empty. Fewer people linger outside the discount stores.\n\n---\n\n_Generated by `scripts/buildNeighborhoodTexture.js` v1.1.0 from Riley_Digest + Neighborhood_Map + Story_Seed_Deck (cycle 113). One batched generation, frozen for the cycle. 17/22 hoods with engine signal; 5 quiet._"
   },
   "pointers": {
-    "worldSummary": "output/world_summary_c112.md",
-    "deskSignal": "output/desk_signal_c112.json",
-    "neighborhoodTexture": "output/neighborhood_texture_c112.md",
-    "engineAudit": "output/engine_audit_c112.json",
-    "engineReview": "output/engine_review_c112.md"
+    "worldSummary": "output/world_summary_c113.md",
+    "deskSignal": "output/desk_signal_c113.json",
+    "neighborhoodTexture": "output/neighborhood_texture_c113.md",
+    "engineAudit": "output/engine_audit_c113.json"
   }
 }

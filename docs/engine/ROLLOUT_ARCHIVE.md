@@ -973,6 +973,15 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S627 Archive Pass (2026-11-01, engine-sheet) — post-S626 closures sweep
+
+2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 infrastructure.* + 1 engine.*.
+
+- **infrastructure.17** [engine-sheet] — Supermemory recall patch re-ported to plugin 0.2.0 and applied; plugin pinned, self-update off 10-31 **State at archive:** done-pending-archive. Pointer: [[../SUPERMEMORY]]
+- **engine.329** [research-build] — Hard-light line named the last usage row's piece, not the hard row's (codex 10-31). LIVE PROD @172 stage 36, 2026-11-01 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-11-media-extension]] §Changelog 2026-11-01
+
+This pass: 2 rows — infrastructure.17 + engine.329. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S626 Archive Pass (2026-10-31, research-build) — post-S625 closures sweep
 
 6 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 4 engine.* + 1 pipeline.* + 1 civic.*.

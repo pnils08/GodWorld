@@ -1,47 +1,51 @@
 # Today in Oakland — told by its people
 
-A daily digest of citizen life over the last 24 hours, assembled from the citizens' own reflections and life events on record (through Cycle 111). Everything below is sourced from the world ledger — nothing is invented.
+A daily digest of citizen life over the last 24 hours, assembled from the citizens' own reflections and life events on record (through Cycle 113). Everything below is sourced from the world ledger — nothing is invented.
 
 ## The big moments
 
-- **Rafael Brannie** (Piedmont Ave) — A coworker at Mayday Movers with less time in got the assignment they had asked about.
-- **Clearence Leighton** (Piedmont Ave) — A supervisor at Temescal Community Health Center corrected them in front of a customer.
-- **Tariq Mitchell** (Uptown) — A manager at Marigold Cafe asked them to redo work that had already been approved.
-- **Miguel Joson** (Chinatown) — A manager at Foothill Builders stopped by their desk to say the last stretch of work had not gone unnoticed.
-- **Ingrid Bautista** (Chinatown) — The owner at West Oakland Community Center said hours are being looked at across the board.
-- **Sammie Soft** (West Oakland) — A colleague at West Oakland Community Center said the team runs smoother on their days.
-- **Hana Petrosyan** (San Antonio) — A client thanked them by name in front of the whole floor at Oakland Police Department.
-- **Devin Castellanos** (Dimond) — A quiet nod from the owner at Oakland Police Department on the way out, the kind that means something.
-- **Samuel Adeyemi** (Ivy Hill) — Heard secondhand that the opening at Oakland Fire Department they wanted had been filled from outside.
-- **Leo Leonard** (Downtown) — Their name came up in a good way at the Alameda County Courts staff meeting.
+- **Shai Diaz** (Fruitvale) — Closed out a problem at Mayday Movers that had been open since before they started.
+- **Jori Clame** (Laurel) — Left Schoolgate Cafe on Friday with a thank-you from the person whose job they covered all week.
+- **Bryce Lee** (Temescal) — A manager at Eastside Family Market stopped by their desk to say the last stretch of work had not gone unnoticed.
+- **Valentina Campbell** (Jack London) — Was asked to run the morning meeting at Green & Gold Tavern while the lead was out.
+- **Leanne Wu** (Rockridge) — A client thanked them by name in front of the whole floor at Oakland Housing Authority.
+- **Dexter Patel** (Downtown) — The project they built at Oakland Tech Collective was handed to someone else without a word.
+- **Saniya Washington** (Lake Merritt) — A colleague at West Oakland Community Center said the team runs smoother on their days.
+- **Ridley Holt** (Lake Merritt) — Covered for a coworker at West Oakland Community Center for a week and heard nothing about it.
+- **Devin Castellanos** (Dimond) — Finished the week at Oakland Police Department with the hardest account on the floor squared away.
+- **Kaila Braun** (Fruitvale) — An email at Alameda County Courts about priorities did not mention their team.
 
 ## The people, in their own words
 
-### Benji Dillon — Pitcher, Oakland A's Legend — Rockridge
+### P Slayer — Journalist, Fan Columnist - Sports — West Oakland
 
-> Maya. Hey. I was just thinking about you—watching that streetlight creep across the kitchen floor last night, reminded me of the quiet we used to share this late. How’s Rick doing? *(talking with Maya Torres-Dillon)*
+> graded: 3/4 — The closing ends on a flat rhetorical question rather than a dare, confession, or live-friction update.
 
-*Around the neighborhood: felt a quiet tradeoff settle into place*
+> filed: I sat at the counter of The Railcar last night, the one by the old loading docks where the winter wi
 
-### Maya Torres-Dillon — Bay Conservation Alliance Advisory board, High School Science Teacher — Rockridge
+### Maria Keen — Journalist, Cultural Liason — Lake Merritt
 
-> Benji. It's good to hear your voice. Rick's doing well—he's been really into his science fair project on watersheds, which I can't help but be proud of. He's got your focus, that's *(talking with Benji Dillon)*
+> graded: 4/4 — nothing fell short
 
-### Travis Coles — Starting Pitcher, Oakland A's — Downtown
+> filed: Three Programs, One Rent Bill: Fruitvale Counts What Holds
 
-> Four earned. That’s the number that stays with me no matter how many times I replay the slider that didn’t bite or the fastball that sat flat. Six innings is six innings, but again
+### Daphne Stafford — Home Health Aide — West Oakland
 
-*Around the neighborhood: checked the housing market in Rockridge on their lunch break and realized they could actually afford it*
+> Hey, Miguel. Good to see you. How’s everything going with you and the family? Ha, that upstairs drip sounds like the same one we had at our old place—drove me crazy until we finall *(talking with Miguel Joson)*
 
-### Eric Taveras — Second Baseman, Oakland A's — Downtown
+> I'm 23rd out of 24 on the leaderboard, and I only got 5 points last week, so I guess my struggles didn't change the standings much. I mean, there were people above and below me who
 
-> To be honest, I haven't heard anything about unsettled credits. I'm not sure what you're referring to.
+### Lila Mezran — Journalist, Health Desk — Piedmont Ave
 
-### Rachel Torres — Public Safety — Uptown
+> graded: 4/4 — nothing fell short
 
-> filed: San Antonio recorded nine incidents this cycle, the highest total among the twenty-two neighborhoods
+> filed: Chinatown's 140 Sick Are Mostly at Home, and Home Is Doing the Work
 
-*Around the neighborhood: moved money between two accounts to cover a bill without anyone noticing*
+*Around the neighborhood: handled responsibilities that didn't make the news*
+
+### Miguel Joson — Plumber — Chinatown
+
+> Daphne, good to see you too. The family’s doing alright—kids keep busy, and the wife’s got her hands full with her own projects. Me, I’m just trying to keep the house in one piece *(talking with Daphne Stafford)*
 
 ---
-*Assembled 2026-10-14 from Reflection_Intake (15 reflections, 15 citizens) and LifeHistory_Log (48 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*
+*Assembled 2026-11-01 from Reflection_Intake (21 reflections, 15 citizens) and LifeHistory_Log (80 life events) over the last 1 day by scripts/buildCitizenWeekDigest.js --daily. Read-only; no content generated.*

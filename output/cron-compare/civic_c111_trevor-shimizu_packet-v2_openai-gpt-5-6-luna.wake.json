@@ -28,5 +28,6 @@
     "recorded": true,
     "out": "iple files { path: ['.env.local', '.env'] }\n{\n  \"popId\": \"POP-00155\",\n  \"name\": \"Trevor Shimizu\",\n  \"recorded\": true,\n  \"text\": \"filed: 12th Street Is Running Better. The People Are Somewhere Else.\"\n}"
   },
-  "ranAt": "2026-10-12T23:18:09.971Z"
+  "ranAt": "2026-10-12T23:18:09.971Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:02.828Z"
 }

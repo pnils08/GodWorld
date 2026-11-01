@@ -38,5 +38,6 @@
     "recorded": true,
     "out": "xisting { override: true }\n{\n  \"popId\": \"POP-00166\",\n  \"name\": \"Elliot Marbury\",\n  \"recorded\": true,\n  \"text\": \"filed: Richards Struck Out Less in 2039, 2040 and 2041 Than in Any Season Before Them\"\n}"
   },
-  "ranAt": "2026-10-15T03:26:47.914Z"
+  "ranAt": "2026-10-15T03:26:47.914Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:03.014Z"
 }

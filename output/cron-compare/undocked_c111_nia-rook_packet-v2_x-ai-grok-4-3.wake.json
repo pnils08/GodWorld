@@ -21,12 +21,38 @@
     "fail": false,
     "findings": []
   },
-  "footerPresent": true,
+  "footerPresent": null,
   "toolUse": [],
-  "article": "output/cron-compare/staged/undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3.staged-2316.md",
+  "toolCalls": 0,
+  "wordCount": 318,
+  "targetWords": "350-600",
+  "capHit": 0,
+  "checkFlags": [],
+  "engineTerms": [],
+  "verbatimWarn": [],
+  "rewardLoop": true,
+  "contractScore": {
+    "opened": true,
+    "closed": true,
+    "purposeMet": true,
+    "inTarget": false,
+    "inTargetBy": "code floor 350",
+    "words": 318,
+    "short": "The piece falls short of the 350-word minimum target.",
+    "score": 3,
+    "model": "google/gemini-3.7-flash",
+    "draftSha256": "05ababf990ede95cfa84b5a87b191cc93c6fc2fb4af3e3e152898f11d94ff650",
+    "costUsd": 0.001
+  },
+  "gradeRecord": {
+    "recorded": true,
+    "line": "graded: 3/4 — The piece falls short of the 350-word minimum target."
+  },
+  "article": "output/cron-compare/staged/undocked_c111_nia-rook_packet-v2_x-ai-grok-4-3.staged-2319.md",
   "selfRecord": {
     "recorded": true,
-    "out": " '.env'] }\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"filed: In a downtown break-room the screen lingered on Eric Taveras's quiet stretch through sol and sirius,\"\n}"
+    "out": "de: true }\n{\n  \"popId\": \"POP-01076\",\n  \"name\": \"Nia Rook\",\n  \"recorded\": true,\n  \"text\": \"filed: In a Downtown break-room where the night shift had pulled chairs into a loose circle, the screen hel\"\n}"
   },
-  "ranAt": "2026-10-13T23:16:40.634Z"
+  "ranAt": "2026-10-16T23:19:40.041Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:03.220Z"
 }

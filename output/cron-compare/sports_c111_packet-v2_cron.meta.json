@@ -1,17 +1,17 @@
 {
   "desk": "sports",
   "cycle": "111",
-  "model": "anthropic/claude-sonnet-5.5",
-  "turns": 3,
+  "model": "openai/gpt-5.6-luna",
+  "turns": 1,
   "maxTurns": 15,
-  "usageInputTokens": 31620,
-  "usageOutputTokens": 3270,
+  "usageInputTokens": 11689,
+  "usageOutputTokens": 2363,
   "savedFiles": [
-    "output/cron-compare/sports_c111_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5.md"
+    "output/cron-compare/sports_c111_talia-finch_packet-v2_openai-gpt-5-6-luna.md"
   ],
   "compareAgainst": "output/desk-output/sports_c111.md",
-  "durationMs": 29249,
+  "durationMs": 18649,
   "dryRun": false,
   "packetOnly": true,
-  "ranAt": "2026-10-15T03:26:29.314Z"
+  "ranAt": "2026-10-15T23:19:03.726Z"
 }

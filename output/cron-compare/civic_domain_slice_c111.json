@@ -1567,6 +1567,22 @@
     },
     {
       "kind": "civic-datawake",
+      "label": "Denise Carter: Working the Tenant Defense Fund through the vote pipeline ensures Brooklyn families have legal defense against displacement — that's the immediate lever I'm pulling this week.",
+      "ref": "output/cron-civic/datawake/civic-office-council-d1_2026-10-15.json",
+      "hood": null,
+      "popids": [
+        "POP-00501"
+      ],
+      "handle": {
+        "angle": "I'm standing with Brooklyn — not because it's easy, but because it's right. The numbers don't lie: sentiment at 0.21 against a citywide 0.34, property crime at 34, and a decay momentum of 4 that's been building. This isn't a blip; it's a pa",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 94
+    },
+    {
+      "kind": "civic-datawake",
       "label": "Leonard Tran: 1",
       "ref": "output/cron-civic/datawake/civic-office-council-d2_2026-10-13.json",
       "hood": null,
@@ -1579,7 +1595,7 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 94
+      "sourceIndex": 95
     },
     {
       "kind": "civic-datawake",
@@ -1595,7 +1611,7 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 95
+      "sourceIndex": 96
     },
     {
       "kind": "civic-datawake",
@@ -1611,7 +1627,7 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 96
+      "sourceIndex": 97
     },
     {
       "kind": "civic-datawake",
@@ -1627,7 +1643,7 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 97
+      "sourceIndex": 98
     },
     {
       "kind": "civic-datawake",
@@ -1643,7 +1659,7 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 98
+      "sourceIndex": 99
     },
     {
       "kind": "civic-datawake",
@@ -1659,7 +1675,7 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 99
+      "sourceIndex": 100
     },
     {
       "kind": "civic-datawake",
@@ -1675,7 +1691,23 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 100
+      "sourceIndex": 101
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Terrence Mobley: Laurel and Uptown are holding steady. With no proposals in play and no pressing conditions on my turf, there's no urgent need for me to force a move this cycle. I'm watching the si",
+      "ref": "output/cron-civic/datawake/civic-office-council-d9_2026-10-15.json",
+      "hood": null,
+      "popids": [
+        "POP-00506"
+      ],
+      "handle": {
+        "angle": "Laurel and Uptown are holding steady. With no proposals in play and no pressing conditions on my turf, there's no urgent need for me to force a move this cycle. I'm watching the sick-resident counts in both neighborhoods — Laurel at 111, Up",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 102
     },
     {
       "kind": "civic-datawake",
@@ -1691,7 +1723,23 @@
         "citizens": []
       },
       "source": "civic-datawake",
-      "sourceIndex": 101
+      "sourceIndex": 103
+    },
+    {
+      "kind": "civic-datawake",
+      "label": "Rafael Montez: The Oakland Police Department has completed deployment adjustments for high-incident zones in East Oakland, West Oakland, and Downtown. Patrol allocation now aligns with CrimeIndex",
+      "ref": "output/cron-civic/datawake/civic-office-police-chief_2026-10-15.json",
+      "hood": null,
+      "popids": [
+        "POP-00136"
+      ],
+      "handle": {
+        "angle": "The Oakland Police Department has completed deployment adjustments for high-incident zones in East Oakland, West Oakland, and Downtown. Patrol allocation now aligns with CrimeIndex data — 1.11 in East Oakland, 1.10 in West Oakland, and 1.10",
+        "hookLine": null,
+        "citizens": []
+      },
+      "source": "civic-datawake",
+      "sourceIndex": 104
     },
     {
       "kind": "weather",
@@ -1705,7 +1753,7 @@
         "citizens": []
       },
       "source": "world-summary",
-      "sourceIndex": 102
+      "sourceIndex": 105
     },
     {
       "kind": "season-feel",
@@ -1723,7 +1771,7 @@
         ]
       },
       "source": "season-feel",
-      "sourceIndex": 103
+      "sourceIndex": 106
     },
     {
       "kind": "season-feel",
@@ -1737,7 +1785,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 104
+      "sourceIndex": 107
     },
     {
       "kind": "season-feel",
@@ -1751,7 +1799,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 105
+      "sourceIndex": 108
     },
     {
       "kind": "season-feel",
@@ -1765,7 +1813,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 106
+      "sourceIndex": 109
     },
     {
       "kind": "season-feel",
@@ -1779,7 +1827,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 107
+      "sourceIndex": 110
     },
     {
       "kind": "season-feel",
@@ -1793,7 +1841,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 108
+      "sourceIndex": 111
     },
     {
       "kind": "season-feel",
@@ -1807,7 +1855,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 109
+      "sourceIndex": 112
     },
     {
       "kind": "season-feel",
@@ -1821,7 +1869,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 110
+      "sourceIndex": 113
     },
     {
       "kind": "season-feel",
@@ -1835,7 +1883,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 111
+      "sourceIndex": 114
     },
     {
       "kind": "season-feel",
@@ -1849,7 +1897,7 @@
         "citizens": []
       },
       "source": "season-feel",
-      "sourceIndex": 112
+      "sourceIndex": 115
     },
     {
       "kind": "health-city",
@@ -1863,7 +1911,7 @@
         "citizens": []
       },
       "source": "world-summary-health",
-      "sourceIndex": 113
+      "sourceIndex": 116
     },
     {
       "kind": "health-lived",
@@ -1881,7 +1929,7 @@
         ]
       },
       "source": "world-summary-health",
-      "sourceIndex": 114
+      "sourceIndex": 117
     },
     {
       "kind": "health-lived",
@@ -1899,7 +1947,7 @@
         ]
       },
       "source": "world-summary-health",
-      "sourceIndex": 115
+      "sourceIndex": 118
     }
   ],
   "packets": {
@@ -2565,7 +2613,7 @@
             "Ariana Lee (POP-00168)"
           ],
           "source": "world-summary-health",
-          "sourceIndex": 114
+          "sourceIndex": 117
         },
         {
           "score": 80,
@@ -2582,7 +2630,7 @@
             "Sammie Soft (POP-00355)"
           ],
           "source": "world-summary-health",
-          "sourceIndex": 115
+          "sourceIndex": 118
         },
         {
           "score": 45,
@@ -2721,7 +2769,7 @@
             "Javier Robertson (POP-00228)"
           ],
           "source": "season-feel",
-          "sourceIndex": 103
+          "sourceIndex": 106
         },
         {
           "score": 80,
@@ -2734,7 +2782,7 @@
           "hookLine": "FAITH — community_program — East Oakland: Masjid An-Nur Oakland: food pantry serves neighbors in need",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 104
+          "sourceIndex": 107
         },
         {
           "score": 80,
@@ -2747,7 +2795,7 @@
           "hookLine": "FAITH — community_program — Chinatown: Bay Pure Land Buddhist Temple: community health fair hosted",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 105
+          "sourceIndex": 108
         },
         {
           "score": 80,
@@ -2760,7 +2808,7 @@
           "hookLine": "FAITH — community_program — Montclair: Bharat Mandir of the East Bay: after-school tutoring program expands",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 106
+          "sourceIndex": 109
         },
         {
           "score": 80,
@@ -2773,7 +2821,7 @@
           "hookLine": "FAITH — community_program — Grand Lake: Or Hashalom Renewal Community: seniors lunch program marks milestone",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 107
+          "sourceIndex": 110
         },
         {
           "score": 80,
@@ -2786,7 +2834,7 @@
           "hookLine": "FAITH — community_program — Lake Merritt: Lakeshore Unitarian Universalist Fellowship: seniors lunch program marks milestone",
           "citizens": [],
           "source": "season-feel",
-          "sourceIndex": 108
+          "sourceIndex": 111
         }
       ],
       "pointers": [

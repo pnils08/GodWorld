@@ -52,5 +52,6 @@
     "recorded": true,
     "out": "rom ../.config/godworld/.env // tip: ◈ encrypted .env [www.dotenvx.com]\n{\n  \"popId\": \"POP-00011\",\n  \"name\": \"Carmen Delaine\",\n  \"recorded\": true,\n  \"text\": \"filed: Ninety-One Households, One Ledger\"\n}"
   },
-  "ranAt": "2026-10-15T04:05:10.784Z"
+  "ranAt": "2026-10-15T04:05:10.784Z",
+  "dispositionReconciledAt": "2026-10-17T17:00:02.301Z"
 }

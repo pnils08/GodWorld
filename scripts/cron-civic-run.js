@@ -67,6 +67,7 @@ const { readBriefEvidence, promptBrief, filterEvidenceDependentMoves } = require
 const civicSession = require('./civicActionSession');
 const { loadEventView } = require('./civicEventView');
 const { planDutyRota } = require('./civicDutyQueue');
+const { pilotPolicy } = require('./civic47PilotPolicy');
 const { CANONICAL_HOODS } = require('../lib/canonNeighborhoods');
 const civicSeat = require('./civicSeat');
 const { categoryIssue, budgetIssue, reachHoods, renewRowIssue } = require('./civicInterventionValidation');
@@ -3225,19 +3226,24 @@ function ungroundedNumbers(slice, texts, context) {
   }
 }
 
+function civicDutyDay(day, policy) {
+  return day >= 1 && day <= 4 ||
+    !!(policy && policy.duty.eventExceptionDaysUtc.includes(day));
+}
+
 async function runDatawake() {
   const cycle = arg('--cycle', null) || detectCycle();
   const date = arg('--date', new Date().toISOString().slice(0, 10));
   const CIVIC47_PILOT = process.argv.includes('--civic47-pilot');
-  const LIMIT = parseInt(arg('--limit', CIVIC47_PILOT ? '6' : '3'), 10);
+  const policy = pilotPolicy(CIVIC47_PILOT);
+  const LIMIT = parseInt(arg('--limit', policy ? String(policy.duty.maxSeatsPerRun) : '3'), 10);
   const ONLY = arg('--office', null);
   const day = new Date(date + 'T12:00:00Z').getUTCDay();   // 0=Sun..6=Sat
   console.log('Civic DATAWAKE — ' + date + ' (c' + cycle + ')');
   console.log('===================================');
-  // Task 3.2: offices work Sun-Thu; datawakes run Mon-Thu (Sunday is the chain).
-  // Fri/Sat the office-holders are citizens — their wakes belong to the
-  // citizen-loop (whose pool already includes them; no office wake here, ever).
-  if (day === 5 || day === 6 || day === 0) {
+  // Normal office duty remains Mon-Thu. The inactive-by-default civic.47 pilot
+  // may use Fri/Sat only for a fresh major event owed to an elected seat.
+  if (!civicDutyDay(day, policy)) {
     console.log('[datawake] ' + date + ' is ' + ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][day] + ' — no office wakes (Fri-Sat = citizen life days; Sun = decision chain). Exiting clean.');
     return;
   }
@@ -3253,16 +3259,21 @@ async function runDatawake() {
   let dutyPlan = null;
   if (ONLY) {
     const row = civicSeat.resolveOfficeRow(officeMap, ONLY);
-    rotaEntries = row ? [{ office: row, dutyKind: 'regular', eventKeys: [] }] : [];
+    if (row && policy && policy.duty.eventExceptionDaysUtc.includes(day)) {
+      dutyPlan = planDutyRota([row], loadDutyResults(ROOT), loadEventView(ROOT, cycle),
+        date, 1, policy.duty);
+      rotaEntries = dutyPlan.selected;
+    } else rotaEntries = row ? [{ office: row, dutyKind: 'regular', eventKeys: [] }] : [];
   } else if (CIVIC47_PILOT) {
     const eventView = loadEventView(ROOT, cycle);
-    dutyPlan = planDutyRota(datawakeRota(officeMap, 999), loadDutyResults(ROOT), eventView, date, LIMIT);
+    dutyPlan = planDutyRota(datawakeRota(officeMap, 999), loadDutyResults(ROOT), eventView,
+      date, LIMIT, policy.duty);
     rotaEntries = dutyPlan.selected;
   } else {
     rotaEntries = datawakeRota(officeMap, LIMIT).map(office => ({ office, dutyKind: 'regular', eventKeys: [] }));
   }
   if (!rotaEntries.length) {
-    if (CIVIC47_PILOT && !ONLY) {
+    if (CIVIC47_PILOT) {
       console.log('[datawake] no owed seats today; duty queue remains visible in the results record');
       fs.mkdirSync(CIVIC, { recursive: true });
       const resultsFile = path.join(CIVIC, 'datawake_' + date + '.results.json');
@@ -4124,6 +4135,7 @@ if (require.main === module) {
 }
 
 module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, retailWord, ailmentPerception, cleanLines, parseApprovalTable, parseHoodTable, outputContract, datawakeUserPrompt, datawakeStatementText, districtPackRef, weekCarryBlock, spliceWeekCarry, loadWeekCarry, hearingHasPhase, noPhaseCheck, prepTargetDirForHood, validateVoiceJson, ungroundedNumbers, statementNumberCheck, composeChecks,
+  civicDutyDay,
   // civic.38 Task 1 — closed move set (exported for scripts/cron-civic-game.test.js)
   MOVE_TYPES, validateDatawakeMoves, runTickAndRefresh, hoodAuthorityReason, appendMoveLedger, moveLedgerLines, datawakeRecord,
   // civic.38 Task 2 — move ledger fold (Sunday close)

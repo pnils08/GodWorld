@@ -10,9 +10,16 @@ function mondayOf(date) {
 }
 
 function planDutyRota(seats, results, eventView, date, limit = 6, policy = {}) {
+  policy = policy || {};
   const weekStart = mondayOf(date);
   const regularTarget = policy.regularTarget == null ? 2 : policy.regularTarget;
   const eventTarget = policy.eventTarget == null ? 2 : policy.eventTarget;
+  const chiefRegularTarget = policy.chiefRegularTarget == null ? 1 : policy.chiefRegularTarget;
+  const day = new Date(date + 'T12:00:00Z').getUTCDay();
+  const regularDays = policy.regularDaysUtc || [1, 2, 3, 4];
+  const eventExceptionDays = policy.eventExceptionDaysUtc || [];
+  const regularOpen = regularDays.includes(day);
+  const eventOpen = regularOpen || eventExceptionDays.includes(day);
   const inWeek = (results || []).filter(r => r.date >= weekStart && r.date <= date);
   const rows = seats.map(seat => {
     const officeId = String(seat.officeId || '');
@@ -21,7 +28,8 @@ function planDutyRota(seats, results, eventView, date, limit = 6, policy = {}) {
     const doneRegular = mine.filter(r => r.ok && r.dutyKind === 'regular').length;
     const doneEvents = mine.filter(r => r.ok && r.dutyKind === 'event').length;
     const today = mine.some(r => r.date === date);
-    const delivered = new Set(mine.filter(r => r.ok).flatMap(r => r.eventKeys || []));
+    const delivered = new Set((results || []).filter(r => r.office === seat.agentDir && r.ok)
+      .flatMap(r => r.eventKeys || []));
     const dueEvents = (eventView ? eventsForSeat(eventView, seat) : [])
       .filter(e => e.significance === 'major' && e.occurredCycle >= Number(eventView.generation.cycle) - 1 &&
         e.status !== 'cancelled' && !delivered.has(e.eventId + '@' + e.sourceRevision))
@@ -29,16 +37,15 @@ function planDutyRota(seats, results, eventView, date, limit = 6, policy = {}) {
     return { seat, elected, doneRegular, doneEvents, attempts: mine.length, today, dueEvents };
   });
   const eligible = rows.filter(r => !r.today);
-  const regular = eligible.filter(r => r.doneRegular < (r.elected ? regularTarget : 1))
+  const regular = (regularOpen ? eligible : []).filter(r => r.doneRegular < (r.elected ? regularTarget : chiefRegularTarget))
     .sort((a, b) => a.doneRegular - b.doneRegular || a.attempts - b.attempts ||
       a.seat.agentDir.localeCompare(b.seat.agentDir));
-  const event = eligible.filter(r => r.dueEvents.length && r.doneEvents < eventTarget)
+  const event = (eventOpen ? eligible : []).filter(r => r.elected && r.dueEvents.length && r.doneEvents < eventTarget)
     .sort((a, b) => a.doneEvents - b.doneEvents || a.attempts - b.attempts ||
       a.seat.agentDir.localeCompare(b.seat.agentDir));
-  const dayIndex = (new Date(date + 'T12:00:00Z').getUTCDay() + 6) % 7;
-  const remainingDutyDays = Math.max(0, 4 - dayIndex);
+  const remainingDutyDays = regularDays.filter(d => d >= day).length;
   const owedRegular = rows.reduce((n, r) => n + Math.max(0,
-    (r.elected ? regularTarget : 1) - r.doneRegular), 0);
+    (r.elected ? regularTarget : chiefRegularTarget) - r.doneRegular), 0);
   const spareSlots = remainingDutyDays * limit - owedRegular;
   const reserve = event.length && spareSlots > 0 ? 1 : 0;
   const selected = [];
@@ -56,7 +63,7 @@ function planDutyRota(seats, results, eventView, date, limit = 6, policy = {}) {
     selected.push({ office: r.seat, dutyKind: 'regular', eventKeys: r.dueEvents.slice() });
   }
   return { weekStart, selected, owed: rows.map(r => ({ office: r.seat.agentDir,
-    regular: Math.max(0, (r.elected ? regularTarget : 1) - r.doneRegular),
+    regular: Math.max(0, (r.elected ? regularTarget : chiefRegularTarget) - r.doneRegular),
     event: r.dueEvents.length && r.doneEvents < eventTarget ? r.dueEvents : [] })) };
 }
 

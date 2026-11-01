@@ -5,8 +5,9 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { planDutyRota } = require('./civicDutyQueue');
+const { pilotPolicy } = require('./civic47PilotPolicy');
 const { normalizeEnvelope, actionLines, appendSession } = require('./civicActionSession');
-const { validateDatawakeMoves } = require('./cron-civic-run');
+const { validateDatawakeMoves, civicDutyDay } = require('./cron-civic-run');
 
 const seats = [
   { officeId: 'MAYOR-01', agentDir: 'syn-mayor', district: 'citywide' },
@@ -15,6 +16,15 @@ const seats = [
   { officeId: 'CHIEF-POLICE', agentDir: 'syn-chief', district: 'citywide' },
 ];
 const noEvents = { generation: { cycle: 120 }, events: [] };
+assert.strictEqual(pilotPolicy(false), null);
+assert.strictEqual(pilotPolicy(true).version, 'CIVIC47-PILOT-PROPOSAL/1');
+assert.strictEqual(pilotPolicy(true).duty.regularTarget, 2);
+assert.strictEqual(pilotPolicy(true).duty.eventTarget, 2);
+assert.strictEqual(civicDutyDay(5, null), false);
+assert.strictEqual(civicDutyDay(6, null), false);
+assert.strictEqual(civicDutyDay(5, pilotPolicy(true)), true);
+assert.strictEqual(civicDutyDay(6, pilotPolicy(true)), true);
+assert.strictEqual(civicDutyDay(0, pilotPolicy(true)), false);
 const results = [];
 for (const date of ['2026-11-02', '2026-11-03', '2026-11-04', '2026-11-05']) {
   const plan = planDutyRota(seats, results, noEvents, date, 6);
@@ -33,6 +43,18 @@ const eventView = { generation: { cycle: 120 }, events: [{
 const eventPlan = planDutyRota(seats, [], eventView, '2026-11-02', 6);
 assert(eventPlan.selected.some(x => x.office.officeId === 'MAYOR-01' && x.eventKeys.includes('EV-syn@rev1')));
 assert(eventPlan.selected.some(x => x.office.officeId === 'COUNCIL-D2' && x.eventKeys.includes('EV-syn@rev1')));
+const friday = planDutyRota(seats, [], eventView, '2026-11-06', 6, pilotPolicy(true).duty);
+assert(friday.selected.length > 0);
+assert(friday.selected.every(x => x.dutyKind === 'event' && x.office.officeId !== 'CHIEF-POLICE'));
+assert.strictEqual(friday.owed.find(x => x.office === 'syn-mayor').regular, 2);
+assert.strictEqual(planDutyRota(seats, [], noEvents, '2026-11-06', 6,
+  pilotPolicy(true).duty).selected.length, 0);
+assert.strictEqual(planDutyRota(seats, [], eventView, '2026-11-08', 6,
+  pilotPolicy(true).duty).selected.length, 0);
+const nextWeek = planDutyRota(seats, [{ date: '2026-11-06', office: 'syn-d2',
+  dutyKind: 'event', eventKeys: ['EV-syn@rev1'], ok: true }], eventView,
+  '2026-11-09', 6, pilotPolicy(true).duty);
+assert(!nextWeek.selected.some(x => x.office.agentDir === 'syn-d2' && x.eventKeys.includes('EV-syn@rev1')));
 const failed = [{ date: '2026-11-02', office: 'syn-d1', dutyKind: 'regular', ok: false }];
 for (const date of ['2026-11-03', '2026-11-04', '2026-11-05']) {
   const plan = planDutyRota(seats, failed, noEvents, date, 6);

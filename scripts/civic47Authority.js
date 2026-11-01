@@ -29,7 +29,7 @@ function treasuryBalance(rows, cycle) {
 }
 
 function classifyAction(action, office, policy) {
-  if (!policy || !policy.version || !finiteMoney(policy.localEventMaxCost) ||
+  if (!policy || policy.enabled !== true || !policy.version || !finiteMoney(policy.localEventMaxCost) ||
       !finiteMoney(policy.localServiceMaxCost) || !finiteMoney(policy.citywideMaxCost) ||
       !Number.isInteger(policy.localEventMaxCycles) || policy.localEventMaxCycles < 1)
     return { route: 'hold', reason: 'delegated-authority-policy-unavailable' };

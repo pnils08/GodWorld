@@ -2,8 +2,9 @@
 
 const assert = require('assert');
 const { activeHolder, treasuryBalance, classifyAction, planReservations, hash } = require('./civic47Authority');
+const { pilotPolicy } = require('./civic47PilotPolicy');
 
-const policy = { version: 'SYN-POLICY/1', localEventMaxCost: 100,
+const policy = { version: 'SYN-POLICY/1', enabled: true, localEventMaxCost: 100,
   localServiceMaxCost: 80, citywideMaxCost: 150, localEventMaxCycles: 2 };
 const office = { officeId: 'COUNCIL-D2', district: 'D2', popid: 'POP-SYN01' };
 const mayor = { officeId: 'MAYOR-01', district: 'citywide', popid: 'POP-SYN02' };
@@ -25,6 +26,7 @@ assert.strictEqual(classifyAction({ ...event, hoods: ['Downtown', 'Fruitvale'] }
 assert.strictEqual(classifyAction({ ...event, hoods: ['Downtown', 'Fruitvale'],
   scope: 'citywide' }, mayor, policy).route, 'delegated');
 assert.strictEqual(classifyAction(event, office, null).route, 'hold');
+assert.strictEqual(classifyAction(event, office, pilotPolicy(true).delegation).route, 'hold');
 const first = planReservations([
   { actionId: 'SYN-A', office, action: event },
   { actionId: 'SYN-B', office, action: { ...event, cost: 60 } },

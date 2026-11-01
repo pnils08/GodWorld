@@ -67,7 +67,6 @@ const { readBriefEvidence, promptBrief, filterEvidenceDependentMoves } = require
 const civicSession = require('./civicActionSession');
 const { loadEventView } = require('./civicEventView');
 const { planDutyRota } = require('./civicDutyQueue');
-const civic47Ballots = require('./civic47Ballots');
 const { CANONICAL_HOODS } = require('../lib/canonNeighborhoods');
 const civicSeat = require('./civicSeat');
 const { categoryIssue, budgetIssue, reachHoods, renewRowIssue } = require('./civicInterventionValidation');
@@ -1688,20 +1687,6 @@ async function runHearing() {
     }));
   }
   cityHallLedger.save(ledger, ROOT);
-  if (process.argv.includes('--civic47-pilot')) {
-    const sessions = Object.fromEntries(initiatives
-      .filter(i => Number(i.voteCycle) === Number(cycle) && i.id)
-      .map(i => [i.id, { sessionId: 'VOTE-' + cycle + '-' + i.id,
-        initiativeId: i.id, cycle: Number(cycle), body: i.domain === 'education' ? 'school-board' : 'council' }]));
-    const voices = Object.fromEntries(results.filter(r => r.seat).map(r => [r.seat.officeId,
-      { ok: r.ok, voice: r.voiceJson || null }]));
-    const batch = civic47Ballots.collectBallots(roster.map(r => {
-      const seat = civicSeat.councilSeats(officeMap).find(x => x.officeId === r.officeId);
-      return { officeId: r.officeId, popid: seat && seat.popid || null,
-        status: r.status || r.seatStatus || 'active' };
-    }), voices, cycle, sessions);
-    fs.writeFileSync(path.join(CIVIC, 'ballot-intent_c' + cycle + '.json'), JSON.stringify(batch, null, 2) + '\n');
-  }
   fs.writeFileSync(path.join(CIVIC, 'hearing_c' + cycle + '.json'), JSON.stringify({
     stage: 'hearing', cycle: Number(cycle), results, ranAt: new Date().toISOString(),
   }, null, 2));
@@ -1772,17 +1757,11 @@ async function hearingSeatPrompt(dir, cycle, officeMap, initiatives, opts) {
   const slug = voiceSlug(dir);
   const packet = fs.readFileSync(path.join(root, 'output', 'cron-civic', 'packets', dir + '_pending_decisions_c' + cycle + '.md'), 'utf8');
   const wallInj = await (opts.wallInject || positionWallInject)(officeMap, dir);
-  const civic47Pilot = opts.civic47Pilot === true || process.argv.includes('--civic47-pilot');
-  const voteSessions = (initiatives || []).filter(i => Number(i.voteCycle) === Number(cycle) && i.id && i.domain !== 'education')
-    .map(i => ({ initiativeId: i.id, sessionId: 'VOTE-' + cycle + '-' + i.id }));
   const user = [
     'YOUR PENDING DECISIONS PACKET (cycle ' + cycle + ') — the Mayor\'s AGENDA is in the packet; react as yourself.',
     '', packet, wallInj || '',
     'Do NOT emit trackerUpdates.ImplementationPhase. That is the Mayor\'s gavel after you speak.',
     outputContract(slug, cycle, initiatives, { forbidPhase: true }),
-    civic47Pilot && voteSessions.length
-      ? 'PILOT BALLOTS: Your JSON must also include "ballots":[{"initiativeId":"INIT-...","sessionId":"VOTE-...","vote":"YES|NO|ABSTAIN"}]. Current council sessions: ' + JSON.stringify(voteSessions) + '. Each vote is your own explicit choice. If no ballot is returned after a delivered opportunity, it is a recorded nonresponse at the deadline.'
-      : '',
   ].join('\n');
   return {
     dir, slug, model: officeModel(officeMap, dir), user,
@@ -2029,9 +2008,6 @@ async function runMayorGavel() {
     '',
     'This is the GAVEL. You may now stamp trackerUpdates (ImplementationPhase / MayoralAction) for initiatives that moved. Hearing voices do not stamp.',
     outputContract('mayor_gavel', cycle, initiatives),
-    process.argv.includes('--civic47-pilot')
-      ? 'PILOT EXECUTIVE DECISIONS: Your JSON must also include "executiveDecisions":[{"initiativeId":"INIT-...","decision":"sign|veto"}] for each council-passed initiative on your current packet. A missing choice remains unresolved; it is not a signature or veto.'
-      : '',
   ].join('\n');
   // Transcript is included in hay — a hearing figure was already checked when
   // spoken, so the gavel citing it back is legitimate, not a new fabrication.
@@ -2053,15 +2029,6 @@ async function runMayorGavel() {
   let ledger = cityHallLedger.loadOrCreate(cycle, ROOT);
   ledger = cityHallLedger.writeGavel(ledger, mayorRow || { officeId: 'MAYOR-01', holder: 'Avery Santana', popid: 'POP-00034' }, r.json, outPath, cityHallLedger.gavelPhases(r.json));
   cityHallLedger.save(ledger, ROOT);
-  if (process.argv.includes('--civic47-pilot')) {
-    const batch = readJson(path.join(CIVIC, 'ballot-intent_c' + cycle + '.json'));
-    const ids = Object.keys(batch && batch.sessions || {}).filter(id => batch.sessions[id].body === 'council');
-    const decisions = ids.map(id => civic47Ballots.extractMayorDecision(mayorRow, r.json, cycle, id));
-    fs.writeFileSync(path.join(CIVIC, 'mayor-decision-intent_c' + cycle + '.json'),
-      JSON.stringify({ schema: 'CIVIC-MAYOR-BATCH/1', cycle: Number(cycle),
-        sourceBallotHash: batch && batch.sourceHash || null, decisions,
-        authoritative: false }, null, 2) + '\n');
-  }
   fs.writeFileSync(path.join(CIVIC, 'mayor_gavel_c' + cycle + '.json'), JSON.stringify({
     stage: 'mayor-gavel', cycle: Number(cycle), model, output: outPath, reused: !!r.reused,
     statements: r.json.statements.length, attempts: r.attempts, usage: r.usage,

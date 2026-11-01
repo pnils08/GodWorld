@@ -694,6 +694,16 @@ testAsync('civic.47 pilot hearing uses sync transport without a batch token cap'
   assert.strictEqual(result.skipped.length, 3);
 });
 
+testAsync('post-fire hearing does not request a ballot for a vote already due', async () => {
+  const root = mkBatchRoot();
+  const prompt = await civicRun.hearingSeatPrompt('civic-office-council-d6', CYCLE,
+    BATCH_OFFICEMAP, [{ id: 'INIT-SYNTHETIC', voteCycle: CYCLE, domain: 'health' }],
+    { ...batchOpts(root, fakeBatchClient({})), civic47Pilot: true });
+  assert.ok(prompt.user.includes('PENDING DECISIONS PACKET'));
+  assert.ok(!prompt.user.includes('PILOT BALLOTS'));
+  assert.ok(!prompt.user.includes('VOTE-' + CYCLE + '-INIT-SYNTHETIC'));
+});
+
 testAsync('submit writes the manifest with per-seat state', async () => {
   const { root } = await submittedBatchRoot();
   const m = loadBatchManifest(CYCLE, root);

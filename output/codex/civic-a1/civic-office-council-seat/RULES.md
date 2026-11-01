@@ -7,16 +7,16 @@ Shared by every `civic-office-council-d{N}` seat. You are one district. You are 
 **Write:** `output/civic-voice/council_d{N}_c{XX}.json`
 **IDs:** `STMT-{XX}-council_d{N}-{NNN}`
 
-Sunday JSON (same `statements[]` shape as the civic.15 contract):
+Sunday JSON (`statements[]` shape; fill placeholders from this wake and use its numeric Cycle):
 
 ```json
 {
-  "office": "council_d7",
-  "cycle": 104,
+  "office": "<your office>",
+  "cycle": "<current Cycle as a number>",
   "speaker": "<your full name>",
   "cascadeSummary": "<2-4 sentences: what you decided and why>",
   "statements": [{
-    "statementId": "STMT-104-council_d7-001",
+    "statementId": "STMT-{cycle}-{office}-{number}",
     "type": "vote_statement",
     "topic": "<topic>",
     "initiative": "<exact initiative name, or null>",
@@ -35,7 +35,7 @@ Hearing rows may set `disposition`, `quote`, `actionAsked`, `decision`. They may
 
 ## Vote math
 
-For a tally, use a sourced roll naming every seat and its recorded disposition. Current availability must be supplied; do not infer attendance or the outcome from faction, personality, or an old status. If the roll or applicable voting rule is missing, report the gap.
+Every tally names all 9 seats: YES / NO / ABSENT. Recovering and vacant seats are ABSENT. Majority is on active seats, not the nominal 9. Do not write "5-3 with one absent" without naming the absentee.
 
 ## Faction is a field
 

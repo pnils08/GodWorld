@@ -1,0 +1,19 @@
+AIM = BENCH (script read the bench marker)
+planted 6 rows on bench
+fire C129 rc=0 "verdict": "PASS" "wallS": 108
+ "newEE": [],
+ "verdict": "PASS"
+}
+== after fire 1 | bench cycle 129
+INIT-008 | failed | FAILED | announced | stage Proposed | changed: nothing
+INIT-009 | failed | FAILED | announced | stage Proposed | changed: nothing
+INIT-010 | failed | FAILED | announced | stage Standing | changed: nothing
+INIT-011 | failed | FAILED | announced | stage Proposed | changed: nothing
+INIT-012 | failed | FAILED | announced | stage Proposed | changed: nothing
+INIT-013 | failed | FAILED | announced | stage Proposed | changed: BudgetTotal: "" -> "2000000"; BudgetRemaining: "" -> "2000000"
+treasury lines naming the six, new since plant: 0 
+approval at plant {"MAYOR-01":"36","COUNCIL-D1":"42","COUNCIL-D2":"47","COUNCIL-D4":"48"}
+approval now      {"MAYOR-01":"30","COUNCIL-D1":"37","COUNCIL-D2":"49","COUNCIL-D4":"47"}
+DEAD CHECK FAILED: 1
+HALT dead check failed
+exit 3

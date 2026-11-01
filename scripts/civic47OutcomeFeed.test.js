@@ -5,6 +5,8 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const { buildOutcomeFeed } = require('./civic47OutcomeFeed');
+const { buildLocal } = require('./buildCivicOutcomeFeed');
+const { makeBrief } = require('./civicBrief');
 const { loadCycleCivicEntries } = require('./buildCivicDomainSlice');
 
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'civic47-outcome-'));
@@ -50,5 +52,23 @@ try {
   assert(entries.some(e => e.actionId === 'CA-SYN1' && e.ref === 'Civic_Action_Ledger:CA-SYN1'));
   fs.writeFileSync(path.join(dir, 'outcome_feed_c120.json'), JSON.stringify({ ...feed, actions: [] }));
   assert(loadCycleCivicEntries(120, root).some(e => e.actionId === 'CA-SYN1'), 'stale saved feed never hides journal source');
+  fs.writeFileSync(path.join(beats, 'meta.json'), JSON.stringify({ cycle: 121 }));
+  fs.writeFileSync(path.join(dir, 'reactions_c122.jsonl'), JSON.stringify({
+    ActionId: 'CA-SYN1', POPID: 'POP-SYN02', ExperienceId: 'EXP-SYN1',
+    ReactionId: 'REACT-FUTURE', Stance: 'positive',
+  }) + '\n');
+  const nextCycle = buildLocal(root, 121);
+  assert.strictEqual(nextCycle.officialFeedback[0].sampleCount, 1,
+    'a saved C120 reaction remains in the C121 brief');
+  assert.strictEqual(nextCycle.officialFeedback[0].reactions[0].reactionId, 'REACT-SYN1',
+    'a future Cycle receipt is not read early');
+  assert.strictEqual(nextCycle.officialFeedback[0].publishedCoverage.length, 1);
+  const nextBrief = makeBrief({ root, cycle: 121,
+    office: { officeId: 'COUNCIL-D2', district: 'D2' },
+    pack: { game: { board: [], lastMove: { available: true, moves: [] } } },
+    audit: { snapshots: { Neighborhood_Map: [] } },
+  }).brief;
+  assert.strictEqual(nextBrief.sections.response.committedResponse[0].reactions[0].reactionId,
+    'REACT-SYN1', 'the official actually sees the saved prior-Cycle response');
   console.log('civic47 outcome feed: ok');
 } finally { fs.rmSync(root, { recursive: true, force: true }); }

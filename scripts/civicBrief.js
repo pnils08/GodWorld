@@ -88,8 +88,7 @@ function makeBrief({ root, cycle, office, pack, audit }) {
       .filter(m => m.moveId).map(m => [m.moveId, m])),
   };
   const currentOutcomes = loadOutcomeFeed(root, cycle);
-  const previousOutcomes = loadOutcomeFeed(root, Number(cycle) - 1);
-  const outcomeFeeds = [currentOutcomes, previousOutcomes].filter(x => x.available);
+  const outcomeFeeds = [currentOutcomes].filter(x => x.available);
   const myOutcomes = outcomeFeeds.flatMap(x => x.officialFeedback || [])
     .filter(x => x.officeId === office.officeId);
   for (const outcome of myOutcomes) evidence.prior[outcome.actionId] = outcome;

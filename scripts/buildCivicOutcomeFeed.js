@@ -22,6 +22,16 @@ function readRows(file, required = false) {
   });
 }
 
+function readReceiptsThroughCycle(dir, stem, cycle) {
+  if (!fs.existsSync(dir)) return null;
+  const files = fs.readdirSync(dir).flatMap(name => {
+    const match = new RegExp('^' + stem + '_c([1-9][0-9]*)\\.jsonl$').exec(name);
+    return match && Number(match[1]) <= cycle ? [{ name, cycle: Number(match[1]) }] : [];
+  }).sort((a, b) => a.cycle - b.cycle || a.name.localeCompare(b.name));
+  if (!files.length) return null;
+  return files.flatMap(file => readRows(path.join(dir, file.name), true));
+}
+
 function buildLocal(root, cycle) {
   if (!Number.isInteger(Number(cycle)) || Number(cycle) < 1) throw new Error('positive Cycle required');
   const c = Number(cycle);
@@ -30,9 +40,12 @@ function buildLocal(root, cycle) {
   if (Number(meta.cycle) !== c) throw new Error('beat dump Cycle mismatch');
   const rows = readRows(path.join(beats, 'Civic_Action_Ledger.jsonl'), true);
   const local = path.join(root, 'output', 'cron-civic');
-  const experiences = readRows(path.join(local, 'experiences_c' + c + '.jsonl'));
-  const reactions = readRows(path.join(local, 'reactions_c' + c + '.jsonl'));
-  const publications = readRows(path.join(local, 'published_c' + c + '.jsonl'));
+  // The authoritative action journal is cumulative. Saved local receipt
+  // exports must be cumulative here too, or a response vanishes from the
+  // official's next brief when the Cycle advances without a new reaction.
+  const experiences = readReceiptsThroughCycle(local, 'experiences', c);
+  const reactions = readReceiptsThroughCycle(local, 'reactions', c);
+  const publications = readReceiptsThroughCycle(local, 'published', c);
   const feed = buildOutcomeFeed(rows, experiences, reactions, publications, c);
   if (!feed.available) throw new Error(feed.reason + ': ' + (feed.issues || []).join(', '));
   return feed;
@@ -57,4 +70,4 @@ function main(args = process.argv.slice(2)) {
 if (require.main === module) {
   try { main(); } catch (e) { console.error(e.message); process.exitCode = 1; }
 }
-module.exports = { readRows, buildLocal, main };
+module.exports = { readRows, readReceiptsThroughCycle, buildLocal, main };

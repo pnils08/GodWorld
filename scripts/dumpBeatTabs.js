@@ -34,6 +34,7 @@
 require('/root/GodWorld/lib/env');  // GODWORLD_SHEET_ID + GOOGLE_APPLICATION_CREDENTIALS
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const sheets = require('../lib/sheets');
 const { livedEventsFrom, LIVED_WINDOW } = require('../lib/wakePerception'); // pipeline.73 step 2 — the wake's own event set
 
@@ -81,6 +82,9 @@ const OPTIONAL_TABS = [
   'Judicial_Ledger',          // Rachel / Carmen — every case: charge, status, outcome, cycles held
   'Care_Justice_Census',      // Rachel / Lila / Maria — per-hood trail: intakes, occupancy, beds (tracked vs other residents)
 ];
+// civic.47 pilot: the applied-action journal is a proposed new tab. Do not
+// query it on ordinary dumps until Claude has installed the exact schema.
+const CIVIC47_PILOT_TABS = ['Civic_Action_Ledger'];
 
 const args = process.argv.slice(2);
 const quiet = args.includes('--quiet');
@@ -173,11 +177,13 @@ async function main() {
   // soft skip. Optional (lazy-created) tabs absent from the sheet dump empty.
   const titles = new Set((await sheets.listSheets()).map(s => s.title));
   const missing = BEAT_TABS.filter(t => !titles.has(t));
+  if (args.includes('--civic47-pilot')) missing.push(...CIVIC47_PILOT_TABS.filter(t => !titles.has(t)));
   if (missing.length) {
     console.error('dumpBeatTabs: ABORT — tab(s) missing from the live sheet: ' + missing.join(', '));
     process.exit(1);
   }
-  const ALL_TABS = BEAT_TABS.concat(OPTIONAL_TABS);
+  const ALL_TABS = BEAT_TABS.concat(OPTIONAL_TABS,
+    args.includes('--civic47-pilot') ? CIVIC47_PILOT_TABS : []);
 
   // Read everything first; write nothing until every read succeeded, so a
   // mid-run failure never leaves a half-rotated dump.
@@ -219,12 +225,16 @@ async function main() {
   files.LifeHistory_Log = lifeRows.map(r => JSON.stringify(r));
   files.Lived_Events = livedRows.map(r => JSON.stringify(r));
   const counts = Object.fromEntries(Object.keys(files).map(k => [k, files[k].length])); // LifeHistory_Log = the window rows written
+  const sourceHashes = Object.fromEntries(Object.keys(files).map(k => [k,
+    crypto.createHash('sha256').update(files[k].length ? files[k].join('\n') + '\n' : '').digest('hex')]));
   const advancing = priorCycle != null && stamp > priorCycle;
   const meta = {
     source: 'beat tabs (' + ALL_TABS.length + ') + LifeHistory_Log window (Cycle ' + (stamp - LIVED_WINDOW) + '–' + stamp + ') + Lived_Events (derived)',
     cycle: stamp,
     prevCycle: advancing ? priorCycle : (readMeta(path.join(PREV_DIR, 'meta.json')) || {}).cycle ?? null,
     rows: counts,
+    sourceHashes,
+    generationHash: crypto.createHash('sha256').update(JSON.stringify({ cycle: stamp, sourceHashes })).digest('hex'),
     generatedAt: new Date().toISOString(),
     generatedBy: 'scripts/dumpBeatTabs.js',
     note: 'pipeline.68 Task 1 — beat-tab dump for the slice builders. Stable filenames, overwritten each cycle; prior cycle kept in prev/. Published as one generation (directory swap).',

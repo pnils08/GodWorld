@@ -130,7 +130,7 @@ test('F7 stalled phase takes precedence over every recognized Stage', () => {
   }
   assert.match(slice.boardNeedText({Status:'proposed',VoteCycle:''}), /petition-pending/);
 });
-test('F8 prompt caps narrative blocks without dropping legal IDs or mutating full pack evidence', () => {
+test('F8 prompt omits raw history without dropping legal IDs or mutating full pack evidence', () => {
   const entry = {snippet:'SYNTHETIC-RAW-HISTORY'.repeat(500)};
   const game = {boardIds:['INIT-SYNTHETIC-1','INIT-SYNTHETIC-2'],board:[entry],boardText:'SYNTHETIC board',
     lastMove:{text:'SYNTHETIC outcome',moves:Array(1000).fill(entry)},
@@ -140,7 +140,6 @@ test('F8 prompt caps narrative blocks without dropping legal IDs or mutating ful
   const prompt = run.datawakeUserPrompt(pack, '', office);
   assert.equal(prompt.includes('SYNTHETIC-RAW-HISTORY'), false);
   assert.match(prompt, /INIT-SYNTHETIC-2/);
-  assert(prompt.length < 6000);
   assert.equal(game.petitionPool.complaints.length,1000);
   assert.equal(game.categories.text.length,5000);
 });
@@ -155,7 +154,7 @@ test('F8 board proposals show measured condition counts (health)', () => workspa
   assert.equal(game.conditions.available,true);
   assert.equal(game.conditions.proposals[0].counts.inCareCitizens,1);
   assert.equal(game.conditions.proposals[0].support.cleared,false);
-  assert.match(game.conditions.text,/support-band-unset/);
+  assert.match(game.conditions.text,/support-band-unavailable/);
 }));
 test('R3 unanswered directives persist, answers bind Cycle and seat, and a second accepted answer is refused', () => workspace((root, write) => {
   const directive = (seat, text) => '## SYNTHETIC demand\n- **Agent:** `.claude/agents/'+seat+'/`\n- **Address:** '+text+'\n';

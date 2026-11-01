@@ -12,6 +12,7 @@ const path = require('path');
 const { getNeighborhoodsForDistricts } = require('../lib/districtMap');
 const trackerSnapshot = require('./initiativeTrackerSnapshot');
 const { categoryIssue, renewRowIssue } = require('./civicInterventionValidation');
+const { makeBrief } = require('./civicBrief');
 
 const ROOT = path.join(__dirname, '..');
 const CONSTITUENT_CAP = 8;
@@ -818,13 +819,12 @@ function boardStageView(row, context) {
   let text;
   if (phase === 'stalled') text = 'stalled — one work move revives it';
   else if (petitionPending) {
-    // Mirrors civicPetitions.js's countPetition reason logic exactly (health ->
-    // band-gated, else -> domain-rules-deferred; safety joined deferred in Job 2) without calling it — the board must not tell an agent "signatures
-    // move it" for a domain call-vote considers open (found in adversarial
-    // review of 51fdee28, 2026-09-22; keep this in sync if that logic changes).
+    // The board does not know whether a petition band has been configured.
+    // Describe both paths accurately and leave the counter to decide which is
+    // open. An unset health band no longer traps a valid proposal.
     const domain = String(row.PolicyDomain || '').trim().toLowerCase();
     text = domain === 'health'
-      ? 'petition-pending — signatures move it to a vote'
+      ? 'petition-pending — eligible for call-vote if no petition band; otherwise condition gate'
       : 'petition-pending — no signature rule; eligible for call-vote';
   } else text = String(row.NextScheduledAction || '').trim() || 'advance or hold';
   return {requirement:null,metricEvidence:null,text};
@@ -1418,7 +1418,7 @@ function buildPack(opts) {
   // confrontation. boardIds feed the datawake move gate (Task 1 step 2).
   const game = buildGameBlocks({ root, cycle, office, officeMap, hoods, audit });
 
-  return {
+  const pack = {
     v: 'OFFICE/1',
     team: 'civic-office',
     empty: !!turn.empty,
@@ -1488,6 +1488,10 @@ function buildPack(opts) {
       dest: 'office wiki (civic.16) then next Sunday city-hall packet',
     },
   };
+  const situation = makeBrief({ root, cycle, office, pack, audit });
+  pack.brief = situation.brief;
+  pack._briefEvidence = situation.evidence;
+  return pack;
 }
 
 function packSlug(actor) {

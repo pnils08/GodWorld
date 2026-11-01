@@ -102,7 +102,7 @@ test('support threshold uses hood population, not tracked people; never inferred
   const r = countPetition(proposal('health'), d, { supportBand: 0.01, hardshipBand: 0.9 });
   assert.equal(r.support.requiredCount, 10);
   assert.equal(r.support.cleared, false);
-  assert.equal(countPetition(proposal('health'), d).support.reason, 'support-band-unset');
+  assert.equal(countPetition(proposal('health'), d).support.reason, 'support-band-unavailable');
 });
 test('bad care rows are printed warnings, scoped to the district and never a citywide veto', () => {
   const d = fixture(), base = d.Hospital_Ledger[0];
@@ -223,6 +223,7 @@ test('beats dump treats Reflection_Intake as optional, including empty and prese
         if (name.endsWith('/lib/env')) return {};
         if (name === 'fs') return fakeFs;
         if (name === 'path') return path;
+        if (name === 'crypto') return require('crypto');
         if (name === '../lib/wakePerception') return require('../lib/wakePerception');
         if (name === '../lib/sheets') return {
           async listSheets() { return required.concat(present ? ['Reflection_Intake'] : []).map(title => ({ title })); },

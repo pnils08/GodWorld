@@ -1,0 +1,27 @@
+diff --git a/.claude/skills/city-hall/SKILL.md b/.claude/skills/city-hall/SKILL.md
+--- a/.claude/skills/city-hall/SKILL.md
++++ b/.claude/skills/city-hall/SKILL.md
+@@ -32,7 +32,11 @@ Less data, stronger identity, one clear decision. Bounded input — data is chao
+ - "No decision" is not an option for any voice. They commit or the story moves without them.
+ - Show the user what each voice decided before applying tracker updates.
+ - USER APPROVAL GATE before writing to the Initiative_Tracker sheet.
+ 
++## civic.47 pilot boundary
++
++The existing Sunday voice and tracker path remains authoritative until the approved civic.47 schema, authority policy and engine reader are installed together. `ballot-intent_c{XX}.json` and `mayor-decision-intent_c{XX}.json` are local proposals; their existence does not prove a vote, signature, veto, funded initiative or world effect. On an approved civic.47 pilot turn, a reasoned no-op is a valid official choice and must be recorded as such. A seat cannot be charged for an ignored duty until its evidence, authority and completed opportunity are verified. The rule above requiring a decision describes the legacy city-hall cascade only.
++
+ ## Agent Coordination (from Paperclip patterns)
+ 
+ **Heartbeat model:** Voices don't run as long sessions. They wake, receive their decision, produce output, done. If a voice has no pending decision this cycle, it doesn't run. No idle agents.
+diff --git a/.claude/skills/run-cycle/SKILL.md b/.claude/skills/run-cycle/SKILL.md
+--- a/.claude/skills/run-cycle/SKILL.md
++++ b/.claude/skills/run-cycle/SKILL.md
+@@ -240,6 +240,8 @@ Plan: `docs/archive/plans/2026-05-03-run-cycle-gap-log-surface.md` (Phase 2 do
+ 
+ Nothing downstream is hand-run. The artifacts this chain leaves on disk are read by the scheduled jobs in `crontab -l`:
+ 
++The civic.47 `Civic_Action_Ledger` beat export is conditional on an approved, installed sheet schema and an explicit pilot flag. The ordinary beat dump and current civic crons do not enable that flag. Before switching a schedule, verify the journal readback, the binding ballot reader, resource reservation recovery, the approved authority policy and the composed sandbox receipt; a local intent or dry run cannot stand in for those checks.
++
+ | Artifact | Cron consumers |
+ |---|---|
+ | `output/world_summary_c{XX}.md` | `cron-desk-run` (06:15 angle / 13:15 report / 18:15 write, Mon–Fri), `cron-desk-writer`, `cron-civic-run` (Mon–Thu datawake, Sunday chain), `cron-saturday-run`, `notebooklmDailyNews` (08:00), `newsroom-digest` (06:00), every `scripts/build*Slice.js`, `lib/mags.js` (Discord), `lib/getCurrentCycle.js` |

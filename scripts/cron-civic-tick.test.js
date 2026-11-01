@@ -415,9 +415,9 @@ test('Job 2: a safety row (no Delivering lever) is callable to a vote — never 
   assert.strictEqual(r, null, r);
 });
 
-test('the hatch never opens where the band mechanism exists (health, band unset)', () => {
+test('health with no configured petition band can use the explicit call-vote path', () => {
   const r = callVoteEligibility('INIT-010', MAYOR, cvCtx(MAYOR));
-  assert.ok(/^call-vote-not-a-deferred-domain/.test(r) && /support-band-unset/.test(r), r);
+  assert.strictEqual(r, null, r);
 });
 
 test('validator integration: call-vote accepts a legal move, rejects an off-board row', () => {
@@ -442,6 +442,9 @@ function mkCallVoteRoot(rows) {
   fs.mkdirSync(path.join(root, 'output', 'beats'), { recursive: true });
   beats('Initiative_Tracker', rows);
   beats('Neighborhood_Demographics', CV_DATA.Neighborhood_Demographics);
+  beats('Hospital_Ledger', CV_DATA.Hospital_Ledger);
+  beats('Household_Ledger', []);
+  beats('Reflection_Intake', []);
   beats('Crime_Metrics', CV_DATA.Crime_Metrics);
   return root;
 }
@@ -483,13 +486,13 @@ test('callVoteSweep skips a row the world already moved past', () => {
   assert.ok(!fs.existsSync(path.join(root, 'output', 'city-civic-database', 'initiatives', 'init-003')));
 });
 
-test('callVoteSweep skips when the counter no longer says domain-rules-deferred', () => {
-  const root = mkCallVoteRoot([CV_ROWS[3]]); // INIT-010 health, band unset → support-band-unset, not deferred
+test('callVoteSweep schedules health when no petition band is configured', () => {
+  const root = mkCallVoteRoot([CV_ROWS[3]]); // INIT-010 health, band unset → explicit legislative path
   const move = { ...CV_MOVE, payload: { initiativeId: 'INIT-010' } };
   fs.mkdirSync(path.join(root, 'output', 'cron-civic', 'moves'), { recursive: true });
   fs.writeFileSync(path.join(root, 'output', 'cron-civic', 'moves', 'moves_c' + (CYCLE - 1) + '.jsonl'), JSON.stringify(move) + '\n');
   const out = callVoteSweep(root, CYCLE);
-  assert.deepStrictEqual(out, { filed: 1, scheduled: 0 });
+  assert.deepStrictEqual(out, { filed: 1, scheduled: 1 });
 });
 
 // ────────────────────────────────────────────────────────────────────────────

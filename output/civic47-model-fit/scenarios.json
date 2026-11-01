@@ -1,0 +1,126 @@
+{
+  "schema": "civic47-scenarios/1",
+  "syntheticOnly": true,
+  "provenance": "Hand-authored synthetic test data. No citizen, POPID, institution, business, event, statistic, vote, budget, or relationship in this file is canon.",
+  "scenarios": [
+    {
+      "scenarioId": "SYN-C47-STABLE-POSITIVE", "syntheticOnly": true, "family": "district", "seat": "D9",
+      "clock": { "cycle": 120 }, "freshness": { "generation": "syn-gen-01", "hash": "syn-hash-stable-01", "sourceWatermarkCycle": 120, "complete": true },
+      "evidence": [{ "id": "e-stable-state", "kind": "measured-state", "cycle": 120, "district": "D9", "value": "synthetic service index 62" }, { "id": "e-open-opportunity", "kind": "opportunity", "cycle": 120, "district": "D9", "value": "synthetic volunteer cleanup window" }],
+      "availableDetails": [], "requiredEvidence": ["e-stable-state", "e-open-opportunity"],
+      "allowedActions": [{ "actionId": "a-offer-cleanup", "kind": "offer", "district": "D9" }, { "actionId": "a-noop", "kind": "no-op", "district": "D9" }],
+      "requirements": { "uncertainties": [], "temporalAndGeographic": [] }
+    },
+    {
+      "scenarioId": "SYN-C47-MEASURED-STRAIN", "syntheticOnly": true, "family": "district", "seat": "D4",
+      "clock": { "cycle": 120 }, "freshness": { "generation": "syn-gen-02", "hash": "syn-hash-strain-02", "sourceWatermarkCycle": 120, "complete": true },
+      "evidence": [{ "id": "e-strain-measure", "kind": "measured-state", "cycle": 120, "district": "D4", "value": "synthetic delay index 84, prior cycle 71" }, { "id": "e-measure-definition", "kind": "measurement-definition", "cycle": 120, "district": "D4", "value": "higher delay index means longer wait" }],
+      "availableDetails": [], "requiredEvidence": ["e-strain-measure", "e-measure-definition"],
+      "allowedActions": [{ "actionId": "a-request-review", "kind": "request-review", "district": "D4" }, { "actionId": "a-noop", "kind": "no-op", "district": "D4" }],
+      "requirements": { "uncertainties": [], "temporalAndGeographic": [] }
+    },
+    {
+      "scenarioId": "SYN-C47-CITY-VICTORY", "syntheticOnly": true, "family": "mayor", "seat": "MAYOR",
+      "clock": { "cycle": 120 }, "freshness": { "generation": "syn-gen-03", "hash": "syn-hash-victory-03", "sourceWatermarkCycle": 120, "complete": true },
+      "evidence": [{ "id": "e-title-result", "kind": "city-event", "cycle": 119, "status": "occurred", "category": "championship", "hoods": [], "citywideRelevance": true, "value": "synthetic Oakland team won title" }],
+      "availableDetails": [], "requiredEvidence": ["e-title-result"],
+      "allowedActions": [{ "actionId": "a-city-recognition", "kind": "public-recognition", "scope": "citywide" }, { "actionId": "a-noop", "kind": "no-op", "scope": "citywide" }],
+      "requirements": { "uncertainties": [], "temporalAndGeographic": [{ "kind": "city-event", "occurredCycle": 119, "district": null, "evidenceId": "e-title-result" }] }
+    },
+    {
+      "scenarioId": "SYN-C47-C111-DOWNTOWN-PARADE", "syntheticOnly": true, "family": "paired", "seat": "MAYOR+D2",
+      "clock": { "cycle": 120 }, "freshness": { "generation": "syn-gen-04", "hash": "syn-hash-parade-04", "sourceWatermarkCycle": 120, "complete": true },
+      "evidence": [{ "id": "e-parade", "kind": "city-event", "cycle": 120, "occurredCycle": 111, "status": "occurred", "category": "parade", "hoods": ["Downtown"], "districts": ["D2"], "citywideRelevance": false, "value": "synthetic parade at a Downtown civic plaza; discovered in later export" }],
+      "availableDetails": [], "requiredEvidence": ["e-parade"],
+      "allowedActions": [{ "actionId": "a-downtown-response", "kind": "district-response", "district": "D2" }, { "actionId": "a-citywide-note", "kind": "public-recognition", "scope": "citywide" }],
+      "requirements": { "uncertainties": [], "temporalAndGeographic": [{ "kind": "city-event", "occurredCycle": 111, "district": "D2", "evidenceId": "e-parade" }] }
+    },
+    {
+      "scenarioId": "SYN-C47-DUE-PROGRAMS", "syntheticOnly": true, "family": "district", "seat": "D2",
+      "clock": { "cycle": 120 }, "freshness": { "generation": "syn-gen-05", "hash": "syn-hash-programs-05", "sourceWatermarkCycle": 120, "complete": true },
+      "evidence": [{ "id": "e-program-one", "kind": "commitment", "cycle": 118, "district": "D2", "status": "due", "value": "synthetic program A due this cycle" }, { "id": "e-program-two", "kind": "commitment", "cycle": 118, "district": "D2", "status": "due", "value": "synthetic program B due this cycle" }, { "id": "e-program-three", "kind": "commitment", "cycle": 118, "district": "D2", "status": "due", "value": "synthetic program C due next cycle" }],
+      "availableDetails": ["program-result"], "requiredEvidence": ["e-program-one", "e-program-two", "e-program-three"],
+      "allowedActions": [{ "actionId": "a-review-programs", "kind": "review-commitments", "district": "D2" }, { "actionId": "a-noop", "kind": "no-op", "district": "D2" }],
+      "requirements": { "uncertainties": [], "temporalAndGeographic": [] }
+    },
+    {
+      "scenarioId": "SYN-C47-DIRECTIVE-AND-ACTION", "syntheticOnly": true, "family": "district", "seat": "D6",
+      "clock": { "cycle": 120 }, "freshness": { "generation": "syn-gen-06", "hash": "syn-hash-directive-06", "sourceWatermarkCycle": 120, "complete": true },
+      "evidence": [{ "id": "e-directive", "kind": "directive", "cycle": 120, "district": "D6", "value": "synthetic request for a status report" }, { "id": "e-useful-option", "kind": "opportunity", "cycle": 120, "district": "D6", "value": "synthetic, authorized inspection offer" }],
+      "availableDetails": [], "requiredEvidence": ["e-directive", "e-useful-option"],
+      "allowedActions": [{ "actionId": "a-status-report", "kind": "report", "district": "D6" }, { "actionId": "a-inspection", "kind": "inspection", "district": "D6" }],
+      "requirements": { "uncertainties": [], "temporalAndGeographic": [] }
+    },
+    {
+      "scenarioId": "SYN-C47-CONFLICTING-SOURCES", "syntheticOnly": true, "family": "district", "seat": "D3",
+      "clock": { "cycle": 120 }, "freshness": { "generation": "syn-gen-07", "hash": "syn-hash-conflict-07", "sourceWatermarkCycle": 120, "complete": true },
+      "evidence": [{ "id": "e-conflict-a", "kind": "source-claim", "cycle": 120, "district": "D3", "value": "synthetic export A says status open" }, { "id": "e-conflict-b", "kind": "source-claim", "cycle": 120, "district": "D3", "value": "synthetic export B says status closed" }],
+      "availableDetails": [], "requiredEvidence": ["e-conflict-a", "e-conflict-b"],
+      "allowedActions": [{ "actionId": "a-verify-status", "kind": "verification-request", "district": "D3" }, { "actionId": "a-noop", "kind": "no-op", "district": "D3" }],
+      "requirements": { "uncertainties": [], "temporalAndGeographic": [] }
+    },
+    {
+      "scenarioId": "SYN-C47-UNAVAILABLE-RESOURCE", "syntheticOnly": true, "family": "district", "seat": "D8",
+      "clock": { "cycle": 120 }, "freshness": { "generation": "syn-gen-08", "hash": "syn-hash-unavailable-08", "sourceWatermarkCycle": 120, "complete": true },
+      "evidence": [{ "id": "e-open-task", "kind": "opportunity", "cycle": 120, "district": "D8", "value": "synthetic task that needs a resource availability read" }],
+      "availableDetails": [], "requiredEvidence": ["e-open-task"],
+      "allowedActions": [{ "actionId": "a-independent-note", "kind": "public-note", "district": "D8" }, { "actionId": "a-resource-dependent", "kind": "resource-commitment", "district": "D8" }],
+      "requirements": { "uncertainties": ["resource-register"], "deferIfUnavailable": ["a-resource-dependent"], "preserveIndependent": ["a-independent-note"] }
+    },
+    {
+      "scenarioId": "SYN-C47-CANCELLED-ACTION", "syntheticOnly": true, "family": "district", "seat": "D5",
+      "clock": { "cycle": 120 }, "freshness": { "generation": "syn-gen-09", "hash": "syn-hash-cancelled-09", "sourceWatermarkCycle": 120, "complete": true },
+      "evidence": [{ "id": "e-cancelled", "kind": "commitment-outcome", "cycle": 119, "district": "D5", "status": "cancelled", "value": "synthetic action cancelled before execution" }],
+      "availableDetails": [], "requiredEvidence": ["e-cancelled"],
+      "allowedActions": [{ "actionId": "a-ack-cancellation", "kind": "acknowledge-outcome", "district": "D5" }, { "actionId": "a-retry-request", "kind": "request-retry-review", "district": "D5" }],
+      "requirements": { "uncertainties": [], "doNotClaimCompleted": ["e-cancelled"] }
+    },
+    {
+      "scenarioId": "SYN-C47-BINDING-VOTE", "syntheticOnly": true, "family": "council", "seat": "D1",
+      "clock": { "cycle": 120 }, "freshness": { "generation": "syn-gen-10", "hash": "syn-hash-vote-10", "sourceWatermarkCycle": 120, "complete": true },
+      "evidence": [{ "id": "e-vote-rule", "kind": "authority", "cycle": 120, "district": "D1", "value": "synthetic binding vote has adopted measure R" }, { "id": "e-vote-result", "kind": "vote-result", "cycle": 120, "district": "D1", "value": "synthetic vote passed 5 to 2" }],
+      "availableDetails": [], "requiredEvidence": ["e-vote-rule", "e-vote-result"],
+      "allowedActions": [{ "actionId": "a-implement-vote", "kind": "implementation-followup", "district": "D1" }, { "actionId": "a-noop", "kind": "no-op", "district": "D1" }],
+      "requirements": { "uncertainties": [], "mustHonorBindingVote": true }
+    },
+    {
+      "scenarioId": "SYN-C47-FULL-MAYOR-BOARD", "syntheticOnly": true, "family": "mayor", "seat": "MAYOR",
+      "clock": { "cycle": 120 }, "freshness": { "generation": "syn-gen-11", "hash": "syn-hash-board-11", "sourceWatermarkCycle": 120, "complete": true },
+      "evidence": [{ "id": "e-board-city-event", "kind": "city-event", "cycle": 120, "status": "announced", "category": "synthetic citywide notice", "hoods": [], "citywideRelevance": true, "value": "synthetic event appears after a long board" }, { "id": "e-board-tail", "kind": "opportunity", "cycle": 120, "district": "D9", "value": "synthetic tail opportunity" }],
+      "availableDetails": [], "requiredEvidence": ["e-board-city-event", "e-board-tail"],
+      "allowedActions": [{ "actionId": "a-citywide-response", "kind": "public-response", "scope": "citywide" }, { "actionId": "a-tail-review", "kind": "review-opportunity", "district": "D9" }],
+      "requirements": { "uncertainties": [], "mustSeeEvidenceAfterBoard": ["e-board-city-event", "e-board-tail"] }
+    },
+    {
+      "scenarioId": "SYN-C47-SAME-CYCLE-UPDATE", "syntheticOnly": true, "family": "district", "seat": "D2",
+      "clock": { "cycle": 120 }, "freshness": { "generation": "syn-gen-12b", "previousGeneration": "syn-gen-12a", "hash": "syn-hash-update-12b", "sourceWatermarkCycle": 120, "complete": true },
+      "evidence": [{ "id": "e-updated-event", "kind": "city-event", "cycle": 120, "status": "corrected", "category": "synthetic notice", "district": "D2", "revision": "r2", "value": "same-cycle correction replaces prior description" }],
+      "availableDetails": [], "requiredEvidence": ["e-updated-event"],
+      "allowedActions": [{ "actionId": "a-corrected-response", "kind": "district-response", "district": "D2" }],
+      "requirements": { "uncertainties": [], "mustUseGeneration": "syn-gen-12b" }
+    },
+    {
+      "scenarioId": "SYN-C47-STALE-SNAPSHOT", "syntheticOnly": true, "family": "mayor", "seat": "MAYOR",
+      "clock": { "cycle": 120 }, "freshness": { "generation": "syn-gen-stale", "hash": "syn-hash-stale", "sourceWatermarkCycle": 116, "complete": false, "reason": "synthetic source snapshot stale" },
+      "evidence": [], "availableDetails": [], "requiredEvidence": [],
+      "allowedActions": [{ "actionId": "a-mark-unavailable", "kind": "defer", "scope": "citywide" }],
+      "requirements": { "uncertainties": ["city-event-snapshot"] }
+    },
+    {
+      "scenarioId": "SYN-C47-ABSENT-OFFICIAL", "syntheticOnly": true, "family": "district", "seat": "D7",
+      "clock": { "cycle": 120 }, "freshness": { "generation": "syn-gen-13", "hash": "syn-hash-absent-13", "sourceWatermarkCycle": 120, "complete": true },
+      "evidence": [{ "id": "e-office-absence", "kind": "seat-status", "cycle": 120, "district": "D7", "status": "absent", "value": "synthetic office holder unavailable this cycle" }],
+      "availableDetails": [], "requiredEvidence": ["e-office-absence"],
+      "allowedActions": [{ "actionId": "a-noop", "kind": "no-op", "district": "D7" }],
+      "requirements": { "uncertainties": [], "mustNotImpersonateAbsentOfficial": true }
+    },
+    {
+      "scenarioId": "SYN-C47-PARTIAL-WRITE-RECOVERY", "syntheticOnly": true, "family": "district", "seat": "D3",
+      "clock": { "cycle": 120 }, "freshness": { "generation": "syn-gen-14", "hash": "syn-hash-partial-14", "sourceWatermarkCycle": 120, "complete": true },
+      "evidence": [{ "id": "e-write-receipt", "kind": "action-receipt", "cycle": 119, "district": "D3", "status": "partial", "value": "synthetic write recorded intent but typed readback missing" }],
+      "availableDetails": ["readback"], "requiredEvidence": ["e-write-receipt"],
+      "allowedActions": [{ "actionId": "a-reconcile", "kind": "reconciliation-request", "district": "D3" }, { "actionId": "a-noop", "kind": "no-op", "district": "D3" }],
+      "requirements": { "uncertainties": ["typed-readback"], "mustNotClaimSuccessWithoutReadback": true }
+    }
+  ]
+}

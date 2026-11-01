@@ -1359,7 +1359,7 @@ test('F7: boardNeedText uses the shared helper, preserves stalled priority and a
     assert.equal(civicSlice.boardNeedText(activeRow), phaseContract.stageRequirement({stage:Stage,phase:'active'}).text);
   }
   const proposedRow = { Status: 'proposed', VoteCycle: '', PolicyDomain: 'health' };
-  assert.match(civicSlice.boardNeedText(proposedRow), /petition-pending — signatures move it to a vote/);
+  assert.match(civicSlice.boardNeedText(proposedRow), /petition-pending — eligible for call-vote if no petition band/);
   // A domain with no petition rule (anything but health) must not tell
   // the agent signatures move it — call-vote is the only path (adversarial
   // review of 51fdee28, Finding 5, fixed 2026-09-22).
@@ -1433,7 +1433,7 @@ test('F8: Proposal condition evidence computes from countPetition and gamePrompt
     assert.strictEqual(game.conditions.proposals.length, 1);
     assert.strictEqual(game.conditions.proposals[0].counts.inCareCitizens, 1);
     assert.strictEqual(game.conditions.proposals[0].support.cleared, false);
-    assert.match(game.conditions.text, /support-band-unset/);
+    assert.match(game.conditions.text, /support-band-unavailable/);
 
     // Verify gamePromptView caps history while preserving ID sets
     const rawEntry = { snippet: 'LONG_STRING_'.repeat(200) };

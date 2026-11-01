@@ -1,0 +1,18 @@
+{
+  "schema": "civic47-provider-profile/1",
+  "profileId": "fill-from-current-model-inventory",
+  "modelId": null,
+  "provider": null,
+  "checkedAt": null,
+  "source": null,
+  "verified": {
+    "contextWindowTokens": null,
+    "maxOutputTokens": null,
+    "reasoningModes": null,
+    "synchronous": null,
+    "batch": null,
+    "inputUsdPerMillionTokens": null,
+    "outputUsdPerMillionTokens": null
+  },
+  "notes": "All unknowns remain null until checked against a dated provider source. These values describe provider facts; they do not impose a civic prompt or output token ceiling."
+}

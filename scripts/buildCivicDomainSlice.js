@@ -11,6 +11,7 @@
 const fs = require('fs');
 const path = require('path');
 const seasonFeel = require('./buildSeasonFeelSlice');
+const { loadOutcomeFeed } = require('./civic47OutcomeFeed');
 
 const ROOT = path.join(__dirname, '..');
 
@@ -549,6 +550,25 @@ function loadCycleCivicEntries(cycle, root = ROOT, profiles = null) {
     }
   } catch (_) { /* datawakes are optional local input */ }
 
+  // civic.47: committed action results are source records, not office speech.
+  // Failed and cancelled actions are also eligible accountability leads.
+  const outcomes = loadOutcomeFeed(root, cycle);
+  if (outcomes.available) {
+    for (const source of outcomes.mediaSources || []) {
+      const label = source.actionId + ' ' + source.status +
+        (source.result ? ' — ' + source.result : source.reason ? ' — ' + source.reason : '');
+      const entry = normalizeEntry({ kind: 'civic-outcome',
+        ref: source.sourceRef, label, hood: null,
+        handle: { angle: label, hookLine: 'A recorded civic action has a result to verify.' },
+      }, 'civic-action-journal', entries.length);
+      if (entry) {
+        entry.actionId = source.actionId;
+        entry.effectReceiptIds = source.effectReceiptIds;
+        entries.push(entry);
+      }
+    }
+  }
+
   const summaryPath = path.join(root, 'output', 'world_summary_c' + cycle + '.md');
   try {
     const line = fs.readFileSync(summaryPath, 'utf8').split(/\r?\n/)
@@ -597,6 +617,7 @@ function scoreEntryForSeat(entry, slug) {
   const text = entryText(entry);
   if (slug === 'carmen-delaine') {
     let score = 10;
+    if (entry.kind === 'civic-outcome') score += 50;
     if (/initiative|vote|decision|civic-datawake/i.test(entry.kind)) score += 30;
     if (/initiative|vote|decision|council|approval|disbursement|review|phase/i.test(text)) score += 15;
     return score;
@@ -631,6 +652,8 @@ function scoreEntryForSeat(entry, slug) {
 
 function candidateFor(entry, score) {
   return {
+    actionId: entry.actionId || null,
+    effectReceiptIds: entry.effectReceiptIds || [],
     score,
     kind: entry.kind,
     label: entry.label,
@@ -980,14 +1003,16 @@ function buildCivicDomainSlice(cycle, { root = ROOT } = {}) {
     [slug, packetForEntries(entries, slug, profiles, deck)]));
   const nonempty = Object.values(packets).filter(packet => packet && !packet.empty);
   return {
-    version: 'CIVIC-DOMAIN-SLICE-7',
+    version: 'CIVIC-DOMAIN-SLICE-8',
     cycle: Number(cycle),
+    outcomeGenerationHash: loadOutcomeFeed(root, cycle).generationHash || null,
     kind: 'civic-domain',
     empty: nonempty.length === 0,
     source: {
       deskSignal: 'output/desk_signal_c' + cycle + '.json',
       decisions: 'output/cron-civic/decisions_lane_c' + cycle + '.json',
-      datawakes: 'output/cron-civic/datawake/* (cycle-matched only)'
+      datawakes: 'output/cron-civic/datawake/* (cycle-matched only)',
+      actionOutcomes: 'output/cron-civic/outcome_feed_c' + cycle + '.json (committed receipts only)'
     },
     entries,
     packets
@@ -1061,7 +1086,8 @@ function writeCivicDomainSlice(cycle, slice, root = ROOT) {
 
 function loadCivicDomainSlice(cycle, root = ROOT) {
   const existing = loadJson(slicePaths(cycle, root).json);
-  if (existing && existing.version === 'CIVIC-DOMAIN-SLICE-7') return existing;
+  if (existing && existing.version === 'CIVIC-DOMAIN-SLICE-8' &&
+      existing.outcomeGenerationHash === (loadOutcomeFeed(root, cycle).generationHash || null)) return existing;
   const slice = buildCivicDomainSlice(cycle, { root });
   if (!slice.empty) writeCivicDomainSlice(cycle, slice, root);
   return slice.empty ? null : slice;

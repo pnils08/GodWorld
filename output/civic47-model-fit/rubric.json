@@ -1,0 +1,24 @@
+{
+  "schema": "civic47-blind-rubric/1",
+  "status": "preregistered before any model comparison",
+  "instructions": [
+    "Blind evaluators see the frozen input and anonymized output, not model, provider, cost, or other evaluators' scores.",
+    "Score each dimension separately from 1 to 5 and cite a short evidence note from the output.",
+    "Do not score action count, positivity, or approval gain as intelligence.",
+    "Do not reward claims supported by evidence the serialized input did not contain.",
+    "A hard contract failure remains a failure regardless of eloquence or dimension scores.",
+    "Do not infer model-family quality from political preference differences; compare a model on its own persona across repeated matched samples."
+  ],
+  "dimensions": [
+    { "id": "grounded_choice", "question": "Does the response make a choice supported by the visible evidence?", "anchors": { "1": "Contradicts or invents central facts", "3": "Mostly grounded with material gaps", "5": "Every material claim and choice is traceable to visible evidence" } },
+    { "id": "useful_distinct_options", "question": "Are the offered options meaningfully distinct and useful for this seat?", "anchors": { "1": "No usable option or repeated variants", "3": "One useful path with limited distinction", "5": "Clear, materially different paths with consequences" } },
+    { "id": "event_time_geography", "question": "Does it preserve event occurrence time and typed geography?", "anchors": { "1": "Wrong cycle or district", "3": "Correct broad location/time with ambiguity", "5": "Correct event age, district, citywide scope, and uncertainty" } },
+    { "id": "honest_uncertainty", "question": "Does it distinguish missing, stale, conflicting, and measured-zero information?", "anchors": { "1": "Treats unavailable data as zero or certain", "3": "Flags some unknowns but overstates others", "5": "Precisely labels what is known, conflicting, stale, and unavailable" } },
+    { "id": "follow_through", "question": "Does it account for prior commitments and recorded outcomes?", "anchors": { "1": "Claims success without a receipt or ignores failure", "3": "Recognizes outcome with incomplete next step", "5": "Tracks due, cancelled, partial, and verified outcomes accurately" } },
+    { "id": "distinct_character", "question": "Does the response sound consistent with this seat's supplied persona?", "anchors": { "1": "Generic or contradicts persona", "3": "Some seat-specific voice", "5": "Distinctive and consistent without inventing persona facts" } },
+    { "id": "resource_discipline", "question": "Does it respect visible authority and resource evidence?", "anchors": { "1": "Commits unavailable authority/resources", "3": "Mostly bounded with a questionable assumption", "5": "Makes only supported commitments and defers dependencies" } },
+    { "id": "output_completeness", "question": "Does it complete the requested contract without truncation or omitted required work?", "anchors": { "1": "Incomplete or invalid", "3": "Usable with a missing noncritical field", "5": "Complete, valid, and fully addresses the assigned work" } }
+  ],
+  "record": { "scenarioId": "string", "blindLabel": "string", "evaluatorId": "string", "ratings": "dimension id to integer 1-5", "evidenceNotes": "dimension id to concise note", "overallComment": "string or empty" },
+  "aggregation": "Report per-dimension distributions and paired scenario differences. No weighted total is defined; hard contract failures cannot be averaged away."
+}

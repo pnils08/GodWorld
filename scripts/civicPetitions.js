@@ -215,8 +215,11 @@ function countPetition(proposal, data, options = {}) {
   // deferred — callable to a vote — and its Crime_Metrics hood conditions stay
   // on the record as evidence. `domain-not-playable` here left a seat-proposed
   // safety row with no path to a vote (a gate that could never open, §15).
+  // An unset health band is not a veto on the explicit legislative route.
+  // Keep the measured care/condition evidence, and leave a configured band as
+  // a separate petition gate when the builder actually supplies one.
   if (domain !== 'health') reason = 'domain-rules-deferred';
-  else if (supportBand == null) reason = 'support-band-unset';
+  else if (supportBand == null) reason = 'support-band-unavailable';
   else if (!(population.value > 0)) reason = 'population-incomplete';
   else if (numerator == null) reason = 'condition-incomplete';
   else if (numerator < requiredCount) reason = 'below-support-band';

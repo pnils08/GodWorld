@@ -45,3 +45,9 @@ Focused local evidence: `cron-civic-game` **56/56**, `cron-civic-tick` **72/72**
 ## Correction — 2026-11-01 (codex)
 
 Commit `715032ca7` removed the pilot prompt's fixed decision/upkeep counts and routes its hearing seats through synchronous transport. The existing batch validator requires `max_tokens` (`scripts/cron-civic-tick.test.js:889-896`), so `scripts/cron-civic-run.js:1813-1818` bypasses batch submission under `--civic47-pilot`; legacy batches retain their cap and contract. The sentence above saying the pilot prompt suggests two decisions and eight upkeep items is superseded. The new synthetic tick test passed **73/73**; actual provider support and cost remain unverified.
+
+## Timing correction — 2026-11-01 (codex)
+
+Commit `a3a24d813` removed the post-fire ballot and mayor-decision intent files. The Sunday chain explicitly turns a **fired** Cycle into civic output (`scripts/cron-civic-run.js:5-7`), while `phase05-citizens/civicInitiativeEngine.js:400-434` resolves votes in that fire. A `VoteCycle === cycle` ballot collected by the subsequent hearing arrives too late. The earlier local-intent claim in this review is superseded: `scripts/civic47Ballots.js` remains a tested local contract, but B3 needs a delivered pre-fire opportunity, a session that survives delays, an authorized ballot write, and a single engine reader before a binding result can be claimed. The post-fire prompt regression and local tick suite passed **74/74**.
+
+The pilot transport pointer above moved to `scripts/cron-civic-run.js:1792-1797` after this deletion.

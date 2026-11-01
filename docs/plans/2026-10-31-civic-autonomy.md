@@ -79,7 +79,7 @@ Task status lives only in this table. Task detail specifies scope and acceptance
 | A3 | Give each seat sufficient duty turns, independent replies, action batches and continuation receipts | research-build | offline candidate `fe5746d41`, no-cap transport `715032ca7`; policy and week proof open |
 | B1 | Implement action authority, durable execution journal, resource reservations and migration contract | research-build | local contract `fe5746d41`; authoritative journal and migration open |
 | B2 | Connect events, programs and project actions to real receivers; close typed gate defects | research-build | protected patch proposed `fe5746d41`; receivers open |
-| B3 | Make official ballots and mayor decisions binding through one vote authority | research-build | local intents `fe5746d41`; engine binding open |
+| B3 | Make official ballots and mayor decisions binding through one vote authority | research-build | local ballot contract; post-fire intents removed `a3a24d813`; pre-fire opportunity and engine binding open |
 | B4 | Connect committed outcomes to citizen exposure, diverse reactions and measured accountability | research-build | strict local feed `fe5746d41`; experience and approval writers open |
 | A4 | Give newsroom and next official wake source-linked choices, outcomes and responses | research-build | local source and brief adapter `fe5746d41`; composed trace open |
 | A5 | Evaluate actual seat models, context/output limits and fallback behavior on frozen scenarios | research-build | synthetic offline rubric `fe5746d41`; approved model runs open |
@@ -296,6 +296,7 @@ No single unit test, applied=true file, stage transition, quoted reaction or agg
 
 ## Changelog
 
+- 2026-11-01 (codex) — Removed post-fire ballot intents in `a3a24d813`; Sunday hearing follows the fire, so binding B3 ballots need a pre-fire opportunity and authoritative reader.
 - 2026-11-01 (codex) — Pilot hearing bypasses batch transport's required token cap in `715032ca7`; legacy batches retain their contract, and no paid/provider proof was run.
 - 2026-11-01 (codex) — Built civic.47 local brief, duty, authority, ballot-intent, outcome-feed and offline-fit candidates in `fe5746d41`; protected patch artifacts await Claude, and no task has composed activation proof.
 - 2026-11-01 (research-build) — **Builder answers recorded verbatim, 04:30–04:50 CDT.** Asked about the plan's turn counts (2 duty + 2 event per week): "No clue what this is and codex plan not mine". Asked about event wakes outside a seat's duty day: not answered (builder: "I didn't answer number 2"). Asked about token budgets (8k/12k in, 3k/5k out): "No cap is the rule stayed over 29 times". Also: "Nothing pushes without codex sign off". "Never heard of event awareness as my doctrine and your making a judgment that applies here, Claude is restricted from applying its judgment". "Nothing is built until my answers are recorded". Last night (01:34–01:52 CDT): "The cap goes up according to codex plan"; "You're call on the cap, I wasn't sure if they spend their whole turn writing otherwise but we can watch for it"; "we can leverage es for the sake of time". No build started on these answers; the builder's go is still required.

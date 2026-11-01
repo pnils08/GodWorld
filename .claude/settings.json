@@ -202,6 +202,11 @@
         "hooks": [
           {
             "type": "command",
+            "command": "node /root/GodWorld/.claude/hooks/boot-load.js",
+            "timeout": 10
+          },
+          {
+            "type": "command",
             "command": "bash /root/GodWorld/.claude/hooks/session-startup-hook.sh",
             "timeout": 10
           }

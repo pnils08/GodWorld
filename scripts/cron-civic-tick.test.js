@@ -684,6 +684,16 @@ testAsync('submit batches only the :batch-eligible seats, one batch per model', 
   }
 });
 
+testAsync('civic.47 pilot hearing uses sync transport without a batch token cap', async () => {
+  const root = mkBatchRoot();
+  const client = fakeBatchClient({ submit: async () => { throw new Error('pilot must not submit'); },
+    get: async () => ({ status: 'in_progress' }) });
+  const result = await batchSubmitHearing(CYCLE, { ...batchOpts(root, client), civic47Pilot: true });
+  assert.deepStrictEqual(result.submitted, []);
+  assert.strictEqual(client.calls.submit.length, 0);
+  assert.strictEqual(result.skipped.length, 3);
+});
+
 testAsync('submit writes the manifest with per-seat state', async () => {
   const { root } = await submittedBatchRoot();
   const m = loadBatchManifest(CYCLE, root);

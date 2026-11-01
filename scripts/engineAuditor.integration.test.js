@@ -92,7 +92,11 @@ function buildFixtureCtx() {
       Population_Stats: [],
       World_Population: [],
       Crime_Metrics: [],
-      Transit_Metrics: [],
+      Transit_Metrics: [
+        { Cycle: 92, Station: 'Fruitvale', RidershipVolume: '4000' },
+        { Cycle: 93, Station: 'Fruitvale', RidershipVolume: '4553' },
+        { Cycle: 93, Station: '', RidershipVolume: '' },
+      ],
       Event_Arc_Ledger: [],
       LifeHistory_Log: [],
     },
@@ -188,6 +192,9 @@ function buildFixtureCtx() {
       s.Civic_Office_Ledger[0].Approval === 0.6);
     assert('snapshots.Crime_Metrics is array (empty)',
       Array.isArray(s.Crime_Metrics));
+    assert('snapshots.Transit_Metrics keeps only this Cycle\'s rows (the tab is an append log)',
+      Array.isArray(s.Transit_Metrics) && s.Transit_Metrics.length === 2 && s.Transit_Metrics.every(r => Number(r.Cycle) === 93),
+      JSON.stringify(s.Transit_Metrics));
   }
 
   // ─── Test 5: citizenIncomes derived from Simulation_Ledger ───
@@ -352,7 +359,7 @@ function buildFixtureCtx() {
     const ok = await runEngineAudit(Object.assign(buildFixtureCtx(), { readFailures: [] }));
     assert('no failure: readFailures is [] and every snapshot key is present',
       Array.isArray(ok.auditOutput.readFailures) && ok.auditOutput.readFailures.length === 0 &&
-      ['Initiative_Tracker', 'Neighborhood_Map', 'Civic_Office_Ledger', 'Crime_Metrics'].every(k => Array.isArray(ok.auditOutput.snapshots[k])));
+      ['Initiative_Tracker', 'Neighborhood_Map', 'Civic_Office_Ledger', 'Crime_Metrics', 'Transit_Metrics'].every(k => Array.isArray(ok.auditOutput.snapshots[k])));
     const fx = buildFixtureCtx();
     fx.snapshot.Initiative_Tracker = [];
     fx.readFailures = [{ name: 'Initiative_Tracker', error: 'TEST-ONLY read timeout' }];

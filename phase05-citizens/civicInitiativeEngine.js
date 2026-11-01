@@ -3698,7 +3698,7 @@ function civicStageRequirementWith_(catalogByDomain, input) {
     var m = entry.stage3Metric;
     // A gate whose metric the engine cannot read yet is not a live gate: say so,
     // and the losing clock stays off it (ruling 3 — no clock on an unbuilt exit).
-    if (m.scope !== 'hood') {
+    if (m.scope !== 'hood' && m.scope !== 'station-serving-hood') {
       out.blocked = 'no-delivering-reader';
       out.text = 'Standing — the delivering gate for this domain cannot be read yet';
       return out;
@@ -3722,7 +3722,7 @@ function civicStageBaselineFrom_(input) {
   var fail = function (reason) { return { ok: false, reason: reason, descriptor: null }; };
   var metric = inp.metric || {};
   var columns = Array.isArray(metric.column) ? metric.column.slice() : [];
-  if (metric.scope !== 'hood' || !columns.length) return fail('no-hood-reader');
+  if ((metric.scope !== 'hood' && metric.scope !== 'station-serving-hood') || !columns.length) return fail('no-hood-reader');
   if (metric.direction !== 'up' && metric.direction !== 'down') return fail('bad-direction');
   if (inp.origin !== 'vote' && inp.origin !== 'conversion') return fail('bad-origin');
   var capture = Number(inp.captureCycle);
@@ -3732,6 +3732,8 @@ function civicStageBaselineFrom_(input) {
   if (cohort.available !== true || cohort.tab !== metric.tab || !cohort.rows || !isFinite(obs) || obs < 1) {
     return fail(cohort.reason || 'cohort-unavailable');
   }
+  var cohortScope = cohort.scope || 'hood';
+  if (cohortScope !== metric.scope) return fail('cohort-scope-mismatch');
   if (obs > capture) return fail('cohort-from-the-future');
   var hoods = [];
   (inp.hoods || []).forEach(function (h) {
@@ -3765,7 +3767,7 @@ function civicStageBaselineFrom_(input) {
   }
   return { ok: true, reason: null, descriptor: {
     v: 1, origin: inp.origin, cycle: obs, captureCycle: capture, tab: metric.tab, columns: columns,
-    scope: 'hood', direction: metric.direction, cityN: all.length, city: all, keys: keys, cityMiddle: middle
+    scope: metric.scope, direction: metric.direction, cityN: all.length, city: all, keys: keys, cityMiddle: middle
   } };
 }
 
@@ -3776,10 +3778,12 @@ function civicDeliveryEdge_(baseline, cohort) {
   var b = baseline;
   if (typeof b === 'string') { try { b = JSON.parse(b); } catch (e) { b = null; } }
   if (!b || b.v !== 1 || !Array.isArray(b.columns) || !b.columns.length || !b.keys || !b.cityMiddle ||
-      (b.direction !== 'up' && b.direction !== 'down') || !isFinite(Number(b.cycle))) return fail('baseline-unavailable');
+      (b.direction !== 'up' && b.direction !== 'down') || !isFinite(Number(b.cycle)) ||
+      (b.scope !== 'hood' && b.scope !== 'station-serving-hood')) return fail('baseline-unavailable');
   var co = cohort || {};
   if (co.available !== true || !co.rows) return fail(co.reason || 'cohort-unavailable');
   if (co.tab !== b.tab) return fail('cohort-tab-mismatch');
+  if ((co.scope || 'hood') !== b.scope) return fail('cohort-scope-mismatch');
   var obs = Number(co.cycle);
   if (!isFinite(obs) || !(obs > Number(b.cycle))) return fail('observation-not-after-baseline');
   var all = Object.keys(co.rows).sort();
@@ -4151,6 +4155,58 @@ function applyCivicStageStep_(ctx, row, ix, cycle) {
 }
 
 /**
+ * Convert committed station rows to a hood metric. A hood's value is the sum of
+ * RidershipVolume of the configured stations located in it (the station's own
+ * neighborhood, OAKLAND_BART_STATIONS). Corridor labels are catchment, not
+ * location: they carry no share here, so no station's riders are counted in two
+ * hoods. A hood with no station is not in the cohort. Only rows stamped with the
+ * observation Cycle count (the tab is an append log of every Cycle). A missing or
+ * duplicate station row in that Cycle, or an unresolved station hood, makes the
+ * entire cohort unavailable.
+ */
+function civicTransitStageCohort_(data, observationCycle, canonHoods, stationDefs, resolveHood) {
+  var fail = function (reason) { return { available: false, reason: reason, cycle: observationCycle, tab: 'Transit_Metrics', scope: 'station-serving-hood', rows: null }; };
+  var obs = Number(observationCycle);
+  if (!isFinite(obs) || obs < 1 || Math.floor(obs) !== obs) return fail('bad-observation-cycle');
+  if (!Array.isArray(data) || data.length < 2) return fail('transit-tab-empty');
+  if (!Array.isArray(canonHoods) || !canonHoods.length || typeof resolveHood !== 'function') return fail('canon-hoods-unavailable');
+  if (!Array.isArray(stationDefs) || !stationDefs.length) return fail('station-map-unavailable');
+  var head = data[0], iCycle = head.indexOf('Cycle'), iStation = head.indexOf('Station'), iRiders = head.indexOf('RidershipVolume');
+  if (iCycle < 0 || iStation < 0 || iRiders < 0) return fail('transit-columns-missing');
+  var expected = {}, stationHood = {}, stationNames = [], values = {};
+  for (var d = 0; d < stationDefs.length; d++) {
+    var def = stationDefs[d] || {}, station = String(def.station || '').trim();
+    if (!station || expected[station]) return fail('station-map-invalid');
+    expected[station] = true; stationNames.push(station);
+    var raw = String(def.neighborhood || '').trim();
+    var hood = raw ? resolveHood(raw) : null;
+    if (!hood || canonHoods.indexOf(hood) < 0) return fail('station-hood-unresolved:' + station + ':' + raw);
+    stationHood[station] = hood;
+    values[hood] = 0;
+  }
+  var byStation = {};
+  for (var r = 1; r < data.length; r++) {
+    var name = String(data[r][iStation] == null ? '' : data[r][iStation]).trim();
+    if (!name) continue; // Transit_Metrics also contains corridor rows.
+    // The tab appends every Cycle; only the observation Cycle's rows are evidence.
+    if (Number(data[r][iCycle]) !== obs) continue;
+    if (!expected[name]) return fail('station-not-configured:' + name);
+    if (Object.prototype.hasOwnProperty.call(byStation, name)) return fail('duplicate-station:' + name);
+    var riders = data[r][iRiders];
+    if (!((typeof riders === 'number' || (typeof riders === 'string' && riders.trim() !== '')) && isFinite(Number(riders)) && Number(riders) >= 0)) return fail('station-ridership-invalid:' + name);
+    byStation[name] = Number(riders);
+  }
+  for (var n = 0; n < stationNames.length; n++) {
+    var stationName = stationNames[n];
+    if (!Object.prototype.hasOwnProperty.call(byStation, stationName)) return fail('station-row-missing:' + stationName);
+    values[stationHood[stationName]] += byStation[stationName];
+  }
+  var rows = {};
+  Object.keys(values).sort().forEach(function (h) { rows[h] = { RidershipVolume: values[h] }; });
+  return { available: true, reason: null, cycle: obs, tab: 'Transit_Metrics', scope: 'station-serving-hood', rows: rows };
+}
+
+/**
  * civic.38 Task 4 (2) — freeze the prior Cycle's observation cohort.
  *
  * Called FIRST in Phase 2 of fire N (its own safePhaseCall_, both entry points),
@@ -4183,14 +4239,16 @@ function freezeCivicStageCohort_(ctx) {
 
   // Which tabs does a staged row actually gate on? Playable, hood-scoped only.
   var wanted = {};
+  var wantedScopes = {};
   var anyStaged = false;
   for (var r = 1; r < tData.length; r++) {
     if (!String(tData[r][iStage] == null ? '' : tData[r][iStage]).trim()) continue;
     anyStaged = true;
     var entry = CIVIC_STAGE_CATALOG_[String(tData[r][iDomain] == null ? '' : tData[r][iDomain]).trim().toLowerCase()];
-    if (!entry || entry.playable !== true || entry.stage3Metric.scope !== 'hood') continue;
+    if (!entry || entry.playable !== true || (entry.stage3Metric.scope !== 'hood' && entry.stage3Metric.scope !== 'station-serving-hood')) continue;
     var m = entry.stage3Metric;
     wanted[m.tab] = wanted[m.tab] || [];
+    wantedScopes[m.tab] = m.scope;
     for (var c = 0; c < m.column.length; c++) {
       if (wanted[m.tab].indexOf(m.column[c]) < 0) wanted[m.tab].push(m.column[c]);
     }
@@ -4203,7 +4261,7 @@ function freezeCivicStageCohort_(ctx) {
   var out = { cycle: obs, tabs: {} };
 
   Object.keys(wanted).forEach(function (tab) {
-    var co = { available: false, reason: null, cycle: obs, tab: tab, rows: {} };
+    var co = { available: false, reason: null, cycle: obs, tab: tab, scope: wantedScopes[tab] || 'hood', rows: {} };
     out.tabs[tab] = co;
     if (!(obs >= 1)) { co.reason = 'no-prior-cycle'; return; }
     if (!canon || !canon.length || typeof resolveHoodOrChild_ !== 'function') { co.reason = 'canon-hoods-unavailable'; return; }
@@ -4211,6 +4269,12 @@ function freezeCivicStageCohort_(ctx) {
     if (!sheet) { co.reason = 'tab-missing'; return; }
     var data = sheet.getDataRange().getValues();
     if (data.length < 2) { co.reason = 'tab-empty'; return; }
+    if (wantedScopes[tab] === 'station-serving-hood') {
+      var stations = typeof OAKLAND_BART_STATIONS === 'undefined' ? null : OAKLAND_BART_STATIONS;
+      var transit = civicTransitStageCohort_(data, obs, canon, stations, function (raw) { return resolveHoodOrChild_(ctx, raw); });
+      co.available = transit.available; co.reason = transit.reason; co.scope = transit.scope; co.rows = transit.rows;
+      return;
+    }
     var head = data[0];
     var iHood = head.indexOf('Neighborhood');
     var iStamp = head.indexOf(tab === 'Neighborhood_Map' ? 'Cycle' : 'LastUpdated');
@@ -4294,7 +4358,7 @@ function applyCivicStageBaseline_(ctx, row, ix) {
   if (stage !== 'Funded' && stage !== 'Standing') return false;
   if (String(row[ix.baseline] == null ? '' : row[ix.baseline]).trim()) return false;
   var entry = CIVIC_STAGE_CATALOG_[String(row[ix.policyDomain] == null ? '' : row[ix.policyDomain]).trim().toLowerCase()];
-  if (!entry || entry.playable !== true || entry.stage3Metric.scope !== 'hood') return false;
+  if (!entry || entry.playable !== true || (entry.stage3Metric.scope !== 'hood' && entry.stage3Metric.scope !== 'station-serving-hood')) return false;
   var initKey = String((ix.id >= 0 ? row[ix.id] : '') || '').trim() || String((ix.name >= 0 ? row[ix.name] : '') || '').trim();
   // resolveHoodOrChild_ THROWS on an unseeded canon set, and a throw here would
   // take the whole civic engine down for the fire. No canon, no stamp — retried next fire.

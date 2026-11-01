@@ -78,17 +78,22 @@ function measureStageMovement(row, context = {}) {
       const differences = {};
       for (const column of metric.column) {
         const cohortHoods = metric.scope === 'station-serving-hood' ? [...byHood.keys()] : resolver.hoods;
+        // Same frozen-membership test as the engine's delivery edge: a city reference that
+        // changed since the baseline is not comparable.
+        if (Number.isFinite(Number(baseline.cityN)) && cohortHoods.length !== Number(baseline.cityN)) throw new Error('city membership changed');
+        if (Array.isArray(baseline.city) && [...cohortHoods].sort().join('|') !== baseline.city.join('|')) throw new Error('city membership changed');
         const levels = cohortHoods.map(h=>number((byHood.get(h)||{})[column], h+'.'+column)).sort((a,b)=>a-b);
         if (!levels.length) throw new Error('city metric cohort empty');
         const mid = Math.floor(levels.length/2);
         const middle = levels.length%2 ? levels[mid] : (levels[mid-1]+levels[mid])/2;
         if (middle <= 0) throw new Error('city middle must be positive');
         const mean = keys.reduce((sum,h)=>sum+number(byHood.get(h)[column],h+'.'+column)/middle,0)/keys.length;
-        const delta = metric.direction === 'down' ? baselineMeans[column]-mean : mean-baselineMeans[column];
+        const raw = metric.direction === 'down' ? baselineMeans[column]-mean : mean-baselineMeans[column];
+        const delta = Math.round(raw * 1000000) / 1000000; // the engine rounds each edge to 1e-6 before the hold test
         if (!['up','down'].includes(metric.direction)) throw new Error('metric direction unsupported');
         differences[column] = delta;
-        // The contract uses >= margin; tolerate only machine representation error.
-        if (delta + Number.EPSILON * Math.max(1,Math.abs(mean),Math.abs(baselineMeans[column])) < margin) metricMoved = false;
+        // The contract: edge + 1e-9 >= margin.
+        if (delta + 1e-9 < margin) metricMoved = false;
       }
       observations.push({cycle:c,differences});
     }

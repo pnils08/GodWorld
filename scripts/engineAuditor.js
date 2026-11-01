@@ -332,6 +332,9 @@ async function runEngineAudit(ctx) {
       District: r.District, Approval: r.Approval,
     })),
     Crime_Metrics: snapshot.Crime_Metrics || [],
+    // civic.47 B2 F7: the board reads the transit stage gate from this audit. The tab
+    // appends every Cycle, so keep only this Cycle's rows (stations + corridor rows).
+    Transit_Metrics: (snapshot.Transit_Metrics || []).filter(r => Number(r.Cycle) === Number(cycle)),
   };
   Object.keys(persistedSnapshots).forEach(k => { if (failed.has(k)) delete persistedSnapshots[k]; });
   // The citizen maps are the next audit's baseline (citizenStates diff, income Δ):

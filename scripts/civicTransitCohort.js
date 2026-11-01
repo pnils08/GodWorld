@@ -23,42 +23,38 @@ function stationServingHoodCohort(rows, cycle, resolver, stationDefs = configure
   if (!Array.isArray(rows) || !rows.length) return fail('transit-tab-empty');
   if (!resolver || !Array.isArray(resolver.hoods) || !resolver.hoods.length || typeof resolver.resolve !== 'function') return fail('canon-hoods-unavailable');
   if (!Array.isArray(stationDefs) || !stationDefs.length) return fail('station-map-unavailable');
-  const serves = new Map();
+  // A hood's value is the sum of the stations located in it (the station's own
+  // neighborhood). Corridor labels are catchment: no station is counted in two hoods.
+  const stationHood = new Map();
+  const values = {};
   for (const def of stationDefs) {
     const station = String(def?.station || '').trim();
-    if (!station || serves.has(station)) return fail('station-map-invalid');
-    const hoods = new Set();
-    for (const label of [def.neighborhood, ...(Array.isArray(def.corridors) ? def.corridors : [])]) {
-      const raw = String(label || '').trim();
-      if (!raw) continue;
-      const hood = resolver.resolve(raw);
-      if (!hood || !resolver.hoods.includes(hood)) return fail('station-hood-unresolved:' + station + ':' + raw);
-      hoods.add(hood);
-    }
-    if (!hoods.size) return fail('station-has-no-hood:' + station);
-    serves.set(station, [...hoods]);
+    if (!station || stationHood.has(station)) return fail('station-map-invalid');
+    const raw = String(def.neighborhood || '').trim();
+    const hood = raw ? resolver.resolve(raw) : null;
+    if (!hood || !resolver.hoods.includes(hood)) return fail('station-hood-unresolved:' + station + ':' + raw);
+    stationHood.set(station, hood);
+    values[hood] = 0;
   }
   const byStation = new Map();
   for (const row of rows) {
     const station = String(row?.Station || '').trim();
     if (!station) continue; // Transit_Metrics also contains corridor rows.
-    if (!serves.has(station)) return fail('station-not-configured:' + station);
+    // The tab appends every Cycle; only the observation Cycle's rows are evidence.
+    if (Number(row.Cycle) !== Number(cycle)) continue;
+    if (!stationHood.has(station)) return fail('station-not-configured:' + station);
     if (byStation.has(station)) return fail('duplicate-station:' + station);
-    if (Number(row.Cycle) !== Number(cycle)) return fail('station-cycle-mismatch:' + station);
     if (!(['number', 'string'].includes(typeof row.RidershipVolume) &&
           String(row.RidershipVolume).trim() !== '' && Number.isFinite(Number(row.RidershipVolume)) && Number(row.RidershipVolume) >= 0)) {
       return fail('station-ridership-invalid:' + station);
     }
     byStation.set(station, Number(row.RidershipVolume));
   }
-  const values = Object.fromEntries(resolver.hoods.map(h => [h, 0]));
-  for (const [station, hoods] of serves) {
+  for (const [station, hood] of stationHood) {
     if (!byStation.has(station)) return fail('station-row-missing:' + station);
-    for (const hood of hoods) values[hood] += byStation.get(station);
+    values[hood] += byStation.get(station);
   }
-  const cohortRows = Object.fromEntries(Object.entries(values).filter(([, value]) => value > 0)
-    .map(([hood, value]) => [hood, { RidershipVolume: value }]));
-  if (!Object.keys(cohortRows).length) return fail('no-station-served-hoods');
+  const cohortRows = Object.fromEntries(Object.keys(values).sort().map(hood => [hood, { RidershipVolume: values[hood] }]));
   return { available: true, reason: null, cycle: Number(cycle), tab: 'Transit_Metrics', scope: 'station-serving-hood', rows: cohortRows };
 }
 

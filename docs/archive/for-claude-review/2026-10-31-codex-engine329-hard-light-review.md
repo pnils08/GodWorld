@@ -9,7 +9,7 @@ sources:
   - commit 41160fe3
   - output/engine-sheet/2026-10-31-e329-bench.log
 pointers:
-  - "[[../archive/for-claude-review/2026-10-31-codex-pipeline99-world-facing-review]] — F3 second paragraph, the attribution defect under review"
+  - "[[2026-10-31-codex-pipeline99-world-facing-review]] — F3 second paragraph, the attribution defect under review"
 ---
 
 # engine.329 — hard-light context diff review

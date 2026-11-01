@@ -1,7 +1,7 @@
 ---
 title: Deploy History — full sandbox + PROD deployment ledger
 created: 2026-09-04
-updated: 2026-10-27
+updated: 2026-11-01
 type: reference
 tags: [engine, deploy, history, active]
 sources:
@@ -18,6 +18,8 @@ pointers:
 ---
 
 ## Current sandbox — full trail
+
+**`SANDBOX 1004` @177 = stage 35 = PROD stage 35 after the engine.329 proof (2026-11-01, research-build).** @176 = stage 36 = stage 35 + `processAdvancementIntake.js` at `41160fe3` (`output/engine-sheet/stage36-e329.sha256`) fired C128 PASS with the planted hard/neutral pair for POP-00023 (bench-only rows, Reporter `BENCH-ONLY engine.329 probe - never replay`); code restored to stage 35 (@177), **bench data at C128** (now one stage behind PROD stage 36 — the next push script bases on `stage36-e329.sha256`). Log `output/engine-sheet/2026-10-31-e329-bench.log`.
 
 **`SANDBOX 1004` @173 = engine.317 fingerprint = PROD stage 34 (2026-10-30 late to 10-31, engine-sheet).** Bench data as engine.316 left it (C122). Stage 34 = stage 33 + `utilities/webTrigger.js` at `5043d7f6` (`output/engine-sheet/stage34-e317b.sha256`). Door reads with the real read key: C122 equal twice, cycleCount unchanged. The C123 fire lost its local wrapper at session close and finished on its own (201 s, door C123 done, EE 4 → 4, no checkpoint, verdict lost), so a receipt fire followed: `e317b-fire2` C124 198 s PASS, persist errors [], EE 4 → 4, door C124 done, live 113 throughout. Bench code stays @173 (= PROD), no restore; **bench data at C124.** Log `output/engine-sheet/2026-10-30-e317b-bench.log`, receipt `2026-10-19-benchfires.jsonl`.
 
@@ -176,10 +178,17 @@ pointers:
 
 ## PROD deploy log — full trail
 
+### PROD stage 36 (`41160fe3`, one file over stage 35) — engine.329 the hard-light line names the hard row's piece (2026-11-01 ~00:10 CDT, research-build)
+- **Why:** codex pipeline.99 review F3 second paragraph (2026-10-31), builder "let's take care of #1": `processMediaUsage_` ORed `hard` across a citizen's usage rows while `context`/`usageType` took the last row's, so a hard sports row followed by a neutral civic row wrote the hard-light line naming the civic piece.
+- **What changed:** `phase05-citizens/processAdvancementIntake.js` — the first hard row's context and usageType stick for the pass; a later row, neutral or hard, never overwrites them. Test `scripts/engine304FamilyLottery.test.js` C7 (fails on `57cef469`, passes on `41160fe3`; 60/60, 52/52, 138/138).
+- **Bench proof:** SANDBOX 1004 @176 stage 36 (`stage36-e329.sha256`): two bench-only `Citizen_Media_Usage` rows planted for POP-00023 (hard `sports_c127` first, neutral `civic_c127` second), C128 PASS 171 s, log row + ledger line both "a Bay Tribune sports desk piece, C127", UsageCount 3. Bench restored to stage 35 (@177). Log `output/engine-sheet/2026-10-31-e329-bench.log`. Codex: one review, SHIP, no findings (`docs/archive/for-claude-review/2026-10-31-codex-engine329-hard-light-review.md`).
+- **Push:** `bash output/engine-sheet/2026-10-31-push-e329-prod.sh 41160fe3 output/engine-sheet/stage36-e329.sha256 113` (log `…-push-e329-prod.log`) → fresh PROD pull = stage 35, built = benched manifest, door read before the push valid C113 done, **@172**, pull-back 167 js identical, fire state and door clean after the pull-back, +8 and +16 min (Cycle 113, intake 148 rows identical, ledger 1,053), no fire key.
+- **Rollback:** the one file from `57cef469` with a guarded deploy against `stage35-e316.sha256`.
+
 ### PROD stage 35 (`57cef469`, three files over stage 34) — engine.316 every hood holds a line each way; pipeline.99 hard-light lines in plain words (2026-10-31 ~01:00 CDT, research-build)
 - **Why:** builder 2026-10-30 "go on the hoods" and 2026-10-31 "remove the builder and 4th wall breaking stuff". Five hoods held no signed drift line one way or both, so a moving week's winning roll wrote nothing; hard-light lines bypassed engine.163's seam and wrote a raw ops key into a life.
 - **What changed:** `phase05-citizens/runNeighborhoodEngine.js` 28 signed lines in `NEIGHBORHOOD_DRIFT_BESPOKE_` (Eastlake, Baylight District, East Oakland, Grand Lake, San Antonio). `phase05-citizens/processAdvancementIntake.js` the hard-light ledger line and log row go through `describeUsageContext_`. `phase07-evening-media/mediaRoomIntake.js` a comment.
-- **Bench proof:** SANDBOX 1004 @174 stage 35 (`stage35-e316.sha256`): C125–C127 PASS, 9 drafted lines (Eastlake 3, San Antonio 2, Baylight 4), 0 outside their hood; bench restored to stage 34. Earlier runs @169, @171. Hard-light seam: unit only, no hard row fell in the bench window. Codex: engine.316 review + re-review, pipeline.99 review + re-review (each HOLD, verified, decided by the seat, `docs/for-claude-review/2026-10-30-codex-engine316-*`, `2026-10-31-codex-pipeline99-*`).
+- **Bench proof:** SANDBOX 1004 @174 stage 35 (`stage35-e316.sha256`): C125–C127 PASS, 9 drafted lines (Eastlake 3, San Antonio 2, Baylight 4), 0 outside their hood; bench restored to stage 34. Earlier runs @169, @171. Hard-light seam: unit only, no hard row fell in the bench window. Codex: engine.316 review + re-review, pipeline.99 review + re-review (each HOLD, verified, decided by the seat, `docs/archive/for-claude-review/2026-10-30-codex-engine316-*`, `2026-10-31-codex-pipeline99-*`).
 - **Push:** `bash output/engine-sheet/2026-10-31-push-e316-prod.sh 57cef469 output/engine-sheet/stage35-e316.sha256 113` (log `…-push-e316-prod.log`) → fresh PROD pull = stage 34, built = benched manifest, door read before the push valid C113 done, **@171**, pull-back 167 js identical, fire state and door clean after the pull-back, +8 and +16 min (Cycle 113, intake 148 rows identical, ledger 1,053), no fire key. First push with the door read on both sides, no named exception.
 - **Rollback:** the three files from `6b0732f4^` with a guarded deploy against `stage34-e317b.sha256`.
 

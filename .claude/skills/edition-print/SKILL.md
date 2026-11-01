@@ -5,7 +5,7 @@ version: "1.4"
 updated: 2026-05-30
 tags: [media, active]
 effort: low
-disable-model-invocation: false
+disable-model-invocation: true
 argument-hint: "[--cycle XX]"
 ---
 

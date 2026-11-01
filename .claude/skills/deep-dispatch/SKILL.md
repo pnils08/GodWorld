@@ -6,7 +6,7 @@ updated: 2026-08-03
 tags: [media, pipeline-44, fork, deep-dispatch, active]
 effort: medium
 argument-hint: "<desk> [cycle-number]"
-disable-model-invocation: false
+disable-model-invocation: true
 related_skills: [desk-slice, post-publish]
 sources:
   - "docs/research/2026-07-11-desk-slice-fork.md — the one-doc (fork design + Task 1 charge-format rules)"

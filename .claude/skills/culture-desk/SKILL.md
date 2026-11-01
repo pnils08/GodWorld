@@ -5,7 +5,7 @@ version: "1.0"
 updated: 2026-04-17
 tags: [media, active]
 effort: medium
-disable-model-invocation: false
+disable-model-invocation: true
 ---
 
 # /culture-desk — Write Culture Section

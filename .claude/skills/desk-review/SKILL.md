@@ -5,7 +5,7 @@ version: "1.0"
 updated: 2026-07-11
 tags: [media, pipeline-44, fork, review, active]
 effort: medium
-disable-model-invocation: false
+disable-model-invocation: true
 argument-hint: "<desk|all> [cycle-number]"
 related_skills: [deep-dispatch, post-publish]
 sources:

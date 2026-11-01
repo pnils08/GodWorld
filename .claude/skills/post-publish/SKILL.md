@@ -5,7 +5,7 @@ version: "1.12"
 updated: 2026-07-11
 tags: [media, active]
 effort: high
-disable-model-invocation: false
+disable-model-invocation: true
 argument-hint: "[--type edition|interview|supplemental|dispatch] [--cycle XX] [--source <path>]"
 ---
 

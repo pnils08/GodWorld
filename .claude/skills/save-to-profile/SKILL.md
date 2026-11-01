@@ -6,7 +6,7 @@ updated: 2026-05-26
 tags: [infrastructure, persona, active]
 allowed-tools: Bash(npx supermemory *), Bash(source *)
 effort: low
-disable-model-invocation: false
+disable-model-invocation: true
 related_skills: [save-to-mags]
 sources:
   - docs/archive/plans/2026-05-13-supermemory-profile-leverage.md (Phase 2 confirmed answers, S235)

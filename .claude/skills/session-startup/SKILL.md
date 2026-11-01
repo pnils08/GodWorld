@@ -5,7 +5,7 @@ version: "3.0"
 updated: 2026-10-28
 tags: [infrastructure, active]
 effort: low
-disable-model-invocation: false
+disable-model-invocation: true
 related_skills: [session-end]
 ---
 

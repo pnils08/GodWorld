@@ -5,7 +5,7 @@ version: "2.1"
 updated: 2026-06-16
 tags: [engine, active]
 effort: high
-disable-model-invocation: false
+disable-model-invocation: true
 ---
 
 # /doc-audit — Architecture Doc Freshness Audit

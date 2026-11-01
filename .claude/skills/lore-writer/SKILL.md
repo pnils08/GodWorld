@@ -5,7 +5,7 @@ version: "1.0"
 updated: 2026-08-17
 tags: [antigravity, canon, lore, active]
 effort: low
-disable-model-invocation: false
+disable-model-invocation: true
 ---
 
 # lore-writer — Deep Background Generation

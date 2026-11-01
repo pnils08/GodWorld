@@ -5,7 +5,7 @@ version: "1.1"
 updated: 2026-06-16
 tags: [engine, active]
 effort: medium
-disable-model-invocation: false
+disable-model-invocation: true
 ---
 
 # /health — Quick Engine Health Check

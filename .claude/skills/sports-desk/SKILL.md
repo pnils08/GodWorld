@@ -5,7 +5,7 @@ version: "1.0"
 updated: 2026-04-17
 tags: [media, active]
 effort: high
-disable-model-invocation: false
+disable-model-invocation: true
 ---
 
 # /sports-desk — Write Oakland Sports Section

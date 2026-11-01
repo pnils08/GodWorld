@@ -5,7 +5,7 @@ version: "2.7"
 updated: 2026-07-11
 tags: [media, active]
 effort: high
-disable-model-invocation: false
+disable-model-invocation: true
 argument-hint: "[cycle-number]"
 related_skills: [sift, post-publish, style-pass, capability-review, skill-check]
 sources:

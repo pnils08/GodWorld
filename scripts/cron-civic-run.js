@@ -2398,7 +2398,7 @@ function datawakeUserPrompt(pack, wallInj, office) {
 
 // Only accepted structured moves belong to new records. Historical wall
 // readers retain legacy action support, but model extras never reach them.
-function datawakeRecord({ office, cycle, date, answeredModel, j, mv }) {
+function datawakeRecord({ office, cycle, date, answeredModel, j, mv, usage }) {
   return {
     office: voiceSlug(office.agentDir), agentDir: office.agentDir, holder: office.holder,
     popid: office.popid, title: office.title, date, cycle: Number(cycle),
@@ -2406,6 +2406,7 @@ function datawakeRecord({ office, cycle, date, answeredModel, j, mv }) {
     moves: mv.accepted,
     movesRejected: mv.rejected.map(r => ({ type: (r.move && r.move.type) || null, reason: r.reason })),
     numberMoved: j.numberMoved || null, ranAt: new Date().toISOString(),
+    usage: usage || null,
     fellBackFrom: answeredModel === (office.model || 'deepseek/deepseek-v4.1-flash-1017') ? null : office.model,
   };
 }
@@ -3236,6 +3237,7 @@ async function runDatawake() {
       const persona = readPersonaDir(civicSeat.personaDirFor(office, ROOT) || office.agentDir);
       let j = null;
       let answeredModel = office.model || 'deepseek/deepseek-v4.1-flash-1017';
+      let answeredUsage = null;   // builder 2026-11-01: no caps, so the receipt shows what each seat spends
       let attemptUser = user;
       // civic.29: a CALL failure (429, timeout, provider outage) used to burn
       // both attempts on the office's own model and mute the seat for the day
@@ -3274,7 +3276,7 @@ async function runDatawake() {
           // slices; statement is speech. (civic.38: the free-text action field
           // is replaced by the closed moves array, gated below.)
           const bad = ungroundedNumbers(hay, [cand.numberMoved], { district: office.district, cycle });
-          if (!bad.length) { j = cand; answeredModel = active; break chainLoop; }
+          if (!bad.length) { j = cand; answeredModel = active; answeredUsage = r.usage || null; break chainLoop; }
           log(office.agentDir + ' attempt ' + attempt + ': ungrounded number(s) ' + bad.join(', '));
           if (attempt === 2) throw new Error('fabricated statistic(s) after retry: ' + bad.join(', '));
           attemptUser = user + '\n\nYOUR PREVIOUS ATTEMPT WAS REJECTED: it cited number(s) [' + bad.join(', ') + '] that are NOT in your data. Use only quantities present in the material above, or say it in words without inventing figures.';
@@ -3307,7 +3309,7 @@ async function runDatawake() {
       for (const accepted of mv.accepted) {
         log('[datawake] MOVE ' + office.agentDir + ' — ' + accepted.type + ' ' + JSON.stringify(accepted.payload).slice(0, 120));
       }
-      const rec = datawakeRecord({ office, cycle, date, answeredModel, j, mv });
+      const rec = datawakeRecord({ office, cycle, date, answeredModel, j, mv, usage: answeredUsage });
       const outPath = path.join(DATAWAKE_DIR, office.agentDir + '_' + date + '.json');
       fs.writeFileSync(outPath, JSON.stringify(rec, null, 2));
       const ledgerFile = appendMoveLedger(ROOT, cycle, moveLedgerLines(office, cycle, date, mv));

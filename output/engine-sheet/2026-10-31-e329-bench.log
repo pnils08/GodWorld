@@ -1,0 +1,23 @@
+== engine.329 bench, candidate 41160fe3, probe citizen POP-00023 Gregory Mims
+AIM = BENCH (script read the bench marker)
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":127,"startedMs":1793425827368,"state":"done","finishedMs":1793426010981},"raw":"{\"cycle\":127,\"startedMs\":1793425827368,\"state\":\"done\",\"finishedMs\":1793426010981}","valid":true,"expectOk":null}
+bench pulled = stage 34; three e316 files at 57cef469 = stage 35
+stage 36 = stage 35 + phase05-citizens/processAdvancementIntake.js at 41160fe3; manifest output/engine-sheet/stage36-e329.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @176
+pull-back 167 js + manifest byte-identical to stage36-e329.sha256
+planted 2 rows for POP-00023 Gregory Mims at bench cycle 127 usage 3 tier 3 [["sports_c127_p-slayer","negative",""],["civic_c127_carmen-delaine","neutral",""]]
+version cut; waiting 293 s for /exec propagation
+bench cycleCount 127
+fire C128 rc=0 "verdict": "PASS" "wallS": 171
+bench cycle 128 | log hard-light rows after C127: 1 | ledger hard-light lines: 1 | UsageCount 3
+  log   C128 "Named in a hard light — UsageCount now 3 (a Bay Tribune sports desk piece, C127)"
+  ledger "Y3C24 — [Media] Named in a hard light — the coverage was not kind (a Bay Tribune sports desk piece, C127)"
+engine.329 line names the hard row's piece in words
+== restore bench code to stage 35 (= PROD)
+bench pulled = stage 36; phase05-citizens/processAdvancementIntake.js back at 57cef469 = stage 35
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @177
+pull-back 167 js + manifest byte-identical to stage35-e316.sha256
+engine.329 bench PASS
+exit 0

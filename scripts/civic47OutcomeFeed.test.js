@@ -4,6 +4,7 @@ const assert = require('assert');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
+const crypto = require('crypto');
 const { buildOutcomeFeed } = require('./civic47OutcomeFeed');
 const { buildLocal } = require('./buildCivicOutcomeFeed');
 const { makeBrief } = require('./civicBrief');
@@ -42,8 +43,12 @@ try {
   fs.mkdirSync(dir, { recursive: true });
   const beats = path.join(root, 'output', 'beats');
   fs.mkdirSync(beats, { recursive: true });
-  fs.writeFileSync(path.join(beats, 'meta.json'), JSON.stringify({ cycle: 120 }));
-  fs.writeFileSync(path.join(beats, 'Civic_Action_Ledger.jsonl'), JSON.stringify(base) + '\n');
+  const journalFile = path.join(beats, 'Civic_Action_Ledger.jsonl');
+  const journalBody = JSON.stringify(base) + '\n';
+  const journalHash = crypto.createHash('sha256').update(journalBody).digest('hex');
+  fs.writeFileSync(path.join(beats, 'meta.json'), JSON.stringify({ cycle: 120,
+    sourceHashes: { Civic_Action_Ledger: journalHash } }));
+  fs.writeFileSync(journalFile, journalBody);
   fs.writeFileSync(path.join(dir, 'experiences_c120.jsonl'), experience.map(JSON.stringify).join('\n') + '\n');
   fs.writeFileSync(path.join(dir, 'reactions_c120.jsonl'), reactions.map(JSON.stringify).join('\n') + '\n');
   fs.writeFileSync(path.join(dir, 'published_c120.jsonl'), publications.map(JSON.stringify).join('\n') + '\n');
@@ -52,7 +57,8 @@ try {
   assert(entries.some(e => e.actionId === 'CA-SYN1' && e.ref === 'Civic_Action_Ledger:CA-SYN1'));
   fs.writeFileSync(path.join(dir, 'outcome_feed_c120.json'), JSON.stringify({ ...feed, actions: [] }));
   assert(loadCycleCivicEntries(120, root).some(e => e.actionId === 'CA-SYN1'), 'stale saved feed never hides journal source');
-  fs.writeFileSync(path.join(beats, 'meta.json'), JSON.stringify({ cycle: 121 }));
+  fs.writeFileSync(path.join(beats, 'meta.json'), JSON.stringify({ cycle: 121,
+    sourceHashes: { Civic_Action_Ledger: journalHash } }));
   fs.writeFileSync(path.join(dir, 'reactions_c122.jsonl'), JSON.stringify({
     ActionId: 'CA-SYN1', POPID: 'POP-SYN02', ExperienceId: 'EXP-SYN1',
     ReactionId: 'REACT-FUTURE', Stance: 'positive',
@@ -70,5 +76,8 @@ try {
   }).brief;
   assert.strictEqual(nextBrief.sections.response.committedResponse[0].reactions[0].reactionId,
     'REACT-SYN1', 'the official actually sees the saved prior-Cycle response');
+  fs.writeFileSync(journalFile, journalBody + journalBody);
+  assert.throws(() => buildLocal(root, 121), /hash mismatch/,
+    'a changed journal file cannot certify an applied outcome under old metadata');
   console.log('civic47 outcome feed: ok');
 } finally { fs.rmSync(root, { recursive: true, force: true }); }

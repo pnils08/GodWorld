@@ -10,10 +10,10 @@ const { normalizeEnvelope, actionLines, appendSession } = require('./civicAction
 const { validateDatawakeMoves, civicDutyDay } = require('./cron-civic-run');
 
 const seats = [
-  { officeId: 'MAYOR-01', agentDir: 'syn-mayor', district: 'citywide' },
+  { officeId: 'MAYOR-01', agentDir: 'syn-mayor', district: 'citywide', popid: 'POP-SYNM' },
   ...Array.from({ length: 9 }, (_, n) => ({ officeId: 'COUNCIL-D' + (n + 1),
-    agentDir: 'syn-d' + (n + 1), district: 'D' + (n + 1) })),
-  { officeId: 'CHIEF-POLICE', agentDir: 'syn-chief', district: 'citywide' },
+    agentDir: 'syn-d' + (n + 1), district: 'D' + (n + 1), popid: 'POP-SYN' + (n + 1) })),
+  { officeId: 'CHIEF-POLICE', agentDir: 'syn-chief', district: 'citywide', popid: 'POP-SYNC' },
 ];
 const noEvents = { generation: { cycle: 120 }, events: [] };
 assert.strictEqual(pilotPolicy(false), null);
@@ -77,6 +77,8 @@ const verdict = validateDatawakeMoves(envelope.moves, { office, cycle: 120, civi
   answerEvidenceAvailable: true });
 assert.deepStrictEqual(verdict.accepted.map(x => x.type), ['answer', 'work', 'work', 'work', 'work']);
 assert.strictEqual(verdict.rejected.length, 0);
+assert.throws(() => actionLines({ ...office, popid: null }, 120, '2026-11-02',
+  { accepted: verdict.accepted, rejected: [] }, 'syn-hash'), /holder POPID/);
 const independent = validateDatawakeMoves([
   { type: 'work', initiativeId: 'BAD', clientActionId: 'D1' },
   { type: 'work', initiativeId: 'INIT-SYN2', clientActionId: 'D2', dependsOn: ['D1'] },
@@ -89,6 +91,7 @@ const root = fs.mkdtempSync(path.join(os.tmpdir(), 'civic47-session-'));
 try {
   const lines = actionLines(office, 120, '2026-11-02', verdict, 'syn-hash');
   assert.strictEqual(new Set(lines.map(x => x.moveId)).size, lines.length);
+  assert(lines.filter(x => x.status === 'pending').every(x => /^CA-[a-f0-9]{24}$/.test(x.actionId)));
   const withoutFirst = actionLines(office, 120, '2026-11-02',
     { accepted: verdict.accepted.slice(1), rejected: [] }, 'syn-hash');
   assert.strictEqual(withoutFirst[0].moveId, lines[1].moveId,

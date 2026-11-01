@@ -5,6 +5,7 @@ const path = require('path');
 const { getNeighborhoodsForDistricts } = require('../lib/districtMap');
 const { loadEventView, eventsForSeat, sha } = require('./civicEventView');
 const { loadOutcomeFeed } = require('./civic47OutcomeFeed');
+const { loadReconciliation } = require('./civic47Journal');
 
 function priorAudit(root, cycle) {
   const file = path.join(root, 'output', 'engine_audit_c' + (Number(cycle) - 1) + '.json');
@@ -88,10 +89,14 @@ function makeBrief({ root, cycle, office, pack, audit }) {
       .filter(m => m.moveId).map(m => [m.moveId, m])),
   };
   const currentOutcomes = loadOutcomeFeed(root, cycle);
+  const reconciliation = loadReconciliation(root, cycle);
+  const myReconciled = reconciliation.available ? reconciliation.actions
+    .filter(x => x.officeId === office.officeId) : [];
   const outcomeFeeds = [currentOutcomes].filter(x => x.available);
   const myOutcomes = outcomeFeeds.flatMap(x => x.officialFeedback || [])
     .filter(x => x.officeId === office.officeId);
   for (const outcome of myOutcomes) evidence.prior[outcome.actionId] = outcome;
+  for (const action of myReconciled) evidence.prior[action.moveId] = action;
   const boardPage = page.map(b => ({ ...b, retrievalKey: 'project/' + b.id }));
   const freshness = {
     ...view.generation,
@@ -122,6 +127,9 @@ function makeBrief({ root, cycle, office, pack, audit }) {
         evidenceAvailable: ((pack.game || {}).lastMove || {}).available !== false,
         outcomeFeedAvailable: outcomeFeeds.length > 0,
         actionOutcomes: myOutcomes,
+        actionReconciliationAvailable: reconciliation.available,
+        actionReconciliationReason: reconciliation.available ? null : reconciliation.reason,
+        reconciledActions: myReconciled,
       },
       opportunities: {
         board: boardPage, omittedCount: Math.max(0, board.length - page.length),
@@ -158,7 +166,10 @@ function readBriefEvidence(pack, request) {
   const type = String(request && request.type || '');
   const id = String(request && request.id || '');
   const key = type + '/' + id;
-  if (!KINDS.has(type) || !/^[A-Za-z0-9_-]{1,80}$/.test(id))
+  const validId = type === 'prior'
+    ? /^[A-Za-z0-9_:-]{1,120}$/.test(id)
+    : /^[A-Za-z0-9_-]{1,80}$/.test(id);
+  if (!KINDS.has(type) || !validId)
     return { key, available: false, reason: 'invalid evidence request' };
   const value = pack && pack._briefEvidence && pack._briefEvidence[type] && pack._briefEvidence[type][id];
   if (!value) return { key, available: false, reason: 'not in this seat snapshot' };

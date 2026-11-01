@@ -50,8 +50,10 @@ try {
     { Neighborhood: 'Chinatown', Sentiment: '0.4' },
     { Neighborhood: 'Baylight District', Sentiment: '0.3' },
   ] } };
+  const priorMoveId = 'MV-112-COUNCIL-D2-2026-10-30:a:D1';
   const pack = { pulse: null, game: { board: [], categories: { available: true, list: [] },
-    lastMove: { available: true, moves: [] }, petitionPool: { complaints: [], participation: [] } } };
+    lastMove: { available: true, moves: [{ moveId: priorMoveId, status: 'pending', type: 'work', cycle: 112 }] },
+    petitionPool: { complaints: [], participation: [] } } };
   const situation = makeBrief({ root, cycle: 113, office: d2, pack, audit });
   pack.brief = situation.brief;
   pack._briefEvidence = situation.evidence;
@@ -59,6 +61,8 @@ try {
   assert(pack.brief.sections.events.items.some(e => e.category === 'sports-parade' && e.ageCycles === 2));
   const paradeId = districtEvents.find(e => e.category === 'sports-parade').eventId;
   assert(readBriefEvidence(pack, { type: 'event', id: paradeId }).available);
+  assert(readBriefEvidence(pack, { type: 'prior', id: priorMoveId }).available,
+    'a listed prior move ID with colons must be retrievable');
   assert(!readBriefEvidence(pack, { type: 'district', id: 'D1' }).available);
   assert(!readBriefEvidence(pack, { type: 'project', id: '../../etc/passwd' }).available);
   const gated = filterEvidenceDependentMoves([

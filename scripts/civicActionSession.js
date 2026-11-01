@@ -6,6 +6,8 @@ const crypto = require('crypto');
 const { acquireFileLock } = require('../lib/wakePerception');
 
 const hash = value => crypto.createHash('sha256').update(JSON.stringify(value === undefined ? null : value)).digest('hex');
+const actionIdFor = (moveId, popid, payloadHash) => 'CA-' +
+  hash([moveId, popid, payloadHash]).slice(0, 24);
 
 function normalizeEnvelope(output) {
   if (!output || typeof output !== 'object') return { statement: '', moves: [], issue: 'decision object missing' };
@@ -28,6 +30,8 @@ function normalizeEnvelope(output) {
 
 function actionLines(office, cycle, sessionId, moves, evidenceHash) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(String(sessionId))) throw new Error('invalid civic session date');
+  if (!office || !office.officeId || !/^POP-[A-Z0-9]+$/.test(String(office.popid || '')))
+    throw new Error('accepted civic session requires office and holder POPID');
   const base = 'MV-' + cycle + '-' + String(office.officeId || office.agentDir) + '-' + sessionId;
   const at = new Date().toISOString();
   return [
@@ -35,7 +39,8 @@ function actionLines(office, cycle, sessionId, moves, evidenceHash) {
       const payloadHash = hash({ type: m.type, payload: m.payload });
       const clientActionId = String(m.payload && m.payload.clientActionId || '');
       if (!/^[A-Za-z][A-Za-z0-9_-]{0,39}$/.test(clientActionId)) throw new Error('accepted action lacks stable clientActionId');
-      return { moveId: base + ':a:' + clientActionId, sessionId, clientActionId,
+      const moveId = base + ':a:' + clientActionId;
+      return { moveId, actionId: actionIdFor(moveId, office.popid, payloadHash), sessionId, clientActionId,
         payloadHash, evidenceHash: evidenceHash || null,
         cycle: Number(cycle), agentDir: office.agentDir, officeId: office.officeId || null,
         popid: office.popid || null, type: m.type, payload: m.payload,
@@ -76,6 +81,8 @@ function appendSession(root, cycle, lines) {
       if (old) {
         if (old.payloadHash !== row.payloadHash || old.popid !== row.popid)
           throw new Error('action identity conflict; prior choice cannot be overwritten');
+        if (old.actionId && old.actionId !== row.actionId)
+          throw new Error('action identity conflict; prior action ID cannot be overwritten');
         replayed++;
       } else add.push(row);
     }
@@ -84,4 +91,4 @@ function appendSession(root, cycle, lines) {
   } finally { release(); }
 }
 
-module.exports = { normalizeEnvelope, actionLines, appendSession, hash };
+module.exports = { normalizeEnvelope, actionLines, appendSession, actionIdFor, hash };

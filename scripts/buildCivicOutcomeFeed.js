@@ -5,14 +5,11 @@
 // unavailable when their producers have not shipped. Nothing here writes a tab.
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const { buildOutcomeFeed } = require('./civic47OutcomeFeed');
 
-function readRows(file, required = false) {
-  if (!fs.existsSync(file)) {
-    if (required) throw new Error(file + ' missing');
-    return null;
-  }
-  return fs.readFileSync(file, 'utf8').split(/\r?\n/).flatMap((line, index) => {
+function parseRows(body, file) {
+  return body.split(/\r?\n/).flatMap((line, index) => {
     if (!line.trim()) return [];
     try {
       const row = JSON.parse(line);
@@ -20,6 +17,14 @@ function readRows(file, required = false) {
       return [row];
     } catch (e) { throw new Error(file + ':' + (index + 1) + ': ' + e.message); }
   });
+}
+
+function readRows(file, required = false) {
+  if (!fs.existsSync(file)) {
+    if (required) throw new Error(file + ' missing');
+    return null;
+  }
+  return parseRows(fs.readFileSync(file, 'utf8'), file);
 }
 
 function readReceiptsThroughCycle(dir, stem, cycle) {
@@ -38,7 +43,12 @@ function buildLocal(root, cycle) {
   const beats = path.join(root, 'output', 'beats');
   const meta = JSON.parse(fs.readFileSync(path.join(beats, 'meta.json'), 'utf8'));
   if (Number(meta.cycle) !== c) throw new Error('beat dump Cycle mismatch');
-  const rows = readRows(path.join(beats, 'Civic_Action_Ledger.jsonl'), true);
+  const journalFile = path.join(beats, 'Civic_Action_Ledger.jsonl');
+  const journalBody = fs.readFileSync(journalFile, 'utf8');
+  const actualHash = crypto.createHash('sha256').update(journalBody).digest('hex');
+  if (!meta.sourceHashes || meta.sourceHashes.Civic_Action_Ledger !== actualHash)
+    throw new Error('action journal dump hash mismatch or missing');
+  const rows = parseRows(journalBody, journalFile);
   const local = path.join(root, 'output', 'cron-civic');
   // The authoritative action journal is cumulative. Saved local receipt
   // exports must be cumulative here too, or a response vanishes from the
@@ -70,4 +80,4 @@ function main(args = process.argv.slice(2)) {
 if (require.main === module) {
   try { main(); } catch (e) { console.error(e.message); process.exitCode = 1; }
 }
-module.exports = { readRows, readReceiptsThroughCycle, buildLocal, main };
+module.exports = { parseRows, readRows, readReceiptsThroughCycle, buildLocal, main };

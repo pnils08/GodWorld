@@ -168,7 +168,7 @@ Rulings: **(1)** pilots' own reserve, 3 a Cycle, beside the 6 owed. **(2)** Back
 - Live C113 wake dry run, Cristina Booker (POP-00836), night: `show: 6 pilot-Cycle(s) in window, 6 waiting, 0/3`; her block named both her nights and the board (10th of 24). The reflection spoke to it unprompted: "Thursday night, I couldn't get the ship moving on the show, and I walked home feeling flat."
 - Interview dry run, Eric Taveras (POP-00597): the block carries his three C111 nights (the 1,170-credit night included) and "1st of 24 … led the board 3 weeks". With the switch off the prompt is unchanged (its one UNDOCKED mention is a pre-existing audience line from his life).
 
-### 6.6 Codex review (HOLD, F1–F7) — folded `docs/for-claude-review/2026-10-30-codex-pipeline95-show-wake-review.md`
+### 6.6 Codex review (HOLD, F1–F7) — folded `docs/archive/for-claude-review/2026-10-30-codex-pipeline95-show-wake-review.md`
 
 | # | Finding | Verified | Disposition |
 |---|---|---|---|
@@ -182,7 +182,7 @@ Rulings: **(1)** pilots' own reserve, 3 a Cycle, beside the 6 owed. **(2)** Back
 
 Proof after the fold: the suites pass (new cases for F1, F3, F5 and F6). An unforced C113 night wake dry run (ON in memory) took the show slot for Father Miguel (POP-00734, a C113 pilot), spent only `undocked:POP-00734:c113`, and his reflection named the show unprompted.
 
-### 6.7 Codex re-review (HOLD, R1–R3) — last round; this seat decided `docs/for-claude-review/2026-10-30-codex-pipeline95-show-wake-rereview.md`
+### 6.7 Codex re-review (HOLD, R1–R3) — last round; this seat decided `docs/archive/for-claude-review/2026-10-30-codex-pipeline95-show-wake-rereview.md`
 
 | # | Finding | Verified | Disposition |
 |---|---|---|---|

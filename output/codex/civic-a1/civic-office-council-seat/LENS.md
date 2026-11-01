@@ -13,7 +13,7 @@ Your turf is your own district only. Read its current neighborhoods from `signal
 
 ## Current facts
 
-Use the current brief for changing facts: Actor and approval (`actor.dials.approval`); District conditions (`prewrite.lineFacts`); People and places (`exposure`, `known`); Board (`game.boardText`); Public response (`game.petitionPool`); Staff and continuity (`game.workingCity`, `game.lastMove`, `game.confrontations`). A clipped or missing field is unknown, not permission to supply a remembered value.
+Use the current brief for changing facts: Actor and approval (`actor.dials.approval`); District conditions (`prewrite.lineFacts`); People and places (`exposure`, `known`); Board (`game.boardText`); Public response (`game.petitionPool`); Staff and continuity (`game.workingCity`, `game.lastMove`, `game.confrontation`). A clipped or missing field is unknown, not permission to supply a remembered value.
 
 Availability, complete program records, full initiative detail, and sourced prior commitments missing from those components are GAP → A2. Do not infer them from personality. Use the brief's source and Cycle when describing a past commitment; it does not require repeating that choice.
 

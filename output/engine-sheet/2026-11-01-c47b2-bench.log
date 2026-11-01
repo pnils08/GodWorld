@@ -1,0 +1,31 @@
+== civic.47 B2 F7 bench, candidate 2fc359eb4
+AIM = BENCH (script read the bench marker)
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":132,"startedMs":1793563357921,"state":"done","finishedMs":1793563545922},"raw":"{\"cycle\":132,\"startedMs\":1793563357921,\"state\":\"done\",\"finishedMs\":1793563545922}","valid":true,"expectOk":null}
+bench pulled = stage 36
+stage 37 = stage 36 + phase05-citizens/civicInitiativeEngine.js at 2fc359eb4; manifest output/engine-sheet/stage37-c47b2.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @180
+pull-back 167 js + manifest byte-identical to stage37-c47b2.sha256
+bench cycleCount 132
+planted INIT-003 at bench C132: Standing / signed / operational, no baseline, no hold (originals saved)
+version cut; waiting 294 s for /exec propagation
+fire C133 rc=0 "verdict": "PASS" "wallS": 242
+bench Fruitvale C132 = 8692 | station hoods 7 | median 7609
+baseline: station-serving-hood, conversion, C132, Fruitvale 8692, 7 station hoods, middle 7609 — matches the bench tab
+civic.47 B2 F7 bench after1 PASS
+boosted Fruitvale C133 ridership 7696 -> 34768 (4x the frozen baseline reading 8692)
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":133,"startedMs":1793564149043,"state":"done","finishedMs":1793564384936},"raw":"{\"cycle\":133,\"startedMs\":1793564149043,\"state\":\"done\",\"finishedMs\":1793564384936}","valid":true,"expectOk":null}
+fire C134 rc=0 "verdict": "PASS" "wallS": 193
+bench Fruitvale C132 = 8692 | station hoods 7 | median 7609
+baseline: station-serving-hood, conversion, C132, Fruitvale 8692, 7 station hoods, middle 7609 — matches the bench tab
+bench Fruitvale C133 = 34768 | recomputed edge 4.4972 | hold {"v":1,"obs":133,"up":1,"down":0,"first":0,"regressed":0,"m":0.2,"r":0.5,"st":0}
+hold: observation C133 counted, up 1 — the freeze read the station rows and the edge was available
+civic.47 B2 F7 bench after2 PASS
+== revert INIT-003
+INIT-003 reverted to {"Stage":"","StageBaseline":"","StageHold":"","MayoralAction":"none","ImplementationPhase":"design-phase","LastStageChangeCycle":"108","LastWorkCycle":"112"}
+== restore bench code to stage 36 (= PROD)
+bench pulled = stage 37; phase05-citizens/civicInitiativeEngine.js back at 2a6ccb214^ = stage 36
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @181
+pull-back 167 js + manifest byte-identical to stage36-e329.sha256
+civic.47 B2 F7 bench PASS

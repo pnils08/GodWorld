@@ -98,7 +98,7 @@ check('chain offers fallbacks', mayorChain.length > 1, JSON.stringify(mayorChain
 check('no same-family fallback (a provider 429 takes every slug it serves)',
   mayorChain.slice(1).every(function (m) { return m.split('/')[0] !== 'mistralai'; }), JSON.stringify(mayorChain));
 check('fallbacks ordered least-used-first, so a borrowed voice stays distinct',
-  mayorChain[1] === 'moonshotai/kimi-k2', JSON.stringify(mayorChain));
+  mayorChain[1] === 'moonshotai/kimi-k3.1-pro', JSON.stringify(mayorChain));
 
 // A seat already ON a fallback model must not list itself twice.
 var deepseekChain = modelChainFor('deepseek/deepseek-chat');

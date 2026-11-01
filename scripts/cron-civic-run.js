@@ -1411,7 +1411,7 @@ function composeChecks() {
 // ~30, a per-seat rate roughly 10x worse. A fallback exists to rescue a seat
 // from a CALL failure (429/timeout); one that reliably reintroduces the exact
 // defect the two-attempt VALIDITY gate exists to catch is not a rescue.
-const FALLBACK_MODELS = ['moonshotai/kimi-k2', 'deepseek/deepseek-v4-flash-0731'];
+const FALLBACK_MODELS = ['moonshotai/kimi-k3.1-pro', 'deepseek/deepseek-v4.1-flash-1017']; // 2026-11-01 builder: each family on its current model
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
@@ -2124,7 +2124,7 @@ async function runClose() {
   // the 6h verdict cutoff), never treated as a FAIL. Only overall === 'fail'
   // blocks. Check 1 (every office produced statements) is a report line now —
   // a missing voice is pending, not a failed check.
-  const clerkModel = arg('--clerk-model', 'deepseek/deepseek-v4-flash-0731');
+  const clerkModel = arg('--clerk-model', 'deepseek/deepseek-v4.1-flash-1017');
   const clerkPersona = readPersonaDir('city-clerk');
   // civic.38 Task 2 step 4 — the clerk sees this week's candidate proposals
   // (pending `propose` moves off the move ledger) alongside the voice outputs.
@@ -2406,7 +2406,7 @@ function datawakeRecord({ office, cycle, date, answeredModel, j, mv }) {
     moves: mv.accepted,
     movesRejected: mv.rejected.map(r => ({ type: (r.move && r.move.type) || null, reason: r.reason })),
     numberMoved: j.numberMoved || null, ranAt: new Date().toISOString(),
-    fellBackFrom: answeredModel === (office.model || 'deepseek/deepseek-v4-flash-0731') ? null : office.model,
+    fellBackFrom: answeredModel === (office.model || 'deepseek/deepseek-v4.1-flash-1017') ? null : office.model,
   };
 }
 
@@ -3235,7 +3235,7 @@ async function runDatawake() {
       const user = datawakeUserPrompt(pack, wallInj, office);
       const persona = readPersonaDir(civicSeat.personaDirFor(office, ROOT) || office.agentDir);
       let j = null;
-      let answeredModel = office.model || 'deepseek/deepseek-v4-flash-0731';
+      let answeredModel = office.model || 'deepseek/deepseek-v4.1-flash-1017';
       let attemptUser = user;
       // civic.29: a CALL failure (429, timeout, provider outage) used to burn
       // both attempts on the office's own model and mute the seat for the day

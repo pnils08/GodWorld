@@ -74,7 +74,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| infrastructure.16 | PRIORITY (builder 10-30): crons run on Node 20, end of life Apr 2026 (kimi on 22). Move system node + crons to 22; every suite + one cron dry pass | ready | engine-sheet | [[../reference/DEPLOY]] |
 | infrastructure.18 | Weekly version-drift report in the existing health check, no model: runtime end of life, npm behind (majors flagged), Claude Code, plugin vs patch | ready | engine-sheet | [[../reference/DEPLOY]] |
 | engine.325 | Casino overview (builder 10-30, own session): bet types safe→risky, how bets settle without credits or failure, house odds; mishap bet never pays | ready | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §Changelog 2026-10-30 |
 | engine.330 | Sandbox runs cold (builder 11-01): no media scores or ingest reach it. Build: add generic ratings to those feeds on the sandbox | ready | engine-sheet | [[../reference/DEPLOY]] §The bench runs cold |

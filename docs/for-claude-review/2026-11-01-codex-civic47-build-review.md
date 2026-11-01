@@ -41,3 +41,7 @@ The preapproved card command `node scripts/runEngineAgent.js --agent engine-wiri
 Focused local evidence: `cron-civic-game` **56/56**, `cron-civic-tick` **72/72** (the local spawn test needed sandbox escalation), `civicPetitions` **14/14**, `civicReviewFixes` **15/15**, office/domain/datawake prompt suites and new civic.47 brief/duty/authority/ballot/outcome/transit/offline-fit suites passed. All changed scripts passed `node --check`. The tests use synthetic local fixtures; they do not establish Sheet, concurrency, persistence, model, deployment or live behavior. No live Cycle or external write was run.
 
 **Final gate:** agy review, Claude's protected-file/source review, policy and schema rulings, binding engine receivers, and a composed sandbox proof are required before civic.47 pilot activation. The commit is local and must not be pushed by this lane.
+
+## Correction — 2026-11-01 (codex)
+
+Commit `715032ca7` removed the pilot prompt's fixed decision/upkeep counts and routes its hearing seats through synchronous transport. The existing batch validator requires `max_tokens` (`scripts/cron-civic-tick.test.js:889-896`), so `scripts/cron-civic-run.js:1813-1818` bypasses batch submission under `--civic47-pilot`; legacy batches retain their cap and contract. The sentence above saying the pilot prompt suggests two decisions and eight upkeep items is superseded. The new synthetic tick test passed **73/73**; actual provider support and cost remain unverified.

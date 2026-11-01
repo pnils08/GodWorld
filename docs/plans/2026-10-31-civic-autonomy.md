@@ -76,8 +76,8 @@ Task status lives only in this table. Task detail specifies scope and acceptance
 |---|---|---|---|
 | A1 | Reconcile civic facts, permissions and old contracts; freeze source/receipt baseline | research-build | persona facts landed 2026-11-01; slice fields → A2 |
 | A2 | Build event-aware, model-budgeted seat briefs and bounded evidence retrieval | research-build | offline candidate `fe5746d41`; ordinary-wake proof open |
-| A3 | Give each seat sufficient duty turns, independent replies, action batches and continuation receipts | research-build | offline candidate `fe5746d41`, no-cap transport `715032ca7`; policy and week proof open |
-| B1 | Implement action authority, durable execution journal, resource reservations and migration contract | research-build | local contract `fe5746d41`; authoritative journal and migration open |
+| A3 | Give each seat sufficient duty turns, independent replies, action batches and continuation receipts | research-build | inactive proposed policy `3f5bda84e`; week and event-duty proof open |
+| B1 | Implement action authority, durable execution journal, resource reservations and migration contract | research-build | local contract `fe5746d41`, unset spend bands `3f5bda84e`; authoritative journal and migration open |
 | B2 | Connect events, programs and project actions to real receivers; close typed gate defects | research-build | protected patch proposed `fe5746d41`; receivers open |
 | B3 | Make official ballots and mayor decisions binding through one vote authority | research-build | local ballot contract; post-fire intents removed `a3a24d813`; pre-fire opportunity and engine binding open |
 | B4 | Connect committed outcomes to citizen exposure, diverse reactions and measured accountability | research-build | strict local feed `fe5746d41`; experience and approval writers open |
@@ -289,6 +289,7 @@ No single unit test, applied=true file, stage transition, quoted reaction or agg
 ## Open questions
 
 - Claude/builder acceptance should ratify or adjust the proposed opportunity/action/retrieval defaults, event-duty exception and delegated budget authority once. This blocks production policy activation, not offline implementation/specification. **Builder 2026-11-01 (verbatim, see Changelog):** token budgets — "No cap is the rule"; turn counts — "codex plan not mine"; event-duty exception — not answered. The numeric targets in A2/A3/A5 are not builder rulings.
+- **Builder 2026-11-01 selected "Use proposed defaults behind pilot flag (Recommended)."** This supersedes the earlier unanswered offline-policy choice: `scripts/civic47PilotPolicy.js` v1 encodes two regular opportunities, up to two extra event opportunities, and a Fri/Sat event-duty exception under explicit `--civic47-pilot` only. No crontab or live schedule changed. The plan specifies no numeric delegated spend or event-duration bands, so those fields are null and delegation remains unavailable until amounts are supplied; this selection does not authorize invented budgets or production activation.
 - Engine-sheet must map event/program execution capabilities and choose concrete effect rates against existing sim scales; no new housing premise or guaranteed approval gain. This blocks B2 receiver activation.
 - Bind the execution journal to the exact existing persistence guarantees before choosing its final columns/storage. A proposed new tab is not authority to create it now. This blocks B1 external writes.
 - Approve an A5 model-comparison spending ceiling after the frozen matrix and current provider facts are ready. No new vendor model is selected here; existing model-family diversity remains the starting constraint.
@@ -296,6 +297,7 @@ No single unit test, applied=true file, stage transition, quoted reaction or agg
 
 ## Changelog
 
+- 2026-11-01 (codex) — Encoded the builder-selected proposed duty and Fri/Sat event defaults behind inactive `--civic47-pilot` in `3f5bda84e`; delegated spend/duration bands remain unset because the plan contains no numbers.
 - 2026-11-01 (codex) — Removed post-fire ballot intents in `a3a24d813`; Sunday hearing follows the fire, so binding B3 ballots need a pre-fire opportunity and authoritative reader.
 - 2026-11-01 (codex) — Pilot hearing bypasses batch transport's required token cap in `715032ca7`; legacy batches retain their contract, and no paid/provider proof was run.
 - 2026-11-01 (codex) — Built civic.47 local brief, duty, authority, ballot-intent, outcome-feed and offline-fit candidates in `fe5746d41`; protected patch artifacts await Claude, and no task has composed activation proof.

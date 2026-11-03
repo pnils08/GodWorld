@@ -27,7 +27,7 @@ pointers:
 
 | Seat | Persona loaded | Memory read | Memory written |
 |---|---|---|---|
-| Discord bot | CHARACTER.md (to `## The Journal`) + world state | page: 2 recent reflections; `mags` container: profile of the speaker | `mags` container: every exchange |
+| Discord bot | CHARACTER.md (to `## The Journal`) + world state | page: 2 recent reflections; `mags` container: one whole-container profile (`fetchUserProfile` ignores the user id) injected as "About This Person", plus a query search injected as "Archive Knowledge (from Tribune files)" | `mags` container: every exchange |
 | Reflection cron (3×/day) | CHARACTER.md | page tail | page **and** `mags` container (same reflection twice) + claude-mem |
 | Saturday Pulse narrator | none — 9-line inline charge (`NARRATOR_CHARGE`) | none | the Pulse |
 | Old media CLI (retired 2026-08-20) | CHARACTER.md | page via `magsPageRecall.js`; NEWSROOM_MEMORY.md for editorial work | page via `magsPageAppend.js` |
@@ -37,7 +37,8 @@ pointers:
 | # | Task | Owner | Status |
 |---|------|-------|--------|
 | 1 | One persona loader in `lib/mags.js` matching the CLI load (CHARACTER.md + page recall + NEWSROOM_MEMORY for editorial seats); every Mags seat calls it | es | not started |
-| 2 | Discord bot: speaker memory reads/writes move from the `mags` container to her page (or a page-scoped tag) | es | not started |
+| 2 | Discord bot: the "About This Person" profile and the mislabelled "Archive Knowledge" search both read the whole `mags` container; repoint to her page; exchanges write to the page. One Discord speaker is allowlisted (the builder) | es | not started |
+| 2a | Read the `mags` container for builder/build content (past `/save-to-mags` session saves) reaching her prompt via the profile — Rule 3 check, before Task 2 | es | not started |
 | 3 | Reflection cron: drop the duplicate `mags` container write; page stays the one write | es | not started |
 | 4 | `mags` container frozen as history, not deleted (CLAUDE.md Rule 2); `/save-to-mags` repointed or retired per builder | es · builder | not started |
 
@@ -71,8 +72,8 @@ pointers:
 ## Open questions
 
 - Does "load similar to how the CLI did" include the Saturday narrator (today a 9-line charge, no persona file) or only Discord and the reflection cron? — blocks Task 1 scope; for the builder.
-- Speaker memory (what Mags knows about each person she talks to on Discord): onto her page, or its own page-scoped tag? — blocks Task 2; for the builder.
 
 ## Changelog
 
 - 2026-11-03 (engine-sheet) — Created on the builder's word; current state read from the bot, reflection cron, Saturday run and legacy CLI boot.
+- 2026-11-03 (engine-sheet) — Correction: the bot keeps no per-speaker memory; its profile is the whole `mags` container. Speaker-memory question dropped; Task 2a (Rule 3 read of the container) added.

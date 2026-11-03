@@ -24,9 +24,10 @@ disable-model-invocation: false
 | Doc | What to verify |
 |-----|---------------|
 | `SESSION_CONTEXT.md` | **On-demand post-ADR-0009 (S248)** — NOT read at boot. Live span reasonable size (hard close snapshots to `docs/session-context/S<##>.md` + resets to thin header)? STATUS line current? No duplicated content from ROLLOUT? (The old "under 300 lines / last 5 sessions" criterion predates ADR-0009 — it's a span model now, not a rolling-5 file.) |
-| `CLAUDE.md` | Quick commands still work? Session lifecycle refs current? Rules index matches actual rules files? Wiki-layer reference present and pointing to existing files? Canon files referenced if relevant? |
+| `CLAUDE.md` | Only the status line, What GodWorld is, Rules 1–6 and the `@.claude/TERMINAL.md` import? Nothing repeated from TERMINAL.md or a rule file? |
+| `.claude/TERMINAL.md` | Terminal table matches the tmux layout (`docs/reference/CROSS_LANE_MESSAGING.md`)? Every command and path in it still works? No repeat or contradiction with CLAUDE.md or the rule files? |
 | `docs/mags-corliss/CHARACTER.md` | Identity-only (governance.5 partial close S228): The Principle / Who I Am / My Family / Off the Clock. NO session counter (lives in SESSION_CONTEXT.md line 5). NO infrastructure refs (live in STACK.md / SUPERMEMORY.md). NO Compact Recovery (lives in `.claude/skills/boot/SKILL.md`). Audit: family POPIDs match ledger? No drift back to operational content? |
-| `.claude/rules/identity.md` | Rules still match actual behavior? No contradictions with CLAUDE.md? |
+| `.claude/rules/canon-names.md` | Names, Mayor and faction lines match the civic agents' files? No hard-coded population? |
 | `.claude/rules/newsroom.md` | Cycle-rule reversal still documented (S146)? Citizen-creation rules current? 2041 birth-year anchor present? |
 | `.claude/rules/engine.md` | Engine code rules current? Determinism guidance reflects safeRand_ pattern post-S156? |
 | `.claude/rules/dashboard.md` | Dashboard rules current? Endpoint conventions match server code? |

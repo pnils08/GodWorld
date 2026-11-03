@@ -256,7 +256,7 @@
     ],
     "environment": [
       "This is GodWorld \u2014 a city simulation engine with a newsroom pipeline",
-      "675 citizens in Simulation_Ledger \u2014 destructive sheet operations risk data loss",
+      "Simulation_Ledger holds the citizens \u2014 destructive sheet operations risk data loss",
       "Service account credentials in credentials/ \u2014 never read or expose",
       ".env contains API keys \u2014 never read or expose",
       "bay-tribune Supermemory container is agent-facing canon \u2014 never write system internals to it",

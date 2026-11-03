@@ -65,4 +65,4 @@ City hall's agents and the newsroom both write from these; content generators dr
 - **OPP** = Oakland Progressive Party (not "People's Party"). **CRC** = Civic Reform Coalition.
 - **IND** = Vega and Tran, independents who don't coordinate — never a bloc with a unified position. Each speaks for themselves.
 - **Population:** cite the live ledger count, never a number from a doc.
-- **Vote math adds up.** Every council vote lists all 9 members, marked YES / NO / ABSENT, totals verified.
+- **Vote math adds up.** Every council vote lists all 9 seats, marked YES / NO / ABSENT (recovering and vacant seats are ABSENT), totals verified.

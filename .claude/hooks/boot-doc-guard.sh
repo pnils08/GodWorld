@@ -33,7 +33,7 @@ except Exception: print('')
 tool="$(field tool_name)"
 cwd="$(field cwd)"; [ -z "$cwd" ] && cwd="$ROOT"
 
-abspath() { case "$1" in /*) printf '%s' "$1" ;; *) python3 -c 'import os,sys; print(os.path.normpath(os.path.join(sys.argv[1],sys.argv[2])))' "$cwd" "$1" ;; esac; }
+abspath() { python3 -c 'import os,sys; print(os.path.realpath(os.path.join(sys.argv[1],sys.argv[2])))' "$cwd" "$1"; }
 
 block() { echo "BLOCKED (boot-doc-guard, builder 2026-10-28): $1" >&2; exit 2; }
 

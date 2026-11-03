@@ -56,9 +56,9 @@ Every council seat carries a status from `Civic_Office_Ledger`. Truesource (`get
 |--------|---------|-----------|---------------|
 | `active` | Full voting member | Marked YES / NO | Normal topic assignment |
 | `recovering` | Seated but not actively voting this window (e.g. D6 Crane) | **Counted in the 9-seat roster, NAMED as ABSENT every tally**; participates via written statement only. Reduces the active-voter denominator (8 active → majority 5) | Written-statement-only assignment, routed through the bloc spokesperson |
-| `vacant` | Seat empty, no member | Named as VACANT in the roster; not a voter | No assignment |
+| `vacant` | Seat empty, no member | Named in the roster as ABSENT; not a voter | No assignment |
 
-**Vote-math rule (extends the 9-member rule in `canon-names.md`):** every vote ships the full 9-seat roster with each seat's disposition — `active` members YES/NO, `recovering`/`vacant` seats named explicitly (Mara hard-rule S225: no "5-3 with one absent" without naming the absentee; a 5-3-1 over 9 reads correctly, a 5-3 over 8 drifts). Majority is computed on active voters, not the nominal 9. When a bloc has a recovering member (CRC with Crane recovering → 2 active CRC voters), every cross-bloc vote-math calculation must use the active count. The engine-side companion (Civic_Office_Ledger filter `active`→`active,recovering` in `buildWorldSummary.js`, G-PREP2) is its own job; this rule is the canonical documentation of the enum + vote-math mapping.
+**Vote-math rule (extends the 9-member rule in `canon-names.md`):** every vote ships the full 9-seat roster with each seat's disposition — `active` members YES/NO, `recovering`/`vacant` seats named explicitly as ABSENT (Mara hard-rule S225: no "5-3 with one absent" without naming the absentee; a 5-3-1 over 9 reads correctly, a 5-3 over 8 drifts). Majority is computed on active voters, not the nominal 9. When a bloc has a recovering member (CRC with Crane recovering → 2 active CRC voters), every cross-bloc vote-math calculation must use the active count. The engine-side companion (Civic_Office_Ledger filter `active`→`active,recovering` in `buildWorldSummary.js`, G-PREP2) is its own job; this rule is the canonical documentation of the enum + vote-math mapping.
 
 ## Production output rules
 

@@ -75,27 +75,24 @@ Flag patterns:
 
 ### Rules (`.claude/rules/*.md`)
 
-Path-scoped per CLAUDE.md: `identity.md` (always), `engine.md`, `newsroom.md`, `dashboard.md`.
-
-- Always-loaded: `identity.md`
-- Path-scoped: others (only load when working in that path)
+Every rule file carries `paths:` and loads only when a matching file is opened: `engine.md`, `newsroom.md`, `civic.md`, `research-build.md`, `dashboard.md`, `canon-names.md` (civic + newsroom paths). None is always-loaded.
 
 Flag patterns:
-- identity.md > 200 lines (always-loaded — every line is a tax)
-- path-scoped rule duplicating identity.md content
-- path-scoped rule that could be merged into identity.md to drop a file
+- a rule file without `paths:` (it would load every session)
+- path-scoped rule duplicating CLAUDE.md, `.claude/TERMINAL.md` or another rule file
 
 ### Top-level instruction files
 
 | File | Always? | Notes |
 |------|---------|-------|
-| CLAUDE.md | yes | Project rules, auto-loaded |
+| CLAUDE.md | yes | Project and rules, auto-loaded |
+| .claude/TERMINAL.md | yes | Imported by CLAUDE.md (`@.claude/TERMINAL.md`); how a builder session works |
 | MEMORY.md | yes | Persistent-memory index, auto-loaded |
 | CONTEXT.md | recommended at boot | Project glossary (S187 ADR-0001) |
 | SCHEMA.md | on-demand | Doc conventions |
 
 Flag patterns:
-- CLAUDE.md > 300 lines
+- CLAUDE.md + .claude/TERMINAL.md together > 200 lines
 - MEMORY.md over 24.4KB warning threshold (we hit 25.9KB on S187)
 - CONTEXT.md duplicates content in CANON_RULES / INSTITUTIONS / SCHEMA (per ADR-0001 it should pointer, not duplicate)
 
@@ -152,11 +149,11 @@ Component Breakdown:
 ├──────────────────┼────────┼───────────┼─────────────┤
 │ CLAUDE.md        │ 1      │ ~X,XXX    │ yes         │
 │ MEMORY.md        │ 1      │ ~XX,XXX   │ yes         │
-│ identity.md      │ 1      │ ~X,XXX    │ yes         │
+│ TERMINAL.md      │ 1      │ ~X,XXX    │ yes (import)│
 │ Agent descs      │ 25     │ ~X,XXX    │ yes (Task)  │
 │ Skill descs      │ 80+    │ ~X,XXX    │ yes (reg)   │
 │ MCP schemas      │ N tools│ ~XX,XXX   │ yes         │
-│ Path-scoped rules│ 4      │ ~X,XXX    │ on-path     │
+│ Path-scoped rules│ 6      │ ~X,XXX    │ on-path     │
 └──────────────────┴────────┴───────────┴─────────────┘
 
 Issues found (N):
@@ -221,7 +218,7 @@ Skill: Current always-loaded baseline ~85K tokens (~42% of 200K). Adding 30-tool
 
 ## Integration
 
-- After audit, if a finding becomes a recurring rule: update `.claude/rules/identity.md` or a topic-specific MEMORY.md feedback file
+- After audit, if a finding becomes a recurring rule: update `.claude/TERMINAL.md` (builder process), the matching path rule, or a topic-specific MEMORY.md feedback file
 - Pair with `/skill-audit` (skill drift) and `/doc-audit` (content staleness) for full health picture
 - Re-run after each major addition (new agent, MCP server, skill batch)
 - Token-burn investigations should start here — before guessing, audit

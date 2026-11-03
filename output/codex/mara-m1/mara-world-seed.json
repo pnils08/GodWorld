@@ -1,0 +1,30 @@
+{
+  "note": "Builder reviews this list before node scripts/maraWorldSeed.js --write. Each text is the exact text written; edits from the source are listed.",
+  "entries": [
+    {
+      "sourceId": "rt8eqQbhco1W4YgeT6hvqT",
+      "title": "Vote Records: Stabilization Fund, Health Center, OARI, Baylight, and Fruitvale Transit Hub",
+      "asOf": "C86",
+      "edits": [],
+      "text": "COMPLETE VOTE RECORDS — ALL VERIFIED. Stabilization Fund C78: PASSED 6-3. YES: Carter(D1), Delgado(D3), Vega(D4), Rivers(D5), Crane(D6 remote crossover), Mobley(D9). NO: Tran(D2), Ashford(D7), Chen(D8). Health Center C80: PASSED 6-2. YES: Carter, Tran, Delgado, Vega, Rivers, Mobley. NO: Ashford, Chen. Crane ABSENT. OARI C82: PASSED 5-4. YES: Carter(D1), Tran(D2), Delgado(D3), Rivers(D5), Mobley(D9). NO: Vega(D4), Crane(D6), Ashford(D7), Chen(D8). Baylight C83: PASSED 6-3. YES: Carter, Tran, Delgado, Rivers, Mobley, Vega. NO: Crane, Ashford, Chen. Fruitvale Transit Hub Phase II C86: PASSED 7-1. Ashford crossover. Only NO was Chen(D8)."
+    },
+    {
+      "sourceId": "XUh7WPedjdCxuiwaF7qXyu",
+      "title": "Baylight Legal Instruments: Environmental Remediation Bond & Tax Increment Financing for Infrastructure",
+      "asOf": "C84",
+      "edits": [
+        "\"— Canon from C84.\" → \"(C84).\""
+      ],
+      "text": "BAYLIGHT LEGAL INSTRUMENTS FILED (C84). Instrument BD-83-REB: Environmental Remediation Performance Bond Certificate, executed by Keisha Ramos. Ordinance BD-83-TIF: Tax Increment Financing framework, prepared by Dr. Simone Ellis. TIF establishes 30-year financing zone across 65 acres. Property tax increment flows to Baylight Infrastructure Fund. Authorized uses: environmental remediation, shoreline stabilization, water/sewer, utility installation, transit integration (BART pedestrian bridge, ferry terminal expansion, AC Transit priority lanes), roadway improvements, stadium-adjacent public works/open space, admin costs capped at 3%. Independent Audit Commission conducts annual reviews. Community Benefits Oversight Board receives quarterly reports. Environmental review confirmed by Dr. Leanne Wu, Director of Office of Environmental Review and Sustainability."
+    },
+    {
+      "sourceId": "ocs1t4BDKpr9j6ikL7Tkyz",
+      "title": "Canon City Justice and Public Safety Roster: Key Officials and Departments",
+      "asOf": "C87",
+      "edits": [
+        "dropped: \" — Canon officials who respond to cycles but cannot initiate events\""
+      ],
+      "text": "JUSTICE AND PUBLIC SAFETY ROSTER. Police Chief: Rafael Montez (27yr OPD veteran, measured/factual). Deputy Chief Ops: Kimberly Cho. Deputy Chief Community: Leonard Briggs. Internal Affairs: Samantha Viteri. Fire Chief: Marcus Hollowell. EMS Director: Dr. Priya Narang. Medical Examiner: Dr. Jonas Patel. DA: Clarissa Dane. ADA Major Crimes: Ethan D'Souza. ADA Community Safety: Janelle Rourke. Public Defender: Caleb Reyes. Deputy PD: Marisol Guzman. Superior Court Liaison: Gordon Tate. Civilian Police Review Board Chair: Dr. Lamine Sissoko. City Ombudsman: Helena Morr. Probation/Reentry Director: Victor Han. Emergency Management Director: Shawna Delgado."
+    }
+  ]
+}

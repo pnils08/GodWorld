@@ -1,0 +1,139 @@
+{
+  "promises": [
+    {
+      "kind": "promise",
+      "eventId": "P-d28c799873945e24",
+      "promiseId": "P-d28c799873945e24",
+      "office": "civic-office-mayor",
+      "cycle": 114,
+      "said": "Four visible citizen petitions will receive four formal public filings this cycle, each with a responsible office, a remedy, and a next date.",
+      "source": "mayor_gavel_c114 statements[10].quote",
+      "initiativeId": null,
+      "trackerAtPromise": null,
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-0981c3df9119c390",
+      "promiseId": "P-0981c3df9119c390",
+      "office": "civic-office-mayor",
+      "cycle": 114,
+      "said": "Publish the C114 placement-gap analysis and a program adjustment plan, explicitly examining West Oakland and Fruitvale without inventing unreported placement results.",
+      "source": "mayor_gavel_c114 statements[4].decision",
+      "initiativeId": "INIT-007",
+      "trackerAtPromise": {
+        "ImplementationPhase": "implementation-active",
+        "Status": "announced",
+        "NextScheduledAction": "Publish placement-gap analysis and program adjustment plan",
+        "NextActionCycle": "115"
+      },
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-7c5d64e3e39d46c3",
+      "promiseId": "P-7c5d64e3e39d46c3",
+      "office": "civic-office-council-d4",
+      "cycle": 114,
+      "said": "As Council President, I will docket a formal C114 committee referral and hearing schedule for the Ivy Hill Revitalization Initiative.",
+      "source": "council_d4_c114 statements[0].fullStatement",
+      "initiativeId": "INIT-011",
+      "trackerAtPromise": {
+        "ImplementationPhase": "announced",
+        "Status": "failed",
+        "NextScheduledAction": "",
+        "NextActionCycle": ""
+      },
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-b928a7b72da0a175",
+      "promiseId": "P-b928a7b72da0a175",
+      "office": "civic-office-council-d4",
+      "cycle": 114,
+      "said": "I will docket legislative text for the Dimond Revitalization Initiative in C114 and reconcile its announced filing record so the initiative has a distinct, traceable entry.",
+      "source": "council_d4_c114 statements[1].fullStatement",
+      "initiativeId": "INIT-012",
+      "trackerAtPromise": {
+        "ImplementationPhase": "announced",
+        "Status": "failed",
+        "NextScheduledAction": "",
+        "NextActionCycle": ""
+      },
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-b79d154ce5e47165",
+      "promiseId": "P-b79d154ce5e47165",
+      "office": "civic-office-council-d4",
+      "cycle": 114,
+      "said": "I will docket legislative text for Ivy Hill Community Revitalization in C114 and reconcile the announced filing record separately from INIT-012.",
+      "source": "council_d4_c114 statements[2].fullStatement",
+      "initiativeId": "INIT-013",
+      "trackerAtPromise": {
+        "ImplementationPhase": "announced",
+        "Status": "failed",
+        "NextScheduledAction": "",
+        "NextActionCycle": ""
+      },
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-f99bb87468e0e747",
+      "promiseId": "P-f99bb87468e0e747",
+      "office": "civic-office-council-d5",
+      "cycle": 114,
+      "said": "The complaint filed this cycle gets a response on the record.",
+      "source": "council_d5_c114 statements[2].fullStatement",
+      "initiativeId": null,
+      "trackerAtPromise": null,
+      "note": null
+    }
+  ],
+  "statuses": [],
+  "rejectedPromises": [],
+  "memoryReads": [],
+  "notes": [],
+  "trace": [
+    {
+      "tool": "promise_record",
+      "resultChars": 27
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 38
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 38
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 38
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 38
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 27
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 3852
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 1609
+    },
+    {
+      "tool": "sheet_read",
+      "resultChars": 51
+    }
+  ],
+  "runEntry": "C114 — Mara Vance's directive, written after the close.\nDirected Avery Santana — Mayor: Provide the four petition-specific public filings you committed to publish and confirm the publication status of the citywide apprenticeship placement-gap analysis and adjustment plan.\nDirected Denise Carter — City Council District 1: Report what utility coordination and municipal follow-up, if any, your office is arranging after Brooklyn’s transformer failure.\nDirected Leonard Tran — City Council District 2: Reconcile INIT-008’s failed status with your Cycle 114 authorization remarks and identify what path remains for Uptown scheduling and Downtown transit-access planning.\nDirected Rose Delgado — City Council District 3: Report the San Antonio complaint’s disposition and corridor response, including what your office makes of the current neighborhood readings.\nDirected Ramon Vega — City Council District 4: Supply INIT-014’s legislation filing or a revised filing date, and reconcile your Cycle 114 docket commitments for INIT-011, INIT-012 and INIT-013 with their failed tracker entries.\nDirected Janae Rivers — City Council District 5: Provide the promised public response to the East Oakland complaint and explain whether the current economic spike calls for any additional district action.\nDirected Warren Ashford — City Council District 7: Clarify the scope and reporting schedule of the Rockridge assessment and whether Temescal’s safety event requires coordination beyond the clinic’s audit work.\nDirected Nina Chen — City Council District 8: Reconcile your Cycle 114 Grand Lake YES statement with INIT-009’s failed record and identify the Eastlake and Adams Point service steps that can proceed independently.\nDirected Terrence Mobley — City Council District 9: What follow-up, if any, is your office arranging for Laurel’s missed pickup and Uptown’s housing-pressure and relocation signals?\nNot directing:\n- Elliott Crane (City Council District 6): Cycle 114 records no district complaints or dated overdue step; the Month-12 reconciliation he requested was reported published by the program director.\n- Marcus Webb (OEWD Program Director (Stabilization Fund)): Cycle 114 reports the disbursement executed and closeout reconciliation published; the renewal step is dated Cycle 115, not overdue.\n- Vanessa Tran-Muñoz (OARI Program Director): Cycle 114 reports the briefing executed and D1 and D5 evaluations filed, with expansion held; the tracker’s next step is dated Cycle 115.\n- Bobby Chen-Ramirez (Health Center Project Director): Cycle 114 reports clinical verification filed and operational feedback gathered; the live tracker schedules the next audit step for Cycle 116.\n- Elena Soria Dominguez (Transit Hub Planning Lead): Cycle 114 reports community review convened and compliance records published; completion of the response record remains within the Cycle 115 next-step schedule.\n- Keisha Ramos (Baylight Authority Director): Cycle 114 reports evidence-file assembly and the workforce meeting, without claiming milestone passage; the construction review is scheduled for Cycle 115.\nOpen promises she is watching: mayor \"Four visible citizen petitions will receive four formal public filings this cycle, each with a responsible office, a remedy, and a next date.\"; mayor \"Publish the C114 placement-gap analysis and a program adjustment plan, explicitly examining West Oakland and Fruitvale without inventing unreported placement results.\"; council-d4 \"As Council President, I will docket a formal C114 committee referral and hearing schedule for the Ivy Hill Revitalization Initiative.\"; council-d4 \"I will docket legislative text for the Dimond Revitalization Initiative in C114 and reconcile its announced filing record so the initiative has a distinct, traceable entry.\"; council-d4 \"I will docket legislative text for Ivy Hill Community Revitalization in C114 and reconcile the announced filing record separately from INIT-012.\"; council-d5 \"The complaint filed this cycle gets a response on the record.\""
+}

@@ -74,7 +74,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| research.31 | UNDOCKED scoring (builder 10-30 C) LIVE: points board, progress score, leader + night bet. C114 held: night bet settled on Stafford | done-pending-archive | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §Changelog 2026-10-31 |
 | infrastructure.18 | Weekly version-drift report in the existing health check, no model: runtime end of life, npm behind (majors flagged), Claude Code, plugin vs patch | ready | engine-sheet | [[../reference/DEPLOY]] |
 | engine.325 | Casino overview (builder 10-30, own session): bet types safe→risky, how bets settle without credits or failure, house odds; mishap bet never pays | ready | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §Changelog 2026-10-30 |
 | engine.330 | Sandbox runs cold (builder 11-01): no media scores or ingest reach it. Build: add generic ratings to those feeds on the sandbox | ready | engine-sheet | [[../reference/DEPLOY]] §The bench runs cold |
@@ -101,4 +100,3 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.104 | Mint economy: arrivals born right. Mint paths take job titles from lists outside the Economic_Parameters job table; revision owes legacy mutating-path disposition + D2 proof (agy 2026-10-17) | ready | research-build | [[../plans/2026-08-10-economy-native-rebuild]] §Read 2026-10-16 |
 | engine.248 | Faith orgs get a sim role. Membership LIVE since S325 (processFaithJoins_, MembersList). Open: membership-gated dial nudge (today any faith line nudges), member faith-life events, faith chaos car; the 16 leaders not in MembersList. Pointer says design first | ready | engine-sheet | [[../research/2026-09-10-kimi-faith-lane-routing]] |
 | engine.261 | Firm agents: three business owners get a wake slice to run their business | ready | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
-| pipeline.75 | Tanya wrote unattended C112/C113. C113 read written 11-01: feed names and Notes reach her slice. Write checks proven in fan-outs 10-15 → 10-19 | done-pending-archive | engine-sheet | [[../plans/2026-10-11-media-extension]] |

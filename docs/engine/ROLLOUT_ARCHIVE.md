@@ -973,6 +973,15 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S630 Archive Pass (2026-11-03, engine-sheet) — post-S629 closures sweep
+
+2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 research.* + 1 pipeline.*.
+
+- **research.31** [engine-sheet] — UNDOCKED scoring (builder 10-30 C) LIVE: points board, progress score, leader + night bet. C114 held: night bet settled on Stafford **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-07-spacemolt-game-show]] §Changelog 2026-10-31
+- **pipeline.75** [engine-sheet] — Tanya wrote unattended C112/C113. C113 read written 11-01: feed names and Notes reach her slice. Write checks proven in fan-outs 10-15 → 10-19 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-10-11-media-extension]]
+
+This pass: 2 rows — research.31 + pipeline.75. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S627 Archive Pass (2026-11-01, engine-sheet) — post-S626 closures sweep
 
 2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 infrastructure.* + 1 engine.*.

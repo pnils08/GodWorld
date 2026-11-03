@@ -1,0 +1,93 @@
+# C114 Voice Directives — Mara Vance (AUTO)
+
+**Cycle:** 114
+**Issued:** C114 (auto-derived, cron-civic-run.js --stage=directive, post-close)
+**Source:** close_c114 + the week's statements + promise record + world_summary_c114 + tracker
+
+---
+## Avery Santana — Mayor
+
+- **Agent:** `.claude/agents/civic-office-mayor/`
+- **Address:** Identify the four petition-specific filings and public closeout index, reconcile their coverage with the current complaint ledger, and provide the INIT-007 placement-gap analysis and adjustment plan.
+- **Why:** Your Cycle 114 gavel committed to four formal complaint responses and publication of the youth placement-gap analysis with assigned adjustments. The Cycle 114 office evidence now lists seven complaints, without establishing that all seven meet the visibility threshold; the tracker dates INIT-007’s next step to Cycle 115.
+- **Acceptance:** Traceable filings matched to the four actual petitions, responsible offices and next dates, an explanation of which ledger entries remain outside that response, and the published gap analysis and adjustment plan—or their outstanding work and delivery dates. West Oakland and Fruitvale must be identifiable without invented placement results.
+- **Promise:** P-daabc5b98a8bcd93; P-0981c3df9119c390
+
+## Denise Carter — City Council District 1
+
+- **Agent:** `.claude/agents/civic-office-council-d1/`
+- **Address:** Establish the status of Brooklyn’s transformer outage and identify any remaining municipal coordination needed for affected households and businesses.
+- **Why:** The Cycle 114 city summary records a transformer blowout in Brooklyn; its neighborhood snapshot reports sentiment of -0.09 and retail vitality of 5.23. This is a specific infrastructure event, not evidence that the completed D1 OARI evaluation needs repeating.
+- **Acceptance:** Verified restoration or outstanding-service status, the utility and city contacts handling unresolved matters, and any next update or business-support referral needed; distinguish outage effects from Brooklyn’s broader conditions.
+
+## Leonard Tran — City Council District 2
+
+- **Agent:** `.claude/agents/civic-office-council-d2/`
+- **Address:** Clarify INIT-008’s recorded disposition and identify what Downtown transit-access and Uptown planning work can proceed under existing authority.
+- **Why:** Your Cycle 114 Sunday statement supports the $15 million authorization and a public Uptown timeline, while the live tracker labels INIT-008 failed with no dated next step. The Cycle 114 city summary also records the Downtown Transit Snarl.
+- **Acceptance:** The Clerk or council record explaining the failed status, a clear distinction between support and authorization, the status of the Uptown timeline, and any transit-access coordination that can proceed without treating the proposal as approved.
+
+## Rose Delgado — City Council District 3
+
+- **Agent:** `.claude/agents/civic-office-council-d3/`
+- **Address:** Reconcile the San Antonio complaint-response record with the corridor plan still described as needed and identify the next district action, if any.
+- **Why:** Your Cycle 113 reply reported an active complaint and targeted response plan; your Cycle 114 Sunday statement says the complaint still needs its corridor plan. Cycle 114 office evidence lists two district complaints, while San Antonio’s crime index is 0.73 against the supplied city comparison of 0.655.
+- **Acceptance:** The actual complaint entries and their dispositions, a findable corridor response or an owner and next date for unfinished work, and an explanation of whether current conditions change that response. Do not substitute another briefing schedule: OARI reports the briefing held in Cycle 114.
+
+## Ramon Vega — City Council District 4
+
+- **Agent:** `.claude/agents/civic-office-council-d4/`
+- **Address:** State whether INIT-014’s legislation has been filed and reconcile its docket with the separate INIT-011, INIT-012 and INIT-013 records.
+- **Why:** The Cycle 114 live tracker marks INIT-014’s legislation-filed step past due at Cycle 114. It separately labels INIT-011, INIT-012 and INIT-013 failed, with no dated next steps; those entries cannot be treated as one continuing proposal.
+- **Acceptance:** A filing reference and legislative text for INIT-014, or confirmation that filing remains outstanding with an owner and proposed date, plus distinct docket identities and documented dispositions for the other three initiatives. Do not presume revival or impose deadlines absent from their records.
+
+## Janae Rivers — City Council District 5
+
+- **Agent:** `.claude/agents/civic-office-council-d5/`
+- **Address:** Report what the East Oakland economic spike is affecting and whether existing business or youth-program support needs adjustment.
+- **Why:** The Cycle 114 city summary records a medium-severity economic spike alongside the expansion of Masjid An-Nur Oakland’s after-school tutoring program. Your Cycle 114 statement says the spike will be tracked while continued services are protected.
+- **Acceptance:** What the office has verified about affected activity, what remains unknown, and any warranted referral or adjustment through existing services—or a reasoned finding that monitoring is sufficient. Do not infer that low crime removes economic pressure or that tutoring expansion itself requires city intervention.
+
+## Warren Ashford — City Council District 7
+
+- **Agent:** `.claude/agents/civic-office-council-d7/`
+- **Address:** Confirm that the Rockridge commercial-corridor and housing-pressure assessment has been commissioned and explain how it will reconcile the differing neighborhood signals.
+- **Why:** Your Cycle 114 Sunday decision directs an assessment before intervention. The Cycle 114 city summary describes Rockridge as turning upward while also reporting falling retail vitality, slipping sentiment and housing pressure; the office evidence places sentiment at 0.03.
+- **Acceptance:** The instruction to the City Auditor and Economic Development staff, assessment scope, responsible lead and expected reporting date, with a method for distinguishing commercial activity from household pressure. The answer need not propose an intervention before findings exist.
+- **Promise:** P-364d4ad22f03e370
+
+## Nina Chen — City Council District 8
+
+- **Agent:** `.claude/agents/civic-office-council-d8/`
+- **Address:** Identify the administrative actions and maintenance scheduling arising from the Eastlake review and Adams Point service request without assuming INIT-009 funding is authorized.
+- **Why:** Your Cycle 114 Sunday statement reports the Eastlake review filed and requests Adams Point maintenance scheduling. Cycle 114 office evidence records Eastlake decay momentum of 2 and Adams Point sentiment of -0.02; the tracker labels INIT-009 failed despite your stated YES position.
+- **Acceptance:** The review reference, responsible departments, scheduled or still-unassigned maintenance actions, and the authority supporting any expenditure. Explain the recorded INIT-009 disposition without presenting an individual YES statement as passage.
+
+## Terrence Mobley — City Council District 9
+
+- **Agent:** `.claude/agents/civic-office-council-d9/`
+- **Address:** Check whether Laurel’s missed garbage pickup has been resolved and identify any routine service follow-through still needed.
+- **Why:** The Cycle 114 Chaos Events table records a missed pickup in Laurel. Your Cycle 114 Sunday statement emphasizes municipal fundamentals rather than manufacturing a crisis; the neighborhood snapshot shows sentiment of -0.03 and retail vitality of 4.34.
+- **Acceptance:** Whether the pickup was completed or remains outstanding, the responsible service contact and any next service date, or confirmation that no further action is needed. Do not attribute Laurel’s wider commercial conditions to this single event.
+
+## Marcus Webb — OEWD Program Director (Stabilization Fund)
+
+- **Agent:** `.claude/agents/civic-project-stabilization-fund/`
+- **Address:** Identify the renewal draft available for public review or state precisely what drafting remains before its publication.
+- **Why:** Your Cycle 114 Sunday decision commits to publishing the scope-preserving charter language alongside the closeout record. You report the Month-12 payment and reconciliation completed; the live tracker dates closeout and draft completion to Cycle 115, so that tracker step is not overdue.
+- **Acceptance:** The public draft or its current drafting status and delivery date, showing West Oakland businesses and residents as the scope and identifying how the processing standard, equity tracking and audit criteria are carried forward. Do not resubmit the already reported payment as a substitute for the draft.
+- **Promise:** P-570753e07465881d
+
+## Elena Soria Dominguez — Transit Hub Planning Lead
+
+- **Agent:** `.claude/agents/civic-project-transit-hub/`
+- **Address:** Report which schematics and community-review sessions have actually been delivered and where their covenant, oversight and comment-response records can be read.
+- **Why:** Your Cycle 114 Sunday decision commits to two community sessions and published review records, while the Mayor’s Cycle 114 gavel explicitly says schematic delivery was not yet confirmed. The live tracker sets delivery and documented review for Cycle 115; this is a check on execution, not a declaration of an overdue tracker step.
+- **Acceptance:** Delivered schematic versions, dates and status of the library and senior-center sessions, access to English, Spanish and Mam materials, and the public response log with unresolved comments identified. Keep further design advancement contingent on the required response record; do not imply final design or construction approval.
+- **Promise:** P-955a3dfbf7ddc5d8
+
+## Not directing
+- Elliott Crane (City Council District 6): Cycle 114 provides no unresolved district event or dated step requiring direction; the reported community milestone does not itself call for intervention.
+- Vanessa Tran-Muñoz (OARI Program Director): Her Cycle 114 statement reports the briefing held and D1 and D5 evaluations filed, with Baylight work limited to feasibility review; the tracker’s next step is due Cycle 115.
+- Bobby Chen-Ramirez (Health Center Project Director): The Cycle 114 statement reports the clinical verification filing, and the tracker schedules the next audit step for Cycle 116; no missed step is shown.
+- Keisha Ramos (Baylight Authority Director): Cycle 114 reports workforce coordination completed and evidence-file assembly underway for the Cycle 115 review, without declaring the construction milestone passed.

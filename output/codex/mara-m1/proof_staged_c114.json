@@ -1,0 +1,86 @@
+{
+  "promises": [
+    {
+      "kind": "promise",
+      "eventId": "P-daabc5b98a8bcd93",
+      "promiseId": "P-daabc5b98a8bcd93",
+      "office": "civic-office-mayor",
+      "cycle": 114,
+      "said": "Require formal legislative or administrative filings on all four citizen complaints above the visibility threshold, with responsible offices, next action dates, and a public closeout index.",
+      "source": "mayor_gavel_c114 statements[10].decision",
+      "initiativeId": null,
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-0981c3df9119c390",
+      "promiseId": "P-0981c3df9119c390",
+      "office": "civic-office-mayor",
+      "cycle": 114,
+      "said": "Publish the C114 placement-gap analysis and a program adjustment plan, explicitly examining West Oakland and Fruitvale without inventing unreported placement results.",
+      "source": "mayor_gavel_c114 statements[4].decision",
+      "initiativeId": "INIT-007",
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-364d4ad22f03e370",
+      "promiseId": "P-364d4ad22f03e370",
+      "office": "civic-office-council-d7",
+      "cycle": 114,
+      "said": "Direct the City Auditor and Economic Development staff to execute a formal commercial corridor viability and housing pressure assessment for Rockridge before any municipal intervention is drafted.",
+      "source": "council_d7_c114 statements[0].decision",
+      "initiativeId": null,
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-955a3dfbf7ddc5d8",
+      "promiseId": "P-955a3dfbf7ddc5d8",
+      "office": "civic-project-transit-hub",
+      "cycle": 114,
+      "said": "Convene the C114 preliminary schematics community review as set by the council: two bilingual sessions (senior center and library), merchant-covenant compliance dossier and Mayer & Associates' community-oversight record published for scrutiny, a written public comment-and-response record, and no assertion of final design or construction approval.",
+      "source": "transit_hub_c114 statements[0].decision",
+      "initiativeId": "INIT-003",
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-570753e07465881d",
+      "promiseId": "P-570753e07465881d",
+      "office": "civic-project-stabilization-fund",
+      "cycle": 114,
+      "said": "Advance charter renewal drafting with the Fund's scope explicitly preserved to West Oakland businesses and residents as chartered, and publish the draft language for review alongside the closeout record.",
+      "source": "stabilization_fund_c114 statements[1].decision",
+      "initiativeId": "INIT-001",
+      "note": null
+    }
+  ],
+  "statuses": [],
+  "rejectedPromises": [],
+  "memoryReads": [],
+  "notes": [],
+  "trace": [
+    {
+      "tool": "promise_record",
+      "resultChars": 27
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 38
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 27
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 38
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 38
+    }
+  ],
+  "runEntry": "C114 — Mara Vance's directive, written after the close.\nDirected Avery Santana — Mayor: Identify the four petition-specific filings and public closeout index, reconcile their coverage with the current complaint ledger, and provide the INIT-007 placement-gap analysis and adjustment plan.\nDirected Denise Carter — City Council District 1: Establish the status of Brooklyn’s transformer outage and identify any remaining municipal coordination needed for affected households and businesses.\nDirected Leonard Tran — City Council District 2: Clarify INIT-008’s recorded disposition and identify what Downtown transit-access and Uptown planning work can proceed under existing authority.\nDirected Rose Delgado — City Council District 3: Reconcile the San Antonio complaint-response record with the corridor plan still described as needed and identify the next district action, if any.\nDirected Ramon Vega — City Council District 4: State whether INIT-014’s legislation has been filed and reconcile its docket with the separate INIT-011, INIT-012 and INIT-013 records.\nDirected Janae Rivers — City Council District 5: Report what the East Oakland economic spike is affecting and whether existing business or youth-program support needs adjustment.\nDirected Warren Ashford — City Council District 7: Confirm that the Rockridge commercial-corridor and housing-pressure assessment has been commissioned and explain how it will reconcile the differing neighborhood signals.\nDirected Nina Chen — City Council District 8: Identify the administrative actions and maintenance scheduling arising from the Eastlake review and Adams Point service request without assuming INIT-009 funding is authorized.\nDirected Terrence Mobley — City Council District 9: Check whether Laurel’s missed garbage pickup has been resolved and identify any routine service follow-through still needed.\nDirected Marcus Webb — OEWD Program Director (Stabilization Fund): Identify the renewal draft available for public review or state precisely what drafting remains before its publication.\nDirected Elena Soria Dominguez — Transit Hub Planning Lead: Report which schematics and community-review sessions have actually been delivered and where their covenant, oversight and comment-response records can be read.\nNot directing:\n- Elliott Crane (City Council District 6): Cycle 114 provides no unresolved district event or dated step requiring direction; the reported community milestone does not itself call for intervention.\n- Vanessa Tran-Muñoz (OARI Program Director): Her Cycle 114 statement reports the briefing held and D1 and D5 evaluations filed, with Baylight work limited to feasibility review; the tracker’s next step is due Cycle 115.\n- Bobby Chen-Ramirez (Health Center Project Director): The Cycle 114 statement reports the clinical verification filing, and the tracker schedules the next audit step for Cycle 116; no missed step is shown.\n- Keisha Ramos (Baylight Authority Director): Cycle 114 reports workforce coordination completed and evidence-file assembly underway for the Cycle 115 review, without declaring the construction milestone passed.\nOpen promises she is watching: mayor \"Require formal legislative or administrative filings on all four citizen complaints above the visibility threshold, with responsible offices, next action dates, and a public closeout index.\"; mayor \"Publish the C114 placement-gap analysis and a program adjustment plan, explicitly examining West Oakland and Fruitvale without inventing unreported placement results.\"; council-d7 \"Direct the City Auditor and Economic Development staff to execute a formal commercial corridor viability and housing pressure assessment for Rockridge before any municipal intervention is drafted.\"; transit-hub \"Convene the C114 preliminary schematics community review as set by the council: two bilingual sessions (senior center and library), merchant-covenant compliance dossier and Mayer & Associates' community-oversight record published for scrutiny, a written public comment-and-response record, and no assertion of final design or construction approval.\"; stabilization-fund \"Advance charter renewal drafting with the Fund's scope explicitly preserved to West Oakland businesses and residents as chartered, and publish the draft language for review alongside the closeout record.\""
+}

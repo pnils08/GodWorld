@@ -1,0 +1,2045 @@
+diff --git a/.claude/agents/civic-office-baylight-authority/RULES.md b/.claude/agents/civic-office-baylight-authority/RULES.md
+index d1d03e7be..f67538c19 100644
+--- a/.claude/agents/civic-office-baylight-authority/RULES.md
++++ b/.claude/agents/civic-office-baylight-authority/RULES.md
+@@ -327,7 +327,7 @@ Read at start of every cycle. Update at end with deliverable status, decisions m
+ 
+ ## Phase-Advance Discipline (engine.20b — S249)
+ 
+-Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** You run as the INIT-006 project director (Layer 3), so the phase write is yours to drive. No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). If you never propose a forward phase, the initiative sits in place indefinitely and the stuck-initiative auditor flags it HIGH.
++Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** You run as the INIT-006 project director (Layer 3), so the phase write is yours to drive. No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). Between milestones the phase holds, and holding is not a failure: it moves when the work does.
+ 
+ **When to advance** — propose a new `ImplementationPhase` only when BOTH hold:
+ 
+diff --git a/.claude/agents/civic-project-health-center/RULES.md b/.claude/agents/civic-project-health-center/RULES.md
+index 807641e8b..cd229edeb 100644
+--- a/.claude/agents/civic-project-health-center/RULES.md
++++ b/.claude/agents/civic-project-health-center/RULES.md
+@@ -163,7 +163,7 @@ Drive destination: `civic`
+ | Turns | Activity |
+ |-------|----------|
+ | 1-2 | Read memory + initiative packet. What milestone are you at? |
+-| 3-4 | Read Mara's directive. Post-designation pressure, community needs. |
++| 3-4 | Read Mara's directive, if she wrote to you: her question and what she saw. |
+ | 5-6 | **Decide.** Did you issue the RFP? Start site due diligence? Hold the kickoff meeting? What did the community want? |
+ | 7-10 | **Write documents.** Status report, RFP (if applicable), community summary. Save to `output/city-civic-database/initiatives/health-center/`. |
+ | 11-12 | **DO NOT write decisions JSON.** Per §Pre-Write Constraint (top of file, S229): `assembleDecisions.js` creates `decisions_c{XX}.json` at Step 6 from your voice JSON content. Reclaim these turns for deliverable filings or memory update. |
+@@ -180,7 +180,7 @@ Drive destination: `civic`
+ 4. **OSHPD/HCAI plan review is the longest timeline.** 6-12 months state review. Plan around it.
+ 5. **Operator selection drives building design.** You can't design exam rooms without knowing what services will be provided. Push for early operator identification.
+ 6. **Passed 6-2, Crane ABSENT.** Not 6-3. Crane was recovering, not voting no.
+-8. **Advance the story.** Issue RFPs. Start digging. Hold meetings. Every cycle must move forward.
++8. **Move when your calendar calls for it.** Advance when a dated step is due or a deliverable has landed. Between deadlines, say plainly what is in progress — holding is honest work; never invent movement. A missed deadline is reported honestly.
+ 9. **You make your own decisions.** You decide the timeline. You decide the risk register. You decide what to tell council.
+ 10. **Update memory every cycle.**
+ 
+@@ -308,7 +308,7 @@ This applies double for status reports and RFPs that get filed with City Hall an
+ 
+ ## Phase-Advance Discipline (engine.20b — S249)
+ 
+-Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). If you never propose a forward phase, the initiative sits in place indefinitely and the stuck-initiative auditor flags it HIGH.
++Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). Between milestones the phase holds, and holding is not a failure: it moves when the work does.
+ 
+ **When to advance** — propose a new `ImplementationPhase` only when BOTH hold:
+ 
+diff --git a/.claude/agents/civic-project-oari/RULES.md b/.claude/agents/civic-project-oari/RULES.md
+index 22542c7c0..74b66ed28 100644
+--- a/.claude/agents/civic-project-oari/RULES.md
++++ b/.claude/agents/civic-project-oari/RULES.md
+@@ -145,7 +145,7 @@ Drive destination: `civic` (City_Civic_Database folder)
+ | Turns | Activity |
+ |-------|----------|
+ | 1-2 | Read memory + initiative packet. Where did you leave off? What day of the 45-day clock? |
+-| 3-4 | Read Mara's directive. What's the political pressure this cycle? |
++| 3-4 | Read Mara's directive, if she wrote to you: her question and what she saw. |
+ | 5-6 | **Decide.** How many hires? Did OPD sign the dispatch spec? Did the MOU execute? Did you request the timeline extension? |
+ | 7-10 | **Write documents.** Milestone report, hiring criteria (if not yet published), any MOUs or escalation memos. Save to `output/city-civic-database/initiatives/oari/`. |
+ | 11-12 | **DO NOT write decisions JSON.** Per §Pre-Write Constraint (top of file, S229): `assembleDecisions.js` creates `decisions_c{XX}.json` at Step 6 from your voice JSON content. Reclaim these turns for deliverable filings or memory update. |
+@@ -161,7 +161,7 @@ Drive destination: `civic` (City_Civic_Database folder)
+ 3. **OPD cooperation is your critical dependency.** Without dispatch integration, the program is inert. Document OPD's response (or non-response) factually.
+ 4. **Budget is $12.5M.** Pilot districts are D1, D3, D5. Do not expand without council authorization.
+ 5. **OARI passed 5-4** — the closest vote. Do not confuse with other initiative vote counts.
+-6. **Advance the story.** Each cycle must be different. Hire people. Sign MOUs. Miss deadlines honestly. The world must move.
++6. **Move when your calendar calls for it.** Advance when a dated step is due or a deliverable has landed. Between deadlines, say plainly what is in progress — holding is honest work; never invent movement. A missed deadline is reported honestly.
+ 8. **Update your memory file every cycle.**
+ 9. **You make your own decisions.** Nobody scripts whether the 45-day deadline is met or missed.
+ 
+@@ -320,7 +320,7 @@ The Mayor, council, Police Chief, DA, CPRC, Mara, OPD, Alameda County BH, Highla
+ 
+ ## Phase-Advance Discipline (engine.20b — S249)
+ 
+-Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). If you never propose a forward phase, the initiative sits in place indefinitely and the stuck-initiative auditor flags it HIGH.
++Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). Between milestones the phase holds, and holding is not a failure: it moves when the work does.
+ 
+ **When to advance** — propose a new `ImplementationPhase` only when BOTH hold:
+ 
+diff --git a/.claude/agents/civic-project-stabilization-fund/RULES.md b/.claude/agents/civic-project-stabilization-fund/RULES.md
+index ccf2e5b74..56a272c9b 100644
+--- a/.claude/agents/civic-project-stabilization-fund/RULES.md
++++ b/.claude/agents/civic-project-stabilization-fund/RULES.md
+@@ -215,7 +215,7 @@ The `civic` destination maps to the City_Civic_Database folder on Google Drive 
+ | Turns | Activity |
+ |-------|----------|
+ | 1-2 | Read memory file + initiative packet. Understand where you left off. |
+-| 3-4 | Read Mara's directive. Identify what she's asking for and what the political moment requires. |
++| 3-4 | Read Mara's directive, if she wrote to you: her question and what she saw. |
+ | 5-6 | **Decide.** How many applications did you review this cycle? Who got approved? Who got denied? Did you escalate the disbursement hold? Did Beverly Hayes get her letter? Make real decisions. |
+ | 7-10 | **Write documents.** Status report, determination letters (1-2 named citizens), any escalation memos. Save to `output/city-civic-database/initiatives/stabilization-fund/`. |
+ | 11-12 | **DO NOT write decisions JSON.** Per §Pre-Write Constraint (top of file, S229): `assembleDecisions.js` creates `decisions_c{XX}.json` at Step 6 from your voice JSON content. Reclaim these turns for deliverable filings or memory update. |
+@@ -230,7 +230,7 @@ The `civic` destination maps to the City_Civic_Database folder on Google Drive 
+ 2. **Budget math must be consistent.** Every number in your status report must match your decisions JSON. If you approved $18,500 for Beverly Hayes, the cumulative approved total must reflect it.
+ 3. **The fund is $28M total. Phase 1 is $4.2M.** Do not conflate.
+ 4. **Beverly Hayes is POP-00772.** She is a real citizen in the simulation ledger. Her case matters.
+-5. **Advance the story.** Each cycle should be different from the last. Review applications. Make determinations. Escalate or don't. The world must move.
++5. **Move when your calendar calls for it.** Advance when a dated step is due or a deliverable has landed. Between deadlines, say plainly what is in progress — holding is honest work; never invent movement. A missed deadline is reported honestly.
+ 7. **Every document is public record.** Write as if anyone could FOIA it.
+ 8. **Update your memory file at the end of every cycle.** Financial state, decisions made, documents produced, corrections needed.
+ 9. **You make your own decisions.** Nobody scripts whether Beverly Hayes gets approved or denied. You read her file, you apply the criteria, you decide.
+@@ -392,7 +392,7 @@ The Mayor's office, council, Mara, City Auditor, OEWD, HUD/HUD-SF/CDBG, the 17 n
+ 
+ ## Phase-Advance Discipline (engine.20b — S249)
+ 
+-Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). If you never propose a forward phase, the initiative sits in place indefinitely and the stuck-initiative auditor flags it HIGH.
++Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). Between milestones the phase holds, and holding is not a failure: it moves when the work does.
+ 
+ **When to advance** — propose a new `ImplementationPhase` only when BOTH hold:
+ 
+diff --git a/.claude/agents/civic-project-transit-hub/RULES.md b/.claude/agents/civic-project-transit-hub/RULES.md
+index 6b23338dd..3aaa07880 100644
+--- a/.claude/agents/civic-project-transit-hub/RULES.md
++++ b/.claude/agents/civic-project-transit-hub/RULES.md
+@@ -142,7 +142,7 @@ Drive destination: `civic`
+ | Turns | Activity |
+ |-------|----------|
+ | 1-2 | Read memory + initiative packet. Pre-vote or post-vote? What does council need? |
+-| 3-4 | Read Mara's directive. Political pressure, community dynamics. |
++| 3-4 | Read Mara's directive, if she wrote to you: her question and what she saw. |
+ | 5-6 | **Decide.** What visioning sessions did you hold? What did the community say? What's in the council briefing? |
+ | 7-10 | **Write documents.** Visioning framework, session reports, council memo. Save to `output/city-civic-database/initiatives/transit-hub/`. |
+ | 11-12 | **DO NOT write decisions JSON.** Per §Pre-Write Constraint (top of file, S229): `assembleDecisions.js` creates `decisions_c{XX}.json` at Step 6 from your voice JSON content. Reclaim these turns for deliverable filings or memory update. |
+@@ -159,7 +159,7 @@ Drive destination: `civic`
+ 4. **Anti-displacement is non-negotiable.** Every design option must include displacement impact analysis.
+ 5. **Bilingual by default.** All public-facing documents in English and Spanish minimum.
+ 6. **This is Phase II** of an existing transit hub. Phase I exists. Reference it. Learn from it.
+-8. **Advance the story.** Hold sessions. Hear people. Brief council. The vote is coming.
++8. **Move when your calendar calls for it.** Advance when a dated step is due or a deliverable has landed. Between deadlines, say plainly what is in progress — holding is honest work; never invent movement. A missed deadline is reported honestly.
+ 9. **You make your own decisions.** You decide what the community said. You decide what to recommend.
+ 10. **Update memory every cycle.**
+ 
+@@ -286,7 +286,7 @@ This applies double for visioning frameworks, anti-displacement assessments, and
+ 
+ ## Phase-Advance Discipline (engine.20b — S249)
+ 
+-Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). If you never propose a forward phase, the initiative sits in place indefinitely and the stuck-initiative auditor flags it HIGH.
++Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). Between milestones the phase holds, and holding is not a failure: it moves when the work does.
+ 
+ **When to advance** — propose a new `ImplementationPhase` only when BOTH hold:
+ 
+diff --git a/scripts/buildCivicOfficeSlice.js b/scripts/buildCivicOfficeSlice.js
+index d1157ef85..4554444e2 100644
+--- a/scripts/buildCivicOfficeSlice.js
++++ b/scripts/buildCivicOfficeSlice.js
+@@ -1,5 +1,6 @@
+ #!/usr/bin/env node
+ 'use strict';
++const maraDirective = require('./maraDirective');
+ 
+ /**
+  * OFFICE/1 pack. Same box as a heat slice: code picks the facts, the seat speaks.
+@@ -873,6 +874,23 @@ function renewalStampText(row) {
+ // My board: rows the seat sponsors (ProposingOffice) plus rows touching its
+ // hoods after child→parent fold; the mayor sees all. (Plan Task 3.1 — a
+ // sponsor-only board leaves nine seats empty on day one.)
++// civic.47 M1 item 9: a tracker row's next-step date. A blank or non-integer
++// NextActionCycle is no date (Number('') was 0, which read as overdue), and a
++// terminal Status has no next step. past-due: the date is this Cycle or
++// earlier; due-next: next Cycle; scheduled: later.
++const TERMINAL_STATUS_RE = /^(failed|withdrawn|rejected|expired|cancell?ed|closed|completed)$/i;
++function nextActionCycleOf(row) {
++  const v = String(row && row.NextActionCycle != null ? row.NextActionCycle : '').trim();
++  return /^\d+$/.test(v) ? Number(v) : null;
++}
++function trackerClock(row, cycle) {
++  if (!row || TERMINAL_STATUS_RE.test(String(row.Status || '').trim())) return null;
++  const nac = nextActionCycleOf(row);
++  if (nac === null) return null;
++  const c = Number(cycle);
++  return { nac, state: nac <= c ? 'past-due' : nac === c + 1 ? 'due-next' : 'scheduled' };
++}
++
+ function boardRowsFor(office, rows, childToParent, context) {
+   const isMayor = String(office.officeId || '') === 'MAYOR-01';
+   const turf = new Set(turfHoods(office).map(h => foldHood(h, childToParent).toLowerCase()));
+@@ -890,6 +908,7 @@ function boardRowsFor(office, rows, childToParent, context) {
+       domain: row.PolicyDomain || null,
+       phase: row.ImplementationPhase || null,
+       status: row.Status || null,
++      nextActionCycle: TERMINAL_STATUS_RE.test(String(row.Status || '').trim()) ? null : nextActionCycleOf(row),
+       voteCycle: row.VoteCycle ? Number(row.VoteCycle) : null,
+       stage: row.Stage || null,
+       // stamped by buildGameBlocks (it owns cycle); null until the Task 4
+@@ -913,7 +932,8 @@ function boardBlock(board) {
+   if (board === null) return 'Board unavailable — no Initiative_Tracker beats dump on disk.';
+   if (!board.length) return 'Your board is empty: no initiative sponsors you or touches your turf.';
+   const lines = board.map(b =>
+-    '- ' + b.id + ' ' + b.name + ' [' + (b.phase || '—') + '] — ' + b.needsNext + ' — ' + b.budget);
++    '- ' + b.id + ' ' + b.name + ' [' + (b.phase || '—') + '] — ' + b.needsNext + ' — ' + b.budget +
++    (b.nextActionCycle != null ? ' — next step due C' + b.nextActionCycle : ''));
+   return clip('Your board:\n' + lines.join('\n'), BLOCK_CAP);
+ }
+ 
+@@ -1137,16 +1157,22 @@ function loadSeatMoves(root, cycle, agentDir) {
+ 
+ function loadConfrontations(root, cycle, agentDir) {
+   const all = [];
+-  for (const input of cycleFiles(root, 'mara-directives', /^mara_directive_c(\d+)_AUTO\.txt$/, cycle)) {
+-    const blocks = fs.readFileSync(input.file,'utf8').split(/\n(?=## )/).filter(b => /^## /.test(b));
+-    const mine = blocks.filter(b => b.split('\n').some(line => /\*\*Agent:\*\*/.test(line) && line.includes('.claude/agents/' + agentDir + '/')));
++  // civic.47 M1 item 10: `all` keeps every AUTO block for this seat (hood
++  // inference reads an old answer's sourceText); `open` holds only blocks from
++  // the latest directive Cycle citywide. A zero-block AUTO is still the latest
++  // directive and leaves nothing open; an older block stays open only if Mara
++  // re-issues it. Weekday reads AUTO files only (a manual file is prep's).
++  const files = cycleFiles(root, 'mara-directives', /^mara_directive_c(\d+)_AUTO\.txt$/, cycle);
++  const latestCycle = files.length ? files[files.length - 1].cycle : null;
++  for (const input of files) {
++    const mine = maraDirective.blocksFor(fs.readFileSync(input.file,'utf8'), agentDir);
+     if (!mine.length) continue;
+     const demand = mine.map(b => {
+       const address = (b.match(/\*\*Address:\*\*\s*(.+)/) || [])[1];
+       if (!address || !address.trim()) throw new Error('Directive Address unavailable: C' + input.cycle + ' ' + agentDir);
+       return b.split('\n')[0].replace(/^## /,'') + ' — ' + address.trim();
+     }).join('\n');
+-    all.push({id:'CONF-' + input.cycle + '-' + agentDir,cycle:input.cycle,agentDir,
++    all.push({id:maraDirective.confrontationId(input.cycle, agentDir),cycle:input.cycle,agentDir,
+       demand:clip(demand,BLOCK_CAP), sourceText:mine.join('\n'),
+       src:path.relative(root || ROOT,input.file).replace(/\\/g,'/'),expectsMove:'answer'});
+   }
+@@ -1156,7 +1182,7 @@ function loadConfrontations(root, cycle, agentDir) {
+     const id = (m.payload || {}).confrontationId, directive = known.get(id);
+     if (m.type === 'answer' && ['pending','applied','failed'].includes(m.status) && directive && Number(m.cycle) >= directive.cycle) answeredIds.add(id);
+   }
+-  return {available:true,all,open:all.filter(c => !answeredIds.has(c.id)),answeredIds:[...answeredIds]};
++  return {available:true,all,latestCycle,open:all.filter(c => c.cycle === latestCycle && !answeredIds.has(c.id)),answeredIds:[...answeredIds]};
+ }
+ 
+ function loadConfrontation(root, cycle, agentDir) {
+@@ -1513,7 +1539,7 @@ module.exports = {
+   clip, writePack, CONSTITUENT_CAP,
+   // civic.38 Task 3 game blocks
+   buildGameBlocks, boardRowsFor, boardNeedText, boardBlock, budgetStampText, budgetBandText, childToParentFromAudit, foldHood, requireCycle, loadAudit, gamePromptView,
+-  loadMovesFolded, loadPatrolState, loadPetitionPool, loadWorkingCity, loadConfrontation, loadConfrontations, loadSeatMoves,
++  nextActionCycleOf, trackerClock, TERMINAL_STATUS_RE, loadMovesFolded, loadPatrolState, loadPetitionPool, loadWorkingCity, loadConfrontation, loadConfrontations, loadSeatMoves,
+   loadCategoryMenu, loadTrackerRows, readJsonl, NEGATIVE_AFFECTS, BLOCK_CAP,
+ };
+ 
+diff --git a/scripts/buildInitiativePackets.js b/scripts/buildInitiativePackets.js
+index 26d4a4ef7..08e345d6d 100644
+--- a/scripts/buildInitiativePackets.js
++++ b/scripts/buildInitiativePackets.js
+@@ -147,7 +147,11 @@ function readMaraDirective(prevCycle) {
+     path.join(PROJECT_ROOT, `output/mara-directives/mara_directive_c${prevCycle}_AUTO.txt`),
+   ];
+   for (const filePath of candidates) {
+-    try { return fs.readFileSync(filePath, 'utf-8'); } catch { /* next */ }
++    let text;
++    try { text = fs.readFileSync(filePath, 'utf-8'); } catch { continue; }
++    // civic.47 M1 item 3: the packet carries Mara's addressee blocks only —
++    // never her Not directing list; a week with no block carries nothing.
++    return require('./maraDirective').withoutNotDirecting(text);
+   }
+   return null;
+ }
+diff --git a/scripts/civicReviewFixes.test.js b/scripts/civicReviewFixes.test.js
+index cc266690b..dc9a1fc5c 100644
+--- a/scripts/civicReviewFixes.test.js
++++ b/scripts/civicReviewFixes.test.js
+@@ -156,13 +156,16 @@ test('F8 board proposals show measured condition counts (health)', () => workspa
+   assert.equal(game.conditions.proposals[0].support.cleared,false);
+   assert.match(game.conditions.text,/support-band-unavailable/);
+ }));
+-test('R3 unanswered directives persist, answers bind Cycle and seat, and a second accepted answer is refused', () => workspace((root, write) => {
++test('R3 (civic.47 M1 item 10) only the latest directive is open; history stays for binding; answers bind Cycle and seat; a second accepted answer is refused', () => workspace((root, write) => {
+   const directive = (seat, text) => '## SYNTHETIC demand\n- **Agent:** `.claude/agents/'+seat+'/`\n- **Address:** '+text+'\n';
+   write('output/mara-directives/mara_directive_c997_AUTO.txt',directive(office.agentDir,'SYNTHETIC prior'));
+   write('output/mara-directives/mara_directive_c998_AUTO.txt',directive('SYNTHETIC-other','SYNTHETIC other'));
+   write('output/mara-directives/mara_directive_c999_AUTO.txt',directive(office.agentDir,'SYNTHETIC current'));
+   const oldId='CONF-997-'+office.agentDir;
+-  assert.equal(slice.loadConfrontation(root,999,office.agentDir).id,oldId);
++  const before=slice.loadConfrontations(root,999,office.agentDir);
++  assert.deepEqual(before.all.map(c=>c.id),[oldId,confrontation.id]); // history kept for hood inference
++  assert.deepEqual(before.open.map(c=>c.id),[confrontation.id]);       // an older block is not re-opened
++  assert.equal(slice.loadConfrontation(root,999,office.agentDir).id,confrontation.id);
+   const priorAnswer={moveId:'MV-SYNTHETIC-ANSWER',cycle:998,agentDir:office.agentDir,type:'answer',payload:{confrontationId:oldId},status:'pending'};
+   write('output/cron-civic/moves/moves_c998.jsonl',JSON.stringify(priorAnswer));
+   const state=slice.loadConfrontations(root,999,office.agentDir);
+diff --git a/scripts/cron-civic-game.test.js b/scripts/cron-civic-game.test.js
+index 4fd69ff08..104676661 100644
+--- a/scripts/cron-civic-game.test.js
++++ b/scripts/cron-civic-game.test.js
+@@ -1543,7 +1543,7 @@ test('R4: Working city selects 1 latest reflection per staff member across cycle
+   }
+ });
+ 
+-test('R3: Unanswered directives persist across cycles, bind answer moves, and reject duplicate answers', () => {
++test('R3 (civic.47 M1 item 10): only the latest directive is open, history binds answers, duplicates are rejected', () => {
+   const ws = createTempWorkspace();
+   try {
+     const office = { officeId: 'COUNCIL-D5', agentDir: 'civic-office-council-d5', district: 'D5' };
+@@ -1553,10 +1553,11 @@ test('R3: Unanswered directives persist across cycles, bind answer moves, and re
+     ws.writeText('output/mara-directives/mara_directive_c106_AUTO.txt', directiveText(106, office.agentDir, 'Prior unresolved demand'));
+     ws.writeText('output/mara-directives/mara_directive_c108_AUTO.txt', directiveText(108, office.agentDir, 'Current demand'));
+ 
+-    // Prior unresolved demand persists as open[0]
++    // The older block stays in history; only the latest directive is open.
+     const state1 = civicSlice.loadConfrontations(ws.dir, 108, office.agentDir);
+-    assert.strictEqual(state1.open.length, 2);
+-    assert.strictEqual(civicSlice.loadConfrontation(ws.dir, 108, office.agentDir).id, 'CONF-106-' + office.agentDir);
++    assert.strictEqual(state1.all.length, 2);
++    assert.strictEqual(state1.open.length, 1);
++    assert.strictEqual(civicSlice.loadConfrontation(ws.dir, 108, office.agentDir).id, 'CONF-108-' + office.agentDir);
+ 
+     // Record an answer to C106 in C107
+     ws.writeJsonl('output/cron-civic/moves/moves_c107.jsonl', [{
+diff --git a/scripts/cron-civic-run.js b/scripts/cron-civic-run.js
+index 19e541950..c2ec97aef 100644
+--- a/scripts/cron-civic-run.js
++++ b/scripts/cron-civic-run.js
+@@ -73,7 +73,8 @@ const civicSeat = require('./civicSeat');
+ const { categoryIssue, budgetIssue, reachHoods, renewRowIssue } = require('./civicInterventionValidation');
+ const cityHallLedger = require('./cityHallLedger');
+ const chaosCascade = require('./dumpChaosCascade');
+-const orBatch = require('./orBatch');   // civic.39 Task 3 — batch transport (importable since the require.main guard; key read is lazy)
++const orBatch = require('./orBatch');
++const maraDirective = require('./maraDirective');   // civic.39 Task 3 — batch transport (importable since the require.main guard; key read is lazy)
+ 
+ /** Non-fatal: prior CIVIC positions for holder of agentDir. */
+ async function positionWallInject(officeMap, agentDir) {
+@@ -625,9 +626,9 @@ async function runPrep() {
+   // crime-flavored -> police chief; ownerless hoods roll up to the Mayor digest.
+   // A one-week decay flag skips the district seat (isOneWeekDecay).
+   for (const p of audit.patterns.filter(p => p.severity === 'high')) {
+-    const topic = { kind: 'ailment', title: 'Engine review HIGH: ' + p.type.replace(/-/g, ' '), body: ailmentPerception(p) + (p.type === 'stuck-initiative'
+-      ? '\nThis is a decision demand, not a briefing. Advance the phase or take a fail phase. Silence fails the apply gate.'
+-      : '') };
++    // civic.47 M1 item 12 (builder 2026-11-03): a program moves when its
++    // deadlines call for it, so a stuck-initiative reading carries no demand.
++    const topic = { kind: 'ailment', title: 'Engine review HIGH: ' + p.type.replace(/-/g, ' '), body: ailmentPerception(p) };
+     const sig = JSON.stringify((p.evidence && p.evidence.fields) || {});
+     if (p.type !== 'ledger-completeness') {
+       if (!isOneWeekDecay(p, cycle)) {
+@@ -666,6 +667,13 @@ async function runPrep() {
+   for (const d of civicSeat.councilAgentDirs(officeMap)) {
+     if (!assignments[d]) assignments[d] = [];
+   }
++  // civic.47 M1 item 11: a project director Mara addressed gets its packet
++  // (with her section) even when no initiative or pattern routed it a topic.
++  if (directive) {
++    for (const seat of projectSeats(officeMap)) {
++      if (!assignments[seat.agentDir] && maraDirective.blocksFor(directive, seat.agentDir).length) assignments[seat.agentDir] = [];
++    }
++  }
+ 
+   // engine.11 T5.3 — chaos cascade: a Tier-1 chaos-cars hit is citywide news,
+   // every packet gets the block regardless of topic assignment (city-hall-prep
+@@ -761,9 +769,11 @@ async function runPrep() {
+ 
+     // Mara cross-check — the office's section of the directive, if one exists
+     if (directive) {
+-      const sect = directive.split(/\n## /).find(s => s.includes('`' + dir + '`') || s.includes(dir));
++      // civic.47 M1 item 3: only blocks whose Agent line names this seat —
++      // never a Not directing line or another seat's block that mentions it.
++      const sect = maraDirective.blocksFor(directive, dir).join('\n');
+       if (sect) {
+-        const clean = cleanLines('## ' + sect).trim();
++        const clean = cleanLines(sect).trim();
+         if (clean) L.push('', '## Directive from Mara Vance, City Planning Director', clean);
+       }
+     }
+@@ -912,329 +922,547 @@ function callOpenRouter(model, system, user) {
+ const modelFamily = slug => String(slug).split('/')[0];
+ 
+ // ---------------------------------------------------------------------------
+-// civic.39 Task 4 — the directive is a POST-CLOSE artifact. It is built from
+-// close_c{N}.json and aims only at seats the close left PASSED OVER (their
+-// voice never landed — pendingVoices) or carrying an UNANSWERED DEMAND
+-// (petition pool at/above the visibility line with no proposal filed by the
+-// seat, or a board row inside one cycle of its stall clock). The AUTO file
+-// for week N is written after week N's close and consumed by week N+1's prep.
++// civic.47 M1 — Mara Vance's weekly directive, after the Sunday close. She
++// reads the week in full (Sunday and weekday statements, her promise record,
++// her last directives and the answers to them, the paper, the summary and the
++// tracker), looks things up with tools, and addresses the offices — mayor,
++// council, program directors — only where a promise is slipping or something
++// real deserves an answer. A week with no directive is a valid result. Code
++// supplies evidence and the roster; it does not pick her addressees.
++// The AUTO file for week N is written after week N's close and read by week
++// N+1's prep, the weekday reader and the projects stage.
+ // ---------------------------------------------------------------------------
+ 
+-// Petition visibility line (default the builder may overrule): a district with
+-// this many Civic complaints on the record and no answering proposal is
+-// confrontable.
+-const PETITION_VISIBILITY_LINE = 3;
+-
+-function seatUnansweredDemands(o, deps) {
+-  const reasons = [];
+-  const pool = deps.petitionPoolFor ? deps.petitionPoolFor(o) : null;
+-  if (pool && pool.available) {
+-    const answered = (deps.pendingProposals || []).filter(m => m.agentDir === o.agentDir).length;
+-    if (pool.complaints.length >= PETITION_VISIBILITY_LINE && !answered) {
+-      reasons.push('petition pool: ' + pool.complaints.length + ' complaint(s) ≥ the visibility line (' + PETITION_VISIBILITY_LINE + ') with NO proposal filed by this seat');
++const DIRECTIVE_MODEL = 'openai/gpt-6.1-sol';
++const DIRECTIVE_FALLBACK = 'google/gemini-3.8-flash';
++const DIRECTIVE_TOOL_CALLS = 8;
++const DIRECTIVE_TIMEOUT_MS = 600000;
++const DIRECTIVE_MAX_TOKENS = 32000;
++const MARA_POP = 'POP-00507';
++
++// The offices Mara may address: mayor, nine council seats, program directors.
++function directiveRoster(officeMap) {
++  const out = [];
++  for (const o of officeMap.offices || []) {
++    const id = String(o.officeId || '');
++    if (o.agentDir && (id === 'MAYOR-01' || /^COUNCIL-D\d$/.test(id))) out.push({ agentDir: o.agentDir, holder: o.holder, title: o.title, office: o, kind: 'elected' });
++  }
++  for (const seat of projectSeats(officeMap)) {
++    const row = (officeMap.projects || []).find(p => p.agentDir === seat.agentDir) ||
++      (officeMap.offices || []).find(o => o.agentDir === seat.agentDir) || {};
++    out.push({ agentDir: seat.agentDir, holder: row.holder, title: row.title, office: row, kind: 'project', initiative: seat.initiative });
++  }
++  return out;
++}
++
++// Evidence lines for one office — what that office could see this week.
++// Plain facts; none of them obliges a directive.
++function seatEvidence(s, deps) {
++  const o = s.office;
++  const slice = deps.slice;
++  const lines = [];
++  if (deps.passedOver && deps.passedOver.has(s.agentDir)) lines.push('- no statement from this office landed in the C' + deps.cycle + ' close');
++  if (s.kind === 'elected') {
++    const hoods = slice.turfHoods(o);
++    const turfSet = new Set(hoods.map(h => String(h).toLowerCase()));
++    const hot = (deps.hoodScores || []).filter(h => turfSet.has(String(h.hood).toLowerCase()) && (h.outlier || h.traj === 'decay'));
++    if (hot.length) lines.push('- district readings: ' + hot.map(h => h.hood + ' (' + h.why.join('; ') + ')').join(' | '));
++    const pool = deps.petitionPoolFor ? deps.petitionPoolFor(o) : null;
++    if (pool && pool.available) {
++      const pending = (deps.pendingProposals || []).filter(m => m.agentDir === s.agentDir).length;
++      lines.push('- citizen complaints on the record: ' + pool.complaints.length + (pending ? '; ' + pending + ' proposal(s) pending from this office' : ''));
+     }
+   }
+-  const dueSoon = (deps.boardFor ? deps.boardFor(o) : []).filter(b => {
+-    const row = (deps.trackerRows || []).find(r => r.InitiativeID === b.id) || {};
+-    const nac = Number(row.NextActionCycle);
+-    return Number.isFinite(nac) && nac <= Number(deps.cycle) + 1;
+-  });
+-  if (dueSoon.length) reasons.push('stall clock: ' + dueSoon.map(b => b.id).join(', ') + ' (NextActionCycle ≤ C' + (Number(deps.cycle) + 1) + ')');
+-  return reasons;
++  const board = deps.boardFor ? deps.boardFor(s) : [];
++  for (const b of board) {
++    const row = (deps.trackerRows || []).find(r => r.InitiativeID === b.id);
++    const clock = slice.trackerClock(row, deps.cycle);
++    lines.push('- board ' + b.id + ' ' + (b.name || '') + ' [' + (b.phase || '—') + ', ' + (b.status || '—') + ']' +
++      (clock ? ' next step ' + (clock.state === 'past-due' ? 'PAST DUE (C' + clock.nac + ')' : clock.state === 'due-next' ? 'due C' + clock.nac : 'scheduled C' + clock.nac) : ' — no dated next step'));
++  }
++  return lines;
+ }
+ 
+-// The close-derived addressee set. deps is injectable for tests; runDirective
+-// assembles the real one from the slice builders.
+-function directiveTargetSeats(cycle, opts) {
+-  opts = opts || {};
+-  const root = opts.root || ROOT;
+-  const officeMap = opts.officeMap || mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
+-  const closeRec = opts.closeRec !== undefined ? opts.closeRec
+-    : readJson(path.join(root, 'output', 'cron-civic', 'close_c' + cycle + '.json'));
+-  // Valid addressees = the 10 ELECTED seats (mayor + 9 council, civic.38
+-  // Task 8). A pending voice from a non-elected seat never becomes an addressee.
+-  const pool = (officeMap.offices || []).filter(o => {
+-    if (!o.agentDir) return false;
+-    const id = String(o.officeId || '');
+-    return id === 'MAYOR-01' || /^COUNCIL-D\d$/.test(id);
+-  });
+-  const dirForSlug = slug => String(slug).indexOf('mayor') === 0
+-    ? 'civic-office-mayor'
+-    : 'civic-office-' + String(slug).replace(/_/g, '-');
+-  const passedOver = new Set((((closeRec || {}).pendingVoices) || []).map(dirForSlug));
+-  const targets = [];
+-  for (const o of pool) {
+-    const reasons = [];
+-    if (passedOver.has(o.agentDir)) reasons.push('passed over — no voice from this seat landed in the C' + cycle + ' close');
+-    if (opts.deps) reasons.push.apply(reasons, seatUnansweredDemands(o, opts.deps));
+-    if (reasons.length) targets.push({ agentDir: o.agentDir, holder: o.holder, title: o.title, office: o, reasons });
+-  }
+-  return targets;
+-}
+-
+-// Block validation against the close-derived target set: a block addressed to
+-// ANY other seat — even a real elected one — is rejected. The five template
+-// fields are mandatory (a truncated tail block fails the field check).
+-function filterDirectiveBlocks(text, targetDirs) {
+-  const known = targetDirs instanceof Set ? targetDirs : new Set(targetDirs);
+-  let blocks = String(text).replace(/^```(?:markdown)?\s*/i, '').replace(/\s*```\s*$/, '')
+-    .split(/\n(?=## )/).filter(p => /^## /.test(p));
+-  const FIELDS = ['**Agent', '**Address', '**Why', '**Acceptance', '**Silence consequence'];
++// Block validation: Agent on the roster; Agent, Address, Why, Acceptance
++// required; Silence consequence and Promise optional. The Not directing
++// section is parsed out first and checked on its own.
++function filterDirectiveBlocks(text, rosterDirs, opts) {
++  const known = rosterDirs instanceof Set ? rosterDirs : new Set(rosterDirs);
++  // At most one block per roster office (a second is rejected below).
++  const max = (opts && opts.max) || known.size;
++  const split = maraDirective.splitDirective(text);
++  const FIELDS = ['**Agent:**', '**Address:**', '**Why:**', '**Acceptance:**'];
+   const rejected = [];
+-  blocks = blocks.filter(b => {
+-    const m = b.match(/\.claude\/agents\/([a-z0-9-]+)\/?/i);
+-    if (!m || !known.has(m[1])) { rejected.push({ head: (b.split('\n')[0] || '').slice(0, 80), why: 'addressee outside the close-derived target set' }); return false; }
++  const seen = new Set();
++  let blocks = split.blocks.filter(b => {
++    const head = (b.split('\n')[0] || '').slice(0, 80);
++    const dir = maraDirective.agentDirOf(b);
++    if (!dir || !known.has(dir)) { rejected.push({ head, why: 'addressee not on the roster' }); return false; }
+     const missing = FIELDS.filter(f => !b.includes(f));
+-    if (missing.length) { rejected.push({ head: (b.split('\n')[0] || '').slice(0, 80), why: 'missing fields: ' + missing.join(', ') }); return false; }
++    if (missing.length) { rejected.push({ head, why: 'missing fields: ' + missing.join(', ') }); return false; }
++    if (seen.has(dir)) { rejected.push({ head, why: 'second block for the same office' }); return false; }
++    seen.add(dir);
+     return true;
+   });
+   let truncated = 0;
+-  if (blocks.length > 12) { truncated = blocks.length - 12; blocks = blocks.slice(0, 12); }
+-  return { blocks, rejected, truncated };
++  if (blocks.length > max) { truncated = blocks.length - max; blocks = blocks.slice(0, max); }
++  const ndProblem = maraDirective.notDirectingProblem(split.notDirecting);
++  return { blocks, rejected, truncated, notDirecting: ndProblem ? null : split.notDirecting, notDirectingProblem: ndProblem };
++}
++
++const DIRECTIVE_BRIEF = [
++  '## Your weekly directive — how you work this desk',
++  '',
++  'Each week, after the council closes, you read what the city\'s offices said and did, what the',
++  'paper published, and what the city record shows. You are the city\'s institutional memory: you',
++  'keep offices true to their own word, and you ask them about what is happening in their',
++  'districts and programs. You address the Mayor, the nine council members and the five program',
++  'directors.',
++  '',
++  'Write a directive block only where there is something real to put in front of an office:',
++  '- a promise check: the office said it would do something; where does it stand?',
++  '- an event question: something happened in its district or program (a celebration, a crowd,',
++  '  an opening, a change); what is the office doing about it, if anything?',
++  '- a record question: a reading in its district keeps repeating or looks off; what does the',
++  '  office see?',
++  '- a past-due step: an initiative\'s dated next step on the tracker has passed.',
++  '',
++  'Most of this city is doing well. A quiet week with nothing to ask is a real result, and so is',
++  'an office you leave alone. A program that sits in one phase for a while has not missed',
++  'anything — its deadline is the date of its next step on the tracker. Do not invent urgency,',
++  'defaults or legal consequences; say only what the record shows.',
++  '',
++  'One block per office you address, exactly this shape:',
++  '',
++  '## [Full Name] — [Role]',
++  '',
++  '- **Agent:** `.claude/agents/<seat>/`  (routing line — copy the seat id exactly as listed for that person)',
++  '- **Address:** one sentence — your question or request, plainly',
++  '- **Why:** what you saw, with the Cycle and where it came from',
++  '- **Acceptance:** what a full answer would show',
++  '- **Promise:** P-…  (only when the block puts a recorded promise in front of the office)',
++  '- **Silence consequence:** (optional — only when something real depends on the answer)',
++  '',
++  'After the blocks, always end with:',
++  '',
++  '## Not directing',
++  '- [Full Name] ([Role]): why you are leaving this office alone this week',
++  '',
++  'In that section name people and titles only — no seat ids.',
++  '',
++  'Your tools: promise_record (record a promise an office made, or close one with evidence tied to',
++  'it), mara_memory (your desk\'s institutional memory), memory_recall and memory_note (your own',
++  'notebook), canon_recall (what the Tribune has published), citizen_lookup, sheet_read (a city',
++  'sheet). Use them when they help; you can also work from the material alone.',
++].join('\n');
++
++const PROMISE_TOOL = { type: 'function', function: { name: 'promise_record', description: 'Record a promise an office made in its own public statement this week, or close an open promise with evidence tied to it. Every call is checked against the record; a rejected call says why.', parameters: { type: 'object', properties: {
++  action: { type: 'string', enum: ['promise', 'status'] },
++  source: { type: 'object', description: 'for action=promise: {kind:"sunday"|"weekday", office:"<seat id>", statement:"open"|"gavel" (mayor only), cycle:<number>, index:<statement index, Sunday>, field:"quote"|"fullStatement"|"decision" (Sunday) or "statement" (weekday), date:"YYYY-MM-DD" (weekday)}' },
++  said: { type: 'string', description: 'for action=promise: the exact words of the promise, copied from that field' },
++  promiseId: { type: 'string', description: 'for action=status' },
++  status: { type: 'string', enum: ['kept', 'dropped', 'changed'] },
++  evidence: { type: 'object', description: 'for action=status: {type:"tracker", initiativeId, field, value} | {type:"statement", source:{…as above}, quote} | {type:"answer", confrontationId}' },
++  note: { type: 'string' },
++}, required: ['action'] } } };
++const MARA_MEMORY_TOOL = { type: 'function', function: { name: 'mara_memory', description: 'Search your desk\'s institutional memory: past directives, what offices promised and did, project gates, earlier weeks.', parameters: { type: 'object', properties: { query: { type: 'string' } }, required: ['query'] } } };
++
++// The tool executor for one attempt. Writes are staged on `stage` and
++// committed only after the final text validates.
++function maraToolExecutor(ctx, stage) {
++  const dw = require('./cron-desk-writer');
++  const promises = require('./maraPromises');
++  const record = ctx.record;
++  return async function (name, input) {
++    input = input || {};
++    if (name === 'promise_record') {
++      if (input.action === 'promise') {
++        const v = promises.validatePromise(input, ctx.promiseCtx);
++        if (!v.ok) { stage.rejectedPromises.push({ action: 'promise', why: v.why }); return 'rejected: ' + v.why; }
++        if (!stage.promises.some(r => r.eventId === v.row.eventId) && !record.promises.has(v.row.promiseId)) stage.promises.push(v.row);
++        return 'recorded ' + v.row.promiseId + (v.row.initiativeId ? ' (' + v.row.initiativeId + ')' : '');
++      }
++      if (input.action === 'status') {
++        const v = promises.validateStatus(input, ctx.promiseCtx, record);
++        if (!v.ok) { stage.rejectedPromises.push({ action: 'status', promiseId: input.promiseId || null, why: v.why }); return 'rejected: ' + v.why; }
++        if (!stage.statuses.some(r => r.eventId === v.row.eventId)) stage.statuses.push(v.row);
++        return 'closed ' + v.row.promiseId + ' as ' + v.row.status;
++      }
++      return 'rejected: action must be promise or status';
++    }
++    if (name === 'mara_memory') {
++      const r = await require('./maraMemory').search(input.query);
++      stage.memoryReads.push({ query: String(input.query || ''), status: r.status, hits: r.results ? r.results.length : 0, why: r.why || null });
++      if (r.status !== 'ok') return 'Your desk memory is unavailable right now (' + r.why + ') — this is not an empty record; say nothing about what it holds.';
++      if (!r.results.length) return 'Your desk memory has nothing on "' + input.query + '".';
++      return r.results.map(x => '- ' + (x.cycle != null ? '[C' + x.cycle + '] ' : '') + x.text).join('\n');
++    }
++    if (name === 'memory_note') {
++      if (stage.notes.length >= 3) return 'notebook full for this week — three notes';
++      const note = String(input.note || '').trim();
++      if (!note) return 'empty note';
++      stage.notes.push(note);
++      return 'noted';
++    }
++    if (name === 'memory_recall') return dw.toolMemoryRecall(MARA_POP, input);
++    if (name === 'canon_recall') return dw.toolCanonRecall(input, Number(ctx.cycle) + 1);
++    if (name === 'citizen_lookup') return dw.toolCitizenLookup(input);
++    if (name === 'sheet_read') return dw.toolSheetRead(input);
++    return 'unknown tool ' + name;
++  };
++}
++
++function maraToolset() {
++  const dw = require('./cron-desk-writer');
++  const pick = (list, n) => list.find(t => t.function.name === n);
++  return [PROMISE_TOOL, MARA_MEMORY_TOOL, pick(dw.MEMORY_TOOLS, 'memory_recall'), pick(dw.MEMORY_TOOLS, 'memory_note'),
++    dw.CANON_RECALL_TOOL, pick(dw.OPENROUTER_TOOLS, 'citizen_lookup'), pick(dw.OPENROUTER_TOOLS, 'sheet_read')].filter(Boolean);
++}
++
++// The week Mara reads, in full.
++function directiveMaterial(cycle, opts) {
++  const root = opts.root;
++  const prevN = Number(cycle) - 1;
++  const out = {};
++  const voiceDir = path.join(root, 'output', 'civic-voice');
++  out.sunday = [];
++  if (fs.existsSync(voiceDir)) {
++    for (const f of fs.readdirSync(voiceDir).sort()) {
++      const m = f.match(/^(.+)_c(\d+)\.json$/);
++      if (!m || Number(m[2]) !== Number(cycle)) continue;
++      const j = readJson(path.join(voiceDir, f));
++      if (j) out.sunday.push({ file: m[1], j });
++    }
++  }
++  const dwDir = path.join(root, 'output', 'cron-civic', 'datawake');
++  out.weekday = [];
++  if (fs.existsSync(dwDir)) {
++    for (const f of fs.readdirSync(dwDir).sort()) {
++      const m = f.match(/^(civic-[a-z0-9-]+)_(\d{4}-\d{2}-\d{2})\.json$/);
++      if (!m) continue;
++      const j = readJson(path.join(dwDir, f));
++      if (j && Number(j.cycle) === prevN && opts.roster.has(j.agentDir)) out.weekday.push({ agentDir: m[1], date: m[2], j });
++    }
++  }
++  const dirDir = path.join(root, 'output', 'mara-directives');
++  out.priorDirectives = [];
++  for (let c = Number(cycle) - 1; c >= Number(cycle) - 3 && c > 0; c--) {
++    const p = ['mara_directive_c' + c + '_AUTO.txt', 'mara_directive_c' + c + '.txt', 'mara_directive_c' + c + '.md']
++      .map(f => path.join(dirDir, f)).find(x => fs.existsSync(x));
++    if (p) out.priorDirectives.push({ cycle: c, file: path.basename(p), text: fs.readFileSync(p, 'utf8') });
++  }
++  // Answers to her questions: weekday answer moves of the week, and
++  // directors' maraAnswer on Sunday.
++  out.answers = [];
++  const folded = loadMoveLedgerFolded(root, prevN);
++  if (folded) {
++    for (const m of folded.values()) {
++      if (m.type === 'answer' && ['pending', 'applied', 'failed'].includes(m.status) && m.payload && m.payload.confrontationId) {
++        out.answers.push({ agentDir: m.agentDir, confrontationId: m.payload.confrontationId, text: m.payload.text || '', via: 'weekday' });
++      }
++    }
++  }
++  for (const s of out.sunday) {
++    const a = s.j.maraAnswer;
++    if (a && a.confrontationId) {
++      const mm = String(a.confrontationId).match(/^CONF-\d+-(.+)$/);
++      if (mm) out.answers.push({ agentDir: mm[1], confrontationId: a.confrontationId, text: (a.kind ? '[' + a.kind + '] ' : '') + (a.text || ''), via: 'sunday' });
++    }
++  }
++  const ed = path.join(root, 'editions', 'cycle_pulse_c' + cycle + '.txt');
++  out.edition = fs.existsSync(ed) ? fs.readFileSync(ed, 'utf8') : null;
++  return out;
++}
++
++function renderSunday(s) {
++  const j = s.j;
++  const lines = ['### ' + s.file + ' — ' + (j.speaker || '?')];
++  if (j.cascadeSummary) lines.push('Summary: ' + j.cascadeSummary);
++  (j.statements || []).forEach((st, i) => {
++    lines.push('[' + i + '] ' + (st.initiative ? '(' + st.initiative + ') ' : '') + 'decision: ' + (st.decision || ''));
++    if (st.quote) lines.push('    quote: ' + st.quote);
++    if (st.fullStatement) lines.push('    fullStatement: ' + st.fullStatement);
++  });
++  if (j.maraAnswer) lines.push('Reply to you (' + j.maraAnswer.confrontationId + ', ' + j.maraAnswer.kind + '): ' + j.maraAnswer.text);
++  return lines.join('\n');
++}
++function renderWeekday(w) {
++  const moves = (w.j.moves || []).map(m => m.type + (m.payload && m.payload.initiativeId ? ' ' + m.payload.initiativeId : '') +
++    (m.payload && m.payload.title ? ' "' + m.payload.title + '"' : '') + (m.payload && m.payload.confrontationId ? ' → ' + m.payload.confrontationId : ''));
++  return '### ' + w.agentDir + ' — ' + w.date + ' (' + (w.j.holder || '?') + ')\nstatement: ' + (w.j.statement || '') + (moves.length ? '\nmoves: ' + moves.join('; ') : '');
++}
++
++// mara-world run entry: what she directed and what she is watching.
++function runEntryText(cycle, blocks, notDirecting, openPromises) {
++  const lines = ['C' + cycle + ' — Mara Vance\'s directive, written after the close.'];
++  if (blocks.length) for (const b of blocks) {
++    const address = (b.match(/\*\*Address:\*\*\s*(.+)/) || [])[1] || '';
++    lines.push('Directed ' + (b.split('\n')[0] || '').replace(/^## /, '') + ': ' + address.trim());
++  } else lines.push('No directive this week.');
++  if (notDirecting) lines.push(notDirecting.replace(/^## Not directing\s*/i, 'Not directing:\n'));
++  if (openPromises.length) lines.push('Open promises she is watching: ' + openPromises.map(p => p.office.replace(/^civic-(office|project)-/, '') + ' "' + p.said + '"').join('; '));
++  return lines.join('\n');
++}
++
++// Commit staged writes after validation (re-review finding 4): remote memory
++// first (upsert by customId + readback), the promise rows last (skipped when
++// their eventId is already on file). Each outcome lands in the receipt.
++async function commitDirectiveWrites(cycle, staged, opts) {
++  const receiptPath = path.join(opts.root, 'output', 'mara-directives', 'commit_c' + cycle + '.json');
++  // A resume continues the prior receipt; a fresh run starts its own (its
++  // staged content is new — the ids still keep a write from landing twice).
++  const prior = (opts.resume && readJson(receiptPath)) || { writes: {} };
++  const receipt = { cycle: Number(cycle), writes: prior.writes || {}, ranAt: new Date().toISOString() };
++  const done = id => receipt.writes[id] && receipt.writes[id].ok;
++  const memory = opts.memory || require('./maraMemory');
++  const page = opts.page || require('../lib/citizenPage');
++  const entryId = 'mara-run-c' + cycle;
++  if (!done(entryId)) receipt.writes[entryId] = await memory.upsert(entryId, staged.runEntry, { cycle: Number(cycle), type: 'directive-run' });
++  for (let i = 0; i < staged.notes.length; i++) {
++    const key = 'directive-note' + (i + 1);
++    const id = 'page:' + key;
++    if (done(id)) continue;
++    const r = await page.appendReflection_(MARA_POP, staged.notes[i], { cycle: Number(cycle), daypart: 'directive', key, extra: { kind: 'planning-director-note' } });
++    if (r.error) { receipt.writes[id] = { ok: false, why: r.error }; continue; }
++    const back = await page.pageHasDoc_(MARA_POP, r.customId);
++    receipt.writes[id] = back === true ? { ok: true, customId: r.customId } : { ok: false, customId: r.customId, why: back === false ? 'readback: not found' : 'readback: unknown' };
++  }
++  const rows = staged.promises.concat(staged.statuses);
++  if (rows.length && !done('promises')) {
++    try {
++      const a = require('./maraPromises').appendRows(opts.root, rows);
++      receipt.writes.promises = { ok: true, written: a.written.length, skipped: a.skipped.length };
++    } catch (e) { receipt.writes.promises = { ok: false, why: e.message }; }
++  }
++  receipt.complete = Object.values(receipt.writes).every(w => w && w.ok);
++  fs.writeFileSync(receiptPath, JSON.stringify(receipt, null, 2));
++  return receipt;
+ }
+ 
+ async function runDirective() {
+   const cycle = arg('--cycle', null) || detectCycle();
+-  const prev = String(Number(cycle) - 1);
+-  console.log('Civic DIRECTIVE — c' + cycle);
++  const DRY_COMMIT = process.argv.includes('--dry-commit');
++  console.log('Civic DIRECTIVE — c' + cycle + (DRY_COMMIT ? ' (dry commit — no memory or promise writes)' : ''));
+   console.log('===================================');
+ 
+   const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
+   const summaryMd = mustRead(path.join(ROOT, 'output', 'world_summary_c' + cycle + '.md'), 'run /build-world-summary first');
+   const audit = mustJson(path.join(ROOT, 'output', 'engine_audit_c' + cycle + '.json'), 'run /engine-review first');
+   const tracker = trackerSnapshot.loadOrRebuild(cycle);
++  const outDir = path.join(ROOT, 'output', 'mara-directives');
++  const stagedPath = path.join(outDir, 'staged_c' + cycle + '.json');
++
++  // Resume a partial commit (re-review finding 4): the directive is written;
++  // only the missing writes are redone, from what was staged.
++  const manifestPath = path.join(CIVIC, 'directive_c' + cycle + '.json');
++  const priorManifest = readJson(manifestPath);
++  if (!DRY_COMMIT && priorManifest && priorManifest.commit === 'partial' && fs.existsSync(stagedPath)) {
++    log('resuming the C' + cycle + ' commit from the staged writes — no model call');
++    const receipt = await commitDirectiveWrites(cycle, readJson(stagedPath), { root: ROOT, resume: true });
++    priorManifest.commit = receipt.complete ? 'complete' : 'partial';
++    priorManifest.commitReceipt = path.relative(ROOT, path.join(outDir, 'commit_c' + cycle + '.json'));
++    fs.writeFileSync(manifestPath, JSON.stringify(priorManifest, null, 2));
++    console.log('\n=== directive commit ' + priorManifest.commit + ' ===');
++    if (!receipt.complete) process.exit(1);
++    return;
++  }
+ 
+-  // Friction rule (plan Task 2.2): the directive's model family must differ
+-  // from the Mayor's writer family.
++  // Friction rule (plan Task 2.2): the directive's writer family — primary
++  // and fallback — must differ from the Mayor's.
+   const mayorModel = (officeMap.offices.find(o => o.officeId === 'MAYOR-01') || {}).model || '';
+-  const MODEL = arg('--model', 'google/gemini-3.8-flash');
+-  if (modelFamily(MODEL) === modelFamily(mayorModel)) {
+-    console.error('FRICTION VIOLATION: directive model family "' + modelFamily(MODEL) + '" matches the Mayor\'s writer family. Pick a different --model.');
+-    process.exit(2);
+-  }
+-
+-  // Mara persona: IN_WORLD_CHARACTER.md only (Mike-direct S344). The
+-  // VOICE_DIRECTIVE_TEMPLATE is an apparatus doc (.claude paths, audit paths,
+-  // owner sign-off) — feeding it whole put out-of-sim framing in her context.
+-  // The directive craft is distilled into the in-world brief below instead.
+-  // civic.38 Task 8: the directive is a CONFRONTATION aimed at the elected
+-  // seats — what the seat could have seen (its own district data, its
+-  // petition pool, its board) and must now answer.
+-  const DIRECTIVE_BRIEF = [
+-    '## Your cycle directive — how you work this desk',
+-    '',
+-    'Each cycle you review the city\'s live record and confront the elected seats that owe',
+-    'the public an answer. You are the city\'s institutional memory: you catch the unresolved',
+-    'thread, the number nobody published, the seat gone quiet while its district moves the',
+-    'wrong way. Project directors and staff are not your addressees — their work is',
+-    'operational. You confront the people the city can vote out.',
+-    '',
+-    'Issue one block per addressee, exactly this shape:',
+-    '',
+-    '## [Full Name] — [Role]',
+-    '',
+-    '- **Agent:** `.claude/agents/<seat>/`  (routing line — copy the seat id exactly as listed for that person)',
+-    '- **Address:** one sentence, action-shaped — what they must say, publish, or do this cycle',
+-    '- **Why:** the unresolved thread. Cite cycles by number. Name the decision that depends on this.',
+-    '- **Acceptance:** what counts as resolved — a number, a position, a filed deliverable, observable next cycle',
+-    '- **Silence consequence:** what breaks if they stay silent. Silence is also a position.',
+-    '',
+-    'All five fields, every block. Order by urgency: vote-gating first, then',
+-    'record-corrections, then coverage gaps, then escalations of prior directives that went',
+-    'unanswered. Maximum 12 blocks. If you cannot write a clean Acceptance line, the',
+-    'directive is not ready — cut it. Thin directives are noise; issuing fewer, sharper',
+-    'directives is always the better cycle.',
+-    '',
+-    'A demand must be traceable to something the seat could see: a district hood moving the',
+-    'wrong way, constituents complaining on the record with no proposal filed in answer, or an',
+-    'initiative on the seat\'s board about to hit its stall clock. Name the evidence.',
+-  ].join('\n');
++  const MODEL = arg('--model', DIRECTIVE_MODEL);
++  for (const m of [MODEL, DIRECTIVE_FALLBACK]) {
++    if (modelFamily(m) === modelFamily(mayorModel)) {
++      console.error('FRICTION VIOLATION: directive model family "' + modelFamily(m) + '" matches the Mayor\'s writer family. Pick a different --model.');
++      process.exit(2);
++    }
++  }
++
++  // Mara persona: IN_WORLD_CHARACTER.md only (Mike-direct S344), plus the
++  // in-world desk brief.
+   const persona = [
+     mustRead(path.join(ROOT, 'docs', 'mara-vance', 'IN_WORLD_CHARACTER.md'), 'Mara persona'),
+     DIRECTIVE_BRIEF,
+   ].join('\n\n---\n\n');
+ 
+-  // civic.39 Task 4: the directive is built AFTER the close and names only
+-  // seats the close left passed-over or carrying an unanswered demand. The
+-  // close record is the required input; without it the stage fails loud.
+   const closeRec = readJson(path.join(CIVIC, 'close_c' + cycle + '.json'));
+   if (!closeRec) {
+     console.error('HALT: no close_c' + cycle + '.json — the directive is a post-close stage (civic.39 Task 4). Run --stage=close first.');
+     process.exit(1);
+   }
+ 
+-  // Per-seat material is built from the SAME inputs the seats get: district
+-  // hood movement (engine audit), the petition pool (beats Reflection_Intake),
+-  // the seat's board (beats tracker dump). A confrontation confronts with what
+-  // the seat could have seen.
+   const slice = require('./buildCivicOfficeSlice');
+   const c2p = slice.childToParentFromAudit(audit);
+   const trackerRows = slice.loadTrackerRows(ROOT, cycle);
+   if (trackerRows === null) throw new Error('Directive board unavailable: Initiative_Tracker dump absent');
+-  const hoodScores = slice.scoreHoods(audit);
++  const roster = directiveRoster(officeMap);
++  const rosterDirs = new Set(roster.map(s => s.agentDir));
+   const pendingProposals = (function () {
+     const folded = loadMoveLedgerFolded(ROOT, moveWeekForClose(cycle));
+     if (!folded) return [];
+     return [...folded.values()].filter(m => m.status === 'pending' && m.type === 'propose');
+   })();
+-
+-  // The close-derived target set: passed-over seats ∪ unanswered demands.
+-  const seats = directiveTargetSeats(cycle, {
+-    officeMap, closeRec,
+-    deps: {
+-      cycle, pendingProposals, trackerRows,
+-      petitionPoolFor: o => slice.loadPetitionPool(ROOT, o, slice.turfHoods(o), officeMap, c2p, cycle),
+-      boardFor: o => slice.boardRowsFor(o, trackerRows, c2p),
+-    },
+-  });
+-
+-  const writeDirectiveOutputs = (blocks, rejected, usage, note) => {
+-    // Canonical header is OURS, never the model's — no Gregorian dates in
+-    // sim-facing content (no-real-world-clock rule); sim clock only.
+-    const outDir = path.join(ROOT, 'output', 'mara-directives');
+-    fs.mkdirSync(outDir, { recursive: true });
+-    const outPath = path.join(outDir, 'mara_directive_c' + cycle + '_AUTO.txt');
+-    const canonHeader = [
+-      '# C' + cycle + ' Voice Directives — Mara Vance (AUTO)',
+-      '',
+-      '**Cycle:** ' + cycle,
+-      '**Issued:** C' + cycle + ' (auto-derived, cron-civic-run.js --stage=directive, post-close)',
+-      '**Source:** close_c' + cycle + ' + world_summary_c' + cycle + ' + engine review HIGHs + tracker + C' + prev + ' voice record',
+-      '',
+-      '---',
+-      '',
+-    ].join('\n');
+-    fs.writeFileSync(outPath, canonHeader + (blocks.length ? blocks.join('\n') + '\n'
+-      : 'Mara issued no directives after the C' + cycle + ' close — no seat was passed over and no demand went unanswered.\n'));
+-    fs.mkdirSync(CIVIC, { recursive: true });
+-    fs.writeFileSync(path.join(CIVIC, 'directive_c' + cycle + '.json'), JSON.stringify({
+-      stage: 'directive', cycle: Number(cycle), model: blocks.length ? MODEL : null, mayorModel, closeDerived: true,
+-      targets: seats.map(s => ({ agentDir: s.agentDir, reasons: s.reasons })),
+-      blocks: blocks.map(b => (b.split('\n')[0] || '').replace(/^## /, '').slice(0, 100)),
+-      rejectedBlocks: rejected, usage: usage || null, note: note || null,
+-      directive: path.relative(ROOT, outPath), ranAt: new Date().toISOString(),
+-    }, null, 2));
+-    console.log('\n=== directive complete: ' + blocks.length + ' block(s)' + (rejected.length ? ' (' + rejected.length + ' rejected)' : '') + (note ? ' — ' + note : '') + ' → ' + path.relative(ROOT, outPath) + ' ===');
++  const dirForSlug = slug => String(slug).indexOf('mayor') === 0 ? 'civic-office-mayor'
++    : LAYER3_DIRS.has('civic-project-' + String(slug).replace(/_/g, '-')) ? 'civic-project-' + String(slug).replace(/_/g, '-')
++    : 'civic-office-' + String(slug).replace(/_/g, '-');
++  const deps = {
++    slice, cycle, pendingProposals, trackerRows, hoodScores: slice.scoreHoods(audit),
++    passedOver: new Set(((closeRec.pendingVoices) || []).map(dirForSlug)),
++    petitionPoolFor: o => slice.loadPetitionPool(ROOT, o, slice.turfHoods(o), officeMap, c2p, cycle),
++    // A director's board is its own initiative.
++    boardFor: s => s.kind === 'project'
++      ? trackerRows.filter(r => r.InitiativeID === s.initiative).map(r => ({ id: r.InitiativeID, name: r.Name, phase: r.ImplementationPhase || null, status: r.Status || null }))
++      : slice.boardRowsFor(s.office, trackerRows, c2p),
+   };
++  const promises = require('./maraPromises');
++  const record = promises.loadRecord(ROOT);
++  const material = directiveMaterial(cycle, { root: ROOT, roster: rosterDirs });
++  const promiseCtx = { root: ROOT, cycle: Number(cycle), roster: rosterDirs, trackerRows, answers: material.answers };
+ 
+-  if (!seats.length) {
+-    log('close left no passed-over seat and no unanswered demand — no directive issued, no model call made');
+-    writeDirectiveOutputs([], [], null, 'nothing owed after the close');
+-    return;
+-  }
+-
+-  const seatMaterial = seats.map(s => {
+-    const o = s.office;
+-    const hoods = slice.turfHoods(o);
+-    const turfSet = new Set(hoods.map(h => String(h).toLowerCase()));
+-    const lines = ['### ' + s.holder + ' (' + s.title + (o.district ? ', ' + o.district : '') + ') — ' + s.agentDir];
+-    lines.push('- why named: ' + s.reasons.join(' | '));
+-    // (a) hood data moving the wrong way
+-    const hot = hoodScores.filter(h => turfSet.has(String(h.hood).toLowerCase()) && (h.outlier || h.traj === 'decay'));
+-    if (hot.length) lines.push('- district heat: ' + hot.slice(0, 3).map(h => h.hood + ' (' + h.why.join('; ') + ')').join(' | '));
+-    // (b) petitions above the visibility line with no proposal filed
+-    const pool = slice.loadPetitionPool(ROOT, o, hoods, officeMap, c2p, cycle);
+-    if (pool.available) {
+-      const answered = pendingProposals.filter(m => m.agentDir === o.agentDir).length;
+-      lines.push('- petition pool: ' + pool.complaints.length + ' complaint(s) on the record' +
+-        (pool.complaints.length >= PETITION_VISIBILITY_LINE && !answered
+-          ? ' — ABOVE the visibility line (' + PETITION_VISIBILITY_LINE + ') with NO proposal filed by this seat'
+-          : answered ? ' — ' + answered + ' proposal(s) pending from this seat' : ''));
+-    }
+-    // (c) board rows inside one cycle of the stall clock.
+-    const board = slice.boardRowsFor(o, trackerRows, c2p);
+-    const dueSoon = board.filter(b => {
+-      const row = trackerRows.find(r => r.InitiativeID === b.id) || {};
+-      const nac = Number(row.NextActionCycle);
+-      return Number.isFinite(nac) && nac <= Number(cycle) + 1;
+-    });
+-    if (board.length) lines.push('- board: ' + board.map(b => b.id + ' [' + (b.phase || '—') + ']').join(', '));
+-    if (dueSoon.length) lines.push('- stall-clock proximity (NextActionCycle ≤ C' + (Number(cycle) + 1) + '): ' + dueSoon.map(b => b.id).join(', '));
+-    return lines.join('\n');
+-  });
+-
+-  // Cycle material: summary slices + HIGH patterns + tracker + last cycle's
+-  // voice record + prior directive (escalation detection). Mara sits at the
+-  // fourth wall — she MAY see raw engine data; the prep-side line filter keeps
+-  // it out of voice packets.
+-  const sections = splitSections(summaryMd);
+-  const priorDirective = ['mara_directive_c' + prev + '.md', 'mara_directive_c' + prev + '.txt', 'mara_directive_c' + prev + '_AUTO.txt']
+-    .map(f => path.join(ROOT, 'output', 'mara-directives', f)).find(p => fs.existsSync(p));
+-  const voiceDir = path.join(ROOT, 'output', 'civic-voice');
+-  const priorSaid = [];
+-  if (fs.existsSync(voiceDir)) {
+-    for (const f of fs.readdirSync(voiceDir)) {
+-      const m = f.match(/^(.+)_c(\d+)\.json$/);
+-      if (!m || m[2] !== prev) continue;
+-      const j = readJson(path.join(voiceDir, f));
+-      if (!j) continue;
+-      const gist = j.cascadeSummary || (Array.isArray(j.statements) ? j.statements.map(s => s.decision || s.topic).filter(Boolean).join(' — ') : '');
+-      if (gist) priorSaid.push('- ' + m[1] + ': ' + String(gist).replace(/\s+/g, ' ').slice(0, 400));
+-    }
+-  }
+   const highs = audit.patterns.filter(p => p.severity === 'high' && !isOneWeekDecay(p, cycle))
+     .map(p => '- [' + p.type + '] ' + ((p.affectedEntities || {}).neighborhoods || []).join(', ') +
+       ((p.affectedEntities || {}).initiatives || []).map(i => ' ' + i).join('') +
+-      ' — evidence: ' + JSON.stringify((p.evidence || {}).fields || {}).slice(0, 300));
+-  const initLines = (tracker.initiatives || []).map(i => {
+-    const impl = i.implementation || {};
+-    return '- ' + i.id + ' ' + i.name + ' [' + (impl.phase || i.status) + '] next: ' + (impl.nextScheduledAction || '—') + ' (cycle ' + (impl.nextActionCycle || '—') + '). ' + String(impl.summary || '').slice(0, 300);
++      ' — evidence: ' + JSON.stringify((p.evidence || {}).fields || {}));
++  const trackerLines = trackerRows.map(r => {
++    const clock = slice.trackerClock(r, cycle);
++    return '- ' + r.InitiativeID + ' ' + (r.Name || '') + ' [' + (r.ImplementationPhase || '—') + ', ' + (r.Status || '—') + '] next: ' +
++      (r.NextScheduledAction || '—') + ' (' + (clock ? (clock.state === 'past-due' ? 'PAST DUE, C' : clock.state === 'due-next' ? 'due C' : 'scheduled C') + clock.nac : 'no dated step') + ')';
+   });
++  const promiseLines = record.open.map(p => '- ' + p.promiseId + ' — ' + p.office + ' (C' + p.cycle + ', ' + p.source + (p.initiativeId ? ', ' + p.initiativeId : '') + '): "' + p.said + '"');
++  const answerLines = material.answers.map(a => '- ' + a.confrontationId + ' (' + a.via + '): ' + a.text);
+ 
+   const user = [
+-    'Produce your voice directive for cycle ' + cycle + ' as output text only — the structured block-per-addressee format from your template, with the cycle header. No prose outside the format.',
++    'Write your directive for Cycle ' + cycle + ' — the blocks, then the Not directing section. Output the directive text only.',
+     '',
+-    'HARD RULES:',
+-    '- Addressees MUST come from this close-derived target list only — seats the C' + cycle + ' close left passed-over or carrying an unanswered demand (use the agentDir in the Agent field, formatted as `.claude/agents/<agentDir>/`):',
+-    ...seats.map(s => '  - ' + s.agentDir + ' — ' + s.holder + ' (' + s.title + '): ' + s.reasons.join('; ')),
+-    '- Maximum 12 blocks. Every block carries all five fields (Agent, Address, Why, Acceptance, Silence consequence).',
+-    '- Only issue a directive where the cycle material below gives you a real unresolved thread, gap, or dependency. Thin directives are noise.',
+-    '- Do not limit directives to initiative process. Press offices on the crisis and the success in their neighborhoods, their programs, and the city — they argue the initiatives, but they must fight for their constituents.',
+-    '- Cite cycles by number (C' + prev + ', C' + cycle + '). Never invent citizens, numbers, or events not present below.',
++    'ROSTER (use the seat id in the Agent line, formatted `.claude/agents/<seat>/`):',
++    ...roster.map(s => '- ' + s.agentDir + ' — ' + s.holder + ' (' + s.title + ')'),
+     '',
+-    '=== PER-SEAT MATERIAL (target seats only — the same data each seat was given; confront them with what they could have seen) ===',
+-    ...seatMaterial,
++    'Cite Cycles by number. Never invent citizens, numbers, events or promises that are not below or in what your tools return.',
++    'To record a promise, quote the office\'s own words with promise_record; to put a recorded promise in front of an office, add its **Promise:** line to the block.',
+     '',
+-    '=== CYCLE ' + cycle + ' MATERIAL ===',
++    '=== YOUR OPEN PROMISE RECORD (' + promiseLines.length + ') ===',
++    ...(promiseLines.length ? promiseLines : ['(none yet)']),
+     '',
+-    '## City State (engine summary)',
+-    findSection(sections, 'City State').slice(0, 3000),
++    '=== REPLIES TO YOUR QUESTIONS THIS WEEK ===',
++    ...(answerLines.length ? answerLines : ['(none)']),
+     '',
+-    '## Three-Cycle Trends',
+-    findSection(sections, 'Three-Cycle Trends').slice(0, 2000),
++    '=== YOUR LAST DIRECTIVES ===',
++    ...(material.priorDirectives.length ? material.priorDirectives.map(d => '--- C' + d.cycle + ' (' + d.file + ') ---\n' + d.text) : ['(none on file)']),
+     '',
+-    '## Approval Ratings',
+-    findSection(sections, 'Approval Ratings'),   // builder 2026-11-01: no character caps
++    '=== SUNDAY C' + cycle + ' — WHAT THE OFFICES SAID ===',
++    ...(material.sunday.length ? material.sunday.map(renderSunday) : ['(no Sunday statements on file)']),
+     '',
+-    '## Engine review HIGH-severity patterns (' + highs.length + ')',
+-    ...highs,
++    '=== THE WEEK BEFORE — WEEKDAY STATEMENTS (C' + (Number(cycle) - 1) + ' week) ===',
++    ...(material.weekday.length ? material.weekday.map(renderWeekday) : ['(none on file)']),
++    '',
++    '=== EACH OFFICE\'S OWN EVIDENCE ===',
++    ...roster.map(s => '### ' + s.holder + ' (' + s.title + ') — ' + s.agentDir + '\n' + (seatEvidence(s, deps).join('\n') || '- nothing on file')),
+     '',
+-    '## Initiative Tracker (live)',
+-    ...initLines,
++    '=== INITIATIVE TRACKER (live) ===',
++    ...trackerLines,
+     '',
+-    '## What the offices said last cycle (C' + prev + ')',
+-    ...(priorSaid.length ? priorSaid : ['(no prior voice record on disk)']),
++    '=== ENGINE REVIEW HIGH READINGS (' + highs.length + ') — a reading, not a demand ===',
++    ...highs,
+     '',
+-    '## Your prior directive (C' + prev + ') — check satisfaction, escalate what went unanswered',
+-    priorDirective ? fs.readFileSync(priorDirective, 'utf8').slice(0, 6000) : '(none found on disk)',
++    '=== CITY SUMMARY C' + cycle + ' ===',
++    summaryMd,
++    '',
++    material.edition ? '=== THE PAPER — EDITION C' + cycle + ' ===\n' + material.edition : '(No edition on file for C' + cycle + ' — canon_recall reaches what the paper has published.)',
+   ].join('\n');
+ 
+-  log('model=' + MODEL + ' (mayor=' + mayorModel + ') seats=' + seats.length + ' user=' + user.length + 'ch');
+-  const r = await callOpenRouter(MODEL, persona, user);
++  const dw = require('./cron-desk-writer');
++  const writeOutputs = (result, model, usage, attempts, staged, note) => {
++    fs.mkdirSync(outDir, { recursive: true });
++    const outPath = path.join(outDir, 'mara_directive_c' + cycle + '_AUTO.txt');
++    const canonHeader = [
++      '# C' + cycle + ' Voice Directives — Mara Vance (AUTO)', '',
++      '**Cycle:** ' + cycle,
++      '**Issued:** C' + cycle + ' (auto-derived, cron-civic-run.js --stage=directive, post-close)',
++      '**Source:** close_c' + cycle + ' + the week\'s statements + promise record + world_summary_c' + cycle + ' + tracker', '',
++      '---', '',
++    ].join('\n');
++    const body = (result.blocks.length ? result.blocks.map(b => b.replace(/\s*$/, '')).join('\n\n') + '\n\n' : '') +
++      (result.notDirecting ? result.notDirecting.replace(/\s*$/, '') + '\n' : '## Not directing\n- Mara Vance issued no directive after the C' + cycle + ' close.\n');
++    fs.writeFileSync(outPath, canonHeader + body);
++    fs.writeFileSync(stagedPath, JSON.stringify(staged, null, 2));
++    fs.mkdirSync(CIVIC, { recursive: true });
++    const manifest = {
++      stage: 'directive', cycle: Number(cycle), model, mayorModel, roster: [...rosterDirs],
++      blocks: result.blocks.map(b => ({ head: (b.split('\n')[0] || '').replace(/^## /, '').slice(0, 100), agentDir: maraDirective.agentDirOf(b), promises: maraDirective.promiseIdsIn(b) })),
++      notDirecting: !!result.notDirecting, notDirectingProblem: result.notDirectingProblem || null,
++      rejectedBlocks: result.rejected, truncated: result.truncated || 0,
++      promises: { staged: staged.promises.length, statuses: staged.statuses.length, rejected: staged.rejectedPromises },
++      memoryReads: staged.memoryReads, notes: staged.notes.length,
++      toolCalls: staged.trace, usage, attempts, note: note || null,
++      commit: DRY_COMMIT ? 'dry' : 'pending',
++      directive: path.relative(ROOT, outPath), staged: path.relative(ROOT, stagedPath), ranAt: new Date().toISOString(),
++    };
++    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
++    return { manifest, outPath };
++  };
+ 
+-  // Validate against the close-derived target set: keep only blocks addressed
+-  // to a named seat AND carrying all five mandatory template fields (a
+-  // truncated tail block fails the field check).
+-  const { blocks, rejected, truncated } = filterDirectiveBlocks(r.text, new Set(seats.map(s => s.agentDir)));
+-  if (truncated) log('truncating ' + (blocks.length + truncated) + ' blocks to the template max of 12');
+-  if (!blocks.length) {
+-    console.error('HALT: directive model produced no block addressed to a close-derived target seat (' + rejected.length + ' rejected). Raw output kept at output/cron-civic/directive_c' + cycle + '.raw.txt');
++  // Attempts: the primary with tools, one retry, then the fallback without
++  // tools. Each attempt stages afresh; nothing is written until one validates.
++  const attempts = [];
++  const plan = [{ model: MODEL, tools: true }, { model: MODEL, tools: true }, { model: DIRECTIVE_FALLBACK, tools: false }];
++  let winner = null;
++  for (const step of plan) {
++    const staged = { promises: [], statuses: [], rejectedPromises: [], memoryReads: [], notes: [], trace: [] };
++    try {
++      let text, usage;
++      if (step.tools) {
++        const r = await dw.openRouterToolLoop({
++          model: step.model, system: persona, user, toolset: maraToolset(),
++          exec: maraToolExecutor({ cycle, record, promiseCtx }, staged),
++          maxToolCalls: DIRECTIVE_TOOL_CALLS, maxTokens: DIRECTIVE_MAX_TOKENS, timeoutMs: DIRECTIVE_TIMEOUT_MS,
++          resultCap: Infinity, body: { reasoning: { effort: 'high' }, usage: { include: true } },
++        });
++        text = r.text;
++        staged.trace = r.trace.map(t => ({ tool: t.tool, resultChars: t.resultChars }));
++        usage = { in: r.usageIn, out: r.usageOut, billedUsd: r.billedUsd, rateUsd: dw.costUsd(step.model, r.usageIn, r.usageOut), finishReason: r.finishReason };
++      } else {
++        const r = await callOpenRouter(step.model, persona, user);
++        text = r.text;
++        usage = { in: (r.usage || {}).prompt_tokens || 0, out: (r.usage || {}).completion_tokens || 0, rateUsd: dw.costUsd(step.model, (r.usage || {}).prompt_tokens || 0, (r.usage || {}).completion_tokens || 0), finishReason: r.finishReason };
++      }
++      const result = filterDirectiveBlocks(text, rosterDirs);
++      attempts.push({ model: step.model, tools: step.tools, blocks: result.blocks.length, notDirecting: !!result.notDirecting, usage });
++      if (result.blocks.length || result.notDirecting) {
++        winner = { result, staged, model: step.model, usage, text };
++        break;
++      }
++      fs.mkdirSync(CIVIC, { recursive: true });
++      fs.writeFileSync(path.join(CIVIC, 'directive_c' + cycle + '.raw.txt'), text || '');
++      log('attempt with ' + step.model + ' gave no valid block and no Not directing section (' + result.rejected.length + ' rejected' + (result.notDirectingProblem ? '; ' + result.notDirectingProblem : '') + ')');
++    } catch (e) {
++      attempts.push({ model: step.model, tools: step.tools, error: e.message });
++      log('directive attempt with ' + step.model + ' failed: ' + e.message);
++    }
++  }
++  if (!winner) {
++    console.error('HALT: no directive attempt produced a valid block or a Not directing section. Raw output kept at output/cron-civic/directive_c' + cycle + '.raw.txt');
+     fs.mkdirSync(CIVIC, { recursive: true });
+-    fs.writeFileSync(path.join(CIVIC, 'directive_c' + cycle + '.raw.txt'), r.text);
++    fs.writeFileSync(path.join(CIVIC, 'directive_attempts_c' + cycle + '.json'), JSON.stringify(attempts, null, 2));
+     process.exit(1);
+   }
+ 
+-  writeDirectiveOutputs(blocks, rejected, r.usage);
++  // Only promises the directive actually uses are staged — a status for a
++  // promise Mara recorded this run is fine; everything validated already.
++  const staged = winner.staged;
++  const openAfter = record.open.filter(p => !staged.statuses.some(s => s.promiseId === p.promiseId)).concat(staged.promises);
++  staged.runEntry = runEntryText(cycle, winner.result.blocks, winner.result.notDirecting, openAfter);
++  const { manifest, outPath } = writeOutputs(winner.result, winner.model, winner.usage, attempts, staged,
++    winner.model !== MODEL ? 'fallback writer (no tools)' : null);
++
++  if (!DRY_COMMIT) {
++    const receipt = await commitDirectiveWrites(cycle, staged, { root: ROOT });
++    manifest.commit = receipt.complete ? 'complete' : 'partial';
++    manifest.commitReceipt = path.relative(ROOT, path.join(outDir, 'commit_c' + cycle + '.json'));
++    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
++    if (!receipt.complete) log('directive written; memory/promise commit PARTIAL — re-run --stage=directive --cycle=' + cycle + ' to finish it');
++  }
++  console.log('\n=== directive complete: ' + winner.result.blocks.length + ' block(s)' + (winner.result.rejected.length ? ' (' + winner.result.rejected.length + ' rejected)' : '') +
++    ', commit ' + manifest.commit + ' → ' + path.relative(ROOT, outPath) + ' ===');
+ }
+ 
+ // ---------------------------------------------------------------------------
+@@ -2053,6 +2281,37 @@ async function runMayorGavel() {
+   console.log('\n=== mayor-gavel complete: ' + r.json.statements.length + ' statement(s) → ' + outPath + ' ===');
+ }
+ 
++// civic.47 M1 item 11: Mara's question to a project director, from the
++// directive this week's prep used. Returns null when she did not address it.
++function maraProjectAsk(directiveText, directiveCycle, agentDir) {
++  if (!directiveText || !directiveCycle) return null;
++  const blocks = maraDirective.blocksFor(directiveText, agentDir);
++  if (!blocks.length) return null;
++  return { confrontationId: maraDirective.confrontationId(directiveCycle, agentDir), text: blocks.join('\n').trim() };
++}
++function maraAnswerContract(ask) {
++  return 'Add a top-level "maraAnswer" to your JSON: {"confrontationId":"' + ask.confrontationId +
++    '","kind":"answer" or "deferral","text":"<your reply to Mara: what is true now — or, if it is not known yet, say so and when it will be>"}. ' +
++    'Mara counts only this field as your reply.';
++}
++function maraAnswerCheck(ask) {
++  return function (json) {
++    const a = json && json.maraAnswer;
++    if (!a || typeof a !== 'object') return 'maraAnswer missing — reply to Mara Vance in the maraAnswer field';
++    if (a.confrontationId !== ask.confrontationId) return 'maraAnswer.confrontationId must be exactly ' + ask.confrontationId;
++    if (a.kind !== 'answer' && a.kind !== 'deferral') return 'maraAnswer.kind must be "answer" or "deferral"';
++    if (!String(a.text || '').trim()) return 'maraAnswer.text is empty';
++    return null;
++  };
++}
++function directiveForWeek(cycle) {
++  const prepMan = readJson(path.join(CIVIC, 'prep_c' + cycle + '.json'));
++  const rel = prepMan && prepMan.directive;
++  if (!rel || !fs.existsSync(path.join(ROOT, rel))) return { text: null, cycle: null };
++  const m = path.basename(rel).match(/_c(\d+)/);
++  return { text: fs.readFileSync(path.join(ROOT, rel), 'utf8'), cycle: m ? Number(m[1]) : null };
++}
++
+ // --- stage: projects (Layer 3 — only where a decision touched their initiative) ---
+ async function runProjects() {
+   const cycle = arg('--cycle', null) || detectCycle();
+@@ -2064,16 +2323,52 @@ async function runProjects() {
+   if (!voiceJsons.mayor_gavel && !voiceJsons.mayor) throw new Error('no mayor_gavel_c' + cycle + '.json — run --stage=mayor-gavel first');
+   const layer12 = Object.fromEntries(Object.entries(voiceJsons).filter(([s]) => !['baylight_authority', 'stabilization_fund', 'oari', 'health_center', 'transit_hub'].includes(s)));
+ 
++  const week = directiveForWeek(cycle);
++  const trackerRowsLive = require('./buildCivicOfficeSlice').loadTrackerRows(ROOT, cycle) || [];
+   const results = [];
+   for (const seat of projectSeats(officeMap)) {
+     const slug = voiceSlug(seat.agentDir);
+     const touches = statementsTouching(layer12, seat.initiative, tracker);
+-    if (!touches.length) { log('skip ' + slug + ' — no voice decision touched ' + seat.initiative + ' (Step 5 trigger rule)'); continue; }
++    const ask = maraProjectAsk(week.text, week.cycle, seat.agentDir);
++    if (!touches.length && !ask) { log('skip ' + slug + ' — no voice decision touched ' + seat.initiative + ' and Mara did not address it (Step 5 trigger rule)'); continue; }
++    const triggeredBy = touches.map(t => t.slug).concat(ask ? ['mara-directive'] : []);
+     try {
+       const model = officeModel(officeMap, seat.agentDir);
+       const prior = existingVoice(slug, cycle);
+       if (prior) {
+-        results.push({ slug, model: prior.model, ok: true, output: prior.output, statements: prior.json.statements.length, reused: true, triggeredBy: touches.map(t => t.slug) });
++        results.push({ slug, model: prior.model, ok: true, output: prior.output, statements: prior.json.statements.length, reused: true, triggeredBy });
++        continue;
++      }
++      if (!touches.length) {
++        // Mara-only turn: her question and the director's own record. No
++        // operational decision is asked for; a tracker change is accepted only
++        // when the initiative's dated step is due this Cycle.
++        const ownInit = (tracker.initiatives || []).find(i => (i.id || i.InitiativeID) === seat.initiative);
++        const row = trackerRowsLive.find(r => r.InitiativeID === seat.initiative);
++        const clock = require('./buildCivicOfficeSlice').trackerClock(row, cycle);
++        const stepDue = !!(clock && clock.state === 'past-due');
++        const impl = (ownInit && ownInit.implementation) || {};
++        const record = ownInit ? [
++          'What you run: ' + ownInit.name + (ownInit.budget ? ' — Budget: ' + ownInit.budget : '') + '.',
++          'Where it stands: ' + (cleanInline(impl.summary) || 'in ' + phaseProse(impl.phase)) + '.',
++          impl.nextScheduledAction ? 'On your calendar: ' + cleanInline(impl.nextScheduledAction) + (clock ? ' (C' + clock.nac + ')' : '') + '.' : null,
++        ].filter(Boolean).join('\n') : '';
++        const wallInj = await positionWallInject(officeMap, seat.agentDir);
++        const user = [
++          record, '',
++          'Mara Vance, the City Planning Director, asked your office this:', '', ask.text, '',
++          wallInj,
++          'Your job this turn: answer her from your record, in your own voice. If the answer is not known yet, say so and when it will be. No operational decision is asked of you this turn.',
++          'Never invent citizens, statistics, votes, or progress that is not in your record.',
++          maraAnswerContract(ask),
++          outputContract(slug, cycle, tracker.initiatives || [], { forbidPhase: !stepDue }),
++        ].join('\n');
++        const r = await callVoice(seat.agentDir, model, user, 4000, officeMap,
++          composeChecks(maraAnswerCheck(ask), statementNumberCheck(record + '\n' + ask.text + '\n' + (wallInj || ''), { cycle })));
++        if (!r || r.error) { results.push({ slug, model, ok: false, error: r ? r.error : 'no result', triggeredBy }); continue; }
++        const out = writeVoiceJson(slug, cycle, r.json);
++        await positionWallRecordCascade(officeMap, seat.agentDir, r.json, cycle);
++        results.push({ slug, model, ok: true, output: out, statements: r.json.statements.length, triggeredBy, maraAnswer: r.json.maraAnswer.kind });
+         continue;
+       }
+       // civic.29: a Layer-3 seat only gets a packet file when its OWN
+@@ -2098,15 +2393,16 @@ async function runProjects() {
+         '- What details emerge from implementation?',
+         '- What would a reporter see if they visited?',
+         'You may invent operational details — names of facilities, timelines, specifics — but never citizens, statistics, or votes beyond your material.',
++        ask ? '\nMara Vance, the City Planning Director, also asked your office this:\n\n' + ask.text + '\n\n' + maraAnswerContract(ask) : '',
+         outputContract(slug, cycle, tracker.initiatives || []),
+       ].join('\n');
+-      const projectHay = identity + '\n' + frame + '\n' + packet + '\n' + (wallInj || '');
++      const projectHay = identity + '\n' + frame + '\n' + packet + '\n' + (wallInj || '') + (ask ? '\n' + ask.text : '');
+       const r = await callVoice(seat.agentDir, model, user, 4000, officeMap,
+-        statementNumberCheck(projectHay, { cycle }));
+-      if (!r || r.error) { results.push({ slug, model, ok: false, error: r ? r.error : 'no result' }); continue; }
++        composeChecks(ask ? maraAnswerCheck(ask) : null, statementNumberCheck(projectHay, { cycle })));
++      if (!r || r.error) { results.push({ slug, model, ok: false, error: r ? r.error : 'no result', triggeredBy }); continue; }
+       const out = writeVoiceJson(slug, cycle, r.json);
+       await positionWallRecordCascade(officeMap, seat.agentDir, r.json, cycle);
+-      results.push({ slug, model, ok: true, output: out, statements: r.json.statements.length, triggeredBy: touches.map(t => t.slug) });
++      results.push({ slug, model, ok: true, output: out, statements: r.json.statements.length, triggeredBy, ...(ask ? { maraAnswer: r.json.maraAnswer.kind } : {}) });
+     } catch (e) { results.push({ slug, ok: false, error: e.message }); }
+   }
+   fs.writeFileSync(path.join(CIVIC, 'projects_c' + cycle + '.json'), JSON.stringify({
+@@ -2435,7 +2731,9 @@ function datawakeUserPrompt(pack, wallInj, office, options = {}) {
+         ? '. You also hold the patrol move, yours alone: {"type":"patrol","strategy":"balanced|suppress_hotspots|community_presence","note":""} — the city\'s patrol posture from next week on. suppress_hotspots clears more cases but pushes activity into the next neighborhood over; community_presence displaces far less and lifts quality of life, clearing fewer cases; balanced sits between. Your latest patrol move of the week is the one that stands; the district seats work with it'
+         : '') +
+       '. A move that breaks these rules is discarded, not corrected.',
+-    conf ? 'YOU HAVE AN UNANSWERED DIRECTIVE (' + conf.id + '). An {"type":"answer",...} move responding to it is expected. Bind confrontationId exactly to that directive; only one answer is accepted per directive and seat. No new consequence is attached.' : 'No answer move is available unless game.confrontationIds names an unanswered directive for this seat.',
++    // civic.47 M1 item 12: Mara's question is put plainly; replying is the
++    // seat's choice, through the answer move.
++    conf ? 'Mara Vance, the City Planning Director, has a question for your office (' + conf.id + '). To reply, use one {"type":"answer",...} move with confrontationId bound exactly to it; one answer is accepted per directive and seat.' : 'No answer move is available unless game.confrontationIds names an unanswered directive for this seat.',
+     'No headcount, percentage, or dollar figure unless that exact number appears above. Progress with no cited metric is described in words ("ahead of schedule", "significant headway") — never estimated.',
+   ].join('\n');
+ }
+@@ -4172,4 +4470,4 @@ module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, ret
+   BATCH_PROFILES, batchEligible, batchManifestPath, loadBatchManifest, batchInFlightSlugs,
+   hearingSeatPrompt, batchSubmitHearing, batchCollectHearing,
+   // civic.39 Task 4 — directive from close output
+-  PETITION_VISIBILITY_LINE, seatUnansweredDemands, directiveTargetSeats, filterDirectiveBlocks };
++  directiveRoster, seatEvidence, filterDirectiveBlocks, directiveMaterial, commitDirectiveWrites, maraProjectAsk, maraAnswerCheck, runEntryText, DIRECTIVE_MODEL, DIRECTIVE_BRIEF };
+diff --git a/scripts/cron-civic-tick.test.js b/scripts/cron-civic-tick.test.js
+index 74e478a20..cd72aa985 100644
+--- a/scripts/cron-civic-tick.test.js
++++ b/scripts/cron-civic-tick.test.js
+@@ -907,70 +907,79 @@ test('orBatch is importable with no API key and validates batches locally', () =
+ });
+ 
+ // ────────────────────────────────────────────────────────────────────────────
+-console.log('\ncivic.39 Task 4 — directive from close output');
++console.log('\ncivic.47 M1 — Mara\'s directive: roster, evidence, block validation');
+ // ────────────────────────────────────────────────────────────────────────────
+ 
+-const { directiveTargetSeats, filterDirectiveBlocks } = civicRun;
++const { directiveRoster, seatEvidence, filterDirectiveBlocks } = civicRun;
+ 
+ const T4_OFFICEMAP = {
+   offices: [
+     { agentDir: 'civic-office-mayor', officeId: 'MAYOR-01', model: 'moonshotai/kimi-k2', holder: 'Synthetic Mayor', title: 'Mayor' },
+     { agentDir: 'civic-office-council-d2', officeId: 'COUNCIL-D2', district: 'D2', model: 'meta-llama/llama-3.3-70b-instruct', holder: 'Synthetic D2', title: 'Council D2' },
+     { agentDir: 'civic-office-council-d6', officeId: 'COUNCIL-D6', district: 'D6', model: 'google/gemini-3.7-flash', holder: 'Synthetic D6', title: 'Council D6' },
+-    { agentDir: 'civic-office-council-d7', officeId: 'COUNCIL-D7', district: 'D7', model: 'google/gemini-3.7-flash', holder: 'Synthetic D7', title: 'Council D7' },
+     { agentDir: 'civic-office-police-chief', officeId: 'COP-01', model: 'deepseek/deepseek-chat', holder: 'Synthetic Chief', title: 'Chief' },
++    { agentDir: 'civic-office-baylight-authority', officeId: 'STAFF-BAYLIGHT', holder: 'Synthetic Baylight', title: 'Baylight Director' },
+   ],
+-  projects: [],
++  projects: [{ agentDir: 'civic-project-oari', holder: 'Synthetic OARI', title: 'OARI Director', initiative: 'INIT-002' }],
+ };
+-function t4Deps(overrides) {
+-  return Object.assign({
+-    cycle: CYCLE,
+-    pendingProposals: [],
+-    trackerRows: [{ InitiativeID: 'INIT-001', NextActionCycle: CYCLE + 1 }, { InitiativeID: 'INIT-002', NextActionCycle: CYCLE + 9 }],
+-    petitionPoolFor: o => ({ available: true, complaints: o.agentDir === 'civic-office-council-d7' ? [1, 2, 3] : [] }),
+-    boardFor: o => (o.agentDir === 'civic-office-council-d2' ? [{ id: 'INIT-001' }] : [{ id: 'INIT-002' }]),
+-  }, overrides || {});
+-}
++const slice4 = require('./buildCivicOfficeSlice');
+ 
+-test('the directive names only seats the close left passed-over or unanswered (Task 4 verify)', () => {
+-  const closeRec = { pendingVoices: ['council_d6', 'mayor_gavel', 'police_chief'] };
+-  const targets = directiveTargetSeats(CYCLE, { officeMap: T4_OFFICEMAP, closeRec, deps: t4Deps() });
+-  const byDir = new Map(targets.map(t => [t.agentDir, t.reasons.join(' | ')]));
+-  assert.deepStrictEqual(targets.map(t => t.agentDir),
+-    ['civic-office-mayor', 'civic-office-council-d2', 'civic-office-council-d6', 'civic-office-council-d7']);
+-  assert.ok(byDir.get('civic-office-mayor').includes('passed over'), 'mayor named via mayor_gavel pending');
+-  assert.ok(byDir.get('civic-office-council-d6').includes('passed over'));
+-  assert.ok(byDir.get('civic-office-council-d7').includes('petition pool'), 'd7 named via unanswered petitions');
+-  assert.ok(byDir.get('civic-office-council-d2').includes('stall clock'), 'd2 named via the stall clock');
+-  assert.ok(!byDir.has('civic-office-police-chief'), 'a pending non-elected seat never becomes an addressee');
+-});
+-
+-test('an answered proposal or a distant stall clock keeps the seat out of the directive', () => {
+-  const closeRec = { pendingVoices: [] };
+-  const deps = t4Deps({
+-    pendingProposals: [{ agentDir: 'civic-office-council-d7', status: 'pending', type: 'propose' }],
+-    boardFor: () => [{ id: 'INIT-002' }],  // NextActionCycle C+9 — nowhere near the clock
+-  });
+-  const targets = directiveTargetSeats(CYCLE, { officeMap: T4_OFFICEMAP, closeRec, deps });
+-  assert.deepStrictEqual(targets, []);
++test('the roster is the mayor, council and program directors — never staff or the chief', () => {
++  const dirs = directiveRoster(T4_OFFICEMAP).map(s => s.agentDir);
++  assert.deepStrictEqual(dirs, ['civic-office-mayor', 'civic-office-council-d2', 'civic-office-council-d6', 'civic-project-oari', 'civic-office-baylight-authority']);
++});
++
++test('blank and failed tracker rows carry no clock; a dated step is past due, due next or scheduled', () => {
++  const rows = [
++    { InitiativeID: 'INIT-008', Status: 'failed', NextActionCycle: '' },
++    { InitiativeID: 'INIT-009', Status: 'failed', NextActionCycle: String(CYCLE + 1) },
++    { InitiativeID: 'INIT-011', Status: 'announced', NextActionCycle: '' },
++    { InitiativeID: 'INIT-001', Status: 'passed', NextActionCycle: String(CYCLE + 1) },
++    { InitiativeID: 'INIT-014', Status: 'proposed', NextActionCycle: String(CYCLE) },
++    { InitiativeID: 'INIT-005', Status: 'passed', NextActionCycle: String(CYCLE + 2) },
++  ];
++  const clocks = rows.map(r => slice4.trackerClock(r, CYCLE));
++  assert.deepStrictEqual(clocks.map(c => c && c.state), [null, null, null, 'due-next', 'past-due', 'scheduled']);
++  const seat = directiveRoster(T4_OFFICEMAP).find(s => s.agentDir === 'civic-office-council-d2');
++  const lines = seatEvidence(seat, { slice: slice4, cycle: CYCLE, trackerRows: rows, hoodScores: [],
++    boardFor: () => rows.map(r => ({ id: r.InitiativeID, status: r.Status })) });
++  assert.match(lines.find(l => l.includes('INIT-008')), /no dated next step/);
++  assert.match(lines.find(l => l.includes('INIT-014')), /PAST DUE/);
++  assert.match(lines.find(l => l.includes('INIT-001')), /due C/);
++});
++
++test('complaint counts are evidence lines, not a rule', () => {
++  const seat = directiveRoster(T4_OFFICEMAP).find(s => s.agentDir === 'civic-office-council-d6');
++  const lines = seatEvidence(seat, { slice: slice4, cycle: CYCLE, trackerRows: [], hoodScores: [],
++    petitionPoolFor: () => ({ available: true, complaints: [1, 2, 3, 4, 5, 6, 7] }), boardFor: () => [] });
++  assert.deepStrictEqual(lines, ['- citizen complaints on the record: 7']);
++});
++
++const BLOCK = (dir, name, extra) => '## ' + name + ' — Role\n\n- **Agent:** `.claude/agents/' + dir + '/`\n- **Address:** ask\n- **Why:** C' + CYCLE + ' statement\n- **Acceptance:** an answer\n' + (extra || '');
++const ND = '## Not directing\n- Synthetic Mayor (Mayor): a quiet week.\n';
++const ROSTER4 = new Set(directiveRoster(T4_OFFICEMAP).map(s => s.agentDir));
++
++test('Silence consequence is optional; Agent, Address, Why, Acceptance are required', () => {
++  const out = filterDirectiveBlocks(BLOCK('civic-office-council-d6', 'D6') + BLOCK('civic-project-oari', 'OARI', '- **Silence consequence:** the briefing slips\n') + BLOCK('civic-office-council-d2', 'D2').replace('- **Acceptance:** an answer\n', '') + ND, ROSTER4);
++  assert.deepStrictEqual(out.blocks.map(b => b.split('\n')[0]), ['## D6 — Role', '## OARI — Role']);
++  assert.strictEqual(out.rejected.length, 1);
++  assert.match(out.rejected[0].why, /missing fields: \*\*Acceptance:\*\*/);
++  assert.ok(out.notDirecting.startsWith('## Not directing'));
+ });
+ 
+-test('filterDirectiveBlocks rejects any addressee outside the close-derived target set', () => {
+-  const goodBlock = '## Synthetic D6 — Council D6\n\n- **Agent:** `.claude/agents/civic-office-council-d6/`\n- **Address:** say it\n- **Why:** the thread\n- **Acceptance:** a number\n- **Silence consequence:** it breaks\n';
+-  const outside = goodBlock.replace(/council-d6/g, 'council-d9').replace('Synthetic D6', 'Synthetic D9');
+-  const missing = goodBlock.replace('- **Acceptance:** a number\n', '');
+-  const out = filterDirectiveBlocks(goodBlock + outside + missing, new Set(['civic-office-council-d6']));
++test('an addressee off the roster or a second block for one office is rejected', () => {
++  const out = filterDirectiveBlocks(BLOCK('civic-office-police-chief', 'Chief') + BLOCK('civic-office-council-d6', 'D6') + BLOCK('civic-office-council-d6', 'D6 again') + ND, ROSTER4);
+   assert.strictEqual(out.blocks.length, 1);
+-  assert.strictEqual(out.rejected.length, 2);
+-  assert.ok(out.rejected[0].why.includes('outside the close-derived target set'));
+-  assert.ok(out.rejected[1].why.includes('missing fields'));
++  assert.deepStrictEqual(out.rejected.map(r => r.why), ['addressee not on the roster', 'second block for the same office']);
+ });
+ 
+-test('filterDirectiveBlocks caps at the template maximum of 12 blocks', () => {
+-  const block = '## Synthetic D6 — Council D6\n\n- **Agent:** `.claude/agents/civic-office-council-d6/`\n- **Address:** say it\n- **Why:** the thread\n- **Acceptance:** a number\n- **Silence consequence:** it breaks\n';
+-  const out = filterDirectiveBlocks(block.repeat(13), new Set(['civic-office-council-d6']));
+-  assert.strictEqual(out.blocks.length, 12);
+-  assert.strictEqual(out.truncated, 1);
++test('a zero-block week with a Not directing section is a valid result; one naming a seat id is not', () => {
++  const ok = filterDirectiveBlocks('# header\n\n---\n' + ND, ROSTER4);
++  assert.strictEqual(ok.blocks.length, 0);
++  assert.ok(ok.notDirecting);
++  const bad = filterDirectiveBlocks('# header\n\n---\n## Not directing\n- civic-office-mayor: quiet\n', ROSTER4);
++  assert.strictEqual(bad.notDirecting, null);
++  assert.match(bad.notDirectingProblem, /office id/);
+ });
+ 
+ // ────────────────────────────────────────────────────────────────────────────
+diff --git a/scripts/cron-desk-writer.js b/scripts/cron-desk-writer.js
+index 01708dd61..4de19dbb3 100644
+--- a/scripts/cron-desk-writer.js
++++ b/scripts/cron-desk-writer.js
+@@ -253,7 +253,8 @@ const RATES = {
+   'anthropic/claude-opus-5.5': [4, 20],
+   'anthropic/claude-haiku-5.5': [0.10, 0.50],
+   'openai/gpt-5.6-luna': [0.20, 1.20],
+-  'openai/gpt-6-luna': [0.10, 0.50],   // pipeline.83 2026-10-28 — Nia's two seats (OpenRouter list 2026-10-28)
++  'openai/gpt-6-luna': [0.10, 0.50],
++  'openai/gpt-6.1-sol': [2, 10],   // civic.47 M1 — Mara's directive (OpenRouter list 2026-11-02)   // pipeline.83 2026-10-28 — Nia's two seats (OpenRouter list 2026-10-28)
+   'x-ai/grok-4.3': [1.25, 2.50],
+   'deepseek/deepseek-v4-flash-0731': [0.016, 0.64],
+   'meta-llama/llama-4-maverick': [0.188, 0.652],
+@@ -575,7 +576,10 @@ function callModel(client, system, messages) {
+ 
+ // OpenRouter (OpenAI-compatible) raw POST — shared by the compose call and the
+ // Task 2.5.5 tool loop. Returns the parsed response body.
+-function callOpenRouterRaw(payloadObj) {
++// opts.timeoutMs (civic.47 M1): abort a request that runs past it — the
++// default is none, as before.
++function callOpenRouterRaw(payloadObj, opts) {
++  const timeoutMs = opts && opts.timeoutMs;
+   // builder 2026-10-12: newer DeepSeek runs with its hidden reasoning off
+   if (/^deepseek\/deepseek-v4/.test(payloadObj.model) && !payloadObj.reasoning) payloadObj = Object.assign({ reasoning: { enabled: false } }, payloadObj);
+   return new Promise((resolve, reject) => {
+@@ -601,6 +605,7 @@ function callOpenRouterRaw(payloadObj) {
+       });
+     });
+     req.on('error', reject);
++    if (timeoutMs) req.setTimeout(timeoutMs, () => req.destroy(new Error('OpenRouter: no response within ' + timeoutMs + 'ms')));
+     req.write(payload); req.end();
+   });
+ }
+@@ -957,24 +962,33 @@ async function openRouterToolLoop(opts) {
+   const toolset = opts.toolset || (opts.memCtx ? OPENROUTER_TOOLS.concat(MEMORY_TOOLS) : OPENROUTER_TOOLS);
+   const messages = [{ role: 'system', content: opts.system }, { role: 'user', content: opts.user }];
+   const trace = [];
+-  let usageIn = 0, usageOut = 0, calls = 0;
++  // civic.47 M1: opts.exec replaces the desk tool executor (another seat's
++  // tools), opts.resultCap overrides the 8,000-character tool-result cut
++  // (Infinity = whole result), opts.body adds request fields (reasoning,
++  // usage accounting), opts.timeoutMs bounds each request. Omitted: as before.
++  const resultCap = opts.resultCap != null ? opts.resultCap : 8000;
++  let usageIn = 0, usageOut = 0, calls = 0, billedUsd = 0, billed = true;
+   for (let turn = 0; turn < maxCalls + 2; turn++) {
+     const toolsOn = calls < maxCalls;
+     const j = await callOpenRouterRaw({
+       model, max_tokens: opts.maxTokens || MAX_TOKENS, messages,
++      ...(opts.body || {}),
+       ...(toolsOn ? { tools: toolset } : {}),
+       ...(toolsOn && opts.forceFirstTool && calls === 0 ? { tool_choice: 'required' } : {})
+-    });
+-    const msg = (j.choices && j.choices[0] && j.choices[0].message) || {};
++    }, { timeoutMs: opts.timeoutMs });
++    const choice = (j.choices && j.choices[0]) || {};
++    const msg = choice.message || {};
+     const u = j.usage || {};
+     usageIn += u.prompt_tokens || 0; usageOut += u.completion_tokens || 0;
++    if (typeof u.cost === 'number') billedUsd += u.cost; else billed = false;
++    const usageCost = () => ({ billedUsd: billed ? +billedUsd.toFixed(4) : null, finishReason: choice.finish_reason || null });
+     if (toolsOn && Array.isArray(msg.tool_calls) && msg.tool_calls.length) {
+       messages.push(msg);
+       for (const tc of msg.tool_calls) {
+         let input = {};
+         try { input = JSON.parse(tc.function.arguments || '{}'); } catch (_) {}
+         const raw = calls < maxCalls
+-          ? await execOpenRouterTool(tc.function.name, input, opts.memCtx, opts.cycle)
++          ? await (opts.exec ? opts.exec(tc.function.name, input) : execOpenRouterTool(tc.function.name, input, opts.memCtx, opts.cycle))
+           : 'tool budget exhausted — compose from what you have.';
+         // dossier_read returns { text, lines }; every other tool returns its text.
+         const result = String(raw && typeof raw === 'object' ? raw.text : raw);
+@@ -982,13 +996,13 @@ async function openRouterToolLoop(opts) {
+         trace.push({ tool: tc.function.name, input, resultChars: result.length,
+           ...(opts.traceResults ? { resultHead: result.slice(0, 600) } : {}),
+           ...(opts.keepResults ? { result, lines: raw && typeof raw === 'object' ? raw.lines : null } : {}) });
+-        messages.push({ role: 'tool', tool_call_id: tc.id, content: cap(result, 8000) });
++        messages.push({ role: 'tool', tool_call_id: tc.id, content: cap(result, resultCap) });
+       }
+       continue;
+     }
+-    return { text: msg.content || '', usageIn, usageOut, trace };
++    return { text: msg.content || '', usageIn, usageOut, trace, ...usageCost() };
+   }
+-  return { text: '', usageIn, usageOut, trace };
++  return { text: '', usageIn, usageOut, trace, billedUsd: billed ? +billedUsd.toFixed(4) : null, finishReason: 'tool-turns-exhausted' };
+ }
+ 
+ // OpenRouter compose call (kept for the scorer + fact-selection callers).
+@@ -1665,6 +1679,8 @@ module.exports = {
+   stripRepairChrome,
+   renderPacketIntake,
+   resolveMaxToolCalls,
++  costUsd,                 // civic.47 M1 — Mara's manifest falls back to the rate table
++  CANON_RECALL_TOOL, OPENROUTER_TOOLS, MEMORY_TOOLS, toolMemoryRecall, toolMemoryNote,
+   openRouterToolLoop,      // Task 2.5.5 — shared by the wake-1 fact selection (cron-desk-run.js)
+   callOpenRouterRaw,
+ };
+diff --git a/scripts/maraDirective.js b/scripts/maraDirective.js
+new file mode 100644
+index 000000000..8954b1735
+--- /dev/null
++++ b/scripts/maraDirective.js
+@@ -0,0 +1,79 @@
++'use strict';
++
++// civic.47 M1 — one parser for Mara's directive text, shared by the directive
++// stage (validation), Sunday prep (per-seat section), the weekday reader
++// (confrontations) and the initiative-packet copy. A directive is a header,
++// zero or more addressee blocks ("## Name — Role" with an **Agent:** line) and
++// an optional "## Not directing" section that names offices in plain text.
++
++const NOT_DIRECTING_RE = /^## Not directing\b/i;
++const AGENT_LINE_RE = /\*\*Agent:\*\*[^\n]*\.claude\/agents\/([a-z0-9-]+)\/?/i;
++const OFFICE_ID_RE = /\b(?:civic-office|civic-project)-[a-z0-9-]+/i;
++
++function stripFence(text) {
++  return String(text || '').replace(/^```(?:markdown)?\s*/i, '').replace(/\s*```\s*$/, '');
++}
++
++// Sections are the "## " chunks; the header is whatever precedes the first.
++function sections(text) {
++  const parts = stripFence(text).split(/\n(?=## )/);
++  const header = /^## /.test(parts[0] || '') ? '' : parts.shift();
++  return { header, parts: parts.filter(p => /^## /.test(p)) };
++}
++
++function agentDirOf(block) {
++  const m = String(block).match(AGENT_LINE_RE);
++  return m ? m[1] : null;
++}
++
++// { header, blocks, notDirecting } — blocks keep every non-Not-directing
++// section (the stage validates them); notDirecting is the section text or null.
++function splitDirective(text) {
++  const { header, parts } = sections(text);
++  const nd = parts.filter(p => NOT_DIRECTING_RE.test(p));
++  return {
++    header,
++    blocks: parts.filter(p => !NOT_DIRECTING_RE.test(p)),
++    notDirecting: nd.length ? nd.join('\n').trim() : null,
++  };
++}
++
++// A Not directing section must name offices by person and title only; an
++// agent id or an Agent line would let a reader mistake it for a block.
++function notDirectingProblem(section) {
++  if (!section) return null;
++  if (AGENT_LINE_RE.test(section) || /\*\*Agent:\*\*/.test(section)) return 'Not directing section carries an Agent line';
++  if (OFFICE_ID_RE.test(section)) return 'Not directing section carries an office id';
++  if (!section.split('\n').slice(1).some(l => l.trim())) return 'Not directing section is empty';
++  return null;
++}
++
++// Every addressee block whose Agent line names this seat exactly.
++function blocksFor(text, agentDir) {
++  return splitDirective(text).blocks.filter(b => agentDirOf(b) === agentDir);
++}
++
++// The directive without its Not directing section; null when no block is left.
++function withoutNotDirecting(text) {
++  const { header, blocks } = splitDirective(text);
++  if (!blocks.length) return null;
++  return (header ? header.replace(/\s*$/, '\n') : '') + blocks.map(b => b.replace(/\s*$/, '')).join('\n\n') + '\n';
++}
++
++function confrontationId(cycle, agentDir) {
++  return 'CONF-' + Number(cycle) + '-' + agentDir;
++}
++
++// "**Promise:** P-…" lines in a block: the promise ids Mara put in front of
++// the office in that block (status relation (b), plan M1 item 4).
++function promiseIdsIn(block) {
++  const out = [];
++  const re = /\*\*Promise:\*\*\s*([^\n]+)/g;
++  let m;
++  while ((m = re.exec(String(block)))) {
++    for (const id of m[1].match(/P-[0-9a-f]{12,}/g) || []) out.push(id);
++  }
++  return [...new Set(out)];
++}
++
++module.exports = { splitDirective, notDirectingProblem, blocksFor, withoutNotDirecting, agentDirOf, confrontationId, promiseIdsIn, NOT_DIRECTING_RE };
+diff --git a/scripts/maraM1.test.js b/scripts/maraM1.test.js
+new file mode 100644
+index 000000000..7f316bca2
+--- /dev/null
++++ b/scripts/maraM1.test.js
+@@ -0,0 +1,186 @@
++'use strict';
++// civic.47 M1 — Mara's directive: parser and readers, promise record, commit
++// receipt, director answer route. Synthetic fixtures only.
++const test = require('node:test');
++const assert = require('node:assert/strict');
++const fs = require('node:fs');
++const os = require('node:os');
++const path = require('node:path');
++const md = require('./maraDirective');
++const promises = require('./maraPromises');
++const run = require('./cron-civic-run');
++const slice = require('./buildCivicOfficeSlice');
++const { moveHoods } = require('./civicProblemContinuity');
++
++function workspace(fn) {
++  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'mara-m1-'));
++  const write = (rel, text) => { const p = path.join(root, rel); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, text); };
++  try { return fn(root, write); } finally { fs.rmSync(root, { recursive: true, force: true }); }
++}
++async function aworkspace(fn) {
++  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'mara-m1-'));
++  const write = (rel, text) => { const p = path.join(root, rel); fs.mkdirSync(path.dirname(p), { recursive: true }); fs.writeFileSync(p, text); };
++  try { return await fn(root, write); } finally { fs.rmSync(root, { recursive: true, force: true }); }
++}
++
++// The C114 AUTO's shape: five fields per block, no Not directing section.
++const OLD = '# C998 Voice Directives — Mara Vance (AUTO)\n\n**Cycle:** 998\n\n---\n' +
++  '## Synthetic Two — Council D2\n\n- **Agent:** `.claude/agents/civic-office-council-d2/`\n- **Address:** Bring INIT-SYN to a vote.\n- **Why:** civic-office-council-d4 raised it in C997 for Coliseum.\n- **Acceptance:** a vote\n- **Silence consequence:** it stalls\n\n' +
++  '## Synthetic Four — Council D4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** Docket the referral.\n- **Why:** C997 filing in Coliseum.\n- **Acceptance:** a schedule\n- **Silence consequence:** it freezes\n';
++const NEW = '# C999 Voice Directives — Mara Vance (AUTO)\n\n---\n' +
++  '## Synthetic OARI — Program Director\n\n- **Agent:** `.claude/agents/civic-project-oari/`\n- **Address:** Where does the East Oakland briefing stand?\n- **Why:** C998 tracker step.\n- **Acceptance:** a date\n- **Promise:** P-0123456789abcdef\n\n' +
++  '## Not directing\n- Synthetic Four (Council D4): the referral is scheduled; nothing to ask.\n';
++const ZERO = '# C1000 Voice Directives — Mara Vance (AUTO)\n\n---\n## Not directing\n- Synthetic Two (Council D2): a quiet week.\n';
++
++test('the old five-field directive still parses for every reader', () => {
++  const s = md.splitDirective(OLD);
++  assert.equal(s.blocks.length, 2);
++  assert.equal(s.notDirecting, null);
++  assert.deepEqual(s.blocks.map(md.agentDirOf), ['civic-office-council-d2', 'civic-office-council-d4']);
++});
++
++test('prep gives a seat only blocks whose Agent line names it — a mention elsewhere is not a block', () => {
++  const d4 = md.blocksFor(OLD, 'civic-office-council-d4');
++  assert.equal(d4.length, 1);
++  assert.match(d4[0], /Docket the referral/);
++  assert.doesNotMatch(d4[0], /Bring INIT-SYN/);
++  assert.equal(md.blocksFor(NEW, 'civic-office-council-d4').length, 0, 'a Not directing line is never a block');
++});
++
++test('the initiative-packet copy drops Not directing and carries nothing on a zero-block week', () => {
++  const copy = md.withoutNotDirecting(NEW);
++  assert.match(copy, /Synthetic OARI/);
++  assert.doesNotMatch(copy, /Not directing/);
++  assert.equal(md.withoutNotDirecting(ZERO), null);
++  assert.deepEqual(md.promiseIdsIn(md.splitDirective(NEW).blocks[0]), ['P-0123456789abcdef']);
++});
++
++test('weekday: a zero-block latest directive leaves nothing open; history still binds an old answer to its hoods', () => workspace((root, write) => {
++  const dir = 'civic-office-council-d4';
++  write('output/mara-directives/mara_directive_c998_AUTO.txt', OLD);
++  write('output/mara-directives/mara_directive_c999_AUTO.txt', NEW);
++  let st = slice.loadConfrontations(root, 999, dir);
++  assert.deepEqual(st.all.map(c => c.id), ['CONF-998-' + dir]);
++  assert.deepEqual(st.open, [], 'the C999 directive left D4 alone');
++  write('output/mara-directives/mara_directive_c1000_AUTO.txt', ZERO);
++  st = slice.loadConfrontations(root, 1000, 'civic-project-oari');
++  assert.equal(st.latestCycle, 1000);
++  assert.deepEqual(st.open, [], 'a zero-block week clears C999');
++  assert.equal(st.all.length, 1);
++  const resolver = { resolve: n => (n === 'Coliseum' ? 'East Oakland' : null) };
++  const hoods = moveHoods({ type: 'answer', agentDir: dir, cycle: 999, payload: { confrontationId: 'CONF-998-' + dir } }, resolver, [],
++    slice.loadConfrontations(root, 1000, dir).all, [{ Neighborhood: 'East Oakland', ChildAreas: 'Coliseum' }]);
++  assert.deepEqual([...hoods], ['East Oakland']);
++}));
++
++// ── promise record ─────────────────────────────────────────────────────────
++function promiseWorld(write) {
++  write('output/civic-voice/council_d4_c999.json', JSON.stringify({ office: 'council_d4', speaker: 'Synthetic Four', statements: [
++    { initiative: 'Synthetic Referral Program', decision: 'refer it', quote: 'We will send the referral to committee by next week.', fullStatement: 'Full text. We will send the referral to committee by next week.', trackerUpdates: { MilestoneNotes: 'a secret promise in tracker text' } },
++    { initiative: 'Other Program', decision: 'other', quote: 'Something about another program entirely here.', fullStatement: 'x', trackerUpdates: {} }] }));
++  write('output/civic-voice/mayor_open_c999.json', JSON.stringify({ office: 'mayor_open', speaker: 'Synthetic Mayor', statements: [{ initiative: null, decision: 'open', quote: 'I will meet the fans downtown on Friday.', fullStatement: 'f', trackerUpdates: {} }] }));
++  write('output/civic-voice/mayor_gavel_c999.json', JSON.stringify({ office: 'mayor_gavel', speaker: 'Synthetic Mayor', statements: [{ initiative: null, decision: 'gavel', quote: 'I will sign the parade permit tonight.', fullStatement: 'f', trackerUpdates: {} }] }));
++  write('output/cron-civic/datawake/civic-office-council-d4_2026-01-05.json', JSON.stringify({ agentDir: 'civic-office-council-d4', cycle: 998, statement: 'I will hold a “listening   session” in Dimond this week.', moves: [] }));
++}
++const ROWS = [{ InitiativeID: 'INIT-SYN', Name: 'Synthetic Referral Program', ImplementationPhase: 'announced', Status: 'proposed', NextActionCycle: '1000' },
++  { InitiativeID: 'INIT-OTH', Name: 'Other Program', ImplementationPhase: 'announced', Status: 'proposed' }];
++const pctx = (root, extra) => Object.assign({ root, cycle: 999, roster: new Set(['civic-office-council-d4', 'civic-office-mayor']), trackerRows: ROWS, answers: [] }, extra || {});
++
++test('promise sources: allowlisted, public fields only, the mayor names open or gavel, quotes normalized', () => workspace((root, write) => {
++  promiseWorld(write);
++  const c = pctx(root);
++  const sun = { kind: 'sunday', office: 'civic-office-council-d4', cycle: 999, index: 0, field: 'quote' };
++  const ok = promises.validatePromise({ source: sun, said: 'send the referral to committee by next week' }, c);
++  assert.equal(ok.ok, true);
++  assert.equal(ok.row.initiativeId, 'INIT-SYN');
++  assert.equal(promises.validatePromise({ source: sun, said: 'send the referral to committee by next week' }, c).row.promiseId, ok.row.promiseId, 'identity is stable');
++  assert.match(promises.validatePromise({ source: { ...sun, field: 'trackerUpdates' }, said: 'a secret promise in tracker' }, c).why, /field must be/);
++  assert.match(promises.validatePromise({ source: { ...sun, office: 'civic-office-police-chief' }, said: 'a b c d' }, c).why, /roster/);
++  assert.match(promises.validatePromise({ source: { kind: 'sunday', office: 'civic-office-mayor', cycle: 999, index: 0, field: 'quote' }, said: 'meet the fans downtown on' }, c).why, /open" or "gavel/);
++  const gavel = promises.validatePromise({ source: { kind: 'sunday', office: 'civic-office-mayor', statement: 'gavel', cycle: 999, index: 0, field: 'quote' }, said: 'sign the parade permit tonight' }, c);
++  assert.equal(gavel.ok, true);
++  assert.match(gavel.row.source, /^mayor_gavel_c999/);
++  assert.match(promises.validatePromise({ source: { kind: 'sunday', office: 'civic-office-mayor', statement: 'open', cycle: 999, index: 0, field: 'quote' }, said: 'sign the parade permit tonight' }, c).why, /not in that statement/);
++  const wk = promises.validatePromise({ source: { kind: 'weekday', office: 'civic-office-council-d4', date: '2026-01-05' }, said: 'hold a "listening session" in Dimond' }, c);
++  assert.equal(wk.ok, true, 'curly quotes and runs of spaces normalize');
++  assert.match(promises.validatePromise({ source: { kind: 'weekday', office: 'civic-office-council-d4', date: '../../etc/passwd' }, said: 'a b c d' }, c).why, /date/);
++}));
++
++test('a status closes a promise only on evidence tied to it', () => workspace((root, write) => {
++  promiseWorld(write);
++  const c = pctx(root);
++  const p = promises.validatePromise({ source: { kind: 'sunday', office: 'civic-office-council-d4', cycle: 999, index: 0, field: 'quote' }, said: 'send the referral to committee by next week' }, c).row;
++  const w = promises.validatePromise({ source: { kind: 'weekday', office: 'civic-office-council-d4', date: '2026-01-05' }, said: 'hold a "listening session" in Dimond' }, c).row;
++  promises.appendRows(root, [p, w]);
++  const rec = promises.loadRecord(root);
++  // tracker evidence: the promise's own initiative only
++  assert.match(promises.validateStatus({ promiseId: p.promiseId, status: 'kept', evidence: { type: 'tracker', initiativeId: 'INIT-OTH', field: 'Status', value: 'proposed' } }, c, rec).why, /another initiative/);
++  assert.equal(promises.validateStatus({ promiseId: p.promiseId, status: 'kept', evidence: { type: 'tracker', initiativeId: 'INIT-SYN', field: 'NextActionCycle', value: '1000' } }, c, rec).ok, true);
++  // a same-office statement about another initiative does not close it
++  const c2 = pctx(root, { cycle: 1000 });
++  write('output/civic-voice/council_d4_c1000.json', JSON.stringify({ office: 'council_d4', speaker: 'S', statements: [{ initiative: 'Other Program', decision: 'd', quote: 'The other program opened its doors today.', fullStatement: 'f', trackerUpdates: {} }] }));
++  assert.match(promises.validateStatus({ promiseId: p.promiseId, status: 'kept', evidence: { type: 'statement', source: { kind: 'sunday', office: 'civic-office-council-d4', cycle: 1000, index: 0, field: 'quote' }, quote: 'other program opened its doors today' } }, c2, rec).why, /another initiative/);
++  // a weekday promise (no initiative) closes only through her question to the office
++  assert.match(promises.validateStatus({ promiseId: w.promiseId, status: 'kept', evidence: { type: 'tracker', initiativeId: 'INIT-SYN', field: 'Status', value: 'proposed' } }, c, rec).why, /no initiative/);
++  write('output/mara-directives/mara_directive_c999_AUTO.txt', '# h\n---\n## Synthetic Four — Council D4\n\n- **Agent:** `.claude/agents/civic-office-council-d4/`\n- **Address:** Did the listening session happen?\n- **Why:** C998\n- **Acceptance:** yes or no\n- **Promise:** ' + w.promiseId + '\n');
++  assert.match(promises.validateStatus({ promiseId: w.promiseId, status: 'kept', evidence: { type: 'answer', confrontationId: 'CONF-999-civic-office-council-d4' } }, c, rec).why, /has not answered/);
++  const withAnswer = pctx(root, { answers: [{ agentDir: 'civic-office-council-d4', confrontationId: 'CONF-999-civic-office-council-d4', text: 'Held it Tuesday.' }] });
++  const kept = promises.validateStatus({ promiseId: w.promiseId, status: 'kept', evidence: { type: 'answer', confrontationId: 'CONF-999-civic-office-council-d4' } }, withAnswer, rec);
++  assert.equal(kept.ok, true);
++  assert.match(promises.validateStatus({ promiseId: p.promiseId, status: 'kept', evidence: { type: 'answer', confrontationId: 'CONF-999-civic-office-council-d4' } }, withAnswer, rec).why, /did not carry this promise/);
++  // append is idempotent by eventId
++  assert.equal(promises.appendRows(root, [kept.row]).written.length, 1);
++  assert.equal(promises.appendRows(root, [kept.row, p]).written.length, 0);
++  assert.equal(promises.loadRecord(root).openIds.has(w.promiseId), false);
++}));
++
++test('a partial commit resumes from the receipt and writes nothing twice', () => aworkspace(async (root) => {
++  const calls = { memory: 0, page: 0 };
++  let failPage = true;
++  const memory = { upsert: async id => { calls.memory++; return { ok: true, customId: id }; } };
++  const page = {
++    appendReflection_: async (pop, text, o) => { calls.page++; return failPage ? { error: 'down' } : { customId: 'cp-' + pop + '-c' + o.cycle + '-' + o.key }; },
++    pageHasDoc_: async () => true,
++  };
++  const row = { kind: 'promise', eventId: 'P-aaaaaaaaaaaaaaaa', promiseId: 'P-aaaaaaaaaaaaaaaa', office: 'civic-office-mayor', cycle: 999, said: 'x' };
++  const staged = { runEntry: 'C999 entry', notes: ['watch the parade permit'], promises: [row], statuses: [] };
++  fs.mkdirSync(path.join(root, 'output', 'mara-directives'), { recursive: true });
++  const r1 = await run.commitDirectiveWrites(999, staged, { root, memory, page });
++  assert.equal(r1.complete, false);
++  assert.equal(r1.writes['mara-run-c999'].ok, true);
++  assert.equal(r1.writes.promises.ok, true);
++  failPage = false;
++  const r2 = await run.commitDirectiveWrites(999, staged, { root, memory, page, resume: true });
++  assert.equal(r2.complete, true);
++  assert.equal(calls.memory, 1, 'the memory entry is not rewritten');
++  assert.equal(promises.loadRecord(root).rows.length, 1, 'the promise row is not appended twice');
++}));
++
++test('a director Mara addressed gets her question and must answer in maraAnswer', () => {
++  const ask = run.maraProjectAsk(NEW, 999, 'civic-project-oari');
++  assert.equal(ask.confrontationId, 'CONF-999-civic-project-oari');
++  assert.equal(run.maraProjectAsk(NEW, 999, 'civic-project-health-center'), null);
++  const check = run.maraAnswerCheck(ask);
++  assert.match(check({}), /maraAnswer missing/);
++  assert.match(check({ maraAnswer: { confrontationId: 'CONF-1-x', kind: 'answer', text: 'y' } }), /must be exactly/);
++  assert.match(check({ maraAnswer: { confrontationId: ask.confrontationId, kind: 'promise', text: 'y' } }), /kind/);
++  assert.equal(check({ maraAnswer: { confrontationId: ask.confrontationId, kind: 'deferral', text: 'Not known until the C1000 briefing.' } }), null);
++});
++
++test('the run entry names what she directed and what she watches', () => {
++  const blocks = md.splitDirective(NEW).blocks;
++  const t = run.runEntryText(999, blocks, md.splitDirective(NEW).notDirecting, [{ office: 'civic-office-mayor', said: 'sign the parade permit tonight' }]);
++  assert.match(t, /Directed Synthetic OARI — Program Director: Where does the East Oakland briefing stand\?/);
++  assert.match(t, /Not directing:/);
++  assert.match(t, /mayor "sign the parade permit tonight"/);
++  assert.match(run.runEntryText(1000, [], null, []), /No directive this week/);
++});
++
++test('the brief carries no crisis or compulsion frame', () => {
++  for (const re of [/confront/i, /\bowe/i, /crisis/i, /must fight/i, /Silence is also a position/i, /charter/i, /stall clock/i]) {
++    assert.doesNotMatch(run.DIRECTIVE_BRIEF, re);
++  }
++  const src = fs.readFileSync(path.join(__dirname, 'cron-civic-run.js'), 'utf8');
++  assert.doesNotMatch(src, /This is a decision demand, not a briefing/);
++  assert.doesNotMatch(src, /An \{"type":"answer",\.\.\.\} move responding to it is expected/);
++});
+diff --git a/scripts/maraMemory.js b/scripts/maraMemory.js
+new file mode 100644
+index 000000000..ab5746ddc
+--- /dev/null
++++ b/scripts/maraMemory.js
+@@ -0,0 +1,67 @@
++'use strict';
++
++// civic.47 M1 item 7 — Mara's in-world institutional memory, the `mara-world`
++// Supermemory container. Split from the manual-era `mara` container (which
++// also holds out-of-world material); this module never reads `mara`.
++// Unlike lib/supermemory (fail-soft to []), every call says whether the
++// memory answered, so "no match" is never confused with "unavailable".
++
++const API = 'https://api.supermemory.ai';
++const CONTAINER = 'mara-world';
++
++function key() { return process.env.SUPERMEMORY_CC_API_KEY || ''; }
++async function post(pathname, body, timeoutMs) {
++  const ctrl = new AbortController();
++  const t = setTimeout(() => ctrl.abort(), timeoutMs || 15000);
++  try {
++    const r = await fetch(API + pathname, {
++      method: 'POST', signal: ctrl.signal,
++      headers: { Authorization: 'Bearer ' + key(), 'Content-Type': 'application/json' },
++      body: JSON.stringify(body),
++    });
++    let j = null;
++    try { j = await r.json(); } catch (e) { return { error: 'bad JSON (HTTP ' + r.status + ')' }; }
++    if (!r.ok || (j && j.error)) return { error: 'HTTP ' + r.status + (j && j.error ? ': ' + (typeof j.error === 'string' ? j.error : JSON.stringify(j.error)) : '') };
++    return { json: j };
++  } catch (e) {
++    return { error: e.name === 'AbortError' ? 'timeout' : e.message };
++  } finally { clearTimeout(t); }
++}
++
++// { status: 'ok', results: [{text, cycle, customId}] } | { status: 'unavailable', why }
++async function search(query, opts) {
++  if (!key()) return { status: 'unavailable', why: 'no Supermemory key in this run' };
++  const r = await post('/v3/search', { q: String(query || ''), containerTags: [(opts && opts.container) || CONTAINER], limit: (opts && opts.limit) || 8 });
++  if (r.error) return { status: 'unavailable', why: r.error };
++  const results = (r.json.results || []).map(x => {
++    const chunks = (x.chunks || []).filter(c => c.isRelevant);
++    const text = (chunks.length ? chunks : (x.chunks || []).slice(0, 2)).map(c => String(c.content || '')).join(' ').replace(/\s+/g, ' ').trim();
++    const m = x.metadata || {};
++    return { text, cycle: m.cycle != null ? m.cycle : null, customId: x.customId || null };
++  }).filter(x => x.text);
++  return { status: 'ok', results };
++}
++
++async function hasDoc(customId, container) {
++  for (let p = 1; p <= 5; p++) {
++    const r = await post('/v3/documents/list', { containerTags: [container || CONTAINER], limit: 200, page: p });
++    if (r.error) return null;
++    const docs = r.json.memories || r.json.documents || [];
++    if (docs.some(d => d && d.customId === customId)) return true;
++    if (docs.length < 200) return false;
++  }
++  return null;
++}
++
++// Upsert by customId, then read back. { ok, customId, why? }
++async function upsert(customId, content, metadata, container) {
++  if (!key()) return { ok: false, customId, why: 'no Supermemory key in this run' };
++  const meta = {};
++  for (const [k, v] of Object.entries(metadata || {})) if (v != null) meta[k] = v;
++  const r = await post('/v3/documents', { content: String(content || ''), customId, containerTags: [container || CONTAINER], metadata: meta });
++  if (r.error) return { ok: false, customId, why: r.error };
++  const back = await hasDoc(customId, container);
++  return back === true ? { ok: true, customId } : { ok: false, customId, why: back === false ? 'readback: not found' : 'readback: unknown' };
++}
++
++module.exports = { CONTAINER, search, upsert, hasDoc };
+diff --git a/scripts/maraPromises.js b/scripts/maraPromises.js
+new file mode 100644
+index 000000000..6c7a20b4b
+--- /dev/null
++++ b/scripts/maraPromises.js
+@@ -0,0 +1,168 @@
++'use strict';
++
++// civic.47 M1 item 4 — Mara's promise record. What an office said it would
++// do, quoted from its own public statement, kept in front of her until
++// evidence tied to that promise closes it. Append-only JSONL; nothing is
++// edited. Pure validation here; runDirective stages and commits the rows.
++
++const fs = require('fs');
++const path = require('path');
++const crypto = require('crypto');
++const maraDirective = require('./maraDirective');
++
++const REL = path.join('output', 'mara-directives', 'promises.jsonl');
++const SUNDAY_FIELDS = new Set(['quote', 'fullStatement', 'decision']);
++const TRACKER_FIELDS = new Set(['ImplementationPhase', 'Status', 'MilestoneNotes', 'NextScheduledAction', 'NextActionCycle']);
++const STATUSES = new Set(['kept', 'dropped', 'changed']);
++const MIN_WORDS = 4;
++
++const hash = s => crypto.createHash('sha256').update(s).digest('hex').slice(0, 16);
++function norm(text) {
++  return String(text == null ? '' : text)
++    .replace(/[‘’]/g, "'").replace(/[“”]/g, '"')
++    .replace(/\s+/g, ' ').trim();
++}
++const slugOf = agentDir => String(agentDir).replace(/^civic-(office|project)-/, '').replace(/-/g, '_');
++function readJson(file) {
++  try { return JSON.parse(fs.readFileSync(file, 'utf8')); } catch (e) { return null; }
++}
++function readJsonl(file) {
++  let text;
++  try { text = fs.readFileSync(file, 'utf8'); } catch (e) { if (e.code === 'ENOENT') return []; throw e; }
++  return text.split('\n').filter(l => l.trim()).map(l => JSON.parse(l));
++}
++
++// ctx: { root, cycle (the directive Cycle), roster: Set<agentDir>, trackerRows }
++// Sources Mara may cite this run: the Cycle's Sunday statements, and the
++// weekday statements of the week before it (datawake records carry the
++// previous Cycle number).
++function resolveSource(src, ctx) {
++  if (!src || typeof src !== 'object') return { error: 'source missing' };
++  const agentDir = String(src.office || '');
++  if (!ctx.roster.has(agentDir)) return { error: 'office not on the roster: ' + agentDir };
++  if (src.kind === 'sunday') {
++    if (Number(src.cycle) !== Number(ctx.cycle)) return { error: 'Sunday source must be C' + ctx.cycle };
++    const slug = slugOf(agentDir);
++    let file = slug;
++    if (slug === 'mayor') {
++      if (src.statement !== 'open' && src.statement !== 'gavel') return { error: 'the mayor has two Sunday statements — statement must be "open" or "gavel"' };
++      file = 'mayor_' + src.statement;
++    } else if (src.statement) return { error: 'statement applies to the mayor only' };
++    const j = readJson(path.join(ctx.root, 'output', 'civic-voice', file + '_c' + ctx.cycle + '.json'));
++    if (!j) return { error: 'no Sunday statement on file for ' + agentDir + (src.statement ? ' (' + src.statement + ')' : '') };
++    if (j.office !== file) return { error: 'Sunday file office "' + j.office + '" does not match ' + file };
++    const i = Number(src.index);
++    const st = Number.isInteger(i) && Array.isArray(j.statements) ? j.statements[i] : null;
++    if (!st) return { error: 'no statement at index ' + src.index };
++    if (!SUNDAY_FIELDS.has(src.field)) return { error: 'field must be quote, fullStatement or decision' };
++    return { agentDir, text: st[src.field], initiative: st.initiative || null,
++      key: ['sunday', ctx.cycle, file, i, src.field].join('|'), label: file + '_c' + ctx.cycle + ' statements[' + i + '].' + src.field };
++  }
++  if (src.kind === 'weekday') {
++    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(src.date || ''))) return { error: 'weekday source needs a date YYYY-MM-DD' };
++    const j = readJson(path.join(ctx.root, 'output', 'cron-civic', 'datawake', agentDir + '_' + src.date + '.json'));
++    if (!j) return { error: 'no weekday statement on file for ' + agentDir + ' ' + src.date };
++    if (j.agentDir !== agentDir) return { error: 'weekday file agentDir does not match' };
++    if (Number(j.cycle) !== Number(ctx.cycle) - 1) return { error: 'weekday source must be from the week before C' + ctx.cycle };
++    if (src.field && src.field !== 'statement') return { error: 'weekday field must be statement' };
++    return { agentDir, text: j.statement, initiative: null,
++      key: ['weekday', src.date, agentDir, 'statement'].join('|'), label: agentDir + '_' + src.date + ' statement' };
++  }
++  return { error: 'source kind must be sunday or weekday' };
++}
++
++function resolveInitiative(value, trackerRows) {
++  const v = norm(value).toLowerCase();
++  if (!v) return null;
++  const row = (trackerRows || []).find(r => String(r.InitiativeID || '').toLowerCase() === v || norm(r.Name).toLowerCase() === v);
++  return row ? row.InitiativeID : null;
++}
++
++function quoteIn(said, text) {
++  const q = norm(said);
++  if (q.split(' ').filter(Boolean).length < MIN_WORDS) return 'quote must be at least ' + MIN_WORDS + ' words';
++  if (typeof text !== 'string' || !norm(text).includes(q)) return 'quote is not in that statement';
++  return null;
++}
++
++function validatePromise(input, ctx) {
++  const src = resolveSource(input && input.source, ctx);
++  if (src.error) return { ok: false, why: src.error };
++  const bad = quoteIn(input.said, src.text);
++  if (bad) return { ok: false, why: bad };
++  const said = norm(input.said);
++  const promiseId = 'P-' + hash([src.agentDir, src.key, said].join('|'));
++  return { ok: true, row: { kind: 'promise', eventId: promiseId, promiseId, office: src.agentDir, cycle: Number(ctx.cycle),
++    said, source: src.label, initiativeId: resolveInitiative(src.initiative, ctx.trackerRows), note: norm(input.note) || null } };
++}
++
++// Status evidence must be tied to the promise (re-review finding 3):
++//  tracker   — the promise's initiative, a tracker field quoted exactly
++//  statement — a later statement of the same office on the same initiative
++//  answer    — the office's answer to the directive block that carried it
++function validateStatus(input, ctx, record) {
++  const p = record.promises.get(input && input.promiseId);
++  if (!p) return { ok: false, why: 'unknown promiseId' };
++  if (!record.openIds.has(p.promiseId)) return { ok: false, why: 'promise already closed' };
++  if (!STATUSES.has(input.status)) return { ok: false, why: 'status must be kept, dropped or changed' };
++  const ev = input.evidence || {};
++  let evidence;
++  if (ev.type === 'tracker') {
++    if (!p.initiativeId) return { ok: false, why: 'promise has no initiative — tracker evidence cannot speak to it' };
++    if (ev.initiativeId !== p.initiativeId) return { ok: false, why: 'tracker evidence is for another initiative' };
++    if (!TRACKER_FIELDS.has(ev.field)) return { ok: false, why: 'tracker field not allowed' };
++    const row = (ctx.trackerRows || []).find(r => r.InitiativeID === ev.initiativeId);
++    if (!row || norm(row[ev.field]) !== norm(ev.value) || !norm(ev.value)) return { ok: false, why: 'tracker value does not match the live row' };
++    evidence = { type: 'tracker', initiativeId: ev.initiativeId, field: ev.field, value: norm(ev.value) };
++  } else if (ev.type === 'statement') {
++    if (!p.initiativeId) return { ok: false, why: 'promise has no initiative — close it through her question to the office' };
++    const src = resolveSource(ev.source, ctx);
++    if (src.error) return { ok: false, why: src.error };
++    if (src.agentDir !== p.office) return { ok: false, why: 'evidence statement is from another office' };
++    if (src.key.startsWith('sunday') && Number(ctx.cycle) <= p.cycle) return { ok: false, why: 'evidence must be later than the promise' };
++    if (resolveInitiative(src.initiative, ctx.trackerRows) !== p.initiativeId) return { ok: false, why: 'evidence statement is about another initiative' };
++    const bad = quoteIn(ev.quote, src.text);
++    if (bad) return { ok: false, why: bad };
++    evidence = { type: 'statement', source: src.label, quote: norm(ev.quote) };
++  } else if (ev.type === 'answer') {
++    const m = String(ev.confrontationId || '').match(/^CONF-(\d+)-(.+)$/);
++    if (!m || m[2] !== p.office) return { ok: false, why: 'answer must be bound to a question to this office' };
++    const auto = path.join(ctx.root, 'output', 'mara-directives', 'mara_directive_c' + m[1] + '_AUTO.txt');
++    let text = '';
++    try { text = fs.readFileSync(auto, 'utf8'); } catch (e) { return { ok: false, why: 'no directive C' + m[1] }; }
++    if (!maraDirective.blocksFor(text, p.office).some(b => maraDirective.promiseIdsIn(b).includes(p.promiseId))) {
++      return { ok: false, why: 'that question did not carry this promise' };
++    }
++    const reply = (ctx.answers || []).find(a => a.confrontationId === ev.confrontationId && a.agentDir === p.office);
++    if (!reply) return { ok: false, why: 'the office has not answered that question' };
++    evidence = { type: 'answer', confrontationId: ev.confrontationId, text: norm(reply.text) };
++  } else return { ok: false, why: 'evidence type must be tracker, statement or answer' };
++  const eventId = 'S-' + hash([p.promiseId, ctx.cycle, input.status, JSON.stringify(evidence)].join('|'));
++  return { ok: true, row: { kind: 'status', eventId, promiseId: p.promiseId, cycle: Number(ctx.cycle), status: input.status, evidence, note: norm(input.note) || null } };
++}
++
++function loadRecord(root) {
++  const rows = readJsonl(path.join(root, REL));
++  const promises = new Map(), closed = new Set(), eventIds = new Set();
++  for (const r of rows) {
++    eventIds.add(r.eventId);
++    if (r.kind === 'promise' && !promises.has(r.promiseId)) promises.set(r.promiseId, r);
++    if (r.kind === 'status') closed.add(r.promiseId);
++  }
++  const openIds = new Set([...promises.keys()].filter(id => !closed.has(id)));
++  return { rows, promises, openIds, eventIds, open: [...openIds].map(id => promises.get(id)) };
++}
++
++// Append rows whose eventId is not already in the file. Returns what landed.
++function appendRows(root, rows) {
++  const file = path.join(root, REL);
++  const have = loadRecord(root).eventIds;
++  const fresh = rows.filter(r => r && r.eventId && !have.has(r.eventId));
++  if (fresh.length) {
++    fs.mkdirSync(path.dirname(file), { recursive: true });
++    fs.appendFileSync(file, fresh.map(r => JSON.stringify(r)).join('\n') + '\n');
++  }
++  return { written: fresh.map(r => r.eventId), skipped: rows.filter(r => !fresh.includes(r)).map(r => r && r.eventId) };
++}
++
++module.exports = { REL, norm, resolveSource, resolveInitiative, validatePromise, validateStatus, loadRecord, appendRows, slugOf };

@@ -1,0 +1,149 @@
+{
+  "stage": "directive",
+  "cycle": 114,
+  "model": "openai/gpt-6.1-sol",
+  "mayorModel": "moonshotai/kimi-k3.1-pro",
+  "roster": [
+    "civic-office-mayor",
+    "civic-office-council-d1",
+    "civic-office-council-d2",
+    "civic-office-council-d3",
+    "civic-office-council-d4",
+    "civic-office-council-d5",
+    "civic-office-council-d6",
+    "civic-office-council-d7",
+    "civic-office-council-d8",
+    "civic-office-council-d9",
+    "civic-project-stabilization-fund",
+    "civic-project-oari",
+    "civic-project-health-center",
+    "civic-project-transit-hub",
+    "civic-office-baylight-authority"
+  ],
+  "blocks": [
+    {
+      "head": "Avery Santana — Mayor",
+      "agentDir": "civic-office-mayor",
+      "promises": [
+        "P-daabc5b98a8bcd93",
+        "P-0981c3df9119c390"
+      ]
+    },
+    {
+      "head": "Denise Carter — City Council District 1",
+      "agentDir": "civic-office-council-d1",
+      "promises": []
+    },
+    {
+      "head": "Leonard Tran — City Council District 2",
+      "agentDir": "civic-office-council-d2",
+      "promises": []
+    },
+    {
+      "head": "Rose Delgado — City Council District 3",
+      "agentDir": "civic-office-council-d3",
+      "promises": []
+    },
+    {
+      "head": "Ramon Vega — City Council District 4",
+      "agentDir": "civic-office-council-d4",
+      "promises": []
+    },
+    {
+      "head": "Janae Rivers — City Council District 5",
+      "agentDir": "civic-office-council-d5",
+      "promises": []
+    },
+    {
+      "head": "Warren Ashford — City Council District 7",
+      "agentDir": "civic-office-council-d7",
+      "promises": [
+        "P-364d4ad22f03e370"
+      ]
+    },
+    {
+      "head": "Nina Chen — City Council District 8",
+      "agentDir": "civic-office-council-d8",
+      "promises": []
+    },
+    {
+      "head": "Terrence Mobley — City Council District 9",
+      "agentDir": "civic-office-council-d9",
+      "promises": []
+    },
+    {
+      "head": "Marcus Webb — OEWD Program Director (Stabilization Fund)",
+      "agentDir": "civic-project-stabilization-fund",
+      "promises": [
+        "P-570753e07465881d"
+      ]
+    },
+    {
+      "head": "Elena Soria Dominguez — Transit Hub Planning Lead",
+      "agentDir": "civic-project-transit-hub",
+      "promises": [
+        "P-955a3dfbf7ddc5d8"
+      ]
+    }
+  ],
+  "notDirecting": true,
+  "notDirectingProblem": null,
+  "rejectedBlocks": [],
+  "truncated": 0,
+  "promises": {
+    "staged": 5,
+    "statuses": 0,
+    "rejected": []
+  },
+  "memoryReads": [],
+  "notes": 0,
+  "toolCalls": [
+    {
+      "tool": "promise_record",
+      "resultChars": 27
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 38
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 27
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 38
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 38
+    }
+  ],
+  "usage": {
+    "in": 82247,
+    "out": 5237,
+    "billedUsd": 0.1614,
+    "rateUsd": 0.2169,
+    "finishReason": "stop"
+  },
+  "attempts": [
+    {
+      "model": "openai/gpt-6.1-sol",
+      "tools": true,
+      "blocks": 11,
+      "notDirecting": true,
+      "usage": {
+        "in": 82247,
+        "out": 5237,
+        "billedUsd": 0.1614,
+        "rateUsd": 0.2169,
+        "finishReason": "stop"
+      }
+    }
+  ],
+  "note": null,
+  "commit": "dry",
+  "directive": "output/mara-directives/mara_directive_c114_AUTO.txt",
+  "staged": "output/mara-directives/staged_c114.json",
+  "ranAt": "2026-11-03T15:57:35.026Z"
+}

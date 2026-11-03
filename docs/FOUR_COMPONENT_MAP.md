@@ -30,7 +30,7 @@ Paper 4 names the four components every AI system has whether the architect name
 | **Model** | The LLM making each decision. Different roles use different models. | Inline per role (§3) |
 | **Harness** | Skill files, identity rules, agent prompts — the instructions that shape what each model does | `.claude/skills/`, `.claude/agents/`, `.claude/rules/`, `CLAUDE.md`, `docs/mags-corliss/identity files` |
 | **Tools** | What a model can reach — scripts, libraries, MCP servers, the bash/read/write primitives | `scripts/`, `lib/`, `.mcp.json`, plus the Claude Code built-ins |
-| **Environment** | Where execution happens — which terminal, which machine, which account | `.claude/terminals/*/TERMINAL.md`, PM2 daemons, cron, scheduled remote agents |
+| **Environment** | Where execution happens — which terminal, which machine, which account | `.claude/TERMINAL.md` §The terminals, PM2 daemons, cron, scheduled remote agents |
 
 Components compose: every skill invocation is one `(model, harness, tools, environment)` tuple. Attack surfaces and failure modes live at the seams between components, not inside them — which is why naming the seams matters.
 
@@ -51,7 +51,7 @@ Two builder terminals plus hosted and scheduled surfaces, each a distinct execut
 | Scheduled remote agents | Hosted on Anthropic infra | Mara sync, code review, bay-tribune audit (per `docs/OPERATIONS.md`; not verifiable from the droplet) | Their own logs; results land in relevant containers |
 | Non-Claude helper lanes | External CLIs — codex, kimi, antigravity, grok | Review and helper work; control-plane read-only, no substrate, no lead (`AGENTS.md`) | `docs/for-claude-review/`, `output/<lane>/` |
 
-Terminal identity is resolved from `tmux display-message`, not from any state file. Each terminal's `TERMINAL.md` is the source of truth for its scope.
+Terminal identity is resolved from `tmux display-message`, not from any state file. Its row in `.claude/TERMINAL.md` §The terminals is the source of truth for its window, save tag and codex lane.
 
 ---
 

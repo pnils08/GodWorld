@@ -14,6 +14,6 @@ related_skills: [session-end]
 The SessionStart hook fires on startup, resume, clear and compact, and injects `<godworld-state>`. Use this only when that block is absent.
 
 1. Read `.claude/state/boot-payload.txt` — the hook writes it on every fire. Fresh mtime → the hook ran and delivery dropped; the file is the boot. Stale or missing → the hook died; run `bash .claude/hooks/session-startup-hook.sh < /dev/null` and read its output.
-2. Run `CLAUDE.md` §Ready check.
+2. Run the Ready check (`.claude/TERMINAL.md`).
 
 Prior version: `.claude/boot-legacy/session-startup-SKILL.legacy.md`.

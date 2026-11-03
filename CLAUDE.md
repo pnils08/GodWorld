@@ -22,54 +22,6 @@
 5. An approach Mike rejected is not re-proposed in a new wrapper.
 6. Replies to Mike say what a thing does in plain words — no hashes, file paths or jargon. Pointers go in commits and docs.
 
-## Fact sources
+## How a session works
 
-A doc, memory, summary, audit or NEXT line is a claim. Before building on one, check it here.
-
-| Question | Source |
-|---|---|
-| A citizen, hood, business, initiative — current value | live sheet: scratchpad script, `require('/root/GodWorld/lib/env')` then `lib/sheets` `getSheetAsObjects` (bench: set `GODWORLD_SHEET_ID` after requiring env); one ledger row: `output/simulation_ledger_snapshot.jsonl` |
-| What the world has established (canon) | whatever the ingest paths send — an ingest path's gate decides canon. Query it in Supermemory `search_canon` (fast, search results; what crons use) or NotebookLM (slow, strong prose answers). Supermemory is also the sim's and build's memory |
-| What code does, who calls it | the code; `grep -rn "fn(" phase* utilities scripts lib dashboard`; one function / `S.` field / tab: `engine-wiring` agent |
-| What a pipeline produced | `output/` artifacts |
-| What was decided before | `node scripts/brainSearch.js "<query>"` — a `rule` hit is current law; `brain` / `mem` hits are history |
-| Open work | `docs/engine/ROLLOUT_PLAN.md` (every job, one line each), then the row's plan |
-| What is deployed | `docs/reference/DEPLOY_HISTORY.md` §PROD |
-| Does the whole path work | run the real entry point against live data |
-
-## Ready check
-
-Every session, before work:
-
-1. Job: the row id the NEXT line names → its row in `docs/engine/ROLLOUT_PLAN.md` → its plan. No row named → ask Mike; a new row is claimed only on his word.
-2. Is the NEXT line still true: the commits it names are in `git log`; the plan's task status matches the row.
-3. Loose state: `git log origin/main..HEAD --oneline` and `git status --short`.
-4. Engine job: the PROD deployment in the PIN matches the top of DEPLOY_HISTORY §PROD.
-5. Tell Mike: the job, the model, and ready — or the mismatch found.
-
-Model: Opus for engine substrate or code across several files; Sonnet for plans, docs, config, single-file scripts. Mike types `/model`. Subagents run a tier down — Sonnet reasoning, Haiku grunt. Mike pays for every token.
-
-## Jobs
-
-- One job per terminal: one ROLLOUT row, Terminal = this terminal alone, carried plan → build → bench → deploy → close.
-- A fix the job cannot finish without is the job. Anything else surfaced is a new ROLLOUT row, not a second build.
-- Done → `done-pending-archive`. Session ends mid-job → the row stays in-progress; the NEXT line says where it stopped.
-- Engine substrate (`phase*/`, `utilities/`, `lib/`, `schemas/`): bench proof on the exact candidate before PROD; one unbenched change in flight across both terminals; a review (below) before PROD. Bench fires, reverts and resyncs need no ask; a PROD `clasp push` needs no per-deploy ask. Code rules: `.claude/rules/engine.md`.
-- The live Cycle fires Sundays on its own. Never sequence work behind it or ask Mike to fire one.
-- Needs Mike's explicit go: sheet writes touching many rows, schema deletions, Supermemory wipes.
-
-## Review
-
-1. Check who is up: `tmux list-panes -a -F '#{window_name} #{pane_current_command}'` — the pane exists, `capture-pane` shows it idle, its NEXT line does not say out.
-2. Engine code or a change across several files → this terminal's codex window (its `TERMINAL.md`). Anything smaller → agy.
-3. Send per `docs/reference/CROSS_LANE_MESSAGING.md`. Verify every finding against the code; this seat decides.
-4. One review, at most one re-review of the fold. Then this seat decides what is left: fix it in place, or record it and close. No third round.
-
-## Boot and memory
-
-- The SessionStart hook prints the PIN and NEXT lines and names the terminal. Terminal details: `.claude/terminals/<terminal>/TERMINAL.md`.
-- Search: `node scripts/brainSearch.js "<query>"`.
-- Save: `npx supermemory add "<fact>" --namespace sl-godworld` — one hand-written fact per session, tagged with the terminal, before close. Never a log or diff.
-- `docs/index.md` (~40k tokens): grep it, never load it.
-- Git: commit path-specifically; control-plane files (`.claude/`, `CLAUDE.md`, `SESSION_CONTEXT.md`) need `CLAUDE_CTL=1`. Never amend — other lanes commit on this tree.
-- Skills in use: `/run-cycle` (its chain: pre-flight, pre-mortem, engine-review, build-world-summary) and `/session-end` (`.claude/skills/session-end/SKILL.md`). The rest stay runnable by name; the legacy manual media run (sift, deep-dispatch, city-hall-prep, write-edition) is kept for occasional use.
+@.claude/TERMINAL.md

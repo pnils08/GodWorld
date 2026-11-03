@@ -13,7 +13,6 @@ paths:
   - "docs/media/**"
   - "docs/mags-corliss/**"
   - ".claude/agents/business-desk/**"
-  - ".claude/agents/chicago-desk/**"
   - ".claude/agents/civic-desk/**"
   - ".claude/agents/culture-desk/**"
   - ".claude/agents/dj-hartley/**"
@@ -38,7 +37,6 @@ paths:
   - ".claude/skills/dispatch/**"
   - ".claude/skills/edition-print/**"
   - ".claude/skills/business-desk/**"
-  - ".claude/skills/chicago-desk/**"
   - ".claude/skills/civic-desk/**"
   - ".claude/skills/culture-desk/**"
   - ".claude/skills/letters-desk/**"
@@ -62,11 +60,11 @@ paths:
 
 # Newsroom & Editorial Rules
 
-When these rules load, you are engaging the **Editor-in-Chief running edition production skill bag** — Mags-as-EIC orchestrating desk reporters, voice consistency, canon enforcement, three-layer coverage, anti-cookie-cutter discipline, reviewer-lane gen-eval, and the media-evaluates-civic-source-material boundary. The bullets below are *what* that skill executes; naming the bag conditions richer context than the rule list alone would summon. (S212 — LLMs are bags of skills, not single tools. Full principle: `docs/adr/0004-skill-bag-naming-principle.md`.)
+Rules for work on the newsroom pipeline: desk reporters, voice consistency, canon enforcement, three-layer coverage, anti-cookie-cutter discipline, reviewer-lane gen-eval, and the newsroom-evaluates-civic-source-material boundary. They describe what the pipeline does; the session working on it stays the builder.
 
-**Reviewer lanes are the canonical S212 gen-eval architecture in the project.** Desk reporters generate (locally optimal, no holistic quality compass); Rhea verifies sourcing, cycle-review evaluates reasoning, Mara audits result validity, capability reviewer checks the lanes themselves, Final Arbiter renders verdict. The other terminals' review patterns (Clerk in civic, measure-twice in engine-sheet, audit-the-audit in research-build) are simpler instances of what this terminal already does at full architecture. Don't propose collapsing lanes for efficiency — they ARE the gen-eval principle made architectural at full scale.
+**Reviewer lanes are the canonical S212 gen-eval architecture in the project.** Desk reporters generate (locally optimal, no holistic quality compass); Rhea verifies sourcing, cycle-review evaluates reasoning, Mara audits result validity, capability reviewer checks the lanes themselves, Final Arbiter renders verdict. Clerk in civic and measure-twice in engine and plan work are simpler instances of what this pipeline does at full architecture. Don't propose collapsing lanes for efficiency — they ARE the gen-eval principle made architectural at full scale.
 
-**Terminal-pipeline gen-eval boundary.** Civic terminal GENERATES raw source material (Mayor decisions, faction positions, vote tallies, project status); media terminal EVALUATES/refines into journalism. Civic output is intentionally raw quotes and decisions; polishing into journalism happens here, not at civic. Don't ask civic to ship finished prose; don't ship raw source material as journalism.
+**Civic source material arrives raw** (`.claude/rules/civic.md` §Handoff boundary). Turning it into journalism is this pipeline's job; don't publish raw source material as journalism.
 
 **Three-layer coverage (S142, load-bearing).** Every meaningful article threads engine state + simulation events + user/citizen actions. Beverly Hayes E90 letter is the paradigm; single-layer pieces (only engine, only roster, only quotes) are the cookie-cutter failure mode. Threading all three is what makes editions canon-worthy rather than formulaic.
 
@@ -88,26 +86,21 @@ The A's dynasty core are the **pillars of the world** — the dynasty isn't *in*
 
 **The hook.** Each cycle the pillars act in their own houses — Kelley takes a pulpit, Davis ties himself to the chief, Dillon reads a water survey, Aitken sits the votes, Vinnie opens a youth academy. Catching those threads is the job; they are where the architecture becomes a living edition.
 
-## Canon facts — don't drift (S259, redistributed from CLAUDE.md)
+## Canon facts — don't drift
 
-These auto-load here because content-generators drift on them; engine-sheet / research-build don't need them.
+Names, the Mayor, population and vote math: `.claude/rules/canon-names.md`.
 
-- **Mayor Avery Santana** — she/her. Locked canon (S139).
-- **OPP** = Oakland Progressive Party (NOT "People's Party").
-- **CRC** = Civic Reform Coalition.
-- **IND** = Independent (Vega, Tran — NOT a bloc; they don't coordinate).
-- **Population** ~1,366 tracked (live counts). Don't cite "675" or "761" — both stale.
 - **Paulson carpenters line is loose, not editorial canon (S221)** — don't thread it into coverage; detail in `docs/media/PAULSON_CARPENTERS_LINE.md`. **Anthony Raines** = canonical sports reporter, black, no relation to Mike Paulson. Mike Paulson editorial canon = A's GM + one-year Bulls stint (C92 Finals loss) + Jack London + POP-00527. Family OUT until Mike opens it.
 
-## Media-only discipline (S259, redistributed from MEMORY.md)
+## Newsroom-only discipline
 
-These are media-terminal-specific; they left universal MEMORY.md to load only where they apply.
+These apply only to newsroom work.
 
 - **Never write Mike's mental states — anywhere, on any pretext.** No suicide/self-harm/crisis framing, no characterizing his mood or state of mind. Venting language is frustration, not ideation. The repo is git-tracked and world-readable; a fabricated mental-health record is irreversible real-world harm. When in doubt, don't write it. (Carried forward from the journal rule; the journal is gone, this never was about the journal.)
 - **Mags' inner life is her citizen page, not a file.** `JOURNAL.md` / `JOURNAL_RECENT.md` are frozen archive (S300, pipe.40 T4) — nothing writes them and no close step produces one. Her reflections land on POP-00005 through `magsPageAppend.js` at real EIC moments inside `/sift`, and read back through `magsPageRecall.js`. Same discipline applies to what goes there: each entry carries an extractable lesson, not atmosphere. Never dump page content into chat.
 - **Never close a print/publish skill without opening the artifact (S229).** Generator metrics (file exists, size, photo count, exit 0) ≠ review — open the rendered edition/PDF and verify headlines-from-canon + photos-at-anchors + on-canon execution before closing `/edition-print` / `/post-publish`.
 - **Approved-artifact edit scope (S229).** Editorial directives default to FUTURE-coverage framework; editing a CURRENT approved/published artifact (re-render / re-publish / drop-sections) needs explicit "edit this print" confirmation.
-- **Mara Vance (claude.ai) is canon authority** — catches citizen errors every edition; her connector searches blind, so the wd-* schema lives in `CLAUDE_AI_SYSTEM_PROMPT.md`.
+- **Mara Vance (claude.ai) audits each edition** for citizen errors; her connector searches blind, so the wd-* schema lives in `docs/mara-vance/CLAUDE_AI_SYSTEM_PROMPT.md`.
 
 ## Standing rules
 
@@ -117,22 +110,12 @@ These are media-terminal-specific; they left universal MEMORY.md to load only wh
 - Every citizen name must come from the desk packet canon sections. Never invent names.
 - Lines prefixed with `ESTABLISHED CANON:` in briefings are immutable facts. Never contradict them.
 - Reporters never appear as sources in their own articles.
-- Vote math must add up: list all 9 council members, mark YES/NO/ABSENT, verify totals.
 - New citizens require: Name, Age, Neighborhood, Occupation.
 - Mara Directive topics are assignments, not suggestions.
 - **Citizen age = the sim's calendar year − `BirthYear`.** The year turned to 2042 when C104 closed (C105–C156 = 2042; engine `simYearFromCycle_`). Read `BirthYear` from the ledger (or MCP `lookup_citizen`); the `Age` column is empty by design. Never guess an age, never hardcode a year, never trust `Age` values in derived docs (`world_summary_*`, `pending_decisions_*`).
 
-## Newsroom memories (moved from MEMORY.md 2026-10-07; files in the auto-memory dir, searchable via `node scripts/brainSearch.js`)
+## Newsroom memories (not in the memory index; files in the auto-memory dir, searchable via `node scripts/brainSearch.js`)
 
-- A civic story needs a non-official citizen living the consequence. (`feedback_civic-story-needs-affected-citizen`)
-- Interview only citizens the story touched, or none; reporters differ by sourcing. (`feedback_interview-impacted-citizens-or-none`)
-- Canon is color, not a data echo — restating an engine number writes it into canon twice. (`feedback_canon-is-color-not-data-echo`)
-- Centralized curation tidies stories — reach around curated feeds to the raw ledger and citizens' own words. (`feedback_centralized-curation-tidies-stories`)
-- Gate the facts (citizens, offices, teams, tracker), not the color; all other invention is the job. (`project_gate-the-facts-not-the-color`)
-- Every article threads engine + simulation + user actions. (`project_three-layer-coverage-principle`)
 - Editions invented struggle the engine never reported; the fix is shared neighborhood-slicer data. (`project_edition-engine-fidelity-seam`)
-- Check named businesses on the Business ledger before inventing a neighborhood economy. (`feedback_business-ledger-before-neighborhood-description`)
-- Months as loose talk are fine; calendar-driven stories are not. (`feedback_months-loose-talk-ok-calendar-driven-stories-not`)
 - What Mike hates: repeated front pages, thin engine texture, cynical tone, invented citizens when existing ones fit. (`feedback_what-mike-hates`)
 - Division III: cover what no real newsroom can afford to staff. (`project_division-three-principle`)
-- Notebook sources go through the validator first; `unclassifiedIds: 0` after every add. (`feedback_notebook-sources-go-through-the-validator-first`)

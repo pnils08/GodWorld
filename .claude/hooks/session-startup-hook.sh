@@ -1,7 +1,7 @@
 #!/bin/bash
 # GodWorld Session Startup Hook
 # Routes to per-terminal boot instructions based on tmux window name.
-# Falls back to Mags-only mode (no terminal scaffolding) if window name doesn't match a registered terminal (S221).
+# Falls back to an unregistered-window boot (no terminal scaffolding, no persona) if the window name has no row in .claude/TERMINAL.md.
 # Injects critical project state directly into context at session start.
 #
 # OUTPUT MODE (S242, gov.22 T5): emits a single JSON object via `hookSpecificOutput`
@@ -44,7 +44,9 @@ disown 2>/dev/null || true
 # in the media boot sequence now. pipe.40 T4.)
 
 # --- DETECT TERMINAL ---
-# Resolve tmux window name if available. Fall back to Mags-only mode (S221).
+# Resolve tmux window name if available. A terminal is registered when it has a
+# row in .claude/TERMINAL.md §The terminals (2026-11-02; was a .claude/terminals/<name>/ dir).
+# MAGS_ONLY is the historical name for the unregistered fallback; no persona loads.
 TERMINAL_NAME=""
 if [ -n "$TMUX_PANE" ]; then
   TERMINAL_NAME=$(tmux display-message -t "$TMUX_PANE" -p '#W' 2>/dev/null || echo "")
@@ -52,14 +54,14 @@ fi
 
 FALLBACK_NOTE=""
 MAGS_ONLY=""
-if [ -z "$TERMINAL_NAME" ] || [ ! -d "$GODWORLD_ROOT/.claude/terminals/$TERMINAL_NAME" ]; then
+if [ -z "$TERMINAL_NAME" ] || ! grep -qF "| \`$TERMINAL_NAME\` |" "$GODWORLD_ROOT/.claude/TERMINAL.md" 2>/dev/null; then
   ORIGINAL_NAME="$TERMINAL_NAME"
   MAGS_ONLY="yes"
   if [ -n "$ORIGINAL_NAME" ]; then
-    TERMINAL_NAME="(none — Mags-only mode)"
+    TERMINAL_NAME="(none — unregistered window)"
     FALLBACK_NOTE=" — unregistered window '$ORIGINAL_NAME'; no terminal scaffolding loaded"
   else
-    TERMINAL_NAME="(none — Mags-only mode)"
+    TERMINAL_NAME="(none — unregistered window)"
     FALLBACK_NOTE=" — no tmux context; no terminal scaffolding loaded"
   fi
 fi
@@ -99,7 +101,7 @@ fi
 # Per-terminal window chrome. Terminals are launched `claude --name "<terminal>"`,
 # so this is consistent with (and usually identical to) the launch name.
 if [ "$MAGS_ONLY" = "yes" ]; then
-  SESSION_TITLE="Mags-only"
+  SESSION_TITLE="unregistered"
 else
   SESSION_TITLE="$TERMINAL_NAME"
 fi
@@ -200,7 +202,7 @@ EOF
   # rewrote NEXT[civic] because the OTHER lanes were never described to it — boot
   # only ever emitted its own NEXT line + a bare "stay in your lane" in CLAUDE.md.
   cat << 'ROSTER'
-TERMINAL ROSTER: research-build and engine-sheet — two builder terminals, one job each (CLAUDE.md §Jobs). Newsroom and city hall run unattended on crons.
+TERMINAL ROSTER: research-build and engine-sheet — two builder terminals, one job each (.claude/TERMINAL.md §Jobs). Newsroom and city hall run unattended on crons.
 NON-CLAUDE LANES: codex, agy (kimi, grok when run) — adversarial reviewers, control-plane read-only (AGENTS.md); their reviews arrive as files (REVIEW INBOX), no NEXT lines.
 ROSTER
   echo ""
@@ -218,19 +220,20 @@ ROSTER
   # same brain regardless of which model is reasoning. Old per-terminal sl-<terminal>
   # containers are frozen history (still queryable by their old tags by hand).
   if [ "$MAGS_ONLY" != "yes" ] && [ -n "$TERMINAL_NAME" ]; then
-    # Search/save commands live in ONE place: CLAUDE.md §Boot and memory (the brain).
+    # Search/save commands live in ONE place: .claude/TERMINAL.md §Boot and memory (the brain).
     :
   fi
 
   # --- EMIT BOOT SEQUENCE ---
   # Each terminal gets a pre-routed instruction block. Assistant does not re-detect terminal.
-  # Unregistered windows get Mags-only mode (no terminal scaffolding).
+  # Unregistered windows get no terminal scaffolding and no persona (builder
+  # sessions don't carry Mags; CLAUDE.md §What GodWorld is).
   # SESSION_CONTEXT.md read is capped to first ~80 lines (Priority + Recent Sessions) per S165 design.
   if [ "$MAGS_ONLY" = "yes" ]; then
     cat << 'BOOT'
-BOOT SEQUENCE (no terminal — Mags-only mode):
-1. Read docs/mags-corliss/CHARACTER.md
-2. Greet Mike briefly. Open a tmux window named research-build or engine-sheet for a work bag.
+BOOT SEQUENCE (unregistered window):
+Tell Mike this window has no row in .claude/TERMINAL.md §The terminals and ask him
+to reopen it as research-build or engine-sheet. No lane work until he does.
 
 BOOT
   else
@@ -248,11 +251,11 @@ still run; only the human-facing seats are gone. Rules still live at
 BOOT
         ;;
       research-build|engine-sheet)
-        # One shared boot for both builder terminals (2026-10-28); the ready
-        # check, job model and review rule live in CLAUDE.md, not here.
+        # One shared boot for both builder terminals; the ready check, job model
+        # and review rule live in .claude/TERMINAL.md (imported by CLAUDE.md), not here.
         # Prior per-terminal text: .claude/boot-legacy/hook-boot-sequence.legacy.txt
         cat << BOOT
-BOOT (${TERMINAL_NAME}): run CLAUDE.md §Ready check before any work. Terminal details: .claude/terminals/${TERMINAL_NAME}/TERMINAL.md
+BOOT (${TERMINAL_NAME}): run the Ready check (.claude/TERMINAL.md) before any work. This terminal's row: .claude/TERMINAL.md §The terminals.
 
 BOOT
         ;;

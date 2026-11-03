@@ -16,7 +16,7 @@ disable-model-invocation: false
 
 **Two close modes (S226).** Pick by next-session cadence, not by how much work shipped. A session is not a day: bump `Day` only when the date actually changed.
 
-**This file is now the sole canonical source for close mechanics — TERMINAL.md files hold only a short pointer here (HOUSE-PROCESS GATE, 2026-08-15: close ritual is boot-time-loaded process scaffolding, not something worth paying for every session whether or not it's used).**
+**This file is now the sole canonical source for close mechanics — .claude/TERMINAL.md holds only a short pointer here (HOUSE-PROCESS GATE, 2026-08-15: close ritual is boot-time-loaded process scaffolding, not something worth paying for every session whether or not it's used).**
 
 - **Soft close (~2 min)** — chaining to a new session within minutes. Update the PIN + your terminal's NEXT line in SESSION_CONTEXT (the whole carried set, ADR-0009 §loop-tightening) + cross-terminal stack check + commit+push. The block below is **hard close**.
 - **Hard close (~5-10 min)** — end of day, multi-day break, or ≥3 chained soft closes. Run the full sequence below.
@@ -68,7 +68,7 @@ Three sub-actions:
 **Optional model sub-actions:**
 
 - **`/save-to-mags`** — model judgment whether the session has anything architectural worth canonizing. Tag with terminal name (`[research/build]`, `[media]`, etc.). There is NO Stop-hook auto-save (neutralized S221, verified S283) — deliberate saves are the only Supermemory writes; claude-mem carries the automatic session record.
-- **Session save — REQUIRED, one per session, BEFORE Step 3.** Command and rules: `CLAUDE.md` §Boot and memory (the brain). Worth saving: rulings, landmines, a container/schema change, a frozen-vs-live distinction. A session with nothing to say still leaves one line on what it did. `/save-to-mags` writes to Mags' own `mags` container and does NOT reach sl-godworld — don't treat one as covering the other.
+- **Session save — REQUIRED, one per session, BEFORE Step 3.** Command and rules: `.claude/TERMINAL.md` §Boot and memory (the brain). Worth saving: rulings, landmines, a container/schema change, a frozen-vs-live distinction. A session with nothing to say still leaves one line on what it did. `/save-to-mags` writes to Mags' own `mags` container and does NOT reach sl-godworld — don't treat one as covering the other.
 - **`/batch`** — submit heavy analysis work that wasn't urgent enough to run live. Results wait at 50% cost for next session.
 
 **Terminal-specific files** (RESEARCH.md for research-build, ENGINE_MAP / stub maps / DEPLOY.md pointers for engine-sheet) get updated alongside SESSION_CONTEXT/ROLLOUT per the audit tables in §Terminal-Specific Detail — no separate step.
@@ -99,7 +99,7 @@ Plan: `docs/archive/plans/2026-05-23-session-end-collapse.md`.
 
 ### Step 4: Commit & Push — model judgment
 
-**Stage path-specifically.** Never `git add .` or `git add -A`. Identify each touched file and stage by name. Patterns per terminal live in TERMINAL.md §Session Close.
+**Stage path-specifically.** Never `git add .` or `git add -A`. Identify each touched file and stage by name. Patterns per terminal: §Terminal-Specific Detail below.
 
 **Commit message** is model-written. Form: `S<N> <topic>` headline + body explaining *why* not *what*. Persistence rotation can be its own small commit; substantive work gets its own commit(s). Use HEREDOC for multi-line.
 
@@ -133,7 +133,7 @@ Guest lanes are adversarial reviewers and own no jobs (builder 2026-10-28). They
 
 ## Terminal-Specific Detail
 
-Pulled out of the boot-loaded TERMINAL.md files (2026-08-15, HOUSE-PROCESS GATE) — this only matters at actual close time, so it doesn't belong in a file every session pays to load. TERMINAL.md now carries only a one-line pointer to this section.
+Pulled out of the boot-loaded terminal files (2026-08-15, HOUSE-PROCESS GATE) — this only matters at actual close time, so it doesn't belong in a file every session pays to load. `.claude/TERMINAL.md` carries only a one-line pointer to this section.
 
 ### research-build
 

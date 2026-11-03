@@ -1,0 +1,68 @@
+---
+paths:
+  - ".claude/agents/civic-office-*/**"
+  - ".claude/agents/civic-project-*/**"
+  - ".claude/agents/city-clerk/**"
+  - ".claude/skills/city-hall/**"
+  - "output/production_log_c*"
+  - "docs/mara-vance/**"
+  - "editions/**"
+  - "output/reporters/**"
+  - "output/desk-output/**"
+  - "output/desk-packets/**"
+  - "output/letters/**"
+  - "output/quick-takes/**"
+  - "output/photos/**"
+  - "output/grades/**"
+  - "output/grade-examples/**"
+  - "output/city-civic-database/**"
+  - "docs/media/**"
+  - "docs/mags-corliss/**"
+  - ".claude/agents/business-desk/**"
+  - ".claude/agents/civic-desk/**"
+  - ".claude/agents/culture-desk/**"
+  - ".claude/agents/dj-hartley/**"
+  - ".claude/agents/final-arbiter/**"
+  - ".claude/agents/freelance-firebrand/**"
+  - ".claude/agents/letters-desk/**"
+  - ".claude/agents/mags-corliss/**"
+  - ".claude/agents/podcast-desk/**"
+  - ".claude/agents/rhea-morgan/**"
+  - ".claude/agents/sports-desk/**"
+  - ".claude/agents/REPORTER_DESK_INDEX.md"
+  - ".claude/agents/REPORTER_TRAIT_SYSTEM.md"
+  - ".claude/agents/TRAIT_SYSTEM.md"
+  - ".claude/skills/write-edition/**"
+  - ".claude/skills/write-supplemental/**"
+  - ".claude/skills/sift/**"
+  - ".claude/skills/post-publish/**"
+  - ".claude/skills/podcast/**"
+  - ".claude/skills/podcast-desk/**"
+  - ".claude/skills/visual-qa/**"
+  - ".claude/skills/style-pass/**"
+  - ".claude/skills/dispatch/**"
+  - ".claude/skills/edition-print/**"
+  - ".claude/skills/business-desk/**"
+  - ".claude/skills/civic-desk/**"
+  - ".claude/skills/culture-desk/**"
+  - ".claude/skills/letters-desk/**"
+  - ".claude/skills/sports-desk/**"
+  - ".claude/skills/interview/**"
+  - ".claude/skills/save-to-bay-tribune/**"
+  - ".claude/skills/cycle-review/**"
+  - ".claude/skills/capability-review/**"
+  - ".claude/skills/adversarial-review/**"
+  - "scripts/cron-desk-run.js"
+  - "scripts/cron-civic-run.js"
+  - "scripts/newsroom-*"
+---
+
+# Canon names and vote math
+
+City hall's agents and the newsroom both write from these; content generators drift on them.
+
+- **Mayor Avery Santana** — she/her.
+- **OPP** = Oakland Progressive Party (not "People's Party"). **CRC** = Civic Reform Coalition.
+- **IND** = Vega and Tran, independents who don't coordinate — never a bloc with a unified position. Each speaks for themselves.
+- **Population:** cite the live ledger count, never a number from a doc.
+- **Vote math adds up.** Every council vote lists all 9 members, marked YES / NO / ABSENT, totals verified.

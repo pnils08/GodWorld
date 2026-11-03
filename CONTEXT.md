@@ -222,7 +222,7 @@ Deeper definitions and full content for terms above:
 - **Pipeline stages, skills map** — `docs/EDITION_PIPELINE.md`
 - **Reviewer lanes, schema** — `docs/engine/archive/REVIEWER_LANE_SCHEMA.md`
 - **Memory containers, tag scheme** — `docs/SUPERMEMORY.md`
-- **Terminal architecture, persona levels** — `docs/BOOT_ARCHITECTURE.md` plus each `.claude/terminals/<name>/TERMINAL.md`
+- **Terminal architecture, persona levels** — `.claude/TERMINAL.md` (both builder terminals, one table; imported by CLAUDE.md). `docs/BOOT_ARCHITECTURE.md` is archived history
 - **Three-layer coverage principle** — `/root/.claude/projects/-root-GodWorld/memory/project_three-layer-coverage-principle.md`
 - **File/format conventions (this is vocabulary, that is shape)** — `docs/SCHEMA.md`
 - **Doc catalog** — `docs/index.md`

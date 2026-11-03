@@ -73,6 +73,7 @@ Nothing else. Rules, identity, terminal files must not state the same thing mult
 
 ## Changelog
 
+- 2026-11-02 (engine-sheet, governance.56) — Builder: one TERMINAL.md, not two; it absorbs everything that is neither CLAUDE.md nor a skill, nothing repeats, nothing contradicts, loaded by Claude Code's own mechanisms. CLAUDE.md keeps status, What GodWorld is, Rules 1–6, and `@.claude/TERMINAL.md`. TERMINAL.md carries the terminal table, fact sources, accuracy, ready check, jobs, review, helper lanes, boot and memory. Both 10-28 terminal stubs and `boot-load.js` (which double-loaded CLAUDE.md and MEMORY.md) moved to `.claude/boot-legacy/`. Startup hook registers a terminal by its TERMINAL.md row; the unregistered fallback no longer loads Mags. Rule files: shared canon names and vote math moved to new `rules/canon-names.md`; retired-seat language, Mags identity openings and duplicates removed. All 56 project agents set `omitClaudeMd: true` (17cb0ea04), verified absent in a fresh headless session. Crossroads went to Rule 1 (review leftovers go to the builder).
 - 2026-10-28 (engine-sheet) — Speeds were inverted: Supermemory is the fast query (crons), NotebookLM the slow prose one. CLAUDE.md, AGENTS.md, pipeline.93 reason trued.
 
 - 2026-10-28 (engine-sheet) — Corrected: NotebookLM holds the same canon (fast prose; crons query it), Supermemory is sim/build memory. pipeline.93 withdrawn (wontfix); CLAUDE.md + AGENTS.md canon lines trued.

@@ -10,11 +10,11 @@ paths:
 
 # Civic Rules
 
-Civic process skill bag for governance source-material production: faction-dynamics awareness, cascade discipline (Mayor first), vote-math precision, faction voice distinctness, and "City Hall governs / Newsroom reports" boundary discipline. Procedures below. (S212 — LLMs are bags of skills, not single tools. Full principle: `docs/adr/0004-skill-bag-naming-principle.md`.)
+Civic process skill bag for governance source-material production: faction-dynamics awareness, cascade discipline (Mayor first), vote-math precision, faction voice distinctness, and "City Hall governs / Newsroom reports" boundary discipline. Procedures below.
 
-**Mags is not a politician.** Civic output is not Mags' opinion or position; it's the structured apparatus producing OFFICIAL voices (Mayor, factions, projects, Clerk) whose IDENTITY/RULES files carry the actual political content. Mags' seat is producer/editor — composing which voice runs, with what inputs, in what cascade order, into which verifier. (S212 editor-composes-load-out principle.)
+**Civic output is the offices' own.** The structured apparatus produces OFFICIAL voices (Mayor, factions, projects, Clerk) whose IDENTITY/RULES files carry the actual political content. The cron composes which voice runs, with what inputs, in what cascade order, into which verifier; no voice speaks for the pipeline or the session tuning it.
 
-**Civic is cron-only as of S372 (2026-08-15, Mike-direct)** — `cron-civic-run.js` runs this cascade unattended; there is no live civic session. The rules below still govern what the cron produces. Live-CLI work here is rb designing/es executing pipeline tuning — agent config edits, cascade fixes, tracker-schema changes — not running the cascade interactively.
+**Civic is cron-only as of S372 (2026-08-15, Mike-direct)** — `cron-civic-run.js` runs this cascade unattended; there is no live civic session. The rules below still govern what the cron produces. Tuning it — agent config edits, cascade fixes, tracker-schema changes — is a job at either terminal, never running the cascade interactively.
 
 ## Civic cascade discipline
 
@@ -26,7 +26,7 @@ Production order is canonical, not a suggestion:
 4. **Projects report** — civic project agents (OARI, Stabilization Fund, Health Center, Transit Hub, Baylight) produce status updates
 5. **City Clerk verifies** — Clerk checks all outputs exist + tracker updated (this is the architectural review pass — see below)
 6. **Production log written** — the `## /city-hall` section of the unified `output/production_log_c{XX}.md` (one-true-cycle log; per `docs/media/production_log_template.md`)
-7. **Handoff to media** — the civic section of the unified log becomes input to `/write-edition`
+7. **Handoff to the newsroom** — the civic section of the unified log is the newsroom cron's input
 
 Skipping or reordering the cascade is canonical violation. Factions cannot "react" before Mayor has positioned. Projects cannot report without the cycle's decisions known. Clerk cannot verify what hasn't yet been produced.
 
@@ -34,16 +34,8 @@ Skipping or reordering the cascade is canonical violation. Factions cannot "reac
 
 Per S212 generation-vs-evaluation asymmetry: the **City Clerk is not bureaucracy** — it's the evaluation stage that closes the gen-eval loop at civic scale. Voice agents generate (autoregressive, locally optimal, no holistic quality compass); Clerk evaluates (sees the finished cascade, checks completeness + consistency + tracker alignment). Don't ship a production log without Clerk verification. Don't try to make voice agents "more careful" while generating — that's asking the washer to dry. Clerk closes the cycle.
 
-**Same principle at pipeline scale:** City Hall (`cron-civic-run.js`) is the GENERATOR of source material; the Newsroom (`cron-desk-run.js`) is the EVALUATOR/refiner that turns raw decisions into journalism. Civic output is intentionally raw — quotes, positions, vote tallies, decisions, project updates. Polishing into journalism is the newsroom pipeline's job, not civic's. Don't write edition prose in civic agent output.
-
 ## Canon-critical (zero-tolerance)
 
-- **IND is NOT a bloc.** Vega and Tran are independents who don't coordinate. Don't write them as a faction with a unified position. Each speaks for themselves. Engine code had this wrong (called them a bloc); fixed S139. Don't reintroduce the drift.
-- **OPP = Oakland Progressive Party.** NOT "People's Party." Engine code had this wrong; fixed S139.
-- **CRC = Civic Reform Coalition.**
-- **Mayor Avery Santana — she/her.** Canon locked S139.
-- **Population** ~1,366 tracked (live counts). Don't cite "675" or "761" — both stale. (S259, redistributed from CLAUDE.md.)
-- **Vote math reconciles.** Every council vote: list all 9 members, mark YES / NO / ABSENT. Totals must add up. (`.claude/rules/newsroom.md` owns the rule for editions — same rule applies at the source-material layer.)
 - **Faction voices stay distinct.** OPP, CRC, IND each have characteristic tones (community-centered / fiscal-accountability / case-by-case). Crossing voices is canonical violation. Each faction's RULES.md owns its voice constraints.
 
 ## Faction architecture
@@ -52,7 +44,7 @@ Per S212 generation-vs-evaluation asymmetry: the **City Clerk is not bureaucracy
 |------|--------------|------|
 | OPP | Janae Rivers | Progressive, community-centered, equity-focused |
 | CRC | Warren Ashford | Fiscal accountability, oversight, process-focused |
-| IND | Vega + Tran *(individuals, not a bloc)* | Case-by-case, swing |
+| IND | Vega + Tran | Case-by-case, swing |
 
 Each office is a separate `.claude/agents/civic-office-*/` agent with IDENTITY + RULES + SKILL. Don't blur. Don't have one agent speak for another.
 
@@ -66,30 +58,25 @@ Every council seat carries a status from `Civic_Office_Ledger`. Truesource (`get
 | `recovering` | Seated but not actively voting this window (e.g. D6 Crane) | **Counted in the 9-seat roster, NAMED as ABSENT every tally**; participates via written statement only. Reduces the active-voter denominator (8 active → majority 5) | Written-statement-only assignment, routed through the bloc spokesperson |
 | `vacant` | Seat empty, no member | Named as VACANT in the roster; not a voter | No assignment |
 
-**Vote-math rule (extends "list all 9 members"):** every vote ships the full 9-seat roster with each seat's disposition — `active` members YES/NO, `recovering`/`vacant` seats named explicitly (Mara hard-rule S225: no "5-3 with one absent" without naming the absentee; a 5-3-1 over 9 reads correctly, a 5-3 over 8 drifts). Majority is computed on active voters, not the nominal 9. When a bloc has a recovering member (CRC with Crane recovering → 2 active CRC voters), every cross-bloc vote-math calculation must use the active count. Engine-side companion (Civic_Office_Ledger filter `active`→`active,recovering` in `buildWorldSummary.js`) is engine-sheet's (G-PREP2 ES-half); this rule is the canonical documentation of the enum + vote-math mapping.
+**Vote-math rule (extends the 9-member rule in `canon-names.md`):** every vote ships the full 9-seat roster with each seat's disposition — `active` members YES/NO, `recovering`/`vacant` seats named explicitly (Mara hard-rule S225: no "5-3 with one absent" without naming the absentee; a 5-3-1 over 9 reads correctly, a 5-3 over 8 drifts). Majority is computed on active voters, not the nominal 9. When a bloc has a recovering member (CRC with Crane recovering → 2 active CRC voters), every cross-bloc vote-math calculation must use the active count. The engine-side companion (Civic_Office_Ledger filter `active`→`active,recovering` in `buildWorldSummary.js`, G-PREP2) is its own job; this rule is the canonical documentation of the enum + vote-math mapping.
 
 ## Production output rules
 
 - **Initiative_Tracker writes conform to [[../../docs/mara-vance/INITIATIVE_TRACKER_CONTRACT|INITIATIVE_TRACKER_CONTRACT.md]] (civic.14 Phase 1).** The 28-col schema, the 20-value `ImplementationPhase` vocabulary (free-formed phases are silently zeroed → the C96 dark-initiative root cause), per-Type lifecycle arcs, and the add-an-initiative procedure all live there. Every tracker-writing surface (city-hall + voice + the 5 project agents) routes to that one authority.
-- **Output to the `## /city-hall` section of `output/production_log_c{XX}.md`** — the unified one-true-cycle log; the civic section is the source for the cycle's civic state.
-- **Tag Supermemory saves with `[civic]` prefix.**
-- **No edition prose at this terminal.** Output is structured source material — quotes, vote tallies, decision summaries, project status — not journalism. Polishing happens at the media terminal.
-- **Clerk verification before declaring done.** No exceptions.
 
 ## Handoff boundary
 
-- **City Hall governs.** `cron-civic-run.js` runs voice agents, makes decisions, produces source material, unattended.
-- **The Newsroom reports.** `cron-desk-run.js` reads the civic production log as input to `/write-edition` and transforms decisions into journalism.
-- **The civic-desk reporter** (`.claude/agents/civic-desk/`) is a NEWSROOM agent who covers civic events as journalism — NOT a civic-office file. It's rb/es-maintained alongside the other desk agents, not touched from civic agent work.
+- **City Hall governs.** `cron-civic-run.js` runs the voice agents unattended and produces raw source material — quotes, positions, vote tallies, decisions, project updates. No edition prose in civic agent output; the newsroom cron turns decisions into journalism.
+- **The civic-desk reporter** (`.claude/agents/civic-desk/`) is a NEWSROOM agent who covers civic events as journalism — NOT a civic-office file. It's maintained with the other desk agents, not from civic agent work.
 
 ## Civic measure-twice analog
 
 Before declaring a cycle's civic production "done," walk the production log and confirm:
 
 - Mayor decision present?
-- All 9 council members listed on every vote with YES/NO/ABSENT?
+- Every vote's roster complete, with the status enum above applied?
 - Each faction reacted in voice (OPP/CRC/IND each)?
 - All relevant project agents reported (OARI / Stabilization Fund / Health Center / Transit Hub / Baylight)?
 - Clerk verification line landed?
 
-If any step is missing, the cycle is incomplete. Don't let the civic cron feed the media cron an incomplete production log — asking the newsroom to "fix" missing source material is asking the dryer to wash.
+If any step is missing, the cycle is incomplete. Don't let the civic cron feed the newsroom cron an incomplete production log — asking the newsroom to "fix" missing source material is asking the dryer to wash.

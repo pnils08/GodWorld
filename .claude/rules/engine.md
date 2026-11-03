@@ -18,10 +18,8 @@ The engine is production substrate: every citizen's continuity rides on it. Cons
 | How a function works, what it reads/writes, phase order | `docs/engine/ENGINE_STUB_MAP.md` (condensed) → `docs/engine/ENGINE_MAP.md` (full) |
 | Ledger columns, what writes a column, citizen fields | `docs/SIMULATION_LEDGER.md` + `docs/SCHEMA.md` |
 | Which script reads/writes which tab; direct-write carve-outs by file | `docs/engine/SHEETS_MANIFEST.md` (§9 for carve-outs) |
-| Open defects and builds | `docs/engine/ROLLOUT_PLAN.md` `engine.*` rows — grep them, don't load the plan |
 | Designing any mechanic — a sim, not a data system | `docs/SIM_DOCTRINE.md` — read BEFORE design |
 | What connects to what | `graphify query "..."` |
-| Everything wired to ONE function / `S.` field / tab — callers at both entry points, position vs the Phase-10 executor, writers + readers, write path, open rows | spawn the `engine-wiring` subagent (`.claude/agents/engine-wiring/SKILL.md`); open every pointer on the card before cutting. Guests run it via `scripts/runEngineAgent.js` |
 | Deploy targets, current sandbox, standup protocol | `docs/reference/DEPLOY.md` — read before asserting anything about benches. `.clasp.json` shows PROD only |
 
 Load on demand, never at boot — `ENGINE_STUB_MAP` alone is ~86KB.
@@ -44,11 +42,11 @@ Before any destructive operation — delete, rename, migration, schema dedup, RO
 
 - 100+ scripts with cascade dependencies. Phases run phase01 → phase11; each reads ctx fields earlier phases wrote. Check what reads and writes an affected field before editing. Engine files alias `ctx.summary` as `S` — search both spellings.
 - Never `Math.random()`. `ctx.rng` only. Every former fallback site throws; a new fallback is a violation.
-- Never write to sheets directly. Queue `ctx.writeIntents`; only `phase10-persistence/` executes them.
+- Engine code never writes to sheets directly. Queue `ctx.writeIntents`; only `phase10-persistence/` executes them.
 - `executePersistIntents_` runs once, at `Phase10-ExecuteIntents`, and ends with `clearAllIntents_`. An intent queued in any later phase is silently dropped. Phase-11 functions therefore write direct by structural necessity — a permanent carve-out class, never a migration target.
 - Every direct write outside Phase 10 is listed by file and class in `docs/engine/SHEETS_MANIFEST.md` §9. A direct write not on that table is a bug.
 - Pre-commit rejects `Math.random()` and sheet writes outside persistence. The post-write hook flags the same at edit time, plus unrecognised `ctx.summary` fields.
-- No maintenance scripts for ledger work. Read and write through `lib/sheets.js` directly — scripts add conditional logic that silently skips rows.
+- Ledger work Mike has approved runs through `lib/sheets.js` directly, never a maintenance script — scripts add conditional logic that silently skips rows.
 - Verify after every write: read the live sheet back. Script output is not completion.
 - A citizen mint is not finished until `node scripts/dumpLedger.js` refreshes `output/simulation_ledger_snapshot.jsonl`. `scripts/canon-name-check.js` reads that snapshot, not the sheet. Confirm with `require('./scripts/canon-name-check').checkText('<name>')`.
 - Depth over speed. Correct and verified, not fast.

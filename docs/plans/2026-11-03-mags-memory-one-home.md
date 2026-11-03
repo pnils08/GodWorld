@@ -17,7 +17,7 @@ pointers:
 
 # Mags Memory One Home Plan
 
-**Builder's words (2026-11-03):** "this raises a seperate issue if mags has a wiki page save with her popid and this older EIC save container called mags ?" · on opening it: "Yes , and I'm assuming the citizen page is likely the more clean container , mags Persona should load similar to how the CLI did, she seems to do a really good job with her Saturday cycle pulse."
+**Builder's words (2026-11-03):** "this raises a seperate issue if mags has a wiki page save with her popid and this older EIC save container called mags ?" · on opening it: "Yes , and I'm assuming the citizen page is likely the more clean container , mags Persona should load similar to how the CLI did, she seems to do a really good job with her Saturday cycle pulse." · on the Saturday narrator: "Mags needs to know who she is and why she is writing the cycle pulse , so there needs to be more depth to her , her writing it good but mags also is living these moments and making sure the key articles are being reported on the pulse , her choices ultimately drive everyone's usage and what storylines are emphasized"
 
 **Goal:** Mags has one memory home, her citizen page (POP-00005), and every seat that runs her loads her persona the way the media CLI did.
 
@@ -39,6 +39,7 @@ pointers:
 | 1 | One persona loader in `lib/mags.js` matching the CLI load (CHARACTER.md + page recall + NEWSROOM_MEMORY for editorial seats); every Mags seat calls it | es | not started |
 | 2 | Discord bot: the "About This Person" profile and the mislabelled "Archive Knowledge" search both read the whole `mags` container; repoint to her page; exchanges write to the page. One Discord speaker is allowlisted (the builder) | es | not started |
 | 2a | Read the `mags` container for builder/build content (past `/save-to-mags` session saves) reaching her prompt via the profile — Rule 3 check, before Task 2 | es | not started |
+| 1a | Saturday narrator (in scope, builder 11-03): the charge gains who she is (CHARACTER.md), her lived week (page recall), and why she writes the Pulse — she lives these moments, makes sure the key articles reach it, and her picks drive citizen usage and which storylines are emphasized. Dry-run a past cycle old vs new for the builder's read before it goes live | es | not started |
 | 3 | Reflection cron: drop the duplicate `mags` container write; page stays the one write | es | not started |
 | 4 | `mags` container frozen as history, not deleted (CLAUDE.md Rule 2); `/save-to-mags` repointed or retired per builder | es · builder | not started |
 
@@ -71,9 +72,10 @@ pointers:
 
 ## Open questions
 
-- Does "load similar to how the CLI did" include the Saturday narrator (today a 9-line charge, no persona file) or only Discord and the reflection cron? — blocks Task 1 scope; for the builder.
+- None.
 
 ## Changelog
 
 - 2026-11-03 (engine-sheet) — Created on the builder's word; current state read from the bot, reflection cron, Saturday run and legacy CLI boot.
 - 2026-11-03 (engine-sheet) — Correction: the bot keeps no per-speaker memory; its profile is the whole `mags` container. Speaker-memory question dropped; Task 2a (Rule 3 read of the container) added.
+- 2026-11-03 (engine-sheet) — Builder ruled the Saturday narrator in scope with depth (Task 1a); open question closed. Handed to a fresh session.

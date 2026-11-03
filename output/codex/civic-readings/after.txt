@@ -1,0 +1,99 @@
+### MAYOR-01 (passedOver kept internally: 8)
+Health and safety readings this week (C114).
+- Adams Point: 84 residents sick
+- Baylight District: 13 residents sick
+- Brooklyn: 68 residents sick; violence above the city middle
+- Chinatown: 137 residents sick; violence above the city middle
+- Dimond: 93 residents sick; violence above the city middle
+- Downtown: 75 residents sick
+- East Oakland: 119 residents sick; violence above the city middle
+- Eastlake: 89 residents sick; violence above the city middle
+- Fruitvale: 112 residents sick; violence above the city middle
+- Glenview: 89 residents sick; violence above the city middle
+- Grand Lake: 101 residents sick
+- Ivy Hill: 118 residents sick; violence above the city middle
+- Jack London: 71 residents sick
+- KONO: 17 residents sick
+- Lake Merritt: 18 residents sick
+- Laurel: 106 residents sick; violence above the city middle
+- Piedmont Ave: 97 residents sick
+- Rockridge: 101 residents sick
+- San Antonio: 109 residents sick; violence above the city middle
+- Temescal: 86 residents sick
+- Uptown: 22 residents sick
+- West Oakland: 87 residents sick; violence above the city middle
+
+### COUNCIL-D1 (passedOver kept internally: 0)
+Health and safety readings this week (C114).
+- Brooklyn: 68 residents sick; violence above the city middle
+- West Oakland: 87 residents sick; violence above the city middle
+
+### COUNCIL-D2 (passedOver kept internally: 3)
+Health and safety readings this week (C114).
+- Baylight District: 13 residents sick
+- Chinatown: 137 residents sick; violence above the city middle
+- Downtown: 75 residents sick
+- Jack London: 71 residents sick
+
+### COUNCIL-D3 (passedOver kept internally: 0)
+Health and safety readings this week (C114).
+- Fruitvale: 112 residents sick; violence above the city middle
+- San Antonio: 109 residents sick; violence above the city middle
+
+### COUNCIL-D4 (passedOver kept internally: 0)
+Health and safety readings this week (C114).
+- Dimond: 93 residents sick; violence above the city middle
+- Glenview: 89 residents sick; violence above the city middle
+- Ivy Hill: 118 residents sick; violence above the city middle
+
+### COUNCIL-D5 (passedOver kept internally: 0)
+Health and safety readings this week (C114).
+- East Oakland: 119 residents sick; violence above the city middle
+
+### COUNCIL-D6 (passedOver kept internally: 1)
+Health and safety readings this week (C114).
+- Piedmont Ave: 97 residents sick
+
+### COUNCIL-D7 (passedOver kept internally: 2)
+Health and safety readings this week (C114).
+- KONO: 17 residents sick
+- Rockridge: 101 residents sick
+- Temescal: 86 residents sick
+
+### COUNCIL-D8 (passedOver kept internally: 1)
+Health and safety readings this week (C114).
+- Adams Point: 84 residents sick
+- Eastlake: 89 residents sick; violence above the city middle
+- Grand Lake: 101 residents sick
+- Lake Merritt: 18 residents sick
+
+### COUNCIL-D9 (passedOver kept internally: 3)
+Health and safety readings this week (C114).
+- Laurel: 106 residents sick; violence above the city middle
+- Uptown: 22 residents sick
+
+### CHIEF-POLICE (passedOver kept internally: 8)
+Health and safety readings this week (C114).
+- Adams Point: 84 residents sick
+- Baylight District: 13 residents sick
+- Brooklyn: 68 residents sick; violence above the city middle
+- Chinatown: 137 residents sick; violence above the city middle
+- Dimond: 93 residents sick; violence above the city middle
+- Downtown: 75 residents sick
+- East Oakland: 119 residents sick; violence above the city middle
+- Eastlake: 89 residents sick; violence above the city middle
+- Fruitvale: 112 residents sick; violence above the city middle
+- Glenview: 89 residents sick; violence above the city middle
+- Grand Lake: 101 residents sick
+- Ivy Hill: 118 residents sick; violence above the city middle
+- Jack London: 71 residents sick
+- KONO: 17 residents sick
+- Lake Merritt: 18 residents sick
+- Laurel: 106 residents sick; violence above the city middle
+- Piedmont Ave: 97 residents sick
+- Rockridge: 101 residents sick
+- San Antonio: 109 residents sick; violence above the city middle
+- Temescal: 86 residents sick
+- Uptown: 22 residents sick
+- West Oakland: 87 residents sick; violence above the city middle
+

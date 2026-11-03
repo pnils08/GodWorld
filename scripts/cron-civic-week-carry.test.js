@@ -22,7 +22,7 @@ const block = weekCarryBlock({
 
 check('heading is This week on the wall', block.includes('## This week on the wall'));
 check('pointer names the pack file', block.includes('Latest district pack on disk: output/cron-civic/packs/COUNCIL-D7_c103.json'));
-check('lever from pack', block.includes('This week\'s lever from that pack: stand with KONO or leave it'));
+check('pulse from pack', block.includes('This week\'s pulse from that pack: stand with KONO or leave it'));
 check('clean wall line kept', block.includes('KONO needs investment, not abandonment'));
 // civic.26 (Mike-direct): sentiment is a metric every city tracks, so a seat
 // carrying its own hood-vs-city sentiment reading is NOT an engine leak and is

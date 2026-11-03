@@ -242,3 +242,30 @@
 ### G-EC41 — Content drafter wrote 10 rows Active=yes (auth:auto) [judgment] [content-ledger] [INFO]
 - 7 lines + 2 fragments + 1 line across Fruitvale, West Oakland, Temescal, Jack London, Brooklyn, Downtown, KONO, Rockridge. Readback verified. Builder kill switch: Active=no in-sheet.
 - **Status:** CLOSED
+
+## Triage 2026-11-01 (research-build) — all 41 checked
+
+Read against engine code and live sheet headers. No code or sheet changed. Sits below the mechanical marker, so a re-run keeps it. Split: 9 judgment (G-EC33–41), 32 mechanical (G-EC1–32).
+
+**Judgment 9**
+- Closed 5: G-EC33, 35, 38, 40, 41.
+- Open 4: G-EC34 Civis journal; G-EC36 life outcomes (builder dials); G-EC37 double count (detectImprovements emits the same remedy twice, 14 → 13); G-EC39 DEPLOY_HISTORY stage 37.
+- G-EC34 owner: its `pipeline.68` tag is the withdrawn roster row (ROLLOUT_ARCHIVE), not the journal. No live row owns it. Failed drafts go to stderr only; none on disk.
+
+**Mechanical 32**
+- No defect, 24 (header-drift, 21 repeat C110–C114, 3 repeat C112–C114):
+  - Scanner read the wrong tab, 9. G-EC3–5: reads are WorldEvents_V3_Ledger, which has Cycle/Domain/Severity. G-EC13–16: `headers` is the ledger's (processAdvancementIntake), not Economic_Parameters. G-EC22–23: Citizen_Media_Usage has UsageType/Context.
+  - Fallback resolves, 13. G-EC6, 9 (First + Last); G-EC7 (POPID); G-EC8 (row-based ID, Generic_Citizens has no ID column); G-EC12 (SuggestedJournalist, and loadCycleCadence_ has no live caller); G-EC18, 19, 20, 21, 24, 25, 26, 27.
+  - Column absent, write skipped, 2. G-EC10–11: Cultural_Ledger has no LastSeenHoliday/CalendarContext; noted in culturalLedger.js engine.314.
+- Boilerplate, 5. G-EC28, 30, 31, 32: text says the execution log is not captured; output/execution_log_c114.txt is on disk (Step 3.5). The detectors behind them are unbuilt. G-EC29: repeat check, done here.
+- Open, 3:
+  - G-EC2 faith: repeats every cycle and cannot clear. Exactly 5 faith events per cycle; Edition_Coverage_Ratings has no faith Domain and DOMAIN_TRACKER_COLUMNS has no FAITH. Elliot Graye filed C110–C113, ranked each cycle, selected 0 of 9 each time.
+  - G-EC1 Rockridge: new this cycle. Retail 13.14 → 10.98 (8 of 22, above median 8.265). Packet hood line: street trade busy; trajectory growth. Same dip C111 (13.08 → 10.2), back to 12.61 C112. The flag is a one-week compare; 3 signals with no initiative = HIGH, which made it Decision 1 in the District 7 packet.
+  - G-EC17 Laurel: new this cycle. Retail 7.34 → 4.34 (22 of 22). D9 packet showed street trade struggling; the seat declined to act (voices_c114). A seat can file under economic ($2M–$50M), but economic is playable:false: 2026-09-21 bench found no effect beyond noise. No live row for engine.252.
+  - Decay flags C108–C114: 53, 9 HIGH, 21 of 22 hoods at least once. All one-week compares.
+  - Builder 2026-11-01: a city program does not answer a one-week fall; Laurel is up to civic. Status of G-EC1 and G-EC17 waits on his ruling.
+  - Packet pressure C114: "Crisis:" label in 15 of 15 packets (C113 15, C112 14), unconditional on the seat's lowest-mood hood; Fruitvale and West Oakland carried it at mood clearly upbeat, trade busy, crime low. "charged for" in 8, "visibly declining" in 3. Crisis label dates 2026-07-29, charged line 2026-08-13; both predate the 2026-09-23 direction. Builder 2026-11-01: the D9 seat was smarter than the packet; the packet forces a struggling city. Removed on his go after Codex review; first live packets C115 (civic.47 Changelog).
+
+## LEG: /city-hall (G-R)
+
+- G-R (AUTO): sanity-read FAIL-SCOPED — INIT-005, INIT-008 excluded from the write, rest applied — see output/cron-civic/gate_c114.json

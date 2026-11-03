@@ -195,9 +195,10 @@ test('R2 passed-over problems require prior visible evidence and an empty closed
   assert.equal(first.visibleProblems[0].conditionKey,'health.inCareCitizens');
   write('output/cron-civic/packs/COUNCIL-D5_c998.json',JSON.stringify({actor:{officeId:office.officeId,agentDir:office.agentDir},game:{board:blocks().board,problemContinuity:{cycle:998,visibleProblems:first.visibleProblems}}}));
   assert.equal(blocks().problemContinuity.passedOver.length,0); // missing ledger is not proof of inaction
+  assert.match(blocks().problemContinuity.text,/Move record unavailable for 1 earlier week\./);
   write('output/cron-civic/moves/moves_c998.jsonl','');
   assert.equal(blocks().problemContinuity.passedOver.length,1);
-  assert.match(blocks().problemContinuity.text,/passed over C998/);
+  assert.doesNotMatch(blocks().problemContinuity.text,/passed over|problem/i);
   const m={moveId:'MV-SYNTHETIC-WORK',cycle:998,agentDir:office.agentDir,type:'work',payload:{initiativeId:'INIT-SYNTHETIC'},status:'applied'};
   write('output/cron-civic/moves/moves_c998.jsonl',JSON.stringify(m));
   assert.equal(blocks().problemContinuity.passedOver.length,0);
@@ -205,6 +206,16 @@ test('R2 passed-over problems require prior visible evidence and an empty closed
   write('output/beats/Hospital_Ledger.jsonl',JSON.stringify({...patient,DischargeCycle:'998',StatusNow:'discharged'}));
   assert.equal(blocks().problemContinuity.passedOver.length,0);
   assert.equal(blocks().problemContinuity.problems.length,0);
+  write('output/cron-civic/packs/COUNCIL-D5_c998.json',JSON.stringify({actor:{officeId:office.officeId,agentDir:office.agentDir},game:{problemContinuity:{cycle:998,visibleProblems:'malformed'}}}));
+  const fallback=blocks().problemContinuity;
+  assert.equal(fallback.available,false);
+  assert.match(fallback.text,/^Health and safety readings unavailable — /);
+  assert.doesNotMatch(fallback.text,/problem/i);
+  write('output/cron-civic/packs/COUNCIL-D5_c998.json',JSON.stringify({actor:{officeId:office.officeId,agentDir:office.agentDir},game:{problemContinuity:{cycle:998,visibleProblems:[{hood:'East Oakland',conditionKey:'health.sickResidents',count:0}]}}}));
+  const zero=blocks().problemContinuity;
+  assert.equal(zero.available,false);
+  assert.match(zero.text,/^Health and safety readings unavailable — /);
+  assert.doesNotMatch(zero.text,/problem/i);
 }));
 test('R2 each move type addresses only evidenced hoods; pending proposals, rejected moves and missing readings cannot fabricate resolution', () => {
   const {deriveProblemContinuity:derive}=require('./civicProblemContinuity');
@@ -231,6 +242,6 @@ test('R2 each move type addresses only evidenced hoods; pending proposals, rejec
   assert.equal(unknown.available,false); // no historical board to locate this work
   const missing=derive({...args,data:{...data,Hospital_Ledger:null}});
   assert.equal(missing.available,false);
-  assert.match(missing.text,/readings unavailable/);
+  assert.match(missing.text,/readings? unavailable\./);
   assert(missing.text.length<=600);
 });

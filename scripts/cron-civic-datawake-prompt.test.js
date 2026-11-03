@@ -17,7 +17,7 @@ const office = { agentDir: 'civic-office-crc-faction', holder: 'Warren Ashford' 
 const prompt = datawakeUserPrompt(pack, wall, office);
 
 const wallAt = prompt.indexOf(wall);
-const leverAt = prompt.indexOf('THIS WEEK\'S LEVER (respond to this): stand with KONO or leave it');
+const leverAt = prompt.indexOf('This week\'s pulse from your pack (yours to take up or leave): stand with KONO or leave it');
 const packAt = prompt.indexOf(JSON.stringify(pack));
 const formatAt = prompt.indexOf('JSON only:');
 
@@ -30,8 +30,10 @@ check('prompt permits a directive answer alongside work',
 
 const noGoal = datawakeUserPrompt({ task: { a: 'district-week' } }, wall, office);
 check('missing goal still puts wall before pack', noGoal.indexOf(wall) < noGoal.indexOf('{"task":'));
-check('missing goal omits lever line', !noGoal.includes('THIS WEEK\'S LEVER (respond to this):'));
+check('missing goal omits lever line', !noGoal.includes('This week\'s pulse from your pack'));
 check('wall marked continuity-only before lever', prompt.indexOf('Prior wall is continuity only') < leverAt);
+check('no forced-answer wording', !/respond to this|answers THIS WEEK/.test(prompt));
+check('propose asks what it is for, not a problem', prompt.includes('"purpose":""') && !prompt.includes('"problem":""') && !/the problem in your own words/.test(prompt));
 check('string statement kept', datawakeStatementText({ statement: 'stand with KONO' }) === 'stand with KONO');
 check('object statement flattened', datawakeStatementText({
   statement: { quote: 'old wall', fullStatement: 'KONO at 0.27 vs city 0.489' },

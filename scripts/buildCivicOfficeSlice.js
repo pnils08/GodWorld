@@ -569,7 +569,7 @@ function pickTurn(opts) {
         score: 200 + topH.heat,
         className: 'district-heat',
         label: topH.hood + ' — ' + (topH.why[0] || 'district outlier'),
-        lever: 'stand with ' + topH.hood + ' or leave it',
+        lever: 'what is happening in ' + topH.hood,
         hood: topH.hood,
         hoodScore: topH,
       });
@@ -600,7 +600,7 @@ function pickTurn(opts) {
       score: 50 + (55 - approval),
       className: 'approval-pressure',
       label: office.holder + ' at approval ' + approval + (cool ? ' — ' + cool.text : ''),
-      lever: 'defend the district or go quiet',
+      lever: 'how the district sees your seat',
       hood: hoods[0] || null,
       approval,
       fact: cool || null,
@@ -1362,7 +1362,7 @@ function buildGameBlocks(opts) {
     if (boardIssue) throw new Error(boardIssue);
     if (!game.confrontations.available) throw new Error('Confrontation evidence unavailable');
     return loadProblemContinuity(root,cycle,office,hoods,rows,game.confrontations);
-  }, {text:'Problem continuity unavailable',problems:[],visibleProblems:[],passedOver:[]});
+  }, {text:'Health and safety readings unavailable',problems:[],visibleProblems:[],passedOver:[]});
   return game;
 }
 

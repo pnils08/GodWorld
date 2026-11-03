@@ -1,0 +1,22 @@
+BEFORE
+MAYOR-01    THIS WEEK'S LEVER (respond to this): legislation-filed
+COUNCIL-D1  THIS WEEK'S LEVER (respond to this): stand with Brooklyn or leave it
+COUNCIL-D2  THIS WEEK'S LEVER (respond to this): C115 construction milestone review against the assembled evidence file
+COUNCIL-D3  THIS WEEK'S LEVER (respond to this): Execute and document D3 East Oakland community briefing
+COUNCIL-D4  THIS WEEK'S LEVER (respond to this): stand with Ivy Hill or leave it
+COUNCIL-D5  THIS WEEK'S LEVER (respond to this): Execute and document D3 East Oakland community briefing
+COUNCIL-D6  THIS WEEK'S LEVER (respond to this): no move this cycle
+COUNCIL-D7  THIS WEEK'S LEVER (respond to this): stand with Rockridge or leave it
+COUNCIL-D8  THIS WEEK'S LEVER (respond to this): stand with Adams Point or leave it
+COUNCIL-D9  THIS WEEK'S LEVER (respond to this): stand with Laurel or leave it
+AFTER
+MAYOR-01    This week's pulse from your pack (yours to take up or leave): legislation-filed
+COUNCIL-D1  This week's pulse from your pack (yours to take up or leave): what is happening in Brooklyn
+COUNCIL-D2  This week's pulse from your pack (yours to take up or leave): C115 construction milestone review against the assembled evidence file
+COUNCIL-D3  This week's pulse from your pack (yours to take up or leave): Execute and document D3 East Oakland community briefing
+COUNCIL-D4  This week's pulse from your pack (yours to take up or leave): what is happening in Ivy Hill
+COUNCIL-D5  This week's pulse from your pack (yours to take up or leave): Execute and document D3 East Oakland community briefing
+COUNCIL-D6  This week's pulse from your pack (yours to take up or leave): no move this cycle
+COUNCIL-D7  This week's pulse from your pack (yours to take up or leave): what is happening in Rockridge
+COUNCIL-D8  This week's pulse from your pack (yours to take up or leave): what is happening in Adams Point
+COUNCIL-D9  This week's pulse from your pack (yours to take up or leave): what is happening in Laurel

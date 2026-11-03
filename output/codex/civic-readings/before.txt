@@ -1,0 +1,143 @@
+### MAYOR-01 (passedOver kept internally: 8)
+Condition problems at C114; prior Sunday folds through C113.
+- Adams Point: sick residents 84 [passed over C110]
+- Baylight District: sick residents 13 [passed over C110]
+- Brooklyn: sick residents 68 [passed over C110]
+- Brooklyn: hoods above city violent-level median 1 [passed over C110]
+- Chinatown: sick residents 137 [passed over C110]
+- Dimond: sick residents 93 [passed over C110]
+- Dimond: hoods above city violent-level median 1 [passed over C110]
+- Downtown: sick residents 75 [passed over C110]
+- Chinatown: hoods above city violent-level median 1
+- East Oakland: sick residents 119
+- East Oakland: hoods above city violent-level median 1
+- Eastlake: sick residents 89
+- Eastlake: hoods above city violent-level median 1
+- Fruitvale: sick residents 112
+- Fruitvale: hoods above city violent-level median 1
+- Glenview: sick residents 89
+- Glenview: hoods above city violent-level median 1
+- Grand Lake: sick residents 101
+- Ivy Hill: sick residents 118
+- Ivy Hill: hoods above city violent-level median 1
+- Jack London: sick residents 71
+- KONO: sick residents 17
+- Lake Merritt: sick residents 18
+- Laurel: sick residents 106
+- Laurel: hoods above city violent-level median 1
+- Piedmont Ave: sick residents 97
+- Rockridge: sick residents 101
+- San Antonio: sick residents 109
+- San Antonio: hoods above city violent-level median 1
+- Temescal: sick residents 86
+- Uptown: sick residents 22
+- West Oakland: sick residents 87
+- West Oakland: hoods above city violent-level median 1
+
+
+### COUNCIL-D1 (passedOver kept internally: 0)
+Condition problems at C114; prior Sunday folds through C113.
+- Brooklyn: sick residents 68
+- Brooklyn: hoods above city violent-level median 1
+- West Oakland: sick residents 87
+- West Oakland: hoods above city violent-level median 1
+No passed-over problem proven.
+
+### COUNCIL-D2 (passedOver kept internally: 3)
+Condition problems at C114; prior Sunday folds through C113.
+- Chinatown: sick residents 137 [passed over C110]
+- Chinatown: hoods above city violent-level median 1 [passed over C110]
+- Jack London: sick residents 71 [passed over C113]
+- Baylight District: sick residents 13
+- Downtown: sick residents 75
+
+
+### COUNCIL-D3 (passedOver kept internally: 0)
+Condition problems at C114; prior Sunday folds through C113.
+- Fruitvale: sick residents 112
+- Fruitvale: hoods above city violent-level median 1
+- San Antonio: sick residents 109
+- San Antonio: hoods above city violent-level median 1
+No passed-over problem proven.
+
+### COUNCIL-D4 (passedOver kept internally: 0)
+Condition problems at C114; prior Sunday folds through C113.
+- Dimond: sick residents 93
+- Dimond: hoods above city violent-level median 1
+- Glenview: sick residents 89
+- Glenview: hoods above city violent-level median 1
+- Ivy Hill: sick residents 118
+- Ivy Hill: hoods above city violent-level median 1
+No passed-over problem proven.
+
+### COUNCIL-D5 (passedOver kept internally: 0)
+Condition problems at C114; prior Sunday folds through C113.
+- East Oakland: sick residents 119
+- East Oakland: hoods above city violent-level median 1
+No passed-over problem proven.
+
+### COUNCIL-D6 (passedOver kept internally: 1)
+Condition problems at C114; prior Sunday folds through C113.
+- Piedmont Ave: sick residents 97 [passed over C110]
+
+
+### COUNCIL-D7 (passedOver kept internally: 2)
+Condition problems at C114; prior Sunday folds through C113.
+- Rockridge: sick residents 101 [passed over C110]
+- KONO: sick residents 17 [passed over C110]
+- Temescal: sick residents 86
+
+
+### COUNCIL-D8 (passedOver kept internally: 1)
+Condition problems at C114; prior Sunday folds through C113.
+- Lake Merritt: sick residents 18 [passed over C110]
+- Adams Point: sick residents 84
+- Eastlake: sick residents 89
+- Eastlake: hoods above city violent-level median 1
+- Grand Lake: sick residents 101
+
+
+### COUNCIL-D9 (passedOver kept internally: 3)
+Condition problems at C114; prior Sunday folds through C113.
+- Laurel: sick residents 106 [passed over C110]
+- Uptown: sick residents 22 [passed over C110]
+- Laurel: hoods above city violent-level median 1 [passed over C112]
+
+
+### CHIEF-POLICE (passedOver kept internally: 8)
+Condition problems at C114; prior Sunday folds through C113.
+- Adams Point: sick residents 84 [passed over C110]
+- Baylight District: sick residents 13 [passed over C110]
+- Brooklyn: sick residents 68 [passed over C110]
+- Brooklyn: hoods above city violent-level median 1 [passed over C110]
+- Chinatown: sick residents 137 [passed over C110]
+- Dimond: sick residents 93 [passed over C110]
+- Dimond: hoods above city violent-level median 1 [passed over C110]
+- Eastlake: sick residents 89 [passed over C112]
+- Chinatown: hoods above city violent-level median 1
+- Downtown: sick residents 75
+- East Oakland: sick residents 119
+- East Oakland: hoods above city violent-level median 1
+- Eastlake: hoods above city violent-level median 1
+- Fruitvale: sick residents 112
+- Fruitvale: hoods above city violent-level median 1
+- Glenview: sick residents 89
+- Glenview: hoods above city violent-level median 1
+- Grand Lake: sick residents 101
+- Ivy Hill: sick residents 118
+- Ivy Hill: hoods above city violent-level median 1
+- Jack London: sick residents 71
+- KONO: sick residents 17
+- Lake Merritt: sick residents 18
+- Laurel: sick residents 106
+- Laurel: hoods above city violent-level median 1
+- Piedmont Ave: sick residents 97
+- Rockridge: sick residents 101
+- San Antonio: sick residents 109
+- San Antonio: hoods above city violent-level median 1
+- Temescal: sick residents 86
+- Uptown: sick residents 22
+- West Oakland: sick residents 87
+- West Oakland: hoods above city violent-level median 1
+
+

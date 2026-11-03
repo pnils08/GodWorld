@@ -350,6 +350,20 @@ test('T1.7: Job 2 no menu — unknown or housing category refused; a category th
   assert.equal(run1({ ...base, category: 'Economic' }).accepted[0].payload.category, 'economic');
 });
 
+test('T1.7b: a program need not state a problem — purpose is read into the problem key, an empty one still files', () => {
+  const office = { officeId: 'COUNCIL-D1', agentDir: 'civic-office-council-d1', district: 'D1' };
+  const base = { type: 'propose', title: 'Saturday market', category: 'health', reach: 'hood', hoods: ['West Oakland'], budget: '$20M' };
+  const run1 = m => civicRun.validateDatawakeMoves([m], { office, childToParent: CHILD_TO_PARENT_HOOD });
+  const bare = run1(base);
+  assert.strictEqual(bare.rejected.length, 0, JSON.stringify(bare.rejected));
+  assert.strictEqual(bare.accepted.length, 1);
+  const withPurpose = run1({ ...base, purpose: 'a weekend market on the plaza' });
+  assert.strictEqual(withPurpose.accepted[0].payload.problem, 'a weekend market on the plaza');
+  assert.ok(!('purpose' in withPurpose.accepted[0].payload));
+  const both = run1({ ...base, problem: 'kept', purpose: 'ignored' });
+  assert.strictEqual(both.accepted[0].payload.problem, 'kept');
+});
+
 test('T1.8: Live validateDatawakeMoves: Police Chief may work, answer, canvass, but NEVER propose', () => {
   const office = { officeId: 'CHIEF-POLICE', agentDir: 'civic-office-police-chief', district: 'citywide' };
   const boardIds = new Set(['INIT-002']);
@@ -1616,7 +1630,7 @@ test('R2: Passed-over problems derive from prior displayed pack conditions + emp
     ws.writeJsonl('output/cron-civic/moves/moves_c107.jsonl', []);
     const blocks3 = civicSlice.buildGameBlocks({ root: ws.dir, cycle: 108, office, officeMap: { offices: [] }, hoods: ['East Oakland'], audit });
     assert.strictEqual(blocks3.problemContinuity.passedOver.length, 1);
-    assert.match(blocks3.problemContinuity.text, /passed over C107/);
+    assert.doesNotMatch(blocks3.problemContinuity.text, /passed over|problem/i); // builder 2026-11-02: readings, not failures
 
     // Landed work move in C107 on Coliseum initiative resolves the passed-over problem
     ws.writeJsonl('output/cron-civic/moves/moves_c107.jsonl', [{

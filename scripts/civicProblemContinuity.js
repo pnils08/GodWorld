@@ -38,7 +38,7 @@ function deriveProblemContinuity({ data, hoods, previousPacks, moves, trackerRow
   const cycle = Number(data.cycle), resolver = buildHoodResolver(data.Neighborhood_Map);
   const targets = [...new Set((hoods.length ? hoods : resolver.hoods).map(h => {
     const hood = resolver.resolve(h);
-    if (!hood) throw new Error('Unknown problem territory: ' + h);
+    if (!hood) throw new Error('Unknown reading territory: ' + h);
     return hood;
   }))].sort();
   const readings = new Map(), problems = [], issues = [];
@@ -73,7 +73,7 @@ function deriveProblemContinuity({ data, hoods, previousPacks, moves, trackerRow
     const seenCycle = Number(evidence.cycle);
     if (!Number.isInteger(seenCycle) || seenCycle < 1 || seenCycle >= cycle) throw new Error('Prior pack condition Cycle is invalid');
     for (const old of evidence.visibleProblems) {
-      if (!old || !(Number(old.count) > 0)) throw new Error('Prior displayed problem has no positive counter reading');
+      if (!old || !(Number(old.count) > 0)) throw new Error('Prior shown reading has no positive count');
       const hood = resolver.resolve(old.hood), id = identity(hood,old.conditionKey);
       if (!hood || !readings.has(id)) continue; // unknown is not proof of persistence or resolution
       if (!(readings.get(id) > 0)) continue;
@@ -84,19 +84,28 @@ function deriveProblemContinuity({ data, hoods, previousPacks, moves, trackerRow
       if (!passed.has(id)) passed.set(id,{...problems.find(p => p.id === id),passedOverCycle:seenCycle});
     }
   }
+  // Builder 2026-11-02: the seat sees plain readings, not a list of problems
+  // it failed. Every count above zero and every above-median hood is normal
+  // in a living city; the passed-over record stays in the return value only.
   const passedOver = [...passed.values()], visibleProblems = [];
-  const ordered = [...passedOver,...problems.filter(p => !passed.has(p.id))];
-  let text = 'Condition problems at C' + cycle + '; prior Sunday folds through C' + (cycle-1) + '.';
-  const note = '\n' + (issues.length ? issues.length + ' condition readings unavailable. ' : '') +
-    (missingFolds.size ? missingFolds.size + ' prior fold ledgers unavailable. ' : '') +
-    (!exposurePacks ? 'No earlier pack proves a displayed condition.' : !passedOver.length ? 'No passed-over problem proven.' : '');
-  for (const p of ordered) {
-    const line = '\n- ' + p.hood + ': ' + p.label + ' ' + p.count + (p.passedOverCycle ? ' [passed over C' + p.passedOverCycle + ']' : '');
+  const reading = p => p.conditionKey === 'safety.aboveMedianHoods' ? 'violence above the city middle'
+    : p.conditionKey === 'health.sickResidents' ? p.count + ' residents sick'
+    : p.conditionKey === 'health.inCareCitizens' ? p.count + ' in care'
+    : p.label + ' ' + p.count;
+  const byHood = new Map();
+  for (const p of problems) { if (!byHood.has(p.hood)) byHood.set(p.hood, []); byHood.get(p.hood).push(p); }
+  let text = 'Health and safety readings this week (C' + cycle + ').';
+  const note = (issues.length ? '\n' + issues.length + (issues.length === 1 ? ' reading unavailable.' : ' readings unavailable.') : '') +
+    (missingFolds.size ? '\n' + (missingFolds.size === 1 ? 'Move record unavailable for 1 earlier week.' : 'Move records unavailable for ' + missingFolds.size + ' earlier weeks.') : '');
+  let shown = 0;
+  for (const [hood, list] of byHood) {
+    const line = '\n- ' + hood + ': ' + list.map(reading).join('; ');
     if (text.length + line.length + note.length + 45 > cap) break;
     text += line;
-    visibleProblems.push(p);
+    visibleProblems.push(...list);
+    shown++;
   }
-  if (visibleProblems.length < ordered.length) text += '\n' + (ordered.length-visibleProblems.length) + ' more conditions beyond this block.';
+  if (shown < byHood.size) text += '\n' + (byHood.size - shown) + ' more hoods not shown.';
   text += note;
   return {available:!issues.length && !missingFolds.size,cycle,problems,visibleProblems,passedOver,
     issues,missingFoldCycles:[...missingFolds],text:text.slice(0,cap)};

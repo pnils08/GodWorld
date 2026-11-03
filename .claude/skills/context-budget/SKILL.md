@@ -92,7 +92,8 @@ Flag patterns:
 | SCHEMA.md | on-demand | Doc conventions |
 
 Flag patterns:
-- CLAUDE.md + .claude/TERMINAL.md together > 200 lines
+- any one boot file (CLAUDE.md, .claude/TERMINAL.md, a rule file) > 200 lines or > 25KB
+- total boot load (CLAUDE.md + TERMINAL.md + MEMORY.md) > 40KB
 - MEMORY.md over 24.4KB warning threshold (we hit 25.9KB on S187)
 - CONTEXT.md duplicates content in CANON_RULES / INSTITUTIONS / SCHEMA (per ADR-0001 it should pointer, not duplicate)
 

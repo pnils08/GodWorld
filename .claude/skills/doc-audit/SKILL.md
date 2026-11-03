@@ -29,6 +29,8 @@ disable-model-invocation: false
 | `docs/mags-corliss/CHARACTER.md` | Identity-only (governance.5 partial close S228): The Principle / Who I Am / My Family / Off the Clock. NO session counter (lives in SESSION_CONTEXT.md line 5). NO infrastructure refs (live in STACK.md / SUPERMEMORY.md). NO Compact Recovery (lives in `.claude/skills/boot/SKILL.md`). Audit: family POPIDs match ledger? No drift back to operational content? |
 | `.claude/rules/canon-names.md` | Names, Mayor and faction lines match the civic agents' files? No hard-coded population? |
 | `.claude/rules/newsroom.md` | Cycle-rule reversal still documented (S146)? Citizen-creation rules current? 2041 birth-year anchor present? |
+| `.claude/rules/civic.md` | Cascade order matches `cron-civic-run.js`? Faction table and status enum match the civic-office agents' files? |
+| `.claude/rules/research-build.md` | Doc-registration and research-filing steps match `docs/index.md` and `docs/research/index.md` as they stand? |
 | `.claude/rules/engine.md` | Engine code rules current? Determinism guidance reflects safeRand_ pattern post-S156? |
 | `.claude/rules/dashboard.md` | Dashboard rules current? Endpoint conventions match server code? |
 | `MEMORY.md` (auto-memory) | **Under 24.4KB** (S147 limit per CLAUDE.md, NOT 200 lines). Dead memory file references? Stale session memories? Population numbers current? Index entries one-line under ~150 chars? |

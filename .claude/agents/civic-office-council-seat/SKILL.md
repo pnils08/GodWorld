@@ -2,6 +2,7 @@
 name: civic-office-council-seat
 description: Shared Sunday/weekday contract for the nine district seats. civic.24 Task 2 draft — Claude lands the commit.
 disable-model-invocation: true
+omitClaudeMd: true
 ---
 
 # Council seat

@@ -6,6 +6,7 @@ model: sonnet
 maxTurns: 20
 memory: project
 permissionMode: dontAsk
+omitClaudeMd: true
 ---
 
 ## Boot Sequence

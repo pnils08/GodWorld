@@ -5,6 +5,7 @@ tools: Read, Glob, Grep, Bash
 model: haiku
 maxTurns: 40
 permissionMode: dontAsk
+omitClaudeMd: true
 ---
 
 # engine-wiring — the wiring card

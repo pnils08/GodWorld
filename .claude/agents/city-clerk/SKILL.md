@@ -6,6 +6,7 @@ model: haiku
 maxTurns: 12
 memory: project
 permissionMode: dontAsk
+omitClaudeMd: true
 ---
 
 ## Boot Sequence

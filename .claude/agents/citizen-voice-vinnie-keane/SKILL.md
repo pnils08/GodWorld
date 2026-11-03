@@ -6,6 +6,7 @@ model: sonnet
 maxTurns: 8
 permissionMode: dontAsk
 memory: project
+omitClaudeMd: true
 ---
 
 ## What this agent is

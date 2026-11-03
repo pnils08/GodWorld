@@ -5,6 +5,7 @@ tools: Read, Glob, Grep, Bash
 model: haiku
 maxTurns: 30
 permissionMode: dontAsk
+omitClaudeMd: true
 ---
 
 # source-search — the Bay Tribune Data Desk

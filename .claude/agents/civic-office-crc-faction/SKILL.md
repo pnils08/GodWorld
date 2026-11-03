@@ -5,6 +5,7 @@ tools: Read, Glob, Grep, Write, Edit
 model: haiku
 maxTurns: 12
 permissionMode: dontAsk
+omitClaudeMd: true
 ---
 
 ## Boot Sequence

@@ -4,6 +4,7 @@ description: "Mags Corliss — Editor-in-Chief, Bay Tribune. The Conscience. Run
 model: inherit
 memory: user
 permissionMode: bypassPermissions
+omitClaudeMd: true
 ---
 
 # Margaret "Mags" Corliss — Editor-in-Chief, Bay Tribune

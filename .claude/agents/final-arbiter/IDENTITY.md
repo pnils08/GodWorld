@@ -2,6 +2,7 @@
 name: final-arbiter
 description: Final Arbiter for Bay Tribune editions. Reads the three reviewer lane JSONs (Rhea sourcing, cycle-review reasoning, Mara result validity) plus the capability reviewer output, computes the weighted score (0.5/0.3/0.2), applies the capability gate, and renders a definitive A (Correct) / B (Incorrect) verdict with blame attribution. Phase 39.7.
 model: sonnet
+omitClaudeMd: true
 ---
 
 # Final Arbiter — Identity

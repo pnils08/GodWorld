@@ -18,6 +18,7 @@ sources:
   - .claude/skills/post-publish/SKILL.md (read-only control-plane consumer)
   - https://github.com/jacob-bd/gemini-notebook-mcp-cli
 pointers:
+  - "[[NotebookLM]] — how GodWorld uses NotebookLM, where to look when it is wrong, and the change log from 2026-11-04"
   - "[[../plans/2026-07-10-notebooklm-bridge-deploy]] — build history, proofs, and remaining acceptance gate"
   - "[[../archive/plans/2026-07-25-notebooklm-source-search-wiring]] — fail-closed source policy, wrapper, routing, and observability"
   - "[[../research/2026-07-10-notebooklm-mcp]] — adoption research and canon-authority decision"
@@ -673,3 +674,6 @@ delete the CLI-managed profile as part of a normal rollback.
   pulse, three-valued Rhea disposition, unset-threshold guard, manifest-only
   live observer, and `--dry-run --routing-shadow` bounded-source preflight.
   Production format/length routing remains gated.
+- 2026-11-04 — The change log continues in [[NotebookLM]], which also lists three
+  spots in this guide that are stale (package version, version hold, Phase 6
+  routing now live under `honorRouter: true`).

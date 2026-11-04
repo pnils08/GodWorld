@@ -388,6 +388,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[reference/DISASTER_RECOVERY]]** — rebuild procedure if the machine dies. *(reference, infrastructure, active)*
 - **[[reference/DRIVE_UPLOAD_GUIDE]]** — saving files to Google Drive. *(reference, infrastructure, active)*
 - **[[reference/GODWORLD_REFERENCE]]** — simulation reference for Mara and the Media Room. *(reference, civic, active)*
+- **[[reference/NotebookLM]]** — how GodWorld uses NotebookLM: the two notebooks, who feeds and reads them, the 08:00 daily news and its brief-vs-deep-dive router, where to look when it is wrong, and the change log (started 2026-11-04). Path rule `.claude/rules/notebooklm.md` points here. *(reference, infrastructure, media, active)*
 - **[[reference/notebookLM-CLI]]** — Gemini Notebook / NotebookLM CLI operator guide: persistent Chrome auth, root compatibility patch, version hold/upgrade procedure, permanent published-canon search lane, post-publish additions, and daily newsroom listening brief. *(reference, infrastructure, media, active)*
 - **[[reference/PROJECT_GOALS]]** — original project goals. *(reference, architecture, active)*
 - **[[reference/V3_ARCHITECTURE]]** — engine v3 technical contract. *(reference, engine, active)*

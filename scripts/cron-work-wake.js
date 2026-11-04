@@ -29,6 +29,7 @@ const classifier = require('/root/GodWorld/lib/reflectionClassifier');
 const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 const { loadOwnPageReadback } = require('/root/GodWorld/lib/wakePerception');
 const registry = require('./workWakePackages');
+const { centralDate } = require('./centralDate');   // the Central day the crontab runs on; the UTC date is the next day at the 20:18 run
 
 const ARGV = process.argv.slice(2);
 const DRY = ARGV.includes('--dry-run');
@@ -210,7 +211,7 @@ function workMoveLine(pkg, pack, cycle, date) {
   if (!pack || !Array.isArray(pack.nodes) || pack.nodes.indexOf('initiative-project') === -1) return null;
   const c = Number(cycle);
   if (!Number.isInteger(c) || c < 1) return null;
-  const d = String(date || new Date().toISOString().slice(0, 10));
+  const d = String(date || centralDate());
   return {
     moveId: 'MV-' + c + '-' + pkg.persona + '-' + d,
     cycle: c, date: d, agentDir: pkg.persona, popid: pkg.popid || null,
@@ -290,7 +291,7 @@ async function wakeOne(pkg, cycle, state) {
   if (appended.error) { logLine('appendReflection_ ERROR: ' + appended.error); return false; }
   logLine(`page ${ptr.tag} (${ptr.created ? 'created' : 'existing'}) <- reflection doc ${appended.id || '?'}`);
 
-  const mv = workMoveLine(pkg, pack, cycle, new Date().toISOString().slice(0, 10));
+  const mv = workMoveLine(pkg, pack, cycle, centralDate());
   if (mv) {
     try {
       // Lazy: cron-civic-run.js is guarded (require.main) but is 3k lines; only a director's shift pays for it.

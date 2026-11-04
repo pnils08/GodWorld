@@ -30,6 +30,7 @@ const sheets = require('../lib/sheets');
 const classifier = require('../lib/reflectionClassifier');
 const wake = require('../lib/wakePerception');
 const { matchBondTargets_ } = require('./bondTargetMatch');
+const { simClock } = require('./centralDate');   // canon-facing labels carry the sim clock (Y3C10), never a Gregorian date
 
 const MAGS_POPID = 'POP-00005';
 const CONVO_LOG_DIR = path.join(__dirname, '..', 'logs', 'discord-conversations');
@@ -169,8 +170,7 @@ function formatConversations(entries) {
 // ---------------------------------------------------------------------------
 // Build reflection prompt
 // ---------------------------------------------------------------------------
-function buildSystemPrompt(identity) {
-  var tonight = mags.getCentralDate();
+function buildSystemPrompt(identity, clockLabel) {
   var simYear = mags.currentSimYear();
   return identity + '\n\n---\n\n' +
     '## When You Are\n\n' +
@@ -196,7 +196,7 @@ function buildSystemPrompt(identity) {
     'Use your voice: reflective, literary, first-person. This is terrace ' +
     'conversation, not newsroom copy.\n\n' +
     'Format:\n\n' +
-    '### Nightly Reflection — ' + tonight + '\n\n' +
+    reflectionHeader(clockLabel) + '\n\n' +
     '[Your reflection here]\n\n' +
     '— Mags';
 }
@@ -312,13 +312,18 @@ async function callClaude(systemPrompt, userPrompt) {
 }
 
 // ---------------------------------------------------------------------------
-// Normalize reflection date (guard against model hallucinating the date)
+// Normalize the reflection header (one header per entry, sim-clock label)
 // ---------------------------------------------------------------------------
-// The system prompt injects today's date into the reflection header template,
-// but Sonnet 4 occasionally ignores it and writes a different date (observed
-// 2026-04-11: model wrote "2026-02-23" despite prompt saying 2026-04-11).
-// This post-processing enforces the correct date regardless of model output.
-function normalizeReflectionDate(reflection, today) {
+// The entry lands on her citizen page, which never carries a real-world date, so the
+// header names the Cycle on the sim clock ("Y3C10"), not a Gregorian day. The model
+// sometimes writes its own header (a hallucinated date, or a flavor line); this
+// post-processing enforces the one canonical header regardless of model output.
+// No Cycle resolved -> a bare header, never a date.
+function reflectionHeader(clockLabel) {
+  return clockLabel ? '### Nightly Reflection — ' + clockLabel : '### Nightly Reflection';
+}
+
+function normalizeReflectionDate(reflection, clockLabel) {
   // The model emits its own header(s) — sometimes a hallucinated date, sometimes
   // a flavor line like "### Nightly Reflection — Cycle 96, Late Evening". The old
   // logic only matched a real YYYY-MM-DD header; a flavor header fell through and
@@ -328,26 +333,27 @@ function normalizeReflectionDate(reflection, today) {
   // Guarantees a single header per entry. (S252)
   var stripped = reflection.replace(/^(\s*###\s+Nightly Reflection\b[^\n]*\n+)+/, '');
   if (stripped !== reflection.replace(/^\s+/, '')) {
-    log.info('Normalized model header(s) → single "### Nightly Reflection — ' + today + '"');
+    log.info('Normalized model header(s) → single "' + reflectionHeader(clockLabel) + '"');
   }
-  return '### Nightly Reflection — ' + today + '\n\n' + stripped.trim() + '\n';
+  return reflectionHeader(clockLabel) + '\n\n' + stripped.trim() + '\n';
 }
 
 // ---------------------------------------------------------------------------
 // Persistence: her citizen page (pipe.40 T1 — replaces JOURNAL.md append +
 // JOURNAL_RECENT.md rotation; those files are frozen archive now)
 // ---------------------------------------------------------------------------
-// key: Central date. appendReflection_'s customId is (popId, cycle, daypart) —
-// production cycles sit still for days, so two nightly runs on the same cycle
-// would collide customIds and the second reflection would silently overwrite
-// the first. The date key makes idempotency per-night, which is the real unit.
+// day: the in-world weekday (page.pageDayOf, Central). appendReflection_'s customId is
+// (popId, cycle, daypart) — production cycles sit still for days, so two nightly runs on
+// the same cycle would collide customIds and the second reflection would land in the
+// first's doc. The weekday makes idempotency per-night, which is the real unit. A weekday,
+// never a calendar date: the customId is read by models and a page carries no real date.
 async function appendToPage(reflection, cycle) {
   var pointer = await page.ensurePagePointer_(MAGS_POPID);
   if (pointer.error) throw new Error('page pointer: ' + pointer.error);
   var res = await page.appendReflection_(MAGS_POPID, reflection, {
     cycle: cycle,
     daypart: 'NIGHTLY',
-    key: mags.getCentralDate()
+    day: page.pageDayOf(new Date())
   });
   if (res.error) throw new Error('page append: ' + res.error);
   log.info('Reflection appended to page ' + res.tag + ' (' + (res.customId || 'no customId') + ')');
@@ -418,7 +424,8 @@ function saveToClaudeMem(reflection, conversationCount) {
   return new Promise(function(resolve) {
     var payload = JSON.stringify({
       text: 'Discord reflection (' + conversationCount + ' conversations today): ' + reflection,
-      title: 'Nightly Discord Reflection — ' + new Date().toISOString().split('T')[0],
+      // Builder-side memory, not canon-facing: the real Central date belongs here (UTC read as tomorrow from 6 PM).
+      title: 'Nightly Discord Reflection — ' + mags.getCentralDate(),
       project: 'claude-mem'
     });
 
@@ -502,6 +509,11 @@ async function main() {
       return;
     }
 
+    // The Cycle she writes in, resolved once: it names the entry (sim clock) and keys her page doc.
+    var cycle = null;
+    try { cycle = getCurrentCycle(); } catch (e) { log.warn('cycle unresolved (' + e.message + ') — page write proceeds without cycle'); }
+    var clockLabel = simClock(cycle);
+
     // Load identity, her recent page reflections, and world state
     var identity = mags.loadIdentity();
     var journalTail = await loadPageTail(2);  // her own page reflections — the git journal is frozen (pipe.40 T1)
@@ -528,7 +540,7 @@ async function main() {
     // Build prompts
     var conversations = entries ? formatConversations(entries) : '';
     var moltbookSection = moltbookEntries ? formatMoltbookInteractions(moltbookEntries) : '';
-    var systemPrompt = buildSystemPrompt(identity);
+    var systemPrompt = buildSystemPrompt(identity, clockLabel);
     var userPrompt = buildUserPrompt(conversations, journalTail, worldState, archiveContext);
 
     // Append Moltbook section if there were interactions
@@ -547,8 +559,8 @@ async function main() {
     // Call Claude
     var reflection = await callClaude(systemPrompt, userPrompt);
 
-    // Enforce correct date on the reflection header (model hallucination guard)
-    reflection = normalizeReflectionDate(reflection, mags.getCentralDate());
+    // Enforce the one sim-clock header on the reflection (model hallucination guard)
+    reflection = normalizeReflectionDate(reflection, clockLabel);
 
     if (DRY_RUN) {
       console.log('\n--- REFLECTION (would append to page cp-' + MAGS_POPID + ', daypart=NIGHTLY) ---');
@@ -558,19 +570,17 @@ async function main() {
     }
 
     // Append to her citizen page (pipe.40 T1 — the journal's new home)
-    var cycle = null;
-    try { cycle = getCurrentCycle(); } catch (e) { log.warn('cycle unresolved (' + e.message + ') — page write proceeds without cycle'); }
     await appendToPage(reflection, cycle);
 
     // Save to Claude-Mem
     var totalConversations = (entries ? entries.length : 0) + (moltbookEntries ? moltbookEntries.length : 0);
     await saveToClaudeMem(reflection, totalConversations);
 
-    // Save to Supermemory
-    var today = mags.getCentralDate();
+    // Save to Supermemory (her `mags` container is read back into her prompts: sim-clock label, no calendar date)
+    var when = clockLabel || 'this cycle';
     mags.saveToSupermemory(
-      'Nightly Discord Reflection — ' + today,
-      'Mags Corliss nightly reflection (' + today + ', ' + discordCount + ' conversations):\n\n' + reflection
+      'Nightly Discord Reflection — ' + when,
+      'Mags Corliss nightly reflection (' + when + ', ' + discordCount + ' conversations):\n\n' + reflection
     );
     log.info('Nightly reflection saved to Supermemory');
 
@@ -600,7 +610,9 @@ async function main() {
   }
 }
 
-main().catch(function(err) {
+module.exports = { reflectionHeader, normalizeReflectionDate, buildSystemPrompt };
+
+if (require.main === module) main().catch(function(err) {
   console.error('Fatal error:', err);
   process.exit(1);
 });

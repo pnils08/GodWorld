@@ -20,4 +20,13 @@ function centralDate(daysBack, now) {
   return new Date(Date.UTC(y, m - 1, d - back)).toISOString().slice(0, 10);   // calendar arithmetic on the date, not 24h on the clock
 }
 
-module.exports = { centralDate, ZONE };
+// The sim's own clock label for a Cycle: Y<n>C<m>, 52 Cycles to a SimYear (C114 = Y3C10). Same formula as
+// cron-saturday-run.js simClock and buildDeskPackets deriveDeskCalendar_. Canon-facing text takes this label,
+// never a Gregorian date — a real date is allowed only in internal keys, logs and builder-side memory.
+function simClock(cycle) {
+  const c = Number(cycle);
+  if (!Number.isInteger(c) || c < 1) return null;
+  return 'Y' + Math.ceil(c / 52) + 'C' + (((c - 1) % 52) + 1);
+}
+
+module.exports = { centralDate, simClock, ZONE };

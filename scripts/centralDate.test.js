@@ -16,6 +16,10 @@ assert.strictEqual(centralDate(0, at('2026-10-26T23:15:00Z')), '2026-10-26');
 // 19:15 CDT Mon is 00:15Z Tue — under CDT the UTC date turns one hour later in the evening.
 assert.strictEqual(centralDate(0, at('2026-10-27T00:15:00Z')), '2026-10-26');
 
+// The Tue/Thu 20:18 work wake: 02:18Z (CST) / 01:18Z (CDT) is still the same Central evening.
+assert.strictEqual(centralDate(0, at('2026-11-04T02:18:00Z')), '2026-11-03');
+assert.strictEqual(centralDate(0, at('2026-10-28T01:18:00Z')), '2026-10-27');
+
 // Morning wakes agree with UTC under both offsets.
 assert.strictEqual(centralDate(0, at('2026-11-03T12:15:00Z')), '2026-11-03');
 assert.strictEqual(centralDate(0, at('2026-10-27T11:15:00Z')), '2026-10-27');

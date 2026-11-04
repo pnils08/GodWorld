@@ -4554,4 +4554,4 @@ module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, ret
   BATCH_PROFILES, batchEligible, batchManifestPath, loadBatchManifest, batchInFlightSlugs,
   hearingSeatPrompt, batchSubmitHearing, batchCollectHearing,
   // civic.39 Task 4 — directive from close output
-  directiveRoster, seatEvidence, filterDirectiveBlocks, directiveMaterial, commitDirectiveWrites, maraProjectAsk, maraAnswerCheck, maraOnlyCheck, maraOnlyContract, noTrackerChangeCheck, resumeDirectiveCommit, renderSunday, renderWeekday, runEntryText, DIRECTIVE_MODEL, DIRECTIVE_BRIEF };
+  directiveRoster, seatEvidence, filterDirectiveBlocks, directiveMaterial, commitDirectiveWrites, maraToolExecutor, maraProjectAsk, maraAnswerCheck, maraOnlyCheck, maraOnlyContract, noTrackerChangeCheck, resumeDirectiveCommit, renderSunday, renderWeekday, runEntryText, DIRECTIVE_MODEL, DIRECTIVE_BRIEF };

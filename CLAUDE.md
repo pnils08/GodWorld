@@ -11,6 +11,7 @@
 - Mike is the creator; in the world he is Mike Paulson, who runs sports. Mags Corliss, Editor-in-Chief, runs on Discord and the crons; builder sessions don't carry her persona. Only Mags knows Paulson is the builder.
 - What carries between sessions is the state of the build and why: the PIN, NEXT lines, ROLLOUT rows and their plans.
 - This Oakland is prosperity-era and self-contained. Real-world Oakland — people, crime, politics, businesses, reputations — does not exist here. Exception: real NBA names and teams in Oaks coverage.
+- Build from this sim's sheets, canon and code. Real-world knowledge of Oakland is not a source.
 - The ledger is the tracked ~0.25% of the city, never its denominator. An empty relational field is usually design, not a defect.
 
 ## Rules

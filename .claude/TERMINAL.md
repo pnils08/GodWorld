@@ -19,7 +19,7 @@ A doc, memory, summary, audit, NEXT line or a generated file's header is a claim
 
 | Question | Source |
 |---|---|
-| A citizen, hood, business, initiative — current value | live sheet: scratchpad script, `require('/root/GodWorld/lib/env')` then `lib/sheets` `getSheetData` / `getSheetAsObjects` (bench: set `GODWORLD_SHEET_ID` after requiring env); one ledger row: `output/simulation_ledger_snapshot.jsonl` |
+| A citizen, hood, business, initiative — current value | live sheet: scratchpad script, `require('/root/GodWorld/lib/env')` then `lib/sheets` `getSheetData` / `getSheetAsObjects` (sandbox: set `GODWORLD_SHEET_ID` after requiring env); one ledger row: `output/simulation_ledger_snapshot.jsonl` |
 | What the world has established (canon) | whatever the ingest paths send — an ingest path's gate decides canon. Query it in Supermemory `search_canon` (fast, search results; what crons use) or NotebookLM (slow, strong prose answers). Supermemory is also the sim's and build's memory |
 | What code does, who calls it | the code; `grep -rn "fn(" phase* utilities scripts lib dashboard` (all five dirs); one function / `S.` field / tab: the wiring card (§Helper lanes) |
 | What a pipeline produced | `output/` artifacts: `output/beats/*.jsonl`, `output/desk_signal_c<N>.json`, `output/cron-compare/*`, `output/storyline_signal_c<N>.json`, the cycle gap logs |
@@ -54,15 +54,15 @@ Model: Opus for engine substrate or code across several files; Sonnet for plans,
 
 ## Jobs
 
-- One job per terminal: one ROLLOUT row, any group, Owner = the terminal carrying it, plan → build → bench → deploy → close. A row is never split into a design half and a build half. Row contract: `docs/engine/rollout-rules.md`.
+- One job per terminal: one ROLLOUT row, any group, Owner = the terminal carrying it, plan → build → sandbox → deploy → close. A row is never split into a design half and a build half. Row contract: `docs/engine/rollout-rules.md`.
 - Designed work gets a plan from `docs/plans/PLAN_TEMPLATE.md`. Observations made mid-job go to the cycle gap log.
 - A fix the job cannot finish without is the job. Anything else surfaced is a new ROLLOUT row, not a second build.
 - The job's owner carries it and owns its failures; "the plan said so" is no defense.
 - Done → `done-pending-archive`; the session-end sweep moves the row to ROLLOUT_ARCHIVE and the plan to `docs/archive/plans/`. Session ends mid-job → the row stays in-progress; the NEXT line says where it stopped.
-- Engine substrate (`phase*/`, `utilities/`, `lib/`, `schemas/`): bench proof on the exact candidate, on live-synced bench state, before PROD; bench-proven changes may stack on one live fire; one unbenched change in flight across both terminals (the bench is shared); a review (below) before PROD. Code rules: `.claude/rules/engine.md`.
-- Mike's standing go: bench fires, reverts and resyncs, and a PROD `clasp push` with its smoke-test note, need no per-deploy ask. The bench trigger is the web-app GET with the trigger token; never echo the token.
+- Engine substrate (`phase*/`, `utilities/`, `lib/`, `schemas/`): sandbox proof on the exact candidate, on live-synced sandbox state, before PROD; sandbox-proven changes may stack on one live fire; one unbenched change in flight across both terminals (the sandbox is shared); a review (below) before PROD. Code rules: `.claude/rules/engine.md`.
+- Mike's standing go: sandbox fires, reverts and resyncs, and a PROD `clasp push` with its smoke-test note, need no per-deploy ask. Claude fires and deploys the sandbox; procedure, current sandbox and trigger: `docs/reference/DEPLOY.md`. The trigger is the web-app GET with the trigger token; never echo the token.
 - Needs Mike's explicit go: sheet writes touching many rows, schema deletions, Supermemory wipes.
-- The live Cycle fires Sundays on its own. Never sequence work behind it or ask Mike to fire one.
+- The live Cycle runs Sundays; Mike fires it from the sheet inside `/run-cycle`. Never sequence work behind it or ask Mike to fire one.
 - Either terminal works anywhere. Files other pipelines run on — `.claude/agents/*`, `docs/media/voices/*`, another lane's `SKILL.md` — change only inside a job that owns them, and the row says so.
 
 ## Review

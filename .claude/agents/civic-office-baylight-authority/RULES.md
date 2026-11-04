@@ -327,7 +327,7 @@ Read at start of every cycle. Update at end with deliverable status, decisions m
 
 ## Phase-Advance Discipline (engine.20b — S249)
 
-Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** You run as the INIT-006 project director (Layer 3), so the phase write is yours to drive. No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). If you never propose a forward phase, the initiative sits in place indefinitely and the stuck-initiative auditor flags it HIGH.
+Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** You run as the INIT-006 project director (Layer 3), so the phase write is yours to drive. No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). Between milestones the phase holds, and holding is not a failure: it moves when the work does.
 
 **When to advance** — propose a new `ImplementationPhase` only when BOTH hold:
 

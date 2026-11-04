@@ -1,0 +1,128 @@
+{
+  "stage": "directive",
+  "cycle": 114,
+  "model": "openai/gpt-6.1-sol",
+  "mayorModel": "moonshotai/kimi-k3.1-pro",
+  "roster": [
+    "civic-office-mayor",
+    "civic-office-council-d1",
+    "civic-office-council-d2",
+    "civic-office-council-d3",
+    "civic-office-council-d4",
+    "civic-office-council-d5",
+    "civic-office-council-d6",
+    "civic-office-council-d7",
+    "civic-office-council-d8",
+    "civic-office-council-d9",
+    "civic-project-stabilization-fund",
+    "civic-project-oari",
+    "civic-project-health-center",
+    "civic-project-transit-hub",
+    "civic-office-baylight-authority"
+  ],
+  "blocks": [
+    {
+      "head": "Avery Santana — Mayor",
+      "agentDir": "civic-office-mayor",
+      "promises": [
+        "P-d28c799873945e24"
+      ]
+    },
+    {
+      "head": "Denise Carter — City Council District 1",
+      "agentDir": "civic-office-council-d1",
+      "promises": []
+    },
+    {
+      "head": "Leonard Tran — City Council District 2",
+      "agentDir": "civic-office-council-d2",
+      "promises": []
+    },
+    {
+      "head": "Rose Delgado — City Council District 3",
+      "agentDir": "civic-office-council-d3",
+      "promises": []
+    },
+    {
+      "head": "Ramon Vega — City Council District 4",
+      "agentDir": "civic-office-council-d4",
+      "promises": [
+        "P-7c5d64e3e39d46c3"
+      ]
+    },
+    {
+      "head": "Janae Rivers — City Council District 5",
+      "agentDir": "civic-office-council-d5",
+      "promises": []
+    },
+    {
+      "head": "Warren Ashford — City Council District 7",
+      "agentDir": "civic-office-council-d7",
+      "promises": [
+        "P-7d465bc69f93e23e"
+      ]
+    },
+    {
+      "head": "Nina Chen — City Council District 8",
+      "agentDir": "civic-office-council-d8",
+      "promises": []
+    },
+    {
+      "head": "Terrence Mobley — City Council District 9",
+      "agentDir": "civic-office-council-d9",
+      "promises": []
+    }
+  ],
+  "notDirecting": true,
+  "notDirectingProblem": null,
+  "rejectedBlocks": [],
+  "truncated": 0,
+  "promises": {
+    "staged": 3,
+    "statuses": 0,
+    "rejected": []
+  },
+  "memoryReads": [],
+  "notes": 0,
+  "toolCalls": [
+    {
+      "tool": "promise_record",
+      "resultChars": 27
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 38
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 27
+    }
+  ],
+  "usage": {
+    "in": 127939,
+    "out": 4587,
+    "billedUsd": 0.1627,
+    "rateUsd": 0.3017,
+    "finishReason": "stop"
+  },
+  "attempts": [
+    {
+      "model": "openai/gpt-6.1-sol",
+      "tools": true,
+      "blocks": 9,
+      "notDirecting": true,
+      "usage": {
+        "in": 127939,
+        "out": 4587,
+        "billedUsd": 0.1627,
+        "rateUsd": 0.3017,
+        "finishReason": "stop"
+      }
+    }
+  ],
+  "note": null,
+  "commit": "dry",
+  "directive": "output/mara-directives/mara_directive_c114_AUTO.txt",
+  "staged": "output/mara-directives/staged_c114.json",
+  "ranAt": "2026-11-04T05:21:36.321Z"
+}

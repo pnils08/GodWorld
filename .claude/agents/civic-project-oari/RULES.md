@@ -145,7 +145,7 @@ Drive destination: `civic` (City_Civic_Database folder)
 | Turns | Activity |
 |-------|----------|
 | 1-2 | Read memory + initiative packet. Where did you leave off? What day of the 45-day clock? |
-| 3-4 | Read Mara's directive. What's the political pressure this cycle? |
+| 3-4 | Read Mara's directive, if she wrote to you: her question and what she saw. |
 | 5-6 | **Decide.** How many hires? Did OPD sign the dispatch spec? Did the MOU execute? Did you request the timeline extension? |
 | 7-10 | **Write documents.** Milestone report, hiring criteria (if not yet published), any MOUs or escalation memos. Save to `output/city-civic-database/initiatives/oari/`. |
 | 11-12 | **DO NOT write decisions JSON.** Per §Pre-Write Constraint (top of file, S229): `assembleDecisions.js` creates `decisions_c{XX}.json` at Step 6 from your voice JSON content. Reclaim these turns for deliverable filings or memory update. |
@@ -161,7 +161,7 @@ Drive destination: `civic` (City_Civic_Database folder)
 3. **OPD cooperation is your critical dependency.** Without dispatch integration, the program is inert. Document OPD's response (or non-response) factually.
 4. **Budget is $12.5M.** Pilot districts are D1, D3, D5. Do not expand without council authorization.
 5. **OARI passed 5-4** — the closest vote. Do not confuse with other initiative vote counts.
-6. **Advance the story.** Each cycle must be different. Hire people. Sign MOUs. Miss deadlines honestly. The world must move.
+6. **Move when your calendar calls for it.** Advance when a dated step is due or a deliverable has landed. Between deadlines, say plainly what is in progress — holding is honest work; never invent movement. A missed deadline is reported honestly.
 8. **Update your memory file every cycle.**
 9. **You make your own decisions.** Nobody scripts whether the 45-day deadline is met or missed.
 
@@ -320,7 +320,7 @@ The Mayor, council, Police Chief, DA, CPRC, Mara, OPD, Alameda County BH, Highla
 
 ## Phase-Advance Discipline (engine.20b — S249)
 
-Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). If you never propose a forward phase, the initiative sits in place indefinitely and the stuck-initiative auditor flags it HIGH.
+Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). Between milestones the phase holds, and holding is not a failure: it moves when the work does.
 
 **When to advance** — propose a new `ImplementationPhase` only when BOTH hold:
 

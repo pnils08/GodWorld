@@ -147,7 +147,11 @@ function readMaraDirective(prevCycle) {
     path.join(PROJECT_ROOT, `output/mara-directives/mara_directive_c${prevCycle}_AUTO.txt`),
   ];
   for (const filePath of candidates) {
-    try { return fs.readFileSync(filePath, 'utf-8'); } catch { /* next */ }
+    let text;
+    try { text = fs.readFileSync(filePath, 'utf-8'); } catch { continue; }
+    // civic.47 M1 item 3: the packet carries Mara's addressee blocks only —
+    // never her Not directing list; a week with no block carries nothing.
+    return require('./maraDirective').withoutNotDirecting(text);
   }
   return null;
 }

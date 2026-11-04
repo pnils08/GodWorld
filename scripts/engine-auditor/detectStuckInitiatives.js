@@ -50,6 +50,13 @@
  *          `VotePhase` (absent from the live Initiative_Tracker schema —
  *          every row reads undefined); the real signal is Status==='passed' +
  *          VoteCycle, verified live S246 before coding.
+ *   1.5.0  civic.47 M1 — deadline-aware (builder 2026-11-03: "don't have to
+ *          move it every week, it's moving it when the deadlines call for
+ *          it"). A phase held while the next dated step is still ahead
+ *          (NextActionCycle > cycle) is the calendar, not a stall: no pattern.
+ *          A step past due, or no dated step at all, keeps the tenure rule.
+ *          A final Status (failed, withdrawn, …) is over, not stuck: no
+ *          pattern. Evidence carries NextActionCycle.
  *
  * cyclesInState semantics: best available evidence that an initiative has been
  * stuck in its current ImplementationPhase. The number reflects retained audit
@@ -65,7 +72,7 @@
  * is shallow. max() of the two preserves the stuck classification.
  */
 
-const VERSION = '1.4.0';
+const VERSION = '1.5.0';
 const STUCK_THRESHOLD = 3;
 // G-W54 — a vote-passed initiative that has been settled longer than this many
 // cycles since its vote exits stuck-initiative drama-detection. Small N so a
@@ -84,6 +91,16 @@ function isVotePassedTerminal(row, cycle) {
   const voteCycle = parseCycleHint(row.VoteCycle);
   if (voteCycle == null || voteCycle > cycle) return false;
   return (cycle - voteCycle) > VOTE_PASSED_TERMINAL_CYCLES;
+}
+
+// 1.5.0 — the calendar: a final Status, or a dated next step still ahead.
+const FINAL_STATUS_RE = /^(failed|withdrawn|rejected|expired|cancell?ed|closed|completed)$/i;
+function isFinalStatus(row) {
+  return FINAL_STATUS_RE.test(String(row.Status || '').trim());
+}
+function nextStepAhead(row, cycle) {
+  const v = String(row.NextActionCycle != null ? row.NextActionCycle : '').trim();
+  return /^\d+$/.test(v) && Number(v) > cycle;
 }
 
 function parseCycleHint(val) {
@@ -190,6 +207,10 @@ function detect(ctx) {
     // positive story independently.)
     if (isVotePassedTerminal(row, ctx.cycle)) continue;
 
+    // 1.5.0 — a held phase is not a stall while its dated step is ahead, and
+    // a finished program is not stuck.
+    if (isFinalStatus(row) || nextStepAhead(row, ctx.cycle)) continue;
+
     const cyclesInState = computeCyclesInState(row, ctx);
     if (cyclesInState < STUCK_THRESHOLD) continue;
 
@@ -223,6 +244,7 @@ function detect(ctx) {
           Status: status,
           ImplementationPhase: phase,
           LastUpdated: row.LastUpdated,
+          NextActionCycle: row.NextActionCycle,
           PolicyDomain: row.PolicyDomain,
         },
         ...(remedyFiringPositive ? {
@@ -238,4 +260,4 @@ function detect(ctx) {
   return out;
 }
 
-module.exports = { detect, version: VERSION, computeCyclesInState, findPriorPositiveRemedyIds, isVotePassedTerminal };
+module.exports = { detect, version: VERSION, computeCyclesInState, findPriorPositiveRemedyIds, isVotePassedTerminal, isFinalStatus, nextStepAhead };

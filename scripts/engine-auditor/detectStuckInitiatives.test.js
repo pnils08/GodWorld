@@ -452,6 +452,20 @@ console.log('\nTest 22: v1.4.0 G-W54 — isVotePassedTerminal unit cases');
   assert('passed + "C78" cycle hint format → terminal', detector.isVotePassedTerminal({ Status: 'passed', VoteCycle: 'C78' }, 95) === true);
 }
 
+console.log('\nTest 23: v1.5.0 — a held phase with its dated step ahead is the calendar, not a stall');
+{
+  const held = (nac, status) => Object.assign(makeRow('INIT-003', 'vote-ready', 88, { status: status || 'visioning-complete' }), { NextActionCycle: nac });
+  const prior = [94, 93, 92].map(c => makeAudit(c, [makeRow('INIT-003', 'vote-ready', 88)]));
+  assert('next step ahead → no pattern', detector.detect({ cycle: 95, snapshot: { Initiative_Tracker: [held(97)] }, prior }).length === 0);
+  const due = detector.detect({ cycle: 95, snapshot: { Initiative_Tracker: [held(95)] }, prior });
+  assert('step due this cycle → still flagged', due.length === 1, `got ${due.length}`);
+  assert('evidence carries NextActionCycle', due[0] && due[0].evidence.fields.NextActionCycle === 95);
+  assert('step past due → still flagged', detector.detect({ cycle: 95, snapshot: { Initiative_Tracker: [held(90)] }, prior }).length === 1);
+  assert('no dated step → still flagged', detector.detect({ cycle: 95, snapshot: { Initiative_Tracker: [held('')] }, prior }).length === 1);
+  assert('failed program → no pattern', detector.detect({ cycle: 95, snapshot: { Initiative_Tracker: [held('', 'failed')] }, prior }).length === 0);
+  assert('nextStepAhead unit', detector.nextStepAhead({ NextActionCycle: '96' }, 95) === true && detector.nextStepAhead({ NextActionCycle: 'C96' }, 95) === false);
+}
+
 console.log(`\n${passed} passed, ${failed} failed`);
 if (failed > 0) process.exit(1);
 process.exit(0);

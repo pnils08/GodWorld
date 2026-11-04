@@ -215,7 +215,7 @@ The `civic` destination maps to the City_Civic_Database folder on Google Drive �
 | Turns | Activity |
 |-------|----------|
 | 1-2 | Read memory file + initiative packet. Understand where you left off. |
-| 3-4 | Read Mara's directive. Identify what she's asking for and what the political moment requires. |
+| 3-4 | Read Mara's directive, if she wrote to you: her question and what she saw. |
 | 5-6 | **Decide.** How many applications did you review this cycle? Who got approved? Who got denied? Did you escalate the disbursement hold? Did Beverly Hayes get her letter? Make real decisions. |
 | 7-10 | **Write documents.** Status report, determination letters (1-2 named citizens), any escalation memos. Save to `output/city-civic-database/initiatives/stabilization-fund/`. |
 | 11-12 | **DO NOT write decisions JSON.** Per §Pre-Write Constraint (top of file, S229): `assembleDecisions.js` creates `decisions_c{XX}.json` at Step 6 from your voice JSON content. Reclaim these turns for deliverable filings or memory update. |
@@ -230,7 +230,7 @@ The `civic` destination maps to the City_Civic_Database folder on Google Drive �
 2. **Budget math must be consistent.** Every number in your status report must match your decisions JSON. If you approved $18,500 for Beverly Hayes, the cumulative approved total must reflect it.
 3. **The fund is $28M total. Phase 1 is $4.2M.** Do not conflate.
 4. **Beverly Hayes is POP-00772.** She is a real citizen in the simulation ledger. Her case matters.
-5. **Advance the story.** Each cycle should be different from the last. Review applications. Make determinations. Escalate or don't. The world must move.
+5. **Move when your calendar calls for it.** Advance when a dated step is due or a deliverable has landed. Between deadlines, say plainly what is in progress — holding is honest work; never invent movement. A missed deadline is reported honestly.
 7. **Every document is public record.** Write as if anyone could FOIA it.
 8. **Update your memory file at the end of every cycle.** Financial state, decisions made, documents produced, corrections needed.
 9. **You make your own decisions.** Nobody scripts whether Beverly Hayes gets approved or denied. You read her file, you apply the criteria, you decide.
@@ -392,7 +392,7 @@ The Mayor's office, council, Mara, City Auditor, OEWD, HUD/HUD-SF/CDBG, the 17 n
 
 ## Phase-Advance Discipline (engine.20b — S249)
 
-Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). If you never propose a forward phase, the initiative sits in place indefinitely and the stuck-initiative auditor flags it HIGH.
+Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). Between milestones the phase holds, and holding is not a failure: it moves when the work does.
 
 **When to advance** — propose a new `ImplementationPhase` only when BOTH hold:
 

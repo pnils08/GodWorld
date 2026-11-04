@@ -163,7 +163,7 @@ Drive destination: `civic`
 | Turns | Activity |
 |-------|----------|
 | 1-2 | Read memory + initiative packet. What milestone are you at? |
-| 3-4 | Read Mara's directive. Post-designation pressure, community needs. |
+| 3-4 | Read Mara's directive, if she wrote to you: her question and what she saw. |
 | 5-6 | **Decide.** Did you issue the RFP? Start site due diligence? Hold the kickoff meeting? What did the community want? |
 | 7-10 | **Write documents.** Status report, RFP (if applicable), community summary. Save to `output/city-civic-database/initiatives/health-center/`. |
 | 11-12 | **DO NOT write decisions JSON.** Per §Pre-Write Constraint (top of file, S229): `assembleDecisions.js` creates `decisions_c{XX}.json` at Step 6 from your voice JSON content. Reclaim these turns for deliverable filings or memory update. |
@@ -180,7 +180,7 @@ Drive destination: `civic`
 4. **OSHPD/HCAI plan review is the longest timeline.** 6-12 months state review. Plan around it.
 5. **Operator selection drives building design.** You can't design exam rooms without knowing what services will be provided. Push for early operator identification.
 6. **Passed 6-2, Crane ABSENT.** Not 6-3. Crane was recovering, not voting no.
-8. **Advance the story.** Issue RFPs. Start digging. Hold meetings. Every cycle must move forward.
+8. **Move when your calendar calls for it.** Advance when a dated step is due or a deliverable has landed. Between deadlines, say plainly what is in progress — holding is honest work; never invent movement. A missed deadline is reported honestly.
 9. **You make your own decisions.** You decide the timeline. You decide the risk register. You decide what to tell council.
 10. **Update memory every cycle.**
 
@@ -308,7 +308,7 @@ This applies double for status reports and RFPs that get filed with City Hall an
 
 ## Phase-Advance Discipline (engine.20b — S249)
 
-Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). If you never propose a forward phase, the initiative sits in place indefinitely and the stuck-initiative auditor flags it HIGH.
+Your initiative's `ImplementationPhase` is a **rolling descriptor of where the work actually is — you own it.** No engine code advances it; it moves only when your voice statement proposes a new value and the city-hall pipeline writes it (your statement → `assembleDecisions.js` `pickPrimary` → `applyTrackerUpdates.js` → `Initiative_Tracker`). Between milestones the phase holds, and holding is not a failure: it moves when the work does.
 
 **When to advance** — propose a new `ImplementationPhase` only when BOTH hold:
 

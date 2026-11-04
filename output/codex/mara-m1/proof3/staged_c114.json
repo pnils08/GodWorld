@@ -1,0 +1,64 @@
+{
+  "promises": [
+    {
+      "kind": "promise",
+      "eventId": "P-d28c799873945e24",
+      "promiseId": "P-d28c799873945e24",
+      "office": "civic-office-mayor",
+      "cycle": 114,
+      "said": "Four visible citizen petitions will receive four formal public filings this cycle, each with a responsible office, a remedy, and a next date.",
+      "source": "mayor_gavel_c114 statements[10].quote",
+      "initiativeId": null,
+      "trackerAtPromise": null,
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-7c5d64e3e39d46c3",
+      "promiseId": "P-7c5d64e3e39d46c3",
+      "office": "civic-office-council-d4",
+      "cycle": 114,
+      "said": "As Council President, I will docket a formal C114 committee referral and hearing schedule for the Ivy Hill Revitalization Initiative.",
+      "source": "council_d4_c114 statements[0].fullStatement",
+      "initiativeId": "INIT-011",
+      "trackerAtPromise": {
+        "ImplementationPhase": "announced",
+        "Status": "failed",
+        "NextScheduledAction": "",
+        "NextActionCycle": ""
+      },
+      "note": null
+    },
+    {
+      "kind": "promise",
+      "eventId": "P-7d465bc69f93e23e",
+      "promiseId": "P-7d465bc69f93e23e",
+      "office": "civic-office-council-d7",
+      "cycle": 114,
+      "said": "District 7 is ordering a formal commercial corridor assessment and housing impact review through the City Auditor and Economic Development staff.",
+      "source": "council_d7_c114 statements[0].fullStatement",
+      "initiativeId": null,
+      "trackerAtPromise": null,
+      "note": null
+    }
+  ],
+  "statuses": [],
+  "rejectedPromises": [],
+  "memoryReads": [],
+  "notes": [],
+  "trace": [
+    {
+      "tool": "promise_record",
+      "resultChars": 27
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 38
+    },
+    {
+      "tool": "promise_record",
+      "resultChars": 27
+    }
+  ],
+  "runEntry": "C114 — Mara Vance's directive, written after the close.\nDirected Avery Santana — Mayor: Provide the filing references and current disposition of the four petition-specific responses you committed to publish in Cycle 114.\nDirected Denise Carter — City Council District 1: What has your office confirmed about Brooklyn’s transformer outage, and is utility coordination or municipal assistance still needed?\nDirected Leonard Tran — City Council District 2: What transit-access response are you pursuing for Downtown now that INIT-008 is marked failed?\nDirected Rose Delgado — City Council District 3: What remains unresolved in San Antonio’s citizen-complaint corridor response, and does the Cycle 114 neighborhood reading change your approach?\nDirected Ramon Vega — City Council District 4: Reconcile your Cycle 114 INIT-011 scheduling commitment with its failed tracker status, and give the disposition of INIT-014’s overdue legislation filing.\nDirected Janae Rivers — City Council District 5: What, if anything, is your office doing about East Oakland’s economic spike, and has Masjid An-Nur’s expanded tutoring program requested municipal support?\nDirected Warren Ashford — City Council District 7: Confirm the scope, responsible staff, and timetable for the Rockridge commercial-corridor and housing-pressure assessment you ordered.\nDirected Nina Chen — City Council District 8: With INIT-009 marked failed, which Eastlake review recommendations and Adams Point maintenance requests can proceed under existing authority, and who is handling them?\nDirected Terrence Mobley — City Council District 9: Has Laurel’s reported missed garbage pickup been cleared, and does your office see any continuing collection issue?\nNot directing:\n- Elliott Crane (City Council District 6): The Cycle 114 record shows steady trade, low crime, and a seniors lunch milestone on Piedmont Avenue; no specific unresolved municipal matter requires an answer this week.\n- Marcus Webb (OEWD Program Director (Stabilization Fund)): Month-12 execution and reconciliation are reported complete, and the live tracker places the closeout and renewal next step at Cycle 115.\n- Vanessa Tran-Muñoz (OARI Program Director): The Cycle 114 statements report the briefing and district evaluations completed; the live tracker’s next step is due Cycle 115, and feasibility review is not expansion authorization.\n- Bobby Chen-Ramirez (Health Center Project Director): The clinical verification packet is reported filed, and the live tracker schedules the next audit step for Cycle 116; no present deadline has passed.\n- Elena Soria Dominguez (Transit Hub Planning Lead): The schematic review is reported convened with public records available, and the live tracker’s documented-review step is due Cycle 115.\n- Keisha Ramos (Baylight Authority Director): The evidence file and workforce meeting are reported assembled and completed respectively; the construction milestone review remains scheduled for Cycle 115, not prematurely declared passed.\nOpen promises she is watching: mayor \"Four visible citizen petitions will receive four formal public filings this cycle, each with a responsible office, a remedy, and a next date.\"; council-d4 \"As Council President, I will docket a formal C114 committee referral and hearing schedule for the Ivy Hill Revitalization Initiative.\"; council-d7 \"District 7 is ordering a formal commercial corridor assessment and housing impact review through the City Auditor and Economic Development staff.\""
+}

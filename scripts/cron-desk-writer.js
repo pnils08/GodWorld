@@ -253,7 +253,8 @@ const RATES = {
   'anthropic/claude-opus-5.5': [4, 20],
   'anthropic/claude-haiku-5.5': [0.10, 0.50],
   'openai/gpt-5.6-luna': [0.20, 1.20],
-  'openai/gpt-6-luna': [0.10, 0.50],   // pipeline.83 2026-10-28 — Nia's two seats (OpenRouter list 2026-10-28)
+  'openai/gpt-6-luna': [0.10, 0.50],
+  'openai/gpt-6.1-sol': [2, 10],   // civic.47 M1 — Mara's directive (OpenRouter list 2026-11-02)   // pipeline.83 2026-10-28 — Nia's two seats (OpenRouter list 2026-10-28)
   'x-ai/grok-4.3': [1.25, 2.50],
   'deepseek/deepseek-v4-flash-0731': [0.016, 0.64],
   'meta-llama/llama-4-maverick': [0.188, 0.652],
@@ -575,7 +576,10 @@ function callModel(client, system, messages) {
 
 // OpenRouter (OpenAI-compatible) raw POST — shared by the compose call and the
 // Task 2.5.5 tool loop. Returns the parsed response body.
-function callOpenRouterRaw(payloadObj) {
+// opts.timeoutMs (civic.47 M1): abort a request that runs past it — the
+// default is none, as before.
+function callOpenRouterRaw(payloadObj, opts) {
+  const timeoutMs = opts && opts.timeoutMs;
   // builder 2026-10-12: newer DeepSeek runs with its hidden reasoning off
   if (/^deepseek\/deepseek-v4/.test(payloadObj.model) && !payloadObj.reasoning) payloadObj = Object.assign({ reasoning: { enabled: false } }, payloadObj);
   return new Promise((resolve, reject) => {
@@ -601,6 +605,7 @@ function callOpenRouterRaw(payloadObj) {
       });
     });
     req.on('error', reject);
+    if (timeoutMs) req.setTimeout(timeoutMs, () => req.destroy(new Error('OpenRouter: no response within ' + timeoutMs + 'ms')));
     req.write(payload); req.end();
   });
 }
@@ -957,24 +962,33 @@ async function openRouterToolLoop(opts) {
   const toolset = opts.toolset || (opts.memCtx ? OPENROUTER_TOOLS.concat(MEMORY_TOOLS) : OPENROUTER_TOOLS);
   const messages = [{ role: 'system', content: opts.system }, { role: 'user', content: opts.user }];
   const trace = [];
-  let usageIn = 0, usageOut = 0, calls = 0;
+  // civic.47 M1: opts.exec replaces the desk tool executor (another seat's
+  // tools), opts.resultCap overrides the 8,000-character tool-result cut
+  // (Infinity = whole result), opts.body adds request fields (reasoning,
+  // usage accounting), opts.timeoutMs bounds each request. Omitted: as before.
+  const resultCap = opts.resultCap != null ? opts.resultCap : 8000;
+  let usageIn = 0, usageOut = 0, calls = 0, billedUsd = 0, billed = true;
   for (let turn = 0; turn < maxCalls + 2; turn++) {
     const toolsOn = calls < maxCalls;
     const j = await callOpenRouterRaw({
       model, max_tokens: opts.maxTokens || MAX_TOKENS, messages,
+      ...(opts.body || {}),
       ...(toolsOn ? { tools: toolset } : {}),
       ...(toolsOn && opts.forceFirstTool && calls === 0 ? { tool_choice: 'required' } : {})
-    });
-    const msg = (j.choices && j.choices[0] && j.choices[0].message) || {};
+    }, { timeoutMs: opts.timeoutMs });
+    const choice = (j.choices && j.choices[0]) || {};
+    const msg = choice.message || {};
     const u = j.usage || {};
     usageIn += u.prompt_tokens || 0; usageOut += u.completion_tokens || 0;
+    if (typeof u.cost === 'number') billedUsd += u.cost; else billed = false;
+    const usageCost = () => ({ billedUsd: billed ? +billedUsd.toFixed(4) : null, finishReason: choice.finish_reason || null });
     if (toolsOn && Array.isArray(msg.tool_calls) && msg.tool_calls.length) {
       messages.push(msg);
       for (const tc of msg.tool_calls) {
         let input = {};
         try { input = JSON.parse(tc.function.arguments || '{}'); } catch (_) {}
         const raw = calls < maxCalls
-          ? await execOpenRouterTool(tc.function.name, input, opts.memCtx, opts.cycle)
+          ? await (opts.exec ? opts.exec(tc.function.name, input) : execOpenRouterTool(tc.function.name, input, opts.memCtx, opts.cycle))
           : 'tool budget exhausted — compose from what you have.';
         // dossier_read returns { text, lines }; every other tool returns its text.
         const result = String(raw && typeof raw === 'object' ? raw.text : raw);
@@ -982,13 +996,13 @@ async function openRouterToolLoop(opts) {
         trace.push({ tool: tc.function.name, input, resultChars: result.length,
           ...(opts.traceResults ? { resultHead: result.slice(0, 600) } : {}),
           ...(opts.keepResults ? { result, lines: raw && typeof raw === 'object' ? raw.lines : null } : {}) });
-        messages.push({ role: 'tool', tool_call_id: tc.id, content: cap(result, 8000) });
+        messages.push({ role: 'tool', tool_call_id: tc.id, content: cap(result, resultCap) });
       }
       continue;
     }
-    return { text: msg.content || '', usageIn, usageOut, trace };
+    return { text: msg.content || '', usageIn, usageOut, trace, ...usageCost() };
   }
-  return { text: '', usageIn, usageOut, trace };
+  return { text: '', usageIn, usageOut, trace, billedUsd: billed ? +billedUsd.toFixed(4) : null, finishReason: 'tool-turns-exhausted' };
 }
 
 // OpenRouter compose call (kept for the scorer + fact-selection callers).
@@ -1665,6 +1679,8 @@ module.exports = {
   stripRepairChrome,
   renderPacketIntake,
   resolveMaxToolCalls,
+  costUsd,                 // civic.47 M1 — Mara's manifest falls back to the rate table
+  CANON_RECALL_TOOL, OPENROUTER_TOOLS, MEMORY_TOOLS, toolMemoryRecall, toolMemoryNote,
   openRouterToolLoop,      // Task 2.5.5 — shared by the wake-1 fact selection (cron-desk-run.js)
   callOpenRouterRaw,
 };

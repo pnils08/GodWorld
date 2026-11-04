@@ -194,6 +194,11 @@ test('engine artifacts flip prep to ready and stamp engineFiredAt (directive wai
   writeJson(root, 'output/cron-civic/directive_c' + CYCLE + '.json', { stage: 'directive', cycle: CYCLE, blocks: [] });
   const s3 = refreshWeekState(blankWeekState(CYCLE), root);
   assert.strictEqual(s3.stages.directive.status, 'done');
+  // civic.47 M1: a partial memory/promise commit is not done — the tick finishes it
+  writeJson(root, 'output/cron-civic/directive_c' + CYCLE + '.json', { stage: 'directive', cycle: CYCLE, blocks: [], commit: 'partial' });
+  assert.strictEqual(refreshWeekState(blankWeekState(CYCLE), root).stages.directive.status, 'partial');
+  writeJson(root, 'output/cron-civic/directive_c' + CYCLE + '.json', { stage: 'directive', cycle: CYCLE, blocks: [], commit: 'complete' });
+  assert.strictEqual(refreshWeekState(blankWeekState(CYCLE), root).stages.directive.status, 'done');
 });
 
 test('acceptance 1: a killed seat is pending — hearing done, close-det ready on the arrived voices', () => {
@@ -907,70 +912,79 @@ test('orBatch is importable with no API key and validates batches locally', () =
 });
 
 // ────────────────────────────────────────────────────────────────────────────
-console.log('\ncivic.39 Task 4 — directive from close output');
+console.log('\ncivic.47 M1 — Mara\'s directive: roster, evidence, block validation');
 // ────────────────────────────────────────────────────────────────────────────
 
-const { directiveTargetSeats, filterDirectiveBlocks } = civicRun;
+const { directiveRoster, seatEvidence, filterDirectiveBlocks } = civicRun;
 
 const T4_OFFICEMAP = {
   offices: [
     { agentDir: 'civic-office-mayor', officeId: 'MAYOR-01', model: 'moonshotai/kimi-k2', holder: 'Synthetic Mayor', title: 'Mayor' },
     { agentDir: 'civic-office-council-d2', officeId: 'COUNCIL-D2', district: 'D2', model: 'meta-llama/llama-3.3-70b-instruct', holder: 'Synthetic D2', title: 'Council D2' },
     { agentDir: 'civic-office-council-d6', officeId: 'COUNCIL-D6', district: 'D6', model: 'google/gemini-3.7-flash', holder: 'Synthetic D6', title: 'Council D6' },
-    { agentDir: 'civic-office-council-d7', officeId: 'COUNCIL-D7', district: 'D7', model: 'google/gemini-3.7-flash', holder: 'Synthetic D7', title: 'Council D7' },
     { agentDir: 'civic-office-police-chief', officeId: 'COP-01', model: 'deepseek/deepseek-chat', holder: 'Synthetic Chief', title: 'Chief' },
+    { agentDir: 'civic-office-baylight-authority', officeId: 'STAFF-BAYLIGHT', holder: 'Synthetic Baylight', title: 'Baylight Director' },
   ],
-  projects: [],
+  projects: [{ agentDir: 'civic-project-oari', holder: 'Synthetic OARI', title: 'OARI Director', initiative: 'INIT-002' }],
 };
-function t4Deps(overrides) {
-  return Object.assign({
-    cycle: CYCLE,
-    pendingProposals: [],
-    trackerRows: [{ InitiativeID: 'INIT-001', NextActionCycle: CYCLE + 1 }, { InitiativeID: 'INIT-002', NextActionCycle: CYCLE + 9 }],
-    petitionPoolFor: o => ({ available: true, complaints: o.agentDir === 'civic-office-council-d7' ? [1, 2, 3] : [] }),
-    boardFor: o => (o.agentDir === 'civic-office-council-d2' ? [{ id: 'INIT-001' }] : [{ id: 'INIT-002' }]),
-  }, overrides || {});
-}
+const slice4 = require('./buildCivicOfficeSlice');
 
-test('the directive names only seats the close left passed-over or unanswered (Task 4 verify)', () => {
-  const closeRec = { pendingVoices: ['council_d6', 'mayor_gavel', 'police_chief'] };
-  const targets = directiveTargetSeats(CYCLE, { officeMap: T4_OFFICEMAP, closeRec, deps: t4Deps() });
-  const byDir = new Map(targets.map(t => [t.agentDir, t.reasons.join(' | ')]));
-  assert.deepStrictEqual(targets.map(t => t.agentDir),
-    ['civic-office-mayor', 'civic-office-council-d2', 'civic-office-council-d6', 'civic-office-council-d7']);
-  assert.ok(byDir.get('civic-office-mayor').includes('passed over'), 'mayor named via mayor_gavel pending');
-  assert.ok(byDir.get('civic-office-council-d6').includes('passed over'));
-  assert.ok(byDir.get('civic-office-council-d7').includes('petition pool'), 'd7 named via unanswered petitions');
-  assert.ok(byDir.get('civic-office-council-d2').includes('stall clock'), 'd2 named via the stall clock');
-  assert.ok(!byDir.has('civic-office-police-chief'), 'a pending non-elected seat never becomes an addressee');
+test('the roster is the mayor, council and program directors — never staff or the chief', () => {
+  const dirs = directiveRoster(T4_OFFICEMAP).map(s => s.agentDir);
+  assert.deepStrictEqual(dirs, ['civic-office-mayor', 'civic-office-council-d2', 'civic-office-council-d6', 'civic-project-oari', 'civic-office-baylight-authority']);
 });
 
-test('an answered proposal or a distant stall clock keeps the seat out of the directive', () => {
-  const closeRec = { pendingVoices: [] };
-  const deps = t4Deps({
-    pendingProposals: [{ agentDir: 'civic-office-council-d7', status: 'pending', type: 'propose' }],
-    boardFor: () => [{ id: 'INIT-002' }],  // NextActionCycle C+9 — nowhere near the clock
-  });
-  const targets = directiveTargetSeats(CYCLE, { officeMap: T4_OFFICEMAP, closeRec, deps });
-  assert.deepStrictEqual(targets, []);
+test('blank and failed tracker rows carry no clock; a dated step is past due, due next or scheduled', () => {
+  const rows = [
+    { InitiativeID: 'INIT-008', Status: 'failed', NextActionCycle: '' },
+    { InitiativeID: 'INIT-009', Status: 'failed', NextActionCycle: String(CYCLE + 1) },
+    { InitiativeID: 'INIT-011', Status: 'announced', NextActionCycle: '' },
+    { InitiativeID: 'INIT-001', Status: 'passed', NextActionCycle: String(CYCLE + 1) },
+    { InitiativeID: 'INIT-014', Status: 'proposed', NextActionCycle: String(CYCLE) },
+    { InitiativeID: 'INIT-005', Status: 'passed', NextActionCycle: String(CYCLE + 2) },
+  ];
+  const clocks = rows.map(r => slice4.trackerClock(r, CYCLE));
+  assert.deepStrictEqual(clocks.map(c => c && c.state), [null, null, null, 'due-next', 'past-due', 'scheduled']);
+  const seat = directiveRoster(T4_OFFICEMAP).find(s => s.agentDir === 'civic-office-council-d2');
+  const lines = seatEvidence(seat, { slice: slice4, cycle: CYCLE, trackerRows: rows, hoodScores: [],
+    boardFor: () => rows.map(r => ({ id: r.InitiativeID, status: r.Status })) });
+  assert.match(lines.find(l => l.includes('INIT-008')), /no dated next step/);
+  assert.match(lines.find(l => l.includes('INIT-014')), /PAST DUE/);
+  assert.match(lines.find(l => l.includes('INIT-001')), /due C/);
 });
 
-test('filterDirectiveBlocks rejects any addressee outside the close-derived target set', () => {
-  const goodBlock = '## Synthetic D6 — Council D6\n\n- **Agent:** `.claude/agents/civic-office-council-d6/`\n- **Address:** say it\n- **Why:** the thread\n- **Acceptance:** a number\n- **Silence consequence:** it breaks\n';
-  const outside = goodBlock.replace(/council-d6/g, 'council-d9').replace('Synthetic D6', 'Synthetic D9');
-  const missing = goodBlock.replace('- **Acceptance:** a number\n', '');
-  const out = filterDirectiveBlocks(goodBlock + outside + missing, new Set(['civic-office-council-d6']));
+test('complaint counts are evidence lines, not a rule', () => {
+  const seat = directiveRoster(T4_OFFICEMAP).find(s => s.agentDir === 'civic-office-council-d6');
+  const lines = seatEvidence(seat, { slice: slice4, cycle: CYCLE, trackerRows: [], hoodScores: [],
+    petitionPoolFor: () => ({ available: true, complaints: [1, 2, 3, 4, 5, 6, 7] }), boardFor: () => [] });
+  assert.deepStrictEqual(lines, ['- citizen complaints on the record: 7']);
+});
+
+const BLOCK = (dir, name, extra) => '## ' + name + ' — Role\n\n- **Agent:** `.claude/agents/' + dir + '/`\n- **Address:** ask\n- **Why:** C' + CYCLE + ' statement\n- **Acceptance:** an answer\n' + (extra || '');
+const ND = '## Not directing\n- Synthetic Mayor (Mayor): a quiet week.\n';
+const ROSTER4 = new Set(directiveRoster(T4_OFFICEMAP).map(s => s.agentDir));
+
+test('Silence consequence is optional; Agent, Address, Why, Acceptance are required', () => {
+  const out = filterDirectiveBlocks(BLOCK('civic-office-council-d6', 'D6') + BLOCK('civic-project-oari', 'OARI', '- **Silence consequence:** the briefing slips\n') + BLOCK('civic-office-council-d2', 'D2').replace('- **Acceptance:** an answer\n', '') + ND, ROSTER4);
+  assert.deepStrictEqual(out.blocks.map(b => b.split('\n')[0]), ['## D6 — Role', '## OARI — Role']);
+  assert.strictEqual(out.rejected.length, 1);
+  assert.match(out.rejected[0].why, /missing fields: \*\*Acceptance:\*\*/);
+  assert.ok(out.notDirecting.startsWith('## Not directing'));
+});
+
+test('an addressee off the roster or a second block for one office is rejected', () => {
+  const out = filterDirectiveBlocks(BLOCK('civic-office-police-chief', 'Chief') + BLOCK('civic-office-council-d6', 'D6') + BLOCK('civic-office-council-d6', 'D6 again') + ND, ROSTER4);
   assert.strictEqual(out.blocks.length, 1);
-  assert.strictEqual(out.rejected.length, 2);
-  assert.ok(out.rejected[0].why.includes('outside the close-derived target set'));
-  assert.ok(out.rejected[1].why.includes('missing fields'));
+  assert.deepStrictEqual(out.rejected.map(r => r.why), ['addressee unknown — not on the roster', 'malformed — a second block for the same office (one question id per office)']);
 });
 
-test('filterDirectiveBlocks caps at the template maximum of 12 blocks', () => {
-  const block = '## Synthetic D6 — Council D6\n\n- **Agent:** `.claude/agents/civic-office-council-d6/`\n- **Address:** say it\n- **Why:** the thread\n- **Acceptance:** a number\n- **Silence consequence:** it breaks\n';
-  const out = filterDirectiveBlocks(block.repeat(13), new Set(['civic-office-council-d6']));
-  assert.strictEqual(out.blocks.length, 12);
-  assert.strictEqual(out.truncated, 1);
+test('a zero-block week with a Not directing section is a valid result; one naming a seat id is not', () => {
+  const ok = filterDirectiveBlocks('# header\n\n---\n' + ND, ROSTER4);
+  assert.strictEqual(ok.blocks.length, 0);
+  assert.ok(ok.notDirecting);
+  const bad = filterDirectiveBlocks('# header\n\n---\n## Not directing\n- civic-office-mayor: quiet\n', ROSTER4);
+  assert.strictEqual(bad.notDirecting, null);
+  assert.match(bad.notDirectingProblem, /office id/);
 });
 
 // ────────────────────────────────────────────────────────────────────────────

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 'use strict';
+const maraDirective = require('./maraDirective');
 
 /**
  * OFFICE/1 pack. Same box as a heat slice: code picks the facts, the seat speaks.
@@ -873,6 +874,23 @@ function renewalStampText(row) {
 // My board: rows the seat sponsors (ProposingOffice) plus rows touching its
 // hoods after child→parent fold; the mayor sees all. (Plan Task 3.1 — a
 // sponsor-only board leaves nine seats empty on day one.)
+// civic.47 M1 item 9: a tracker row's next-step date. A blank or non-integer
+// NextActionCycle is no date (Number('') was 0, which read as overdue), and a
+// terminal Status has no next step. past-due: the date is this Cycle or
+// earlier; due-next: next Cycle; scheduled: later.
+const TERMINAL_STATUS_RE = /^(failed|withdrawn|rejected|expired|cancell?ed|closed|completed)$/i;
+function nextActionCycleOf(row) {
+  const v = String(row && row.NextActionCycle != null ? row.NextActionCycle : '').trim();
+  return /^\d+$/.test(v) ? Number(v) : null;
+}
+function trackerClock(row, cycle) {
+  if (!row || TERMINAL_STATUS_RE.test(String(row.Status || '').trim())) return null;
+  const nac = nextActionCycleOf(row);
+  if (nac === null) return null;
+  const c = Number(cycle);
+  return { nac, state: nac <= c ? 'past-due' : nac === c + 1 ? 'due-next' : 'scheduled' };
+}
+
 function boardRowsFor(office, rows, childToParent, context) {
   const isMayor = String(office.officeId || '') === 'MAYOR-01';
   const turf = new Set(turfHoods(office).map(h => foldHood(h, childToParent).toLowerCase()));
@@ -890,6 +908,7 @@ function boardRowsFor(office, rows, childToParent, context) {
       domain: row.PolicyDomain || null,
       phase: row.ImplementationPhase || null,
       status: row.Status || null,
+      nextActionCycle: TERMINAL_STATUS_RE.test(String(row.Status || '').trim()) ? null : nextActionCycleOf(row),
       voteCycle: row.VoteCycle ? Number(row.VoteCycle) : null,
       stage: row.Stage || null,
       // stamped by buildGameBlocks (it owns cycle); null until the Task 4
@@ -913,7 +932,8 @@ function boardBlock(board) {
   if (board === null) return 'Board unavailable — no Initiative_Tracker beats dump on disk.';
   if (!board.length) return 'Your board is empty: no initiative sponsors you or touches your turf.';
   const lines = board.map(b =>
-    '- ' + b.id + ' ' + b.name + ' [' + (b.phase || '—') + '] — ' + b.needsNext + ' — ' + b.budget);
+    '- ' + b.id + ' ' + b.name + ' [' + (b.phase || '—') + '] — ' + b.needsNext + ' — ' + b.budget +
+    (b.nextActionCycle != null ? ' — next step due C' + b.nextActionCycle : ''));
   return clip('Your board:\n' + lines.join('\n'), BLOCK_CAP);
 }
 
@@ -1137,16 +1157,22 @@ function loadSeatMoves(root, cycle, agentDir) {
 
 function loadConfrontations(root, cycle, agentDir) {
   const all = [];
-  for (const input of cycleFiles(root, 'mara-directives', /^mara_directive_c(\d+)_AUTO\.txt$/, cycle)) {
-    const blocks = fs.readFileSync(input.file,'utf8').split(/\n(?=## )/).filter(b => /^## /.test(b));
-    const mine = blocks.filter(b => b.split('\n').some(line => /\*\*Agent:\*\*/.test(line) && line.includes('.claude/agents/' + agentDir + '/')));
+  // civic.47 M1 item 10: `all` keeps every AUTO block for this seat (hood
+  // inference reads an old answer's sourceText); `open` holds only blocks from
+  // the latest directive Cycle citywide. A zero-block AUTO is still the latest
+  // directive and leaves nothing open; an older block stays open only if Mara
+  // re-issues it. Weekday reads AUTO files only (a manual file is prep's).
+  const files = cycleFiles(root, 'mara-directives', /^mara_directive_c(\d+)_AUTO\.txt$/, cycle);
+  const latestCycle = files.length ? files[files.length - 1].cycle : null;
+  for (const input of files) {
+    const mine = maraDirective.blocksFor(fs.readFileSync(input.file,'utf8'), agentDir);
     if (!mine.length) continue;
     const demand = mine.map(b => {
       const address = (b.match(/\*\*Address:\*\*\s*(.+)/) || [])[1];
       if (!address || !address.trim()) throw new Error('Directive Address unavailable: C' + input.cycle + ' ' + agentDir);
       return b.split('\n')[0].replace(/^## /,'') + ' — ' + address.trim();
     }).join('\n');
-    all.push({id:'CONF-' + input.cycle + '-' + agentDir,cycle:input.cycle,agentDir,
+    all.push({id:maraDirective.confrontationId(input.cycle, agentDir),cycle:input.cycle,agentDir,
       demand:clip(demand,BLOCK_CAP), sourceText:mine.join('\n'),
       src:path.relative(root || ROOT,input.file).replace(/\\/g,'/'),expectsMove:'answer'});
   }
@@ -1156,7 +1182,7 @@ function loadConfrontations(root, cycle, agentDir) {
     const id = (m.payload || {}).confrontationId, directive = known.get(id);
     if (m.type === 'answer' && ['pending','applied','failed'].includes(m.status) && directive && Number(m.cycle) >= directive.cycle) answeredIds.add(id);
   }
-  return {available:true,all,open:all.filter(c => !answeredIds.has(c.id)),answeredIds:[...answeredIds]};
+  return {available:true,all,latestCycle,open:all.filter(c => c.cycle === latestCycle && !answeredIds.has(c.id)),answeredIds:[...answeredIds]};
 }
 
 function loadConfrontation(root, cycle, agentDir) {
@@ -1513,7 +1539,7 @@ module.exports = {
   clip, writePack, CONSTITUENT_CAP,
   // civic.38 Task 3 game blocks
   buildGameBlocks, boardRowsFor, boardNeedText, boardBlock, budgetStampText, budgetBandText, childToParentFromAudit, foldHood, requireCycle, loadAudit, gamePromptView,
-  loadMovesFolded, loadPatrolState, loadPetitionPool, loadWorkingCity, loadConfrontation, loadConfrontations, loadSeatMoves,
+  nextActionCycleOf, trackerClock, TERMINAL_STATUS_RE, loadMovesFolded, loadPatrolState, loadPetitionPool, loadWorkingCity, loadConfrontation, loadConfrontations, loadSeatMoves,
   loadCategoryMenu, loadTrackerRows, readJsonl, NEGATIVE_AFFECTS, BLOCK_CAP,
 };
 

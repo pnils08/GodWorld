@@ -1543,7 +1543,7 @@ test('R4: Working city selects 1 latest reflection per staff member across cycle
   }
 });
 
-test('R3: Unanswered directives persist across cycles, bind answer moves, and reject duplicate answers', () => {
+test('R3 (civic.47 M1 item 10): only the latest directive is open, history binds answers, duplicates are rejected', () => {
   const ws = createTempWorkspace();
   try {
     const office = { officeId: 'COUNCIL-D5', agentDir: 'civic-office-council-d5', district: 'D5' };
@@ -1553,10 +1553,11 @@ test('R3: Unanswered directives persist across cycles, bind answer moves, and re
     ws.writeText('output/mara-directives/mara_directive_c106_AUTO.txt', directiveText(106, office.agentDir, 'Prior unresolved demand'));
     ws.writeText('output/mara-directives/mara_directive_c108_AUTO.txt', directiveText(108, office.agentDir, 'Current demand'));
 
-    // Prior unresolved demand persists as open[0]
+    // The older block stays in history; only the latest directive is open.
     const state1 = civicSlice.loadConfrontations(ws.dir, 108, office.agentDir);
-    assert.strictEqual(state1.open.length, 2);
-    assert.strictEqual(civicSlice.loadConfrontation(ws.dir, 108, office.agentDir).id, 'CONF-106-' + office.agentDir);
+    assert.strictEqual(state1.all.length, 2);
+    assert.strictEqual(state1.open.length, 1);
+    assert.strictEqual(civicSlice.loadConfrontation(ws.dir, 108, office.agentDir).id, 'CONF-108-' + office.agentDir);
 
     // Record an answer to C106 in C107
     ws.writeJsonl('output/cron-civic/moves/moves_c107.jsonl', [{

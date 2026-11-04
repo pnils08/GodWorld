@@ -73,7 +73,8 @@ const civicSeat = require('./civicSeat');
 const { categoryIssue, budgetIssue, reachHoods, renewRowIssue } = require('./civicInterventionValidation');
 const cityHallLedger = require('./cityHallLedger');
 const chaosCascade = require('./dumpChaosCascade');
-const orBatch = require('./orBatch');   // civic.39 Task 3 — batch transport (importable since the require.main guard; key read is lazy)
+const orBatch = require('./orBatch');
+const maraDirective = require('./maraDirective');   // civic.39 Task 3 — batch transport (importable since the require.main guard; key read is lazy)
 
 /** Non-fatal: prior CIVIC positions for holder of agentDir. */
 async function positionWallInject(officeMap, agentDir) {
@@ -625,9 +626,9 @@ async function runPrep() {
   // crime-flavored -> police chief; ownerless hoods roll up to the Mayor digest.
   // A one-week decay flag skips the district seat (isOneWeekDecay).
   for (const p of audit.patterns.filter(p => p.severity === 'high')) {
-    const topic = { kind: 'ailment', title: 'Engine review HIGH: ' + p.type.replace(/-/g, ' '), body: ailmentPerception(p) + (p.type === 'stuck-initiative'
-      ? '\nThis is a decision demand, not a briefing. Advance the phase or take a fail phase. Silence fails the apply gate.'
-      : '') };
+    // civic.47 M1 item 12 (builder 2026-11-03): a program moves when its
+    // deadlines call for it, so a stuck-initiative reading carries no demand.
+    const topic = { kind: 'ailment', title: 'Engine review HIGH: ' + p.type.replace(/-/g, ' '), body: ailmentPerception(p) };
     const sig = JSON.stringify((p.evidence && p.evidence.fields) || {});
     if (p.type !== 'ledger-completeness') {
       if (!isOneWeekDecay(p, cycle)) {
@@ -665,6 +666,13 @@ async function runPrep() {
   // unless those seats still get a packet.
   for (const d of civicSeat.councilAgentDirs(officeMap)) {
     if (!assignments[d]) assignments[d] = [];
+  }
+  // civic.47 M1 item 11: a project director Mara addressed gets its packet
+  // (with her section) even when no initiative or pattern routed it a topic.
+  if (directive) {
+    for (const seat of projectSeats(officeMap)) {
+      if (!assignments[seat.agentDir] && maraDirective.blocksFor(directive, seat.agentDir).length) assignments[seat.agentDir] = [];
+    }
   }
 
   // engine.11 T5.3 — chaos cascade: a Tier-1 chaos-cars hit is citywide news,
@@ -761,9 +769,11 @@ async function runPrep() {
 
     // Mara cross-check — the office's section of the directive, if one exists
     if (directive) {
-      const sect = directive.split(/\n## /).find(s => s.includes('`' + dir + '`') || s.includes(dir));
+      // civic.47 M1 item 3: only blocks whose Agent line names this seat —
+      // never a Not directing line or another seat's block that mentions it.
+      const sect = maraDirective.blocksFor(directive, dir).join('\n');
       if (sect) {
-        const clean = cleanLines('## ' + sect).trim();
+        const clean = cleanLines(sect).trim();
         if (clean) L.push('', '## Directive from Mara Vance, City Planning Director', clean);
       }
     }
@@ -912,329 +922,587 @@ function callOpenRouter(model, system, user) {
 const modelFamily = slug => String(slug).split('/')[0];
 
 // ---------------------------------------------------------------------------
-// civic.39 Task 4 — the directive is a POST-CLOSE artifact. It is built from
-// close_c{N}.json and aims only at seats the close left PASSED OVER (their
-// voice never landed — pendingVoices) or carrying an UNANSWERED DEMAND
-// (petition pool at/above the visibility line with no proposal filed by the
-// seat, or a board row inside one cycle of its stall clock). The AUTO file
-// for week N is written after week N's close and consumed by week N+1's prep.
+// civic.47 M1 — Mara Vance's weekly directive, after the Sunday close. She
+// reads the week in full (Sunday and weekday statements, her promise record,
+// her last directives and the answers to them, the paper, the summary and the
+// tracker), looks things up with tools, and addresses the offices — mayor,
+// council, program directors — only where a promise is slipping or something
+// real deserves an answer. A week with no directive is a valid result. Code
+// supplies evidence and the roster; it does not pick her addressees.
+// The AUTO file for week N is written after week N's close and read by week
+// N+1's prep, the weekday reader and the projects stage.
 // ---------------------------------------------------------------------------
 
-// Petition visibility line (default the builder may overrule): a district with
-// this many Civic complaints on the record and no answering proposal is
-// confrontable.
-const PETITION_VISIBILITY_LINE = 3;
+const DIRECTIVE_MODEL = 'openai/gpt-6.1-sol';
+const DIRECTIVE_FALLBACK = 'google/gemini-3.8-flash';
+const DIRECTIVE_TOOL_CALLS = 8;
+const DIRECTIVE_TIMEOUT_MS = 600000;
+const DIRECTIVE_MAX_TOKENS = 32000;
+const MARA_POP = 'POP-00507';
 
-function seatUnansweredDemands(o, deps) {
-  const reasons = [];
-  const pool = deps.petitionPoolFor ? deps.petitionPoolFor(o) : null;
-  if (pool && pool.available) {
-    const answered = (deps.pendingProposals || []).filter(m => m.agentDir === o.agentDir).length;
-    if (pool.complaints.length >= PETITION_VISIBILITY_LINE && !answered) {
-      reasons.push('petition pool: ' + pool.complaints.length + ' complaint(s) ≥ the visibility line (' + PETITION_VISIBILITY_LINE + ') with NO proposal filed by this seat');
+// The offices Mara may address: mayor, nine council seats, program directors.
+function directiveRoster(officeMap) {
+  const out = [];
+  for (const o of officeMap.offices || []) {
+    const id = String(o.officeId || '');
+    if (o.agentDir && (id === 'MAYOR-01' || /^COUNCIL-D\d$/.test(id))) out.push({ agentDir: o.agentDir, holder: o.holder, title: o.title, office: o, kind: 'elected' });
+  }
+  for (const seat of projectSeats(officeMap)) {
+    const row = (officeMap.projects || []).find(p => p.agentDir === seat.agentDir) ||
+      (officeMap.offices || []).find(o => o.agentDir === seat.agentDir) || {};
+    out.push({ agentDir: seat.agentDir, holder: row.holder, title: row.title, office: row, kind: 'project', initiative: seat.initiative });
+  }
+  return out;
+}
+
+// Evidence lines for one office — what that office could see this week.
+// Plain facts; none of them obliges a directive.
+function seatEvidence(s, deps) {
+  const o = s.office;
+  const slice = deps.slice;
+  const lines = [];
+  if (deps.passedOver && deps.passedOver.has(s.agentDir)) lines.push('- no statement from this office landed in the C' + deps.cycle + ' close');
+  if (s.kind === 'elected') {
+    const hoods = slice.turfHoods(o);
+    const turfSet = new Set(hoods.map(h => String(h).toLowerCase()));
+    const hot = (deps.hoodScores || []).filter(h => turfSet.has(String(h.hood).toLowerCase()) && (h.outlier || h.traj === 'decay'));
+    if (hot.length) lines.push('- district readings: ' + hot.map(h => h.hood + ' (' + h.why.join('; ') + ')').join(' | '));
+    const pool = deps.petitionPoolFor ? deps.petitionPoolFor(o) : null;
+    if (pool && pool.available) {
+      const pending = (deps.pendingProposals || []).filter(m => m.agentDir === s.agentDir).length;
+      lines.push('- citizen complaints on the record: ' + pool.complaints.length + (pending ? '; ' + pending + ' proposal(s) pending from this office' : ''));
     }
   }
-  const dueSoon = (deps.boardFor ? deps.boardFor(o) : []).filter(b => {
-    const row = (deps.trackerRows || []).find(r => r.InitiativeID === b.id) || {};
-    const nac = Number(row.NextActionCycle);
-    return Number.isFinite(nac) && nac <= Number(deps.cycle) + 1;
-  });
-  if (dueSoon.length) reasons.push('stall clock: ' + dueSoon.map(b => b.id).join(', ') + ' (NextActionCycle ≤ C' + (Number(deps.cycle) + 1) + ')');
-  return reasons;
-}
-
-// The close-derived addressee set. deps is injectable for tests; runDirective
-// assembles the real one from the slice builders.
-function directiveTargetSeats(cycle, opts) {
-  opts = opts || {};
-  const root = opts.root || ROOT;
-  const officeMap = opts.officeMap || mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
-  const closeRec = opts.closeRec !== undefined ? opts.closeRec
-    : readJson(path.join(root, 'output', 'cron-civic', 'close_c' + cycle + '.json'));
-  // Valid addressees = the 10 ELECTED seats (mayor + 9 council, civic.38
-  // Task 8). A pending voice from a non-elected seat never becomes an addressee.
-  const pool = (officeMap.offices || []).filter(o => {
-    if (!o.agentDir) return false;
-    const id = String(o.officeId || '');
-    return id === 'MAYOR-01' || /^COUNCIL-D\d$/.test(id);
-  });
-  const dirForSlug = slug => String(slug).indexOf('mayor') === 0
-    ? 'civic-office-mayor'
-    : 'civic-office-' + String(slug).replace(/_/g, '-');
-  const passedOver = new Set((((closeRec || {}).pendingVoices) || []).map(dirForSlug));
-  const targets = [];
-  for (const o of pool) {
-    const reasons = [];
-    if (passedOver.has(o.agentDir)) reasons.push('passed over — no voice from this seat landed in the C' + cycle + ' close');
-    if (opts.deps) reasons.push.apply(reasons, seatUnansweredDemands(o, opts.deps));
-    if (reasons.length) targets.push({ agentDir: o.agentDir, holder: o.holder, title: o.title, office: o, reasons });
+  const board = deps.boardFor ? deps.boardFor(s) : [];
+  for (const b of board) {
+    const row = (deps.trackerRows || []).find(r => r.InitiativeID === b.id);
+    const clock = slice.trackerClock(row, deps.cycle);
+    lines.push('- board ' + b.id + ' ' + (b.name || '') + ' [' + (b.phase || '—') + ', ' + (b.status || '—') + ']' +
+      (clock ? ' next step ' + (clock.state === 'past-due' ? 'PAST DUE (C' + clock.nac + ')' : clock.state === 'due-next' ? 'due C' + clock.nac : 'scheduled C' + clock.nac) : ' — no dated next step'));
   }
-  return targets;
+  return lines;
 }
 
-// Block validation against the close-derived target set: a block addressed to
-// ANY other seat — even a real elected one — is rejected. The five template
-// fields are mandatory (a truncated tail block fails the field check).
-function filterDirectiveBlocks(text, targetDirs) {
-  const known = targetDirs instanceof Set ? targetDirs : new Set(targetDirs);
-  let blocks = String(text).replace(/^```(?:markdown)?\s*/i, '').replace(/\s*```\s*$/, '')
-    .split(/\n(?=## )/).filter(p => /^## /.test(p));
-  const FIELDS = ['**Agent', '**Address', '**Why', '**Acceptance', '**Silence consequence'];
+// Block validation: Agent on the roster; Agent, Address, Why, Acceptance
+// required; Silence consequence and Promise optional. The Not directing
+// section is parsed out first and checked on its own.
+function filterDirectiveBlocks(text, rosterDirs, opts) {
+  const known = rosterDirs instanceof Set ? rosterDirs : new Set(rosterDirs);
+  // At most one block per roster office (a second is rejected below).
+  const max = (opts && opts.max) || known.size;
+  const split = maraDirective.splitDirective(text);
+  const FIELDS = ['Address', 'Why', 'Acceptance'];
+  const fieldValue = (b, f) => ((b.match(new RegExp('\\*\\*' + f + ':\\*\\*[ \\t]*([^\\n]*)')) || [])[1] || '').trim();
+  const knownPromises = opts && opts.knownPromiseIds;
   const rejected = [];
-  blocks = blocks.filter(b => {
-    const m = b.match(/\.claude\/agents\/([a-z0-9-]+)\/?/i);
-    if (!m || !known.has(m[1])) { rejected.push({ head: (b.split('\n')[0] || '').slice(0, 80), why: 'addressee outside the close-derived target set' }); return false; }
-    const missing = FIELDS.filter(f => !b.includes(f));
-    if (missing.length) { rejected.push({ head: (b.split('\n')[0] || '').slice(0, 80), why: 'missing fields: ' + missing.join(', ') }); return false; }
+  const seen = new Set();
+  let blocks = split.blocks.filter(b => {
+    const head = (b.split('\n')[0] || '').slice(0, 80);
+    const dir = maraDirective.agentDirOf(b);
+    if (!dir || !known.has(dir)) { rejected.push({ head, why: 'addressee unknown — not on the roster' }); return false; }
+    const missing = FIELDS.filter(f => !fieldValue(b, f));
+    if (missing.length) { rejected.push({ head, why: 'missing fields: ' + missing.map(f => '**' + f + ':**').join(', ') }); return false; }
+    if (!/\b(C\d+|Cycle \d+)\b/.test(fieldValue(b, 'Why'))) { rejected.push({ head, why: 'malformed block — Why cites no Cycle' }); return false; }
+    if (/\*\*Promise:\*\*/.test(b) && knownPromises) {
+      const ids = maraDirective.promiseIdsIn(b);
+      const unknown = ids.filter(id => !knownPromises.has(id));
+      if (!ids.length || unknown.length) { rejected.push({ head, why: 'Promise line names no recorded promise' + (unknown.length ? ': ' + unknown.join(', ') : '') }); return false; }
+    }
+    if (seen.has(dir)) { rejected.push({ head, why: 'malformed — a second block for the same office (one question id per office)' }); return false; }
+    seen.add(dir);
     return true;
   });
   let truncated = 0;
-  if (blocks.length > 12) { truncated = blocks.length - 12; blocks = blocks.slice(0, 12); }
-  return { blocks, rejected, truncated };
+  if (blocks.length > max) { truncated = blocks.length - max; blocks = blocks.slice(0, max); }
+  const ndProblem = maraDirective.notDirectingProblem(split.notDirecting);
+  return { blocks, rejected, truncated, notDirecting: ndProblem ? null : split.notDirecting, notDirectingProblem: ndProblem };
+}
+
+const DIRECTIVE_BRIEF = [
+  '## Your weekly directive — how you work this desk',
+  '',
+  'Each week, after the council closes, you read what the city\'s offices said and did, what the',
+  'paper published, and what the city record shows. You are the city\'s institutional memory: you',
+  'keep offices true to their own word, and you ask them about what is happening in their',
+  'districts and programs. You address the Mayor, the nine council members and the five program',
+  'directors.',
+  '',
+  'Write a directive block only where there is something real to put in front of an office:',
+  '- a promise check: the office said it would do something; where does it stand?',
+  '- an event question: something happened in its district or program (a celebration, a crowd,',
+  '  an opening, a change); what is the office doing about it, if anything?',
+  '- a record question: a reading in its district keeps repeating or looks off; what does the',
+  '  office see?',
+  '- a past-due step: an initiative\'s dated next step on the tracker has passed.',
+  '',
+  'Most of this city is doing well. A quiet week with nothing to ask is a real result, and so is',
+  'an office you leave alone. A program that sits in one phase for a while has not missed',
+  'anything — its deadline is the date of its next step on the tracker. Do not invent urgency,',
+  'defaults or legal consequences; say only what the record shows.',
+  '',
+  'One block per office you address, exactly this shape:',
+  '',
+  '## [Full Name] — [Role]',
+  '',
+  '- **Agent:** `.claude/agents/<seat>/`  (routing line — copy the seat id exactly as listed for that person)',
+  '- **Address:** one sentence — your question or request, plainly',
+  '- **Why:** what you saw, with the Cycle and where it came from',
+  '- **Acceptance:** what a full answer would show',
+  '- **Promise:** P-…  (only when the block puts a recorded promise in front of the office)',
+  '- **Silence consequence:** (optional — only when something real depends on the answer)',
+  '',
+  'After the blocks, always end with:',
+  '',
+  '## Not directing',
+  '- [Full Name] ([Role]): why you are leaving this office alone this week',
+  '',
+  'In that section name people and titles only — no seat ids.',
+  '',
+  'Your tools: promise_record (record a promise an office made, or close one with evidence tied to',
+  'it), memory_recall (your own record: past directives, what offices promised and did, your',
+  'notes), memory_note (add to it), canon_recall (what the Tribune has published), citizen_lookup, sheet_read (a city',
+  'sheet). Use them when they help; you can also work from the material alone.',
+].join('\n');
+
+const PROMISE_TOOL = { type: 'function', function: { name: 'promise_record', description: 'Record a promise an office made in its own public statement this week, or close an open promise with evidence tied to it. Every call is checked against the record; a rejected call says why.', parameters: { type: 'object', properties: {
+  action: { type: 'string', enum: ['promise', 'status'] },
+  source: { type: 'object', description: 'for action=promise: {kind:"sunday"|"weekday", office:"<seat id>", statement:"open"|"gavel" (mayor only), cycle:<number>, index:<statement index, Sunday>, field:"quote"|"fullStatement"|"decision" (Sunday) or "statement" (weekday), date:"YYYY-MM-DD" (weekday)}' },
+  said: { type: 'string', description: 'for action=promise: the exact words of the promise, copied from that field' },
+  promiseId: { type: 'string', description: 'for action=status' },
+  status: { type: 'string', enum: ['kept', 'dropped', 'changed'] },
+  evidence: { type: 'object', description: 'for action=status: {type:"tracker", initiativeId, field, value} (kept: ImplementationPhase moved; dropped: a final Status; changed: NextActionCycle or NextScheduledAction) | {type:"statement", source:{…as above}, quote} | {type:"answer", confrontationId, quote}. A statement or answer close is your reading of the office\'s own words: quote the words you rely on; the record shows it was closed on the office\'s word.' },
+  note: { type: 'string' },
+}, required: ['action'] } } };
+
+const MARA_RECALL_TOOL = { type: 'function', function: { name: 'memory_recall', description: 'Read your own record: past directives, what offices promised and did, what closed, your notes from earlier weeks. Optional query narrows by topic.', parameters: { type: 'object', properties: { query: { type: 'string', description: 'optional topic keywords' } }, required: [] } } };
+const MARA_NOTE_TOOL = { type: 'function', function: { name: 'memory_note', description: 'Write one short note to your own record — something to pick up next week. Not the directive. Three a week.', parameters: { type: 'object', properties: { note: { type: 'string' } }, required: ['note'] } } };
+
+// The tool executor for one attempt. Writes are staged on `stage` and
+// committed only after the final text validates.
+function maraToolExecutor(ctx, stage) {
+  const dw = require('./cron-desk-writer');
+  const promises = require('./maraPromises');
+  const record = ctx.record;
+  return async function (name, input) {
+    input = input || {};
+    if (name === 'promise_record') {
+      if (input.action === 'promise') {
+        const v = promises.validatePromise(input, ctx.promiseCtx);
+        if (!v.ok) { stage.rejectedPromises.push({ action: 'promise', why: v.why }); return 'rejected: ' + v.why; }
+        if (!stage.promises.some(r => r.eventId === v.row.eventId) && !record.promises.has(v.row.promiseId)) stage.promises.push(v.row);
+        return 'recorded ' + v.row.promiseId + (v.row.initiativeId ? ' (' + v.row.initiativeId + ')' : '');
+      }
+      if (input.action === 'status') {
+        const v = promises.validateStatus(input, ctx.promiseCtx, record);
+        if (!v.ok) { stage.rejectedPromises.push({ action: 'status', promiseId: input.promiseId || null, why: v.why }); return 'rejected: ' + v.why; }
+        if (!stage.statuses.some(r => r.eventId === v.row.eventId)) stage.statuses.push(v.row);
+        return 'closed ' + v.row.promiseId + ' as ' + v.row.status;
+      }
+      return 'rejected: action must be promise or status';
+    }
+    if (name === 'memory_recall') {
+      // Her page: the seeded records and newest entries, plus what matches the query.
+      const memory = require('./maraMemory');
+      const q = String(input.query || '').trim();
+      const [rec, hit] = await Promise.all([memory.recent(8), q ? memory.search(q) : Promise.resolve(null)]);
+      const reads = [rec].concat(hit ? [hit] : []);
+      stage.memoryReads.push({ query: q, status: reads.every(r => r.status === 'ok') ? 'ok' : 'unavailable', hits: reads.reduce((n, r) => n + (r.results ? r.results.length : 0), 0), why: reads.map(r => r.why).filter(Boolean).join('; ') || null });
+      const bad = reads.find(r => r.status !== 'ok');
+      if (bad) return 'Your memory is unavailable right now (' + bad.why + ') — this is not an empty record; say nothing about what it holds.';
+      const line = x => '- ' + (x.cycle != null ? '[C' + x.cycle + '] ' : '') + x.text;
+      const parts = [];
+      if (rec.results.length) parts.push('Your record (seeded desk records and newest entries):\n' + rec.results.map(line).join('\n'));
+      if (hit) parts.push(hit.results.length ? 'On "' + q + '":\n' + hit.results.map(line).join('\n') : 'Nothing on "' + q + '".');
+      return parts.join('\n\n') || 'Your record is empty.';
+    }
+    if (name === 'memory_note') {
+      if (stage.notes.length >= 3) return 'notebook full for this week — three notes';
+      const note = String(input.note || '').trim();
+      if (!note) return 'empty note';
+      stage.notes.push(note);
+      return 'noted';
+    }
+    if (name === 'canon_recall') return dw.toolCanonRecall(input, Number(ctx.cycle) + 1);
+    if (name === 'citizen_lookup') return dw.toolCitizenLookup(input);
+    if (name === 'sheet_read') return dw.toolSheetRead(input);
+    return 'unknown tool ' + name;
+  };
+}
+
+function maraToolset() {
+  const dw = require('./cron-desk-writer');
+  const pick = (list, n) => list.find(t => t.function.name === n);
+  return [PROMISE_TOOL, MARA_RECALL_TOOL, MARA_NOTE_TOOL,
+    dw.CANON_RECALL_TOOL, pick(dw.OPENROUTER_TOOLS, 'citizen_lookup'), pick(dw.OPENROUTER_TOOLS, 'sheet_read')].filter(Boolean);
+}
+
+// The week Mara reads, in full.
+function directiveMaterial(cycle, opts) {
+  const root = opts.root;
+  const prevN = Number(cycle) - 1;
+  const out = {};
+  const voiceDir = path.join(root, 'output', 'civic-voice');
+  out.sunday = [];
+  if (fs.existsSync(voiceDir)) {
+    for (const f of fs.readdirSync(voiceDir).sort()) {
+      const m = f.match(/^(.+)_c(\d+)\.json$/);
+      if (!m || Number(m[2]) !== Number(cycle)) continue;
+      const j = readJson(path.join(voiceDir, f));
+      if (j) out.sunday.push({ file: m[1], j });
+    }
+  }
+  const dwDir = path.join(root, 'output', 'cron-civic', 'datawake');
+  out.weekday = [];
+  if (fs.existsSync(dwDir)) {
+    for (const f of fs.readdirSync(dwDir).sort()) {
+      const m = f.match(/^(civic-[a-z0-9-]+)_(\d{4}-\d{2}-\d{2})\.json$/);
+      if (!m) continue;
+      const j = readJson(path.join(dwDir, f));
+      if (j && Number(j.cycle) === prevN && opts.roster.has(j.agentDir)) out.weekday.push({ agentDir: m[1], date: m[2], j });
+    }
+  }
+  const dirDir = path.join(root, 'output', 'mara-directives');
+  out.priorDirectives = [];
+  for (let c = Number(cycle) - 1; c >= Number(cycle) - 3 && c > 0; c--) {
+    const p = ['mara_directive_c' + c + '_AUTO.txt', 'mara_directive_c' + c + '.txt', 'mara_directive_c' + c + '.md']
+      .map(f => path.join(dirDir, f)).find(x => fs.existsSync(x));
+    if (p) out.priorDirectives.push({ cycle: c, file: path.basename(p), text: fs.readFileSync(p, 'utf8') });
+  }
+  // Answers to her questions: weekday answer moves of the week, and
+  // directors' maraAnswer on Sunday.
+  out.answers = [];
+  const folded = loadMoveLedgerFolded(root, prevN);
+  if (folded) {
+    for (const m of folded.values()) {
+      if (m.type === 'answer' && ['pending', 'applied', 'failed'].includes(m.status) && m.payload && m.payload.confrontationId) {
+        out.answers.push({ agentDir: m.agentDir, confrontationId: m.payload.confrontationId, text: m.payload.text || '', via: 'weekday' });
+      }
+    }
+  }
+  for (const s of out.sunday) {
+    const a = s.j.maraAnswer;
+    if (a && a.confrontationId) {
+      const mm = String(a.confrontationId).match(/^CONF-\d+-(.+)$/);
+      if (mm) out.answers.push({ agentDir: mm[1], confrontationId: a.confrontationId, kind: a.kind || null, text: (a.kind ? '[' + a.kind + '] ' : '') + (a.text || ''), via: 'sunday' });
+    }
+  }
+  const ed = path.join(root, 'editions', 'cycle_pulse_c' + cycle + '.txt');
+  out.edition = fs.existsSync(ed) ? fs.readFileSync(ed, 'utf8') : null;
+  return out;
+}
+
+function renderSunday(s) {
+  const j = s.j;
+  const lines = ['### ' + s.file + ' — ' + (j.speaker || '?')];
+  if (j.cascadeSummary) lines.push('Summary: ' + j.cascadeSummary);
+  (j.statements || []).forEach((st, i) => {
+    lines.push('[' + i + '] ' + (st.initiative ? '(' + st.initiative + ') ' : '') + 'decision: ' + (st.decision || ''));
+    if (st.quote) lines.push('    quote: ' + st.quote);
+    if (st.fullStatement) lines.push('    fullStatement: ' + st.fullStatement);
+    if (st.trackerUpdates && Object.keys(st.trackerUpdates).length) lines.push('    trackerUpdates: ' + JSON.stringify(st.trackerUpdates));
+  });
+  if (j.maraAnswer) lines.push('Reply to you (' + j.maraAnswer.confrontationId + ', ' + j.maraAnswer.kind + '): ' + j.maraAnswer.text);
+  return lines.join('\n');
+}
+function renderWeekday(w) {
+  const moves = (w.j.moves || []).map(m => '- ' + m.type + ' ' + JSON.stringify(m.payload || {}));
+  return '### ' + w.agentDir + ' — ' + w.date + ' (' + (w.j.holder || '?') + ')\nstatement: ' + (w.j.statement || '') + (moves.length ? '\nmoves:\n' + moves.join('\n') : '');
+}
+
+// Her weekly run entry, on her page: what she directed, what closed, what she is watching.
+function runEntryText(cycle, blocks, notDirecting, openPromises, closed) {
+  const lines = ['C' + cycle + ' — Mara Vance\'s directive, written after the close.'];
+  if (blocks.length) for (const b of blocks) {
+    const address = (b.match(/\*\*Address:\*\*\s*(.+)/) || [])[1] || '';
+    lines.push('Directed ' + (b.split('\n')[0] || '').replace(/^## /, '') + ': ' + address.trim());
+  } else lines.push('No directive this week.');
+  if (notDirecting) lines.push(notDirecting.replace(/^## Not directing\s*/i, 'Not directing:\n'));
+  for (const c of closed || []) {
+    const e = c.status.evidence || {};
+    const how = e.basis === 'office-word' ? 'on the office\'s word: "' + e.quote + '"' : e.field + ' moved from ' + (e.before || 'blank') + ' to ' + e.value;
+    lines.push('Closed ' + c.promise.office.replace(/^civic-(office|project)-/, '') + ' "' + c.promise.said + '" as ' + c.status.status + ', ' + how + '.');
+  }
+  if (openPromises.length) lines.push('Open promises she is watching: ' + openPromises.map(p => p.office.replace(/^civic-(office|project)-/, '') + ' "' + p.said + '"').join('; '));
+  return lines.join('\n');
+}
+
+// Commit staged writes after validation (re-review finding 4): remote memory
+// first (upsert by customId + readback), the promise rows last (skipped when
+// their eventId is already on file). Each outcome lands in the receipt.
+async function commitDirectiveWrites(cycle, staged, opts) {
+  const receiptPath = path.join(opts.root, 'output', 'mara-directives', 'commit_c' + cycle + '.json');
+  // A resume continues the prior receipt; a fresh run starts its own (its
+  // staged content is new — the ids still keep a write from landing twice).
+  const prior = (opts.resume && readJson(receiptPath)) || { writes: {} };
+  const receipt = { cycle: Number(cycle), writes: prior.writes || {}, ranAt: new Date().toISOString() };
+  const done = id => receipt.writes[id] && receipt.writes[id].ok;
+  const memory = opts.memory || require('./maraMemory');
+  const page = opts.page || require('../lib/citizenPage');
+  const entryId = memory.CONTAINER + '-c' + cycle + '-directive-run';
+  if (!done(entryId)) receipt.writes[entryId] = await memory.upsert(entryId, staged.runEntry, { cycle: Number(cycle), type: 'desk-record', kind: 'directive-run' });
+  for (let i = 0; i < staged.notes.length; i++) {
+    const key = 'directive-note' + (i + 1);
+    const id = 'page:' + key;
+    if (done(id)) continue;
+    const r = await page.appendReflection_(MARA_POP, staged.notes[i], { cycle: Number(cycle), daypart: 'directive', key, extra: { kind: 'planning-director-note' } });
+    if (r.error) { receipt.writes[id] = { ok: false, why: r.error }; continue; }
+    const back = await page.pageHasDoc_(MARA_POP, r.customId);
+    receipt.writes[id] = back === true ? { ok: true, customId: r.customId } : { ok: false, customId: r.customId, why: back === false ? 'readback: not found' : 'readback: unknown' };
+  }
+  const rows = staged.promises.concat(staged.statuses);
+  if (rows.length && !done('promises')) {
+    try {
+      const a = require('./maraPromises').appendRows(opts.root, rows);
+      receipt.writes.promises = { ok: true, written: a.written.length, skipped: a.skipped.length };
+    } catch (e) { receipt.writes.promises = { ok: false, why: e.message }; }
+  }
+  receipt.complete = Object.values(receipt.writes).every(w => w && w.ok);
+  fs.writeFileSync(receiptPath, JSON.stringify(receipt, null, 2));
+  return receipt;
+}
+
+// Finish a partial commit from the staged writes. Returns the updated
+// manifest, or null when nothing is staged.
+async function resumeDirectiveCommit(cycle, opts) {
+  const root = (opts && opts.root) || ROOT;
+  const civicDir = path.join(root, 'output', 'cron-civic');
+  const manifestPath = path.join(civicDir, 'directive_c' + cycle + '.json');
+  const stagedPath = path.join(root, 'output', 'mara-directives', 'staged_c' + cycle + '.json');
+  const manifest = readJson(manifestPath);
+  const staged = readJson(stagedPath);
+  if (!manifest || !staged) return null;
+  log('resuming the C' + cycle + ' directive commit from the staged writes — no model call');
+  const receipt = await commitDirectiveWrites(cycle, staged, Object.assign({ root, resume: true }, opts || {}));
+  manifest.commit = receipt.complete ? 'complete' : 'partial';
+  manifest.commitReceipt = path.relative(root, path.join(root, 'output', 'mara-directives', 'commit_c' + cycle + '.json'));
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+  return manifest;
 }
 
 async function runDirective() {
   const cycle = arg('--cycle', null) || detectCycle();
-  const prev = String(Number(cycle) - 1);
-  console.log('Civic DIRECTIVE — c' + cycle);
+  const DRY_COMMIT = process.argv.includes('--dry-commit');
+  console.log('Civic DIRECTIVE — c' + cycle + (DRY_COMMIT ? ' (dry commit — no memory or promise writes)' : ''));
   console.log('===================================');
 
   const officeMap = mustJson(path.join(ROOT, 'scripts', 'civic-office-map.json'), 'office map');
   const summaryMd = mustRead(path.join(ROOT, 'output', 'world_summary_c' + cycle + '.md'), 'run /build-world-summary first');
   const audit = mustJson(path.join(ROOT, 'output', 'engine_audit_c' + cycle + '.json'), 'run /engine-review first');
   const tracker = trackerSnapshot.loadOrRebuild(cycle);
+  const outDir = path.join(ROOT, 'output', 'mara-directives');
+  const stagedPath = path.join(outDir, 'staged_c' + cycle + '.json');
 
-  // Friction rule (plan Task 2.2): the directive's model family must differ
-  // from the Mayor's writer family.
-  const mayorModel = (officeMap.offices.find(o => o.officeId === 'MAYOR-01') || {}).model || '';
-  const MODEL = arg('--model', 'google/gemini-3.8-flash');
-  if (modelFamily(MODEL) === modelFamily(mayorModel)) {
-    console.error('FRICTION VIOLATION: directive model family "' + modelFamily(MODEL) + '" matches the Mayor\'s writer family. Pick a different --model.');
-    process.exit(2);
+  // Resume a partial commit (re-review finding 4): the directive is written;
+  // only the missing writes are redone, from what was staged.
+  const manifestPath = path.join(CIVIC, 'directive_c' + cycle + '.json');
+  const priorManifest = readJson(manifestPath);
+  if (!DRY_COMMIT && priorManifest && priorManifest.commit === 'partial') {
+    const r = await resumeDirectiveCommit(cycle);
+    console.log('\n=== directive commit ' + (r ? r.commit : 'not resumable — no staged writes on disk') + ' ===');
+    if (!r || r.commit !== 'complete') process.exit(1);
+    return;
   }
 
-  // Mara persona: IN_WORLD_CHARACTER.md only (Mike-direct S344). The
-  // VOICE_DIRECTIVE_TEMPLATE is an apparatus doc (.claude paths, audit paths,
-  // owner sign-off) — feeding it whole put out-of-sim framing in her context.
-  // The directive craft is distilled into the in-world brief below instead.
-  // civic.38 Task 8: the directive is a CONFRONTATION aimed at the elected
-  // seats — what the seat could have seen (its own district data, its
-  // petition pool, its board) and must now answer.
-  const DIRECTIVE_BRIEF = [
-    '## Your cycle directive — how you work this desk',
-    '',
-    'Each cycle you review the city\'s live record and confront the elected seats that owe',
-    'the public an answer. You are the city\'s institutional memory: you catch the unresolved',
-    'thread, the number nobody published, the seat gone quiet while its district moves the',
-    'wrong way. Project directors and staff are not your addressees — their work is',
-    'operational. You confront the people the city can vote out.',
-    '',
-    'Issue one block per addressee, exactly this shape:',
-    '',
-    '## [Full Name] — [Role]',
-    '',
-    '- **Agent:** `.claude/agents/<seat>/`  (routing line — copy the seat id exactly as listed for that person)',
-    '- **Address:** one sentence, action-shaped — what they must say, publish, or do this cycle',
-    '- **Why:** the unresolved thread. Cite cycles by number. Name the decision that depends on this.',
-    '- **Acceptance:** what counts as resolved — a number, a position, a filed deliverable, observable next cycle',
-    '- **Silence consequence:** what breaks if they stay silent. Silence is also a position.',
-    '',
-    'All five fields, every block. Order by urgency: vote-gating first, then',
-    'record-corrections, then coverage gaps, then escalations of prior directives that went',
-    'unanswered. Maximum 12 blocks. If you cannot write a clean Acceptance line, the',
-    'directive is not ready — cut it. Thin directives are noise; issuing fewer, sharper',
-    'directives is always the better cycle.',
-    '',
-    'A demand must be traceable to something the seat could see: a district hood moving the',
-    'wrong way, constituents complaining on the record with no proposal filed in answer, or an',
-    'initiative on the seat\'s board about to hit its stall clock. Name the evidence.',
-  ].join('\n');
+  // Friction rule (plan Task 2.2): the directive's writer family — primary
+  // and fallback — must differ from the Mayor's.
+  const mayorModel = (officeMap.offices.find(o => o.officeId === 'MAYOR-01') || {}).model || '';
+  const MODEL = arg('--model', DIRECTIVE_MODEL);
+  for (const m of [MODEL, DIRECTIVE_FALLBACK]) {
+    if (modelFamily(m) === modelFamily(mayorModel)) {
+      console.error('FRICTION VIOLATION: directive model family "' + modelFamily(m) + '" matches the Mayor\'s writer family. Pick a different --model.');
+      process.exit(2);
+    }
+  }
+
+  // Mara persona: IN_WORLD_CHARACTER.md only (Mike-direct S344), plus the
+  // in-world desk brief.
   const persona = [
     mustRead(path.join(ROOT, 'docs', 'mara-vance', 'IN_WORLD_CHARACTER.md'), 'Mara persona'),
     DIRECTIVE_BRIEF,
   ].join('\n\n---\n\n');
 
-  // civic.39 Task 4: the directive is built AFTER the close and names only
-  // seats the close left passed-over or carrying an unanswered demand. The
-  // close record is the required input; without it the stage fails loud.
   const closeRec = readJson(path.join(CIVIC, 'close_c' + cycle + '.json'));
   if (!closeRec) {
     console.error('HALT: no close_c' + cycle + '.json — the directive is a post-close stage (civic.39 Task 4). Run --stage=close first.');
     process.exit(1);
   }
 
-  // Per-seat material is built from the SAME inputs the seats get: district
-  // hood movement (engine audit), the petition pool (beats Reflection_Intake),
-  // the seat's board (beats tracker dump). A confrontation confronts with what
-  // the seat could have seen.
   const slice = require('./buildCivicOfficeSlice');
   const c2p = slice.childToParentFromAudit(audit);
   const trackerRows = slice.loadTrackerRows(ROOT, cycle);
   if (trackerRows === null) throw new Error('Directive board unavailable: Initiative_Tracker dump absent');
-  const hoodScores = slice.scoreHoods(audit);
+  const roster = directiveRoster(officeMap);
+  const rosterDirs = new Set(roster.map(s => s.agentDir));
   const pendingProposals = (function () {
     const folded = loadMoveLedgerFolded(ROOT, moveWeekForClose(cycle));
     if (!folded) return [];
     return [...folded.values()].filter(m => m.status === 'pending' && m.type === 'propose');
   })();
-
-  // The close-derived target set: passed-over seats ∪ unanswered demands.
-  const seats = directiveTargetSeats(cycle, {
-    officeMap, closeRec,
-    deps: {
-      cycle, pendingProposals, trackerRows,
-      petitionPoolFor: o => slice.loadPetitionPool(ROOT, o, slice.turfHoods(o), officeMap, c2p, cycle),
-      boardFor: o => slice.boardRowsFor(o, trackerRows, c2p),
-    },
-  });
-
-  const writeDirectiveOutputs = (blocks, rejected, usage, note) => {
-    // Canonical header is OURS, never the model's — no Gregorian dates in
-    // sim-facing content (no-real-world-clock rule); sim clock only.
-    const outDir = path.join(ROOT, 'output', 'mara-directives');
-    fs.mkdirSync(outDir, { recursive: true });
-    const outPath = path.join(outDir, 'mara_directive_c' + cycle + '_AUTO.txt');
-    const canonHeader = [
-      '# C' + cycle + ' Voice Directives — Mara Vance (AUTO)',
-      '',
-      '**Cycle:** ' + cycle,
-      '**Issued:** C' + cycle + ' (auto-derived, cron-civic-run.js --stage=directive, post-close)',
-      '**Source:** close_c' + cycle + ' + world_summary_c' + cycle + ' + engine review HIGHs + tracker + C' + prev + ' voice record',
-      '',
-      '---',
-      '',
-    ].join('\n');
-    fs.writeFileSync(outPath, canonHeader + (blocks.length ? blocks.join('\n') + '\n'
-      : 'Mara issued no directives after the C' + cycle + ' close — no seat was passed over and no demand went unanswered.\n'));
-    fs.mkdirSync(CIVIC, { recursive: true });
-    fs.writeFileSync(path.join(CIVIC, 'directive_c' + cycle + '.json'), JSON.stringify({
-      stage: 'directive', cycle: Number(cycle), model: blocks.length ? MODEL : null, mayorModel, closeDerived: true,
-      targets: seats.map(s => ({ agentDir: s.agentDir, reasons: s.reasons })),
-      blocks: blocks.map(b => (b.split('\n')[0] || '').replace(/^## /, '').slice(0, 100)),
-      rejectedBlocks: rejected, usage: usage || null, note: note || null,
-      directive: path.relative(ROOT, outPath), ranAt: new Date().toISOString(),
-    }, null, 2));
-    console.log('\n=== directive complete: ' + blocks.length + ' block(s)' + (rejected.length ? ' (' + rejected.length + ' rejected)' : '') + (note ? ' — ' + note : '') + ' → ' + path.relative(ROOT, outPath) + ' ===');
+  const dirForSlug = slug => String(slug).indexOf('mayor') === 0 ? 'civic-office-mayor'
+    : LAYER3_DIRS.has('civic-project-' + String(slug).replace(/_/g, '-')) ? 'civic-project-' + String(slug).replace(/_/g, '-')
+    : 'civic-office-' + String(slug).replace(/_/g, '-');
+  const deps = {
+    slice, cycle, pendingProposals, trackerRows, hoodScores: slice.scoreHoods(audit),
+    passedOver: new Set(((closeRec.pendingVoices) || []).map(dirForSlug)),
+    petitionPoolFor: o => slice.loadPetitionPool(ROOT, o, slice.turfHoods(o), officeMap, c2p, cycle),
+    // A director's board is its own initiative.
+    boardFor: s => s.kind === 'project'
+      ? trackerRows.filter(r => r.InitiativeID === s.initiative).map(r => ({ id: r.InitiativeID, name: r.Name, phase: r.ImplementationPhase || null, status: r.Status || null }))
+      : slice.boardRowsFor(s.office, trackerRows, c2p),
   };
+  const promises = require('./maraPromises');
+  const record = promises.loadRecord(ROOT);
+  const material = directiveMaterial(cycle, { root: ROOT, roster: rosterDirs });
+  const promiseCtx = { root: ROOT, cycle: Number(cycle), roster: rosterDirs, trackerRows, answers: material.answers };
 
-  if (!seats.length) {
-    log('close left no passed-over seat and no unanswered demand — no directive issued, no model call made');
-    writeDirectiveOutputs([], [], null, 'nothing owed after the close');
-    return;
-  }
-
-  const seatMaterial = seats.map(s => {
-    const o = s.office;
-    const hoods = slice.turfHoods(o);
-    const turfSet = new Set(hoods.map(h => String(h).toLowerCase()));
-    const lines = ['### ' + s.holder + ' (' + s.title + (o.district ? ', ' + o.district : '') + ') — ' + s.agentDir];
-    lines.push('- why named: ' + s.reasons.join(' | '));
-    // (a) hood data moving the wrong way
-    const hot = hoodScores.filter(h => turfSet.has(String(h.hood).toLowerCase()) && (h.outlier || h.traj === 'decay'));
-    if (hot.length) lines.push('- district heat: ' + hot.slice(0, 3).map(h => h.hood + ' (' + h.why.join('; ') + ')').join(' | '));
-    // (b) petitions above the visibility line with no proposal filed
-    const pool = slice.loadPetitionPool(ROOT, o, hoods, officeMap, c2p, cycle);
-    if (pool.available) {
-      const answered = pendingProposals.filter(m => m.agentDir === o.agentDir).length;
-      lines.push('- petition pool: ' + pool.complaints.length + ' complaint(s) on the record' +
-        (pool.complaints.length >= PETITION_VISIBILITY_LINE && !answered
-          ? ' — ABOVE the visibility line (' + PETITION_VISIBILITY_LINE + ') with NO proposal filed by this seat'
-          : answered ? ' — ' + answered + ' proposal(s) pending from this seat' : ''));
-    }
-    // (c) board rows inside one cycle of the stall clock.
-    const board = slice.boardRowsFor(o, trackerRows, c2p);
-    const dueSoon = board.filter(b => {
-      const row = trackerRows.find(r => r.InitiativeID === b.id) || {};
-      const nac = Number(row.NextActionCycle);
-      return Number.isFinite(nac) && nac <= Number(cycle) + 1;
-    });
-    if (board.length) lines.push('- board: ' + board.map(b => b.id + ' [' + (b.phase || '—') + ']').join(', '));
-    if (dueSoon.length) lines.push('- stall-clock proximity (NextActionCycle ≤ C' + (Number(cycle) + 1) + '): ' + dueSoon.map(b => b.id).join(', '));
-    return lines.join('\n');
-  });
-
-  // Cycle material: summary slices + HIGH patterns + tracker + last cycle's
-  // voice record + prior directive (escalation detection). Mara sits at the
-  // fourth wall — she MAY see raw engine data; the prep-side line filter keeps
-  // it out of voice packets.
-  const sections = splitSections(summaryMd);
-  const priorDirective = ['mara_directive_c' + prev + '.md', 'mara_directive_c' + prev + '.txt', 'mara_directive_c' + prev + '_AUTO.txt']
-    .map(f => path.join(ROOT, 'output', 'mara-directives', f)).find(p => fs.existsSync(p));
-  const voiceDir = path.join(ROOT, 'output', 'civic-voice');
-  const priorSaid = [];
-  if (fs.existsSync(voiceDir)) {
-    for (const f of fs.readdirSync(voiceDir)) {
-      const m = f.match(/^(.+)_c(\d+)\.json$/);
-      if (!m || m[2] !== prev) continue;
-      const j = readJson(path.join(voiceDir, f));
-      if (!j) continue;
-      const gist = j.cascadeSummary || (Array.isArray(j.statements) ? j.statements.map(s => s.decision || s.topic).filter(Boolean).join(' — ') : '');
-      if (gist) priorSaid.push('- ' + m[1] + ': ' + String(gist).replace(/\s+/g, ' ').slice(0, 400));
-    }
-  }
   const highs = audit.patterns.filter(p => p.severity === 'high' && !isOneWeekDecay(p, cycle))
     .map(p => '- [' + p.type + '] ' + ((p.affectedEntities || {}).neighborhoods || []).join(', ') +
       ((p.affectedEntities || {}).initiatives || []).map(i => ' ' + i).join('') +
-      ' — evidence: ' + JSON.stringify((p.evidence || {}).fields || {}).slice(0, 300));
-  const initLines = (tracker.initiatives || []).map(i => {
-    const impl = i.implementation || {};
-    return '- ' + i.id + ' ' + i.name + ' [' + (impl.phase || i.status) + '] next: ' + (impl.nextScheduledAction || '—') + ' (cycle ' + (impl.nextActionCycle || '—') + '). ' + String(impl.summary || '').slice(0, 300);
+      ' — evidence: ' + JSON.stringify((p.evidence || {}).fields || {}));
+  const trackerLines = trackerRows.map(r => {
+    const clock = slice.trackerClock(r, cycle);
+    return '- ' + r.InitiativeID + ' ' + (r.Name || '') + ' [' + (r.ImplementationPhase || '—') + ', ' + (r.Status || '—') + '] next: ' +
+      (r.NextScheduledAction || '—') + ' (' + (clock ? (clock.state === 'past-due' ? 'PAST DUE, C' : clock.state === 'due-next' ? 'due C' : 'scheduled C') + clock.nac : 'no dated step') + ')';
   });
+  const promiseLines = record.open.map(p => '- ' + p.promiseId + ' — ' + p.office + ' (C' + p.cycle + ', ' + p.source + (p.initiativeId ? ', ' + p.initiativeId : '') + '): "' + p.said + '"');
+  const answerLines = material.answers.map(a => '- ' + a.confrontationId + ' (' + a.via + '): ' + a.text);
 
   const user = [
-    'Produce your voice directive for cycle ' + cycle + ' as output text only — the structured block-per-addressee format from your template, with the cycle header. No prose outside the format.',
+    'Write your directive for Cycle ' + cycle + ' — the blocks, then the Not directing section. Output the directive text only.',
     '',
-    'HARD RULES:',
-    '- Addressees MUST come from this close-derived target list only — seats the C' + cycle + ' close left passed-over or carrying an unanswered demand (use the agentDir in the Agent field, formatted as `.claude/agents/<agentDir>/`):',
-    ...seats.map(s => '  - ' + s.agentDir + ' — ' + s.holder + ' (' + s.title + '): ' + s.reasons.join('; ')),
-    '- Maximum 12 blocks. Every block carries all five fields (Agent, Address, Why, Acceptance, Silence consequence).',
-    '- Only issue a directive where the cycle material below gives you a real unresolved thread, gap, or dependency. Thin directives are noise.',
-    '- Do not limit directives to initiative process. Press offices on the crisis and the success in their neighborhoods, their programs, and the city — they argue the initiatives, but they must fight for their constituents.',
-    '- Cite cycles by number (C' + prev + ', C' + cycle + '). Never invent citizens, numbers, or events not present below.',
+    'ROSTER (use the seat id in the Agent line, formatted `.claude/agents/<seat>/`):',
+    ...roster.map(s => '- ' + s.agentDir + ' — ' + s.holder + ' (' + s.title + ')'),
     '',
-    '=== PER-SEAT MATERIAL (target seats only — the same data each seat was given; confront them with what they could have seen) ===',
-    ...seatMaterial,
+    'Cite Cycles by number. Never invent citizens, numbers, events or promises that are not below or in what your tools return.',
+    'To record a promise, quote the office\'s own words with promise_record; to put a recorded promise in front of an office, add its **Promise:** line to the block.',
     '',
-    '=== CYCLE ' + cycle + ' MATERIAL ===',
+    '=== YOUR OPEN PROMISE RECORD (' + promiseLines.length + ') ===',
+    ...(promiseLines.length ? promiseLines : ['(none yet)']),
     '',
-    '## City State (engine summary)',
-    findSection(sections, 'City State').slice(0, 3000),
+    '=== REPLIES TO YOUR QUESTIONS THIS WEEK ===',
+    ...(answerLines.length ? answerLines : ['(none)']),
     '',
-    '## Three-Cycle Trends',
-    findSection(sections, 'Three-Cycle Trends').slice(0, 2000),
+    '=== YOUR LAST DIRECTIVES ===',
+    ...(material.priorDirectives.length ? material.priorDirectives.map(d => '--- C' + d.cycle + ' (' + d.file + ') ---\n' + d.text) : ['(none on file)']),
     '',
-    '## Approval Ratings',
-    findSection(sections, 'Approval Ratings'),   // builder 2026-11-01: no character caps
+    '=== SUNDAY C' + cycle + ' — WHAT THE OFFICES SAID ===',
+    ...(material.sunday.length ? material.sunday.map(renderSunday) : ['(no Sunday statements on file)']),
     '',
-    '## Engine review HIGH-severity patterns (' + highs.length + ')',
+    '=== THE WEEK BEFORE — WEEKDAY STATEMENTS (C' + (Number(cycle) - 1) + ' week) ===',
+    ...(material.weekday.length ? material.weekday.map(renderWeekday) : ['(none on file)']),
+    '',
+    '=== EACH OFFICE\'S OWN EVIDENCE ===',
+    ...roster.map(s => '### ' + s.holder + ' (' + s.title + ') — ' + s.agentDir + '\n' + (seatEvidence(s, deps).join('\n') || '- nothing on file')),
+    '',
+    '=== INITIATIVE TRACKER (live) ===',
+    ...trackerLines,
+    '',
+    '=== ENGINE REVIEW HIGH READINGS (' + highs.length + ') — a reading, not a demand ===',
     ...highs,
     '',
-    '## Initiative Tracker (live)',
-    ...initLines,
+    '=== CITY SUMMARY C' + cycle + ' ===',
+    summaryMd,
     '',
-    '## What the offices said last cycle (C' + prev + ')',
-    ...(priorSaid.length ? priorSaid : ['(no prior voice record on disk)']),
-    '',
-    '## Your prior directive (C' + prev + ') — check satisfaction, escalate what went unanswered',
-    priorDirective ? fs.readFileSync(priorDirective, 'utf8').slice(0, 6000) : '(none found on disk)',
+    material.edition ? '=== THE PAPER — EDITION C' + cycle + ' ===\n' + material.edition : '(No edition on file for C' + cycle + ' — canon_recall reaches what the paper has published.)',
   ].join('\n');
 
-  log('model=' + MODEL + ' (mayor=' + mayorModel + ') seats=' + seats.length + ' user=' + user.length + 'ch');
-  const r = await callOpenRouter(MODEL, persona, user);
-
-  // Validate against the close-derived target set: keep only blocks addressed
-  // to a named seat AND carrying all five mandatory template fields (a
-  // truncated tail block fails the field check).
-  const { blocks, rejected, truncated } = filterDirectiveBlocks(r.text, new Set(seats.map(s => s.agentDir)));
-  if (truncated) log('truncating ' + (blocks.length + truncated) + ' blocks to the template max of 12');
-  if (!blocks.length) {
-    console.error('HALT: directive model produced no block addressed to a close-derived target seat (' + rejected.length + ' rejected). Raw output kept at output/cron-civic/directive_c' + cycle + '.raw.txt');
+  const dw = require('./cron-desk-writer');
+  const writeOutputs = (result, model, usage, attempts, staged, note) => {
+    fs.mkdirSync(outDir, { recursive: true });
+    const outPath = path.join(outDir, 'mara_directive_c' + cycle + '_AUTO.txt');
+    const canonHeader = [
+      '# C' + cycle + ' Voice Directives — Mara Vance (AUTO)', '',
+      '**Cycle:** ' + cycle,
+      '**Issued:** C' + cycle + ' (auto-derived, cron-civic-run.js --stage=directive, post-close)',
+      '**Source:** close_c' + cycle + ' + the week\'s statements + promise record + world_summary_c' + cycle + ' + tracker', '',
+      '---', '',
+    ].join('\n');
+    // A section that failed its check is left out (the manifest says why);
+    // an attempt with no block and no valid section never reaches here.
+    const body = (result.blocks.length ? result.blocks.map(b => b.replace(/\s*$/, '')).join('\n') + '\n' : '') +
+      (result.notDirecting ? (result.blocks.length ? '\n' : '') + result.notDirecting.replace(/\s*$/, '') + '\n' : '');
+    fs.writeFileSync(outPath, canonHeader + body);
+    fs.writeFileSync(stagedPath, JSON.stringify(staged, null, 2));
     fs.mkdirSync(CIVIC, { recursive: true });
-    fs.writeFileSync(path.join(CIVIC, 'directive_c' + cycle + '.raw.txt'), r.text);
+    const manifest = {
+      stage: 'directive', cycle: Number(cycle), model, mayorModel, roster: [...rosterDirs],
+      blocks: result.blocks.map(b => ({ head: (b.split('\n')[0] || '').replace(/^## /, '').slice(0, 100), agentDir: maraDirective.agentDirOf(b), promises: maraDirective.promiseIdsIn(b) })),
+      notDirecting: !!result.notDirecting, notDirectingProblem: result.notDirectingProblem || null,
+      rejectedBlocks: result.rejected, truncated: result.truncated || 0,
+      promises: { staged: staged.promises.length, statuses: staged.statuses.length, rejected: staged.rejectedPromises },
+      memoryReads: staged.memoryReads, notes: staged.notes.length,
+      toolCalls: staged.trace, usage, attempts, note: note || null,
+      commit: DRY_COMMIT ? 'dry' : 'pending',
+      directive: path.relative(ROOT, outPath), staged: path.relative(ROOT, stagedPath), ranAt: new Date().toISOString(),
+    };
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+    return { manifest, outPath };
+  };
+
+  // Attempts: the primary with tools, one retry, then the fallback without
+  // tools. Each attempt stages afresh; nothing is written until one validates.
+  const attempts = [];
+  const plan = [{ model: MODEL, tools: true }, { model: MODEL, tools: true }, { model: DIRECTIVE_FALLBACK, tools: false }];
+  let winner = null;
+  for (const step of plan) {
+    const staged = { promises: [], statuses: [], rejectedPromises: [], memoryReads: [], notes: [], trace: [] };
+    try {
+      let text, usage;
+      if (step.tools) {
+        const r = await dw.openRouterToolLoop({
+          model: step.model, system: persona, user, toolset: maraToolset(),
+          exec: maraToolExecutor({ cycle, record, promiseCtx }, staged),
+          maxToolCalls: DIRECTIVE_TOOL_CALLS, maxTokens: DIRECTIVE_MAX_TOKENS, timeoutMs: DIRECTIVE_TIMEOUT_MS,
+          resultCap: Infinity, body: { reasoning: { effort: 'high' }, usage: { include: true } },
+        });
+        text = r.text;
+        staged.trace = r.trace.map(t => ({ tool: t.tool, resultChars: t.resultChars }));
+        usage = { in: r.usageIn, out: r.usageOut, billedUsd: r.billedUsd, rateUsd: dw.costUsd(step.model, r.usageIn, r.usageOut), finishReason: r.finishReason };
+      } else {
+        const r = await callOpenRouter(step.model, persona, user);
+        text = r.text;
+        usage = { in: (r.usage || {}).prompt_tokens || 0, out: (r.usage || {}).completion_tokens || 0, rateUsd: dw.costUsd(step.model, (r.usage || {}).prompt_tokens || 0, (r.usage || {}).completion_tokens || 0), finishReason: r.finishReason };
+      }
+      const knownPromiseIds = new Set([...record.promises.keys(), ...staged.promises.map(p => p.promiseId)]);
+      const result = filterDirectiveBlocks(text, rosterDirs, { knownPromiseIds });
+      attempts.push({ model: step.model, tools: step.tools, blocks: result.blocks.length, notDirecting: !!result.notDirecting, usage });
+      if (result.blocks.length || result.notDirecting) {
+        winner = { result, staged, model: step.model, usage, text };
+        break;
+      }
+      fs.mkdirSync(CIVIC, { recursive: true });
+      fs.writeFileSync(path.join(CIVIC, 'directive_c' + cycle + '.raw.txt'), text || '');
+      log('attempt with ' + step.model + ' gave no valid block and no Not directing section (' + result.rejected.length + ' rejected' + (result.notDirectingProblem ? '; ' + result.notDirectingProblem : '') + ')');
+    } catch (e) {
+      attempts.push({ model: step.model, tools: step.tools, error: e.message });
+      log('directive attempt with ' + step.model + ' failed: ' + e.message);
+    }
+  }
+  if (!winner) {
+    console.error('HALT: no directive attempt produced a valid block or a Not directing section. Raw output kept at output/cron-civic/directive_c' + cycle + '.raw.txt');
+    fs.mkdirSync(CIVIC, { recursive: true });
+    fs.writeFileSync(path.join(CIVIC, 'directive_attempts_c' + cycle + '.json'), JSON.stringify(attempts, null, 2));
     process.exit(1);
   }
 
-  writeDirectiveOutputs(blocks, rejected, r.usage);
+  // Only promises the directive actually uses are staged — a status for a
+  // promise Mara recorded this run is fine; everything validated already.
+  const staged = winner.staged;
+  const openAfter = record.open.filter(p => !staged.statuses.some(s => s.promiseId === p.promiseId)).concat(staged.promises);
+  const closedNow = staged.statuses.map(st => ({ status: st, promise: record.promises.get(st.promiseId) })).filter(c => c.promise);
+  staged.runEntry = runEntryText(cycle, winner.result.blocks, winner.result.notDirecting, openAfter, closedNow);
+  const { manifest, outPath } = writeOutputs(winner.result, winner.model, winner.usage, attempts, staged,
+    winner.model !== MODEL ? 'fallback writer (no tools)' : null);
+
+  if (!DRY_COMMIT) {
+    const receipt = await commitDirectiveWrites(cycle, staged, { root: ROOT });
+    manifest.commit = receipt.complete ? 'complete' : 'partial';
+    manifest.commitReceipt = path.relative(ROOT, path.join(outDir, 'commit_c' + cycle + '.json'));
+    fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2));
+    if (!receipt.complete) log('directive written; memory/promise commit PARTIAL — re-run --stage=directive --cycle=' + cycle + ' to finish it');
+  }
+  console.log('\n=== directive complete: ' + winner.result.blocks.length + ' block(s)' + (winner.result.rejected.length ? ' (' + winner.result.rejected.length + ' rejected)' : '') +
+    ', commit ' + manifest.commit + ' → ' + path.relative(ROOT, outPath) + ' ===');
 }
 
 // ---------------------------------------------------------------------------
@@ -2053,6 +2321,70 @@ async function runMayorGavel() {
   console.log('\n=== mayor-gavel complete: ' + r.json.statements.length + ' statement(s) → ' + outPath + ' ===');
 }
 
+// civic.47 M1 item 11: Mara's question to a project director, from the
+// directive this week's prep used. Returns null when she did not address it.
+function maraProjectAsk(directiveText, directiveCycle, agentDir) {
+  if (!directiveText || !directiveCycle) return null;
+  const blocks = maraDirective.blocksFor(directiveText, agentDir);
+  if (!blocks.length) return null;
+  return { confrontationId: maraDirective.confrontationId(directiveCycle, agentDir), text: blocks.join('\n').trim() };
+}
+function maraAnswerContract(ask) {
+  return 'Add a top-level "maraAnswer" to your JSON: {"confrontationId":"' + ask.confrontationId +
+    '","kind":"answer" or "deferral","text":"<your reply to Mara: what is true now — or, if it is not known yet, say so and when it will be>"}. ' +
+    'Mara counts only this field as your reply.';
+}
+// The Mara-only turn's output: one public statement replying to her; the
+// decision field names the reply, and tracker fields stay empty unless the
+// initiative's dated step is due this Cycle.
+function maraOnlyContract(officeSlug, cycle, stepDue, initiative) {
+  return '\nRespond with ONLY a JSON object (no markdown fences, no prose before or after):\n' + JSON.stringify({
+    office: officeSlug, cycle: Number(cycle), speaker: '<your full name>',
+    cascadeSummary: '<one or two sentences: your reply to Mara Vance in brief>',
+    statements: [{ statementId: 'STMT-' + cycle + '-' + officeSlug + '-001', type: 'reply', topic: 'reply to the City Planning Director',
+      initiative: null, decision: MARA_REPLY_DECISION, quote: '<one line of your reply>', fullStatement: '<your full public reply>', trackerUpdates: {} }],
+    maraAnswer: { confrontationId: '<as given>', kind: 'answer or deferral', text: '<your reply>' },
+  }, null, 2) + (stepDue
+    ? '\nYour dated step is due this Cycle: if it landed, you may fill trackerUpdates as {"initiative": "' + (initiative || 'INIT-XXX') + '", "ImplementationPhase": "<value>", "MilestoneNotes": "C' + cycle + ': <one sentence>", "NextScheduledAction": "<optional>", "NextActionCycle": <optional number>}; otherwise keep it {}. ImplementationPhase MUST be one of: ' + [...PHASES].join(', ') + '.'
+    : '\ntrackerUpdates MUST be {} — no tracker change this turn.');
+}
+function noTrackerChangeCheck(json) {
+  const moved = ((json && json.statements) || []).some(st => st && st.trackerUpdates && Object.keys(st.trackerUpdates).length);
+  return moved ? 'trackerUpdates must be {} this turn — your initiative has no step due this Cycle. Re-send the whole JSON object.' : null;
+}
+// Code re-review findings 2-3: the Mara-only turn's statements are replies,
+// not decisions, and a due step moves only the director's own initiative.
+const MARA_REPLY_DECISION = 'Reply to the City Planning Director';
+function maraOnlyCheck(initiative, stepDue) {
+  return function (json) {
+    for (const st of (json && json.statements) || []) {
+      if (!st || st.type !== 'reply') return 'every statement this turn has type "reply". Re-send the whole JSON object.';
+      if (st.decision !== MARA_REPLY_DECISION) return 'decision must be exactly "' + MARA_REPLY_DECISION + '" — no operational decision is taken this turn. Re-send the whole JSON object.';
+      if (st.initiative != null && st.initiative !== initiative) return 'initiative must be null or ' + initiative + '. Re-send the whole JSON object.';
+      const tu = st.trackerUpdates || {};
+      if (Object.keys(tu).length && tu.initiative !== initiative) return 'trackerUpdates.initiative must be ' + initiative + ' — your own initiative. Re-send the whole JSON object.';
+    }
+    return stepDue ? null : noTrackerChangeCheck(json);
+  };
+}
+function maraAnswerCheck(ask) {
+  return function (json) {
+    const a = json && json.maraAnswer;
+    if (!a || typeof a !== 'object') return 'maraAnswer missing — reply to Mara Vance in the maraAnswer field';
+    if (a.confrontationId !== ask.confrontationId) return 'maraAnswer.confrontationId must be exactly ' + ask.confrontationId;
+    if (a.kind !== 'answer' && a.kind !== 'deferral') return 'maraAnswer.kind must be "answer" or "deferral"';
+    if (!String(a.text || '').trim()) return 'maraAnswer.text is empty';
+    return null;
+  };
+}
+function directiveForWeek(cycle) {
+  const prepMan = readJson(path.join(CIVIC, 'prep_c' + cycle + '.json'));
+  const rel = prepMan && prepMan.directive;
+  if (!rel || !fs.existsSync(path.join(ROOT, rel))) return { text: null, cycle: null };
+  const m = path.basename(rel).match(/_c(\d+)/);
+  return { text: fs.readFileSync(path.join(ROOT, rel), 'utf8'), cycle: m ? Number(m[1]) : null };
+}
+
 // --- stage: projects (Layer 3 — only where a decision touched their initiative) ---
 async function runProjects() {
   const cycle = arg('--cycle', null) || detectCycle();
@@ -2064,16 +2396,52 @@ async function runProjects() {
   if (!voiceJsons.mayor_gavel && !voiceJsons.mayor) throw new Error('no mayor_gavel_c' + cycle + '.json — run --stage=mayor-gavel first');
   const layer12 = Object.fromEntries(Object.entries(voiceJsons).filter(([s]) => !['baylight_authority', 'stabilization_fund', 'oari', 'health_center', 'transit_hub'].includes(s)));
 
+  const week = directiveForWeek(cycle);
+  const trackerRowsLive = require('./buildCivicOfficeSlice').loadTrackerRows(ROOT, cycle) || [];
   const results = [];
   for (const seat of projectSeats(officeMap)) {
     const slug = voiceSlug(seat.agentDir);
     const touches = statementsTouching(layer12, seat.initiative, tracker);
-    if (!touches.length) { log('skip ' + slug + ' — no voice decision touched ' + seat.initiative + ' (Step 5 trigger rule)'); continue; }
+    const ask = maraProjectAsk(week.text, week.cycle, seat.agentDir);
+    if (!touches.length && !ask) { log('skip ' + slug + ' — no voice decision touched ' + seat.initiative + ' and Mara did not address it (Step 5 trigger rule)'); continue; }
+    const triggeredBy = touches.map(t => t.slug).concat(ask ? ['mara-directive'] : []);
     try {
       const model = officeModel(officeMap, seat.agentDir);
       const prior = existingVoice(slug, cycle);
       if (prior) {
-        results.push({ slug, model: prior.model, ok: true, output: prior.output, statements: prior.json.statements.length, reused: true, triggeredBy: touches.map(t => t.slug) });
+        results.push({ slug, model: prior.model, ok: true, output: prior.output, statements: prior.json.statements.length, reused: true, triggeredBy });
+        continue;
+      }
+      if (!touches.length) {
+        // Mara-only turn: her question and the director's own record. No
+        // operational decision is asked for; a tracker change is accepted only
+        // when the initiative's dated step is due this Cycle.
+        const ownInit = (tracker.initiatives || []).find(i => (i.id || i.InitiativeID) === seat.initiative);
+        const row = trackerRowsLive.find(r => r.InitiativeID === seat.initiative);
+        const clock = require('./buildCivicOfficeSlice').trackerClock(row, cycle);
+        const stepDue = !!(clock && clock.state === 'past-due');
+        const impl = (ownInit && ownInit.implementation) || {};
+        const record = ownInit ? [
+          'What you run: ' + ownInit.name + (ownInit.budget ? ' — Budget: ' + ownInit.budget : '') + '.',
+          'Where it stands: ' + (cleanInline(impl.summary) || 'in ' + phaseProse(impl.phase)) + '.',
+          impl.nextScheduledAction ? 'On your calendar: ' + cleanInline(impl.nextScheduledAction) + (clock ? ' (C' + clock.nac + ')' : '') + '.' : null,
+        ].filter(Boolean).join('\n') : '';
+        const wallInj = await positionWallInject(officeMap, seat.agentDir);
+        const user = [
+          record, '',
+          'Mara Vance, the City Planning Director, asked your office this:', '', ask.text, '',
+          wallInj,
+          'Your job this turn: answer her from your record, in your own voice. If the answer is not known yet, say so and when it will be. No operational decision is asked of you this turn.',
+          'Never invent citizens, statistics, votes, or progress that is not in your record.',
+          'Reply in "maraAnswer" with confrontationId "' + ask.confrontationId + '", kind "answer" (what is true now) or "deferral" (not known yet, and when it will be). Mara counts only this field as your reply.',
+          maraOnlyContract(slug, cycle, stepDue, seat.initiative),
+        ].join('\n');
+        const r = await callVoice(seat.agentDir, model, user, 4000, officeMap,
+          composeChecks(maraAnswerCheck(ask), maraOnlyCheck(seat.initiative, stepDue), statementNumberCheck(record + '\n' + ask.text + '\n' + (wallInj || ''), { cycle })));
+        if (!r || r.error) { results.push({ slug, model, ok: false, error: r ? r.error : 'no result', triggeredBy }); continue; }
+        const out = writeVoiceJson(slug, cycle, r.json);
+        await positionWallRecordCascade(officeMap, seat.agentDir, r.json, cycle);
+        results.push({ slug, model, ok: true, output: out, statements: r.json.statements.length, triggeredBy, maraAnswer: r.json.maraAnswer.kind });
         continue;
       }
       // civic.29: a Layer-3 seat only gets a packet file when its OWN
@@ -2098,15 +2466,16 @@ async function runProjects() {
         '- What details emerge from implementation?',
         '- What would a reporter see if they visited?',
         'You may invent operational details — names of facilities, timelines, specifics — but never citizens, statistics, or votes beyond your material.',
+        ask ? '\nMara Vance, the City Planning Director, also asked your office this:\n\n' + ask.text + '\n\n' + maraAnswerContract(ask) : '',
         outputContract(slug, cycle, tracker.initiatives || []),
       ].join('\n');
-      const projectHay = identity + '\n' + frame + '\n' + packet + '\n' + (wallInj || '');
+      const projectHay = identity + '\n' + frame + '\n' + packet + '\n' + (wallInj || '') + (ask ? '\n' + ask.text : '');
       const r = await callVoice(seat.agentDir, model, user, 4000, officeMap,
-        statementNumberCheck(projectHay, { cycle }));
-      if (!r || r.error) { results.push({ slug, model, ok: false, error: r ? r.error : 'no result' }); continue; }
+        composeChecks(ask ? maraAnswerCheck(ask) : null, statementNumberCheck(projectHay, { cycle })));
+      if (!r || r.error) { results.push({ slug, model, ok: false, error: r ? r.error : 'no result', triggeredBy }); continue; }
       const out = writeVoiceJson(slug, cycle, r.json);
       await positionWallRecordCascade(officeMap, seat.agentDir, r.json, cycle);
-      results.push({ slug, model, ok: true, output: out, statements: r.json.statements.length, triggeredBy: touches.map(t => t.slug) });
+      results.push({ slug, model, ok: true, output: out, statements: r.json.statements.length, triggeredBy, ...(ask ? { maraAnswer: r.json.maraAnswer.kind } : {}) });
     } catch (e) { results.push({ slug, ok: false, error: e.message }); }
   }
   fs.writeFileSync(path.join(CIVIC, 'projects_c' + cycle + '.json'), JSON.stringify({
@@ -2435,7 +2804,9 @@ function datawakeUserPrompt(pack, wallInj, office, options = {}) {
         ? '. You also hold the patrol move, yours alone: {"type":"patrol","strategy":"balanced|suppress_hotspots|community_presence","note":""} — the city\'s patrol posture from next week on. suppress_hotspots clears more cases but pushes activity into the next neighborhood over; community_presence displaces far less and lifts quality of life, clearing fewer cases; balanced sits between. Your latest patrol move of the week is the one that stands; the district seats work with it'
         : '') +
       '. A move that breaks these rules is discarded, not corrected.',
-    conf ? 'YOU HAVE AN UNANSWERED DIRECTIVE (' + conf.id + '). An {"type":"answer",...} move responding to it is expected. Bind confrontationId exactly to that directive; only one answer is accepted per directive and seat. No new consequence is attached.' : 'No answer move is available unless game.confrontationIds names an unanswered directive for this seat.',
+    // civic.47 M1 item 12: Mara's question is put plainly; replying is the
+    // seat's choice, through the answer move.
+    conf ? 'Mara Vance, the City Planning Director, has a question for your office (' + conf.id + '). To reply, use one {"type":"answer",...} move with confrontationId bound exactly to it; one answer is accepted per directive and seat.' : 'No answer move is available unless game.confrontationIds names an unanswered directive for this seat.',
     'No headcount, percentage, or dollar figure unless that exact number appears above. Progress with no cited metric is described in words ("ahead of schedule", "significant headway") — never estimated.',
   ].join('\n');
 }
@@ -3792,11 +4163,13 @@ function refreshWeekState(state, root) {
   const prepDone = fs.existsSync(path.join(civic, 'prep_c' + cycle + '.json'));
   set('prep', prepDone ? 'done' : (fire.fired ? 'ready' : 'waiting'));
 
-  const directiveDone = fs.existsSync(path.join(civic, 'directive_c' + cycle + '.json'));
+  const directiveMan = readJson(path.join(civic, 'directive_c' + cycle + '.json'));
   const closeRecExists = fs.existsSync(path.join(civic, 'close_c' + cycle + '.json'));
   // civic.39 Task 4: the directive is a post-close stage — ready once the
-  // close record exists, never on the engine fire alone.
-  set('directive', directiveDone ? 'done' : (closeRecExists ? 'ready' : 'waiting'));
+  // close record exists, never on the engine fire alone. civic.47 M1: a
+  // directive whose memory/promise commit came back partial is not done; the
+  // tick finishes it from the staged writes.
+  set('directive', directiveMan ? (directiveMan.commit === 'partial' ? 'partial' : 'done') : (closeRecExists ? 'ready' : 'waiting'));
 
   const mayorOpenRaw = fs.existsSync(path.join(civic, 'mayor_open_c' + cycle + '.raw.txt'));
   set('mayor-open', voiceExists('mayor_open') ? 'done' : (mayorOpenRaw ? 'failed' : (prepDone ? 'ready' : 'waiting')));
@@ -4012,6 +4385,15 @@ async function runTick() {
     if (fs.existsSync(weekStatePath(cycle))) saveWeekState(state);
     return;
   }
+  // civic.47 M1: finish a partial directive commit (no model call) — the
+  // directive runs after the apply, so this comes before the week-closed exit.
+  if (state.stages.directive.status === 'partial') {
+    if (APPLY) {
+      const r = await resumeDirectiveCommit(cycle);
+      console.log('[tick] directive commit ' + (r ? r.commit : 'not resumable (no staged writes)'));
+      refreshWeekState(state);
+    } else console.log('[tick] directive commit is PARTIAL — an --apply tick would finish it.');
+  }
   if (state.stages.apply.status === 'done') {
     console.log('[tick] c' + cycle + ' already applied — week closed. Nothing to do.');
     saveWeekState(state);
@@ -4172,4 +4554,4 @@ module.exports = { modelChainFor, FALLBACK_MODELS, sentimentWord, crimeWord, ret
   BATCH_PROFILES, batchEligible, batchManifestPath, loadBatchManifest, batchInFlightSlugs,
   hearingSeatPrompt, batchSubmitHearing, batchCollectHearing,
   // civic.39 Task 4 — directive from close output
-  PETITION_VISIBILITY_LINE, seatUnansweredDemands, directiveTargetSeats, filterDirectiveBlocks };
+  directiveRoster, seatEvidence, filterDirectiveBlocks, directiveMaterial, commitDirectiveWrites, maraProjectAsk, maraAnswerCheck, maraOnlyCheck, maraOnlyContract, noTrackerChangeCheck, resumeDirectiveCommit, renderSunday, renderWeekday, runEntryText, DIRECTIVE_MODEL, DIRECTIVE_BRIEF };

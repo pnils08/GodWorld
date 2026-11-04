@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** engine.330 → sandbox runs cold: add generic ratings to the media-score and ingest feeds on the sandbox. Queued: pipeline.100 (Mags memory/persona), governance.57 (close pass), engine.325. governance.56 done; close on Mike's word. Raise: path rules name the builder; plugin skills. Open: SSH; INIT-010 $4.2M.
 
-**NEXT[research-build]:** civic.47 → ask the builder about a DEPLOY_HISTORY entry for PROD @173 (transit reader live), then push the records commit. Open: A2 (his go), event-duty exception. Gates: receivers, journal, pre-fire ballot, approval writers. Pilot flag off. Builder to name: Civis journal dark C113–C114, review step, header-drift repeats.
+**NEXT[research-build]:** civic.47 M1 live → read Mara's first live directive after the C115 close (blocks, promises, page, receipt, cost); closes on Mike's word. Open: DEPLOY_HISTORY PROD @173; A2; event-duty exception. Gates: receivers, journal, ballot, approval writers. Pilot off. Mike to name: Civis journal C113–14, review step, header drift.

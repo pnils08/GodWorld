@@ -156,13 +156,16 @@ test('F8 board proposals show measured condition counts (health)', () => workspa
   assert.equal(game.conditions.proposals[0].support.cleared,false);
   assert.match(game.conditions.text,/support-band-unavailable/);
 }));
-test('R3 unanswered directives persist, answers bind Cycle and seat, and a second accepted answer is refused', () => workspace((root, write) => {
+test('R3 (civic.47 M1 item 10) only the latest directive is open; history stays for binding; answers bind Cycle and seat; a second accepted answer is refused', () => workspace((root, write) => {
   const directive = (seat, text) => '## SYNTHETIC demand\n- **Agent:** `.claude/agents/'+seat+'/`\n- **Address:** '+text+'\n';
   write('output/mara-directives/mara_directive_c997_AUTO.txt',directive(office.agentDir,'SYNTHETIC prior'));
   write('output/mara-directives/mara_directive_c998_AUTO.txt',directive('SYNTHETIC-other','SYNTHETIC other'));
   write('output/mara-directives/mara_directive_c999_AUTO.txt',directive(office.agentDir,'SYNTHETIC current'));
   const oldId='CONF-997-'+office.agentDir;
-  assert.equal(slice.loadConfrontation(root,999,office.agentDir).id,oldId);
+  const before=slice.loadConfrontations(root,999,office.agentDir);
+  assert.deepEqual(before.all.map(c=>c.id),[oldId,confrontation.id]); // history kept for hood inference
+  assert.deepEqual(before.open.map(c=>c.id),[confrontation.id]);       // an older block is not re-opened
+  assert.equal(slice.loadConfrontation(root,999,office.agentDir).id,confrontation.id);
   const priorAnswer={moveId:'MV-SYNTHETIC-ANSWER',cycle:998,agentDir:office.agentDir,type:'answer',payload:{confrontationId:oldId},status:'pending'};
   write('output/cron-civic/moves/moves_c998.jsonl',JSON.stringify(priorAnswer));
   const state=slice.loadConfrontations(root,999,office.agentDir);

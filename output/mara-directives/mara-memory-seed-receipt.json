@@ -1,0 +1,19 @@
+{
+  "list": "output/mara-directives/mara-memory-seed.json",
+  "writes": {
+    "cp-POP-00507-seed-rt8eqQbhco1W4YgeT6hvqT": {
+      "ok": true,
+      "customId": "cp-POP-00507-seed-rt8eqQbhco1W4YgeT6hvqT"
+    },
+    "cp-POP-00507-seed-XUh7WPedjdCxuiwaF7qXyu": {
+      "ok": true,
+      "customId": "cp-POP-00507-seed-XUh7WPedjdCxuiwaF7qXyu"
+    },
+    "cp-POP-00507-seed-ocs1t4BDKpr9j6ikL7Tkyz": {
+      "ok": true,
+      "customId": "cp-POP-00507-seed-ocs1t4BDKpr9j6ikL7Tkyz"
+    }
+  },
+  "ranAt": "2026-11-04T05:19:04.325Z",
+  "complete": true
+}

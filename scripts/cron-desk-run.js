@@ -34,6 +34,7 @@ const crypto = require('crypto');
 const { execFileSync } = require('child_process');
 const ASK_ARGV_MAX = 100 * 1024;   // under the kernel's 128 KiB single-argument cap, with room for the rest of argv
 const articleContamination = require('./articleContamination');
+const { centralDate } = require('./centralDate');   // the newsroom's day is the Central date the crontab runs on, not the UTC date
 
 const ROOT = path.join(__dirname, '..');
 const COMPARE = path.join(ROOT, 'output', 'cron-compare');
@@ -1299,7 +1300,7 @@ function loadLane(cycle, desk, beatDomain) {
     // affected-citizen). Government leads the story; residents still get quoted.
     if (dl && Array.isArray(dl.entries)) civicFirst.push(...dl.entries.map(e => ({ ...e, popids: [] })));
     const dwDir = path.join(ROOT, 'output', 'cron-civic', 'datawake');
-    const today = new Date().toISOString().slice(0, 10);
+    const today = centralDate();
     if (fs.existsSync(dwDir)) {
       for (const f of fs.readdirSync(dwDir)) {
         if (!f.endsWith('_' + today + '.json')) continue;
@@ -2578,7 +2579,7 @@ function yesterdaysFilings(desk, cycle) {
   const out = [];
   try {
     if (!fs.existsSync(STAGED)) return out;
-    const yday = new Date(Date.now() - 86400000).toISOString().slice(0, 10);
+    const yday = centralDate(1);
     for (const f of fs.readdirSync(STAGED)) {
       if (!require('../lib/articleIntake').isStagedSidecar(f) || out.length >= FILINGS_MAX) continue;   // pipeline.78
       const side = readJson(path.join(STAGED, f));
@@ -3416,7 +3417,7 @@ async function runWrite(assign) {
     verbatim, words: thin.words,
     contractScore: contractScore && Number.isInteger(contractScore.score) ? contractScore.score : null };
   if (rewardLoop) appendRewardLoopRead(cycle, {
-    date: new Date().toISOString().slice(0, 10), name: byline && byline.name, persona: personaSlug, model: route.model,
+    date: centralDate(), name: byline && byline.name, persona: personaSlug, model: route.model,
     contractScore: contractScore ? (contractScore.error ? { error: contractScore.error } : {
       score: contractScore.score, opened: contractScore.opened, closed: contractScore.closed,
       purposeMet: contractScore.purposeMet, inTarget: contractScore.inTarget, short: contractScore.short }) : null,
@@ -3648,7 +3649,7 @@ async function runFanoutStage() {
   // --date YYYY-MM-DD replays a past day's rotation (a missed seat re-run with --only); default is today.
   const dateArg = arg('--date', null);
   if (dateArg && !/^\d{4}-\d{2}-\d{2}$/.test(dateArg)) throw new Error('--date must be YYYY-MM-DD');
-  const date = dateArg || new Date().toISOString().slice(0, 10);
+  const date = dateArg || centralDate();
   const fanoutApi = require('./newsroom-fanout');
   let fanout = fanoutApi.loadFanout(date);
   if (!fanout) {

@@ -888,7 +888,7 @@ async function writeFanout(date, force) {
 }
 
 if (require.main === module) {
-  const date = arg('--date', new Date().toISOString().slice(0, 10));
+  const date = arg('--date', require('./centralDate').centralDate());   // Central date, the crontab's clock — not UTC
   const force = process.argv.includes('--force');
   writeFanout(date, force)
     .then(f => {

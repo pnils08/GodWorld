@@ -3,7 +3,7 @@ title: Sandbox Generic Feeds Plan
 created: 2026-11-04
 updated: 2026-11-04
 type: plan
-tags: [engine, sandbox, active]
+tags: [engine, sandbox, parked]
 sources:
   - docs/reference/DEPLOY.md §The bench runs cold (measured at bench C130)
   - phase02-world-state/applyEditionCoverageEffects.js
@@ -105,3 +105,4 @@ Code read 2026-11-04. Spot-checked by es: ratings Cycle filter, usage Processed 
 - 2026-11-04 (engine-sheet) — Audit pass: `--check` mode added to task 2 (pre-mortem: an unseeded fire read as truth); N2 logged.
 - 2026-11-04 (engine-sheet) — Advisor fold: usage rows N-1 (task 4, A5); sheet-ID interface fixed in task 2; sandbox 1004 ID in task 8.
 - 2026-11-04 (engine-sheet) — Live medians pulled. Ratings frequency settled inside "typical week" (A6, task 3): rows only for domains live covers in ≥4 of 8 Cycles. Open question closed.
+- 2026-11-04 (engine-sheet) — Builder: "forget it". Parked; no script written, no review sent; row back to ready.

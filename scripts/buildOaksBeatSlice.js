@@ -56,13 +56,15 @@ function rowFacts(r) {
 }
 
 function build(cycle, { beats, profiles }) {
-  const rows = oaksRows(beats, cycle).sort((a, b) => Number(b.Cycle) - Number(a.Cycle));
+  // Newest first, inside a Cycle too: the feed is entered in order, so the later entry is the later game.
+  const rows = oaksRows(beats, cycle).map((r, i) => ({ r, i }))
+    .sort((a, b) => Number(b.r.Cycle) - Number(a.r.Cycle) || b.i - a.i).map(x => x.r);
   const current = rows.filter(r => Number(r.Cycle) === Number(cycle));
   if (!rows.length) return K.emptySlice(SEAT, cycle, 'no Oaks rows on Oakland_Sports_Feed in the last 6 cycles');
   const facts = [];
   const people = [];
   const ledgerIdx = new Map(); // POPID-keyed profiles already loaded by the kit caller
-  for (const r of (current.length ? current : rows).slice(0, 3)) {
+  for (const r of (current.length ? current : rows)) {   // every entry, no count cap (SIM_DOCTRINE §1; C114 had six Oaks entries and the old first-three cut dropped the newest game)
     facts.push(...rowFacts(r));
     for (const p of sports.resolveFeedPlayers(
       { namesUsed: r.NamesUsed, storyAngle: r.StoryAngle, notes: r.Notes },

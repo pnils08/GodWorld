@@ -70,6 +70,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.101 | Daily news: evening write wake date fixed (builder 11-04), NotebookLM page written. Next: confirm the 11-04 18:15 wake writes and gates | in-progress | research-build | [[../reference/NotebookLM]] §Change log |
 | governance.56 | One boot (builder 11-02): CLAUDE.md imports one `.claude/TERMINAL.md`; boot-load.js retired. Next: review | in-progress | engine-sheet | [[../plans/2026-08-29-boot-doc-consolidation]] §Changelog |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
+| engine.330 | Sandbox runs cold (builder 11-01): no media scores or ingest reach it. Build: add generic ratings to those feeds on the sandbox | in-progress | engine-sheet | [[../plans/2026-11-04-engine-330-sandbox-generic-feeds]] |
 
 ## 4. Queue — ruled, not started (ready)
 
@@ -77,7 +78,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 |---|------|-------|----------|---------|
 | infrastructure.18 | Weekly version-drift report in the existing health check, no model: runtime end of life, npm behind (majors flagged), Claude Code, plugin vs patch | ready | engine-sheet | [[../reference/DEPLOY]] |
 | engine.325 | Casino overview (builder 10-30, own session): bet types safe→risky, how bets settle without credits or failure, house odds; mishap bet never pays | ready | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §Changelog 2026-10-30 |
-| engine.330 | Sandbox runs cold (builder 11-01): no media scores or ingest reach it. Build: add generic ratings to those feeds on the sandbox | ready | engine-sheet | [[../reference/DEPLOY]] §The bench runs cold |
 | pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did | ready | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |
 | governance.57 | Session-end pass (builder 11-03): plan-touched gate checks nothing; close text still on the old boot; stale remember handoff | ready | engine-sheet | [[../plans/2026-11-03-session-end-pass]] |
 | governance.53 | Trim every row to what it is + what it waits on or next step; history into each plan's changelog first, then drop the 280 cap | ready | engine-sheet | [[rollout-rules]] §3 Row contract |

@@ -40,13 +40,13 @@ Code read 2026-11-04. Spot-checked by es: ratings Cycle filter, usage Processed 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
 | 1 | Plan review: agy against the code; findings reconciled below before the build | es / agy | not started |
-| 2 | `scripts/seedSandboxFeeds.js` shell + `scripts/seedSandboxFeeds.test.js`: `--sheet-id` assigned after `require('lib/env')`, resolved ID printed, live ID refused, `--cycle <N>` = the Cycle about to fire, dry-run default, `--apply`, `--check` (exits non-zero when the Cycle's rows are missing); reads live tabs read-only, writes sandbox only; every row carries `SANDBOX-GENERIC`. Verified by tests + a dry-run readback | es | not started |
+| 2 | `scripts/seedSandboxFeeds.js` shell + `scripts/seedSandboxFeeds.test.js`: `--sheet-id` assigned after `require('lib/env')`, resolved ID printed, live ID refused, `--cycle <N>` = the Cycle about to fire, dry-run default, `--apply`, `--check` (exits non-zero when the Cycle's rows are missing); `lib/sheets` reads the sheet from `process.env` on every call, so the script reads every live input into memory first, sets the target once, prints it with the sheet title, never sets it back; refuses the live ID and the frozen baseline copy; writes sandbox only; every row carries `SANDBOX-GENERIC`. Verified by tests + a dry-run readback | es | not started |
 | 3 | Ratings rows: Cycle N-1, one per domain seen in live's last 8 Cycles, Rating = median of those, ArticleCount 1, Reporter `SANDBOX-GENERIC`, Processed FALSE; a domain with a row for that Cycle is skipped. Verified by tests + rows read back | es | not started |
-| 4 | Media-usage rows: the last live Cycle's byline rows (same CitizenName, UsageType), Cycle N, Context `sandbox-generic_c<N>_<slug>`, Processed/Routed/Source/Sentiment blank; written once per fire (no Cycle gate). Names must match one ledger citizen. Verified by tests + rows read back | es | not started |
+| 4 | Media-usage rows: the last live Cycle's byline rows (same CitizenName, UsageType), Cycle N-1 (live stamps the edition's Cycle; fire N reads N-1 rows), Context `sandbox-generic_c<N-1>_<slug>`, Processed/Routed/Source/Sentiment blank; written once per fire (no Cycle gate). Names must match one ledger citizen. Verified by tests + rows read back | es | not started |
 | 5 | Sports rows: one per team (A's, Oaks), Cycle N, SeasonType = the team's last live one, game-result with WeekRecord `H:W A:L` and Team Record + 1-1, Streak `L1`, other columns copied from the team's last live row; a no-game SeasonType gets season-state / `none`; NamesUsed kept only for living citizens; a team with a row for N is skipped; Notes `SANDBOX-GENERIC NON-CANON`. Verified by tests + rows read back | es | not started |
 | 6 | Intake: no rows written. Engine self-feeds it; the media route fills it once task 4 rows exist; authored citizens are not generated | es | not started |
 | 7 | `DEPLOY.md`: seed step added before **Fire** in §Groundhog proving loop; §The bench runs cold rewritten to match (drops "seat work", undefined in the repo) | es | not started |
-| 8 | Sandbox proof: confirm research-build holds no sandbox proof in flight → resync from live → cold control fire (no seed) → seed → fire. Compare per Acceptance 3 | es | not started |
+| 8 | Sandbox proof on sandbox 1004 (`1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA`, the `BENCH` constant in `output/engine-sheet/` scripts; dry-run prints the title to confirm): confirm research-build holds no sandbox proof in flight → resync from live → cold control fire (no seed) → seed → fire. Compare per Acceptance 3 | es | not started |
 | 9 | Code review of the script (agy; one re-review of the fold at most); findings reconciled below | es / agy | not started |
 | 10 | Close: row → `done-pending-archive`; observations to the gap log | es | not started |
 
@@ -76,6 +76,7 @@ Code read 2026-11-04. Spot-checked by es: ratings Cycle filter, usage Processed 
 | A1 | The fix is sheet-side rows. No branch on sandbox inside engine code | advisor · es | §Feed facts (no sheet-ID or environment branch in the four readers) |
 | A2 | Scope is ratings, media usage and sports; intake writes nothing | builder | builder's words 2026-11-04 |
 | A3 | "Generic" = ratings: median of live's last 8 Cycles per domain; usage: last live week's byline pattern; sports: an even week in the team's last live season phase | builder | builder's words 2026-11-04 |
+| A5 | Usage rows carry Cycle N-1 like live; decay reads the max Cycle per name, so N-1 stops it | advisor · es | `processAdvancementIntake.js:1514-1525` |
 | A4 | Seeder runs right before each sandbox fire; usage and intake have no Cycle gate | es | §Feed facts, `processAdvancementIntake.js:476`, `mediaRoomIntake.js:477` |
 
 ### Needs proof
@@ -95,9 +96,11 @@ Code read 2026-11-04. Spot-checked by es: ratings Cycle filter, usage Processed 
 
 ## Open questions
 
-- none
+- Ratings frequency — blocks Task 3; for the builder. Live C106–C113: 47 rows, net rating 77 (9.6 a Cycle); domain rows per 8 Cycles: SPORTS 8, CIVIC 7, CULTURE 7, ENVIRONMENT 6, ECONOMIC 5, INFRASTRUCTURE 4, COMMUNITY 3, GENERAL 3, HEALTH 2, EDUCATION 2. A median row for all ten domains every Cycle writes net 18.5 (about 1.9x live). Proposed: a domain gets a row only when live had one in at least 4 of the last 8 Cycles (six domains, net 11); half-point medians round toward zero.
 
 ## Changelog
 
 - 2026-11-04 (engine-sheet) — Created. Scope and generic-row rules ruled by the builder; seat work dropped (undefined).
 - 2026-11-04 (engine-sheet) — Audit pass: `--check` mode added to task 2 (pre-mortem: an unseeded fire read as truth); N2 logged.
+- 2026-11-04 (engine-sheet) — Advisor fold: usage rows N-1 (task 4, A5); sheet-ID interface fixed in task 2; sandbox 1004 ID in task 8.
+- 2026-11-04 (engine-sheet) — Live medians pulled; open question on ratings frequency added (all-domain rows run ~1.9x live).

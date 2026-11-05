@@ -973,6 +973,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S634 Archive Pass (2026-11-05, engine-sheet) — post-S633 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.
+
+- **engine.330** [engine-sheet] — Sandbox runs cold: `scripts/seedSandboxFeeds.js` seeds ratings, usage and a sports week before each sandbox fire; proof PASS 11-05 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-11-04-engine-330-sandbox-generic-feeds]]
+
+This pass: 1 rows — engine.330. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S630 Archive Pass (2026-11-03, engine-sheet) — post-S629 closures sweep
 
 2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 research.* + 1 pipeline.*.

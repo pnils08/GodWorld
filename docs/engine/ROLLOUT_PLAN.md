@@ -22,7 +22,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| research.32 | Discord voices look records up (builder 11-05): four lookups, Sonnet 5.5 on the direct key, restarted 11-05. Organic: the builder's next talk reads the log | live-observing | research-build | [[../plans/2026-11-05-discord-voices-lookups]] |
+| research.32 | Organic: the builder's next talk with Mags and Vinnie reads the log. Four record lookups, Sonnet 5.5 on the direct key (builder 11-05); restart on his env line | live-observing | research-build | [[../plans/2026-11-05-discord-voices-lookups]] |
 | engine.286 | Life-event dice LIVE (`63754ca8`); forced sale, own-record wake, scoreboard live; C112 read 2026-10-25 in the plan. Builder call asked 2026-10-28: name the game (N31/N32) before wake-as-turn builds | live-observing | research-build | [[../plans/2026-10-08-engine-286-game-of-life-events]] |
 | pipeline.84 | Organic: next unattended Jax assignment naming a covered citizen carries the earlier-coverage section. Built and live 2026-10-20 (index, landing, canon fix); detail in the plan | live-observing | research-build | [[../plans/2026-10-19-bay-tribune-master-index]] |
 | engine.208 | Fandom: C112 4 fan lines, Oaks weight 0.35 → 0.3831; C113 4 fan lines, `fandom seeded 9`, weight → 0.4061 (weeks 2, fans 4). Band open; second read C114 Sun 2026-11-01 | live-observing | engine-sheet | [[../research/2026-10-02-engine-208-fandom-dial-read-before]] §Changelog 2026-10-08; `output/engine_review_c113.md` §C113 re-reads |

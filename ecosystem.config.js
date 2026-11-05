@@ -25,7 +25,10 @@ module.exports = {
     autorestart: true,
     max_restarts: 10,
     restart_delay: 5000,
-    max_memory_restart: '200M',
+    // research.32 (2026-11-05): 200M was killing the bot MID-REPLY — the 30-second memory check caught it at
+    // 250-290M while it answered (1,495 such stops in the pm2 log since October). Idle is ~180M; a reply with
+    // the tables and a search in memory peaks under 300M.
+    max_memory_restart: '450M',
     env: {
       NODE_ENV: 'production',
       GODWORLD_ENV_FILE: GODWORLD_ENV_FILE,

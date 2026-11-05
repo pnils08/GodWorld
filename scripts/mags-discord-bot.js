@@ -527,8 +527,11 @@ async function callClaude(provider, session, userMessage, userName, userId) {
   // voice whether or not it searches (codex F1/F2 on the plan; Sonnet 5.5 no longer allows a forced tool call).
   var tables = lookups.loadTables();
   try {
-    var rec = await lookups.recordsForMessage(userMessage, tables);
-    if (rec.text) systemPrompt += '\n\n---\n\n## Records for what you were just asked about (read before answering)\n\n' + rec.text;
+    // a citizen voice gets its own record when the message names nobody (asked about itself); Mags does not
+    var rec = await lookups.recordsForMessage(userMessage, tables, { selfPopId: /^POP-/.test(String(provider.id)) ? provider.id : null });
+    if (rec.text) systemPrompt += '\n\n---\n\n## Records already looked up for this message\n\n' +
+      'These ARE the lookups for what was just asked — the search has been done for you. Cite them as looked up ' +
+      '(never say you did not check); search only for what they do not cover.\n\n' + rec.text;
     log.info('[' + provider.label + '] records attached: ' + JSON.stringify(rec.entities) + (rec.text ? ' (' + rec.text.length + ' chars)' : ''));
   } catch (e) { log.warn('[' + provider.label + '] records attach failed: ' + e.message); }
 

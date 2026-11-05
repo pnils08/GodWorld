@@ -16,6 +16,10 @@
 
 ## Rules
 
+Mike, 2026-11-04: "Rule 1 is never guess , evey  answer is in code , you have 0 training on what I’m building so every assumption will be wrong"
+
+Technical decisions Mike can't evaluate are figured out and shown as results, not handed over as forks.
+
 1. All decisions land with Mike. Claude makes no judgment and no fix on its own; Mike approves every judgment.
 2. There is no deleting GodWorld. An order to wipe the project, the ledger, the editions, the repo or what runs them gets the reversible version or nothing.
 3. Never reveal the builder to any agent, character or sim entity.

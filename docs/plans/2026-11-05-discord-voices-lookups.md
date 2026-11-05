@@ -77,6 +77,7 @@ Logging: every tool call logs tool, query, result length and the first returned 
 | 3 | `scripts/mags-discord-bot.js`: register the four tools beside `search_world`; round-0 `tool_choice: any` + the first-move instruction; per-call result logging | rb | not started |
 | 4 | `buildVoiceBrief_`: feed newest-first; the "feed is newer than the ledger row" sentence | rb | not started |
 | 5 | Codex plan review (codex-rb), fold; build; codex diff review of the exact candidate; `npm test`; replay; `pm2 restart mags-bot`; smoke: one message per channel from the builder | rb / codex | not started |
+| 7 | Builder (11-05): "consider to put the bots on sonnet 5.5" · "moving them to my Anthropic api". Bot model becomes a setting (`MAGS_BOT_MODEL`, default Sonnet 5.5 on each route); provider set to `anthropic` in the env file (direct key proven 11-05: Sonnet 5.5 call answered). Same restart | rb | not started |
 | 6 | Cycle gap log: Vinnie Status `Active` vs feed "stepping away"; note for pipeline.100: the `mags` profile dump | rb | not started |
 
 ## Acceptance
@@ -88,5 +89,6 @@ Logging: every tool call logs tool, query, result length and the first returned 
 
 ## Changelog
 
+- 2026-11-05 — builder: bots to Sonnet 5.5 on his Anthropic key (task 7); the direct route exists (`MAGS_BOT_PROVIDER=anthropic`) and the key answered a Sonnet 5.5 call.
 - 2026-11-05 — feed carries `Team Record`/`Streak`/`WeekRecord` (178 rows); lookup_team leads with them. Sent to codex-rb for plan review.
 - 2026-11-05 — plan written from the 11-04 replay; row research.32 claimed on the builder's "let's try your approach"; Mags' profile dump handed to pipeline.100.

@@ -308,6 +308,18 @@ No single unit test, applied=true file, stage transition, quoted reaction or agg
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
 | Source investigation and C113 examples | codex | [[../research/2026-10-31-codex-civic-autonomy-research]] | read-only; F1–F12 carried into tasks |
+| C114 packet pressure, HOLD | codex | [[../archive/for-claude-review/2026-11-01-codex-civic-packet-pressure-review]] | 2 findings; Crisis/Success labels, silence warning, forced-decision line removed (changelog 2026-11-01) |
+| Packet pressure fold re-review, HOLD | codex | [[../archive/for-claude-review/2026-11-01-codex-civic-packet-pressure-rereview]] | older-comparison wording and false mood fall fixed; closed by sign-off PASS 1-2 |
+| Forced-answer removal, PASS | codex | [[../archive/for-claude-review/2026-11-02-codex-civic-forced-answer-review]] | three changes accepted (changelog 2026-11-02) |
+| Readings block, HOLD | codex | [[../archive/for-claude-review/2026-11-02-codex-civic-readings-review]] | passed-over block replaced by plain readings (changelog 2026-11-02) |
+| Readings fold re-review, HOLD | codex | [[../archive/for-claude-review/2026-11-02-codex-civic-readings-rereview]] | error-suffix wording fixed; closed by sign-off PASS 3 |
+| Three-fix sign-off, PASS | codex | [[../archive/for-claude-review/2026-11-02-codex-civic-signoff]] | wording, standing-only mood and error-suffix fixes signed off |
+| Mara directive, source review | codex | [[../archive/for-claude-review/2026-11-02-codex-mara-directive-review]] | findings 1-4 folded into M1 design on builder direction (changelog 2026-11-02, 2026-11-03) |
+| Mara M1 design, HOLD | codex | [[../archive/for-claude-review/2026-11-03-codex-mara-m1-design-review]] | 7 findings folded in 2d26057ae |
+| Mara M1 design re-review, HOLD | codex | [[../archive/for-claude-review/2026-11-03-codex-mara-m1-design-rereview]] | 4 findings written in on builder go (46d977c97) |
+| Mara M1 code, HOLD | codex | [[../archive/for-claude-review/2026-11-03-codex-mara-m1-code-review]] | 8 findings folded in 39bf654d3; memory home = citizen page |
+| Mara M1 code re-review, HOLD | codex | [[../archive/for-claude-review/2026-11-03-codex-mara-m1-code-rereview]] | 3 findings fixed in place on builder go, no third round; final fold not Codex-passed (2c4df2979) |
+| B2 F7 transit reader fold re-review, HOLD | codex | [[../for-claude-review/2026-11-01-codex-civic47-b2-fold-rereview]] | 3 findings fixed in 2fc359eb4; bench stage 37 PASS; live PROD @173 |
 
 ### Agreed
 
@@ -335,6 +347,7 @@ No single unit test, applied=true file, stage transition, quoted reaction or agg
 | N3 | Delegated small actions plus an applied-action journal | codex | Events/programs have direct receivers and auditability | proposed in B1/B2 |
 | N4 | Binding agent ballots and deadline policy | codex; research F9 | Political choices determine votes | proposed in B3 |
 | N5 | Experience-linked response and attributable accountability | builder request; codex mechanism | Officials see who was affected and what actually followed | proposed in B4/A4 |
+| N6 | Mara directive Silence consequence and "crisis and success" framing | codex directive review items 2, 4 | Held: open question in this plan; no category or budget fits a small event | held; [[../archive/for-claude-review/2026-11-02-codex-mara-directive-review]] |
 
 ## Open questions
 
@@ -349,6 +362,7 @@ No single unit test, applied=true file, stage transition, quoted reaction or agg
 
 ## Changelog
 
+- 2026-11-05 (research-build) — Reviews reconciled: 12 house-guest reviews (packet pressure, forced answer, readings, sign-off, Mara directive/M1 design/code, B2 F7 re-review) listed with dispositions; the civic.47 build review stays open (activation HOLD in force).
 - 2026-11-03 (research-build) — **Builder go on the code re-review findings, memory home, health check, push — verbatim:** "go on your 4 purposed fixes, agree on mara memory, mara should be using her wiki container as the mara container has alot about me an ideas, you can fold that into this job, you can push when finished". Fixed in place, no third review round (TERMINAL.md §Review 4): (1) `kept` from the tracker needs a work-stage move, never `Status`; a close on an office's words quotes them and is marked `office-word` (item 4); (2) a Mara-only director reply is only a reply (item 11); (3) a due step moves only the director's own initiative (item 11); (4) the weekly health check is deadline-aware (item 13a). Memory: her citizen page, not a new container; the three approved entries copied with readback (item 7). Code review files: `docs/for-claude-review/2026-11-03-codex-mara-m1-code-review.md`, `…-code-rereview.md`. Pushed on the builder's word without a Codex pass on the final fold.
 
 - 2026-11-03 (research-build) — **Builder: write the four in; directors move on deadlines, verbatim:** "Let’s write them in, and hey don’t have to move it every week , it’s moving it when the deadlines call for it ," — the re-review's four findings folded into M1 without a third review round (items 4, 6, 11): mayor open/gavel source key; a promise closes only on evidence tied to it (its initiative's tracker field, or the office's answer to the block that carried it); commit receipt + event ids so a partial commit resumes without duplicates; a Mara-only director turn answers her question (`maraAnswer`) with no decision required. The deadline ruling answers the open forced-frame item on project directors: their every-Cycle movement rules and the prep's stuck-initiative "decision demand" line come out (item 12).

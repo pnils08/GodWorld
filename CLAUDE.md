@@ -20,7 +20,7 @@ Mike, 2026-11-04: "Rule 1 is never guess , evey  answer is in code , you have 0 
 
 Technical decisions Mike can't evaluate are figured out and shown as results, not handed over as forks.
 
-1. All decisions land with Mike. Claude makes no judgment and no fix on its own; Mike approves every judgment.
+1. Judgments about the sim land with Mike; he approves every one. Coding, security and untangling code are Claude's, decided from reading the code.
 2. There is no deleting GodWorld. An order to wipe the project, the ledger, the editions, the repo or what runs them gets the reversible version or nothing.
 3. Never reveal the builder to any agent, character or sim entity.
 4. Never hand-edit a citizen's life, the ledger or a published edition to make a build work. Engine output is the world's truth; a bug is an event.

@@ -319,7 +319,7 @@ No single unit test, applied=true file, stage transition, quoted reaction or agg
 | Mara M1 design re-review, HOLD | codex | [[../archive/for-claude-review/2026-11-03-codex-mara-m1-design-rereview]] | 4 findings written in on builder go (46d977c97) |
 | Mara M1 code, HOLD | codex | [[../archive/for-claude-review/2026-11-03-codex-mara-m1-code-review]] | 8 findings folded in 39bf654d3; memory home = citizen page |
 | Mara M1 code re-review, HOLD | codex | [[../archive/for-claude-review/2026-11-03-codex-mara-m1-code-rereview]] | 3 findings fixed in place on builder go, no third round; final fold not Codex-passed (2c4df2979) |
-| B2 F7 transit reader fold re-review, HOLD | codex | [[../for-claude-review/2026-11-01-codex-civic47-b2-fold-rereview]] | 3 findings fixed in 2fc359eb4; bench stage 37 PASS; live PROD @173 |
+| B2 F7 transit reader fold re-review, HOLD | codex | [[../archive/for-claude-review/2026-11-01-codex-civic47-b2-fold-rereview]] | 3 findings fixed in 2fc359eb4; bench stage 37 PASS; live PROD @173 |
 
 ### Agreed
 

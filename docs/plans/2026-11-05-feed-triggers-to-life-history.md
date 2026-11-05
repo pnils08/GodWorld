@@ -10,7 +10,7 @@ sources:
   - lib/wakePerception.js:722-828 (the wake loop perceives a [Retirement] LifeHistory tag as "you retired")
   - output/beats/Oakland_Sports_Feed.jsonl (265 rows; EventTrigger filled on 163 — hot-streak 59, breaking-news 16, cold-streak 14, home-opener 9, playoffs 9, playoff-push 8, awards 7, pre-season 5, championship 5, draft 4, community outreach 4, legacy 2, contract-year 2, rivalry 2)
   - output/simulation_ledger_snapshot.jsonl (1,015 Active / 43 Retired; no engine phase writes Status Retired — grep 2026-11-05)
-  - docs/for-claude-review/2026-11-05-codex-engine333-read-before.md (codex independent read, reconciled §Codex)
+  - docs/archive/for-claude-review/2026-11-05-codex-engine333-read-before.md (codex independent read, reconciled §Codex)
   - phase05-citizens/runAsUniversePipeline.js:427-575 (the legacy Status=Retired post-career loop)
   - docs/plans/2026-11-05-discord-voices-lookups.md §Build log (how the gap surfaced: Vinnie's Discord voice reads "the club says I'm stepping away; my row says Active")
 pointers:
@@ -171,6 +171,12 @@ Injury from the sports intake (the builder's input): the dashboard roster `injur
 2. A `hot-streak` named row writes one Sports-Streak-Hot line tagged with team and trigger on each named player — proven by sandbox readback.
 2b. An `injury` named row on an Active player leaves Status `injured`, StatusStartCycle = that Cycle, HealthCause set, one Hospital_Ledger row with IntakeType `injury`, SourceSystem `sports-feed` and PriorStatus `Active`; the same row on a player the dashboard stamped that Cycle adds the bed and the line and changes no Status cell; the next fire rolls him through the health engine — proven by sandbox readback across two fires.
 3. After the live fire that carries Vinnie's press-conference row, `lookup_citizen("Vinnie Keane")` shows Former Designated Hitter, Active, beside the feed line; if his page is drawn in the two-Cycle window the wake entry speaks from "you retired" (C7) — proven by his row and, when drawn, his page.
+
+## Reviews reconciled
+
+| Review | Verdict | Where folded |
+|---|---|---|
+| [[../archive/for-claude-review/2026-11-05-codex-engine333-read-before]] (codex, independent read-before, 2026-11-05) | HOLD — 6 findings, all verified | §Codex independent read — F1 decisive (Universe writer), F2 → acceptance 1, F3 → ripple names the milestone, F4 → 331 pin split, F5 → C7, F6 → inventory |
 
 ## Changelog
 

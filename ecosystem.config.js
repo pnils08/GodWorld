@@ -28,7 +28,10 @@ module.exports = {
     max_memory_restart: '200M',
     env: {
       NODE_ENV: 'production',
-      GODWORLD_ENV_FILE: GODWORLD_ENV_FILE
+      GODWORLD_ENV_FILE: GODWORLD_ENV_FILE,
+      // research.32 (builder 2026-11-05): the Discord bots on the direct Anthropic key, Sonnet 5.5
+      // (MAGS_BOT_MODEL in the env file overrides the model). Set here, not in the credentials file.
+      MAGS_BOT_PROVIDER: 'anthropic'
     },
     env_file: GODWORLD_ENV_FILE,
     error_file: 'logs/mags-discord-error.log',

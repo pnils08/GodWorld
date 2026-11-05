@@ -57,7 +57,7 @@ Four record lookups beside `search_world`, all read from disk tables the crons a
 |---|---|---|
 | `lookup_citizen(name or POPID)` | ledger snapshot row (name or POPID match) · that citizen's page, newest entries (`citizenPage.recentPage_`, fenced — the wiki container) · `wd-citizens` card · newest sports-feed rows naming them · newest Tribune lines · bay-tribune hits by cycle desc | one record, newest first, cycles labelled |
 | `lookup_neighborhood(name)` | `Neighborhood_Demographics` row (students/adults/seniors/unemployed/sick, LastUpdated) · `Care_Justice_Census` current-cycle hospital + judicial `all` rows · citywide rank of the sick count ("3rd lowest of 22; highest is Chinatown 137") · `wd-neighborhood` card | the numbers Mags needed, with the neighbour that does have the spike |
-| `lookup_team(team)` | `Oakland_Sports_Feed` newest rows for A's or Oaks (season type, event type, notes) · A's roster from truesource (status, position) | newest feed first. No standings table and no Oaks roster exist — the tool says so rather than inventing a record |
+| `lookup_team(team)` | `Oakland_Sports_Feed` newest rows for A's or Oaks (season type, event type, notes) and the newest row's `Team Record` / `Streak` / `WeekRecord` (Oaks C114: 6-1, W2 — Mags said she had "no clean standings line"; it was in the feed) · A's roster from truesource (status, position) | record line first, then newest feed rows. No Oaks roster exists — the tool says so rather than inventing one |
 | `lookup_business(name)` | `Business_Ledger` row · `wd-business` card · bay-tribune hits by cycle desc | one record |
 
 `search_world` fixes: a jsonl shelf returns its newest matching row by `Cycle`, not line 1 (the C36 row is why C114 vanished); a text shelf's snippet is the line matching every term, not the first line matching the first term; the ledger snapshot is listed only when the row's Name contains a query term (kills Amara/Derek/Dalton noise, keeps Vinnie for "Vinnie Keane retire"); within a rank, newest cycle first (already so for editions; extend to jsonl rows and staged pieces).
@@ -88,4 +88,5 @@ Logging: every tool call logs tool, query, result length and the first returned 
 
 ## Changelog
 
+- 2026-11-05 — feed carries `Team Record`/`Streak`/`WeekRecord` (178 rows); lookup_team leads with them. Sent to codex-rb for plan review.
 - 2026-11-05 — plan written from the 11-04 replay; row research.32 claimed on the builder's "let's try your approach"; Mags' profile dump handed to pipeline.100.

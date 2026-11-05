@@ -82,6 +82,7 @@ Vinnie's brief (codex F16): feed lines newest-first, each with its Cycle, and th
 |---|---|---|
 | codex-rb plan review, 2026-11-05 | HOLD → folded, all 16 verified against the cited code | [[../for-claude-review/2026-11-05-codex-research32-plan-review]] |
 | codex-rb diff review of `f974fbad6`, 2026-11-05 | HOLD, 26 points → 18 folded (what a voice says, a number's stamp, the trust boundary); 8 named as ceilings below (builder's stop test 10-30: fold what changes what a citizen lives) | [[../for-claude-review/2026-11-05-codex-research32-diff-review]] |
+| codex-rb re-review of `fc54ef559`, 2026-11-05 (the one re-review) | HOLD → 6 fixed in place (hood card by the writer's hood or title only; a record a year old under the same label is "last recorded"; "the Athletics" detected, "athletics program" not; club rows only for a role that names a club; the brief says each record has its own Cycle; a final round with no text asks once more, no tools, before falling back); the rest recorded for the builder below. No third round | [[../for-claude-review/2026-11-05-codex-research32-diff-rereview]] |
 
 ### Agreed
 - F1 dispatch by tool name; F2 first move kept as forced `search_world` + bot-side record lookups for named entities (Design §First move). Source: `scripts/mags-discord-bot.js:523-542`.
@@ -97,6 +98,11 @@ Vinnie's brief (codex F16): feed lines newest-first, each with its Cycle, and th
 ### Needs proof
 - F3 acceptance 1 — the C114 feed row says "retiring", not "retire"; the disk search cannot carry it for that query. Acceptance 1 is restated on the `lookup_citizen` path (the record attached for any message naming him, and the tool).
 - F2 on Sonnet 5.5: no forced first search exists on that model; small talk and an unrecognised name get no attached record and the model may answer without a tool. Accepted by design (the brief carries the voice's own record; the builder's next talks are the measure).
+
+### Recorded for the builder after the re-review (not built; his call: fix in place or close)
+- A message that names no citizen, hood, team or business (small talk, "Keane" alone, an inexact business name) attaches no record, and on Sonnet 5.5 the voice may answer without a tool call. The brief carries the voice's own record; a question about someone else by first name only is the gap.
+- The keyword search shows one row per table and one line per text file; several same-Cycle games or a name and an event on different lines reach the voice only through the lookups. The prior Cycle's table (unemployment, schools, business values) is reachable only through the neighborhood lookup's illness movement.
+- A table that exists but cannot be parsed reads as empty, not unavailable; no manifest check before a table is read.
 
 ### New concepts (ceilings, not built)
 - F4 one row per jsonl file: several same-Cycle events are carried by the team / citizen lookups, not the keyword search (a pointer, eight lines).
@@ -115,8 +121,8 @@ Logging: every tool call logs tool, query, result length and the first returned 
 | 2 | `lib/discordLookups.js` (both personas share): `lookupCitizen`, `lookupNeighborhood`, `lookupTeam`, `lookupBusiness` reading the tables above through the existing readers; canon hits via raw `lib/supermemory.search`, Cycle-stamped first. 51 unit checks on fixture rows | rb | done `f974fbad6` |
 | 3 | `scripts/mags-discord-bot.js`: the four tools beside `search_world`, dispatch by name; records attached before the first call; forced round-0 search only where the model allows it; per-call result logging | rb | done `f974fbad6` |
 | 4 | `buildVoiceBrief_`: feed newest-first with season; the two-records sentence (codex F16) | rb | done `f974fbad6` |
-| 5 | Codex plan review (codex-rb), fold — done; build — done; codex diff review of `f974fbad6`; `npm test`; `pm2 restart mags-bot`; smoke: one message per channel from the builder | rb / codex | in progress |
-| 7 | Builder (11-05): "consider to put the bots on sonnet 5.5" · "moving them to my Anthropic api". `MAGS_BOT_MODEL` setting, Sonnet 5.5 default on each route — done `f974fbad6`; provider set to `anthropic` in the env file at the restart (direct key proven 11-05) | rb | in progress |
+| 5 | Codex plan review, fold, build, diff review `f974fbad6` → fold `fc54ef559`, re-review → 6 fixed in place; `npm test` 317/317 twice; `pm2 restart mags-bot`; smoke: the builder's next talk on each channel | rb / codex | restart done — awaiting the builder's talk |
+| 7 | Builder (11-05): "consider to put the bots on sonnet 5.5" · "moving them to my Anthropic api". `MAGS_BOT_MODEL` setting, Sonnet 5.5 default on each route — `f974fbad6`; `MAGS_BOT_PROVIDER=anthropic` set in the env file at the restart | rb | done |
 | 6 | Cycle gap log: Vinnie Status `Active` vs feed "stepping away"; note for pipeline.100: the `mags` profile dump | rb | not started |
 
 ## Acceptance
@@ -128,6 +134,7 @@ Logging: every tool call logs tool, query, result length and the first returned 
 
 ## Changelog
 
+- 2026-11-05 — re-review HOLD: 6 fixed in place, 3 items recorded for the builder (§Reviews reconciled); 66 unit checks; bot restarted on the direct key, Sonnet 5.5. Row → live-observing until the builder's talk.
 - 2026-11-05 — codex diff review HOLD (26): 18 folded, 8 ceilings (§Reviews reconciled). 64 unit checks. Harness: Vinnie reads KONO vs Chinatown and Oaks vs A's in one reply, A's 11-3 labelled last recorded. Sent for the one re-review.
 - 2026-11-05 — build landed `f974fbad6` (§Build log). Sonnet 5.5 rejects forced tool_choice and `disabled` thinking, so records attach before the first call. Harness on Sonnet 5.5 passes the three 11-03 misses.
 - 2026-11-05 — codex plan review HOLD, 16 findings verified and folded (§Reviews reconciled): first move stays forced search_world + bot-side entity lookups; row-level AND on jsonl shelves; health bar and census read through the existing readers; no roster claim; brief names both records.

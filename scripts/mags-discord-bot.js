@@ -589,9 +589,19 @@ async function callClaude(provider, session, userMessage, userName, userId) {
     text = textBlocks;
     break;
   }
-  // A final round can come back with only thinking / progress blocks (a max_tokens cut under between_tools);
-  // the reply is then the last text the model wrote on the way, never an empty payload (codex, diff review).
-  if (!text.trim() && lastText.trim()) { text = lastText; log.warn('[' + provider.label + '] final round had no text; replying with the last text block'); }
+  // A final round can come back with only thinking / progress blocks (a max_tokens cut under between_tools).
+  // One more call, no tools, asks for the answer in words; only if that is empty too does the last text the
+  // model wrote on the way stand in — never an empty payload (codex, diff review + re-review).
+  if (!text.trim()) {
+    try {
+      var again = await claude.messages.create(Object.assign({ model: BOT_MODEL, max_tokens: MAX_RESPONSE_TOKENS, system: systemPrompt,
+        messages: messages.concat([{ role: 'user', content: 'Answer now, in your own words, from what you found.' }]) },
+        requestShapeFor(BOT_MODEL).thinking ? { thinking: requestShapeFor(BOT_MODEL).thinking } : {}));
+      text = (again.content || []).filter(function (b) { return b.type === 'text'; }).map(function (b) { return b.text; }).join('');
+      log.warn('[' + provider.label + '] final round had no text; asked once more -> ' + text.length + ' chars');
+    } catch (e) { log.warn('[' + provider.label + '] final retry failed: ' + e.message); }
+    if (!text.trim() && lastText.trim()) { text = lastText; log.warn('[' + provider.label + '] replying with the last text block'); }
+  }
 
   log.info('[' + provider.label + '] Response: ' + text.length + ' chars, ' +
     (response && response.usage ? response.usage.input_tokens + ' in / ' + response.usage.output_tokens + ' out' : 'n/a'));

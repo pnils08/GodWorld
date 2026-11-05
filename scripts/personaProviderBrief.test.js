@@ -26,7 +26,7 @@ assert(/The club, from the sports feed, newest first/.test(brief), 'brief carrie
 {
   const feedCycles = (brief.match(/^- C(\d+) /gm) || []).map(function (l) { return parseInt(l.slice(3), 10); });
   assert(feedCycles.length >= 2 && feedCycles[0] >= feedCycles[feedCycles.length - 1], 'feed lines run newest first: ' + feedCycles.join(','));
-  assert(/both are on the record at the same Cycle/.test(brief), 'brief names both records rather than calling one newer');
+  assert(/both are on the record, each with its own Cycle/.test(brief), 'brief names both records, each with its own Cycle');
 }
 assert(brief.length < 4500, 'brief stays compact (' + brief.length + ' chars)');
 assert(!/\bthe builder\b|\bbuilder\b/i.test(brief), 'brief never names a builder');

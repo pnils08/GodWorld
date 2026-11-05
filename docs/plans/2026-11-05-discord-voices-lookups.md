@@ -103,12 +103,12 @@ Logging: every tool call logs tool, query, result length and the first returned 
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | `lib/mags.js searchDisk`: newest jsonl row by Cycle per file; all-terms snippet line for text shelves; ledger snapshot only on a Name match; cycle-desc within rank. Verified by the seven-query replay before/after | rb | not started |
-| 2 | `lib/personaProvider.js` (or a new `lib/discordLookups.js` both personas share): `lookupCitizen`, `lookupNeighborhood`, `lookupTeam`, `lookupBusiness` reading the tables above; canon hits via `lib/supermemory.search` sorted by `metadata.cycle` desc. Unit test on fixture rows (KONO 17 / Chinatown 137; Vinnie C114 feed first) | rb | not started |
-| 3 | `scripts/mags-discord-bot.js`: register the four tools beside `search_world`; round-0 `tool_choice: any` + the first-move instruction; per-call result logging | rb | not started |
-| 4 | `buildVoiceBrief_`: feed newest-first; the "feed is newer than the ledger row" sentence | rb | not started |
-| 5 | Codex plan review (codex-rb), fold; build; codex diff review of the exact candidate; `npm test`; replay; `pm2 restart mags-bot`; smoke: one message per channel from the builder | rb / codex | not started |
-| 7 | Builder (11-05): "consider to put the bots on sonnet 5.5" · "moving them to my Anthropic api". Bot model becomes a setting (`MAGS_BOT_MODEL`, default Sonnet 5.5 on each route); provider set to `anthropic` in the env file (direct key proven 11-05: Sonnet 5.5 call answered). Same restart | rb | not started |
+| 1 | `lib/mags.js searchDisk`: newest jsonl row carrying every term per file (ledger on identity fields, no fallback); best-line snippet for text shelves; current beats rows rank with editions; `beats/prev/` off. Verified by the seven-query replay before/after | rb | done `f974fbad6` |
+| 2 | `lib/discordLookups.js` (both personas share): `lookupCitizen`, `lookupNeighborhood`, `lookupTeam`, `lookupBusiness` reading the tables above through the existing readers; canon hits via raw `lib/supermemory.search`, Cycle-stamped first. 51 unit checks on fixture rows | rb | done `f974fbad6` |
+| 3 | `scripts/mags-discord-bot.js`: the four tools beside `search_world`, dispatch by name; records attached before the first call; forced round-0 search only where the model allows it; per-call result logging | rb | done `f974fbad6` |
+| 4 | `buildVoiceBrief_`: feed newest-first with season; the two-records sentence (codex F16) | rb | done `f974fbad6` |
+| 5 | Codex plan review (codex-rb), fold — done; build — done; codex diff review of `f974fbad6`; `npm test`; `pm2 restart mags-bot`; smoke: one message per channel from the builder | rb / codex | in progress |
+| 7 | Builder (11-05): "consider to put the bots on sonnet 5.5" · "moving them to my Anthropic api". `MAGS_BOT_MODEL` setting, Sonnet 5.5 default on each route — done `f974fbad6`; provider set to `anthropic` in the env file at the restart (direct key proven 11-05) | rb | in progress |
 | 6 | Cycle gap log: Vinnie Status `Active` vs feed "stepping away"; note for pipeline.100: the `mags` profile dump | rb | not started |
 
 ## Acceptance
@@ -120,6 +120,7 @@ Logging: every tool call logs tool, query, result length and the first returned 
 
 ## Changelog
 
+- 2026-11-05 — build landed `f974fbad6` (§Build log). Sonnet 5.5 rejects forced tool_choice and `disabled` thinking, so records attach before the first call. Harness on Sonnet 5.5 passes the three 11-03 misses.
 - 2026-11-05 — codex plan review HOLD, 16 findings verified and folded (§Reviews reconciled): first move stays forced search_world + bot-side entity lookups; row-level AND on jsonl shelves; health bar and census read through the existing readers; no roster claim; brief names both records.
 - 2026-11-05 — builder: bots to Sonnet 5.5 on his Anthropic key (task 7); the direct route exists (`MAGS_BOT_PROVIDER=anthropic`) and the key answered a Sonnet 5.5 call.
 - 2026-11-05 — feed carries `Team Record`/`Streak`/`WeekRecord` (178 rows); lookup_team leads with them. Sent to codex-rb for plan review.

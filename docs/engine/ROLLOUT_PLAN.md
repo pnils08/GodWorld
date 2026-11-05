@@ -17,6 +17,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.309 | Off-heritage ownership with ascent and crash (builder 2026-10-21): founder door for an existing citizen in their own field; ascent via owner draw → home → Door C; crash = back to the hiring pool. Door number = money-game Task 5. After engine.308 | needs-info | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8, engine.309 design |
 | engine.311 | Business entry by opportunity (builder 2026-10-22): line tier decides which business types open; every business class gets entry gates (none today); line contents in combination raise an opportunity to buy/open; the citizen's wake decides, not a roll. Covers 309's door | needs-info | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8, builder 2026-10-22 under engine.308 |
 | engine.328 | Ledger OriginGame column: remove it, free the column (builder 10-31). Own session first: blast radius (22 files, 11 engine refs), naming, then his go | needs-info | research-build | `docs/SIMULATION_LEDGER.md` |
+| engine.333 | Feed triggers to life history: `retirement` / `injury` change a named player's row. Read-before done; waits on C1–C3 + `retirement` in 331's list | needs-info | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] |
 
 ## 2. Waiting on a fire — dated or organic (live-observing, blocked)
 
@@ -78,7 +79,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.332 | Media-feedback seeds (builder 11-05): Citywide-reaction seeds for coverage at \|rating\| ≥ 3 never reach Story_Seed_Deck, live or sandbox. Fix the path | ready | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` G-ES2 |
-| engine.333 | Feed triggers to life history (builder 11-05): a named player carries the row's Event Trigger; `retirement` flips Status + writes [Retirement]. After engine.331 | ready | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] |
 | engine.334 | Story seeds sum unlike numbers (C114 sports "sentiment +36.06" = mood + head-count). After engine.331 and engine.332; stub, review deeper when picked up | ready | engine-sheet | [[../plans/2026-11-05-story-seed-mixed-magnitudes]] |
 | infrastructure.18 | Weekly version-drift report in the existing health check, no model: runtime end of life, npm behind (majors flagged), Claude Code, plugin vs patch | ready | engine-sheet | [[../reference/DEPLOY]] |
 | engine.325 | Casino overview (builder 10-30, own session): bet types safe→risky, how bets settle without credits or failure, house odds; mishap bet never pays | ready | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §Changelog 2026-10-30 |

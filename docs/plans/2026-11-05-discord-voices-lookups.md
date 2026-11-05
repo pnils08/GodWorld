@@ -60,11 +60,32 @@ Four record lookups beside `search_world`, all read from disk tables the crons a
 | `lookup_team(team)` | `Oakland_Sports_Feed` newest rows for A's or Oaks (season type, event type, notes) and the newest row's `Team Record` / `Streak` / `WeekRecord` (Oaks C114: 6-1, W2 — Mags said she had "no clean standings line"; it was in the feed) · A's roster from truesource (status, position) | record line first, then newest feed rows. No Oaks roster exists — the tool says so rather than inventing one |
 | `lookup_business(name)` | `Business_Ledger` row · `wd-business` card · bay-tribune hits by cycle desc | one record |
 
-`search_world` fixes: a jsonl shelf returns its newest matching row by `Cycle`, not line 1 (the C36 row is why C114 vanished); a text shelf's snippet is the line matching every term, not the first line matching the first term; the ledger snapshot is listed only when the row's Name contains a query term (kills Amara/Derek/Dalton noise, keeps Vinnie for "Vinnie Keane retire"); within a rank, newest cycle first (already so for editions; extend to jsonl rows and staged pieces).
+`search_world` fixes (after the codex fold, below): file-level exact-phrase-then-AND matching stays as it is. For a jsonl shelf the shown row is the newest row that itself matches every term (row-level AND; order by `Cycle`, else `LastUpdated`, else file order), falling back to the first file-match row labelled as such; the ledger snapshot follows the same row-level rule, which is what removes Amara/Derek/Dalton (their rows carry one term, not all). A text shelf keeps its file match and shows the line carrying the most query terms, bounded. A query-matched beats row from the live Cycle or the one before ranks with the editions (rank 1), so a current feed row is no longer buried under rank 3.
 
-First move: round 0 stays a forced tool call but becomes `tool_choice: any` with the instruction "a name → lookup_citizen; a neighborhood → lookup_neighborhood; a team → lookup_team; a business → lookup_business; anything else → search_world; follow a lead with a second lookup". Four rounds stay.
+First move (codex F1/F2): round 0 stays the forced `search_world` fan-out — the research.30 invariant holds. The bot then runs record lookups itself for what the message names — a hood from the Neighborhood_Demographics names, a team token (A's / Oaks), an exact citizen full name or POPID from the ledger snapshot, an exact business name from Business_Ledger — and appends them to the round-0 tool result, so the right record is in front of the voice before it chooses anything. Rounds 1–3 carry the four tools with dispatch by tool name (one result per `tool_use_id`, unknown tool → an explicit error result). "Oaks record" therefore gets the team record even if the model would have reached for the business card.
 
-Vinnie's brief: feed lines newest-first, and one sentence — where the ledger row and the sports feed disagree, the feed is newer.
+Vinnie's brief (codex F16): feed lines newest-first, each with its Cycle, and the sentence names both records with their Cycles — "the C114 feed reports you stepping away; the C114 ledger row still says Active" — rather than asserting one is newer. An announced departure and a standing status can both be true.
+
+## Reviews reconciled
+
+| Review | Verdict | Pointer |
+|---|---|---|
+| codex-rb plan review, 2026-11-05 | HOLD → folded, all 16 verified against the cited code | [[../for-claude-review/2026-11-05-codex-research32-plan-review]] |
+
+### Agreed
+- F1 dispatch by tool name; F2 first move kept as forced `search_world` + bot-side record lookups for named entities (Design §First move). Source: `scripts/mags-discord-bot.js:523-542`.
+- F3 current beats rows rank with editions; F4/F6/F7 row-level AND for jsonl shelves with per-shelf recency fields; F5 text shelves keep the file match, best-line snippet. Source: `lib/mags.js:665-752`.
+- F8 `lookup_citizen` resolves an exact POPID or exact full name; two or more matches (two Jacob Perez rows, POP-00203 / POP-01089) return the candidates and stop. F9 page entries are labelled as that citizen's own recollections, fenced, show docs skipped, an error reads as unavailable; they never outrank a ledger fact.
+- F10 `lookup_neighborhood` returns count, share, the 6% watch bar and the prior-Cycle movement as separate facts (Chinatown 137/2213 is over the bar and highest by count, and fell from 140); the formula is `buildHealthSlice.js` `sickShare` / `SPIKE_WATCH` / `SPIKE_RISE`, exported from there rather than copied. F11 census via `beatSliceKit.censusTrail` (Cycle + System + `all`, scopes apart, incomplete withheld), admissions and closing occupancy named separately.
+- F12 `lookup_team`: record from the newest row of that exact team whose `Team Record` is usable, with its Cycle and event type; `WeekRecord` parsed by `utilities/sportsWeekRecord.js` as ordered game outcomes; "no current record on this feed" when none. F13 no roster claim from TrueSource (it is every GAME-clock citizen, not a club list); names come from the feed rows.
+- F14 `lookup_business`: exact name or BIZ_ID in Business_Ledger, else Business_Archive with `ExitCycle`/`ArchiveReason` (closed, not "never existed"); card secondary.
+- F15 canon hits via the raw `lib/supermemory.search`; hits carrying `metadata.cycle` first, Cycle desc; Cycle-less cards after, labelled undated. F16 brief sentence as in Design.
+
+### Needs proof
+- F3 acceptance 1 ("C114 feed row in the first three disk lines") — proven only by the after-replay; if the rank rule does not deliver it, acceptance moves to `lookup_citizen` surfacing it.
+
+### New concepts
+- Codex could not run the engine-wiring card (connection error) nor the replay (grep blocked in its sandbox); both are run here before the build and the diff review.
 
 Logging: every tool call logs tool, query, result length and the first returned line, so the next review reads the log instead of replaying.
 
@@ -89,6 +110,7 @@ Logging: every tool call logs tool, query, result length and the first returned 
 
 ## Changelog
 
+- 2026-11-05 — codex plan review HOLD, 16 findings verified and folded (§Reviews reconciled): first move stays forced search_world + bot-side entity lookups; row-level AND on jsonl shelves; health bar and census read through the existing readers; no roster claim; brief names both records.
 - 2026-11-05 — builder: bots to Sonnet 5.5 on his Anthropic key (task 7); the direct route exists (`MAGS_BOT_PROVIDER=anthropic`) and the key answered a Sonnet 5.5 call.
 - 2026-11-05 — feed carries `Team Record`/`Streak`/`WeekRecord` (178 rows); lookup_team leads with them. Sent to codex-rb for plan review.
 - 2026-11-05 — plan written from the 11-04 replay; row research.32 claimed on the builder's "let's try your approach"; Mags' profile dump handed to pipeline.100.

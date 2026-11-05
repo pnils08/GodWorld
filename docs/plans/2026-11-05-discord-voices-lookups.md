@@ -81,6 +81,7 @@ Vinnie's brief (codex F16): feed lines newest-first, each with its Cycle, and th
 | Review | Verdict | Pointer |
 |---|---|---|
 | codex-rb plan review, 2026-11-05 | HOLD → folded, all 16 verified against the cited code | [[../for-claude-review/2026-11-05-codex-research32-plan-review]] |
+| codex-rb diff review of `f974fbad6`, 2026-11-05 | HOLD, 26 points → 18 folded (what a voice says, a number's stamp, the trust boundary); 8 named as ceilings below (builder's stop test 10-30: fold what changes what a citizen lives) | [[../for-claude-review/2026-11-05-codex-research32-diff-review]] |
 
 ### Agreed
 - F1 dispatch by tool name; F2 first move kept as forced `search_world` + bot-side record lookups for named entities (Design §First move). Source: `scripts/mags-discord-bot.js:523-542`.
@@ -91,11 +92,18 @@ Vinnie's brief (codex F16): feed lines newest-first, each with its Cycle, and th
 - F14 `lookup_business`: exact name or BIZ_ID in Business_Ledger, else Business_Archive with `ExitCycle`/`ArchiveReason` (closed, not "never existed"); card secondary.
 - F15 canon hits via the raw `lib/supermemory.search`; hits carrying `metadata.cycle` first, Cycle desc; Cycle-less cards after, labelled undated. F16 brief sentence as in Design.
 
-### Needs proof
-- F3 acceptance 1 ("C114 feed row in the first three disk lines") — proven only by the after-replay; if the rank rule does not deliver it, acceptance moves to `lookup_citizen` surfacing it.
+- Diff review, folded: F16 the brief's club rows are the voice's own club and the sentence is generic (an Oaks voice no longer reads "you stepping away"); sports lines newest first across the set. F12 team recency by Cycle then file position; a record from a season other than the newest entry's is "last recorded (from the X entries, not this Y)"; the name join ignores periods (Wendell Carter Jr). F14 a `canon-duplicate-of` archive row is a retired record pointing at the live one, not a closure; archived numbers stamped at the exit Cycle. F15 a card counts only on the record's own ID (metadata or text) or the name in its title; the hood card is fetched. F2 up to two of each kind; names without periods; "Athletics" alone is not a team. F6 only the LifeHistory field is dropped from a ledger row, not the columns after it. F7 the ledger ranks and labels by its own snapshot Cycle; no stamp prints `?`, never `Cnull`. F4 no partial-row fallback on any jsonl shelf. F10 a missing population cell gives no total and no share. F11 a missing census tab reads "source unavailable". Bot: a final round with no text replies with the last text the model wrote. Trust boundary: the attached records are fenced as data (`memoryFence.wrap`, source `city-records`).
 
-### New concepts
-- Codex could not run the engine-wiring card (connection error) nor the replay (grep blocked in its sandbox); both are run here before the build and the diff review.
+### Needs proof
+- F3 acceptance 1 — the C114 feed row says "retiring", not "retire"; the disk search cannot carry it for that query. Acceptance 1 is restated on the `lookup_citizen` path (the record attached for any message naming him, and the tool).
+- F2 on Sonnet 5.5: no forced first search exists on that model; small talk and an unrecognised name get no attached record and the model may answer without a tool. Accepted by design (the brief carries the voice's own record; the builder's next talks are the measure).
+
+### New concepts (ceilings, not built)
+- F4 one row per jsonl file: several same-Cycle events are carried by the team / citizen lookups, not the keyword search (a pointer, eight lines).
+- F5 text-shelf snippet shows one line, not a bounded excerpt around every matched term.
+- F7 `output/beats/prev/` stays off the keyword shelves (last Cycle's copy of the same tabs); the prior-Cycle value reaches the voice through `lookup_neighborhood`'s movement line. No manifest hash / row-count check before a table is read.
+- F2 an inexact business name ("West Oakland academy" for "Firehouse 29 West Oakland Baseball Academy") is not detected; the model can still call `lookup_business` or search.
+- Codex could not run the engine-wiring card (connection error) nor the replay (grep blocked in its sandbox); both ran here before the build and the diff review.
 
 Logging: every tool call logs tool, query, result length and the first returned line, so the next review reads the log instead of replaying.
 
@@ -113,13 +121,14 @@ Logging: every tool call logs tool, query, result length and the first returned 
 
 ## Acceptance
 
-1. Replay of the seven logged queries: `Vinnie Keane retire` shows the C114 feed row in the first three disk lines; `Oaks record` / `Adash Stanley Oaks` / `West Oakland academy` list no unrelated ledger row — proven by the before/after replay in the plan changelog.
+1. Replay of the seven logged queries: `Oaks record` / `Adash Stanley Oaks` / `West Oakland academy` list no unrelated ledger row, and a current feed row ranks with the editions; the C114 "made it clear" line reaches the voice through `lookup_citizen` (attached for any message naming him) — proven by the before/after replay and the unit test.
 2. `lookup_neighborhood("KONO")` returns sick 17, its rank, and names Chinatown 137 as the city's highest — proven by the unit test and one live call.
 3. `lookup_citizen("Vinnie Keane")` returns the C114 feed line before the ledger row's status — proven by the unit test.
 4. The bot restarts clean and both channels answer; the log shows tool + result line per call — proven by the builder's next talk (the real proof; this row stays live-observing until he reads one).
 
 ## Changelog
 
+- 2026-11-05 — codex diff review HOLD (26): 18 folded, 8 ceilings (§Reviews reconciled). 64 unit checks. Harness: Vinnie reads KONO vs Chinatown and Oaks vs A's in one reply, A's 11-3 labelled last recorded. Sent for the one re-review.
 - 2026-11-05 — build landed `f974fbad6` (§Build log). Sonnet 5.5 rejects forced tool_choice and `disabled` thinking, so records attach before the first call. Harness on Sonnet 5.5 passes the three 11-03 misses.
 - 2026-11-05 — codex plan review HOLD, 16 findings verified and folded (§Reviews reconciled): first move stays forced search_world + bot-side entity lookups; row-level AND on jsonl shelves; health bar and census read through the existing readers; no roster claim; brief names both records.
 - 2026-11-05 — builder: bots to Sonnet 5.5 on his Anthropic key (task 7); the direct route exists (`MAGS_BOT_PROVIDER=anthropic`) and the key answered a Sonnet 5.5 call.

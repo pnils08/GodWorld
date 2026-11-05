@@ -543,6 +543,7 @@ async function callClaude(provider, session, userMessage, userName, userId) {
   // data before replying. Capped at 4 rounds so a confused turn can't spin.
   var response;
   var text = '';
+  var lastText = '';  // research.32 — the last text the model wrote beside a tool call; the reply if the final round comes back without text
   var MAX_TOOL_ROUNDS = 4;
   for (var round = 0; round < MAX_TOOL_ROUNDS; round++) {
     // Last round: NO tools, so it must answer and can never reply empty
@@ -564,6 +565,7 @@ async function callClaude(provider, session, userMessage, userName, userId) {
       .filter(function (b) { return b.type === 'text'; })
       .map(function (b) { return b.text; }).join('');
 
+    if (textBlocks.trim()) lastText = textBlocks;
     if (!isFinal && response.stop_reason === 'tool_use' && toolUses.length) {
       messages.push({ role: 'assistant', content: response.content });  // thinking / progress blocks ride back unchanged
       var toolResults = await Promise.all(toolUses.map(async function (tu) {
@@ -587,6 +589,9 @@ async function callClaude(provider, session, userMessage, userName, userId) {
     text = textBlocks;
     break;
   }
+  // A final round can come back with only thinking / progress blocks (a max_tokens cut under between_tools);
+  // the reply is then the last text the model wrote on the way, never an empty payload (codex, diff review).
+  if (!text.trim() && lastText.trim()) { text = lastText; log.warn('[' + provider.label + '] final round had no text; replying with the last text block'); }
 
   log.info('[' + provider.label + '] Response: ' + text.length + ' chars, ' +
     (response && response.usage ? response.usage.input_tokens + ' in / ' + response.usage.output_tokens + ' out' : 'n/a'));

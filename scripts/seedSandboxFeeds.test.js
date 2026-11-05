@@ -85,8 +85,17 @@ console.log('usage');
   assert('context reads as a desk piece', /^sandbox-generic_c115_ines-sorensen-\d+$/.test(u.rows[0].Context));
   const again = s.buildUsageRows(live, u.rows, ledger, 116);
   assert('second run adds nothing', again.rows.length === 0 && /already/.test(again.skipped));
-  const warm = s.buildUsageRows(live, live, ledger, 115);
-  assert('sandbox with live N-1 bylines is not seeded', warm.rows.length === 0);
+  const warm = s.buildUsageRows(live, live.filter(r => r.Cycle === 113), ledger, 114);
+  assert('sandbox with a published week at N-1 is not seeded', warm.rows.length === 0 && /published/.test(warm.skipped));
+  // mid-week resync: live's in-progress week (landed only) is on the sandbox at N-1
+  const inProgress = [{ Cycle: 115, CitizenName: 'Ines Sorensen', UsageType: 'byline-landed', Context: 'culture_c115_x', Processed: '' }];
+  const mid = s.buildUsageRows(live, inProgress, ledger, 116);
+  assert('in-progress landed rows do not block the seed', mid.rows.length === 1);
+  assert('a landed piece already there is not seeded twice', mid.rows[0].UsageType === 'byline-published', JSON.stringify(mid.rows.map(r => r.UsageType)));
+  const homonym = ledger.concat([{ First: 'Ines', Last: 'Sorensen', Status: 'Deceased' }]);
+  assert('a dead namesake makes the name ambiguous, as the engine reads it', s.buildUsageRows(live, [], homonym, 116).rows.length === 0);
+  const deadOnly = [{ First: 'Ines', Last: 'Sorensen', Status: 'Deceased' }];
+  assert('a dead reporter is not seeded', s.buildUsageRows(live, [], deadOnly, 116).rows.length === 0);
 }
 
 console.log('sports');
@@ -100,13 +109,27 @@ console.log('sports');
   const oaks = r.rows.find(x => x.TeamsUsed === 'Oaks'), as = r.rows.find(x => x.TeamsUsed === "A's");
   assert('game phase pairs game-result with a week', oaks.EventType === 'game-result' && oaks.WeekRecord === 'H:W A:L');
   assert('record from the last valid W-L + 1-1', oaks['Team Record'] === '5-2', oaks['Team Record']);
-  assert('streak L1, trigger and mood blank', oaks.Streak === 'L1' && oaks.EventTrigger === '' && oaks.PlayerMood === '');
+  // a blank cell would carry C114's championship trigger and confident mood forward (reduceFeedTeamState_ keeps non-blank, non-dash)
+  assert('streak L1; trigger none and mood quiet overwrite the carried state', oaks.Streak === 'L1' && oaks.EventTrigger === 'none' && oaks.PlayerMood === 'quiet');
+  assert('quiet fires no mood trigger and leaves the night to the streak', !/frustrated|angry|electric|confident/.test(oaks.PlayerMood) && !/confident|energized|high|frustrat|low|tense/.test(oaks.PlayerMood));
   assert('names: latest row with a living match', oaks.NamesUsed === 'Dillon Brooks', oaks.NamesUsed);
   assert('static columns copied', oaks.HomeNeighborhood === 'KONO');
   assert('off-season pairs season-state with none', as.EventType === 'season-state' && as.WeekRecord === 'none' && as['Team Record'] === '');
   assert('stamped N, marked', r.rows.every(x => x.Cycle === 115 && /SANDBOX-GENERIC/.test(x.Notes)));
   const again = s.buildSportsRows(live, r.rows, ledger, 115);
   assert('second run adds nothing', again.rows.length === 0);
+}
+
+{
+  const sparse = [
+    { Cycle: 113, SeasonType: 'mid-season', TeamsUsed: "A's", 'Team Record': '20-10', FanSentiment: 'excited', MediaProfile: 'national', NamesUsed: 'Ines Sorensen' },
+    { Cycle: 114, SeasonType: '', TeamsUsed: "A's", 'Team Record': '0-0', FanSentiment: '-', MediaProfile: '' }
+  ];
+  const a = s.buildSportsRows(sparse, [], ledger, 115).rows[0];
+  assert('a blank last SeasonType walks back to the phase', a.SeasonType === 'mid-season' && a.EventType === 'game-result');
+  assert('carried columns walk back past blank and dash', a.FanSentiment === 'excited' && a.MediaProfile === 'national');
+  assert('a filler 0-0 does not clobber the played record', a['Team Record'] === '21-11', a['Team Record']);
+  assert('an unknown phase is off-season, as the engine reads it', s.isNoGamePhase('-') && s.isNoGamePhase('banana') && !s.isNoGamePhase('finals'));
 }
 
 console.log('row shape');

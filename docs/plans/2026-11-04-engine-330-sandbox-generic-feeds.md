@@ -45,10 +45,10 @@ Code read 2026-11-04. Spot-checked by es: ratings Cycle filter, usage Processed 
 | 4 | Media-usage rows: the byline rows (`byline-landed`, `byline-published`) of the latest live Cycle with `byline-published` rows (a whole week; live's in-progress week has landed rows only), Cycle N-1, Context `sandbox-generic_c<N-1>_<slug>-<k>` (k = row number in the batch), Reporter `SANDBOX-GENERIC`, Processed/Routed blank. CitizenName written as the ledger's `First Last` and only when exactly one sandbox ledger citizen matches under `normalizeCitizenName_`. Skipped when the sandbox already has byline rows at N-1. Verified by tests + rows read back | es | built — `scripts/seedSandboxFeeds.js`, 39 tests pass, dry run on 1004 read back (C135: 6 ratings, 39 usage from live C113, Oaks game week 7-2, A's off-season) |
 | 5 | Sports rows: one per team (A's, Oaks), Cycle N, skipped when the sandbox has that team's row for N. SeasonType = the team's last live one. Game phase: EventType `game-result`, WeekRecord `H:W A:L`, Team Record = the last valid W-L on the team's live rows (W-L text or a Sheets date `M/D/YYYY`) + 1-1, Streak `L1`. `off-season`: EventType `season-state`, WeekRecord `none`, Team Record and Streak blank. Copied from the team's last live row: TeamsUsed, HomeNeighborhood, FanSentiment, FranchiseStability, EconomicFootprint, CommunityInvestment, MediaProfile. Blank: EventTrigger, PlayerMood, StoryAngle, Stats. NamesUsed: the team's latest live row with at least one living sandbox citizen, parsed as `parseNamesUsed_` does, kept to living matches. Notes `SANDBOX-GENERIC NON-CANON`. Verified by tests + rows read back | es | built — `scripts/seedSandboxFeeds.js`, 39 tests pass, dry run on 1004 read back (C135: 6 ratings, 39 usage from live C113, Oaks game week 7-2, A's off-season) |
 | 6 | Intake: no rows written. Engine self-feeds it; the media route fills it once task 4 rows exist; authored citizens are not generated | es | done — the script writes no intake rows |
-| 7 | `DEPLOY.md`: seed step added before **Fire** in §Groundhog proving loop; §The bench runs cold rewritten to match (drops "seat work", undefined in the repo) | es | not started |
-| 8 | Sandbox proof on sandbox 1004 (`1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA`, the `BENCH` constant in `output/engine-sheet/` scripts; dry-run prints the title to confirm): confirm research-build holds no sandbox proof in flight → resync from live → cold control fire (no seed) → seed → fire. Compare per Acceptance 3 | es | not started |
-| 9 | Code review of the script (agy; one re-review of the fold at most); findings reconciled below | es / agy | not started |
-| 10 | Close: row → `done-pending-archive`; observations to the gap log | es | not started |
+| 7 | `DEPLOY.md`: seed step added before **Fire** in §Groundhog proving loop; §The bench runs cold rewritten to match (drops "seat work", undefined in the repo) | es | done — §Groundhog proving loop step 3b, §The bench runs cold rewritten |
+| 8 | Sandbox proof on sandbox 1004 (`1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA`, the `BENCH` constant in `output/engine-sheet/` scripts; dry-run prints the title to confirm): confirm research-build holds no sandbox proof in flight → resync from live → cold control fire (no seed) → seed → fire. Compare per Acceptance 3 | es | done — `output/engine-sheet/2026-11-05-e330-bench-2.log`, reads `2026-11-05-e330-reads.jsonl`; bench code stage 36 @181 unchanged, left synced to live C114 |
+| 9 | Code review of the script (agy; one re-review of the fold at most); findings reconciled below | es / agy | done — 5 findings fixed (A13–A16), 48 tests |
+| 10 | Close: row → `done-pending-archive`; observations to the gap log | es | done — row `done-pending-archive`; G-ES1, G-ES2 in the C114 gap log |
 
 ## Acceptance
 
@@ -69,6 +69,7 @@ Code read 2026-11-04. Spot-checked by es: ratings Cycle filter, usage Processed 
 | Advisor, pre-plan | es | in-session, not saved | read-only |
 | Feed code map | es (Explore subagent) | §Feed facts | read-only |
 | Plan review | agy | `output/antigravity/2026-11-05-review-engine330-sandbox-feeds.md` | SHIP-WITH-FIXES; 8 findings, all verified against the code by es and folded |
+| Code review | agy | `output/antigravity/2026-11-05-review-engine330-seeder-code.md` | SHIP-WITH-FIXES; 5 findings, all verified by es and fixed (A13–A16); tests 39 → 48 |
 
 ### Agreed
 
@@ -85,6 +86,10 @@ Code read 2026-11-04. Spot-checked by es: ratings Cycle filter, usage Processed 
 | A10 | Usage rows: idempotent per N-1, latest byline Cycle, unique Context, one ledger match under `normalizeCitizenName_`, Reporter marker | agy · es | `processAdvancementIntake.js:476`, `:1364-1393`, `mediaRoomIntake.js:477`, `:577-584` |
 | A11 | Ratings rows carry Tone; window = 8 highest distinct rated Cycles | agy · es | `applyEditionCoverageEffects.js:95` |
 | A12 | Target allowlist = sandbox 1004 only; live and both baselines refused; live reads before the switch, sandbox reads after | agy · es | `lib/sheets.js:36-42`; DEPLOY.md:61; `output/engine-sheet/2026-10-19-reset-from-baseline-c112.js:6` |
+| A13 | EventTrigger `none`, PlayerMood `quiet`: a blank cell carries the last trigger and mood forward and re-fires them | agy · es | `applySportsSeason.js:1018-1051`, `:1098-1099` |
+| A14 | Usage gate = a published or seeded week at N-1; an in-progress week's landed rows count against the seed one for one | agy · es | proof run 1 skipped usage on live's in-progress C114 |
+| A15 | Sports columns walk back to the last non-blank, non-dash value; phase read as `canonicalSportsPhase_`; a 0-0 record is not played | agy · es | `applySportsSeason.js:533-543`, `:1083-1101`, `:1126-1135` |
+| A16 | Name ambiguity counts dead namesakes, as `processMediaUsage_` does; `--check` reads sandbox presence | agy · es | `processAdvancementIntake.js:441`, `:554` |
 | A4 | Seeder runs right before each sandbox fire; usage and intake have no Cycle gate | es | §Feed facts, `processAdvancementIntake.js:476`, `mediaRoomIntake.js:477` |
 
 ### Needs proof
@@ -116,3 +121,5 @@ Code read 2026-11-04. Spot-checked by es: ratings Cycle filter, usage Processed 
 - 2026-11-05 (engine-sheet) — Builder: "I'm ok with however you want to build it as a benefit to what you would need from it in a bench run". Unparked; row to in-progress; task 1 sent to agy.
 - 2026-11-05 (engine-sheet) — agy plan review folded (SHIP-WITH-FIXES, 8 findings verified against the code): tasks 2–5, Feed facts, Acceptance 4–5, A7–A12, P1–P3 settled.
 - 2026-11-05 (engine-sheet) — Tasks 2–6 built: seeder + tests (39 pass); live ID refused; dry run against 1004 printed the rows. Usage source = latest live week with published bylines.
+- 2026-11-05 (engine-sheet) — Proof run 1 (C115 cold vs seeded): ratings 6/6 processed, coverage 0 → 0.0645, sports rows read with 0 WeekRecord errors, usage skipped on live's in-progress C114 week. agy code review folded (A13–A16). G-ES1, G-ES2 to the C114 gap log. Proof run 2 on the fixed script.
+- 2026-11-05 (engine-sheet) — Proof run 2 PASS, C115 cold vs seeded on the same live-synced state, 0 Engine_Errors both: ratings 6/6 processed, coverage 0 → 0.0645; usage 26 rows (39 from live C113 less 13 landed in live's C114 week) 26/26 processed and routed, reporters' UsageCount 305 → 328, intake 15 → 41 (26 routed from usage); sports season off-season → early-season, 0 WeekRecord errors, Oaks player lines 6 → 7; second apply 0 rows; resync leaves 0 marked rows. Citywide-reaction seeds 0 in both legs and on live (G-ES2). Closed.

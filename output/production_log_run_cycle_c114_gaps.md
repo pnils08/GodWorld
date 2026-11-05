@@ -269,3 +269,8 @@ Read against engine code and live sheet headers. No code or sheet changed. Sits 
 ## LEG: /city-hall (G-R)
 
 - G-R (AUTO): sanity-read FAIL-SCOPED — INIT-005, INIT-008 excluded from the write, rest applied — see output/cron-civic/gate_c114.json
+
+## engine-sheet: engine.330 sandbox observations (2026-11-05)
+
+- G-ES1 sports feed: a blank EventTrigger or PlayerMood keeps the team's last non-blank value (`reduceFeedTeamState_`, `applySportsSeason.js:1098-1099`), and `processFeedSheet_` fires it again whenever the team has a row for the Cycle (`:1018-1051`). A `championship` or `confident` cell re-fires every later week until a row overwrites it. Live hand rows leave both blank. Not fixed (engine code, outside engine.330); the seeder writes `none` / `quiet`.
+- G-ES2 media-feedback seeds: `applyStorySeeds.js:1307-1320` builds a "Citywide reaction" seed for every coverage domain at |rating| ≥ 3. Live Story_Seed_Deck has 0 such rows ever; the seeded sandbox fire (ECONOMIC +3, ENVIRONMENT +5) also wrote 0. Path from `seeds` to the deck not traced.

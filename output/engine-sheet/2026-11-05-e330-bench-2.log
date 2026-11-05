@@ -1,0 +1,41 @@
+AIM = BENCH (script read the bench marker)
+== sync from live
+  verify Reflection_Intake: bench 2455 rows vs live 2455 — OK
+  verify Story_Hook_Deck: bench 2132 rows vs live 2132 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"114","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":115,"startedMs":1793864134015,"state":"done","finishedMs":1793864285628},"raw":"{\"cycle\":115,\"startedMs\":1793864134015,\"state\":\"done\",\"finishedMs\":1793864285628}","valid":true,"expectOk":null}
+clearfire 115: {"ok":true,"cleared":{"cycle":115,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+bench cycleCount 114
+fire C115 rc=0 "verdict": "PASS" "wallS": 174
+{"label":"e330-cold","N":115,"at":"2026-11-05T07:45:07.965Z","cycleCount":115,"engineErrorsAtN":0,"weekRecordErrors":0,"fireGuardErrors":0,"ratingsMarked":0,"ratingsProcessed":0,"coverageBoost":0,"usageMarked":0,"usageProcessedY":0,"usageRoutedY":0,"reporters":26,"reportersUsageCountSum":305,"sportsRowsAtN":0,"worldEventsSportsSeason":["off-season"],"oaksPlayersOnLedger":3,"lifeHistoryAtN":2490,"lifeHistoryOaksPlayers":7,"lifeHistoryOaksPlayersGameWords":6,"intakeRows":15,"intakeRoutedFromSandboxUsage":0,"citywideReactionSeeds":0}
+== sync from live
+  verify Reflection_Intake: bench 2455 rows vs live 2455 — OK
+  verify Story_Hook_Deck: bench 2132 rows vs live 2132 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"114","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":115,"startedMs":1793864527227,"state":"done","finishedMs":1793864695625},"raw":"{\"cycle\":115,\"startedMs\":1793864527227,\"state\":\"done\",\"finishedMs\":1793864695625}","valid":true,"expectOk":null}
+clearfire 115: {"ok":true,"cleared":{"cycle":115,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+reading live 1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk
+target 1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA "Sandox_104_c109-live_Simulation_Narrative"
+sandbox cycleCount 114 → seeding for fire C115
+
+Edition_Coverage_Ratings C114: 6 rows (window 113,112,111,110,109,108,107,106)
+Citizen_Media_Usage C114: 26 rows from live C113
+Oakland_Sports_Feed C115: 2 rows
+appended 6 to Edition_Coverage_Ratings; marked rows on the tab now 6
+appended 26 to Citizen_Media_Usage; marked rows on the tab now 26
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+== second apply (must add nothing)
+Edition_Coverage_Ratings C114: 0 rows (window 113,112,111,110,109,108,107,106), sandbox already has CIVIC,CULTURE,ECONOMIC,ENVIRONMENT,INFRASTRUCTURE,SPORTS
+Citizen_Media_Usage C114: 0 rows (sandbox already has a published or seeded week at C114)
+Oakland_Sports_Feed C115: 0 rows
+CHECK: seeded for C115
+bench cycleCount 114
+fire C115 rc=0 "verdict": "PASS" "wallS": 195
+{"label":"e330-seed","N":115,"at":"2026-11-05T07:50:17.747Z","cycleCount":115,"engineErrorsAtN":0,"weekRecordErrors":0,"fireGuardErrors":0,"ratingsMarked":6,"ratingsProcessed":6,"coverageBoost":0.0645,"usageMarked":26,"usageProcessedY":26,"usageRoutedY":26,"reporters":26,"reportersUsageCountSum":328,"sportsRowsAtN":2,"worldEventsSportsSeason":["early-season"],"oaksPlayersOnLedger":3,"lifeHistoryAtN":2475,"lifeHistoryOaksPlayers":7,"lifeHistoryOaksPlayersGameWords":7,"intakeRows":41,"intakeRoutedFromSandboxUsage":26,"citywideReactionSeeds":0}
+== final sync from live (Acceptance 5)
+marker rows after resync: 0
+engine.330 bench done

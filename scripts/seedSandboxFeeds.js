@@ -85,20 +85,27 @@ function feedTeam(v) {
   return '';
 }
 
-// only off-season (and blank) carries no games (applySportsSeason.js SPORTS_PHASE_DEPTH_)
-function isNoGamePhase(seasonType) {
-  const s = String(seasonType || '').trim().toLowerCase();
-  return !s || s === 'off-season';
+// mirrors canonicalSportsPhase_ (applySportsSeason.js): an unknown or blank phase is off-season, the only phase with no games
+const SPORTS_PHASE_ALIASES = { 'world-series': 'championship', 'worldseries': 'championship', 'world series': 'championship',
+  'finals': 'championship', 'postseason': 'post-season', 'summer league': 'preseason', 'summer-league': 'preseason',
+  'regular': 'regular-season', 'wild-card': 'playoffs', 'division-series': 'playoffs', 'league-championship': 'playoffs',
+  'play-in': 'playoffs', 'first-round': 'playoffs', 'conference-semis': 'playoffs', 'conference-finals': 'playoffs' };
+const SPORTS_PHASES = ['off-season', 'spring-training', 'preseason', 'early-season', 'regular-season', 'mid-season',
+  'late-season', 'post-season', 'playoffs', 'championship'];
+function canonicalPhase(seasonType) {
+  let s = String(seasonType || '').trim().toLowerCase();
+  if (SPORTS_PHASE_ALIASES[s]) s = SPORTS_PHASE_ALIASES[s];
+  return SPORTS_PHASES.indexOf(s) === -1 ? 'off-season' : s;
 }
+function isNoGamePhase(seasonType) { return canonicalPhase(seasonType) === 'off-season'; }
 
 // "6-1" / "6-1-0", or a Sheets date the cell was coerced into ("6/1/2026" = 6-1)
 function parseWinLoss(v) {
   const s = String(v || '').trim();
-  let m = /^(\d+)-(\d+)(?:-\d+)?$/.exec(s);
-  if (m) return { w: Number(m[1]), l: Number(m[2]) };
-  m = /^(\d{1,2})\/(\d{1,2})(?:\/\d{2,4})?$/.exec(s);
-  if (m) return { w: Number(m[1]), l: Number(m[2]) };
-  return null;
+  const m = /^(\d+)-(\d+)(?:-\d+)?$/.exec(s) || /^(\d{1,2})\/(\d{1,2})(?:\/\d{2,4})?$/.exec(s);
+  if (!m) return null;
+  const w = Number(m[1]), l = Number(m[2]);
+  return w + l > 0 ? { w, l } : null;   // a filler 0-0 is not a played record (parseWinPercentage_)
 }
 
 // living as applyGameNightMoments.js:189 reads it
@@ -107,13 +114,13 @@ function isLiving(row) { return !/^(deceased|dead)$/i.test(String(row.Status || 
 function ledgerIndexes(ledgerRows) {
   const byGameKey = new Set();
   const byNorm = {};
+  // byNorm counts every ledger row, living or not, as processMediaUsage_ does: two rows with one name is ambiguous there
   ledgerRows.forEach(r => {
-    if (!isLiving(r)) return;
     const first = String(r.First || '').trim(), last = String(r.Last || '').trim();
     if (!first && !last) return;
-    byGameKey.add(gameNightNameKey(first + ' ' + last));
+    if (isLiving(r)) byGameKey.add(gameNightNameKey(first + ' ' + last));
     const k = normalizeCitizenName(first) + ' ' + normalizeCitizenName(last);
-    (byNorm[k] = byNorm[k] || []).push(first + ' ' + last);
+    (byNorm[k] = byNorm[k] || []).push({ name: first + ' ' + last, living: isLiving(r) });
   });
   return { byGameKey, byNorm };
 }
@@ -150,9 +157,15 @@ function buildRatingRows(liveRatings, sandboxRatings, N) {
 function buildUsageRows(liveUsage, sandboxUsage, ledgerRows, N) {
   const prev = N - 1;
   const type = r => String(r.UsageType || '').trim().toLowerCase();
-  if (sandboxUsage.some(r => num(r.Cycle) === prev && BYLINE_TYPES.indexOf(type(r)) !== -1)) {
-    return { rows: [], skipped: 'sandbox already has byline rows at C' + prev, source: null, dropped: [] };
+  // a whole week (published bylines) or an earlier seed at N-1 means the feed is warm; landed rows alone are a week in progress
+  if (sandboxUsage.some(r => num(r.Cycle) === prev && (type(r) === 'byline-published' || String(r.Reporter).trim() === MARKER))) {
+    return { rows: [], skipped: 'sandbox already has a published or seeded week at C' + prev, source: null, dropped: [] };
   }
+  // the in-progress week's landed rows count against the seed, one for one, so no reporter's piece lands twice
+  const already = {};
+  sandboxUsage.filter(r => num(r.Cycle) === prev && BYLINE_TYPES.indexOf(type(r)) !== -1).forEach(r => {
+    const k = normalizeCitizenName(r.CitizenName) + '|' + type(r); already[k] = (already[k] || 0) + 1;
+  });
   const published = liveUsage.filter(r => type(r) === 'byline-published').map(r => num(r.Cycle)).filter(c => c !== null);
   if (!published.length) return { rows: [], skipped: 'live has no published week', source: null, dropped: [] };
   const source = Math.max(...published);
@@ -161,8 +174,10 @@ function buildUsageRows(liveUsage, sandboxUsage, ledgerRows, N) {
   liveUsage.filter(r => num(r.Cycle) === source && BYLINE_TYPES.indexOf(type(r)) !== -1).forEach(r => {
     const sp = splitUsageName(r.CitizenName);
     const hits = sp ? (byNorm[normalizeCitizenName(sp.first) + ' ' + normalizeCitizenName(sp.last)] || []) : [];
-    if (hits.length !== 1) { dropped.push(String(r.CitizenName)); return; }
-    const name = hits[0];
+    if (hits.length !== 1 || !hits[0].living) { dropped.push(String(r.CitizenName)); return; }
+    const name = hits[0].name;
+    const k = normalizeCitizenName(name) + '|' + type(r);
+    if (already[k]) { already[k]--; return; }
     const slug = normalizeCitizenName(name).replace(/\s+/g, '-');
     rows.push(Object.assign({}, r, {
       Timestamp: 'C' + prev, Cycle: prev, CitizenName: name,
@@ -183,14 +198,23 @@ function buildSportsRows(liveSports, sandboxSports, ledgerRows, N) {
     const teamRows = liveSports.filter(r => feedTeam(r.TeamsUsed) === team && num(r.Cycle) !== null)
       .map((r, i) => ({ r, i })).sort((a, b) => (num(a.r.Cycle) - num(b.r.Cycle)) || (a.i - b.i)).map(x => x.r);
     if (!teamRows.length) { notes.push(team + ': no live rows, skipped'); return; }
-    const last = teamRows[teamRows.length - 1];
-    const seasonType = String(last.SeasonType || '').trim();
+    // each carried column = its last non-blank, non-dash value, as reduceFeedTeamState_ carries them
+    const lastOf = col => {
+      for (let k = teamRows.length - 1; k >= 0; k--) {
+        const v = String(teamRows[k][col] === undefined ? '' : teamRows[k][col]).trim();
+        if (v && v !== '-') return v;
+      }
+      return '';
+    };
+    const seasonType = lastOf('SeasonType');
+    // EventTrigger 'none' and PlayerMood 'quiet' overwrite the carried state: a blank cell keeps the last trigger and mood
+    // and re-fires them (reduceFeedTeamState_ / processFeedSheet_); 'quiet' fires no mood trigger and leaves the streak to bucket the night
     const out = {
-      Cycle: N, SeasonType: seasonType, TeamsUsed: last.TeamsUsed,
-      HomeNeighborhood: last.HomeNeighborhood, FanSentiment: last.FanSentiment,
-      FranchiseStability: last.FranchiseStability, EconomicFootprint: last.EconomicFootprint,
-      CommunityInvestment: last.CommunityInvestment, MediaProfile: last.MediaProfile,
-      EventTrigger: '', PlayerMood: '', StoryAngle: '', Stats: '',
+      Cycle: N, SeasonType: seasonType, TeamsUsed: teamRows[teamRows.length - 1].TeamsUsed,
+      HomeNeighborhood: lastOf('HomeNeighborhood'), FanSentiment: lastOf('FanSentiment'),
+      FranchiseStability: lastOf('FranchiseStability'), EconomicFootprint: lastOf('EconomicFootprint'),
+      CommunityInvestment: lastOf('CommunityInvestment'), MediaProfile: lastOf('MediaProfile'),
+      EventTrigger: 'none', PlayerMood: 'quiet', StoryAngle: '', Stats: '',
       Notes: MARKER + ' NON-CANON'
     };
     if (isNoGamePhase(seasonType)) {
@@ -223,7 +247,7 @@ function checkTarget(sheetId, liveId) {
 }
 
 module.exports = { buildRatingRows, buildUsageRows, buildSportsRows, checkTarget, median, parseWinLoss,
-  parseNamesUsed, isNoGamePhase, toObjects, toRow, SANDBOX_ID, BASELINE_IDS, MARKER };
+  parseNamesUsed, isNoGamePhase, canonicalPhase, toObjects, toRow, SANDBOX_ID, BASELINE_IDS, MARKER };
 
 // ── main ────────────────────────────────────────────────────────────────────
 
@@ -293,7 +317,12 @@ async function main() {
   ];
 
   if (check) {
-    const missing = plan.filter(p => p[2].length).map(p => p[0]);
+    // present on the sandbox for the Cycle, not "nothing left to write"
+    const at = (rows, c) => rows.filter(r => num(r.Cycle) === c);
+    const missing = [];
+    if (!at(sbr.Edition_Coverage_Ratings.rows, N - 1).length) missing.push('Edition_Coverage_Ratings');
+    if (!at(sbr.Citizen_Media_Usage.rows, N - 1).some(r => BYLINE_TYPES.indexOf(String(r.UsageType).trim().toLowerCase()) !== -1)) missing.push('Citizen_Media_Usage');
+    TEAMS.forEach(t => { if (!at(sbr.Oakland_Sports_Feed.rows, N).some(r => feedTeam(r.TeamsUsed) === t)) missing.push('Oakland_Sports_Feed ' + t); });
     console.log(missing.length ? '\nCHECK: missing rows for C' + N + ' on ' + missing.join(', ') : '\nCHECK: seeded for C' + N);
     process.exit(missing.length ? 1 : 0);
   }

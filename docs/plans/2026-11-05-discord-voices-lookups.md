@@ -123,7 +123,7 @@ Logging: every tool call logs tool, query, result length and the first returned 
 | 4 | `buildVoiceBrief_`: feed newest-first with season; the two-records sentence (codex F16) | rb | done `f974fbad6` |
 | 5 | Codex plan review, fold, build, diff review `f974fbad6` → fold `fc54ef559`, re-review → 6 fixed in place; `npm test` 317/317 twice; `pm2 restart mags-bot`; smoke: the builder's next talk on each channel | rb / codex | restart done — awaiting the builder's talk |
 | 7 | Builder (11-05): "consider to put the bots on sonnet 5.5" · "moving them to my Anthropic api". `MAGS_BOT_MODEL` setting, Sonnet 5.5 default on each route — `f974fbad6`; `MAGS_BOT_PROVIDER=anthropic` set in `ecosystem.config.js` (the credentials file is not writable from a session); restarted 2026-11-05 01:33 CST, `pm2 env` shows it | rb | done |
-| 6 | Cycle gap log: Vinnie Status `Active` vs feed "stepping away"; note for pipeline.100: the `mags` profile dump | rb | not started |
+| 6 | Cycle gap log: G-RB3 Vinnie Status `Active` vs feed "stepping away" (no engine retirement path → engine.333), G-RB4 talk-hedge written as a page TENSION (builder's call); the `mags` profile dump is noted in §Measured for pipeline.100 | rb | done |
 
 ## Acceptance
 

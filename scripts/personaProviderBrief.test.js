@@ -19,9 +19,15 @@ function assert(cond, msg) {
 
 const brief = pp.buildVoiceBrief_('POP-00001', 'Vinnie Keane');
 assert(brief.indexOf('## What the records say right now') === 0, 'brief opens with its header');
-assert(/Your ledger row: .*Designated Hitter/.test(brief), 'brief carries the ledger row (role)');
+assert(/Your ledger row[^:]*: .*Designated Hitter/.test(brief), 'brief carries the ledger row (role)');
 assert(/status \w+/.test(brief) && /lives in /.test(brief), 'brief carries status and hood from the ledger');
-assert(/The club, from the sports feed:/.test(brief), 'brief carries sports feed lines');
+assert(/The club, from the sports feed, newest first/.test(brief), 'brief carries sports feed lines');
+// research.32 — newest first, and the two-records sentence instead of "the feed is newer"
+{
+  const feedCycles = (brief.match(/^- C(\d+) /gm) || []).map(function (l) { return parseInt(l.slice(3), 10); });
+  assert(feedCycles.length >= 2 && feedCycles[0] >= feedCycles[feedCycles.length - 1], 'feed lines run newest first: ' + feedCycles.join(','));
+  assert(/both are on the record at the same Cycle/.test(brief), 'brief names both records rather than calling one newer');
+}
 assert(brief.length < 4500, 'brief stays compact (' + brief.length + ' chars)');
 assert(!/\bthe builder\b|\bbuilder\b/i.test(brief), 'brief never names a builder');
 assert(!/\b20(2[0-9]|3[0-9])-\d\d-\d\d\b/.test(brief), 'brief carries no real-world date');

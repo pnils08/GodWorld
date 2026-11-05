@@ -30,6 +30,7 @@ const path = require('path');
 const mags = require('../lib/mags');
 const contextScan = require('../lib/contextScan');
 const personaProvider = require('../lib/personaProvider');
+const lookups = require('../lib/discordLookups');   // research.32 — citizen / neighborhood / team / business records
 const citizenPage = require('../lib/citizenPage');   // pipe.40 T4 — Mags' reflections live on her page now, not the frozen journal
 const memoryFence = require('../lib/memoryFence');
 
@@ -106,12 +107,25 @@ const USE_SUPERMEMORY = !!SUPERMEMORY_KEY;
 // /v1/messages to baseURL, so it points at /api, not /api/v1.
 // MAGS_BOT_PROVIDER=anthropic reverts to the direct key.
 const BOT_PROVIDER = process.env.MAGS_BOT_PROVIDER || 'openrouter';
-const BOT_MODEL = BOT_PROVIDER === 'anthropic'
-  ? 'claude-haiku-5-5'
-  : 'anthropic/claude-haiku-5.5';
+// research.32 (builder 2026-11-05: "put the bots on sonnet 5.5", "moving them to my Anthropic api"):
+// the model is a setting, Sonnet 5.5 by default on either route; MAGS_BOT_MODEL overrides.
+const BOT_MODEL = (process.env.MAGS_BOT_MODEL || '').trim() || (BOT_PROVIDER === 'anthropic'
+  ? 'claude-sonnet-5-5'
+  : 'anthropic/claude-sonnet-5.5');
 const claude = BOT_PROVIDER === 'anthropic'
   ? new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
   : new Anthropic({ apiKey: process.env.OPENROUTER_API_KEY, baseURL: 'https://openrouter.ai/api' });
+
+// What each model accepts (read 2026-11-05 against the direct API): Sonnet 5.5 returns 400 on
+// thinking "disabled" (its no-thinking setting is "between_tools") and on a forced tool_choice; Haiku 5.5
+// still takes both. Opus 5.5 / Fable take neither and think on their own. The round-0 search is forced
+// only where the model allows it; the records are attached to the prompt either way.
+function requestShapeFor(model) {
+  var m = String(model || '').toLowerCase();
+  if (/sonnet-5[.-]5/.test(m)) return { thinking: { type: 'between_tools' }, forcedTool: false };
+  if (/haiku/.test(m)) return { thinking: { type: 'disabled' }, forcedTool: true };
+  return { thinking: null, forcedTool: false };
+}
 
 // ---------------------------------------------------------------------------
 // State — per-channel sessions. Each persona keeps its OWN conversation history,
@@ -502,7 +516,21 @@ async function callClaude(provider, session, userMessage, userName, userId) {
   // round is forced to search_world, so a confident character file can never skip the records.
   systemPrompt += '\n\n---\n\n## First move\n\nYour first move on every message is one search_world lookup. ' +
     'Pick 2-3 keywords from what was asked (a name, a place, a thing). If it is small talk with nothing ' +
-    'to look up, search your own name. Then answer from what you find plus what you already know.';
+    'to look up, search your own name. The result comes back with the records for whatever the message named ' +
+    '(a person, a neighborhood, a team, a business) already attached. Then, before you answer, follow a lead ' +
+    'if the result points at one: lookup_citizen for a person, lookup_neighborhood for a hood, lookup_team for ' +
+    'the A\'s or the Oaks, lookup_business for a business. A number is read off the record, newest Cycle first; ' +
+    'where two records differ, say what each says. Then answer from what you found plus what you already know.';
+
+  // research.32 — the records for whatever the message names (a person, a hood, a team, a business) are
+  // attached before the first model call, on every route and model: the right record is in front of the
+  // voice whether or not it searches (codex F1/F2 on the plan; Sonnet 5.5 no longer allows a forced tool call).
+  var tables = lookups.loadTables();
+  try {
+    var rec = await lookups.recordsForMessage(userMessage, tables);
+    if (rec.text) systemPrompt += '\n\n---\n\n## Records for what you were just asked about (read before answering)\n\n' + rec.text;
+    log.info('[' + provider.label + '] records attached: ' + JSON.stringify(rec.entities) + (rec.text ? ' (' + rec.text.length + ' chars)' : ''));
+  } catch (e) { log.warn('[' + provider.label + '] records attach failed: ' + e.message); }
 
   // Build messages array from this channel's conversation history + new message
   var messages = session.history.slice();
@@ -520,10 +548,16 @@ async function callClaude(provider, session, userMessage, userName, userId) {
     // Last round: NO tools, so it must answer and can never reply empty
     // (S252 flaw fix — a still-searching turn returned 0 chars).
     var isFinal = (round === MAX_TOOL_ROUNDS - 1);
-    var opts = { model: BOT_MODEL, max_tokens: MAX_RESPONSE_TOKENS, system: systemPrompt, messages: messages, tools: [SEARCH_TOOL], thinking: { type: 'disabled' } };
-    if (round === 0) opts.tool_choice = { type: 'tool', name: 'search_world' };  // research.30 — search first
+    // research.32 — the four record lookups ride beside search_world (lib/discordLookups.js)
+    var opts = { model: BOT_MODEL, max_tokens: MAX_RESPONSE_TOKENS, system: systemPrompt, messages: messages, tools: [SEARCH_TOOL].concat(lookups.TOOLS) };
+    var shape = requestShapeFor(BOT_MODEL);
+    if (shape.thinking) opts.thinking = shape.thinking;
+    if (round === 0) opts.tool_choice = shape.forcedTool ? { type: 'tool', name: 'search_world' } : { type: 'auto' };  // research.30 — search first, where the model still allows a forced call
     if (isFinal) opts.tool_choice = { type: 'none' };  // force a reply, never empty
     response = await claude.messages.create(opts);
+    if (response.stop_reason && response.stop_reason !== 'end_turn' && response.stop_reason !== 'tool_use') {
+      log.warn('[' + provider.label + '] stop_reason ' + response.stop_reason + (response.stop_details ? ' ' + JSON.stringify(response.stop_details) : ''));
+    }
 
     var toolUses = (response.content || []).filter(function (b) { return b.type === 'tool_use'; });
     var textBlocks = (response.content || [])
@@ -531,15 +565,22 @@ async function callClaude(provider, session, userMessage, userName, userId) {
       .map(function (b) { return b.text; }).join('');
 
     if (!isFinal && response.stop_reason === 'tool_use' && toolUses.length) {
-      messages.push({ role: 'assistant', content: response.content });
+      messages.push({ role: 'assistant', content: response.content });  // thinking / progress blocks ride back unchanged
       var toolResults = await Promise.all(toolUses.map(async function (tu) {
         var result;
-        try { result = await searchEverything(tu.input && tu.input.query); }
-        catch (e) { result = '(search failed: ' + e.message + ')'; }
+        var arg = tu.input && (tu.input.query || tu.input.name || tu.input.team) || '';
+        try {
+          if (tu.name === 'search_world') {
+            result = await searchEverything(tu.input && tu.input.query);
+          } else {
+            result = await lookups.runTool(tu.name, tu.input, tables);  // dispatch by name; unknown -> explicit error
+          }
+        } catch (e) { result = '(' + tu.name + ' failed: ' + e.message + ')'; }
+        var first = String(result || '').split('\n').find(function (l) { return l.trim(); }) || '';
+        log.info('[' + provider.label + '] ' + tu.name + ': ' + arg + ' -> ' + String(result || '').length + ' chars | ' + first.slice(0, 160));
         return { type: 'tool_result', tool_use_id: tu.id, content: result };
       }));
       messages.push({ role: 'user', content: toolResults });
-      log.info('[' + provider.label + '] search_world: ' + toolUses.map(function (t) { return t.input && t.input.query; }).join(' | '));
       continue;  // let it see results and answer (or search again)
     }
 

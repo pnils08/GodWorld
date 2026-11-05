@@ -193,4 +193,5 @@ function build(cycle, { root, beats, profiles }) {
 const W = K.wire(SEAT);
 if (require.main === module) W.main();
 module.exports = { SEAT, loadSlice: W.load, buildHealthSlice: W.build, writeHealthSlice: W.write, loadHealthSlice: W.load,
-  isHealthSeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment: W.enrichAssignment, slicePaths: W.paths };
+  isHealthSeat: W.isSeat, assignmentFromSlice: W.assignmentFromSlice, enrichAssignment: W.enrichAssignment, slicePaths: W.paths,
+  sickShare, SPIKE_WATCH, SPIKE_RISE }; // research.32 — the Discord lookups read the same bar, not a copy

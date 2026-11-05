@@ -123,7 +123,7 @@ Logging: every tool call logs tool, query, result length and the first returned 
 | 4 | `buildVoiceBrief_`: feed newest-first with season; the two-records sentence (codex F16) | rb | done `f974fbad6` |
 | 5 | Codex plan review, fold, build, diff review `f974fbad6` → fold `fc54ef559`, re-review → 6 fixed in place; `npm test` 317/317 twice; `pm2 restart mags-bot`; smoke: the builder's next talk on each channel | rb / codex | restart done — awaiting the builder's talk |
 | 7 | Builder (11-05): "consider to put the bots on sonnet 5.5" · "moving them to my Anthropic api". `MAGS_BOT_MODEL` setting, Sonnet 5.5 default on each route — `f974fbad6`; `MAGS_BOT_PROVIDER=anthropic` set in `ecosystem.config.js` (the credentials file is not writable from a session); restarted 2026-11-05 01:33 CST, `pm2 env` shows it | rb | done |
-| 6 | Cycle gap log: G-RB3 Vinnie Status `Active` vs feed "stepping away" (no engine retirement path → engine.333), G-RB4 talk-hedge written as a page TENSION (builder's call); the `mags` profile dump is noted in §Measured for pipeline.100 | rb | done |
+| 6 | Cycle gap log: G-RB3 Vinnie Status `Active` vs feed "stepping away" (no engine retirement path → engine.333), G-RB4 talk-hedge written as a page TENSION — builder 11-05: keep as is; his lines go to Paulson in both channels; the `mags` profile dump is noted in §Measured for pipeline.100 | rb | done |
 
 ## Acceptance
 
@@ -134,6 +134,7 @@ Logging: every tool call logs tool, query, result length and the first returned 
 
 ## Changelog
 
+- 2026-11-05 — builder: the talk recorder stays as built (a talk may open a tension; his lines → Paulson in both channels). G-RB4 closed.
 - 2026-11-05 — re-review HOLD: 6 fixed in place, 3 items recorded for the builder (§Reviews reconciled); 66 unit checks; bot restarted on the direct key, Sonnet 5.5. Row → live-observing until the builder's talk.
 - 2026-11-05 — codex diff review HOLD (26): 18 folded, 8 ceilings (§Reviews reconciled). 64 unit checks. Harness: Vinnie reads KONO vs Chinatown and Oaks vs A's in one reply, A's 11-3 labelled last recorded. Sent for the one re-review.
 - 2026-11-05 — build landed `f974fbad6` (§Build log). Sonnet 5.5 rejects forced tool_choice and `disabled` thinking, so records attach before the first call. Harness on Sonnet 5.5 passes the three 11-03 misses.

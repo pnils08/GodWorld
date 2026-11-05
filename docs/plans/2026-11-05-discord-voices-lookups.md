@@ -80,9 +80,9 @@ Vinnie's brief (codex F16): feed lines newest-first, each with its Cycle, and th
 
 | Review | Verdict | Pointer |
 |---|---|---|
-| codex-rb plan review, 2026-11-05 | HOLD → folded, all 16 verified against the cited code | [[../for-claude-review/2026-11-05-codex-research32-plan-review]] |
-| codex-rb diff review of `f974fbad6`, 2026-11-05 | HOLD, 26 points → 18 folded (what a voice says, a number's stamp, the trust boundary); 8 named as ceilings below (builder's stop test 10-30: fold what changes what a citizen lives) | [[../for-claude-review/2026-11-05-codex-research32-diff-review]] |
-| codex-rb re-review of `fc54ef559`, 2026-11-05 (the one re-review) | HOLD → 6 fixed in place (hood card by the writer's hood or title only; a record a year old under the same label is "last recorded"; "the Athletics" detected, "athletics program" not; club rows only for a role that names a club; the brief says each record has its own Cycle; a final round with no text asks once more, no tools, before falling back); the rest recorded for the builder below. No third round | [[../for-claude-review/2026-11-05-codex-research32-diff-rereview]] |
+| codex-rb plan review, 2026-11-05 | HOLD → folded, all 16 verified against the cited code | [[../archive/for-claude-review/2026-11-05-codex-research32-plan-review]] |
+| codex-rb diff review of `f974fbad6`, 2026-11-05 | HOLD, 26 points → 18 folded (what a voice says, a number's stamp, the trust boundary); 8 named as ceilings below (builder's stop test 10-30: fold what changes what a citizen lives) | [[../archive/for-claude-review/2026-11-05-codex-research32-diff-review]] |
+| codex-rb re-review of `fc54ef559`, 2026-11-05 (the one re-review) | HOLD → 6 fixed in place (hood card by the writer's hood or title only; a record a year old under the same label is "last recorded"; "the Athletics" detected, "athletics program" not; club rows only for a role that names a club; the brief says each record has its own Cycle; a final round with no text asks once more, no tools, before falling back); the rest recorded for the builder below. No third round | [[../archive/for-claude-review/2026-11-05-codex-research32-diff-rereview]] |
 
 ### Agreed
 - F1 dispatch by tool name; F2 first move kept as forced `search_world` + bot-side record lookups for named entities (Design §First move). Source: `scripts/mags-discord-bot.js:523-542`.

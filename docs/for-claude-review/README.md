@@ -35,6 +35,9 @@ mechanism — a file here is a message to Claude; a file anywhere else is not.
    files or updates the ROLLOUT row per `docs/engine/rollout-rules.md` §4.
 3. Review resolved (every finding verified and folded, accepted or refused) →
    moves it to `docs/archive/for-claude-review/`; the owning plan links it there.
+   Mechanical half: `node scripts/archiveFoldedReviews.js` (dry run; `--apply` to
+   move + repoint) moves every review a plan lists under `## Reviews reconciled`
+   and reports the rest for judgment (2026-11-05).
 4. Research or plan sent back → appends a dated `## Review — <date>` section
    stating what is missing and leaves the file here.
 5. Guests carry no `NEXT` line (builder 2026-10-28): the guest hears the outcome

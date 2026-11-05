@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** engine.331 (sports triggers: variety, Oaks off-season, one game ≠ hot/cold, blank-cell re-fire) and engine.332 (media-feedback seeds never reach the deck) → plan each from the C114 gap log G-ES1/G-ES2; builder's words there. Queued: pipeline.100, governance.57, engine.325. Open: SSH; INIT-010 $4.2M.
 
-**NEXT[research-build]:** civic.47 M1 live → read Mara's first live directive after the C115 close (blocks, promises, page, receipt, cost); closes on Mike's word. Open: A2; event-duty exception. Gates: receivers, journal, ballot, approval writers. Pilot off. Mike to name: Civis journal C113–14, review step, header drift.
+**NEXT[research-build]:** engine.333 (feed triggers → life history; `retirement` flips Status; builder 11-05) → read-before, cut, sandbox; after engine.331's vocabulary. research.32 live-observing: read the Discord log after Mike's next talk. civic.47 waits on the C115 close. Mike to rule: talk-hedges as page TENSION; A2.

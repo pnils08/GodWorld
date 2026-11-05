@@ -77,6 +77,8 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.330 | Sandbox runs cold: `scripts/seedSandboxFeeds.js` seeds ratings, usage and a sports week before each sandbox fire; proof PASS 11-05 | done-pending-archive | engine-sheet | [[../plans/2026-11-04-engine-330-sandbox-generic-feeds]] |
+| engine.331 | Sports triggers (builder 11-05): more positive and negative variety, Oaks off-season decisions, one game is not hot or cold; a blank cell re-fires the last one | ready | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` G-ES1 |
+| engine.332 | Media-feedback seeds (builder 11-05): Citywide-reaction seeds for coverage at \|rating\| ≥ 3 never reach Story_Seed_Deck, live or sandbox. Fix the path | ready | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` G-ES2 |
 | infrastructure.18 | Weekly version-drift report in the existing health check, no model: runtime end of life, npm behind (majors flagged), Claude Code, plugin vs patch | ready | engine-sheet | [[../reference/DEPLOY]] |
 | engine.325 | Casino overview (builder 10-30, own session): bet types safe→risky, how bets settle without credits or failure, house odds; mishap bet never pays | ready | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §Changelog 2026-10-30 |
 | pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did | ready | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |

@@ -78,15 +78,25 @@ function pools() {
   const eeScoped = eeN.filter(t => /SportsSeason|SportsFeed|storyHook|story hook|GameNight|Household/i.test(t));
   const lh = obj(await sh.getSheetData('LifeHistory_Log')).rows.filter(r => num(r.Cycle) === N);
   const players = lh.filter(r => PLAYER_POPS.includes(r.POPID)).map(r => ({ pop: r.POPID, tag: String(r.EventTag).split('|')[0], text: String(r.EventText) }));
+  // a pool line may carry its own ' — ' (winStreak[2]): match the mood clause off the end, then the line
   const playerNight = players.filter(p => /^Sports-Played/.test(p.tag)).map(p => {
-    const [line, clause] = p.text.split(' — ');
+    let mood = null, line = p.text;
+    for (const m of Object.keys(P.clauses)) for (const c of P.clauses[m]) if (p.text.endsWith(' — ' + c)) { mood = m; line = p.text.slice(0, -(c.length + 3)); }
     const bucket = Object.keys(P.night).find(b => P.night[b].includes(line)) || null;
-    const mood = clause ? (Object.keys(P.clauses).find(m => P.clauses[m].includes(clause)) || 'unmatched') : null;
     return { pop: p.pop, bucket, mood };
   });
   const household = lh.filter(r => /^Household-GameNight/.test(String(r.EventTag))).map(r => String(r.EventText));
-  const fanStreak = lh.filter(r => /streak numbers like family business|three nods before the first coffee|re-enact the play twice/.test(String(r.EventText))).length;
-  const fanSkid = lh.filter(r => /who to blame for the skid|cap at home for the first time|patience wearing thin/.test(String(r.EventText))).length;
+  // the city's game-night lines (generateCitizensEvents gnTexts) by bucket, with the written dial tag
+  const FAN = { winStreak: /streak numbers like family business|three nods before the first coffee|re-enact the play twice/,
+    coldStreak: /who to blame for the skid|cap at home for the first time|patience wearing thin/,
+    win: /packed bar and walked home|block erupt through an open window|caught the recap at the counter/,
+    loss: /bar go quiet by the eighth|turned the game off before the end|avoided the score all morning/ };
+  const fans = {};
+  for (const k of Object.keys(FAN)) {
+    const hit = lh.filter(r => FAN[k].test(String(r.EventText)));
+    fans[k] = { n: hit.length, tags: [...new Set(hit.map(r => String(r.EventTag).split('|')[0]))] };
+  }
+  const fanStreak = fans.winStreak.n, fanSkid = fans.coldStreak.n;
   const wk = obj([['Key', 'Value'], ...(await sh.getSheetData('World_Config')).slice(1)]).rows;
   const out = {
     label, N, at: new Date().toISOString(),
@@ -98,7 +108,7 @@ function pools() {
     playerNight, playerOtherTags: players.filter(p => !/^Sports-Played/.test(p.tag)).map(p => p.pop + ' ' + p.tag),
     householdGameNight: household.length, householdStreak: household.filter(t => /streak|lineup/.test(t)).length,
     householdSkid: household.filter(t => /peace|skid|subject/.test(t)).length,
-    fanStreakLines: fanStreak, fanSkidLines: fanSkid
+    fanStreakLines: fanStreak, fanSkidLines: fanSkid, fans
   };
   fs.appendFileSync(OUT, JSON.stringify(out) + '\n');
   console.log(JSON.stringify(out, null, 1));

@@ -2189,6 +2189,12 @@ function generateCitizensEvents_(ctx) {
     var gnHotCold = (gnGameTeam && gnWeeks[gnGameTeam]) ? (gnWeeks[gnGameTeam].hotCold || '') : '';
     var gnBucket = (typeof gameNightBucket_ === 'function') ? gameNightBucket_(gnGame, gnHotCold) : 'neutral';
     var gnTags = ["source:sports", "gameNight", "streak:" + (gnGame.streak || '-')];
+    // engine.331: the night's sign, in the vocabulary the fan week lines use (Sports-Win fandom +, Sports-Loss
+    // fandom −). Without it engine.299's admission gate (gradedTagFor_) found no sign and dropped every one of
+    // these lines unwritten: live LifeHistory_Log has 37–74 a Cycle at C105–C110 and none at C112–C114, though
+    // the Oaks played all three weeks. A neutral night stays unsigned (it moves nothing, so it is not written).
+    if (gnBucket === 'win' || gnBucket === 'winStreak') gnTags.push("dial:fandom:up");
+    else if (gnBucket === 'loss' || gnBucket === 'coldStreak') gnTags.push("dial:fandom:down");
     // engine.194: weight scales with the repriced net games share. A full
     // per-franchise share (0.10) saturates intensity. Cap 4 — game
     // night concentrates the town's texture, never erases the rest of life.

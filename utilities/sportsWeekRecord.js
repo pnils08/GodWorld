@@ -448,6 +448,9 @@ function sportsStreakHeadlineConfig_(ctx) {
 // typed one), wk.streakHeadline = a game week on a run at or past the bar whose signed result does not
 // run against it (a W run on a week below expectation, or an L run above it, carries nothing). bar null
 // (unusable config) marks none.
+// engine.331 (builder 2026-11-05: "pick 1 number and keep it consistent"; 11-06: "5 games sounds like
+// the good numbers to use for the streaks"): wk.hotCold = 'hot' / 'cold' / '' is that same decision —
+// the hot-/cold-streak story (processFeedSheet_) and the game-night readers (gameNightBucket_) read it.
 function markSportsStreakHeadline_(weeks, bar) {
   for (var f in (weeks || {})) {
     if (!weeks.hasOwnProperty(f) || !weeks[f]) continue;
@@ -455,6 +458,7 @@ function markSportsStreakHeadline_(weeks, bar) {
     var against = run && ((run.dir === 'W' && signed < 0) || (run.dir === 'L' && signed > 0));
     wk.streakRun = run;
     wk.streakHeadline = !!(bar && run && wk.g > 0 && run.n >= bar && !against);
+    wk.hotCold = wk.streakHeadline ? (run.dir === 'W' ? 'hot' : 'cold') : '';
   }
   return weeks;
 }

@@ -109,9 +109,8 @@ console.log('sports');
   const oaks = r.rows.find(x => x.TeamsUsed === 'Oaks'), as = r.rows.find(x => x.TeamsUsed === "A's");
   assert('game phase pairs game-result with a week', oaks.EventType === 'game-result' && oaks.WeekRecord === 'H:W A:L');
   assert('record from the last valid W-L + 1-1', oaks['Team Record'] === '5-2', oaks['Team Record']);
-  // a blank cell would carry C114's championship trigger and confident mood forward (reduceFeedTeamState_ keeps non-blank, non-dash)
-  assert('streak L1; trigger none and mood quiet overwrite the carried state', oaks.Streak === 'L1' && oaks.EventTrigger === 'none' && oaks.PlayerMood === 'quiet');
-  assert('quiet fires no mood trigger and leaves the night to the streak', !/frustrated|angry|electric|confident/.test(oaks.PlayerMood) && !/confident|energized|high|frustrat|low|tense/.test(oaks.PlayerMood));
+  // engine.331: nothing carries — C114's championship trigger and confident mood do not reach the generic row, and a blank is no moment
+  assert('streak L1; trigger and mood blank (no "none" / "quiet" for the raw readers to print)', oaks.Streak === 'L1' && oaks.EventTrigger === '' && oaks.PlayerMood === '');
   assert('names: latest row with a living match', oaks.NamesUsed === 'Dillon Brooks', oaks.NamesUsed);
   assert('static columns copied', oaks.HomeNeighborhood === 'KONO');
   assert('off-season pairs season-state with none', as.EventType === 'season-state' && as.WeekRecord === 'none' && as['Team Record'] === '');

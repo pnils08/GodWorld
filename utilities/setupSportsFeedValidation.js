@@ -126,15 +126,15 @@ var PLAYER_MOOD_VALUES = [
   'electric'
 ];
 
-// Exactly the keys of TRIGGER_HOOKS (phase07-evening-media/storyHook.js) —
-// the only reader that turns a trigger into a story. trade-deadline / all-star
-// / draft had no hook and were dropped (engine.202 cut 3); giving them one is
-// a sim call. Free text still reaches the media handoff (allowInvalid).
+// The keys of TRIGGER_HOOKS (phase07-evening-media/storyHook.js) minus
+// EVENT_TRIGGER_ENGINE_ONLY — the only reader that turns a trigger into a story.
+// Free text still reaches the media handoff (allowInvalid); the engine reads a
+// cell through canonicalFeedTrigger_ (applySportsSeason.js), so a word off this
+// list or EVENT_TRIGGER_ALIASES makes no moment.
 // scripts/sportsFeedContract.test.js pins this list to the hook table.
+// engine.331 (builder 2026-11-05): off-season and good/bad moments for both clubs.
 var EVENT_TRIGGER_VALUES = [
   '',
-  'hot-streak',
-  'cold-streak',
   'playoff-push',
   'playoff-clinch',
   'eliminated',
@@ -150,8 +150,48 @@ var EVENT_TRIGGER_VALUES = [
   'all-star',
   'series-clinch',
   'walk-off',
-  'no-hitter'
+  'no-hitter',
+  'big-win',
+  'comeback',
+  'career-night',
+  'milestone',
+  'shutout',
+  'buzzer-beater',
+  'tough-loss',
+  'blowout-loss',
+  'blown-lead',
+  'slump',
+  'suspension',
+  'clubhouse-tension',
+  're-signed',
+  'signed',
+  'departed',
+  'traded',
+  'released',
+  'retirement',
+  'coaching-change',
+  'trade-rumor',
+  'camp-opens',
+  'award',
+  'community-outreach'
 ];
+
+// engine.331: words typed into the cell that name one of the moments above
+// (the 10-22 ruling: the common ignored words become real hooks). The cell is
+// lowercased and its spaces become dashes first, so "community outreach" is
+// already community-outreach. Only the EventTrigger cell reads this map.
+var EVENT_TRIGGER_ALIASES = {
+  'awards': 'award',
+  'draft': 'draft-night',
+  'blockbuster-trade': 'traded',
+  'spring-training': 'camp-opens',
+  'call-up': 'debut'
+};
+
+// engine.331 (builder 2026-11-05: "the hot and cold streak can be a engine
+// decision"): hooks the engine raises from the streak alone. Typed into the
+// cell they make no moment.
+var EVENT_TRIGGER_ENGINE_ONLY = ['hot-streak', 'cold-streak'];
 
 // P–T: exactly the words applySportsSeason.js parses (parseFanSentiment_,
 // parseFranchiseStability_, parseEconomicFootprint_,
@@ -207,20 +247,24 @@ var HEADER_NOTES = {
   'VideoGame': 'DEAD COLUMN — deleted from Oakland_Sports_Feed 2026-09-19.',
   'StoryAngle': 'Your 10-word headline instinct.\nLeads the sports media line and the desk slices.\nExample: "Kessler gamble paying off in locker room"',
   'PlayerMood': 'Clubhouse mood of the named player(s).\n' +
-    'Game-night tone: a W streak makes it a win night; otherwise confident leans win, frustrated (or an L streak) leans loss.\n' +
-    'The other moods are newsroom color.',
-  'EventTrigger': 'Optional. A MOMENT in the week (home-opener, debut, draft-night, walk-off) — not the season phase\n' +
+    "On a game row each named player's game-night line ends with this mood — every dropdown word has its own lines.\n" +
+    'On a game row with no Streak it also sets the night for fans and households: confident / dominant / locked-in / electric lean win, frustrated / uncertain lean loss.\n' +
+    "Also goes to the citizens' wake text and the newsroom.",
+  'EventTrigger': 'Optional. A MOMENT on this row (home-opener, debut, re-signed, comeback, tough-loss) — not the season phase\n' +
     '(that is SeasonType) or the kind of entry (that is EventType). Each dropdown word makes a sports story for the newsroom.\n' +
-    "Only the team's LAST row of the Cycle counts; a blank row keeps the earlier trigger.\n" +
-    'Leave blank and the engine picks one: W6+ streak = hot-streak, L6+ = cold-streak, championship phase = championship.\n' +
-    'Any other word you type makes NO story and also stops that automatic pick.',
+    "Every row's word counts, this Cycle only. A blank row is no moment: nothing carries from earlier rows or Cycles.\n" +
+    'The engine adds its own: hot-streak / cold-streak when the week ends on a run at the World_Config sportsStreakHeadline bar (5),\n' +
+    'championship when a game row of the week has SeasonType championship. Typed, those two streak words make nothing.\n' +
+    'awards, draft, spring-training, blockbuster-trade and call-up read as award, draft-night, camp-opens, traded and debut; any other word makes no story.',
   'HomeNeighborhood': 'Optional. Where this event lands: that neighborhood counts as a game day for transit,\n' +
     "and the team's game-day crowd goes there in the evening crowd map.\n" +
     'Use one of the 22 map neighborhoods (Montclair is Piedmont Ave, Old Oakland is Downtown).\n' +
     "For the crowd, a blank row keeps the team's last neighborhood; transit reads only this Cycle's rows.",
-  'Streak': 'Team streak after this event: W6 or L3.\n' +
-    'Amplifies city sports sentiment, sets the game-night tone (W4+ is a win-streak night),\n' +
-    'settles the casino when there is no WeekRecord, and at 6+ picks hot-/cold-streak automatically.',
+  'Streak': 'Team streak after this event: W5 or L3.\n' +
+    "The week's run is the Streak on its LAST game-result row with an accepted WeekRecord — a Streak typed only on a feature or rumor row is no run.\n" +
+    "A run at the World_Config sportsStreakHeadline bar (5) that the week's result agrees with makes the team hot or cold:\n" +
+    "the business-desk headline, the newsroom's hot-/cold-streak story, and the streak lines for players, fans and households on game night.\n" +
+    'A W or L on a game row sets that night win or loss; the casino settles on it when there is no WeekRecord.',
   'FanSentiment': 'How the fanbase feels. Moves city sports sentiment:\n' +
     'electric/euphoric +, high/confident/excited slight +, uncertain/anxious slight −,\n' +
     'low/apathetic/disappointed −, frustrated/angry/hostile − −; neutral/moderate 0.',
@@ -488,6 +532,8 @@ if (typeof module !== 'undefined' && module.exports) {
     OAKLAND_EVENT_TYPE_VALUES: OAKLAND_EVENT_TYPE_VALUES,
     PLAYER_MOOD_VALUES: PLAYER_MOOD_VALUES,
     EVENT_TRIGGER_VALUES: EVENT_TRIGGER_VALUES,
+    EVENT_TRIGGER_ALIASES: EVENT_TRIGGER_ALIASES,
+    EVENT_TRIGGER_ENGINE_ONLY: EVENT_TRIGGER_ENGINE_ONLY,
     FAN_SENTIMENT_VALUES: FAN_SENTIMENT_VALUES,
     FRANCHISE_STABILITY_VALUES: FRANCHISE_STABILITY_VALUES,
     ECONOMIC_FOOTPRINT_VALUES: ECONOMIC_FOOTPRINT_VALUES,

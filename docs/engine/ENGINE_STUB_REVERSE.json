@@ -1,8 +1,8 @@
 {
-  "generated": "2026-10-28",
+  "generated": "2026-11-06",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1759,
+  "functionsMapped": 1766,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -2232,6 +2232,7 @@
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_",
         "phase06-analysis/economicRippleEngine.js::calculateNeighborhoodEconomies_",
         "phase06-analysis/economicRippleEngine.js::detectCalendarRipples_",
         "phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_",
@@ -2438,6 +2439,7 @@
         "phase02-world-state/applySportsSeason.js::applySportsSeason_"
       ],
       "readers": [
+        "phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_",
         "phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_",
         "phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",

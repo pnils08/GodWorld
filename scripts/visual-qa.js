@@ -155,7 +155,7 @@ async function installSportsFixture(page) {
     eventTypes: ['game-result', 'stat-capture', 'roster-move', 'player-feature', 'front-office', 'fan-civic', 'season-state', 'editorial-note'],
     seasonTypes: ['off-season', 'regular-season', 'playoffs'],
     playerMoods: ['', 'confident', 'frustrated'],
-    eventTriggers: ['', 'hot-streak', 'cold-streak'],
+    eventTriggers: ['', 're-signed', 'tough-loss'],
     neighborhoods: ['', 'Downtown', 'Lake Merritt'],
     fanSentiments: ['', 'confident', 'frustrated'],
     franchiseStability: ['', 'stable', 'uncertain'],

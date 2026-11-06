@@ -124,4 +124,37 @@ const r4 = run([], { "A's": week('TITLE') });
 assert.strictEqual(r4.appended.length, 0);
 assert.strictEqual(r4.dirty, false);
 
+// 4. engine.331 — one hot/cold decision (the week's hotCold, the streak headline at the World_Config bar)
+const bucket = (streak, hotCold, playerMood) => sandbox.gameNightBucket_({ streak, playerMood }, hotCold);
+assert.strictEqual(bucket('W4', ''), 'win', 'W4 under the bar is a plain win night (the old W4 literal is gone)');
+assert.strictEqual(bucket('W5', 'hot'), 'winStreak');
+assert.strictEqual(bucket('W5', ''), 'win', 'a W5 the week\'s result runs against is not hot (no headline, no streak night)');
+assert.strictEqual(bucket('L5', 'cold'), 'coldStreak', 'builder 2026-11-06: a cold week has its own night');
+assert.strictEqual(bucket('L2', 'hot'), 'loss', 'a loss in a hot week stays a loss');
+assert.strictEqual(bucket('L1', '', 'confident'), 'loss', 'the result decides before the mood');
+assert.strictEqual(bucket('', '', 'locked-in'), 'win', 'no Streak: the mood sets the tone');
+assert.strictEqual(bucket('', '', 'uncertain'), 'loss');
+assert.strictEqual(bucket('', '', 'reflective'), 'neutral');
+assert.strictEqual(bucket('', '', 'constructor'), 'neutral', 'an off-list mood is no tone (own keys only)');
+
+// 5. builder 2026-11-06 "handle the dropdowm moods add to the night line": every dropdown mood has its clauses
+const clauses = vm.runInContext('GAME_NIGHT_MOOD_CLAUSES_', sandbox);
+const vocab = require('../utilities/setupSportsFeedValidation.js');
+assert.deepStrictEqual(Object.keys(clauses).sort(), vocab.PLAYER_MOOD_VALUES.filter(Boolean).sort(),
+  'mood clause keys must equal the PlayerMood dropdown');
+assert.deepStrictEqual(Object.keys(vm.runInContext('GAME_NIGHT_MOOD_TONE_', sandbox)).sort(), Object.keys(clauses).sort());
+const poolsByBucket = vm.runInContext('GAME_NIGHT_POOLS', sandbox);
+const r5 = run([
+  { eventType: 'game-result', teamsUsed: 'Oaks', namesUsed: 'AJ Dybantsa (SF)', streak: 'W5', playerMood: 'Locked In' },
+  { eventType: 'game-result', teamsUsed: "A's", namesUsed: 'Danny Horn (CF)', streak: 'L5', playerMood: 'energized' },
+  { eventType: 'player-feature', teamsUsed: "A's", namesUsed: 'Isley Kelley (SS)', playerMood: 'hungry' }
+], { Oaks: Object.assign(week('WIN'), { hotCold: 'hot' }), "A's": { g: 2, w: 0, l: 2, cls: 'LOSING_WEEK', hotCold: 'cold' } });
+const lineOf = (id, tag) => r5.appended.find((x) => x[1] === id && String(x[3]).startsWith(tag))[4];
+const aj = lineOf('POP-01024', 'Sports-PlayedWin').split(' — ');
+assert.ok(poolsByBucket.winStreak.includes(aj[0]), 'hot week W5: the streak night ' + aj[0]);
+assert.ok(clauses['locked-in'].includes(aj[1]), '"Locked In" typed reads as locked-in and closes the line: ' + aj[1]);
+const horn5 = lineOf('POP-00022', 'Sports-Played');
+assert.ok(poolsByBucket.coldStreak.includes(horn5), 'cold week L5: the skid night, and an off-list mood adds nothing: ' + horn5);
+assert.ok(lineOf('POP-00019', 'Reputation').indexOf(' — ') < 0, 'a mood colors only the game-night line');
+
 console.log('gameNightMoments.test.js: all assertions passed');

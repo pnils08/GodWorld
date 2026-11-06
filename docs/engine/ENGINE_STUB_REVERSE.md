@@ -1,6 +1,6 @@
 # Engine Stub Reverse Index
 
-**Generated:** 2026-10-28 by `scripts/stubEngine.js` (mechanical — no LLM).
+**Generated:** 2026-11-06 by `scripts/stubEngine.js` (mechanical — no LLM).
 
 **Purpose:** Cheap lookup — given an `S.*` field or sheet name, find every function that reads or writes it. Companion to `ENGINE_STUB_MAP.md` (forward: function → fields).
 
@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1759 · **S.* fields:** 381 · **Sheets:** 61
+**Files scanned:** 180 · **Functions mapped:** 1766 · **S.* fields:** 381 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -340,7 +340,7 @@
 | `S.sportsAtmosphereEnabled` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_`, `phase03-population/applyDemographicDrift.js::applyDemographicDrift_`, `phase03-population/deriveDemographicDrift.js::deriveDemographicDrift_`, `phase03-population/updateNeighborhoodDemographics.js::updateNeighborhoodDemographics_`, `phase04-events/buildCityEvents.js::buildCityEvents_`, …(+3 more) | 1 | 9 |
 | `S.sportsCity` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase03-population/applyDemographicDrift.js::applyDemographicDrift_`, `phase03-population/generateCrisisSpikes.js::generateCrisisSpikes_`, `phase05-citizens/applyNamedCitizenSpotlight.js::applyNamedCitizenSpotlights_`, …(+22 more) | 1 | 28 |
 | `S.sportsEventTriggers` | `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_` | `phase07-evening-media/storyHook.js::storyHookEngine_` | 1 | 1 |
-| `S.sportsFeedEntries` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_`, `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_`, `phase07-evening-media/buildEveningMedia.js::buildEveningMedia_`, `phase07-evening-media/sportsStreaming.js::buildEveningSportsAndStreaming_` | 1 | 6 |
+| `S.sportsFeedEntries` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_`, `phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_`, `phase05-citizens/casinoLedgerEngine.js::processCasinoLedger_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_`, `phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_`, `phase07-evening-media/buildEveningMedia.js::buildEveningMedia_`, …(+1 more) | 1 | 7 |
 | `S.sportsFeedSeasonType` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | _(none)_ | 1 | 0 |
 | `S.sportsNeighborhoodEffects` | _(none)_ | `phase07-evening-media/cityEveningSystems.js::buildCityEveningSystems_` | 0 | 1 |
 | `S.sportsSeason` | `phase02-world-state/applySportsSeason.js::applySportsSeason_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase02-world-state/applySportsSeason.js::applySportsSeason_`, `phase02-world-state/applySportsSeason.js::normalizeOaklandFeedTeam_`, `phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_`, …(+53 more) | 2 | 59 |
@@ -348,7 +348,7 @@
 | `S.sportsSeasonOakland` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | _(none)_ | 1 | 0 |
 | `S.sportsSentimentBoost` | `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 3 |
 | `S.sportsSource` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase04-events/worldEventsEngine.js::worldEventsEngine_`, `phase06-analysis/applyShockMonitor.js::applyShockMonitor_` | 1 | 3 |
-| `S.sportsWeek` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_`, `phase02-world-state/applySportsSeason.js::applySportsSeason_`, `phase02-world-state/applySportsSeason.js::normalizeOaklandFeedTeam_`, `phase02-world-state/updateTransitMetrics.js::gameDayLoadByHood_`, `phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_`, …(+9 more) | 1 | 15 |
+| `S.sportsWeek` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySportsSeason.js::applySportsFeedTriggers_`, `phase02-world-state/applySportsSeason.js::applySportsSeason_`, `phase02-world-state/applySportsSeason.js::normalizeOaklandFeedTeam_`, `phase02-world-state/updateTransitMetrics.js::gameDayLoadByHood_`, `phase02-world-state/updateTransitMetrics.js::updateTransitMetrics_Phase2_`, …(+10 more) | 1 | 16 |
 | `S.sportsWeekBars` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_` | `phase05-citizens/applyBusinessDynamics.test.js::ctxWith`, `phase06-analysis/economicRippleEngine.js::detectCalendarRipples_` | 1 | 2 |
 | `S.sportsWeekReach` | `phase05-citizens/applyGameNightMoments.js::applyGameNightMoments_` | `utilities/sportsWeekRecord.js::driftFranchiseWeight_` | 1 | 1 |
 | `S.sportsZones` | `phase02-world-state/applySportsSeason.js::applySportsSeason_` | `phase02-world-state/applyInitiativeImplementationEffects.js::applyInitiativeImplementationEffects_`, `phase02-world-state/applyInitiativeImplementationEffects.js::sportsHasOpenedBaylight_`, `phase05-citizens/bondEngine.js::detectNewBonds_`, `phase05-citizens/generateGenericCitizens.js::generateGenericCitizens_`, `phase06-analysis/economicRippleEngine.js::runEconomicRippleEngine_`, `phase07-evening-media/applyStorySeeds.js::applyStorySeeds_`, …(+7 more) | 1 | 13 |

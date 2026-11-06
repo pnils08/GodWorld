@@ -116,13 +116,14 @@ function applySportsSeason_(ctx) {
     S.sportsCity = deriveSportsIntensity_(S.sportsWeek, ctx._sportsWeekHistory || {},
       ctx._sportsLensHistory || {}, S.baylightOpenings, currentCycle, S.franchiseWeight || null);
     // engine.206 cut 2: after the intensity (the run must agree with the week's signed result) — a week
-    // on a run at the World_Config sportsStreakHeadline bar reaches the business desk
+    // on a run at the World_Config sportsStreakHeadline bar reaches the business desk.
+    // engine.331: the same decision is the week's hotCold — the hot/cold story and every game-night reader.
     var streakBar = sportsStreakHeadlineConfig_(ctx);
     markSportsStreakHeadline_(S.sportsWeek, streakBar);
     for (var sk in S.sportsWeek) {
       if (S.sportsWeek.hasOwnProperty(sk) && S.sportsWeek[sk] && S.sportsWeek[sk].streakRun) {
         Logger.log('  sportsStreak ' + sk + ': ' + S.sportsWeek[sk].streak + ' bar ' + streakBar +
-          (S.sportsWeek[sk].streakHeadline ? ' → business headline' : ' → no headline'));
+          (S.sportsWeek[sk].streakHeadline ? ' → business headline, ' + S.sportsWeek[sk].hotCold : ' → no headline'));
       }
     }
     // Unchanged and deliberate: the feed never licenses invented atmosphere.
@@ -212,6 +213,7 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
   // or not), so a past game week's stakes — and the trailing median — can be recomputed.
   var lensHistory = {};
   ctx._sportsLensHistory = lensHistory;
+  var triggerLogged = {};   // engine.331: one log line per off-list word per Cycle
 
   for (var i = 1; i < data.length; i++) {
     var row = data[i];
@@ -234,7 +236,8 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
         } catch (pastErr) { /* rejected in its own Cycle */ }
       }
     }
-    if (isNaN(cycle) || cycle !== currentCycle) continue;
+    // engine.331: a run with no positive Cycle reads no current rows (a Cycle-0 row is not a week)
+    if (isNaN(cycle) || cycle !== currentCycle || !(currentCycle > 0)) continue;
 
     var entry = {
       cycle: cycle,
@@ -256,6 +259,18 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
       communityInvestment: getColVal_(row, communityCol),
       mediaProfile: getColVal_(row, mediaProfileCol)
     };
+    // engine.331: the one place a row's trigger is read. The entry carries the canonical moment
+    // word, or '' — a blank / '-' / none cell, an off-list word, a typed hot-/cold-streak (the
+    // engine's call), or any row that is not the A's or the Oaks. Every reader of the field
+    // (the story hooks via processFeedSheet_, engine.333's named route) inherits the gate.
+    var trig = canonicalFeedTrigger_(entry.eventTrigger);
+    var trigTeam = normalizeOaklandFeedTeam_(entry.teamsUsed);
+    entry.eventTrigger = (trigTeam === "A's" || trigTeam === 'Oaks') ? trig.word : '';
+    if ((trig.status === 'unknown' || trig.status === 'engine-only') && !triggerLogged[trig.status + '|' + trig.raw]) {
+      triggerLogged[trig.status + '|' + trig.raw] = true;
+      Logger.log('readOaklandFeedEntries_: C' + currentCycle + ' EventTrigger "' + trig.raw + '" ' +
+        (trig.status === 'engine-only' ? 'is the engine\'s call from the streak' : 'is not a trigger word') + ' — no moment');
+    }
     // Only the explicit new header carries weekly facts. Historical dead-column
     // values and blank supplemental rows never become game results.
     //
@@ -791,9 +806,9 @@ function buildActiveSportsFromOverride_(oaklandState) {
  *   SeasonType        - canonical season for inferred triggers (raw week lens sets reach)
  *   TeamsUsed         - team identification
  *   Team Record       - carried record for inferred triggers and logging
- *   EventTrigger      - special event triggers (hot-streak, playoff-clinch, etc.)
- *   Streak            - hot/cold streak triggers (W6, L3 format)
- *   PlayerMood        - story hook triggers (frustrated = drama, electric = energy)
+ *   EventTrigger      - NOT read here (engine.331): moments come from this Cycle's rows,
+ *                       S.sportsFeedEntries[i].eventTrigger, canonical (readOaklandFeedEntries_)
+ *   Streak            - carried for the sentiment log line; the week's run is S.sportsWeek[f].streak
  *   FanSentiment      - carried authored context; no numeric share
  *   MediaProfile      - carried authored context; no numeric share
  *   WeekRecord        - accepted upstream in S.sportsWeek; result prices the games share
@@ -807,12 +822,13 @@ function buildActiveSportsFromOverride_(oaklandState) {
  * columns come off the tab (the builder's call).
  *
  * Convention: Last entry per cycle is the "season-state" row — definitive
- * snapshot. Earlier entries are story content for reporters. Last row wins
- * for all engine behavior columns.
+ * snapshot for the carried record / phase / streak / fan / media fields.
+ * A trigger is not carried (engine.331): every row of this Cycle says its own moment.
  *
  * Outputs to ctx.summary:
  *   - sportsSentimentBoost: cumulative sentiment modifier
- *   - sportsEventTriggers: array of {team, trigger, neighborhood, playerMood}
+ *   - sportsEventTriggers: array of {team, trigger, neighborhood, streak, sentiment}, un-deduped
+ *     (storyHook dedupes one pitch per team per word)
  *
  * ============================================================================
  */
@@ -849,7 +865,7 @@ function applySportsFeedTriggers_(ctx) {
       weights: S.franchiseWeight,
       fadeRate: sportsFadeRateConfig_(ctx)
     } : null;
-    var oakResult = processFeedSheet_(oakSheet, currentCycle, S.sportsWeek, feedHistory);
+    var oakResult = processFeedSheet_(oakSheet, currentCycle, S.sportsWeek, feedHistory, S.sportsFeedEntries || []);
     totalSentiment += oakResult.sentiment;
     allTriggers = allTriggers.concat(oakResult.triggers);
     aftermath = oakResult.aftermath;
@@ -923,10 +939,12 @@ function applySportsFeedTriggers_(ctx) {
  * venue on a home week (h > 0) and nowhere on an away week.
  * history = { weeks: ctx._sportsWeekHistory, lens: ctx._sportsLensHistory, weights, fadeRate } —
  * engine.203d: a franchise with an earlier game week and no game this Cycle speaks its
- * aftermath (sportsAftermathShare_) instead of its carried row fields; its authored triggers
- * still fire when it has a row. No history = no aftermath; no week = no new games share.
+ * aftermath (sportsAftermathShare_) instead of its carried row fields. No history = no
+ * aftermath; no week = no new games share.
+ * entries = S.sportsFeedEntries (engine.331): the moments — each row's own canonical word, then
+ * the engine's own (feedMoments_). None under an override or with no row this Cycle.
  */
-function processFeedSheet_(sheet, currentCycle, weeks, history) {
+function processFeedSheet_(sheet, currentCycle, weeks, history, entries) {
   var empty = { sentiment: 0, triggers: [], aftermath: { total: 0, byTeam: {} } };
 
   var data = sheet.getDataRange().getValues();
@@ -941,8 +959,6 @@ function processFeedSheet_(sheet, currentCycle, weeks, history) {
     teams: findColumnIndex_(headers, ['TeamsUsed', 'teamsused', 'Team', 'team']),
     record: findColumnIndex_(headers, ['Team Record', 'teamrecord', 'record']),
     streak: findColumnIndex_(headers, ['Streak', 'streak']),
-    trigger: findColumnIndex_(headers, ['EventTrigger', 'eventtrigger', 'trigger']),
-    playerMood: findColumnIndex_(headers, ['PlayerMood', 'playermood']),
     fanSentiment: findColumnIndex_(headers, ['FanSentiment', 'fansentiment']),
     mediaProfile: findColumnIndex_(headers, ['MediaProfile', 'mediaprofile'])
   };
@@ -958,12 +974,11 @@ function processFeedSheet_(sheet, currentCycle, weeks, history) {
   var totalSentiment = 0;
   var triggers = [];
   var aftermath = { total: 0, byTeam: {} };
+  var teamSentiment_ = {};   // each franchise's share this Cycle (games or aftermath), for its moments
 
   for (var teamName in teamState) {
     var state = teamState[teamName];
-    // engine.204/205 slice E: the franchise's own venue on a home week, none away
     var wkH = weeks && weeks[teamName];
-    var trigHood = (wkH && wkH.h > 0 && wkH.venue && wkH.venue[0]) || '';
 
     // engine.203d: no game this Cycle after an earlier game week → the aftermath of that week.
     var lastGame = (teamName === "A's" || teamName === 'Oaks') && !(wkH && wkH.g > 0)
@@ -991,9 +1006,7 @@ function processFeedSheet_(sheet, currentCycle, weeks, history) {
           lastGame.cycle + ' (' + lastGame.w + '-' + lastGame.l + ', share ' + lastShare.toFixed(3) +
           ') = ' + teamSentiment.toFixed(3));
       }
-      // no row this Cycle: nothing authored to trigger on
-      if (currentCycle > 0 && state.cycle !== currentCycle) continue;
-      state.seasonType = canonicalSportsPhase_(state.seasonType);
+      teamSentiment_[teamName] = teamSentiment;
     } else {
       // engine.75 (S328, Mike-direct): only teams with a row in the CURRENT
       // cycle speak. The carry-forward state map never aged teams out, so
@@ -1009,54 +1022,83 @@ function processFeedSheet_(sheet, currentCycle, weeks, history) {
         ' (record: ' + state.record + ', season: ' + state.seasonType +
         ', streak: ' + state.streak + ', fan: ' + state.fanSentiment +
         ', media: ' + state.mediaProfile + ')');
+      teamSentiment_[teamName] = teamSentiment;
     }
+  }
 
-    // Process trigger (use manual if set, otherwise infer from state)
-    var triggerValue = (state.trigger || '').toLowerCase();
-    if (!triggerValue) {
-      triggerValue = inferFeedTrigger_(state);
-    }
-
-    // PlayerMood triggers (v3.0) — frustrated/electric players generate story hooks
-    if (state.playerMood) {
-      var mood = state.playerMood.toLowerCase();
-      if (mood === 'frustrated' || mood === 'angry') {
-        triggers.push({
-          team: teamName, trigger: 'player-frustration',
-          neighborhood: trigHood,
-          streak: state.streak, sentiment: teamSentiment,
-          playerMood: state.playerMood
-        });
-      } else if (mood === 'electric' || mood === 'confident') {
-        triggers.push({
-          team: teamName, trigger: 'player-energy',
-          neighborhood: trigHood,
-          streak: state.streak, sentiment: teamSentiment,
-          playerMood: state.playerMood
-        });
-      }
-    }
-
-    if (triggerValue && triggerValue !== 'none') {
-      triggers.push({
-        team: teamName,
-        trigger: triggerValue,
-        neighborhood: trigHood,
-        streak: state.streak,
-        sentiment: teamSentiment,
-        playerMood: state.playerMood || ''
-      });
-      Logger.log('Sports trigger: ' + teamName + ' -> ' + triggerValue +
-        ' @ ' + (trigHood || 'city-wide'));
-    }
+  // engine.331: moments are this Cycle's rows and this Cycle's week, never carried state
+  // (builder 2026-11-05: a blank cell re-fired an old hot-streak). engine.331 Q3: PlayerMood makes
+  // no trigger — no reader ever took player-frustration / player-energy; the mood reaches the
+  // game-night lines, the wake text and the newsroom on its own.
+  var moments = feedMoments_(entries || [], weeks || {});
+  for (var mi = 0; mi < moments.length; mi++) {
+    var mt = moments[mi].team;
+    var wkM = weeks && weeks[mt];
+    // engine.204/205 slice E: the franchise's own venue on a home week, none away
+    var trigHood = (wkM && wkM.h > 0 && wkM.venue && wkM.venue[0]) || '';
+    triggers.push({
+      team: mt,
+      trigger: moments[mi].trigger,
+      neighborhood: trigHood,
+      streak: (wkM && wkM.g > 0 && wkM.streak) || '',
+      sentiment: teamSentiment_[mt] || 0
+    });
+    Logger.log('Sports trigger: ' + mt + ' -> ' + moments[mi].trigger + ' @ ' + (trigHood || 'city-wide'));
   }
 
   return { sentiment: totalSentiment, triggers: triggers, aftermath: aftermath };
 }
 
 /**
+ * engine.331 — the Cycle's sports moments, [{ team, trigger }], un-deduped, A's and Oaks only.
+ * 1. Each row's own word, in row order (entry.eventTrigger is canonical, '' off the two clubs).
+ * 2. The engine's own, per franchise: hot-/cold-streak from the week's hotCold (the streak
+ *    headline's decision, markSportsStreakHeadline_); championship when one of the franchise's
+ *    accepted game rows (weekGames > 0) has raw SeasonType championship — the column's clinch game,
+ *    in any row order; world-series / finals mean the final round is on, not won. A typed
+ *    championship already said it, so the engine adds none.
+ */
+function feedMoments_(entries, weeks) {
+  var out = [], typed = {}, clinch = {};
+  for (var i = 0; i < entries.length; i++) {
+    var e = entries[i];
+    var team = normalizeOaklandFeedTeam_(e.teamsUsed);
+    if (team !== "A's" && team !== 'Oaks') continue;
+    if (e.eventTrigger) {
+      out.push({ team: team, trigger: e.eventTrigger });
+      typed[team + '|' + e.eventTrigger] = true;
+    }
+    if (e.weekGames > 0 && String(e.seasonType || '').trim().toLowerCase() === 'championship') clinch[team] = true;
+  }
+  var clubs = ["A's", 'Oaks'];
+  for (var c = 0; c < clubs.length; c++) {
+    var wk = weeks[clubs[c]];
+    if (wk && wk.hotCold) out.push({ team: clubs[c], trigger: wk.hotCold === 'hot' ? 'hot-streak' : 'cold-streak' });
+    if (clinch[clubs[c]] && !typed[clubs[c] + '|championship']) out.push({ team: clubs[c], trigger: 'championship' });
+  }
+  return out;
+}
+
+/**
+ * engine.331 — one EventTrigger cell → { word, status, raw }. Pure; the caller logs.
+ * status: blank (blank / '-' / none) · known (a dropdown word) · alias (EVENT_TRIGGER_ALIASES) ·
+ * engine-only (hot-/cold-streak: the engine's call from the streak) · unknown. word is '' unless
+ * known or alias. Lowercased, spaces to dashes first ("community outreach" is community-outreach).
+ * Vocabulary: utilities/setupSportsFeedValidation.js (one global scope in Apps Script).
+ */
+function canonicalFeedTrigger_(value) {
+  var raw = String(value == null ? '' : value).trim().toLowerCase().replace(/\s+/g, '-');
+  if (!raw || raw === '-' || raw === 'none') return { word: '', status: 'blank', raw: raw };
+  if (EVENT_TRIGGER_ENGINE_ONLY.indexOf(raw) !== -1) return { word: '', status: 'engine-only', raw: raw };
+  if (EVENT_TRIGGER_VALUES.indexOf(raw) !== -1) return { word: raw, status: 'known', raw: raw };
+  if (EVENT_TRIGGER_ALIASES.hasOwnProperty(raw)) return { word: EVENT_TRIGGER_ALIASES[raw], status: 'alias', raw: raw };
+  return { word: '', status: 'unknown', raw: raw };
+}
+
+/**
  * Per-team latest state from every feed row at or before uptoCycle. Blank/dash fields
- * preserve earlier data; the record parser keeps filler records (including 0-0) from
+ * preserve earlier data (record, phase, streak, fan sentiment, media profile — never a trigger
+ * or a mood, engine.331); the record parser keeps filler records (including 0-0) from
  * clobbering a played record, while a team with only 0-0 keeps that legitimate record.
  * Later rows win within a Cycle — the last entry per Cycle is the "season-state" row.
  */
@@ -1073,8 +1115,7 @@ function reduceFeedTeamState_(data, cols, uptoCycle, feedTz) {
 
     if (!teamState[team]) {
       teamState[team] = {
-        record: '', seasonType: '', streak: '', trigger: '',
-        playerMood: '', fanSentiment: '', mediaProfile: '',
+        record: '', seasonType: '', streak: '', fanSentiment: '', mediaProfile: '',
         cycle: 0
       };
     }
@@ -1084,8 +1125,6 @@ function reduceFeedTeamState_(data, cols, uptoCycle, feedTz) {
       var record = cols.record !== -1 ? sportsRecordText_(row[cols.record], feedTz) : '';   // engine.247
       var seasonType = cols.seasonType !== -1 ? (row[cols.seasonType] || '').toString().trim() : '';
       var streak = cols.streak !== -1 ? (row[cols.streak] || '').toString().trim() : '';
-      var trigger = cols.trigger !== -1 ? (row[cols.trigger] || '').toString().trim() : '';
-      var playerMood = cols.playerMood !== -1 ? (row[cols.playerMood] || '').toString().trim() : '';
       var fanSentiment = cols.fanSentiment !== -1 ? (row[cols.fanSentiment] || '').toString().trim() : '';
       var mediaProfile = cols.mediaProfile !== -1 ? (row[cols.mediaProfile] || '').toString().trim() : '';
 
@@ -1095,8 +1134,6 @@ function reduceFeedTeamState_(data, cols, uptoCycle, feedTz) {
       }
       if (seasonType && seasonType !== '-') ts.seasonType = seasonType;
       if (streak && streak !== '-') ts.streak = streak;
-      if (trigger && trigger !== '-') ts.trigger = trigger;
-      if (playerMood && playerMood !== '-') ts.playerMood = playerMood;
       if (fanSentiment && fanSentiment !== '-') ts.fanSentiment = fanSentiment;
       if (mediaProfile && mediaProfile !== '-') ts.mediaProfile = mediaProfile;
       ts.cycle = cycle;
@@ -1109,7 +1146,7 @@ function reduceFeedTeamState_(data, cols, uptoCycle, feedTz) {
  * engine.194: accepted game results against the franchise's own expectation, at the
  * round's city reach. No games / no accepted week = no new games share. The trailing
  * baseline and expansion/dynasty priors live in buildSportsWeek_, not authored mood.
- * Canonicalize the state in place for inferFeedTrigger_; never change the raw week lens.
+ * Canonicalize the state in place (the sentiment log line reads it); never change the raw week lens.
  */
 function feedTeamShare_(state, wk) {
   state.seasonType = canonicalSportsPhase_(state.seasonType);
@@ -1153,30 +1190,6 @@ function parseStreakBonus_(streak) {
     if (count >= 3) return -0.01;
     return -0.005;
   }
-}
-
-/**
- * Infer event trigger from team state when not manually set.
- */
-function inferFeedTrigger_(teamState) {
-  // Check streak for hot/cold streak triggers
-  if (teamState.streak) {
-    var match = teamState.streak.toUpperCase().match(/([WL])(\d+)/);
-    if (match) {
-      var type = match[1];
-      var count = parseInt(match[2], 10);
-      if (type === 'W' && count >= 6) return 'hot-streak';
-      if (type === 'L' && count >= 6) return 'cold-streak';
-    }
-  }
-
-  // Check season type for championship
-  var st = (teamState.seasonType || '').toLowerCase();
-  if (st.indexOf('championship') >= 0 || st.indexOf('finals') >= 0 || st.indexOf('world') >= 0) {
-    return 'championship';
-  }
-
-  return '';
 }
 
 /**

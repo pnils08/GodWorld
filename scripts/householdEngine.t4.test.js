@@ -148,25 +148,36 @@ console.log('\nengine.47 Hop 5 — households bend around tonight\'s result');
 {
   const gnSrc = fs.readFileSync(path.resolve(__dirname, '../phase05-citizens/applyGameNightMoments.js'), 'utf8');
   global.gameNightBucket_ = new Function(gnSrc + '\nreturn gameNightBucket_;')();
+  // engine.331: the caller resolves the row's team with the real normalizer and reads the week's hotCold
+  const seasonSrc = fs.readFileSync(path.resolve(__dirname, '../phase02-world-state/applySportsSeason.js'), 'utf8');
+  global.normalizeOaklandFeedTeam_ = new Function(seasonSrc + '\nreturn normalizeOaklandFeedTeam_;')();
   const ripples = [];
   global.recordRipple_ = (ctx, r) => { ripples.push(r); return true; };
-  const runWithFeed = (n, feed) => {
+  const runWithFeed = (n, feed, weeks) => {
     const events = [];
     for (let i = 0; i < n; i++) {
       rngImpl = mulberry32(i + 7);
       const ctx = makeCtx([makeRow('POP-G' + i)]);
       ctx.summary.sportsFeedEntries = feed;
+      ctx.summary.sportsWeek = weeks || {};
       runHouseholdEngine_(ctx);
       for (const ev of (ctx.summary.householdEvents || [])) events.push(ev);
     }
     return events;
   };
-  const winStreak = runWithFeed(3000, [{ eventType: 'game-result', streak: 'W5', playerMood: 'confident' }]);
+  const winStreak = runWithFeed(3000, [{ eventType: 'game-result', teamsUsed: "A's", streak: 'W5', playerMood: 'confident' }],
+    { "A's": { g: 3, hotCold: 'hot' } });
   const gn = winStreak.filter(ev => ev.tag === 'Household-GameNight');
   assert('5.1 a game week puts game-night lines on some households', gn.length > 0, String(gn.length));
-  assert('5.2 a W5 streak draws the streak lines', gn.every(ev => /streak|lineup/.test(ev.event)), gn.map(e => e.event).slice(0, 3).join(' | '));
+  assert('5.2 a W5 streak in a hot week draws the streak lines', gn.every(ev => /streak|lineup/.test(ev.event)), gn.map(e => e.event).slice(0, 3).join(' | '));
   assert('5.3 each touched household is named in a game-night Ripple row',
     ripples.filter(r => r.effectType === 'game-night-household').reduce((a, r) => a + r.targetIds.length, 0) === gn.length);
+  const notHot = runWithFeed(600, [{ eventType: 'game-result', teamsUsed: "A's", streak: 'W4' }], { "A's": { g: 3, hotCold: '' } })
+    .filter(ev => ev.tag === 'Household-GameNight');
+  assert('5.2b engine.331: W4 (under the bar) draws the plain win lines, not the streak', notHot.length > 0 && notHot.every(ev => !/streak/.test(ev.event)), notHot.map(e => e.event).slice(0, 3).join(' | '));
+  const cold = runWithFeed(600, [{ eventType: 'game-result', teamsUsed: 'Oaks', streak: 'L5' }], { Oaks: { g: 3, hotCold: 'cold' } })
+    .filter(ev => ev.tag === 'Household-GameNight');
+  assert('5.2c engine.331: an L5 in a cold week draws the skid lines', cold.length > 0 && cold.every(ev => /peace|skid|subject/.test(ev.event)), cold.map(e => e.event).slice(0, 3).join(' | '));
   const loss = runWithFeed(3000, [{ eventType: 'game-result', streak: 'L2', playerMood: 'frustrated' }]).filter(ev => ev.tag === 'Household-GameNight');
   assert('5.4 a loss draws the quiet-house lines', loss.length > 0 && loss.every(ev => /quiet|early|loss/.test(ev.event)), loss.map(e => e.event).slice(0, 3).join(' | '));
   const quiet = runWithFeed(3000, []);

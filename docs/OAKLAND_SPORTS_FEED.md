@@ -113,10 +113,10 @@ has a current-Cycle row. Old team state does not speak by itself.
 | G | `Stats` | Newsroom only; does not touch roster stat columns | Use dashboard stat capture to change roster stats |
 | H | `Team Record` | Base of the team's city sports sentiment (win % term) | `W-L`; series records like `3-1` parse; required on `game-result` in the dashboard |
 | I | `StoryAngle` | Leads the sports media line and desk slices | Your headline instinct |
-| J | `PlayerMood` | Game-night tone only: a W streak wins the night; otherwise `confident` leans win, `frustrated` (or an L streak) leans loss. `frustrated`/`angry`/`electric`/`confident` also raise a player trigger that no story hook reads | Other moods are newsroom color |
-| K | `EventTrigger` | A MOMENT in the week, not a phase (SeasonType) or entry kind (EventType). Each of the 18 dropdown words makes a sports story hook (six moment words added 2026-09-19: draft-night, trade-deadline, all-star, series-clinch, walk-off, no-hitter). Only the team's last row of the Cycle counts. Blank → the engine infers `hot-streak` (W6+), `cold-streak` (L6+) or `championship`. Any other word makes no hook and blocks the inference. A blank row keeps the team's last trigger | Use the dropdown words; see the trigger audit below |
+| J | `PlayerMood` | engine.331: on a game row each named player's game-night line ends with a clause for this mood (every dropdown word has its own three). On a game row with no `Streak` it sets the night for fans and households (`confident`/`dominant`/`locked-in`/`electric` win, `frustrated`/`uncertain` loss, the rest neutral). Also the citizen wake text and the newsroom. Makes no trigger | Dropdown; an off-list mood adds nothing |
+| K | `EventTrigger` | engine.331: a MOMENT on this row, this Cycle only — every A's / Oaks row's word counts, and a blank, `-` or `none` row is no moment (nothing carries). 39 dropdown words, each a sports story hook: in-season good and bad nights, and off-season / front-office moves for both clubs. `awards`, `draft`, `spring-training`, `blockbuster-trade`, `call-up` read as `award`, `draft-night`, `camp-opens`, `traded`, `debut`. The engine adds its own: `hot-streak` / `cold-streak` when the week is hot / cold (row M), `championship` when a game row of the week has SeasonType `championship`. Typed `hot-streak` / `cold-streak` and off-list words make nothing (one log line each per Cycle). `S.sportsFeedEntries[i].eventTrigger` carries the canonical word | Use the dropdown |
 | L | `HomeNeighborhood` | That hood counts as a game day for transit (this Cycle's rows) and gets the team's game-day crowd in the evening crowd map (a blank row keeps the last hood for the crowd) | One of the 22 map hoods — the dropdown reads Neighborhood_Map. Plan ruling: comes off the tab once Task 3 moves transit to the stadium zone |
-| M | `Streak` | Sentiment amplifier; game-night tone (W4+ = win-streak night); casino settlement when there is no `WeekRecord`; 6+ infers hot/cold-streak | `W<n>` / `L<n>` |
+| M | `Streak` | The week's run = the Streak on its last accepted game row. A run at World_Config `sportsStreakHeadline` (5) that the week's result agrees with makes the team hot or cold (engine.331, one decision): the business headline, the `hot-streak` / `cold-streak` hook, and the streak / skid lines for players, fans and households on game night. A row's W or L sets that night win or loss; casino settlement when there is no `WeekRecord` | `W<n>` / `L<n>`, on the game row |
 | N | `FanSentiment` | City sports sentiment: electric/euphoric +0.02, high/confident/excited +0.01, uncertain/anxious −0.005, low/apathetic/disappointed −0.01, frustrated/angry/hostile −0.02, neutral/moderate 0 | Dropdown |
 | O | `FranchiseStability` | Parsed, result unread (retail term nothing consumes) — newsroom only | Dropdown; wiring is Tasks 3–4 |
 | P | `EconomicFootprint` | ±a little game-day crowd in the team's hood (traffic term); its retail term is unread | Dropdown |
@@ -134,7 +134,9 @@ suppresses the `championship` hook the phase would infer. All-time authored:
 hot-streak 46, breaking-news 16, playoffs 9, home-opener 8, playoff-push 8,
 pre-season 7, awards 7, cold-streak 5, draft 4, community outreach 4, and
 twelve one-to-two-use words. Which of these words should become hooks is a sim
-call for Mike (plan Task 1 item 3d).
+call for Mike (plan Task 1 item 3d). **Ruled 2026-11-05 (engine.331):** the list,
+aliases and `breaking-news` (stays an EventType) are in row K and
+[[plans/2026-11-05-sports-feed-triggers]].
 
 The FanSentiment–MediaProfile dropdowns carry exactly the words the engine parses (engine.202 cut 3);
 the sheet still allows other text, which the engine treats as neutral. Re-run
@@ -191,8 +193,8 @@ or an unparseable value cannot erase a played record. A team with only `0-0`
 keeps it and contributes zero base sentiment; a played `0-3` remains informative.
 Blank and literal `-` fields preserve earlier values.
 
-The reducer uses `canonicalSportsPhase_` for SeasonType before season-trigger
-inference. Existing aliases apply, including `summer league` to `preseason`;
+The reducer uses `canonicalSportsPhase_` for SeasonType for the sentiment line
+(engine.331: it no longer carries a trigger or a mood). Existing aliases apply, including `summer league` to `preseason`;
 unknown or blank phases fail closed to `off-season`.
 
 ### How the feed moves city mood (PROD `ae9278aa`, LIVE 2026-10-11 — engine.194 + engine.203d)
@@ -228,7 +230,8 @@ Current effects include:
 - record, streak, fan sentiment, season, and media-profile adjustments to
   `sportsSentimentBoost`;
 - folding that boost into final city sentiment;
-- manual or inferred sports triggers;
+- sports moments: each A's / Oaks row's own canonical trigger this Cycle, plus the engine's
+  hot-/cold-streak (the streak headline's decision) and the clinch-row championship (engine.331);
 - computed neighborhood traffic, retail, nightlife, and community values;
   the evening consumer uses only traffic to adjust crowd counts, while the
   retail/nightlife/community values still lack consumers;
@@ -253,8 +256,11 @@ A resolved named player can receive:
 - `Ripple_Ledger` attribution with cause
   `Oakland_Sports_Feed.gameNight`.
 
-The moment is bucketed as win, win streak, loss, or neutral from `Streak` and
-`PlayerMood`. An unmatched or inactive name does not receive this moment.
+The moment is bucketed from the row's `Streak` and the week's hot/cold (engine.331):
+a W row is a win-streak night in a hot week, else a win; an L row a skid night in a cold
+week, else a loss; a row with no Streak takes its tone from `PlayerMood`. The row's mood
+then closes the line with a clause. Fans and households read the same bucket. An
+unmatched or inactive name does not receive this moment.
 
 ### Watching citizens
 
@@ -281,7 +287,7 @@ summary). Built by `feedRowDelivery` in `scripts/sportsSubstrate.js`.
 | Consumer | Current use | Important limitation |
 |---|---|---|
 | `phase07-evening-media/sportsStreaming.js` | Builds evening sports text, preferring `StoryAngle` and then team/event/notes | Uses current-Cycle entries and last-entry details |
-| `phase07-evening-media/storyHook.js` | Converts selected sports triggers into story hooks | Does not map every trigger Phase 2 can emit |
+| `phase07-evening-media/storyHook.js` | Converts sports moments into story hooks, one per team per word | Every word Phase 2 emits has a hook (pinned by `sportsFeedContract.test.js`) |
 | `scripts/buildWorldSummary.js` | Emits current and two prior Cycles with story, record, streak, mood, sentiment, and neighborhood context | Reads the live Sheet when run |
 | `scripts/buildDeskPackets.js` | Builds exact-Cycle A's/Oaks sports digests for newsroom packets | Historical Oakland rows are no longer substituted when the Cycle is empty |
 | `lib/wakePerception.js` | Gives citizens a latest-Cycle A's perception slice | A's-only; does not provide Oaks parity |
@@ -455,6 +461,7 @@ parsers, validators, and consumers through an approved implementation plan.
 
 ## Changelog
 
+- 2026-11-06 (engine-sheet) — engine.331: rows J, K, M rewritten — moments are this Cycle's rows (no carry), 39 trigger words + aliases, hot/cold is the streak headline's decision at 5 for hooks and game night, a cold game-night set, every mood closes the players' night line, mood triggers gone.
 - 2026-10-11 (engine-sheet) — §How the feed moves city mood: what counts as a game, game-week pricing (engine.194), the season aftermath (engine.203d), and the two known holes (row order, gap week). Removed the stale "203d unbuilt" and old phase-multiplier lines — PROD `ae9278aa` no longer uses them.
 - 2026-09-20 (engine-sheet) — `Team Record` (column H) is now Plain text on every data row; 14 cells Sheets had stored as dates (`4-1`, `7-2`, `10-3` …) were restored to text. Until PROD @105 the engine read a date-stored record as unreadable and fell back to the cycle's first text record (engine.247). The engine now converts a date back to `M-d`, and pre-flight warns on any date-stored record and runs the engine's own WeekRecord validator (a `WeekRecord` with games on a non-`game-result` row fails pre-flight).
 - 2026-09-16 (codex) — Corrected the retired off-season sentinel claim and distinguished computed neighborhood values from consumed effects; documented the interim WeekRecord draft guard and pending schema migration.

@@ -14,16 +14,20 @@ vm.createContext(sandbox);
 vm.runInContext(fs.readFileSync(path.join(__dirname, '../phase02-world-state/applySportsSeason.js'), 'utf8'), sandbox);
 // engine.203d: the aftermath helpers live in the shared week utility (one global scope in Apps Script)
 vm.runInContext(fs.readFileSync(path.join(__dirname, '../utilities/sportsWeekRecord.js'), 'utf8'), sandbox);
+// engine.331: the trigger vocabulary (EVENT_TRIGGER_VALUES / _ALIASES / _ENGINE_ONLY) — same global scope
+vm.runInContext(fs.readFileSync(path.join(__dirname, '../utilities/setupSportsFeedValidation.js'), 'utf8'), sandbox);
 
 const headers = ['Cycle', 'TeamsUsed', 'EventType', 'SeasonType', 'Team Record', 'Streak',
   'EventTrigger', 'HomeNeighborhood', 'PlayerMood', 'FanSentiment', 'FranchiseStability',
   'EconomicFootprint', 'CommunityInvestment', 'MediaProfile'];
 const row = (overrides) => Object.assign({ Cycle: 106, TeamsUsed: "A's", SeasonType: 'regular-season' }, overrides);
 const plain = (value) => JSON.parse(JSON.stringify(value));
+// engine.331: the moments are this Cycle's rows as the one reader canonicalizes them
+const entriesOf = (sheet, cycle) => sandbox.readOaklandFeedEntries_({ ss: { getSheetByName: () => sheet }, summary: {} }, cycle);
 function read(rows, cycle = 106) {
   logs.length = 0;
   const sheet = { getDataRange: () => ({ getValues: () => [headers, ...rows.map(r => headers.map(h => r[h] ?? ''))] }) };
-  const result = plain(sandbox.processFeedSheet_(sheet, cycle));
+  const result = plain(sandbox.processFeedSheet_(sheet, cycle, undefined, undefined, entriesOf(sheet, cycle)));
   // Observe the record actually used for sentiment without changing the engine's return shape.
   const records = {};
   for (const line of logs) {
@@ -74,7 +78,8 @@ test('D4: informative record format follows the existing parser', () => {
   assert.strictEqual(read([row({ 'Team Record': '10-2' }), row({ 'Team Record': 'record: 12–3' })]).records["A's"], 'record: 12–3');
 });
 
-// Authored fields still carry for triggers/prose; they no longer price game results.
+// Authored fields still carry for prose; they no longer price game results. engine.331: a trigger
+// and a mood never carry — a dash row adds no moment and takes none away.
 const complete = row({ 'Team Record': '10-2', SeasonType: 'playoffs', Streak: 'W1',
   EventTrigger: 'rivalry', HomeNeighborhood: 'SYNTHETIC-HOOD', PlayerMood: 'electric',
   FanSentiment: 'high', FranchiseStability: 'stable', EconomicFootprint: 'growing',
@@ -86,9 +91,9 @@ for (const field of ['SeasonType', 'Streak', 'EventTrigger', 'HomeNeighborhood',
     assert.deepStrictEqual(read([complete, later]).result, read([complete]).result);
   });
 }
-test('D4: explicit none still clears a manual trigger', () => {
-  const actual = read([row({ EventTrigger: 'rivalry' }), row({ EventTrigger: 'none' })]);
-  assert.deepStrictEqual(actual.result.triggers, []);
+test('engine.331: every row says its own moment — none / blank / dash on a later row add none and clear none', () => {
+  const actual = read([row({ EventTrigger: 'rivalry' }), row({ EventTrigger: 'none' }), row({ EventTrigger: '' }), row({ EventTrigger: ' - ' })]);
+  assert.deepStrictEqual(actual.result.triggers.map(t => t.trigger), ['rivalry']);
 });
 
 for (const [label, factor] of [
@@ -114,9 +119,12 @@ test('D1: unknown season cannot infer a championship through a substring', () =>
   assert.deepStrictEqual(read([row({ SeasonType: 'world invitational' })]).result.triggers, []);
 });
 
-test('D3 guard: prior-Cycle fields still carry when the team has a current row', () => {
+test('D3 guard: prior-Cycle fields still carry for sentiment; engine.331: the prior trigger and mood do not', () => {
   const old = Object.assign({}, complete, { Cycle: 105 });
-  assert.deepStrictEqual(read([old, { Cycle: 106, TeamsUsed: "A's" }]).result, read([complete]).result);
+  const carried = read([old, { Cycle: 106, TeamsUsed: "A's" }]);
+  assert.deepStrictEqual(carried.records, read([complete]).records);
+  assert.strictEqual(carried.result.sentiment, read([complete]).result.sentiment);
+  assert.deepStrictEqual(carried.result.triggers, [], 'C105 rivalry and electric say nothing at C106 (the C114 re-fire)');
 });
 test('D3 guard: with no game-week history a team without a current row stays silent', () => {
   assert.deepStrictEqual(read([Object.assign({}, complete, { Cycle: 105 })]).result,
@@ -151,11 +159,11 @@ test('203d: the week after a title fades from the title share, no dip', () => {
   near(r3.aftermath.total, s * Math.pow(0.85, 3));
 });
 test('203d: an off-season row after the title does not re-read the carried record (no snap, no hold)', () => {
-  const rows = titleRows.concat([row({ Cycle: 111, EventType: 'front-office', SeasonType: 'off-season', EventTrigger: 'breaking-news' })]);
-  const r = plain(sandbox.processFeedSheet_(feedSheet(rows), 111, { "A's": { g: 0, h: 0 } }, titleHist()));
+  const rows = titleRows.concat([row({ Cycle: 111, EventType: 'front-office', SeasonType: 'off-season', EventTrigger: 'awards' })]);
+  const r = plain(sandbox.processFeedSheet_(feedSheet(rows), 111, { "A's": { g: 0, h: 0 } }, titleHist(), entriesOf(feedSheet(rows), 111)));
   near(r.aftermath.total, share110() * 0.85);
   assert.strictEqual(r.sentiment, 0);
-  assert.deepStrictEqual(r.triggers.map(t => t.trigger), ['breaking-news'], 'the authored trigger still fires');
+  assert.deepStrictEqual(r.triggers.map(t => t.trigger), ['award'], 'the authored moment fires (awards reads as award), no title re-fire');
   near(r.triggers[0].sentiment, share110() * 0.85);
 });
 test('203d: a game week this Cycle reads the repriced formula, not aftermath', () => {
@@ -249,7 +257,7 @@ test('published S fields keep their shapes and atmosphere licence stays untouche
 // places it at the franchise's venue; an away week (or no week object) places it nowhere.
 const trigHoods = (week) => {
   const sheet = { getDataRange: () => ({ getValues: () => [headers, headers.map(h => complete[h] ?? '')] }) };
-  const ctx = { summary: { cycle: 106, sportsWeek: week }, ss: { getSheetByName: () => sheet } };
+  const ctx = { summary: { cycle: 106, sportsWeek: week, sportsFeedEntries: entriesOf(sheet, 106) }, ss: { getSheetByName: () => sheet } };
   sandbox.applySportsFeedTriggers_(ctx);
   return ctx.summary.sportsEventTriggers.map(t => t.neighborhood);
 };
@@ -313,6 +321,7 @@ function replay(rows, cycle, weights) {
   const weeks = sandbox.deriveSportsWeekFromFeed_(entries, ctx._sportsWeekHistory, cycle);
   sandbox.deriveSportsIntensity_(weeks, ctx._sportsWeekHistory, ctx._sportsLensHistory, {}, cycle, weights);
   ctx.summary.sportsWeek = weeks;
+  ctx.summary.sportsFeedEntries = entries;
   sandbox.applySportsFeedTriggers_(ctx);
   return ctx;
 }
@@ -361,9 +370,10 @@ test('194: none, blank and rejected cells pay zero; authored triggers still fire
     ['season-state', 'A:W'], ['game-result', 'bad-token']]) {
     const ctx = replay([row({ Cycle: 110, EventType: eventType, WeekRecord,
       SeasonType: 'championship', 'Team Record': '11-3', FanSentiment: 'high',
-      MediaProfile: 'national', EventTrigger: 'breaking-news' })], 110);
+      MediaProfile: 'national', EventTrigger: 'award' })], 110);
     near(ctx.summary.sportsSentimentBoost, 0);
-    assert.strictEqual(ctx.summary.sportsEventTriggers[0].trigger, 'breaking-news');
+    // engine.331: no accepted game row → no inferred title, only the typed moment
+    assert.deepStrictEqual(plain(ctx.summary.sportsEventTriggers.map(t => t.trigger)), ['award']);
   }
 });
 test('194: real reader folds games, rejects wrong row type, preserves postseason result at summary', () => {

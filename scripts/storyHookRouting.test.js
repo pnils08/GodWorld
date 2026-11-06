@@ -89,6 +89,12 @@ check('cold-streak moment reaches the deck (C105 case: was dropped)', clinch.som
 check('one hook per team per moment; unhooked player triggers make none', clinch.length === 3, String(clinch.length));
 const quiet = runSports('off-season', [{ team: "A's", trigger: 'no-hitter' }]);
 check('a moment with no phase hook still lands (priority 3)', quiet.length === 1 && quiet[0].priority === 3);
+// engine.331: an off-season decision and a bad night are moments too (builder 2026-11-05)
+const offSeason = runSports('off-season', [{ team: 'Oaks', trigger: 're-signed' }, { team: "A's", trigger: 'tough-loss' },
+  { team: "A's", trigger: 'retirement' }]);
+check('off-season and bad-night words land, retirement at priority 3', offSeason.length === 3 &&
+  offSeason.some(h => /^Oaks keep a player/.test(h.text)) && offSeason.some(h => /drop a close one/.test(h.text)) &&
+  offSeason.some(h => /retires/.test(h.text) && h.priority === 3), offSeason.map(h => h.text.slice(0, 30)).join(' | '));
 
 console.log('engine.232 — rotation within the desk');
 const sports = run(mk('GAME_RESULT', 'SPORTS', 8));

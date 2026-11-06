@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-10-28 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-11-06 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -467,11 +467,15 @@
 - **buildActiveSportsFromOverride_(oaklandState)**
 
 - **applySportsFeedTriggers_(ctx)**
-  Reads: S.cycle, S.cycleId, S.franchiseWeight, S.sentiment, S.sportsAftermath, S.sportsSentimentBoost, S.sportsWeek
+  Reads: S.cycle, S.cycleId, S.franchiseWeight, S.sentiment, S.sportsAftermath, S.sportsFeedEntries, S.sportsSentimentBoost, S.sportsWeek
   Writes: S.sportsAftermath, S.sportsEventTriggers, S.sportsSentimentBoost
   Sheets: Oakland_Sports_Feed
 
-- **processFeedSheet_(sheet, currentCycle, weeks, history)**
+- **processFeedSheet_(sheet, currentCycle, weeks, history, entries)**
+
+- **feedMoments_(entries, weeks)**
+
+- **canonicalFeedTrigger_(value)**
 
 - **reduceFeedTeamState_(data, cols, uptoCycle, feedTz)**
 
@@ -480,8 +484,6 @@
 - **parseWinPercentage_(record)**
 
 - **parseStreakBonus_(streak)**
-
-- **inferFeedTrigger_(teamState)**
 
 - **parseFanSentiment_(val)**
 
@@ -1203,7 +1205,11 @@
   Sheets: Business_Ledger, Civic_Office_Ledger, Initiative_Tracker
 
 ### applyGameNightMoments.js
-- **gameNightBucket_(entry)**
+- **gameNightMoodKey_(mood)**
+
+- **gameNightMoodLookup_(table, mood)**
+
+- **gameNightBucket_(entry, hotCold)**
 
 - **parseNamesUsed_(entry)**
 
@@ -1795,6 +1801,8 @@
   Writes: S.initiativeEnginePhaseMoves
 
 - **applyCivicStageStep_(ctx, row, ix, cycle)**
+
+- **civicTransitStageCohort_(data, observationCycle, canonHoods, stationDefs, resolveHood)**
 
 - **freezeCivicStageCohort_(ctx)**
   Reads: S.canonHoods, S.cycleId
@@ -2654,7 +2662,7 @@
 
 ### runHouseholdEngine.js
 - **runHouseholdEngine_(ctx)**
-  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsFeedEntries, S.sportsSeason, S.weather, S.weatherMood, S.worldEvents
+  Reads: S.absoluteCycle, S.cityDynamics, S.cycleId, S.economicMood, S.eventsGenerated, S.holiday, S.holidayPriority, S.isCreationDay, S.isFirstFriday, S.season, S.sportsFeedEntries, S.sportsSeason, S.sportsWeek, S.weather, S.weatherMood, S.worldEvents
   Writes: S.eventsGenerated, S.householdEvents
   Config: ctx.config.cycleCount
   Sheets: LifeHistory_Log
@@ -4818,6 +4826,12 @@ _No top-level function declarations found (helper/constants file)._
   RNG: ctx.rng / safeRand_(ctx)
 
 ### webTrigger.js
+- **webSha256Hex_(str)**
+
+- **webKeysCollide_(props)**
+
+- **readFireAdmission_(param)**
+
 - **doGet(e)**
 
 - **doPost(e)**
@@ -4854,4 +4868,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1759
+**Functions mapped:** 1766

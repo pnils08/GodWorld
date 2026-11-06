@@ -2184,7 +2184,10 @@ function generateCitizensEvents_(ctx) {
     gnGame = gnFeed[gnf]; break;
   }
   if (gnGame) {
-    var gnBucket = (typeof gameNightBucket_ === 'function') ? gameNightBucket_(gnGame) : 'neutral';
+    // engine.331: the week's hot/cold (the streak headline's decision) — the row's own team
+    var gnGameTeam = (typeof normalizeOaklandFeedTeam_ === 'function') ? normalizeOaklandFeedTeam_(gnGame.teamsUsed) : '';
+    var gnHotCold = (gnGameTeam && gnWeeks[gnGameTeam]) ? (gnWeeks[gnGameTeam].hotCold || '') : '';
+    var gnBucket = (typeof gameNightBucket_ === 'function') ? gameNightBucket_(gnGame, gnHotCold) : 'neutral';
     var gnTags = ["source:sports", "gameNight", "streak:" + (gnGame.streak || '-')];
     // engine.194: weight scales with the repriced net games share. A full
     // per-franchise share (0.10) saturates intensity. Cap 4 — game
@@ -2213,6 +2216,12 @@ function generateCitizensEvents_(ctx) {
       neutral: [
         "kept the game on low while cooking, half an ear on the count",
         "checked the score once at a red light and put the phone away"
+      ],
+      // engine.331 (builder 2026-11-06): a cold week has its own night
+      coldStreak: [
+        "heard the bus stop arguing over who to blame for the skid",
+        "left the cap at home for the first time in weeks",
+        "watched another loss with the patience wearing thin"
       ]
     }[gnBucket] || [];
     for (var gnt = 0; gnt < gnTexts.length; gnt++) {

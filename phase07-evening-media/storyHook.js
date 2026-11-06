@@ -584,7 +584,33 @@ function storyHookEngine_(ctx) {
       'all-star':       { priority: 2, text: function(t) { return t.team + ' send an All-Star. Recognition story, career arc, hometown pride' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '.'; } },
       'series-clinch':  { priority: 3, text: function(t) { return t.team + ' clinch the series! Celebration' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '. Who carried them, next-round stakes.'; } },
       'walk-off':       { priority: 2, text: function(t) { return t.team + ' win it on a walk-off. Instant-classic story, the hero, the crowd' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '.'; } },
-      'no-hitter':      { priority: 3, text: function(t) { return t.team + ' throw a no-hitter. Historic night, pitcher profile, where-were-you story.'; } }
+      'no-hitter':      { priority: 3, text: function(t) { return t.team + ' throw a no-hitter. Historic night, pitcher profile, where-were-you story.'; } },
+      // engine.331 (builder 2026-11-05: "more variety on positive and negative type triggers",
+      // "there really isn't anything for the oaks off season decisions"). hot-streak / cold-streak
+      // above are the engine's own (the week's hotCold, applySportsSeason_); every other key is a dropdown word.
+      'big-win':        { priority: 2, text: function(t) { return t.team + ' big win. The game that mattered, who delivered, fan energy' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '.'; } },
+      'comeback':       { priority: 2, text: function(t) { return t.team + ' come back to win. The turn, the hero, the crowd' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '.'; } },
+      'career-night':   { priority: 2, text: function(t) { return t.team + ' player has a career night. Box-score story, the player behind it.'; } },
+      'milestone':      { priority: 2, text: function(t) { return t.team + ' player reaches a career milestone. The number, the road there, what it means.'; } },
+      'shutout':        { priority: 2, text: function(t) { return t.team + ' throw a shutout. Pitching story, the staff, the zeros.'; } },
+      'buzzer-beater':  { priority: 2, text: function(t) { return t.team + ' win at the buzzer. The shot, the shooter, the arena' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '.'; } },
+      'tough-loss':     { priority: 2, text: function(t) { return t.team + ' drop a close one. The play that turned it, the mood after, what is next.'; } },
+      'blowout-loss':   { priority: 2, text: function(t) { return t.team + ' blown out. What went wrong, who answers for it, fan frustration.'; } },
+      'blown-lead':     { priority: 2, text: function(t) { return t.team + ' let a lead slip. Where it turned, the late stretch, the clubhouse after.'; } },
+      'slump':          { priority: 2, text: function(t) { return t.team + ' player in a slump. The numbers, the work, the patience question.'; } },
+      'suspension':     { priority: 2, text: function(t) { return t.team + ' player suspended. What happened, how long, the roster hole.'; } },
+      'clubhouse-tension': { priority: 2, text: function(t) { return t.team + ' clubhouse tension. What is behind it, who is talking, does it reach the field.'; } },
+      're-signed':      { priority: 2, text: function(t) { return t.team + ' keep a player. Loyalty story, what the deal says about next season, clubhouse reaction.'; } },
+      'signed':         { priority: 2, text: function(t) { return t.team + ' sign a new player. Who they are, where they fit, fan verdict.'; } },
+      'departed':       { priority: 2, text: function(t) { return t.team + ' lose a player to another club. What leaves with them, who fills the hole, fan reaction.'; } },
+      'traded':         { priority: 2, text: function(t) { return t.team + ' make a trade. Who went, who came, winners and losers, clubhouse ripple.'; } },
+      'released':       { priority: 2, text: function(t) { return t.team + ' let a player go. End of a road, roster math, what comes next.'; } },
+      'retirement':     { priority: 3, text: function(t) { return t.team + ' player retires. Career look-back, the farewell, what the city remembers.'; } },
+      'coaching-change': { priority: 2, text: function(t) { return t.team + ' change the bench. Why now, who is in, what changes.'; } },
+      'trade-rumor':    { priority: 2, text: function(t) { return t.team + ' trade talk. Who is on the block, what it would cost, fan temperature.'; } },
+      'camp-opens':     { priority: 2, text: function(t) { return t.team + ' open camp. First look at the roster, battles to watch, fresh-start energy.'; } },
+      'award':          { priority: 2, text: function(t) { return t.team + ' player wins an award. Recognition story, the season behind it, hometown pride.'; } },
+      'community-outreach': { priority: 2, text: function(t) { return t.team + ' in the community. Who showed up, who it helped, the club off the field' + (t.neighborhood ? ' in ' + t.neighborhood : '') + '.'; } }
     };
 
     for (var sti = 0; sti < sportsTriggers.length; sti++) {

@@ -58,17 +58,57 @@ var GAME_NIGHT_POOLS = {
     "came home sore and grateful for a quiet house",
     "iced the usual aches and called it a night early",
     "ate standing up at the counter, still half at the ballpark"
+  ],
+  // engine.331 (builder 2026-11-06: "No reasons to not cold streak set as well")
+  coldStreak: [
+    "got the \"hang in there\" texts from everyone and answered none of them",
+    "stayed late at the facility looking for whatever has gone missing",
+    "heard the skid come up at the gas station and kept walking",
+    "stopped checking the standings and started counting the days to the off-day"
   ]
 };
 
-function gameNightBucket_(entry) {
-  var streak = String(entry.streak || '').toUpperCase();
-  var mood = String(entry.playerMood || '').toLowerCase();
-  var wins = /^W(\d+)/.exec(streak);
-  if (wins && Number(wins[1]) >= 4) return 'winStreak';
-  if (wins || /confident|energized|high/.test(mood)) return 'win';
-  if (/^L\d+/.test(streak) || /frustrat|low|tense/.test(mood)) return 'loss';
-  return 'neutral';
+// engine.331 (builder 2026-11-06: "handle the dropdowm moods add to the night line"): the row's
+// PlayerMood closes each named player's game-night line — one pool per dropdown word
+// (PLAYER_MOOD_VALUES, utilities/setupSportsFeedValidation.js; scripts/gameNightMoments.test.js pins
+// the keys). A blank or off-list mood adds nothing. Color, never fact.
+var GAME_NIGHT_MOOD_CLAUSES_ = {
+  'confident': ["sure the next one belongs to them too", "already talking about the next game like it was settled", "sleeping easy, certain the work was done"],
+  'frustrated': ["still chewing on the one play that went wrong", "short with everyone and sorry about it by morning", "unable to let the night go"],
+  'hungry': ["already asking for more", "alarm set early to get back to work", "texting the coaches a question at midnight"],
+  'reflective': ["turning the whole season over for a long while", "looking through old photos from the first year with the club", "up late thinking about how far it has come"],
+  'dominant': ["feeling like nobody in the league could touch them", "walking in the door like the block was theirs", "not bothering to check anyone else's score"],
+  'uncertain': ["wondering how much longer the role will hold", "reading every comment online and wishing they hadn't", "asking the family what they thought and not liking the answer"],
+  'locked-in': ["already running the next game in their head", "keeping the routine down to the minute", "barely saying a word, all focus"],
+  'quiet': ["keeping all of it to themselves", "saying maybe ten words all night", "letting the house stay quiet around them"],
+  'electric': ["unable to stop pacing the kitchen", "calling three friends before midnight just to talk about it", "still buzzing hours after the game"]
+};
+// a game row with no Streak: the clubhouse mood sets the night for the bucket's readers
+var GAME_NIGHT_MOOD_TONE_ = {
+  'confident': 'win', 'dominant': 'win', 'locked-in': 'win', 'electric': 'win',
+  'frustrated': 'loss', 'uncertain': 'loss',
+  'hungry': 'neutral', 'reflective': 'neutral', 'quiet': 'neutral'
+};
+
+function gameNightMoodKey_(mood) {
+  return String(mood || '').trim().toLowerCase().replace(/\s+/g, '-');
+}
+// own keys only — a typed "constructor" is an off-list mood, not Object.prototype's
+function gameNightMoodLookup_(table, mood) {
+  var key = gameNightMoodKey_(mood);
+  return Object.prototype.hasOwnProperty.call(table, key) ? table[key] : null;
+}
+
+// engine.331: the row's result first, then the week. hotCold = S.sportsWeek[team].hotCold, the
+// streak headline's decision (markSportsStreakHeadline_, World_Config sportsStreakHeadline) — the
+// caller resolves the row's team, so this stays pure (householdEngine.t4.test.js loads it alone).
+// A W row in a hot week is a streak night, an L row in a cold week a skid night; a loss in a hot
+// week stays a loss. Only a game row with no Streak takes its tone from the mood.
+function gameNightBucket_(entry, hotCold) {
+  var run = /^([WL])\d+/.exec(String(entry.streak || '').trim().toUpperCase());
+  if (run && run[1] === 'W') return hotCold === 'hot' ? 'winStreak' : 'win';
+  if (run) return hotCold === 'cold' ? 'coldStreak' : 'loss';
+  return gameNightMoodLookup_(GAME_NIGHT_MOOD_TONE_, entry.playerMood) || 'neutral';
 }
 
 // engine.208 M1: the feed writes positions — "Arturo Ramos (SP)", "Ernesto Quintero (3B/1B/DH)",
@@ -227,7 +267,14 @@ function applyGameNightMoments_(ctx) {
       if (ri === undefined) { if (unresolved.indexOf(names[n]) < 0) unresolved.push(names[n]); continue; }
       if (seenThisRow[key]) continue;
       seenThisRow[key] = true;
-      var text = route.pool ? pick(SPORTS_NAMED_POOLS[route.pool]) : pick(GAME_NIGHT_POOLS[gameNightBucket_(entry)]);
+      var text;
+      if (route.pool) {
+        text = pick(SPORTS_NAMED_POOLS[route.pool]);
+      } else {
+        text = pick(GAME_NIGHT_POOLS[gameNightBucket_(entry, weeks[team] ? weeks[team].hotCold : '')]);
+        var moodPool = gameNightMoodLookup_(GAME_NIGHT_MOOD_CLAUSES_, entry.playerMood);
+        if (moodPool) text += ' — ' + pick(moodPool);
+      }
       write(ri, route.tag, text, route.tag + '|source:sports|feedNamed|event:' + (entry.eventType || '-') + '|team:' + (team || '-'));
       counts.named++;
     }

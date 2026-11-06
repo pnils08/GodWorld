@@ -207,14 +207,14 @@ function buildSportsRows(liveSports, sandboxSports, ledgerRows, N) {
       return '';
     };
     const seasonType = lastOf('SeasonType');
-    // EventTrigger 'none' and PlayerMood 'quiet' overwrite the carried state: a blank cell keeps the last trigger and mood
-    // and re-fires them (reduceFeedTeamState_ / processFeedSheet_); 'quiet' fires no mood trigger and leaves the streak to bucket the night
+    // engine.331: EventTrigger and PlayerMood stay blank — a moment is this row's own word and nothing carries, so a
+    // blank row is no moment; a blank mood adds no clause to the game-night line and the Streak buckets the night
     const out = {
       Cycle: N, SeasonType: seasonType, TeamsUsed: teamRows[teamRows.length - 1].TeamsUsed,
       HomeNeighborhood: lastOf('HomeNeighborhood'), FanSentiment: lastOf('FanSentiment'),
       FranchiseStability: lastOf('FranchiseStability'), EconomicFootprint: lastOf('EconomicFootprint'),
       CommunityInvestment: lastOf('CommunityInvestment'), MediaProfile: lastOf('MediaProfile'),
-      EventTrigger: 'none', PlayerMood: 'quiet', StoryAngle: '', Stats: '',
+      EventTrigger: '', PlayerMood: '', StoryAngle: '', Stats: '',
       Notes: MARKER + ' NON-CANON'
     };
     if (isNoGamePhase(seasonType)) {

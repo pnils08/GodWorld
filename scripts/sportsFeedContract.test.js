@@ -489,8 +489,18 @@ assert.ok(oversizedDraft.errors.some((error) => /50,000 characters or fewer/.tes
     assert.ok(contract.EVENT_TYPES.includes(type), type);
   });
   assert.deepStrictEqual(contract.EVENT_TYPES.filter((type) => type.indexOf('game') >= 0), ['game-result']);
-  assert.deepStrictEqual(contract.SAFE_ENUMS.EventTrigger.filter(Boolean).slice().sort(), hookKeys.slice().sort(),
-    'EventTrigger dropdown must equal the TRIGGER_HOOKS keys');
+  // engine.331: hot-streak / cold-streak are hooks the engine raises from the streak; never on the dropdown
+  const vocab = require('../utilities/setupSportsFeedValidation.js');
+  assert.deepStrictEqual([...vocab.EVENT_TRIGGER_ENGINE_ONLY].sort(), ['cold-streak', 'hot-streak']);
+  vocab.EVENT_TRIGGER_ENGINE_ONLY.forEach((w) => assert.ok(hookKeys.includes(w), w + ' must keep its hook'));
+  assert.deepStrictEqual(contract.SAFE_ENUMS.EventTrigger.filter(Boolean).slice().sort(),
+    hookKeys.filter((k) => !vocab.EVENT_TRIGGER_ENGINE_ONLY.includes(k)).sort(),
+    'EventTrigger dropdown must equal the TRIGGER_HOOKS keys minus the engine-only words');
+  // an alias is a typed word off the dropdown that names a dropdown moment
+  Object.entries(vocab.EVENT_TRIGGER_ALIASES).forEach(([typed, word]) => {
+    assert.ok(!vocab.EVENT_TRIGGER_VALUES.includes(typed), typed + ' is an alias, not a dropdown word');
+    assert.ok(vocab.EVENT_TRIGGER_VALUES.includes(word), typed + ' must alias a dropdown word');
+  });
 
   const sandbox = { Logger: { log() {} } };
   vm.createContext(sandbox);

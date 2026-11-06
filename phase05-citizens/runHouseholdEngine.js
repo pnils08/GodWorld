@@ -410,12 +410,17 @@ function runHouseholdEngine_(ctx) {
     if (String(feed[ge].eventType || '').toLowerCase().indexOf('game') >= 0) { gameEntry = feed[ge]; break; }
   }
   if (gameEntry && typeof gameNightBucket_ === 'function') {
-    var gnBucket = gameNightBucket_(gameEntry);
+    // engine.331: the week's hot/cold (the streak headline's decision) for the row's own team
+    var gnTeam = (typeof normalizeOaklandFeedTeam_ === 'function') ? normalizeOaklandFeedTeam_(gameEntry.teamsUsed) : '';
+    var gnWeek = (gnTeam && S.sportsWeek) ? S.sportsWeek[gnTeam] : null;
+    var gnBucket = gameNightBucket_(gameEntry, gnWeek ? (gnWeek.hotCold || '') : '');
     var GAME_NIGHT_HOUSEHOLD_ = {
       winStreak: ["left the game on through dinner, the streak still running", "let the kids stay up to watch the streak go on", "argued happily about the lineup at the kitchen table"],
       win: ["moved dinner to the couch for the broadcast", "cheered the last out from the living room", "kept the radio on the porch through the late innings"],
       loss: ["turned the broadcast off early after the loss", "went quiet as a house after the final score", "skipped the postgame and went to bed early"],
-      neutral: ["had the game on in the background through dinner"]
+      neutral: ["had the game on in the background through dinner"],
+      // engine.331 (builder 2026-11-06): a cold week has its own night
+      coldStreak: ["kept the game off at dinner to keep the peace", "let the kids pick the channel with the skid still going", "sighed at the score and changed the subject"]
     };
     gameNightPool = (GAME_NIGHT_HOUSEHOLD_[gnBucket] || GAME_NIGHT_HOUSEHOLD_.neutral).slice();
   }

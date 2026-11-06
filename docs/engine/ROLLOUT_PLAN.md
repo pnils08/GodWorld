@@ -17,7 +17,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.309 | Off-heritage ownership with ascent and crash (builder 2026-10-21): founder door for an existing citizen in their own field; ascent via owner draw → home → Door C; crash = back to the hiring pool. Door number = money-game Task 5. After engine.308 | needs-info | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8, engine.309 design |
 | engine.311 | Business entry by opportunity (builder 2026-10-22): line tier decides which business types open; every business class gets entry gates (none today); line contents in combination raise an opportunity to buy/open; the citizen's wake decides, not a roll. Covers 309's door | needs-info | research-build | [[../plans/2026-10-10-engine-214-mood-per-hood]] step 8, builder 2026-10-22 under engine.308 |
 | engine.328 | Ledger OriginGame column: remove it, free the column (builder 10-31). Own session first: blast radius (22 files, 11 engine refs), naming, then his go | needs-info | research-build | `docs/SIMULATION_LEDGER.md` |
-| engine.333 | Feed triggers to life history: `retirement` leaves the sports layer (Status stays Active), `injury` fills the bed. Waits on C4–C7 + `retirement` in 331's list | needs-info | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] |
+| engine.333 | Feed triggers to life history: `retirement` leaves the sports layer, `injury` fills the bed. Waits on C6 (Bio line), C7 (owed wake), `retirement` in 331's list | needs-info | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] |
 
 ## 2. Waiting on a fire — dated or organic (live-observing, blocked)
 

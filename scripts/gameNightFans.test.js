@@ -53,10 +53,10 @@ const STREAK = ['heard strangers at the bus stop talking streak numbers like fam
   'watched the kids on the corner re-enact the play twice, arguing the call both times'];
 const SKID = ['heard the bus stop arguing over who to blame for the skid', 'left the cap at home for the first time in weeks',
   'watched another loss with the patience wearing thin'];
-const WIN = ["watched the ninth from a packed bar and walked home in a crowd that didn't want to disperse",
-  'heard the block erupt through an open window when the final out landed',
+const WIN = ["watched the finish from a packed bar and walked home in a crowd that didn't want to disperse",
+  'heard the block erupt through an open window when the final play landed',
   'caught the recap at the counter this morning and stayed for the second retelling'];
-const LOSS = ['watched the bar go quiet by the eighth and settle the tab early', 'turned the game off before the end and told nobody',
+const LOSS = ['watched the bar go quiet before the finish and settle the tab early', 'turned the game off before the end and told nobody',
   'avoided the score all morning and got told anyway, twice'];
 
 function night(n, entry, weeks) {
@@ -92,6 +92,15 @@ assert('4 the row\'s own team decides — the Oaks\' hot week does not make an A
 // engine.299's admission gate writes only a line that moves a dial: before engine.331 every one of these was dropped
 assert('5 the written night moves fandom: up on a win night, down on a skid night', hot.up === hot.streak && under.up === under.win &&
   cold.down === cold.skid && hot.down === 0 && cold.up === 0, JSON.stringify({ hot, under, cold }));
+
+// codex diff review F2: the A's and the Oaks draw the same night pools — no baseball-only word in any of the three
+const BASEBALL = /\b(innings?|at-bats?|pitch(es)?|ninth|eighth|ballpark|final out|last out|on the count)\b/i;
+const block = (text, from, to) => { const i = text.indexOf(from); return text.slice(i, text.indexOf(to, i)); };
+const shared = [block(src, 'var gnTexts = {', '}[gnBucket]'),
+  block(read('phase05-citizens/runHouseholdEngine.js'), 'var GAME_NIGHT_HOUSEHOLD_ = {', '};'),
+  block(read('phase05-citizens/applyGameNightMoments.js'), 'var GAME_NIGHT_POOLS = {', '};')];
+assert('6 the shared night pools are sport-neutral (players, fans, households)', shared.every((b) => b.length > 200 && !BASEBALL.test(b)),
+  shared.map((b) => (b.match(BASEBALL) || [''])[0]).join(','));
 
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

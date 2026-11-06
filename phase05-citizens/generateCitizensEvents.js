@@ -2203,10 +2203,11 @@ function generateCitizensEvents_(ctx) {
     var gnI = Math.min(1, Math.abs(Number(S.sportsSentimentBoost || 0) -
       Number((S.sportsAftermath && S.sportsAftermath.total) || 0)) / 0.10);
     var gnW = Math.min(4, 1.1 * (1 + 3 * gnI));
+    // both clubs draw these: sport-neutral words (engine.331, codex diff review F2)
     var gnTexts = {
       win: [
-        "watched the ninth from a packed bar and walked home in a crowd that didn't want to disperse",
-        "heard the block erupt through an open window when the final out landed",
+        "watched the finish from a packed bar and walked home in a crowd that didn't want to disperse",
+        "heard the block erupt through an open window when the final play landed",
         "caught the recap at the counter this morning and stayed for the second retelling"
       ],
       winStreak: [
@@ -2215,12 +2216,12 @@ function generateCitizensEvents_(ctx) {
         "watched the kids on the corner re-enact the play twice, arguing the call both times"
       ],
       loss: [
-        "watched the bar go quiet by the eighth and settle the tab early",
+        "watched the bar go quiet before the finish and settle the tab early",
         "turned the game off before the end and told nobody",
         "avoided the score all morning and got told anyway, twice"
       ],
       neutral: [
-        "kept the game on low while cooking, half an ear on the count",
+        "kept the game on low while cooking, half an ear on the score",
         "checked the score once at a red light and put the phone away"
       ],
       // engine.331 (builder 2026-11-06): a cold week has its own night

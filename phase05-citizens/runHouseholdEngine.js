@@ -414,9 +414,10 @@ function runHouseholdEngine_(ctx) {
     var gnTeam = (typeof normalizeOaklandFeedTeam_ === 'function') ? normalizeOaklandFeedTeam_(gameEntry.teamsUsed) : '';
     var gnWeek = (gnTeam && S.sportsWeek) ? S.sportsWeek[gnTeam] : null;
     var gnBucket = gameNightBucket_(gameEntry, gnWeek ? (gnWeek.hotCold || '') : '');
+    // both clubs draw these: sport-neutral words (engine.331, codex diff review F2)
     var GAME_NIGHT_HOUSEHOLD_ = {
       winStreak: ["left the game on through dinner, the streak still running", "let the kids stay up to watch the streak go on", "argued happily about the lineup at the kitchen table"],
-      win: ["moved dinner to the couch for the broadcast", "cheered the last out from the living room", "kept the radio on the porch through the late innings"],
+      win: ["moved dinner to the couch for the broadcast", "cheered the final play from the living room", "kept the radio on the porch through the late stretch"],
       loss: ["turned the broadcast off early after the loss", "went quiet as a house after the final score", "skipped the postgame and went to bed early"],
       neutral: ["had the game on in the background through dinner"],
       // engine.331 (builder 2026-11-06): a cold week has its own night

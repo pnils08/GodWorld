@@ -57,19 +57,19 @@ function run(entries, weeks, statusOf, withLog = true) {
     [id, f, l, '', (statusOf && statusOf[id]) || 'Active', 'Jack London', '', clock, emp, role, dial]);
   const appended = [];
   const logSheet = { getLastRow: () => 1, getRange: () => ({ setValues: (v) => { appended.push(...v); } }) };
-  let seed = 7;
+  let seed = 7, draws = 0;
   const ctx = {
     summary: { sportsFeedEntries: entries, sportsWeek: weeks || {}, cycleId: 110 },
     ledger: { headers, rows, dirty: false },
     ss: { getSheetByName: (n) => (n === 'LifeHistory_Log' && withLog ? logSheet : null) },
     config: { cycleCount: 110 },
     now: 'NOW',
-    rng: () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+    rng: () => { draws++; seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
   };
   sandbox.applyGameNightMoments_(ctx);
   const tags = {};
   appended.forEach((x) => { (tags[x[1]] = tags[x[1]] || []).push(String(x[3]).split('|')[0]); });
-  return { rows, appended, tags, dirty: ctx.ledger.dirty };
+  return { rows, appended, tags, dirty: ctx.ledger.dirty, draws };
 }
 const week = (cls) => ({ g: 2, w: 2, l: 0, cls });
 const pools = [].concat(...Object.values(vm.runInContext('GAME_NIGHT_POOLS', sandbox)));
@@ -156,5 +156,18 @@ assert.ok(clauses['locked-in'].includes(aj[1]), '"Locked In" typed reads as lock
 const horn5 = lineOf('POP-00022', 'Sports-Played');
 assert.ok(poolsByBucket.coldStreak.includes(horn5), 'cold week L5: the skid night, and an off-list mood adds nothing: ' + horn5);
 assert.ok(lineOf('POP-00019', 'Reputation').indexOf(' — ') < 0, 'a mood colors only the game-night line');
+
+// 6. engine.331 (codex diff review F1): the mood is text only — the same draws, the same staff / fan week lines
+const night6 = (mood) => run([{ eventType: 'game-result', teamsUsed: 'Oaks', namesUsed: 'AJ Dybantsa (SF), Wendell Carter Jr (C)', streak: 'W2', playerMood: mood }],
+  { Oaks: Object.assign(week('WIN'), { hotCold: '' }) });
+const blank6 = night6(''), moody6 = night6('locked-in');
+assert.strictEqual(moody6.draws, blank6.draws, 'a mood clause spends no draw of its own');
+const named6 = (r) => r.appended.filter((x) => String(x[3]).indexOf('feedNamed') >= 0);
+const week6 = (r) => r.appended.filter((x) => String(x[3]).indexOf('feedNamed') < 0).map((x) => x.join('|'));
+assert.deepStrictEqual(week6(moody6), week6(blank6), 'staff and fan week lines byte-identical');
+named6(moody6).forEach((x, i) => {
+  const base = named6(blank6)[i][4];
+  assert.ok(x[4].indexOf(base + ' — ') === 0 && clauses['locked-in'].includes(x[4].slice(base.length + 3)), x[4]);
+});
 
 console.log('gameNightMoments.test.js: all assertions passed');

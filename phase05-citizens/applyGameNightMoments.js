@@ -34,30 +34,31 @@
  * ctx.ledger (Phase 42 §5.6), committed at Phase 10.
  */
 
+// Both clubs draw these (engine.331, codex diff review F2): sport-neutral words — play, finish, the game.
 var GAME_NIGHT_POOLS = {
   win: [
     "drove home with the radio off, letting the win settle",
     "stayed late signing for the kids by the player lot after the win",
-    "got home still wired from the final out and couldn't sit down",
-    "replayed one at-bat the whole drive home and finally smiled at a red light",
+    "got home still wired from the final play and couldn't sit down",
+    "replayed one play the whole drive home and finally smiled at a red light",
     "came home to find the neighbors had left a case of something cold on the porch"
   ],
   winStreak: [
     "tried to keep the streak out of the conversation at dinner and failed",
     "found the block's kids waiting at the corner to walk the last stretch home with them",
-    "put the phone face-down on the counter — everyone in the world was texting about the run",
+    "put the phone face-down on the counter; everyone in the world was texting about the run",
     "admitted to the mirror that this stretch feels different from the other years"
   ],
   loss: [
     "took the long way home and didn't turn the radio on",
     "sat in the driveway a while before going in",
     "told the family it was fine over dinner, and everyone let the lie stand",
-    "stayed up rewatching two pitches that will not matter to anyone else"
+    "stayed up rewatching two plays that will not matter to anyone else"
   ],
   neutral: [
     "came home sore and grateful for a quiet house",
     "iced the usual aches and called it a night early",
-    "ate standing up at the counter, still half at the ballpark"
+    "ate standing up at the counter, still half at the game"
   ],
   // engine.331 (builder 2026-11-06: "No reasons to not cold streak set as well")
   coldStreak: [
@@ -69,7 +70,7 @@ var GAME_NIGHT_POOLS = {
 };
 
 // engine.331 (builder 2026-11-06: "handle the dropdowm moods add to the night line"): the row's
-// PlayerMood closes each named player's game-night line — one pool per dropdown word
+// PlayerMood closes each named player's game-night line (no rng draw of its own) — one pool per dropdown word
 // (PLAYER_MOOD_VALUES, utilities/setupSportsFeedValidation.js; scripts/gameNightMoments.test.js pins
 // the keys). A blank or off-list mood adds nothing. Color, never fact.
 var GAME_NIGHT_MOOD_CLAUSES_ = {
@@ -271,9 +272,14 @@ function applyGameNightMoments_(ctx) {
       if (route.pool) {
         text = pick(SPORTS_NAMED_POOLS[route.pool]);
       } else {
-        text = pick(GAME_NIGHT_POOLS[gameNightBucket_(entry, weeks[team] ? weeks[team].hotCold : '')]);
+        // engine.331 (codex diff review F1): ONE draw picks the line and, from its fractional remainder
+        // (uniform, independent of the line index), the mood clause — the shared stream every later Phase 5
+        // roll reads is the same whether the mood cell is blank or not, so the mood is text only.
+        var nightPool = GAME_NIGHT_POOLS[gameNightBucket_(entry, weeks[team] ? weeks[team].hotCold : '')];
+        var nightPos = rng() * nightPool.length;
+        text = nightPool[Math.floor(nightPos)];
         var moodPool = gameNightMoodLookup_(GAME_NIGHT_MOOD_CLAUSES_, entry.playerMood);
-        if (moodPool) text += ' — ' + pick(moodPool);
+        if (moodPool) text += ' — ' + moodPool[Math.floor((nightPos - Math.floor(nightPos)) * moodPool.length)];
       }
       write(ri, route.tag, text, route.tag + '|source:sports|feedNamed|event:' + (entry.eventType || '-') + '|team:' + (team || '-'));
       counts.named++;

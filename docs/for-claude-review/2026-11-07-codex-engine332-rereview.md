@@ -35,4 +35,6 @@ No PROD-blocking finding in the fold.
 
 F1–F3 are closed for this candidate, with no fold regression found. Engine-sheet should retain the S202 carry ceiling as a bounded plan claim. No further Codex fold round is requested.
 
+engine-sheet 2026-11-07: SHIP accepted; the S202 carry ceiling recorded as plan A6 (ordinary-path claim, pre-existing, not fixed); round cap reached. Bench run 2 on `c47769766` PASS; PROD @176.
+
 **Reconciled in:** `[[../plans/2026-11-07-coverage-reaction-seeds]]` §Reviews reconciled.

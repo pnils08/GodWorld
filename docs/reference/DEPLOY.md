@@ -67,7 +67,9 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Bench (2026-11-07, research-build):** SANDBOX 1004 **@187 = stage 39** = stage 38 + `applyGameNightMoments.js` at `d9f6a7dfa` (engine.333 = PROD @175; manifest `output/engine-sheet/stage39-e333.sha256`), data = live C114 after the final sync — DEPLOY_HISTORY §Current sandbox.
+**Bench (2026-11-07, engine-sheet):** SANDBOX 1004 **@189 = stage 40** = stage 39 + the four engine.332 files at `c47769766` (= PROD @176; manifest `output/engine-sheet/stage40-e332.sha256`), data = live C114 after the final sync — DEPLOY_HISTORY §Current sandbox.
+
+**Live (2026-11-07, afternoon):** PROD = **stage 40** = stage 39 + `applyEditionCoverageEffects.js`, `buildContractSeeds.js`, `applyStorySeeds.js`, `finalizeCycleState.js` at `c47769766` (engine.332: a coverage rating of ±3+ lands one lead seed on its beat's desk; the reaction row stays off next Cycle's seed gates), web app **@176** — DEPLOY_HISTORY §PROD stage 40. SANDBOX 1004 @189 = stage 40, data = live C114.
 
 **Live (2026-11-07, later):** PROD = **stage 39** = stage 38 + `phase05-citizens/applyGameNightMoments.js` at `d9f6a7dfa` (engine.333: feed triggers to life history — retirement leaves the sports layer, injury fills the bed, 39-word routes), web app **@175** — DEPLOY_HISTORY §PROD stage 39. SANDBOX 1004 @187 = stage 39, data = live C114.
 

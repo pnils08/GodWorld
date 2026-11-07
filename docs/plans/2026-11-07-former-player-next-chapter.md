@@ -77,6 +77,15 @@ So "present the cron with choices" has one working shape in this codebase: a clo
 
 `citizen-wake.js` builds the system prompt from the ledger row, dials, life tail and co-residents (`:207`), adds the authored voice agent's `## Your Voice` section only (`loadVoiceTexture`, `wakePerception.js:397-402`), and generates on `deepseek/deepseek-v4-flash-0731`, 260 tokens (`:225`). Vinnie's full character files (`.claude/agents/citizen-voice-vinnie-keane/` — the academy he founded, the firehouse on Mandela Parkway, "the kid who was found") reach interviews, Discord and the desk crons through `lib/personaProvider.js`, **not the wake**. "In his own words" at the wake today is a small model with his cadence and his row, not his canon.
 
+## Builder's words 2026-11-07 (on the first pass of C1–C4 — the calls below are being rebuilt on these)
+
+1. "Should sports-override have a player vs staff distinction?"
+2. "Correct that this isn't build fully and post sports career jobs I've been hand-minting. The jobs they would take would be a small pool of the jobs pools we offer, reduced to like, sports analyst, college coach, etc type things and tier would matter, but also considering heritage lines own businesses as is. So there is a system that can work here but some real design is needed"
+3. "The build for crons should start to present some wakes with choices the engine puts in front of them. So if I wanted to run a row in Oakland sports feed and maybe we add a trigger 'question' and it asks Vinnie is he wants to be a coach or not. I can pose the question but he would make the decision"
+4. "MUBA is a basketball league I ran in my head as a kid, these are the legendary players from that. I haven't written their backgrounds or added their prose yet but these are players from an old basketball league that now reside in Oakland. It's a neat way for me to bring them to life finally, but there use case is the test in a lot of ways, these MUBA players and retired A's players living their lives out in Oakland and how a former athlete lives. Tier matters and fame as to what type of jobs could be presented to them, and there isn't a priority to work at all, it would be their life declining that may force them to want to work"
+
+Code read against these (2026-11-07): the job catalog (`data/economic_parameters.json`) carries **no** sports analyst, coach, scout or broadcaster role — Mason Miller's `Sports Analyst` is off-catalog (his key is `Journalist / Reporter`); the post-sports pool needs catalog entries before any router can price or key it. The wealth engine skips Tier 1–2 on both paths (`generationalWealthEngine.js:790, 1023`), so a former star's NetWorth never moves — "life declining" has no engine source today for the rows this is about. The three MUBA rows are Status `Retired` — the senior state (off UNDOCKED, off the names floor, Universe branch 3 texture) — not the Active / `Former …` shape engine.333 gives a retiring A's player.
+
 ## Calls that are the builder's
 
 Each call shows what the code does today beside it. Ruled items are not re-asked: UNI stays yes (builder 2026-10-08), Status stays Active and the key blank at the flip (engine.333 C4).
@@ -127,4 +136,5 @@ Each call shows what the code does today beside it. Ruled items are not re-asked
 
 ## Changelog
 
+- 2026-11-07 (research-build) — builder answered the first pass: a feed trigger `question` poses, the citizen decides; a small tier-gated post-sports job pool from the catalog (none exist yet); heritage lines own businesses; no priority to work, decline forces it; MUBA rows are the test case. C1–C4 rebuilt and re-asked.
 - 2026-11-07 (research-build) — Created from the engine.333 plan's §Builder's ruling (engine.338); read-before done; engine.337 folded (key inert on a Retired row, convention recorded); C1–C4 drafted for the builder.

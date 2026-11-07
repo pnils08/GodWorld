@@ -503,6 +503,16 @@ console.log('\nTest 11c: rippleEntry + RIPPLE_LANE_MAP');
   assertEqual('coverage-reaction unknown beat → civic', cr('TECHNOLOGY'), 'civic');
   assertEqual('other cause types keep RIPPLE_LANE_MAP', helper.rippleLane({ CauseType: 'edition-coverage' }), 'business');
   assertEqual('unmapped cause type → business', helper.rippleLane({ CauseType: 'toString' }), 'business');
+  // codex review: the rows through emitDeskSignal itself, not only the helper
+  const sig = helper.emitDeskSignal(115, { rippleAll: [
+    { Cycle: 115, CauseType: 'coverage-reaction', CauseId: 'HEALTH:C114:R2', EffectType: 'HEALTH coverage reaction', CauseDetail: 'h', Magnitude: -4 },
+    { Cycle: 115, CauseType: 'coverage-reaction', CauseId: 'ENVIRONMENT:C114:R3', EffectType: 'ENVIRONMENT coverage reaction', CauseDetail: 'e', Magnitude: 5 },
+    { Cycle: 114, CauseType: 'coverage-reaction', CauseId: 'SPORTS:C113:R9', EffectType: 'SPORTS coverage reaction', CauseDetail: 's', Magnitude: 3 }
+  ] });
+  const crIn = lane => sig.lanes[lane].filter(e => e.causeType === 'coverage-reaction').map(e => e.label);
+  assertEqual('emitDeskSignal: HEALTH reaction in civic', crIn('civic'), ['HEALTH coverage reaction | h']);
+  assertEqual('emitDeskSignal: ENVIRONMENT reaction in culture', crIn('culture'), ['ENVIRONMENT coverage reaction | e']);
+  assertEqual('emitDeskSignal: another Cycle\'s row stays out', crIn('sports').length + crIn('business').length, 0);
 }
 
 // ────────────────────────────────────────────────────────────────────────────

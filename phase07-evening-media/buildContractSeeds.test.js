@@ -410,6 +410,12 @@ var LH_HEADER = ['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighbo
   assert('11h the merged edition-coverage row still forms', agg.length === 1 && agg[0].what.indexOf('2 related effects') >= 0);
   assert('11i a paper reader leads the citizens', health.citizens.indexOf('POP-00300 Odile Park') === 0);
   assert('11j distinct SeedIDs', envs[0].seedId !== envs[1].seedId);
+  assert('11k the seed carries its causeType for the Phase-9 carry', health.causeType === 'coverage-reaction' && agg[0].causeType === 'edition-coverage');
+  // codex review F3: +3 and −3 for one beat and Cycle (two sheet rows) stay two leads, not one texture row at 0
+  var ctx2 = { ss: fakeSS([LH_HEADER]), summary: { cycleId: 115, rippleEvents: [cr('HEALTH', '114:R2', 3, 'a'), cr('HEALTH', '114:R3', -3, 'b')] } };
+  b.buildContractSeeds_(ctx2);
+  var hs = ctx2.summary.contractSeeds;
+  assert('11l two rows for one beat and Cycle → two major rows', hs.length === 2 && hs.every(function (s) { return s.seedClass === 'major'; }) && hs[0].magnitude === 3 && hs[1].magnitude === -3);
 })();
 
 // §12 engine.332 the beat table agrees with the newsroom's beat → lane table

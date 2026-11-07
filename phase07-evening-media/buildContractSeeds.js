@@ -594,6 +594,7 @@ function buildContractSeeds_(ctx) {
     seeds.push({
       seedId: contractSeedHash_(cycle + '|' + order[k] + '|' + lead.causeId),
       cycle: cycle,
+      causeType: lead.causeType, // engine.332: not a deck column; compactContractSeeds_ reads it
       desk: CONTRACT_SEED_DESK[seedDomain] || 'civic',
       domain: seedDomain,
       neighborhood: lead.neighborhood || 'Citywide',

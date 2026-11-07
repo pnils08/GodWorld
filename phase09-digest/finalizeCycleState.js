@@ -730,7 +730,13 @@ function compactStorySeeds_(S) {
  * `Citywide` / `CITYWIDE` / a council district stay as written and fall to the citywide term in Phase 2.
  */
 function compactContractSeeds_(S) {
-  return compactSeedList_(S, (S && Array.isArray(S.contractSeeds)) ? S.contractSeeds : [], function(sd) {
+  // engine.332 (codex review F1): a coverage-reaction row stays off this carry. Its cause already rides the engine
+  // list's S202 seed (applyStorySeeds_ → compactStorySeeds_), so carrying the deck row too would count one rating
+  // twice in next Cycle's seed gates — and a seed's weight is unsigned, so a grim rating would add lift.
+  var deck = ((S && Array.isArray(S.contractSeeds)) ? S.contractSeeds : []).filter(function(sd) {
+    return !(sd && sd.causeType === 'coverage-reaction');
+  });
+  return compactSeedList_(S, deck, function(sd) {
     var cls = String(sd.seedClass || 'texture').toLowerCase();
     var dom = String(sd.domain || 'GENERAL').toUpperCase();
     if (dom === 'ECONOMIC') dom = 'BUSINESS';

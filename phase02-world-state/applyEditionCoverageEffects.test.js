@@ -63,17 +63,35 @@ function run(rows, cycle) {
   assert('1b ±2, processed and out-of-window rows record none', !one('CIVIC') && !one('CULTURE') && !one('ECONOMIC'));
   assert('1c the triggers list is unchanged in kind', out.S.editionCoverageTriggers.length === 3);
   var h = one('HEALTH');
-  assert('1d causeId = beat + rating Cycle', h.causeId === 'HEALTH:C114' && one('SPORTS').causeId === 'SPORTS:C115');
+  assert('1d causeId = beat + rating Cycle + sheet row', h.causeId === 'HEALTH:C114:R2' && one('SPORTS').causeId === 'SPORTS:C115:R4');
   assert('1e magnitude = the rating, citywide, one Cycle', h.magnitude === -4 && h.targetScope === 'citywide' && h.duration === 1);
   assert('1f effectType names the beat', h.effectType === 'HEALTH coverage reaction');
-  assert('1g Why: last week, tone, rating, article, reporter, mood down',
-    h.causeDetail === 'Citywide reaction: last week\'s Tribune HEALTH coverage ran negative (rating -4, 1 article, Dr. Lila Mezran) and pulled the city\'s mood down.');
-  assert('1h plural articles, mood up', one('ENVIRONMENT').causeDetail.indexOf('(rating +5, 2 articles, Noah Tan) and pulled the city\'s mood up.') >= 0);
+  assert('1g Why: last week, rating, tone, article, reporter — no mood claim',
+    h.causeDetail === 'Citywide reaction: last week\'s Tribune HEALTH coverage rated -4 (negative, 1 article, Dr. Lila Mezran).');
+  assert('1h plural articles', one('ENVIRONMENT').causeDetail === 'Citywide reaction: last week\'s Tribune ENVIRONMENT coverage rated +5 (positive, 2 articles, Noah Tan).');
   assert('1i this Cycle\'s rating says this week; a blank reporter drops out',
-    one('SPORTS').causeDetail === 'Citywide reaction: this week\'s Tribune SPORTS coverage ran mixed (rating +3, 1 article) and pulled the city\'s mood up.');
+    one('SPORTS').causeDetail === 'Citywide reaction: this week\'s Tribune SPORTS coverage rated +3 (mixed, 1 article).');
   var ledgerRows = out.appended.filter(function (a) { return a.tab === 'Ripple_Ledger' && a.row[1] === 'coverage-reaction'; });
   assert('1j one Ripple_Ledger append per reaction', ledgerRows.length === 3);
   assert('1k processed marks queued for the four rows read', out.cells.length === 4);
+})();
+
+// §1b codex review F2/F3: two rows for one beat and Cycle stay two ripples; the rater's tone is reported, not reconciled
+(function () {
+  var out = run([
+    ['114', 'HEALTH', '3', '1', 'Dr. Lila Mezran', 'positive', ''],
+    ['114', 'HEALTH', '-3', '1', 'Dr. Lila Mezran', 'negative', ''],
+    ['114', 'CIVIC', '3', '1', 'Jax Caldera', 'negative', ''],
+    ['114', 'SPORTS', '5', '', '', '', '']
+  ], 115);
+  var r = out.reactions;
+  var health = r.filter(function (x) { return x.causeId.indexOf('HEALTH:C114:') === 0; });
+  assert('1b.a same beat, same Cycle → two ripples with distinct causeIds', health.length === 2 && health[0].causeId !== health[1].causeId && health[0].magnitude === 3 && health[1].magnitude === -3);
+  var civ = r.filter(function (x) { return x.causeId.indexOf('CIVIC:') === 0; })[0];
+  assert('1b.b a +3 the rater labelled negative reads as written, no direction claimed',
+    civ.causeDetail === 'Citywide reaction: last week\'s Tribune CIVIC coverage rated +3 (negative, 1 article, Jax Caldera).' && !/mood|up\b|down\b/.test(civ.causeDetail));
+  var sp = r.filter(function (x) { return x.causeId.indexOf('SPORTS:') === 0; })[0];
+  assert('1b.c blank tone, count and reporter leave the bare rating', sp.causeDetail === 'Citywide reaction: last week\'s Tribune SPORTS coverage rated +5.');
 })();
 
 // §2 no strong rating → no reaction ripple; no sheet → no throw

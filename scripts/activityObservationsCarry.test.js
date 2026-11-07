@@ -296,6 +296,11 @@ console.log('engine.228 — activity observations carry');
     c.cycle === 108 && c.count === 4 && c.seeds.length === 3 && c.seeds[0].p === 3 && c.seeds[0].t === 'contract-major' && c.seeds[0].n === 'Fruitvale' && c.seeds[0].d === 'SAFETY' && c.seeds[0].m === 5 &&
     c.seeds.find(x => x.n === 'Dimond').p === 2 && c.seeds.find(x => x.n === 'Dimond').t === 'contract-texture' && c.seeds.find(x => x.n === 'Dimond').d === 'BUSINESS' && c.seeds.find(x => x.n === 'Citywide').n === 'Citywide', JSON.stringify(c));
   check('288 compact: an empty deck → an empty, stamped blob (the F4 rule holds for the second key)', JSON.stringify(w.sb.compactContractSeeds_({ cycleId: 108, contractSeeds: [] })) === JSON.stringify({ cycle: 108, count: 0, calendarContext: null, seeds: [] }));
+  // engine.332 (codex F1): a coverage-reaction deck row stays off the carry — the engine list's S202 seed already counts the rating
+  const cr = Object.assign(deck('Citywide', 'major', 'COMMUNITY', -4), { causeType: 'coverage-reaction', what: 'HEALTH coverage reaction -4' });
+  const c332 = w.sb.compactContractSeeds_({ cycleId: 108, contractSeeds: [deck('Fruitvale', 'major', 'SAFETY'), cr] });
+  check('332 compact: a coverage-reaction row is not carried; the rest of the deck is', c332.seeds.length === 1 && c332.seeds[0].n === 'Fruitvale' && c332.count === 1, JSON.stringify(c332));
+  check('332 compact: a deck of only coverage reactions carries an empty, stamped blob', JSON.stringify(w.sb.compactContractSeeds_({ cycleId: 108, contractSeeds: [cr] })) === JSON.stringify({ cycle: 108, count: 0, calendarContext: null, seeds: [] }));
 
   // Cycle 108: engine list only (the Task 18 world) → recorded as seedMix 1 at Cycle 109
   const mk = (hood, p, dom) => ({ text: 'seed text', neighborhood: hood, priority: p, domain: dom || 'GENERAL', seedType: 'signal', calendarContext: { holiday: 'none', isFirstFriday: false, isCreationDay: false, sportsSeason: 'off-season' } });

@@ -1303,10 +1303,13 @@ function applyStorySeeds_(ctx) {
   // with |rating| >= 3 in the prior edition. Each trigger gets converted to a
   // story seed here. Pre-S202 these triggers were emitted to S but never read.
   // ⚠ DECK-DEAD since saveV3Seeds v4.0 (S296), like the Wire 3b block below:
-  // these seeds feed only the UI renderer + Riley_Digest StorySeedCount. The
+  // these seeds feed the UI renderer, Riley_Digest StorySeedCount and next
+  // Cycle's seed gates (finalizeCycleState compactStorySeeds_ → applyCityDynamics_)
+  // — the one place a coverage rating counts there; compactContractSeeds_ keeps
+  // the deck's coverage-reaction row off that carry (engine.332, codex F1). The
   // deck and desk-signal path is the coverage-reaction ripple
-  // applyEditionCoverageEffects_ records (engine.332). Do not extend this block
-  // expecting deck coverage.
+  // applyEditionCoverageEffects_ records. Do not extend this block expecting
+  // deck coverage, and do not drop it without moving that carry.
   var coverageTriggers = (S.editionCoverageTriggers && S.editionCoverageTriggers.length) ? S.editionCoverageTriggers : [];
   for (var cti = 0; cti < coverageTriggers.length; cti++) {
     var tg = coverageTriggers[cti];

@@ -281,13 +281,14 @@ function applyEditionCoverageEffects_(ctx) {
       // engine.332: the trigger above feeds only applyStorySeeds_'s Phase-7 list,
       // which has not reached Story_Seed_Deck since saveV3Seeds v4.0 (S296). The
       // deck and the desk signal read ripples, so the reaction is recorded here,
-      // where it is computed — one per beat (causeId), magnitude = the rating so
-      // every ±3 is a lead (builder 2026-11-07). Plan:
+      // where it is computed — one per rating row (causeId carries the sheet row,
+      // so two rows for one beat never merge and cancel, codex review F3),
+      // magnitude = the rating so every ±3 is a lead (builder 2026-11-07). Plan:
       // docs/plans/2026-11-07-coverage-reaction-seeds.md
       if (typeof recordRipple_ === 'function') {
         recordRipple_(ctx, {
           causeType: 'coverage-reaction',
-          causeId: e.domain + ':C' + e.cycle,
+          causeId: e.domain + ':C' + e.cycle + ':R' + processedRows[ei],
           causeDetail: coverageReactionDetail_(e, currentCycle),
           effectType: e.domain + ' coverage reaction',
           targetScope: 'citywide',
@@ -427,16 +428,18 @@ function findCoverageCol_(headers, possibleNames) {
 
 /**
  * engine.332: the Why line of a coverage-reaction ripple (seed contract v2 —
- * what happened, never an angle). The rating is the coverage's own tone
- * (rateEditionCoverage.js), and every domain's sentimentWeight is positive, so
- * the rating's sign is the direction this beat pulled the city's mood.
+ * what happened, never an angle): the rating row as the rater wrote it. No
+ * claim about the city's mood: one beat's share can vanish under the ±0.20 /
+ * ±0.25 clamps, and the rater can leave a +3 labelled negative (codex review
+ * F2); the merged edition-coverage row carries what was applied.
  */
 function coverageReactionDetail_(e, currentCycle) {
-  var bits = ['rating ' + (e.rating > 0 ? '+' : '') + e.rating];
+  var bits = [];
+  if (e.tone) bits.push(e.tone);
   var n = Number(e.articleCount);
   if (n > 0) bits.push(n + ' article' + (n === 1 ? '' : 's'));
   if (e.reporter) bits.push(e.reporter);
   return 'Citywide reaction: ' + (e.cycle < currentCycle ? 'last' : 'this') + ' week\'s Tribune ' +
-    e.domain + ' coverage' + (e.tone ? ' ran ' + e.tone : '') + ' (' + bits.join(', ') + ')' +
-    (e.tone ? ' and' : '') + ' pulled the city\'s mood ' + (e.rating > 0 ? 'up' : 'down') + '.';
+    e.domain + ' coverage rated ' + (e.rating > 0 ? '+' : '') + e.rating +
+    (bits.length ? ' (' + bits.join(', ') + ')' : '') + '.';
 }

@@ -8,7 +8,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.337 | Three ex-MUBA rows sit half on the sports layer (ENGINE clock, SPORTS_OVERRIDE key, Retired): what key an off-clock retired athlete carries — his call | needs-info | research-build | `output/production_log_run_cycle_c114_gaps.md` G-RB8 |
 | civic.47 | Civic autonomy, the one plan (builder 11-01). A1 landed; F7 transit reader live (@173); M1 Mara live 11-03; the rest of the plan is open; A2 waits on his go | needs-info | research-build | [[../plans/2026-10-31-civic-autonomy]] |
 | civic.43 | School board: T1 + T3 LIVE. T2 seating HELD (builder 2026-10-07): schools half built (hood school data, no schools in hoods); deep review first, then the canon-name fix | needs-info | research-build | [[../plans/2026-10-04-school-board]] §Builder's words (2026-10-07) |
 | pipeline.71 | Each hood read against its own canon: every hood's INSTITUTIONS character is its own baseline and its own numbers say whether it lives up to it (builder 2026-10-20; the one-axis tech-boom design is superseded). Rewrite with the builder: which numbers express each hood's character | needs-info | research-build | [[../plans/2026-10-20-hood-character-standing]] |
@@ -23,6 +22,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.333 | Feed triggers to life history: retirement leaves the sports layer, Now: bio line, owed wake, injury bed. PROD @175. Task 5 = the C115 live read, Sun 2026-11-08 | live-observing | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] |
 | research.32 | Organic: the builder's next talk with Mags and Vinnie reads the log. Four record lookups, Sonnet 5.5 on the direct key (builder 11-05); restarted 11-05 01:33 | live-observing | research-build | [[../plans/2026-11-05-discord-voices-lookups]] |
 | engine.286 | Life-event dice LIVE (`63754ca8`); forced sale, own-record wake, scoreboard live; C112 read 2026-10-25 in the plan. Builder call asked 2026-10-28: name the game (N31/N32) before wake-as-turn builds | live-observing | research-build | [[../plans/2026-10-08-engine-286-game-of-life-events]] |
 | pipeline.84 | Organic: next unattended Jax assignment naming a covered citizen carries the earlier-coverage section. Built and live 2026-10-20 (index, landing, canon fix); detail in the plan | live-observing | research-build | [[../plans/2026-10-19-bay-tribune-master-index]] |
@@ -72,14 +72,14 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.101 | Daily news: evening write wake date fixed (builder 11-04), NotebookLM page written. Next: confirm the 11-04 18:15 wake writes and gates | in-progress | research-build | [[../reference/NotebookLM]] §Change log |
 | governance.56 | One boot (builder 11-02): CLAUDE.md imports one `.claude/TERMINAL.md`; boot-load.js retired. Next: review | in-progress | engine-sheet | [[../plans/2026-08-29-boot-doc-consolidation]] §Changelog |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
-| engine.333 | Feed triggers to life history (builder 11-05/07): `retirement` leaves the sports layer, `Now:` bio line, owed wake; `injury` fills the bed. PROD @175; C115 read | in-progress | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] |
+| engine.338 | A former player's next chapter (builder 11-07): the intake door writes no employer, clock or key on an existing row; his word at the owed wake. Folds 337; C1–C4 | in-progress | research-build | [[../plans/2026-11-07-former-player-next-chapter]] |
 | engine.331 | Sports triggers: no blank-cell re-fire, hot/cold at 5, off-season and good/bad words. PROD @174; waits on the builder's menu re-run + C115 read | in-progress | engine-sheet | [[../plans/2026-11-05-sports-feed-triggers]] |
 
 ## 4. Queue — ruled, not started (ready)
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.338 | A former player's next chapter (builder 11-07): ENGINE/Active/UNI row has no engine path to a post-career job; how the cron gets career choices. Folds 337 | ready | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] §Builder's ruling (engine.338) |
+| engine.337 | Ex-MUBA rows' key: inert on a Retired row (every key reader skips Retired first); convention: blank off the clock, the role's key when one lands. Folds into 338 | done-pending-archive | research-build | [[../plans/2026-11-07-former-player-next-chapter]] §engine.337 folded |
 | engine.336 | `Now:` bio lines for ledger-changing moments (builder 11-07: wedding, birth, job change, promotion); they stack atop the minted prose, newest first | ready | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] §Builder's ruling (scope) |
 | engine.332 | Media-feedback seeds (builder 11-05): Citywide-reaction seeds for coverage at \|rating\| ≥ 3 never reach Story_Seed_Deck, live or sandbox. Fix the path | ready | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` G-ES2 |
 | engine.334 | Story seeds sum unlike numbers (C114 sports "sentiment +36.06" = mood + head-count). After engine.331 and engine.332; stub, review deeper when picked up | ready | engine-sheet | [[../plans/2026-11-05-story-seed-mixed-magnitudes]] |

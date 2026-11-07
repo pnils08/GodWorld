@@ -199,6 +199,7 @@ Injury from the sports intake (the builder's input): the dashboard roster `injur
 
 ## Changelog
 
+- 2026-11-07 (338 opened) — engine.338 has its own plan ([[2026-11-07-former-player-next-chapter]]); engine.337 folded there (key inert on a Retired row). This row to live-observing: Task 5 (C115 read) is all that is left.
 - 2026-11-07 (next row) — builder opened the former player's next chapter (UNI / ENGINE row, the key, career choices for the cron); code read: no engine path reaches an Active+ENGINE Tier-1 row; filed engine.338 `ready`, taken in a new session after the C115 read.
 - 2026-11-07 (rulings) — builder ruled engine.336's scope (a `Now:` line = a ledger cell changed: wedding, birth, job change, promotion; lines stack atop the minted prose) → row `ready`; C8 ruled: the dropdown word is the "current" switch, the follow-on withdrawn.
 - 2026-11-07 (close) — C8 found: the injury milestone needs the trigger word and the dashboard leaves the cell blank by default; builder's call (pick the word, or a follow-on routes EventType `injury` alone). STUB_MAP fix-up for the fold.

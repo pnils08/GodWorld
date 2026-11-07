@@ -528,6 +528,10 @@ function validateRosterAction(actionName, changes, cycle, errors) {
   }
 }
 
+// pipeline.102 (codex F2): a roster stat cell reading '-' holds no value (live Oaks_Roster: no attempts).
+// It stays as it is, or a valid value replaces it; a value is never turned back into '-'.
+const UNAVAILABLE_STAT = '-';
+
 function validateStatChanges(participant, changes, errors) {
   const fields = participant && STAT_FIELD_MAPS[participant.rosterSource];
   if (!fields) return;
@@ -542,7 +546,8 @@ function validateStatChanges(participant, changes, errors) {
       if (change.before) errors.push(`${change.field}.after must not erase a nonblank current value`);
       return;
     }
-    if (change.before) {
+    if (change.before === UNAVAILABLE_STAT && change.after === UNAVAILABLE_STAT) return;
+    if (change.before && change.before !== UNAVAILABLE_STAT) {
       const beforeError = statValueError(change.field, change.before, spec.validator);
       if (beforeError) errors.push(`${beforeError} in before`);
     }

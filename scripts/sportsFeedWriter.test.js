@@ -152,11 +152,13 @@ function writerHarness(options = {}) {
       })[header] || ''),
     }],
   };
+  // pipeline.102: opt-in roster tab (default the A's, as every existing case)
+  const rosterSheet = options.rosterSheet || 'As_Roster';
   const rosterSnapshot = {
-    headers: AS_HEADERS.slice(),
+    headers: (options.rosterHeaders || AS_HEADERS).slice(),
     rows: [{
       rowNumber: 11,
-      values: [
+      values: options.rosterValues ? options.rosterValues.slice() : [
         'POP-90001', 'Synthetic', '', 'Batter', '1', 'CF', "A's", '$1',
         '100', '.300', '30', '5', '20', '4', '21',
         '12.1', '2.50', '2-1', '2', '33', '7', '1.8',
@@ -167,7 +169,7 @@ function writerHarness(options = {}) {
     headers: CITIZEN_HEADERS.slice(),
     rows: [{
       rowNumber: 22,
-      values: [
+      values: options.citizenValues ? options.citizenValues.slice() : [
         'POP-90001',
         'Synthetic',
         'Batter',
@@ -257,7 +259,7 @@ function writerHarness(options = {}) {
       }
       const result = {};
       if (sheetNames.includes('Oakland_Sports_Feed')) result.Oakland_Sports_Feed = 101;
-      if (sheetNames.includes('As_Roster')) result.As_Roster = 202;
+      if (sheetNames.includes(rosterSheet)) result[rosterSheet] = 202;
       if (sheetNames.includes('Simulation_Ledger')) result.Simulation_Ledger = 303;
       if (sheetNames.includes('LifeHistory_Log')) result.LifeHistory_Log = 404;
       if (sheetNames.includes('Ripple_Ledger')) result.Ripple_Ledger = 505;
@@ -265,7 +267,7 @@ function writerHarness(options = {}) {
     },
     readSportsSource: async (sheetName) => {
       if (sheetName === 'Oakland_Sports_Feed') return clone(feedSnapshot);
-      if (sheetName === 'As_Roster') return clone(rosterSnapshot);
+      if (sheetName === rosterSheet) return clone(rosterSnapshot);
       if (sheetName === 'Simulation_Ledger') return clone(citizenSnapshot);
       if (sheetName === 'LifeHistory_Log') return clone(lifeHistoryLogSnapshot);
       if (sheetName === 'Ripple_Ledger') return clone(rippleLedgerSnapshot);
@@ -345,7 +347,7 @@ function writerHarness(options = {}) {
     },
     readFormulaRanges: async (ranges) => {
       const values = ranges.map((range) => {
-        const rosterMatch = range.match(/^As_Roster!([A-Z]+)(\d+):[A-Z]+\d+$/);
+        const rosterMatch = range.match(/^(?:As|Oaks)_Roster!([A-Z]+)(\d+):[A-Z]+\d+$/);
         if (rosterMatch) {
           const column = rosterMatch[1].split('').reduce(
             (value, character) => value * 26 + character.charCodeAt(0) - 64,
@@ -636,6 +638,36 @@ async function expectCode(promise, code) {
       .rows[0].values[0].userEnteredValue,
     { numberValue: 0.301 },
   );
+
+  // pipeline.102 (codex F1, F2): the live Oaks layout through the writer — FG% 51.7 → 51.5 writes 51.5 (the
+  // cell holds points in a 0.0 format, not a fraction) and reads back as such; a '-' cell takes a value; an
+  // unchanged '-' cell rides along without blocking the line
+  const oaksHarness = writerHarness({
+    rosterSheet: 'Oaks_Roster',
+    rosterHeaders: ['POPID', 'First', 'Last', 'Tier', 'Position', 'Team', 'Salary',
+      'MIN', 'PTS', 'REB', 'AST', 'STL', 'BLK', 'TO', 'FG%', 'FGA', '3P%', '3PA'],
+    rosterValues: ['POP-90002', 'Synthetic', 'Guard', '4', 'C', 'The Oaks', '1400000',
+      '7.1', '4.3', '2.4', '0.1', '0.5', '1.1', '0.3', '51.7', '3.6', '-', '-'],
+    citizenValues: ['POP-90002', 'Synthetic', 'Guard', '4', 'Oaks Player', 'Active',
+      'C403 — [Synthetic] Prior non-canon event.', 'Downtown', '', ''],
+  });
+  const oaksValue = statSubmission({
+    draft: draft({ TeamsUsed: 'oaks', NamesUsed: 'Synthetic Guard', EventType: 'stat-capture',
+      'Team Record': '', Streak: '', Stats: 'Synthetic reviewed current-season basketball line' }),
+    participant: { popid: 'POP-90002', name: 'Synthetic Guard', rosterSource: 'Oaks_Roster', sourceRow: 11 },
+  });
+  oaksValue.mutation.changes = [
+    { field: 'basketball.fgPct', before: '51.7', after: '51.5', reviewed: true },
+    { field: 'basketball.tpa', before: '-', after: '0.4', reviewed: true },
+    { field: 'basketball.threePct', before: '-', after: '-', reviewed: false },
+  ];
+  const oaksResult = await oaksHarness.writer(inputFor(oaksValue, 'synthetic-oaks-key-01', oaksHarness));
+  assert.strictEqual(oaksResult.writePerformed, true, JSON.stringify(oaksResult).slice(0, 300));
+  const oaksCells = oaksHarness.capturedBatches[0].filter((r) => r.updateCells && r.updateCells.start.sheetId === 202)
+    .map((r) => [r.updateCells.start.columnIndex, r.updateCells.rows[0].values[0].userEnteredValue]);
+  assert.deepStrictEqual(oaksCells, [[14, { numberValue: 51.5 }], [17, { numberValue: 0.4 }]]);
+  assert.strictEqual(oaksHarness.rosterSnapshot.rows[0].values[14], '51.5');
+  assert.strictEqual(oaksHarness.rosterSnapshot.rows[0].values[16], '-');
 
   const middleNameHarness = writerHarness();
   middleNameHarness.rosterSnapshot.rows[0].values[2] = 'Middle';

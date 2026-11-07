@@ -165,13 +165,14 @@ export default function SportsIntakeWorkspace({
       : before;
     let status = before === after ? 'unchanged' : before ? 'changed' : 'blank-source';
     let validationError = '';
-    if (before && !validStatValue(before, field.validator)) {
+    // pipeline.102: '-' is the roster's no-value mark — kept as is, or replaced by a valid value
+    if (before && before !== '-' && !validStatValue(before, field.validator)) {
       status = 'invalid';
       validationError = 'The current Sheet value does not match this field contract.';
     } else if (!after && before) {
       status = 'invalid';
       validationError = 'A blank proposal cannot erase a current value.';
-    } else if (after && !validStatValue(after, field.validator)) {
+    } else if (after && !(after === '-' && before === '-') && !validStatValue(after, field.validator)) {
       status = 'invalid';
       validationError = statValidationHint(field.validator);
     }

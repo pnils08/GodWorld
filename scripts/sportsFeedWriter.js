@@ -332,8 +332,9 @@ function statCell(value, spec) {
   if (!spec || spec.validator === 'record') return stringCell(value);
   let numberValue;
   if (spec.validator === 'percentage') {
-    const raw = safeCell(value).trim().replace(/%$/, '');
-    numberValue = Number(raw) / 100;
+    // pipeline.102 (codex F1): percentage points, stored as the number the cell shows — live Oaks_Roster
+    // FG% / 3P% hold 51.7 in a 0.0 format, so a /100 fraction would write 0.515 there
+    numberValue = Number(safeCell(value).trim().replace(/%$/, ''));
   } else {
     numberValue = Number(value);
   }
@@ -410,11 +411,9 @@ function comparableStatNumbers(value, spec) {
   const raw = safeCell(value).trim();
   if (!raw) return [];
   if (spec.validator === 'percentage') {
+    // one reading only (codex F1): a fraction read-back must not pass for the points written
     const numeric = Number(raw.replace(/%$/, ''));
-    if (!Number.isFinite(numeric)) return [];
-    return raw.endsWith('%')
-      ? [numeric / 100]
-      : [numeric, numeric / 100];
+    return Number.isFinite(numeric) ? [numeric] : [];
   }
   if (spec.validator === 'record') return [];
   const numeric = Number(raw);
@@ -423,6 +422,8 @@ function comparableStatNumbers(value, spec) {
 
 function statValuesEqual(left, right, spec) {
   if (spec.validator === 'record') return safeCell(left) === safeCell(right);
+  // pipeline.102: the same text is the same cell — '-' (no value) has no number to compare
+  if (safeCell(left).trim() === safeCell(right).trim()) return true;
   const leftCandidates = comparableStatNumbers(left, spec);
   const rightCandidates = comparableStatNumbers(right, spec);
   return leftCandidates.some((leftValue) => (

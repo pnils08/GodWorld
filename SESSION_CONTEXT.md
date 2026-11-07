@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** engine.331 (sports triggers: variety, Oaks off-season, one game ≠ hot/cold, blank-cell re-fire) and engine.332 (media-feedback seeds never reach the deck) → plan each from the C114 gap log G-ES1/G-ES2; builder's words there. Queued: pipeline.100, governance.57, engine.325. Open: SSH; INIT-010 $4.2M.
 
-**NEXT[research-build]:** engine.333 (feed triggers → life history; `retirement` flips Status; builder 11-05) → read-before, cut, sandbox; after engine.331. research.32 live-observing: read the Discord log after Mike's next talk. civic.47 waits on C115. To do: fold `archiveFoldedReviews.js` into /session-end (builder 11-05). Open: A2.
+**NEXT[research-build]:** engine.333 → fold codex review of Task 2a (brief 11-07 owed-milestone); Task 2b engine cut after engine.331 PROD (shared sandbox). research.32 live-observing: read the Discord log after Mike's next talk. civic.47 waits on C115. To do: fold `archiveFoldedReviews.js` into /session-end (builder 11-05). Open: A2.

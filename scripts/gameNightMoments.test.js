@@ -248,8 +248,24 @@ assert.deepStrictEqual(r7b.tags['POP-00001'], ['Sports-Sociability-Up-S'], 'the 
 assert.strictEqual(vin2[c7('RoleType')], "Former Designated Hitter, Oakland A's Legend", 'no Former Former');
 assert.strictEqual(vin2[c7('CitizenBio')], "Now: Former Designated Hitter, Oakland A's Legend; retired C110. " + BIO, 'bio untouched');
 assert.strictEqual((vin2[c7('LifeHistory')].match(/\[Retirement\]/g) || []).length, 1, 'one Retirement line across two fires');
-// a later chapter replaces the Now: sentence, never piles up
-assert.strictEqual(sandbox.sportsBioNow_(vin2[c7('CitizenBio')], 'Owner, Keane Academy'), 'Now: Owner, Keane Academy. ' + BIO);
+// a later chapter replaces the Now: sentence, never piles up; the strip anchors on the engine's own ` C<N>.` terminator
+assert.strictEqual(sandbox.sportsBioNow_(vin2[c7('CitizenBio')], 'Owner, Keane Academy', 118), 'Now: Owner, Keane Academy C118. ' + BIO);
+assert.strictEqual(sandbox.sportsBioNow_('Now: Former Dr. Keane, Oakland A\'s; retired C110. Dr. Keane grew up in Boston. More.', 'Team Physician, Oaks', 120),
+  'Now: Team Physician, Oaks C120. Dr. Keane grew up in Boston. More.', 'an abbreviation period inside the Now: sentence does not cut it short (codex claim 6)');
+assert.strictEqual(sandbox.sportsBioNow_('An authored bio with no Now: line. Second sentence.', 'Former X; retired', 110), 'Now: Former X; retired C110. An authored bio with no Now: line. Second sentence.');
+assert.strictEqual(sandbox.sportsBioNow_('', 'Former Y; retired', 1), 'Now: Former Y; retired C1.');
+
+// 7c2. who retires (codex F2): a row already off the GAME clock is left alone whatever its key; a GAME row not Active too
+const halfRows = rows7();
+halfRows.push(['POP-00508', 'Freddie', 'Silecki', 'C90 — [Retirement] hung it up', 'Retired', 'Downtown', '', 'ENGINE', '', 'Hall of Famer from old basketball league MUBA', '', 'SPORTS_OVERRIDE', 'Legend of the MUBA.', '', '', 2]);
+halfRows.push(['POP-00018', 'Benji', 'Dillon', '', 'Retired', 'Rockridge', '', 'GAME', 'BIZ-00005', "Starting Pitcher, Oakland A's", '', 'SPORTS_OVERRIDE', '', '', '', 1]);
+const r7x = run7([{ eventType: 'player-feature', teamsUsed: "A's", namesUsed: 'Freddie Silecki, Benji Dillon (SP)', eventTrigger: 'retirement' }], halfRows);
+const sil = rowOf(r7x, 'POP-00508'), dil = rowOf(r7x, 'POP-00018');
+assert.deepStrictEqual([sil[c7('ClockMode')], sil[c7('EconomicProfileKey')], sil[c7('RoleType')], sil[c7('CitizenBio')]], ['ENGINE', 'SPORTS_OVERRIDE', 'Hall of Famer from old basketball league MUBA', 'Legend of the MUBA.'], 'the half-state row is untouched');
+assert.deepStrictEqual(r7x.tags['POP-00508'], ['Reputation'], 'the type line only, no Retirement');
+assert.deepStrictEqual([dil[c7('ClockMode')], dil[c7('Status')]], ['GAME', 'Retired'], 'a GAME row already Retired is not retired again');
+assert.deepStrictEqual(r7x.tags['POP-00018'], ['Reputation']);
+assert.ok(r7x.logs.some((m) => /retirement row on Freddie Silecki left alone \(off-clock\)/.test(m)) && r7x.logs.some((m) => /Benji Dillon left alone \(status:retired\)/.test(m)), r7x.logs.join(' / '));
 
 // 7d. the gates: an NFL row's retirement retires no one (331's team gate); a typed hot-streak writes no streak line
 const r7c = run7([{ eventType: 'player-feature', teamsUsed: 'NFL', namesUsed: 'Arturo Ramos (SP)', eventTrigger: 'retirement' },
@@ -296,6 +312,35 @@ const r7f = run7([{ eventType: 'injury', teamsUsed: "A's", namesUsed: 'Arturo Ra
 assert.strictEqual(r7f.hospital.length, 1, 'the dashboard-stamped shape (StatusStartCycle = this Cycle) files the bed again — same id');
 assert.strictEqual(r7f.hospital[0].sourceEventId, 'sports-feed:C110:injury:POP-00025');
 assert.strictEqual(rowOf(r7f, 'POP-00025')[c7('HealthCause')], "injured playing for the A's");
+
+// 7f2. who gets a bed (codex F1 + claim 2): a detained citizen named on an injury row gets the line only — no stamp, no
+// receipt (the writer refuses a detained PriorStatus mid-loop); a player the ambulance already filed this Cycle gets no second receipt
+const custodyRows = rows7();
+custodyRows.push(['POP-00700', 'Held', 'Player', '', 'detained', 'Downtown', '', 'GAME', 'BIZ-00005', "Relief Pitcher, Oakland A's", '', 'SPORTS_OVERRIDE', '', '', '', 3]);
+const r7y = run7([{ eventType: 'injury', teamsUsed: "A's", namesUsed: 'Held Player (RP)', eventTrigger: 'injury' }], custodyRows);
+const held = rowOf(r7y, 'POP-00700');
+assert.deepStrictEqual([held[c7('Status')], held[c7('StatusStartCycle')], held[c7('HealthCause')]], ['detained', '', ''], 'custody row untouched');
+assert.strictEqual(r7y.hospital.length, 0, 'no receipt for a detained citizen');
+assert.deepStrictEqual(r7y.tags['POP-00700'], ['Sports-Injured', 'Sports-Injured'], 'the lines still land');
+assert.ok(r7y.ripples[0].causeDetail.indexOf('injury (line-only:detained): Held Player') > 0, r7y.ripples[0].causeDetail);
+// the ambulance stamped critical this Cycle and filed its intake before GameNight ran
+const ambRows = rows7();
+const ramosRow = ambRows.find((x) => x[0] === 'POP-00025');
+ramosRow[c7('Status')] = 'critical'; ramosRow[c7('StatusStartCycle')] = 110; ramosRow[c7('HealthCause')] = 'Ambulance: hit crossing Broadway';
+const preFiled = { popId: 'POP-00025', kind: 'intake', cycle: 110, to: 'critical', sourceSystem: 'chaos-cars', sourceEventId: 'chaos:C110:POP-00025' };
+logs.length = 0;
+const appendedZ = [];
+const ctxZ = {
+  summary: { sportsFeedEntries: [{ eventType: 'injury', teamsUsed: "A's", namesUsed: 'Arturo Ramos (SP)', eventTrigger: 'injury' }], sportsWeek: {}, cycleId: 110, hospitalEvents: [preFiled] },
+  ledger: { headers: H7, rows: ambRows, dirty: false },
+  ss: { getSheetByName: (n) => (n === 'LifeHistory_Log' ? { getLastRow: () => 1, getRange: () => ({ setValues: (v) => { appendedZ.push(...v); } }) } : null) },
+  config: { cycleCount: 110 }, now: 'NOW', cache: {}, rng: () => 0.5
+};
+sandbox.applyGameNightMoments_(ctxZ);
+assert.strictEqual(ctxZ.summary.hospitalEvents.length, 1, 'the ambulance intake stays the only receipt');
+assert.strictEqual(ctxZ.summary.hospitalEvents[0].sourceSystem, 'chaos-cars');
+assert.deepStrictEqual([ramosRow[c7('Status')], ramosRow[c7('HealthCause')]], ['critical', 'Ambulance: hit crossing Broadway'], 'the ambulance stamp stands');
+assert.strictEqual(appendedZ.filter((x) => x[1] === 'POP-00025').length, 2, 'type line + trigger line');
 
 // 7g. injury-return empties the bed the health engine's way
 priorCalls = [];

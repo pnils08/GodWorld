@@ -251,9 +251,12 @@ function sportsTriggerWord_(entry) {
 // sentence leads CitizenBio — `Now: …` — replaced, never accreted; the authored prose after it is untouched. The wake's
 // own-record read-back takes the Bio line first and cuts at 600 chars (lib/wakePerception.js), so the front is the
 // only place a long bio's newest chapter is heard. Pure.
-function sportsBioNow_(existing, sentence) {
-  var rest = String(existing || '').replace(/^Now:\s[^\n]*?(?:\.\s+|\.$|\n|$)/, '').replace(/^\s+/, '');
-  var now = 'Now: ' + String(sentence || '').trim().replace(/\.?$/, '.');
+// Grammar every engine `Now:` writer keeps (codex engine-cut review claim 6): the sentence ends with the Cycle stamp,
+// `… C<N>.` — the one terminator a role like "Dr. Keane" or "St. Mary's Nurse" cannot contain — so the strip never cuts
+// an authored sentence short. The helper stamps the sentence itself; a caller passes the text without the Cycle.
+function sportsBioNow_(existing, sentence, cycle) {
+  var rest = String(existing || '').replace(/^Now:\s[^\n]*?\sC\d+\.(?:\s+|$)/, '').replace(/^\s+/, '');
+  var now = 'Now: ' + String(sentence || '').trim().replace(/[.,\s]+$/, '') + ' C' + Number(cycle) + '.';
   return rest ? now + ' ' + rest : now;
 }
 
@@ -263,10 +266,16 @@ function sportsBioNow_(existing, sentence) {
 // `Former ` so the Occupation texture stops saying he worked a shift as a designated hitter; the pools never touch a
 // Tier 1–2 row, so the next chapter is the builder's own row. StatusStartCycle is not stamped — it is the health /
 // custody clock and nothing reads it on an Active row.
+// Who retires (codex engine-cut review F2): a row on the GAME clock with Status Active — the player's own row. A row already
+// off the clock is not flipped again whatever its key holds (live C114 has three ENGINE / SPORTS_OVERRIDE / Retired rows,
+// the MUBA Hall-of-Famers, gap G-RB8); a Retired, traded, detained or hospitalized row is not retired by a feed word.
+// Returns 'retired', or the reason the row was left alone.
 function sportsRetire_(ctx, row, cols, team, cycle, write, ri) {
   var clock = cols.iClock >= 0 ? String(row[cols.iClock] || '').trim().toUpperCase() : '';
+  var status = cols.iStatus >= 0 ? String(row[cols.iStatus] || '').trim().toLowerCase() : '';
+  if (clock !== 'GAME') return 'off-clock';
+  if (status !== 'active' && status !== '') return 'status:' + status;
   var econ = cols.iEcon >= 0 ? String(row[cols.iEcon] || '').trim() : '';
-  if (clock !== 'GAME' && econ !== 'SPORTS_OVERRIDE') return false;
   if (cols.iClock >= 0) row[cols.iClock] = 'ENGINE';
   if (cols.iEcon >= 0 && econ === 'SPORTS_OVERRIDE') row[cols.iEcon] = '';
   var role = cols.iRole >= 0 ? String(row[cols.iRole] || '').trim() : '';
@@ -275,9 +284,19 @@ function sportsRetire_(ctx, row, cols, team, cycle, write, ri) {
   write(ri, 'Retirement', 'retired from ' + club + ', announced C' + cycle, 'Retirement');
   if (cols.iBio >= 0) {
     var formerRole = cols.iRole >= 0 ? String(row[cols.iRole] || '').trim() : '';
-    row[cols.iBio] = sportsBioNow_(row[cols.iBio], (formerRole || ('Former ' + club.replace(/^the /, '') + ' player')) + '; retired C' + cycle);
+    row[cols.iBio] = sportsBioNow_(row[cols.iBio], (formerRole || ('Former ' + club.replace(/^the /, '') + ' player')) + '; retired', cycle);
   }
-  return true;
+  return 'retired';
+}
+
+// One intake receipt per citizen per Cycle (codex engine-cut review claim 2): the Phase-4 chaos ambulance can stamp a
+// GAME-clock player and file its own intake before this runs; the feed then adds the line, never a second receipt.
+function sportsBedAlreadyFiled_(ctx, popId, cycle) {
+  var evs = (ctx.summary && ctx.summary.hospitalEvents) || [];
+  for (var i = 0; i < evs.length; i++) {
+    if (String(evs[i].popId) === String(popId) && evs[i].kind === 'intake' && Number(evs[i].cycle) === Number(cycle)) return true;
+  }
+  return false;
 }
 
 // `injury` fills the bed. The dashboard roster action (engine.77) may already have stamped Status / StatusStartCycle /
@@ -290,6 +309,11 @@ function sportsInjure_(ctx, row, cols, team, cycle, entry, popId, name) {
   var low = status.toLowerCase();
   var start = cols.iStatusStart >= 0 ? Number(row[cols.iStatusStart]) || 0 : 0;
   if (SPORTS_HEALTH_STATES_[low] && start !== cycle) return 'line-only';
+  // codex engine-cut review F1: only an Active row is stamped — a detained (custody), retired, traded or pending citizen
+  // named on an injury row gets the line and nothing else (the hospital writer refuses a `detained` PriorStatus mid-loop,
+  // and custody's care handoff is the judicial engine's, not the feed's).
+  if (!SPORTS_HEALTH_STATES_[low] && low !== 'active' && low !== '') return 'line-only:' + low;
+  if (sportsBedAlreadyFiled_(ctx, popId, cycle)) return 'line-only:bed-filed';
   var club = team === 'Oaks' ? 'the Oaks' : "the A's";
   var cause = cols.iHealthCause >= 0 ? String(row[cols.iHealthCause] || '').trim() : '';
   var stampedByDashboard = SPORTS_HEALTH_STATES_[low] && start === cycle;
@@ -462,7 +486,9 @@ function applyGameNightMoments_(ctx) {
         // only a club row retires or injures anyone (engine.331's team gate: A's / Oaks)
         if (team !== "A's" && team !== 'Oaks') { if (unknownWords.indexOf(word + '@' + (entry.teamsUsed || '-')) < 0) unknownWords.push(word + '@' + (entry.teamsUsed || '-')); continue; }
         if (word === 'retirement') {
-          if (sportsRetire_(ctx, rows[ri], cols, team, cycle, write, ri)) { counts.retired++; milestoneDetail.push('retirement: ' + who); }
+          var rt = sportsRetire_(ctx, rows[ri], cols, team, cycle, write, ri);
+          if (rt === 'retired') { counts.retired++; milestoneDetail.push('retirement: ' + who); }
+          else if (typeof Logger !== 'undefined') Logger.log('applyGameNightMoments_: retirement row on ' + who + ' left alone (' + rt + '), cycle ' + cycle);
         } else if (word === 'injury') {
           var inj = sportsInjure_(ctx, rows[ri], cols, team, cycle, entry, String(rows[ri][iPop]), who);
           write(ri, 'Sports-Injured', pick(SPORTS_NAMED_POOLS.injured), 'Sports-Injured' + tagTail);

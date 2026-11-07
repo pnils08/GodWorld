@@ -39,7 +39,8 @@ echo "clearcheckpoint: $(node $O/2026-11-05-e330-bench.js clearcp 2>&1 | q)"
 plant 1; fire e333-f1
 plant 2; fire e333-f2
 echo "== owed dry replay on the bench (nothing written)"
-GODWORLD_SHEET_ID=$B timeout 170 node scripts/citizen-wake.js --dry-run --wake=morning --cycle=$(cc) 2>&1 | grep -i "owed\|woke" | head -8
+# lib/env overrides GODWORLD_SHEET_ID from .env (dotenv override: true), so the id is set AFTER the env loads, not on the command line
+timeout 170 node -e "require('/root/GodWorld/lib/env'); process.env.GODWORLD_SHEET_ID='$B'; process.argv.push('--dry-run','--wake=morning','--cycle=$(cc)'); require('/root/GodWorld/scripts/citizen-wake.js')" 2>&1 | grep -i "owed\|woke" | head -8
 echo "== final sync from live"; node scripts/syncSandboxFromLive.js $B --apply > $SP/e333.sync.final.out 2>&1 || echo "HOLD final sync failed"
 tail -2 $SP/e333.sync.final.out | q
 echo "engine.333 bench done"

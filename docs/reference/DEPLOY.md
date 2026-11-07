@@ -67,7 +67,7 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Bench (2026-11-07, research-build):** SANDBOX 1004 **@186 = stage 39** = stage 38 + `applyGameNightMoments.js` at `f1b53151f` (engine.333, the PROD candidate; manifest `output/engine-sheet/stage39-e333.sha256`), data = live C114 after the final sync — DEPLOY_HISTORY §Current sandbox.
+**Bench (2026-11-07, research-build):** SANDBOX 1004 **@187 = stage 39** = stage 38 + `applyGameNightMoments.js` at `d9f6a7dfa` (engine.333, the PROD candidate; manifest `output/engine-sheet/stage39-e333.sha256`), data = live C114 after the final sync — DEPLOY_HISTORY §Current sandbox.
 
 **Live (2026-11-07):** PROD = **stage 38** = stage 37 + the seven engine.331 files at `f82f19c72` (sports moments are this Cycle's rows; hot/cold at the streak bar; cold set, moods, fan sign), web app **@174** — DEPLOY_HISTORY §PROD stage 38. Stage 37 = stage 36 + `civicInitiativeEngine.js` at `2fc359eb4` (@173). SANDBOX 1004 @184 = stage 38, data = live C114.
 

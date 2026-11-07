@@ -1,8 +1,8 @@
 {
-  "generated": "2026-11-06",
+  "generated": "2026-11-07",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1766,
+  "functionsMapped": 1771,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -2979,11 +2979,15 @@
     "hospitalEvents": {
       "writers": [
         "phase04-events/chaosCarsEngine.js::runChaosEvent_",
-        "phase04-events/generationalEventsEngine.js::runGenerationalEngine_"
+        "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
+        "phase05-citizens/applyGameNightMoments.js::sportsInjure_",
+        "phase05-citizens/applyGameNightMoments.js::sportsReturn_"
       ],
       "readers": [
         "phase04-events/chaosCarsEngine.js::runChaosEvent_",
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
+        "phase05-citizens/applyGameNightMoments.js::sportsInjure_",
+        "phase05-citizens/applyGameNightMoments.js::sportsReturn_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",
         "phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_",
         "phase10-persistence/buildCyclePacket.js::persistHospitalLedger_"

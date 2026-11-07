@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-11-06 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-11-07 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -1214,6 +1214,20 @@
 - **parseNamesUsed_(entry)**
 
 - **gameNightNameKey_(s)**
+
+- **sportsTriggerWord_(entry)**
+
+- **sportsBioNow_(existing, sentence)**
+
+- **sportsRetire_(ctx, row, cols, team, cycle, write, ri)**
+
+- **sportsInjure_(ctx, row, cols, team, cycle, entry, popId, name)**
+  Reads: S.hospitalEvents
+  Writes: S.hospitalEvents
+
+- **sportsReturn_(ctx, row, cols, cycle, popId, name)**
+  Reads: S.hospitalEvents
+  Writes: S.hospitalEvents
 
 - **sportsNamedRoute_(eventType, cls)**
 
@@ -4868,4 +4882,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1766
+**Functions mapped:** 1771

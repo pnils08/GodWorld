@@ -171,6 +171,167 @@ var SPORTS_WEEK_POOLS = {
     LOSING_WEEK: ["shrugged off another losing week and kept the cap on", "watched a loss with the patience of a real fan", "said next week would be different"]
   }
 };
+// engine.333 (builder 2026-11-05/07): the row's EventTrigger — the canonical word engine.331 leaves on the cell
+// (utilities/setupSportsFeedValidation.js EVENT_TRIGGER_VALUES; hot-streak / cold-streak never reach it) — is the
+// named player's second received line beside the EventType line. Every ruled word has a route (builder, 331 Q3:
+// "a word no citizen reacts to is not worth keeping"; scripts/gameNightMoments.test.js pins dropdown == routes).
+// Five texture routes draw a pool under a graded tag the Phase-9 fold reads; three MILESTONE words change the row
+// itself (sportsMilestone_ below): `injury` fills the hospital bed, `injury-return` empties it, `retirement`
+// leaves the sports layer. A word off the table writes nothing and is named once in the engine log.
+var SPORTS_TRIGGER_POOLS_ = {
+  celebration: [
+    "kept the phone buzzing on the counter all night and let it",
+    "got home to a hand-lettered sign on the door from the kids on the block",
+    "told the story of the moment three times at dinner and it got better each time",
+    "sat on the back step a long while, letting the night be as big as it was"
+  ],
+  setback: [
+    "came home and went straight to the garage to hit off the tee in the dark",
+    "let the family carry dinner and said almost nothing",
+    "read one headline, put the phone in a drawer, and left it there",
+    "walked the block twice before going in"
+  ],
+  move: [
+    "sat at the kitchen table with the family working out what the news means for the house",
+    "started a list of what would have to change and stopped halfway down",
+    "called the one friend who would tell it straight",
+    "took the long way home with the news still sinking in"
+  ],
+  season: [
+    "felt the calendar turn and went to bed earlier than usual",
+    "checked the schedule twice and circled a date for the family",
+    "stood in the yard a while thinking about the stretch ahead",
+    "pulled out the old glove and worked the leather for an hour"
+  ],
+  community: [
+    "came home from the event with a bag of thank-you cards from kids who'd never seen a game",
+    "stayed an extra hour at the community center because nobody wanted to leave",
+    "drove home thinking about the one kid who wouldn't let go of the ball",
+    "got a text from a neighbor who'd been at the event and sat with it a while"
+  ],
+  injuryReturn: [
+    "pulled on the uniform again and had to sit down for a second before leaving the house",
+    "came home from the first day back sore in the good way",
+    "let the family make a small fuss over the return and didn't stop them",
+    "slept the whole night through for the first time since the injury"
+  ]
+};
+var SPORTS_TRIGGER_ROUTES_ = {
+  // celebration — the night was theirs
+  'walk-off': 'celebration', 'no-hitter': 'celebration', 'big-win': 'celebration', 'comeback': 'celebration',
+  'career-night': 'celebration', 'shutout': 'celebration', 'buzzer-beater': 'celebration', 'series-clinch': 'celebration',
+  'playoff-clinch': 'celebration', 'championship': 'celebration', 'all-star': 'celebration', 'award': 'celebration',
+  'milestone': 'celebration', 'debut': 'celebration',
+  // setback — the night went against them
+  'tough-loss': 'setback', 'blowout-loss': 'setback', 'blown-lead': 'setback', 'slump': 'setback',
+  'eliminated': 'setback', 'suspension': 'setback', 'clubhouse-tension': 'setback',
+  // move — the life moves
+  'signed': 'move', 're-signed': 'move', 'departed': 'move', 'traded': 'move', 'released': 'move',
+  'draft-night': 'move', 'trade-deadline': 'move', 'trade-rumor': 'move', 'coaching-change': 'move',
+  // season — the calendar turns
+  'playoff-push': 'season', 'rivalry': 'season', 'home-opener': 'season', 'season-finale': 'season', 'camp-opens': 'season',
+  // community — the club off the field
+  'community-outreach': 'community',
+  // milestones — the row changes (sportsMilestone_)
+  'injury': 'injury', 'injury-return': 'injury-return', 'retirement': 'retirement'
+};
+// the graded tag each texture route writes (engine.299: a line with no signed fact is not written)
+var SPORTS_TRIGGER_TAGS_ = {
+  celebration: 'Sports-Composure-Up-M', setback: 'Sports-Composure-Down-M', move: 'Sports-Moved',
+  season: 'Sports-Drive-Up-S', community: 'Sports-Warmth-Up-S', injuryReturn: 'Sports-Composure-Up-S'
+};
+var SPORTS_MILESTONE_WORDS_ = { 'injury': true, 'injury-return': true, 'retirement': true };
+var SPORTS_HEALTH_STATES_ = { injured: true, hospitalized: true, critical: true, recovering: true, 'serious-condition': true };
+
+function sportsTriggerWord_(entry) {
+  return String(entry && entry.eventTrigger || '').trim().toLowerCase();
+}
+
+// engine.333 C6 (builder 2026-11-07: "newest life altering moments should add a line atop the bio"): one engine-owned
+// sentence leads CitizenBio — `Now: …` — replaced, never accreted; the authored prose after it is untouched. The wake's
+// own-record read-back takes the Bio line first and cuts at 600 chars (lib/wakePerception.js), so the front is the
+// only place a long bio's newest chapter is heard. Pure.
+function sportsBioNow_(existing, sentence) {
+  var rest = String(existing || '').replace(/^Now:\s[^\n]*?(?:\.\s+|\.$|\n|$)/, '').replace(/^\s+/, '');
+  var now = 'Now: ' + String(sentence || '').trim().replace(/\.?$/, '.');
+  return rest ? now + ' ' + rest : now;
+}
+
+// `retirement` leaves the sports layer (builder 2026-11-05: Status stays Active — "Vinnie is 38 … putting him off
+// Undocked and in a retirement event loop doesn't make sense"). The layer is two cells (isSportsLayerRow_: GAME clock,
+// SPORTS_OVERRIDE); a row already off it is skipped whole, so a re-fired row writes no second line. RoleType takes
+// `Former ` so the Occupation texture stops saying he worked a shift as a designated hitter; the pools never touch a
+// Tier 1–2 row, so the next chapter is the builder's own row. StatusStartCycle is not stamped — it is the health /
+// custody clock and nothing reads it on an Active row.
+function sportsRetire_(ctx, row, cols, team, cycle, write, ri) {
+  var clock = cols.iClock >= 0 ? String(row[cols.iClock] || '').trim().toUpperCase() : '';
+  var econ = cols.iEcon >= 0 ? String(row[cols.iEcon] || '').trim() : '';
+  if (clock !== 'GAME' && econ !== 'SPORTS_OVERRIDE') return false;
+  if (cols.iClock >= 0) row[cols.iClock] = 'ENGINE';
+  if (cols.iEcon >= 0 && econ === 'SPORTS_OVERRIDE') row[cols.iEcon] = '';
+  var role = cols.iRole >= 0 ? String(row[cols.iRole] || '').trim() : '';
+  if (cols.iRole >= 0 && role && !/^Former\b/i.test(role)) row[cols.iRole] = 'Former ' + role;
+  var club = team === 'Oaks' ? 'the Oaks' : "the A's";
+  write(ri, 'Retirement', 'retired from ' + club + ', announced C' + cycle, 'Retirement');
+  if (cols.iBio >= 0) {
+    var formerRole = cols.iRole >= 0 ? String(row[cols.iRole] || '').trim() : '';
+    row[cols.iBio] = sportsBioNow_(row[cols.iBio], (formerRole || ('Former ' + club.replace(/^the /, '') + ' player')) + '; retired C' + cycle);
+  }
+  return true;
+}
+
+// `injury` fills the bed. The dashboard roster action (engine.77) may already have stamped Status / StatusStartCycle /
+// HealthCause this Cycle and writes no hospitalEvents entry (buildCyclePacket.js self-heals a bed with blank source);
+// here the bed is a real intake from the feed row, one writer per fact: the dashboard's cells stand when it got there
+// first, the engine stamps them otherwise. sourceEventId is stable per row, so a second fire hits the writer's
+// one-row-per-SourceEventId dedup. A player already in a health state from an earlier Cycle gets the line only.
+function sportsInjure_(ctx, row, cols, team, cycle, entry, popId, name) {
+  var status = cols.iStatus >= 0 ? String(row[cols.iStatus] || '').trim() : '';
+  var low = status.toLowerCase();
+  var start = cols.iStatusStart >= 0 ? Number(row[cols.iStatusStart]) || 0 : 0;
+  if (SPORTS_HEALTH_STATES_[low] && start !== cycle) return 'line-only';
+  var club = team === 'Oaks' ? 'the Oaks' : "the A's";
+  var cause = cols.iHealthCause >= 0 ? String(row[cols.iHealthCause] || '').trim() : '';
+  var stampedByDashboard = SPORTS_HEALTH_STATES_[low] && start === cycle;
+  if (!stampedByDashboard) {
+    if (cols.iStatus >= 0) row[cols.iStatus] = 'injured';
+    if (cols.iStatusStart >= 0) row[cols.iStatusStart] = cycle;
+    if (cols.iHealthCause >= 0 && !cause) { cause = 'injured playing for ' + club; row[cols.iHealthCause] = cause; }
+  } else if (cols.iHealthCause >= 0 && !cause) {
+    cause = 'injured playing for ' + club; row[cols.iHealthCause] = cause;
+  }
+  ctx.summary.hospitalEvents = ctx.summary.hospitalEvents || [];
+  ctx.summary.hospitalEvents.push({
+    popId: popId, name: name, neighborhood: cols.iNbhd >= 0 ? (row[cols.iNbhd] || '') : '',
+    cause: cause, from: stampedByDashboard ? 'Active' : status, to: stampedByDashboard ? low : 'injured', cycle: cycle,
+    priorStatus: stampedByDashboard ? 'Active' : status, kind: 'intake',
+    intakeType: 'injury', sourceSystem: 'sports-feed',
+    sourceEventId: 'sports-feed:C' + cycle + ':injury:' + popId
+  });
+  return stampedByDashboard ? 'bed-only' : 'stamped';
+}
+
+// `injury-return` empties the bed the way the health engine's discharge does: Status back to the bed's PriorStatus
+// (hospitalPriorStatusForDischarge_, generationalEventsEngine.js — the Hospital_Ledger cache), the health clock and
+// cause cleared, a transition the Phase-10 writer closes the row on. Already out → the line only.
+function sportsReturn_(ctx, row, cols, cycle, popId, name) {
+  var status = cols.iStatus >= 0 ? String(row[cols.iStatus] || '').trim() : '';
+  var low = status.toLowerCase();
+  if (!SPORTS_HEALTH_STATES_[low]) return 'line-only';
+  var prior = hospitalPriorStatusForDischarge_(ctx, popId) || 'active';
+  var cause = cols.iHealthCause >= 0 ? String(row[cols.iHealthCause] || '') : '';
+  row[cols.iStatus] = String(prior).trim().toLowerCase() === 'active' ? 'Active' : prior;
+  if (cols.iStatusStart >= 0) row[cols.iStatusStart] = '';
+  if (cols.iHealthCause >= 0) row[cols.iHealthCause] = '';
+  ctx.summary.hospitalEvents = ctx.summary.hospitalEvents || [];
+  ctx.summary.hospitalEvents.push({
+    popId: popId, name: name, neighborhood: cols.iNbhd >= 0 ? (row[cols.iNbhd] || '') : '',
+    cause: cause, from: low, to: 'active', cycle: cycle,
+    kind: 'transition', intakeType: '', sourceSystem: 'sports-feed', sourceEventId: ''
+  });
+  return 'discharged';
+}
+
 // franchise employer of record (the same pair processAdvancementIntake reads)
 var SPORTS_FRANCHISE_EMPLOYER_ = { 'BIZ-00005': "A's", 'BIZ-00074': 'Oaks' };
 var SPORTS_FAN_TEAM_ = { as: "A's", oaks: 'Oaks' };
@@ -219,6 +380,9 @@ function applyGameNightMoments_(ctx) {
   var iLife = idx('LifeHistory'), iStatus = idx('Status'), iNbhd = idx('Neighborhood');
   var iClock = idx('ClockMode'), iEmployer = idx('EmployerBizId'), iRole = idx('RoleType'), iDial = idx('DialState');
   var iLastU = (idx('LastUpdated') >= 0) ? idx('LastUpdated') : idx('Last Updated');
+  // engine.333: the milestone cells
+  var iEcon = idx('EconomicProfileKey'), iBio = idx('CitizenBio'), iStatusStart = idx('StatusStartCycle'), iHealthCause = idx('HealthCause');
+  var cols = { iStatus: iStatus, iClock: iClock, iEcon: iEcon, iRole: iRole, iBio: iBio, iStatusStart: iStatusStart, iHealthCause: iHealthCause, iNbhd: iNbhd };
   if (iPop < 0 || iLife < 0) return;
   var logSheet = ctx.ss ? ctx.ss.getSheetByName('LifeHistory_Log') : null;
   // engine.208 Revision 1: the log is half the evidence — never write the ledger half alone
@@ -241,9 +405,11 @@ function applyGameNightMoments_(ctx) {
   var stamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
   var logRows = [];
   var touched = {};
-  var counts = { named: 0, staff: 0, fan: 0 };
+  var counts = { named: 0, staff: 0, fan: 0, trigger: 0, retired: 0, injured: 0, returned: 0 };
   var reach = {};   // engine.209: per franchise { staff, fan } — the week's attendance input
   var unresolved = [];
+  var unknownWords = []; // engine.333: a trigger word with no route, named once a Cycle
+  var milestoneDetail = []; // engine.333: "retirement: <name>" etc. for the ripple's CauseDetail
 
   function write(ri, tag, text, logTag) {
     var row = rows[ri];
@@ -283,7 +449,37 @@ function applyGameNightMoments_(ctx) {
       }
       write(ri, route.tag, text, route.tag + '|source:sports|feedNamed|event:' + (entry.eventType || '-') + '|team:' + (team || '-'));
       counts.named++;
+
+      // engine.333: the row's own trigger word — the second received line, or the milestone that changes the row
+      var word = sportsTriggerWord_(entry);
+      if (!word) continue;
+      var routeKey = Object.prototype.hasOwnProperty.call(SPORTS_TRIGGER_ROUTES_, word) ? SPORTS_TRIGGER_ROUTES_[word] : null;
+      var tagTail = '|source:sports|feedNamed|event:' + (entry.eventType || '-') + '|trigger:' + word + '|team:' + (team || '-');
+      var who = ((rows[ri][iFirst] || '') + ' ' + (rows[ri][iLast] || '')).trim();
+      if (!routeKey) {
+        if (unknownWords.indexOf(word) < 0) unknownWords.push(word);
+      } else if (SPORTS_MILESTONE_WORDS_[word]) {
+        // only a club row retires or injures anyone (engine.331's team gate: A's / Oaks)
+        if (team !== "A's" && team !== 'Oaks') { if (unknownWords.indexOf(word + '@' + (entry.teamsUsed || '-')) < 0) unknownWords.push(word + '@' + (entry.teamsUsed || '-')); continue; }
+        if (word === 'retirement') {
+          if (sportsRetire_(ctx, rows[ri], cols, team, cycle, write, ri)) { counts.retired++; milestoneDetail.push('retirement: ' + who); }
+        } else if (word === 'injury') {
+          var inj = sportsInjure_(ctx, rows[ri], cols, team, cycle, entry, String(rows[ri][iPop]), who);
+          write(ri, 'Sports-Injured', pick(SPORTS_NAMED_POOLS.injured), 'Sports-Injured' + tagTail);
+          counts.injured++; milestoneDetail.push('injury (' + inj + '): ' + who);
+        } else {
+          var ret = sportsReturn_(ctx, rows[ri], cols, cycle, String(rows[ri][iPop]), who);
+          write(ri, SPORTS_TRIGGER_TAGS_.injuryReturn, pick(SPORTS_TRIGGER_POOLS_.injuryReturn), SPORTS_TRIGGER_TAGS_.injuryReturn + tagTail);
+          counts.returned++; milestoneDetail.push('injury-return (' + ret + '): ' + who);
+        }
+      } else {
+        write(ri, SPORTS_TRIGGER_TAGS_[routeKey], pick(SPORTS_TRIGGER_POOLS_[routeKey]), SPORTS_TRIGGER_TAGS_[routeKey] + tagTail);
+        counts.trigger++;
+      }
     }
+  }
+  if (unknownWords.length && typeof Logger !== 'undefined') {
+    Logger.log('applyGameNightMoments_: trigger words with no citizen route, cycle ' + cycle + ': ' + unknownWords.join(', '));
   }
 
   // 2. STAFF and 3. FANS — the team's week, for every franchise with a signed week
@@ -344,7 +540,9 @@ function applyGameNightMoments_(ctx) {
       causeType: 'sports',
       causeId: 'Oakland_Sports_Feed.gameNight',
       causeDetail: 'The sports week reached ' + touchedIds.length + ' citizen(s) — ' + counts.named + ' named, ' +
-        counts.staff + ' staff week lines, ' + counts.fan + ' fan week lines',
+        counts.staff + ' staff week lines, ' + counts.fan + ' fan week lines' +
+        (counts.trigger ? ', ' + counts.trigger + ' trigger line(s)' : '') +
+        (milestoneDetail.length ? '; ' + milestoneDetail.join('; ') : ''), // engine.333: the seed and summary carry the milestone by name
       effectType: 'game-night',
       targetScope: 'citizen',
       targetIds: touchedIds,
@@ -357,6 +555,7 @@ function applyGameNightMoments_(ctx) {
 
   if (typeof Logger !== 'undefined') {
     Logger.log('applyGameNightMoments_: cycle ' + cycle + ' — ' + counts.named + ' named, ' + counts.staff +
-      ' staff, ' + counts.fan + ' fan line(s); weeks ' + JSON.stringify(signed));
+      ' staff, ' + counts.fan + ' fan line(s), ' + counts.trigger + ' trigger line(s), ' + counts.retired + ' retired, ' +
+      counts.injured + ' injured, ' + counts.returned + ' returned; weeks ' + JSON.stringify(signed));
   }
 }

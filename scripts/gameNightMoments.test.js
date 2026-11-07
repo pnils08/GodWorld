@@ -170,4 +170,148 @@ named6(moody6).forEach((x, i) => {
   assert.ok(x[4].indexOf(base + ' — ') === 0 && clauses['locked-in'].includes(x[4].slice(base.length + 3)), x[4]);
 });
 
+// 7. engine.333 — the row's trigger word: a second received line, or a milestone that changes the row
+// (builder 2026-11-05/07: a sports retirement leaves the sports layer with Status Active; injury fills the bed;
+// the newest life-altering moment leads the bio). Fixture rows carry the milestone cells.
+const H7 = headers.concat(['EconomicProfileKey', 'CitizenBio', 'StatusStartCycle', 'HealthCause', 'Tier']);
+const c7 = (n) => H7.indexOf(n);
+const BIO = "DH from Boston playing his farewell 2041 season. 436 career homers, six rings.";
+function rows7() {
+  return [
+    ['POP-00001', 'Vinnie', 'Keane', '', 'Active', 'Rockridge', '', 'GAME', 'BIZ-00005', "Designated Hitter, Oakland A's Legend", '', 'SPORTS_OVERRIDE', BIO, '', '', 1],
+    ['POP-00025', 'Arturo', 'Ramos', '', 'Active', 'Jack London', '', 'GAME', 'BIZ-00005', "Starting Pitcher, Oakland A's", '', 'SPORTS_OVERRIDE', '', '', '', 2],
+    ['POP-01024', 'AJ', 'Dybantsa', '', 'Active', 'Downtown', '', 'GAME', 'BIZ-00074', 'SF / The Oaks', '', 'SPORTS_OVERRIDE', '', '', '', 2],
+    ['POP-00022', 'Danny', 'Horn', '', 'injured', 'Jack London', '', 'GAME', 'BIZ-00005', "Center Fielder, Oakland A's", '', 'SPORTS_OVERRIDE', '', 110, 'hamstring, dashboard', 3],
+    ['POP-00019', 'Isley', 'Kelley', '', 'injured', 'Jack London', '', 'GAME', 'BIZ-00005', "Shortstop, Oakland A's Legend", '', 'SPORTS_OVERRIDE', '', 108, 'knee', 1],
+    ['POP-00527', 'Mike', 'Paulson', '', 'Active', 'Jack London', '', 'GAME', 'BIZ-00005', "General Manager, Oakland A's & The Oaks", '', 'SPORTS_OVERRIDE', '', '', '', 1]
+  ];
+}
+let priorCalls = [];
+sandbox.hospitalPriorStatusForDischarge_ = (ctx, pop) => { priorCalls.push(pop); return 'Active'; };
+function run7(entries, rows, weeks) {
+  logs.length = 0;
+  const appended = [];
+  const logSheet = { getLastRow: () => 1, getRange: () => ({ setValues: (v) => { appended.push(...v); } }) };
+  let seed = 11;
+  const ripples = [];
+  sandbox.recordRipple_ = (ctx, r) => ripples.push(r);
+  const ctx = {
+    summary: { sportsFeedEntries: entries, sportsWeek: weeks || {}, cycleId: 110 },
+    ledger: { headers: H7, rows, dirty: false },
+    ss: { getSheetByName: (n) => (n === 'LifeHistory_Log' ? logSheet : null) },
+    config: { cycleCount: 110 }, now: 'NOW', cache: {},
+    rng: () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
+  };
+  sandbox.applyGameNightMoments_(ctx);
+  const tags = {};
+  appended.forEach((x) => { (tags[x[1]] = tags[x[1]] || []).push(String(x[3]).split('|')[0]); });
+  const rawTags = {};
+  appended.forEach((x) => { (rawTags[x[1]] = rawTags[x[1]] || []).push(String(x[3])); });
+  return { rows, appended, tags, rawTags, dirty: ctx.ledger.dirty, hospital: ctx.summary.hospitalEvents || [], ripples, logs: logs.slice() };
+}
+const rowOf = (r, id) => r.rows.find((x) => x[0] === id);
+
+// 7a. the pin: every dropdown word has a route; every texture route's tag moves a dial (engine.299: no inert line)
+const routes = vm.runInContext('SPORTS_TRIGGER_ROUTES_', sandbox);
+const routeTags = vm.runInContext('SPORTS_TRIGGER_TAGS_', sandbox);
+const routePools = vm.runInContext('SPORTS_TRIGGER_POOLS_', sandbox);
+const words = vocab.EVENT_TRIGGER_VALUES.filter(Boolean);
+assert.deepStrictEqual(Object.keys(routes).sort(), words.slice().sort(), 'dropdown words == route keys (a word 331 adds later fails here)');
+assert.ok(!routes['hot-streak'] && !routes['cold-streak'], 'the engine-only words never reach the cell and have no route');
+const dialMap = require('../utilities/citizenDialMap.js');
+for (const k of Object.keys(routeTags)) {
+  assert.ok(Object.keys(dialMap.nudgesForEvent_(routeTags[k], 1, '')).length > 0, 'route tag moves a dial: ' + routeTags[k]);
+  assert.ok(Array.isArray(routePools[k]) && routePools[k].length >= 3, 'route pool: ' + k);
+}
+assert.ok(Object.keys(dialMap.nudgesForEvent_('Retirement', 1, '')).length > 0);
+
+// 7b. retirement leaves the sports layer: clock, key, role, line, bare log tag, bio — Status stays Active
+const r7 = run7([{ eventType: 'press-conference', teamsUsed: "A's", namesUsed: 'Vinnie Keane (DH)', eventTrigger: 'retirement' }], rows7());
+const vin = rowOf(r7, 'POP-00001');
+assert.strictEqual(vin[c7('ClockMode')], 'ENGINE');
+assert.strictEqual(vin[c7('EconomicProfileKey')], '');
+assert.strictEqual(vin[c7('RoleType')], "Former Designated Hitter, Oakland A's Legend");
+assert.strictEqual(vin[c7('Status')], 'Active', 'a sports retirement is not a senior retirement');
+assert.strictEqual(vin[c7('StatusStartCycle')], '', 'the health clock is not stamped');
+assert.strictEqual(vin[c7('EmployerBizId')], 'BIZ-00005', 'employer of record kept');
+assert.ok(/ — \[Retirement\] retired from the A's, announced C110$/m.test(vin[c7('LifeHistory')]), vin[c7('LifeHistory')]);
+assert.deepStrictEqual(r7.rawTags['POP-00001'], ['Sports-Sociability-Up-S|source:sports|feedNamed|event:press-conference|team:A\'s', 'Retirement'],
+  'the type line, then the milestone with a BARE log tag the wake loop reads');
+assert.strictEqual(vin[c7('CitizenBio')], "Now: Former Designated Hitter, Oakland A's Legend; retired C110. " + BIO, 'the Now: sentence leads the authored bio');
+assert.ok(r7.ripples[0].causeDetail.indexOf('retirement: Vinnie Keane') > 0, r7.ripples[0].causeDetail);
+assert.strictEqual(r7.dirty, true);
+
+// 7c. idempotent: the same row fired again on the flipped row changes nothing and writes no second Retirement
+const r7b = run7([{ eventType: 'press-conference', teamsUsed: "A's", namesUsed: 'Vinnie Keane (DH)', eventTrigger: 'retirement' }], r7.rows);
+const vin2 = rowOf(r7b, 'POP-00001');
+assert.deepStrictEqual(r7b.tags['POP-00001'], ['Sports-Sociability-Up-S'], 'the per-fire type line only');
+assert.strictEqual(vin2[c7('RoleType')], "Former Designated Hitter, Oakland A's Legend", 'no Former Former');
+assert.strictEqual(vin2[c7('CitizenBio')], "Now: Former Designated Hitter, Oakland A's Legend; retired C110. " + BIO, 'bio untouched');
+assert.strictEqual((vin2[c7('LifeHistory')].match(/\[Retirement\]/g) || []).length, 1, 'one Retirement line across two fires');
+// a later chapter replaces the Now: sentence, never piles up
+assert.strictEqual(sandbox.sportsBioNow_(vin2[c7('CitizenBio')], 'Owner, Keane Academy'), 'Now: Owner, Keane Academy. ' + BIO);
+
+// 7d. the gates: an NFL row's retirement retires no one (331's team gate); a typed hot-streak writes no streak line
+const r7c = run7([{ eventType: 'player-feature', teamsUsed: 'NFL', namesUsed: 'Arturo Ramos (SP)', eventTrigger: 'retirement' },
+  { eventType: 'game-result', teamsUsed: "A's", namesUsed: 'Vinnie Keane (DH)', streak: 'W2', eventTrigger: 'hot-streak' }], rows7());
+assert.strictEqual(rowOf(r7c, 'POP-00025')[c7('ClockMode')], 'GAME', 'NFL row: still a GAME row');
+assert.deepStrictEqual(r7c.tags['POP-00025'], ['Reputation'], 'the type line only');
+assert.deepStrictEqual(r7c.tags['POP-00001'], ['Sports-Played'], 'typed hot-streak: no streak line, no second line');
+assert.ok(r7c.logs.some((m) => /trigger words with no citizen route, cycle 110: retirement@NFL, hot-streak/.test(m)), r7c.logs.join(' / '));
+
+// 7e. texture routes: a second signed line beside the type line, tag carries the word; the move route for a trade
+const r7d = run7([{ eventType: 'game-result', teamsUsed: 'Oaks', namesUsed: 'AJ Dybantsa (SF)', streak: 'W1', eventTrigger: 'buzzer-beater' },
+  { eventType: 'roster-move', teamsUsed: "A's", namesUsed: 'Arturo Ramos (SP)', eventTrigger: 'traded' },
+  { eventType: 'player-feature', teamsUsed: "A's", namesUsed: 'Mike Paulson', eventTrigger: 'community-outreach' }], rows7());
+assert.deepStrictEqual(r7d.tags['POP-01024'], ['Sports-Played', 'Sports-Composure-Up-M']);
+assert.ok(/\|trigger:buzzer-beater\|team:Oaks$/.test(r7d.rawTags['POP-01024'][1]));
+assert.ok(routePools.celebration.includes(r7d.appended.find((x) => x[1] === 'POP-01024' && /Composure-Up-M/.test(x[3]))[4]));
+assert.deepStrictEqual(r7d.tags['POP-00025'], ['Sports-Moved', 'Sports-Moved'], 'type route and trigger route both say moved');
+assert.deepStrictEqual(r7d.tags['POP-00527'], ['Reputation', 'Sports-Warmth-Up-S']);
+assert.strictEqual(r7d.hospital.length, 0);
+
+// 7f. injury fills the bed — three states of the row
+const r7e = run7([{ eventType: 'injury', teamsUsed: "A's", namesUsed: 'Arturo Ramos (SP), Danny Horn (CF), Isley Kelley (SS)', eventTrigger: 'injury', notes: 'hamstring' }], rows7());
+const ramos = rowOf(r7e, 'POP-00025'), horn7 = rowOf(r7e, 'POP-00022'), kelley7 = rowOf(r7e, 'POP-00019');
+// Active → the engine stamps the row and files the intake
+assert.strictEqual(ramos[c7('Status')], 'injured');
+assert.strictEqual(ramos[c7('StatusStartCycle')], 110);
+assert.strictEqual(ramos[c7('HealthCause')], "injured playing for the A's");
+// the dashboard stamped this Cycle (StatusStartCycle = 110, its own cause) → the engine files the bed, touches no Status cell
+assert.strictEqual(horn7[c7('Status')], 'injured');
+assert.strictEqual(horn7[c7('HealthCause')], 'hamstring, dashboard');
+// in a health state from an earlier Cycle → the line only
+assert.strictEqual(kelley7[c7('StatusStartCycle')], 108);
+const beds = r7e.hospital;
+assert.deepStrictEqual(Array.from(beds, (e) => e.popId).sort(), ['POP-00022', 'POP-00025'], 'two intakes, none for the earlier injury'); // host-realm array (hospitalEvents is the vm's)
+const bedR = beds.find((e) => e.popId === 'POP-00025'), bedH = beds.find((e) => e.popId === 'POP-00022');
+assert.deepStrictEqual([bedR.kind, bedR.intakeType, bedR.sourceSystem, bedR.sourceEventId, bedR.priorStatus, bedR.to],
+  ['intake', 'injury', 'sports-feed', 'sports-feed:C110:injury:POP-00025', 'Active', 'injured']);
+assert.deepStrictEqual([bedH.priorStatus, bedH.to, bedH.cause], ['Active', 'injured', 'hamstring, dashboard']);
+for (const id of ['POP-00025', 'POP-00022', 'POP-00019']) assert.deepStrictEqual(r7e.tags[id], ['Sports-Injured', 'Sports-Injured'], id + ': type line + trigger line');
+assert.ok(r7e.ripples[0].causeDetail.indexOf('injury (stamped): Arturo Ramos') > 0 && r7e.ripples[0].causeDetail.indexOf('injury (bed-only): Danny Horn') > 0
+  && r7e.ripples[0].causeDetail.indexOf('injury (line-only): Isley Kelley') > 0, r7e.ripples[0].causeDetail);
+// a second fire of the same row: same stable sourceEventId (the writer's dedup), no re-stamp of the clock
+const r7f = run7([{ eventType: 'injury', teamsUsed: "A's", namesUsed: 'Arturo Ramos (SP)', eventTrigger: 'injury' }], r7e.rows);
+assert.strictEqual(r7f.hospital.length, 1, 'the dashboard-stamped shape (StatusStartCycle = this Cycle) files the bed again — same id');
+assert.strictEqual(r7f.hospital[0].sourceEventId, 'sports-feed:C110:injury:POP-00025');
+assert.strictEqual(rowOf(r7f, 'POP-00025')[c7('HealthCause')], "injured playing for the A's");
+
+// 7g. injury-return empties the bed the health engine's way
+priorCalls = [];
+const r7g = run7([{ eventType: 'injury', teamsUsed: "A's", namesUsed: 'Isley Kelley (SS), Vinnie Keane (DH)', eventTrigger: 'injury-return' }], rows7());
+const kel = rowOf(r7g, 'POP-00019');
+assert.deepStrictEqual(priorCalls, ['POP-00019'], 'PriorStatus read for the injured player only');
+assert.deepStrictEqual([kel[c7('Status')], kel[c7('StatusStartCycle')], kel[c7('HealthCause')]], ['Active', '', '']);
+assert.strictEqual(r7g.hospital.length, 1);
+assert.deepStrictEqual([r7g.hospital[0].kind, r7g.hospital[0].from, r7g.hospital[0].to, r7g.hospital[0].cause], ['transition', 'injured', 'active', 'knee']);
+assert.deepStrictEqual(r7g.tags['POP-00019'], ['Sports-Injured', 'Sports-Composure-Up-S']);
+assert.deepStrictEqual(r7g.tags['POP-00001'], ['Sports-Injured', 'Sports-Composure-Up-S'], 'already out: the line only');
+assert.strictEqual(rowOf(r7g, 'POP-00001')[c7('Status')], 'Active');
+
+// 7h. a blank trigger: exactly the pre-333 shape (one type line, nothing else)
+const r7h = run7([{ eventType: 'game-result', teamsUsed: "A's", namesUsed: 'Vinnie Keane (DH)', streak: 'W1', eventTrigger: '' }], rows7());
+assert.deepStrictEqual(r7h.tags['POP-00001'], ['Sports-Played']);
+assert.strictEqual(rowOf(r7h, 'POP-00001')[c7('ClockMode')], 'GAME');
+
 console.log('gameNightMoments.test.js: all assertions passed');

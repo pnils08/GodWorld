@@ -82,6 +82,10 @@ pointers:
 
 Builder's words: "a sports citizen can retire for baseball but still be of a working age to take on new opportunities. So where someone 70 years old should retire, Vinnie is 38 so putting him off Undocked and in a retirement event loop doesn't make sense." "injuries happen in my game that I add to the sports intake that should ripple into the sim, they can also get sick and have issue like Deacon Seymour did and was hospitalized." "these sports retirements are not senior citizens and they are likely to move into new career types, business owners, media, coach a team, etc, their stories don't end at retirement from sports, Vinnie Keane will continue to be a prominent citizen." "sports players in retirement are different than senior citizen retirement, the engine mode or flags should determine what a 'next chapter' looks like."
 
+Builder's words 2026-11-06 on C4–C7: "once Vinnie has the retirement line it's just a matter of switching him off game to engine on clock mode … his job won't end up as ride share driver"; "[the roster is] mainly a ledger I manually manage at this point"; "a better place for this may be 'bio' … idk how easy it is to maintain the prose approach"; "Doesn't the life event increase the odds? And a major guarantees it?" And 2026-11-07, ruling C6 and C7: "Yes on newest life altering moments should add a line atop the bio. Yes retirement should join the reserve."
+
+**Scope of the Bio ruling.** "Newest life altering moments" is wider than retirement: the engine's own definition of a person-readable milestone is the wake's `MILESTONE_TAGS` set (`wakePerception.js:55`: Wedding, Birth, Retirement, Graduation, Stabilized, Health). This row builds the mechanism as one shared helper — write the `Now:` sentence for a milestone tag, replace an earlier `Now:` — and wires the two writers it owns (retirement; the injury bed as a Health moment). Wiring the other milestone writers (wedding, birth, graduation, the health engine's own admissions) is its own row, filed at this row's close.
+
 What that rules out, from the code: `Status = Retired` is the senior-retirement state — it drops a row from the UNDOCKED draw and the names floor, ends the career path, and (codex F1) the Universe phase turns a `Retired` GAME row into a post-career loop (`runAsUniversePipeline.js:433-456`: clock → ENGINE, "Moved into post-career life", then `:461-575` a 2% soft PostCareer-* texture each Cycle, "ENGINE may add soft post-career notes only"). That loop and the six hand-minted ex-A's rows (Status Retired, CareerStage retired, profile key "Retired") are the old convention. The engine does not perpetuate it; the six rows are not touched (rule 4). C1–C3 as first written are withdrawn — they were built on `Status = Retired`.
 
 ### The sports layer is two cells, and a sports retirement is leaving it
@@ -139,13 +143,13 @@ Injury from the sports intake (the builder's input): the dashboard roster `injur
 2. **`retirement` leaves the sports layer** (C4): ClockMode → ENGINE, EconomicProfileKey → blank, RoleType → `Former <position>, Oakland A's` (Legend kept), `[Retirement]` line ("retired from the <team>, announced C<N>"), log EventTag bare `Retirement`, StatusStartCycle → cycle, Status untouched (Active). Skipped when the row is already off the layer. The GameNight ripple CauseDetail names it.
 3. **`injury` fills the bed** (§Injury): intake entry + line when the dashboard stamped this Cycle; Status + StatusStartCycle + HealthCause + intake entry + line when it did not. `injury-return` on Status `injured` → the health engine's discharge path (PriorStatus). Already in a health state from an earlier Cycle → line only.
 4. **Readers.** `buildVoiceBrief_` and `lookup_citizen` already show the feed lines and the row; after the flip the row reads Former <position>, ENGINE, Active. The citizen-voice character files stay as written — the brief says the records win.
-5. **The chapter sentence** (C6, pending the builder's yes on the shape): the retirement milestone writes `Now: Former <position>, Oakland A's; retired C<N>.` to the front of CitizenBio, replacing an earlier `Now:` sentence if one leads the cell; the authored prose after it is untouched. First engine write to that column — SIMULATION_LEDGER + SCHEMA_HEADERS note in the same commit.
-6. **The cron is aware** (C7, pending the builder's yes): `owedFrom` gains LifeHistory_Log as a fifth source — EventTag `Retirement` in the window → owed entry kind `milestone`, tier 1, pin the `[Retirement]` life line. Injury needs nothing: the bed (design 3) is already an owed source.
+5. **The chapter sentence** (C6, ruled 2026-11-07): a shared helper writes `Now: <sentence>` to the front of CitizenBio for a milestone tag, replacing an earlier `Now:` sentence if one leads the cell; the authored prose after it is untouched. This row's writers: retirement → `Now: Former <position>, Oakland A's; retired C<N>.`; injury → `Now: injured (<cause>), C<N>.`, and the restore on discharge/return clears back to the previous chapter sentence or none. First engine write to that column — SIMULATION_LEDGER + SCHEMA_HEADERS note in the same commit. Other milestone writers: a follow-on row (§Builder's ruling, scope).
+6. **The cron is aware** (C7, ruled 2026-11-07): `owedFrom` gains LifeHistory_Log as a fifth source — EventTag `Retirement` in the window → owed entry kind `milestone`, tier 1, pin the `[Retirement]` life line. Injury needs nothing: the bed (design 3) is already an owed source.
 7. **Not in this row:** the trigger vocabulary and re-fire (engine.331); the roster tab (C5: the builder's hand ledger); the next-chapter inputs (intake rows, owner doors — their own rows); any hand edit to Vinnie's row.
 
 ## Open with the builder
 
-- C4 and C5 ruled 2026-11-06. C6: yes/no on the one leading `Now:` sentence in CitizenBio. C7: yes/no on the retirement milestone joining the owed-wake reserve.
+- C4–C7 all ruled (C4, C5 on 11-06; C6, C7 on 11-07). Nothing open on the design.
 - Sequence: this row waits on `retirement` entering the trigger list as a **milestone word** (engine.331 owns the list; codex F4 — not a hook).
 - The `retirement` feed row for Vinnie: his press conference. The builder files it when he judges the world is there; the engine opens the door at the next fire; his next chapter is the builder's next row.
 
@@ -162,7 +166,7 @@ Injury from the sports intake (the builder's input): the dashboard roster `injur
 | # | Task | Owner | Status |
 |---|------|-------|--------|
 | 1 | Read-before: `applyGameNightMoments_` NAMED path end to end; the 43 Retired rows' RoleType/Status convention; wakePerception `[Retirement]` read; engine.331 plan when written. Wiring card on `applyGameNightMoments_` and `S.sportsEventTriggers` | rb | done 2026-11-05 (§Read-before; three cards; codex independent read reconciled) |
-| 1b | Builder rules C4 – C7 | Mike | C4, C5 ruled 2026-11-06; C6 (Bio sentence shape) and C7 (owed reserve) open |
+| 1b | Builder rules C4 – C7 | Mike | done — C4, C5 ruled 2026-11-06; C6, C7 ruled 2026-11-07 |
 | 2 | Cut: trigger routing table + `retirement` leaves the sports layer + `injury` fills the bed + the Bio `Now:` sentence (C6) + the owed milestone source (C7); idempotent per row. Read first: the wealth engine's income paths on an ENGINE Tier 1 row (C4 open item) | rb | not started |
 | 3 | Sandbox: plant one `retirement` row (NamesUsed = a bench-only name, never a live citizen), fire twice, read back clock / profile key / RoleType / Status / LifeHistory / log tag; plant a `hot-streak` named row, read the line; plant an `injury` named row with and without a prior dashboard stamp, read the bed | rb | not started |
 | 4 | Codex review of the exact candidate; PROD push; DEPLOY_HISTORY | rb / codex | not started |
@@ -182,6 +186,7 @@ Injury from the sports intake (the builder's input): the dashboard roster `injur
 
 ## Changelog
 
+- 2026-11-07 — builder ruled C6 (a `Now:` line atop the bio for the newest life-altering moment; this row builds the helper + its two writers, other milestones a follow-on row) and C7 (retirement joins the owed reserve). Design closed; row to ready.
 - 2026-11-06 — builder answered C4–C7: C4, C5 ruled; C6 reframed to a leading `Now:` sentence in CitizenBio (the wake reads Bio first); C7 corrected — the owed reserve guarantees beds, not milestones; retirement joins it.
 - 2026-11-05 (ruling) — builder: a sports retirement is not a senior retirement; Status stays Active, the row leaves the sports layer (clock, profile key, RoleType), next chapter by mode and tier; C1–C3 withdrawn, C4–C7 open; codex read reconciled (F1 Universe writer decisive).
 - 2026-11-05 (later) — Task 1 read-before written (§Read-before): milestones read the row's own cell so 331's re-fire fix is not upstream; the vocabulary pin is the one 331 contract; bare log tag for the wake loop; `injury` added as a milestone; C1–C3 put to the builder.

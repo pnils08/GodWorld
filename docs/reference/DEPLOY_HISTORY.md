@@ -1,7 +1,7 @@
 ---
 title: Deploy History — full sandbox + PROD deployment ledger
 created: 2026-09-04
-updated: 2026-11-01
+updated: 2026-11-07
 type: reference
 tags: [engine, deploy, history, active]
 sources:
@@ -18,6 +18,8 @@ pointers:
 ---
 
 ## Current sandbox — full trail
+
+**`SANDBOX 1004` @184 = stage 38 = PROD stage 38 (2026-11-07, engine-sheet, engine.331).** Stage 38 = stage 37 + the seven engine.331 files (`output/engine-sheet/stage38-e331.sha256`, rewritten by each bench push). Three runs, each from a live sync (C114) with bench-only feed rows (Notes `E331-BENCH NON-CANON`), fire 1 at C115 + fire 2 at C116: bench 1 on `592707c09` (@182), bench 2 on `e36350a88` (@183, the fan-line sign), bench 3 on the final `f82f19c72` (@184) — every fire PASS, 0 Engine_Errors. Final sync from live after each run: **bench data = live C114; bench code = stage 38 = PROD**, no restore owed. Push `output/engine-sheet/2026-11-06-push-e331-bench.sh`, run `2026-11-06-e331-bench.sh <commit>`, reads `2026-11-06-e331-reads.jsonl`, logs `2026-11-06-e331-bench{,-2,-3}.log`.
 
 **`SANDBOX 1004` @181 = stage 36 = PROD stage 36 after the civic.47 B2 F7 proof (2026-11-01, research-build).** @178 / @180 = stage 37 = stage 36 + `civicInitiativeEngine.js` (the station-serving-hood transit stage reader) at `2a6ccb214` / `2fc359eb4` (`output/engine-sheet/stage37-c47b2.sha256` = the second, `2fc359eb4`). Each run: INIT-003 (Fruitvale hub) staged bench-only (Standing / signed / operational, no baseline); fire 1 stamped a conversion baseline typed `station-serving-hood` from the bench's own Transit_Metrics (target reading, 7 station hoods and city middle recomputed independently from the tab — all matched); Fruitvale's next-Cycle reading planted at 4x the baseline; fire 2 counted one up (edge available). First run C131 + C132 (baseline C130), second run C133 + C134 (baseline C132), all PASS (193–242 s). INIT-003 reverted; bench code restored to stage 36 (@181). Bench data at C134 with two bench-only Fruitvale readings planted (Notes carry the marker). Reviews: agy HOLD (5 findings, verified, folded), codex re-review HOLD (3 findings, folded in `2fc359eb4`, the guard being the one engine-file change that triggered the second run). PROD push script `output/engine-sheet/2026-11-01-push-c47b2-prod.sh` written and dry-run; first held (live sheet lost its Simulation_Ledger and Initiative_Tracker tabs), then pushed 2026-11-01 ~15:13 CST — PROD @173 = stage 37, see §PROD. Logs `output/engine-sheet/2026-11-01-c47b2-bench.log`, `…-bench-first-2a6ccb214.log`.
 
@@ -179,6 +181,15 @@ pointers:
 ---
 
 ## PROD deploy log — full trail
+
+### PROD stage 38 (`f82f19c72`, seven files over stage 37) — engine.331 sports moments are this Cycle's rows (2026-11-07 ~01:59 CST, engine-sheet)
+- **Why:** engine.331 (builder 11-05 / 11-06) — a blank feed cell re-fired the team's last trigger every Cycle (C114: both sports pitches carried); one game made a hot/cold streak; nothing for the off-season or a bad week. Also G-ES5: since engine.299 the city's game-night fan lines carried no sign and were never written (live 37–74 a Cycle at C105–C110, 0 at C112–C114).
+- **What changed:** `utilities/setupSportsFeedValidation.js` (39 words, 5 aliases, `hot-streak` / `cold-streak` engine-only), `utilities/sportsWeekRecord.js` (`S.sportsWeek[team].hotCold` = the streak headline's decision at World_Config `sportsStreakHeadline` 5), `phase02-world-state/applySportsSeason.js` (moments from this Cycle's rows only, canonical word, clinch off the game row, mood triggers gone), `phase07-evening-media/storyHook.js` (23 new pitches), and the three game-night readers `applyGameNightMoments.js` / `generateCitizensEvents.js` / `runHouseholdEngine.js` (hot/cold from the week, cold set, every dropdown mood closes the players' night line on the same rng draw, sport-neutral shared lines, fan lines signed `dial:fandom:up/down`, a club that played decides the night, the game-night Ripple names each citizen once).
+- **Bench proof:** SANDBOX 1004 @184 on `f82f19c72` (bench 3; Current sandbox above). C115 (160 s): A's `award` ×2 → one pitch, Oaks `re-signed` + `trade-rumor` pitches, the typed W2 `hot-streak` no pitch; fans 35 win lines all `Sports-Fandom-Up-S`, 35 distinct = Ripple 35; players `win` + `hungry` clause. C116 (214 s, every trigger cell blank): one Oaks W5 hot pitch, nothing for the A's; fans 38 `winStreak` Up, 38 distinct = Ripple 38; players `winStreak` + `locked-in`, all parse; one household streak line. 0 Engine_Errors both fires.
+- **Reviews:** codex plan review HOLD (9 folded) + re-review HOLD (fixed in place); codex diff review HOLD on `592707c09` (2 folded, `d409bac12`) + diff re-review HOLD (3 fixed in place, `f82f19c72`). **The `f82f19c72` fold came after the round cap and has no codex read** (CLAUDE.md §Review 4); each fix is pinned by a test that fails on the old code with codex's own probe numbers (313 wrong-team lines; 23/290 Ripples with a repeat), full suite 320/320, and bench 3 ran on that hash. Reviews: `docs/for-claude-review/2026-11-06-codex-engine331-diff-review.md`, `…-diff-rereview.md`.
+- **Push:** `bash output/engine-sheet/2026-11-07-push-e331-prod.sh f82f19c72 output/engine-sheet/stage38-e331.sha256 114` (dry run first; log `…-push-e331-prod.log`) → fresh PROD pull = stage 37, built = benched manifest, no fire key, door valid C114 done, **@174** on the pinned deployment `AKfycbwUvd4T…`, pull-back 167 js + manifest identical; fire state and door clean after the pull-back, +8 and +16 min (Cycle 114, intake 174 rows identical, ledger 1,058); `push-e331-prod.DONE` 02:20:37 CST (cut time = that less the script's ~21 min of waits).
+- **After:** `pm2 restart godworld-dashboard` 02:20 CST — validation serves the 39 words and refuses `hot-streak` (422); the sports workspace / preview 500 on a live `As_Roster` header without `Middle` (G-ES6, not this deploy's code). Builder re-runs **Setup Sports Feed Validation** from the menu (sheet dropdown); first live fire C115 Sun 2026-11-08 — read per plan Acceptance 14 and P1/P3.
+- **Rollback:** the seven files from `592707c09^` (= stage 37 blobs, `stage37-c47b2.sha256`) with a guarded deploy; the dashboard restart after it.
 
 ### PROD stage 37 (`2fc359eb4`, one file over stage 36) — civic.47 B2 F7 the transit stage reader (2026-11-01 ~15:13 CST, research-build; entry written 2026-11-03)
 - **Why:** civic.47 B2 F7 — a station's riders count in the hood the station serves, and only the observation Cycle's `Transit_Metrics` rows are read, so INIT-003 (Fruitvale hub) has a stage-3 reading once it holds a Stage.

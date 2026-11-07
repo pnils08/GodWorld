@@ -36,8 +36,8 @@ RC=$(echo "$D" | grep -o '"record":{"cycle":[0-9]*' | grep -o '[0-9]*$')
 echo "clearcheckpoint: $(node $O/2026-11-05-e330-bench.js clearcp 2>&1 | q)"
 N=$(( $(cc) + 1 ))
 echo "== plant fire 1 at C$N"; node $O/2026-11-07-e332-bench.js plant $N 2>&1 | q; [ ${PIPESTATUS[0]} -eq 0 ] || { echo "HALT plant"; exit 6; }
-seed; fire e332-f1
-echo "== fire 2: seeder only"; seed; fire e332-f2
+seed; fire ${TAG:-e332}-f1
+echo "== fire 2: seeder only"; seed; fire ${TAG:-e332}-f2
 echo "== final sync from live"; node scripts/syncSandboxFromLive.js $B --apply > $SP/e332.sync.final.out 2>&1 || echo "HOLD final sync failed"
 tail -2 $SP/e332.sync.final.out | q
 echo "engine.332 bench done"

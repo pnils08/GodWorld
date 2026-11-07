@@ -1,4 +1,4 @@
-// engine.332 bench helpers on SANDBOX 1004 (no token echoed). Bench-only Edition_Coverage_Ratings rows,
+// engine.332 bench helpers on SANDBOX 1004 (run 2 on the codex fold reads the contract carry too) (no token echoed). Bench-only Edition_Coverage_Ratings rows,
 // Reporter marker E332-BENCH NON-CANON (the tab has no Notes column).
 //   node 2026-11-07-e332-bench.js plant <N>          fire 1 ratings: HEALTH -4, ENVIRONMENT +5, SPORTS +3, CIVIC +2 at N-1;
 //                                                    ENVIRONMENT +3 at N (a same-beat pair across two rating Cycles)
@@ -66,12 +66,19 @@ function ratingRows(N) {
     const lanes = reactions.map(x => ({ causeId: x.causeId, lane: ws.rippleLane({ CauseType: 'coverage-reaction', CauseId: x.causeId }) }));
     const sig = ws.emitDeskSignal ? ws.emitDeskSignal(N, { rippleAll: rip.rows }) : null;
     const sigLanes = sig ? Object.fromEntries(Object.entries(sig.lanes).map(([k, v]) => [k, v.filter(e => e.causeType === 'coverage-reaction').map(e => e.label)])) : null;
+    // codex F1 fold: the contract carry Phase 9 saved at N holds every deck row with a What but the coverage reactions
+    const cfs = obj(await sh.getSheetData('Carry_Forward_Store')).rows.filter(r => r.Key === 'PREV_CONTRACT_SEEDS_JSON' && num(r.Cycle) === N);
+    let carry = null;
+    if (cfs.length) { try { const j = JSON.parse(cfs[cfs.length - 1].JSON); carry = { cycle: j.cycle, count: j.count, seeds: (j.seeds || []).length,
+      citywide: (j.seeds || []).filter(x => /^citywide$/i.test(x.n)).length }; } catch (e) { carry = { parseError: e.message }; } }
+    const deckWithWhat = deck.filter(r => String(r.What).trim()).length;
+    const carryCheck = carry && !carry.parseError ? { expectCount: deckWithWhat - reactionSeeds.length, ok: carry.count === deckWithWhat - reactionSeeds.length } : null;
     const ee = obj(await sh.getSheetData('Engine_Errors'));
     const eeN = ee.rows.filter(r => num(r.Cycle) === N).map(r => [r.Phase, r.Error].join(' | ').slice(0, 220));
     const wk = obj([['Key', 'Value'], ...(await sh.getSheetData('World_Config')).slice(1)]).rows;
     const out = { label, N, at: new Date().toISOString(), cycleCount: (wk.find(r => r.Key === 'cycleCount') || {}).Value,
       ratingsInWindow: ecr, reactionRipples: reactions, editionCoverageRipples: editionCoverage,
-      deckRowsAtN: deck.length, reactionSeeds, aggregateSeeds: aggSeeds, rippleLanes: lanes, deskSignalCoverageReaction: sigLanes,
+      deckRowsAtN: deck.length, reactionSeeds, contractCarry: carry, contractCarryCheck: carryCheck, aggregateSeeds: aggSeeds, rippleLanes: lanes, deskSignalCoverageReaction: sigLanes,
       engineErrorsAtN: eeN };
     fs.appendFileSync(OUT, JSON.stringify(out) + '\n');
     console.log(JSON.stringify(out, null, 1));

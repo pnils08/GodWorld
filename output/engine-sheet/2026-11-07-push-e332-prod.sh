@@ -1,5 +1,5 @@
 #!/bin/bash
-# engine.332 PROD push (stage 40): PROD (stage 39, @175) + the three engine.332 files at <commit>, which must
+# engine.332 PROD push (stage 40): PROD (stage 39, @175) + the four engine.332 files at <commit>, which must
 # equal the benched stage byte for byte (<manifest>: stage40-e332.sha256, written by the bench push of that commit). Copied
 # from 2026-11-07-push-e333-prod.sh (itself from push-e331-prod.sh): the door reads PROD's fire record before the push and after; live fire-state gate at
 # <cycle> = the live Cycle now, right before the push, after the pull-back, 8 and 16 minutes later.
@@ -10,7 +10,7 @@ SRC=${1:?commit}; MAN=${2:?manifest}; CYC=${3:?live cycle}; DRY=${4:-}
 CLASP=/root/GodWorld/node_modules/.bin/clasp
 PROD_ID=1hL59VnByrXfWdz6EKZZQ1ss8DH1PFfDT9vVDvmjqHY_pwLyTB_N1iKW5
 OUT=/root/GodWorld/output/engine-sheet
-FILES="phase02-world-state/applyEditionCoverageEffects.js phase07-evening-media/buildContractSeeds.js phase07-evening-media/applyStorySeeds.js"
+FILES="phase02-world-state/applyEditionCoverageEffects.js phase07-evening-media/buildContractSeeds.js phase07-evening-media/applyStorySeeds.js phase09-digest/finalizeCycleState.js"
 [[ "$CYC" =~ ^[0-9]+$ ]] && [ "$CYC" -ge 114 ] || { echo "cycle must be the live Cycle (>= 114) — stop"; exit 1; }
 [ "$(realpath "$MAN")" = "$OUT/stage40-e332.sha256" ] || { echo "manifest must be the benched stage40-e332.sha256 — stop"; exit 1; }
 door() {   # door <when> — PROD still has no fire key, and its fire record through the read-only door of the PINNED
@@ -81,7 +81,7 @@ N0=$(DOOR_EXPECT_DEP="$DEP" node $OUT/2026-10-30-e317-door.js prod-nofire 2>&1 |
 echo "$N0" | grep -q '"noFireKey":true' || { echo "PROD answers with a fire key, or the door's deployment is not the pinned one — STOP"; exit 1; }
 door "before the push" || { echo "PROD's fire record through the door is not a valid Cycle $CYC done record — STOP"; exit 1; }
 ( cd "$W/stage" && CLAUDE_CTL=1 "$CLASP" push --force | tail -1 )
-VER=$( cd "$W/stage" && CLAUDE_CTL=1 "$CLASP" deploy -i "$DEP" -d "engine.332 = $BASE + applyEditionCoverageEffects / buildContractSeeds / applyStorySeeds at $SRC (coverage reaction seeds: a beat rated 3+ lands one lead row on its desk) — bench 1004" | tail -1 | grep -o '@[0-9]*$' )
+VER=$( cd "$W/stage" && CLAUDE_CTL=1 "$CLASP" deploy -i "$DEP" -d "engine.332 = $BASE + applyEditionCoverageEffects / buildContractSeeds / applyStorySeeds / finalizeCycleState at $SRC (coverage reaction seeds: a beat rated 3+ lands one lead row on its desk) — bench 1004" | tail -1 | grep -o '@[0-9]*$' )
 [ -n "$VER" ] || { echo "deploy printed no version — STOP, read the deployment listing by hand"; exit 1; }
 served=0; for t in 1 2 3 4 5 6; do
   /root/GodWorld/node_modules/.bin/clasp-real deployments 2>/dev/null | grep "$DEP" | grep -qE " ${VER}( |$)" && { served=1; break; }; sleep 10; done

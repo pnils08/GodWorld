@@ -79,6 +79,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.338 | A former player's next chapter (builder 11-07): ENGINE/Active/UNI row has no engine path to a post-career job; how the cron is offered career choices. Folds 337 | ready | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] §Builder's ruling (engine.338) |
 | engine.336 | `Now:` bio lines for ledger-changing moments (builder 11-07: wedding, birth, job change, promotion); they stack atop the minted prose, newest first | ready | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] §Builder's ruling (scope) |
 | engine.332 | Media-feedback seeds (builder 11-05): Citywide-reaction seeds for coverage at \|rating\| ≥ 3 never reach Story_Seed_Deck, live or sandbox. Fix the path | ready | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` G-ES2 |
 | engine.334 | Story seeds sum unlike numbers (C114 sports "sentiment +36.06" = mood + head-count). After engine.331 and engine.332; stub, review deeper when picked up | ready | engine-sheet | [[../plans/2026-11-05-story-seed-mixed-magnitudes]] |

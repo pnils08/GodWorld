@@ -268,7 +268,7 @@ All sport-neutral (the Oaks ride these pools too), they/them only.
 - **Q4 — ruled 2026-11-06: yes.** A `coldStreak` set for players, fans and households (Mechanism 4, §Game-night lines).
 - **Moods into the night line — ruled 2026-11-06** (builder's own addition, pulls G-ES4 into this row): Mechanism 8.
 - **Acceptance 9 (2026-11-07):** list half met (restarted dashboard's validation = the 39 words; `hot-streak` 422); "accepts a row with a new word" blocked past validation by G-ES6 (`re-signed` passes the enum check, then the roster read 500s). Sheet dropdown receipt 2026-11-07: the same 39 words on every feed row through the grid end.
-- **Q5 — asked 2026-11-07, open.** Builder: "those watching a game or any game event now would hit fandom dial". True for the city's fans (this row), fan/staff week lines and season-week lines; families at home move `family` only (`Household-GameNight` → `Household`, engine.299 suffix rule, `citizenDialMap.js`); off-season moments reach no citizen until engine.333. Whether a household game night also moves fandom is his; if yes, its own row (an eighth file, reverses the suffix rule), not this candidate.
+- **Q5 — ruled 2026-11-07: yes** ("1. Yes", on "should families watching at home also move the fan dial, on top of family?"). Its own row, engine.335; not this candidate. Builder: "those watching a game or any game event now would hit fandom dial". True for the city's fans (this row), fan/staff week lines and season-week lines; families at home move `family` only (`Household-GameNight` → `Household`, engine.299 suffix rule, `citizenDialMap.js`); off-season moments reach no citizen until engine.333. The build reverses engine.299's `GameNight` suffix rule for this tag (`citizenDialMap.js`).
 
 ## Changelog
 

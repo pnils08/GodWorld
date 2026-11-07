@@ -46,7 +46,10 @@ function feedRows(N, fire) {
   if (cmd === 'plant') {
     const N = Number(a1), fire = a2;
     const feed = obj(await sh.getSheetData('Oakland_Sports_Feed'));
-    if (feed.rows.some(r => num(r.Cycle) === N)) throw new Error('bench already has C' + N + ' feed rows — stop');
+    // live rows for N (the builder enters next Cycle's feed ahead of Sunday) ride along — they are live data, not a plant;
+    // only a second E333 plant at N is refused
+    if (feed.rows.some(r => num(r.Cycle) === N && String(r.Notes).indexOf(MARK) === 0)) throw new Error('bench already has E333 C' + N + ' feed rows — stop');
+    const liveAtN = feed.rows.filter(r => num(r.Cycle) === N).map(r => r.TeamsUsed + ':' + r.EventType + ':' + (r.EventTrigger || '-') + ':' + r.NamesUsed);
     const led = await sh.getSheetData('Simulation_Ledger');
     const H = led[0].map(x => String(x).trim());
     const col = n => H.indexOf(n);
@@ -77,22 +80,23 @@ function feedRows(N, fire) {
     const rows = feedRows(N, fire);
     for (const r of rows) for (const k of Object.keys(r)) if (!feed.h.includes(k)) throw new Error('no header ' + k);
     await sh.appendRows('Oakland_Sports_Feed', rows.map(r => feed.h.map(h => r[h] === undefined ? '' : r[h])));
-    const back = obj(await sh.getSheetData('Oakland_Sports_Feed')).rows.filter(r => num(r.Cycle) === N);
+    const back = obj(await sh.getSheetData('Oakland_Sports_Feed')).rows.filter(r => num(r.Cycle) === N && String(r.Notes).indexOf(MARK) === 0);
     const led2 = obj(await sh.getSheetData('Simulation_Ledger')).rows.filter(r => BENCH_POPS[r.POPID]);
-    console.log(JSON.stringify({ fire, N, planted: rows.length, readBack: back.length, marked: back.filter(r => String(r.Notes).indexOf(MARK) === 0).length,
+    console.log(JSON.stringify({ fire, N, liveRowsAtN: liveAtN, planted: rows.length, readBack: back.length, marked: back.filter(r => String(r.Notes).indexOf(MARK) === 0).length,
       triggers: back.map(r => r.EventTrigger + ':' + r.NamesUsed), benchCitizens: led2.map(r => r.POPID + ' ' + r.First + ' ' + r.Last + ' ' + r.ClockMode + '/' + r.Status + '/' + (r.StatusStartCycle || '-')) }));
     process.exit(back.length === rows.length && led2.length === 3 ? 0 : 1);
   }
   if (cmd !== 'read') throw new Error('usage: plant <N> <1|2> | read <label> <N>');
 
   const label = a1, N = Number(a2);
-  const led = obj(await sh.getSheetData('Simulation_Ledger')).rows.filter(r => BENCH_POPS[r.POPID]);
+  const READ = Object.assign({ 'POP-00001': { live: true } }, BENCH_POPS); // live Vinnie rides along: his real C115 row is on the feed
+  const led = obj(await sh.getSheetData('Simulation_Ledger')).rows.filter(r => READ[r.POPID]);
   const citizens = led.map(r => ({ pop: r.POPID, name: r.First + ' ' + r.Last, clock: r.ClockMode, econ: r.EconomicProfileKey, role: r.RoleType, status: r.Status,
     statusStart: r.StatusStartCycle, cause: r.HealthCause, tier: r.Tier, employer: r.EmployerBizId, uni: r['UNI (y/n)'], stage: r.CareerStage, income: r.Income,
     bioHead: String(r.CitizenBio).slice(0, 90), lifeTail: String(r.LifeHistory).split('\n').slice(-4) }));
-  const lh = obj(await sh.getSheetData('LifeHistory_Log')).rows.filter(r => num(r.Cycle) === N && BENCH_POPS[r.POPID])
+  const lh = obj(await sh.getSheetData('LifeHistory_Log')).rows.filter(r => num(r.Cycle) === N && READ[r.POPID])
     .map(r => ({ pop: r.POPID, tag: String(r.EventTag), text: String(r.EventText) }));
-  const hosp = obj(await sh.getSheetData('Hospital_Ledger')).rows.filter(r => BENCH_POPS[r.POPID])
+  const hosp = obj(await sh.getSheetData('Hospital_Ledger')).rows.filter(r => READ[r.POPID])
     .map(r => ({ pop: r.POPID, admit: r.AdmitCycle, status: r.Status, discharge: r.DischargeCycle, outcome: r.Outcome, intakeType: r.IntakeType,
       source: r.SourceSystem, eventId: r.SourceEventId, prior: r.PriorStatus, cause: r.Cause }));
   const rip = obj(await sh.getSheetData('Ripple_Ledger'));

@@ -71,6 +71,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.101 | Daily news: evening write wake date fixed (builder 11-04), NotebookLM page written. Next: confirm the 11-04 18:15 wake writes and gates | in-progress | research-build | [[../reference/NotebookLM]] §Change log |
 | governance.56 | One boot (builder 11-02): CLAUDE.md imports one `.claude/TERMINAL.md`; boot-load.js retired. Next: review | in-progress | engine-sheet | [[../plans/2026-08-29-boot-doc-consolidation]] §Changelog |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
+| engine.333 | Feed triggers to life history (builder 11-05/07): `retirement` leaves the sports layer, `Now:` bio line, owed wake; `injury` fills the bed. Cut done; bench | in-progress | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] |
 | engine.331 | Sports triggers: no blank-cell re-fire, hot/cold at 5, off-season and good/bad words. PROD @174; waits on the builder's menu re-run + C115 read | in-progress | engine-sheet | [[../plans/2026-11-05-sports-feed-triggers]] |
 | pipeline.102 | Dashboard sports page follows the live Oaks_Roster layout (builder 11-07: "Yes address the oaks dashboard"); built, codex review next | in-progress | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` G-ES6 |
 
@@ -78,7 +79,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.333 | Feed triggers to life history (builder 11-05/07): `retirement` leaves the sports layer, `Now:` bio line, owed wake; `injury` fills the bed. C4–C7 ruled; cut | ready | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] |
 | engine.332 | Media-feedback seeds (builder 11-05): Citywide-reaction seeds for coverage at \|rating\| ≥ 3 never reach Story_Seed_Deck, live or sandbox. Fix the path | ready | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` G-ES2 |
 | engine.334 | Story seeds sum unlike numbers (C114 sports "sentiment +36.06" = mood + head-count). After engine.331 and engine.332; stub, review deeper when picked up | ready | engine-sheet | [[../plans/2026-11-05-story-seed-mixed-magnitudes]] |
 | engine.335 | Families watching at home move the fan dial too (builder 11-07, engine.331 Q5): household game night signs fandom by the night's result | ready | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` Q5 note |

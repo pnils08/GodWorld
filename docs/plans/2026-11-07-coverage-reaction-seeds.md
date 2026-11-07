@@ -54,8 +54,8 @@ Correction given to the builder the same session: the questions said a rating is
 |---|------|-------|--------|
 | 1 | Builder rulings recorded verbatim (above) | builder / es | done 2026-11-07 |
 | 2 | Design 1 in `applyEditionCoverageEffects.js`; Design 2, 3, 5 in `buildContractSeeds.js` (+ export); Design 6 in `buildWorldSummary.js`; Design 7 comment in `applyStorySeeds.js`. Tests: `buildContractSeeds.test.js` (one row per beat, desk per beat, major at ±3, ±2 none upstream, unknown beat → civic, the table agrees with LANE_BY_DOMAIN for every beat but GENERAL), a new `applyEditionCoverageEffects.test.js` (ripple per strong row, none at ±2, prose, up/down, blank reporter), `buildWorldSummary.test.js` (lane per beat). STUB_MAP regenerated in the same commit | es | done `2048ad406`; review fold (F1 carry skip in `finalizeCycleState.js`, F2 prose, F3 per-row causeId + tests in `activityObservationsCarry.test.js`, `buildWorldSummary.test.js` through `emitDeskSignal`) in the fold commit |
-| 3 | Codex review of the diff (exact deploy candidate); one re-review of the fold at most | codex | review HOLD 2026-11-07 → F1-F3 folded; re-review of the fold open |
-| 4 | Sandbox proof on the exact candidate (four files after the fold: + `phase09-digest/finalizeCycleState.js`), live-synced bench: bench-only Edition_Coverage_Ratings rows at Cycle N−1 (Reporter carries `E332-BENCH`): HEALTH −4, ENVIRONMENT +5, SPORTS +3, CIVIC +2, plus a same-beat pair (ENVIRONMENT +3 at Cycle N beside the +5 at N−1). Fire 1 read: Ripple_Ledger, Story_Seed_Deck, Engine_Errors, the desk signal (`emitDeskSignal` on the bench rows, nothing written to `output/`), the contract carry (Carry_Forward_Store `PREV_CONTRACT_SEEDS_JSON`); fire 2 with the seeder only. Final sync from live | es | run 1 on the pre-fold `2048ad406` in flight; the fold needs its own run |
+| 3 | Codex review of the diff (exact deploy candidate); one re-review of the fold at most | codex | done 2026-11-07: review HOLD → F1-F3 folded `c47769766`; re-review SHIP; round cap reached |
+| 4 | Sandbox proof on the exact candidate (four files after the fold: + `phase09-digest/finalizeCycleState.js`), live-synced bench: bench-only Edition_Coverage_Ratings rows at Cycle N−1 (Reporter carries `E332-BENCH`): HEALTH −4, ENVIRONMENT +5, SPORTS +3, CIVIC +2, plus a same-beat pair (ENVIRONMENT +3 at Cycle N beside the +5 at N−1). Fire 1 read: Ripple_Ledger, Story_Seed_Deck, Engine_Errors, the desk signal (`emitDeskSignal` on the bench rows, nothing written to `output/`), the contract carry (Carry_Forward_Store `PREV_CONTRACT_SEEDS_JSON`); fire 2 with the seeder only. Final sync from live | es | run 1 on the pre-fold `2048ad406` (@188): C115 260 s + C116 219 s PASS, 0 Engine_Errors, Acceptance 1-6 read (`output/engine-sheet/2026-11-07-e332-bench.log`, `…-e332-reads.jsonl`); run 2 on the fold `c47769766` in flight |
 | 5 | PROD push with smoke note; first live fire with a ±3 rating in its window read back | es | not started |
 
 ## Acceptance
@@ -80,7 +80,8 @@ Correction given to the builder the same session: the questions said a rating is
 
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
-| plan + diff review of `2048ad406` | codex | [[../for-claude-review/2026-11-07-codex-engine332-review]] | HOLD → F1-F3 folded |
+| plan + diff review of `2048ad406` | codex | [[../for-claude-review/2026-11-07-codex-engine332-review]] | HOLD → F1-F3 folded `c47769766` |
+| re-review of the fold `c47769766` (last round) | codex | [[../for-claude-review/2026-11-07-codex-engine332-rereview]] | SHIP |
 
 ### Agreed
 
@@ -90,6 +91,7 @@ Correction given to the builder the same session: the questions said a rating is
 | A2 | F2: "pulled the city's mood up/down" can be false (clamps; a +3 the rater labels negative) → the Why states the rating row only | es · codex | review:22; `applyEditionCoverageEffects.js:318-340`, `rateEditionCoverage.js:444-450` |
 | A3 | F3: two rows for one beat and Cycle shared a causeId and cancelled into a texture row → causeId carries the sheet row | es · codex | review:24; `buildContractSeeds.js` cluster key |
 | A4 | Coverage seeds draw citizens with `ctx.rng` ahead of later clusters, so later seeds' citizen picks and shared draw offsets shift. Deterministic on replay; accepted, as with any new ripple | es · codex | review:29 |
+| A6 | "The rating counts once" in next Cycle's seed gates is the ordinary path, not a per-row guarantee: the S202 seed has no row identity, identical texts dedupe and the engine list caps at 60. Pre-existing S202 behavior; the fold adds no contract-list weight. Recorded, not fixed | codex · es | rereview:30; `applyStorySeeds.js:1440-1454`, `finalizeCycleState.js:748-768` |
 | A5 | The six Domain_Tracker names no beat or section emits (WEATHER, NIGHTLIFE, FESTIVAL, HOLIDAY, ARTS, TECHNOLOGY) fall to GENERAL / civic — a stated default | es · codex | review:30 |
 
 ### Needs proof
@@ -108,5 +110,6 @@ Correction given to the builder the same session: the questions said a rating is
 
 ## Changelog
 
-- 2026-11-07 (engine-sheet) — Created from G-ES2; trace, three builder rulings, design.
+- 2026-11-07 (engine-sheet) — Bench run 1 (pre-fold, @188) PASS; codex re-review of the fold SHIP; S202 carry ceiling recorded (A6).
 - 2026-11-07 (engine-sheet) — Built `2048ad406`; codex HOLD (F1 deck carry double-counts, F2 mood claim, F3 same-key cancel) folded: carry skip, rating-only Why, per-row causeId.
+- 2026-11-07 (engine-sheet) — Created from G-ES2; trace, three builder rulings, design.

@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1771 · **S.* fields:** 381 · **Sheets:** 61
+**Files scanned:** 180 · **Functions mapped:** 1772 · **S.* fields:** 381 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -212,7 +212,7 @@
 | `S.hoodSpots` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_` | `phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_`, `phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_` | 1 | 2 |
 | `S.hookSuppression` | `phase08-v3-chicago/applyCycleRecovery.js::applyCycleRecovery_` | _(none)_ | 1 | 0 |
 | `S.hospitalCensus` | `phase10-persistence/buildCyclePacket.js::persistHospitalLedger_` | _(none)_ | 1 | 0 |
-| `S.hospitalEvents` | `phase04-events/chaosCarsEngine.js::runChaosEvent_`, `phase04-events/generationalEventsEngine.js::runGenerationalEngine_`, `phase05-citizens/applyGameNightMoments.js::sportsInjure_`, `phase05-citizens/applyGameNightMoments.js::sportsReturn_` | `phase04-events/chaosCarsEngine.js::runChaosEvent_`, `phase04-events/generationalEventsEngine.js::runGenerationalEngine_`, `phase05-citizens/applyGameNightMoments.js::sportsInjure_`, `phase05-citizens/applyGameNightMoments.js::sportsReturn_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_`, `phase10-persistence/buildCyclePacket.js::persistCareJusticeCensus_`, …(+1 more) | 4 | 7 |
+| `S.hospitalEvents` | `phase04-events/chaosCarsEngine.js::runChaosEvent_`, `phase04-events/generationalEventsEngine.js::runGenerationalEngine_`, `phase05-citizens/applyGameNightMoments.js::sportsInjure_`, `phase05-citizens/applyGameNightMoments.js::sportsReturn_` | `phase04-events/chaosCarsEngine.js::runChaosEvent_`, `phase04-events/generationalEventsEngine.js::runGenerationalEngine_`, `phase05-citizens/applyGameNightMoments.js::sportsBedAlreadyFiled_`, `phase05-citizens/applyGameNightMoments.js::sportsInjure_`, `phase05-citizens/applyGameNightMoments.js::sportsReturn_`, `phase09-digest/finalizeCycleState.js::finalizeCycleState_`, …(+2 more) | 4 | 8 |
 | `S.hospitalTalkback` | `phase03-population/applyDemographicDrift.js::applyDemographicDrift_` | `phase10-persistence/buildCyclePacket.js::buildCyclePacket_` | 1 | 1 |
 | `S.householdEvents` | `phase05-citizens/runHouseholdEngine.js::runHouseholdEngine_` | _(none)_ | 1 | 0 |
 | `S.householdFormation` | `phase05-citizens/householdFormationEngine.js::processHouseholdFormation_` | _(none)_ | 1 | 0 |

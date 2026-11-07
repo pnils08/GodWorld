@@ -1217,9 +1217,12 @@
 
 - **sportsTriggerWord_(entry)**
 
-- **sportsBioNow_(existing, sentence)**
+- **sportsBioNow_(existing, sentence, cycle)**
 
 - **sportsRetire_(ctx, row, cols, team, cycle, write, ri)**
+
+- **sportsBedAlreadyFiled_(ctx, popId, cycle)**
+  Reads: S.hospitalEvents
 
 - **sportsInjure_(ctx, row, cols, team, cycle, entry, popId, name)**
   Reads: S.hospitalEvents
@@ -4882,4 +4885,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 180
-**Functions mapped:** 1771
+**Functions mapped:** 1772

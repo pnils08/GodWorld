@@ -2,7 +2,7 @@
   "generated": "2026-11-07",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 180,
-  "functionsMapped": 1771,
+  "functionsMapped": 1772,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -2986,6 +2986,7 @@
       "readers": [
         "phase04-events/chaosCarsEngine.js::runChaosEvent_",
         "phase04-events/generationalEventsEngine.js::runGenerationalEngine_",
+        "phase05-citizens/applyGameNightMoments.js::sportsBedAlreadyFiled_",
         "phase05-citizens/applyGameNightMoments.js::sportsInjure_",
         "phase05-citizens/applyGameNightMoments.js::sportsReturn_",
         "phase09-digest/finalizeCycleState.js::finalizeCycleState_",

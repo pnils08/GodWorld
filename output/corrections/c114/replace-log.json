@@ -1,0 +1,86 @@
+[
+ {
+  "stem": "sports_c114_p-slayer_packet-v2_x-ai-grok-4-3",
+  "customId": "article-c114-sports_c114_p-slayer_packet-v2_x-ai-grok-4-3",
+  "edits": 3,
+  "liveBefore": 200,
+  "liveHeldOld": true,
+  "patch": 200,
+  "id": "SB3nfm8s6Y5yfH4csHKiB6",
+  "exact": false,
+  "oldGone": false,
+  "len": 5106
+ },
+ {
+  "stem": "sports_c114_simon-leary_packet-v2_openai-gpt-5-6-luna",
+  "customId": "article-c114-sports_c114_simon-leary_packet-v2_openai-gpt-5-6-luna",
+  "edits": 4,
+  "liveBefore": 200,
+  "liveHeldOld": true,
+  "patch": 200,
+  "id": "zrX8gUeF3M9hbfmcq6Ct3c",
+  "exact": false,
+  "oldGone": false,
+  "len": 5038
+ },
+ {
+  "stem": "sports_c114_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5",
+  "customId": "article-c114-sports_c114_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5",
+  "edits": 2,
+  "liveBefore": 200,
+  "liveHeldOld": true,
+  "patch": 200,
+  "id": "EoVZZgFLYEwGPP7cwDgy6X",
+  "exact": false,
+  "oldGone": false,
+  "len": 9784
+ },
+ {
+  "stem": "sports_c114_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5",
+  "customId": "article-c114-sports_c114_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5",
+  "edits": 6,
+  "liveBefore": 200,
+  "liveHeldOld": true,
+  "patch": 200,
+  "id": "ejW7eqt4pzjwfgNVQnsHzD",
+  "exact": false,
+  "oldGone": false,
+  "len": 7721
+ },
+ {
+  "stem": "sports_c114_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5",
+  "customId": "article-c114-sports_c114_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5",
+  "edits": 3,
+  "liveBefore": 200,
+  "liveHeldOld": true,
+  "patch": 200,
+  "id": "zcc7Giz1Tqm4dFMov32FMF",
+  "exact": false,
+  "oldGone": false,
+  "len": 9414
+ },
+ {
+  "stem": "culture_c114_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+  "customId": "article-c114-culture_c114_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+  "edits": 3,
+  "liveBefore": 200,
+  "liveHeldOld": true,
+  "patch": 200,
+  "id": "Pp1RnQ52DF6zSZ8UMuQPtK",
+  "exact": false,
+  "oldGone": false,
+  "len": 8079
+ },
+ {
+  "stem": "culture_c114_maria-keen_packet-v2_anthropic-claude-sonnet-5-5",
+  "customId": "article-c114-culture_c114_maria-keen_packet-v2_anthropic-claude-sonnet-5-5",
+  "edits": 1,
+  "liveBefore": 200,
+  "liveHeldOld": true,
+  "patch": 200,
+  "id": "Efv9K2K8i1g7NyWcSm715f",
+  "exact": false,
+  "oldGone": false,
+  "len": 9046
+ }
+]

@@ -1,0 +1,51 @@
+[
+ {
+  "stem": "sports_c114_p-slayer_packet-v2_x-ai-grok-4-3",
+  "customId": "article-c114-sports_c114_p-slayer_packet-v2_x-ai-grok-4-3",
+  "edits": 3,
+  "liveBefore": 200,
+  "liveHeldOld": true
+ },
+ {
+  "stem": "sports_c114_simon-leary_packet-v2_openai-gpt-5-6-luna",
+  "customId": "article-c114-sports_c114_simon-leary_packet-v2_openai-gpt-5-6-luna",
+  "edits": 4,
+  "liveBefore": 200,
+  "liveHeldOld": true
+ },
+ {
+  "stem": "sports_c114_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5",
+  "customId": "article-c114-sports_c114_hal-richmond_packet-v2_anthropic-claude-sonnet-5-5",
+  "edits": 2,
+  "liveBefore": 200,
+  "liveHeldOld": true
+ },
+ {
+  "stem": "sports_c114_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5",
+  "customId": "article-c114-sports_c114_elliot-marbury_packet-v2_anthropic-claude-sonnet-5-5",
+  "edits": 6,
+  "liveBefore": 200,
+  "liveHeldOld": true
+ },
+ {
+  "stem": "sports_c114_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5",
+  "customId": "article-c114-sports_c114_anthony-raines_packet-v2_anthropic-claude-sonnet-5-5",
+  "edits": 3,
+  "liveBefore": 200,
+  "liveHeldOld": true
+ },
+ {
+  "stem": "culture_c114_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+  "customId": "article-c114-culture_c114_kai-marston_packet-v2_anthropic-claude-haiku-5-5",
+  "edits": 3,
+  "liveBefore": 200,
+  "liveHeldOld": true
+ },
+ {
+  "stem": "culture_c114_maria-keen_packet-v2_anthropic-claude-sonnet-5-5",
+  "customId": "article-c114-culture_c114_maria-keen_packet-v2_anthropic-claude-sonnet-5-5",
+  "edits": 1,
+  "liveBefore": 200,
+  "liveHeldOld": true
+ }
+]

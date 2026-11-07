@@ -163,5 +163,6 @@ None of these exist in the catalog today; each becomes a catalog entry (role, ca
 
 ## Changelog
 
+- 2026-11-07 (research-build) — second pass recorded; correction: money loop skips no Tier, nothing spends, retirement keeps the playing salary. C1/C2/MUBA ruled; C3/C4/C5 + pool draft posed; design v1.
 - 2026-11-07 (research-build) — builder answered the first pass: a feed trigger `question` poses, the citizen decides; a small tier-gated post-sports job pool from the catalog (none exist yet); heritage lines own businesses; no priority to work, decline forces it; MUBA rows are the test case. C1–C4 rebuilt and re-asked.
 - 2026-11-07 (research-build) — Created from the engine.333 plan's §Builder's ruling (engine.338); read-before done; engine.337 folded (key inert on a Retired row, convention recorded); C1–C4 drafted for the builder.

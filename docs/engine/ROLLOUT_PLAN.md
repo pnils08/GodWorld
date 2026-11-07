@@ -8,7 +8,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.336 | `Now:` bio line for the other milestones (builder 11-07: "newest life altering moments"): which of wedding / birth / graduation / health write it — his call | needs-info | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] §Builder's ruling (scope) |
 | engine.337 | Three ex-MUBA rows sit half on the sports layer (ENGINE clock, SPORTS_OVERRIDE key, Retired): what key an off-clock retired athlete carries — his call | needs-info | research-build | `output/production_log_run_cycle_c114_gaps.md` G-RB8 |
 | civic.47 | Civic autonomy, the one plan (builder 11-01). A1 landed; F7 transit reader live (@173); M1 Mara live 11-03; the rest of the plan is open; A2 waits on his go | needs-info | research-build | [[../plans/2026-10-31-civic-autonomy]] |
 | civic.43 | School board: T1 + T3 LIVE. T2 seating HELD (builder 2026-10-07): schools half built (hood school data, no schools in hoods); deep review first, then the canon-name fix | needs-info | research-build | [[../plans/2026-10-04-school-board]] §Builder's words (2026-10-07) |
@@ -80,6 +79,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.336 | `Now:` bio lines for ledger-changing moments (builder 11-07: wedding, birth, job change, promotion); they stack atop the minted prose, newest first | ready | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] §Builder's ruling (scope) |
 | engine.332 | Media-feedback seeds (builder 11-05): Citywide-reaction seeds for coverage at \|rating\| ≥ 3 never reach Story_Seed_Deck, live or sandbox. Fix the path | ready | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` G-ES2 |
 | engine.334 | Story seeds sum unlike numbers (C114 sports "sentiment +36.06" = mood + head-count). After engine.331 and engine.332; stub, review deeper when picked up | ready | engine-sheet | [[../plans/2026-11-05-story-seed-mixed-magnitudes]] |
 | engine.335 | Families watching at home move the fan dial too (builder 11-07, engine.331 Q5): household game night signs fandom by the night's result | ready | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` Q5 note |

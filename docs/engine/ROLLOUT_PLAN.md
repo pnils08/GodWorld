@@ -73,7 +73,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.101 | Daily news: evening write wake date fixed (builder 11-04), NotebookLM page written. Next: confirm the 11-04 18:15 wake writes and gates | in-progress | research-build | [[../reference/NotebookLM]] §Change log |
 | governance.56 | One boot (builder 11-02): CLAUDE.md imports one `.claude/TERMINAL.md`; boot-load.js retired. Next: review | in-progress | engine-sheet | [[../plans/2026-08-29-boot-doc-consolidation]] §Changelog |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
-| engine.333 | Feed triggers to life history (builder 11-05/07): `retirement` leaves the sports layer, `Now:` bio line, owed wake; `injury` fills the bed. Cut done; bench | in-progress | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] |
+| engine.333 | Feed triggers to life history (builder 11-05/07): `retirement` leaves the sports layer, `Now:` bio line, owed wake; `injury` fills the bed. PROD @175; C115 read | in-progress | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] |
 | engine.331 | Sports triggers: no blank-cell re-fire, hot/cold at 5, off-season and good/bad words. PROD @174; waits on the builder's menu re-run + C115 read | in-progress | engine-sheet | [[../plans/2026-11-05-sports-feed-triggers]] |
 
 ## 4. Queue — ruled, not started (ready)

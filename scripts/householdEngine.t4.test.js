@@ -178,11 +178,18 @@ console.log('\nengine.47 Hop 5 — households bend around tonight\'s result');
   const cold = runWithFeed(600, [{ eventType: 'game-result', teamsUsed: 'Oaks', streak: 'L5' }], { Oaks: { g: 3, hotCold: 'cold' } })
     .filter(ev => ev.tag === 'Household-GameNight');
   assert('5.2c engine.331: an L5 in a cold week draws the skid lines', cold.length > 0 && cold.every(ev => /peace|skid|subject/.test(ev.event)), cold.map(e => e.event).slice(0, 3).join(' | '));
-  const loss = runWithFeed(3000, [{ eventType: 'game-result', streak: 'L2', playerMood: 'frustrated' }]).filter(ev => ev.tag === 'Household-GameNight');
+  const loss = runWithFeed(3000, [{ eventType: 'game-result', teamsUsed: "A's", streak: 'L2', playerMood: 'frustrated' }], { "A's": { g: 3, hotCold: '' } })
+    .filter(ev => ev.tag === 'Household-GameNight');
   assert('5.4 a loss draws the quiet-house lines', loss.length > 0 && loss.every(ev => /quiet|early|loss/.test(ev.event)), loss.map(e => e.event).slice(0, 3).join(' | '));
   const quiet = runWithFeed(3000, []);
   assert('5.5 no game in the feed — no game-night line (no invented games)', quiet.filter(ev => ev.tag === 'Household-GameNight').length === 0);
   assert('5.6 the draw chance is unchanged — same event count with or without a game', quiet.length === winStreak.length, quiet.length + ' vs ' + winStreak.length);
+  // codex re-review F1: a blank, retired or unknown team ahead of the club that played is no club's night
+  const mixed = runWithFeed(600, [{ eventType: 'game-result', teamsUsed: 'NBA', streak: 'W5' }, { eventType: 'game-result', teamsUsed: '', streak: 'W5' },
+    { eventType: 'game-result', teamsUsed: 'Oaks', streak: 'L5' }], { Oaks: { g: 3, hotCold: 'cold' } }).filter(ev => ev.tag === 'Household-GameNight');
+  assert('5.7 engine.331: retired and blank game rows first — the Oaks\' cold night still decides', mixed.length > 0 && mixed.every(ev => /peace|skid|subject/.test(ev.event)), mixed.map(e => e.event).slice(0, 3).join(' | '));
+  const unplayed = runWithFeed(600, [{ eventType: 'game-result', teamsUsed: 'Oaks', streak: 'W5' }], {}).filter(ev => ev.tag === 'Household-GameNight');
+  assert('5.8 engine.331: a game row with no week played is no game night (the city\'s fan gate)', unplayed.length === 0, String(unplayed.length));
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

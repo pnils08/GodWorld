@@ -406,13 +406,17 @@ function runHouseholdEngine_(ctx) {
   var gameNightPool = [];
   var gameEntry = null;
   var feed = S.sportsFeedEntries || [];
+  // engine.331 (codex re-review F1): the first game row of a club that played this week (the city's
+  // fan gate, generateCitizensEvents) — a blank, retired or unknown team is no club's night
+  var gnTeam = '', gnWeek = null;
   for (var ge = 0; ge < feed.length; ge++) {
-    if (String(feed[ge].eventType || '').toLowerCase().indexOf('game') >= 0) { gameEntry = feed[ge]; break; }
+    if (String(feed[ge].eventType || '').toLowerCase().indexOf('game') < 0) continue;
+    gnTeam = (typeof normalizeOaklandFeedTeam_ === 'function') ? normalizeOaklandFeedTeam_(feed[ge].teamsUsed) : '';
+    gnWeek = (gnTeam && S.sportsWeek) ? S.sportsWeek[gnTeam] : null;
+    if (gnWeek && gnWeek.g > 0) { gameEntry = feed[ge]; break; }
   }
   if (gameEntry && typeof gameNightBucket_ === 'function') {
     // engine.331: the week's hot/cold (the streak headline's decision) for the row's own team
-    var gnTeam = (typeof normalizeOaklandFeedTeam_ === 'function') ? normalizeOaklandFeedTeam_(gameEntry.teamsUsed) : '';
-    var gnWeek = (gnTeam && S.sportsWeek) ? S.sportsWeek[gnTeam] : null;
     var gnBucket = gameNightBucket_(gameEntry, gnWeek ? (gnWeek.hotCold || '') : '');
     // both clubs draw these: sport-neutral words (engine.331, codex diff review F2)
     var GAME_NIGHT_HOUSEHOLD_ = {

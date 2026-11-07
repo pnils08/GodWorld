@@ -20,6 +20,9 @@ global.getGriefConfig_ = C.getGriefConfig_;
 global.activeGriefFromRegisters_ = C.activeGriefFromRegisters_;
 global.Utilities = { formatDate: () => 'STAMP' };
 global.Session = { getScriptTimeZone: () => 'UTC' };
+// codex re-review F2: capture the game-night Ripple each run writes
+const ripples = [];
+global.recordRipple_ = (ctx, r) => { ripples.push(r); return true; };
 global.inWorldStamp_ = (ctx) => 'C' + ((ctx && ctx.config && ctx.config.cycleCount) || 0);
 // the real bucket and the real team normalizer, as Apps Script's one global scope has them
 const read = (f) => fs.readFileSync(path.resolve(__dirname, '..', f), 'utf8');
@@ -60,13 +63,14 @@ const LOSS = ['watched the bar go quiet before the finish and settle the tab ear
   'avoided the score all morning and got told anyway, twice'];
 
 function night(n, entry, weeks) {
+  const feed = Array.isArray(entry) ? entry : [entry];
   const lines = [];
   for (let i = 0; i < n; i++) {
     const rows = [makeRow('POP-N' + i)];
     const ctx = { now: new Date(0), rng: mulberry32(i + 31), config: { griefDurationCycles: 3, griefHolidayDurationCycles: 5, griefParticipationMultiplier: 0.80,
         griefPublicActivityMultiplier: 0.75, griefSupportMultiplier: 1.25, griefResponseChance: 0.35, gcSurfaceChance: 0.06, hoodFloorSurfaceQuota: 0 },
       ss: { getSheetByName: () => null },
-      summary: { cycleId: 120, season: 'Summer', economicMood: 50, sportsFeedEntries: [entry], sportsWeek: weeks,
+      summary: { cycleId: 120, season: 'Summer', economicMood: 50, sportsFeedEntries: feed, sportsWeek: weeks,
         sportsSentimentBoost: 0.05, sportsAftermath: { total: 0 } },
       ledger: { headers: HEADERS.slice(), rows, dirty: false } };
     generateCitizensEvents_(ctx);
@@ -101,6 +105,20 @@ const shared = [block(src, 'var gnTexts = {', '}[gnBucket]'),
   block(read('phase05-citizens/applyGameNightMoments.js'), 'var GAME_NIGHT_POOLS = {', '};')];
 assert('6 the shared night pools are sport-neutral (players, fans, households)', shared.every((b) => b.length > 200 && !BASEBALL.test(b)),
   shared.map((b) => (b.match(BASEBALL) || [''])[0]).join(','));
+
+// codex re-review F1: a blank, retired or unknown team ahead of the club that played is no club's night
+ripples.length = 0;
+const mixed = night(1500, [game('NBA', 'W5'), game('', 'W5'), game('Oaks', 'L5')], { Oaks: { g: 2, hotCold: 'cold' } });
+assert('7 retired and blank game rows first — the Oaks\' cold night still decides, and moves fandom down',
+  mixed.skid > 0 && mixed.win === 0 && mixed.streak === 0 && mixed.down === mixed.skid && mixed.up === 0, JSON.stringify(mixed));
+
+// codex re-review F2: the game-night Ripple counts citizen days — one citizen drawing two lines is one day
+ripples.length = 0;
+const dup = night(1500, game('Oaks', 'W5'), { Oaks: { g: 2, hotCold: 'hot' } });
+const gnr = ripples.filter((r) => r.effectType === 'game-night-texture');
+assert('8 each game-night Ripple names a citizen once and its magnitude is the citizens named',
+  gnr.length > 0 && gnr.every((r) => new Set(r.targetIds).size === r.targetIds.length && r.magnitude === r.targetIds.length),
+  gnr.length + ' ripples, ' + gnr.filter((r) => new Set(r.targetIds).size !== r.targetIds.length).length + ' with a repeat; lines ' + dup.streak);
 
 console.log(`\n${passed} passed, ${failed} failed`);
 process.exit(failed ? 1 : 0);

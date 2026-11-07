@@ -179,7 +179,7 @@ All sport-neutral (the Oaks ride these pools too), they/them only.
 | 4 | Mood triggers stop (Q3): drop the push at `applySportsSeason.js:1020-1037` and the `:796` / `:815` comments; unit test that a `frustrated` / `electric` row makes no trigger | es | done `592707c09` |
 | 5 | Seeder writes blank EventTrigger / PlayerMood (`seedSandboxFeeds.js:210-217` behavior and comment, `seedSandboxFeeds.test.js:112-114`). Truth docs in the build commit: `docs/OAKLAND_SPORTS_FEED.md` (K row :117, audit :127-137, Phase 2 behavior, override contract), `/stub-engine` regen, DEPLOY_HISTORY entry at push | es | done `592707c09` (DEPLOY_HISTORY at push) |
 | 6 | Sandbox proof on the exact candidate, live-synced bench, bench-only planted rows (marker in Notes), ruled words. Fire 1: three A's off-season rows = word X, word X again, blank; three Oaks rows = (a) a game-result row with an accepted WeekRecord, Streak W2, EventTrigger typed `hot-streak`; (b) a non-game row with word Y; (c) a non-game row with word Z. Fire 2: every cell blank; Oaks game week at or past the bar. Each fire: team-qualified Story_Hook_Deck moment pitches (the three phase hooks, `storyHook.js:518-551`, excluded by their fixed texts); Ripple_Ledger trigger labels only where the games share is nonzero, the aftermath row read on its own; Engine_Errors rows of this Cycle from Phase2-SportsSeason / Phase2-SportsFeed / story hooks | es | running 2026-11-06: stage 38 = stage 37 + 7 files (`output/engine-sheet/2026-11-06-e331-bench.sh`, `…-push-e331-bench.sh`, reads `…-e331-reads.jsonl`) |
-| 7 | Codex review of the diff (exact deploy candidate); one re-review of the fold at most | codex | not started |
+| 7 | Codex review of the diff (exact deploy candidate); one re-review of the fold at most | codex | done 2026-11-07: review HOLD → A17, A18; re-review HOLD → A19-A21 fixed in place; round cap reached, no third round |
 | 8 | PROD push with smoke note; `pm2 restart godworld-dashboard` (dashboard reads the list at start); builder re-runs **Setup Sports Feed Validation** from the GodWorld menu (validation only, no cell values), then one EventTrigger cell's validation rule is read back as the sheet receipt; first live fire read | es / builder | not started |
 | 9 | Handoff to engine.333: the ruled vocabulary — every word gets a route in its table, because a word no citizen reacts to is not worth keeping (builder, Q3) — `retirement` on the list, canonical word on `S.sportsFeedEntries[i].eventTrigger` (never `hot-streak` / `cold-streak`; a per-player hot line, if 333 wants one, reads `S.sportsWeek[team].hotCold`); override = no entries; its routing table re-pointed at surviving words; one shared test that a typed W2 `hot-streak` on a named row writes no streak line, and one that an `NFL` row's `retirement` retires no one. **Conflict on record (re-review F4):** engine.333 Design 1 routes `hot-streak` / `cold-streak` from `entry.eventTrigger`, and its Task 3 / Acceptance 2 plant and prove a typed `hot-streak` line; after this row that word never reaches the field, so that route and proof cannot fire. engine.333's plan is research-build's to revise at its read-before (drop the route, or read `S.sportsWeek[team].hotCold` for a named player on a game row) | es → rb | not started |
 
@@ -215,6 +215,7 @@ All sport-neutral (the Oaks ride these pools too), they/them only.
 | engine.331 plan review | codex | [[../research/2026-11-05-codex-engine331-plan-review]] | HOLD → 9 of 9 verified in code and folded 2026-11-05 |
 | engine.331 plan re-review (round cap) | codex | [[../research/2026-11-05-codex-engine331-plan-rereview]] | HOLD → 7 closed; F3 + new 1 (team gate on the field) and new 2 (fire-1 rows) fixed in place; F4 recorded as a cross-plan conflict for engine.333 (P2). No third round: the 11-06 builder-ordered scope (cold set, Mechanism 8) is reviewed in the Task 7 diff review |
 | engine.331 diff review (Task 7) | codex | `docs/for-claude-review/2026-11-06-codex-engine331-diff-review.md` | HOLD on `592707c09` → F1, F2 verified and fixed in place (A17, A18); the fan-line sign fix `e36350a88` came after it — both go to the one re-review |
+| engine.331 diff re-review (round cap) | codex | `docs/for-claude-review/2026-11-06-codex-engine331-diff-rereview.md` | HOLD on `d409bac12` → F1, F2 of the review closed; new 1-3 verified and fixed in place (A19-A21), each pin failing on the old code with codex's own numbers; live volume → P3. No third round |
 
 ### Agreed
 
@@ -238,12 +239,16 @@ All sport-neutral (the Oaks ride these pools too), they/them only.
 | A16 | Re-review new 2: fire 1 needed one cell per Oaks value → three Oaks rows (Task 6) | es · codex | rereview:45 |
 | A17 | Diff F1: the clause's own rng draw shifted every later Phase 5 roll (households, citizen events, their dials) → one draw picks line and clause (Mechanism 8); same-draws test | es · codex | diff-review:21; `applyGameNightMoments.js` named loop; `gameNightMoments.test.js` §6 |
 | A18 | Diff F2: W4 under the bar now routes Oaks nights into the shared `win` pools, which carry baseball-only words (pre-existing on Oaks W1–W3 and L nights) → word swaps, pinned | es · codex | diff-review:23; `gameNightFans.test.js` 6 |
+| A19 | Re-review 1: a blank, retired or unknown team's game row set the city's night ahead of the club that played (old code: 313 win/up lines, 0 skid on an Oaks cold week); households took the first game row with no team check at all → fans and households both take the first game row of a club that played this week (`g > 0`) | es · codex | diff-rereview:24; `generateCitizensEvents.js` gnGame loop; `runHouseholdEngine.js` gameEntry loop; `gameNightFans.test.js` 7, `householdEngine.t4.test.js` 5.4 (row now teamed), 5.7, 5.8 |
+| A20 | Re-review 2: the game-night Ripple listed a citizen once per line drawn (old code: 23 of 290 with a repeat), and its magnitude counted lines as citizen days → one entry per citizen | es · codex | diff-rereview:26; `generateCitizensEvents.js` gameNightDrawn push; `gameNightFans.test.js` 8 |
+| A21 | Re-review 3: the bench reader still matched the pre-swap loss line → match moved; the reader also checks distinct fan-line POPIDs = the Ripple magnitude | es · codex | diff-rereview:28; `output/engine-sheet/2026-11-06-e331-bench.js` |
 
 ### Needs proof
 
 | # | Claim | Held by | Proof that settles it | Sources |
 |---|---|---|---|---|
 | P1 | Fewer sports pitches does not starve the sports desk slices | es | first live fire after PROD: desk slice hook counts vs C112-C114 | Pre-mortem |
+| P3 | The signed fan lines do not write far more a Cycle than C105–C110 (37–74) | codex | bench 3 fan line counts on the final hash; first live fire LifeHistory_Log count | diff-rereview:41 |
 | P2 | engine.333's hot/cold route and its Acceptance 2 cannot fire once this row lands; its plan must change before it builds the named route | codex | research-build's engine.333 read-before revises Design 1, Task 3, Acceptance 2 | rereview:29; `2026-11-05-feed-triggers-to-life-history.md:91,118,124` |
 
 ### New concepts
@@ -262,9 +267,11 @@ All sport-neutral (the Oaks ride these pools too), they/them only.
 - **Q3 — ruled 2026-11-05.** The mood triggers stop (no citizen reacts to them). The mood cell stays.
 - **Q4 — ruled 2026-11-06: yes.** A `coldStreak` set for players, fans and households (Mechanism 4, §Game-night lines).
 - **Moods into the night line — ruled 2026-11-06** (builder's own addition, pulls G-ES4 into this row): Mechanism 8.
+- **Q5 — asked 2026-11-07, open.** Builder: "those watching a game or any game event now would hit fandom dial". True for the city's fans (this row), fan/staff week lines and season-week lines; families at home move `family` only (`Household-GameNight` → `Household`, engine.299 suffix rule, `citizenDialMap.js`); off-season moments reach no citizen until engine.333. Whether a household game night also moves fandom is his; if yes, its own row (an eighth file, reverses the suffix rule), not this candidate.
 
 ## Changelog
 
+- 2026-11-07 (engine-sheet) — Codex re-review HOLD (round cap): wrong-team night (fans + households), Ripple repeats and the bench reader fixed in place (A19-A21); live volume to bench 3 + first fire (P3). Q5 to the builder.
 - 2026-11-06 (engine-sheet) — Codex diff review HOLD folded (F1 one draw for line + clause; F2 sport-neutral shared pools); fan game-night lines signed so they are written again (G-ES5). Re-review next, then bench on the final hash.
 - 2026-11-06 (engine-sheet) — Builder: cold game-night set yes, every dropdown mood into the players' night line (Mechanism 8, G-ES4 pulled in), 5 confirmed. Lines drafted in §Game-night lines; reviewed with the diff.
 - 2026-11-05 (engine-sheet) — Q1-Q3 ruled (words verbatim at top): list adopted whole; hot/cold = the streak headline's decision at 5, read by pitch + game night (W4, W6 go); mood triggers stop. Q4 (cold game-night set) to the builder.

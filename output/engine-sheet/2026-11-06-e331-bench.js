@@ -90,13 +90,18 @@ function pools() {
   const FAN = { winStreak: /streak numbers like family business|three nods before the first coffee|re-enact the play twice/,
     coldStreak: /who to blame for the skid|cap at home for the first time|patience wearing thin/,
     win: /packed bar and walked home|block erupt through an open window|caught the recap at the counter/,
-    loss: /bar go quiet by the eighth|turned the game off before the end|avoided the score all morning/ };
+    loss: /bar go quiet before the finish|turned the game off before the end|avoided the score all morning/ };
   const fans = {};
   for (const k of Object.keys(FAN)) {
     const hit = lh.filter(r => FAN[k].test(String(r.EventText)));
     fans[k] = { n: hit.length, tags: [...new Set(hit.map(r => String(r.EventTag).split('|')[0]))] };
   }
   const fanStreak = fans.winStreak.n, fanSkid = fans.coldStreak.n;
+  // codex re-review F2: the game-night Ripple's magnitude is the citizens who drew a fan line, each once
+  const fanPops = new Set(lh.filter(r => Object.keys(FAN).some(k => FAN[k].test(String(r.EventText)))).map(r => r.POPID));
+  const gnRipple = ripples.filter(r => r.effect === 'game-night-texture').map(r => Number(r.mag));
+  const fanCitizens = { lines: Object.keys(fans).reduce((a, k) => a + fans[k].n, 0), distinctPops: fanPops.size, rippleMagnitude: gnRipple,
+    match: gnRipple.length === 1 && gnRipple[0] === fanPops.size };
   const wk = obj([['Key', 'Value'], ...(await sh.getSheetData('World_Config')).slice(1)]).rows;
   const out = {
     label, N, at: new Date().toISOString(),
@@ -108,7 +113,7 @@ function pools() {
     playerNight, playerOtherTags: players.filter(p => !/^Sports-Played/.test(p.tag)).map(p => p.pop + ' ' + p.tag),
     householdGameNight: household.length, householdStreak: household.filter(t => /streak|lineup/.test(t)).length,
     householdSkid: household.filter(t => /peace|skid|subject/.test(t)).length,
-    fanStreakLines: fanStreak, fanSkidLines: fanSkid, fans
+    fanStreakLines: fanStreak, fanSkidLines: fanSkid, fans, fanCitizens
   };
   fs.appendFileSync(OUT, JSON.stringify(out) + '\n');
   console.log(JSON.stringify(out, null, 1));

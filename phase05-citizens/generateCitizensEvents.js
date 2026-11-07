@@ -2180,7 +2180,9 @@ function generateCitizensEvents_(ctx) {
   for (var gnf = 0; gnAny && gnf < gnFeed.length; gnf++) {
     if (String(gnFeed[gnf].eventType || '').toLowerCase().indexOf('game') < 0) continue;
     var gnTeam = (typeof normalizeOaklandFeedTeam_ === 'function') ? normalizeOaklandFeedTeam_(gnFeed[gnf].teamsUsed) : null;
-    if (gnTeam && !gnPlayed[gnTeam]) continue;
+    // engine.331 (codex re-review F1): a blank, retired or unknown team is no club's night — it fell
+    // through here and set the city's bucket ahead of the club that played
+    if (!gnTeam || !gnPlayed[gnTeam]) continue;
     gnGame = gnFeed[gnf]; break;
   }
   if (gnGame) {
@@ -3828,7 +3830,8 @@ function generateCitizensEvents_(ctx) {
     if (ev === 0 && typeof recordPulse_ === 'function') recordPulse_(S, citizenHood, pulseKindForLine_(lineKind, primaryTag), tags, pick);
 
     // engine.47 Hop 4: attribution — this citizen actually drew tonight's game.
-    if (tags.indexOf("gameNight") >= 0) gameNightDrawn.push(String(popId));
+    // engine.331 (codex re-review F2): once per citizen — the Ripple counts citizen days, not lines
+    if (tags.indexOf("gameNight") >= 0 && gameNightDrawn.indexOf(String(popId)) < 0) gameNightDrawn.push(String(popId));
 
     remember(popId, lineKind, pick, chosenVenue, neighborhood, contact && contact.name, tags);
 

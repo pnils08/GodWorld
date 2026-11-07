@@ -237,6 +237,10 @@ console.log('═══ Section X — engine.299 graded form: every event that fi
   // codex 2026-10-18: the fold contract for intake lines is unchanged — "Intake at Tier 3" still routes to drive.
   assert('X10 an Advancement intake line still folds as before (content rule: tier 3 → drive)', M.nudgesForEvent_('Advancement', 1, 'Intake at Tier 3. Synthetic note').drive === 6 && !M.STRUCTURAL.Advancement && !M.STRUCTURAL.Death);
   assert('X11 GameNight is a texture suffix: Household-GameNight folds as Household', M.baseTag_('Household-GameNight') === 'Household' && M.nudgesForEvent_('Household-GameNight', 1).family === 5);
+  // engine.335 (builder 2026-11-07): a family's signed game night moves fandom one step on top of family +5
+  const gw = M.nudgesForEvent_('Household-GameNight-Win', 1), gl = M.nudgesForEvent_('Household-GameNight-Loss', 1), g0 = M.nudgesForEvent_('Household-GameNight', 1);
+  assert('X12 a won game night folds family +5, fandom +1; a lost one family +5, fandom -1', gw.family === 5 && gw.fandom === 1 && Object.keys(gw).length === 2 && gl.family === 5 && gl.fandom === -1 && Object.keys(gl).length === 2, JSON.stringify([gw, gl]));
+  assert('X12b a neutral game night (and every older line) is family only', g0.family === 5 && Object.keys(g0).length === 1 && M.baseTag_('Household-GameNight-Win') === 'Household-GameNight-Win', JSON.stringify(g0));
   assert('X8 a real compound key is not mistaken for the graded form', M.nudgesForEvent_('CivicRole-Up-M', 1).drive === 2 && M.baseTag_('Career-Transition') === 'Career-Transition');
 }
 

@@ -75,6 +75,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | governance.56 | One boot (builder 11-02): CLAUDE.md imports one `.claude/TERMINAL.md`; boot-load.js retired. Next: review | in-progress | engine-sheet | [[../plans/2026-08-29-boot-doc-consolidation]] §Changelog |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | engine.338 | A former player's next chapter (builder 11-07): the intake door writes no employer, clock or key on an existing row; his word at the owed wake. Folds 337; C1–C4 | in-progress | research-build | [[../plans/2026-11-07-former-player-next-chapter]] |
+| engine.335 | Families watching at home move the fan dial too (builder 11-07): a household game night signs fandom one step by the night's result. Built; codex review | in-progress | engine-sheet | [[../plans/2026-11-07-household-game-night-fandom]] |
 
 ## 4. Queue — ruled, not started (ready)
 
@@ -83,7 +84,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.337 | Ex-MUBA rows' key: inert on a Retired row (every key reader skips Retired first); convention: blank off the clock, the role's key when one lands. Folds into 338 | done-pending-archive | research-build | [[../plans/2026-11-07-former-player-next-chapter]] §engine.337 folded |
 | engine.336 | `Now:` bio lines for ledger-changing moments (builder 11-07: wedding, birth, job change, promotion); they stack atop the minted prose, newest first | ready | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] §Builder's ruling (scope) |
 | engine.334 | Story seeds sum unlike numbers (C114 sports "sentiment +36.06" = mood + head-count). After engine.331 and engine.332; stub, review deeper when picked up | ready | engine-sheet | [[../plans/2026-11-05-story-seed-mixed-magnitudes]] |
-| engine.335 | Families watching at home move the fan dial too (builder 11-07, engine.331 Q5): household game night signs fandom by the night's result | ready | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` Q5 note |
 | infrastructure.18 | Weekly version-drift report in the existing health check, no model: runtime end of life, npm behind (majors flagged), Claude Code, plugin vs patch | ready | engine-sheet | [[../reference/DEPLOY]] |
 | engine.325 | Casino overview (builder 10-30, own session): bet types safe→risky, how bets settle without credits or failure, house odds; mishap bet never pays | ready | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §Changelog 2026-10-30 |
 | pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did | ready | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |

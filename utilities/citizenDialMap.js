@@ -95,6 +95,11 @@ var DIAL_MAP = {
 
   // --- Family ---
   'Household':          { family: 5 },
+  // engine.335 (builder 2026-11-07): a family watching at home moves the fan dial one step by the night's
+  // result, on top of family (runHouseholdEngine.js). The tail is not a calendar suffix, so these resolve
+  // by exact key; the plain 'Household-GameNight' (a neutral night, and every older line) still folds as Household.
+  'Household-GameNight-Win':  { family: 5, fandom: 1 },
+  'Household-GameNight-Loss': { family: 5, fandom: -1 },
   'Wedding':            { family: 10, warmth: 4, composure: 2 },
   'Birth':             { family: 10, warmth: 4 },
   'Divorce':            { family: -8, composure: -5 },
@@ -298,7 +303,7 @@ var DEFAULT_AMBIENT = {};
 // Calendar suffixes are TEXTURE: a Career event on a holiday is still a Career
 // memory. Strip a known calendar half and route by the base tag. (Must NOT strip
 // real compound tags like 'Career-Transition' or 'Transgression-Petty'.)
-var CALENDAR_SUFFIXES = ['FirstFriday', 'CreationDay', 'Holiday', 'Sports', 'Weather', 'GameNight'];   // engine.299: a household moment on a game night is still a household moment   // engine.299: a Relationship line in the rain is still a Relationship memory
+var CALENDAR_SUFFIXES = ['FirstFriday', 'CreationDay', 'Holiday', 'Sports', 'Weather', 'GameNight'];   // engine.299: a household moment on a game night is still a household moment (engine.335: a signed one, -GameNight-Win / -Loss, is its own key)   // engine.299: a Relationship line in the rain is still a Relationship memory
 
 // engine.299: the graded form. <Kind>-<Dial>-<Up|Down>-<S|M|L> -> { dial: +/-BAND_DELTA[band] }.
 // One dial per line (what the line says), the fact's direction, the band's weight. The nine dials

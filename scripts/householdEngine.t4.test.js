@@ -153,6 +153,8 @@ console.log('\nengine.47 Hop 5 — households bend around tonight\'s result');
   global.normalizeOaklandFeedTeam_ = new Function(seasonSrc + '\nreturn normalizeOaklandFeedTeam_;')();
   const ripples = [];
   global.recordRipple_ = (ctx, r) => { ripples.push(r); return true; };
+  // engine.335: the line's tag carries the night's sign (-Win / -Loss); a neutral night keeps the plain tag
+  const isGN = ev => /^Household-GameNight(-Win|-Loss)?$/.test(ev.tag);
   const runWithFeed = (n, feed, weeks) => {
     const events = [];
     for (let i = 0; i < n; i++) {
@@ -167,29 +169,37 @@ console.log('\nengine.47 Hop 5 — households bend around tonight\'s result');
   };
   const winStreak = runWithFeed(3000, [{ eventType: 'game-result', teamsUsed: "A's", streak: 'W5', playerMood: 'confident' }],
     { "A's": { g: 3, hotCold: 'hot' } });
-  const gn = winStreak.filter(ev => ev.tag === 'Household-GameNight');
+  const gn = winStreak.filter(ev => isGN(ev));
   assert('5.1 a game week puts game-night lines on some households', gn.length > 0, String(gn.length));
   assert('5.2 a W5 streak in a hot week draws the streak lines', gn.every(ev => /streak|lineup/.test(ev.event)), gn.map(e => e.event).slice(0, 3).join(' | '));
   assert('5.3 each touched household is named in a game-night Ripple row',
     ripples.filter(r => r.effectType === 'game-night-household').reduce((a, r) => a + r.targetIds.length, 0) === gn.length);
   const notHot = runWithFeed(600, [{ eventType: 'game-result', teamsUsed: "A's", streak: 'W4' }], { "A's": { g: 3, hotCold: '' } })
-    .filter(ev => ev.tag === 'Household-GameNight');
+    .filter(ev => isGN(ev));
   assert('5.2b engine.331: W4 (under the bar) draws the plain win lines, not the streak', notHot.length > 0 && notHot.every(ev => !/streak/.test(ev.event)), notHot.map(e => e.event).slice(0, 3).join(' | '));
   const cold = runWithFeed(600, [{ eventType: 'game-result', teamsUsed: 'Oaks', streak: 'L5' }], { Oaks: { g: 3, hotCold: 'cold' } })
-    .filter(ev => ev.tag === 'Household-GameNight');
+    .filter(ev => isGN(ev));
   assert('5.2c engine.331: an L5 in a cold week draws the skid lines', cold.length > 0 && cold.every(ev => /peace|skid|subject/.test(ev.event)), cold.map(e => e.event).slice(0, 3).join(' | '));
   const loss = runWithFeed(3000, [{ eventType: 'game-result', teamsUsed: "A's", streak: 'L2', playerMood: 'frustrated' }], { "A's": { g: 3, hotCold: '' } })
-    .filter(ev => ev.tag === 'Household-GameNight');
+    .filter(ev => isGN(ev));
   assert('5.4 a loss draws the quiet-house lines', loss.length > 0 && loss.every(ev => /quiet|early|loss/.test(ev.event)), loss.map(e => e.event).slice(0, 3).join(' | '));
   const quiet = runWithFeed(3000, []);
-  assert('5.5 no game in the feed — no game-night line (no invented games)', quiet.filter(ev => ev.tag === 'Household-GameNight').length === 0);
+  assert('5.5 no game in the feed — no game-night line (no invented games)', quiet.filter(ev => isGN(ev)).length === 0);
   assert('5.6 the draw chance is unchanged — same event count with or without a game', quiet.length === winStreak.length, quiet.length + ' vs ' + winStreak.length);
   // codex re-review F1: a blank, retired or unknown team ahead of the club that played is no club's night
   const mixed = runWithFeed(600, [{ eventType: 'game-result', teamsUsed: 'NBA', streak: 'W5' }, { eventType: 'game-result', teamsUsed: '', streak: 'W5' },
-    { eventType: 'game-result', teamsUsed: 'Oaks', streak: 'L5' }], { Oaks: { g: 3, hotCold: 'cold' } }).filter(ev => ev.tag === 'Household-GameNight');
+    { eventType: 'game-result', teamsUsed: 'Oaks', streak: 'L5' }], { Oaks: { g: 3, hotCold: 'cold' } }).filter(ev => isGN(ev));
   assert('5.7 engine.331: retired and blank game rows first — the Oaks\' cold night still decides', mixed.length > 0 && mixed.every(ev => /peace|skid|subject/.test(ev.event)), mixed.map(e => e.event).slice(0, 3).join(' | '));
-  const unplayed = runWithFeed(600, [{ eventType: 'game-result', teamsUsed: 'Oaks', streak: 'W5' }], {}).filter(ev => ev.tag === 'Household-GameNight');
+  const unplayed = runWithFeed(600, [{ eventType: 'game-result', teamsUsed: 'Oaks', streak: 'W5' }], {}).filter(ev => isGN(ev));
   assert('5.8 engine.331: a game row with no week played is no game night (the city\'s fan gate)', unplayed.length === 0, String(unplayed.length));
+  // engine.335 (builder 2026-11-07): the tag signs the fan dial by the night's result, one step, on top of family
+  const tags = evs => [...new Set(evs.map(ev => ev.tag))].join(',');
+  assert('5.9 engine.335: a win-streak night tags every game-night line -Win', gn.every(ev => ev.tag === 'Household-GameNight-Win'), tags(gn));
+  assert('5.10 engine.335: a plain win night tags -Win', notHot.every(ev => ev.tag === 'Household-GameNight-Win'), tags(notHot));
+  assert('5.11 engine.335: a loss night and a cold streak tag -Loss', loss.every(ev => ev.tag === 'Household-GameNight-Loss') && cold.every(ev => ev.tag === 'Household-GameNight-Loss'), tags(loss) + ' / ' + tags(cold));
+  const neutral = runWithFeed(15000, [{ eventType: 'game-result', teamsUsed: 'Oaks', playerMood: 'hungry' }], { Oaks: { g: 3, hotCold: '' } }).filter(ev => isGN(ev));
+  assert('5.12 engine.335: a neutral night keeps the plain tag (family only)', neutral.length > 0 && neutral.every(ev => ev.tag === 'Household-GameNight'), tags(neutral));
+  assert('5.13 engine.335: the game-night Ripple names every signed line too', ripples.filter(r => r.effectType === 'game-night-household').reduce((a, r) => a + r.targetIds.length, 0) >= gn.length + notHot.length + loss.length + cold.length);
 }
 
 console.log(`\n${passed} passed, ${failed} failed`);

@@ -404,6 +404,7 @@ function runHouseholdEngine_(ctx) {
   // is the players' own (gameNightBucket_, applyGameNightMoments.js). Adds lines
   // to the draw; it does not raise the draw chance.
   var gameNightPool = [];
+  var gameNightTag = "Household-GameNight";
   var gameEntry = null;
   var feed = S.sportsFeedEntries || [];
   // engine.331 (codex re-review F1): the first game row of a club that played this week (the city's
@@ -428,6 +429,10 @@ function runHouseholdEngine_(ctx) {
       coldStreak: ["kept the game off at dinner to keep the peace", "let the kids pick the channel with the skid still going", "sighed at the score and changed the subject"]
     };
     gameNightPool = (GAME_NIGHT_HOUSEHOLD_[gnBucket] || GAME_NIGHT_HOUSEHOLD_.neutral).slice();
+    // engine.335 (builder 2026-11-07): families watching at home move the fan dial too, one step by the night's
+    // result, the same buckets the city's fan lines sign by (generateCitizensEvents); a neutral night stays family only
+    if (gnBucket === 'win' || gnBucket === 'winStreak') gameNightTag = "Household-GameNight-Win";
+    else if (gnBucket === 'loss' || gnBucket === 'coldStreak') gameNightTag = "Household-GameNight-Loss";
   }
   var gameNightTouched = [];
 
@@ -577,7 +582,7 @@ function runHouseholdEngine_(ctx) {
     } else if (wellnessPool.indexOf(pick) >= 0) {
       eventTag = "Recovering";
     } else if (gameNightPool.indexOf(pick) >= 0) {
-      eventTag = "Household-GameNight";
+      eventTag = gameNightTag;
       gameNightTouched.push(String(row[iPopID] || ''));
     }
 

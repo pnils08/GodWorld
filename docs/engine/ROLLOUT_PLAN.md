@@ -73,7 +73,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | engine.333 | Feed triggers to life history (builder 11-05/07): `retirement` leaves the sports layer, `Now:` bio line, owed wake; `injury` fills the bed. Cut done; bench | in-progress | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] |
 | engine.331 | Sports triggers: no blank-cell re-fire, hot/cold at 5, off-season and good/bad words. PROD @174; waits on the builder's menu re-run + C115 read | in-progress | engine-sheet | [[../plans/2026-11-05-sports-feed-triggers]] |
-| pipeline.102 | Dashboard sports page follows the live Oaks_Roster layout (builder 11-07: "Yes address the oaks dashboard"); review folded, restart + live read next | in-progress | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` G-ES6 |
 
 ## 4. Queue — ruled, not started (ready)
 
@@ -82,6 +81,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.332 | Media-feedback seeds (builder 11-05): Citywide-reaction seeds for coverage at \|rating\| ≥ 3 never reach Story_Seed_Deck, live or sandbox. Fix the path | ready | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` G-ES2 |
 | engine.334 | Story seeds sum unlike numbers (C114 sports "sentiment +36.06" = mood + head-count). After engine.331 and engine.332; stub, review deeper when picked up | ready | engine-sheet | [[../plans/2026-11-05-story-seed-mixed-magnitudes]] |
 | engine.335 | Families watching at home move the fan dial too (builder 11-07, engine.331 Q5): household game night signs fandom by the night's result | ready | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` Q5 note |
+| pipeline.102 | Dashboard sports page follows the live Oaks_Roster layout (builder 11-07); live 11-07: both team pages 200, Oaks 11 stats | done-pending-archive | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` G-ES6 |
 | infrastructure.18 | Weekly version-drift report in the existing health check, no model: runtime end of life, npm behind (majors flagged), Claude Code, plugin vs patch | ready | engine-sheet | [[../reference/DEPLOY]] |
 | engine.325 | Casino overview (builder 10-30, own session): bet types safe→risky, how bets settle without credits or failure, house odds; mishap bet never pays | ready | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §Changelog 2026-10-30 |
 | pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did | ready | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |

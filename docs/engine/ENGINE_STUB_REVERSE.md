@@ -14,7 +14,7 @@
 
 ---
 
-**Files scanned:** 180 · **Functions mapped:** 1772 · **S.* fields:** 381 · **Sheets:** 61
+**Files scanned:** 181 · **Functions mapped:** 1776 · **S.* fields:** 381 · **Sheets:** 61
 
 ## S.* / ctx.summary reverse index
 
@@ -320,7 +320,7 @@
 | `S.relocationNetFlow` | _(none)_ | `phase09-digest/finalizeCycleState.js::compactRelocationFlow_` | 0 | 1 |
 | `S.relocationPressureDeltas` | `phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_` | `phase05-citizens/neighborhoodTrajectoryEngine.js::updateNeighborhoodTrajectories_` | 1 | 1 |
 | `S.resetDynamicsMomentum` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | `phase02-world-state/applyCityDynamics.js::applyCityDynamics_` | 1 | 1 |
-| `S.rippleEvents` | `utilities/rippleLedger.js::recordRipple_` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase07-evening-media/buildContractSeeds.js::buildContractSeeds_`, `utilities/rippleLedger.js::recordRipple_` | 1 | 4 |
+| `S.rippleEvents` | `utilities/rippleLedger.js::recordRipple_` | `phase01-config/godWorldEngine2.js::runCyclePhases_`, `phase01-config/godWorldEngine2.js::runWorldCycleLocked_`, `phase02-world-state/applyEditionCoverageEffects.test.js::run`, `phase07-evening-media/buildContractSeeds.js::buildContractSeeds_`, `utilities/rippleLedger.js::recordRipple_` | 1 | 5 |
 | `S.rngState` | `phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_` | `phase06-analysis/applyMigrationDrift.js::applyMigrationDrift_` | 1 | 1 |
 | `S.schoolDrift` | `phase03-population/updateNeighborhoodDemographics.js::driftNeighborhoodEducation_` | `phase05-citizens/educationCareerEngine.js::checkSchoolQuality_` | 1 | 1 |
 | `S.season` | `phase01-config/advanceSimulationCalendar.js::advanceSimulationCalendar_`, `phase08-v3-chicago/v3preLoader.js::v3PreloadContext_` | `phase01-config/godWorldEngine2.js::updateWorldPopulation_`, `phase02-world-state/applyCityDynamics.js::applyCityDynamics_`, `phase02-world-state/applySeasonWeights.js::applySeasonalWeights_`, `phase02-world-state/applyWeatherModel.js::applyWeatherModel_`, `phase02-world-state/calendarChaosWeights.js::applyChaosCategoryWeights_`, `phase02-world-state/calendarStorySeeds.js::applySeasonalStorySeeds_`, …(+38 more) | 2 | 44 |

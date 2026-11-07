@@ -1,8 +1,8 @@
 {
   "generated": "2026-11-07",
   "generator": "scripts/stubEngine.js",
-  "filesScanned": 180,
-  "functionsMapped": 1772,
+  "filesScanned": 181,
+  "functionsMapped": 1776,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -1068,6 +1068,7 @@
       "readers": [
         "phase01-config/godWorldEngine2.js::runCyclePhases_",
         "phase01-config/godWorldEngine2.js::runWorldCycleLocked_",
+        "phase02-world-state/applyEditionCoverageEffects.test.js::run",
         "phase07-evening-media/buildContractSeeds.js::buildContractSeeds_",
         "utilities/rippleLedger.js::recordRipple_"
       ]

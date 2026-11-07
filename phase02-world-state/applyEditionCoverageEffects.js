@@ -20,6 +20,9 @@
  *
  * ============================================================================
  *
+ * engine.332 (2026-11-07) — each |rating| >= 3 also records a coverage-reaction
+ *   ripple, the path Story_Seed_Deck and the desk signal read.
+ *
  * v2.1 (S236, Phase 42 §B5 P3) — mark-processed `setValue` loop migrated to
  *   `queueCellIntent_`. dryRun guard dropped (intents respect dryRun at
  *   commit time per Phase 10). Edition_Coverage_Ratings removed from the
@@ -274,6 +277,25 @@ function applyEditionCoverageEffects_(ctx) {
         articleCount: e.articleCount,
         reporter: e.reporter
       });
+
+      // engine.332: the trigger above feeds only applyStorySeeds_'s Phase-7 list,
+      // which has not reached Story_Seed_Deck since saveV3Seeds v4.0 (S296). The
+      // deck and the desk signal read ripples, so the reaction is recorded here,
+      // where it is computed — one per beat (causeId), magnitude = the rating so
+      // every ±3 is a lead (builder 2026-11-07). Plan:
+      // docs/plans/2026-11-07-coverage-reaction-seeds.md
+      if (typeof recordRipple_ === 'function') {
+        recordRipple_(ctx, {
+          causeType: 'coverage-reaction',
+          causeId: e.domain + ':C' + e.cycle,
+          causeDetail: coverageReactionDetail_(e, currentCycle),
+          effectType: e.domain + ' coverage reaction',
+          targetScope: 'citywide',
+          magnitude: e.rating,
+          duration: 1,
+          sourceEngine: 'applyEditionCoverageEffects'
+        });
+      }
     }
 
     // ─────────────────────────────────────────────────────────────────────
@@ -401,4 +423,20 @@ function findCoverageCol_(headers, possibleNames) {
     }
   }
   return -1;
+}
+
+/**
+ * engine.332: the Why line of a coverage-reaction ripple (seed contract v2 —
+ * what happened, never an angle). The rating is the coverage's own tone
+ * (rateEditionCoverage.js), and every domain's sentimentWeight is positive, so
+ * the rating's sign is the direction this beat pulled the city's mood.
+ */
+function coverageReactionDetail_(e, currentCycle) {
+  var bits = ['rating ' + (e.rating > 0 ? '+' : '') + e.rating];
+  var n = Number(e.articleCount);
+  if (n > 0) bits.push(n + ' article' + (n === 1 ? '' : 's'));
+  if (e.reporter) bits.push(e.reporter);
+  return 'Citywide reaction: ' + (e.cycle < currentCycle ? 'last' : 'this') + ' week\'s Tribune ' +
+    e.domain + ' coverage' + (e.tone ? ' ran ' + e.tone : '') + ' (' + bits.join(', ') + ')' +
+    (e.tone ? ' and' : '') + ' pulled the city\'s mood ' + (e.rating > 0 ? 'up' : 'down') + '.';
 }

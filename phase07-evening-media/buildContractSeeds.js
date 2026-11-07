@@ -66,6 +66,38 @@ var CONTRACT_SEED_DESK = {
   'GENERAL': 'civic'
 };
 
+// engine.332: a coverage-reaction seed goes to the desk of the beat that was
+// covered (builder 2026-11-07), not one desk for the cause type. Beat → deck
+// domain is the newsroom's beat → lane table (bayTribuneRoster.js
+// LANE_BY_DOMAIN) read through CONTRACT_SEED_DESK; CRIME / HOUSING / TRANSIT
+// follow the engine's coverage normalizer (priorityEngine.js
+// COVERAGE_DOMAIN_NORMALIZE), BUSINESS is ECONOMIC's alias (rosterLookup.js).
+// A beat not listed is GENERAL — desk civic, the deck's existing default.
+var CONTRACT_SEED_COVERAGE_DOMAIN = {
+  'CIVIC': 'CIVIC',
+  'HEALTH': 'CIVIC',
+  'INFRASTRUCTURE': 'CIVIC',
+  'HOUSING': 'CIVIC',
+  'TRANSIT': 'CIVIC',
+  'SAFETY': 'SAFETY',
+  'CRIME': 'SAFETY',
+  'ECONOMIC': 'ECONOMIC',
+  'BUSINESS': 'ECONOMIC',
+  'CULTURE': 'COMMUNITY',
+  'COMMUNITY': 'COMMUNITY',
+  'EDUCATION': 'COMMUNITY',
+  'ENVIRONMENT': 'COMMUNITY',
+  'SPORTS': 'SPORTS',
+  'GENERAL': 'GENERAL'
+};
+
+/** Deck domain for a coverage-reaction ripple; causeId is '<BEAT>:C<cycle>' or a bare beat. */
+function contractSeedCoverageDomain_(causeId) {
+  var beat = String(causeId || '').split(':')[0].trim().toUpperCase();
+  return Object.prototype.hasOwnProperty.call(CONTRACT_SEED_COVERAGE_DOMAIN, beat)
+    ? CONTRACT_SEED_COVERAGE_DOMAIN[beat] : 'GENERAL';
+}
+
 function contractSeedHash_(input) {
   // Deterministic short id — same shape as computeShortHash_ but self-contained
   // so the Node test doesn't need the engine core loaded.
@@ -143,6 +175,7 @@ var CONTRACT_SEED_EVENT_HINTS = {
   'economic-event': /work|job|shift|business|market|shop|hire|wage|customer|vendor/i,
   'migration': /moving|leave|leaving|goodbye|arriv|relocat|farewell/i,
   'edition-coverage': /read|paper|article|news|tribune|coverage/i,
+  'coverage-reaction': /read|paper|article|news|tribune|coverage/i, // engine.332
   'city-event': /festival|market|night|concert|gallery|music|walk|series|fair|parade|celebrat/i
 };
 
@@ -436,6 +469,8 @@ function buildContractSeeds_(ctx) {
   for (var j = 0; j < ripples.length; j++) {
     var r = ripples[j];
     var key = (r.causeType || 'unknown') + '|' + contractSeedNormHood_(r.neighborhood || 'citywide');
+    // engine.332: one row per covered beat — every beat's reaction is citywide.
+    if (r.causeType === 'coverage-reaction') key += '|' + (r.causeId || '');
     if (!clusters[key]) { clusters[key] = []; order.push(key); }
     clusters[key].push(r);
   }
@@ -532,7 +567,9 @@ function buildContractSeeds_(ctx) {
       }
     }
 
-    var seedDomain = CONTRACT_SEED_DOMAIN[lead.causeType] || 'GENERAL';
+    var seedDomain = lead.causeType === 'coverage-reaction'
+      ? contractSeedCoverageDomain_(lead.causeId)
+      : (CONTRACT_SEED_DOMAIN[lead.causeType] || 'GENERAL');
     // S331 engine.80b/c: in-cycle hint cap — one name may take at most 25% of
     // this cycle's seeds (floor 2; denominator = seeds built so far, matching
     // checkBylineCadence's %-of-cycle metric). The 78c penalty cap (max -4)
@@ -600,6 +637,9 @@ if (typeof module !== 'undefined' && module.exports) {
     contractSeedIsMajor_: contractSeedIsMajor_,
     contractSeedTrend_: contractSeedTrend_,
     contractSeedHash_: contractSeedHash_,
-    CONTRACT_SEED_DOMAIN: CONTRACT_SEED_DOMAIN
+    contractSeedCoverageDomain_: contractSeedCoverageDomain_,
+    CONTRACT_SEED_DOMAIN: CONTRACT_SEED_DOMAIN,
+    CONTRACT_SEED_DESK: CONTRACT_SEED_DESK,
+    CONTRACT_SEED_COVERAGE_DOMAIN: CONTRACT_SEED_COVERAGE_DOMAIN
   };
 }

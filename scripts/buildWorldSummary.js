@@ -43,6 +43,8 @@ const sheets = require('/root/GodWorld/lib/sheets');
 // W5h2 (S336 engine.76): roster lane pools for the byline WHO-assist
 const { buildLanePools } = require('./engine-auditor/bayTribuneRoster');
 const { SIM_HOLIDAYS } = require('../phase02-world-state/getSimHoliday');
+// engine.332: a coverage reaction's lane is its beat's desk — the deck's own table
+const { contractSeedCoverageDomain_, CONTRACT_SEED_DESK } = require('../phase07-evening-media/buildContractSeeds');
 const { censusTrail, holidayMeaning } = require('./beatSliceKit');
 
 const REPO_ROOT = path.resolve(__dirname, '..');
@@ -809,6 +811,20 @@ const RIPPLE_LANE_MAP = {
 const RIPPLE_DEFAULT_LANE = 'business';
 const DESK_SIGNAL_VERSION = '1.3';
 
+// engine.332: a coverage-reaction row goes to the desk of the beat it names
+// (CauseId '<BEAT>:C<cycle>'), the same desk its Story_Seed_Deck row carries;
+// every other CauseType takes its lane from RIPPLE_LANE_MAP.
+function rippleLane(r) {
+  if (r.CauseType === 'coverage-reaction') {
+    return CONTRACT_SEED_DESK[contractSeedCoverageDomain_(r.CauseId)] || 'civic';
+  }
+  // hasOwnProperty guard: a CauseType like "toString" must not resolve an
+  // inherited Object.prototype member as the lane name.
+  return Object.prototype.hasOwnProperty.call(RIPPLE_LANE_MAP, r.CauseType)
+    ? RIPPLE_LANE_MAP[r.CauseType]
+    : RIPPLE_DEFAULT_LANE;
+}
+
 // ── Storyline registry (engine.270) ────────────────────────────────────────
 // A storyline is an ENGINE EVENT with its own ID and its own ending. Two
 // sources today: crisis arcs (generateCrisisBuckets_, CRISIS-<cycle>-<hood>)
@@ -1408,12 +1424,7 @@ function emitDeskSignal(cycle, data) {
   // ── ripples: route by CauseType; unmapped → business (the row's default lane) ──
   const cycleRipples = (rippleAll || []).filter(r => String(r.Cycle) === String(cycle));
   for (const r of cycleRipples) {
-    // hasOwnProperty guard: a CauseType like "toString" must not resolve an
-    // inherited Object.prototype member as the lane name.
-    const lane = Object.prototype.hasOwnProperty.call(RIPPLE_LANE_MAP, r.CauseType)
-      ? RIPPLE_LANE_MAP[r.CauseType]
-      : RIPPLE_DEFAULT_LANE;
-    lanes[lane].push(rippleEntry(r, cycle, stageByName));
+    lanes[rippleLane(r)].push(rippleEntry(r, cycle, stageByName));
   }
   if (!cycleRipples.length) notes.push('no Ripple_Ledger rows this cycle — ripple entries empty across lanes');
 
@@ -1673,6 +1684,7 @@ module.exports = {
   extractPopids,
   resolveFeedNames: resolveFeedNames_,
   RIPPLE_LANE_MAP,
+  rippleLane,
   DESK_SIGNAL_VERSION,
   // W5h2 byline WHO-assist (pure selection + fs-only usage tally)
   selectBylineCandidates,

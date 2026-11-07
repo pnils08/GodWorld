@@ -364,5 +364,69 @@ var LH_HEADER = ['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighbo
   assert('7a empty is clean', ctx.summary.contractSeeds.length === 0);
 })();
 
+// §11 engine.332 coverage reactions: one lead row per beat, on the beat's desk
+(function () {
+  function cr(beat, ratingCycle, rating, detail) {
+    return { cycle: 115, causeType: 'coverage-reaction', causeId: beat + ':C' + ratingCycle, causeDetail: detail,
+      effectType: beat + ' coverage reaction', targetScope: 'citywide', targetIds: [], neighborhood: '',
+      magnitude: rating, duration: 1, sourceEngine: 'applyEditionCoverageEffects' };
+  }
+  var rows = [
+    LH_HEADER,
+    ['t', 'POP-00300', 'Odile Park', 'Daily', 'read the Tribune front page twice', 'Temescal', 115],
+    ['t', 'POP-00301', 'Lev Amos', 'Daily', 'walked the dog to the lake', 'Fruitvale', 115]
+  ];
+  var ctx = {
+    ss: fakeSS(rows),
+    summary: {
+      cycleId: 115,
+      rippleEvents: [
+        cr('HEALTH', 114, -4, 'Citywide reaction: last week\'s Tribune HEALTH coverage ran negative (rating -4, 1 article, Dr. Lila Mezran) and pulled the city\'s mood down.'),
+        cr('ENVIRONMENT', 114, 5, 'env C114'),
+        cr('ENVIRONMENT', 115, 3, 'env C115'),
+        cr('SPORTS', 114, 3, 'sports C114'),
+        cr('TECHNOLOGY', 114, 3, 'tech C114'),
+        // the merged edition-coverage row is untouched by the split
+        { cycle: 115, causeType: 'edition-coverage', causeId: 'editionSentimentBoost', causeDetail: 'mood', effectType: 'sentiment', targetScope: 'citywide', targetIds: [], neighborhood: '', magnitude: 0.04, duration: 1 },
+        { cycle: 115, causeType: 'edition-coverage', causeId: 'editionNeighborhoodEffects.city', causeDetail: 'metrics', effectType: 'traffic', targetScope: 'citywide', targetIds: [], neighborhood: '', magnitude: 0.03, duration: 1 }
+      ]
+    }
+  };
+  b.buildContractSeeds_(ctx);
+  var seeds = ctx.summary.contractSeeds;
+  function by(what) { return seeds.filter(function (s) { return s.what.indexOf(what) === 0; }); }
+  var health = by('HEALTH coverage reaction')[0];
+  var envs = by('ENVIRONMENT coverage reaction');
+  var sports = by('SPORTS coverage reaction')[0];
+  var tech = by('TECHNOLOGY coverage reaction')[0];
+  var agg = seeds.filter(function (s) { return s.why.indexOf('mood') >= 0 && s.why.indexOf('metrics') >= 0; });
+  assert('11a one row per beat and rating Cycle (5 reactions + 1 merged coverage row)', seeds.length === 6);
+  assert('11b HEALTH lands on the civic desk', !!health && health.desk === 'civic' && health.domain === 'CIVIC');
+  assert('11c ENVIRONMENT lands on the culture desk, two rating Cycles stay two rows', envs.length === 2 && envs[0].desk === 'culture' && envs[0].domain === 'COMMUNITY');
+  assert('11d SPORTS lands on the sports desk', !!sports && sports.desk === 'sports');
+  assert('11e every ±3 is a lead', seeds.filter(function (s) { return /coverage reaction/.test(s.what); }).every(function (s) { return s.seedClass === 'major'; }));
+  assert('11f What = beat + signed rating, Why = the prose with the reporter', health.what === 'HEALTH coverage reaction -4' && health.magnitude === -4 && health.why.indexOf('Dr. Lila Mezran') >= 0);
+  assert('11g a beat with no table entry is GENERAL on the civic desk', !!tech && tech.domain === 'GENERAL' && tech.desk === 'civic');
+  assert('11h the merged edition-coverage row still forms', agg.length === 1 && agg[0].what.indexOf('2 related effects') >= 0);
+  assert('11i a paper reader leads the citizens', health.citizens.indexOf('POP-00300 Odile Park') === 0);
+  assert('11j distinct SeedIDs', envs[0].seedId !== envs[1].seedId);
+})();
+
+// §12 engine.332 the beat table agrees with the newsroom's beat → lane table
+(function () {
+  var LANE_BY_DOMAIN = { CIVIC: 'civic', SAFETY: 'civic', HEALTH: 'civic', INFRASTRUCTURE: 'civic', ECONOMIC: 'business',
+    CULTURE: 'culture', COMMUNITY: 'culture', EDUCATION: 'culture', ENVIRONMENT: 'culture', SPORTS: 'sports', GENERAL: '*' };
+  try {
+    LANE_BY_DOMAIN = require('../scripts/engine-auditor/bayTribuneRoster.js').LANE_BY_DOMAIN;
+  } catch (e) { console.log('  (bayTribuneRoster not loadable here — checked against the copied table)'); }
+  var bad = Object.keys(LANE_BY_DOMAIN).filter(function (beat) {
+    if (LANE_BY_DOMAIN[beat] === '*') return false;
+    return b.CONTRACT_SEED_DESK[b.contractSeedCoverageDomain_(beat)] !== LANE_BY_DOMAIN[beat];
+  });
+  assert('12a every beat lands on its newsroom lane' + (bad.length ? ' — off: ' + bad.join(',') : ''), bad.length === 0);
+  assert('12b causeId and bare beat resolve the same', b.contractSeedCoverageDomain_('health:C114') === 'CIVIC' && b.contractSeedCoverageDomain_('HEALTH') === 'CIVIC');
+  assert('12c blank resolves GENERAL', b.contractSeedCoverageDomain_('') === 'GENERAL');
+})();
+
 console.log(failures === 0 ? 'ALL PASS' : failures + ' FAILURES');
 process.exit(failures === 0 ? 0 : 1);

@@ -363,6 +363,14 @@
 
 - **findCoverageCol_(headers, possibleNames)**
 
+- **coverageReactionDetail_(e, currentCycle)**
+
+### applyEditionCoverageEffects.test.js
+- **assert(name, cond)**
+
+- **run(rows, cycle)**
+  Reads: S.rippleEvents
+
 ### applyInitiativeImplementationEffects.js
 - **loadCivicVoiceSentiment_(ctx)**
   Reads: S.cycle, S.cycleId
@@ -3052,6 +3060,8 @@
 - **generateAngle_(seed)**
 
 ### buildContractSeeds.js
+- **contractSeedCoverageDomain_(causeId)**
+
 - **contractSeedHash_(input)**
 
 - **contractSeedTrend_(r)**
@@ -4884,5 +4894,5 @@ _No top-level function declarations found (helper/constants file)._
 
 ---
 
-**Files scanned:** 180
-**Functions mapped:** 1772
+**Files scanned:** 181
+**Functions mapped:** 1776

@@ -494,6 +494,15 @@ console.log('\nTest 11c: rippleEntry + RIPPLE_LANE_MAP');
   for (const [k, lane] of Object.entries(expected)) {
     assertEqual(`route ${k} → ${lane}`, helper.RIPPLE_LANE_MAP[k], lane);
   }
+  // engine.332: a coverage reaction rides its beat's desk, as on Story_Seed_Deck
+  const cr = beat => helper.rippleLane({ CauseType: 'coverage-reaction', CauseId: beat + ':C114' });
+  assertEqual('coverage-reaction HEALTH → civic', cr('HEALTH'), 'civic');
+  assertEqual('coverage-reaction ENVIRONMENT → culture', cr('ENVIRONMENT'), 'culture');
+  assertEqual('coverage-reaction SPORTS → sports', cr('SPORTS'), 'sports');
+  assertEqual('coverage-reaction ECONOMIC → business', cr('ECONOMIC'), 'business');
+  assertEqual('coverage-reaction unknown beat → civic', cr('TECHNOLOGY'), 'civic');
+  assertEqual('other cause types keep RIPPLE_LANE_MAP', helper.rippleLane({ CauseType: 'edition-coverage' }), 'business');
+  assertEqual('unmapped cause type → business', helper.rippleLane({ CauseType: 'toString' }), 'business');
 }
 
 // ────────────────────────────────────────────────────────────────────────────

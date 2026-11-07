@@ -1301,9 +1301,12 @@ function applyStorySeeds_(ctx) {
   // ═══════════════════════════════════════════════════════════════════════════
   // applyEditionCoverageEffects_ (Phase 2) emits a trigger for every domain
   // with |rating| >= 3 in the prior edition. Each trigger gets converted to a
-  // story seed here so next cycle's reporters see the strong-coverage signal
-  // surfaced in Story_Seed_Deck. Pre-S202 these triggers were emitted to S
-  // but never read — closes the S137b feedback loop's hook side.
+  // story seed here. Pre-S202 these triggers were emitted to S but never read.
+  // ⚠ DECK-DEAD since saveV3Seeds v4.0 (S296), like the Wire 3b block below:
+  // these seeds feed only the UI renderer + Riley_Digest StorySeedCount. The
+  // deck and desk-signal path is the coverage-reaction ripple
+  // applyEditionCoverageEffects_ records (engine.332). Do not extend this block
+  // expecting deck coverage.
   var coverageTriggers = (S.editionCoverageTriggers && S.editionCoverageTriggers.length) ? S.editionCoverageTriggers : [];
   for (var cti = 0; cti < coverageTriggers.length; cti++) {
     var tg = coverageTriggers[cti];

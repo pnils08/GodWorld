@@ -150,6 +150,7 @@ Injury from the sports intake (the builder's input): the dashboard roster `injur
 ## Open with the builder
 
 - C4–C7 all ruled (C4, C5 on 11-06; C6, C7 on 11-07). Nothing open on the design.
+- **C8 (found at close, 2026-11-07): the injury milestone keys on the trigger WORD, and the dashboard leaves that cell blank by default.** The dashboard's roster `injury` action (`sportsFeedContract.js:594-643`) writes Status / StatusStartCycle / HealthCause, a `[SportsRoster]` line and a log row — a separate submission from the feed row. The feed row's `EventTrigger` is a dropdown the builder fills by hand (`SportsIntakeWorkspace.jsx:985`; the draft resets it to `''`, `:303`). So: an `injury` feed row with the word picked → the bed is filed as `injury` / `sports-feed` (this build); the same row with the cell blank → the type line only, and the bed stays the Phase-10 self-heal with a blank source (the pre-existing gap, not a regression). Call: (a) the builder picks `injury` / `injury-return` from the dropdown on those rows — nothing to build; or (b) a follow-on row makes EventType `injury` / `injury-return` alone the milestone when the trigger cell is blank (the type is the fact). Recommendation: (b) as a follow-on, since the dropdown is one more thing to remember. Not Sunday's problem: Vinnie's row carries `retirement` in the cell.
 - Sequence: this row waits on `retirement` entering the trigger list as a **milestone word** (engine.331 owns the list; codex F4 — not a hook).
 - The `retirement` feed row for Vinnie: his press conference. The builder files it when he judges the world is there; the engine opens the door at the next fire; his next chapter is the builder's next row.
 
@@ -191,6 +192,7 @@ Injury from the sports intake (the builder's input): the dashboard roster `injur
 
 ## Changelog
 
+- 2026-11-07 (close) — C8 found: the injury milestone needs the trigger word and the dashboard leaves the cell blank by default; builder's call (pick the word, or a follow-on routes EventType `injury` alone). STUB_MAP fix-up for the fold.
 - 2026-11-07 (PROD) — engine.333 on PROD @175 = stage 39 at `d9f6a7dfa`; bench-2 PASS, re-review SHIP; follow-on rows engine.336/337 filed; Task 5 = the C115 live read.
 - 2026-11-07 (re-review) — codex SHIP on the fold `d9f6a7dfa`; three ceilings recorded; round cap reached. PROD push after bench-2's C116.
 - 2026-11-07 (2b review) — codex HOLD folded in place: injury stamps only an Active row (F1), retirement flips only a GAME Active row (F2, G-RB8), one receipt per citizen per Cycle, `Now:` ends ` C<N>.`; re-bench + re-review next.

@@ -973,6 +973,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S636 Archive Pass (2026-11-07, engine-sheet) — post-S635 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.*.
+
+- **pipeline.102** [engine-sheet] — Dashboard sports page follows the live Oaks_Roster layout (builder 11-07); live 11-07: both team pages 200, Oaks 11 stats **State at archive:** done-pending-archive. Pointer: `output/production_log_run_cycle_c114_gaps.md` G-ES6
+
+This pass: 1 rows — pipeline.102. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S634 Archive Pass (2026-11-05, engine-sheet) — post-S633 closures sweep
 
 1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.

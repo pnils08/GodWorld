@@ -23,6 +23,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.333 | Feed triggers to life history: retirement leaves the sports layer, Now: bio line, owed wake, injury bed. PROD @175. Task 5 = the C115 live read, Sun 2026-11-08 | live-observing | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] |
+| engine.331 | Sports triggers: no blank-cell re-fire, hot/cold at 5, off-season and good/bad words. PROD @174, dropdown done. C115 live read Sun 2026-11-08 (Acc 14, P1, P3) | live-observing | engine-sheet | [[../plans/2026-11-05-sports-feed-triggers]] |
 | research.32 | Organic: the builder's next talk with Mags and Vinnie reads the log. Four record lookups, Sonnet 5.5 on the direct key (builder 11-05); restarted 11-05 01:33 | live-observing | research-build | [[../plans/2026-11-05-discord-voices-lookups]] |
 | engine.286 | Life-event dice LIVE (`63754ca8`); forced sale, own-record wake, scoreboard live; C112 read 2026-10-25 in the plan. Builder call asked 2026-10-28: name the game (N31/N32) before wake-as-turn builds | live-observing | research-build | [[../plans/2026-10-08-engine-286-game-of-life-events]] |
 | pipeline.84 | Organic: next unattended Jax assignment naming a covered citizen carries the earlier-coverage section. Built and live 2026-10-20 (index, landing, canon fix); detail in the plan | live-observing | research-build | [[../plans/2026-10-19-bay-tribune-master-index]] |
@@ -73,7 +74,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | governance.56 | One boot (builder 11-02): CLAUDE.md imports one `.claude/TERMINAL.md`; boot-load.js retired. Next: review | in-progress | engine-sheet | [[../plans/2026-08-29-boot-doc-consolidation]] §Changelog |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | engine.338 | A former player's next chapter (builder 11-07): the intake door writes no employer, clock or key on an existing row; his word at the owed wake. Folds 337; C1–C4 | in-progress | research-build | [[../plans/2026-11-07-former-player-next-chapter]] |
-| engine.331 | Sports triggers: no blank-cell re-fire, hot/cold at 5, off-season and good/bad words. PROD @174; waits on the builder's menu re-run + C115 read | in-progress | engine-sheet | [[../plans/2026-11-05-sports-feed-triggers]] |
+| engine.332 | Coverage reaction seeds (builder 11-05, rulings 11-07): a beat rated ±3+ reaches the deck and desk signal as one lead row on its own desk | in-progress | engine-sheet | [[../plans/2026-11-07-coverage-reaction-seeds]] |
 
 ## 4. Queue — ruled, not started (ready)
 
@@ -81,7 +82,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 |---|------|-------|----------|---------|
 | engine.337 | Ex-MUBA rows' key: inert on a Retired row (every key reader skips Retired first); convention: blank off the clock, the role's key when one lands. Folds into 338 | done-pending-archive | research-build | [[../plans/2026-11-07-former-player-next-chapter]] §engine.337 folded |
 | engine.336 | `Now:` bio lines for ledger-changing moments (builder 11-07: wedding, birth, job change, promotion); they stack atop the minted prose, newest first | ready | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] §Builder's ruling (scope) |
-| engine.332 | Media-feedback seeds (builder 11-05): Citywide-reaction seeds for coverage at \|rating\| ≥ 3 never reach Story_Seed_Deck, live or sandbox. Fix the path | ready | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` G-ES2 |
 | engine.334 | Story seeds sum unlike numbers (C114 sports "sentiment +36.06" = mood + head-count). After engine.331 and engine.332; stub, review deeper when picked up | ready | engine-sheet | [[../plans/2026-11-05-story-seed-mixed-magnitudes]] |
 | engine.335 | Families watching at home move the fan dial too (builder 11-07, engine.331 Q5): household game night signs fandom by the night's result | ready | engine-sheet | `output/production_log_run_cycle_c114_gaps.md` Q5 note |
 | infrastructure.18 | Weekly version-drift report in the existing health check, no model: runtime end of life, npm behind (majors flagged), Claude Code, plugin vs patch | ready | engine-sheet | [[../reference/DEPLOY]] |

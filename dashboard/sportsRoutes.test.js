@@ -60,8 +60,8 @@ const FEED_HEADERS = [
   'CommunityInvestment', 'MediaProfile',
 ];
 const OAKS_HEADERS = [
-  'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
-  'PPG', 'ASST', 'REB', 'STL', 'FG%', '3P%',
+  'POPID', 'First', 'Last', 'Tier', 'Position', 'Team', 'Salary',
+  'MIN', 'PTS', 'REB', 'AST', 'STL', 'BLK', 'TO', 'FG%', 'FGA', '3P%', '3PA',
 ];
 const CITIZEN_HEADERS = [
   'POPID',
@@ -149,8 +149,8 @@ const syntheticSheets = {
     rows: [{
       rowNumber: 8,
       values: [
-        'POP-90002', 'Synthetic', '', 'Guard', '1', 'G', 'Oaks', '$1',
-        '20.0', '7.0', '5.0', '2.0', '51.0%', '38.0%',
+        'POP-90002', 'Synthetic', 'Guard', '1', 'G', 'Oaks', '$1',
+        '29.6', '20.0', '5.0', '7.0', '2.0', '0.4', '2.1', '51.0%', '15.0', '38.0%', '8.1',
       ],
     }],
   },
@@ -280,7 +280,7 @@ assert.strictEqual(emptyCycle.body.data.teams.as.state['Team Record'].sourceCycl
 const workspace = await call(handlers.workspace, { query: { cycle: '404', team: 'oaks' } });
 assert.strictEqual(workspace.statusCode, 200);
 assert.strictEqual(workspace.body.data.team.roster[0].popid, 'POP-90002');
-assert.strictEqual(workspace.body.data.team.roster[0].stats.PPG, '20.0');
+assert.strictEqual(workspace.body.data.team.roster[0].stats.PTS, '20.0');
 assert.strictEqual(
   workspace.body.data.team.roster[0].statValues['basketball.threePct'],
   '38.0%',
@@ -288,7 +288,7 @@ assert.strictEqual(
 assert.ok(workspace.body.data.validEventOptions.eventTypes.includes('game-result'));
 assert.strictEqual(workspace.body.data.writePolicy.featureEnabled, false);
 assert.strictEqual(workspace.body.data.writePolicy.reasonCode, 'sports_write_disabled');
-assert.strictEqual(workspace.body.data.validMutationOptions.statFields.length, 6);
+assert.strictEqual(workspace.body.data.validMutationOptions.statFields.length, 11);   // pipeline.102: the live Oaks line, H–R
 assert.strictEqual(workspace.body.data.team.roster[0].citizen.tier, '2');
 assert.deepStrictEqual(
   workspace.body.data.validMutationOptions.rosterActions,
@@ -512,7 +512,7 @@ const oaksStatPreview = await call(handlers.preview, {
     rosterSource: 'Oaks_Roster',
     sourceRow: 8,
     changes: [
-      { field: 'basketball.ppg', before: '20.0', after: '20.5', reviewed: true },
+      { field: 'basketball.pts', before: '20.0', after: '20.5', reviewed: true },
       { field: 'basketball.fgPct', before: '51.0%', after: '51.5%', reviewed: true },
     ],
   }),

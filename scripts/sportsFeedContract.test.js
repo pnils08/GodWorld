@@ -169,7 +169,7 @@ assert.strictEqual(asStats.valid, true, asStats.errors.join('; '));
 const oaksStats = contract.validateSportsSubmission(syntheticSubmission(
   'stat-capture',
   [
-    { field: 'basketball.ppg', before: '19.8', after: '20.0' },
+    { field: 'basketball.pts', before: '19.8', after: '20.0' },
     { field: 'basketball.fgPct', before: '50.5%', after: '51.0%' },
     { field: 'basketball.threePct', before: '37.5', after: '38.0' },
   ],

@@ -97,13 +97,20 @@ const STAT_FIELD_MAPS = Object.freeze({
     'pitching.so': statField('pitching.so', 'T', 19, 'SO', 'Pitching SO', 'integer'),
     'pitching.bb': statField('pitching.bb', 'U', 20, 'BB', 'BB', 'integer'),
   }),
+  // pipeline.102: the live Oaks_Roster per-game line (builder's sheet, 2026-11-07), H–R. Every column is
+  // a hand-entered stat (no derived one like the A's SV / WAR), so all eleven are editable.
   Oaks_Roster: Object.freeze({
-    'basketball.ppg': statField('basketball.ppg', 'I', 8, 'PPG', 'PPG', 'decimal'),
-    'basketball.asst': statField('basketball.asst', 'J', 9, 'ASST', 'ASST', 'decimal'),
-    'basketball.reb': statField('basketball.reb', 'K', 10, 'REB', 'REB', 'decimal'),
+    'basketball.min': statField('basketball.min', 'H', 7, 'MIN', 'MIN', 'decimal'),
+    'basketball.pts': statField('basketball.pts', 'I', 8, 'PTS', 'PTS', 'decimal'),
+    'basketball.reb': statField('basketball.reb', 'J', 9, 'REB', 'REB', 'decimal'),
+    'basketball.ast': statField('basketball.ast', 'K', 10, 'AST', 'AST', 'decimal'),
     'basketball.stl': statField('basketball.stl', 'L', 11, 'STL', 'STL', 'decimal'),
-    'basketball.fgPct': statField('basketball.fgPct', 'M', 12, 'FG%', 'FG%', 'percentage'),
-    'basketball.threePct': statField('basketball.threePct', 'N', 13, '3P%', '3P%', 'percentage'),
+    'basketball.blk': statField('basketball.blk', 'M', 12, 'BLK', 'BLK', 'decimal'),
+    'basketball.to': statField('basketball.to', 'N', 13, 'TO', 'TO', 'decimal'),
+    'basketball.fgPct': statField('basketball.fgPct', 'O', 14, 'FG%', 'FG%', 'percentage'),
+    'basketball.fga': statField('basketball.fga', 'P', 15, 'FGA', 'FGA', 'decimal'),
+    'basketball.threePct': statField('basketball.threePct', 'Q', 16, '3P%', '3P%', 'percentage'),
+    'basketball.tpa': statField('basketball.tpa', 'R', 17, '3PA', '3PA', 'decimal'),
   }),
 });
 

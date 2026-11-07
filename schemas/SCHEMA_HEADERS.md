@@ -1,7 +1,7 @@
 ---
 title: GodWorld Schema Headers
 created: 2026-01-21
-updated: 2026-10-02
+updated: 2026-11-07
 type: reference
 tags: [schema, infrastructure, auto-generated, active]
 sources:
@@ -1233,25 +1233,29 @@ pointers:
 
 ## Oaks_Roster
 
-- **Rows:** 9
-- **Columns:** 14
+- **Rows:** 11
+- **Columns:** 18
 
 | Col | Header |
 |-----|--------|
 | A | POPID |
 | B | First |
-| C | Middle  |
-| D | Last |
-| E | Tier |
-| F | Position |
-| G | Team |
-| H | Salary |
-| I | PPG |
-| J | ASST |
-| K | REB |
+| C | Last |
+| D | Tier |
+| E | Position |
+| F | Team |
+| G | Salary |
+| H | MIN |
+| I | PTS |
+| J | REB |
+| K | AST |
 | L | STL |
-| M | FG% |
-| N | 3P% |
+| M | BLK |
+| N | TO |
+| O | FG% |
+| P | FGA |
+| Q | 3P% |
+| R | 3PA |
 
 ---
 

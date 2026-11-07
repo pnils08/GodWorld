@@ -1,7 +1,7 @@
 ---
 title: Oakland Sports Feed
 created: 2026-07-28
-updated: 2026-09-16
+updated: 2026-11-07
 type: reference
 tags: [sports, engine, citizens, active]
 sources:
@@ -299,12 +299,13 @@ summary). Built by `feedRowDelivery` in `scripts/sportsSubstrate.js`.
 
 ### `As_Roster`
 
-`As_Roster` has 22 columns:
+`As_Roster` has 26 columns:
 
-- identity and roster fields: POPID, name parts, Tier, Position, Team, Salary;
+- identity and roster fields: POPID, First, Middle, Last, Tier, Position, Team, Salary;
 - current batting-stat fields: AB, AVG, H, HR, RBI, SB, SO;
 - current pitching-stat fields: IP, ERA, W-L, SV, SO, BB;
-- current summary stat: WAR.
+- current summary stat: WAR;
+- reference fields: Awards, Current MLB rating, Year, Age.
 
 The dashboard stat-intake allowlist may update pitching SO at column T and BB
 at column U. SV at column S and WAR at column V are projected for reference but
@@ -314,10 +315,16 @@ It is also read by several canon/reviewer and reference-building scripts.
 
 ### `Oaks_Roster`
 
-`Oaks_Roster` has 14 columns:
+`Oaks_Roster` has 18 columns (the builder's layout, read 2026-11-07; no Middle):
 
-- identity and roster fields: POPID, name parts, Tier, Position, Team, Salary;
-- current basketball-stat fields: PPG, ASST, REB, STL, FG%, 3P%.
+- identity and roster fields: POPID, First, Last, Tier, Position, Team, Salary;
+- current per-game basketball line: MIN, PTS, REB, AST, STL, BLK, TO, FG%, FGA,
+  3P%, 3PA (H–R). The dashboard stat-intake allowlist covers all eleven.
+
+The dashboard reads identity cells by header on both tabs and stat cells by
+column; a tab whose headers differ from the contract (`ROSTER_SCHEMAS`,
+`scripts/sportsWorkspaceProjection.js`) stops the sports workspace rather than
+read or write the wrong column (pipeline.102).
 
 It is not currently wired into all of the canon/reviewer paths that use
 `As_Roster`.
@@ -461,6 +468,7 @@ parsers, validators, and consumers through an approved implementation plan.
 
 ## Changelog
 
+- 2026-11-07 (engine-sheet) — pipeline.102: §Roster relationship trued to the live tabs — As_Roster 26 columns (Middle restored by the builder), Oaks_Roster 18 (his per-game line, no Middle); the dashboard reads identity by header and stats by column.
 - 2026-11-06 (engine-sheet) — engine.331: rows J, K, M rewritten — moments are this Cycle's rows (no carry), 39 trigger words + aliases, hot/cold is the streak headline's decision at 5 for hooks and game night, a cold game-night set, every mood closes the players' night line, mood triggers gone.
 - 2026-10-11 (engine-sheet) — §How the feed moves city mood: what counts as a game, game-week pricing (engine.194), the season aftermath (engine.203d), and the two known holes (row order, gap week). Removed the stale "203d unbuilt" and old phase-multiplier lines — PROD `ae9278aa` no longer uses them.
 - 2026-09-20 (engine-sheet) — `Team Record` (column H) is now Plain text on every data row; 14 cells Sheets had stored as dates (`4-1`, `7-2`, `10-3` …) were restored to text. Until PROD @105 the engine read a date-stored record as unreadable and fell back to the cycle's first text record (engine.247). The engine now converts a date back to `M-d`, and pre-flight warns on any date-stored record and runs the engine's own WeekRecord validator (a `WeekRecord` with games on a non-`game-result` row fails pre-flight).

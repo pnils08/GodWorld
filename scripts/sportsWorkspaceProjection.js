@@ -28,11 +28,12 @@ const ROSTER_SCHEMAS = Object.freeze({
       ...AS_READ_ONLY_STATS,
     ].sort((left, right) => left.columnIndex - right.columnIndex)),
   }),
+  // pipeline.102: the live tab's own layout (builder's sheet, 2026-11-07) — no Middle, per-game line H–R
   oaks: Object.freeze({
     sheetName: 'Oaks_Roster',
     headers: Object.freeze([
-      'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
-      'PPG', 'ASST', 'REB', 'STL', 'FG%', '3P%',
+      'POPID', 'First', 'Last', 'Tier', 'Position', 'Team', 'Salary',
+      'MIN', 'PTS', 'REB', 'AST', 'STL', 'BLK', 'TO', 'FG%', 'FGA', '3P%', '3PA',
     ]),
     stats: Object.freeze(Object.values(STAT_FIELD_MAPS.Oaks_Roster)),
   }),
@@ -53,6 +54,17 @@ function eventFromRow(row, index, team, cycle) {
 
 function rawValue(values, index) {
   return values && values[index] != null ? String(values[index]).trim() : '';
+}
+
+// pipeline.102: identity cells by the schema's own header (unique on both tabs; a tab with no
+// Middle reads ''). Stats stay by index — As_Roster carries two SO columns.
+const IDENTITY_HEADERS = Object.freeze(['POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary']);
+function rosterIdentityIndex(teamId) {
+  const headers = ROSTER_SCHEMAS[teamId].headers;
+  return Object.freeze(Object.fromEntries(IDENTITY_HEADERS.map((header) => [header, headers.indexOf(header)])));
+}
+function identityValue(values, index) {
+  return index < 0 ? '' : rawValue(values, index);
 }
 
 function validateRosterHeaders(headers, teamId) {
@@ -98,10 +110,11 @@ function projectRoster(snapshot, teamId, warnings) {
       throw new Error(`${schema.sheetName} raw snapshot row ${index + 1} has an invalid physical row number`);
     }
     const cells = row.values;
-    const popid = rawValue(cells, 0);
-    const firstName = rawValue(cells, 1);
-    const middleName = rawValue(cells, 2);
-    const lastName = rawValue(cells, 3);
+    const at = rosterIdentityIndex(teamId);
+    const popid = identityValue(cells, at.POPID);
+    const firstName = identityValue(cells, at.First);
+    const middleName = identityValue(cells, at.Middle);
+    const lastName = identityValue(cells, at.Last);
     const name = [firstName, middleName, lastName]
       .filter(Boolean)
       .join(' ');
@@ -122,10 +135,10 @@ function projectRoster(snapshot, teamId, warnings) {
       firstName,
       middleName,
       lastName,
-      tier: rawValue(cells, 4),
-      position: rawValue(cells, 5),
-      team: rawValue(cells, 6),
-      salary: rawValue(cells, 7),
+      tier: identityValue(cells, at.Tier),
+      position: identityValue(cells, at.Position),
+      team: identityValue(cells, at.Team),
+      salary: identityValue(cells, at.Salary),
       stats,
       statValues,
     };
@@ -181,5 +194,6 @@ module.exports = {
   STATE_FIELDS,
   POPID_RE,
   ROSTER_SCHEMAS,
+  rosterIdentityIndex,
   projectSportsWorkspace,
 };

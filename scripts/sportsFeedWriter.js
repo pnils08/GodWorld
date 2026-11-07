@@ -14,7 +14,7 @@ const {
   projectRosterEventMutation,
   validateSportsSubmission,
 } = require('./sportsFeedContract.js');
-const { ROSTER_SCHEMAS } = require('./sportsWorkspaceProjection.js');
+const { ROSTER_SCHEMAS, rosterIdentityIndex } = require('./sportsWorkspaceProjection.js');
 
 const FEED_SHEET = 'Oakland_Sports_Feed';
 const CITIZEN_SHEET = 'Simulation_Ledger';
@@ -191,8 +191,11 @@ function selectedRosterRow(snapshot, participant) {
     throw new Error('Selected roster physical row is unavailable');
   }
   const values = schema.headers.map((_, index) => safeCell(row.values[index]).trim());
-  const name = [values[1], values[2], values[3]].filter(Boolean).join(' ');
-  if (values[0] !== participant.popid || name !== participant.name) {
+  // pipeline.102: identity by the schema's header (Oaks_Roster has no Middle)
+  const at = rosterIdentityIndex(teamId);
+  const cell = (index) => (index < 0 ? '' : values[index]);
+  const name = [cell(at.First), cell(at.Middle), cell(at.Last)].filter(Boolean).join(' ');
+  if (cell(at.POPID) !== participant.popid || name !== participant.name) {
     throw new Error('Selected roster identity changed');
   }
   return {
@@ -200,9 +203,9 @@ function selectedRosterRow(snapshot, participant) {
     rowNumber: row.rowNumber,
     values,
     identity: {
-      first: values[1],
-      middle: values[2],
-      last: values[3],
+      first: cell(at.First),
+      middle: cell(at.Middle),
+      last: cell(at.Last),
     },
   };
 }

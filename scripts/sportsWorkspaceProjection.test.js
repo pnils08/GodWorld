@@ -9,8 +9,8 @@ const AS_HEADERS = [
   'BB', 'WAR', 'Awards', 'Current MLB rating', 'Year', 'Age',
 ];
 const OAKS_HEADERS = [
-  'POPID', 'First', 'Middle', 'Last', 'Tier', 'Position', 'Team', 'Salary',
-  'PPG', 'ASST', 'REB', 'STL', 'FG%', '3P%',
+  'POPID', 'First', 'Last', 'Tier', 'Position', 'Team', 'Salary',
+  'MIN', 'PTS', 'REB', 'AST', 'STL', 'BLK', 'TO', 'FG%', 'FGA', '3P%', '3PA',
 ];
 
 const feedRows = [
@@ -41,8 +41,8 @@ const result = projectSportsWorkspace({
     rows: [{
       rowNumber: 7,
       values: [
-        'bad-id', 'Synthetic', '', 'Guard', '2', 'G', 'Oaks', '$1',
-        '20.0', '7.0', '5.0', '2.0', '51.0%', '38.0%',
+        'bad-id', 'Synthetic', 'Guard', '2', 'G', 'Oaks', '$1',
+        '29.6', '20.0', '5.0', '7.0', '2.0', '0.4', '2.1', '51.0%', '15.0', '38.0%', '-',
       ],
     }],
   },
@@ -71,7 +71,29 @@ assert.strictEqual(result.teams.as.roster[0].stats['Pitching SO'], '33');
 assert.strictEqual(result.teams.as.roster[0].stats.SV, '2');
 assert.strictEqual(result.teams.as.roster[0].stats.WAR, '1.8');
 assert.strictEqual(result.teams.oaks.roster[0].validPopid, false);
-assert.strictEqual(result.teams.oaks.roster[0].statValues['basketball.ppg'], '20.0');
+// pipeline.102: the live Oaks layout has no Middle — identity and stats read off its own headers
+assert.strictEqual(result.teams.oaks.roster[0].name, 'Synthetic Guard');
+assert.strictEqual(result.teams.oaks.roster[0].middleName, '');
+assert.strictEqual(result.teams.oaks.roster[0].tier, '2');
+assert.strictEqual(result.teams.oaks.roster[0].position, 'G');
+assert.strictEqual(result.teams.oaks.roster[0].team, 'Oaks');
+assert.strictEqual(result.teams.oaks.roster[0].salary, '$1');
+assert.strictEqual(result.teams.oaks.roster[0].statValues['basketball.min'], '29.6');
+assert.strictEqual(result.teams.oaks.roster[0].statValues['basketball.pts'], '20.0');
+assert.strictEqual(result.teams.oaks.roster[0].statValues['basketball.ast'], '7.0');
+assert.strictEqual(result.teams.oaks.roster[0].statValues['basketball.threePct'], '38.0%');
+assert.strictEqual(result.teams.oaks.roster[0].statValues['basketball.tpa'], '-');
+assert.strictEqual(result.teams.as.roster[0].name, 'Synthetic Two-Way');
+
+// pipeline.102: every stat field names the header at its own column, by index and by letter, on both tabs
+const { STAT_FIELD_MAPS } = require('./sportsFeedContract');
+const { ROSTER_SCHEMAS } = require('./sportsWorkspaceProjection');
+for (const [sheet, team] of [['As_Roster', 'as'], ['Oaks_Roster', 'oaks']]) {
+  for (const spec of Object.values(STAT_FIELD_MAPS[sheet])) {
+    assert.strictEqual(ROSTER_SCHEMAS[team].headers[spec.columnIndex], spec.header, `${sheet} ${spec.key} index`);
+    assert.strictEqual(spec.column, String.fromCharCode(65 + spec.columnIndex), `${sheet} ${spec.key} letter`);
+  }
+}
 
 const empty = projectSportsWorkspace({
   cycle: 499,

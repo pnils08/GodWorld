@@ -247,10 +247,18 @@ function isReadableCanonPath(rel) {
   if (rel.startsWith('archive/non-articles/') && !NON_ARTICLE_CANON_RE.test(rel)) return false;
   return true;
 }
-// The paths a searchDisk answer names, one per "— <path>: <snippet>" line.
+// The paths a searchDisk answer names, one per "— <path>[ (row label)][: <snippet>]" line,
+// read only from a real hit list (its header line). The term is flattened to one line
+// before the search (searchTerm), so an echoed term cannot add a hit line of its own.
+function searchTerm(term) {
+  return String(term == null ? '' : term).replace(/\s+/g, ' ').trim();
+}
 function pathsInSearchResult(text) {
   const out = new Set();
-  for (const m of String(text || '').matchAll(/^— (.+?): /gm)) out.add(m[1]);
+  const s = String(text || '');
+  if (!/^\d+ file\(s\) matched on disk for /.test(s)) return out;
+  const LINE = /^— (.+?)(?: \((?:ledger row|newest matching row)[^)]*\))?(?:: |$)/gm;
+  for (const m of s.matchAll(LINE)) out.add(m[1]);
   return out;
 }
 function readSource(relPath, offset, seenPaths) {
@@ -473,7 +481,7 @@ async function main() {
             // pipeline.106: the crons' ranked disk search (lib/mags searchDisk) — editions, the
             // Richmond Archive, TrueSource cards, world summaries, staged canon, the ledger. The
             // old queryLedger `articles` reached editions/ only and dropped hits past its cap.
-            resultData = require('../lib/mags').searchDisk(String(call.args.term), 12);
+            resultData = require('../lib/mags').searchDisk(searchTerm(call.args.term), 12);
             for (const p of pathsInSearchResult(resultData)) seenPaths.add(p);
             break;
           }
@@ -557,4 +565,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { slugify, FALLBACK_MIN_CHARS, clampToQuarantine, writeQuarantineFile, canonRecall, notebookSearch, readSource, pathsInSearchResult, isReadableCanonPath, visibleText, QUARANTINE_DIR, GEMINI_MODEL, THINKING_LEVEL, TOOLS };
+module.exports = { slugify, FALLBACK_MIN_CHARS, clampToQuarantine, writeQuarantineFile, canonRecall, notebookSearch, readSource, pathsInSearchResult, searchTerm, isReadableCanonPath, visibleText, QUARANTINE_DIR, GEMINI_MODEL, THINKING_LEVEL, TOOLS };

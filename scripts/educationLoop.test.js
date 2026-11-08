@@ -282,6 +282,8 @@ console.log('\n8. engine.144 loops 1+2 — field-first settlement (S411):');
   // draws (rich band → no dropout roll): band jitter, field roll (parent Healthcare 3 + school Education 1
   // + hood 1.2 Healthcare / 1.2 Food / 0.6 Gov → Healthcare below ≈.6), income, employer
   let ctx = mkCtx([parent, kid], [0.5, 0.1, 0.5, 0.0]);
+  // engine.338: the settlement's key now reads the catalog through the shared catalogRoleKey_ (same fallback as before)
+  global.economicParameters_ = () => JSON.parse(R('data/economic_parameters.json'));
   let res = E.settleAdulthood_(ctx, CYCLE, ctx.rng);
   let k = ctx.ledger.rows[1];
   check('settled one, rich band (hh 150k + sq 9 + parent masters)', res.settled === 1 && res.rich === 1);

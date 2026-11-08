@@ -4324,5 +4324,89 @@
     "housingBurdenPct": 0.38,
     "consumerProfile": "moderate",
     "notes": "engine.290: track, switch and systems maintenance, mostly overnight windows."
+  },
+  {
+    "role": "Sports Broadcaster / Color Analyst",
+    "category": "Creative & Arts",
+    "incomeRange": [
+      120000,
+      350000
+    ],
+    "medianIncome": 200000,
+    "effectiveTaxRate": 0.34,
+    "economicOutputCategory": "Creative/Arts",
+    "housingBurdenPct": 0.24,
+    "consumerProfile": "high-discretionary",
+    "notes": "engine.338 post-sports pool (builder draft 2026-11-07): the booth and the studio; a former player's name is the credential. MEDIA clock, employer a media business. Tier 1 gate."
+  },
+  {
+    "role": "Sports Analyst (Front Office)",
+    "category": "Professional",
+    "incomeRange": [
+      110000,
+      220000
+    ],
+    "medianIncome": 150000,
+    "effectiveTaxRate": 0.32,
+    "economicOutputCategory": "Professional Services",
+    "housingBurdenPct": 0.27,
+    "consumerProfile": "high-discretionary",
+    "notes": "engine.338 post-sports pool (builder draft 2026-11-07): roster architecture, numbers, fit — Mason Miller's shape, made catalog. ENGINE clock, employer the club. Tier 1–2 gate."
+  },
+  {
+    "role": "Club Coach / Instructor",
+    "category": "Education",
+    "incomeRange": [
+      95000,
+      185000
+    ],
+    "medianIncome": 130000,
+    "effectiveTaxRate": 0.3,
+    "economicOutputCategory": "Education",
+    "housingBurdenPct": 0.3,
+    "consumerProfile": "moderate",
+    "notes": "engine.338 post-sports pool (builder draft 2026-11-07): the cage, the bullpen, the film room; teaches the game he played. GAME clock, employer the club, key blank (the roster's word). Tier 1–2 gate."
+  },
+  {
+    "role": "Scout",
+    "category": "Professional",
+    "incomeRange": [
+      70000,
+      120000
+    ],
+    "medianIncome": 90000,
+    "effectiveTaxRate": 0.27,
+    "economicOutputCategory": "Professional Services",
+    "housingBurdenPct": 0.36,
+    "consumerProfile": "moderate",
+    "notes": "engine.338 post-sports pool (builder draft 2026-11-07): the road, the radar gun, the report. ENGINE clock, employer the club. Tier 2 gate."
+  },
+  {
+    "role": "College Coach",
+    "category": "Education",
+    "incomeRange": [
+      88000,
+      165000
+    ],
+    "medianIncome": 120000,
+    "effectiveTaxRate": 0.29,
+    "economicOutputCategory": "Education",
+    "housingBurdenPct": 0.32,
+    "consumerProfile": "moderate",
+    "notes": "engine.338 post-sports pool (builder draft 2026-11-07): a program, a recruiting class, a season. ENGINE clock, employer a college row if tracked else UNTRACKED. Tier 2 gate."
+  },
+  {
+    "role": "Youth Academy Director",
+    "category": "Education",
+    "incomeRange": [
+      78000,
+      140000
+    ],
+    "medianIncome": 105000,
+    "effectiveTaxRate": 0.28,
+    "economicOutputCategory": "Education",
+    "housingBurdenPct": 0.34,
+    "consumerProfile": "moderate",
+    "notes": "engine.338 post-sports pool (builder draft 2026-11-07): runs the academy — the kids, the coaches, the fundraising. ENGINE clock, employer the academy row (ownership stays the owner doors'). Tier 1–3 gate."
   }
 ]

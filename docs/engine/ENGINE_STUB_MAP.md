@@ -1903,6 +1903,8 @@
 
 - **settleSkillTag_(role)**
 
+- **catalogRoleKey_(roleText)**
+
 - **isSettleField_(tag)**
 
 - **skillTagField_(tag)**
@@ -2455,7 +2457,7 @@
 
 - **processAdvancementRowsBody_(ctx, now, cycle, log)**
   Reads: S.careerSignals
-  Sheets: Advancement_Intake1, Generic_Citizens
+  Sheets: Advancement_Intake1, Business_Ledger, Generic_Citizens
   RNG: ctx.rng / safeRand_(ctx)
 
 - **tierPayFactor_(tier)**
@@ -2481,6 +2483,9 @@
   Sheets: Business_Ledger
 
 - **mintNamedEmployer_(role)**
+
+- **readAdvBusinessBook_(ss)**
+  Sheets: Business_Ledger
 
 - **mintGameTeam_(role)**
 
@@ -4902,4 +4907,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1779
+**Functions mapped:** 1781

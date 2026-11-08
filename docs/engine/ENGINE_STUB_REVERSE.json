@@ -2,7 +2,7 @@
   "generated": "2026-11-08",
   "generator": "scripts/stubEngine.js",
   "filesScanned": 181,
-  "functionsMapped": 1779,
+  "functionsMapped": 1781,
   "sFields": {
     "absoluteCycle": {
       "writers": [
@@ -4757,6 +4757,7 @@
       "writers": [
         "phase01-config/godWorldEngine2.js::processIntake_",
         "phase05-citizens/generateCitizensEvents.js::generateCitizensEvents_",
+        "phase05-citizens/processAdvancementIntake.js::processAdvancementRowsBody_",
         "phase05-citizens/processAdvancementIntake.js::processMediaUsage_",
         "phase05-citizens/updateCivicApprovalRatings.js::mintOutOfTownChallenger_",
         "phase05-citizens/updateCivicApprovalRatings.js::pickGenericCitizenChallenger_"
@@ -4976,6 +4977,7 @@
         "phase05-citizens/applyBusinessDynamics.js::applyBusinessDynamics_",
         "phase05-citizens/generationalWealthEngine.js::applyOwnerDraw_",
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
+        "phase05-citizens/processAdvancementIntake.js::processAdvancementRowsBody_",
         "phase05-citizens/processAdvancementIntake.js::wireBusinessOwners_",
         "phase05-citizens/runCareerEngine.js::runCareerEngine_"
       ],
@@ -4996,6 +4998,8 @@
         "phase05-citizens/generationalWealthEngine.js::updateHeritage_",
         "phase05-citizens/processAdvancementIntake.js::buildMintBizPool_",
         "phase05-citizens/processAdvancementIntake.js::buildOwnerDoorPool_",
+        "phase05-citizens/processAdvancementIntake.js::processAdvancementRowsBody_",
+        "phase05-citizens/processAdvancementIntake.js::readAdvBusinessBook_",
         "phase05-citizens/processAdvancementIntake.js::wireBusinessOwners_",
         "phase05-citizens/runCareerEngine.js::applyCustodyDismissals_",
         "phase05-citizens/runCareerEngine.js::careerEmployerBook_",

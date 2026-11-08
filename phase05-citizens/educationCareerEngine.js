@@ -919,6 +919,21 @@ var SETTLE_FIELD_ECON_KEYS = {
   'Hospital Orderly':                 'Home Health Aide'
 };
 
+// engine.338: the one lookup for the key a job title carries — an exact catalog title (case-insensitive) is its own
+// key, in the catalog's casing; a trainee title maps through the two tables above; anything else carries no key
+// (''). The settlement keeps its own non-empty fallback (the RoleType itself — the gate that stops the money loop
+// re-deriving a settled citizen); the intake's existing-row door (processAdvancementIntake.js) writes exactly this.
+function catalogRoleKey_(roleText) {
+  var t = String(roleText || '').trim();
+  if (!t) return '';
+  var lc = t.toLowerCase();
+  var E = economicParameters_();
+  for (var i = 0; i < E.length; i++) {
+    if (String(E[i].role || '').toLowerCase() === lc) return String(E[i].role);
+  }
+  return SETTLE_ECON_KEYS[t] || SETTLE_FIELD_ECON_KEYS[t] || '';
+}
+
 // Youth dial tags (runYouthEngine_ YOUTH_DIAL_TAG) → the field they point to.
 var SETTLE_YOUTH_FIELD = {
   'Education': 'Education', 'Team': 'Education',
@@ -1241,7 +1256,7 @@ function settleAdulthood_(ctx, cycle, rng) {
     // already made this cycle) are candidates. Blank-count rows can't prove
     // room, so they never take hires. No opening anywhere → the citizen is
     // explicitly recorded as seeking work; silence is not an outcome.
-    if (iEcon >= 0) row[iEcon] = SETTLE_ECON_KEYS[row[iRole]] || SETTLE_FIELD_ECON_KEYS[row[iRole]] || row[iRole];
+    if (iEcon >= 0) row[iEcon] = catalogRoleKey_(row[iRole]) || row[iRole]; // engine.338: the shared lookup, same fallback
     var settledBiz = '';
     if (iEmployer >= 0) {
       if (bizPool === undefined) bizPool = buildSettleBizPool_(ctx); // (field pick above normally built it)

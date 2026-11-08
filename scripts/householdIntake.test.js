@@ -411,7 +411,9 @@ console.log('\n10. engine.319 — the clock is folded at the door and places the
   const usage = new Array(q3.length).fill(''); usage[c3('First')] = 'Ida'; usage[c3('Last')] = 'Known'; usage[c3('Tier')] = 3; usage[c3('ClockMode')] = 'whatever';
   adv3.appendRow(usage);
   let err3 = null; try { E.processAdvancementRows_(w3.ctx, 'C' + CYCLE, CYCLE); } catch (e) { err3 = e; }
-  check('an existing citizen\'s row ignores the cell, as before (it never sets the clock)', !err3 && w3.ctx.ledger.rows.find(r => r[col('POPID')] === 'POP-00950')[col('ClockMode')] === 'ENGINE', err3 && err3.message);
+  // engine.338 (agy F4.1): the existing-row door now WRITES the clock, so a bad clock on an existing name is refused for the
+  // whole queue too — the row stays as it was (engine.319 had this row ignore the cell)
+  check('an existing citizen\'s row with a bad clock is refused at the door, naming the row; the row stands', !!err3 && /Advancement_Intake row for "Ida Known" carries ClockMode "whatever"/.test(err3.message) && w3.ctx.ledger.rows.find(r => r[col('POPID')] === 'POP-00950')[col('ClockMode')] === 'ENGINE' && adv3.cleared.length === 0, err3 ? err3.message : 'no throw');
   // codex final look §1: every row whose name finds no ledger citizen is checked — a same-batch repeat or a family row the
   // family door would refuse included — so every refusal is all or nothing. A valid, distinct mint ahead of each case pins it.
   const refusal = (label, rows, extraCols) => {

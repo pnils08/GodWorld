@@ -781,6 +781,10 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
   var lStatusCol = findColByName_(ledgerHeaders, 'Status');
   var mintBizPool; // S336 Task 5: lazy — Business_Ledger read only on batches that mint someone
   var mintTrackedByBiz = {};
+  // engine.338: the existing-row door's view of Business_Ledger (BIZ_ID -> sheet row, stated Employee_Count, name) —
+  // lazy, read once, only when a queue row re-homes an existing citizen onto a tracked business
+  var advBizBook;
+  function bizBook_() { if (advBizBook === undefined) advBizBook = readAdvBusinessBook_(ss); return advBizBook; }
 
   // S184 (Phase 4.1.b) — build ledger frequency snapshot ONCE per intake batch.
   // Used by deriveCitizenProfile_ for neighborhood-aware RoleType + EducationLevel draws.
@@ -805,13 +809,26 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
   // ledger citizen (or an ambiguous one, skipped) never reads the cell and is never refused for it.
   // engine.320: the off-map hood refusal is the same check on the same rows — it threw at the mint, mid-pass, so the
   // mints ahead of it stayed in the ledger with every queue row uncleared and re-ran next Cycle as existing bumps.
+  // engine.338 (agy F4.1): the clock check covers EXISTING names too — the existing-row door now writes ClockMode, so a bad
+  // clock on a re-home row is refused here, before any row is processed, not mid-pass. An existing row's EmployerBizId
+  // is checked the same way: a `BIZ-` id must be on Business_Ledger (the mint's own rule — the business must exist), or
+  // the cell is SELF_EMPLOYED / UNTRACKED. A mint row's employer is not checked here: a carried id the pool cannot place
+  // falls through to the mint's own pick, as before.
   for (var pv = 1; pv < intakeData.length; pv++) {
     var pvFirst = iFirst >= 0 ? String(intakeData[pv][iFirst] || '').trim() : '';
     var pvLast = iLast >= 0 ? String(intakeData[pv][iLast] || '').trim() : '';
     if (!pvFirst && !pvLast) continue;
-    if ((advNameIndex[normalizeCitizenName_(pvFirst) + ' ' + normalizeCitizenName_(pvLast)] || []).length) continue;
     var pvRaw = iClockMode >= 0 ? String(intakeData[pv][iClockMode] || '').trim() : '';
     if (pvRaw && !MINT_CLOCK_MODES_[pvRaw.toUpperCase()]) throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + pvFirst + ' ' + pvLast + '" carries ClockMode "' + pvRaw + '", which is not ENGINE, GAME, CIVIC or MEDIA — fix the cell (no row in the queue was processed).');
+    if ((advNameIndex[normalizeCitizenName_(pvFirst) + ' ' + normalizeCitizenName_(pvLast)] || []).length) {
+      var pvEmp = iEmployerBiz >= 0 ? String(intakeData[pv][iEmployerBiz] || '').trim() : '';
+      if (pvEmp && !ADV_EMPLOYER_SENTINELS_[pvEmp.toUpperCase()]) {
+        var pvBook = pvEmp.indexOf('BIZ-') === 0 ? bizBook_() : null;
+        if (!pvBook) throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + pvFirst + ' ' + pvLast + '" names EmployerBizId "' + pvEmp + '" — ' + (pvEmp.indexOf('BIZ-') === 0 ? 'Business_Ledger could not be read' : 'not a BIZ- id, SELF_EMPLOYED or UNTRACKED') + ' (no row in the queue was processed).');
+        if (!pvBook.byId[pvEmp]) throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + pvFirst + ' ' + pvLast + '" names EmployerBizId "' + pvEmp + '", which is not on Business_Ledger — fix the cell (no row in the queue was processed).');
+      }
+      continue;
+    }
     var pvHood = iNeighborhood >= 0 ? String(intakeData[pv][iNeighborhood] || '').trim() : '';
     if (pvHood && !resolveHoodOrChild_(ctx, pvHood)) throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + pvFirst + ' ' + pvLast + '" names neighborhood "' + pvHood + '", which is not on Neighborhood_Map (ADR-0016) — fix the cell (no row in the queue was processed).');
   }
@@ -906,6 +923,7 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
       var advBYCol = findColByName_(ledgerHeaders, 'BirthYear');
       var advBY = advBYCol >= 0 ? (Number(ledgerRows[existingRow][advBYCol]) || 0) : 0;
       var advIsMinor = advBY > 0 && (simYearOf_(ctx, cycle) - advBY) < 18;
+      var incomeBefore = lIncome >= 0 ? ledgerRows[existingRow][lIncome] : null; // engine.338: the line names a moved Income
       if (roleChanged && !advIsMinor && lIncome >= 0 && advSalaryPools && typeof ctx.rng === 'function') {
         var newIncome = rederiveIncomeForRole_(advSalaryPools, roleType, ctx.rng);
         // engine.135 D2 (S399), re-based 2026-09-07: the job's catalog band prices the new role when it can.
@@ -917,12 +935,81 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
         if (hoodIncome !== null) ledgerRows[existingRow][lIncome] = hoodIncome;
         else if (newIncome !== null) ledgerRows[existingRow][lIncome] = newIncome;
       }
+      // engine.338 (builder 2026-11-07: the intake door is half a door): the existing-row branch learns the three cells it
+      // never wrote. Only a row that names a cell changes it; blank keeps it (the RoleType contract). The clock is the row's
+      // OWN cell (rawClockMode), never the mint's ENGINE default (agy F4.2); a bad clock or an unknown business was refused
+      // for the whole queue in the pre-pass above. OwnerOfBizId on an existing row stays refused (the collision skip above —
+      // ownership is the owner doors', engine.295/309/311). A move onto a tracked `BIZ-` grows that business's
+      // Employee_Count by one in this pass (else reconcileBusinessHeadcounts_ lays off its lowest worker next Cycle) and
+      // signals the Phase-6 ripple like the mint does — not for a GAME row (a player or club staffer is never a hire).
+      var moved = []; // the Advancement line names every cell that moved
+      var popId = lPopId >= 0 ? ledgerRows[existingRow][lPopId] : '';
+      var clockBefore = lClockMode >= 0 ? String(ledgerRows[existingRow][lClockMode] || '').trim().toUpperCase() : '';
+      var clockNow = clockBefore;
+      if (lClockMode >= 0 && rawClockMode && rawClockMode.toUpperCase() !== clockBefore) {
+        clockNow = rawClockMode.toUpperCase();
+        ledgerRows[existingRow][lClockMode] = clockNow;
+        moved.push('ClockMode ' + (clockBefore || '(blank)') + ' -> ' + clockNow);
+      }
+      var empCell = iEmployerBiz >= 0 ? String(row[iEmployerBiz] || '').trim() : '';
+      var employerChanged = false;
+      if (lEmployerBiz >= 0 && empCell) {
+        var empNew = empCell.indexOf('BIZ-') === 0 ? empCell : empCell.toUpperCase();
+        var empBefore = String(ledgerRows[existingRow][lEmployerBiz] || '').trim();
+        if (empBefore !== empNew) {
+          ledgerRows[existingRow][lEmployerBiz] = empNew;
+          employerChanged = true;
+          moved.push('EmployerBizId ' + (empBefore || '(blank)') + ' -> ' + empNew);
+          if (empNew.indexOf('BIZ-') === 0) {
+            var book = bizBook_();
+            var bizRec = book && book.byId[empNew];
+            if (bizRec && bizRec.stated !== null) {
+              bizRec.stated += 1; // the batch sees its own hires
+              queueCellIntent_(ctx, 'Business_Ledger', bizRec.sheetRow, book.countCol + 1, bizRec.stated,
+                'engine.338 intake re-home: ' + popId + ' joins ' + bizRec.name, 'citizens');
+            }
+            var acs = ctx.summary && ctx.summary.careerSignals;
+            if (acs && acs.businessDeltas && clockNow !== 'GAME') {
+              if (!acs.businessDeltas[empNew]) acs.businessDeltas[empNew] = { gained: 0, lost: 0 };
+              acs.businessDeltas[empNew].gained += 1;
+            }
+          }
+        }
+      }
+      // EconomicProfileKey follows the role: the catalog key the new title carries, else blank — a stale key would price
+      // him as the job he left. A GAME row takes none (the roster's word — SPORTS_OVERRIDE or blank — is the sports layer's).
+      var lEconKey = findColByName_(ledgerHeaders, 'EconomicProfileKey');
+      var keyChanged = false;
+      if (roleChanged && lEconKey >= 0 && clockNow !== 'GAME') {
+        var keyBefore = String(ledgerRows[existingRow][lEconKey] || '').trim();
+        var keyNow = (typeof catalogRoleKey_ === 'function') ? catalogRoleKey_(roleType) : '';
+        if (keyBefore !== keyNow) {
+          ledgerRows[existingRow][lEconKey] = keyNow;
+          keyChanged = true;
+          moved.push('EconomicProfileKey ' + (keyBefore || '(blank)') + ' -> ' + (keyNow || '(blank)'));
+        }
+      }
+      // engine.338 (agy F5): a new employer or key re-prices the job too, not the role alone — priced on the row's role
+      // when the intake row names none. The role-change price above already ran when the role moved.
+      if (!roleChanged && (employerChanged || keyChanged) && !advIsMinor && lIncome >= 0 && typeof ctx.rng === 'function') {
+        var priceRole = lRoleType >= 0 ? String(ledgerRows[existingRow][lRoleType] || '').trim() : '';
+        var lStageB = findColByName_(ledgerHeaders, 'CareerStage'), lTagsB = findColByName_(ledgerHeaders, 'SkillTags');
+        var rePrice = (priceRole && typeof jobReferencePay_ === 'function') ? jobReferencePay_(
+          priceRole, lTagsB >= 0 ? ledgerRows[existingRow][lTagsB] : '',
+          lStageB >= 0 ? ledgerRows[existingRow][lStageB] : '', popId,
+          (typeof payProfileFromRow_ === 'function') ? payProfileFromRow_(ledgerHeaders, ledgerRows[existingRow], null) : null) : null;
+        if (rePrice === null && priceRole && advSalaryPools) rePrice = rederiveIncomeForRole_(advSalaryPools, priceRole, ctx.rng);
+        if (rePrice !== null) ledgerRows[existingRow][lIncome] = rePrice;
+      }
+      if (lIncome >= 0 && Number(incomeBefore) !== Number(ledgerRows[existingRow][lIncome])) {
+        moved.push('Income ' + (incomeBefore || 0) + ' -> ' + ledgerRows[existingRow][lIncome]);
+      }
       if (lLastUpdated >= 0) ledgerRows[existingRow][lLastUpdated] = now;
       ctx.ledger.dirty = true;
-      var popId = lPopId >= 0 ? ledgerRows[existingRow][lPopId] : '';
       if (logSheet) {
         logSheet.appendRow([now, popId, (first + ' ' + last).trim(), 'Advancement',
-          (tier !== tierBefore ? 'Updated to Tier ' + tier : 'Intake at Tier ' + tier) + (roleChanged ? '; RoleType -> ' + roleType : '') + '. ' + notes, '', cycle]); // engine.150: the earned-rung marker only when the Tier actually moved
+          (tier !== tierBefore ? 'Updated to Tier ' + tier : 'Intake at Tier ' + tier) + (roleChanged ? '; RoleType -> ' + roleType : '') +
+          (moved.length ? '; ' + moved.join('; ') : '') + '. ' + notes, '', cycle]); // engine.150: the earned-rung marker only when the Tier actually moved
       }
     } else {
       // engine.304 D6b: a family arrival is re-checked against the ledger as it stands NOW — an earlier wire in
@@ -1786,6 +1873,37 @@ function mintNamedEmployer_(role) {
 
 // engine.319 — the ledger's four clocks; the intake door folds its cell to one of them or refuses the row.
 var MINT_CLOCK_MODES_ = { ENGINE: true, GAME: true, CIVIC: true, MEDIA: true };
+// engine.338: the two EmployerBizId words that are not a tracked business (the mint's own sentinels)
+var ADV_EMPLOYER_SENTINELS_ = { SELF_EMPLOYED: true, UNTRACKED: true };
+
+// engine.338: Business_Ledger as the existing-row door reads it — every BIZ_ID with its 1-based sheet row, its stated
+// Employee_Count (null when blank / non-numeric: a count the door never invents) and its name; countCol is the 0-based
+// Employee_Count column. Returns null when the tab or either column is missing (the caller refuses the queue row that
+// needed it, naming the row). Read once per pass; the batch's own hires are counted into `stated` as they land.
+function readAdvBusinessBook_(ss) {
+  var sheet = ss ? ss.getSheetByName('Business_Ledger') : null;
+  if (!sheet) return null;
+  var data = sheet.getDataRange().getValues();
+  if (data.length < 2) return null;
+  var h = data[0], cId = -1, cName = -1, cCount = -1;
+  for (var c = 0; c < h.length; c++) {
+    var hd = String(h[c]).trim();
+    if (hd === 'BIZ_ID') cId = c; else if (hd === 'Name') cName = c; else if (hd === 'Employee_Count') cCount = c;
+  }
+  if (cId < 0 || cCount < 0) return null;
+  var byId = {};
+  for (var r = 1; r < data.length; r++) {
+    var id = String(data[r][cId] || '').trim();
+    if (!id) continue;
+    var raw = data[r][cCount];
+    byId[id] = {
+      sheetRow: r + 1,
+      name: String(cName >= 0 ? (data[r][cName] || id) : id),
+      stated: (raw === '' || raw === null || raw === undefined || isNaN(Number(raw))) ? null : Number(raw)
+    };
+  }
+  return { byId: byId, countCol: cCount };
+}
 // engine.319 — a GAME title's team: the roster script's two sports-layer ids
 // (scripts/linkCitizensToEmployers.js layer 1 — keyed there on OriginGame, which
 // an intake mint never carries, so the mint reads the title). The farm clubs are

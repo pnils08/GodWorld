@@ -73,7 +73,7 @@ Correction given to the builder the same session: the questions said a rating is
 
 - A follow-up that rates strong again brings another reaction seed the next week. The builder accepted this with ruling 1 (the option said so).
 - Deck growth: 2–3 rows a Cycle at past rates (55 strong ratings over 24 Cycles).
-- `draftContentRows.js:289` turns any major COMMUNITY seed into a moving-trucks line; its `hood=Citywide; displacement>=4` condition already meets the merged coverage row today. Logged as G-ES8 in the C114 gap log, not this row.
+- `draftContentRows.js:289` turns any major COMMUNITY seed into a moving-trucks line. Logged as G-ES8 in the C114 gap log, not this row. Traced 2026-11-07: inert on live — the rule is the stub backend only (`/run-cycle` runs `openrouter`), and the `hood=Citywide` gate is rejected before write (`normalizeHoodGate` → null).
 - The bench resync wipes the evidence (`project_bench-resync-destroys-dial-evidence`): reads are taken before the final sync.
 
 ## Reviews reconciled

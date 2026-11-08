@@ -45,14 +45,15 @@ What every other citizen voice does (`lib/personaProvider.js` `citizenVoiceProvi
 - **Bot** — the "About This Person" block (`fetchUserProfile` :357, called :277) and the per-exchange `mags` write (`saveToSupermemory` :415, called :318) come out. Her page read, talk buffer, Tribune/world search, notes to self, family and newsroom week stay as they are.
 - **Reflection cron** — the `mags` search (:523-532) and the `mags` write (:576-585) come out. Page tail, page write, claude-mem save and the intake row stay.
 - **Saturday narrator** — the charge sits under her citizen persona (CHARACTER.md identity to `## The Journal` + her newest page reflections, fenced, as the bot reads them) and gains why she writes the Pulse, in the builder's 11-03 words. A preview path narrates one past Cycle old vs new from pinned inputs to scratch files, never `cycle_pulse_c<N>.md` (codex F3); the builder reads both before it goes live.
+- **Every crossing to the builder side out (builder 11-08)** — the bot's notes-to-self sink (`[NOTE_TO_SELF:]` → `docs/mags-corliss/NOTES_TO_SELF.md`, read by the CLI `mags-corliss` agent) and the reflection's claude-mem save (`project: 'claude-mem'`, builder memory) come out with the store. Tags are still stripped from any reply.
 - **Not touched** — the CLI agent and the builder-side skills that name the store (`/save-to-mags`, `/save-to-profile`, session-end, diagnose, self-debug): once the citizen seats stop reading the store, nothing written there reaches her. The Moltbook seat already loads identity + page and writes no `mags` (codex F5). `daily-reflection.js` has no cron. The store stays as it is (Rule 2).
 
 ## Tasks
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | Bot: "About This Person" store profile and per-exchange store write out | es | not started |
-| 2 | Reflection cron: store search and store write out | es | not started |
+| 1 | Bot: "About This Person" store profile and per-exchange store write out; the notes-to-self channel (a citizen filing gaps and build requests to an "editorial session self") out (builder 11-08: "what does that serve the CLIs ?") | es | built 11-08 |
+| 2 | Reflection cron: store search, store write and the claude-mem (builder memory tool) save out; `lib/mags` store helpers and notes reader removed; orphan `daily-reflection.js` retired | es | built 11-08 |
 | 2a | Read the `mags` container for builder/build content reaching her prompt via the profile — Rule 3 check | es | done 11-08 (Task 2a section) |
 | 3 | Saturday narrator under her citizen persona + why she writes the Pulse; preview path old vs new on one past Cycle to scratch; builder reads both | es | not started |
 | 4 | Tests; codex diff review; restart the bot; read back the bot and reflection prompts (no store block) | es | not started |
@@ -91,6 +92,7 @@ What every other citizen voice does (`lib/personaProvider.js` `citizenVoiceProvi
 
 ## Changelog
 
+- 2026-11-08 (engine-sheet) — Tasks 1–2 built: bot and reflection no longer read or write `mags`; notes-to-self and the claude-mem save cut (builder: citizen Mags serves no CLI); `lib/mags` store helpers and notes reader removed; `daily-reflection.js` retired. Tests PASS. Codex diff review next, then the bot restart.
 - 2026-11-08 (engine-sheet) — Builder correction: citizen Mags runs like every other citizen; the CLI Mags is a different agent. The CLI-style loader is dropped; the job is the two store reads/writes out of the bot and reflection, plus the narrator's persona and a preview compare. Codex plan review HOLD reconciled against the rescope.
 - 2026-11-08 (engine-sheet) — Started (ordered 11-03; four engine jobs ran ahead of it). Task 2a done: the profile is the whole store, mislabelled as the speaker, real-world dated; no Rule 3 breach. Correction: the bot's Tribune archive search reads `world-data` + `bay-tribune`; the reflection cron's reads `mags`. Design written; `/save-to-mags` and the orphan `daily-reflection.js` retire with the freeze.
 - 2026-11-03 (engine-sheet) — Created on the builder's word; current state read from the bot, reflection cron, Saturday run and legacy CLI boot.

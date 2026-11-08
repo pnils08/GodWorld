@@ -19,7 +19,6 @@
 require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
-const http = require('http');
 const Anthropic = require('@anthropic-ai/sdk');
 const mags = require('../lib/mags');
 const page = require('../lib/citizenPage');
@@ -38,7 +37,6 @@ const MOLTBOOK_LOG_DIR = path.join(__dirname, '..', 'logs', 'moltbook');
 const MOLTBOOK_REFLECTION_CURSOR = path.join(MOLTBOOK_LOG_DIR, '.reflection-cursor.json');
 const LOG_DIR = mags.LOG_DIR;
 const LOG_FILE = path.join(LOG_DIR, 'discord-reflection.log');
-const CLAUDE_MEM_URL = 'http://127.0.0.1:37777/api/memory/save';
 const INTAKE_LOCK = path.join(LOG_DIR, 'nightly-intake.lock');
 const INTAKE_SPOOL = path.join(LOG_DIR, 'nightly-intake');
 
@@ -201,16 +199,12 @@ function buildSystemPrompt(identity, clockLabel) {
     '— Mags';
 }
 
-function buildUserPrompt(conversations, journalTail, worldState, archiveContext) {
+function buildUserPrompt(conversations, journalTail, worldState) {
   // worldState = compact orientation header; she searches her city for depth (S252 Task 5)
+  // pipeline.100 (builder 11-08): no `mags` store archive block — her page is her memory, as every citizen's is.
   var prompt = '## Oakland right now\n\n' + worldState +
     '\n\n---\n\n## Today\'s Discord Conversations\n\n' + conversations +
     '\n\n---\n\n## Earlier reflections (your own — pick the thread back up)\n\n' + journalTail;
-
-  if (archiveContext) {
-    prompt += '\n\n---\n\n## Archive Context (from Tribune files & memory)\n\n' +
-      'Background knowledge. Use naturally.\n\n' + archiveContext;
-  }
 
   prompt += '\n\n---\n\nThe terrace light is fading. What stayed with you today?';
   return prompt;
@@ -418,53 +412,6 @@ async function queueNightlyIntake(reflection, cycle, clock, instant) {
 }
 
 // ---------------------------------------------------------------------------
-// Save to Claude-Mem
-// ---------------------------------------------------------------------------
-function saveToClaudeMem(reflection, conversationCount) {
-  return new Promise(function(resolve) {
-    var payload = JSON.stringify({
-      text: 'Discord reflection (' + conversationCount + ' conversations today): ' + reflection,
-      // Builder-side memory, not canon-facing: the real Central date belongs here (UTC read as tomorrow from 6 PM).
-      title: 'Nightly Discord Reflection — ' + mags.getCentralDate(),
-      project: 'claude-mem'
-    });
-
-    var url = new URL(CLAUDE_MEM_URL);
-    var options = {
-      hostname: url.hostname,
-      port: url.port,
-      path: url.pathname,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(payload)
-      }
-    };
-
-    var req = http.request(options, function(res) {
-      var data = '';
-      res.on('data', function(chunk) { data += chunk; });
-      res.on('end', function() {
-        if (res.statusCode === 200) {
-          log.info('Saved to Claude-Mem: ' + data);
-        } else {
-          log.warn('Claude-Mem returned ' + res.statusCode + ': ' + data);
-        }
-        resolve();
-      });
-    });
-
-    req.on('error', function(err) {
-      log.warn('Claude-Mem unavailable: ' + err.message);
-      resolve();
-    });
-
-    req.write(payload);
-    req.end();
-  });
-}
-
-// ---------------------------------------------------------------------------
 // Log the run
 // ---------------------------------------------------------------------------
 function logRun(status, details) {
@@ -519,29 +466,11 @@ async function main() {
     var journalTail = await loadPageTail(2);  // her own page reflections — the git journal is frozen (pipe.40 T1)
     var worldState = mags.loadWorldState();
 
-    // Search Supermemory for context related to today's conversations
-    var archiveContext = '';
-    try {
-      // Build search query from conversation topics
-      var topicParts = entries.slice(-5).map(function(e) { return e.message; });
-      topicParts = topicParts.concat(moltbookEntries.slice(-5).map(function(e) {
-        return e.targetTitle || e.title || e.replyText || '';
-      }));
-      var topicSample = topicParts.filter(Boolean).join(' ');
-      var searchQuery = topicSample.substring(0, 200);
-      archiveContext = await mags.searchSupermemory(searchQuery, 3, 5000);
-      if (archiveContext) {
-        log.info('Supermemory: +' + archiveContext.length + ' chars of archive context');
-      }
-    } catch (err) {
-      log.warn('Supermemory search skipped: ' + err.message);
-    }
-
     // Build prompts
     var conversations = entries ? formatConversations(entries) : '';
     var moltbookSection = moltbookEntries ? formatMoltbookInteractions(moltbookEntries) : '';
     var systemPrompt = buildSystemPrompt(identity, clockLabel);
-    var userPrompt = buildUserPrompt(conversations, journalTail, worldState, archiveContext);
+    var userPrompt = buildUserPrompt(conversations, journalTail, worldState);
 
     // Append Moltbook section if there were interactions
     if (moltbookSection) {
@@ -572,17 +501,7 @@ async function main() {
     // Append to her citizen page (pipe.40 T1 — the journal's new home)
     await appendToPage(reflection, cycle);
 
-    // Save to Claude-Mem
-    var totalConversations = (entries ? entries.length : 0) + (moltbookEntries ? moltbookEntries.length : 0);
-    await saveToClaudeMem(reflection, totalConversations);
-
-    // Save to Supermemory (her `mags` container is read back into her prompts: sim-clock label, no calendar date)
-    var when = clockLabel || 'this cycle';
-    mags.saveToSupermemory(
-      'Nightly Discord Reflection — ' + when,
-      'Mags Corliss nightly reflection (' + when + ', ' + discordCount + ' conversations):\n\n' + reflection
-    );
-    log.info('Nightly reflection saved to Supermemory');
+    // pipeline.100 (builder 11-08): no claude-mem or `mags` store copy — her page is the one write, as every citizen's.
 
     // engine.197 M2 — after every durable save above; its own failure never undoes them
     try { await queueNightlyIntake(reflection, cycle, runClock, runInstant); } catch (e) { log.warn('Reflection_Intake: ' + e.message + ' (a spooled row stays for the next run)'); }

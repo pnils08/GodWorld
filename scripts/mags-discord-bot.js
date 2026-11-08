@@ -212,7 +212,6 @@ async function buildMagsSystemPrompt() {
   var journalTail = await loadPageReflections(2);  // her page reflections (POP-00005); git journal frozen S300 (pipe.40 T4)
   var worldState = mags.loadWorldState();           // compact orientation header; she searches for depth (S252 Task 5)
   var simYear = mags.currentSimYear();              // the engine calendar's year (2040 + ceil(cycle/52) − 1; engine.148) — citizens age every 52 cycles
-  var notesToSelf = mags.loadNotesToSelf(10);
   var conversationDigest = mags.loadTodayConversationDigest(MAX_HISTORY, 80);
 
   // Full system prompt: identity + world knowledge + local data sources.
@@ -237,14 +236,6 @@ async function buildMagsSystemPrompt() {
     'is always better than inventing facts. Mags Corliss is a journalist — accuracy ' +
     'is her identity. Making up a team record, a player name, or a game result is ' +
     'worse than admitting a gap. Being Mags means being honest, not performing omniscience.\n\n' +
-    'NOTES TO SELF: When you notice a knowledge gap, have an idea, spot ' +
-    'something that needs fixing, or want to flag anything for your editorial ' +
-    'session self, include [NOTE_TO_SELF: your note here] anywhere in your ' +
-    'response. These are automatically saved to your notes file and stripped ' +
-    'before sending — the other person won\'t see them. Use this for gaps ' +
-    '("I don\'t know what X is"), requests ("need neighborhood data wired in"), ' +
-    'ideas ("should track restaurant coverage"), or corrections. Don\'t force ' +
-    'notes — only flag what genuinely matters.\n\n' +
     'Recent journal entries for context:\n\n' + journalTail;
 
   // Append local data sources — all read from disk, zero cost
@@ -257,9 +248,6 @@ async function buildMagsSystemPrompt() {
   if (newsroomWeek) {
     prompt += '\n\n---\n\n' + newsroomWeek;
   }
-  if (notesToSelf) {
-    prompt += '\n\n---\n\n' + notesToSelf;
-  }
   if (conversationDigest) {
     prompt += '\n\n---\n\n' + conversationDigest;
   }
@@ -268,27 +256,22 @@ async function buildMagsSystemPrompt() {
   return prompt;
 }
 
-// Mags' per-message dynamic context: user profile + archive RAG + family + dashboard, exactly as
-// the original callClaude did. Returns the augmented system prompt.
+// Mags' per-message dynamic context: archive RAG + family + dashboard. Returns the augmented system prompt.
+// pipeline.100 (builder 11-08: "Mags discord and cron behaves like every other citizen"): the old `mags`
+// store's whole-container profile ("About This Person") is gone — her page is her memory, as every citizen's is.
 async function magsAugment(systemPrompt, opts) {
   opts = opts || {};
   var results = await Promise.all([
     searchSupermemory(opts.userMessage),
-    fetchUserProfile(opts.userId),
     mags.loadFamilyData(),
     searchDashboard(opts.userMessage)
   ]);
   var archiveContext = results[0];
-  var userProfile = results[1];
-  var familyData = results[2];
-  var dashboardArticles = results[3];
+  var familyData = results[1];
+  var dashboardArticles = results[2];
 
   if (familyData && !familyData.startsWith('(')) {
     systemPrompt += '\n\n---\n\n' + familyData;
-  }
-  if (userProfile) {
-    systemPrompt += '\n\n---\n\n## About This Person\n\n' +
-      'You remember this about who you\'re talking to:\n' + userProfile;
   }
   if (archiveContext) {
     systemPrompt += '\n\n---\n\n## Archive Knowledge (from Tribune files)\n\n' +
@@ -309,14 +292,12 @@ const magsTalk = personaProvider.makeTalkBuffer_(MAGS_POPID, 'Mags', { snippet: 
 const magsProvider = {
   id: 'mags',
   label: 'Mags',
-  notesEnabled: true,
   logSubdir: '',                       // root logs/discord-conversations/ — her digest reads this path
   historyFile: MAGS_HISTORY_FILE,
   buildSystemPrompt: buildMagsSystemPrompt,
   augment: magsAugment,
   persistResponse: function (userName, userMessage, response, userId) {
-    saveToSupermemory(userName, userMessage, response, userId);
-    magsTalk.persist(userName, userMessage, response);   // research.30 — her dials and Paulson's move with the talk
+    magsTalk.persist(userName, userMessage, response);   // research.30 — her dials and Paulson's move with the talk; pipeline.100: no `mags` store write
   },
   flushVoiceBuffer: function (force) { return magsTalk.flush(force); },
 };
@@ -349,101 +330,6 @@ function searchSupermemory(query) {
     if (context) log.info('Supermemory returned context (' + context.length + ' chars)');
     return context;
   });
-}
-
-// ---------------------------------------------------------------------------
-// Fetch user profile from Supermemory (auto-built from conversations)
-// ---------------------------------------------------------------------------
-function fetchUserProfile(discordUserId) {
-  if (!USE_SUPERMEMORY) return Promise.resolve('');
-
-  return new Promise(function(resolve) {
-    var payload = JSON.stringify({
-      containerTag: 'mags'
-    });
-
-    var options = {
-      hostname: 'api.supermemory.ai',
-      path: '/v4/profile',
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + SUPERMEMORY_KEY,
-        'Content-Length': Buffer.byteLength(payload)
-      }
-    };
-
-    var req = require('https').request(options, function(res) {
-      var data = '';
-      res.on('data', function(chunk) { data += chunk; });
-      res.on('end', function() {
-        try {
-          if (res.statusCode !== 200) { resolve(''); return; }
-          var parsed = JSON.parse(data);
-          var profile = parsed.profile;
-          if (!profile) { resolve(''); return; }
-
-          var lines = [];
-          if (profile.static && profile.static.length) {
-            lines.push('Known: ' + profile.static.join('. '));
-          }
-          if (profile.dynamic && profile.dynamic.length) {
-            lines.push('Recent: ' + profile.dynamic.join('. '));
-          }
-
-          var result = lines.join('\n');
-          if (result) {
-            log.info('User profile loaded (' + result.length + ' chars)');
-          }
-          resolve(result);
-        } catch (err) {
-          resolve('');
-        }
-      });
-    });
-
-    req.on('error', function() { resolve(''); });
-    req.setTimeout(2000, function() { req.destroy(); resolve(''); });
-    req.write(payload);
-    req.end();
-  });
-}
-
-// ---------------------------------------------------------------------------
-// Save conversation to Supermemory for user profile building (Mags)
-// ---------------------------------------------------------------------------
-function saveToSupermemory(userName, userMessage, magsResponse, discordUserId) {
-  if (!USE_SUPERMEMORY) return;
-
-  var content = userName + ': ' + userMessage + '\nMags: ' + magsResponse;
-  var payload = JSON.stringify({
-    content: content,
-    containerTags: ['mags']
-  });
-
-  var options = {
-    hostname: 'api.supermemory.ai',
-    path: '/v3/documents',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + SUPERMEMORY_KEY,
-      'Content-Length': Buffer.byteLength(payload)
-    }
-  };
-
-  var req = require('https').request(options, function(res) {
-    var data = '';
-    res.on('data', function(c) { data += c; });
-    res.on('end', function() {
-      if (res.statusCode >= 200 && res.statusCode < 300) {
-        log.info('Conversation saved to Supermemory for profile building');
-      }
-    });
-  });
-  req.on('error', function() {}); // fire and forget
-  req.write(payload);
-  req.end();
 }
 
 // ---------------------------------------------------------------------------
@@ -670,7 +556,6 @@ function splitMessage(text) {
 // subdir so transcripts never mix.
 // ---------------------------------------------------------------------------
 const CONVO_LOG_DIR = path.join(__dirname, '..', 'logs', 'discord-conversations');
-const NOTES_FILE = path.join(__dirname, '..', 'docs', 'mags-corliss', 'NOTES_TO_SELF.md');
 
 function logConversation(provider, session, userName, userMessage, response) {
   try {
@@ -712,38 +597,14 @@ function logConversation(provider, session, userName, userMessage, response) {
 }
 
 // ---------------------------------------------------------------------------
-// Notes to Self — extract, save, and strip [NOTE_TO_SELF: ...] tags (Mags only)
+// [NOTE_TO_SELF: ...] tags are stripped from any reply. pipeline.100 (builder 11-08): citizen Mags files no
+// notes for a builder or editorial session — the notes sink is gone; the strip stays so an old-style tag
+// never reaches the channel.
 // ---------------------------------------------------------------------------
 var NOTE_PATTERN = /\[NOTE_TO_SELF:\s*([\s\S]*?)\]/g;
 
-function extractNotes(text) {
-  var notes = [];
-  var match;
-  while ((match = NOTE_PATTERN.exec(text)) !== null) {
-    notes.push(match[1].trim());
-  }
-  NOTE_PATTERN.lastIndex = 0; // reset regex state
-  return notes;
-}
-
 function stripNotes(text) {
   return text.replace(NOTE_PATTERN, '').replace(/\n{3,}/g, '\n\n').trim();
-}
-
-function saveNotesToSelf(notes) {
-  if (!notes.length) return;
-  try {
-    var timestamp = new Date().toISOString();
-    var date = mags.getCentralDate();
-    var entry = '\n### ' + date + ' (' + timestamp + ')\n';
-    for (var i = 0; i < notes.length; i++) {
-      entry += '- ' + notes[i] + '\n';
-    }
-    fs.appendFileSync(NOTES_FILE, entry);
-    log.info('Saved ' + notes.length + ' note(s) to NOTES_TO_SELF.md');
-  } catch (err) {
-    log.error('Failed to save notes: ' + err.message);
-  }
 }
 
 // ---------------------------------------------------------------------------
@@ -899,11 +760,6 @@ async function main() {
       // Call Claude
       var response = await callClaude(provider, session, userMessage, userName, message.author.id);
 
-      // Extract and save any notes to self (Mags only); always strip the tags
-      if (provider.notesEnabled) {
-        var notes = extractNotes(response);
-        if (notes.length) saveNotesToSelf(notes);
-      }
       var cleanResponse = stripNotes(response);
 
       // Send response (split if needed)

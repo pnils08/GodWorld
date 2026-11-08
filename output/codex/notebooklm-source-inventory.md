@@ -4,8 +4,8 @@ Artifact class: CODEX_DIAGNOSTIC
 Canon status: NOT CANON. Review buckets are title-based suggestions only.
 Notebook: GodWorld
 Notebook ID: 417e2d29-4167-420f-a9cc-76fb6b2b7de2
-Generated: 2026-11-08T08:04:11.612Z
-Total sources: 149
+Generated: 2026-11-08T08:34:49.499Z
+Total sources: 151
 
 ## Review counts
 
@@ -14,7 +14,7 @@ Total sources: 149
 | `publication_candidate` | 43 |
 | `nonpublication_candidate` | 0 |
 | `exclude_candidate` | 1 |
-| `needs_review` | 105 |
+| `needs_review` | 107 |
 
 ## Sources
 
@@ -87,10 +87,12 @@ Total sources: 149
 | JR Rosado FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `6e907ba2-1f88-405a-bfc6-75c9a20236c7` |
 | Julio Valencia FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `7f0741a6-3eed-44ce-b264-49e3f17a1996` |
 | Kevin Clark FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `27c6fb1d-851e-4cfa-bb42-9e9ced662cac` |
+| Lore: arturo_ramos_deep_dive (Y3C10) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `edea3f29-3234-4771-a122-fe98e7af129b` |
 | Lore: danny_horn_deep_dive (Y3C7) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `583182ab-726d-4139-be05-fd5a2ea9c9c6` |
 | Lore: darrin_davis_deep_dive (Y3C7) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `07783621-142e-4404-916d-7b58b0621a11` |
 | Lore: deep_dive_benji_dillon_c109 (Y3C5) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `031d5364-a3d4-47db-b730-cad1e811baeb` |
 | Lore: deep_dive_carmen_delaine (Y3C4) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `579a7aa1-f829-4342-8d5f-2e8a9d45dd99` |
+| Lore: deep_dive_henry_rivas (Y3C8) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `e3949d83-3e86-4e0b-ab2e-ef93d80816db` |
 | Lore: deep_dive_isley_kelley (Y3C6) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `fcca44cc-c930-4429-a807-668f3b8c24db` |
 | Lore: hal_richmond_deep_dive (Y3C3) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `32e10420-f828-4f5c-8b7a-bdf109c3f508` |
 | Louis Cross FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `80e3d1ed-baf3-4b01-bf19-35dc86bcf2c0` |

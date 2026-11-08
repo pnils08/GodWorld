@@ -92,7 +92,9 @@
     "fcca44cc-c930-4429-a807-668f3b8c24db",
     "07783621-142e-4404-916d-7b58b0621a11",
     "579a7aa1-f829-4342-8d5f-2e8a9d45dd99",
-    "583182ab-726d-4139-be05-fd5a2ea9c9c6"
+    "583182ab-726d-4139-be05-fd5a2ea9c9c6",
+    "e3949d83-3e86-4e0b-ab2e-ef93d80816db",
+    "edea3f29-3234-4771-a122-fe98e7af129b"
   ],
   "decisions": {
     "5a519026-77a2-46c6-87ea-e9dcb5c229d1": {
@@ -789,6 +791,26 @@
         "Cycle placement: Y3C7",
         "Verdict: pass (rhea)",
         "Restore: output/engine-sheet/2026-11-08-horn-lore-restore.js"
+      ]
+    },
+    "e3949d83-3e86-4e0b-ab2e-ef93d80816db": {
+      "title": "Lore: deep_dive_henry_rivas (Y3C8)",
+      "classification": "lore",
+      "reason": "Graded lore piece promoted out of quarantine by the rhea gate (pipeline.59); ledger-grounded deep background, not a published edition.",
+      "evidence": [
+        "Source file: output/lore-quarantine/deep_dive_henry_rivas.md",
+        "Cycle placement: Y3C8",
+        "Verdict: pass (rhea)"
+      ]
+    },
+    "edea3f29-3234-4771-a122-fe98e7af129b": {
+      "title": "Lore: arturo_ramos_deep_dive (Y3C10)",
+      "classification": "lore",
+      "reason": "Graded lore piece promoted out of quarantine by the rhea gate (pipeline.59); ledger-grounded deep background, not a published edition.",
+      "evidence": [
+        "Source file: output/lore-quarantine/arturo_ramos_deep_dive.md",
+        "Cycle placement: Y3C10",
+        "Verdict: pass (rhea)"
       ]
     }
   }

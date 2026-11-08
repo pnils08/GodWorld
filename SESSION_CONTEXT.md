@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** pipeline.100 next (Mags memory one home) → read its plan. Queued: governance.57, engine.325. Open: SSH; INIT-010; G-ES9; memory save of G-ES12 needs the builder's unlock.
 
-**NEXT[research-build]:** engine.339 (builder 11-08, high priority: how kids are minted) → Task 1 read-before, then his calls at 1b. engine.338 live-observing; after the 333/338 reads, 333 → done-pending-archive. Builder: re-run Setup Sports Feed Validation. Queue: engine.336. research.32, civic.47 at C115. Open: A2.
+**NEXT[research-build]:** engine.339 (builder 11-08, high priority: how kids are minted) → calls 1–4 OPEN, no code approved; plan also holds the wake bench-bleed finding. engine.338 live-observing; 333 → done-pending-archive after its read. Builder: re-run Sports Feed Validation. Queue: engine.336. research.32, civic.47 at C115. Open: A2.

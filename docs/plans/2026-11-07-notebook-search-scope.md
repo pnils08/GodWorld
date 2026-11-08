@@ -93,13 +93,14 @@ Shapes considered:
 
 ## Acceptance
 
-1. An add reaches scope with no hand step — proven by the 22 sources added since 2026-10-18 (no inventory refresh since) all sitting in the rebuilt search's scope on readback, and confirmed at the next real add (C115's Saturday edition) by one scoped query naming it. No test source goes into the permanent notebook: every source in it is canon (builder ruling, `notebooklmCanonSearch.js:100-102`).
+1. **Met 2026-11-08:** the restored Horn lore (`583182ab`, a real add on the builder's word) was in scope at the next search and cited, verified, 30 s. Original wording: An add reaches scope with no hand step — proven by the 22 sources added since 2026-10-18 (no inventory refresh since) all sitting in the rebuilt search's scope on readback, and confirmed at the next real add (C115's Saturday edition) by one scoped query naming it. No test source goes into the permanent notebook: every source in it is canon (builder ruling, `notebooklmCanonSearch.js:100-102`).
 2. The 22 sources above are in scope and the 69 dead ids are not — proven by readback of the scope against `nlm source list`.
 3. A query that cites C114 answers instead of failing closed — proven by one live query on the exact candidate. Precedent for the id count: the retrieval log holds verified calls on 196 ids (2026-10-19, 33–41 s) and `ff437d6fb` on 165; the live query on the candidate is still the gate.
 4. Every listing failure — spawn error, non-zero exit, non-JSON, shape breach (missing / duplicate id, missing title, non-integer status, empty array), a non-ready source in default scope, a non-ready or deleted requested id — fails with `auth_failure` or `no_result` in the retrieval log, zero query calls, and no file read in its place — proven by tests through an injected `main`. The headless eval's explicit-id path fails on a deleted id rather than substituting.
 
 ## Changelog
 
+- 2026-11-08 — Horn lore restored on the builder's word (policy `3824b8b0` → `583182ab`); its add met Acceptance 1 live; all four met, row done-pending-archive.
 - 2026-11-08 — Builder: the 69 deletions were mostly duplicates / older TrueSource cards; validator inventory refreshed to 149 live. Horn lore `3824b8b0` is the exception (no live copy) — builder call.
 - 2026-11-08 — Row to live-observing: Acc 2–4 met; Acc 1 read Sat 2026-11-14 (one search names C115's edition). Code diff had no external review; build added a `selection` stage (→ `not_run`) the design did not name.
 - 2026-11-08 — Task 4: builder chose "Fix it now"; caller scope wording trued in four files, tags unchanged.

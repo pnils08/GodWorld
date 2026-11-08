@@ -92,7 +92,7 @@
     "fcca44cc-c930-4429-a807-668f3b8c24db",
     "07783621-142e-4404-916d-7b58b0621a11",
     "579a7aa1-f829-4342-8d5f-2e8a9d45dd99",
-    "3824b8b0-910b-4fe5-ad3e-3cc1a181cca1"
+    "583182ab-726d-4139-be05-fd5a2ea9c9c6"
   ],
   "decisions": {
     "5a519026-77a2-46c6-87ea-e9dcb5c229d1": {
@@ -755,16 +755,6 @@
         "editions/cycle_pulse_c111.txt"
       ]
     },
-    "3824b8b0-910b-4fe5-ad3e-3cc1a181cca1": {
-      "title": "Lore: danny_horn_deep_dive (Y3C7)",
-      "classification": "lore",
-      "reason": "Graded lore piece promoted out of quarantine by the rhea gate (pipeline.59); ledger-grounded deep background, not a published edition.",
-      "evidence": [
-        "Source file: output/lore-quarantine/danny_horn_deep_dive.md",
-        "Cycle placement: Y3C7",
-        "Verdict: pass (rhea)"
-      ]
-    },
     "06e1843d-5c67-4052-8ddd-de2fc22413d1": {
       "title": "The Cycle Pulse — Y3C8",
       "classification": "published",
@@ -788,6 +778,17 @@
       "evidence": [
         "editions/cycle_pulse_c114.txt",
         "output/corrections/c114/cycle_pulse_c114.corrected.txt"
+      ]
+    },
+    "583182ab-726d-4139-be05-fd5a2ea9c9c6": {
+      "title": "Lore: danny_horn_deep_dive (Y3C7)",
+      "classification": "lore",
+      "reason": "Graded lore piece promoted out of quarantine by the rhea gate (pipeline.59); ledger-grounded deep background, not a published edition. Restored copy (builder 2026-11-08 \"Put it back\"): the same file re-added; replaces 3824b8b0-910b-4fe5-ad3e-3cc1a181cca1, deleted from the notebook outside any script.",
+      "evidence": [
+        "Source file: output/lore-quarantine/danny_horn_deep_dive.md",
+        "Cycle placement: Y3C7",
+        "Verdict: pass (rhea)",
+        "Restore: output/engine-sheet/2026-11-08-horn-lore-restore.js"
       ]
     }
   }

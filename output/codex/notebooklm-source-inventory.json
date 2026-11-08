@@ -1,15 +1,15 @@
 {
   "artifactClass": "CODEX_NOTEBOOKLM_SOURCE_INVENTORY",
   "canonStatus": "NOT_CANON",
-  "generatedAt": "2026-11-08T07:19:40.032Z",
+  "generatedAt": "2026-11-08T07:21:58.883Z",
   "notebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
   "notebookName": "GodWorld",
-  "total": 149,
+  "total": 150,
   "counts": {
     "publication_candidate": 43,
     "nonpublication_candidate": 0,
     "exclude_candidate": 1,
-    "needs_review": 105
+    "needs_review": 106
   },
   "sources": [
     {
@@ -485,6 +485,13 @@
       "id": "50b6dde2-f4bf-4efa-892e-83863dbe794e",
       "title": "Lore : deep_dive_henry_rivas.md (Y3C8)",
       "type": "word_doc",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "583182ab-726d-4139-be05-fd5a2ea9c9c6",
+      "title": "Lore: danny_horn_deep_dive (Y3C7)",
+      "type": "generated_text",
       "reviewBucket": "needs_review",
       "reviewReason": "title alone does not establish publication or exclusion status"
     },

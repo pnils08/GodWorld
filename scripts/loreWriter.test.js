@@ -61,13 +61,31 @@ const toolNames = TOOLS.map((t) => t.name);
 ['query_ledger', 'read_canon', 'search_articles', 'canon_recall', 'read_source', 'notebook_search', 'write_file']
   .forEach((n) => assert.ok(toolNames.includes(n), 'tool registered: ' + n));
 
-// pipeline.106: read_source opens canon shelves only, in pages.
-const { readSource } = require('./loreWriter');
+// pipeline.106: read_source opens canon shelves only, in pages, and only what a search returned.
+const { readSource, pathsInSearchResult, isReadableCanonPath, visibleText } = require('./loreWriter');
 assert.match(readSource('../../etc/passwd'), /refused/);
 assert.match(readSource('/etc/passwd'), /refused/);
+assert.match(readSource('/editions/cycle_pulse_c114.txt'), /refused/, 'absolute paths are refused, not re-rooted');
 assert.match(readSource('.env'), /refused/);
 assert.match(readSource('output/lore-quarantine/danny_horn_deep_dive.md'), /refused/, 'quarantine drafts are not canon');
+assert.match(readSource('archive/non-articles/templates/CYCLE PULSE TEMPLATE v1.2.txt'), /refused/, 'newsroom templates are not canon');
+assert.ok(isReadableCanonPath('archive/non-articles/data/Martin Richards DataPage v1.0.txt'), 'TrueSource cards are canon');
 assert.match(readSource('editions/NONCANON_TEST-missing.txt'), /no such file/);
+const seen = pathsInSearchResult("2 file(s) matched on disk for 'x':\n— editions/cycle_pulse_c114.txt: snippet one\n— archive/articles/c100_a.txt: snippet two");
+assert.deepStrictEqual([...seen], ['editions/cycle_pulse_c114.txt', 'archive/articles/c100_a.txt']);
+assert.match(readSource('editions/cycle_pulse_c113.txt', 0, seen), /not returned by search_articles/);
+// A link inside a shelf that points outside it is refused even though its own path is canon.
+const linkDir = path.join(__dirname, '..', 'editions');
+const linkName = 'NONCANON_TEST-link-' + process.pid + '.txt';
+try {
+  fs.symlinkSync('/etc/hostname', path.join(linkDir, linkName));
+  assert.match(readSource('editions/' + linkName), /does not resolve/);
+} finally {
+  if (fs.existsSync(path.join(linkDir, linkName)) || fs.lstatSync(path.join(linkDir, linkName), { throwIfNoEntry: false })) fs.unlinkSync(path.join(linkDir, linkName));
+}
+// With thinking on, a thought part is never the reply or the rescued piece.
+assert.strictEqual(visibleText([{ thought: true, text: 'reasoning' }, { functionCall: { name: 'x' } }]), null);
+assert.strictEqual(visibleText([{ thought: true, text: 'reasoning' }, { text: 'the piece' }]), 'the piece');
 const editionFile = fs.readdirSync(path.join(__dirname, '..', 'editions')).find((f) => /^cycle_pulse_c\d+\.txt$/.test(f));
 if (editionFile) {
   const first = readSource('editions/' + editionFile);

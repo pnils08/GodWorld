@@ -20,6 +20,7 @@ const GODWORLD_ROOT = '/root/GodWorld';
 const QUARANTINE_DIR = path.join(GODWORLD_ROOT, 'output', 'lore-quarantine');
 const MAX_ITERATIONS = 50;
 const WRITE_WARNING_TURNS = 10;
+const GEMINI_CALL_TIMEOUT_MS = 5 * 60 * 1000;
 // pipeline.106 (builder 2026-11-08): gemini-3.8-flash (id confirmed from the API's model
 // list 2026-11-08) with thinking at high — the upstream gemini-writer runs thinking_level
 // HIGH; this port never set it. Both configurable.
@@ -159,11 +160,19 @@ function clampToQuarantine(relPath) {
 // new name instead of replacing a graded or repaired draft.
 function writeQuarantineFile(filename, content) {
   const fullPath = clampToQuarantine(filename); // AC #3: PATH CLAMP
-  if (fs.existsSync(fullPath)) {
-    throw new Error('file exists: ' + path.relative(QUARANTINE_DIR, fullPath) + ' -- choose a new filename');
+  try {
+    fs.writeFileSync(fullPath, content, { encoding: 'utf-8', flag: 'wx' }); // exclusive: never truncates
+  } catch (e) {
+    if (e.code === 'EEXIST') throw new Error('file exists: ' + path.relative(QUARANTINE_DIR, fullPath) + ' -- choose a new filename');
+    throw e;
   }
-  fs.writeFileSync(fullPath, content, 'utf-8');
   return fullPath;
+}
+
+// The model's visible reply text. With thinking on, a part flagged `thought` is reasoning,
+// never the piece, so it is neither printed as the reply nor rescued as an AUTOSAVE.
+function visibleText(parts) {
+  return (parts || []).filter((p) => p && typeof p.text === 'string' && !p.thought).map((p) => p.text).join('') || null;
 }
 
 // S417: a run that ends with a long final text turn and no write_file call
@@ -200,6 +209,9 @@ async function canonRecall(query) {
   if (!q) return '(empty query)';
   if (!process.env.SUPERMEMORY_CC_API_KEY) return '(canon_recall unavailable: no Supermemory key in this run)';
   const raw = await require('../lib/supermemory').search(q, { containerTags: ['bay-tribune'], limit: 16, timeoutMs: 15000, apiVersion: 'v3' });
+  // lib/supermemory resolves [] on an HTTP error, bad JSON or a timeout; a semantic search
+  // over a populated archive always returns nearest matches, so [] means the call failed.
+  if (!raw || raw.length === 0) return 'canon_recall unavailable: the archive lookup failed (no results at all). Use search_articles; say nothing about what the canon has or has not published.';
   const STOP = new Set(['the', 'and', 'for', 'with', 'from', 'that', 'this', 'about', 'what', 'where', 'into', 'over']);
   const terms = Array.from(new Set(q.toLowerCase().split(/[^a-z0-9']+/).filter((t) => t.length >= 3 && !STOP.has(t))));
   const need = terms.length <= 3 ? terms.length : Math.ceil(terms.length * 0.6);
@@ -224,19 +236,39 @@ async function canonRecall(query) {
   return out.join('\n');
 }
 
-// One canon file whole, in pages. Only a path the crons' canon search would serve
-// (lib/mags isCanonSearchPath), resolved inside the repo; never a symlink out.
+// One canon file whole, in pages. A path must (1) be one search_articles returned this
+// run, (2) sit on a canon shelf: lib/mags isCanonSearchPath, and inside archive/non-articles
+// only the TrueSource data cards and profiles (templates, assignments, indexes and mirrors are
+// newsroom apparatus), and (3) resolve, through every parent link, to that same canon path.
 const READ_PAGE_CHARS = 20000;
-function readSource(relPath, offset) {
-  const rel = path.normalize(String(relPath || '').trim()).replace(/^\/+/, '');
-  if (!rel || rel.startsWith('..') || !require('../lib/mags').isCanonSearchPath(rel)) {
-    return 'read_source refused: "' + relPath + '" is not a canon path a search returned.';
+const NON_ARTICLE_CANON_RE = /^archive\/non-articles\/(data|profiles)\//;
+function isReadableCanonPath(rel) {
+  if (!require('../lib/mags').isCanonSearchPath(rel)) return false;
+  if (rel.startsWith('archive/non-articles/') && !NON_ARTICLE_CANON_RE.test(rel)) return false;
+  return true;
+}
+// The paths a searchDisk answer names, one per "— <path>: <snippet>" line.
+function pathsInSearchResult(text) {
+  const out = new Set();
+  for (const m of String(text || '').matchAll(/^— (.+?): /gm)) out.add(m[1]);
+  return out;
+}
+function readSource(relPath, offset, seenPaths) {
+  const raw = String(relPath || '').trim();
+  const rel = path.normalize(raw);
+  if (!raw || path.isAbsolute(raw) || rel.startsWith('..') || !isReadableCanonPath(rel)) {
+    return 'read_source refused: "' + relPath + '" is not a canon file.';
+  }
+  if (seenPaths && !seenPaths.has(rel)) {
+    return 'read_source refused: "' + rel + '" was not returned by search_articles in this run; search first.';
   }
   const full = path.join(GODWORLD_ROOT, rel);
-  if (!fs.existsSync(full) || fs.lstatSync(full).isSymbolicLink() || !fs.statSync(full).isFile()) {
-    return 'read_source: no such file: ' + rel;
+  if (!fs.existsSync(full)) return 'read_source: no such file: ' + rel;
+  const real = fs.realpathSync(full);
+  if (path.relative(GODWORLD_ROOT, real) !== rel || !fs.statSync(real).isFile()) {
+    return 'read_source refused: "' + rel + '" does not resolve to that canon file.';
   }
-  const text = fs.readFileSync(full, 'utf-8');
+  const text = fs.readFileSync(real, 'utf-8');
   const start = Math.max(0, Math.floor(Number(offset) || 0));
   const page = text.slice(start, start + READ_PAGE_CHARS);
   const end = start + page.length;
@@ -311,6 +343,7 @@ async function callGemini(messages) {
     try {
       response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + GEMINI_MODEL + ":generateContent?key=" + apiKey, {
         method: 'POST',
+        signal: AbortSignal.timeout(GEMINI_CALL_TIMEOUT_MS), // a stalled call retries, never hangs the cron
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
@@ -352,6 +385,7 @@ async function main() {
   const messages = [{ role: 'user', parts: [{ text: prompt }] }];
   let iterations = 0;
   let notebookCalls = 0;
+  const seenPaths = new Set(); // read_source opens only what search_articles returned
   let wroteFile = false;
   let lastText = null;
 
@@ -380,10 +414,10 @@ async function main() {
     messages.push(modelMessage);
 
     const parts = content.parts || [];
-    const textPart = parts.find(p => p.text);
-    if (textPart) {
-      console.log("\nModel says:\n" + textPart.text + "\n");
-      lastText = textPart.text;
+    const visible = visibleText(parts);
+    if (visible) {
+      console.log("\nModel says:\n" + visible + "\n");
+      lastText = visible;
     }
 
     // S426: finishReason distinguishes "the model is done" from "the response
@@ -440,6 +474,7 @@ async function main() {
             // Richmond Archive, TrueSource cards, world summaries, staged canon, the ledger. The
             // old queryLedger `articles` reached editions/ only and dropped hits past its cap.
             resultData = require('../lib/mags').searchDisk(String(call.args.term), 12);
+            for (const p of pathsInSearchResult(resultData)) seenPaths.add(p);
             break;
           }
           case 'canon_recall': {
@@ -447,7 +482,7 @@ async function main() {
             break;
           }
           case 'read_source': {
-            resultData = readSource(call.args.path, call.args.offset);
+            resultData = readSource(call.args.path, call.args.offset, seenPaths);
             break;
           }
           case 'notebook_search': {
@@ -522,4 +557,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { slugify, FALLBACK_MIN_CHARS, clampToQuarantine, writeQuarantineFile, canonRecall, notebookSearch, readSource, QUARANTINE_DIR, GEMINI_MODEL, THINKING_LEVEL, TOOLS };
+module.exports = { slugify, FALLBACK_MIN_CHARS, clampToQuarantine, writeQuarantineFile, canonRecall, notebookSearch, readSource, pathsInSearchResult, isReadableCanonPath, visibleText, QUARANTINE_DIR, GEMINI_MODEL, THINKING_LEVEL, TOOLS };

@@ -55,10 +55,23 @@ check('the frame carries the question verbatim and the one closed line, with his
   assert.ok(f.includes('MOVE: role=<one of: ' + nc.ROLES.join(' | ') + ' | none>'), 'Tier 1 is offered everything');
   assert.deepStrictEqual(nc.rolesFor(2), ['Sports Analyst (Front Office)', 'Club Coach / Instructor', 'Scout', 'College Coach', 'Youth Academy Director']);
   assert.deepStrictEqual(nc.rolesFor(3), ['Youth Academy Director']);
-  assert.deepStrictEqual(nc.rolesFor(4), [], 'Tier 4 is offered nothing');
-  assert.deepStrictEqual(nc.rolesFor(''), [], 'a blank Tier reads as the floor');
-  assert.ok(nc.questionFrame('Q?', 4).includes('role=<none'), 'a Tier offered nothing is told to say so');
+  assert.deepStrictEqual(nc.rolesFor(4), ['Youth Academy Director'], 'the academy is open at every Tier (own academy at any tier)');
+  assert.deepStrictEqual(nc.rolesFor(''), ['Youth Academy Director'], 'a blank Tier reads as the floor');
+  assert.ok(nc.questionFrame('Q?', 4).includes('role=<one of: Youth Academy Director | none>'));
   assert.ok(!nc.questionFrame('Q?', 2).includes('Broadcaster'));
+});
+check('answeredFor: the ledger folded last-line-wins — queued / declined is answered, held / refused is not', () => {
+  const L = [
+    { pop: 'POP-00001', status: 'held', reason: 'read-failed' },
+    { pop: 'POP-00002', status: 'queued', role: 'Scout' },
+    { pop: 'POP-00001', status: 'queued', role: 'Scout' },
+  ];
+  assert.deepStrictEqual(nc.answeredFor(L, 'POP-00001').answered, true);
+  assert.strictEqual(nc.answeredFor(L, 'pop-00002').last.role, 'Scout');
+  assert.strictEqual(nc.answeredFor(L.concat([{ pop: 'POP-00001', status: 'held', reason: 'row-already-queued' }]), 'POP-00001').answered, false, 'a later held line reopens it');
+  assert.strictEqual(nc.answeredFor([{ pop: 'POP-00001', status: 'declined' }], 'POP-00001').answered, true);
+  assert.strictEqual(nc.answeredFor([{ pop: 'POP-00001', status: 'refused' }], 'POP-00001').answered, false);
+  assert.strictEqual(nc.answeredFor([], 'POP-00001').answered, false);
 });
 check('parseMove with a Tier refuses an ineligible title, names it; eligible passes; none always passes', () => {
   const p = nc.parseMove('x\nMOVE: role=Sports Broadcaster / Color Analyst', 3);

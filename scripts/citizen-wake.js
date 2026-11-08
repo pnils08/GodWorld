@@ -257,25 +257,35 @@ async function generateVoice(system, user, maxTokens) {
 // run resolves and reports, writes nothing. A failed read or write lands as a `held` line and a loud log, never a throw:
 // the page already holds his words; the move waits in the ledger for a re-file.
 const MOVES_DIR = path.join(__dirname, '..', 'output', 'citizen-moves');
+const movesFile = (cycle) => path.join(MOVES_DIR, 'moves_c' + cycle + '.jsonl');
+// → true when the line is on disk (read back), false otherwise — codex re-review R2: a ledger write that failed is never
+// treated as recorded; the caller exits before the page and the receipt, and the next wake asks again.
 function appendMoveLine(cycle, line) {
   try {
     fs.mkdirSync(MOVES_DIR, { recursive: true });
-    fs.appendFileSync(path.join(MOVES_DIR, 'moves_c' + cycle + '.jsonl'), JSON.stringify(line) + '\n');
-  } catch (e) { logLine('next-chapter: move ledger write failed (' + e.message + '): ' + JSON.stringify(line)); }
+    const text = JSON.stringify(line) + '\n';
+    fs.appendFileSync(movesFile(cycle), text);
+    return fs.readFileSync(movesFile(cycle), 'utf8').includes(text);
+  } catch (e) { logLine('next-chapter: move ledger write failed (' + e.message + '): ' + JSON.stringify(line)); return false; }
+}
+function readMoveLines(cycle) {
+  try { return fs.readFileSync(movesFile(cycle), 'utf8').split('\n').filter(Boolean).map((l) => { try { return JSON.parse(l); } catch (e) { return null; } }).filter(Boolean); }
+  catch (e) { return []; }
 }
 async function fileNextChapter(c, cycle, question, parsed, dry) {
   const date = new Date().toISOString().slice(0, 10);
   const base = { cycle, date, pop: c.popId, name: c.name, question };
   const say = (s) => logLine('next-chapter: ' + s);
+  const NOT_RECORDED = { status: 'held', retry: true, reason: 'ledger-write-failed' };
+  // the ledger line is the record of his answer; it lands first, and a line that did not land holds everything after it
+  const ledger = (o) => dry ? true : appendMoveLine(cycle, nextChapter.moveLedgerLine(o));
   if (!parsed.move) {
     say(`${c.popId} answered off the vocabulary (${parsed.reason}) — refused, nothing filed`);
-    if (!dry) appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'refused', reason: parsed.reason }, base)));
-    return { status: 'refused' };
+    return ledger(Object.assign({ status: 'refused', reason: parsed.reason }, base)) ? { status: 'refused' } : NOT_RECORDED;
   }
   if (parsed.move.role === 'none') {
     say(`${c.popId} declined — no row`);
-    if (!dry) appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'declined', role: 'none' }, base)));
-    return { status: 'declined' };
+    return ledger(Object.assign({ status: 'declined', role: 'none' }, base)) ? { status: 'declined' } : NOT_RECORDED;
   }
   let biz = [], adv = [];
   try {
@@ -283,7 +293,7 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
     adv = await sheets.getSheetData('Advancement_Intake1');
   } catch (e) {
     say(`${c.popId} chose ${parsed.move.role} but the sheets could not be read (${e.message}) — held in the ledger, no row`);
-    if (!dry) appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'held', reason: 'read-failed: ' + e.message, role: parsed.move.role, where: parsed.move.where }, base)));
+    ledger(Object.assign({ status: 'held', reason: 'read-failed: ' + e.message, role: parsed.move.role, where: parsed.move.where }, base));
     return { status: 'held', retry: true };
   }
   const emp = nextChapter.resolveEmployer(parsed.move.role, parsed.move.where, c, biz);
@@ -291,26 +301,27 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   const entry = Object.assign({ role: parsed.move.role, where: parsed.move.where, employerBizId: emp.employerBizId }, base);
   if (nextChapter.hasQueuedRow(adv.slice(1), header, c.first, c.last)) {
     say(`${c.popId} already has a row on Advancement_Intake1 — one row per citizen; held`);
-    if (!dry) appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'held', reason: 'row-already-queued' }, entry)));
+    ledger(Object.assign({ status: 'held', reason: 'row-already-queued' }, entry));
     return { status: 'held' };
   }
   let row;
   try { row = nextChapter.intakeRowFor(header, { first: c.first, last: c.last, role: parsed.move.role, employerBizId: emp.employerBizId, notes: 'his words: ' + nextChapter.notesFrom(parsed.text) }); }
   catch (e) {
     say(`${c.popId}: ${e.message} — held`);
-    if (!dry) appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'held', reason: e.message }, entry)));
+    ledger(Object.assign({ status: 'held', reason: e.message }, entry));
     return { status: 'held' };
   }
   const where = emp.named ? `${emp.named.Name} (${emp.employerBizId})` : `${emp.employerBizId} by the ${emp.rule} rule${parsed.move.where ? ' — "' + parsed.move.where + '" is not on Business_Ledger' : ''}`;
   if (dry) { say(`[dry-run] ${c.popId} would file ${parsed.move.role} / ${nextChapter.POOL[parsed.move.role].clock} / ${where}; row ${JSON.stringify(row.filter(Boolean))}; nothing written`); return { status: 'dry' }; }
+  // the `queued` line lands BEFORE the row (R2): a row that lands is always recorded; a line that did not land files no row
+  if (!ledger(Object.assign({ status: 'queued' }, entry))) { say(`${c.popId}: the move ledger did not take the queued line — no row filed, the question stays owed`); return NOT_RECORDED; }
   try {
     await sheets.appendRows('Advancement_Intake1', [row]);
   } catch (e) {
     say(`${c.popId}: Advancement_Intake1 append failed (${e.message}) — held`);
-    appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'held', reason: 'append-failed: ' + e.message }, entry)));
+    ledger(Object.assign({ status: 'held', reason: 'append-failed: ' + e.message }, entry)); // last line wins: held, not queued
     return { status: 'held', retry: true };
   }
-  appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'queued' }, entry)));
   say(`${c.popId} chose ${parsed.move.role} at ${where} — Advancement_Intake1 row filed; the next fire applies it`);
   return { status: 'queued' };
 }
@@ -399,8 +410,14 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   if (shownOwed.length < mineOwed.length) logLine(`owed not shown this wake, stays owed: ${mineOwed.filter((e) => !shownOwed.includes(e)).map((e) => e.id).join(',')}`);
   // engine.338 — a shown `question` milestone: the builder's words off his own life line become the wake's question
   const askedOwed = shownOwed.find((e) => e.milestone === 'question');
-  const question = askedOwed ? nextChapter.questionFromLines(c.lifeLines || [], askedOwed) : '';
+  let question = askedOwed ? nextChapter.questionFromLines(c.lifeLines || [], askedOwed) : '';
   if (askedOwed && !question) logLine(`next-chapter: ${askedOwed.id} is owed but no [Question] text was found on the life line — asked nothing`);
+  // codex re-review R1: an answer already on this Cycle's move ledger (queued / declined, last line wins) is not asked
+  // again — a row that landed before a failed page stands, and this wake is an ordinary one (the pin still shows and spends)
+  if (question && cycle) {
+    const prior = nextChapter.answeredFor(readMoveLines(cycle), c.popId);
+    if (prior.answered) { logLine(`next-chapter: ${c.popId} already answered this Cycle (${prior.last.status}${prior.last.role ? ' ' + prior.last.role : ''}) — not asked again`); question = ''; }
+  }
   const livedLine = lived ? renderLivedLine(lived.event, cycle, lived.rel) : '';
   // pipeline.95 — the pilot's record rides any wake of theirs; an unspent show mark is spent when it is in front of them.
   const myNights = showRecord.nightsFor(nights, c.popId);
@@ -510,7 +527,7 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   //     citizen) and never doubled. Refused / declined answers write their ledger line and go on to the page.
   if (parsedMove && cycle) {
     const filed = await fileNextChapter(c, cycle, question, parsedMove, false);
-    if (filed.status === 'held' && filed.retry) { logLine('next-chapter: the row could not be filed — no page, the question stays owed (retried at his next wake)'); process.exit(1); }
+    if (filed.retry) { logLine('next-chapter: the answer could not be recorded or filed — no page, the question stays owed (retried at his next wake)'); process.exit(1); }
   }
 
   // 2) narrative store: ensure the page pointer (AW), append the reflection (ungated).

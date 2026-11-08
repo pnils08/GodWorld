@@ -5,7 +5,7 @@ set -uo pipefail
 cd /root/GodWorld
 O=output/engine-sheet; B=1tByPpT8QIgJppabjpEdAqPlTjcq2RBSkL_QDrGk8YcA
 SP=/tmp/claude-0/-root-GodWorld/01da4ba3-fe39-4267-a36a-19c514e8819d/scratchpad
-TAG=e338b
+TAG=${TAG:-e338b}
 q() { grep -v "injected env"; }
 cc() { node -e "require('/root/GodWorld/lib/env'); process.env.GODWORLD_SHEET_ID='$B'; require('/root/GodWorld/lib/sheets').getSheetData('World_Config').then(d=>console.log((d.find(r=>r[0]==='cycleCount')||[])[1]))" 2>&1 | q; }
 fire() { local C; C=$(cc); echo "bench cycleCount $C"
@@ -24,10 +24,13 @@ plant() { local C; C=$(cc); local N=$(( C + 1 ))
 C=$(cc); [ "$C" = "115" ] || { echo "HALT bench is at C$C, expected 115"; exit 1; }
 echo "== re-read fire 1 (corrected checks)"
 node $O/2026-11-08-e338b-bench.js read $TAG-f1 115 > $SP/$TAG.f1.reread 2>&1; tail -1 $SP/$TAG.f1.reread; grep -q "READ OK" $SP/$TAG.f1.reread || { echo "HALT re-read"; exit 7; }
-echo "== Task 3 dry wake against the bench on the asked player (writes nothing; two model calls)"
+[ "${SKIP_WAKE:-0}" = "1" ] && echo "== dry wake skipped (SKIP_WAKE=1; run 2 already answered: Club Coach / Instructor at Oakland A's)" || echo "== Task 3 dry wake against the bench on the asked player (writes nothing; two model calls)"
+if [ "${SKIP_WAKE:-0}" != "1" ]; then
 node -e "require('/root/GodWorld/lib/env'); process.env.GODWORLD_SHEET_ID='$B'; process.argv=['node','citizen-wake.js','--dry-run','--wake=evening','--cycle=115','--pop=POP-99338']; require('/root/GodWorld/scripts/citizen-wake.js');" > $SP/$TAG.wake.out 2>&1
 echo "wake rc=$? — lines of note:"; grep -E "woke |owed |next-chapter|MOVE|provocation=question|dry-run\] would|FATAL|ERROR" $SP/$TAG.wake.out | q | cut -c1-260 | head -16
 grep -q "next-chapter: POP-99338 answered" $SP/$TAG.wake.out || echo "HOLD: the dry wake did not carry the question (see $SP/$TAG.wake.out)"
+fi
+echo "== 70 s pause: the Sheets read quota is 60/min/user and the readback + wake spend most of it"; sleep 70
 plant 2; fire $TAG-f2
 plant 3; fire $TAG-f3
 echo "== final sync from live"; node scripts/syncSandboxFromLive.js $B --apply > $SP/$TAG.sync.final.out 2>&1 || echo "HOLD final sync failed"

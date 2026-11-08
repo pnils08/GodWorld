@@ -1,15 +1,15 @@
 {
   "artifactClass": "CODEX_NOTEBOOKLM_SOURCE_INVENTORY",
   "canonStatus": "NOT_CANON",
-  "generatedAt": "2026-11-08T08:34:49.499Z",
+  "generatedAt": "2026-11-08T08:45:18.474Z",
   "notebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
   "notebookName": "GodWorld",
-  "total": 151,
+  "total": 153,
   "counts": {
     "publication_candidate": 43,
     "nonpublication_candidate": 0,
     "exclude_candidate": 1,
-    "needs_review": 107
+    "needs_review": 109
   },
   "sources": [
     {
@@ -489,6 +489,13 @@
       "reviewReason": "title alone does not establish publication or exclusion status"
     },
     {
+      "id": "f9225116-b4d9-40c1-9d5e-e002fe7b4e0c",
+      "title": "Lore: avery_santana_deep_dive (Y3C10)",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
       "id": "583182ab-726d-4139-be05-fd5a2ea9c9c6",
       "title": "Lore: danny_horn_deep_dive (Y3C7)",
       "type": "generated_text",
@@ -533,6 +540,13 @@
     {
       "id": "32e10420-f828-4f5c-8b7a-bdf109c3f508",
       "title": "Lore: hal_richmond_deep_dive (Y3C3)",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "10f17db1-9933-4059-94d0-7e1e6c83e277",
+      "title": "Lore: martin-richards-deep-dive (Y3C10)",
       "type": "generated_text",
       "reviewBucket": "needs_review",
       "reviewReason": "title alone does not establish publication or exclusion status"

@@ -113,6 +113,13 @@ const { SYSTEM_PROMPT, subjectDossier } = require('./loreWriter');
 assert.match(SYSTEM_PROMPT, /WHEN THE SOURCES DON'T SAY/);
 assert.match(SYSTEM_PROMPT, /Copy numbers exactly as the source gives them/);
 subjectDossier('Write a piece with no subject id.', new Set()).then((d) => assert.strictEqual(d, ''));
+// pipeline.106: the subject's own page entries come in by POPID, oldest first.
+const { citizenPageBlock } = require('./loreWriter');
+assert.match(citizenPageBlock('POP-99999', 'NONCANON_TEST Nobody'), /no admitted page entries|not on disk/);
+if (fs.existsSync(path.join(__dirname, '..', 'output', 'citizen_pages', 'index.jsonl'))) {
+  const firstRow = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'output', 'citizen_pages', 'index.jsonl'), 'utf-8').split('\n')[0]);
+  assert.match(citizenPageBlock(firstRow.popId, 'NONCANON_TEST Name'), /^CITIZEN PAGE \(NONCANON_TEST Name's own words[\s\S]*\[Y\dC\d+ · /);
+}
 // With thinking on, a thought part is never the reply or the rescued piece.
 assert.strictEqual(visibleText([{ thought: true, text: 'reasoning' }, { functionCall: { name: 'x' } }]), null);
 assert.strictEqual(visibleText([{ thought: true, text: 'reasoning' }, { text: 'the piece' }]), 'the piece');

@@ -300,6 +300,38 @@ const TEAM_TIMELINE = 'archive/non-articles/data/TrueSource_Team_Timeline_v1.1.t
 // subject's name, what the canon archive holds, and the published files naming them (those
 // paths open with read_source). A source that fails is named in the block, never fatal.
 const DOSSIER_CARD_CHARS = 40000;
+// The subject's own page: what their wakes wrote, in their voice (reflections and tensions,
+// admitted by scanCitizenPages.js --dump into output/citizen_pages/index.jsonl). Pages are keyed
+// by POPID and written in the first person, so a name search never finds them; they are read
+// here by id, oldest first, newest kept when over the cap (builder 2026-11-08: "Does it have
+// access to their wake pages?").
+const CITIZEN_PAGES = 'output/citizen_pages/index.jsonl';
+const DOSSIER_PAGE_CHARS = 15000;
+function citizenPageBlock(popid, name) {
+  const file = path.join(GODWORLD_ROOT, CITIZEN_PAGES);
+  if (!fs.existsSync(file)) return 'CITIZEN PAGE: the page mirror (' + CITIZEN_PAGES + ') is not on disk this run.';
+  const rows = [];
+  for (const line of fs.readFileSync(file, 'utf-8').split('\n')) {
+    if (!line || line.indexOf(popid) < 0) continue;
+    try { const r = JSON.parse(line); if (r.popId === popid) rows.push(r); } catch (_) { /* a torn line is skipped */ }
+  }
+  if (!rows.length) return 'CITIZEN PAGE: ' + name + ' has no admitted page entries yet.';
+  rows.sort((a, b) => (Number(a.cycle) - Number(b.cycle)) || String(a.createdAt).localeCompare(String(b.createdAt)));
+  const fmt = (r) => {
+    const c = Number(r.cycle);
+    const tag = 'Y' + (Math.floor((c - 1) / 52) + 1) + 'C' + (((c - 1) % 52) + 1);
+    return '[' + tag + ' · ' + (r.slot || r.daypart || '') + (r.affect ? ' · ' + r.affect : '') + '] ' + String(r.content || '').replace(/\s+/g, ' ').trim();
+  };
+  const out = [];
+  let used = 0;
+  for (let i = rows.length - 1; i >= 0; i--) {   // newest first into the budget, then printed oldest first
+    const t = fmt(rows[i]);
+    if (used + t.length > DOSSIER_PAGE_CHARS) break;
+    out.unshift(t);
+    used += t.length;
+  }
+  return 'CITIZEN PAGE (' + name + "'s own words, from their wakes; " + out.length + ' of ' + rows.length + ' entries, oldest first):\n' + out.join('\n');
+}
 async function subjectDossier(prompt, seenPaths) {
   const popid = (/POP-\d{5}/.exec(String(prompt || '')) || [])[0];
   if (!popid) return '';
@@ -326,6 +358,7 @@ async function subjectDossier(prompt, seenPaths) {
       budget -= take.length;
     }
     if (!cards.length) lines.push('', 'TRUESOURCE CARD: none on disk for ' + name + '.');
+    lines.push('', citizenPageBlock(popid, name));
     try {
       lines.push('', 'CANON ARCHIVE (canon_recall "' + name + '"):', await canonRecall(name));
     } catch (e) {
@@ -647,4 +680,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { slugify, FALLBACK_MIN_CHARS, clampToQuarantine, writeQuarantineFile, canonRecall, notebookSearch, readSource, pathsInSearchResult, searchTerm, isReadableCanonPath, visibleText, worldNowBlock, subjectDossier, SYSTEM_PROMPT, QUARANTINE_DIR, GEMINI_MODEL, THINKING_LEVEL, TOOLS };
+module.exports = { slugify, FALLBACK_MIN_CHARS, clampToQuarantine, writeQuarantineFile, canonRecall, notebookSearch, readSource, pathsInSearchResult, searchTerm, isReadableCanonPath, visibleText, worldNowBlock, subjectDossier, citizenPageBlock, SYSTEM_PROMPT, QUARANTINE_DIR, GEMINI_MODEL, THINKING_LEVEL, TOOLS };

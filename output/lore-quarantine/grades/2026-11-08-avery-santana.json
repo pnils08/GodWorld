@@ -1,0 +1,67 @@
+{
+  "file": "output/lore-quarantine/avery_santana_deep_dive.md",
+  "verdict": "FAIL",
+  "recommendedTag": "Y3C10",
+  "failures": [
+    {
+      "quote": "Yet for Santana, who held a master's degree in public administration",
+      "line": 9,
+      "claimType": "invented-career",
+      "ledgerSays": "Ledger gives educationLevel 'masters' only; no field of study. Zero hits for 'public administration' in editions/ or archive/articles/. A degree field is a new background fact about the mayor.",
+      "source": "queryLedger citizen POP-00034 (educationLevel: masters); grep editions + archive/articles"
+    },
+    {
+      "quote": "She had spent nearly twenty-four years in municipal public service—rising through departmental hearings, policy drafts, and council committee rooms before taking the oath on the fourteenth floor of City Hall.",
+      "line": 7,
+      "claimType": "invented-career",
+      "ledgerSays": "Ledger has yearsInCareer 23.8 (the 'nearly twenty-four years' is fine) and careerStage mid-career, originGame 'Civic Office'. It has no career path (departmental hearings / policy drafts / committee rooms) and no oath location. No canon or published piece puts the oath, or any City Hall floor, on a 'fourteenth floor'; INSTITUTIONS.md places City Hall in Downtown with no floor detail.",
+      "source": "queryLedger citizen POP-00034; docs/canon/INSTITUTIONS.md (Downtown, City Hall); grep for 'fourteenth/14th floor' = 0 hits"
+    },
+    {
+      "quote": "Deputy Mayor Brenda Okoro had moved from City Hall's fourth floor into direct field coordination with OARI",
+      "line": 27,
+      "claimType": "invented-career",
+      "ledgerSays": "Okoro is Deputy Mayor (Community Affairs), 'Housing-first specialist'; the record ties her to Stabilization Fund oversight (tracker: disbursed under Okoro's authority C84-C90; Editions 87, 110-111). No record moves her to OARI field coordination, and no canon names a City Hall 'fourth floor' (the only 'fourth floor' in the record is the Davidson Courthouse).",
+      "source": "queryLedger council (STAFF-DM-COMM); Initiative_Tracker INIT-001 MilestoneNotes; editions/cycle_pulse_edition_87.txt, cycle_pulse_c110.txt"
+    },
+    {
+      "quote": "refusing to authorize supplemental infrastructure tranches for downtown transit corridors until the Temescal facility cleared its environmental and architectural benchmarks",
+      "line": 29,
+      "claimType": "ledger-contradiction",
+      "ledgerSays": "INIT-005 opened C109 ('construction complete, open to the public', $1.2M under budget), Stage Delivering, first utilization audit filed C113. By Y3C10 (C114) there is no pending environmental/architectural benchmark to gate on, and no record of any Santana hold on downtown transit tranches. The ledger bio says only that she 'designated Temescal Health Center as priority'. Invented executive act.",
+      "source": "Initiative_Tracker INIT-005 (OpensCycle 88, MilestoneNotes C109/C111/C113, Stage Delivering); queryLedger citizen POP-00034 citizenBio; grep editions c110-c114 for the claim = 0 hits"
+    },
+    {
+      "quote": "When the Bay Tribune published investigative columns by Luis Navarro and Carmen Delaine in Y3C7 examining the pace of fund disbursements and youth apprenticeship cohorts",
+      "line": 37,
+      "claimType": "ledger-contradiction",
+      "ledgerSays": "Y3C7 placement is supported (the mayor's own Y3C7 life event cites civic_c110_luis-navarro and Delaine's C111 column 'Ninety-One Households, One Ledger' covers Stabilization Fund disbursement pace). The content is wrong: Navarro's cited piece is Ed. 110 (Y3C6) 'Three Cycles, Same Sentence' on Fruitvale transit-corridor listening sessions (his other recent column, C113/Y3C9, is the Baylight tracker/audit mismatch); neither covers fund disbursements or youth apprenticeship cohorts, and there is no joint Navarro+Delaine piece.",
+      "source": "queryLedger citizen POP-00034 lifeEvents (Y3C7); editions/cycle_pulse_c110.txt (Navarro), cycle_pulse_c111.txt (Delaine), cycle_pulse_c113.txt (Navarro); Y3C7 = C111"
+    },
+    {
+      "quote": "Santana had driven home from an emergency budget session in the dark",
+      "line": 17,
+      "claimType": "ledger-contradiction",
+      "ledgerSays": "The Y3C9 (C113) life event is only 'drove the whole way home without remembering a single turn'; the neighbor event is 'a couple in Rockridge said they are thinking about leaving the block' (piece says an 'ordinary neighbor' leaving 'Oakland altogether'). No emergency budget session at C113 in Civic_Office_Ledger, the initiative tracker, or editions c110-c114 (0 hits). Invented council event; lower severity than the rest.",
+      "source": "queryLedger citizen POP-00034 lifeEvents (Y3C9); grep editions/cycle_pulse_c11*.txt, output/beats/Civic_Office_Ledger.jsonl"
+    },
+    {
+      "quote": "as the baseball season began its early-cycle push and the Oaks basketball franchise settled its rotation",
+      "line": 43,
+      "claimType": "ledger-contradiction",
+      "ledgerSays": "World summary C114 (Y3C10): 'Sports season: A's off-season, Oaks early-season'. The baseball season had not begun; only the Oaks (NBA expansion club) were in season.",
+      "source": "output/world_summary_c114.md (Calendar context line)"
+    }
+  ],
+  "conflicts": [
+    {
+      "quote": "the initiative had deployed white response vans across all nine council districts ... expanded citywide in Y2C45",
+      "line": 27,
+      "ledgerSays": "Initiative_Tracker INIT-002: AffectedNeighborhoods West Oakland, Fruitvale, East Oakland; MilestoneNotes C109 'Expanded to District 1 with evaluation metrics', C112-C114 'expansion held until after briefing' (D3 East Oakland / Fruitvale briefing docketed).",
+      "publishedSays": "Edition 97 (Y2C45): OARI 'answered its first calls across all nine council districts ... Citywide, this cycle'; 'Citywide Means Citywide: OARI Begins Answering Every District'.",
+      "sources": "output/beats/Initiative_Tracker.jsonl INIT-002; editions/cycle_pulse_edition_97.txt"
+    }
+  ],
+  "verifiedClaims": 56,
+  "notes": "Mayor core facts verify (she/her, 56, Rockridge, HH-0102-F007 couple household with off-ledger spouse and no children, $180,000, masters, INIT-001/002/005 votes, cycles and dollars, all 13 supporting names/ages/roles); no C89 'Dockworker's Son' backstory leaked. Tallies 6-3 and 5-4 given without seat lists: judged compliant because the record itself names only 3 of 9 seats (Ed. 111) and the piece names no parties or blocs. Soft, not failed: line 49 'setting structural pilings' runs ahead of INIT-006 (construction-active, but Phase II remediation ongoing and no milestone passed at C114; review set C115); Theo Park's bio says Temescal vs ledger Neighborhood Rockridge. Fix: cut the MPA, career-path clause, 'fourteenth floor', Okoro OARI/fourth-floor line, downtown-transit hold, Navarro attribution, baseball-season clause and 'emergency budget session'."
+}

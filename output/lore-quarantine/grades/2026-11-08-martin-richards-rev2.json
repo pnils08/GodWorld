@@ -1,0 +1,104 @@
+{
+  "file": "output/lore-quarantine/martin-richards-deep-dive/martin_richards.md",
+  "verdict": "PASS",
+  "recommendedTag": "Y3C10",
+  "changedLinesChecked": [
+    {
+      "line": 21,
+      "text": "When the Oakland Athletics drafted him out of Maryland in the first round of the 2028 draft and developed him",
+      "ok": true,
+      "evidence": "Builder ruling: Richards born in Maryland, TrueSource card right. Card 'Martin Richards DataPage v1.0': 'Born: Maryland', 'Drafted: Round 1 (2028)'. Edition 83 also says 'drafted out of Maryland'. The ledger (POP-00031 OrginCity Oakland, BirthYear 2012, bio 'Oakland native') disagrees with the card; reported under conflicts, not decided."
+    },
+    {
+      "line": 27,
+      "text": "In Y2C33, our own columnist P Slayer summarized the front office's dilemma in twelve brutal words",
+      "ok": true,
+      "evidence": "editions/cycle_pulse_edition_85.txt: header 'Edition 85 | Cycle 85'; line 426 'By P Slayer | Bay Tribune Sports [OPINION]' (index row 'If You Had to Keep One - Aitken or Richards?'); line 446 holds the quoted sentence. C85 = Y2C33 (n=floor(84/52)+1=2, m=84%52+1=33). The sentence 'You can find a Martin Richards. You cannot find another Mark Aitken.' is 12 words (6 + 6). Both first-grade failures fixed."
+    },
+    {
+      "line": 31,
+      "text": "Martin Richards was dealt to the New York Mets for two prospects",
+      "ok": true,
+      "evidence": "archive/articles/c100_sports_end-of-an-anchor-richards-to-mets_bay-tribune-sports-desk.txt line 19: 'two highly rated minor league players: an A-rated shortstop prospect and a 19-year-old B-rated pitcher'; line 34 'for two prospects'. Edition 101 line 23: 'two top-ten prospects, one of them a shortstop'. No relief arms. Fixed."
+    },
+    {
+      "line": 33,
+      "text": "In Y2C49, under the banner headline Trade Deadline Earthquake, this paper called it an ending Richards didn't get to write.",
+      "ok": true,
+      "evidence": "Edition 101 header 'Cycle 101 | Y2C49 | Winter' (m=100%52+1=49). Line 11 front-page headline 'Trade Deadline Earthquake: A's Send Richards to Mets' (Hal Richmond, FP1); line 49 / index 'The Ending Richards Didn't Get to Write' (Margaret Corliss, Editor's Desk). 'This paper' is correct for a two-desk attribution. The edition-number reference is gone."
+    },
+    {
+      "line": 33,
+      "text": "P Slayer had already confessed to a journalistic debt long overdue in Y2C42, admitting that the paper had spent years documenting the pitching staff and the farewell tours",
+      "ok": true,
+      "evidence": "Edition 94 header 'Cycle 94 | Y2C42 | Fall' (m=93%52+1=42). Line 223 'By P Slayer'; S2 'The Let-Walks Coming'. Line 241: 'I cannot find a single dedicated piece about Martin Richards in the Tribune archive ... We covered the pitching staff seventeen different ways. We wrote Kelley features and Aitken civic profiles'; line 243 'That's on us. That's on me.' 'Pitching staff' and the farewell tours (Kelley sendoff) are sourced."
+    },
+    {
+      "line": 49,
+      "text": "But I built my life on these curbs.",
+      "ok": true,
+      "evidence": "Dialogue, texture. It also no longer asserts that he grew up in Oakland, consistent with the Maryland ruling. Fruitvale is his ledger neighborhood."
+    }
+  ],
+  "openItemsChecked": [
+    {
+      "quote": "playing on a pre-arbitration deal that paid him $750,000",
+      "ok": "unverifiable",
+      "evidence": "Ledger citizenBio '$750K current salary'; Edition 83 says 'eight figures in arbitration' and 'free agent after 2042'. Ledger vs published split, left as conflict."
+    },
+    {
+      "quote": "Isley lives up in Rockridge.",
+      "ok": "unverifiable",
+      "evidence": "Ledger POP-00019 Neighborhood Rockridge matches the piece; Edition 79 names index says Montclair. Left as conflict."
+    },
+    {
+      "quote": "Across the bay, the Mets were preparing for a weekend homestand at Citi Field. / jersey number 14",
+      "ok": "unverifiable",
+      "evidence": "The Mets are not tracked in the feed; world_summary_c114 says A's off-season at Y3C10. The jersey number and Citi Field are not in the record. Texture."
+    },
+    {
+      "quote": "His fielding percentage was spotless. He did not commit a single throwing error",
+      "ok": "unverifiable",
+      "evidence": "Editions 83/94 say 'perfect at third'; Edition 101 says three errors. Published record splits; left as conflict."
+    }
+  ],
+  "failures": [],
+  "conflicts": [
+    {
+      "quote": "drafted him out of Maryland in the first round of the 2028 draft",
+      "line": 21,
+      "ledgerSays": "POP-00031 OrginCity Oakland, BirthYear 2012 (a 2028 draftee would be 16), CitizenBio 'Born 2012, Oakland native... Lives in Fruitvale.'",
+      "publishedSays": "TrueSource card: Born Maryland, Drafted Round 1 (2028); Edition 83 'drafted out of Maryland'. The card has no birth year of its own. Builder ruling: Maryland, card right; the 2028 draft year and the 2012 BirthYear stay unreconciled.",
+      "sources": "node scripts/queryLedger.js citizen POP-00031; archive/non-articles/data/Martin Richards DataPage v1.0.txt; editions/cycle_pulse_edition_83.txt"
+    },
+    {
+      "quote": "playing on a pre-arbitration deal that paid him $750,000",
+      "line": 25,
+      "ledgerSays": "CitizenBio: '$750K current salary'. Piece matches the ledger bio.",
+      "publishedSays": "Edition 83: 'earns him eight figures in arbitration' and 'free agent after two thousand forty-two'; Editions 85/94 and the ledger bio treat 2041 as the walk year.",
+      "sources": "editions/cycle_pulse_edition_83.txt; output/simulation_ledger_snapshot.jsonl POP-00031"
+    },
+    {
+      "quote": "Isley lives up in Rockridge.",
+      "line": 49,
+      "ledgerSays": "Isley Kelley (POP-00019) Neighborhood = Rockridge. Piece matches the ledger.",
+      "publishedSays": "Edition 79 names index: 'Isley Kelley (SS - Montclair)'.",
+      "sources": "editions/cycle_pulse_edition_79.txt:475"
+    },
+    {
+      "quote": "His fielding percentage was spotless.",
+      "line": 25,
+      "ledgerSays": "No fielding field.",
+      "publishedSays": "Editions 83/94: 'perfect' at third; Edition 101: 'three errors'.",
+      "sources": "editions/cycle_pulse_edition_101.txt; editions/cycle_pulse_edition_94.txt:221"
+    },
+    {
+      "quote": "In Y2C49, at the trade deadline, Mike Paulson made the call.",
+      "line": 31,
+      "ledgerSays": "No ledger trade row.",
+      "publishedSays": "Dispatch is indexed C100 (Y2C48); Edition 101 front page is C101 (Y2C49). The piece follows Edition 101. Split in the published record.",
+      "sources": "archive/articles/c100_sports_end-of-an-anchor-richards-to-mets_bay-tribune-sports-desk.txt; editions/cycle_pulse_edition_101.txt"
+    }
+  ],
+  "notes": "All four first-grade failures are fixed and each new or reworded line checks out against Editions 85, 94, 101, the C100 dispatch and the TrueSource card; cycle math Y2C33, Y2C42, Y2C49 all well-formed. Remaining items are ledger-vs-published conflicts only (birth year vs 2028 draft, $750K, Rockridge/Montclair, fielding, trade cycle C100/C101)."
+}

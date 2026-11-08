@@ -28,9 +28,9 @@ In Y3C7, during the quiet stretch before early-season workouts intensified, he s
 
 ### II. Sidewalk Geometry
 
-The reality of being the ace of an Oakland sports dynasty is that anonymity is a fragile illusion. In Y3C6, after an authoritative outing, Ramos walked back up his front path at dusk to find that an anonymous neighbor had left a wooden crate on the porch containing six chilled bottles of craft cider and a note written on butcher paper: *Good sinker Tuesday. Keep your front shoulder closed.*
+The reality of being the ace of an Oakland sports dynasty is that anonymity is a fragile illusion. In Y3C6, the week after his World Series opener, Ramos walked back up his front path at dusk to find that an anonymous neighbor had left a wooden crate on the porch containing six chilled bottles of craft cider and a note written on butcher paper: *Good sinker Tuesday. Keep your front shoulder closed.*
 
-"You can't even get mad at that," Ramos chuckles. "It was good advice. I was flying open in the fifth against Seattle."
+"You can't even get mad at that," Ramos chuckles. "It was good advice. I was flying open in the fifth against Philadelphia."
 
 Yet being known in Laurel carries responsibilities distinct from the stadium tunnel. In Y3C7, walking down MacArthur to pick up morning pan dulce, Ramos passed the line wrapped around the local community health clinic. Standing in the chill were three people he had sat next to in high school homeroom a decade earlier. None of them mentioned the box score from the night before. They talked about dental coverage, city bus line delays, and the cost of groceries. Ramos covered a round of coffees, nodded, and listened. 
 

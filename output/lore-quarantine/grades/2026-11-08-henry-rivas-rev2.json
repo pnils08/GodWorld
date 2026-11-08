@@ -1,0 +1,114 @@
+{
+  "file": "output/lore-quarantine/deep_dive_henry_rivas.md",
+  "verdict": "PASS",
+  "recommendedTag": "Y3C8",
+  "changedLinesChecked": [
+    {
+      "line": 19,
+      "text": "During the long weeks of rehabilitation between Y2C39 and Y2C46",
+      "ok": true,
+      "evidence": "Edition 91 (C91 = Y2C39: n=floor(90/52)+1=2, m=90%52+1=39) reports the dislocated right shoulder, 'two months on the injured list'. Edition 98 (C98 = Y2C46: m=97%52+1=46) and Oakland_Sports_Feed C98 report his return (7 IP, 0 ER, 7 K). Feed C95 shows him still on the DL (25 days remaining). Both tags well-formed, m <= 52."
+    },
+    {
+      "line": 19,
+      "text": "before entering professional ball a decade ago",
+      "ok": true,
+      "evidence": "Ledger POP-00024 YearsInCareer 10.5; Hal Richmond opening-day essay 'ten seasons deep' (first grade). A decade matches; the earlier 'decade and a half' contradiction is gone."
+    },
+    {
+      "line": 19,
+      "text": "Born in Puerto Rico (unchanged line, builder ruling)",
+      "ok": true,
+      "evidence": "Builder ruling: Henry Rivas was born in Puerto Rico. Ledger OrginCity Puerto Rico and TrueSource card agree. The CitizenBio 'Oakland native' text stays a ledger-internal conflict, resolved by the ruling."
+    },
+    {
+      "line": 27,
+      "text": "He rented a place and moved his household (HH-0101-B031) down into the industrial flats of West Oakland.",
+      "ok": true,
+      "evidence": "Household_Ledger HH-0101-B031 HousingType 'rented', MonthlyRent 3625 (first grade). Move in Y3C6: ledger POP-00024 MigratedCycle 110, MigrationDestination West Oakland; C110 = Y3C6 (n=floor(109/52)+1=3, m=109%52+1=6)."
+    },
+    {
+      "line": 43,
+      "text": "Unlike many professional athletes ... mundane fabric of the flats. He does not avoid the changing civic reality around him. (graffiti paragraph with 'Y2C52 and again in Y3C3' and 'five neighbors' deleted)",
+      "ok": true,
+      "evidence": "The unsupported Rivas graffiti claim is gone. grep of the file finds no remaining graffiti reference, no Y2C52, no Y3C3. The join sentence is not a claim. Remaining Y3C7 UNDOCKED / Bayline 6 and Y3C8 OARI van lines were verified clean in the first grade."
+    },
+    {
+      "line": 55,
+      "text": "In Y3C6, the week the A's won the World Series, he made the familiar drive home along 7th Street with the windows cracked.",
+      "ok": true,
+      "evidence": "world_summary_c110.md line 6: 'Y3C6, Winter ... Sports season: A's playoffs/championship'; Oakland_Sports_Feed C110: WS Game 4 (Rivas complete game win in Philadelphia) and Game 5 (Ellis, A's win the title) and a 'championship' row. Y3C6 = C110 = World Series week, so the week-level placement matches. The wording no longer names a divisional game or the Coliseum. The seventh-inning at-bat, the dugout and the drive route are texture; the record gives no location for the drive."
+    }
+  ],
+  "openItemsChecked": [
+    {
+      "quote": "scattering four harmless singles",
+      "ok": "unverifiable",
+      "evidence": "Edition 98 and feed C98 give 7 IP, 0 ER, 7 K and the Royals/Blue Jays sweep, no hit count. The record does not contradict it. Edition 98 also gives no home/away location; 'walked back onto the Coliseum diamond' is likewise unverifiable. Texture."
+    },
+    {
+      "quote": "The dislocated right shoulder",
+      "ok": true,
+      "evidence": "editions/cycle_pulse_edition_91.txt:81: 'two months ... with a dislocated right shoulder.' Side confirmed."
+    },
+    {
+      "quote": "Yamamoto is a Tier 4 entry-level union electrician",
+      "ok": "unverifiable",
+      "evidence": "Ledger POP-01031 role Electrician, income 86100, EmployerBizId UNTRACKED (matches). The ledger and snapshot carry no union marker for her (no IBEW or union text). 'Union' and the separate-finances framing are characterization, not contradicted. Texture."
+    },
+    {
+      "quote": "construction crews in the Baylight District are driving pilings",
+      "ok": true,
+      "evidence": "world_summary_c110.md-c114 repeat 'Baylight District - Final Council Vote is construction-active'; Story_Seed_Deck C109 has Sara Copper 'braced for the sound of pile drivers'. 35,000 seats and $2.1B match the editions (first grade). Supported."
+    },
+    {
+      "quote": "the district where Civis Systems first set up in brick warehouses before Downtown built its towers",
+      "ok": "unverifiable",
+      "evidence": "Business_Ledger BIZ-00052 Civis Systems is in West Oakland (first grade). queryLedger articles 'Civis Systems warehouse' = 0 hits; 'brick warehouse' not in archive/editions/docs/canon. The history is neither confirmed nor contradicted. Texture."
+    },
+    {
+      "quote": "His two children are growing up with the salt air of the bay",
+      "ok": "unverifiable",
+      "evidence": "NumChildren 2 matches; ChildrenIds [] and the household is a couple of two. Child count not contradicted. Stays a conflict (reported, not decided)."
+    }
+  ],
+  "failures": [],
+  "conflicts": [
+    {
+      "quote": "Mesa was quietly optioned back to Midland",
+      "line": 21,
+      "ledgerSays": "Ledger POP-00081 RoleType 'Starting Pitcher, Midland RockHounds (AA)'; Edition 93 says called up from Midland/Double-A.",
+      "publishedSays": "Edition 98 and feed C98: Mesa 'optioned to AAA'; feed C95/C101 also AAA.",
+      "sources": "output/simulation_ledger_snapshot.jsonl POP-00081; editions/cycle_pulse_edition_98.txt:251; output/beats/Oakland_Sports_Feed.jsonl C98"
+    },
+    {
+      "quote": "When the medical staff cleared him in late spring",
+      "line": 21,
+      "ledgerSays": "No ledger season field.",
+      "publishedSays": "Edition 98 header 'Y2C46 | Fall'; feed marks C98 early-season. Season label only.",
+      "sources": "editions/cycle_pulse_edition_98.txt:4"
+    },
+    {
+      "quote": "His two children / they talk about the children",
+      "line": "37, 47",
+      "ledgerSays": "NumChildren 2, but ChildrenIds [] and the West Oakland household is two adults.",
+      "publishedSays": "Not covered.",
+      "sources": "output/simulation_ledger_snapshot.jsonl POP-00024, POP-01031; output/beats/Household_Ledger.jsonl HH-0101-B031"
+    },
+    {
+      "quote": "navigating his farewell season (Dillon) ... slot two rotation, shown as ongoing at Y3C8",
+      "line": 5,
+      "ledgerSays": "Ledger bio says 'Farewell season in 2041 - age 38' against BirthYear 2005.",
+      "publishedSays": "Feed has the A's winning the WS at C110 (Y3C6), closing that season, so the farewell season is in the past at Y3C8.",
+      "sources": "output/beats/Oakland_Sports_Feed.jsonl C110; output/simulation_ledger_snapshot.jsonl POP-00018"
+    },
+    {
+      "quote": "Bay Tribune sports columnist Anthony Raines",
+      "line": 9,
+      "ledgerSays": "n/a",
+      "publishedSays": "Anthony Raines is a canon byline; the roster role is Lead Beat Reporter, not 'columnist'.",
+      "sources": "schemas/bay_tribune_roster.json"
+    }
+  ],
+  "notes": "All four first-grade failures are repaired (rented, a decade, Y2C39-Y2C46, WS week); the unsupported graffiti claim is cut. Remaining items are unverifiable texture or reported conflicts, none contradicted. Born in Puerto Rico is the builder ruling. Weighed and left: both WS games that cycle (Games 4 and 5) were in Philadelphia, and the closing scene has Rivas driving home on 7th Street to a postgame radio replay; the sentence names no game or venue and the ledger Y3C6 line is generic, so it is texture at the week level, not a contradicted event."
+}

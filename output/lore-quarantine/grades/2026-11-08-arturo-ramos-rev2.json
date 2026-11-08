@@ -1,0 +1,85 @@
+{
+  "file": "output/lore-quarantine/arturo_ramos_deep_dive.md",
+  "verdict": "FAIL",
+  "recommendedTag": "Y3C10",
+  "changedLinesChecked": [
+    {
+      "line": 11,
+      "text": "twenty-two-year-old phenom Travis Coles pays four-figure monthly rents to look down on Broadway from a high-rise tower",
+      "ok": true,
+      "evidence": "Household_Ledger HH-0109-F009 (head POP-00533): Downtown, solo, HousingType rented, MonthlyRent 3024 = four figures. Age 22 (BirthYear 2020) and Downtown matched in the first grade. 'High-rise tower' is texture. The earlier five-figure failure is fixed."
+    }
+  ],
+  "openItemsChecked": [
+    {
+      "quote": "In Y3C6, after an authoritative outing ... 'I was flying open in the fifth against Seattle.'",
+      "ok": false,
+      "evidence": "Check finished. Y3C6 = C110 (n=floor(109/52)+1=3, m=109%52+1=6), World Series clinch week. Oakland_Sports_Feed C110 game rows: WS Game 4 (Rivas complete game at Philadelphia), WS Game 5 (Ellis starts, Dillon relief, title won at Philadelphia), plus a 'championship' celebration row. world_summary_c110.md: Ramos appears only in that celebration roster and in the WS Game 1 row, which is c109 (= Y3C5): home vs Phillies, 'shaky start by his own standards', 6 IP, 3 ER. No Ramos outing in c110, so the relief-appearance question the first grade left open is closed against the piece. 'Seattle' has no hit in the Oakland_Sports_Feed or any world summary c104-c114 (only an NBA-expansion rumor at C87); postseason opponents were NYY, MIN, PHI. Ramos LifeHistory Y3C6 gives only the porch gift ('a case of something cold on the porch'), no outing."
+    },
+    {
+      "quote": "a house he owns outright / bought a single-story house",
+      "ok": "unverifiable",
+      "evidence": "POP-00025 HouseholdId null; 0 Household_Ledger rows containing POP-00025; the ledger carries no housing type for him. Nothing contradicts it. Texture; contrast Rivas, where the ledger says rented."
+    },
+    {
+      "quote": "the morning bell at St. Ansgar's",
+      "ok": "unverifiable",
+      "evidence": "Repo-wide grep (output, archive, editions, docs, schemas): only hits are this piece and its first grade file. Not in Faith_Organizations. Setting texture, not a ledger claim."
+    },
+    {
+      "quote": "the rear wall of the Laurel Recreation Center",
+      "ok": "unverifiable",
+      "evidence": "Ramos and Lend LifeHistory (Y3C9) say 'recreation center wall' with five neighbors; the event and cycle match. The 'Laurel Recreation Center' name appears nowhere else. Texture."
+    },
+    {
+      "quote": "whether the city's small-business utility rebate was ever going to actually disburse",
+      "ok": "unverifiable",
+      "evidence": "Dialogue; no such program in Initiative_Tracker or anywhere in output/archive/editions/docs. Dialogue is texture."
+    },
+    {
+      "quote": "None of them mentioned the box score from the night before.",
+      "ok": "unverifiable",
+      "evidence": "Y3C7 = C111: feed C111 season-type off-season (parade and rally). No A's game the night before. Narration texture; noted, not failed."
+    }
+  ],
+  "failures": [
+    {
+      "quote": "In Y3C6, after an authoritative outing, Ramos walked back up his front path at dusk ... \"I was flying open in the fifth against Seattle.\"",
+      "line": "31-33",
+      "claimType": "cycle",
+      "ledgerSays": "Narration dates a Ramos pitching outing to Y3C6 (C110). The record has no Ramos start in C110: the only game rows are WS Game 4 (Rivas) and Game 5 (Ellis); Ramos's last start is WS Game 1 at home vs Philadelphia in c109 = Y3C5 ('shaky', 6 IP, 3 ER, not 'authoritative'). The piece's opponent, Seattle, appears nowhere in the A's 2042 feed or world summaries; postseason opponents were NYY, MIN, PHI. The ledger Y3C6 line carries only the porch gift.",
+      "source": "output/beats/Oakland_Sports_Feed.jsonl Cycle 108-111 rows; output/world_summary_c109.md, c110.md (lines 241-246, 259-270); grep seattle|mariners output/world_summary_c104-c114.md (0 hits); node scripts/queryLedger.js citizen POP-00025 (Y3C6 LifeHistory)"
+    }
+  ],
+  "conflicts": [
+    {
+      "quote": "anchored the Oakland Athletics through a fourteen-win campaign in Y2C48 ... You win fourteen games and drop one",
+      "line": "7, 21",
+      "ledgerSays": "Oakland_Sports_Feed: Ramos 20-1 (2.50 ERA) at c102, final 23-1, 2.41 ERA, 212.2 IP (c105/c106/c114 world summaries). The Y2C52 scene (c104) falls when he was already past 20 wins.",
+      "publishedSays": "Edition c100 (Y2C48): 'fourteen wins against one loss', 14-1, 2.32 ERA. The Y2C48 mid-season mark is correct but is presented as a full campaign.",
+      "sources": "editions/cycle_pulse_edition_100.txt lines 22, 346; output/world_summary_c103.md, c106.md, c114.md"
+    },
+    {
+      "quote": "an $8.1 million annual contract",
+      "line": 7,
+      "ledgerSays": "Ledger Income 8,100,000 and Sports_Feed Stats '$8.1M' match the piece.",
+      "publishedSays": "Ramos citizenBio and TrueSource card say $8.2M. Piece matches the ledger; reported only.",
+      "sources": "output/simulation_ledger_snapshot.jsonl POP-00025; archive/non-articles/data/Arturo Ramos _ TrueSource DataPage v1.0.txt"
+    },
+    {
+      "quote": "net worth $2,989,076 ... net worth $219,874 ... net worth $25,004,092",
+      "line": 85,
+      "ledgerSays": "Snapshot NetWorth now: Ramos 2,997,128; Lend 219,934; Ellis 25,004,745. Lend and Ellis figures equal Household_Ledger HouseholdSavings one cycle earlier (219874; 25004092). Usage-log metadata only, not story prose. One-cycle drift.",
+      "publishedSays": "n/a",
+      "sources": "output/simulation_ledger_snapshot.jsonl; output/beats/Household_Ledger.jsonl"
+    },
+    {
+      "quote": "As the season grinds forward / The mantle of the rotation has passed ... to Arturo Ramos",
+      "line": "59-61",
+      "ledgerSays": "World summary c110-c114 list the A's as off-season after the C110 title; setting reads in-season.",
+      "publishedSays": "Coles won the Cy Young; the piece frames Ramos as staff ace. Soft framing, not decided.",
+      "sources": "output/world_summary_c111.md line 6; output/world_summary_c114.md"
+    }
+  ],
+  "notes": "FAIL on one item: the Y3C6 'authoritative outing ... against Seattle' (line 31-33). Record has Ramos pitching WS Game 1 on c109 (Y3C5) vs Philadelphia and no start in c110 (WS Games 4 and 5 were Rivas and Ellis, in Philadelphia); no Seattle opponent exists in the 2042 record. Suggested repair: drop the outing and the opponent (e.g. 'In Y3C6, the week the A's won the World Series' and 'flying open in the fifth against Philadelphia' only if tied to c109/Y3C5). The Coles rent fix is clean; every other open item is unverifiable texture or a reported conflict."
+}

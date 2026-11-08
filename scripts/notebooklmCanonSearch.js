@@ -9,8 +9,10 @@ const { spawnSync } = require('child_process');
 const ROOT = path.join(__dirname, '..');
 const CONFIG_PATH = path.join(ROOT, 'config', 'notebooklm.json');
 const POLICY_PATH = path.join(__dirname, 'notebooklmCanonSources.json');
-const INVENTORY_PATH = path.join(ROOT, 'output', 'codex', 'notebooklm-source-inventory.json');
 const NLM = path.join(ROOT, '.venv', 'nlm', 'bin', 'nlm');
+const SOURCE_LIST_TIMEOUT_SECONDS = 60;
+// notebooklm_tools/core/sources.py: 1 processing, 2 ready, 3 error, 5 preparing.
+const SOURCE_STATUS_READY = 2;
 const SOURCE_CLASSES = new Set(['published', 'canon-reference', 'all']);
 const RESULT_STATUSES = new Set([
   'not_run',
@@ -97,19 +99,62 @@ function allowedIdsForClass(policy, sourceClass) {
   return [...new Set([...published, ...references])];
 }
 
+// pipeline.103: the scope is the live notebook, listed on every call, so a
+// source added or deleted on any path (scripts, MCP, the web page) is in or
+// out of scope at the next search. The whole listing is checked before any
+// of it is used; a malformed one fails the call.
+function normalizeLiveSources(value) {
+  if (!Array.isArray(value)) throw new Error('nlm source list must return a JSON array');
+  if (value.length === 0) throw new Error('nlm source list returned no sources');
+  const seen = new Set();
+  return value.map((source, index) => {
+    if (!source || typeof source !== 'object' || Array.isArray(source)) {
+      throw new Error('nlm source list item ' + index + ' must be an object');
+    }
+    const id = String(source.id || source.source_id || '').trim();
+    const title = String(source.title || source.name || '').trim();
+    if (!id) throw new Error('nlm source list item ' + index + ' has no source ID');
+    if (!title) throw new Error('nlm source list item ' + index + ' has no title');
+    if (!Number.isInteger(source.status)) {
+      throw new Error('nlm source list item ' + index + ' has no integer status');
+    }
+    if (seen.has(id)) throw new Error('nlm source list repeats source ID ' + id);
+    seen.add(id);
+    return { id, title, status: source.status };
+  });
+}
+
+// A source that is not ready fails the call rather than dropping out of the
+// scope, so a partial scope is never logged as verified. An explicit request
+// is checked only for the IDs it names.
+function assertScopeReady(sources, requestedIds) {
+  const byId = new Map(sources.map((source) => [source.id, source]));
+  const describe = (source) => source.id + ' "' + source.title + '" (status ' + source.status + ')';
+  if (!requestedIds) {
+    const notReady = sources.filter((source) => source.status !== SOURCE_STATUS_READY);
+    if (notReady.length) {
+      throw new Error('notebook source not ready: ' + notReady.map(describe).join('; '));
+    }
+    return;
+  }
+  for (const id of requestedIds) {
+    const source = byId.get(id);
+    if (!source) throw new Error('requested source ID is not in the notebook: ' + id);
+    if (source.status !== SOURCE_STATUS_READY) {
+      throw new Error('requested source not ready: ' + describe(source));
+    }
+  }
+}
+
 // Builder ruling: the notebook cannot invent canon, so every source in it is
-// canon. The search lane is the whole inventory; the reviewed policy file stays
+// canon. The search lane is the whole notebook; the reviewed policy file stays
 // as the strict audit (`notebooklmCanonSourcesValidate.js`), not a gate.
-function openPolicyFromInventory(inventory, policy) {
-  if (!inventory || !Array.isArray(inventory.sources)) {
-    throw new Error('inventory.sources must be an array');
-  }
-  if (inventory.notebookId !== policy.notebookId) {
-    throw new Error('inventory notebook ID does not match canon-source policy');
-  }
-  const ids = inventory.sources.map((source) => source.id);
+function openPolicyFromSources(sources, policy) {
+  const ids = sources
+    .filter((source) => source.status === SOURCE_STATUS_READY)
+    .map((source) => source.id);
   const decisions = { ...(policy.decisions || {}) };
-  for (const source of inventory.sources) {
+  for (const source of sources) {
     if (!decisions[source.id]) decisions[source.id] = { title: source.title };
   }
   return {
@@ -283,6 +328,28 @@ function runQuery(queryArgs, timeoutSeconds) {
   }
 }
 
+function listLiveSources(notebookId) {
+  if (!fs.existsSync(NLM)) throw new Error('nlm CLI missing at ' + NLM);
+  const result = spawnSync(NLM, ['source', 'list', notebookId, '--json'], {
+    cwd: ROOT,
+    encoding: 'utf8',
+    timeout: SOURCE_LIST_TIMEOUT_SECONDS * 1000,
+    maxBuffer: 10 * 1024 * 1024,
+  });
+  if (result.error) throw result.error;
+  if (result.status !== 0) {
+    throw new Error(
+      'nlm source list failed: ' +
+      String(result.stderr || result.stdout || '').trim().slice(0, 500)
+    );
+  }
+  try {
+    return JSON.parse(result.stdout);
+  } catch (error) {
+    throw new Error('nlm source list returned invalid JSON: ' + error.message);
+  }
+}
+
 function resolveLogPath(requestedPath) {
   const value = String(requestedPath || '').trim();
   if (!value) throw new Error('retrieval log path must not be empty');
@@ -307,14 +374,15 @@ function resolveLogPath(requestedPath) {
 }
 
 function classifyResultStatus(error, stage) {
-  if (stage === 'not_run') return 'not_run';
+  // 'selection' refuses the request's own arguments before any query, as 'not_run' always has.
+  if (stage === 'not_run' || stage === 'selection') return 'not_run';
   const message = String(error && error.message || error || '');
   if (
     /(?:auth(?:entication|orization)?|unauthori[sz]ed|forbidden|log(?:ged)? in|sign in|cookie|csrf|credentials?|\b401\b|\b403\b)/i.test(message)
   ) {
     return 'auth_failure';
   }
-  if (stage === 'query') return 'no_result';
+  if (stage === 'query' || stage === 'source_list') return 'no_result';
   if (
     /(?:must be an object|has no answer|has no conversation ID)/i.test(message)
   ) {
@@ -389,7 +457,9 @@ function buildOutput(args, config, policy, selectedSourceIds, validated) {
   };
 }
 
-function main(argv) {
+function main(argv, deps = {}) {
+  const listSources = deps.listSources || listLiveSources;
+  const query = deps.runQuery || runQuery;
   const startedAt = Date.now();
   const questionHint = questionHintFromArgv(argv);
   let args = null;
@@ -404,11 +474,14 @@ function main(argv) {
     logPath = resolveLogPath(args.logPath);
     const config = readJson(CONFIG_PATH, 'NotebookLM configuration');
     const reviewedPolicy = readJson(POLICY_PATH, 'NotebookLM canon-source policy');
-    const inventory = readJson(INVENTORY_PATH, 'NotebookLM source inventory');
-    const policy = openPolicyFromInventory(inventory, reviewedPolicy);
-    if (!config.notebookId || config.notebookId !== policy.notebookId) {
+    if (!config.notebookId || config.notebookId !== reviewedPolicy.notebookId) {
       throw new Error('configured notebook ID does not match canon-source policy');
     }
+    stage = 'source_list';
+    const sources = normalizeLiveSources(listSources(config.notebookId));
+    assertScopeReady(sources, args.sourceIds);
+    const policy = openPolicyFromSources(sources, reviewedPolicy);
+    stage = 'selection';
     selectedSourceIds = selectSourceIds(policy, args.sourceClass, args.sourceIds);
     const queryArgs = buildQueryArgs(
       config.notebookId,
@@ -417,7 +490,7 @@ function main(argv) {
       args.timeoutSeconds
     );
     stage = 'query';
-    const raw = runQuery(queryArgs, args.timeoutSeconds);
+    const raw = query(queryArgs, args.timeoutSeconds);
     stage = 'response_validation';
     validated = validateQueryResponse(raw, selectedSourceIds, policy);
     output = buildOutput(args, config, policy, selectedSourceIds, validated);
@@ -465,7 +538,9 @@ if (require.main === module) {
 module.exports = {
   parseArgs,
   allowedIdsForClass,
-  openPolicyFromInventory,
+  normalizeLiveSources,
+  assertScopeReady,
+  openPolicyFromSources,
   selectSourceIds,
   buildQueryArgs,
   normalizeCitationMap,
@@ -476,4 +551,5 @@ module.exports = {
   buildRetrievalRecord,
   appendRetrievalLog,
   buildOutput,
+  main,
 };

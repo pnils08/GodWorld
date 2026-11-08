@@ -88,7 +88,7 @@ Shapes considered:
 |---|------|-------|--------|
 | 1 | Reader map: every path that queries the permanent notebook (cron and manual) and what scope it uses; every path that adds or deletes a source | es | done 2026-11-08 (§Reader map) |
 | 2 | Design pick from Task 1 (shape 1, 2 or both), advisor, one codex review | es | shape 2 picked, advisor folded; codex HOLD F1–F4 folded 2026-11-08 (`docs/for-claude-review/2026-11-08-codex-pipeline103-plan-review.md`); re-review sent |
-| 3 | Build + tests; one refresh run on live; the strict validator's lore `3824b8b0-…` and the 69 unclassified ids reported, not hand-classified | es | not started |
+| 3 | Build + tests; one refresh run on live; the strict validator's lore `3824b8b0-…` and the 69 unclassified ids reported, not hand-classified | es | done 2026-11-08: tests PASS (shape contract, non-ready, 10 failure paths through injected `main`, zero queries each); live query 149/149 selected, 22/22 formerly-out in, 0/69 dead in, C114 cited `0f829b78` verified 37.6 s (Acc 2, 3). `3824b8b0` = `Lore: danny_horn_deep_dive (Y3C7)`, deleted outside any script; 69 live ids with no policy entry — reported in the NotebookLM change log |
 | 4 | Change log line in `docs/reference/NotebookLM.md`; `lore-ingest` SKILL step trued; `source-search` agent SKILL.md:35 scope line trued to the 2026-10-11 whole-notebook ruling | es | not started |
 
 ## Acceptance
@@ -100,6 +100,7 @@ Shapes considered:
 
 ## Changelog
 
+- 2026-11-08 — Task 3 built and proven live (149/149 in scope, C114 cited, verified); codex re-review HOLD on F1 caller wording only → builder.
 - 2026-11-08 — codex plan review HOLD F1–F4 folded (scope class = 10-11 ruling; non-ready fails the call; listing shape contract; map adds 08:00 fallback + MCP); Acceptance 3 precedent corrected, Acceptance 4 widened.
 - 2026-11-08 — Task 2 design: live listing on every search (shape 2), status-2 filter, fail closed, injectable; Acceptance 1 rewritten so no test source enters the permanent notebook; Acceptance 4 added.
 - 2026-11-08 — Task 1 reader map: the canon search is the only reader on the inventory and runs manual-only; the 08:00 cron scopes by the current policy; the out-of-scope adds and all 69 deletions came through hand paths with no script to hook.

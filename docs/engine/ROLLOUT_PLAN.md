@@ -22,6 +22,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| pipeline.103 | Notebook search reads the live notebook on every call (builder 11-07), proven on C114. Read Sat 2026-11-14: one search names C115 edition (Acc 1) | live-observing | engine-sheet | [[../plans/2026-11-07-notebook-search-scope]] |
 | engine.333 | Feed triggers to life history: retirement leaves the sports layer, Now: bio line, owed wake, injury bed. PROD @175. Task 5 = the C115 live read, Sun 2026-11-08 | live-observing | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] |
 | engine.331 | Sports triggers: no blank-cell re-fire, hot/cold at 5, off-season and good/bad words. PROD @174, dropdown done. C115 live read Sun 2026-11-08 (Acc 14, P1, P3) | live-observing | engine-sheet | [[../plans/2026-11-05-sports-feed-triggers]] |
 | engine.332 | Coverage reaction seeds: a beat rated ±3+ is one lead row on its desk. PROD @176. C114 rated INFRASTRUCTURE −3, COMMUNITY +3: C115 Sun 2026-11-08 is the read | live-observing | engine-sheet | [[../plans/2026-11-07-coverage-reaction-seeds]] |
@@ -76,7 +77,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | governance.56 | One boot (builder 11-02): CLAUDE.md imports one `.claude/TERMINAL.md`; boot-load.js retired. Next: review | in-progress | engine-sheet | [[../plans/2026-08-29-boot-doc-consolidation]] §Changelog |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | engine.338 | A former player's next chapter (builder 11-07): post-career pay, the intake door, his word at the wake. 2a live @178; 2b built 11-08 unbenched; next 2c–d | in-progress | research-build | [[../plans/2026-11-07-former-player-next-chapter]] |
-| pipeline.103 | Notebook search scope rebuilds on every add (builder 11-07): search lists the live notebook per call; trues the scope wording in four newsroom callers | in-progress | engine-sheet | [[../plans/2026-11-07-notebook-search-scope]] |
 
 ## 4. Queue — ruled, not started (ready)
 

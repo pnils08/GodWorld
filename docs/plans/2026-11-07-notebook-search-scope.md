@@ -87,7 +87,7 @@ Shapes considered:
 | # | Task | Owner | Status |
 |---|------|-------|--------|
 | 1 | Reader map: every path that queries the permanent notebook (cron and manual) and what scope it uses; every path that adds or deletes a source | es | done 2026-11-08 (§Reader map) |
-| 2 | Design pick from Task 1 (shape 1, 2 or both), advisor, one codex review | es | shape 2 picked, advisor folded; codex HOLD F1–F4 folded 2026-11-08 (`docs/for-claude-review/2026-11-08-codex-pipeline103-plan-review.md`); re-review sent |
+| 2 | Design pick from Task 1 (shape 1, 2 or both), advisor, one codex review | es | shape 2 picked, advisor folded; codex HOLD F1–F4 folded 2026-11-08 (`docs/for-claude-review/2026-11-08-codex-pipeline103-plan-review.md`); re-review HOLD: F2–F4 closed, F1 remainder (caller wording) → builder → Task 4 (`…-plan-rereview.md`). Round cap reached on the plan; no external review of the code diff |
 | 3 | Build + tests; one refresh run on live; the strict validator's lore `3824b8b0-…` and the 69 unclassified ids reported, not hand-classified | es | done 2026-11-08: tests PASS (shape contract, non-ready, 10 failure paths through injected `main`, zero queries each); live query 149/149 selected, 22/22 formerly-out in, 0/69 dead in, C114 cited `0f829b78` verified 37.6 s (Acc 2, 3). `3824b8b0` = `Lore: danny_horn_deep_dive (Y3C7)`, deleted outside any script; 69 live ids with no policy entry — reported in the NotebookLM change log |
 | 4 | Change log line in `docs/reference/NotebookLM.md`; `lore-ingest` SKILL step trued; `source-search` agent SKILL.md:35 scope line trued to the 2026-10-11 whole-notebook ruling | es | done 2026-11-08: change log + reader row (`30ef28e3a`); builder "Fix it now" on the re-review's F1 remainder → scope wording trued in `source-search` (:35, :37), `deep-dispatch` :74, `city-hall-prep` :131, `sift` :88, `[prior-published]` tag kept; `lore-ingest` :44 checked, no change (its refresh feeds the validator only, and says so) |
 
@@ -100,6 +100,7 @@ Shapes considered:
 
 ## Changelog
 
+- 2026-11-08 — Row to live-observing: Acc 2–4 met; Acc 1 read Sat 2026-11-14 (one search names C115's edition). Code diff had no external review; build added a `selection` stage (→ `not_run`) the design did not name.
 - 2026-11-08 — Task 4: builder chose "Fix it now"; caller scope wording trued in four files, tags unchanged.
 - 2026-11-08 — Task 3 built and proven live (149/149 in scope, C114 cited, verified); codex re-review HOLD on F1 caller wording only → builder.
 - 2026-11-08 — codex plan review HOLD F1–F4 folded (scope class = 10-11 ruling; non-ready fails the call; listing shape contract; map adds 08:00 fallback + MCP); Acceptance 3 precedent corrected, Acceptance 4 widened.

@@ -38,7 +38,8 @@ const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTe
   loadCardAnchor, loadVoiceTexture, renderStanding, renderOwnRecord,
   loadLivedEvents, renderLivedLine, livedFor, recordLivedSpend, selectWakeCitizen, wakeSeedKey,
   lifeTailOf, OWED_RESERVE, chaosOutcomeIndex, owedFrom, owedCandidates, owedFor, owedLivedPrefer, owedShownSet, owedWakesUsed, owedStateFrom, owedJournalLine, owedPageKey, wakeAdmission, owedPageStep, loadOwedRecords, acquireFileLock,
-  SHOW_RESERVE, owedFromShow, showCandidates, showWakesUsed, showMarkSpent } = require('/root/GodWorld/lib/wakePerception'); // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice; pipeline.93 owed; pipeline.95 show
+  SHOW_RESERVE, owedFromShow, showCandidates, showWakesUsed, showMarkSpent } = require('/root/GodWorld/lib/wakePerception');
+const nextChapter = require('/root/GodWorld/lib/nextChapter'); // engine.338: the builder's question → the citizen's MOVE → an Advancement_Intake1 row // engine.48 T10 + T11; loadFamily loop-doctrine 2026-08-04; loadHealthState engine.101 health slice; pipeline.93 owed; pipeline.95 show
 const showRecord = require('./undockedShowRecord'); // pipeline.95 — a pilot's UNDOCKED nights, read from the show's files
 const { selectProvocation } = require('/root/GodWorld/lib/provocationBank'); // T5 varied-provocation bank
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.101 — intake BondTarget (col I) + T4 ripple share one match
@@ -163,7 +164,7 @@ function loadEditionSlice(popId, name, nh, cycle) {
   } catch (e) { return ''; }
 }
 
-function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine, livedLine, showBlock) {
+function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine, livedLine, showBlock, questionText) {
   const disp = dials.disposition(c.cur);
   const who = neighbors.length
     ? `\n\nPeople around you in ${c.nh}: ${neighbors.map((n) => `${n.name}${n.occupation ? ' (' + n.occupation + ')' : ''}`).join(', ')}.`
@@ -214,15 +215,22 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
     neighbors: neighbors, sportsLine: sportsLine, lifeArc: lifeArc,
     textureLine: textureLine, bondsLine: bondsLine, traj: traj, livedLine: livedLine,
   });
+  // engine.338: a wake that carries the builder's question asks THAT — the question is the provocation — and closes on
+  // the one structured MOVE line lib/nextChapter.js reads (never a regex over his prose).
+  if (questionText) {
+    const userQ = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${nextChapter.questionFrame(questionText)}`;
+    return { system, user: userQ, disp, prov: { id: 'question', route: 'owed', text: questionText } };
+  }
   const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${prov.text}\n\nIn 4-5 sentences, think on the page the way you actually would — private, honest, first person. Don't narrate events like a story; just sit with it.`;
   return { system, user, disp, prov };
 }
 
-async function voiceOnce(system, user) {
+const VOICE_TOKENS = 260, VOICE_TOKENS_QUESTION = 340; // engine.338: the MOVE line rides after the reflection
+async function voiceOnce(system, user, maxTokens) {
   const r = await fetch('https://openrouter.ai/api/v1/chat/completions', {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://godworld.local' },
-    body: JSON.stringify({ model: 'deepseek/deepseek-v4-flash-0731', reasoning: { enabled: false }, max_tokens: 260, temperature: 0.85, messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }),
+    body: JSON.stringify({ model: 'deepseek/deepseek-v4-flash-0731', reasoning: { enabled: false }, max_tokens: maxTokens || VOICE_TOKENS, temperature: 0.85, messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }),
   });
   const j = await r.json();
   if (j.error) throw new Error('voice: ' + (j.error.message || JSON.stringify(j.error)));
@@ -233,13 +241,76 @@ async function voiceOnce(system, user) {
 
 // One retry after a short wait: a provider error, timeout or empty reply is usually
 // transient (the 2026-10-12 midday wake lost its citizen to one). A key limit is not.
-async function generateVoice(system, user) {
-  try { return await voiceOnce(system, user); } catch (e) {
+async function generateVoice(system, user, maxTokens) {
+  try { return await voiceOnce(system, user, maxTokens); } catch (e) {
     if (/key limit/i.test(e.message)) throw e;
     logLine('voice retry after: ' + e.message);
     await new Promise((res) => setTimeout(res, 5000));
-    return voiceOnce(system, user);
+    return voiceOnce(system, user, maxTokens);
   }
+}
+
+// engine.338 — the citizen's answer to the builder's question, filed as his next chapter. Reads Business_Ledger (the
+// employer by category / the place he named) and Advancement_Intake1 (the header, the one-row-per-citizen dedup);
+// writes one move-ledger line (output/citizen-moves/moves_c<N>.jsonl, append-only, status lines) and — on a queued
+// move — one Advancement_Intake1 row the next Sunday fire applies through the intake door (engine.338 Task 2c). A dry
+// run resolves and reports, writes nothing. A failed read or write lands as a `held` line and a loud log, never a throw:
+// the page already holds his words; the move waits in the ledger for a re-file.
+const MOVES_DIR = path.join(__dirname, '..', 'output', 'citizen-moves');
+function appendMoveLine(cycle, line) {
+  fs.mkdirSync(MOVES_DIR, { recursive: true });
+  fs.appendFileSync(path.join(MOVES_DIR, 'moves_c' + cycle + '.jsonl'), JSON.stringify(line) + '\n');
+}
+async function fileNextChapter(c, cycle, question, parsed, dry) {
+  const date = new Date().toISOString().slice(0, 10);
+  const base = { cycle, date, pop: c.popId, name: c.name, question };
+  const say = (s) => logLine('next-chapter: ' + s);
+  if (!parsed.move) {
+    say(`${c.popId} answered off the vocabulary (${parsed.reason}) — refused, nothing filed`);
+    if (!dry) appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'refused', reason: parsed.reason }, base)));
+    return { status: 'refused' };
+  }
+  if (parsed.move.role === 'none') {
+    say(`${c.popId} declined — no row`);
+    if (!dry) appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'declined', role: 'none' }, base)));
+    return { status: 'declined' };
+  }
+  let biz = [], adv = [];
+  try {
+    biz = await sheets.getSheetAsObjects('Business_Ledger');
+    adv = await sheets.getSheetData('Advancement_Intake1');
+  } catch (e) {
+    say(`${c.popId} chose ${parsed.move.role} but the sheets could not be read (${e.message}) — held in the ledger, no row`);
+    if (!dry) appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'held', reason: 'read-failed: ' + e.message, role: parsed.move.role, where: parsed.move.where }, base)));
+    return { status: 'held' };
+  }
+  const emp = nextChapter.resolveEmployer(parsed.move.role, parsed.move.where, c, biz);
+  const header = adv[0] || [];
+  const entry = Object.assign({ role: parsed.move.role, where: parsed.move.where, employerBizId: emp.employerBizId }, base);
+  if (nextChapter.hasQueuedRow(adv.slice(1), header, c.first, c.last)) {
+    say(`${c.popId} already has a row on Advancement_Intake1 — one row per citizen; held`);
+    if (!dry) appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'held', reason: 'row-already-queued' }, entry)));
+    return { status: 'held' };
+  }
+  let row;
+  try { row = nextChapter.intakeRowFor(header, { first: c.first, last: c.last, role: parsed.move.role, employerBizId: emp.employerBizId, notes: 'his words: ' + nextChapter.notesFrom(parsed.text) }); }
+  catch (e) {
+    say(`${c.popId}: ${e.message} — held`);
+    if (!dry) appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'held', reason: e.message }, entry)));
+    return { status: 'held' };
+  }
+  const where = emp.named ? `${emp.named.Name} (${emp.employerBizId})` : `${emp.employerBizId} by the ${emp.rule} rule${parsed.move.where ? ' — "' + parsed.move.where + '" is not on Business_Ledger' : ''}`;
+  if (dry) { say(`[dry-run] ${c.popId} would file ${parsed.move.role} / ${nextChapter.POOL[parsed.move.role].clock} / ${where}; row ${JSON.stringify(row.filter(Boolean))}; nothing written`); return { status: 'dry' }; }
+  try {
+    await sheets.appendRows('Advancement_Intake1', [row]);
+  } catch (e) {
+    say(`${c.popId}: Advancement_Intake1 append failed (${e.message}) — held`);
+    appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'held', reason: 'append-failed: ' + e.message }, entry)));
+    return { status: 'held' };
+  }
+  appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'queued' }, entry)));
+  say(`${c.popId} chose ${parsed.move.role} at ${where} — Advancement_Intake1 row filed; the next fire applies it`);
+  return { status: 'queued' };
 }
 
 (async () => {
@@ -324,6 +395,10 @@ async function generateVoice(system, user) {
   const lived = cycle ? livedFor(c.popId, livedList, state, owedAdmit ? owedLivedPrefer(owedAdmit) : undefined) : null;
   const shownOwed = owedShownSet(mineOwed, c.life, lived);
   if (shownOwed.length < mineOwed.length) logLine(`owed not shown this wake, stays owed: ${mineOwed.filter((e) => !shownOwed.includes(e)).map((e) => e.id).join(',')}`);
+  // engine.338 — a shown `question` milestone: the builder's words off his own life line become the wake's question
+  const askedOwed = shownOwed.find((e) => e.milestone === 'question');
+  const question = askedOwed ? nextChapter.questionFromLines(c.lifeLines || [], askedOwed) : '';
+  if (askedOwed && !question) logLine(`next-chapter: ${askedOwed.id} is owed but no [Question] text was found on the life line — asked nothing`);
   const livedLine = lived ? renderLivedLine(lived.event, cycle, lived.rel) : '';
   // pipeline.95 — the pilot's record rides any wake of theirs; an unspent show mark is spent when it is in front of them.
   const myNights = showRecord.nightsFor(nights, c.popId);
@@ -373,7 +448,7 @@ async function generateVoice(system, user) {
   const tensionBlock = openTensions.length
     ? memoryFence.wrap(openTensions.map((t) => t.q).join('\n'), 'citizen-tension:' + c.popId)
     : '';
-  const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine, livedLine, showFenced);
+  const { system, user, disp, prov } = buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bondsLine, familyLine, healthLine, pageMemory, cycle, tensionBlock, editionLine, rippleLine, cardBlock, voiceLine, livedLine, showFenced, question);
 
   // Record what this wake put in front of the citizen, BEFORE they answer. Names come
   // from two shapes: POPIDs we know structurally (neighbours, bonds), and names that
@@ -405,10 +480,15 @@ async function generateVoice(system, user) {
   logLine(`woke ${c.popId} ${c.name} — ${c.occ || 'resident'}, ${c.nh}${c.age ? ', ' + c.age : ''} | eventMag=${c.eventMag} | ${disp} | provocation=${prov.id} route=${prov.route} wake=${WAKE} slot=${picked.slot} seed=${seedKey}${lived ? ' event=' + lived.event.id : ''}${shownOwed.length ? ' owed=' + shownOwed.map((e) => e.id).join(',') : ''}${shownShow.length ? ' show=' + shownShow.map((e) => e.id).join(',') : ''}${showText ? ' show-block=' + myNights.length + ' night(s)' : ''}`);
   if (DRY) console.log('\n--- perception (system prompt) ---\n' + system + '\n----------------------------------');
   if (DRY) console.log('\n--- provocation (user prompt, T5) ---\n' + user + '\n----------------------------------');
-  const reflection = await generateVoice(system, user);
-  console.log('\n--- reflection ---\n' + reflection + '\n------------------');
+  const reply = await generateVoice(system, user, question ? VOICE_TOKENS_QUESTION : VOICE_TOKENS);
+  console.log('\n--- reflection ---\n' + reply + '\n------------------');
+  // engine.338 — the MOVE line is read once and stripped: the page and Reflection_Intake carry his words, not the line
+  const parsedMove = question ? nextChapter.parseMove(reply) : null;
+  const reflection = parsedMove ? parsedMove.text : reply;
+  if (parsedMove) logLine(`next-chapter: ${c.popId} answered "${question.slice(0, 80)}" -> ${parsedMove.move ? 'role=' + parsedMove.move.role + (parsedMove.move.where ? ' where=' + parsedMove.move.where : '') : parsedMove.reason}`);
 
   if (DRY) {
+    if (parsedMove) await fileNextChapter(c, cycle, question, parsedMove, true);
     const tags = await classifier.classifyTripleReflection_(reflection, openTensions.map((t) => t.q));
     logLine(`[dry-run] would classify -> ${JSON.stringify(tags)}; no writes (incl. no tension-state write)`);
     process.exit(0);
@@ -453,6 +533,10 @@ async function generateVoice(system, user) {
   if (step.outcome === 'shown' && receipted.length) logLine(`owed spent: ${receipted.map((e) => e.id).join(',')} (slot=${picked.slot})`);
   if (step.outcome === 'shown-not-saved') logLine('owed: shown line not saved — the pending line already counts this wake as spent');
   logLine(`page ${ptr.tag} (${ptr.created ? 'created' : 'existing'}) <- reflection doc ${appended.id || '?'}`);
+
+  // 2b) engine.338 — his answer, filed: the move ledger line and (on a pool title) the Advancement_Intake1 row. After the
+  //     page landed (his words are on the record either way), before the intake tags. Held, never thrown.
+  if (parsedMove && cycle) await fileNextChapter(c, cycle, question, parsedMove, false);
 
   // 3) B2 tension register (seams Task 3) — voice-memory only: page lines + local index, NEVER
   //    Reflection_Intake (tensions don't drain into dials). Resolution first, then new capture —

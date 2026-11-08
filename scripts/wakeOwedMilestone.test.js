@@ -116,4 +116,22 @@ check('owedCandidates reserves the retiree only when the life line is on the pag
   assert.strictEqual(oc.unshowable.length, 1);
 });
 
+// engine.338 — the builder's question is the second owed milestone; one citizen owed both in a window gets ONE wake carrying both pins
+check('a bare Question row owes a milestone wake pinned on the [Question] line; retirement + question = one wake, two pins', () => {
+  const owed = wp.owedFrom(rec([logRow('POP-00001', 'Retirement', 115), logRow('POP-00001', 'Question', 115, 'Would you coach?')]), 115, {}).owed;
+  assert.deepStrictEqual(owed.map((e) => e.id).sort(), ['milestone:question:POP-00001:c115', 'milestone:retirement:POP-00001:c115']);
+  assert.deepStrictEqual(owed.map((e) => e.milestone).sort(), ['question', 'retirement']);
+  const q = owed.find((e) => e.milestone === 'question');
+  assert.ok(q.pin.re.test('[Question] Would you coach?') && !q.pin.re.test('[Retirement] retired'));
+  const pool = [{ popId: 'POP-00001', eventMag: 8, lifeLines: [wp.simTag(115) + ' — [Retirement] retired from the A\'s', wp.simTag(115) + ' — [Question] Would you coach?'] }];
+  const oc = wp.owedCandidates(pool, owed, {}, [], {});
+  assert.strictEqual(oc.ready.length, 1, 'one wake for the citizen');
+  const mine = wp.owedFor('POP-00001', owed, {});
+  assert.strictEqual(mine.length, 2, 'both events ride it');
+  const life = wp.lifeTailOf(pool[0].lifeLines, mine.map((e) => e.pin));
+  assert.strictEqual(wp.owedShownSet(mine, life, null).length, 2, 'both pins show, both spend');
+  // a piped sports tag is texture, not a question
+  assert.strictEqual(wp.owedFrom(rec([logRow('POP-00001', 'Question|source:sports', 115)]), 115, {}).owed.length, 0);
+});
+
 Promise.all(pending).then(() => console.log('\nwakeOwedMilestone: ' + n + ' checks passed'));

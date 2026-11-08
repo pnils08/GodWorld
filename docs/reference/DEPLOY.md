@@ -67,7 +67,11 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Bench (2026-11-07, engine-sheet):** SANDBOX 1004 **@191 = stage 41** = stage 40 + `runHouseholdEngine.js` and `citizenDialMap.js` at `3184f9f50` (engine.335; manifest `output/engine-sheet/stage41-e335.sha256`), data = live C114 after the final sync — DEPLOY_HISTORY §Current sandbox.
+**Bench (2026-11-07 night, research-build):** SANDBOX 1004 **@194 = stage 42** = stage 41 + `engine94SheetContract.js`, `godWorldEngine2.js`, `applyGameNightMoments.js` at `323311fc4` (engine.338 Task 2a; manifest `output/engine-sheet/stage42-e338a.sha256`), data = live C114 after the final sync — DEPLOY_HISTORY §Current sandbox.
+
+**Live (2026-11-07, night):** PROD = **stage 42** = stage 41 + the three engine.338a files at `323311fc4` (post-career Income by Tier at the sports retirement flip: Tier 1 250,000 · Tier 2 120,000 from World_Config, the `[Retirement]` line names it, Tier 3–4 untouched), web app **@178** — DEPLOY_HISTORY §PROD stage 42. SANDBOX 1004 @194 = stage 42, data = live C114.
+
+**Previous bench (2026-11-07, engine-sheet):** SANDBOX 1004 **@191 = stage 41** = stage 40 + `runHouseholdEngine.js` and `citizenDialMap.js` at `3184f9f50` (engine.335; manifest `output/engine-sheet/stage41-e335.sha256`), data = live C114 after the final sync — DEPLOY_HISTORY §Current sandbox.
 
 **Live (2026-11-07, evening):** PROD = **stage 41** = stage 40 + `runHouseholdEngine.js` and `citizenDialMap.js` at `3184f9f50` (engine.335: a family's game-night line moves the fan dial one step by the night's result, on top of family), web app **@177** — DEPLOY_HISTORY §PROD stage 41. SANDBOX 1004 @191 = stage 41, data = live C114.
 

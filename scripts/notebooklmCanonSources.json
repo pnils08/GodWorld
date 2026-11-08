@@ -96,7 +96,8 @@
     "e3949d83-3e86-4e0b-ab2e-ef93d80816db",
     "edea3f29-3234-4771-a122-fe98e7af129b",
     "10f17db1-9933-4059-94d0-7e1e6c83e277",
-    "f9225116-b4d9-40c1-9d5e-e002fe7b4e0c"
+    "f9225116-b4d9-40c1-9d5e-e002fe7b4e0c",
+    "efc4fe31-6c6f-45a2-ae43-9dc1246c6e93"
   ],
   "decisions": {
     "5a519026-77a2-46c6-87ea-e9dcb5c229d1": {
@@ -831,6 +832,16 @@
       "reason": "Graded lore piece promoted out of quarantine by the rhea gate (pipeline.59); ledger-grounded deep background, not a published edition.",
       "evidence": [
         "Source file: output/lore-quarantine/avery_santana_deep_dive.md",
+        "Cycle placement: Y3C10",
+        "Verdict: pass (rhea)"
+      ]
+    },
+    "efc4fe31-6c6f-45a2-ae43-9dc1246c6e93": {
+      "title": "Lore: lore_c114_john-ellis-deep-dive (Y3C10)",
+      "classification": "lore",
+      "reason": "Graded lore piece promoted out of quarantine by the rhea gate (pipeline.59); ledger-grounded deep background, not a published edition.",
+      "evidence": [
+        "Source file: output/lore-quarantine/lore_c114_john-ellis-deep-dive.md",
         "Cycle placement: Y3C10",
         "Verdict: pass (rhea)"
       ]

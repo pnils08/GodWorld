@@ -1,15 +1,15 @@
 {
   "artifactClass": "CODEX_NOTEBOOKLM_SOURCE_INVENTORY",
   "canonStatus": "NOT_CANON",
-  "generatedAt": "2026-11-08T08:45:18.474Z",
+  "generatedAt": "2026-11-08T17:28:13.620Z",
   "notebookId": "417e2d29-4167-420f-a9cc-76fb6b2b7de2",
   "notebookName": "GodWorld",
-  "total": 153,
+  "total": 154,
   "counts": {
     "publication_candidate": 43,
     "nonpublication_candidate": 0,
     "exclude_candidate": 1,
-    "needs_review": 109
+    "needs_review": 110
   },
   "sources": [
     {
@@ -540,6 +540,13 @@
     {
       "id": "32e10420-f828-4f5c-8b7a-bdf109c3f508",
       "title": "Lore: hal_richmond_deep_dive (Y3C3)",
+      "type": "generated_text",
+      "reviewBucket": "needs_review",
+      "reviewReason": "title alone does not establish publication or exclusion status"
+    },
+    {
+      "id": "efc4fe31-6c6f-45a2-ae43-9dc1246c6e93",
+      "title": "Lore: lore_c114_john-ellis-deep-dive (Y3C10)",
       "type": "generated_text",
       "reviewBucket": "needs_review",
       "reviewReason": "title alone does not establish publication or exclusion status"

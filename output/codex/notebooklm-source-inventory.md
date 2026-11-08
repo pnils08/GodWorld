@@ -4,8 +4,8 @@ Artifact class: CODEX_DIAGNOSTIC
 Canon status: NOT CANON. Review buckets are title-based suggestions only.
 Notebook: GodWorld
 Notebook ID: 417e2d29-4167-420f-a9cc-76fb6b2b7de2
-Generated: 2026-11-08T08:45:18.474Z
-Total sources: 153
+Generated: 2026-11-08T17:28:13.620Z
+Total sources: 154
 
 ## Review counts
 
@@ -14,7 +14,7 @@ Total sources: 153
 | `publication_candidate` | 43 |
 | `nonpublication_candidate` | 0 |
 | `exclude_candidate` | 1 |
-| `needs_review` | 109 |
+| `needs_review` | 110 |
 
 ## Sources
 
@@ -96,6 +96,7 @@ Total sources: 153
 | Lore: deep_dive_henry_rivas (Y3C8) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `e3949d83-3e86-4e0b-ab2e-ef93d80816db` |
 | Lore: deep_dive_isley_kelley (Y3C6) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `fcca44cc-c930-4429-a807-668f3b8c24db` |
 | Lore: hal_richmond_deep_dive (Y3C3) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `32e10420-f828-4f5c-8b7a-bdf109c3f508` |
+| Lore: lore_c114_john-ellis-deep-dive (Y3C10) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `efc4fe31-6c6f-45a2-ae43-9dc1246c6e93` |
 | Lore: martin-richards-deep-dive (Y3C10) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `10f17db1-9933-4059-94d0-7e1e6c83e277` |
 | Louis Cross FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `80e3d1ed-baf3-4b01-bf19-35dc86bcf2c0` |
 | Mariano Rosales FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `b25b8b21-f437-4232-8d79-9a357e4bef0a` |

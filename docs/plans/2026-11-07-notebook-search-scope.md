@@ -40,7 +40,8 @@ Live read 2026-11-08: `nlm source list` 149 sources, all status 2 (ready), 3.4 s
 | Reader | Runs | Scope it passes | State |
 |---|---|---|---|
 | `notebooklmCanonSearch.js` | manual only: `source-search` agent, `/sift`, `/deep-dispatch`, `/city-hall-prep`, `notebooklmHeadlessEval.js`. No cron calls it | inventory file ids (:103-122, :407) | **stale** — the only reader on the inventory |
-| `notebooklmDailyNews.js:1105-1131` archive continuity | cron 08:00 daily | latest 2 editions from the **policy** (`continuitySourceIds` :762, `cycle_pulse_cN.txt` evidence) | current: policy holds C107–C114 (Saturday run records each edition) |
+| `notebooklmDailyNews.js:1105-1131` archive continuity | cron 08:00 daily | latest 2 editions from the **policy** (`continuitySourceIds` :762, `cycle_pulse_cN.txt` evidence); whole notebook when the policy is unreadable or names no edition (:1106-1111) | current: policy holds C107–C114 (Saturday run records each edition) |
+| MCP server `notebooklm` (`mcp__notebooklm__*`) | interactive sessions (`docs/reference/NotebookLM.md:46`) | whatever the session passes | not scope-bound |
 | `cron-desk-run.js:2479` `nlmCanonBrief` | non-persona desk wakes only (:2205 gate, pipeline.75); every scheduled seat is a persona seat | whole notebook, no `--source-ids` | dormant on schedule; 1 output ever (C110 business benchmark) |
 | `notebooklmPush.js:279` summary query | after a push with `--summary` | whole notebook | not scope-bound |
 | `generateAndDeliverEditionAudio` | Saturday run, `notebooklmPush --audio` | the new edition's source id | not scope-bound |
@@ -70,10 +71,12 @@ Shapes considered:
 
 **Shape of the change, `scripts/notebooklmCanonSearch.js` only:**
 
-- `main` drops `readJson(INVENTORY_PATH)`. New stage `source_list` runs one `nlm source list <notebookId> --json` (same spawn shape as `runQuery`; 60 s timeout) before `selectSourceIds`. `INVENTORY_PATH` constant removed.
-- `openPolicyFromInventory(inventory, policy)` becomes `openPolicyFromSources(sources, policy)`: same merge (every live id allowed in both classes, `excludedSourceIds` empty, policy decisions kept, titles filled for undecided ids). The notebook-id check moves to `config.notebookId === policy.notebookId` (already at :408); the listing is fetched for `config.notebookId`, so the separate inventory-id check has nothing to compare.
-- **Status filter:** scope = sources with `status === 2` (ready, `notebooklm_tools/core/sources.py:88-97`). Any other status is left out and named on stderr (id + title + status), never silently. Rationale: a processing source cannot answer; a failed one (3) should not ride every query's id list. Today 149/149 are status 2.
-- **Fail closed:** a failed, empty, or non-JSON listing throws. No fallback to any file. `classifyResultStatus` gains `source_list` → `auth_failure` when the auth regex matches, else `no_result` (today a pre-query error classifies as `not_run` / `citation_failure`).
+- **Scope class is unchanged: the wrapper is the whole-notebook canon search** (builder ruling 2026-10-11, `ff437d6fb`: "NotebookLM cannot invent canon, every source in it is canon"; both classes = the whole notebook since then). `--source-class` stays accepted and, as today, does not narrow. The source-search agent's line "the default is the reviewed published-only scope" (`.claude/agents/source-search/SKILL.md:35`) predates the ruling; Task 4 trues it to the ruling. Not re-decided here (codex F1).
+- `main` drops `readJson(INVENTORY_PATH)`. `stage = 'source_list'` is set **before** the spawn; then one `nlm source list <notebookId> --json` (same spawn shape as `runQuery`; 60 s timeout), JSON parse and `normalizeLiveSources` all run under that stage, before `selectSourceIds`. `INVENTORY_PATH` constant removed.
+- **Listing shape contract (codex F3):** `normalizeLiveSources` validates the whole array before any filter or selection — an array of length ≥ 1; each item an object with a non-empty id (`id` or `source_id`), a non-empty title (`title` or `name`), an integer `status`; ids unique. Any breach throws; nothing is queried.
+- `openPolicyFromInventory(inventory, policy)` becomes `openPolicyFromSources(sources, policy)`: same merge (every live id allowed in both classes, `excludedSourceIds` empty, policy decisions kept, titles filled for undecided ids). The notebook-id check stays `config.notebookId === policy.notebookId` (:408); the listing is fetched for `config.notebookId`.
+- **Non-ready sources fail the call (codex F2):** ready = `status === 2` (`notebooklm_tools/core/sources.py:88-92`: 1 processing, 2 ready, 3 error, 5 preparing). Default scope: any listed source not ready fails the call before the query, naming id, title and status — no partial scope is ever logged `verified`. Explicit `--source-ids`: each requested id must be live and ready, else the call fails naming it (a deleted id fails as not in the notebook); a non-ready source outside the request does not block. Today 149/149 are status 2.
+- **Fail closed:** a failed spawn, non-zero exit, non-JSON or shape-invalid listing throws. No fallback to any file. `classifyResultStatus` gains `source_list` → `auth_failure` when the auth regex matches, else `no_result` (today a pre-query error classifies as `not_run` / `citation_failure`).
 - **Injectable:** `main(argv, deps)` with `deps.listSources` / `deps.runQuery` defaulting to the spawn versions, so tests run without `nlm`. Exports gain `openPolicyFromSources`, `normalizeLiveSources`, `classifyResultStatus` stays.
 - Untouched: `validateQueryResponse` (sources used / cited must be in the selected scope — now the live ready list), the retrieval log record, `--source-ids` / `--source-class` arguments, `notebooklmHeadlessEval.js` (passes explicit `--source-ids`, checked against the live list).
 
@@ -84,19 +87,20 @@ Shapes considered:
 | # | Task | Owner | Status |
 |---|------|-------|--------|
 | 1 | Reader map: every path that queries the permanent notebook (cron and manual) and what scope it uses; every path that adds or deletes a source | es | done 2026-11-08 (§Reader map) |
-| 2 | Design pick from Task 1 (shape 1, 2 or both), advisor, one codex review | es | shape 2 picked, advisor folded 2026-11-08; codex review sent |
+| 2 | Design pick from Task 1 (shape 1, 2 or both), advisor, one codex review | es | shape 2 picked, advisor folded; codex HOLD F1–F4 folded 2026-11-08 (`docs/for-claude-review/2026-11-08-codex-pipeline103-plan-review.md`); re-review sent |
 | 3 | Build + tests; one refresh run on live; the strict validator's lore `3824b8b0-…` and the 69 unclassified ids reported, not hand-classified | es | not started |
-| 4 | Change log line in `docs/reference/NotebookLM.md`; `lore-ingest` SKILL step trued | es | not started |
+| 4 | Change log line in `docs/reference/NotebookLM.md`; `lore-ingest` SKILL step trued; `source-search` agent SKILL.md:35 scope line trued to the 2026-10-11 whole-notebook ruling | es | not started |
 
 ## Acceptance
 
 1. An add reaches scope with no hand step — proven by the 22 sources added since 2026-10-18 (no inventory refresh since) all sitting in the rebuilt search's scope on readback, and confirmed at the next real add (C115's Saturday edition) by one scoped query naming it. No test source goes into the permanent notebook: every source in it is canon (builder ruling, `notebooklmCanonSearch.js:100-102`).
 2. The 22 sources above are in scope and the 69 dead ids are not — proven by readback of the scope against `nlm source list`.
-3. A query that cites C114 answers instead of failing closed — proven by one live query on the exact candidate (149 ids on one `--source-ids` has never run; this is the end-to-end proof).
-4. A failed listing fails closed with `auth_failure` or `no_result` in the retrieval log, and no file is read in its place — proven by test.
+3. A query that cites C114 answers instead of failing closed — proven by one live query on the exact candidate. Precedent for the id count: the retrieval log holds verified calls on 196 ids (2026-10-19, 33–41 s) and `ff437d6fb` on 165; the live query on the candidate is still the gate.
+4. Every listing failure — spawn error, non-zero exit, non-JSON, shape breach (missing / duplicate id, missing title, non-integer status, empty array), a non-ready source in default scope, a non-ready or deleted requested id — fails with `auth_failure` or `no_result` in the retrieval log, zero query calls, and no file read in its place — proven by tests through an injected `main`. The headless eval's explicit-id path fails on a deleted id rather than substituting.
 
 ## Changelog
 
+- 2026-11-08 — codex plan review HOLD F1–F4 folded (scope class = 10-11 ruling; non-ready fails the call; listing shape contract; map adds 08:00 fallback + MCP); Acceptance 3 precedent corrected, Acceptance 4 widened.
 - 2026-11-08 — Task 2 design: live listing on every search (shape 2), status-2 filter, fail closed, injectable; Acceptance 1 rewritten so no test source enters the permanent notebook; Acceptance 4 added.
 - 2026-11-08 — Task 1 reader map: the canon search is the only reader on the inventory and runs manual-only; the 08:00 cron scopes by the current policy; the out-of-scope adds and all 69 deletions came through hand paths with no script to hook.
 - 2026-11-07 — filed from the builder's words after the C114 notebook swap surfaced the stale inventory; current state read live (22 out of scope, 69 dead). Stub; design at pickup.

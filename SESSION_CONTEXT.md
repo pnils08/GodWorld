@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** engine.334 next (story seeds sum unlike numbers) → read its plan. Queued: pipeline.100, governance.57, engine.325. Open: SSH; INIT-010; G-ES9; memory save of G-ES12 needs the builder's unlock.
 
-**NEXT[research-build]:** engine.338 LIVE @179 — live-observing; when its §2 row and engine.333's flip, 333 → done-pending-archive. Builder: re-run Setup Sports Feed Validation (`question` dropdown); the first question row is his (Task 6). Queue: engine.336 (own plan file first). research.32, civic.47 at C115. To do: archiveFoldedReviews. Open: A2.
+**NEXT[research-build]:** engine.339 (builder 11-08, high priority: how kids are minted) → Task 1 read-before, then his calls at 1b. engine.338 live-observing; after the 333/338 reads, 333 → done-pending-archive. Builder: re-run Setup Sports Feed Validation. Queue: engine.336. research.32, civic.47 at C115. Open: A2.

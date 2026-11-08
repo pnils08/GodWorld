@@ -1,0 +1,81 @@
+{
+  "file": "output/lore-quarantine/arturo_ramos_deep_dive.md",
+  "verdict": "FAIL",
+  "recommendedTag": "Y3C10",
+  "failures": [
+    {
+      "quote": "twenty-two-year-old phenom Travis Coles pays five-figure monthly rents to look down on Broadway from a high-rise tower",
+      "line": 11,
+      "claimType": "number",
+      "ledgerSays": "Travis Coles (POP-00533), household HH-0109-F009, Downtown, solo, HousingType rented, MonthlyRent 3024 (four figures, not five). His age (22, BirthYear 2020), neighborhood (Downtown) and $24,000,000 income do match.",
+      "source": "output/beats/Household_Ledger.jsonl row HH-0109-F009; node scripts/queryLedger.js citizen POP-00533 (householdId HH-0109-F009)"
+    }
+  ],
+  "conflicts": [
+    {
+      "quote": "anchored the Oakland Athletics through a fourteen-win campaign in Y2C48 ... You win fourteen games and drop one",
+      "line": 7,
+      "ledgerSays": "Oakland_Sports_Feed stats: Ramos 20-1 (2.50 ERA) at c102, final 23-1, 2.41 ERA, 212.2 IP (c105/c106/c114 world summaries). The piece's Y2C52 scene (lines 19-21) sits at c104 with 2 games left, when he was already past 20 wins.",
+      "publishedSays": "Edition c100 (Y2C48): 'fourteen wins against one loss', 14-1, 2.32 ERA. The c100 mid-season mark is correctly anchored to Y2C48, but the piece presents it as a full 'fourteen-win campaign'.",
+      "sources": "editions/cycle_pulse_edition_100.txt lines 22, 346; output/world_summary_c103.md, c106.md, c114.md Oakland_Sports_Feed Stats lines"
+    },
+    {
+      "quote": "In Y3C6, after an authoritative outing, Ramos walked back up his front path ... \"I was flying open in the fifth against Seattle.\"",
+      "line": 31,
+      "ledgerSays": "Y3C6 = c110 = World Series G4 (Rivas CG at PHI) and G5 (Ellis, title clincher at PHI). Ramos's postseason starts are ALCS G2 and WS G1, both c109 = Y3C5; WS G1 was a 'shaky start' (6 IP, 3 ER). Postseason opponents were NYY, MIN, PHI. No Seattle/Mariners hit in any world summary c104-c114. NOT FULLY CHECKED: I could not rule out a Ramos relief appearance in c110.",
+      "publishedSays": "No published piece places a Ramos start against Seattle. The porch gift itself is correctly placed (Ramos LifeHistory Y3C6: 'came home to find the neighbors had left a case of something cold on the porch'). The opponent sits inside a quote, so I called this a conflict for the gate owner, not a failure.",
+      "sources": "output/world_summary_c109.md lines 221-224, 251-252, 264-267; output/world_summary_c110.md lines 239-246; grep seattle|mariners output/world_summary_c104-c114.md (0 hits)"
+    },
+    {
+      "quote": "an $8.1 million annual contract",
+      "line": 7,
+      "ledgerSays": "Ledger Income 8,100,000 and Oakland_Sports_Feed Stats '$8.1M' match the piece.",
+      "publishedSays": "Ramos citizenBio and TrueSource card say $8.2M annually (2040-2043). Piece matches the ledger; the card/bio differ by $100K. Reported only.",
+      "sources": "output/simulation_ledger_snapshot.jsonl POP-00025 Income and CitizenBio; archive/non-articles/data/Arturo Ramos _ TrueSource DataPage v1.0.txt; output/world_summary_c114.md line 231"
+    },
+    {
+      "quote": "net worth $2,989,076 ... net worth $219,874 ... net worth $25,004,092",
+      "line": 85,
+      "ledgerSays": "Snapshot NetWorth now: Ramos 2,997,128; Lend 219,934; Ellis 25,004,745. The Lend and Ellis figures in the usage log match Household_Ledger HouseholdSavings exactly (HH-0084-266 = 219874; HH-0104-F003 = 25004092), so they were true ledger values one cycle earlier. Ramos has no household row; his 2,989,076 appears nowhere in current data. Reads as one-cycle drift in the usage-log metadata, not the story prose. NOT counted as a failure; the gate owner can overrule.",
+      "publishedSays": "n/a (usage-log metadata only)",
+      "sources": "output/simulation_ledger_snapshot.jsonl POP-00025/00358/00033; output/beats/Household_Ledger.jsonl"
+    },
+    {
+      "quote": "a house he owns outright",
+      "line": 65,
+      "ledgerSays": "not checked beyond: Ramos has no HouseholdId and no Household_Ledger row, so ownership cannot be verified or contradicted. Every other citizen checked rents (Lend $2,150, Ellis $2,150, Coles $3,024, Dillon $4,008). Same for 'bought a single-story house' (line 23).",
+      "publishedSays": "not checked",
+      "sources": "output/simulation_ledger_snapshot.jsonl POP-00025 HouseholdId blank; output/beats/Household_Ledger.jsonl (no POP-00025 row)"
+    },
+    {
+      "quote": "the morning bell at St. Ansgar's",
+      "line": 5,
+      "ledgerSays": "not checked beyond: Faith_Organizations lists 16 orgs and none is St. Ansgar's or in Laurel; no hit anywhere in output/archive/editions/docs/canon. Absence is not a contradiction.",
+      "publishedSays": "not checked",
+      "sources": "output/beats/Faith_Organizations.jsonl; grep -ri ansgar output archive docs/canon editions (0 hits)"
+    },
+    {
+      "quote": "the rear wall of the Laurel Recreation Center",
+      "line": 43,
+      "ledgerSays": "not checked beyond: the Ramos and Lend LifeHistory lines say only 'recreation center wall' (Y3C9 graffiti, five neighbors), no Laurel-named venue anywhere in the beats tabs. The event itself and its cycle match.",
+      "publishedSays": "not checked",
+      "sources": "output/simulation_ledger_snapshot.jsonl POP-00025 LifeHistory Y3C9; grep 'Laurel Rec' (0 venue hits)"
+    },
+    {
+      "quote": "whether the city's small-business utility rebate was ever going to actually disburse",
+      "line": 51,
+      "ledgerSays": "not checked beyond: no such program in Initiative_Tracker (INIT-001 to INIT-014); sits in dialogue and is not a named initiative.",
+      "publishedSays": "not checked",
+      "sources": "output/beats/Initiative_Tracker.jsonl; grep 'utility rebate' (0 hits)"
+    },
+    {
+      "quote": "None of them mentioned the box score from the night before.",
+      "line": 35,
+      "ledgerSays": "not checked in detail: Y3C7 = c111 and the A's are in the off-season (World Series won c110, parade c111), so there is no A's box score the night before. Oaks were in early-season. Dialogue/narration texture; the clinic line and three HS classmates for Y3C7 match the ledger.",
+      "publishedSays": "not checked",
+      "sources": "output/world_summary_c111.md line 6 (Sports season: A's off-season, Oaks early-season)"
+    }
+  ],
+  "verifiedClaims": 44,
+  "notes": "FAIL on one hard number: Coles's rent is $3,024/month in Household_Ledger, not five figures (line 11). All else checked verifies: ages 26/40/25/22/37/46/48 (2042 minus BirthYear), neighborhoods, roles, incomes ($8.1M, $91.3K, $780K, $24M, $13M, $7.6M, $30M), Lend's 4 children and 19.3 years, Ramos single/no children/Puerto Rico origin, 11 K in 8 IP spring line, 1.93 ERA at Y3C4 (c108 edition), Y3C6 porch gift, Y3C7 bench project and clinic line, Y3C8 Temescal renderings, Y3C9 graffiti plus the mutual Ramos-Lend Bond (BOND-5FA21B7A, C113), Paulson's Y3C8 move, Dillon Clinic Y3C5, Bayline 6 = BIZ-00183, Baylight $2.1B; all cycle tags well-formed (no m over 52). Placement Y3C10 (c114): the present-tense porch scene follows the Y3C9 wall event ('recent weeks'); Y3C9 is the only alternative. Unchecked soft items: the off-season setting ('As the season grinds forward'), 'sinker'/'changeup' vs TrueSource repertoire (4-seam, slider, curveball), 'entering his third full season' vs 2039 debut, and 'mantle ... passed ... to Arturo Ramos' vs Coles winning the Cy Young. Injection scan out of scope for this gate."
+}

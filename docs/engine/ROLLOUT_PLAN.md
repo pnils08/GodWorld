@@ -22,6 +22,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| pipeline.106 | Lore writer: Gemini 3.8 thinking high, calendar, subject dossier (card, household, page), every canon source; Ellis passed. Read Fri 2026-11-13: Osei run | live-observing | engine-sheet | [[../plans/2026-08-15-lore-writer]] |
 | pipeline.104 | Saturday Drive drops (builder 11-08): edition to Y-003, audio to Weekly_News; built, C114 uploaded. Read Sat 2026-11-14: C115 edition + audio in their folders | live-observing | engine-sheet | [[../reference/NotebookLM]] §Change log |
 | engine.333 | Feed triggers to life history: retirement leaves the sports layer, Now: bio line, owed wake, injury bed. PROD @175. Task 5 = the C115 live read, Sun 2026-11-08 | live-observing | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] |
 | engine.338 | A former player's next chapter: question, intake door, pool, his word at the wake. PROD @179. C115 Sun 2026-11-08 read; Task 6 waits on a question row | live-observing | research-build | [[../plans/2026-11-07-former-player-next-chapter]] |
@@ -76,7 +77,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 |---|------|-------|----------|---------|
 | pipeline.101 | Daily news: evening write wake date fixed (builder 11-04), NotebookLM page written. Next: confirm the 11-04 18:15 wake writes and gates | in-progress | research-build | [[../reference/NotebookLM]] §Change log |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
-| pipeline.106 | Lore writer (builder 11-08): Gemini 3.8 Flash, thinking high, every canon source; rewrite one failed piece + Mayor Santana, graded | in-progress | engine-sheet | [[../plans/2026-08-15-lore-writer]] |
 
 ## 4. Queue — ruled, not started (ready)
 

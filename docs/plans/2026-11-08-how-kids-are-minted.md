@@ -26,6 +26,10 @@ On Varek, 2026-11-08 (verbatim): "He has no kids" — then, as research-build mo
 
 Closing words, 2026-11-08 (verbatim): "532 citizens were, none have kids, half the population is a corrupted cron with no memory of a birth, no opposite sex known to be the other parent, it's not only the kids it's the fact it makes zero sense and kills the idea of this is a persistent sim, your patching shit on them when the rule is you never touch them, and every search so far is you touched them and every repair is you touch them, it's literally the hard rule to never. So you are killing them not honoring my project and worse the build makes no sense." Standing: no row is touched by any hand or script; the only thing that changes is engine code going forward (Task 2 a–d). The April backfill is the event; it is recorded here as what happened.
 
+**The system, in the builder's words (2026-11-08 evening, verbatim):** "Bonds create marriage and kids are a lottery chance for a married couple to have a kid, there are zero other ways a kid enters the sim in a family, kids can mint themselves and the household has its own lottery, no one's name ever changes unless it's a marriage and/or off ledger citizen is minted, this is the system, the problem seems is you … let a one time script run continuously."
+
+Checked against the code: the April one-time script's dice (`deriveNumChildren`, `deriveMaritalStatus`) also live in `lib/citizenDerivation.js` / `utilities/citizenDerivation.js` and run at the arrival door every Cycle (processAdvancementIntake.js:1174 via `deriveCitizenProfile_`). 136 of the 532 counts replay exactly from that door's seed. The builder's statement is correct: the one-time script's logic runs continuously.
+
 The first line is the duet's proposed repair of the parents' BirthYears — an authoring call on live rows, the builder's; this row does not make it. The row finds why the engine wrote parents aged 6 and 5 at a birth, and stops it.
 
 ## Read-before — the evidence as it sits (snapshot 2026-11-08, live C114)
@@ -126,3 +130,4 @@ No engine writer changes an on-ledger row's `Last`; every `Last` write is on a n
 - 2026-11-08 (research-build, S642) — "532 cleared" withdrawn on the builder's words (a ruling on a mechanism is not a licence to rewrite rows); the cut is forward-only, no ledger row touched; Task 2 scoped a–d.
 - 2026-11-08 (research-build, S642) — Varek's count traced to the 2026-04-28 lifecycle backfill script (rolled married + 1 child from his POPID); the die's reach on the April ledger = 602 rows. Builder's words recorded. What is done with the rolled counts is his, unasked.
 - 2026-11-08 (research-build, S642) — every "RULED" marker struck on the builder's word ("I never once said 18 should be a floor or approved any of this"); calls 1–4 all open; no code is approved.
+- 2026-11-08 (research-build, S642) — the builder stated the system verbatim (bonds → marriage; kids only by a married couple's birth lottery or self-mint into a household; names change only at marriage or an off-ledger mint); confirmed the April dice run every Cycle at the arrival door.

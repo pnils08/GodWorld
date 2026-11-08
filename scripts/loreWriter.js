@@ -19,6 +19,7 @@ require('../lib/env'); // loads /root/.config/godworld/.env — every other GodW
 const GODWORLD_ROOT = '/root/GodWorld';
 const QUARANTINE_DIR = path.join(GODWORLD_ROOT, 'output', 'lore-quarantine');
 const MAX_ITERATIONS = 50;
+const WRITE_WARNING_TURNS = 10;
 // pipeline.106 (builder 2026-11-08): gemini-3.8-flash (id confirmed from the API's model
 // list 2026-11-08) with thinking at high — the upstream gemini-writer runs thinking_level
 // HIGH; this port never set it. Both configurable.
@@ -36,7 +37,7 @@ const SYSTEM_PROMPT = "You are the GodWorld Lore Writer, responsible for generat
 "   Interiority, sensory detail, dialogue, private motive, weather, and atmosphere are freely invented by you.\n" +
 "3. THE RULE OF LOOKUP:\n" +
 "   You MUST call `query_ledger` for EVERY named person before writing about them. Do not invent citizens. Query for real ones.\n" +
-"   Everything already established about a person, place or event is in the canon: `search_articles` (the city's records on disk: every edition, the Richmond Archive, player TrueSource cards, world summaries, the ledger), `canon_recall` (the Bay Tribune's published canon archive) and `notebook_search` (the canon notebook, slow, a few calls per run). Search before you write a past event, a career fact, a birthplace or a game.\n" +
+"   Everything already established about a person, place or event is in the canon: `search_articles` (the city's records on disk: every edition, the Richmond Archive, player TrueSource cards, world summaries, the ledger), `canon_recall` (the Bay Tribune's published canon archive) and `notebook_search` (the canon notebook, slow, a few calls per run). `read_source` opens one file a search returned, whole. Search before you write a past event, a career fact, a birthplace or a game; then write -- research has a turn budget.\n" +
 "4. CANON AND TONE:\n" +
 "   - Prosperity-era Oakland tone. No sci-fi tech (e.g. \"freight-hoverers\"). No rain-soaked noir decay.\n" +
 "   - Cycle references must strictly use Y<n>C<m> format (e.g., Y2C51). Do not invent bare cycle numbers.\n" +
@@ -91,6 +92,18 @@ const TOOLS = [
         query: { type: 'STRING', description: 'A person, place or event' }
       },
       required: ['query']
+    }
+  },
+  {
+    name: 'read_source',
+    description: 'Read one canon file whole, by the path search_articles printed (e.g. "editions/cycle_pulse_edition_101.txt" or "archive/non-articles/data/Martin Richards DataPage v1.0.txt"). Use it instead of searching phrases to read more of an article. Long files come in pages; pass offset to continue.',
+    parameters: {
+      type: 'OBJECT',
+      properties: {
+        path: { type: 'STRING', description: 'Repo-relative path from a search_articles result' },
+        offset: { type: 'NUMBER', description: 'Character offset to start from (default 0)' }
+      },
+      required: ['path']
     }
   },
   {
@@ -209,6 +222,26 @@ async function canonRecall(query) {
   }
   if (!out.length) return 'No published piece came back for "' + q + '". That is not proof the canon is silent; do not write that it is.';
   return out.join('\n');
+}
+
+// One canon file whole, in pages. Only a path the crons' canon search would serve
+// (lib/mags isCanonSearchPath), resolved inside the repo; never a symlink out.
+const READ_PAGE_CHARS = 20000;
+function readSource(relPath, offset) {
+  const rel = path.normalize(String(relPath || '').trim()).replace(/^\/+/, '');
+  if (!rel || rel.startsWith('..') || !require('../lib/mags').isCanonSearchPath(rel)) {
+    return 'read_source refused: "' + relPath + '" is not a canon path a search returned.';
+  }
+  const full = path.join(GODWORLD_ROOT, rel);
+  if (!fs.existsSync(full) || fs.lstatSync(full).isSymbolicLink() || !fs.statSync(full).isFile()) {
+    return 'read_source: no such file: ' + rel;
+  }
+  const text = fs.readFileSync(full, 'utf-8');
+  const start = Math.max(0, Math.floor(Number(offset) || 0));
+  const page = text.slice(start, start + READ_PAGE_CHARS);
+  const end = start + page.length;
+  return '[' + rel + ' chars ' + start + '-' + end + ' of ' + text.length + ']\n' + page +
+    (end < text.length ? '\n[more: read_source with offset ' + end + ']' : '');
 }
 
 // The canon notebook through the read-only, fail-closed wrapper (whole-notebook scope).
@@ -413,6 +446,10 @@ async function main() {
             resultData = await canonRecall(call.args.query);
             break;
           }
+          case 'read_source': {
+            resultData = readSource(call.args.path, call.args.offset);
+            break;
+          }
           case 'notebook_search': {
             if (notebookCalls >= NOTEBOOK_CALLS_PER_RUN) {
               resultData = 'notebook_search limit reached (' + NOTEBOOK_CALLS_PER_RUN + ' per run); use search_articles or canon_recall.';
@@ -444,6 +481,12 @@ async function main() {
         console.error(resultData);
       }
 
+      // pipeline.106: the 2026-11-08 Richards rerun researched all 50 turns and wrote
+      // nothing. In the last turns every tool result carries the budget left.
+      const turnsLeft = MAX_ITERATIONS - iterations;
+      if (!wroteFile && turnsLeft <= WRITE_WARNING_TURNS) {
+        resultData = String(resultData) + '\n\n[TURN BUDGET: ' + turnsLeft + ' turn(s) left. Stop researching and call write_file with the complete piece now.]';
+      }
       functionResponses.push({
         functionResponse: {
           name: call.name,
@@ -479,4 +522,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { slugify, FALLBACK_MIN_CHARS, clampToQuarantine, writeQuarantineFile, canonRecall, notebookSearch, QUARANTINE_DIR, GEMINI_MODEL, THINKING_LEVEL, TOOLS };
+module.exports = { slugify, FALLBACK_MIN_CHARS, clampToQuarantine, writeQuarantineFile, canonRecall, notebookSearch, readSource, QUARANTINE_DIR, GEMINI_MODEL, THINKING_LEVEL, TOOLS };

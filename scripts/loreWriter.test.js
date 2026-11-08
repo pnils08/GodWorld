@@ -58,7 +58,22 @@ try {
 if (!process.env.LOREWRITER_MODEL) assert.strictEqual(GEMINI_MODEL, 'gemini-3.8-flash');
 if (!process.env.LOREWRITER_THINKING) assert.strictEqual(THINKING_LEVEL, 'high');
 const toolNames = TOOLS.map((t) => t.name);
-['query_ledger', 'read_canon', 'search_articles', 'canon_recall', 'notebook_search', 'write_file']
+['query_ledger', 'read_canon', 'search_articles', 'canon_recall', 'read_source', 'notebook_search', 'write_file']
   .forEach((n) => assert.ok(toolNames.includes(n), 'tool registered: ' + n));
+
+// pipeline.106: read_source opens canon shelves only, in pages.
+const { readSource } = require('./loreWriter');
+assert.match(readSource('../../etc/passwd'), /refused/);
+assert.match(readSource('/etc/passwd'), /refused/);
+assert.match(readSource('.env'), /refused/);
+assert.match(readSource('output/lore-quarantine/danny_horn_deep_dive.md'), /refused/, 'quarantine drafts are not canon');
+assert.match(readSource('editions/NONCANON_TEST-missing.txt'), /no such file/);
+const editionFile = fs.readdirSync(path.join(__dirname, '..', 'editions')).find((f) => /^cycle_pulse_c\d+\.txt$/.test(f));
+if (editionFile) {
+  const first = readSource('editions/' + editionFile);
+  assert.match(first, new RegExp('^\\[editions/' + editionFile.replace('.', '\\.') + ' chars 0-'));
+  const more = /\[more: read_source with offset (\d+)\]/.exec(first);
+  if (more) assert.match(readSource('editions/' + editionFile, Number(more[1])), new RegExp('chars ' + more[1] + '-'));
+}
 
 console.log('loreWriter tests: PASS');

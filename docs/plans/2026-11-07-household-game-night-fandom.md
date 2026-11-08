@@ -45,8 +45,8 @@ pointers:
 | 1 | Build: writer + dial map + tests (`runHouseholdEngine.js`, `citizenDialMap.js`, `householdEngine.t4.test.js`, `citizenDials.test.js`); `npm test`; STUB_MAP check | es | done `3184f9f50` |
 | 2 | Codex review of the exact candidate (one review, at most one re-review) | codex | done — SHIP-WITH-FIXES, plan-only fixes folded |
 | 3 | Bench on SANDBOX 1004: stage 41 = PROD stage 40 + the two engine files; sync from live; a seeded game week; fires until a signed household line lands (cap 3); read the line and the citizen's fold | es | done — two runs @190/@191, a loss night and a win night each, PASS, 0 Engine_Errors (DEPLOY_HISTORY §Current sandbox) |
-| 4 | PROD push + 16-minute watch; DEPLOY_HISTORY §PROD | es | not started |
-| 5 | Live read: the first live Cycle with a signed household game-night line | es | not started |
+| 4 | PROD push + 16-minute watch; DEPLOY_HISTORY §PROD | es | done — @177 = stage 41, watch clean, DONE 18:34 CST |
+| 5 | Live read: the first live Cycle with a signed household game-night line (C115 Sun 2026-11-08 if one is drawn) | es | in progress |
 
 ## Acceptance
 
@@ -94,6 +94,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-07 (engine-sheet) — PROD @177 = stage 41 (`3184f9f50`), 16-minute watch clean. Live read: the first Cycle with a signed line, in DialState.
 - 2026-11-07 (engine-sheet) — Bench @191: C115 loss night `-Loss`, the citizen's only fandom input, mood 0 → −1; C116 win night `-Win`, settle + room-scaled +1 hardened a 3-streak, base fandom 50 → 51.03. Acceptance 1, 2, 6 met on the bench.
 - 2026-11-07 (engine-sheet) — Codex review SHIP-WITH-FIXES: Acceptance 7 reads the resolver input and the DialState transition, not a ±1 TraitProfile move; reader inventory corrected (A1–A4). Task 1 done `3184f9f50`.
 - 2026-11-07 (engine-sheet) — Created. Builder size ruling: 1 step, a fan's night. Content-drafting G-ES8 checked first: inert on live, nothing to build.

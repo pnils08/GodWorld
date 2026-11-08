@@ -69,6 +69,8 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 
 **Bench (2026-11-07, engine-sheet):** SANDBOX 1004 **@191 = stage 41** = stage 40 + `runHouseholdEngine.js` and `citizenDialMap.js` at `3184f9f50` (engine.335; manifest `output/engine-sheet/stage41-e335.sha256`), data = live C114 after the final sync — DEPLOY_HISTORY §Current sandbox.
 
+**Live (2026-11-07, evening):** PROD = **stage 41** = stage 40 + `runHouseholdEngine.js` and `citizenDialMap.js` at `3184f9f50` (engine.335: a family's game-night line moves the fan dial one step by the night's result, on top of family), web app **@177** — DEPLOY_HISTORY §PROD stage 41. SANDBOX 1004 @191 = stage 41, data = live C114.
+
 **Live (2026-11-07, afternoon):** PROD = **stage 40** = stage 39 + `applyEditionCoverageEffects.js`, `buildContractSeeds.js`, `applyStorySeeds.js`, `finalizeCycleState.js` at `c47769766` (engine.332: a coverage rating of ±3+ lands one lead seed on its beat's desk; the reaction row stays off next Cycle's seed gates), web app **@176** — DEPLOY_HISTORY §PROD stage 40. SANDBOX 1004 @189 = stage 40, data = live C114.
 
 **Live (2026-11-07, later):** PROD = **stage 39** = stage 38 + `phase05-citizens/applyGameNightMoments.js` at `d9f6a7dfa` (engine.333: feed triggers to life history — retirement leaves the sports layer, injury fills the bed, 39-word routes), web app **@175** — DEPLOY_HISTORY §PROD stage 39. SANDBOX 1004 @187 = stage 39, data = live C114.

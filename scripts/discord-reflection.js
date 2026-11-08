@@ -199,12 +199,16 @@ function buildSystemPrompt(identity, clockLabel) {
     '— Mags';
 }
 
-function buildUserPrompt(conversations, journalTail, worldState) {
+function buildUserPrompt(conversations, journalTail, worldState, archiveContext) {
   // worldState = compact orientation header; she searches her city for depth (S252 Task 5)
-  // pipeline.100 (builder 11-08): no `mags` store archive block — her page is her memory, as every citizen's is.
   var prompt = '## Oakland right now\n\n' + worldState +
     '\n\n---\n\n## Today\'s Discord Conversations\n\n' + conversations +
     '\n\n---\n\n## Earlier reflections (your own — pick the thread back up)\n\n' + journalTail;
+
+  if (archiveContext) {
+    prompt += '\n\n---\n\n## Archive Context (from Tribune files & memory)\n\n' +
+      'Background knowledge. Use naturally.\n\n' + archiveContext;
+  }
 
   prompt += '\n\n---\n\nThe terrace light is fading. What stayed with you today?';
   return prompt;
@@ -466,11 +470,29 @@ async function main() {
     var journalTail = await loadPageTail(2);  // her own page reflections — the git journal is frozen (pipe.40 T1)
     var worldState = mags.loadWorldState();
 
+    // Search Supermemory for context related to today's conversations
+    var archiveContext = '';
+    try {
+      // Build search query from conversation topics
+      var topicParts = entries.slice(-5).map(function(e) { return e.message; });
+      topicParts = topicParts.concat(moltbookEntries.slice(-5).map(function(e) {
+        return e.targetTitle || e.title || e.replyText || '';
+      }));
+      var topicSample = topicParts.filter(Boolean).join(' ');
+      var searchQuery = topicSample.substring(0, 200);
+      archiveContext = await mags.searchSupermemory(searchQuery, 3, 5000);
+      if (archiveContext) {
+        log.info('Supermemory: +' + archiveContext.length + ' chars of archive context');
+      }
+    } catch (err) {
+      log.warn('Supermemory search skipped: ' + err.message);
+    }
+
     // Build prompts
     var conversations = entries ? formatConversations(entries) : '';
     var moltbookSection = moltbookEntries ? formatMoltbookInteractions(moltbookEntries) : '';
     var systemPrompt = buildSystemPrompt(identity, clockLabel);
-    var userPrompt = buildUserPrompt(conversations, journalTail, worldState);
+    var userPrompt = buildUserPrompt(conversations, journalTail, worldState, archiveContext);
 
     // Append Moltbook section if there were interactions
     if (moltbookSection) {
@@ -501,7 +523,14 @@ async function main() {
     // Append to her citizen page (pipe.40 T1 — the journal's new home)
     await appendToPage(reflection, cycle);
 
-    // pipeline.100 (builder 11-08): no claude-mem or `mags` store copy — her page is the one write, as every citizen's.
+    // pipeline.100 (builder 11-08): no claude-mem copy (builder-side). Her memory store keeps every reflection.
+    // Save to Supermemory (her `mags` container is read back into her prompts: sim-clock label, no calendar date)
+    var when = clockLabel || 'this cycle';
+    mags.saveToSupermemory(
+      'Nightly Discord Reflection — ' + when,
+      'Mags Corliss nightly reflection (' + when + ', ' + discordCount + ' conversations):\n\n' + reflection
+    );
+    log.info('Nightly reflection saved to Supermemory');
 
     // engine.197 M2 — after every durable save above; its own failure never undoes them
     try { await queueNightlyIntake(reflection, cycle, runClock, runInstant); } catch (e) { log.warn('Reflection_Intake: ' + e.message + ' (a spooled row stays for the next run)'); }

@@ -256,22 +256,28 @@ async function buildMagsSystemPrompt() {
   return prompt;
 }
 
-// Mags' per-message dynamic context: archive RAG + family + dashboard. Returns the augmented system prompt.
-// pipeline.100 (builder 11-08: "Mags discord and cron behaves like every other citizen"): the old `mags`
-// store's whole-container profile ("About This Person") is gone — her page is her memory, as every citizen's is.
+// Mags' per-message dynamic context: her own memory store + archive RAG + family + dashboard. Returns the
+// augmented system prompt. pipeline.100 (builder 11-08: "You just removed 600 memories I paid for"): the `mags`
+// store is her memory — every past talk and reflection — and stays read; it was labelled as facts about the
+// speaker, it is labelled as hers.
 async function magsAugment(systemPrompt, opts) {
   opts = opts || {};
   var results = await Promise.all([
     searchSupermemory(opts.userMessage),
+    fetchUserProfile(opts.userId),
     mags.loadFamilyData(),
     searchDashboard(opts.userMessage)
   ]);
   var archiveContext = results[0];
-  var familyData = results[1];
-  var dashboardArticles = results[2];
+  var ownMemory = results[1];
+  var familyData = results[2];
+  var dashboardArticles = results[3];
 
   if (familyData && !familyData.startsWith('(')) {
     systemPrompt += '\n\n---\n\n' + familyData;
+  }
+  if (ownMemory) {
+    systemPrompt += '\n\n---\n\n## Your own memory (your past talks and reflections)\n\n' + ownMemory;
   }
   if (archiveContext) {
     systemPrompt += '\n\n---\n\n## Archive Knowledge (from Tribune files)\n\n' +
@@ -297,7 +303,8 @@ const magsProvider = {
   buildSystemPrompt: buildMagsSystemPrompt,
   augment: magsAugment,
   persistResponse: function (userName, userMessage, response, userId) {
-    magsTalk.persist(userName, userMessage, response);   // research.30 — her dials and Paulson's move with the talk; pipeline.100: no `mags` store write
+    saveToSupermemory(userName, userMessage, response, userId);   // her memory store keeps every talk (builder 11-08)
+    magsTalk.persist(userName, userMessage, response);   // research.30 — her dials and Paulson's move with the talk
   },
   flushVoiceBuffer: function (force) { return magsTalk.flush(force); },
 };
@@ -330,6 +337,101 @@ function searchSupermemory(query) {
     if (context) log.info('Supermemory returned context (' + context.length + ' chars)');
     return context;
   });
+}
+
+// ---------------------------------------------------------------------------
+// Fetch user profile from Supermemory (auto-built from conversations)
+// ---------------------------------------------------------------------------
+function fetchUserProfile(discordUserId) {
+  if (!USE_SUPERMEMORY) return Promise.resolve('');
+
+  return new Promise(function(resolve) {
+    var payload = JSON.stringify({
+      containerTag: 'mags'
+    });
+
+    var options = {
+      hostname: 'api.supermemory.ai',
+      path: '/v4/profile',
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + SUPERMEMORY_KEY,
+        'Content-Length': Buffer.byteLength(payload)
+      }
+    };
+
+    var req = require('https').request(options, function(res) {
+      var data = '';
+      res.on('data', function(chunk) { data += chunk; });
+      res.on('end', function() {
+        try {
+          if (res.statusCode !== 200) { resolve(''); return; }
+          var parsed = JSON.parse(data);
+          var profile = parsed.profile;
+          if (!profile) { resolve(''); return; }
+
+          var lines = [];
+          if (profile.static && profile.static.length) {
+            lines.push('Known: ' + profile.static.join('. '));
+          }
+          if (profile.dynamic && profile.dynamic.length) {
+            lines.push('Recent: ' + profile.dynamic.join('. '));
+          }
+
+          var result = lines.join('\n');
+          if (result) {
+            log.info('User profile loaded (' + result.length + ' chars)');
+          }
+          resolve(result);
+        } catch (err) {
+          resolve('');
+        }
+      });
+    });
+
+    req.on('error', function() { resolve(''); });
+    req.setTimeout(2000, function() { req.destroy(); resolve(''); });
+    req.write(payload);
+    req.end();
+  });
+}
+
+// ---------------------------------------------------------------------------
+// Save conversation to Supermemory for user profile building (Mags)
+// ---------------------------------------------------------------------------
+function saveToSupermemory(userName, userMessage, magsResponse, discordUserId) {
+  if (!USE_SUPERMEMORY) return;
+
+  var content = userName + ': ' + userMessage + '\nMags: ' + magsResponse;
+  var payload = JSON.stringify({
+    content: content,
+    containerTags: ['mags']
+  });
+
+  var options = {
+    hostname: 'api.supermemory.ai',
+    path: '/v3/documents',
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + SUPERMEMORY_KEY,
+      'Content-Length': Buffer.byteLength(payload)
+    }
+  };
+
+  var req = require('https').request(options, function(res) {
+    var data = '';
+    res.on('data', function(c) { data += c; });
+    res.on('end', function() {
+      if (res.statusCode >= 200 && res.statusCode < 300) {
+        log.info('Conversation saved to Supermemory for profile building');
+      }
+    });
+  });
+  req.on('error', function() {}); // fire and forget
+  req.write(payload);
+  req.end();
 }
 
 // ---------------------------------------------------------------------------

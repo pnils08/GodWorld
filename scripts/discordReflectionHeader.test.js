@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-// Mags' nightly reflection lands on her citizen page (pipeline.100: no `mags` store copy).
+// Mags' nightly reflection lands on her citizen page and in her `mags` Supermemory memory store.
 // Neither carries a real-world date: the header names the Cycle on the sim clock, the page doc key is a weekday.
 
 const assert = require('assert');

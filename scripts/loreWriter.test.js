@@ -101,6 +101,13 @@ assert.deepStrictEqual([...headerEcho], ['editions/cycle_pulse_c114.txt'], 'a fl
 // JSONL hits carry a row label after the path; the path comes out clean.
 const jsonl = pathsInSearchResult("2 file(s) matched on disk for 'x':\n— output/beats/LifeHistory_Log.jsonl (newest matching row, C114): {\"a\":1}\n— output/simulation_ledger_snapshot.jsonl (ledger row, snapshot C114): {\"b\":2}");
 assert.deepStrictEqual([...jsonl], ['output/beats/LifeHistory_Log.jsonl', 'output/simulation_ledger_snapshot.jsonl']);
+// pipeline.106: every run opens with the current calendar line and the A's season timeline.
+const { worldNowBlock } = require('./loreWriter');
+const now = worldNowBlock();
+assert.match(now, /=== THE WORLD NOW/);
+assert.match(now, /Current Cycle C\d+: Calendar context: Y\dC\d+/, 'the newest world summary calendar line');
+assert.match(now, /Sports season:/);
+assert.match(now, /2041 — World Series Champions/, 'the team timeline');
 // With thinking on, a thought part is never the reply or the rescued piece.
 assert.strictEqual(visibleText([{ thought: true, text: 'reasoning' }, { functionCall: { name: 'x' } }]), null);
 assert.strictEqual(visibleText([{ thought: true, text: 'reasoning' }, { text: 'the piece' }]), 'the piece');

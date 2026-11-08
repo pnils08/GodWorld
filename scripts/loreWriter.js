@@ -284,6 +284,35 @@ function readSource(relPath, offset, seenPaths) {
     (end < text.length ? '\n[more: read_source with offset ' + end + ']' : '');
 }
 
+// pipeline.106 (builder 2026-11-08): every run starts knowing where the world is. Five of
+// five graded pieces put games in the off-season; the writer never saw the calendar. The
+// newest world summary's calendar line is the current Cycle and season; the A's TrueSource
+// team timeline is every season's result. A missing file is named, never fatal.
+const TEAM_TIMELINE = 'archive/non-articles/data/TrueSource_Team_Timeline_v1.1.txt';
+function worldNowBlock() {
+  const lines = ['', '', '=== THE WORLD NOW (read before you write any game, season or date) ==='];
+  const outDir = path.join(GODWORLD_ROOT, 'output');
+  const latest = fs.readdirSync(outDir)
+    .map((f) => /^world_summary_c(\d+)\.md$/.exec(f)).filter(Boolean)
+    .sort((a, b) => Number(b[1]) - Number(a[1]))[0];
+  const cal = latest && (fs.readFileSync(path.join(outDir, latest[0]), 'utf-8').match(/^\*\*Calendar context:\*\*.*$/m) || [])[0];
+  if (cal) {
+    lines.push('Current Cycle C' + latest[1] + ': ' + cal.replace(/\*\*/g, ''));
+    lines.push('A game, a series or a season scene set in this Cycle must agree with that sports-season line.');
+  } else {
+    console.error('[world-now] no calendar line in output/world_summary_c*.md');
+    lines.push('(calendar unavailable this run: do not set any game in the current Cycle)');
+  }
+  const timelinePath = path.join(GODWORLD_ROOT, TEAM_TIMELINE);
+  if (fs.existsSync(timelinePath)) {
+    lines.push('', 'Oakland Athletics season results (' + TEAM_TIMELINE + '):', fs.readFileSync(timelinePath, 'utf-8').trim());
+  } else {
+    console.error('[world-now] missing ' + TEAM_TIMELINE);
+  }
+  lines.push('=== END THE WORLD NOW ===');
+  return lines.join('\n');
+}
+
 // The canon notebook through the read-only, fail-closed wrapper (whole-notebook scope).
 function notebookSearch(question) {
   const q = String(question || '').trim().slice(0, 1000);
@@ -390,7 +419,7 @@ async function main() {
     fs.mkdirSync(QUARANTINE_DIR, { recursive: true });
   }
 
-  const messages = [{ role: 'user', parts: [{ text: prompt }] }];
+  const messages = [{ role: 'user', parts: [{ text: prompt + worldNowBlock() }] }];
   let iterations = 0;
   let notebookCalls = 0;
   const seenPaths = new Set(); // read_source opens only what search_articles returned
@@ -565,4 +594,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { slugify, FALLBACK_MIN_CHARS, clampToQuarantine, writeQuarantineFile, canonRecall, notebookSearch, readSource, pathsInSearchResult, searchTerm, isReadableCanonPath, visibleText, QUARANTINE_DIR, GEMINI_MODEL, THINKING_LEVEL, TOOLS };
+module.exports = { slugify, FALLBACK_MIN_CHARS, clampToQuarantine, writeQuarantineFile, canonRecall, notebookSearch, readSource, pathsInSearchResult, searchTerm, isReadableCanonPath, visibleText, worldNowBlock, QUARANTINE_DIR, GEMINI_MODEL, THINKING_LEVEL, TOOLS };

@@ -398,6 +398,45 @@ assert.deepStrictEqual(r7g.tags['POP-00019'], ['Sports-Injured', 'Sports-Composu
 assert.deepStrictEqual(r7g.tags['POP-00001'], ['Sports-Injured', 'Sports-Composure-Up-S'], 'already out: the line only');
 assert.strictEqual(rowOf(r7g, 'POP-00001')[c7('Status')], 'Active');
 
+// 7i. engine.338 (builder 2026-11-07/08) — `question`: the Notes cell, word for word, is the row's only line; a bare
+// Question log tag (the wake loop's shape); no type line, no team gate, no row change, no dial, no seed.
+const askRows = rows7();
+askRows.push(['POP-00508', 'Freddie', 'Silecki', 'C90 — [Retirement] hung it up', 'Retired', 'Downtown', '', 'ENGINE', '', 'Former MUBA player, Hall of Famer', '', '', 'Legend of the MUBA.', '', '', 2, 70000]);
+askRows.push(['POP-00900', 'Gone', 'Man', '', 'deceased', 'Downtown', '', 'ENGINE', '', 'Clerk', '', '', '', '', '', 3, 0]);
+const r7i = run7([
+  { eventType: 'press-conference', teamsUsed: "A's", namesUsed: 'Vinnie Keane (DH)', eventTrigger: 'question', notes: '  Would you take the hitting-coach job\n next spring?  ' },
+  { eventType: 'player-feature', teamsUsed: '', namesUsed: 'Freddie Silecki, Gone Man', eventTrigger: 'question', notes: 'Would you coach the West Oakland youth league?' },
+  { eventType: 'game-result', teamsUsed: "A's", namesUsed: 'Arturo Ramos (SP)', streak: 'W1' }
+], askRows, { "A's": week('WIN') });
+const askedVin = rowOf(r7i, 'POP-00001');
+assert.deepStrictEqual(r7i.rawTags['POP-00001'], ['Question', "Sports-Win|source:sports|staffWeek|team:A's|week:WIN"],
+  'the question is the row\'s only line — no "named in the papers" texture, bare log tag; the staff week line is the club\'s, as before');
+assert.ok(/ — \[Question\] Would you take the hitting-coach job next spring\?$/m.test(askedVin[c7('LifeHistory')]), askedVin[c7('LifeHistory')]);
+assert.strictEqual(askedVin[c7('LifeHistory')].split('\n').length, 2, 'whitespace folded: one life line, plus his staff week line');
+assert.deepStrictEqual([askedVin[c7('ClockMode')], askedVin[c7('Income')], askedVin[c7('RoleType')], askedVin[c7('CitizenBio')]],
+  ['GAME', 1500000, "Designated Hitter, Oakland A's Legend", BIO], 'a question changes nothing on the row');
+assert.deepStrictEqual(r7i.rawTags['POP-00508'], ['Question'], 'a Retired MUBA legend on no club is asked the same way');
+assert.strictEqual(r7i.appended.find((x) => x[1] === 'POP-00508')[4], 'Would you coach the West Oakland youth league?');
+assert.strictEqual(r7i.appended.filter((x) => x[1] === 'POP-00900').length, 0, 'the dead are not asked');
+assert.ok(r7i.logs.some((m) => /unresolved feed names.*Gone Man/.test(m)), 'a dead name is unresolved, named in the log');
+assert.deepStrictEqual(r7i.tags['POP-00025'], ['Sports-PlayedWin', 'Sports-Win'], 'the game row beside it is untouched (type line + staff week)');
+assert.ok(r7i.ripples.length === 1 && r7i.ripples[0].targetIds.indexOf('POP-00508') < 0, 'a question-only citizen is not in the sports seed');
+assert.ok(r7i.ripples[0].causeDetail.indexOf('question') < 0 && r7i.ripples[0].causeDetail.indexOf('Silecki') < 0, r7i.ripples[0].causeDetail);
+assert.deepStrictEqual(dialMap.nudgesForEvent_('Question', 1, 'Would you coach the injured list after you retire?'), {},
+  'builder 2026-11-08: only the answer moves him — the question text never routes a dial');
+assert.strictEqual(r7i.dirty, true);
+// blank Notes asks nothing: no line, no ledger write, one log line naming the row
+const r7j = run7([{ eventType: 'press-conference', teamsUsed: "A's", namesUsed: 'Vinnie Keane (DH)', eventTrigger: 'question', notes: '   ' }], rows7());
+assert.strictEqual(r7j.appended.length, 0, 'nothing written');
+assert.strictEqual(r7j.dirty, false);
+assert.strictEqual(r7j.ripples.length, 0, 'no seed');
+assert.ok(r7j.logs.some((m) => /question row names Vinnie Keane with a blank Notes cell/.test(m)), r7j.logs.join('\n'));
+// a question only — no club week — writes the line and no seed at all
+const r7k = run7([{ eventType: 'player-feature', teamsUsed: '', namesUsed: 'Vinnie Keane', eventTrigger: 'question', notes: 'Coach?' }], rows7());
+assert.deepStrictEqual(r7k.rawTags['POP-00001'], ['Question']);
+assert.strictEqual(r7k.ripples.length, 0, 'the week reached nobody the desks should hear about');
+assert.strictEqual(r7k.dirty, true, 'the ledger still carries the line');
+
 // 7h. a blank trigger: exactly the pre-333 shape (one type line, nothing else)
 const r7h = run7([{ eventType: 'game-result', teamsUsed: "A's", namesUsed: 'Vinnie Keane (DH)', streak: 'W1', eventTrigger: '' }], rows7());
 assert.deepStrictEqual(r7h.tags['POP-00001'], ['Sports-Played']);

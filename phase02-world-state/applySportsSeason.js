@@ -263,9 +263,12 @@ function readOaklandFeedEntries_(ctx, currentCycle) {
     // word, or '' — a blank / '-' / none cell, an off-list word, a typed hot-/cold-streak (the
     // engine's call), or any row that is not the A's or the Oaks. Every reader of the field
     // (the story hooks via processFeedSheet_, engine.333's named route) inherits the gate.
+    // engine.338: a citizen-only word (`question`) is exempt from the team gate — the person asked
+    // need not be on a club; feedMoments_ keeps it from the newsroom on its own.
     var trig = canonicalFeedTrigger_(entry.eventTrigger);
     var trigTeam = normalizeOaklandFeedTeam_(entry.teamsUsed);
-    entry.eventTrigger = (trigTeam === "A's" || trigTeam === 'Oaks') ? trig.word : '';
+    var citizenOnly = trig.word && EVENT_TRIGGER_CITIZEN_ONLY.indexOf(trig.word) !== -1;
+    entry.eventTrigger = (citizenOnly || trigTeam === "A's" || trigTeam === 'Oaks') ? trig.word : '';
     if ((trig.status === 'unknown' || trig.status === 'engine-only') && !triggerLogged[trig.status + '|' + trig.raw]) {
       triggerLogged[trig.status + '|' + trig.raw] = true;
       Logger.log('readOaklandFeedEntries_: C' + currentCycle + ' EventTrigger "' + trig.raw + '" ' +
@@ -1057,6 +1060,8 @@ function processFeedSheet_(sheet, currentCycle, weeks, history, entries) {
  *    accepted game rows (weekGames > 0) has raw SeasonType championship — the column's clinch game,
  *    in any row order; world-series / finals mean the final round is on, not won. A typed
  *    championship already said it, so the engine adds none.
+ * 3. engine.338: a citizen-only word (`question`) is no moment — the builder's question to a
+ *    citizen is private until he answers (builder 2026-11-08); it never reaches the hook table.
  */
 function feedMoments_(entries, weeks) {
   var out = [], typed = {}, clinch = {};
@@ -1064,7 +1069,7 @@ function feedMoments_(entries, weeks) {
     var e = entries[i];
     var team = normalizeOaklandFeedTeam_(e.teamsUsed);
     if (team !== "A's" && team !== 'Oaks') continue;
-    if (e.eventTrigger) {
+    if (e.eventTrigger && EVENT_TRIGGER_CITIZEN_ONLY.indexOf(e.eventTrigger) === -1) {
       out.push({ team: team, trigger: e.eventTrigger });
       typed[team + '|' + e.eventTrigger] = true;
     }

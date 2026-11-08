@@ -127,12 +127,15 @@ var PLAYER_MOOD_VALUES = [
 ];
 
 // The keys of TRIGGER_HOOKS (phase07-evening-media/storyHook.js) minus
-// EVENT_TRIGGER_ENGINE_ONLY — the only reader that turns a trigger into a story.
+// EVENT_TRIGGER_ENGINE_ONLY, plus EVENT_TRIGGER_CITIZEN_ONLY — the hook table is
+// the only reader that turns a trigger into a story.
 // Free text still reaches the media handoff (allowInvalid); the engine reads a
 // cell through canonicalFeedTrigger_ (applySportsSeason.js), so a word off this
 // list or EVENT_TRIGGER_ALIASES makes no moment.
 // scripts/sportsFeedContract.test.js pins this list to the hook table.
 // engine.331 (builder 2026-11-05): off-season and good/bad moments for both clubs.
+// engine.338 (builder 2026-11-07): `question` — the builder poses a question to the
+// named citizen(s); the Notes cell is the question.
 var EVENT_TRIGGER_VALUES = [
   '',
   'playoff-push',
@@ -173,7 +176,8 @@ var EVENT_TRIGGER_VALUES = [
   'trade-rumor',
   'camp-opens',
   'award',
-  'community-outreach'
+  'community-outreach',
+  'question'
 ];
 
 // engine.331: words typed into the cell that name one of the moments above
@@ -192,6 +196,14 @@ var EVENT_TRIGGER_ALIASES = {
 // decision"): hooks the engine raises from the streak alone. Typed into the
 // cell they make no moment.
 var EVENT_TRIGGER_ENGINE_ONLY = ['hot-streak', 'cold-streak'];
+
+// engine.338 (builder 2026-11-08: the question is private until he answers): words
+// that reach the named citizen and make no story hook. The row's team gate does not
+// apply — the person asked need not be on a club (a MUBA Hall-of-Famer is asked the
+// same way as an A's player) — and feedMoments_ never hands these to the newsroom.
+// The citizen hears the Notes cell verbatim as a `[Question]` life line; his next
+// owed wake carries it; his answer, not the question, is what the city sees.
+var EVENT_TRIGGER_CITIZEN_ONLY = ['question'];
 
 // P–T: exactly the words applySportsSeason.js parses (parseFanSentiment_,
 // parseFranchiseStability_, parseEconomicFootprint_,
@@ -237,8 +249,10 @@ var HEADER_NOTES = {
   'TeamsUsed': "Required. A's or Oaks. NBA / Warriors are retired labels and are ignored.",
   'NamesUsed': 'Player/person names, comma-separated.\n' +
     "On game rows, a name matching an Active citizen's First Last (any case) gets that citizen one game-night moment.\n" +
+    'On a question row (EventTrigger question) every living citizen named here is asked — on a club or not.\n' +
     'Example: Vinnie Keane, Benji Dillon',
-  'Notes': 'Freeform description — your voice. Goes to the newsroom (handoff, desk packets, beat slices).\nKeep facts in the structured columns.',
+  'Notes': 'Freeform description — your voice. Goes to the newsroom (handoff, desk packets, beat slices).\nKeep facts in the structured columns.\n' +
+    'On a question row this cell IS the question, written to the named citizen(s) word for word; blank asks nothing.',
   'Stats': 'Stat line for this event, e.g. 22pts/8ast. Goes to the newsroom.\n' +
     "It does not change the roster's stat columns — use the dashboard's stat capture for that.",
   'Team Record': 'W-L after this event, e.g. 39-16 (a playoff series record like 3-1 is fine).\n' +
@@ -255,7 +269,8 @@ var HEADER_NOTES = {
     "Every row's word counts, this Cycle only. A blank row is no moment: nothing carries from earlier rows or Cycles.\n" +
     'The engine adds its own: hot-streak / cold-streak when the week ends on a run at the World_Config sportsStreakHeadline bar (5),\n' +
     'championship when a game row of the week has SeasonType championship. Typed, those two streak words make nothing.\n' +
-    'awards, draft, spring-training, blockbuster-trade and call-up read as award, draft-night, camp-opens, traded and debut; any other word makes no story.',
+    'awards, draft, spring-training, blockbuster-trade and call-up read as award, draft-night, camp-opens, traded and debut; any other word makes no story.\n' +
+    'question is the one word that makes no story: it hands the Notes cell to the citizen(s) in NamesUsed as a question — TeamsUsed may be blank — and the newsroom hears nothing until they answer.',
   'HomeNeighborhood': 'Optional. Where this event lands: that neighborhood counts as a game day for transit,\n' +
     "and the team's game-day crowd goes there in the evening crowd map.\n" +
     'Use one of the 22 map neighborhoods (Montclair is Piedmont Ave, Old Oakland is Downtown).\n' +
@@ -534,6 +549,7 @@ if (typeof module !== 'undefined' && module.exports) {
     EVENT_TRIGGER_VALUES: EVENT_TRIGGER_VALUES,
     EVENT_TRIGGER_ALIASES: EVENT_TRIGGER_ALIASES,
     EVENT_TRIGGER_ENGINE_ONLY: EVENT_TRIGGER_ENGINE_ONLY,
+    EVENT_TRIGGER_CITIZEN_ONLY: EVENT_TRIGGER_CITIZEN_ONLY,
     FAN_SENTIMENT_VALUES: FAN_SENTIMENT_VALUES,
     FRANCHISE_STABILITY_VALUES: FRANCHISE_STABILITY_VALUES,
     ECONOMIC_FOOTPRINT_VALUES: ECONOMIC_FOOTPRINT_VALUES,

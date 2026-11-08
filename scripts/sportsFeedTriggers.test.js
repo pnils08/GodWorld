@@ -140,6 +140,18 @@ test('Q3: a mood makes no trigger', () => {
   const S = fire([row({ Cycle: 120, PlayerMood: 'frustrated' }), row({ Cycle: 120, TeamsUsed: 'Oaks', PlayerMood: 'electric' })], 120);
   assert.deepStrictEqual(words(S), []);
 });
+// engine.338 (builder 2026-11-08): `question` is the builder's word to a citizen — private until he answers
+test('question: the word rides the entry past the team gate and makes no newsroom moment', () => {
+  const S = fire([
+    row({ Cycle: 120, TeamsUsed: '', EventType: 'player-feature', NamesUsed: 'Freddie Silecki', EventTrigger: 'question', Notes: 'Would you coach the youth league?' }),
+    row({ Cycle: 120, TeamsUsed: "A's", EventType: 'press-conference', NamesUsed: 'Vinnie Keane', EventTrigger: 'Question', Notes: 'Hitting coach next spring?' }),
+    row({ Cycle: 120, TeamsUsed: 'NFL', EventTrigger: 'retirement' })
+  ], 120);
+  assert.deepStrictEqual(plain(S.sportsFeedEntries.map(e => e.eventTrigger)), ['question', 'question', ''],
+    'a question on no club and on a club both carry; the NFL retirement is still gated');
+  assert.deepStrictEqual(words(S), [], 'no moment for the hook table from either question row');
+  assert.deepStrictEqual(triggerLogs(), [], 'a question is a known word, not an off-list one');
+});
 test('a moment off a game week carries no streak — the C114 "A\'s on a W3" came from a carried one', () => {
   const S = fire([row({ Cycle: 120, SeasonType: 'off-season', Streak: 'W3', EventTrigger: 'retirement' })], 120);
   assert.deepStrictEqual(plain(S.sportsEventTriggers.map(t => [t.trigger, t.streak, t.neighborhood])), [['retirement', '', '']]);

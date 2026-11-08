@@ -104,6 +104,9 @@ var DIAL_MAP = {
   'Birth':             { family: 10, warmth: 4 },
   'Divorce':            { family: -8, composure: -5 },
   'Retirement':         { family: 4, drive: -4 },
+  // engine.338 (builder 2026-11-08: "only the answer moves him"): a question posed to a citizen is written bare and moves
+  // no dial — listed so the text router below never reads the question's own words ("injured list", "retire") as a nudge.
+  'Question':           {},
   // engine.157 — the maneuver phase's own lines, written on a posture change only
   'Maneuver-Climb':     { drive: 2, openness: 1 },
   'Maneuver-Retreat':   { composure: 2, family: 1 },

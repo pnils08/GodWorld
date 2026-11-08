@@ -233,7 +233,9 @@ var SPORTS_TRIGGER_ROUTES_ = {
   // community — the club off the field
   'community-outreach': 'community',
   // milestones — the row changes (sportsMilestone_)
-  'injury': 'injury', 'injury-return': 'injury-return', 'retirement': 'retirement'
+  'injury': 'injury', 'injury-return': 'injury-return', 'retirement': 'retirement',
+  // engine.338 — the builder's question to the named citizen(s): the Notes cell, verbatim, as the row's ONLY line
+  'question': 'question'
 };
 // the graded tag each texture route writes (engine.299: a line with no signed fact is not written)
 var SPORTS_TRIGGER_TAGS_ = {
@@ -241,6 +243,15 @@ var SPORTS_TRIGGER_TAGS_ = {
   season: 'Sports-Drive-Up-S', community: 'Sports-Warmth-Up-S', injuryReturn: 'Sports-Composure-Up-S'
 };
 var SPORTS_MILESTONE_WORDS_ = { 'injury': true, 'injury-return': true, 'retirement': true };
+// engine.338 (builder 2026-11-07/08): `question` — the builder asks; the citizen decides at his next owed wake (the cron
+// half, lib/wakePerception.js OWED_MILESTONES). The row's Notes cell is the question, written word for word as the
+// `[Question]` life line under a BARE `Question` log tag (the wake loop's shape, like Retirement). It is the row's only
+// line: no game-night / "named in the papers" texture for a man who was asked something, no team gate (a MUBA legend on
+// no club is asked the same way), no dial (citizenDialMap: only the answer moves him), no newsroom hook (feedMoments_
+// drops the word; the Tribune hears the answer). A blank Notes asks nothing and is named once in the engine log.
+function sportsQuestionText_(entry) {
+  return String(entry && entry.notes || '').replace(/\s+/g, ' ').trim();
+}
 var SPORTS_HEALTH_STATES_ = { injured: true, hospitalized: true, critical: true, recovering: true, 'serious-condition': true };
 
 function sportsTriggerWord_(entry) {
@@ -459,7 +470,8 @@ function applyGameNightMoments_(ctx) {
   var stamp = (typeof inWorldStamp_ === 'function') ? inWorldStamp_(ctx) : ('C' + cycle);
   var logRows = [];
   var touched = {};
-  var counts = { named: 0, staff: 0, fan: 0, trigger: 0, retired: 0, injured: 0, returned: 0 };
+  var reached = {}; // engine.338: the citizens the WEEK reached — a question-only citizen is not named to the desks' seed
+  var counts = { named: 0, staff: 0, fan: 0, trigger: 0, retired: 0, injured: 0, returned: 0, asked: 0 };
   var reach = {};   // engine.209: per franchise { staff, fan } — the week's attendance input
   var unresolved = [];
   var unknownWords = []; // engine.333: a trigger word with no route, named once a Cycle
@@ -473,6 +485,7 @@ function applyGameNightMoments_(ctx) {
     logRows.push([ctx.now, row[iPop], ((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim(), logTag, text,
       (iNbhd >= 0 ? (row[iNbhd] || '') : ''), cycle]);
     touched[String(row[iPop])] = true;
+    if (tag !== 'Question') reached[String(row[iPop])] = true;
   }
 
   // engine.338 (codex re-review R1): the retirement contract is checked BEFORE the first line of the phase is written —
@@ -494,12 +507,22 @@ function applyGameNightMoments_(ctx) {
     var route = sportsNamedRoute_(entry.eventType, weeks[team] ? weeks[team].cls : 'none');
     var names = parseNamesUsed_(entry);
     var seenThisRow = {};
+    // engine.338: a question row is read before any texture — the question is its only line
+    var rowWord = sportsTriggerWord_(entry);
+    var question = rowWord === 'question' ? sportsQuestionText_(entry) : '';
+    if (rowWord === 'question' && !question && names.length && typeof Logger !== 'undefined') {
+      Logger.log('applyGameNightMoments_: question row names ' + names.join(', ') + ' with a blank Notes cell — nothing asked, cycle ' + cycle);
+    }
     for (var n = 0; n < names.length; n++) {
       var key = gameNightNameKey_(names[n]);
       var ri = byName[key];
       if (ri === undefined) { if (unresolved.indexOf(names[n]) < 0) unresolved.push(names[n]); continue; }
       if (seenThisRow[key]) continue;
       seenThisRow[key] = true;
+      if (rowWord === 'question') {
+        if (question) { write(ri, 'Question', question, 'Question'); counts.asked++; }
+        continue;
+      }
       var text;
       if (route.pool) {
         text = pick(SPORTS_NAMED_POOLS[route.pool]);
@@ -517,7 +540,7 @@ function applyGameNightMoments_(ctx) {
       counts.named++;
 
       // engine.333: the row's own trigger word — the second received line, or the milestone that changes the row
-      var word = sportsTriggerWord_(entry);
+      var word = rowWord;
       if (!word) continue;
       var routeKey = Object.prototype.hasOwnProperty.call(SPORTS_TRIGGER_ROUTES_, word) ? SPORTS_TRIGGER_ROUTES_[word] : null;
       var tagTail = '|source:sports|feedNamed|event:' + (entry.eventType || '-') + '|trigger:' + word + '|team:' + (team || '-');
@@ -602,20 +625,22 @@ function applyGameNightMoments_(ctx) {
   var startRow = logSheet.getLastRow() + 1;
   logSheet.getRange(startRow, 1, logRows.length, logRows[0].length).setValues(logRows);
 
-  // Attribution: the week touched THESE citizens — the sports seed names them.
-  if (typeof recordRipple_ === 'function') {
+  // Attribution: the week touched THESE citizens — the sports seed names them. A question is private (engine.338):
+  // a citizen whose only line this Cycle is a [Question] is on the ledger write, not in the seed.
+  var reachedIds = Object.keys(reached);
+  if (reachedIds.length && typeof recordRipple_ === 'function') {
     recordRipple_(ctx, {
       causeType: 'sports',
       causeId: 'Oakland_Sports_Feed.gameNight',
-      causeDetail: 'The sports week reached ' + touchedIds.length + ' citizen(s) — ' + counts.named + ' named, ' +
+      causeDetail: 'The sports week reached ' + reachedIds.length + ' citizen(s) — ' + counts.named + ' named, ' +
         counts.staff + ' staff week lines, ' + counts.fan + ' fan week lines' +
         (counts.trigger ? ', ' + counts.trigger + ' trigger line(s)' : '') +
         (milestoneDetail.length ? '; ' + milestoneDetail.join('; ') : ''), // engine.333: the seed and summary carry the milestone by name
       effectType: 'game-night',
       targetScope: 'citizen',
-      targetIds: touchedIds,
+      targetIds: reachedIds,
       neighborhood: '',
-      magnitude: touchedIds.length,
+      magnitude: reachedIds.length,
       duration: 1,
       sourceEngine: 'applyGameNightMoments_'
     });
@@ -624,6 +649,6 @@ function applyGameNightMoments_(ctx) {
   if (typeof Logger !== 'undefined') {
     Logger.log('applyGameNightMoments_: cycle ' + cycle + ' — ' + counts.named + ' named, ' + counts.staff +
       ' staff, ' + counts.fan + ' fan line(s), ' + counts.trigger + ' trigger line(s), ' + counts.retired + ' retired, ' +
-      counts.injured + ' injured, ' + counts.returned + ' returned; weeks ' + JSON.stringify(signed));
+      counts.injured + ' injured, ' + counts.returned + ' returned, ' + counts.asked + ' asked; weeks ' + JSON.stringify(signed));
   }
 }

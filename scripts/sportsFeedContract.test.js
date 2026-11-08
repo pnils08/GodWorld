@@ -493,9 +493,16 @@ assert.ok(oversizedDraft.errors.some((error) => /50,000 characters or fewer/.tes
   const vocab = require('../utilities/setupSportsFeedValidation.js');
   assert.deepStrictEqual([...vocab.EVENT_TRIGGER_ENGINE_ONLY].sort(), ['cold-streak', 'hot-streak']);
   vocab.EVENT_TRIGGER_ENGINE_ONLY.forEach((w) => assert.ok(hookKeys.includes(w), w + ' must keep its hook'));
-  assert.deepStrictEqual(contract.SAFE_ENUMS.EventTrigger.filter(Boolean).slice().sort(),
+  // engine.338: a citizen-only word (question) is on the dropdown and has NO hook — the question is private until answered
+  assert.deepStrictEqual([...vocab.EVENT_TRIGGER_CITIZEN_ONLY], ['question']);
+  vocab.EVENT_TRIGGER_CITIZEN_ONLY.forEach((w) => {
+    assert.ok(vocab.EVENT_TRIGGER_VALUES.includes(w), w + ' is a dropdown word');
+    assert.ok(!hookKeys.includes(w), w + ' makes no story hook');
+    assert.ok(!vocab.EVENT_TRIGGER_ENGINE_ONLY.includes(w), w + ' is typed, never the engine\'s');
+  });
+  assert.deepStrictEqual(contract.SAFE_ENUMS.EventTrigger.filter(Boolean).filter((w) => !vocab.EVENT_TRIGGER_CITIZEN_ONLY.includes(w)).sort(),
     hookKeys.filter((k) => !vocab.EVENT_TRIGGER_ENGINE_ONLY.includes(k)).sort(),
-    'EventTrigger dropdown must equal the TRIGGER_HOOKS keys minus the engine-only words');
+    'EventTrigger dropdown minus the citizen-only words must equal the TRIGGER_HOOKS keys minus the engine-only words');
   // an alias is a typed word off the dropdown that names a dropdown moment
   Object.entries(vocab.EVENT_TRIGGER_ALIASES).forEach(([typed, word]) => {
     assert.ok(!vocab.EVENT_TRIGGER_VALUES.includes(typed), typed + ' is an alias, not a dropdown word');

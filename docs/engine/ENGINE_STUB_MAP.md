@@ -1,6 +1,6 @@
 # Engine Stub Map
 
-**Generated:** 2026-11-07 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
+**Generated:** 2026-11-08 by `scripts/stubEngine.js` (mechanical scan — no LLM, no memory).
 
 **Purpose:** Per-function ctx footprint + sheet targets + RNG usage across every engine JS file. Regenerate with `node scripts/stubEngine.js` after any engine change.
 
@@ -126,6 +126,9 @@
   Sheets: World_Config
 
 - **ensureEngine276Config_(ss)**
+  Sheets: World_Config
+
+- **ensureEngine338Config_(ss)**
   Sheets: World_Config
 
 - **ensureEngine271Config_(ss)**
@@ -1223,9 +1226,13 @@
 
 - **gameNightNameKey_(s)**
 
+- **sportsQuestionText_(entry)**
+
 - **sportsTriggerWord_(entry)**
 
 - **sportsBioNow_(existing, sentence, cycle)**
+
+- **postCareerIncome_(ctx, tier)**
 
 - **sportsRetire_(ctx, row, cols, team, cycle, write, ri)**
 
@@ -4895,4 +4902,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1776
+**Functions mapped:** 1779

@@ -120,6 +120,12 @@ No engine writer changes an on-ledger row's `Last`; every `Last` write is on a n
 - MaidenName is empty on all 1058 ledger rows. Consistent with no renamed Family row having reached the ledger yet (all 16 still sit in the pool, Status Family); the emergence door's MaidenName carry (:1198) is unproven on live until one does.
 - A split of the 532 by door (seed vs. later arrival) needs a source the snapshot lacks (no CreatedAt; compressed histories).
 
+## Builder's words, late 2026-11-08 (S643) — Varek's daughter stands
+
+Verbatim: "Varek himself talks about his daughter, [expletive] your data, the life happened, your code is not what matters here … it's not a sim, it's not data, it's a world, these are lives." Earlier the same session: "the entire point of the project is we never edit, cause the distinction matters."
+
+Withdrawn on those words: every repair that removes or ignores the child count — the one-cell correction, the page edits, and the read-side guard on unbacked counts (which also could not tell a dice count from a birth count; the birth code adds 1 to a parent's count with no child row, so a bare count is how the sim stores an off-camera child). The daughter stands as an event the world has lived (CLAUDE.md rule 4); what the world does with her is the builder's. Unchanged and unbuilt: no dice at the arrival door, the wake bench-bleed guard below. No row or page touched.
+
 ## Found the same day, not part of the mint: the wake writers put bench weeks on real citizens' pages
 
 Recovered 2026-11-08 (S643) from the ended session's transcript — the 15:37 finding was never committed; that session's close said it was recorded in this plan and it was not. Status: **found, not fixed, nothing built, no page touched. Open, builder's.**
@@ -134,6 +140,7 @@ The shape of the fix, if the builder wants one: a guard in the wake writers that
 
 ## Changelog
 
+- 2026-11-08 (research-build, S643) — builder's words on Varek's daughter recorded; every repair that removes or ignores the child count withdrawn (§Builder's words, late 2026-11-08). No row or page touched.
 - 2026-11-08 (research-build, S643) — the bench-bleed finding (29 pages, 17 citizens, Cycles 119/126/116) recovered from the ended session's transcript and written here; part re-checked against the wake log, the rest carried and marked so. No code, page or row touched.
 - 2026-11-08 (research-build) — opened on the builder's word at session close; the evidence table read off the snapshot; no code touched.
 - 2026-11-08 (research-build, S642) — Task 1 read done; the three defects traced to their writers (§Task 1 read); four calls written for 1b. No code touched.

@@ -26,3 +26,7 @@ pointers:
 ## Evidence limits
 
 `node scripts/docLoopStatus.js --due --terminal engine-sheet` listed five C115 rows and an overdue count; `--stale-next --staged` produced the organic-row warning above. Both `node --check` commands and `bash -n` passed. `node scripts/docLoopStatus.test.js` passed its 29 pure assertions, then this sandbox denied its nested `spawnSync node` with `EPERM`; the CLI portion and the brief's 39/39 claim were not independently reproduced. I did not execute the boot hook because it has unrelated PM2 and plugin side effects. No live Cycle, Sheet, deployment, or network read was run.
+
+## Correction — 2026-11-07 (codex)
+
+The evidence-limit sentence's “no network read” is too broad: a read-only Supermemory recall was used for review context. No production network verifier was run.

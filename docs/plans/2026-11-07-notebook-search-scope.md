@@ -60,27 +60,43 @@ Live read 2026-11-08: `nlm source list` 149 sources, all status 2 (ready), 3.4 s
 
 ## Design
 
-Decided at pickup, after Task 1. The two shapes on the table:
+**Decision (2026-11-08): the canon search lists the live notebook on every call and scopes to that list.** The add paths stay as they are.
 
-1. Every add and delete path refreshes the inventory after a confirmed add (one shared helper; Saturday run, `notebooklmPush`, `loreIngest`, any hand script).
-2. The search lists the live notebook at query time (one `nlm source list` per call) or refreshes a cached inventory older than its newest source; the add paths stay as they are.
+Shapes considered:
+
+1. Every add/delete path refreshes the inventory (shared helper on the Saturday run, `notebooklmPush`, `loreIngest`). **Rejected:** 17 of the 22 out-of-scope adds and all 69 deletions came through hand paths (MCP tools, the web page) that no script runs (§Reader map). The goal cannot be met by hooking scripts.
+2. The search lists live at query time. **Chosen.** One `nlm source list` = 3.4 s against a 30–180 s query budget; the search ran 8 times in its life. Every add and delete on any path is in scope at the next search, with nothing to keep in sync.
+2b. The search refreshes a cached inventory when stale. **Rejected:** the wrapper's only permitted local write is the metadata log (`.claude/agents/source-search/SKILL.md:61`); a cache needs a staleness signal the listing would have to fetch anyway.
+
+**Shape of the change, `scripts/notebooklmCanonSearch.js` only:**
+
+- `main` drops `readJson(INVENTORY_PATH)`. New stage `source_list` runs one `nlm source list <notebookId> --json` (same spawn shape as `runQuery`; 60 s timeout) before `selectSourceIds`. `INVENTORY_PATH` constant removed.
+- `openPolicyFromInventory(inventory, policy)` becomes `openPolicyFromSources(sources, policy)`: same merge (every live id allowed in both classes, `excludedSourceIds` empty, policy decisions kept, titles filled for undecided ids). The notebook-id check moves to `config.notebookId === policy.notebookId` (already at :408); the listing is fetched for `config.notebookId`, so the separate inventory-id check has nothing to compare.
+- **Status filter:** scope = sources with `status === 2` (ready, `notebooklm_tools/core/sources.py:88-97`). Any other status is left out and named on stderr (id + title + status), never silently. Rationale: a processing source cannot answer; a failed one (3) should not ride every query's id list. Today 149/149 are status 2.
+- **Fail closed:** a failed, empty, or non-JSON listing throws. No fallback to any file. `classifyResultStatus` gains `source_list` → `auth_failure` when the auth regex matches, else `no_result` (today a pre-query error classifies as `not_run` / `citation_failure`).
+- **Injectable:** `main(argv, deps)` with `deps.listSources` / `deps.runQuery` defaulting to the spawn versions, so tests run without `nlm`. Exports gain `openPolicyFromSources`, `normalizeLiveSources`, `classifyResultStatus` stays.
+- Untouched: `validateQueryResponse` (sources used / cited must be in the selected scope — now the live ready list), the retrieval log record, `--source-ids` / `--source-class` arguments, `notebooklmHeadlessEval.js` (passes explicit `--source-ids`, checked against the live list).
+
+**Fence (not this job):** `notebooklmSourceInventory.js` and `notebooklmCanonSourcesValidate.js` keep the inventory file as their diagnostic; the validator's `3824b8b0` drift and the 69 live ids with no policy entry are reported in Task 3, not classified. `nlmCanonBrief`, the push summary query and the 08:00 continuity scope are not changed.
 
 ## Tasks
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
 | 1 | Reader map: every path that queries the permanent notebook (cron and manual) and what scope it uses; every path that adds or deletes a source | es | done 2026-11-08 (§Reader map) |
-| 2 | Design pick from Task 1 (shape 1, 2 or both), advisor, one codex review | es | not started |
+| 2 | Design pick from Task 1 (shape 1, 2 or both), advisor, one codex review | es | shape 2 picked, advisor folded 2026-11-08; codex review sent |
 | 3 | Build + tests; one refresh run on live; the strict validator's lore `3824b8b0-…` and the 69 unclassified ids reported, not hand-classified | es | not started |
 | 4 | Change log line in `docs/reference/NotebookLM.md`; `lore-ingest` SKILL step trued | es | not started |
 
 ## Acceptance
 
-1. After a source add on live, the canon search's scope holds the new id with no hand step — proven by one add + one scoped query naming it.
+1. An add reaches scope with no hand step — proven by the 22 sources added since 2026-10-18 (no inventory refresh since) all sitting in the rebuilt search's scope on readback, and confirmed at the next real add (C115's Saturday edition) by one scoped query naming it. No test source goes into the permanent notebook: every source in it is canon (builder ruling, `notebooklmCanonSearch.js:100-102`).
 2. The 22 sources above are in scope and the 69 dead ids are not — proven by readback of the scope against `nlm source list`.
-3. A query that cites C114 answers instead of failing closed — proven by one live query.
+3. A query that cites C114 answers instead of failing closed — proven by one live query on the exact candidate (149 ids on one `--source-ids` has never run; this is the end-to-end proof).
+4. A failed listing fails closed with `auth_failure` or `no_result` in the retrieval log, and no file is read in its place — proven by test.
 
 ## Changelog
 
+- 2026-11-08 — Task 2 design: live listing on every search (shape 2), status-2 filter, fail closed, injectable; Acceptance 1 rewritten so no test source enters the permanent notebook; Acceptance 4 added.
 - 2026-11-08 — Task 1 reader map: the canon search is the only reader on the inventory and runs manual-only; the 08:00 cron scopes by the current policy; the out-of-scope adds and all 69 deletions came through hand paths with no script to hook.
 - 2026-11-07 — filed from the builder's words after the C114 notebook swap surfaced the stale inventory; current state read live (22 out of scope, 69 dead). Stub; design at pickup.

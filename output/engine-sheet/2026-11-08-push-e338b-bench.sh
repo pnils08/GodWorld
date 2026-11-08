@@ -13,7 +13,7 @@ OUT=/root/GodWorld/output/engine-sheet
 S42_MAN=$OUT/stage42-e338a.sha256
 S42_COMMIT=323311fc4
 FILES="utilities/setupSportsFeedValidation.js utilities/citizenDialMap.js phase02-world-state/applySportsSeason.js phase05-citizens/applyGameNightMoments.js phase05-citizens/processAdvancementIntake.js phase05-citizens/educationCareerEngine.js"
-SRC=${1:?commit}; MAN=${2:?manifest}; DRY=${3:-}
+SRC=${1:?commit}; MAN=${2:?manifest}; DRY=${3:-}; STAGE=${STAGE:-43}
 W=$(mktemp -d); mkdir -p "$W/stage" "$W/pullback"
 tree() { ( cd "$W/stage" && find . -type f ! -name .clasp.json | sort | xargs sha256sum ) 2>/dev/null; }
 ( cd "$W/stage" && printf '{"scriptId":"%s","rootDir":""}' "$BENCH_ID" > .clasp.json && "$CLASP" pull >/dev/null )
@@ -31,8 +31,8 @@ PAT=$(echo $FILES | sed 's/ /$|/g')'$'
 grep -vE "$PAT" "$MAN" | diff -q - <(grep -vE "$PAT" "$S42_MAN") >/dev/null \
   || { echo "built stage differs from stage 42 outside the six files — stop"; exit 1; }
 [ "$(wc -l < "$MAN")" = "$(wc -l < "$S42_MAN")" ] || { echo "file count differs from stage 42 — stop"; exit 1; }
-echo "stage 43 = stage 42 + engine.338b (6 files) at $SRC; manifest $MAN"
-LABEL="bench 1004 = stage 43: stage 42 + engine.338b at $SRC"
+echo "stage $STAGE = stage 42 + engine.338b (6 files) at $SRC; manifest $MAN"
+LABEL="bench 1004 = stage $STAGE: stage 42 + engine.338b at $SRC"
 if [ "$DRY" = "--dry-run" ]; then echo "dry run: stopping before the push ($W/stage)"; exit 0; fi
 grep -q "$BENCH_ID" "$W/stage/.clasp.json" || { echo "staged .clasp.json is not the bench — stop"; exit 1; }
 ( cd "$W/stage" && CLAUDE_CTL=1 "$CLASP" push --force | tail -1 )

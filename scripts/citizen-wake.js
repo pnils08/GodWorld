@@ -218,7 +218,7 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   // engine.338: a wake that carries the builder's question asks THAT — the question is the provocation — and closes on
   // the one structured MOVE line lib/nextChapter.js reads (never a regex over his prose).
   if (questionText) {
-    const userQ = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${nextChapter.questionFrame(questionText)}`;
+    const userQ = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${nextChapter.questionFrame(questionText, c.record && c.record.tier)}`; // codex F1: his Tier's titles only
     return { system, user: userQ, disp, prov: { id: 'question', route: 'owed', text: questionText } };
   }
   const user = `${WAKE_FRAME[WAKE] || WAKE_FRAME.evening}. ${prov.text}\n\nIn 4-5 sentences, think on the page the way you actually would — private, honest, first person. Don't narrate events like a story; just sit with it.`;
@@ -258,8 +258,10 @@ async function generateVoice(system, user, maxTokens) {
 // the page already holds his words; the move waits in the ledger for a re-file.
 const MOVES_DIR = path.join(__dirname, '..', 'output', 'citizen-moves');
 function appendMoveLine(cycle, line) {
-  fs.mkdirSync(MOVES_DIR, { recursive: true });
-  fs.appendFileSync(path.join(MOVES_DIR, 'moves_c' + cycle + '.jsonl'), JSON.stringify(line) + '\n');
+  try {
+    fs.mkdirSync(MOVES_DIR, { recursive: true });
+    fs.appendFileSync(path.join(MOVES_DIR, 'moves_c' + cycle + '.jsonl'), JSON.stringify(line) + '\n');
+  } catch (e) { logLine('next-chapter: move ledger write failed (' + e.message + '): ' + JSON.stringify(line)); }
 }
 async function fileNextChapter(c, cycle, question, parsed, dry) {
   const date = new Date().toISOString().slice(0, 10);
@@ -282,7 +284,7 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   } catch (e) {
     say(`${c.popId} chose ${parsed.move.role} but the sheets could not be read (${e.message}) — held in the ledger, no row`);
     if (!dry) appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'held', reason: 'read-failed: ' + e.message, role: parsed.move.role, where: parsed.move.where }, base)));
-    return { status: 'held' };
+    return { status: 'held', retry: true };
   }
   const emp = nextChapter.resolveEmployer(parsed.move.role, parsed.move.where, c, biz);
   const header = adv[0] || [];
@@ -306,7 +308,7 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   } catch (e) {
     say(`${c.popId}: Advancement_Intake1 append failed (${e.message}) — held`);
     appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'held', reason: 'append-failed: ' + e.message }, entry)));
-    return { status: 'held' };
+    return { status: 'held', retry: true };
   }
   appendMoveLine(cycle, nextChapter.moveLedgerLine(Object.assign({ status: 'queued' }, entry)));
   say(`${c.popId} chose ${parsed.move.role} at ${where} — Advancement_Intake1 row filed; the next fire applies it`);
@@ -483,7 +485,7 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   const reply = await generateVoice(system, user, question ? VOICE_TOKENS_QUESTION : VOICE_TOKENS);
   console.log('\n--- reflection ---\n' + reply + '\n------------------');
   // engine.338 — the MOVE line is read once and stripped: the page and Reflection_Intake carry his words, not the line
-  const parsedMove = question ? nextChapter.parseMove(reply) : null;
+  const parsedMove = question ? nextChapter.parseMove(reply, c.record && c.record.tier) : null; // codex F1: an ineligible title is refused
   const reflection = parsedMove ? parsedMove.text : reply;
   if (parsedMove) logLine(`next-chapter: ${c.popId} answered "${question.slice(0, 80)}" -> ${parsedMove.move ? 'role=' + parsedMove.move.role + (parsedMove.move.where ? ' where=' + parsedMove.move.where : '') : parsedMove.reason}`);
 
@@ -501,6 +503,15 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   //    order, where a classify error only skipped intake).
   let cls = {};
   try { cls = await classifier.classifyTripleReflection_(reflection, openTensions.map((t) => t.q)); } catch (e) { cls = { raw: 'classify threw: ' + e.message }; }
+
+  // 2a) engine.338 — his answer, filed FIRST (codex F7): the move-ledger line and, on a pool title, the Advancement_Intake1
+  //     row. A read or append failure here exits before the page lands and before the owed receipt is spent, so the
+  //     question stays owed and the next wake asks again; a row that did land is found by hasQueuedRow (one row per
+  //     citizen) and never doubled. Refused / declined answers write their ledger line and go on to the page.
+  if (parsedMove && cycle) {
+    const filed = await fileNextChapter(c, cycle, question, parsedMove, false);
+    if (filed.status === 'held' && filed.retry) { logLine('next-chapter: the row could not be filed — no page, the question stays owed (retried at his next wake)'); process.exit(1); }
+  }
 
   // 2) narrative store: ensure the page pointer (AW), append the reflection (ungated).
   const ptr = await page.ensurePagePointer_(c.popId);
@@ -533,10 +544,6 @@ async function fileNextChapter(c, cycle, question, parsed, dry) {
   if (step.outcome === 'shown' && receipted.length) logLine(`owed spent: ${receipted.map((e) => e.id).join(',')} (slot=${picked.slot})`);
   if (step.outcome === 'shown-not-saved') logLine('owed: shown line not saved — the pending line already counts this wake as spent');
   logLine(`page ${ptr.tag} (${ptr.created ? 'created' : 'existing'}) <- reflection doc ${appended.id || '?'}`);
-
-  // 2b) engine.338 — his answer, filed: the move ledger line and (on a pool title) the Advancement_Intake1 row. After the
-  //     page landed (his words are on the record either way), before the intake tags. Held, never thrown.
-  if (parsedMove && cycle) await fileNextChapter(c, cycle, question, parsedMove, false);
 
   // 3) B2 tension register (seams Task 3) — voice-memory only: page lines + local index, NEVER
   //    Reflection_Intake (tensions don't drain into dials). Resolution first, then new capture —

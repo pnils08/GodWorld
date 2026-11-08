@@ -196,7 +196,8 @@ async function main() {
       console.error('dumpBeatTabs: ABORT — ' + tab + ' did not return a row array.');
       process.exit(1);
     }
-    data[tab] = rows;   // 0 rows is a legal state (Hospital_Ledger can be empty); the file is written empty
+    // engine.338: a `question` feed row is one citizen's — it never reaches the beats (every desk slice reads this dump)
+    data[tab] = tab === 'Oakland_Sports_Feed' ? require('../lib/feedPrivacy').publicFeedRows(rows) : rows;   // 0 rows is a legal state (Hospital_Ledger can be empty); the file is written empty
   }
 
   // G-PF35 monotonic stamp, same rule as dumpLedger.js.

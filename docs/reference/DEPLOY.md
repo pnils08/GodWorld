@@ -67,7 +67,9 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Bench (2026-11-07 night, research-build):** SANDBOX 1004 **@194 = stage 42** = stage 41 + `engine94SheetContract.js`, `godWorldEngine2.js`, `applyGameNightMoments.js` at `323311fc4` (engine.338 Task 2a; manifest `output/engine-sheet/stage42-e338a.sha256`), data = live C114 after the final sync — DEPLOY_HISTORY §Current sandbox.
+**Bench (2026-11-08, research-build):** SANDBOX 1004 **@195 = stage 43** = stage 42 + the six engine.338b files at `506ca6b28` (the `question` trigger, the intake door whole, the pool; manifest `output/engine-sheet/stage43-e338b.sha256`), data = live C114 after the final sync; three fires PASS — DEPLOY_HISTORY §Current sandbox. Ahead of PROD (stage 42) until the fold candidate benches as stage 44 and ships.
+
+**Previous bench (2026-11-07 night, research-build):** SANDBOX 1004 **@194 = stage 42** = stage 41 + `engine94SheetContract.js`, `godWorldEngine2.js`, `applyGameNightMoments.js` at `323311fc4` (engine.338 Task 2a; manifest `output/engine-sheet/stage42-e338a.sha256`), data = live C114 after the final sync — DEPLOY_HISTORY §Current sandbox.
 
 **Live (2026-11-07, night):** PROD = **stage 42** = stage 41 + the three engine.338a files at `323311fc4` (post-career Income by Tier at the sports retirement flip: Tier 1 250,000 · Tier 2 120,000 from World_Config, the `[Retirement]` line names it, Tier 3–4 untouched), web app **@178** — DEPLOY_HISTORY §PROD stage 42. SANDBOX 1004 @194 = stage 42, data = live C114.
 

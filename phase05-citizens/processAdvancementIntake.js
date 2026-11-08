@@ -818,9 +818,15 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
     var pvFirst = iFirst >= 0 ? String(intakeData[pv][iFirst] || '').trim() : '';
     var pvLast = iLast >= 0 ? String(intakeData[pv][iLast] || '').trim() : '';
     if (!pvFirst && !pvLast) continue;
+    var pvExisting = (advNameIndex[normalizeCitizenName_(pvFirst) + ' ' + normalizeCitizenName_(pvLast)] || []).length > 0;
+    // codex F9: a family / household / owner-door row that collides with an existing name is SKIPPED by the body (never
+    // applied), so its cells are not checked here — a bad cell on a row nothing would apply must not refuse the queue.
+    var pvCarried = (iMatchPop >= 0 && String(intakeData[pv][iMatchPop] || '').trim()) || (iMatchName >= 0 && String(intakeData[pv][iMatchName] || '').trim()) ||
+      (iHouseholdKey >= 0 && String(intakeData[pv][iHouseholdKey] || '').trim()) || (iOwnerBiz >= 0 && String(intakeData[pv][iOwnerBiz] || '').trim());
+    if (pvExisting && pvCarried) continue;
     var pvRaw = iClockMode >= 0 ? String(intakeData[pv][iClockMode] || '').trim() : '';
     if (pvRaw && !MINT_CLOCK_MODES_[pvRaw.toUpperCase()]) throw new Error('processAdvancementIntake_: Advancement_Intake row for "' + pvFirst + ' ' + pvLast + '" carries ClockMode "' + pvRaw + '", which is not ENGINE, GAME, CIVIC or MEDIA — fix the cell (no row in the queue was processed).');
-    if ((advNameIndex[normalizeCitizenName_(pvFirst) + ' ' + normalizeCitizenName_(pvLast)] || []).length) {
+    if (pvExisting) {
       var pvEmp = iEmployerBiz >= 0 ? String(intakeData[pv][iEmployerBiz] || '').trim() : '';
       if (pvEmp && !ADV_EMPLOYER_SENTINELS_[pvEmp.toUpperCase()]) {
         var pvBook = pvEmp.indexOf('BIZ-') === 0 ? bizBook_() : null;
@@ -945,9 +951,10 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
       var moved = []; // the Advancement line names every cell that moved
       var popId = lPopId >= 0 ? ledgerRows[existingRow][lPopId] : '';
       var clockBefore = lClockMode >= 0 ? String(ledgerRows[existingRow][lClockMode] || '').trim().toUpperCase() : '';
-      var clockNow = clockBefore;
+      var clockNow = clockBefore, clockChanged = false;
       if (lClockMode >= 0 && rawClockMode && rawClockMode.toUpperCase() !== clockBefore) {
         clockNow = rawClockMode.toUpperCase();
+        clockChanged = true;
         ledgerRows[existingRow][lClockMode] = clockNow;
         moved.push('ClockMode ' + (clockBefore || '(blank)') + ' -> ' + clockNow);
       }
@@ -964,9 +971,11 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
             var book = bizBook_();
             var bizRec = book && book.byId[empNew];
             if (bizRec && bizRec.stated !== null) {
-              bizRec.stated += 1; // the batch sees its own hires
-              queueCellIntent_(ctx, 'Business_Ledger', bizRec.sheetRow, book.countCol + 1, bizRec.stated,
-                'engine.338 intake re-home: ' + popId + ' joins ' + bizRec.name, 'citizens');
+              // codex F3: Career (Phase5-Career, before this phase) may already hold a pending intent on this very cell
+              // (its headcount write-back, old + net); two intents on one cell land last-wins at Phase 10, so the hire is
+              // ADDED to the pending value when one exists — never a second intent that would erase Career's movement.
+              bizRec.stated = bumpPendingCellIntent_(ctx, 'Business_Ledger', bizRec.sheetRow, book.countCol + 1, bizRec.stated + 1,
+                'engine.338 intake re-home: ' + popId + ' joins ' + bizRec.name);
             }
             var acs = ctx.summary && ctx.summary.careerSignals;
             if (acs && acs.businessDeltas && clockNow !== 'GAME') {
@@ -978,11 +987,15 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
       }
       // EconomicProfileKey follows the role: the catalog key the new title carries, else blank — a stale key would price
       // him as the job he left. A GAME row takes none (the roster's word — SPORTS_OVERRIDE or blank — is the sports layer's).
+      // codex F5: a row LEAVING the GAME clock with its role unchanged re-keys too — SPORTS_OVERRIDE left behind would keep
+      // him on the sports layer (isSportsLayerRow_) with an ENGINE clock, outside the money and career paths.
       var lEconKey = findColByName_(ledgerHeaders, 'EconomicProfileKey');
       var keyChanged = false;
-      if (roleChanged && lEconKey >= 0 && clockNow !== 'GAME') {
+      var leftGame = clockChanged && clockBefore === 'GAME';
+      if ((roleChanged || leftGame) && lEconKey >= 0 && clockNow !== 'GAME') {
         var keyBefore = String(ledgerRows[existingRow][lEconKey] || '').trim();
-        var keyNow = (typeof catalogRoleKey_ === 'function') ? catalogRoleKey_(roleType) : '';
+        var keyRole = roleChanged ? roleType : (lRoleType >= 0 ? String(ledgerRows[existingRow][lRoleType] || '').trim() : '');
+        var keyNow = (typeof catalogRoleKey_ === 'function') ? catalogRoleKey_(keyRole) : '';
         if (keyBefore !== keyNow) {
           ledgerRows[existingRow][lEconKey] = keyNow;
           keyChanged = true;
@@ -1875,6 +1888,29 @@ function mintNamedEmployer_(role) {
 var MINT_CLOCK_MODES_ = { ENGINE: true, GAME: true, CIVIC: true, MEDIA: true };
 // engine.338: the two EmployerBizId words that are not a tracked business (the mint's own sentinels)
 var ADV_EMPLOYER_SENTINELS_ = { SELF_EMPLOYED: true, UNTRACKED: true };
+
+// engine.338 (codex F3): one cell, one pending intent. If this run already queued a cell intent on (tab, row, col) — the
+// career engine's headcount write-back, an earlier re-home in this batch — its value is raised to `value` only when
+// `value` is one more than the pending value's own baseline is unknowable, so the rule is: ADD the hire to the pending
+// value (pending + 1) rather than overwrite it with a count read from the tab before Career moved it. No pending intent
+// → queue `value` (the tab's count + 1). Returns the value now pending. Phase 10 writes the one intent.
+function bumpPendingCellIntent_(ctx, tab, row, col, value, reason) {
+  var pend = ctx && ctx.persist && Array.isArray(ctx.persist.updates) ? ctx.persist.updates : null;
+  if (pend) {
+    for (var i = pend.length - 1; i >= 0; i--) {
+      var it = pend[i];
+      if (it && it.kind === 'cell' && it.tab === tab && it.address && it.address.row === row && it.address.col === col) {
+        var cur = Number(it.values && it.values[0] && it.values[0][0]);
+        var next = (isNaN(cur) ? value : cur + 1);
+        it.values = [[next]];
+        it.reason = String(it.reason || '') + ' | ' + reason;
+        return next;
+      }
+    }
+  }
+  queueCellIntent_(ctx, tab, row, col, value, reason, 'citizens');
+  return value;
+}
 
 // engine.338: Business_Ledger as the existing-row door reads it — every BIZ_ID with its 1-based sheet row, its stated
 // Employee_Count (null when blank / non-numeric: a count the door never invents) and its name; countCol is the 0-based

@@ -13,12 +13,13 @@ const intents = [], cellIntents = [], logs = [];
 const FIELD = new Function('ECONOMIC_PARAMETERS', 'Logger',
   ['utilities/citizenDerivation.js', 'phase05-citizens/runCareerEngine.js', 'phase05-citizens/generationalWealthEngine.js', 'phase05-citizens/educationCareerEngine.js'].map(R).join('\n') +
   '\nreturn { roleFieldOf_, skillTagField_, sectorCategory_, setCurrentField_, catalogRoleKey_ };')(JSON.parse(R('data/economic_parameters.json')), { log() {} });
-const PAY = { 'Accountant / CPA': 132000, 'Cybersecurity Analyst': 178000, 'Club Coach / Instructor': 140000 };
+const PAY = { 'Accountant / CPA': 132000, 'Cybersecurity Analyst': 178000, 'Club Coach / Instructor': 140000, 'Junior Accountant': 81000 };
 const sandbox = {
   ECONOMIC_PARAMETERS: JSON.parse(R('data/economic_parameters.json')),
   Logger: { log(m) { logs.push(String(m)); } },
   queueAppendIntent_: (ctx, tab, row) => intents.push({ tab, row }),
-  queueCellIntent_: (ctx, tab, row, col, value, reason) => cellIntents.push({ tab, row, col, value, reason }),
+  // mirrors utilities/writeIntents.js: the intent lands on ctx.persist.updates (where bumpPendingCellIntent_ finds it) and is recorded here at creation
+  queueCellIntent_: (ctx, tab, row, col, value, reason) => { const it = { tab, kind: 'cell', address: { row, col }, values: [[value]], reason, domain: 'citizens', priority: 100 }; (ctx.persist = ctx.persist || { updates: [] }).updates.push(it); cellIntents.push({ tab, row, col, value, reason }); },
   recordRipple_: () => {},
   inWorldStamp_: () => 'Y3C2',
   jobReferencePay_: (role) => (PAY[role] === undefined ? null : PAY[role]),
@@ -156,6 +157,26 @@ function run(w) { intents.length = 0; cellIntents.length = 0; logs.length = 0; r
   check('key untouched on a GAME row', m[col('EconomicProfileKey')] === 'SPORTS_OVERRIDE');
 }
 
+// ── 4b. codex F5: a clock-only exit from GAME re-keys — SPORTS_OVERRIDE cannot ride an ENGINE clock
+{
+  const w = world([advRow({ First: 'Mike', Last: 'Paulson', ClockMode: 'ENGINE', Notes: 'stepping back from the clubs' })]);
+  run(w);
+  const m = rowOf(w, 'POP-00527');
+  check('GAME -> ENGINE with the role unchanged clears SPORTS_OVERRIDE (no catalog key for the GM title)', m[col('ClockMode')] === 'ENGINE' && m[col('EconomicProfileKey')] === '', JSON.stringify([m[col('ClockMode')], m[col('EconomicProfileKey')]]));
+  check('…the line names both', /ClockMode GAME -> ENGINE; EconomicProfileKey SPORTS_OVERRIDE -> \(blank\)/.test(lineFor(w, 'POP-00527')[0]), lineFor(w, 'POP-00527')[0]);
+  const w2 = world([advRow({ First: 'Vinnie', Last: 'Keane', ClockMode: 'MEDIA' })]);
+  run(w2);
+  check('ENGINE -> MEDIA (not a GAME exit) leaves the key alone', rowOf(w2, 'POP-00001')[col('EconomicProfileKey')] === '' && !/EconomicProfileKey/.test(lineFor(w2, 'POP-00001')[0]));
+}
+
+// ── 4c. codex F6: a trainee title that is also a catalog title keys to the profile it trains into, as the settlement does
+{
+  const w = world([advRow({ First: 'Vinnie', Last: 'Keane', RoleType: 'Junior Accountant' })]);
+  run(w);
+  check('Junior Accountant → key Accountant / CPA (the trainee table before the catalog)', rowOf(w, 'POP-00001')[col('EconomicProfileKey')] === 'Accountant / CPA', rowOf(w, 'POP-00001')[col('EconomicProfileKey')]);
+  check('catalogRoleKey_: trainee first, exact catalog second, else blank', FIELD.catalogRoleKey_('Nurse Aide') === 'Home Health Aide' && FIELD.catalogRoleKey_('scout') === 'Scout' && FIELD.catalogRoleKey_('Neighborhood Historian') === '');
+}
+
 // ── 5. to GAME with the club: clock and employer move, no key, no ripple signal; the club still counts the hire
 {
   const w = world([advRow({ First: 'Vinnie', Last: 'Keane', RoleType: 'Club Coach / Instructor', EmployerBizId: 'BIZ-00005', ClockMode: 'GAME', Notes: 'the cage' })]);
@@ -180,8 +201,20 @@ function run(w) { intents.length = 0; cellIntents.length = 0; logs.length = 0; r
   run(w);
   const r = rowOf(w, 'POP-00900');
   check('employer moves; role kept', r[col('EmployerBizId')] === 'BIZ-00070' && r[col('RoleType')] === 'Junior Accountant');
-  check('Income re-priced on the row\'s own role (Junior Accountant has no stub price → the salary pools / untouched)', r[col('Income')] === 75000 || typeof r[col('Income')] === 'number');
+  check('Income re-priced on the row\'s own role (codex F10: a deterministic price, asserted)', r[col('Income')] === 81000, String(r[col('Income')]));
+  check('…and the line names the Income move', /EmployerBizId BIZ-00060 -> BIZ-00070; Income 75000 -> 81000\./.test(lineFor(w, 'POP-00900')[0]), lineFor(w, 'POP-00900')[0]);
   check('Ledger & Loom grows 9 -> 10', cellIntents.length === 1 && cellIntents[0].value === 10 && cellIntents[0].row === 5, JSON.stringify(cellIntents));
+  // codex F3: Career already holds a pending intent on the same cell this Cycle — the hire is ADDED to it, no second intent
+  const wP = world([advRow({ First: 'Rosa', Last: 'Nguyen', EmployerBizId: 'BIZ-00070' })]);
+  const pending = { tab: 'Business_Ledger', kind: 'cell', address: { row: 5, col: BIZ_H.indexOf('Employee_Count') + 1 }, values: [[11]], reason: 'career-engine headcount write-back (2 hired, 0 left)', domain: 'citizens', priority: 100 };
+  wP.ctx.persist = { updates: [pending] };
+  run(wP);
+  check('a pending Career intent on the cell is raised by one (11 -> 12), not overwritten with tab+1 (10)', pending.values[0][0] === 12 && cellIntents.length === 0 && /intake re-home/.test(pending.reason), JSON.stringify(pending));
+  // two re-homes onto one business in a batch: one intent, +2
+  const w2b = world([advRow({ First: 'Rosa', Last: 'Nguyen', EmployerBizId: 'BIZ-00050' }), advRow({ First: 'Vinnie', Last: 'Keane', EmployerBizId: 'BIZ-00050' })]);
+  run(w2b);
+  const pend2 = w2b.ctx.persist.updates.filter(it => it.tab === 'Business_Ledger');
+  check('two hires onto one business in a batch land as ONE pending intent at 14 (12 + 2)', pend2.length === 1 && pend2[0].values[0][0] === 14 && cellIntents.length === 1, JSON.stringify(pend2));
   const w2 = world([advRow({ First: 'Vinnie', Last: 'Keane', EmployerBizId: 'BIZ-00060' })]);
   run(w2);
   check('a blank Employee_Count is never invented (no intent), the employer still moves', cellIntents.length === 0 && rowOf(w2, 'POP-00001')[col('EmployerBizId')] === 'BIZ-00060');
@@ -207,10 +240,12 @@ function run(w) { intents.length = 0; cellIntents.length = 0; logs.length = 0; r
   const w3 = world([advRow({ First: 'Vinnie', Last: 'Keane', EmployerBizId: 'the A\'s' })]);
   err = null; try { run(w3); } catch (e) { err = e; }
   check('a word that is no BIZ- id and no sentinel is refused', !!err && /not a BIZ- id, SELF_EMPLOYED or UNTRACKED/.test(err.message), err && err.message);
-  // OwnerOfBizId on an existing row stays the owner doors' — the row is skipped, not applied
-  const w4 = world([advRow({ First: 'Vinnie', Last: 'Keane', RoleType: 'Owner', OwnerOfBizId: 'BIZ-00103' })]);
+  // OwnerOfBizId on an existing row stays the owner doors' — the row is skipped, not applied; codex F9: even with a bad
+  // employer / clock on it, the queue behind it still runs (the body would never apply that row)
+  const w4 = world([advRow({ First: 'Vinnie', Last: 'Keane', RoleType: 'Owner', OwnerOfBizId: 'BIZ-00103', EmployerBizId: 'BIZ-09999', ClockMode: 'Owner' }), good.slice()]);
   run(w4);
-  check('OwnerOfBizId on an existing row is skipped (ownership is the owner doors\')', rowOf(w4, 'POP-00001')[col('RoleType')] !== 'Owner' && w4.sheets.Advancement_Intake1.cleared.length === 1 && logs.some(m => /owner-door row "Vinnie Keane" collides/.test(m)));
+  check('OwnerOfBizId on an existing row is skipped (ownership is the owner doors\'), its bad cells refuse nothing', rowOf(w4, 'POP-00001')[col('RoleType')] !== 'Owner' && w4.sheets.Advancement_Intake1.cleared.length === 2 && logs.some(m => /owner-door row "Vinnie Keane" collides/.test(m)));
+  check('…the good row behind it applied', rowOf(w4, 'POP-00900')[col('RoleType')] === 'Accountant / CPA');
 }
 
 // ── 8. the book

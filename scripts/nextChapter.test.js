@@ -49,10 +49,24 @@ check('questionFromLines reads the pinned [Question] line, either stamp spelling
   assert.strictEqual(tail.length, 5);
 });
 
-check('the frame carries the question verbatim and the one closed line', () => {
-  const f = nc.questionFrame('Would you coach the kids?');
+check('the frame carries the question verbatim and the one closed line, with his Tier\'s titles only (codex F1)', () => {
+  const f = nc.questionFrame('Would you coach the kids?', 1);
   assert.ok(f.includes('"Would you coach the kids?"'));
-  assert.ok(f.includes('MOVE: role=<one of: ' + nc.ROLES.join(' | ') + ' | none>'));
+  assert.ok(f.includes('MOVE: role=<one of: ' + nc.ROLES.join(' | ') + ' | none>'), 'Tier 1 is offered everything');
+  assert.deepStrictEqual(nc.rolesFor(2), ['Sports Analyst (Front Office)', 'Club Coach / Instructor', 'Scout', 'College Coach', 'Youth Academy Director']);
+  assert.deepStrictEqual(nc.rolesFor(3), ['Youth Academy Director']);
+  assert.deepStrictEqual(nc.rolesFor(4), [], 'Tier 4 is offered nothing');
+  assert.deepStrictEqual(nc.rolesFor(''), [], 'a blank Tier reads as the floor');
+  assert.ok(nc.questionFrame('Q?', 4).includes('role=<none'), 'a Tier offered nothing is told to say so');
+  assert.ok(!nc.questionFrame('Q?', 2).includes('Broadcaster'));
+});
+check('parseMove with a Tier refuses an ineligible title, names it; eligible passes; none always passes', () => {
+  const p = nc.parseMove('x\nMOVE: role=Sports Broadcaster / Color Analyst', 3);
+  assert.strictEqual(p.move, null);
+  assert.strictEqual(p.reason, 'tier-gated(Sports Broadcaster / Color Analyst at Tier 3)');
+  assert.strictEqual(nc.parseMove('x\nMOVE: role=Youth Academy Director', 3).move.role, 'Youth Academy Director');
+  assert.strictEqual(nc.parseMove('x\nMOVE: role=none', 4).move.role, 'none');
+  assert.strictEqual(nc.parseMove('x\nMOVE: role=Scout').move.role, 'Scout', 'no Tier given → no gate (the pure parse)');
 });
 
 // the MOVE line
@@ -68,6 +82,15 @@ check('parseMove: case-folded title, quotes and angle brackets tolerated, blank 
   const p2 = nc.parseMove('Some words.\n  move: where= | role=scout.');
   assert.deepStrictEqual(p2.move, { role: 'Scout', where: '' }, 'field order free, trailing period dropped');
 });
+check('parseMove: a half of a slashed title, or a title without its parenthetical, is the title (the bench\'s "Color Analyst")', () => {
+  assert.strictEqual(nc.parseMove('x\nMOVE: role=Color Analyst | where=Oakland A\'s broadcast').move.role, 'Sports Broadcaster / Color Analyst');
+  assert.strictEqual(nc.parseMove('x\nMOVE: role=sports broadcaster').move.role, 'Sports Broadcaster / Color Analyst');
+  assert.strictEqual(nc.parseMove('x\nMOVE: role=Sports Analyst').move.role, 'Sports Analyst (Front Office)');
+  assert.strictEqual(nc.parseMove('x\nMOVE: role=Instructor').move.role, 'Club Coach / Instructor');
+  assert.strictEqual(nc.parseMove('x\nMOVE: role=Hitting Coach').move, null, 'a word not on the list is still refused');
+  assert.strictEqual(nc.parseMove('x\nMOVE: role=Coach').move, null, 'a bare "Coach" is two titles and none');
+  assert.strictEqual(Object.keys(nc.ROLE_ALIASES).length, 11, 'the alias list is closed: 6 titles + 4 halves + 1 unparenthesized');
+});
 check('parseMove: none → declined shape', () => {
   const p = nc.parseMove('Not for me, not now.\nMOVE: role=none | where=');
   assert.deepStrictEqual(p.move, { role: 'none', where: '' });
@@ -80,10 +103,22 @@ check('parseMove: off the vocabulary is refused, named; no line is refused; pros
   assert.strictEqual(nc.parseMove('x\nMOVE: where=Bay Tribune').reason, 'move-missing-role');
   assert.strictEqual(nc.parseMove('').reason, 'no-move-line');
 });
-check('parseMove: the LAST MOVE line wins and only it is stripped', () => {
+check('parseMove: the LAST MOVE line decides and EVERY MOVE line is stripped from his words (codex F8)', () => {
   const p = nc.parseMove('MOVE: role=Scout\nthen I thought again\nMOVE: role=none');
   assert.strictEqual(p.move.role, 'none');
-  assert.strictEqual(p.text, 'MOVE: role=Scout\nthen I thought again');
+  assert.strictEqual(p.text, 'then I thought again');
+});
+
+// engine.338 F2 — the one predicate every public reader of the feed shares
+check('feedPrivacy: a question row is private, in either row shape; everything else is public', () => {
+  const fp = require('/root/GodWorld/lib/feedPrivacy');
+  assert.strictEqual(fp.isPrivateFeedRow({ EventTrigger: 'question', Notes: 'Coach?' }), true);
+  assert.strictEqual(fp.isPrivateFeedRow({ EventTrigger: ' Question ' }), true);
+  assert.strictEqual(fp.isPrivateFeedRow({ EventTrigger: 'retirement' }), false);
+  assert.strictEqual(fp.isPrivateFeedRow({ EventTrigger: '' }), false);
+  assert.strictEqual(fp.isPrivateFeedRow(['115', 'A\'s', 'question'], 2), true);
+  assert.strictEqual(fp.isPrivateFeedRow(['115', 'A\'s', 'question'], -1), false, 'no trigger column → nothing is private');
+  assert.deepStrictEqual(fp.publicFeedRows([{ EventTrigger: 'question' }, { EventTrigger: 'award' }, {}]).length, 2);
 });
 
 // the employer by category

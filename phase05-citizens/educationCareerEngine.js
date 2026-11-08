@@ -919,19 +919,23 @@ var SETTLE_FIELD_ECON_KEYS = {
   'Hospital Orderly':                 'Home Health Aide'
 };
 
-// engine.338: the one lookup for the key a job title carries — an exact catalog title (case-insensitive) is its own
-// key, in the catalog's casing; a trainee title maps through the two tables above; anything else carries no key
-// (''). The settlement keeps its own non-empty fallback (the RoleType itself — the gate that stops the money loop
-// re-deriving a settled citizen); the intake's existing-row door (processAdvancementIntake.js) writes exactly this.
+// engine.338: the one lookup for the key a job title carries — a trainee title maps through the two tables above FIRST
+// (codex F6: `Junior Accountant` and `Nurse Aide` are both a trainee title and a catalog title; the settlement always
+// priced them as the profile they train into, and still does), then an exact catalog title (case-insensitive) is its
+// own key in the catalog's casing; anything else carries no key (''). The settlement keeps its own non-empty fallback
+// (the RoleType itself — the gate that stops the money loop re-deriving a settled citizen); the intake's existing-row
+// door (processAdvancementIntake.js) writes exactly this.
 function catalogRoleKey_(roleText) {
   var t = String(roleText || '').trim();
   if (!t) return '';
+  if (SETTLE_ECON_KEYS[t]) return SETTLE_ECON_KEYS[t];
+  if (SETTLE_FIELD_ECON_KEYS[t]) return SETTLE_FIELD_ECON_KEYS[t];
   var lc = t.toLowerCase();
   var E = economicParameters_();
   for (var i = 0; i < E.length; i++) {
     if (String(E[i].role || '').toLowerCase() === lc) return String(E[i].role);
   }
-  return SETTLE_ECON_KEYS[t] || SETTLE_FIELD_ECON_KEYS[t] || '';
+  return '';
 }
 
 // Youth dial tags (runYouthEngine_ YOUTH_DIAL_TAG) → the field they point to.

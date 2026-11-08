@@ -177,7 +177,9 @@ async function main() {
       const reqMissing = [];
       const recMissing = [];
       for (let i = 0; i < rows.length; i++) {
-        for (const c of SPORTS_REQUIRED) if (blank(rows[i][c])) reqMissing.push(`row ${i + 1}:${c}`);
+        // engine.338: a `question` row asks one citizen; it needs no club (TeamsUsed may be blank — a MUBA legend is on none)
+        const isQuestion = String(rows[i].EventTrigger || '').trim().toLowerCase() === 'question';
+        for (const c of SPORTS_REQUIRED) if (blank(rows[i][c]) && !(isQuestion && c === 'TeamsUsed')) reqMissing.push(`row ${i + 1}:${c}`);
         for (const c of SPORTS_RECOMMENDED) if (blank(rows[i][c])) recMissing.push(`row ${i + 1}:${c}`);
       }
       if (reqMissing.length > 0) {

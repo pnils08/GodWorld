@@ -120,7 +120,9 @@ const isBenchFeed = r => String(r.StoryAngle) === MARK || String(r.Notes).indexO
   const adv = await sh.getSheetData('Advancement_Intake1');
   const advLeft = adv.slice(1).filter(r => String(r[0]) === 'Bench').length;
   const hooks = obj(await sh.getSheetData('Story_Hook_Deck')).rows.filter(r => num(r.Cycle) === N || num(r.CycleId) === N);
-  const hookLeak = hooks.filter(r => /question|Bench Legend|Bench Tierone/i.test(Object.values(r).join(' '))).length;
+  // the leak test: the question's own words or the asked citizens' names in a hook (the word "question" alone is in two
+  // ruled hook pitches — "rhythm question", "the patience question")
+  const hookLeak = hooks.filter(r => /Bench Legend|Bench Tierone|radio side|hitting-coach|more your speed/i.test(Object.values(r).join(' '))).length;
   const wc = await sh.getSheetData('World_Config');
   const key = k => { const r = wc.find(x => String(x[0]).trim() === k); return r ? r[1] : undefined; };
   const ee = obj(await sh.getSheetData('Engine_Errors'));
@@ -131,14 +133,17 @@ const isBenchFeed = r => String(r.StoryAngle) === MARK || String(r.Notes).indexO
     lines: String(r.LifeHistory).split('\n').filter(l => /\[(Retirement|Question)\]/.test(l)) }));
   const logRows = lh.map(r => ({ pop: r.POPID, tag: String(r.EventTag), text: String(r.EventText).slice(0, 200) }));
   const byPop = p => citizens.find(c => c.pop === p) || {};
-  const logsOf = p => logRows.filter(l => l.pop === p);
   const phase = label.replace(/.*-f/, '');
+  // the game-night phase's rows only: the feed-named type line, the bare milestones, the staff / fan week lines — other
+  // phases (micro-events, media, UNDOCKED audience, maneuver) write their own rows at N and are not under test
+  const sportsRow = l => /\|(feedNamed|staffWeek|fanWeek)\|/.test(l.tag) || /^(Retirement|Question)$/.test(l.tag);
+  const logsOf = p => logRows.filter(l => l.pop === p && (phase === '1' ? sportsRow(l) : l.tag === 'Advancement'));
   if (phase === '1') {
     const t1 = byPop('POP-99338'), t2 = byPop('POP-99339'), lg = byPop('POP-99341');
     ck('Tierone retired: ENGINE, Income 250000, one [Retirement] line', t1.clock === 'ENGINE' && Number(t1.income) === 250000 && t1.lines.filter(l => /\[Retirement\]/.test(l)).length === 1, t1);
     ck('Tierone asked: one [Question] life line carrying the text', t1.lines.filter(l => l.indexOf('[Question] ' + Q1) > 0).length === 1, t1.lines);
-    ck('Tierone log rows at N: type line + Retirement + Question = 3, Question bare', logsOf('POP-99338').length === 3 && logsOf('POP-99338').some(l => l.tag === 'Question' && l.text === Q1), logsOf('POP-99338'));
-    ck('Legend (no club, ENGINE): exactly one log row, the bare Question, no game-night texture', logsOf('POP-99341').length === 1 && logsOf('POP-99341')[0].tag === 'Question' && logsOf('POP-99341')[0].text === Q2, logsOf('POP-99341'));
+    ck('Tierone sports log rows at N: type line + Retirement + Question = 3, Question bare, no second type line from the question row', logsOf('POP-99338').length === 3 && logsOf('POP-99338').some(l => l.tag === 'Question' && l.text === Q1) && logsOf('POP-99338').filter(l => /feedNamed/.test(l.tag)).length === 1, logsOf('POP-99338'));
+    ck('Legend (no club, ENGINE): exactly one sports log row, the bare Question, no game-night texture', logsOf('POP-99341').length === 1 && logsOf('POP-99341')[0].tag === 'Question' && logsOf('POP-99341')[0].text === Q2, logsOf('POP-99341'));
     ck('Legend row untouched: ENGINE / Active / key blank / income 70000', lg.clock === 'ENGINE' && lg.status === 'Active' && lg.econ === '' && Number(lg.income) === 70000, lg);
     ck('Tiertwo blank-Notes question asks nothing: type line + Retirement only', logsOf('POP-99339').length === 2 && !logsOf('POP-99339').some(l => l.tag === 'Question'), logsOf('POP-99339'));
     ck('no story hook names the question', hookLeak === 0, hooks.length + ' hooks at N, leak ' + hookLeak);
@@ -150,7 +155,7 @@ const isBenchFeed = r => String(r.StoryAngle) === MARK || String(r.Notes).indexO
       ck(s.Last + ' Income in the catalog band ' + e.band.join('–'), Number(c.income) >= e.band[0] && Number(c.income) <= e.band[1], c.income);
       ck(s.Last + ' SkillTags led by ' + e.field, String(c.tags).split('|')[0] === e.field, c.tags);
       ck(s.Last + ' Tier unchanged', Number(c.tier) === s.tier, c.tier);
-      const adv1 = logsOf(pop).filter(l => l.tag === 'Advancement');
+      const adv1 = logsOf(pop);
       if (phase === '2') ck(s.Last + ' Advancement line names the moved cells', adv1.length === 1 && /RoleType -> /.test(adv1[0].text) && /ClockMode|EmployerBizId|EconomicProfileKey|Income/.test(adv1[0].text), adv1);
       else ck(s.Last + ' re-run line names no moved cell', adv1.length === 1 && !/->/.test(adv1[0].text), adv1);
     }

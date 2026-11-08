@@ -30,7 +30,7 @@ plant() { # <fire>
 }
 AIM=$(node $O/2026-10-19-aimcheck.js 2>&1 | q); echo "$AIM" | tail -1
 echo "$AIM" | grep -q "^AIM = BENCH" || { echo "HALT aim not proven"; exit 5; }
-echo "== push stage 43"; bash $O/2026-11-08-push-e338b-bench.sh "$SRC" $O/stage43-e338b.sha256 || { echo "HALT push"; exit 4; }
+MAN=${MAN:-$O/stage43-e338b.sha256}; echo "== push stage ${STAGE:-43}"; bash $O/2026-11-08-push-e338b-bench.sh "$SRC" $MAN || { echo "HALT push"; exit 4; }
 echo "== sync from live"; node scripts/syncSandboxFromLive.js $B --apply > $SP/$TAG.sync.out 2>&1 || { echo "HALT sync"; tail -20 $SP/$TAG.sync.out; exit 3; }
 tail -2 $SP/$TAG.sync.out | q
 echo "== Economic_Parameters on the bench: append the six pool rows (JSON -> tab, append-only)"

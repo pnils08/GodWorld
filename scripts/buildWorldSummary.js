@@ -1523,7 +1523,7 @@ async function loadCycleData(cycle, opts = {}) {
     carryForward
   ] = await Promise.all([
     sheets.getSheetAsObjects('Riley_Digest'),
-    sheets.getSheetAsObjects('Oakland_Sports_Feed'),
+    sheets.getSheetAsObjects('Oakland_Sports_Feed').then(require('../lib/feedPrivacy').publicFeedRows), // engine.338: a `question` row is one citizen's, never the desks'
     sheets.getSheetAsObjects('Civic_Office_Ledger'),
     sheets.getSheetAsObjects('Neighborhood_Map'),
     sheets.getSheetAsObjects('World_Population'),

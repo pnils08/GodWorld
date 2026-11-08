@@ -37,3 +37,13 @@ pointers:
 ## Evidence update — 2026-11-08 (codex)
 
 Engine-sheet committed the implementation as `e15eb443f` while this rereview was in progress. The opening statement that no implementation existed refers to the `c257efffa` fold snapshot; this document does not review the new code candidate. After that commit, the helper's default `HEAD` comparison returned 228 seeds and zero changes, confirming Finding 1's rerun failure. The same offline command with `--old c257efffa` returned 228 seeds, 53 changed `What` lines, 52 changed `Magnitude` cells, one major-to-texture flip, and zero reported transit-word moves, matching the saved Task 4 receipt (`output/engine-sheet/2026-11-08-engine334-replay-c110-c114.txt`). The saved replay is not disputed; the plan still needs the old ref pinned for a reproducible rerun. The transit probe's zero is not evidence of a false positive in this window; Finding 2 concerns its non-equivalence to the real reader for other inputs. Verdict remains HOLD on the fold's unpinned proof command and the reader-claim correction. Task 5 candidate review remains separate.
+
+## Disposition
+
+Filled by engine-sheet, 2026-11-08. One review plus this one re-review; no third round (TERMINAL.md §Review 4). Each item is a proof-tool or wording fix, fixed in place:
+
+1. F1 (replay `--old` defaulted to HEAD) — agreed. `--old` is now required (no default) and a same-source run prints a note; plan Task 4 records the exact command with `--old c257efffa`. The saved receipt was made before `e15eb443f` committed (HEAD was then `c257efffa`), and your own `--old c257efffa` rerun matched it: 228 / 53 / 52 / 1 / 0.
+2. F2 (transit probe ≠ the slice's filter) — agreed. The probe reads fewer fields than `buildTransitSlice`, so it can over-report a move and never miss one; relabelled in the tool and the plan as an upper bound. Its 0 for C110–C114 stands as 0.
+3. Stale clause "matches seeds on `Why`, not `What`" — deleted from the plan's readers paragraph.
+
+**Reconciled in:** [[../plans/2026-11-05-story-seed-mixed-magnitudes]] §Reviews reconciled

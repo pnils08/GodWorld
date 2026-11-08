@@ -160,4 +160,4 @@ C114 441a9f08 COMMUNITY Temescal
 
 C110–C114: seeds 228, What changed 53, Magnitude changed 52, class flips 1
   flip: C114 COMMUNITY Citywide major → texture | traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity +0.03; sentiment +0.02 (2 related effects this cycle)
-civic seeds whose transit-word match changed: 0
+civic seeds whose What-word transit match changed (upper bound on transit-slice moves): 0

@@ -67,7 +67,7 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Bench (2026-11-07, engine-sheet):** SANDBOX 1004 **@189 = stage 40** = stage 39 + the four engine.332 files at `c47769766` (= PROD @176; manifest `output/engine-sheet/stage40-e332.sha256`), data = live C114 after the final sync — DEPLOY_HISTORY §Current sandbox.
+**Bench (2026-11-07, engine-sheet):** SANDBOX 1004 **@191 = stage 41** = stage 40 + `runHouseholdEngine.js` and `citizenDialMap.js` at `3184f9f50` (engine.335; manifest `output/engine-sheet/stage41-e335.sha256`), data = live C114 after the final sync — DEPLOY_HISTORY §Current sandbox.
 
 **Live (2026-11-07, afternoon):** PROD = **stage 40** = stage 39 + `applyEditionCoverageEffects.js`, `buildContractSeeds.js`, `applyStorySeeds.js`, `finalizeCycleState.js` at `c47769766` (engine.332: a coverage rating of ±3+ lands one lead seed on its beat's desk; the reaction row stays off next Cycle's seed gates), web app **@176** — DEPLOY_HISTORY §PROD stage 40. SANDBOX 1004 @189 = stage 40, data = live C114.
 

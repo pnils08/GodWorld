@@ -1,0 +1,241 @@
+AIM = BENCH (script read the bench marker)
+== push stage 41
+bench pulled = a stage 41; the files back at stage 40 = stage 40
+stage 41 = stage 40 + engine.335 (2 files) at 3184f9f50; manifest output/engine-sheet/stage41-e335.sha256
+Script is already up to date.
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @191
+pull-back 167 js + manifest byte-identical to stage41-e335.sha256
+== sync from live
+  verify Story_Hook_Deck: bench 2132 rows vs live 2132 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"114","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":116,"startedMs":1794095850241,"state":"done","finishedMs":1794095984203},"raw":"{\"cycle\":116,\"startedMs\":1794095850241,\"state\":\"done\",\"finishedMs\":1794095984203}","valid":true,"expectOk":null}
+clearfire 116: {"ok":true,"cleared":{"cycle":116,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+== fire 1: the seeder's Oaks L1 (a loss night)
+Edition_Coverage_Ratings C114: 2 rows (window 114,113,112,111,110,109,108,107), sandbox already has COMMUNITY,CULTURE,ECONOMIC,INFRASTRUCTURE,SPORTS
+Citizen_Media_Usage C114: 0 rows (sandbox already has a published or seeded week at C114)
+Oakland_Sports_Feed C115: 1 rows
+  Oaks early-season game-result H:W A:L rec 7-2 streak L1 names: Dillon Brooks, Adash Stanley, Wendell Carter Jr, AJ Dybantsa
+appended 2 to Edition_Coverage_Ratings; marked rows on the tab now 2
+appended 1 to Oakland_Sports_Feed; marked rows on the tab now 1
+bench cycleCount 114
+snap e335-2-f1: 1058 rows
+fire C115 rc=0 "verdict": "PASS" "wallS": 147
+{
+ "label": "e335-2-f1",
+ "N": 115,
+ "at": "2026-11-08T00:06:20.664Z",
+ "cycleCount": "115",
+ "feedAtN": [
+  {
+   "team": "A's",
+   "type": "roster-move",
+   "streak": "-",
+   "week": "",
+   "rec": "-",
+   "bench": false
+  },
+  {
+   "team": "Oaks",
+   "type": "game-result",
+   "streak": "L1",
+   "week": "H:W A:L",
+   "rec": "7-2",
+   "bench": true
+  }
+ ],
+ "householdGameNightByTag": {
+  "Household-GameNight-Loss": 1
+ },
+ "householdLines": [
+  {
+   "pop": "POP-00202",
+   "tag": "Household-GameNight-Loss",
+   "text": "turned the broadcast off early after the loss",
+   "fx": {
+    "family": 5,
+    "fandom": -1
+   },
+   "cycleNetFromAllLines": {
+    "openness": 2,
+    "family": 5,
+    "fandom": -1
+   },
+   "ownLines": 3,
+   "fandom": [
+    null,
+    85
+   ],
+   "family": [
+    94,
+    94
+   ],
+   "tpUpdated": [
+    "c110",
+    "c115"
+   ],
+   "dialState": [
+    {
+     "base": {
+      "family": 93.50308308713359,
+      "fandom": 85
+     },
+     "mood": {
+      "family": 0,
+      "fandom": 0
+     },
+     "streak": {
+      "family": 1,
+      "fandom": 0
+     },
+     "folded": 114
+    },
+    {
+     "base": {
+      "family": 93.50308308713359,
+      "fandom": 85
+     },
+     "mood": {
+      "family": 0.6496916912866411,
+      "fandom": -1
+     },
+     "streak": {
+      "family": 1,
+      "fandom": -1
+     },
+     "folded": 115
+    }
+   ]
+  }
+ ],
+ "gameNightRipples": [
+  {
+   "detail": "Game night reached 1 household(s) — streak L1",
+   "n": 1
+  }
+ ],
+ "cityFanLines": {
+  "Sports-Fandom-Up-S": 174,
+  "Sports-Fandom-Down-S": 30,
+  "Background-Fandom-Up-S": 3
+ },
+ "engineErrorsAtN": []
+}
+== fire 2: plant an Oaks W2 at C116 (a win night)
+planted 1 Oaks row(s) at C116: game-result streak W2 rec 8-2 names Dillon Brooks, Adash Stanley, Wendell Carter Jr, AJ Dybantsa
+Edition_Coverage_Ratings C115: 7 rows (window 114,113,112,111,110,109,108,107)
+Citizen_Media_Usage C115: 35 rows from live C114
+Oakland_Sports_Feed C116: 1 rows
+  Oaks: sandbox has a C116 row, skipped
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 9
+appended 35 to Citizen_Media_Usage; marked rows on the tab now 35
+appended 1 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 115
+snap e335-2-f2: 1066 rows
+fire C116 rc=0 "verdict": "PASS" "wallS": 160
+{
+ "label": "e335-2-f2",
+ "N": 116,
+ "at": "2026-11-08T00:09:31.605Z",
+ "cycleCount": "116",
+ "feedAtN": [
+  {
+   "team": "Oaks",
+   "type": "game-result",
+   "streak": "W2",
+   "week": "H:W",
+   "rec": "8-2",
+   "bench": true
+  },
+  {
+   "team": "A's",
+   "type": "season-state",
+   "streak": "",
+   "week": "none",
+   "rec": "",
+   "bench": true
+  }
+ ],
+ "householdGameNightByTag": {
+  "Household-GameNight-Win": 1
+ },
+ "householdLines": [
+  {
+   "pop": "POP-00292",
+   "tag": "Household-GameNight-Win",
+   "text": "cheered the final play from the living room",
+   "fx": {
+    "family": 5,
+    "fandom": 1
+   },
+   "cycleNetFromAllLines": {
+    "sociability": 2,
+    "warmth": 1,
+    "family": 5,
+    "fandom": 1
+   },
+   "ownLines": 4,
+   "fandom": [
+    50,
+    51
+   ],
+   "family": [
+    82,
+    82
+   ],
+   "tpUpdated": [
+    "c111",
+    "c116"
+   ],
+   "dialState": [
+    {
+     "base": {
+      "family": 81.67678273466629,
+      "fandom": 50
+     },
+     "mood": {
+      "family": 0,
+      "fandom": 1.7938
+     },
+     "streak": {
+      "family": 1,
+      "fandom": 2
+     },
+     "folded": 115
+    },
+    {
+     "base": {
+      "family": 81.67678273466629,
+      "fandom": 51.03285264
+     },
+     "mood": {
+      "family": 1.832321726533371,
+      "fandom": 1.54927896
+     },
+     "streak": {
+      "family": 1,
+      "fandom": 0
+     },
+     "folded": 116
+    }
+   ]
+  }
+ ],
+ "gameNightRipples": [
+  {
+   "detail": "Game night reached 1 household(s) — streak W2",
+   "n": 1
+  }
+ ],
+ "cityFanLines": {
+  "Sports-Fandom-Up-S": 128,
+  "Neighborhood-Fandom-Up-S": 1,
+  "Background-Fandom-Up-S": 3
+ },
+ "engineErrorsAtN": []
+}
+== final sync from live
+  verify Story_Hook_Deck: bench 2132 rows vs live 2132 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+engine.335 bench done

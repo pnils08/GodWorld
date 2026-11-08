@@ -118,8 +118,8 @@ Modelled on the C110–C114 ripples (scratch replay, not the engine; no closure 
 
 ## Open questions
 
-- The bar is unit-blind (C110–C114): a full-strength initiative (intensity 1.0) ranks texture while 0.05–0.9 rank major; every chaos, fame, crisis and service-disruption tag (0.05) ranks major, every faith, city-event and sighting tag (0.01–0.02) texture; a hook severity 5–8 always clears 3. Whether each kind gets its own bar is the builder's call — a new row if yes. Not in this cut.
-- A multi-hood initiative ripple has a blank neighborhood (`applyInitiativeImplementationEffects.js:752`, `hoods.length === 1 ? hoods[0] : ''`), so three different initiatives merge into one citywide seed every Cycle. Not a units defect — a new ROLLOUT row candidate, for the builder.
+- The bar is unit-blind (C110–C114): a full-strength initiative (intensity 1.0) ranks texture while 0.05–0.9 rank major; every chaos, fame, crisis and service-disruption tag (0.05) ranks major, every faith, city-event and sighting tag (0.01–0.02) texture; a hook severity 5–8 always clears 3. Not in this cut — filed 2026-11-08 as engine.340 on the builder's word ([[2026-11-08-seed-builder-class-per-kind]]).
+- A multi-hood initiative ripple has a blank neighborhood (`applyInitiativeImplementationEffects.js:752`, `hoods.length === 1 ? hoods[0] : ''`), so three different initiatives merge into one citywide seed every Cycle. Not a units defect — filed 2026-11-08 as engine.340.
 
 ## Changelog
 

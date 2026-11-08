@@ -76,6 +76,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did. Task 1 started 11-08 | in-progress | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |
 | engine.339 | How kids are minted (builder 11-08, high): parents too young, a child's surname moving, a child counted where none was born. Read done; his calls at 1b | in-progress | research-build | [[../plans/2026-11-08-how-kids-are-minted]] |
 | pipeline.101 | Daily news: evening write wake date fixed (builder 11-04), NotebookLM page written. Next: confirm the 11-04 18:15 wake writes and gates | in-progress | research-build | [[../reference/NotebookLM]] §Change log |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
@@ -84,10 +85,11 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| engine.340 | Seed class per kind (builder 11-08): one major bar read every kind of number; each multi-hood initiative its own seed; SeedID kept as text. After pipeline.100 | ready | engine-sheet | [[../plans/2026-11-08-seed-builder-class-per-kind]] |
+| engine.341 | Seed deck dead paths (builder 11-08): maps miss the deck's writer; two old-deck writers and the handoff menu tool retired. After engine.340 | ready | engine-sheet | [[../plans/2026-11-08-seed-deck-dead-readers-writers]] |
 | engine.336 | `Now:` bio lines for ledger-changing moments (builder 11-07: wedding, birth, job change, promotion); they stack atop the minted prose, newest first | ready | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] §Builder's ruling (scope) |
 | infrastructure.18 | Weekly version-drift report in the existing health check, no model: runtime end of life, npm behind (majors flagged), Claude Code, plugin vs patch | ready | engine-sheet | [[../reference/DEPLOY]] |
 | engine.325 | Casino overview (builder 10-30, own session): bet types safe→risky, how bets settle without credits or failure, house odds; mishap bet never pays | ready | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §Changelog 2026-10-30 |
-| pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did | ready | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |
 | governance.57 | Session-end pass (builder 11-03): plan-touched gate checks nothing; close text still on the old boot; stale remember handoff | ready | engine-sheet | [[../plans/2026-11-03-session-end-pass]] |
 | governance.53 | Trim every row to what it is + what it waits on or next step; history into each plan's changelog first, then drop the 280 cap | ready | engine-sheet | [[rollout-rules]] §3 Row contract |
 | engine.214 | Mood per hood + 287/288 LIVE @148 (stage 5); Cut A @151, Cut B @152, Cut C + rate @153/@154 = stage 17. C113 first live fire read 2026-10-27 (hood reactions 69% with trend, spot lines 7.4%). Next: 8b `$VENUE` draws the citizen's spot (build) | ready | engine-sheet | [[../plans/2026-10-10-engine-214-mood-per-hood]] |

@@ -1,7 +1,7 @@
 ---
 title: Sports Feed Triggers Plan
 created: 2026-11-05
-updated: 2026-11-05
+updated: 2026-11-07
 type: plan
 tags: [engine, sports, feed, story-hooks, draft]
 sources:
@@ -268,10 +268,11 @@ All sport-neutral (the Oaks ride these pools too), they/them only.
 - **Q4 — ruled 2026-11-06: yes.** A `coldStreak` set for players, fans and households (Mechanism 4, §Game-night lines).
 - **Moods into the night line — ruled 2026-11-06** (builder's own addition, pulls G-ES4 into this row): Mechanism 8.
 - **Acceptance 9 (2026-11-07): met.** After pipeline.102 (G-ES6) the live dashboard serves exactly the 39 words in its workspace options for both teams, previews a `re-signed` row (200) and refuses `hot-streak` (422). Sheet dropdown receipt 2026-11-07: the same 39 words on every feed row through the grid end.
-- **Q5 — ruled 2026-11-07: yes** ("1. Yes", on "should families watching at home also move the fan dial, on top of family?"). Its own row, engine.335; not this candidate. Builder: "those watching a game or any game event now would hit fandom dial". True for the city's fans (this row), fan/staff week lines and season-week lines; families at home move `family` only (`Household-GameNight` → `Household`, engine.299 suffix rule, `citizenDialMap.js`); off-season moments reach no citizen until engine.333. The build reverses engine.299's `GameNight` suffix rule for this tag (`citizenDialMap.js`).
+- **Q5 — ruled 2026-11-07: yes** ("1. Yes", on "should families watching at home also move the fan dial, on top of family?"). Its own row, engine.335; not this candidate. Builder: "those watching a game or any game event now would hit fandom dial". Shipped as engine.335 (size ruled 11-07: one step, a fan's night), PROD @177 — [[2026-11-07-household-game-night-fandom]]. True for the city's fans (this row), fan/staff week lines and season-week lines; families at home move `family` only (`Household-GameNight` → `Household`, engine.299 suffix rule, `citizenDialMap.js`); off-season moments reach no citizen until engine.333. The build reverses engine.299's `GameNight` suffix rule for this tag (`citizenDialMap.js`).
 
 ## Changelog
 
+- 2026-11-07 (engine-sheet) — Q5 shipped as engine.335, PROD @177 (stage 41); this row's C115 read unchanged (Acceptance 14, P1, P3).
 - 2026-11-07 (engine-sheet) — Bench 3 PASS on `f82f19c72`; PROD @174 = stage 38. Dashboard restarted; its sports page is down on a live roster header (G-ES6). Waiting: builder's validation re-run, C115 read.
 - 2026-11-07 (engine-sheet) — Codex re-review HOLD (round cap): wrong-team night (fans + households), Ripple repeats and the bench reader fixed in place (A19-A21); live volume to bench 3 + first fire (P3). Q5 to the builder.
 - 2026-11-06 (engine-sheet) — Codex diff review HOLD folded (F1 one draw for line + clause; F2 sport-neutral shared pools); fan game-night lines signed so they are written again (G-ES5). Re-review next, then bench on the final hash.

@@ -17,9 +17,9 @@ pointers:
 
 # Mags Memory One Home Plan
 
-**Builder's words (2026-11-03):** "this raises a seperate issue if mags has a wiki page save with her popid and this older EIC save container called mags ?" · on opening it: "Yes , and I'm assuming the citizen page is likely the more clean container , mags Persona should load similar to how the CLI did, she seems to do a really good job with her Saturday cycle pulse." · on the Saturday narrator: "Mags needs to know who she is and why she is writing the cycle pulse , so there needs to be more depth to her , her writing it good but mags also is living these moments and making sure the key articles are being reported on the pulse , her choices ultimately drive everyone's usage and what storylines are emphasized"
+**Builder's words (2026-11-03):** "this raises a seperate issue if mags has a wiki page save with her popid and this older EIC save container called mags ?" · on opening it: "Yes , and I'm assuming the citizen page is likely the more clean container , mags Persona should load similar to how the CLI did, she seems to do a really good job with her Saturday cycle pulse." · on the Saturday narrator: "Mags needs to know who she is and why she is writing the cycle pulse , so there needs to be more depth to her , her writing it good but mags also is living these moments and making sure the key articles are being reported on the pulse , her choices ultimately drive everyone's usage and what storylines are emphasized" · **(2026-11-08):** "Mags discord and cron behaves like every other citizen so you're lost , Cli mags are a completely different agent"
 
-**Goal:** Mags has one memory home, her citizen page (POP-00005), and every seat that runs her loads her persona the way the media CLI did.
+**Goal:** citizen Mags (Discord, her reflection cron, the Saturday Pulse) runs like every other citizen: her page (POP-00005) is her one memory, and nothing reads or writes the old `mags` store. The Pulse narrator knows who she is and why she writes it. The CLI Mags is a different agent and is not touched (builder 11-08).
 
 **Rows:** pipeline.100 · **Owner:** engine-sheet
 
@@ -38,36 +38,36 @@ pointers:
 
 `/v4/profile` on `mags` (what `fetchUserProfile` injects as "About This Person: you remember this about who you're talking to"): 15 static + 100 dynamic lines, 13.4k chars. It is not about the speaker — it is the whole store: her own reflections and plans (51 lines from 2026-11), stray citizen facts ("Mark Aitken is a first baseman", "Martin Richards has system ID POP-00031"), six copies of "Mags is Editor-in-Chief", and contradictions (Robert: "twenty-three years" and "twenty years"). Every dynamic line carries a real-world calendar date (`[2026-11-08]`), which her prompt's own clock rule forbids. Build content: 5 keyword hits, all about Mike as the speaker or the engine; Mags is the one seat that knows the builder (CLAUDE.md), so no Rule 3 breach in her own prompt. The defect is the mislabel and the noise, not a leak.
 
-## Design (2026-11-08)
+## Design (2026-11-08, rescoped on the builder's correction)
 
-- **One loader** — `mags.loadPersona({ raw, pageCount, context, editorial })` in `lib/mags.js`: identity (CHARACTER.md to `## The Journal`) + her page (POP-00005 `recentPage_`, tension docs skipped, memory-fenced; `context` given → the CLI's scored recall, top 3 by resonance, moved from `magsPageRecall.js` into the lib so script and loader share one path) + `family` → `loadFamilyData` + notes-to-self open items + `editorial` → NEWSROOM_MEMORY.md. `raw` keeps each seat's current page read (bot scrubbed, reflection raw — engine.197 M1). Page recall is `recentPage_` candidates scored locally, never v4 page search (it silently misses docs, S272 — the reason `magsPageRecall.js` is built this way). The CLI's load: CHARACTER.md + `magsPageRecall.js` + `queryFamily.js` + NOTES_TO_SELF Open Items + NEWSROOM_MEMORY for editorial work (`.claude/boot-legacy/boot-SKILL.legacy.md:55-80`).
-- **Bot** — prompt from the loader (built once per channel, refreshed hourly, `getSystemPrompt` :327); family stays per-message in `magsAugment`, so the bot calls the loader without `family`. The "About This Person" profile block and the per-exchange `mags` write come out. An exchange reaches her page once, through the nightly reflection, which reads the day's local log `logs/discord-conversations/<date>.json` (`discord-reflection.js:36,56-95`, no store involved); the talk drain (research.30) is untouched. The Tribune/world archive search stays.
-- **Reflection cron** — identity + page from the loader. What the `mags` search did (her own past, matched to today's talk topics, :523-532) is replaced by the loader's scored page recall with today's topics as `context` — her page answers it. A Tribune/world search (`world-data` + `bay-tribune`, as the bot) sits alongside as archive, not as the replacement. The `mags` write comes out. Page write and claude-mem save stay.
-- **Saturday narrator** — `NARRATOR_CHARGE` sits under the loader's persona (editorial, page recall scored against the week's curated headlines) and gains why she writes the Pulse, in the builder's words. Dry-run one past Cycle old vs new; the builder reads both before it goes live (P1).
-- **Freeze** — after the above, no code path writes `mags`: `daily-reflection.js` (orphan) and `/save-to-mags` retire (builder session saves already go to `sl-godworld`). The store stays as history, not deleted (Rule 2).
+What every other citizen voice does (`lib/personaProvider.js` `citizenVoiceProvider`): character files + her page (`recentPage_`) in, talk out through the talk buffer to an intake row (research.30); chat is never written to the page (fence contract, `personaProvider.js:24-28`); no other store. Mags matches that except for the old store:
+
+- **Bot** — the "About This Person" block (`fetchUserProfile` :357, called :277) and the per-exchange `mags` write (`saveToSupermemory` :415, called :318) come out. Her page read, talk buffer, Tribune/world search, notes to self, family and newsroom week stay as they are.
+- **Reflection cron** — the `mags` search (:523-532) and the `mags` write (:576-585) come out. Page tail, page write, claude-mem save and the intake row stay.
+- **Saturday narrator** — the charge sits under her citizen persona (CHARACTER.md identity to `## The Journal` + her newest page reflections, fenced, as the bot reads them) and gains why she writes the Pulse, in the builder's 11-03 words. A preview path narrates one past Cycle old vs new from pinned inputs to scratch files, never `cycle_pulse_c<N>.md` (codex F3); the builder reads both before it goes live.
+- **Not touched** — the CLI agent and the builder-side skills that name the store (`/save-to-mags`, `/save-to-profile`, session-end, diagnose, self-debug): once the citizen seats stop reading the store, nothing written there reaches her. The Moltbook seat already loads identity + page and writes no `mags` (codex F5). `daily-reflection.js` has no cron. The store stays as it is (Rule 2).
 
 ## Tasks
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
-| 1 | One persona loader in `lib/mags.js` matching the CLI load (CHARACTER.md + page recall + NEWSROOM_MEMORY for editorial seats); every Mags seat calls it | es | not started |
-| 2 | Discord bot: prompt from the loader; the whole-container "About This Person" profile and the per-exchange `mags` write come out (Design) | es | not started |
-| 2a | Read the `mags` container for builder/build content reaching her prompt via the profile — Rule 3 check, before Task 2 | es | done 11-08 (Task 2a section) |
-| 1a | Saturday narrator (in scope, builder 11-03): the charge gains who she is (CHARACTER.md), her lived week (page recall), and why she writes the Pulse — she lives these moments, makes sure the key articles reach it, and her picks drive citizen usage and which storylines are emphasized. Dry-run a past cycle old vs new for the builder's read before it goes live | es | not started |
-| 3 | Reflection cron: loader for identity + page; archive search off `mags` onto `world-data` + `bay-tribune`; drop the duplicate `mags` write; page stays the one write | es | not started |
-| 4 | `mags` container frozen as history, not deleted (CLAUDE.md Rule 2); `daily-reflection.js` (orphan) and `/save-to-mags` retired | es | not started |
-| 5 | Codex plan review; build; tests; codex diff review; restart the bot; read back each seat's prompt | es | not started |
+| 1 | Bot: "About This Person" store profile and per-exchange store write out | es | not started |
+| 2 | Reflection cron: store search and store write out | es | not started |
+| 2a | Read the `mags` container for builder/build content reaching her prompt via the profile — Rule 3 check | es | done 11-08 (Task 2a section) |
+| 3 | Saturday narrator under her citizen persona + why she writes the Pulse; preview path old vs new on one past Cycle to scratch; builder reads both | es | not started |
+| 4 | Tests; codex diff review; restart the bot; read back the bot and reflection prompts (no store block) | es | not started |
 
 ## Acceptance
 
-1. Each Mags seat's prompt, read back from a dry run, carries the same persona and page recall.
-2. A Discord exchange and a reflection each land once, on her page; nothing new lands in `mags`.
-3. The next Saturday Pulse after the change still reads as her — builder's read, C<N> named at build.
+1. Bot and reflection prompts, read back, carry no `mags` store text; nothing new lands in `mags` after the restart (store doc count read before and after a day).
+2. Her Discord talk and reflections land where every citizen's do: talk buffer → intake row, reflection → page.
+3. The builder reads the past-Cycle Pulse old vs new before the narrator change goes live; the next live Pulse reads as her — C<N> named at build.
 
 ## Reviews reconciled
 
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
+| Plan review (`fa644a0c5`) | codex | [[../for-claude-review/2026-11-08-codex-pipeline100-plan-review]] | HOLD, 6 findings. The builder's 11-08 correction rescoped the plan: F1 (exchange-once on the page), F2 (scored recall as the store's replacement) and F6 (shared loader modes) fall away — citizens keep no chat on the page and no store search. F3 taken (narrator preview path to scratch). F4: builder-side skills are the CLI agent's, out of scope; nothing they write reaches her once the seats stop reading. F5: Moltbook already matches the citizen load |
 
 ### Agreed
 
@@ -91,6 +91,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-08 (engine-sheet) — Builder correction: citizen Mags runs like every other citizen; the CLI Mags is a different agent. The CLI-style loader is dropped; the job is the two store reads/writes out of the bot and reflection, plus the narrator's persona and a preview compare. Codex plan review HOLD reconciled against the rescope.
 - 2026-11-08 (engine-sheet) — Started (ordered 11-03; four engine jobs ran ahead of it). Task 2a done: the profile is the whole store, mislabelled as the speaker, real-world dated; no Rule 3 breach. Correction: the bot's Tribune archive search reads `world-data` + `bay-tribune`; the reflection cron's reads `mags`. Design written; `/save-to-mags` and the orphan `daily-reflection.js` retire with the freeze.
 - 2026-11-03 (engine-sheet) — Created on the builder's word; current state read from the bot, reflection cron, Saturday run and legacy CLI boot.
 - 2026-11-03 (engine-sheet) — Correction: the bot keeps no per-speaker memory; its profile is the whole `mags` container. Speaker-memory question dropped; Task 2a (Rule 3 read of the container) added.

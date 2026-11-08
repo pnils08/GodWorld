@@ -1,0 +1,415 @@
+AIM = BENCH (script read the bench marker)
+== push stage 42
+bench pulled = a stage 42; the three files back at stage 41 = stage 41
+stage 42 = stage 41 + engine.338a (3 files) at 323311fc4; manifest output/engine-sheet/stage42-e338a.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @194
+pull-back 167 js + manifest byte-identical to stage42-e338a.sha256
+== sync from live
+  verify Story_Hook_Deck: bench 2132 rows vs live 2132 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+== World_Config before the fire (the 338 keys must be absent — live has none; the fire's open seeds them)
+rows 249 postCareerIncomeTier1=undefined postCareerIncomeTier2=undefined
+{"fireGuardMinutes":"0","cycleCountFormatted":"114","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":116,"startedMs":1794098905196,"state":"done","finishedMs":1794099030891},"raw":"{\"cycle\":116,\"startedMs\":1794098905196,\"state\":\"done\",\"finishedMs\":1794099030891}","valid":true,"expectOk":null}
+clearfire 116: {"ok":true,"cleared":{"cycle":116,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+== plant fire 1 at C115
+{"fire":"1","N":115,"liveRowsAtN":["A's:roster-move:retirement:Vinnie Keane (DH)"],"planted":3,"readBack":3,"triggers":["retirement:Bench Tierone (DH)","retirement:Bench Tiertwo (SP)","retirement:Bench Tierthree (3B)"],"benchCitizens":["POP-99338 Bench Tierone T1 GAME/Active inc 1500000","POP-99339 Bench Tiertwo T2 GAME/Active inc 780000","POP-99340 Bench Tierthree T3 GAME/Active inc 100000"]}
+Edition_Coverage_Ratings C114: 2 rows (window 114,113,112,111,110,109,108,107), sandbox already has COMMUNITY,CULTURE,ECONOMIC,INFRASTRUCTURE,SPORTS
+Citizen_Media_Usage C114: 0 rows (sandbox already has a published or seeded week at C114)
+Oakland_Sports_Feed C115: 1 rows
+appended 2 to Edition_Coverage_Ratings; marked rows on the tab now 2
+appended 1 to Oakland_Sports_Feed; marked rows on the tab now 1
+bench cycleCount 114
+fire C115 rc=0 "verdict": "PASS" "wallS": 158
+{
+ "label": "e338a-3-f1",
+ "N": 115,
+ "at": "2026-11-08T00:58:25.552Z",
+ "cycleCount": "115",
+ "config338": {
+  "postCareerIncomeTier1": "250000",
+  "postCareerIncomeTier2": "120000",
+  "worldConfigRows": 251
+ },
+ "feedRowsAtN": 5,
+ "citizens": [
+  {
+   "pop": "POP-00001",
+   "name": "Vinnie Keane",
+   "clock": "ENGINE",
+   "econ": "",
+   "role": "Former Designated Hitter, Oakland A's Legend",
+   "status": "Active",
+   "tier": "1",
+   "income": "250000",
+   "netWorth": "449636767",
+   "savingsRate": "0.02",
+   "expectIncome": 250000,
+   "incomeOk": true,
+   "retirementLines": [
+    "Y3C11 — [Retirement] retired from the A's, announced C115 — the playing salary ends; appearances and the name pay $250,000 a year"
+   ]
+  },
+  {
+   "pop": "POP-99338",
+   "name": "Bench Tierone",
+   "clock": "ENGINE",
+   "econ": "",
+   "role": "Former Designated Hitter, Oakland A's",
+   "status": "Active",
+   "tier": "1",
+   "income": "250000",
+   "netWorth": "449634720",
+   "savingsRate": "0.02",
+   "expectIncome": 250000,
+   "incomeOk": true,
+   "retirementLines": [
+    "Y3C11 — [Retirement] retired from the A's, announced C115 — the playing salary ends; appearances and the name pay $250,000 a year"
+   ]
+  },
+  {
+   "pop": "POP-99339",
+   "name": "Bench Tiertwo",
+   "clock": "ENGINE",
+   "econ": "",
+   "role": "Former Starting Pitcher, Oakland A's",
+   "status": "Active",
+   "tier": "2",
+   "income": "120000",
+   "netWorth": "25004806",
+   "savingsRate": "0.05",
+   "expectIncome": 120000,
+   "incomeOk": true,
+   "retirementLines": [
+    "Y3C11 — [Retirement] retired from the A's, announced C115 — the playing salary ends; appearances and the name pay $120,000 a year"
+   ]
+  },
+  {
+   "pop": "POP-99340",
+   "name": "Bench Tierthree",
+   "clock": "ENGINE",
+   "econ": "",
+   "role": "Former Third Baseman, Oakland A's",
+   "status": "Active",
+   "tier": "3",
+   "income": "100000",
+   "netWorth": "199745",
+   "savingsRate": "0.02",
+   "expectIncome": null,
+   "incomeOk": null,
+   "retirementLines": [
+    "Y3C11 — [Retirement] retired from the A's, announced C115"
+   ]
+  }
+ ],
+ "logRows": [
+  {
+   "pop": "POP-00001",
+   "tag": "Sports-Moved|source:sports|feedNamed|event:roster-move|team:A's",
+   "text": "spent the night on the phone working out where the family would land"
+  },
+  {
+   "pop": "POP-00001",
+   "tag": "Retirement",
+   "text": "retired from the A's, announced C115 — the playing salary ends; appearances and the name pay $250,000 a year"
+  },
+  {
+   "pop": "POP-99338",
+   "tag": "Reputation|source:sports|feedNamed|event:player-feature|team:A's",
+   "text": "fielded a round of texts from people who hadn't called in years"
+  },
+  {
+   "pop": "POP-99338",
+   "tag": "Retirement",
+   "text": "retired from the A's, announced C115 — the playing salary ends; appearances and the name pay $250,000 a year"
+  },
+  {
+   "pop": "POP-99339",
+   "tag": "Reputation|source:sports|feedNamed|event:player-feature|team:A's",
+   "text": "got recognized twice at the grocery store after the story ran"
+  },
+  {
+   "pop": "POP-99339",
+   "tag": "Retirement",
+   "text": "retired from the A's, announced C115 — the playing salary ends; appearances and the name pay $120,000 a year"
+  },
+  {
+   "pop": "POP-99340",
+   "tag": "Reputation|source:sports|feedNamed|event:player-feature|team:A's",
+   "text": "got recognized twice at the grocery store after the story ran"
+  },
+  {
+   "pop": "POP-99340",
+   "tag": "Retirement",
+   "text": "retired from the A's, announced C115"
+  },
+  {
+   "pop": "POP-00001",
+   "tag": "Civic Perception-Openness-Up-S|source:civicNews|auth:library-s325|dial:openness:up|sportsSeason:early-season|occupation:Former Designated Hitter, Oakland A's Legend|ageGroup:adult|neighborhood:Grand Lake|tier:1|archetype:Striver",
+   "text": "stopped to read the architectural renderings for the Temescal Community Health Center posted on the chain-link fence"
+  },
+  {
+   "pop": "POP-00001",
+   "tag": "Personal-Drive-Up-S|source:identity|dial:drive:up|source:base|sportsSeason:early-season|occupation:Former Designated Hitter, Oakland A's Legend|ageGroup:adult|neighborhood:Grand Lake|tier:1|archetype:Striver",
+   "text": "noticed younger people asking them for advice now"
+  },
+  {
+   "pop": "POP-00001",
+   "tag": "Sports-Fandom-Up-S|source:sports|auth:auto|dial:fandom:up|sportsSeason:early-season|venue:local|occupation:Former Designated Hitter, Oakland A's Legend|ageGroup:adult|neighborhood:Grand Lake|tier:1|archetype:Striver",
+   "text": "the crack of a bat echoes from a nearby screen, drawing a small crowd of pedestrians to pause near a busy shopping block"
+  },
+  {
+   "pop": "POP-99338",
+   "tag": "Daily-Family-Up-S|source:familyLife|dial:family:up|source:base|sportsSeason:early-season|occupation:Former Designated Hitter, Oakland A's|ageGroup:adult|neighborhood:Grand Lake|tier:1|archetype:Striver",
+   "text": "cooked an old family recipe from memory, mostly getting it right"
+  },
+  {
+   "pop": "POP-99338",
+   "tag": "Civic Perception-Openness-Up-S|source:civicNews|auth:library-s325|dial:openness:up|sportsSeason:early-season|venue:local|occupation:Former Designated Hitter, Oakland A's|ageGroup:adult|neighborhood:Grand Lake|tier:1|archetype:Striver",
+   "text": "attended a community feedback session for the Fruitvale Transit Hub Phase II and actually felt heard near a storefront window"
+  },
+  {
+   "pop": "POP-99338",
+   "tag": "Civic Perception-Openness-Down-S|source:civicNews|auth:library-s325|dial:openness:down|sportsSeason:early-season|occupation:Former Designated Hitter, Oakland A's|ageGroup:adult|neighborhood:Grand Lake|tier:1|archetype:Striver",
+   "text": "read the flyer about the Fruitvale Transit Hub delays and shook their head at the timeline"
+  },
+  {
+   "pop": "POP-99338",
+   "tag": "Civic Perception-Composure-Up-S|source:civicNews|auth:library-s325|dial:composure:up|sportsSeason:early-season|venue:local|occupation:Former Designated Hitter, Oakland A's|ageGroup:adult|neighborhood:Grand Lake|tier:1|archetype:Striver",
+   "text": "saw an Oakland Alternative Response Initiative team de-escalate a situation quietly on the corner near a coffee line"
+  },
+  {
+   "pop": "POP-99339",
+   "tag": "Media|source:media|sportsSeason:early-season|occupation:Former Starting Pitcher, Oakland A's|ageGroup:youngAdult|neighborhood:Laurel|tier:2|qol:low|archetype:Striver",
+   "text": "shared an uplifting story they saw"
+  },
+  {
+   "pop": "POP-99339",
+   "tag": "Neighborhood-Sociability-Up-S|source:communityLife|dial:sociability:up|source:base|sportsSeason:early-season|occupation:Former Starting Pitcher, Oakland A's|ageGroup:youngAdult|neighborhood:Laurel|tier:2|qol:low|archetype:Striver",
+   "text": "traded produce over a fence and came out ahead"
+  },
+  {
+   "pop": "POP-99340",
+   "tag": "Personal-Warmth-Up-S|source:reflection|dial:warmth:up|source:base|sportsSeason:early-season|occupation:Former Third Baseman, Oakland A's|ageGroup:youth|neighborhood:Jack London|tier:3|qol:high",
+   "text": "felt unexpectedly nostalgic at the smell of rain on warm pavement"
+  },
+  {
+   "pop": "POP-99340",
+   "tag": "Undocked-Audience|source:undocked|show:undocked|ecl:kind:lottery|grain:citizen|sportsSeason:early-season|occupation:Former Third Baseman, Oakland A's|ageGroup:youth|neighborhood:Jack London|tier:3|qol:high",
+   "text": "kept the secret that they check the UNDOCKED names every cycle the way some people check scores"
+  },
+  {
+   "pop": "POP-99338",
+   "tag": "Relocation-Drive-Up-M",
+   "text": "moved from Grand Lake to Lake Merritt — moving up from Grand Lake"
+  },
+  {
+   "pop": "POP-00001",
+   "tag": "Maneuver-Climb",
+   "text": "playing to climb — the name to keep"
+  },
+  {
+   "pop": "POP-99338",
+   "tag": "Maneuver-Climb",
+   "text": "playing to climb — a place of their own first"
+  },
+  {
+   "pop": "POP-99339",
+   "tag": "Maneuver-Climb",
+   "text": "playing to climb — a place of their own first"
+  },
+  {
+   "pop": "POP-00001",
+   "tag": "Media|hard-light",
+   "text": "Named in a hard light — UsageCount now 67 (a Bay Tribune wire desk piece, C114)"
+  },
+  {
+   "pop": "POP-00001",
+   "tag": "Business-Gain",
+   "text": "Keane Mercantile returned $2047 to the line this week"
+  }
+ ],
+ "engineErrorsAtN": []
+}
+== plant fire 2 at C116
+{"fire":"2","N":116,"liveRowsAtN":[],"planted":3,"readBack":3,"triggers":["retirement:Bench Tierone (DH)","retirement:Bench Tiertwo (SP)","retirement:Bench Tierthree (3B)"],"benchCitizens":["POP-99338 Bench Tierone T1 ENGINE/Active inc 250000","POP-99339 Bench Tiertwo T2 ENGINE/Active inc 120000","POP-99340 Bench Tierthree T3 ENGINE/Active inc 100000"]}
+Edition_Coverage_Ratings C115: 7 rows (window 114,113,112,111,110,109,108,107)
+Citizen_Media_Usage C115: 35 rows from live C114
+Oakland_Sports_Feed C116: 1 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 9
+appended 35 to Citizen_Media_Usage; marked rows on the tab now 35
+appended 1 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 115
+fire C116 rc=0 "verdict": "PASS" "wallS": 153
+{
+ "label": "e338a-3-f2",
+ "N": 116,
+ "at": "2026-11-08T01:01:29.441Z",
+ "cycleCount": "116",
+ "config338": {
+  "postCareerIncomeTier1": "250000",
+  "postCareerIncomeTier2": "120000",
+  "worldConfigRows": 251
+ },
+ "feedRowsAtN": 4,
+ "citizens": [
+  {
+   "pop": "POP-00001",
+   "name": "Vinnie Keane",
+   "clock": "ENGINE",
+   "econ": "",
+   "role": "Former Designated Hitter, Oakland A's Legend",
+   "status": "Active",
+   "tier": "1",
+   "income": "250000",
+   "netWorth": "449638929",
+   "savingsRate": "0.02",
+   "expectIncome": 250000,
+   "incomeOk": true,
+   "retirementLines": [
+    "Y3C11 — [Retirement] retired from the A's, announced C115 — the playing salary ends; appearances and the name pay $250,000 a year"
+   ]
+  },
+  {
+   "pop": "POP-99338",
+   "name": "Bench Tierone",
+   "clock": "ENGINE",
+   "econ": "",
+   "role": "Former Designated Hitter, Oakland A's",
+   "status": "Active",
+   "tier": "1",
+   "income": "250000",
+   "netWorth": "449634832",
+   "savingsRate": "0.02",
+   "expectIncome": 250000,
+   "incomeOk": true,
+   "retirementLines": [
+    "Y3C11 — [Retirement] retired from the A's, announced C115 — the playing salary ends; appearances and the name pay $250,000 a year"
+   ]
+  },
+  {
+   "pop": "POP-99339",
+   "name": "Bench Tiertwo",
+   "clock": "ENGINE",
+   "econ": "",
+   "role": "Former Starting Pitcher, Oakland A's",
+   "status": "Active",
+   "tier": "2",
+   "income": "120000",
+   "netWorth": "25004867",
+   "savingsRate": "0.05",
+   "expectIncome": 120000,
+   "incomeOk": true,
+   "retirementLines": [
+    "Y3C11 — [Retirement] retired from the A's, announced C115 — the playing salary ends; appearances and the name pay $120,000 a year"
+   ]
+  },
+  {
+   "pop": "POP-99340",
+   "name": "Bench Tierthree",
+   "clock": "ENGINE",
+   "econ": "",
+   "role": "Former Third Baseman, Oakland A's",
+   "status": "Active",
+   "tier": "3",
+   "income": "100000",
+   "netWorth": "199766",
+   "savingsRate": "0.02",
+   "expectIncome": null,
+   "incomeOk": null,
+   "retirementLines": [
+    "Y3C11 — [Retirement] retired from the A's, announced C115"
+   ]
+  }
+ ],
+ "logRows": [
+  {
+   "pop": "POP-99338",
+   "tag": "Reputation|source:sports|feedNamed|event:player-feature|team:A's",
+   "text": "had a neighbor tape the article to the building's front door"
+  },
+  {
+   "pop": "POP-99339",
+   "tag": "Reputation|source:sports|feedNamed|event:player-feature|team:A's",
+   "text": "had a neighbor tape the article to the building's front door"
+  },
+  {
+   "pop": "POP-99340",
+   "tag": "Reputation|source:sports|feedNamed|event:player-feature|team:A's",
+   "text": "got recognized twice at the grocery store after the story ran"
+  },
+  {
+   "pop": "POP-00001",
+   "tag": "Personal-Drive-Down-S|source:listening|dial:drive:down|source:base|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Former Designated Hitter, Oakland A's Legend|ageGroup:adult|neighborhood:Grand Lake|tier:1|archetype:Striver",
+   "text": "watched someone repair a fence for an hour and wondered when they last finished anything"
+  },
+  {
+   "pop": "POP-99338",
+   "tag": "Daily-Warmth-Up-S|source:familyLife|dial:warmth:up|source:base|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Former Designated Hitter, Oakland A's|ageGroup:adult|neighborhood:Lake Merritt|tier:1|archetype:Striver",
+   "text": "retold an old family story and caught a detail they'd never noticed"
+  },
+  {
+   "pop": "POP-99338",
+   "tag": "Daily-Family-Up-S|source:familyLife|dial:family:up|source:base|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Former Designated Hitter, Oakland A's|ageGroup:adult|neighborhood:Lake Merritt|tier:1|archetype:Striver",
+   "text": "cooked an old family recipe from memory, mostly getting it right"
+  },
+  {
+   "pop": "POP-99339",
+   "tag": "Personal-Warmth-Up-S|source:reflection|dial:warmth:up|source:base|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Former Starting Pitcher, Oakland A's|ageGroup:youngAdult|neighborhood:Laurel|tier:2|qol:low|archetype:Striver",
+   "text": "thought about an old friend on the walk home"
+  },
+  {
+   "pop": "POP-99339",
+   "tag": "Sports-Fandom-Up-S|source:sports|auth:library-s325|dial:fandom:up|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Former Starting Pitcher, Oakland A's|ageGroup:youngAdult|neighborhood:Laurel|tier:2|qol:low|archetype:Striver",
+   "text": "framed an old ticket stub that had finally earned its frame"
+  },
+  {
+   "pop": "POP-99339",
+   "tag": "Civic Perception-Composure-Down-S|source:civicNews|auth:library-s325|dial:composure:down|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|venue:local|occupation:Former Starting Pitcher, Oakland A's|ageGroup:youngAdult|neighborhood:Laurel|tier:2|qol:low|archetype:Striver",
+   "text": "recognized the OARI van idling outside the corner store and knew better than to ask who they were waiting for near a neighborhood bakery"
+  },
+  {
+   "pop": "POP-99340",
+   "tag": "Sports-Fandom-Up-S|source:sports|auth:library-s325|dial:fandom:up|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Former Third Baseman, Oakland A's|ageGroup:youth|neighborhood:Jack London|tier:3|qol:high",
+   "text": "framed an old ticket stub that had finally earned its frame"
+  },
+  {
+   "pop": "POP-99340",
+   "tag": "Neighborhood-Sociability-Up-S|source:communityLife|dial:sociability:up|source:base|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|venue:local|occupation:Former Third Baseman, Oakland A's|ageGroup:youth|neighborhood:Jack London|tier:3|qol:high",
+   "text": "attended a small local gathering and stayed later than planned near the waterfront"
+  },
+  {
+   "pop": "POP-99340",
+   "tag": "Personal-Drive-Up-S|source:identity|dial:drive:up|source:base|holiday:SpringEquinox|holidayPriority:minor|sportsSeason:early-season|occupation:Former Third Baseman, Oakland A's|ageGroup:youth|neighborhood:Jack London|tier:3|qol:high",
+   "text": "noticed younger people asking them for advice now"
+  },
+  {
+   "pop": "POP-00001",
+   "tag": "Advancement",
+   "text": "Intake at Tier 1. Media usage C115 (mentioned): a Bay Tribune culture desk piece, C114"
+  },
+  {
+   "pop": "POP-00001",
+   "tag": "Advancement",
+   "text": "Intake at Tier 1. Media usage C115 (mentioned): a Bay Tribune wire desk piece, C114"
+  },
+  {
+   "pop": "POP-99338",
+   "tag": "Maneuver-Climb",
+   "text": "playing to climb — the name to keep"
+  },
+  {
+   "pop": "POP-00001",
+   "tag": "Business-Gain",
+   "text": "Keane Mercantile returned $2050 to the line this week"
+  }
+ ],
+ "engineErrorsAtN": []
+}
+== final sync from live
+  verify Story_Hook_Deck: bench 2132 rows vs live 2132 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+engine.338a bench done
+exit 0

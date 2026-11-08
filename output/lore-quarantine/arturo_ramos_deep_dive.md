@@ -8,7 +8,7 @@ Arturo Ramos sits on his porch steps with a ceramic mug cradled between hands th
 
 In Laurel, however, the ledger has a way of flattening out into the pavement.
 
-Laurel is not Rockridge, where Dillon retreats to an architect-renovated compound behind climbing jasmine, and it is not Downtown, where twenty-two-year-old phenom Travis Coles pays five-figure monthly rents to look down on Broadway from a high-rise tower. Laurel is the family belt that stayed reachable. It is the enclave where teachers, mechanics, city clerks, and small-business owners anchored themselves when the tech money crested through West Oakland and the estuary basin. 
+Laurel is not Rockridge, where Dillon retreats to an architect-renovated compound behind climbing jasmine, and it is not Downtown, where twenty-two-year-old phenom Travis Coles pays four-figure monthly rents to look down on Broadway from a high-rise tower. Laurel is the family belt that stayed reachable. It is the enclave where teachers, mechanics, city clerks, and small-business owners anchored themselves when the tech money crested through West Oakland and the estuary basin. 
 
 "If you live down by the water, every conversation is about where the city is moving next cycle," Ramos says, his voice low, gravelly with the residue of sleep. "People look at you and they don't see nine innings; they see a property tax assessment or a ticket package. Here, nobody gives a damn about the luxury boxes at Baylight. If your lemon tree drops fruit on the sidewalk, you sweep it up."
 

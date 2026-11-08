@@ -41,4 +41,24 @@ assert.ok(written.startsWith('<!-- AUTOSAVE:'), 'rescued file is flagged for rev
 assert.ok(written.includes(body), 'rescued file preserves the model\'s text verbatim');
 fs.rmSync(tmpQuarantine, { recursive: true, force: true });
 
+// pipeline.106: write_file never overwrites a quarantine piece.
+const { writeQuarantineFile, GEMINI_MODEL, THINKING_LEVEL, TOOLS } = require('./loreWriter');
+const probe = 'NONCANON_TEST-write-guard-' + process.pid + '.md';
+const probePath = path.join(QUARANTINE_DIR, probe);
+try {
+  assert.strictEqual(writeQuarantineFile(probe, 'first'), probePath);
+  assert.throws(() => writeQuarantineFile(probe, 'second'), /file exists/);
+  assert.strictEqual(fs.readFileSync(probePath, 'utf-8'), 'first', 'the existing piece is untouched');
+  assert.throws(() => writeQuarantineFile('../NONCANON_TEST-escape.md', 'x'), /Path clamp violation/);
+} finally {
+  if (fs.existsSync(probePath)) fs.unlinkSync(probePath);
+}
+
+// pipeline.106: model, thinking, and every canon source on the tool list.
+if (!process.env.LOREWRITER_MODEL) assert.strictEqual(GEMINI_MODEL, 'gemini-3.8-flash');
+if (!process.env.LOREWRITER_THINKING) assert.strictEqual(THINKING_LEVEL, 'high');
+const toolNames = TOOLS.map((t) => t.name);
+['query_ledger', 'read_canon', 'search_articles', 'canon_recall', 'notebook_search', 'write_file']
+  .forEach((n) => assert.ok(toolNames.includes(n), 'tool registered: ' + n));
+
 console.log('loreWriter tests: PASS');

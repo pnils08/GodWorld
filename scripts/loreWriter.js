@@ -19,10 +19,13 @@ require('../lib/env'); // loads /root/.config/godworld/.env — every other GodW
 const GODWORLD_ROOT = '/root/GodWorld';
 const QUARANTINE_DIR = path.join(GODWORLD_ROOT, 'output', 'lore-quarantine');
 const MAX_ITERATIONS = 50;
-// Confirmed API model id gemini-3.7-flash (Google AI for Developers docs, checked
-// 2026-08-17) — was hardcoded to the older gemini-2.5-flash. Configurable so a
-// future model bump doesn't need another hunt-and-fix pass.
-const GEMINI_MODEL = process.env.LOREWRITER_MODEL || 'gemini-3.7-flash';
+// pipeline.106 (builder 2026-11-08): gemini-3.8-flash (id confirmed from the API's model
+// list 2026-11-08) with thinking at high — the upstream gemini-writer runs thinking_level
+// HIGH; this port never set it. Both configurable.
+const GEMINI_MODEL = process.env.LOREWRITER_MODEL || 'gemini-3.8-flash';
+const THINKING_LEVEL = process.env.LOREWRITER_THINKING || 'high';
+// The notebook search is 30-40 s and NotebookLM quota per call; a run can take 50 turns.
+const NOTEBOOK_CALLS_PER_RUN = 3;
 
 const SYSTEM_PROMPT = "You are the GodWorld Lore Writer, responsible for generating long-form world depth grounded in the simulation ledger.\n\n" +
 "CRITICAL RULES (THE SEAM):\n" +
@@ -33,6 +36,7 @@ const SYSTEM_PROMPT = "You are the GodWorld Lore Writer, responsible for generat
 "   Interiority, sensory detail, dialogue, private motive, weather, and atmosphere are freely invented by you.\n" +
 "3. THE RULE OF LOOKUP:\n" +
 "   You MUST call `query_ledger` for EVERY named person before writing about them. Do not invent citizens. Query for real ones.\n" +
+"   Everything already established about a person, place or event is in the canon: `search_articles` (the city's records on disk: every edition, the Richmond Archive, player TrueSource cards, world summaries, the ledger), `canon_recall` (the Bay Tribune's published canon archive) and `notebook_search` (the canon notebook, slow, a few calls per run). Search before you write a past event, a career fact, a birthplace or a game.\n" +
 "4. CANON AND TONE:\n" +
 "   - Prosperity-era Oakland tone. No sci-fi tech (e.g. \"freight-hoverers\"). No rain-soaked noir decay.\n" +
 "   - Cycle references must strictly use Y<n>C<m> format (e.g., Y2C51). Do not invent bare cycle numbers.\n" +
@@ -69,13 +73,35 @@ const TOOLS = [
   },
   {
     name: 'search_articles',
-    description: 'Search published articles to prevent contradicting prior canon.',
+    description: 'Ranked search of the city records on disk: every published edition, the Richmond Archive, player TrueSource cards (birthplace, draft, career stats), world summaries, gate-passed articles, the ledger. Use it to avoid contradicting prior canon.',
     parameters: {
       type: 'OBJECT',
       properties: {
-        term: { type: 'STRING', description: 'Search term to look up in output/ and editions/' }
+        term: { type: 'STRING', description: 'A name, place or phrase, e.g. "Martin Richards" or "Richards Mets trade"' }
       },
       required: ['term']
+    }
+  },
+  {
+    name: 'canon_recall',
+    description: 'The Bay Tribune published canon archive: editions, supplementals, lore and daily pieces, each labeled with its cycle. Search a person, place or event.',
+    parameters: {
+      type: 'OBJECT',
+      properties: {
+        query: { type: 'STRING', description: 'A person, place or event' }
+      },
+      required: ['query']
+    }
+  },
+  {
+    name: 'notebook_search',
+    description: 'Ask the canon notebook a question; it answers from every canon source with citations. Slow (30-40 s) and limited to ' + NOTEBOOK_CALLS_PER_RUN + ' calls per run: save it for a question the other searches leave open.',
+    parameters: {
+      type: 'OBJECT',
+      properties: {
+        question: { type: 'STRING', description: 'One short question, e.g. "Where was Martin Richards born and drafted from?"' }
+      },
+      required: ['question']
     }
   },
   {
@@ -116,6 +142,17 @@ function clampToQuarantine(relPath) {
   return fullPath;
 }
 
+// pipeline.106: never overwrite a quarantine piece; a rerun on the same subject picks a
+// new name instead of replacing a graded or repaired draft.
+function writeQuarantineFile(filename, content) {
+  const fullPath = clampToQuarantine(filename); // AC #3: PATH CLAMP
+  if (fs.existsSync(fullPath)) {
+    throw new Error('file exists: ' + path.relative(QUARANTINE_DIR, fullPath) + ' -- choose a new filename');
+  }
+  fs.writeFileSync(fullPath, content, 'utf-8');
+  return fullPath;
+}
+
 // S417: a run that ends with a long final text turn and no write_file call
 // (2026-09-04 -- Gemini answered in prose instead of calling the tool, after
 // a string of 503/429 retries) used to just print the piece and exit,
@@ -136,6 +173,55 @@ function slugify(text) {
 // re-verifies every quarantine file against the ledger regardless of how it
 // got there. A false negative (losing a real piece) is the actual failure mode.
 const FALLBACK_MIN_CHARS = 400;
+
+// -----------------------------------------------------------------------------
+// CANON SOURCES (pipeline.106)
+// -----------------------------------------------------------------------------
+
+// The bay-tribune canon archive, as the desk writers' canon_recall reads it
+// (cron-desk-writer.js toolCanonRecall), with lore kept and no cycle cutoff: a deep
+// dive looks backward over the whole record. Supermemory is semantic and always
+// answers, so a result counts only if its text carries the query's own terms.
+async function canonRecall(query) {
+  const q = String(query || '').trim();
+  if (!q) return '(empty query)';
+  if (!process.env.SUPERMEMORY_CC_API_KEY) return '(canon_recall unavailable: no Supermemory key in this run)';
+  const raw = await require('../lib/supermemory').search(q, { containerTags: ['bay-tribune'], limit: 16, timeoutMs: 15000, apiVersion: 'v3' });
+  const STOP = new Set(['the', 'and', 'for', 'with', 'from', 'that', 'this', 'about', 'what', 'where', 'into', 'over']);
+  const terms = Array.from(new Set(q.toLowerCase().split(/[^a-z0-9']+/).filter((t) => t.length >= 3 && !STOP.has(t))));
+  const need = terms.length <= 3 ? terms.length : Math.ceil(terms.length * 0.6);
+  const seen = new Set();
+  const out = [];
+  for (const x of raw || []) {
+    const m = x.metadata || {};
+    const title = String(m.title || x.title || '');
+    if (seen.has(x.documentId)) continue;
+    const chunks = (x.chunks || []).filter((k) => k.isRelevant);
+    const text = (chunks.length ? chunks : (x.chunks || []).slice(0, 1)).map((k) => String(k.content || '')).join(' ')
+      .replace(/[#*_|>-]{2,}/g, ' ').replace(/\s+/g, ' ').trim();
+    if ((text.match(/[A-Za-z]/g) || []).length < 80) continue;
+    const low = text.toLowerCase();
+    if (terms.length && terms.filter((t) => low.includes(t)).length < need) continue;
+    seen.add(x.documentId);
+    const c = Number(m.cycle);
+    out.push('[' + (Number.isFinite(c) ? 'C' + c : 'cycle unknown') + ' · ' + (m.type || 'piece') + ' · ' + title + '] ' + text.slice(0, 600));
+    if (out.length >= 6) break;
+  }
+  if (!out.length) return 'No published piece came back for "' + q + '". That is not proof the canon is silent; do not write that it is.';
+  return out.join('\n');
+}
+
+// The canon notebook through the read-only, fail-closed wrapper (whole-notebook scope).
+function notebookSearch(question) {
+  const q = String(question || '').trim().slice(0, 1000);
+  if (!q) return '(empty question)';
+  const out = execFileSync('node', ['scripts/notebooklmCanonSearch.js', '--question', q, '--timeout', '180'],
+    { cwd: GODWORLD_ROOT, encoding: 'utf-8', timeout: 240 * 1000, maxBuffer: 10 * 1024 * 1024 });
+  const r = JSON.parse(out.slice(out.indexOf('{')));
+  const cited = (r.sourceExcerpts || []).slice(0, 8)
+    .map((e) => '[' + e.citationNumber + '] ' + e.sourceTitle + ': ' + String(e.citedText).replace(/\s+/g, ' ').slice(0, 300));
+  return String(r.answer || '') + '\n\nCITED SOURCES:\n' + cited.join('\n');
+}
 
 // -----------------------------------------------------------------------------
 // CORE LOGIC
@@ -166,7 +252,8 @@ async function callGemini(messages) {
     // model's default output cap mid-generation -- the 2026-09-18 Hal Richmond
     // run cut off mid-sentence with no write_file call as a result. ~3-4k tokens
     // is what the mandated length needs; 8192 is deliberate headroom.
-    generationConfig: { maxOutputTokens: 8192 }
+    // pipeline.106: thinking tokens ride alongside the piece; 32768 leaves room for both.
+    generationConfig: { maxOutputTokens: 32768, thinkingConfig: { thinkingLevel: THINKING_LEVEL } }
   };
 
   // Transient-capacity retry. The tool loop runs many turns and every turn
@@ -231,6 +318,7 @@ async function main() {
 
   const messages = [{ role: 'user', parts: [{ text: prompt }] }];
   let iterations = 0;
+  let notebookCalls = 0;
   let wroteFile = false;
   let lastText = null;
 
@@ -315,11 +403,23 @@ async function main() {
             break;
           }
           case 'search_articles': {
-            const { term } = call.args;
-            resultData = execFileSync(
-              'node', ['scripts/queryLedger.js', 'articles', String(term)],
-              { cwd: GODWORLD_ROOT, encoding: 'utf-8' }
-            );
+            // pipeline.106: the crons' ranked disk search (lib/mags searchDisk) — editions, the
+            // Richmond Archive, TrueSource cards, world summaries, staged canon, the ledger. The
+            // old queryLedger `articles` reached editions/ only and dropped hits past its cap.
+            resultData = require('../lib/mags').searchDisk(String(call.args.term), 12);
+            break;
+          }
+          case 'canon_recall': {
+            resultData = await canonRecall(call.args.query);
+            break;
+          }
+          case 'notebook_search': {
+            if (notebookCalls >= NOTEBOOK_CALLS_PER_RUN) {
+              resultData = 'notebook_search limit reached (' + NOTEBOOK_CALLS_PER_RUN + ' per run); use search_articles or canon_recall.';
+              break;
+            }
+            notebookCalls++;
+            resultData = notebookSearch(call.args.question);
             break;
           }
           case 'create_project': {
@@ -331,8 +431,7 @@ async function main() {
           }
           case 'write_file': {
             const { filename, content } = call.args;
-            const fullPath = clampToQuarantine(filename); // AC #3: PATH CLAMP
-            fs.writeFileSync(fullPath, content, 'utf-8');
+            const fullPath = writeQuarantineFile(filename, content);
             resultData = "Wrote file: " + fullPath;
             wroteFile = true;
             break;
@@ -380,4 +479,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { slugify, FALLBACK_MIN_CHARS, clampToQuarantine, QUARANTINE_DIR };
+module.exports = { slugify, FALLBACK_MIN_CHARS, clampToQuarantine, writeQuarantineFile, canonRecall, notebookSearch, QUARANTINE_DIR, GEMINI_MODEL, THINKING_LEVEL, TOOLS };

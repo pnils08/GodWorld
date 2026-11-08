@@ -4,8 +4,8 @@ Artifact class: CODEX_DIAGNOSTIC
 Canon status: NOT CANON. Review buckets are title-based suggestions only.
 Notebook: GodWorld
 Notebook ID: 417e2d29-4167-420f-a9cc-76fb6b2b7de2
-Generated: 2026-10-18T06:52:48.979Z
-Total sources: 196
+Generated: 2026-11-08T07:19:40.032Z
+Total sources: 149
 
 ## Review counts
 
@@ -14,7 +14,7 @@ Total sources: 196
 | `publication_candidate` | 43 |
 | `nonpublication_candidate` | 0 |
 | `exclude_candidate` | 1 |
-| `needs_review` | 152 |
+| `needs_review` | 105 |
 
 ## Sources
 
@@ -26,17 +26,6 @@ Total sources: 196
 | 01_master-canon-registry_c83-c106.md | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `ac5597ba-400b-4471-8da3-60429e284970` |
 | 02 TrueSource_Team_Timeline_v1.1.txt | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `5eb0975f-f6c3-4abd-811b-90bf051a98f6` |
 | 03 hood_canon_reference.md | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `04a56d13-7e43-4be3-bcd5-ac8389098a2e` |
-| 109_As_Roster | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `794ddbb5-7372-4de3-9184-5339eb24c06c` |
-| 109_Business_Ledger | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `9ec3ab7c-1504-456d-b66d-a8704d829372` |
-| 109_Chaos_Cars | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `88099c6a-5a6e-47f6-bae1-42dfc7b56b8c` |
-| 109_Civic_Office_Ledger | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `9b522dd9-95b8-4030-a29a-af47ec936ded` |
-| 109_Faith_Organizations | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `0013a05e-7358-44af-bf71-80d68f397c1a` |
-| 109_Initiative_Tracker | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `0a855e05-c684-49f8-96be-5a5d65868314` |
-| 109_Neighborhood_Map | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `fe3f55f4-893e-4dfe-b8ae-64541f8bdde7` |
-| 109_Oakland_Sports_Feed | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `96228fb7-a7c6-423c-93bd-f9cb1185921f` |
-| 109_Oaks_Roster | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `e62ab2a1-eced-407b-b3fc-b5551e654c4c` |
-| 109_Riley_Digest | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `c5abe6e3-069b-4c50-ae52-5d4cf50d4701` |
-| 109_WorldEvents_V3_Ledger | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `58fde4c1-e846-47c8-8698-29b713c5b0d6` |
 | bay_tribune_e100.pdf | `pdf` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `d1d80081-8cb6-4f9d-a0ef-c2d5f49e63c1` |
 | bay_tribune_e101.pdf | `pdf` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `76818efd-5148-4151-9519-d8071179706c` |
 | bay_tribune_e102.md | `generated_text` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `b0cf1c08-258d-41ab-9604-0d7a13b127f4` |
@@ -81,62 +70,38 @@ Total sources: 196
 | c94_supplemental_A's_let_walks_reset.pdf | `pdf` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `68d0ce88-c554-40ba-9b55-1256633afb58` |
 | c99_supplemental_jax_varek_column.md | `word_doc` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `56f79960-1550-4769-9591-b1b4add11f82` |
 | c99_supplemental_Oaks_expansion_draft.md | `word_doc` | `exclude_candidate` | title signals draft/sample/unpublished material | `3016e5a1-da7d-4152-9fff-505ab5ec5bce` |
+| civis_journal_c111 2.pdf | `pdf` | `needs_review` | title alone does not establish publication or exclusion status | `4807c00f-ac0e-4418-ad5e-3cda925f1601` |
 | Danny Horn — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `932e53cb-226c-43f5-ad9f-6e9a454476a2` |
-| Danny Horn — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `afb69f26-167f-4661-b3a6-e1975e51633a` |
 | Danny Horn Baseball Statistics | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `1fabaa2f-68d7-4964-8108-9a378eae08a6` |
-| Darrin Davis — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `b3dd48f2-fc2d-46c7-b1ad-e307b3dda543` |
 | Darrin Davis — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `ca27a241-92f8-436f-b4a4-7928c4f6e536` |
-| Desmond Morton FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `b0b7818a-686e-4766-95c3-fb69df648d0b` |
-| Desmond Morton FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `dd898baf-68a5-47f7-8b2e-5e4bf667bf8e` |
+| Desmond Morton FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `c2f79784-a7d1-493b-899f-a89c7c0b8be3` |
 | Eric Taveras — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `29d8d605-6ff7-42e6-b8e2-31ebb5bec67a` |
-| Eric Taveras — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `7e17ef59-5761-4c74-8bb3-349a754496ff` |
-| Ernesto Quintero — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `3851a1c3-258d-453f-8982-b1e0a2d7238f` |
-| Ernesto Quintero — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `9e10a073-7310-4ac0-b8b9-35f6e3abc386` |
-| Frank Reyna FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `7a4c8778-bf74-4292-8959-044a1d3f8a92` |
+| Ernesto Quintero — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `7692270f-f9eb-4471-8fa2-5ea0e1b2853c` |
 | Frank Reyna FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `c01f98bd-bfa0-463e-9ba3-3cac0a13ea69` |
-| Henry Rivas — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `4717a0c8-295d-4fa3-974b-2b06a945350c` |
-| Henry Rivas — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `cf16bfba-0e7c-47ae-a4d5-bf20c401fc89` |
-| Henry Rivas_2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `e6755b6c-3561-4d55-a1e9-be1a1cf69022` |
-| Hitoki Ka FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `3bcb50b9-06fa-4560-bfd1-de5bcd5f9112` |
-| Hitoki Ka FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `8d895ecc-9f90-4ac8-a64f-b15753e31f38` |
-| Hitoki Ka_2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `f92947d1-cf63-4b48-b457-24fb2c69a573` |
-| Ian Devine FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `6709940d-4597-4235-a31c-868f9b5cc97b` |
-| Ian Devine FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `806a0cd4-3c93-4d24-adb3-1dac4f3f68b3` |
-| Ian Devine_2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `6b27412b-7c40-49bd-a4a3-a269f2f3d42d` |
+| Henry Rivas — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `54a1bf24-65c6-443f-a4de-07e2179a6da6` |
+| Hitoki Ka FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `c42931e0-0c56-4cca-b5f5-3405b5bdf469` |
+| Ian Devine FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `b9713508-0dec-4f3b-a61b-6f356eb2c812` |
 | Isley Kelley — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `9fc3b7d6-d44d-4848-8836-4dbd6c88aba8` |
-| Isley Kelley — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `bce4f858-366c-4835-b752-ecae863da99c` |
-| John Ellis — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `a5a2974b-a244-4401-8783-2efeeddedd22` |
-| John Ellis — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `b336567f-0857-4119-b267-3020463bccee` |
-| John Ellis_2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `c69c4919-4fbf-445d-b9c8-95da6b85be7e` |
-| Jose Colon — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `2fb2b0a8-6477-44de-aadd-474b83c015bf` |
-| Jose Colon — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `4c5d6312-f252-4529-8e34-c7a7f6606760` |
+| John Ellis — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `143b730d-e3c9-4d13-a2d3-a2ca8cea60a0` |
+| Jose Colon — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `b25065cb-cc5d-467c-a8d3-172363ec408f` |
 | JR Rosado FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `6e907ba2-1f88-405a-bfc6-75c9a20236c7` |
-| JR Rosado FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `e695fe89-1e61-4cb2-8e0e-90892bca1e76` |
-| Julio Valencia FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `b0755cbc-4009-4fee-ba8a-4e7f49a5fb69` |
-| Julio Valencia FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `dbd9c0ad-a0f7-4334-b8ff-b4e30fee3019` |
-| Kevin Clark FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `867c508d-451f-4981-8ce0-996565320e6a` |
-| Kevin Clark FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `bdaa1232-dbf8-49f7-9820-935538657216` |
-| Lore: danny_horn_deep_dive (Y3C7) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `3824b8b0-910b-4fe5-ad3e-3cc1a181cca1` |
+| Julio Valencia FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `7f0741a6-3eed-44ce-b264-49e3f17a1996` |
+| Kevin Clark FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `27c6fb1d-851e-4cfa-bb42-9e9ced662cac` |
+| Lore : deep_dive_henry_rivas.md (Y3C8) | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `50b6dde2-f4bf-4efa-892e-83863dbe794e` |
 | Lore: darrin_davis_deep_dive (Y3C7) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `07783621-142e-4404-916d-7b58b0621a11` |
 | Lore: deep_dive_benji_dillon_c109 (Y3C5) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `031d5364-a3d4-47db-b730-cad1e811baeb` |
 | Lore: deep_dive_carmen_delaine (Y3C4) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `579a7aa1-f829-4342-8d5f-2e8a9d45dd99` |
 | Lore: deep_dive_isley_kelley (Y3C6) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `fcca44cc-c930-4429-a807-668f3b8c24db` |
 | Lore: hal_richmond_deep_dive (Y3C3) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `32e10420-f828-4f5c-8b7a-bdf109c3f508` |
-| Louis Cross FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `5863d65b-a9a9-4597-8fb5-affffdc74913` |
-| Louis Cross FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `7d481d54-a4be-4d6f-bdfe-c5ee8b1f1e6a` |
-| Louis Cross_2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `d74ccf50-0ed7-4e54-9cd1-f79a0d897268` |
+| Louis Cross FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `80e3d1ed-baf3-4b01-bf19-35dc86bcf2c0` |
 | Mariano Rosales FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `b25b8b21-f437-4232-8d79-9a357e4bef0a` |
-| Mariano Rosales FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `fd5402f3-7780-4301-9f7b-332baab2e158` |
-| Mark Aitken — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `5af9b485-9eb4-4e12-9b81-0b7745d3c78d` |
-| Mark Aitken — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `861796e0-424e-4d9f-ba47-d10938734d0c` |
-| Martin Richards — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `0c71f9f4-5f7d-418e-8523-6c85faed3061` |
-| Martin Richards — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `8a58cf40-7896-4288-bb02-396e367e108e` |
+| Mark Aitken — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `5f0a201d-ce4b-4f9f-8d25-2de83f1f299e` |
+| Martin Richards — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `fd3522d6-eede-42ff-bf28-76dba1be2f39` |
 | Mike Paulson-chat | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `e96f7462-8916-4eee-95b5-455a8929346e` |
 | Oakland Athletics | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `c4ec1520-d5d3-4097-9331-60399df7d245` |
 | Oakland Civic | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `c7245532-2eca-4c66-b6c4-ec77c45257fe` |
 | Oakland Oaks | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `874d2f64-0fb3-48e2-98d5-95b40ada1894` |
-| Pablo Almanzar FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `0038423a-85bf-4f22-a9e8-55438dd8be1b` |
-| Pablo Almanzar FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `25be4294-424c-46b5-818d-421621003d72` |
+| Pablo Almanzar FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `820f88db-0f53-4d9a-a392-ec12494cf198` |
 | POP-00001_The Anchor of Oakland: The Vinnie Keane Story | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `88c2c054-5481-4de9-9f17-f44ea483de58` |
 | POP-00001_The Calm and the Storm: The Vinnie Keane Story | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `a70f6800-ce9a-4ac9-a38e-e84c3e1e2c0b` |
 | POP-00001_Vinnie Keane - The Complete Origins (Parts I through IV) Written by Hal Richmond | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `19d25578-1ec3-4fb0-969a-8ee77ec6aa2b` |
@@ -152,10 +117,7 @@ Total sources: 196
 | POP-00005_Mags Corliss-Lore_The Keeper of the Line.md | `google_docs` | `needs_review` | title alone does not establish publication or exclusion status | `87274a06-7bde-4df2-baa0-bb9af0b63446` |
 | POP-00007_Hal Richmond-Lore-The Long View from Ninth Street.md | `google_docs` | `needs_review` | title alone does not establish publication or exclusion status | `5d798f03-b50a-4df5-b05f-71246aef717c` |
 | POP-00018 Benji Dillon — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `5d3c7aa2-5275-4901-b386-66624b1bf85b` |
-| POP-00018 Benji Dillon — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `ae6bd557-1349-4609-98c9-ada2ba021380` |
-| POP-00018 Benji Dillon_2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `3ae936a7-08fc-468f-90c8-e7cce461b569` |
 | POP-00018 deep_dive_benji_dillon_c109.md | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `4d4fd1d4-310b-4a19-8957-1d2e49254b7a` |
-| POP-00018_Benji Dillon_2040.txt | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `eb03d83d-4d48-4fd1-b091-f31ba1184f9c` |
 | POP-00018_Benji_Dillon_DataPage.txt | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `65caccb5-1fdb-42e6-86e9-bd749ce571b4` |
 | POP-00019_Benji Dillon: The Complete Origins (Parts I-IV) By Hal Richmond | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `c31ff29f-42d5-4ed3-ba71-620c463a39a6` |
 | POP-00019_Isley Kelley_2040.txt | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `b856057f-b0a2-4f35-9ae2-4928dab2f59b` |
@@ -170,8 +132,6 @@ Total sources: 196
 | POP-00022_supplemental_c98_horn_deep_dive.txt | `word_doc` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `7914f64b-ec9c-4641-b2c8-fd6fa144955e` |
 | POP-00024_Henry Rivas_2040.txt | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `3112d6a7-6186-42ce-99f6-ffa22700098d` |
 | POP-00025 Arturo Ramos — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `86c61596-6f06-483d-9774-96a290805fa8` |
-| POP-00025 Arturo Ramos — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `884552fc-493f-49ec-be3c-26574ca0d46e` |
-| POP-00025 Arturo Ramos_2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `e59aa13f-55ff-404b-8e4b-1016f47fe861` |
 | POP-00025_Arturo Ramos — TrueSource DataPage v1.0.txt | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `914d4498-c15f-4fad-a0b7-05df2099d7ea` |
 | POP-00031_Martin Richards_2040.txt | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `2de32c3b-c357-4340-8a32-23dfc1a138de` |
 | POP-00033_John Ellis_2040.txt | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `24f75c36-6a32-4458-91a1-3121d1dfa07a` |
@@ -179,9 +139,6 @@ Total sources: 196
 | POP-00034_supplemental_c89 — CULTURE & COMMUNITY_Mayor Avery Santana.txt | `generated_text` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `7a25fbe2-557c-4b21-8a11-b86b272dd4b8` |
 | POP-00034_tribune_interview_c92_mayor_interview.pdf | `pdf` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `0ed229df-1dc3-4a87-ac83-6ccfb5f4696e` |
 | POP-00052 Clark Saryan FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `2734105f-8845-49bc-a6e8-1cfdeacb1e7f` |
-| POP-00052 Clark Saryan FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `9d0c081a-d114-4fa0-a1cf-e72c11fafec3` |
-| POP-00052 Clark Saryan_2041.txt | `pasted_text` | `needs_review` | title alone does not establish publication or exclusion status | `c90b18fb-c312-468d-b1ea-2db1baa9dbb4` |
-| POP-00081 Carmen Mesa FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `97d27ad7-7f27-41bb-bb89-78cb15c21802` |
 | POP-00081 Carmen Mesa FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `f04a610e-bfb1-4dc8-8e0a-ee8d7bafce54` |
 | POP-00131_Lore_lorenzo-jordan (Y2C51) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `a1722406-93b3-4ba5-afa9-61e4b82344d5` |
 | POP-00527_supplemental_c89— CULTURE & COMMUNITY_Paulson.txt | `generated_text` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `b1fa1364-d5ad-4665-b4cb-662b66836681` |
@@ -198,23 +155,19 @@ Total sources: 196
 | POP-01023_Adash_Stanley_TrueSource_Profile_v1.0.txt | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `6891ba16-0ffe-4302-8c0c-23f59f31e1f9` |
 | POP-01023_supplemental_c98_oaks_stanley.txt | `word_doc` | `publication_candidate` | title resembles an Edition or approved off-cycle publication | `4f550cf9-b132-4c1b-be3f-db90449e31cd` |
 | POP-01046_profile_elliot_abraham_origins.md | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `d31ecbea-6a82-4cbc-b422-f3eb399cd031` |
-| Sidney Tumolo FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `2b94a1a9-596e-4127-9092-1ae7404f3ffe` |
-| Sidney Tumolo FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `4bc5256f-2a01-4357-90a6-71cb63e59eb2` |
+| Sidney Tumolo FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `fdef212b-2b94-40be-b0dc-80db560f749e` |
 | Sports_Lore | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `af829925-5cd7-41f1-b5a0-828b5de835b7` |
 | The Cycle Pulse | `unknown` | `needs_review` | title alone does not establish publication or exclusion status | `298d8805-ddd2-400a-9151-422baceed65d` |
 | The Cycle Pulse — Y2C107 | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `86162637-3243-4f59-b562-659cb1ee43be` |
 | The Cycle Pulse — Y2C108 | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `4a9c722e-472c-4bea-bd83-29d12404170a` |
 | The Cycle Pulse — Y2C109 | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `7d5a94fd-e689-41d6-a444-d266c9ddcafb` |
 | The Cycle Pulse — Y2C110 | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `3448ce79-e222-46ed-a8b0-6adc8e35429e` |
+| The Cycle Pulse — Y3C10 | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `0f829b78-8866-4af2-9407-24568e65c5a3` |
 | The Cycle Pulse — Y3C7 | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `45e84e2f-87a7-4e37-a3ff-2d1f828239ef` |
-| Travis Coles — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `0ef65b6f-9513-4520-b3ea-4436524b6a0e` |
-| Travis Coles — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `f3159ce0-7f28-4dbb-8248-86c07489b0b5` |
-| Travis Coles_2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `3386c602-ec38-4019-9d66-5dc7b3b51e5f` |
-| Vinnie Keane FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `9bdf04a2-6180-4144-ab8f-259532e4d88d` |
-| Vinnie Keane FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `df1f0726-f97f-4d56-912b-dfaeb24a39b2` |
-| Vinnie Keane FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `e96a72c3-55bc-4133-ae25-d74b2d1f9deb` |
-| Vinnie Keane_2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `1bb0622a-dffd-4577-819f-f360a579c650` |
-| Vladimir Gonzalez — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `4a86ef7a-be77-4ced-b427-f6c2347dc054` |
-| Vladimir Gonzalez — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `ef788802-9918-4ebf-b57d-2494e467e1ff` |
+| The Cycle Pulse — Y3C8 | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `06e1843d-5c67-4052-8ddd-de2fc22413d1` |
+| The Cycle Pulse — Y3C9 | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `972bb82e-70f8-48a2-9bf2-9a9061d11f46` |
+| Travis Coles — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `3a62d08f-7715-41f8-a8aa-e122c15e321b` |
+| Vinnie Keane FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `f63b5c03-b54a-4cca-9aa5-5ac9e4f1f04f` |
+| Vladimir Gonzalez — FULL STAT TRUE SOURCE — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `f4406827-8418-4256-90b9-9b374f024cbc` |
 
 No row in this report is admitted to a runtime canon-search allowlist. Every source requires explicit Task 2 review.

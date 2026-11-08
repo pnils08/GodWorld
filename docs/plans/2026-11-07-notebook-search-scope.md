@@ -100,6 +100,7 @@ Shapes considered:
 
 ## Changelog
 
+- 2026-11-08 — Builder: the 69 deletions were mostly duplicates / older TrueSource cards; validator inventory refreshed to 149 live. Horn lore `3824b8b0` is the exception (no live copy) — builder call.
 - 2026-11-08 — Row to live-observing: Acc 2–4 met; Acc 1 read Sat 2026-11-14 (one search names C115's edition). Code diff had no external review; build added a `selection` stage (→ `not_run`) the design did not name.
 - 2026-11-08 — Task 4: builder chose "Fix it now"; caller scope wording trued in four files, tags unchanged.
 - 2026-11-08 — Task 3 built and proven live (149/149 in scope, C114 cited, verified); codex re-review HOLD on F1 caller wording only → builder.

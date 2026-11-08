@@ -229,6 +229,11 @@ function printStale(staged) {
     console.log(`NEXT STALE: ${stale.length} handoff line(s) lead with a row that is no longer open — the owner rewrites its line; a closer may correct the stale fact:`);
     stale.forEach(p => console.log(p));
   }
+  const copies = nextCopiesWaiting(read('SESSION_CONTEXT.md'), parseRollout(read('docs/engine/ROLLOUT_PLAN.md')));
+  if (copies.length) {
+    console.log(`NEXT COPIES: ${copies.length} handoff mention(s) of a waiting row — the owner drops it from its line:`);
+    copies.forEach(p => console.log(p));
+  }
 }
 
 function readOr(p) {
@@ -276,6 +281,64 @@ function staleNextLeads(sessionText, rows, archiveText, backlogText) {
     }
   }
   return out;
+}
+
+// --- due: the reads the next fire owes (builder 2026-11-07) ----------------
+// "is there a way to make the rollout the source for this so it's not written
+// multiple places": a read owed to a fire lives once, in its §2 row; boot and
+// /run-cycle print it, a NEXT line never copies it. The next fire is the PIN's
+// ("next live fire C115 Sun 2026-11-08"); a waiting row is due when it names that
+// Cycle or that date. `Organic:` rows name no fire. Pure: the caller reads the files.
+const WAITING = new Set(['live-observing', 'blocked']);
+function nextFire(sessionText) {
+  const m = String(sessionText).match(/next live fire C(\d+)([^|\n]*)/);
+  if (!m) return null;
+  const d = m[2].match(/\b(20\d\d-\d\d-\d\d)\b/);
+  return { cycle: Number(m[1]), date: d ? d[1] : null };
+}
+
+function dueRows(rolloutText, fire) {
+  if (!fire) return [];
+  const out = [];
+  for (const line of String(rolloutText).split('\n')) {
+    const idMatch = line.match(ROW_ID);
+    if (!idMatch) continue;
+    const cells = line.split('|').map(c => c.trim());
+    const sIdx = cells.findIndex(c => STATES.has(c));
+    if (sIdx === -1 || !WAITING.has(cells[sIdx])) continue;
+    const item = cells.slice(2, sIdx).join(' ');
+    if (/^Organic:/.test(item)) continue;
+    const cycles = [...item.matchAll(/\bC(\d{2,3})\b/g)].map(m => Number(m[1]));
+    const dates = [...item.matchAll(/\b(20\d\d-\d\d-\d\d)\b/g)].map(m => m[1]);
+    if (cycles.includes(fire.cycle) || (fire.date && dates.includes(fire.date))) {
+      out.push({ id: idMatch[1], terminal: cells[sIdx + 1] || '(unspecified)', item });
+    }
+  }
+  return out;
+}
+
+// A NEXT line naming a waiting row copies its read. Warning only, like stale.
+function nextCopiesWaiting(sessionText, rows) {
+  const waiting = new Set(rows.filter(r => WAITING.has(r.state)).map(r => r.id));
+  const out = [];
+  for (const line of String(sessionText).split('\n')) {
+    const m = line.match(/^\*\*NEXT\[([a-z-]+)\]:\*\*\s*(.*)$/);
+    if (!m) continue;
+    for (const id of new Set(m[2].match(ROW_TOKEN) || [])) {
+      if (waiting.has(id)) out.push(`  NEXT[${m[1]}] names ${id} — a read owed to a fire; it lives in its ROLLOUT §2 row (--due prints it)`);
+    }
+  }
+  return out;
+}
+
+function printDue(terminal) {
+  const fire = nextFire(readOr(path.join(ROOT, 'SESSION_CONTEXT.md')));
+  if (!fire) { console.log('DUE: the PIN names no "next live fire C<N>" — nothing to match.'); return; }
+  const due = dueRows(readOr(ROLLOUT), fire);
+  console.log(`DUE AT C${fire.cycle}${fire.date ? ' (' + fire.date + ')' : ''}: ${due.length} read(s) waiting in ROLLOUT §2${due.length ? ' — once read, flip or re-date the row:' : '.'}`);
+  for (const r of due) console.log(`  ${r.id} [${r.terminal}${terminal && r.terminal === terminal ? ', yours' : ''}] ${r.item}`);
+  const overdue = overdueRows();
+  if (overdue.length) console.log(`  + ${overdue.length} waiting row(s) past their fire or naming none (docLoopStatus.js --lint lists them).`);
 }
 
 // --- overdue: a waiting row whose every named Cycle/date is behind us ------
@@ -442,6 +505,7 @@ function runHandoffGate() {
 function main() {
   const args = process.argv.slice(2);
   if (args.includes('--gate-handoff')) { runHandoffGate(); return; }
+  if (args.includes('--due')) { const t = args.indexOf('--terminal'); printDue(t >= 0 ? args[t + 1] : ''); return; }
   if (args.includes('--stale-next')) { printStale(args.includes('--staged')); return; }
   if (args.includes('--gate')) { runLint(true); return; }
   if (args.includes('--lint')) { runLint(false); return; }
@@ -459,4 +523,4 @@ function main() {
 }
 
 if (require.main === module) main();
-module.exports = { staleNextLeads };
+module.exports = { staleNextLeads, nextFire, dueRows, nextCopiesWaiting };

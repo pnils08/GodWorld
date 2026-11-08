@@ -233,6 +233,8 @@ If 0 mechanical entries observed: file states "0 mechanical gaps observed" with 
 
 **Gate:** File exists on disk. ROLLOUT pointer added under `Edition Post-Publish` for any HIGH-severity findings: `RUN-CYCLE C{XX} GAP LOG — S{N} (engine-sheet), N entries, severity`.
 
+**Reads this fire owes (builder 2026-11-07):** `node scripts/docLoopStatus.js --due` prints every ROLLOUT §2 row naming this fire, both terminals (the PIN still names C{XX} as the next fire until session-end moves it). Read each on live; then flip its row or re-date it to the next fire. The row is the only record of the read.
+
 Plan: `docs/archive/plans/2026-05-03-run-cycle-gap-log-surface.md` (Phase 2 done S199; Phase 3 validation runs at next /run-cycle invocation).
 
 ## What Happens After — the crons (S456; no sift, no manual edition chain)

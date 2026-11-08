@@ -134,6 +134,15 @@ EOF
     echo "^ No terminal detected, so no lane is yours. The handoff above is still current — read it, but do not edit any NEXT line, and ask Mike which window this is before doing lane work."
   fi
 
+  # --- DUE AT THE NEXT FIRE (builder 2026-11-07) ---
+  # A read owed to a fire lives once, in its ROLLOUT §2 row; a NEXT line never copies
+  # it. The rows naming the PIN's next fire print here, both terminals, yours marked.
+  DUE_BLOCK=$(cd "$GODWORLD_ROOT" && timeout 10 node scripts/docLoopStatus.js --due --terminal "$TERMINAL_NAME" 2>/dev/null)
+  if [ -n "$DUE_BLOCK" ]; then
+    echo ""
+    echo "$DUE_BLOCK"
+  fi
+
   # --- REVIEW INBOX (builder-direct 2026-08-29) ---
   # docs/for-claude-review/ is the house-guest inbox: a finished research/plan MD
   # saved there is a message to Claude. Boot reports clean/dirty ONLY — count +

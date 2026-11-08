@@ -7,7 +7,7 @@
 
 'use strict';
 
-const { staleNextLeads } = require('./docLoopStatus');
+const { staleNextLeads, nextFire, dueRows, nextCopiesWaiting } = require('./docLoopStatus');
 
 let passed = 0;
 let failed = 0;
@@ -68,6 +68,32 @@ assertEqual('archive table row → archived', staleNextLeads(next('engine-sheet'
 assertEqual('a table cell that is not the row id does not count', staleNextLeads(next('engine-sheet', 'engine.911 → x.'), rows,
   '| pipeline.912 | follows engine.911 | done-pending-archive |\n', ''), ['  NEXT[engine-sheet] leads with engine.911 — no such row']);
 
+// --due (builder 2026-11-07): a read owed to a fire lives once, in its §2 row.
+console.log('\nnextFire / dueRows / nextCopiesWaiting');
+const pin = '**PIN:** S1 | Day 1 | Canon C114 | PROD @178 (stage 42) | next live fire C115 Sun 2026-11-08\n';
+assertEqual('nextFire reads the PIN', nextFire(pin), { cycle: 115, date: '2026-11-08' });
+assertEqual('nextFire without a date', nextFire('**PIN:** x | next live fire C116\n'), { cycle: 116, date: null });
+assertEqual('nextFire: no fire named → null', nextFire('**PIN:** S1 | Day 1\n'), null);
+const roll = [
+  '| engine.931 | Read at C115 Sun 2026-11-08 (Acc 14) | live-observing | engine-sheet | [[x]] |',
+  '| engine.932 | C114 rated −3: C115 is the read | live-observing | research-build | [[x]] |',
+  '| engine.933 | Next read C116 | live-observing | engine-sheet | [[x]] |',
+  '| engine.934 | Organic: the first C115 wave | live-observing | engine-sheet | [[x]] |',
+  '| engine.935 | Waits on the 2026-11-08 fire | blocked | engine-sheet | [[x]] |',
+  '| engine.936 | Build after C115 | ready | engine-sheet | [[x]] |',
+  '| engine.937 | C1150 and 2026-11-080 only | live-observing | engine-sheet | [[x]] |'
+].join('\n');
+assertEqual('dueRows: the fire\'s Cycle or date, waiting rows only, Organic skipped',
+  dueRows(roll, nextFire(pin)).map(r => r.id + ':' + r.terminal), ['engine.931:engine-sheet', 'engine.932:research-build', 'engine.935:engine-sheet']);
+assertEqual('dueRows: no fire → nothing', dueRows(roll, null), []);
+assertEqual('dueRows: date-only match needs the date', dueRows(roll, { cycle: 999, date: null }), []);
+assertEqual('nextCopiesWaiting: a waiting row named anywhere in a NEXT line',
+  nextCopiesWaiting(next('engine-sheet', 'engine.901 → build. C115 reads: engine.903; research.906.'), rows),
+  ['  NEXT[engine-sheet] names engine.903 — a read owed to a fire; it lives in its ROLLOUT §2 row (--due prints it)',
+    '  NEXT[engine-sheet] names research.906 — a read owed to a fire; it lives in its ROLLOUT §2 row (--due prints it)']);
+assertEqual('nextCopiesWaiting: open and closed rows are not copies', nextCopiesWaiting(next('engine-sheet', 'engine.901 → engine.902, engine.904.'), rows), []);
+assertEqual('nextCopiesWaiting: the PIN is not a NEXT line', nextCopiesWaiting('**PIN:** engine.903\n', rows), []);
+
 // The CLI path the pre-commit hook and session close call: a scratch copy of
 // the script beside synthetic repo files (the script reads ../docs, ../SESSION_CONTEXT.md).
 console.log('\nCLI (--stale-next, --lint) on a scratch repo');
@@ -96,6 +122,15 @@ console.log('\nCLI (--stale-next, --lint) on a scratch repo');
       ['NEXT STALE: 1 handoff line(s) lead with a row that is no longer open — the owner rewrites its line; a closer may correct the stale fact:',
         '  NEXT[engine-sheet] leads with engine.920 — done-pending-archive']);
     assertEqual('--lint carries the same notice', cli('--lint').includes('NEXT[engine-sheet] leads with engine.920 — done-pending-archive'), true);
+    // --due reads the PIN's fire and the plan's waiting rows; a NEXT copy of one warns.
+    fs.writeFileSync(path.join(root, 'docs', 'engine', 'ROLLOUT_PLAN.md'), plan('ready') + '| engine.921 | Read at C115 (Acc 1) | live-observing | engine-sheet | [[x]] |\n');
+    fs.writeFileSync(path.join(root, 'SESSION_CONTEXT.md'), pin + next('engine-sheet', 'engine.920 → build it. C115: engine.921.'));
+    const due = execFileSync('node', [path.join(root, 'scripts', 'docLoopStatus.js'), '--due', '--terminal', 'engine-sheet'], { encoding: 'utf8' });
+    assertEqual('--due lists the row, marked yours', due.split('\n').slice(0, 2),
+      ['DUE AT C115 (2026-11-08): 1 read(s) waiting in ROLLOUT §2 — once read, flip or re-date the row:',
+        '  engine.921 [engine-sheet, yours] Read at C115 (Acc 1)']);
+    assertEqual('--stale-next warns on the copy', cli('--stale-next').includes('NEXT[engine-sheet] names engine.921'), true);
+    fs.writeFileSync(path.join(root, 'SESSION_CONTEXT.md'), next('engine-sheet', 'engine.920 → build it.'));
 
     // --staged reads the index, the content that will commit (codex re-review F1):
     // a staged close with the working copy restored must still warn, and the inverse must not.

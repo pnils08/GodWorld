@@ -73,7 +73,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | pipeline.101 | Daily news: evening write wake date fixed (builder 11-04), NotebookLM page written. Next: confirm the 11-04 18:15 wake writes and gates | in-progress | research-build | [[../reference/NotebookLM]] §Change log |
-| governance.58 | What waits on a fire lives once, in its §2 row (builder 11-07): boot and /run-cycle print `--due`; a NEXT copy warns. Next: codex review | in-progress | engine-sheet | [[../../.claude/skills/session-end/SKILL]] §Changelog 2026-11-07 |
 | governance.56 | One boot (builder 11-02): CLAUDE.md imports one `.claude/TERMINAL.md`; boot-load.js retired. Next: review | in-progress | engine-sheet | [[../plans/2026-08-29-boot-doc-consolidation]] §Changelog |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 | engine.338 | A former player's next chapter (builder 11-07): post-career pay, the intake door's three missing cells, his word at the owed wake. Task 2a live @178; next 2b–d | in-progress | research-build | [[../plans/2026-11-07-former-player-next-chapter]] |
@@ -82,6 +81,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| governance.58 | What waits on a fire lives once, in its §2 row (builder 11-07): boot and /run-cycle print `--due`; a NEXT copy warns. Codex SHIP on the fold (9f8960e6f) | done-pending-archive | engine-sheet | [[../../.claude/skills/session-end/SKILL]] §Changelog 2026-11-07 |
 | pipeline.103 | Notebook search scope rebuilds on every add (builder 11-07; next session first). Search reads a 10-18 list: 22 live sources out, 69 dead ids in | ready | engine-sheet | [[../plans/2026-11-07-notebook-search-scope]] |
 | engine.336 | `Now:` bio lines for ledger-changing moments (builder 11-07: wedding, birth, job change, promotion); they stack atop the minted prose, newest first | ready | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] §Builder's ruling (scope) |
 | engine.334 | Story seeds sum unlike numbers (C114 sports "sentiment +36.06" = mood + head-count). After engine.331 and engine.332; stub, review deeper when picked up | ready | engine-sheet | [[../plans/2026-11-05-story-seed-mixed-magnitudes]] |

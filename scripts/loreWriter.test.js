@@ -108,6 +108,11 @@ assert.match(now, /=== THE WORLD NOW/);
 assert.match(now, /Current Cycle C\d+: Calendar context: Y\dC\d+/, 'the newest world summary calendar line');
 assert.match(now, /Sports season:/);
 assert.match(now, /2041 — World Series Champions/, 'the team timeline');
+// pipeline.106: the stay-general rule, and no dossier without a subject id.
+const { SYSTEM_PROMPT, subjectDossier } = require('./loreWriter');
+assert.match(SYSTEM_PROMPT, /WHEN THE SOURCES DON'T SAY/);
+assert.match(SYSTEM_PROMPT, /Copy numbers exactly as the source gives them/);
+subjectDossier('Write a piece with no subject id.', new Set()).then((d) => assert.strictEqual(d, ''));
 // With thinking on, a thought part is never the reply or the rescued piece.
 assert.strictEqual(visibleText([{ thought: true, text: 'reasoning' }, { functionCall: { name: 'x' } }]), null);
 assert.strictEqual(visibleText([{ thought: true, text: 'reasoning' }, { text: 'the piece' }]), 'the piece');

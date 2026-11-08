@@ -46,7 +46,10 @@ const SYSTEM_PROMPT = "You are the GodWorld Lore Writer, responsible for generat
 "5. FORMATTING & LENGTH:\n" +
 "   Every generated piece must end with a NAMES INDEX and CITIZEN USAGE LOG block.\n" +
 "   Unless otherwise specified, articles must be LONG-FORM (1200-1500 words). Expand deeply on scenes, sensory details, and lore to achieve this depth.\n" +
-"6. DELIVERY:\n" +
+"6. WHEN THE SOURCES DON'T SAY:\n" +
+"   A specific -- a cycle or date, a game or opponent, a place, an amount, rented or owned, who said what and when -- comes from a source or stays general. \"Later that season\", \"a road start\", \"the place he rents\" are fine; an invented cycle, opponent, number or event is not.\n" +
+"   Copy numbers exactly as the source gives them; never round them into a band (\"five figures\") or a span (\"a decade and a half\"). A midseason record is not a season total. A quote placed in a cycle needs a source that dates it.\n" +
+"7. DELIVERY:\n" +
 "   The finished piece is delivered ONLY by calling the `write_file` tool. Never output the finished article as reply text -- prose you type instead of a write_file call is discarded. When the piece (including the NAMES INDEX and CITIZEN USAGE LOG) is ready, call write_file exactly once with the complete content as the `content` argument.";
 
 const TOOLS = [
@@ -289,6 +292,56 @@ function readSource(relPath, offset, seenPaths) {
 // newest world summary's calendar line is the current Cycle and season; the A's TrueSource
 // team timeline is every season's result. A missing file is named, never fatal.
 const TEAM_TIMELINE = 'archive/non-articles/data/TrueSource_Team_Timeline_v1.1.txt';
+
+// pipeline.106 (builder 2026-11-08: "make sure it has the sources as that's the point for it
+// to use them"): the subject's own record is loaded before the first turn instead of left to
+// the model to fetch -- the 11-08 Richards rerun never opened his TrueSource card. The ledger
+// profile (with its household: rented or owned), every TrueSource card on disk carrying the
+// subject's name, what the canon archive holds, and the published files naming them (those
+// paths open with read_source). A source that fails is named in the block, never fatal.
+const DOSSIER_CARD_CHARS = 40000;
+async function subjectDossier(prompt, seenPaths) {
+  const popid = (/POP-\d{5}/.exec(String(prompt || '')) || [])[0];
+  if (!popid) return '';
+  const lines = ['', '', '=== SUBJECT DOSSIER: ' + popid + ' (the sources for this piece; use them) ==='];
+  let name = null;
+  try {
+    const out = execFileSync('node', ['scripts/queryLedger.js', 'citizen', popid], { cwd: GODWORLD_ROOT, encoding: 'utf-8', maxBuffer: 10 * 1024 * 1024 });
+    const data = JSON.parse(out.slice(out.indexOf('{\n  "query"'))).data;
+    name = data && data.name;
+    lines.push('', 'LEDGER PROFILE (query_ledger citizen ' + popid + '):', JSON.stringify(data, null, 1));
+  } catch (e) {
+    lines.push('', 'LEDGER PROFILE unavailable this run (' + e.message.slice(0, 120) + '); call query_ledger.');
+  }
+  if (name) {
+    const dataDir = path.join(GODWORLD_ROOT, 'archive', 'non-articles', 'data');
+    const low = name.toLowerCase();
+    const cards = fs.existsSync(dataDir) ? fs.readdirSync(dataDir).filter((f) => /\.txt$/i.test(f) && f.toLowerCase().includes(low)) : [];
+    let budget = DOSSIER_CARD_CHARS;
+    for (const f of cards) {
+      const text = fs.readFileSync(path.join(dataDir, f), 'utf-8').trim();
+      const take = text.slice(0, Math.max(0, budget));
+      if (!take) break;
+      lines.push('', 'TRUESOURCE CARD (archive/non-articles/data/' + f + '):', take + (take.length < text.length ? '\n[card truncated]' : ''));
+      budget -= take.length;
+    }
+    if (!cards.length) lines.push('', 'TRUESOURCE CARD: none on disk for ' + name + '.');
+    try {
+      lines.push('', 'CANON ARCHIVE (canon_recall "' + name + '"):', await canonRecall(name));
+    } catch (e) {
+      lines.push('', 'CANON ARCHIVE unavailable this run (' + e.message.slice(0, 120) + ').');
+    }
+    try {
+      const hits = require('../lib/mags').searchDisk(searchTerm(name), 15);
+      for (const p of pathsInSearchResult(hits)) seenPaths.add(p);
+      lines.push('', 'PUBLISHED RECORD NAMING ' + name + ' (search_articles; open the ones that matter with read_source):', hits);
+    } catch (e) {
+      lines.push('', 'PUBLISHED RECORD search unavailable this run (' + e.message.slice(0, 120) + ').');
+    }
+  }
+  lines.push('=== END SUBJECT DOSSIER ===');
+  return lines.join('\n');
+}
 function worldNowBlock() {
   const lines = ['', '', '=== THE WORLD NOW (read before you write any game, season or date) ==='];
   const outDir = path.join(GODWORLD_ROOT, 'output');
@@ -419,10 +472,10 @@ async function main() {
     fs.mkdirSync(QUARANTINE_DIR, { recursive: true });
   }
 
-  const messages = [{ role: 'user', parts: [{ text: prompt + worldNowBlock() }] }];
+  const seenPaths = new Set(); // read_source opens only what search_articles (or the dossier) returned
+  const messages = [{ role: 'user', parts: [{ text: prompt + worldNowBlock() + await subjectDossier(prompt, seenPaths) }] }];
   let iterations = 0;
   let notebookCalls = 0;
-  const seenPaths = new Set(); // read_source opens only what search_articles returned
   let wroteFile = false;
   let lastText = null;
 
@@ -594,4 +647,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { slugify, FALLBACK_MIN_CHARS, clampToQuarantine, writeQuarantineFile, canonRecall, notebookSearch, readSource, pathsInSearchResult, searchTerm, isReadableCanonPath, visibleText, worldNowBlock, QUARANTINE_DIR, GEMINI_MODEL, THINKING_LEVEL, TOOLS };
+module.exports = { slugify, FALLBACK_MIN_CHARS, clampToQuarantine, writeQuarantineFile, canonRecall, notebookSearch, readSource, pathsInSearchResult, searchTerm, isReadableCanonPath, visibleText, worldNowBlock, subjectDossier, SYSTEM_PROMPT, QUARANTINE_DIR, GEMINI_MODEL, THINKING_LEVEL, TOOLS };

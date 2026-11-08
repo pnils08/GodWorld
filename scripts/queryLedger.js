@@ -194,11 +194,21 @@ function buildCitizenProfile(citizen, aux) {
       type: b.BondType || b.Type,
       strength: b.Strength,
     })),
+    // Household_Ledger's own columns (pipeline.106): this read Type/Size/Address, which the
+    // tab has never had, so every profile showed only the id — the lore writer could not tell
+    // a rented home from an owned one and wrote "bought" for a renter.
     household: household ? {
       id: household.HouseholdId,
-      type: household.Type,
-      size: household.Size,
-      address: household.Address,
+      type: household.HouseholdType,
+      members: household.Members,
+      head: household.HeadOfHousehold,
+      neighborhood: household.Neighborhood,
+      housingType: household.HousingType,
+      monthlyRent: household.MonthlyRent,
+      housingCost: household.HousingCost,
+      householdIncome: household.HouseholdIncome,
+      formedCycle: household.FormedCycle,
+      status: household.Status,
     } : null,
   };
 }

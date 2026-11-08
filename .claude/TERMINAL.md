@@ -59,6 +59,7 @@ Model: Opus for engine substrate or code across several files; Sonnet for plans,
 - A fix the job cannot finish without is the job. Anything else surfaced is a new ROLLOUT row, not a second build.
 - The job's owner carries it and owns its failures; "the plan said so" is no defense.
 - Done → `done-pending-archive`; the session-end sweep moves the row to ROLLOUT_ARCHIVE and the plan to `docs/archive/plans/`. Session ends mid-job → the row stays in-progress; the NEXT line says where it stopped.
+- A read owed to a fire lives once, in its ROLLOUT §2 row (builder 2026-11-07). Boot and `/run-cycle` print the rows naming the next fire (`node scripts/docLoopStatus.js --due`); a NEXT line never copies them. Closing a read = flip or re-date the row.
 - Engine substrate (`phase*/`, `utilities/`, `lib/`, `schemas/`): sandbox proof on the exact candidate, on live-synced sandbox state, before PROD; sandbox-proven changes may stack on one live fire; one unproven change in flight across both terminals (the sandbox is shared); a review (below) before PROD. Code rules: `.claude/rules/engine.md`.
 - Mike's standing go: sandbox fires, reverts and resyncs, and a PROD `clasp push` with its smoke-test note, need no per-deploy ask. Claude fires and deploys the sandbox; procedure, current sandbox and trigger: `docs/reference/DEPLOY.md`. The trigger is the web-app GET with the trigger token; never echo the token.
 - Needs Mike's explicit go: sheet writes touching many rows, schema deletions, Supermemory wipes.

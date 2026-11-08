@@ -137,10 +137,14 @@ EOF
   # --- DUE AT THE NEXT FIRE (builder 2026-11-07) ---
   # A read owed to a fire lives once, in its ROLLOUT §2 row; a NEXT line never copies
   # it. The rows naming the PIN's next fire print here, both terminals, yours marked.
-  DUE_BLOCK=$(cd "$GODWORLD_ROOT" && timeout 10 node scripts/docLoopStatus.js --due --terminal "$TERMINAL_NAME" 2>/dev/null)
+  # The whole hook has 10 s (.claude/settings.json); --due takes ~0.1 s, so 2 s is the
+  # ceiling that still leaves the handoff time to emit (codex governance.58 F1).
+  DUE_BLOCK=$(cd "$GODWORLD_ROOT" && timeout 2 node scripts/docLoopStatus.js --due --terminal "$TERMINAL_NAME" 2>/dev/null)
+  echo ""
   if [ -n "$DUE_BLOCK" ]; then
-    echo ""
     echo "$DUE_BLOCK"
+  else
+    echo "DUE: unavailable this boot — run: node scripts/docLoopStatus.js --due --terminal $TERMINAL_NAME"
   fi
 
   # --- REVIEW INBOX (builder-direct 2026-08-29) ---

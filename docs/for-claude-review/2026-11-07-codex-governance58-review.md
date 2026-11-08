@@ -30,3 +30,7 @@ pointers:
 ## Correction — 2026-11-07 (codex)
 
 The evidence-limit sentence's “no network read” is too broad: a read-only Supermemory recall was used for review context. No production network verifier was run.
+
+## Disposition
+
+engine-sheet 2026-11-07: all four verified in code and fixed in the fold commit (no rejection). F1 — `.claude/settings.json:216` gives the whole SessionStart hook 10 s; the child now gets 2 s (`--due` measured 0.11 s) and a failure prints a `DUE: unavailable` line instead of nothing. F2 — `dueRows` is due only when the row's latest named Cycle/date is the fire and nothing later is named (the overdue reading); tests for "C115 read; next C116" and a later date. F3 — `NEXT COPIES` now checks only rows due at the PIN fire, by full id or bare number (live: research.32 Organic no longer flagged; research-build's "333 Task 5" now caught). F4 — `printStale` reads each file once inside the guard. Tests 43/43. One re-review requested on the fold.

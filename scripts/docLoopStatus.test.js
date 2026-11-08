@@ -87,12 +87,23 @@ assertEqual('dueRows: the fire\'s Cycle or date, waiting rows only, Organic skip
   dueRows(roll, nextFire(pin)).map(r => r.id + ':' + r.terminal), ['engine.931:engine-sheet', 'engine.932:research-build', 'engine.935:engine-sheet']);
 assertEqual('dueRows: no fire → nothing', dueRows(roll, null), []);
 assertEqual('dueRows: date-only match needs the date', dueRows(roll, { cycle: 999, date: null }), []);
-assertEqual('nextCopiesWaiting: a waiting row named anywhere in a NEXT line',
-  nextCopiesWaiting(next('engine-sheet', 'engine.901 → build. C115 reads: engine.903; research.906.'), rows),
-  ['  NEXT[engine-sheet] names engine.903 — a read owed to a fire; it lives in its ROLLOUT §2 row (--due prints it)',
-    '  NEXT[engine-sheet] names research.906 — a read owed to a fire; it lives in its ROLLOUT §2 row (--due prints it)']);
-assertEqual('nextCopiesWaiting: open and closed rows are not copies', nextCopiesWaiting(next('engine-sheet', 'engine.901 → engine.902, engine.904.'), rows), []);
-assertEqual('nextCopiesWaiting: the PIN is not a NEXT line', nextCopiesWaiting('**PIN:** engine.903\n', rows), []);
+// The latest named wait governs (codex F2): a kept receipt is not due again.
+assertEqual('dueRows: "C115 read; next C116" is not due at C115',
+  dueRows('| engine.938 | C115 read completed; next read C116 | live-observing | engine-sheet | [[x]] |', nextFire(pin)), []);
+assertEqual('dueRows: a later date keeps it off C115',
+  dueRows('| engine.939 | C115 read; next 2026-11-15 | live-observing | engine-sheet | [[x]] |', nextFire(pin)), []);
+// Copies are reads due at the next fire, by full id or bare number (codex F3).
+const dueSet = [{ id: 'engine.903' }, { id: 'engine.333' }];
+const cp = (body, d) => nextCopiesWaiting(next('engine-sheet', body), d || dueSet);
+assertEqual('nextCopiesWaiting: a due row named by id',
+  cp('engine.901 → build. C115 reads: engine.903.'),
+  ['  NEXT[engine-sheet] copies engine.903 — due at the next fire; the read lives in its ROLLOUT §2 row (--due prints it)']);
+assertEqual('nextCopiesWaiting: shorthand by the bare number',
+  cp('engine.338 → Task 2b. C115 read first: 333 Task 5.'),
+  ['  NEXT[engine-sheet] copies engine.333 (as the bare number) — due at the next fire; the read lives in its ROLLOUT §2 row (--due prints it)']);
+assertEqual('nextCopiesWaiting: a waiting row not due at this fire is not a copy', cp('engine.901 → research.906, engine.904.'), []);
+assertEqual('nextCopiesWaiting: C333, @333, 333.5 are not shorthand', cp('engine.901 → C333 @333 333.5'), []);
+assertEqual('nextCopiesWaiting: the PIN is not a NEXT line', nextCopiesWaiting('**PIN:** engine.903\n', dueSet), []);
 
 // The CLI path the pre-commit hook and session close call: a scratch copy of
 // the script beside synthetic repo files (the script reads ../docs, ../SESSION_CONTEXT.md).
@@ -129,7 +140,7 @@ console.log('\nCLI (--stale-next, --lint) on a scratch repo');
     assertEqual('--due lists the row, marked yours', due.split('\n').slice(0, 2),
       ['DUE AT C115 (2026-11-08): 1 read(s) waiting in ROLLOUT §2 — once read, flip or re-date the row:',
         '  engine.921 [engine-sheet, yours] Read at C115 (Acc 1)']);
-    assertEqual('--stale-next warns on the copy', cli('--stale-next').includes('NEXT[engine-sheet] names engine.921'), true);
+    assertEqual('--stale-next warns on the copy', cli('--stale-next').includes('NEXT[engine-sheet] copies engine.921'), true);
     fs.writeFileSync(path.join(root, 'SESSION_CONTEXT.md'), next('engine-sheet', 'engine.920 → build it.'));
 
     // --staged reads the index, the content that will commit (codex re-review F1):

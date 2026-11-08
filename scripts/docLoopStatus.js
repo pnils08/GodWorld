@@ -217,10 +217,12 @@ function runLint(gate) {
 // working tree, which a partial stage can leave different.
 function printStale(staged) {
   const read = rel => (staged ? stagedText(rel) : readOr(path.join(ROOT, rel)));
-  let stale;
+  let stale, copies;
   try {
-    stale = staleNextLeads(read('SESSION_CONTEXT.md'), parseRollout(read('docs/engine/ROLLOUT_PLAN.md')),
-      read('docs/engine/ROLLOUT_ARCHIVE.md'), read('docs/plans/BACKLOG.md'));
+    // Read once, inside the guard: a second staged read could throw past it (codex F4).
+    const session = read('SESSION_CONTEXT.md'), rollout = read('docs/engine/ROLLOUT_PLAN.md');
+    stale = staleNextLeads(session, parseRollout(rollout), read('docs/engine/ROLLOUT_ARCHIVE.md'), read('docs/plans/BACKLOG.md'));
+    copies = nextCopiesWaiting(session, dueRows(rollout, nextFire(session)));
   } catch (e) {
     console.log(`NEXT STALE: not checked — could not read the index: ${String(e.message).split('\n')[0]}`);
     return;
@@ -229,9 +231,8 @@ function printStale(staged) {
     console.log(`NEXT STALE: ${stale.length} handoff line(s) lead with a row that is no longer open — the owner rewrites its line; a closer may correct the stale fact:`);
     stale.forEach(p => console.log(p));
   }
-  const copies = nextCopiesWaiting(read('SESSION_CONTEXT.md'), parseRollout(read('docs/engine/ROLLOUT_PLAN.md')));
   if (copies.length) {
-    console.log(`NEXT COPIES: ${copies.length} handoff mention(s) of a waiting row — the owner drops it from its line:`);
+    console.log(`NEXT COPIES: ${copies.length} handoff copy(ies) of a read due at the next fire — the owner drops it from its line:`);
     copies.forEach(p => console.log(p));
   }
 }
@@ -288,7 +289,9 @@ function staleNextLeads(sessionText, rows, archiveText, backlogText) {
 // multiple places": a read owed to a fire lives once, in its §2 row; boot and
 // /run-cycle print it, a NEXT line never copies it. The next fire is the PIN's
 // ("next live fire C115 Sun 2026-11-08"); a waiting row is due when it names that
-// Cycle or that date. `Organic:` rows name no fire. Pure: the caller reads the files.
+// Cycle or that date and nothing later — the latest named wait governs, as overdue
+// reads it, so a kept receipt ("C115 read; next C116") is not due again (codex F2).
+// `Organic:` rows name no fire. Pure: the caller reads the files.
 const WAITING = new Set(['live-observing', 'blocked']);
 function nextFire(sessionText) {
   const m = String(sessionText).match(/next live fire C(\d+)([^|\n]*)/);
@@ -309,23 +312,28 @@ function dueRows(rolloutText, fire) {
     const item = cells.slice(2, sIdx).join(' ');
     if (/^Organic:/.test(item)) continue;
     const cycles = [...item.matchAll(/\bC(\d{2,3})\b/g)].map(m => Number(m[1]));
-    const dates = [...item.matchAll(/\b(20\d\d-\d\d-\d\d)\b/g)].map(m => m[1]);
-    if (cycles.includes(fire.cycle) || (fire.date && dates.includes(fire.date))) {
-      out.push({ id: idMatch[1], terminal: cells[sIdx + 1] || '(unspecified)', item });
-    }
+    const dates = [...item.matchAll(/\b(20\d\d-\d\d-\d\d)\b/g)].map(m => m[1]).sort();
+    const maxC = cycles.length ? Math.max(...cycles) : null;
+    const lastD = dates.length ? dates[dates.length - 1] : null;
+    const hit = maxC === fire.cycle || (fire.date !== null && lastD === fire.date);
+    const later = (maxC !== null && maxC > fire.cycle) || (fire.date !== null && lastD !== null && lastD > fire.date);
+    if (hit && !later) out.push({ id: idMatch[1], terminal: cells[sIdx + 1] || '(unspecified)', item });
   }
   return out;
 }
 
-// A NEXT line naming a waiting row copies its read. Warning only, like stale.
-function nextCopiesWaiting(sessionText, rows) {
-  const waiting = new Set(rows.filter(r => WAITING.has(r.state)).map(r => r.id));
+// A NEXT line naming a row due at the next fire copies its read — the full id, or
+// the bare number as shorthand ("333 Task 5"; codex F3). Warning only, like stale.
+function nextCopiesWaiting(sessionText, due) {
   const out = [];
   for (const line of String(sessionText).split('\n')) {
     const m = line.match(/^\*\*NEXT\[([a-z-]+)\]:\*\*\s*(.*)$/);
     if (!m) continue;
-    for (const id of new Set(m[2].match(ROW_TOKEN) || [])) {
-      if (waiting.has(id)) out.push(`  NEXT[${m[1]}] names ${id} — a read owed to a fire; it lives in its ROLLOUT §2 row (--due prints it)`);
+    for (const { id } of due) {
+      const num = id.split('.')[1].replace(/\./g, '\\.');
+      const how = new RegExp(`\\b${id.replace(/\./g, '\\.')}\\b`).test(m[2]) ? ''
+        : new RegExp(`(^|[\\s(,;:+/])${num}(?![\\w.])`).test(m[2]) ? ' (as the bare number)' : null;
+      if (how !== null) out.push(`  NEXT[${m[1]}] copies ${id}${how} — due at the next fire; the read lives in its ROLLOUT §2 row (--due prints it)`);
     }
   }
   return out;

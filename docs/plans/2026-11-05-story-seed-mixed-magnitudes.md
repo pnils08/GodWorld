@@ -43,28 +43,30 @@ C110–C114 clusters: 228 seeds, 39 clusters mix effect types. Shapes seen on th
 
 Class branch tally C110–C114 (which test made each seed major): size≥3 24, magnitude 128, texture 76. The bar (`|m| ≥ 3`, or `0.05 ≤ |m| < 1`) is unit-blind; that is a sim call and sits in Open questions, not in this cut.
 
-Readers (both wiring cards): no non-test code parses `What`. `Magnitude` is mapped by `buildEconomicSlice.js:270` and `draftContentRows.js:216` and never used after; it rides the Phase-9 carry as `m` "for the record" (`loadPreviousEvening.js:451`) and no engine code reads it. `/sift` treats `Magnitude` as a labeled signal, never priority (`.claude/skills/sift/SKILL.md:259`) and matches seeds on `Why`, not `What` (`:455`). `Class` matters: carry `major` → priority 3, `texture` → 2 (`finalizeCycleState.js:743`) → next Cycle's hood seed weight (`applyCityDynamics.js:1037`) and the 60-row carry cap drops texture first (`finalizeCycleState.js:766-767`); `buildLivesSlice.js:315` sorts major first; `draftContentRows.js:281` takes the first three majors; `/sift` sends texture to atmospheric-only (`SKILL.md:257`).
+Readers (both wiring cards, qualified by codex F2): no code reads a number out of `What`, but two paths read its words — `buildTransitSlice.js:201-205` keeps up to four civic seeds whose serialized row (What included) names transit / BART / train / station / rail, and `/sift` may fall back to a `What` text match when Citizens, entities and `Why` do not match (`SKILL.md:254-255,450-455`). `Magnitude` is mapped by `buildEconomicSlice.js:270` and `draftContentRows.js:216` and never used after; it rides the Phase-9 carry as `m` "for the record" (`loadPreviousEvening.js:451`) and no engine code reads it. `/sift` treats `Magnitude` as a labeled signal, never priority (`.claude/skills/sift/SKILL.md:259`) and matches seeds on `Why`, not `What` (`:455`). `Class` matters: carry `major` → priority 3, `texture` → 2 (`finalizeCycleState.js:743`) → next Cycle's hood seed weight (`applyCityDynamics.js:1037`) and the 60-row carry cap drops texture first (`finalizeCycleState.js:766-767`); `buildLivesSlice.js:315` sorts major first; `draftContentRows.js:281` takes the first three majors; `/sift` sends texture to atmospheric-only (`SKILL.md:257`).
 
 ## The cut
 
 One file, `phase07-evening-media/buildContractSeeds.js`, plus its test. Producers untouched; no column or schema change.
 
-1. **Unit table in the builder** — `CONTRACT_SEED_UNIT` by causeType: `economic-event` and `approval-shift` → `sum` (whole cluster, one unit; keeps engine.206's `+16`); `sports` → `by-effect` (sum within each effect type, never across); any cause not listed → `level` (each effect type shows its count of events and its peak value). Lives where the adding happens; a new producer left off the table fails safe (prints `×N`, never a made-up total). A field on `recordRipple_` was weighed and set aside: 48 call sites in 24 files outside this job, and the Ripple_Ledger header would change.
-2. **Groups** — a cluster's ripples split into unit groups per the table; the lead's group (first non-carryover, as now) prints first.
+1. **Unit table in the builder** — `CONTRACT_SEED_UNIT` by causeType: `economic-event` and `approval-shift` → `sum` (one unit across the cause; keeps engine.206's `+16`); `sports` → `by-effect` (sum within each effect type, never across); any cause not listed → `level` (each effect type shows its count of events and its peak value). An effect-type override sits above it: `business-closure` → `level` — a closure is filed as `economic-event` but its −25/−40 is a fixed score from the closing business's size (`applyBusinessDynamics.js:685-700`), not ripple points (codex F1). Lives where the adding happens; a new producer left off the table fails safe (prints `×N`, never a made-up total). A field on `recordRipple_` was weighed and set aside: 48 call sites in 24 files outside this job, and the Ripple_Ledger header would change.
+2. **Groups** — a cluster's ripples split into unit groups per the table (a `sum` cause is one group, labelled by the lead's effect type as today; a closure is always its own group); the lead's group (first non-carryover, as now) prints first.
 3. **`What`** — groups joined `; `. `sum` / `by-effect` group: `<effect> ±<sum>`. `level` group of one: `<effect> ±<value>` (unchanged from today). `level` group of more than one: `<effect> ×<n>`. The `(N related effects this cycle)` suffix stays.
 4. **`Magnitude`** — the lead group's figure: its sum for `sum` / `by-effect`, its signed peak for `level`.
 5. **Class** — major when the cluster has ≥3 effects (unchanged) or when any one group's figure clears the existing bar in its own unit. Merging never demotes an effect that would be major on its own, and never promotes by adding unlike things. Bars unchanged.
 
-Modelled on the C110–C114 ripples (scratch replay, not the engine): 53 of 228 `What` lines change; 1 class flips — C114 edition-coverage, traffic +0.03 and mood +0.02, major → texture (neither clears 0.05; together they did). Sports C114 becomes `sentiment +0.06; game-night +35; game-night-household +1 (4 related effects this cycle)`, Magnitude 0.06, major. Economic, approval and coverage-reaction rows unchanged.
+Class can move both ways: an unlike pair that only reached the bar together drops to texture; an unlike pair that cancelled (an initiative at +0.05 beside one at −0.05) rises to major, because each alone clears the bar (codex review). A same-unit pair still nets.
+
+Modelled on the C110–C114 ripples (scratch replay, not the engine; no closure fired in the window): 53 of 228 `What` lines change; 1 class flips — C114 edition-coverage, traffic +0.03 and mood +0.02, major → texture (neither clears 0.05; together they did). Sports C114 becomes `sentiment +0.06; game-night +35; game-night-household +1 (4 related effects this cycle)`, Magnitude 0.06, major. Economic, approval and coverage-reaction rows unchanged.
 
 ## Tasks
 
 | # | Task | Owner | Status |
 |---|------|-------|--------|
 | 1 | Read-before: `buildContractSeeds_` end to end, wiring cards on it and on `Story_Seed_Deck`, every reader of seed `magnitude` / `Class`, a C110–C114 count of mixed-unit clusters. Fill this plan | es | done (this edit) |
-| 2 | Codex plan review (codex-es) → reconcile below | es / codex | not started |
-| 3 | Build the cut in `buildContractSeeds.js`; tests in `buildContractSeeds.test.js`: the C114 sports shape, a 15-move migration cluster (`×15`, Magnitude 5), the edition-coverage pair (texture), the unit table's default; 5b.a, 5b.d and §11/§12 unchanged. `/stub-engine` in the same commit | es | not started |
-| 4 | Replay C110–C114 Ripple_Ledger rows through the old and the new builder (`output/engine-sheet/`); every class flip and every changed `What` listed here | es | not started |
+| 2 | Codex plan review (codex-es) → reconcile below | es / codex | done — HOLD, folded (closure override, reader claim qualified, both-way class tests); re-review of the fold sent |
+| 3 | Build the cut in `buildContractSeeds.js`; tests in `buildContractSeeds.test.js`: the C114 sports shape, a 15-move migration cluster (`×15`, Magnitude 5), the edition-coverage pair (texture), a closure beside a birth in one hood (two groups, closure leads at −25) and two closures (`×2`, Magnitude −40), an initiative pair +0.05 / −0.05 (major), the unit table's default; 5b.a, 5b.d and §11/§12 unchanged. `/stub-engine` in the same commit | es | not started |
+| 4 | Replay C110–C114 Ripple_Ledger rows through the old and the new builder (`output/engine-sheet/2026-11-08-engine334-replay.js`); every class flip both ways, every changed `What`, and every civic seed whose transit-word match changes, listed here | es | not started |
 | 5 | Codex review of the exact deploy candidate; fold | es / codex | not started |
 | 6 | Sandbox fire on live-synced state (one unproven change in flight across both terminals); read the Cycle's `Story_Seed_Deck` rows back; Engine_Errors unchanged | es | not started |
 | 7 | PROD push, DEPLOY_HISTORY, live read at C116 Sun 2026-11-15 | es | not started |
@@ -83,19 +85,25 @@ Modelled on the C110–C114 ripples (scratch replay, not the engine): 53 of 228 
 |---|---|---|---|
 | Wiring card `buildContractSeeds_` | es (engine-wiring) | in-session 2026-11-08 | read-only |
 | Wiring card `Story_Seed_Deck` | es (engine-wiring) | in-session 2026-11-08 | read-only |
+| Codex plan review of `f6cd6c064` | codex | [[../for-claude-review/2026-11-08-codex-engine334-plan-review]] | HOLD → folded |
 
 ### Agreed
 
 | # | Item | Held by | Sources |
 |---|---|---|---|
-| A1 | No non-test parser of `What`; `Magnitude` read by no engine code and never ranked | es · both cards | `beatSliceKit.js:152`, `loadPreviousEvening.js:451`, sift `SKILL.md:259` |
-| A2 | `Class` moves next Cycle's hood seed weight (3 vs 2) and the carry cap | es · both cards | `finalizeCycleState.js:743,766`, `applyCityDynamics.js:1037` |
+| A1 | No code reads a number out of `What`; `Magnitude` read by no engine code and never ranked; `What` words reach the transit slice filter and sift's fallback match | es · both cards · codex F2 | `beatSliceKit.js:152`, `buildTransitSlice.js:201-205`, `loadPreviousEvening.js:451`, sift `SKILL.md:255,259` |
+| A2 | `Class` moves next Cycle's hood seed weight (3 vs 2) and the carry cap | es · both cards · codex | `finalizeCycleState.js:743,766`, `applyCityDynamics.js:1037` |
+| A3 | `economic-event` holds two kinds: ripple points (births, carryovers) and fixed closure scores −25/−40; a closure is never summed | codex F1 · es (read `applyBusinessDynamics.js:685-700`) | review §Findings 1 |
+| A4 | Approval deltas add within a district (each feeds the same hood mood bus); economic births + carryovers add; transit game-day rows are per franchise and peak is right for them | codex · es | `updateCivicApprovalRatings.js:1067-1103`, `economicRippleEngine.js:259-295`, `updateTransitMetrics.js:639-664,1079-1099` |
+| A5 | Ledger replay reproduces what Phase 7 saw: old builder over the C110–C114 ledger rows rebuilds 226 of 228 live deck rows exactly (What, Magnitude, Class); the two others are C110 `carryover +31` (deck written before engine.206's lead rule went live) and a C113 SeedID the sheet turned into a number (`9.70E+13`) | es (2026-11-08 replay check) · codex (no Phase 8–10 producer) | review §Verified design implications |
+| A6 | Class moves both ways under the any-group rule; tests and the replay must show both | codex · es | review §Verified design implications |
 
 ### Needs proof
 
 | # | Claim | Held by | Proof that settles it | Sources |
 |---|---|---|---|---|
 | P1 | The engine builder gives the same 53 / 1 as the scratch model | es | Task 4 replay through the real builder | this plan §The cut |
+| P2 | A failed Phase-10 ledger append would make the replay miss a ripple Phase 7 saw | codex | none needed for C110–C114 (A5: 226/228 exact, both misses explained); the sandbox fire (Task 6) reads the deck itself | review §Verified design implications |
 
 ### New concepts
 
@@ -103,6 +111,8 @@ Modelled on the C110–C114 ripples (scratch replay, not the engine): 53 of 228 
 |---|---|---|---|---|
 | N1 | Map gaps: STUB_REVERSE lists no `Story_Seed_Deck` writer; SHEETS_MANIFEST §9 has no row for `saveV3Seeds.js` :74/:84 migrator writes, `cycleRollback.js:143`, `citizen-signal-detector.js:231,238`, `routePatternSeeds.js:699,706`; the two scripts write positionally to a v3 header the v4 deck lacks (their guards throw) | es · Story_Seed_Deck card | doc truth, two dead write paths | held — not this job; gap log |
 | N2 | `compileHandoff.js:300-325` reads v3 columns (`SeedType`, `Priority`, `SeedText`) the v4 deck lacks — every row drops | es · Story_Seed_Deck card | a dead reader | held — not this job; gap log |
+| N3 | Give closures their own causeType instead of an effect override | codex F1 (alternative) | a cleaner key | held — changes `applyBusinessDynamics.js`, the deck Domain route and Ripple_Ledger rows; the override keeps the job in one file |
+| N4 | A SeedID made of digits-e-digits (`97e00012`) is stored by the sheet as a number, so the row's id is lost to `/sift` stamping | es (A5 check) | id integrity | held — not this job; gap log G-ES14 |
 
 ## Open questions
 
@@ -111,5 +121,6 @@ Modelled on the C110–C114 ripples (scratch replay, not the engine): 53 of 228 
 
 ## Changelog
 
+- 2026-11-08 (engine-sheet) — Codex plan review HOLD folded: closures (`economic-event` / `business-closure`, fixed −25/−40) never sum; What-word readers named (transit slice, sift fallback); class moves both ways, tested. Ledger replay rebuilds 226/228 live deck rows.
 - 2026-11-08 (engine-sheet) — Task 1 done: read-before on both wiring cards and live C110–C114 ripples; the head-count never set the sports class (0 flips); cut is one file, a unit table, per-unit What/Magnitude/class; modelled 53 What changes, 1 class flip.
 - 2026-11-05 (engine-sheet) — Created as a stub from the engine.331 trace (G-ES3); builder: own plan, after engine.331 and engine.332, review deeper when picked up.

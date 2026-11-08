@@ -1,0 +1,14 @@
+# REVIEW — engine.334 plan: story seeds add unlike numbers (engine-sheet 2026-11-08)
+
+Adversarial plan review, SHIP / SHIP-WITH-FIXES / HOLD, per AGENTS.md. Write to `docs/for-claude-review/2026-11-08-codex-engine334-plan-review.md`. Plan: `docs/plans/2026-11-05-story-seed-mixed-magnitudes.md` (commit `f6cd6c064`). No code is written yet; review the plan against the code.
+
+The cut, in short: one file, `phase07-evening-media/buildContractSeeds.js`. A table `CONTRACT_SEED_UNIT` by causeType (`economic-event`, `approval-shift` → `sum` over the whole cluster; `sports` → `by-effect`, sum within each effectType; any unlisted cause → `level`, each effectType shows its count `×N` and its signed peak). `What` joins the groups; `Magnitude` = the lead group's figure; class = major when the cluster has ≥3 ripples (unchanged) or any one group's figure clears the existing bar (`contractSeedIsMajor_`, `:121-127`, bars unchanged). Modelled on live Ripple_Ledger C110–C114: 53 of 228 What lines change, 1 class flip (C114 edition-coverage, traffic +0.03 + mood +0.02).
+
+Hunt, with file:line and the failure it causes:
+1. Unit table: is any producer's magnitude kind wrong? Read every `recordRipple_` / `recordHookRipple_` call site (48, list via `grep -rn "recordRipple_(\|recordHookRipple_(" phase* utilities`). In particular: is approval-shift really additive across office-holders in one district (`updateCivicApprovalRatings.js:1078-1103`)? Is economic carryover + the week's birth one unit (`economicRippleEngine.js:275`; engine.206 test 5b.a in `buildContractSeeds.test.js:209`)? Does any unlisted cause have repeated same-effectType ripples whose magnitudes DO add, so `level` would hide a real total?
+2. Does `S.rippleEvents` at Phase 7 differ from Ripple_Ledger rows (ripples recorded after Phase7-ContractSeeds), so the C110–C114 replay on ledger rows is not what the builder saw? Phase order: `godWorldEngine2.js:760` / `:2477`.
+3. Class rule "any group clears the bar": can it promote a seed the old sum did not (texture → major)? Which shapes? Any consumer that breaks on more or fewer majors: carry `finalizeCycleState.js:732-769` (priority 3/2, 60 cap), Phase 2 `applyCityDynamics.js:1036-1082`, `buildLivesSlice.js:315`, `draftContentRows.js:281`, `/sift` `.claude/skills/sift/SKILL.md:257`.
+4. Any reader of `What` or `Magnitude` the plan missed (it claims no non-test parser of What; Magnitude read by no engine code). Check dashboard/, lib/, scripts/, cron prompts.
+5. engine.332 coverage-reaction rows (`:470-473`, test `:418` signed 3/−3) — confirm untouched.
+6. Weakest assumption in the plan, and whether the open questions (unit-blind bar, blank-hood initiative merge) belong outside this cut.
+Do not touch the sheet, the sandbox, or any cron. Findings the code does not back are not findings.

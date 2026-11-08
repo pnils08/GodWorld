@@ -34,3 +34,14 @@ pointers:
 `applyBusinessDynamics_`, `runEconomicRippleEngine_`, approval, sports and other pre-Phase-7 producers → `recordRipple_` queues `Ripple_Ledger` and appends `S.rippleEvents` (`utilities/rippleLedger.js:40-93`) → `buildContractSeeds_` clusters and classifies at Phase 7 (`phase07-evening-media/buildContractSeeds.js:444-524`) → `S.contractSeeds` (`:594-621`) → `saveV3Seeds_` queues `Story_Seed_Deck` rows at Phase 10 (`phase10-persistence/saveV3Seeds.js:94-139`) → `executePersistIntents_` commits them (`phase01-config/godWorldEngine2.js:870`). Phase 9 also compacts `Class` into the next-Cycle carry (`phase09-digest/finalizeCycleState.js:732-768`), read by Phase 2 as seed weight (`phase02-world-state/applyCityDynamics.js:1036-1085`). The requested Haiku `engine-wiring` card command was attempted once and returned `[FATAL] Connection error`; this source-traced card is not a model-generated card.
 
 **Checks:** `node phase07-evening-media/buildContractSeeds.test.js` passed on the current, unmodified builder. No code, Sheet, sandbox, cron, or live Cycle was changed or run. The test pass does not verify the proposed implementation, the scratch replay, Sheet readback, sandbox, or PROD.
+
+## Disposition
+
+Filled by engine-sheet, 2026-11-08, after reading the cited lines.
+
+1. F1 (High) — agreed, verified at `applyBusinessDynamics.js:685-700` (`causeType 'economic-event'`, `effectType 'business-closure'`, `magnitude -(40|25)`). Folded: an effect-type override `business-closure → level` above the causeType table; closures never sum, a closure is its own group; Task 3 tests a closure beside a birth and two closures. A separate causeType for closures held as New concept N3 (outside the one-file cut).
+2. F2 (Medium) — agreed, verified at `buildTransitSlice.js:201-205` (regex over `JSON.stringify(sd)`). Reader claim qualified in the plan; the Task 4 replay lists every civic seed whose transit-word match changes.
+3. Both-way class movement — agreed; Task 3 tests the +0.05 / −0.05 pair, Task 4 lists flips both ways.
+4. Replay scope — answered by data: the old builder over the C110–C114 ledger rows rebuilds 226 of 228 live deck rows exactly; the two others are explained (pre-engine.206 lead rule at C110; a SeedID the sheet stored as a number). Plan A5 / P2.
+
+**Reconciled in:** [[../plans/2026-11-05-story-seed-mixed-magnitudes]] §Reviews reconciled

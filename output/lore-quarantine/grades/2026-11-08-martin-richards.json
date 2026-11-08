@@ -1,0 +1,60 @@
+{
+  "file": "output/lore-quarantine/martin-richards-deep-dive/martin_richards.md",
+  "verdict": "FAIL",
+  "recommendedTag": "Y3C10",
+  "failures": [
+    {
+      "quote": "In Y2C41, our own columnist P Slayer summarized the front office's dilemma in eight brutal words",
+      "line": 27,
+      "claimType": "cycle",
+      "ledgerSays": "The quoted line (\"You can find a Martin Richards. You cannot find another Mark Aitken.\") is P Slayer's opinion column in Edition 85 = cycle 85 = Y2C33 (n=floor(84/52)+1=2, m=84%52+1=33). Y2C41 = cycle 93; Edition 93 contains no Richards mention and no P Slayer byline on him. The Richards citizenBio carries the same Slayer line but no cycle.",
+      "source": "grep editions/cycle_pulse_edition_85.txt:446 (only exact hit in editions/ and archive/); grep Richards/P Slayer editions/cycle_pulse_edition_93.txt (no hits)"
+    },
+    {
+      "quote": "in eight brutal words",
+      "line": 27,
+      "claimType": "number",
+      "ledgerSays": "The sentence it counts, \"You can find a Martin Richards. You cannot find another Mark Aitken.\", is 12 words, not 8.",
+      "source": "editions/cycle_pulse_edition_85.txt:446 (the piece's own quoted line at line 27 is the same 12-word sentence)"
+    },
+    {
+      "quote": "Martin Richards was dealt to the New York Mets for prospects and relief arms",
+      "line": 31,
+      "claimType": "ledger-contradiction",
+      "ledgerSays": "Published return was two prospects only: an A-rated shortstop prospect and a 19-year-old B-rated pitcher (C100 breaking dispatch); Edition 101 says \"two top-ten prospects, one of them a shortstop\". No relief arms in the return. (The ledger itself carries no trade-return detail; this is a published-record contradiction.)",
+      "source": "archive/articles/c100_sports_end-of-an-anchor-richards-to-mets_bay-tribune-sports-desk.txt (Continuity Notes: 'The return: an A-rated SS ... and a 19-year-old B-rated pitcher. No immediate contributors added'); editions/cycle_pulse_edition_101.txt:23"
+    },
+    {
+      "quote": "In Edition 101, under the banner headline Trade Deadline Earthquake, this desk called it an ending Richards didn't get to write. P Slayer confessed to a journalistic debt long overdue",
+      "line": 33,
+      "claimType": "cycle",
+      "ledgerSays": "Placed in the Edition 101 paragraph, P Slayer's confession of the coverage debt is not in Edition 101 (his only Ed 101 piece is the Vinnie and Amara gala, S3; 'The Ending Richards Didn't Get to Write' is Margaret Corliss, Editor's Desk). The confession is P Slayer's 'The Let-Walks Coming' in Edition 94 = Y2C42 ('I cannot find a single dedicated piece about Martin Richards in the Tribune archive... That's on me'). Also: body prose cites an edition number, which newsroom.md forbids outside chrome (editorial rule, not a ledger fact).",
+      "source": "editions/cycle_pulse_edition_101.txt:103,314-318,49-53; editions/cycle_pulse_edition_94.txt:221-245"
+    }
+  ],
+  "conflicts": [
+    {
+      "quote": "When the Oakland Athletics drafted and developed him out of the local prep diamonds",
+      "line": 21,
+      "ledgerSays": "Ledger (POP-00031): OrginCity Oakland, BirthYear 2012, CitizenBio 'Born 2012, Oakland native... Lives in Fruitvale.' Piece matches the ledger.",
+      "publishedSays": "Edition 83 (Anthony): 'in one organization since he was drafted out of Maryland.' TrueSource card 'Martin Richards DataPage v1.0': 'Born: Maryland; Drafted: Round 1 (2028)'.",
+      "sources": "node scripts/queryLedger.js citizen POP-00031; editions/cycle_pulse_edition_83.txt (Invisible Star, 'drafted out of Maryland'); archive/non-articles/data/Martin Richards DataPage v1.0.txt. Not decided."
+    },
+    {
+      "quote": "playing on a pre-arbitration deal that paid him $750,000",
+      "line": 25,
+      "ledgerSays": "CitizenBio: '$750K current salary — dramatically underpaid for production.' Contract year 2041. Piece matches the ledger bio.",
+      "publishedSays": "Edition 83: Richards 'plays baseball at a level that earns him eight figures in arbitration'; Edition 83 also says 'free agent after two thousand forty-two' while Editions 85/94 and the ledger bio treat 2041 as his contract/walk year.",
+      "sources": "node scripts/queryLedger.js citizen POP-00031; editions/cycle_pulse_edition_83.txt (Invisible Star). Not decided."
+    },
+    {
+      "quote": "Isley lives up in Rockridge.",
+      "line": 49,
+      "ledgerSays": "Isley Kelley (POP-00019) Neighborhood = Rockridge. Piece matches the ledger.",
+      "publishedSays": "Edition 79 names index: 'Isley Kelley (SS — Montclair)'.",
+      "sources": "output/simulation_ledger_snapshot.jsonl (POP-00019); editions/cycle_pulse_edition_79.txt:475. Not decided."
+    }
+  ],
+  "verifiedClaims": 38,
+  "notes": "Verified OK: Martin age 30 (2042-2012), $20,600,000 income, $180,245,357 net worth, Fruitvale, HH-0101-B032 (household is only Martin + Sakura), spouse Sakura Foster POP-01032 (age 38 from BirthYear 2004, Electrician, $88,600 income, netWorth $223), IBEW Local 595 (Tier 1), Y3C2/C4/C6/C7/C8/C9/C10 beats match his and Sakura's life lines, Y3C10 Spring/first Friday per world_summary_c114, Taquería El Andén / Mercado Fruitvale / Piedmont Avenue Medical Center / Bayline 6 all on Business_Ledger, 2041 line .302/27 HR/.551/463 AB/70 K/6.6 matches Editions 111-112, Aitken thru 2043 + Jack London + Little Leaguers, Kelley 3 MVPs, Horn extension, Paulson/Seymour/Quintero roles, Ed 101 'Trade Deadline Earthquake' by Hal Richmond. Unverifiable and left as texture: jersey number 14, Citi Field homestand (note world_summary_c114 says 'A's off-season' at Y3C10), Martin's 2 listed children are never mentioned (ChildrenIds empty). Published record itself is split on fielding (Ed 83/94 'perfect', Ed 101 'three errors') and on trade cycle (dispatch indexed C100 = Y2C48, Ed 101 front page C101 = Y2C49; piece says Y2C49). Placement Y3C10 (the present-tense frame scene)."
+}

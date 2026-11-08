@@ -1,0 +1,109 @@
+{
+  "file": "output/lore-quarantine/deep_dive_henry_rivas.md",
+  "verdict": "FAIL",
+  "recommendedTag": "Y3C8",
+  "failures": [
+    {
+      "quote": "He bought property and moved his household (HH-0101-B031) down into the industrial flats of West Oakland.",
+      "line": 27,
+      "claimType": "ledger-contradiction",
+      "ledgerSays": "Household_Ledger HH-0101-B031: HousingType \"rented\", MonthlyRent 3625, HouseholdType couple, Members [POP-00024, POP-01031], FormedCycle 101. The move itself matches: MigratedCycle 110 = Y3C6, Uptown to West Oakland (Story_Seed_Deck C110 CITIZEN_RELOCATED: \"The Rivas household (2) moved from Uptown to West Oakland\"). He did not buy; the household rents.",
+      "source": "grep HH-0101-B031 output/beats/Household_Ledger.jsonl; grep POP-00024 output/beats/Story_Seed_Deck.jsonl"
+    },
+    {
+      "quote": "before entering professional ball a decade and a half ago",
+      "line": 19,
+      "claimType": "number",
+      "ledgerSays": "Ledger YearsInCareer 10.5 (BirthYear 2013, so 15 years ago he would have been 14). Published record: Hal Richmond opening-day essay says \"ten seasons deep\". TrueSource card shows pro stats beginning 2034. Nothing supports 15 years.",
+      "source": "output/simulation_ledger_snapshot.jsonl POP-00024 YearsInCareer; archive/articles/cXX_sports_the-richmond-archive-collection-opening-day-essay_hal-richmond.txt; archive/non-articles/data/HENRY RIVAS _ TrueSource DataPage v1.0.txt"
+    },
+    {
+      "quote": "During the long weeks of rehabilitation in Y2C51 and Y2C52, he stayed close to his roots.",
+      "line": 19,
+      "claimType": "cycle",
+      "ledgerSays": "Published record puts the whole injury earlier. Injury in the fourth cycle of the season, reported in Edition 91 (C91 = Y2C39, out two months, Mesa called up). He returned and beat the Royals in Edition 98 (C98 = Y2C46, header Y2C46 | Fall; Oakland_Sports_Feed C98: \"Henry Rivas returns from injury\"). Y2C51 and Y2C52 are C103 and C104, after his return and Mesa's option; the feed has him pitching in the C107 playoffs.",
+      "source": "editions/cycle_pulse_edition_91.txt:81,113,141; editions/cycle_pulse_edition_93.txt:413; editions/cycle_pulse_edition_98.txt:1-4,249; output/beats/Oakland_Sports_Feed.jsonl Cycle 91 and 98"
+    },
+    {
+      "quote": "In Y3C6, following a tight divisional victory under the Coliseum lights, he made the familiar drive home along 7th Street",
+      "line": 57,
+      "claimType": "cycle",
+      "ledgerSays": "Y3C6 = C110 was World Series week. Oakland_Sports_Feed C110: Game 4 of the WS in Philadelphia, Rivas threw a complete-game win (9IP/4H/1ER/9SO), and the A's clinched the title in Game 5 in Philadelphia. There was no divisional game under the Coliseum lights and no Coliseum home game for him that cycle. The ledger Y3C6 line (\"replayed one at-bat the whole drive home and finally smiled at a red light\") is generic and does not name the game.",
+      "source": "output/beats/Oakland_Sports_Feed.jsonl Cycle 110 (Game 4 and Game 5 rows) and Cycle 109 (Game 4 set in Philadelphia)"
+    }
+  ],
+  "conflicts": [
+    {
+      "quote": "Mesa was quietly optioned back to Midland with a handshake and a pat on the shoulder.",
+      "line": 21,
+      "ledgerSays": "Ledger POP-00081 RoleType \"Starting Pitcher, Midland RockHounds (AA)\"; Edition 93 says he was called up from Midland/Double-A.",
+      "publishedSays": "Edition 98 and Oakland_Sports_Feed C98: Mesa \"optioned to AAA\" on Rivas's return; feed C95 and C101 also say AAA. The piece follows the ledger.",
+      "sources": "output/simulation_ledger_snapshot.jsonl POP-00081; editions/cycle_pulse_edition_98.txt:251,315; output/beats/Oakland_Sports_Feed.jsonl C98, C101"
+    },
+    {
+      "quote": "When the medical staff cleared him in late spring",
+      "line": 21,
+      "ledgerSays": "No ledger field for season.",
+      "publishedSays": "Edition 98 (his return) header reads \"Cycle 98 | Y2C46 | Fall\". Feed marks the season early-season. Season label only; not decided.",
+      "sources": "editions/cycle_pulse_edition_98.txt:4"
+    },
+    {
+      "quote": "Born in Puerto Rico and carrying only a high school diploma",
+      "line": 19,
+      "ledgerSays": "OrginCity \"Puerto Rico\" and EducationLevel hs-diploma both match. But the same row's CitizenBio says \"Born 2013, Oakland native.\" The ledger disagrees with itself. TrueSource card says Born Puerto Rico. The piece matches OrginCity and TrueSource.",
+      "publishedSays": "No published piece located that states his birthplace.",
+      "sources": "output/simulation_ledger_snapshot.jsonl POP-00024 OrginCity vs CitizenBio; archive/non-articles/data/HENRY RIVAS _ TrueSource DataPage v1.0.txt"
+    },
+    {
+      "quote": "His two children are growing up with the salt air of the bay and the distant clang of harbor freight.",
+      "line": 49,
+      "ledgerSays": "Rivas NumChildren 2 (matches the count). But ChildrenIds is [], POP-01031 NumChildren is blank, and HH-0101-B031 is a couple household with exactly two members, so the ledger does not place the children in the West Oakland household. Not counted as a failure; the child count is not contradicted. Line 37 (\"they talk about the children\") has the same issue.",
+      "publishedSays": "Not checked beyond the ledger.",
+      "sources": "output/simulation_ledger_snapshot.jsonl POP-00024 and POP-01031; output/beats/Household_Ledger.jsonl HH-0101-B031"
+    },
+    {
+      "quote": "In Y2C52 and again in Y3C3, before his morning throwing routine, he spent hours painting over graffiti along the exterior concrete of the neighborhood recreation center, working quietly alongside five neighbors",
+      "line": 43,
+      "ledgerSays": "Not checked to completion. Rivas's visible LifeHistory shows two Y3C3 entries (holding doors, said no to something) and no graffiti entry; Y2C52 entries are folded into the compressed block and could not be read. The graffiti-with-five-neighbors line appears on Arturo Ramos's ledger at Y3C9. No Rivas graffiti event found in LifeHistory_Log or citizen_archive_snapshot.",
+      "publishedSays": "not checked",
+      "sources": "output/simulation_ledger_snapshot.jsonl POP-00024 LifeHistory; output/beats/LifeHistory_Log.jsonl (holds only Y3C9 and Y3C10 for him)"
+    },
+    {
+      "quote": "scattering four harmless singles",
+      "line": 21,
+      "ledgerSays": "not checked",
+      "publishedSays": "Edition 98 and feed C98 give only 7 IP, 0 ER, 7 K; no hit count and no home/away location found for the Royals game.",
+      "sources": "editions/cycle_pulse_edition_98.txt:249; output/beats/Oakland_Sports_Feed.jsonl C98"
+    },
+    {
+      "quote": "The dislocated right shoulder that seized Rivas early in the year",
+      "line": 15,
+      "ledgerSays": "not checked",
+      "publishedSays": "Published record and feed say \"dislocated shoulder\" in the fourth cycle of the season; none states which side. Rivas throws right (TrueSource), so it is plausible. Unverified.",
+      "sources": "editions/cycle_pulse_edition_91.txt, _93.txt; archive/non-articles/data/HENRY RIVAS _ TrueSource DataPage v1.0.txt"
+    },
+    {
+      "quote": "Yamamoto is a Tier 4 entry-level union electrician working the trades",
+      "line": 31,
+      "ledgerSays": "Tier 4, Electrician, entry-level, $86,100, EmployerBizId UNTRACKED all match. \"Union\" and the separate-finances framing at line 33 are not checked; the Household_Ledger carries one pool (HouseholdIncome 28,286,100, HouseholdSavings 100,130,507) while her own NetWorth is 53.",
+      "publishedSays": "not checked",
+      "sources": "output/simulation_ledger_snapshot.jsonl POP-01031; output/beats/Household_Ledger.jsonl HH-0101-B031"
+    },
+    {
+      "quote": "construction crews in the Baylight District are driving pilings for the new thirty-five-thousand-seat open-air waterfront stadium",
+      "line": 55,
+      "ledgerSays": "The 35,000-seat, $2.1 billion figures match Editions 81, 83, 84 and the supplemental. Construction stage (pilings underway) not checked; Initiative_Tracker lists Baylight as \"passed\" (c113 edition) and some ledger lines mention pile drivers.",
+      "publishedSays": "not checked",
+      "sources": "editions/cycle_pulse_edition_84.txt:356; editions/cycle_pulse_c113.txt:315"
+    },
+    {
+      "quote": "the district where Civis Systems first set up in brick warehouses before Downtown built its towers",
+      "line": 29,
+      "ledgerSays": "Business_Ledger BIZ-00052 Civis Systems is in West Oakland (confirmed; the Tribune names Oakmesh, Civis Systems and Coastline Construction along the West Oakland lane). The \"first set up in brick warehouses\" history is not checked.",
+      "publishedSays": "not checked",
+      "sources": "output/beats/Business_Ledger.jsonl BIZ-00052"
+    }
+  ],
+  "verifiedClaims": 55,
+  "notes": "FAIL on four items: bought property (ledger says rented), 'decade and a half' in pro ball (ledger 10.5 years), rehab placed in Y2C51-Y2C52 (published injury C91-C98 = Y2C39-Y2C46), and the Y3C6 'divisional victory under the Coliseum lights' (feed has WS Game 4 in Philadelphia, the clinching Game 5 the same cycle). Verified clean: Rivas 29 (BirthYear 2013), Tier 2, WL10, $28.2M, net worth $100,141,667, HH-0101-B031, Aaliyah Yamamoto (BirthYear 2020, 22, Tier 4, $86,100, Oakland), her Y3C5-C8 strain and Y3C8 default (C112), Y3C6 move (MigratedCycle 110), Y3C7 UNDOCKED on Bayline 6 and Y3C8 OARI van, ages/POPs/neighborhoods/pay of Ramos, Coles, Dillon, Mesa ($780K, Lake Merritt, 22 K in 15.1 IP), Horn ($37.8M, Temescal), Quintero (Baylight), slot-two rotation, 11-game streak, Anthony quote (Edition 84), and all cycle tags (none exceed C52). Placement Y3C8 is the latest dated event in the body; the ledger runs to Y3C10 and the C114 pulse shows him in West Oakland. Piece ages follow BirthYear (Rivas 29, Mesa 21) where published editions say 28 and 22; per the age rule this is not a failure. Piece presents Dillon's farewell season and the rotation hierarchy as ongoing at Y3C8, though the feed has the A's winning the WS at C110 and closing that season; ledger bio also says 'Farewell season in 2041 - age 38' against BirthYear 2005 (37 in 2042). Anthony Raines is a canon byline; the roster role is Lead Beat Reporter, not 'columnist'. Checks cut short per coordinator instruction; open items are marked 'not checked' above."
+}

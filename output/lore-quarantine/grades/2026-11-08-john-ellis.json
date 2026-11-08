@@ -1,0 +1,47 @@
+{
+  "file": "output/lore-quarantine/lore_c114_john-ellis-deep-dive.md",
+  "verdict": "FAIL",
+  "recommendedTag": "Y3C10",
+  "failures": [
+    {
+      "quote": "as the Athletics sit in the off-season while the minor-league Oaks begin their early campaign",
+      "line": 63,
+      "claimType": "ledger-contradiction",
+      "ledgerSays": "The Oaks are the Oakland NBA franchise in their inaugural season (early-season, 'first NBA Cup run', 'first season in the NBA', records 4-1 / 6-1). Mike Paulson's ledger role is 'General Manager, Oakland A's & The Oaks'. They are not a minor-league team. The A's off-season half of the sentence is correct (Y3C10 = A's off-season, Oaks early-season).",
+      "source": "output/world_summary_c114.md (calendar line 6; Oaks game-result entries ~lines 248-291); output/beats/Oakland_Sports_Feed.jsonl C104 and C114 Oaks rows; queryLedger citizen POP-00527"
+    },
+    {
+      "quote": "Deacon Seymour told me when I was a rookie that the only stat that matters on your headstone is whether the team won the day you had the ball",
+      "line": 75,
+      "claimType": "career",
+      "ledgerSays": "Ellis's rookie season was 2040 (TrueSource: 2039 no MLB IP, 2040 ATH 32 GS 185.0 IP, MLB service 2.001 by end of 2041, so rookie status ended in 2040). The 2040 Oakland staff lists Mike Kinder as manager and does not list Seymour at all. Seymour's origin record has him hired from outside to be Oakland's manager; the C105 feed calls 2041 his 'rookie campaign'. So Seymour was not with the A's when Ellis was a rookie. Medium severity: easy fix is 'Mike Kinder' or 'my first spring under Seymour', or drop 'when I was a rookie'.",
+      "source": "archive/non-articles/data/2040_Coaching Staff _ Oakland Athletics (2040).txt; archive/non-articles/data/Deacon_Seymour_TrueSource_Origin_v1.0.txt; output/player_truesource_mirror.json POP-00033; output/beats/Oakland_Sports_Feed.jsonl Cycle 105 (Seymour rookie campaign)"
+    },
+    {
+      "quote": "alongside her and three other residents",
+      "line": 53,
+      "claimType": "number",
+      "ledgerSays": "Ellis's Y3C10 ledger event: 'painted over graffiti on the recreation center wall alongside five neighbors they barely knew'. The piece counts four neighbors (Rosalind plus three). Low severity; fix is 'four other residents'.",
+      "source": "ledger lifeEvents Y3C10 General (POP-00033)"
+    }
+  ],
+  "conflicts": [
+    {
+      "claim": "Travis Coles is 'twenty-two and carrying a superstar guarantee north of twenty million' and rents Downtown (usage log: $24M); yet the same piece says Paulson is still evaluating a long-term extension for Coles.",
+      "ledgerSays": "POP-00533 Travis Coles: age 22, Downtown, income $24,000,000, rented HH-0109-F009 at $3,024/mo (piece matches the ledger).",
+      "recordSays": "World summary C114 / sports feed: 'Travis Coles won the Cy Young at 21 on a $780K salary', stats line '$780K', front-office angle 'is it time to extend Coles, Ellis, Quintero and Gonzalez?'.",
+      "source": "queryLedger citizen POP-00533; output/world_summary_c114.md lines 233-236",
+      "note": "Both sides reported; not decided. The piece follows the ledger and contradicts the published feed (and its own extension paragraph)."
+    },
+    {
+      "claim": "Game Five line: 'surrendering only two earned runs and punching out five'.",
+      "ledgerSays": "Feed Stats field for C110: 'John Ellis/6IP/2ER/5SO' (piece matches the Stats field).",
+      "recordSays": "Same feed row's Notes text says Ellis was 'only giving up 3 earned runs'.",
+      "source": "output/beats/Oakland_Sports_Feed.jsonl Cycle 110 (the feed disagrees with itself)",
+      "note": "Internal feed discrepancy; the piece used the Stats field. Flagged so the builder knows which side it took."
+    }
+  ],
+  "verifiedClaims": 40,
+  "sourcesUsedWell": "Ledger (age 25, Laurel, rented, $780K, Rosalind Young bond, Y3C9 Tate clash, Y3C8 Lake Merritt bench, Y3C5 Rockridge listings, Y3C6 wired-home night); household (HH-0104-F003 solo, rented, $2,150/mo); TrueSource card and mirror (5'10\", 209, 94/92/86/84 mph, ARM 99, CTRL 70, New York origin, pre-arb, 2040 line 32 GS / 16-6 / 185.0 IP / 3.89); page entries (the c110 'Honestly, Tanya... Electric' quote verbatim, the c102/Y2C50 rec-center pavement and leaking dugout roof); published record (ALDS G4 CG shutout in NY 9IP/4H/9K at Y3C3 = C107, WS G5 6IP/2ER/5K at Y3C6 = C110, 127-35 in 2041, C114 extension talk for Coles/Gonzalez/Quintero/Ellis). Supporting citizens check out: Young 46/3 kids/smoke shop/Laurel, Tate 51/Superior Court Liaison, Lewis 55/bus driver/Laurel, Dillon left-handed/Rockridge/Dillon Clinic (BIZ-00182), Cruz sideline reporter.",
+  "notes": "No fourth-wall language found ('ledger line', 'telemetry', 'grade' are in-world; 'fantasy baseball' is an ordinary real-world phrase). Byline is Anthony Raines and he is not a source in his own piece (Tanya Cruz is a quoted Tribune voice, roster Sideline Reporter, not the byline). FAIL rests on the minor-league Oaks line (Oaks are the NBA club), Seymour mentoring Ellis in a rookie year when Mike Kinder managed, and the five-vs-four neighbors count; three one-line fixes clear it. Not failed, flagged as soft: (a) Game 5 of the WS was played in Philadelphia ('A's visit the Phillies') while the piece has Ellis 'drove back to Laurel alone' that night; the ledger event 'got home still wired from the final out' has no venue, so this is a framing risk, not a ledger/record clash (fix: say he got home after the charter, or leave the night unplaced); (b) 'winter throwing sessions' at Y3C5 = C109 (World Series week) is loose framing, not contradicted; (c) Arturo Ramos 'across the neighborhood line' reads as a different neighborhood while the ledger and the piece's own usage log put him in Laurel, and no household row exists to support 'owns outright'. Unverified, not contradicted (treated as invented texture): Coliseum pitching lab, 'two-bedroom bungalow on 39th Avenue', Alameda landlord, 14 quality starts."
+}

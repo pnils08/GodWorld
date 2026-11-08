@@ -1,12 +1,12 @@
 # The Twenty-Million-Dollar Commute: Martin Richards at 35th and International
 
-### By Hal Richmond and Elliot Marbury | Bay Tribune In-Depth
+### By Hal Richmond | Bay Tribune In-Depth
 
 The fog off the San Francisco Bay rarely climbs past the third floor of the apartment buildings on International Boulevard, but at six in the morning in Fruitvale, you can watch it curl along the silver bellies of the shipping cranes down at the Port of Oakland. 
 
 Martin Richards stands at the front window of apartment 3B with a chipped ceramic mug in his hand. He is thirty years old, mid-career, with the heavy, squared-off shoulders of a man who has played ten and a half seasons of professional third base. On the ledger of the New York Mets, he is an enterprise asset: twenty million six hundred thousand dollars in annual salary, backed by an accumulated net worth of one hundred eighty million two hundred forty-five thousand three hundred fifty-seven dollars. On the rental registry for household HH-0101-B032, he is a tenant paying two thousand four hundred and fifty dollars a month on a walk-up lease, sharing four rooms with an electrician named Sakura Foster.
 
-Behind him in the narrow kitchen, the kettle begins its steady iron hum. Foster, thirty-eight, sits on a stool still lacing up her steel-toed work boots. Her hands are rough from pulling copper wire through the freezing sub-basements of the rising Baylight District—work that earns her eighty-eight thousand six hundred dollars a year against two hundred and twenty-three dollars in liquid savings. She does not look at the Mets travel itinerary resting on the counter. She looks at the steam.
+Behind him in the narrow kitchen, the kettle begins its steady iron hum. Foster, thirty-eight, sits on a stool still lacing up her steel-toed work boots. Her hands are rough from pulling copper wire through the freezing sub-basements of the rising Baylight District—work that earns her eighty-eight thousand six hundred dollars a year against two hundred and twenty-three dollars in liquid savings. She does not look at the Mets envelope resting on the counter. She looks at the steam.
 
 "Anthropic shuttle blocked the transit lane again at twenty-ninth," Foster says, not looking up. "The city bus had to wait through three cycles of the light."
 
@@ -22,11 +22,11 @@ He is a Striver by constitution—driven, steady, and uncomfortably principled. 
 
 To understand why a twenty-million-dollar third baseman still rents in Fruitvale, you have to go back to the trade deadline in Y2C49. 
 
-General Manager Mike Paulson, operating out of West Oakland, had reached the apex of his dynasty construction. The Athletics were marching toward their seventh championship, but the payroll ceiling had hardened. Richards, who had posted a staggering 6.8 WAR while playing on an archaic seven-hundred-and-fifty-thousand-dollar contract, was due an extension that the Oakland front office refused to write. Columnist P Slayer had framed the debate in stark, painful prose that cycle: *"You can find a Martin Richards. You cannot find another Mark Aitken."*
+General Manager Mike Paulson, operating out of West Oakland, had reached the apex of his dynasty construction. The Athletics were marching toward their seventh championship, but the payroll ceiling had hardened. Richards, who had posted a staggering 6.8 WAR while playing on an archaic seven-hundred-and-fifty-thousand-dollar contract, was due an extension that the Oakland front office refused to write. Columnist P Slayer had framed the choice in stark, painful prose back in Y2C33, when both Aitken and Richards were in contract years: *"You can find a Martin Richards. You cannot find another Mark Aitken."*
 
 Aitken, the thirty-three-year-old first baseman and civic liaison who recently purchased his home in Jack London, had a legacy that seemed woven into the concrete of the city. Richards was simply elite. He was quiet, metronomic, and did not demand a media entourage. In the clubhouse, he took his ground balls, went two-for-three in spring openers, and walked home to Fruitvale.
 
-Behind him, Ernesto Quintero was pounding on the door. Quintero, twenty-four, had emerged from the minor-league pipeline as a physical hurricane, smashing thirty-seven home runs in the title year and demanding everyday plate appearances. Paulson made the calculation that every general manager makes when sentiment runs into arithmetic: he cleared third base. In Y2C49, Richards was traded to Queens for two top-ten prospects.
+Behind him, Ernesto Quintero was pounding on the door. Quintero, twenty-four, had emerged from the minor-league pipeline as a physical hurricane, smashing thirty-seven home runs by the deadline of the title year, on his way to forty-six, and demanding everyday plate appearances. Paulson made the calculation that every general manager makes when sentiment runs into arithmetic: he cleared third base. In Y2C49, Richards was traded to Queens for two top-ten prospects.
 
 "Honestly? It's a gut punch," Richards told the Tribune that evening, his apartment half-filled with packing cardboard. "I've spent my entire career here—built a life in Fruitvale, know the streets, the people, the rhythm of this place. One day you're grabbing coffee at the corner market, nodding at Lucia on her way to the wellness center, joking with Allen about his last start, and the next? You're packing boxes for Queens. That stuff doesn't just transfer with a contract."
 
@@ -38,9 +38,9 @@ He flew east, signed the contract that made him generational wealth, and then di
 
 The numbers that followed him across the country were not the erratic flashes of a streaky slugger; they were the results of a ten-year refinement.
 
-In Y3C7, Data Desk analyst Elliot Marbury published a multi-year dossier tracing Richards' strikeout evolution. From five seasons spanning the middle decade through three seasons back, Richards struck out once every 5.1 to 5.6 at-bats, hitting thirty home runs but paying for it with eighty to one hundred punchouts a year. 
+In Y3C7, Data Desk analyst Elliot Marbury published a multi-year dossier tracing Richards' strikeout evolution. From five seasons spanning the middle decade through three seasons back, Richards struck out once every 5.1 to 5.6 at-bats, hitting as many as thirty home runs but paying for it with eighty-nine to one hundred thirteen punchouts a year. 
 
-Then came the hinge. In the three campaigns culminating in the championship run, his strikeout rate separated from his historical band entirely. He struck out once every 7.9 at-bats three seasons ago; once every 6.7 at-bats two seasons ago; and during his final Oakland campaign, once every 6.6 at-bats over four hundred sixty-three plate appearances. He batted .302 with twenty-seven home runs and a .551 slugging average while striking out just seventy times all year. 
+Then came the hinge. In the three campaigns culminating in the championship run, his strikeout rate separated from his historical band entirely. He struck out once every 7.9 at-bats three seasons ago; once every 6.7 at-bats two seasons ago; and during his final Oakland campaign, once every 6.6 at-bats, over four hundred sixty-three of them. He batted .302 with twenty-seven home runs and a .551 slugging average while striking out just seventy times all year. 
 
 He didn't surrender power to purchase contact. He refined his plate coverage until pitchers had nowhere to hide.
 
@@ -70,7 +70,7 @@ A block away, Lucia Polito, fifty-five, was unlocking the front door of her aura
 
 "Colder than here, Miguel!" Richards shouted back, waving without breaking stride.
 
-In Y3C8, after a wire feature on his spring training metrics ran in the Tribune, his phone lit up with texts from high school coaches and former minor-league roommates he hadn't heard from in seven years. He didn't answer them with banquets or promises. He walked down to the Fruitvale station plaza, bought two bags of oranges from a street vendor, and stood for twenty minutes posing for camera-phone pictures with kids wearing green-and-gold caps.
+In Y3C8, a cycle after Marbury's strikeout-rate memo ran in the Tribune, his phone lit up with texts from high school coaches and former minor-league roommates he hadn't heard from in seven years. He didn't answer them with banquets or promises. He walked down to the Fruitvale station plaza, bought two bags of oranges from a street vendor, and stood for twenty minutes posing for camera-phone pictures with kids wearing green-and-gold caps.
 
 ***
 
@@ -80,7 +80,7 @@ The men Richards shared a clubhouse with for a decade are scattering across Oakl
 
 Vinnie Keane, thirty-nine, has stepped away into legend, opening Keane Mercantile in Grand Lake and settling into the role of elder statesman. Isley Kelley, thirty-three, plays out his senior campaign in Rockridge on a thirty-three-million-dollar deal, fielding inquiries with the serene composure of a three-time MVP who knows his numbers will outlive him. Mark Aitken works civic hearings and youth baseball leagues in Jack London, his legacy secured by deed and title.
 
-Richards remains the outlier: the one who was forced out while still at the absolute peak of his athletic powers, yet refused to sever the lifeline to the neighborhood that made him. 
+Richards remains the outlier: the one who was forced out while still at the absolute peak of his athletic powers, yet refused to sever the lifeline to the neighborhood he had made his own. 
 
 He still checks the UNDOCKED broadcast board on Bayline 6 every cycle, tracking the pilot standings the way older fans track box scores. In Y3C4, he watched the flight results near the transit center, noting how an electrician or a janitor could navigate the void for forty minutes and come back down with a clean sheet. He understood that instinct—the desire to fly into a different atmosphere, execute your shift with clinical precision, and return to solid ground.
 
@@ -94,21 +94,21 @@ A paper flyer for a senior lunch program flutters on the wooden utility pole nea
 
 Sakura Foster picks up her lunch pail and kisses Richards on the cheek. 
 
-"When's the flight?" she asks.
+"What's on the day?" she asks.
 
-"Three this afternoon out of Oakland International," Richards replies. "Direct to Kennedy. Series opens in Philadelphia on Friday."
+"Nothing with a clock on it," Richards replies. "Off-season. A latch for the back fence and a loaf from the market."
 
-"Don't let them crowd you inside," she says. It is the same advice she has given him since they were twenty-two years old, living in a studio apartment in San Antonio with one radiator that clanked all night.
+"Don't let anybody talk you into more than you came for," she says. It is the same advice she gives him every time he leaves this apartment, the one with the radiator that clanks all night.
 
 "I won't," he says.
 
 She heads down the wooden steps, her heavy boots striking the concrete with a rhythmic, unhurried cadence, joining the stream of workers heading toward the Fruitvale BART platform.
 
-Martin Richards watches her turn the corner from the window. In a few hours, a black town car will pull up to the curb to take him to the runway, and by nightfall he will be taking ground balls on the manicured dirt of Citi Field, surrounded by twenty-million-dollar expectations and forty thousand screaming fans in Queens.
+Martin Richards watches her turn the corner from the window. No black town car will pull up to the curb today and no runway is waiting; by noon he will be standing in a hardware aisle with a latch in his hand, a man with twenty-million-dollar expectations and a very small errand.
 
-He will play third base with the same ruthless, strikeout-resistant composure that Elliot Marbury charted on a spreadsheet. He will field his position cleanly, hit line drives into the gaps, and cash checks drawn on an empire's bank account.
+He will take the day with the same ruthless, strikeout-resistant composure that Elliot Marbury charted on a spreadsheet in Y3C7. He will pick the right latch without fuss, wave at the regulars on the usual route, and let the checks drawn on an empire's bank account take care of themselves.
 
-And on Sunday night, when the road trip concludes, he will board a commercial flight, land in the East Bay fog, and take a cab back to 35th and International. He will unlock the door of apartment 3B, set his spikes in the hallway closet, and look out the kitchen window at the Port cranes cutting through the night. 
+And by evening, with the day's errands done, he will unlock the door of apartment 3B, set the paper bag in the hallway closet, and look out the kitchen window at the Port cranes cutting through the night. 
 
 He didn't get to choose how his Oakland Athletics career ended. Mike Paulson and Ernesto Quintero took care of that with a spreadsheet and forty-six home runs. But Martin Richards chose where he lives, and in Fruitvale, that is the only kind of contract that actually counts.
 
@@ -150,8 +150,8 @@ He didn't get to choose how his Oakland Athletics career ended. Mike Paulson and
 - Kevin Clark (POP-00053), Third Baseman, Oakland A's, Jack London.
 
 **JOURNALISTS & MEDIA DESKS:**
-- Hal Richmond (POP-00007), Journalist, Senior Historian, West Oakland (co-byline / historical quotes).
-- Elliot Marbury (POP-00166), Journalist, Data Desk, Piedmont Ave (co-byline / sabermetric dossier).
+- Hal Richmond (POP-00007), Journalist, Senior Historian, West Oakland (byline).
+- Elliot Marbury (POP-00166), Journalist, Data Desk, Piedmont Ave (the paper's earlier Y3C7 sabermetric dossier; not a byline of this piece).
 - P Slayer (POP-00008), Journalist, Fan Columnist - Sports, West Oakland (historical column citation).
 
 **FRUITVALE NEIGHBORHOOD CITIZENS:**

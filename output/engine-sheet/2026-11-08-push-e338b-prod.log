@@ -1,0 +1,21 @@
+fresh PROD pull = stage 42
+stage = the benched tree (output/engine-sheet/stage44-e338b2.sha256), byte for byte
+live fire state before the push: cycleCount 114, Neighborhood_Map [114], Riley last 114, checkpoint none, Engine_Errors at C115+ 0, intake queue 174 rows identical, ledger rows 1058 (first read 1058) — C115 not fired, queue still
+fire key before the push: {"target":"prod-nofire","http":200,"error":"CYCLE_TRIGGER_TOKEN script property not set","noFireKey":true}
+fire key before the push: {"target":"prod-nofire","http":200,"error":"CYCLE_TRIGGER_TOKEN script property not set","noFireKey":true}
+fire record before the push: {"target":"prod","http":200,"ok":true,"record":{"cycle":114,"startedMs":1793568464270,"state":"done","finishedMs":1793568605762},"raw":"{\"cycle\":114,\"startedMs\":1793568464270,\"state\":\"done\",\"finishedMs\":1793568605762}","valid":true,"expectOk":true}
+└─ utilities/writeIntents.js
+pinned deployment AKfycbwUvd4TylktdE7AA8axRv-Hru55h78v1PlsOsIejWyAoQrUeYnKGq2ue-FJxPawCW-bgQ serves @179
+pull-back 167 js + manifest byte-identical to output/engine-sheet/stage44-e338b2.sha256
+live fire state after the pull-back: cycleCount 114, Neighborhood_Map [114], Riley last 114, checkpoint none, Engine_Errors at C115+ 0, intake queue 174 rows identical, ledger rows 1058 (first read 1058) — C115 not fired, queue still
+waiting 300 s: /exec serves the old version for minutes after a cut (2026-10-30, @169)
+fire key after the pull-back: {"target":"prod-nofire","http":200,"error":"CYCLE_TRIGGER_TOKEN script property not set","noFireKey":true}
+fire record after the pull-back: {"target":"prod","http":200,"ok":true,"record":{"cycle":114,"startedMs":1793568464270,"state":"done","finishedMs":1793568605762},"raw":"{\"cycle\":114,\"startedMs\":1793568464270,\"state\":\"done\",\"finishedMs\":1793568605762}","valid":true,"expectOk":true}
+waiting 480 s: a fire or intake run admitted before the deploy would persist inside this window
+live fire state 8 minutes after: cycleCount 114, Neighborhood_Map [114], Riley last 114, checkpoint none, Engine_Errors at C115+ 0, intake queue 174 rows identical, ledger rows 1058 (first read 1058) — C115 not fired, queue still
+fire key 8 minutes after: {"target":"prod-nofire","http":200,"error":"CYCLE_TRIGGER_TOKEN script property not set","noFireKey":true}
+fire record 8 minutes after: {"target":"prod","http":200,"ok":true,"record":{"cycle":114,"startedMs":1793568464270,"state":"done","finishedMs":1793568605762},"raw":"{\"cycle\":114,\"startedMs\":1793568464270,\"state\":\"done\",\"finishedMs\":1793568605762}","valid":true,"expectOk":true}
+waiting 480 s more: an old-version call admitted late in the /exec propagation window ends inside this one
+live fire state 16 minutes after: cycleCount 114, Neighborhood_Map [114], Riley last 114, checkpoint none, Engine_Errors at C115+ 0, intake queue 174 rows identical, ledger rows 1058 (first read 1058) — C115 not fired, queue still
+fire key 16 minutes after: {"target":"prod-nofire","http":200,"error":"CYCLE_TRIGGER_TOKEN script property not set","noFireKey":true}
+fire record 16 minutes after: {"target":"prod","http":200,"ok":true,"record":{"cycle":114,"startedMs":1793568464270,"state":"done","finishedMs":1793568605762},"raw":"{\"cycle\":114,\"startedMs\":1793568464270,\"state\":\"done\",\"finishedMs\":1793568605762}","valid":true,"expectOk":true}

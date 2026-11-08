@@ -67,7 +67,11 @@ Cloud Shell sometimes clears installed packages. If clasp fails, run `npm instal
 **Previous bench:** `SANDBOX 0908` (`1FFpUs98L0wrEcfAaQy6-Ir2xYiCq9baCc0SzqzAMrtM`) — RETIRED 2026-10-04: its script project hit Apps Script's 200-version cap (push lands, no new deployment; web app frozen @200 = `d7ac5fff`, C119). Full trail: [[DEPLOY_HISTORY]] §Retired sandboxes.
 
 
-**Bench (2026-11-08, research-build):** SANDBOX 1004 **@195 = stage 43** = stage 42 + the six engine.338b files at `506ca6b28` (the `question` trigger, the intake door whole, the pool; manifest `output/engine-sheet/stage43-e338b.sha256`), data = live C114 after the final sync; three fires PASS — DEPLOY_HISTORY §Current sandbox. Ahead of PROD (stage 42) until the fold candidate benches as stage 44 and ships.
+**Live (2026-11-08, 02:41 CST):** PROD = **stage 44** = stage 42 + the six engine.338b files at `e078c8b33` (the `question` trigger — the builder asks one citizen, privately; the intake door moves an existing citizen's employer / clock / key; the six post-sports jobs in the catalog; the wake files his answer), web app **@179** — DEPLOY_HISTORY §PROD stage 44. SANDBOX 1004 @196 = stage 44, data = live C114. Live Economic_Parameters 315 rows. Dashboard restarted. Builder re-runs Setup Sports Feed Validation for the dropdown word.
+
+**Bench (2026-11-08, later, research-build):** SANDBOX 1004 **@196 = stage 44** = stage 42 + the six engine.338b files at `86174e9db` (the codex fold; manifest `output/engine-sheet/stage44-e338b2.sha256`), data = live C114 after the final sync; three fires PASS, 25/25 door checks twice — DEPLOY_HISTORY §Current sandbox. This is the PROD candidate's engine tree (`e078c8b33` adds Node files only).
+
+**Previous bench (2026-11-08, research-build):** SANDBOX 1004 **@195 = stage 43** = stage 42 + the six engine.338b files at `506ca6b28` (the `question` trigger, the intake door whole, the pool; manifest `output/engine-sheet/stage43-e338b.sha256`), data = live C114 after the final sync; three fires PASS — DEPLOY_HISTORY §Current sandbox. Ahead of PROD (stage 42) until the fold candidate benches as stage 44 and ships.
 
 **Previous bench (2026-11-07 night, research-build):** SANDBOX 1004 **@194 = stage 42** = stage 41 + `engine94SheetContract.js`, `godWorldEngine2.js`, `applyGameNightMoments.js` at `323311fc4` (engine.338 Task 2a; manifest `output/engine-sheet/stage42-e338a.sha256`), data = live C114 after the final sync — DEPLOY_HISTORY §Current sandbox.
 

@@ -81,7 +81,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| governance.58 | What waits on a fire lives once, in its §2 row (builder 11-07): boot and /run-cycle print `--due`; a NEXT copy warns. Codex SHIP on the fold (9f8960e6f) | done-pending-archive | engine-sheet | [[../../.claude/skills/session-end/SKILL]] §Changelog 2026-11-07 |
 | pipeline.103 | Notebook search scope rebuilds on every add (builder 11-07; next session first). Search reads a 10-18 list: 22 live sources out, 69 dead ids in | ready | engine-sheet | [[../plans/2026-11-07-notebook-search-scope]] |
 | engine.336 | `Now:` bio lines for ledger-changing moments (builder 11-07: wedding, birth, job change, promotion); they stack atop the minted prose, newest first | ready | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] §Builder's ruling (scope) |
 | engine.334 | Story seeds sum unlike numbers (C114 sports "sentiment +36.06" = mood + head-count). After engine.331 and engine.332; stub, review deeper when picked up | ready | engine-sheet | [[../plans/2026-11-05-story-seed-mixed-magnitudes]] |

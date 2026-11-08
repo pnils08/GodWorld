@@ -76,6 +76,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.339 | How kids are minted (builder 11-08, high): parents too young, a child's surname moving, a child counted where none was born. Read done; his calls at 1b | in-progress | research-build | [[../plans/2026-11-08-how-kids-are-minted]] |
+| engine.334 | Story seeds add unlike numbers (mood + head-count, stacked tags). Read done; cut = per-unit What, Magnitude, class in one file. Next: codex plan review | in-progress | engine-sheet | [[../plans/2026-11-05-story-seed-mixed-magnitudes]] |
 | pipeline.101 | Daily news: evening write wake date fixed (builder 11-04), NotebookLM page written. Next: confirm the 11-04 18:15 wake writes and gates | in-progress | research-build | [[../reference/NotebookLM]] §Change log |
 | pipeline.89 | Every journalist picks (builder 10-25: "All journalists should pick, they are AI"): every wake package gets the live tools the 3 tool seats have, the slice is a tip sheet not the assignment, Rhea is off every path; Ines first, same cut on all 28. First run 2026-10-28 | in-progress | research-build | [[../plans/2026-10-11-media-extension]] §pipeline.89 |
 
@@ -84,7 +85,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
 | engine.336 | `Now:` bio lines for ledger-changing moments (builder 11-07: wedding, birth, job change, promotion); they stack atop the minted prose, newest first | ready | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] §Builder's ruling (scope) |
-| engine.334 | Story seeds sum unlike numbers (C114 sports "sentiment +36.06" = mood + head-count). After engine.331 and engine.332; stub, review deeper when picked up | ready | engine-sheet | [[../plans/2026-11-05-story-seed-mixed-magnitudes]] |
 | infrastructure.18 | Weekly version-drift report in the existing health check, no model: runtime end of life, npm behind (majors flagged), Claude Code, plugin vs patch | ready | engine-sheet | [[../reference/DEPLOY]] |
 | engine.325 | Casino overview (builder 10-30, own session): bet types safe→risky, how bets settle without credits or failure, house odds; mishap bet never pays | ready | engine-sheet | [[../plans/2026-08-07-spacemolt-game-show]] §Changelog 2026-10-30 |
 | pipeline.100 | Mags memory one home (builder 11-03): her page, not the old `mags` store; every Mags seat loads her persona as the CLI did | ready | engine-sheet | [[../plans/2026-11-03-mags-memory-one-home]] |

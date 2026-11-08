@@ -250,6 +250,7 @@ assert.deepStrictEqual(r7b.tags['POP-00001'], ['Sports-Sociability-Up-S'], 'the 
 assert.strictEqual(vin2[c7('RoleType')], "Former Designated Hitter, Oakland A's Legend", 'no Former Former');
 assert.strictEqual(vin2[c7('CitizenBio')], "Now: Former Designated Hitter, Oakland A's Legend; retired C110. " + BIO, 'bio untouched');
 assert.strictEqual((vin2[c7('LifeHistory')].match(/\[Retirement\]/g) || []).length, 1, 'one Retirement line across two fires');
+assert.strictEqual(vin2[c7('Income')], 250000, 'engine.338 (codex F5): the re-fire never re-prices — Income stays the Tier 1 figure');
 // a later chapter replaces the Now: sentence, never piles up; the strip anchors on the engine's own ` C<N>.` terminator
 assert.strictEqual(sandbox.sportsBioNow_(vin2[c7('CitizenBio')], 'Owner, Keane Academy', 118), 'Now: Owner, Keane Academy C118. ' + BIO);
 assert.strictEqual(sandbox.sportsBioNow_('Now: Former Dr. Keane, Oakland A\'s; retired C110. Dr. Keane grew up in Boston. More.', 'Team Physician, Oaks', 120),
@@ -279,8 +280,20 @@ assert.ok(/pay \$120,000 a year$/m.test(ram[c7('LifeHistory')]), ram[c7('LifeHis
 assert.strictEqual(van[c7('Income')], 400000, 'Tier 3: the pools\' row, pay untouched');
 assert.ok(/ — \[Retirement\] retired from the A's, announced C110$/m.test(van[c7('LifeHistory')]), 'Tier 3 line carries no money clause: ' + van[c7('LifeHistory')]);
 assert.strictEqual(van[c7('ClockMode')], 'ENGINE', 'the flip itself is the same at every Tier');
-assert.throws(() => run7([{ eventType: 'press-conference', teamsUsed: "A's", namesUsed: 'Vinnie Keane (DH)', eventTrigger: 'retirement' }], rows7(), { __config: { postCareerIncomeTier1: undefined } }),
+const noKeyRows = rows7();
+assert.throws(() => run7([{ eventType: 'press-conference', teamsUsed: "A's", namesUsed: 'Vinnie Keane (DH)', eventTrigger: 'retirement' }], noKeyRows, { __config: { postCareerIncomeTier1: undefined } }),
   /engine\.338: World_Config postCareerIncomeTier1 missing/, 'a missing key throws, never a silent 0');
+const vinNoKey = noKeyRows.find((x) => x[0] === 'POP-00001');
+assert.deepStrictEqual([vinNoKey[c7('ClockMode')], vinNoKey[c7('EconomicProfileKey')], vinNoKey[c7('RoleType')], vinNoKey[c7('Income')], (vinNoKey[c7('LifeHistory')].match(/\[Retirement\]/g) || []).length],
+  ['GAME', 'SPORTS_OVERRIDE', "Designated Hitter, Oakland A's Legend", 1500000, 0], 'codex F1: the refusal runs before the first cell moves — no half-flip for Phase 10 to persist');
+// codex F3: a ledger without the Tier / Income columns refuses the retirement before the row moves
+const H7noInc = H7.filter((h) => h !== 'Income');
+const thinRows = rows7().map((r) => r.slice(0, -1));
+assert.throws(() => { const ctx = { summary: { sportsFeedEntries: [{ eventType: 'press-conference', teamsUsed: "A's", namesUsed: 'Vinnie Keane (DH)', eventTrigger: 'retirement' }], sportsWeek: {}, cycleId: 110 },
+  ledger: { headers: H7noInc, rows: thinRows, dirty: false }, ss: { getSheetByName: (n) => (n === 'LifeHistory_Log' ? { getLastRow: () => 1, getRange: () => ({ setValues: () => {} }) } : null) },
+  config: { cycleCount: 110, postCareerIncomeTier1: 250000, postCareerIncomeTier2: 120000 }, now: 'NOW', cache: {}, rng: () => 0.5 }; sandbox.applyGameNightMoments_(ctx); },
+  /engine\.338: Simulation_Ledger Tier \/ Income column missing/, 'no Income column: refused, not a silent unpriced flip');
+assert.strictEqual(thinRows.find((x) => x[0] === 'POP-00001')[H7noInc.indexOf('ClockMode')], 'GAME', 'and the row did not move');
 const seeds338 = require('fs').readFileSync(require('path').join(__dirname, '../phase01-config/engine94SheetContract.js'), 'utf8');
 assert.ok(/'postCareerIncomeTier1', 250000/.test(seeds338) && /'postCareerIncomeTier2', 120000/.test(seeds338), 'the seed list carries the builder\'s figures');
 

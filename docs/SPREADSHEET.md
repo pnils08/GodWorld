@@ -106,6 +106,15 @@ Six rows, self-armed by `ensureEngine148Config_` at boot (same contract as engin
 
 Headcount per hood is counted once per cycle on first read (`getHoodHeadcount_`, child spellings fold via `ChildAreas`); `hoodFloorDeficit_` = (floor − count) / floor. The wave draws the sex the Active ledger is short of first (`waveSexPreference_`), and a row minted into the room this cycle waits one cycle before a wave can take it.
 
+### `World_Config` post-career income (engine.338)
+
+Seeded at open by `ensureEngine338Config_` (`engine94SheetContract.js`, same self-arm contract as engine.276); read fail-loud by `postCareerIncome_` in `applyGameNightMoments.js` at the sports retirement flip (`sportsRetire_`). The read runs before any cell of the retiring row moves, so a missing key refuses the retirement whole (the row stays on the GAME clock) and never leaves a half-flip.
+
+| Key | Default | Range | Meaning |
+|---|---|---|---|
+| `postCareerIncomeTier1` | 250000 | 0–10,000,000 | Income a Tier 1 player takes at the sports retirement flip — appearances, events, the name; not a job. The playing salary ends here. Builder's figure 2026-11-07 (anchor: Mason Miller 130,000 post-career). |
+| `postCareerIncomeTier2` | 120000 | 0–10,000,000 | Same for Tier 2 (anchors: the three MUBA rows authored at 70–145,000). Tier 3–4 keep their pay — the hiring pools re-price them when a job lands. |
+
 ### Approval ceiling state and calibration (engine.94)
 
 The sustained-high-approval ceiling uses eight required `World_Config` rows. Missing, nonnumeric, or out-of-range values fail loud; code owns streak/lifecycle invariants while Sheet values own calibration.

@@ -288,20 +288,22 @@ function sportsRetire_(ctx, row, cols, team, cycle, write, ri) {
   var status = cols.iStatus >= 0 ? String(row[cols.iStatus] || '').trim().toLowerCase() : '';
   if (clock !== 'GAME') return 'off-clock';
   if (status !== 'active' && status !== '') return 'status:' + status;
+  // engine.338 (codex diff review F1 / F3): everything that can refuse runs BEFORE the first cell moves — the Tier and
+  // Income columns must exist and the Tier's key must read — so a refusal leaves the row exactly as it was (still on the
+  // GAME clock, still the player), never a half-flip Phase 10 could persist with the playing salary.
+  if (cols.iTier < 0 || cols.iIncome < 0) throw new Error('engine.338: Simulation_Ledger Tier / Income column missing — a retirement cannot price the next chapter; row left on the GAME clock');
+  var postPay = postCareerIncome_(ctx, row[cols.iTier]); // throws on a missing World_Config key (ADR-0015)
   var econ = cols.iEcon >= 0 ? String(row[cols.iEcon] || '').trim() : '';
   if (cols.iClock >= 0) row[cols.iClock] = 'ENGINE';
   if (cols.iEcon >= 0 && econ === 'SPORTS_OVERRIDE') row[cols.iEcon] = '';
   var role = cols.iRole >= 0 ? String(row[cols.iRole] || '').trim() : '';
   if (cols.iRole >= 0 && role && !/^Former\b/i.test(role)) row[cols.iRole] = 'Former ' + role;
   var club = team === 'Oaks' ? 'the Oaks' : "the A's";
-  // engine.338: the money after the career, by Tier — read before the line so the line can name it
+  // engine.338: the money after the career, by Tier — the line names it
   var moneyClause = '';
-  if (cols.iTier >= 0 && cols.iIncome >= 0) {
-    var postPay = postCareerIncome_(ctx, row[cols.iTier]);
-    if (postPay !== null) {
-      row[cols.iIncome] = postPay;
-      moneyClause = ' — the playing salary ends; appearances and the name pay $' + postPay.toLocaleString('en-US') + ' a year';
-    }
+  if (postPay !== null) {
+    row[cols.iIncome] = postPay;
+    moneyClause = ' — the playing salary ends; appearances and the name pay $' + postPay.toLocaleString('en-US') + ' a year';
   }
   write(ri, 'Retirement', 'retired from ' + club + ', announced C' + cycle + moneyClause, 'Retirement');
   if (cols.iBio >= 0) {

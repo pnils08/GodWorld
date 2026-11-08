@@ -65,8 +65,8 @@ Modelled on the C110–C114 ripples (scratch replay, not the engine; no closure 
 |---|------|-------|--------|
 | 1 | Read-before: `buildContractSeeds_` end to end, wiring cards on it and on `Story_Seed_Deck`, every reader of seed `magnitude` / `Class`, a C110–C114 count of mixed-unit clusters. Fill this plan | es | done (this edit) |
 | 2 | Codex plan review (codex-es) → reconcile below | es / codex | done — HOLD, folded (closure override, reader claim qualified, both-way class tests); re-review of the fold sent |
-| 3 | Build the cut in `buildContractSeeds.js`; tests in `buildContractSeeds.test.js`: the C114 sports shape, a 15-move migration cluster (`×15`, Magnitude 5), the edition-coverage pair (texture), a closure beside a birth in one hood (two groups, closure leads at −25) and two closures (`×2`, Magnitude −40), an initiative pair +0.05 / −0.05 (major), the unit table's default; 5b.a, 5b.d and §11/§12 unchanged. `/stub-engine` in the same commit | es | not started |
-| 4 | Replay C110–C114 Ripple_Ledger rows through the old and the new builder (`output/engine-sheet/2026-11-08-engine334-replay.js`); every class flip both ways, every changed `What`, and every civic seed whose transit-word match changes, listed here | es | not started |
+| 3 | Build the cut in `buildContractSeeds.js`; tests in `buildContractSeeds.test.js`: the C114 sports shape, a 15-move migration cluster (`×15`, Magnitude 5), the edition-coverage pair (texture), a closure beside a birth in one hood (two groups, closure leads at −25) and two closures (`×2`, Magnitude −40), an initiative pair +0.05 / −0.05 (major), the unit table's default; 5b.a, 5b.d and §11/§12 unchanged. `/stub-engine` in the same commit | es | done — §13 13a–13j; all prior asserts unchanged and passing |
+| 4 | Replay C110–C114 Ripple_Ledger rows through the old and the new builder (`output/engine-sheet/2026-11-08-engine334-replay.js`); every class flip both ways, every changed `What`, and every civic seed whose transit-word match changes, listed here | es | done — `output/engine-sheet/2026-11-08-engine334-replay-c110-c114.txt`: 228 seeds, 53 What changed, 52 Magnitude changed, 1 class flip (C114 edition-coverage major → texture), 0 transit-word moves |
 | 5 | Codex review of the exact deploy candidate; fold | es / codex | not started |
 | 6 | Sandbox fire on live-synced state (one unproven change in flight across both terminals); read the Cycle's `Story_Seed_Deck` rows back; Engine_Errors unchanged | es | not started |
 | 7 | PROD push, DEPLOY_HISTORY, live read at C116 Sun 2026-11-15 | es | not started |
@@ -102,7 +102,7 @@ Modelled on the C110–C114 ripples (scratch replay, not the engine; no closure 
 
 | # | Claim | Held by | Proof that settles it | Sources |
 |---|---|---|---|---|
-| P1 | The engine builder gives the same 53 / 1 as the scratch model | es | Task 4 replay through the real builder | this plan §The cut |
+| P1 | The engine builder gives the same 53 / 1 as the scratch model | es | settled 2026-11-08: Task 4 replay through the real builder gives 53 What / 1 flip, the same seeds | `output/engine-sheet/2026-11-08-engine334-replay-c110-c114.txt` |
 | P2 | A failed Phase-10 ledger append would make the replay miss a ripple Phase 7 saw | codex | none needed for C110–C114 (A5: 226/228 exact, both misses explained); the sandbox fire (Task 6) reads the deck itself | review §Verified design implications |
 
 ### New concepts
@@ -121,6 +121,7 @@ Modelled on the C110–C114 ripples (scratch replay, not the engine; no closure 
 
 ## Changelog
 
+- 2026-11-08 (engine-sheet) — Tasks 3–4 built: unit table + groups in buildContractSeeds.js, tests §13; replay C110–C114 through the real builder = 53 What, 1 class flip (C114 edition-coverage), 0 transit-word moves. Codex diff review next.
 - 2026-11-08 (engine-sheet) — Codex plan review HOLD folded: closures (`economic-event` / `business-closure`, fixed −25/−40) never sum; What-word readers named (transit slice, sift fallback); class moves both ways, tested. Ledger replay rebuilds 226/228 live deck rows.
 - 2026-11-08 (engine-sheet) — Task 1 done: read-before on both wiring cards and live C110–C114 ripples; the head-count never set the sports class (0 flips); cut is one file, a unit table, per-unit What/Magnitude/class; modelled 53 What changes, 1 class flip.
 - 2026-11-05 (engine-sheet) — Created as a stub from the engine.331 trace (G-ES3); builder: own plan, after engine.331 and engine.332, review deeper when picked up.

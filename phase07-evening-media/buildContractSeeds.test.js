@@ -434,5 +434,66 @@ var LH_HEADER = ['Timestamp', 'POPID', 'Name', 'EventTag', 'EventText', 'Neighbo
   assert('12c blank resolves GENERAL', b.contractSeedCoverageDomain_('') === 'GENERAL');
 })();
 
+// §13 engine.334: magnitudes add only within one unit — What, Magnitude and Class read each unit on its own
+(function () {
+  function rp(cycle, causeType, effectType, hood, mag, extra) {
+    var r = { cycle: cycle, causeType: causeType, causeId: effectType + ':' + mag, causeDetail: causeType + ' ' + effectType,
+      effectType: effectType, targetScope: 'neighborhood', targetIds: [], neighborhood: hood, magnitude: mag, duration: 1 };
+    for (var k in extra) r[k] = extra[k];
+    return r;
+  }
+  function one(ripples) {
+    var ctx = { ss: fakeSS([LH_HEADER]), summary: { cycleId: 114, rippleEvents: ripples } };
+    b.buildContractSeeds_(ctx);
+    return ctx.summary.contractSeeds;
+  }
+
+  // the C114 sports seed (fd4277fa): city mood twice, game-night citizens, one household
+  var sp = one([
+    rp(114, 'sports', 'sentiment', '', 0.006), rp(114, 'sports', 'sentiment', '', 0.052),
+    rp(114, 'sports', 'game-night', '', 35, { targetScope: 'citizen' }), rp(114, 'sports', 'game-night-household', '', 1, { targetScope: 'citizen' })
+  ])[0];
+  assert('13a sports: mood sums with mood, head-counts stand alone', sp.what === 'sentiment +0.06; game-night +35; game-night-household +1 (4 related effects this cycle)');
+  assert('13b sports: Magnitude is the mood, not mood + 36 people', sp.magnitude === 0.06 && sp.seedClass === 'major');
+
+  // 15 moves at the fixed tag 5 (C110 West Oakland printed "+75")
+  var moves = [];
+  for (var i = 0; i < 15; i++) moves.push(rp(110, 'migration', 'CITIZEN_RELOCATED', 'West Oakland', 5, { causeId: 'POP-' + i, targetScope: 'citizen' }));
+  var mv = one(moves)[0];
+  assert('13c a level seen 15 times is a count', mv.what === 'CITIZEN_RELOCATED ×15 (15 related effects this cycle)' && mv.magnitude === 5 && mv.seedClass === 'major');
+
+  // C114 edition-coverage: a traffic delta and a mood delta reached the 0.05 bar only together
+  var ec = one([rp(114, 'edition-coverage', 'traffic/retail/nightlife', '', 0.03), rp(114, 'edition-coverage', 'sentiment', '', 0.02)])[0];
+  assert('13d unlike deltas print apart and no longer add to a lead', ec.what === 'traffic/retail/nightlife +0.03; sentiment +0.02 (2 related effects this cycle)' && ec.magnitude === 0.03 && ec.seedClass === 'texture');
+
+  // codex F1: a closure (fixed −25) beside the week's economic birth in one hood
+  var cl = one([
+    rp(114, 'economic-event', 'business-closure', 'Fruitvale', -25, { targetScope: 'business', targetIds: ['BIZ-00900'] }),
+    rp(114, 'economic-event', 'sector-impact:retail', 'Fruitvale', 12),
+    rp(114, 'economic-event', 'carryover', 'Fruitvale', 4)
+  ])[0];
+  assert('13e a closure is its own group and leads; ripple points still add (+16)', cl.what === 'business-closure -25; sector-impact:retail +16 (3 related effects this cycle)' && cl.magnitude === -25);
+  var two = one([
+    rp(114, 'economic-event', 'business-closure', 'Fruitvale', -25, { causeId: 'BIZ-1' }),
+    rp(114, 'economic-event', 'business-closure', 'Fruitvale', -40, { causeId: 'BIZ-2' })
+  ])[0];
+  assert('13f two closures are a count, Magnitude the larger', two.what === 'business-closure ×2 (2 related effects this cycle)' && two.magnitude === -40 && two.seedClass === 'major');
+
+  // codex review: two initiatives at +0.05 / −0.05 cancelled to texture; each alone clears the bar
+  var ip = one([rp(114, 'initiative-implementation', 'retail/sentiment', 'Temescal', 0.05), rp(114, 'initiative-implementation', 'nightlife/sentiment', 'Temescal', -0.05)])[0];
+  assert('13g unlike levels never cancel: each clears the bar alone → major', ip.what === 'retail/sentiment +0.05; nightlife/sentiment -0.05 (2 related effects this cycle)' && ip.seedClass === 'major');
+
+  // a same-unit pair still nets: approval points in one district
+  var ap = one([rp(114, 'approval-shift', 'approval/district-sentiment', 'D2', 2), rp(114, 'approval-shift', 'approval/district-sentiment', 'D2', -2)])[0];
+  assert('13h like units still net (approval +2 −2 → texture)', ap.what === 'approval/district-sentiment (2 related effects this cycle)' && ap.magnitude === 0 && ap.seedClass === 'texture');
+
+  // the unit table
+  assert('13i an unlisted cause is a level', b.contractSeedUnit_({ causeType: 'chaos-event', effectType: 'stalled_train' }).kind === 'level');
+  assert('13j sports sums within an effect, economic across the cause, a closure never',
+    b.contractSeedUnit_({ causeType: 'sports', effectType: 'game-night' }).key === 'effect:game-night' &&
+    b.contractSeedUnit_({ causeType: 'economic-event', effectType: 'carryover' }).key === 'cause' &&
+    b.contractSeedUnit_({ causeType: 'economic-event', effectType: 'business-closure' }).kind === 'level');
+})();
+
 console.log(failures === 0 ? 'ALL PASS' : failures + ' FAILURES');
 process.exit(failures === 0 ? 0 : 1);

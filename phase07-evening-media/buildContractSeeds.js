@@ -17,6 +17,8 @@
  * |magnitude| >= MAJOR_MAG or when >= CLUSTER_N same-family causes hit the same
  * neighborhood family this cycle (merged into one seed). Everything else is
  * class "texture" — available, not promoted. Counts logged, no silent caps.
+ * engine.334: magnitudes add only within one unit (CONTRACT_SEED_UNIT) — What,
+ * Magnitude and the |magnitude| test read each unit group on its own.
  *
  * Output: S.contractSeeds — persisted by saveV3Seeds_ v4 (Phase 10) to
  * Story_Seed_Deck contract columns. No JSON artifact anywhere.
@@ -124,6 +126,73 @@ function contractSeedIsMajor_(magnitude, clusterSize) {
   if (m >= CONTRACT_SEED_MAJOR_MAG) return true;
   if (m > 0 && m < 1 && m >= CONTRACT_SEED_MAJOR_MAG_FRAC) return true;
   return false;
+}
+
+// engine.334: a ripple's magnitude has no single unit — a dial delta, a head-count, ripple points, or a
+// fixed tag / severity — so a seed adds only like with like (C114: city mood 0.058 + 35 game-night citizens
+// + 1 household printed "sentiment +36.06"). causeType → how its ripples add: 'sum' = one unit across the
+// cause (economic ripple points, a birth beside a carryover — engine.206; approval points in one district,
+// each feeding the same hood mood); 'effect' = sum within each effectType, never across (sports). A cause
+// not listed is a level: fixed tags (chaos 0.05, faith 0.01), hook severities (migration 5, trajectory 7),
+// an initiative's intensity — each effectType shows its count and its peak, never a total.
+var CONTRACT_SEED_UNIT = {
+  'economic-event': 'sum',
+  'approval-shift': 'sum',
+  'sports': 'effect'
+};
+
+// effectType overrides inside a 'sum' cause: a closure is filed as economic-event but carries a fixed
+// −25 / −40 by the closing business's size (applyBusinessDynamics.js), not ripple points (codex F1).
+var CONTRACT_SEED_UNIT_EFFECT = {
+  'business-closure': 'level'
+};
+
+/** engine.334: {key, kind} — ripples sharing a key share a unit; 'sum' adds, 'level' counts and takes the peak. */
+function contractSeedUnit_(rp) {
+  var eff = String((rp && rp.effectType) || '');
+  if (Object.prototype.hasOwnProperty.call(CONTRACT_SEED_UNIT_EFFECT, eff)) {
+    return { key: 'effect:' + eff, kind: CONTRACT_SEED_UNIT_EFFECT[eff] };
+  }
+  var mode = CONTRACT_SEED_UNIT[rp && rp.causeType] || 'level';
+  if (mode === 'sum') return { key: 'cause', kind: 'sum' };
+  return { key: 'effect:' + eff, kind: mode === 'effect' ? 'sum' : 'level' };
+}
+
+/**
+ * engine.334: a cluster split into unit groups, the lead's group first, the rest in arrival order.
+ * Each group: label (its first non-carryover effectType — engine.206's lead rule inside the group),
+ * kind, n, figure (the sum for 'sum', the signed largest |magnitude| for 'level'; unrounded).
+ */
+function contractSeedUnitGroups_(group, lead) {
+  var byKey = {};
+  var keys = [];
+  for (var i = 0; i < group.length; i++) {
+    var rp = group[i];
+    var u = contractSeedUnit_(rp);
+    var ug = byKey[u.key];
+    if (!ug) { ug = byKey[u.key] = { kind: u.kind, label: '', first: rp.effectType || rp.causeType, n: 0, figure: 0 }; keys.push(u.key); }
+    if (!ug.label && rp.effectType !== 'carryover') ug.label = rp.effectType || rp.causeType;
+    var m = Number(rp.magnitude) || 0;
+    if (u.kind === 'sum') ug.figure += m;
+    else if (Math.abs(m) > Math.abs(ug.figure)) ug.figure = m;
+    ug.n++;
+  }
+  var leadKey = contractSeedUnit_(lead).key;
+  var out = [byKey[leadKey]];
+  for (var k = 0; k < keys.length; k++) {
+    if (keys[k] !== leadKey) out.push(byKey[keys[k]]);
+  }
+  for (var g = 0; g < out.length; g++) {
+    if (!out[g].label) out[g].label = out[g].first; // all carryover: as before
+  }
+  return out;
+}
+
+/** engine.334: one unit group as What text — a level seen more than once is a count, never a total. */
+function contractSeedUnitText_(ug) {
+  if (ug.kind === 'level' && ug.n > 1) return ug.label + ' ×' + ug.n;
+  var f = ug.figure;
+  return ug.label + (f ? ' ' + (f > 0 ? '+' : '') + (Math.round(f * 100) / 100) : '');
 }
 
 /**
@@ -487,7 +556,7 @@ function buildContractSeeds_(ctx) {
     for (var li = 0; li < group.length; li++) {
       if (group[li].effectType !== 'carryover') { lead = group[li]; break; }
     }
-    var totalMag = 0;
+    var unitGroups = contractSeedUnitGroups_(group, lead); // engine.334: no sum crosses a unit
     var causeLines = [];
     var targetPops = [];
     var businesses = [];
@@ -495,7 +564,6 @@ function buildContractSeeds_(ctx) {
 
     for (var g = 0; g < group.length; g++) {
       var rp = group[g];
-      totalMag += Number(rp.magnitude) || 0;
       var line = (rp.causeDetail || (rp.causeType + (rp.causeId ? ' ' + rp.causeId : '')));
       if (causeLines.indexOf(line) < 0) causeLines.push(line);
 
@@ -521,7 +589,12 @@ function buildContractSeeds_(ctx) {
       index, targetPops, lead.neighborhood, lead.causeType, usedPop, CONTRACT_SEED_MAX_CITIZENS,
       (typeof ctx.rng === 'function') ? ctx.rng : null);
 
-    var isMajor = contractSeedIsMajor_(totalMag, group.length);
+    // engine.334: major when the cluster is large, or when any one unit clears the bar on its own —
+    // merging never demotes an effect, and unlike units never add up to a promotion.
+    var isMajor = contractSeedIsMajor_(unitGroups[0].figure, group.length);
+    for (var ui = 1; ui < unitGroups.length && !isMajor; ui++) {
+      if (contractSeedIsMajor_(unitGroups[ui].figure, 0)) isMajor = true;
+    }
     if (isMajor) majorCount++; else textureCount++;
 
     // S313 backdrop fill — same Grade-1 move as citizens: the entities that are
@@ -598,8 +671,7 @@ function buildContractSeeds_(ctx) {
       desk: CONTRACT_SEED_DESK[seedDomain] || 'civic',
       domain: seedDomain,
       neighborhood: lead.neighborhood || 'Citywide',
-      what: (lead.effectType || lead.causeType) +
-            (totalMag ? ' ' + (totalMag > 0 ? '+' : '') + (Math.round(totalMag * 100) / 100) : '') +
+      what: unitGroups.map(contractSeedUnitText_).join('; ') +
             (group.length > 1 ? ' (' + group.length + ' related effects this cycle)' : ''),
       why: causeLines.join(' | '),
       citizens: picked.map(function (p) { return p.popId + ' ' + p.name; }).join('; '),
@@ -609,7 +681,7 @@ function buildContractSeeds_(ctx) {
       }).join(' | '),
       businesses: bizLabels.join('; '),
       otherEntities: otherLabels.join('; '),
-      magnitude: Math.round(totalMag * 100) / 100,
+      magnitude: Math.round(unitGroups[0].figure * 100) / 100, // the lead's unit: its sum, or a level's peak
       trend: contractSeedTrend_(lead),
       seedClass: isMajor ? 'major' : 'texture',
       suggestedJournalist: match && match.journalist ? match.journalist : '',
@@ -636,6 +708,9 @@ if (typeof module !== 'undefined' && module.exports) {
     buildContractSeeds_: buildContractSeeds_,
     contractSeedCycleEvents_: contractSeedCycleEvents_,
     contractSeedIsMajor_: contractSeedIsMajor_,
+    contractSeedUnit_: contractSeedUnit_,
+    contractSeedUnitGroups_: contractSeedUnitGroups_,
+    CONTRACT_SEED_UNIT: CONTRACT_SEED_UNIT,
     contractSeedTrend_: contractSeedTrend_,
     contractSeedHash_: contractSeedHash_,
     contractSeedCoverageDomain_: contractSeedCoverageDomain_,

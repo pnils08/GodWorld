@@ -1,0 +1,163 @@
+C110 aea329f6 SPORTS Citywide
+   old: sentiment +86.08 (3 related effects this cycle) | Magnitude 86.08 | major
+   new: sentiment +0.08; game-night +17; game-night-texture +69 (3 related effects this cycle) | Magnitude 0.08 | major
+C110 ab9a1db3 GENERAL Citywide
+   old: sentiment/communityEngagement/nightlife +2.7 (3 related effects this cycle) | Magnitude 2.7 | major
+   new: sentiment/communityEngagement/nightlife +1; retail/nightlife/traffic/sentiment +0.8; sentiment/communityEngagement/retail +0.9 (3 related effects this cycle) | Magnitude 1 | major
+C110 825cc832 GENERAL Citywide
+   old: fold-applied/initiative-implementation +0.13 (2 related effects this cycle) | Magnitude 0.13 | major
+   new: fold-applied/initiative-implementation +0.14; fold-applied/approval-shift 0 (2 related effects this cycle) | Magnitude 0.14 | major
+C110 dd9171fe COMMUNITY Citywide
+   old: traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity +0.18 (2 related effects this cycle) | Magnitude 0.18 | major
+   new: traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity +0.08; sentiment +0.1 (2 related effects this cycle) | Magnitude 0.08 | major
+C110 0443a742 COMMUNITY Jack London
+   old: fame-rise +0.1 (2 related effects this cycle) | Magnitude 0.1 | major
+   new: fame-rise ×2 (2 related effects this cycle) | Magnitude 0.05 | major
+C110 8666d506 COMMUNITY West Oakland
+   old: tier-climb +0.2 (4 related effects this cycle) | Magnitude 0.2 | major
+   new: tier-climb ×4 (4 related effects this cycle) | Magnitude 0.05 | major
+C110 755630b5 COMMUNITY West Oakland
+   old: CITIZEN_RELOCATED +75 (15 related effects this cycle) | Magnitude 75 | major
+   new: CITIZEN_RELOCATED ×15 (15 related effects this cycle) | Magnitude 5 | major
+C110 9e1e1a90 COMMUNITY Chinatown
+   old: CITIZEN_RELOCATED +15 (3 related effects this cycle) | Magnitude 15 | major
+   new: CITIZEN_RELOCATED ×3 (3 related effects this cycle) | Magnitude 5 | major
+C110 f0c19315 COMMUNITY Lake Merritt
+   old: city-event +0.04 (2 related effects this cycle) | Magnitude 0.04 | texture
+   new: city-event ×2 (2 related effects this cycle) | Magnitude 0.02 | texture
+C111 c24afd77 SPORTS Citywide
+   old: sentiment +9.09 (2 related effects this cycle) | Magnitude 9.09 | major
+   new: sentiment +0.09; game-night +9 (2 related effects this cycle) | Magnitude 0.09 | major
+C111 edb14b12 GENERAL Citywide
+   old: sentiment/communityEngagement/nightlife +2.7 (3 related effects this cycle) | Magnitude 2.7 | major
+   new: sentiment/communityEngagement/nightlife +1; retail/nightlife/traffic/sentiment +0.8; sentiment/communityEngagement/retail +0.9 (3 related effects this cycle) | Magnitude 1 | major
+C111 0f49df51 GENERAL Citywide
+   old: fold-applied/initiative-implementation +0.14 (2 related effects this cycle) | Magnitude 0.14 | major
+   new: fold-applied/initiative-implementation +0.14; fold-applied/approval-shift +0 (2 related effects this cycle) | Magnitude 0.14 | major
+C111 ee473ebf COMMUNITY Citywide
+   old: traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity -0.07 (2 related effects this cycle) | Magnitude -0.07 | major
+   new: traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity -0.02; sentiment -0.05 (2 related effects this cycle) | Magnitude -0.02 | major
+C111 d0724053 COMMUNITY Lake Merritt
+   old: congregation-growth +0.02 (2 related effects this cycle) | Magnitude 0.02 | texture
+   new: congregation-growth ×2 (2 related effects this cycle) | Magnitude 0.01 | texture
+C111 48f3fdf2 GENERAL Downtown
+   old: NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | Magnitude 14 | major
+   new: NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | Magnitude 7 | major
+C111 b07d88d2 GENERAL Uptown
+   old: NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | Magnitude 14 | major
+   new: NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | Magnitude 7 | major
+C111 f32dec7b COMMUNITY West Oakland
+   old: CITIZEN_RELOCATED +40 (8 related effects this cycle) | Magnitude 40 | major
+   new: CITIZEN_RELOCATED ×8 (8 related effects this cycle) | Magnitude 5 | major
+C111 7320e4a8 COMMUNITY Jack London
+   old: CITIZEN_RELOCATED +15 (3 related effects this cycle) | Magnitude 15 | major
+   new: CITIZEN_RELOCATED ×3 (3 related effects this cycle) | Magnitude 5 | major
+C112 d5f2d0f8 SPORTS Citywide
+   old: sentiment +22.08 (4 related effects this cycle) | Magnitude 22.08 | major
+   new: sentiment +0.08; game-night +21; game-night-household +1 (4 related effects this cycle) | Magnitude 0.08 | major
+C112 2fc87871 GENERAL Citywide
+   old: sentiment/communityEngagement/nightlife +2.6 (3 related effects this cycle) | Magnitude 2.6 | major
+   new: sentiment/communityEngagement/nightlife +1; retail/nightlife/traffic/sentiment +0.8; sentiment/communityEngagement/retail +0.8 (3 related effects this cycle) | Magnitude 1 | major
+C112 9c36f670 GENERAL Citywide
+   old: fold-applied/initiative-implementation +0.14 (2 related effects this cycle) | Magnitude 0.14 | major
+   new: fold-applied/initiative-implementation +0.13; fold-applied/approval-shift +0 (2 related effects this cycle) | Magnitude 0.13 | major
+C112 fefd0b80 COMMUNITY Citywide
+   old: traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity +0.04 (2 related effects this cycle) | Magnitude 0.04 | texture
+   new: traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity; sentiment +0.04 (2 related effects this cycle) | Magnitude 0 | texture
+C112 1b7fe23a COMMUNITY Downtown
+   old: community_program +0.02 (2 related effects this cycle) | Magnitude 0.02 | texture
+   new: community_program +0.01; regular_service +0.01 (2 related effects this cycle) | Magnitude 0.01 | texture
+C112 49a0a991 GENERAL Downtown
+   old: NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | Magnitude 14 | major
+   new: NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | Magnitude 7 | major
+C112 b256dbf1 GENERAL Uptown
+   old: NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | Magnitude 14 | major
+   new: NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | Magnitude 7 | major
+C112 7105b439 COMMUNITY West Oakland
+   old: CITIZEN_RELOCATED +35 (7 related effects this cycle) | Magnitude 35 | major
+   new: CITIZEN_RELOCATED ×7 (7 related effects this cycle) | Magnitude 5 | major
+C112 fb51206e COMMUNITY Jack London
+   old: CITIZEN_RELOCATED +10 (2 related effects this cycle) | Magnitude 10 | major
+   new: CITIZEN_RELOCATED ×2 (2 related effects this cycle) | Magnitude 5 | major
+C112 c7f00d69 COMMUNITY Chinatown
+   old: CITIZEN_RELOCATED +10 (2 related effects this cycle) | Magnitude 10 | major
+   new: CITIZEN_RELOCATED ×2 (2 related effects this cycle) | Magnitude 5 | major
+C112 11ecd51c COMMUNITY Fruitvale
+   old: CITIZEN_RELOCATED +10 (2 related effects this cycle) | Magnitude 10 | major
+   new: CITIZEN_RELOCATED ×2 (2 related effects this cycle) | Magnitude 5 | major
+C113 e99aa479 SPORTS Citywide
+   old: sentiment +22.07 (3 related effects this cycle) | Magnitude 22.07 | major
+   new: sentiment +0.07; game-night +22 (3 related effects this cycle) | Magnitude 0.07 | major
+C113 71dfa5d0 GENERAL Citywide
+   old: sentiment/communityEngagement/nightlife +2.6 (3 related effects this cycle) | Magnitude 2.6 | major
+   new: sentiment/communityEngagement/nightlife +1; retail/nightlife/traffic/sentiment +0.8; sentiment/communityEngagement/retail +0.8 (3 related effects this cycle) | Magnitude 1 | major
+C113 29240d8f GENERAL Citywide
+   old: fold-applied/initiative-implementation +0.15 (2 related effects this cycle) | Magnitude 0.15 | major
+   new: fold-applied/initiative-implementation +0.13; fold-applied/approval-shift +0.02 (2 related effects this cycle) | Magnitude 0.13 | major
+C113 0fb2d841 COMMUNITY Citywide
+   old: traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity +0.03 (2 related effects this cycle) | Magnitude 0.03 | texture
+   new: traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity -0.02; sentiment +0.05 (2 related effects this cycle) | Magnitude -0.02 | texture
+C113 481ea5cc COMMUNITY Downtown
+   old: community_program +0.02 (2 related effects this cycle) | Magnitude 0.02 | texture
+   new: community_program +0.01; regular_service +0.01 (2 related effects this cycle) | Magnitude 0.01 | texture
+C113 367b7a33 SAFETY Chinatown
+   old: lost_contract_notice +0.15 (3 related effects this cycle) | Magnitude 0.15 | major
+   new: lost_contract_notice +0.05; medical_emergency +0.05; forced_temporary_closure +0.05 (3 related effects this cycle) | Magnitude 0.05 | major
+C113 9f48251b COMMUNITY Piedmont Ave
+   old: fame-rise +0.1 (2 related effects this cycle) | Magnitude 0.1 | major
+   new: fame-rise +0.05; tier-climb +0.05 (2 related effects this cycle) | Magnitude 0.05 | major
+C113 3ec24b75 COMMUNITY Rockridge
+   old: fame-rise +0.1 (2 related effects this cycle) | Magnitude 0.1 | major
+   new: fame-rise +0.05; tier-climb +0.05 (2 related effects this cycle) | Magnitude 0.05 | major
+C113 4a4d5530 GENERAL Downtown
+   old: NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | Magnitude 14 | major
+   new: NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | Magnitude 7 | major
+C113 aed73e20 GENERAL Jack London
+   old: NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | Magnitude 14 | major
+   new: NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | Magnitude 7 | major
+C113 b22e87d0 GENERAL Grand Lake
+   old: NEIGHBORHOOD_RISING +12 (2 related effects this cycle) | Magnitude 12 | major
+   new: NEIGHBORHOOD_RISING +5; NEIGHBORHOOD_BOOM +7 (2 related effects this cycle) | Magnitude 5 | major
+C113 b4302f10 GENERAL Uptown
+   old: NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | Magnitude 14 | major
+   new: NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | Magnitude 7 | major
+C113 eedd6897 COMMUNITY West Oakland
+   old: CITIZEN_RELOCATED +20 (4 related effects this cycle) | Magnitude 20 | major
+   new: CITIZEN_RELOCATED ×4 (4 related effects this cycle) | Magnitude 5 | major
+C114 fd4277fa SPORTS Citywide
+   old: sentiment +36.06 (4 related effects this cycle) | Magnitude 36.06 | major
+   new: sentiment +0.06; game-night +35; game-night-household +1 (4 related effects this cycle) | Magnitude 0.06 | major
+C114 b3f6d32f GENERAL Citywide
+   old: sentiment/communityEngagement/nightlife +2.6 (3 related effects this cycle) | Magnitude 2.6 | major
+   new: sentiment/communityEngagement/nightlife +1; retail/nightlife/traffic/sentiment +0.8; sentiment/communityEngagement/retail +0.8 (3 related effects this cycle) | Magnitude 1 | major
+C114 b61124ae GENERAL Citywide
+   old: fold-applied/initiative-implementation +0.11 (2 related effects this cycle) | Magnitude 0.11 | major
+   new: fold-applied/initiative-implementation +0.13; fold-applied/approval-shift -0.02 (2 related effects this cycle) | Magnitude 0.13 | major
+C114 2068a502 COMMUNITY Citywide
+   old: traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity +0.05 (2 related effects this cycle) | Magnitude 0.05 | major
+   new: traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity +0.03; sentiment +0.02 (2 related effects this cycle) | Magnitude 0.03 | texture
+C114 c6f27070 COMMUNITY Rockridge
+   old: tier-climb +0.15 (3 related effects this cycle) | Magnitude 0.15 | major
+   new: tier-climb ×3 (3 related effects this cycle) | Magnitude 0.05 | major
+C114 4afa00cf GENERAL Downtown
+   old: NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | Magnitude 14 | major
+   new: NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | Magnitude 7 | major
+C114 15affde1 GENERAL Jack London
+   old: NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | Magnitude 14 | major
+   new: NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | Magnitude 7 | major
+C114 b609822f GENERAL Uptown
+   old: NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | Magnitude 14 | major
+   new: NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | Magnitude 7 | major
+C114 6cb524f4 COMMUNITY West Oakland
+   old: CITIZEN_RELOCATED +10 (2 related effects this cycle) | Magnitude 10 | major
+   new: CITIZEN_RELOCATED ×2 (2 related effects this cycle) | Magnitude 5 | major
+C114 ddfb5b0f COMMUNITY Downtown
+   old: city-event +0.04 (2 related effects this cycle) | Magnitude 0.04 | texture
+   new: city-event ×2 (2 related effects this cycle) | Magnitude 0.02 | texture
+C114 441a9f08 COMMUNITY Temescal
+   old: sighting +0.02 (2 related effects this cycle) | Magnitude 0.02 | texture
+   new: sighting ×2 (2 related effects this cycle) | Magnitude 0.01 | texture
+
+C110–C114: seeds 228, What changed 53, Magnitude changed 52, class flips 1
+  flip: C114 COMMUNITY Citywide major → texture | traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity +0.03; sentiment +0.02 (2 related effects this cycle)
+civic seeds whose transit-word match changed: 0

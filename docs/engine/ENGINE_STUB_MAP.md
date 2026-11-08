@@ -2484,6 +2484,8 @@
 
 - **mintNamedEmployer_(role)**
 
+- **bumpPendingCellIntent_(ctx, tab, row, col, value, reason)**
+
 - **readAdvBusinessBook_(ss)**
   Sheets: Business_Ledger
 
@@ -3079,6 +3081,12 @@
 - **contractSeedTrend_(r)**
 
 - **contractSeedIsMajor_(magnitude, clusterSize)**
+
+- **contractSeedUnit_(rp)**
+
+- **contractSeedUnitGroups_(group, lead)**
+
+- **contractSeedUnitText_(ug)**
 
 - **contractSeedCycleEvents_(ctx, cycle)**
   Sheets: LifeHistory_Log
@@ -4907,4 +4915,4 @@ _No top-level function declarations found (helper/constants file)._
 ---
 
 **Files scanned:** 181
-**Functions mapped:** 1781
+**Functions mapped:** 1785

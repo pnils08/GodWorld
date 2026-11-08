@@ -280,20 +280,34 @@ assert.ok(/pay \$120,000 a year$/m.test(ram[c7('LifeHistory')]), ram[c7('LifeHis
 assert.strictEqual(van[c7('Income')], 400000, 'Tier 3: the pools\' row, pay untouched');
 assert.ok(/ — \[Retirement\] retired from the A's, announced C110$/m.test(van[c7('LifeHistory')]), 'Tier 3 line carries no money clause: ' + van[c7('LifeHistory')]);
 assert.strictEqual(van[c7('ClockMode')], 'ENGINE', 'the flip itself is the same at every Tier');
-const noKeyRows = rows7();
-assert.throws(() => run7([{ eventType: 'press-conference', teamsUsed: "A's", namesUsed: 'Vinnie Keane (DH)', eventTrigger: 'retirement' }], noKeyRows, { __config: { postCareerIncomeTier1: undefined } }),
-  /engine\.338: World_Config postCareerIncomeTier1 missing/, 'a missing key throws, never a silent 0');
-const vinNoKey = noKeyRows.find((x) => x[0] === 'POP-00001');
-assert.deepStrictEqual([vinNoKey[c7('ClockMode')], vinNoKey[c7('EconomicProfileKey')], vinNoKey[c7('RoleType')], vinNoKey[c7('Income')], (vinNoKey[c7('LifeHistory')].match(/\[Retirement\]/g) || []).length],
-  ['GAME', 'SPORTS_OVERRIDE', "Designated Hitter, Oakland A's Legend", 1500000, 0], 'codex F1: the refusal runs before the first cell moves — no half-flip for Phase 10 to persist');
-// codex F3: a ledger without the Tier / Income columns refuses the retirement before the row moves
+// codex F1 / R1: a missing key or a missing column refuses the whole phase BEFORE its first line — every row's LifeHistory
+// unchanged (no unpaired type line), zero log rows, the retiring row still the player
+function runRefused(entries, headers, rows, config) {
+  const appended = [];
+  const ctx = { summary: { sportsFeedEntries: entries, sportsWeek: {}, cycleId: 110 }, ledger: { headers, rows, dirty: false },
+    ss: { getSheetByName: (n) => (n === 'LifeHistory_Log' ? { getLastRow: () => 1, getRange: () => ({ setValues: (v) => { appended.push(...v); } }) } : null) },
+    config, now: 'NOW', cache: {}, rng: () => 0.5 };
+  let err = null; try { sandbox.applyGameNightMoments_(ctx); } catch (e) { err = e; }
+  return { err, appended, dirty: ctx.ledger.dirty };
+}
+const retireAndAward = [{ eventType: 'press-conference', teamsUsed: "A's", namesUsed: 'Arturo Ramos (SP), Vinnie Keane (DH)', eventTrigger: 'retirement' },
+  { eventType: 'player-feature', teamsUsed: "A's", namesUsed: 'Mike Paulson', eventTrigger: 'award' }];
+const noKeyRows = rows7(), noKeyBefore = JSON.stringify(noKeyRows);
+const rk = runRefused(retireAndAward, H7, noKeyRows, { cycleCount: 110, postCareerIncomeTier2: 120000 });
+assert.ok(rk.err && /engine\.338: World_Config postCareerIncomeTier1 missing/.test(rk.err.message), 'a missing key throws, never a silent 0: ' + (rk.err && rk.err.message));
+assert.strictEqual(JSON.stringify(noKeyRows), noKeyBefore, 'R1: not one cell on any row moved — no type line, no flip');
+assert.deepStrictEqual([rk.appended.length, rk.dirty], [0, false], 'R1: zero log rows, ledger not dirtied');
 const H7noInc = H7.filter((h) => h !== 'Income');
-const thinRows = rows7().map((r) => r.slice(0, -1));
-assert.throws(() => { const ctx = { summary: { sportsFeedEntries: [{ eventType: 'press-conference', teamsUsed: "A's", namesUsed: 'Vinnie Keane (DH)', eventTrigger: 'retirement' }], sportsWeek: {}, cycleId: 110 },
-  ledger: { headers: H7noInc, rows: thinRows, dirty: false }, ss: { getSheetByName: (n) => (n === 'LifeHistory_Log' ? { getLastRow: () => 1, getRange: () => ({ setValues: () => {} }) } : null) },
-  config: { cycleCount: 110, postCareerIncomeTier1: 250000, postCareerIncomeTier2: 120000 }, now: 'NOW', cache: {}, rng: () => 0.5 }; sandbox.applyGameNightMoments_(ctx); },
-  /engine\.338: Simulation_Ledger Tier \/ Income column missing/, 'no Income column: refused, not a silent unpriced flip');
-assert.strictEqual(thinRows.find((x) => x[0] === 'POP-00001')[H7noInc.indexOf('ClockMode')], 'GAME', 'and the row did not move');
+const thinRows = rows7().map((r) => r.slice(0, -1)), thinBefore = JSON.stringify(thinRows);
+const rc = runRefused(retireAndAward, H7noInc, thinRows, { cycleCount: 110, postCareerIncomeTier1: 250000, postCareerIncomeTier2: 120000 });
+assert.ok(rc.err && /engine\.338: Simulation_Ledger Tier \/ Income column missing — the retirement row for Arturo Ramos \(SP\), Vinnie Keane \(DH\)/.test(rc.err.message), 'F3/R2: no Income column → refused, the feed names ride: ' + (rc.err && rc.err.message));
+assert.deepStrictEqual([JSON.stringify(thinRows) === thinBefore, rc.appended.length], [true, 0], 'and nothing was written');
+// the function's own guard names the citizen (R2) when called outside the phase preflight
+assert.throws(() => sandbox.sportsRetire_({ config: {} }, rows7()[0], { iStatus: c7('Status'), iClock: c7('ClockMode'), iEcon: c7('EconomicProfileKey'), iRole: c7('RoleType'), iBio: c7('CitizenBio'), iTier: c7('Tier'), iIncome: c7('Income'), iPop: 0 }, "A's", 110, () => {}, 0),
+  /postCareerIncomeTier1 missing.*retirement of POP-00001 refused, row left on the GAME clock/);
+// a Cycle with no club retirement row never pays the read: no keys, no throw
+const noRetire = runRefused([{ eventType: 'player-feature', teamsUsed: "A's", namesUsed: 'Mike Paulson', eventTrigger: 'award' }], H7, rows7(), { cycleCount: 110 });
+assert.strictEqual(noRetire.err, null, 'no retirement row → the contract is not read');
 const seeds338 = require('fs').readFileSync(require('path').join(__dirname, '../phase01-config/engine94SheetContract.js'), 'utf8');
 assert.ok(/'postCareerIncomeTier1', 250000/.test(seeds338) && /'postCareerIncomeTier2', 120000/.test(seeds338), 'the seed list carries the builder\'s figures');
 

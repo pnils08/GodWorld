@@ -108,7 +108,7 @@ Headcount per hood is counted once per cycle on first read (`getHoodHeadcount_`,
 
 ### `World_Config` post-career income (engine.338)
 
-Seeded at open by `ensureEngine338Config_` (`engine94SheetContract.js`, same self-arm contract as engine.276); read fail-loud by `postCareerIncome_` in `applyGameNightMoments.js` at the sports retirement flip (`sportsRetire_`). The read runs before any cell of the retiring row moves, so a missing key refuses the retirement whole (the row stays on the GAME clock) and never leaves a half-flip.
+Seeded at open by `ensureEngine338Config_` (`engine94SheetContract.js`, same self-arm contract as engine.276); read fail-loud by `postCareerIncome_` in `applyGameNightMoments.js` at the sports retirement flip (`sportsRetire_`). The phase checks both keys and the Tier / Income columns before it writes its first line whenever a club retirement row is on the feed, so a missing key refuses the whole phase for that Cycle — no row moves, no line lands — and the Engine_Errors row names the feed row's citizens.
 
 | Key | Default | Range | Meaning |
 |---|---|---|---|

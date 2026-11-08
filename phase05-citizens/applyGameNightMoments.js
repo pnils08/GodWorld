@@ -291,8 +291,13 @@ function sportsRetire_(ctx, row, cols, team, cycle, write, ri) {
   // engine.338 (codex diff review F1 / F3): everything that can refuse runs BEFORE the first cell moves — the Tier and
   // Income columns must exist and the Tier's key must read — so a refusal leaves the row exactly as it was (still on the
   // GAME clock, still the player), never a half-flip Phase 10 could persist with the playing salary.
-  if (cols.iTier < 0 || cols.iIncome < 0) throw new Error('engine.338: Simulation_Ledger Tier / Income column missing — a retirement cannot price the next chapter; row left on the GAME clock');
-  var postPay = postCareerIncome_(ctx, row[cols.iTier]); // throws on a missing World_Config key (ADR-0015)
+  // The phase preflight (applyGameNightMoments_, before the NAMED loop) already proved the columns and both keys; this is
+  // the same read on the row's own Tier, kept as the function's own guard for any other caller (codex R2: the name rides).
+  var whoR = cols.iPop >= 0 ? String(row[cols.iPop] || '') : '';
+  if (cols.iTier < 0 || cols.iIncome < 0) throw new Error('engine.338: Simulation_Ledger Tier / Income column missing — ' + whoR + ' cannot retire priced; row left on the GAME clock');
+  var postPay;
+  try { postPay = postCareerIncome_(ctx, row[cols.iTier]); } // throws on a missing World_Config key (ADR-0015)
+  catch (eR) { throw new Error(eR.message + ' — retirement of ' + whoR + ' refused, row left on the GAME clock'); }
   var econ = cols.iEcon >= 0 ? String(row[cols.iEcon] || '').trim() : '';
   if (cols.iClock >= 0) row[cols.iClock] = 'ENGINE';
   if (cols.iEcon >= 0 && econ === 'SPORTS_OVERRIDE') row[cols.iEcon] = '';
@@ -431,7 +436,7 @@ function applyGameNightMoments_(ctx) {
   // engine.333: the milestone cells
   var iEcon = idx('EconomicProfileKey'), iBio = idx('CitizenBio'), iStatusStart = idx('StatusStartCycle'), iHealthCause = idx('HealthCause');
   var iTier = idx('Tier'), iIncome = idx('Income'); // engine.338: the flip prices the post-career Income by Tier
-  var cols = { iStatus: iStatus, iClock: iClock, iEcon: iEcon, iRole: iRole, iBio: iBio, iStatusStart: iStatusStart, iHealthCause: iHealthCause, iNbhd: iNbhd, iTier: iTier, iIncome: iIncome };
+  var cols = { iStatus: iStatus, iClock: iClock, iEcon: iEcon, iRole: iRole, iBio: iBio, iStatusStart: iStatusStart, iHealthCause: iHealthCause, iNbhd: iNbhd, iTier: iTier, iIncome: iIncome, iPop: iPop };
   if (iPop < 0 || iLife < 0) return;
   var logSheet = ctx.ss ? ctx.ss.getSheetByName('LifeHistory_Log') : null;
   // engine.208 Revision 1: the log is half the evidence — never write the ledger half alone
@@ -468,6 +473,18 @@ function applyGameNightMoments_(ctx) {
     logRows.push([ctx.now, row[iPop], ((row[iFirst] || '') + ' ' + (row[iLast] || '')).trim(), logTag, text,
       (iNbhd >= 0 ? (row[iNbhd] || '') : ''), cycle]);
     touched[String(row[iPop])] = true;
+  }
+
+  // engine.338 (codex re-review R1): the retirement contract is checked BEFORE the first line of the phase is written —
+  // the Tier / Income columns and both World_Config keys — so a missing contract writes nothing (no type line on the
+  // ledger with its log row lost to the throw, no half-flip). Only a Cycle that carries a club retirement row pays the read.
+  for (var pe = 0; pe < entries.length; pe++) {
+    var preTeam = normalizeOaklandFeedTeam_(entries[pe].teamsUsed);
+    if ((preTeam === "A's" || preTeam === 'Oaks') && sportsTriggerWord_(entries[pe]) === 'retirement') {
+      if (cols.iTier < 0 || cols.iIncome < 0) throw new Error('engine.338: Simulation_Ledger Tier / Income column missing — the retirement row for ' + String(entries[pe].namesUsed || '') + ' cannot price the next chapter; nothing written this phase');
+      postCareerIncome_(ctx, 1); postCareerIncome_(ctx, 2); // throws on a missing key (ADR-0015), names nothing yet — no row has moved
+      break;
+    }
   }
 
   // 1. NAMED — one line per resolving feed row (row-level receipt)

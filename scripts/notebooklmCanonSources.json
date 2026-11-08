@@ -46,7 +46,8 @@
     "3448ce79-e222-46ed-a8b0-6adc8e35429e",
     "45e84e2f-87a7-4e37-a3ff-2d1f828239ef",
     "06e1843d-5c67-4052-8ddd-de2fc22413d1",
-    "972bb82e-70f8-48a2-9bf2-9a9061d11f46"
+    "972bb82e-70f8-48a2-9bf2-9a9061d11f46",
+    "0f829b78-8866-4af2-9407-24568e65c5a3"
   ],
   "allowedCanonReferenceSourceIds": [
     "c31ff29f-42d5-4ed3-ba71-620c463a39a6",
@@ -778,6 +779,15 @@
       "reason": "Published Cycle Pulse edition, added to the permanent notebook by the Saturday run (cron-saturday-run.js stepPublish).",
       "evidence": [
         "editions/cycle_pulse_c113.txt"
+      ]
+    },
+    "0f829b78-8866-4af2-9407-24568e65c5a3": {
+      "title": "The Cycle Pulse — Y3C10",
+      "classification": "published",
+      "reason": "Published Cycle Pulse edition C114, corrected copy (builder 2026-11-07: the Claude Duet's desk-draft fixes to four printed articles, checked on the live sheet); replaces fcf9410a-3056-437c-82e6-84b8fd080fa5, added by the Saturday run.",
+      "evidence": [
+        "editions/cycle_pulse_c114.txt",
+        "output/corrections/c114/cycle_pulse_c114.corrected.txt"
       ]
     }
   }

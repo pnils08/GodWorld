@@ -71,7 +71,7 @@ Spawn **≤3** `source-search` agents (S326 — the Haiku-pinned retrieval agent
 
 Exactly one seat may be `retrievalLane=prior-published-arc`: the existing "prior canon / arc" or "prior coverage / initiative arc" seat. Raw-signal, truesource, roster, cycle-event, anomaly, vote-math, and current-state seats must use `exact-current` or `cross-file-reconcile`.
 
-The prior-arc dispatch names the storyline and asks the agent to call `node scripts/notebooklmCanonSearch.js`. It must return source title, source ID, citation number, excerpt, and `reconcileVerdict`. For a citizen origin question, the orchestrator may explicitly authorize `--source-class canon-reference`; otherwise the default published scope holds. **The return gate in Step 4 is the enforcement** — the agent holds Read/Glob/Grep and has drifted off the wrapper in testing, so verify the return rather than trusting the lane.
+The prior-arc dispatch names the storyline and asks the agent to call `node scripts/notebooklmCanonSearch.js`. It must return source title, source ID, citation number, excerpt, and `reconcileVerdict`. The search covers the whole notebook (every source in it is canon) — editions, lore, Richmond Archive, stat cards; the returned source title says which kind backs each claim, and `--source-class` does not narrow it. **The return gate in Step 4 is the enforcement** — the agent holds Read/Glob/Grep and has drifted off the wrapper in testing, so verify the return rather than trusting the lane.
 
 Each subagent returns **sourcing as text** — what it found, each claim traced to its source artifact/tab. They reach raw data at runtime via the tools the charge granted; the orchestrator does NOT pre-package data.
 

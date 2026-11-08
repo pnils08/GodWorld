@@ -120,8 +120,21 @@ No engine writer changes an on-ledger row's `Last`; every `Last` write is on a n
 - MaidenName is empty on all 1058 ledger rows. Consistent with no renamed Family row having reached the ledger yet (all 16 still sit in the pool, Status Family); the emergence door's MaidenName carry (:1198) is unproven on live until one does.
 - A split of the 532 by door (seed vs. later arrival) needs a source the snapshot lacks (no CreatedAt; compressed histories).
 
+## Found the same day, not part of the mint: the wake writers put bench weeks on real citizens' pages
+
+Recovered 2026-11-08 (S643) from the ended session's transcript — the 15:37 finding was never committed; that session's close said it was recorded in this plan and it was not. Status: **found, not fixed, nothing built, no page touched. Open, builder's.**
+
+Carried from that session's read of every citizen's Supermemory container (not re-run in S643): 29 pages across 17 citizens carry a Cycle the live world never reached. 27 were written 2026-07-07 to 07-11, labelled Cycle 119 and 126, from a bench run that summer; Mags has three. 2 were written 2026-11-07 09:42 UTC (03:42 CST; the earlier session read the log's UTC stamp as local): POP-00431 Hassan Montero's Cycle 116 page, a retirement wake he never had, live then at 114–115.
+
+Checked in S643: `logs/citizen-wake.log.1.gz` shows the 11-07 09:11Z dry run and the 09:42Z real run both at `cycle=116`; the pool went 1058 → 1075 ledger rows between them (a live sheet does not grow 17 rows in 30 minutes); the 09:42Z run read `lived events=8`; the Hassan line is `slot=owed … event=retirement:POP-00431:116`. `lib/getCurrentCycle.js` resolves from the freshest `output/world_summary_c{N}.md`, whose newest is C114 — so the 116 did not come from the cycle resolver. No crontab line fires at 03:42 (wake crons at 07:30, 12:30, 21:30 CST). Unproven: which command pointed that run at the bench, and whether the env sheet at that moment was a sandbox (the env file's id matches no line in DEPLOY.md).
+
+Why it matters: a wake reads the citizen's own newest pages back before they speak, so Hassan's next real wake is handed a week-116 retirement as his own memory (`lib/wakePerception.js` `loadOwnPageReadback`). Unverified in S643: that loader's ordering.
+
+The shape of the fix, if the builder wants one: a guard in the wake writers that refuses a page when the sheet's Cycle is ahead of the live world. Code only. Not built. The 29 pages are not to be edited or deleted by hand (CLAUDE.md rule 4); what happens to them is his call.
+
 ## Changelog
 
+- 2026-11-08 (research-build, S643) — the bench-bleed finding (29 pages, 17 citizens, Cycles 119/126/116) recovered from the ended session's transcript and written here; part re-checked against the wake log, the rest carried and marked so. No code, page or row touched.
 - 2026-11-08 (research-build) — opened on the builder's word at session close; the evidence table read off the snapshot; no code touched.
 - 2026-11-08 (research-build, S642) — Task 1 read done; the three defects traced to their writers (§Task 1 read); four calls written for 1b. No code touched.
 - 2026-11-08 (research-build, S642) — advisor fold: call 1 narrowed to the intake die, call 4 gains the unlink option, Varek's mint door marked unrecorded, two open questions added.

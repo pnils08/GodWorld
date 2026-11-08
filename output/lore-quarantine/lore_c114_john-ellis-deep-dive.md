@@ -50,7 +50,7 @@ Waiting on the asphalt with five-gallon buckets of municipal gray primer was Ros
 
 Young, forty-six, is the owner of the MacArthur Boulevard smoke shop three blocks away. A mother of three who has spent decades navigating the shifting economic currents of East Oakland, Young knows every shopkeeper and delivery driver on the avenue. She had previously painted over tagging on the wall during Y3C6, working alongside neighbors while the rest of the city slept. 
 
-On this morning, Ellis took a long-handled roller from her truck bed, poured primer into a plastic tray, and started rolling paint alongside her and three other residents. 
+On this morning, Ellis took a long-handled roller from her truck bed, poured primer into a plastic tray, and started rolling paint alongside her and four other residents. 
 
 "She didn't ask me about my cutter," Ellis says, a rare smile breaking across his features. "She asked if I knew that honeybees can recognize human faces. Learned that from her daughter’s science textbook. I spent two hours rolling gray latex over spray paint, talking to Rosalind about bee navigation and the wholesale price of tobacco tax stamps. By the time we finished, she wasn't some shopkeeper I nod to through a glass window. She was someone I’d call if my pipes burst."
 
@@ -60,7 +60,7 @@ Down the block, Evan Lewis, fifty-five, steered his AC Transit bus past the rec 
 
 ### IV. The Arithmetic of Staying Put
 
-The pressures of the business continue to mount. In Y3C10, as the Athletics sit in the off-season while the minor-league Oaks begin their early campaign, Ellis’s name surfaced once more in the Bay Tribune sports pages. General Manager Mike Paulson is currently evaluating long-term contract extensions for the young championship core—Travis Coles, Vladimir Gonzalez, Ernesto Quintero, and John Ellis.
+The pressures of the business continue to mount. In Y3C10, as the Athletics sit in the off-season while the Oaks begin their first NBA campaign, Ellis’s name surfaced once more in the Bay Tribune sports pages. General Manager Mike Paulson is currently evaluating long-term contract extensions for the young championship core—Travis Coles, Vladimir Gonzalez, Ernesto Quintero, and John Ellis.
 
 Ellis has seen the numbers. Back in Y3C5, during a quiet lunch break between winter throwing sessions, he scrolled through residential listings in Rockridge and was struck by the realization that on his current trajectory, he could comfortably buy a three-bedroom estate near College Avenue. 
 
@@ -72,7 +72,7 @@ When the noise of the front office and the glare of national media become suffoc
 
 He tucks the baseball into his jacket pocket. Later this afternoon, he will run three miles along the ridge, complete ninety minutes of rotator-cuff band work, and throw a thirty-pitch flat-ground session into the net behind the garage. 
 
-"Deacon Seymour told me when I was a rookie that the only stat that matters on your headstone is whether the team won the day you had the ball," Ellis adds. "Out here in Laurel, nobody cares about your WHIP. They care if you painted the wall, if you waved at the bus driver, and if you sweep your own sidewalk. That's a good way to live. The rest is just sixty feet, six inches."
+"Deacon Seymour told me my first spring under him that the only stat that matters on your headstone is whether the team won the day you had the ball," Ellis adds. "Out here in Laurel, nobody cares about your WHIP. They care if you painted the wall, if you waved at the bus driver, and if you sweep your own sidewalk. That's a good way to live. The rest is just sixty feet, six inches."
 
 ---
 

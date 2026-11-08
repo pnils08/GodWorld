@@ -973,6 +973,14 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S638 Archive Pass (2026-11-07, research-build) — post-S637 closures sweep
+
+1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 engine.*.
+
+- **engine.337** [research-build] — Ex-MUBA rows' key: inert on a Retired row (every key reader skips Retired first); convention: blank off the clock, the role's key when one lands. Folds into 338 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-11-07-former-player-next-chapter]] §engine.337 folded
+
+This pass: 1 rows — engine.337. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S636 Archive Pass (2026-11-07, engine-sheet) — post-S635 closures sweep
 
 1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.*.

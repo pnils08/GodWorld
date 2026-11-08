@@ -31,7 +31,7 @@ Three distinct defects, each its own mechanism until the read says otherwise:
 
 Wiring cards first (engine-wiring agent): `ChildrenIds`, `ParentIds`, `NumChildren`, `Last` — writers at both entry points, phase position, write path. Then `grep -rn "NumChildren\|ChildrenIds\|ParentIds" phase* utilities scripts lib` and read every writer end to end. Count on the snapshot: how many children have an empty ParentIds while someone's ChildrenIds names them; how many parents are younger than child − 16; how many citizens have NumChildren > ChildrenIds length.
 
-## Task 1 read — what the code and the sheet say (research-build, 2026-11-08, live C114, sim year 2041)
+## Task 1 read — what the code and the sheet say (research-build, 2026-11-08, live C114, sim year 2042 — cycles 105–156; ages below are BirthYear gaps, not anchored)
 
 **Writers of the four cells (wiring card, every phase writer before Phase10-CommitLedger, in-memory on `ctx.ledger.rows`):**
 

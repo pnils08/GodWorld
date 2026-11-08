@@ -1572,6 +1572,7 @@ async function stepPublish(cycle) {
     console.log('(dry-run) would run:');
     console.log('  node scripts/ingestEdition.js ' + path.relative(ROOT, outPath) + ' --cycle ' + cycle);
     console.log('  nlm source add <permanent notebookId> --file ' + path.relative(ROOT, outPath));
+    console.log('  node scripts/saveToDrive.js ' + path.relative(ROOT, outPath) + ' edition');
     return { published: false };
   }
   const { spawnSync } = require('child_process');
@@ -1604,6 +1605,13 @@ async function stepPublish(cycle) {
     reason: 'Published Cycle Pulse edition, added to the permanent notebook by the Saturday run (cron-saturday-run.js stepPublish).',
     evidence: [path.relative(ROOT, outPath)],
   });
+  // pipeline.104 (builder 2026-11-08): the edition itself goes to the Cycle Pulse Drive folder
+  // (Y-003); the audio goes to Weekly_News below. Non-blocking: a Drive failure never un-publishes.
+  const drop = spawnSync('node', [path.join(ROOT, 'scripts', 'saveToDrive.js'), outPath, 'edition'],
+    { encoding: 'utf-8', timeout: 300 * 1000 });
+  const dropOut = ((drop.stdout || '') + (drop.stderr || '')).trim();
+  if (drop.status !== 0) console.log('EDITION DRIVE DROP SKIPPED (non-blocking): ' + dropOut.slice(0, 300));
+  else console.log('edition Drive drop: ' + ((dropOut.match(/Link: (\S+)/) || [])[1] || 'done'));
   if (config.saturdayAudio !== false) {
     try {
       const { generateAndDeliverEditionAudio } = require(path.join(ROOT, 'scripts', 'notebooklmPush'));
@@ -1617,7 +1625,7 @@ async function stepPublish(cycle) {
         label: 'The Cycle Pulse — ' + simClock(cycle),
         focus: 'The Cycle Pulse edition C' + cycle,
         content: '🎧 **The Cycle Pulse — ' + simClock(cycle) + '**\nSaturday edition audio · deep_dive/long',
-        driveDest: config.driveDest || 'edition',
+        driveDest: config.driveDest || 'audio',
       });
       if (audio && audio.audioPath) {
         console.log('saturday audio → ' + path.relative(ROOT, audio.audioPath));

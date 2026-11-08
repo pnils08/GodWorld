@@ -402,7 +402,7 @@ async function deliver(audioPath, cycle, config, opts) {
   const up = spawnSync('node', [
     path.join(ROOT, 'scripts/saveToDrive.js'),
     audioPath,
-    options.driveDest || config.driveDest || 'edition',
+    options.driveDest || config.driveDest || 'audio',
   ], {
     encoding: 'utf-8',
     timeout: 300 * 1000,

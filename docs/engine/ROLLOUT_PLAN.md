@@ -22,6 +22,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| pipeline.104 | Saturday Drive drops (builder 11-08): edition to Y-003, audio to Weekly_News; built, C114 uploaded. Read Sat 2026-11-14: C115 edition + audio in their folders | live-observing | engine-sheet | [[../reference/NotebookLM]] §Change log |
 | engine.333 | Feed triggers to life history: retirement leaves the sports layer, Now: bio line, owed wake, injury bed. PROD @175. Task 5 = the C115 live read, Sun 2026-11-08 | live-observing | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] |
 | engine.331 | Sports triggers: no blank-cell re-fire, hot/cold at 5, off-season and good/bad words. PROD @174, dropdown done. C115 live read Sun 2026-11-08 (Acc 14, P1, P3) | live-observing | engine-sheet | [[../plans/2026-11-05-sports-feed-triggers]] |
 | engine.332 | Coverage reaction seeds: a beat rated ±3+ is one lead row on its desk. PROD @176. C114 rated INFRASTRUCTURE −3, COMMUNITY +3: C115 Sun 2026-11-08 is the read | live-observing | engine-sheet | [[../plans/2026-11-07-coverage-reaction-seeds]] |
@@ -111,3 +112,4 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 | engine.104 | Mint economy: arrivals born right. Mint paths take job titles from lists outside the Economic_Parameters job table; revision owes legacy mutating-path disposition + D2 proof (agy 2026-10-17) | ready | research-build | [[../plans/2026-08-10-economy-native-rebuild]] §Read 2026-10-16 |
 | engine.248 | Faith orgs get a sim role. Membership LIVE since S325 (processFaithJoins_, MembersList). Open: membership-gated dial nudge (today any faith line nudges), member faith-life events, faith chaos car; the 16 leaders not in MembersList. Pointer says design first | ready | engine-sheet | [[../research/2026-09-10-kimi-faith-lane-routing]] |
 | engine.261 | Firm agents: three business owners get a wake slice to run their business | ready | engine-sheet | [[../plans/2026-09-26-future-build-ideas]] §Builder rulings |
+| pipeline.105 | Lore gate runs on its own (builder 11-08: "no world exists where a gate runs by hand"); hard: the writer uses all the canon it finds. Plan at pickup | ready | engine-sheet | [[../../.claude/skills/lore-ingest/SKILL]] |

@@ -20,10 +20,11 @@
  *   node scripts/saveToDrive.js --test
  *
  * Destinations (shortcuts):
- *   edition              → Publications Archive / 1_The_Cycle_Pulse / Y-002 (S461 housekeeping,
- *                          Mike-direct 2026-09-14: rotated off Y_001 to the new Y-002 bucket —
- *                          also the Saturday NotebookLM audio overview's Drive drop, via
- *                          config/notebooklm.json top-level driveDest)
+ *   edition              → Publications Archive / 1_The_Cycle_Pulse / Y-003 — the Saturday
+ *                          Cycle Pulse edition (builder 2026-11-08, pipeline.104)
+ *   audio                → Publications Archive / 1_The_Cycle_Pulse / Weekly_News — the Saturday
+ *                          NotebookLM audio overview, via config/notebooklm.json top-level
+ *                          driveDest (builder 2026-11-08, pipeline.104)
  *   daily-news           → Publications Archive / 1_The_Cycle_Pulse / Daily_News (S461,
  *                          Mike-direct 2026-09-14) — NotebookLM daily-brief audio Drive drop,
  *                          via config/notebooklm.json dailyNews.driveDest
@@ -108,7 +109,8 @@ function parseCycleFlag() {
 // Destination folder IDs — from combined manifest (mapSubfolders overrides at runtime)
 var DESTINATIONS = {
   // Publications Archive subfolders
-  edition:    '1k8OEMFO90zppxelySqUZCWZ4G5amfkW9',  // 1_The_Cycle_Pulse/Y-002 (S461: rotated off Y_001, Mike-direct 2026-09-14)
+  edition:    '1k8OEMFO90zppxelySqUZCWZ4G5amfkW9',  // 1_The_Cycle_Pulse/Y-003 (the Saturday edition, builder 2026-11-08)
+  audio:      '1J1HhuRUWOHECNYierjX0iygknmn5CJHU',  // 1_The_Cycle_Pulse/Weekly_News (the Saturday audio, builder 2026-11-08)
   'daily-news': '1G4pwonIvrad__5Y9TzcoO_1p7bT0d-22',  // 1_The_Cycle_Pulse/Daily_News (S461, Mike-direct 2026-09-14)
   supplement: '1rv1mTZ8A1ep8u6dIONsEsGmayNkCJg-F',  // 2_Oakland_Supplementals
   chicago:    '1C2TvHmPWNh0VeYnTA4Tq0XvKS0fNRhTy',  // Chicago_Supplementals
@@ -373,7 +375,8 @@ async function mapSubfolders() {
   var folders = manifest.entries.filter(function(e) { return e.isFolder; });
 
   var mappings = {
-    edition:    { path: '/Publications Archive/1_The_Cycle_Pulse/Y-002' },
+    edition:    { path: '/Publications Archive/1_The_Cycle_Pulse/Y-003' },
+    audio:      { path: '/Publications Archive/1_The_Cycle_Pulse/Weekly_News' },
     supplement: { path: '/Publications Archive/2_Oakland_Supplementals' },
     chicago:    { path: '/Publications Archive/Chicago_Supplementals' },
     mara:       { path: '/Publications Archive/Mara_Vance' },

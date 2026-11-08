@@ -82,8 +82,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| pipeline.103 | Notebook search reads the live notebook on every call (builder 11-07). Proven live: C114 answered; the restored Horn lore searchable on add | done-pending-archive | engine-sheet | [[../plans/2026-11-07-notebook-search-scope]] |
-| governance.56 | One boot (builder 11-02): CLAUDE.md imports one `.claude/TERMINAL.md`; boot-load.js retired. Closed on the builder's word 11-08 | done-pending-archive | engine-sheet | [[../plans/2026-08-29-boot-doc-consolidation]] §Changelog |
 | engine.336 | `Now:` bio lines for ledger-changing moments (builder 11-07: wedding, birth, job change, promotion); they stack atop the minted prose, newest first | ready | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] §Builder's ruling (scope) |
 | engine.334 | Story seeds sum unlike numbers (C114 sports "sentiment +36.06" = mood + head-count). After engine.331 and engine.332; stub, review deeper when picked up | ready | engine-sheet | [[../plans/2026-11-05-story-seed-mixed-magnitudes]] |
 | infrastructure.18 | Weekly version-drift report in the existing health check, no model: runtime end of life, npm behind (majors flagged), Claude Code, plugin vs patch | ready | engine-sheet | [[../reference/DEPLOY]] |

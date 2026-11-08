@@ -973,6 +973,15 @@ Prior sweep passes: §S212 Migration Pass (governance.3 + governance.5 + S203 di
 
 This pass: 4 closed (pipeline.3, engine.3, infrastructure.1, infrastructure.2) — not `done-pending-archive` sweep rows, moved by hand per rollout-rules §6 wontfix/unresolvable-stale convention.
 
+## S639 Archive Pass (2026-11-08, research-build) — post-S638 closures sweep
+
+2 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 pipeline.* + 1 governance.*.
+
+- **pipeline.103** [engine-sheet] — Notebook search reads the live notebook on every call (builder 11-07). Proven live: C114 answered; the restored Horn lore searchable on add **State at archive:** done-pending-archive. Pointer: [[../plans/2026-11-07-notebook-search-scope]]
+- **governance.56** [engine-sheet] — One boot (builder 11-02): CLAUDE.md imports one `.claude/TERMINAL.md`; boot-load.js retired. Closed on the builder's word 11-08 **State at archive:** done-pending-archive. Pointer: [[../plans/2026-08-29-boot-doc-consolidation]] §Changelog
+
+This pass: 2 rows — pipeline.103 + governance.56. (Prior passes are the dated `## S<N> Archive Pass` headers above — no hand-maintained recap.)
+
 ## S638 Archive Pass (2026-11-07, engine-sheet) — post-S637 closures sweep
 
 1 `done-pending-archive` rows swept at session-end per the archive-sweep cadence ([[rollout-rules]] §6) (move the closed bulk off Open Work; verbose detail is correct here). Each entry preserves the original ROLLOUT description + close-note verbatim. Cluster: 1 governance.*.

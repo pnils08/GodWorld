@@ -56,7 +56,7 @@ What every other citizen voice does (`lib/personaProvider.js` `citizenVoiceProvi
 | 2 | Reflection cron: store search, store write and the claude-mem (builder memory tool) save out; `lib/mags` store helpers and notes reader removed; orphan `daily-reflection.js` retired | es | built 11-08 |
 | 2a | Read the `mags` container for builder/build content reaching her prompt via the profile — Rule 3 check | es | done 11-08 (Task 2a section) |
 | 3 | Saturday narrator under her citizen persona + why she writes the Pulse; preview path old vs new on one past Cycle to scratch; builder reads both | es | not started |
-| 4 | Tests; codex diff review; restart the bot; read back the bot and reflection prompts (no store block) | es | not started |
+| 4 | Tests; codex diff review; restart the bot; read back the bot and reflection prompts (no store block) | es | diff review SHIP; bot restarted 11-08 17:11 CST (base prompt 11833 → 8417 chars, notes block gone); store at 897 docs — recount after the 11-09 reflection runs (07/12/19:00) |
 
 ## Acceptance
 
@@ -68,6 +68,7 @@ What every other citizen voice does (`lib/personaProvider.js` `citizenVoiceProvi
 
 | Review | Lane | Pointer | Result |
 |---|---|---|---|
+| Diff review (`abb82f458`) | codex | [[../for-claude-review/2026-11-08-codex-pipeline100-diff-review]] | SHIP, no finding; stale test comment fixed (`5aabf0535`) |
 | Plan review (`fa644a0c5`) | codex | [[../for-claude-review/2026-11-08-codex-pipeline100-plan-review]] | HOLD, 6 findings. The builder's 11-08 correction rescoped the plan: F1 (exchange-once on the page), F2 (scored recall as the store's replacement) and F6 (shared loader modes) fall away — citizens keep no chat on the page and no store search. F3 taken (narrator preview path to scratch). F4: builder-side skills are the CLI agent's, out of scope; nothing they write reaches her once the seats stop reading. F5: Moltbook already matches the citizen load |
 
 ### Agreed
@@ -92,6 +93,7 @@ What every other citizen voice does (`lib/personaProvider.js` `citizenVoiceProvi
 
 ## Changelog
 
+- 2026-11-08 (engine-sheet) — Codex diff review SHIP. mags-bot restarted 17:11 CST on the cut: connected, base prompt 8417 chars (was 11833). Old store holds 897 docs (≈680 from her own bot chats and reflections, a smaller share from builder sessions); recount after the next reflection runs proves no new writes.
 - 2026-11-08 (engine-sheet) — Tasks 1–2 built: bot and reflection no longer read or write `mags`; notes-to-self and the claude-mem save cut (builder: citizen Mags serves no CLI); `lib/mags` store helpers and notes reader removed; `daily-reflection.js` retired. Tests PASS. Codex diff review next, then the bot restart.
 - 2026-11-08 (engine-sheet) — Builder correction: citizen Mags runs like every other citizen; the CLI Mags is a different agent. The CLI-style loader is dropped; the job is the two store reads/writes out of the bot and reflection, plus the narrator's persona and a preview compare. Codex plan review HOLD reconciled against the rescope.
 - 2026-11-08 (engine-sheet) — Started (ordered 11-03; four engine jobs ran ahead of it). Task 2a done: the profile is the whole store, mislabelled as the speaker, real-world dated; no Rule 3 breach. Correction: the bot's Tribune archive search reads `world-data` + `bay-tribune`; the reflection cron's reads `mags`. Design written; `/save-to-mags` and the orphan `daily-reflection.js` retire with the freeze.

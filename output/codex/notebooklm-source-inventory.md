@@ -4,8 +4,8 @@ Artifact class: CODEX_DIAGNOSTIC
 Canon status: NOT CANON. Review buckets are title-based suggestions only.
 Notebook: GodWorld
 Notebook ID: 417e2d29-4167-420f-a9cc-76fb6b2b7de2
-Generated: 2026-11-08T07:21:58.883Z
-Total sources: 150
+Generated: 2026-11-08T08:04:11.612Z
+Total sources: 149
 
 ## Review counts
 
@@ -14,7 +14,7 @@ Total sources: 150
 | `publication_candidate` | 43 |
 | `nonpublication_candidate` | 0 |
 | `exclude_candidate` | 1 |
-| `needs_review` | 106 |
+| `needs_review` | 105 |
 
 ## Sources
 
@@ -87,7 +87,6 @@ Total sources: 150
 | JR Rosado FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `6e907ba2-1f88-405a-bfc6-75c9a20236c7` |
 | Julio Valencia FULL STAT TRUE SOURCE — PITCHER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `7f0741a6-3eed-44ce-b264-49e3f17a1996` |
 | Kevin Clark FULL STAT TRUE SOURCE — BATTER — 2041.txt | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `27c6fb1d-851e-4cfa-bb42-9e9ced662cac` |
-| Lore : deep_dive_henry_rivas.md (Y3C8) | `word_doc` | `needs_review` | title alone does not establish publication or exclusion status | `50b6dde2-f4bf-4efa-892e-83863dbe794e` |
 | Lore: danny_horn_deep_dive (Y3C7) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `583182ab-726d-4139-be05-fd5a2ea9c9c6` |
 | Lore: darrin_davis_deep_dive (Y3C7) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `07783621-142e-4404-916d-7b58b0621a11` |
 | Lore: deep_dive_benji_dillon_c109 (Y3C5) | `generated_text` | `needs_review` | title alone does not establish publication or exclusion status | `031d5364-a3d4-47db-b730-cad1e811baeb` |

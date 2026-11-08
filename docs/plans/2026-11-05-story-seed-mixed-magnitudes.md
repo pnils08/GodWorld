@@ -68,7 +68,7 @@ Modelled on the C110–C114 ripples (scratch replay, not the engine; no closure 
 | 3 | Build the cut in `buildContractSeeds.js`; tests in `buildContractSeeds.test.js`: the C114 sports shape, a 15-move migration cluster (`×15`, Magnitude 5), the edition-coverage pair (texture), a closure beside a birth in one hood (two groups, closure leads at −25) and two closures (`×2`, Magnitude −40), an initiative pair +0.05 / −0.05 (major), the unit table's default; 5b.a, 5b.d and §11/§12 unchanged. `/stub-engine` in the same commit | es | done — §13 13a–13j; all prior asserts unchanged and passing |
 | 4 | Replay C110–C114 Ripple_Ledger rows through the old and the new builder (`output/engine-sheet/2026-11-08-engine334-replay.js`); every class flip both ways, every changed `What`, and every civic seed whose transit-word match changes, listed here | es | done — `node output/engine-sheet/2026-11-08-engine334-replay.js --old c257efffa --json output/engine-sheet/2026-11-08-engine334-ripples-c110-c114.json` (old = the last pre-cut commit; codex re-ran it, same result) → `output/engine-sheet/2026-11-08-engine334-replay-c110-c114.txt`: 228 seeds, 53 What changed, 52 Magnitude changed, 1 class flip (C114 edition-coverage major → texture), 0 What-word transit changes (an upper bound on transit-slice moves: the probe reads fewer fields than the slice does) |
 | 5 | Codex review of the exact deploy candidate; fold | es / codex | not started |
-| 6 | Sandbox fire on live-synced state (one unproven change in flight across both terminals); read the Cycle's `Story_Seed_Deck` rows back; Engine_Errors unchanged | es | not started |
+| 6 | Sandbox fire on live-synced state (one unproven change in flight across both terminals); read the Cycle's `Story_Seed_Deck` rows back; Engine_Errors unchanged | es | done — SANDBOX 1004 @197 stage 45 (`e15eb443f`), C115 178 s + C116 207 s PASS, 0 Engine_Errors; deck = candidate 46/46 + 52/52, old builder would differ on 15 + 16 rows, 0 class changes; sports `sentiment +60.05` → `sentiment +0.05; game-night +22; game-night-household +1; game-night-texture +37`; `output/engine-sheet/2026-11-08-e334-reads.jsonl` |
 | 7 | PROD push, DEPLOY_HISTORY, live read at C116 Sun 2026-11-15 | es | not started |
 
 ## Acceptance
@@ -122,6 +122,7 @@ Modelled on the C110–C114 ripples (scratch replay, not the engine; no closure 
 
 ## Changelog
 
+- 2026-11-08 (engine-sheet) — Task 6 sandbox PASS: stage 45 @197, C115 + C116, 0 Engine_Errors, every deck row = the candidate's seed (98/98), 31 rows reworded vs the old builder, 0 class changes; bench data back to live C114.
 - 2026-11-08 (engine-sheet) — Tasks 3–4 built: unit table + groups in buildContractSeeds.js, tests §13; replay C110–C114 through the real builder = 53 What, 1 class flip (C114 edition-coverage), 0 transit-word moves. Codex diff review next.
 - 2026-11-08 (engine-sheet) — Codex plan review HOLD folded: closures (`economic-event` / `business-closure`, fixed −25/−40) never sum; What-word readers named (transit slice, sift fallback); class moves both ways, tested. Ledger replay rebuilds 226/228 live deck rows.
 - 2026-11-08 (engine-sheet) — Task 1 done: read-before on both wiring cards and live C110–C114 ripples; the head-count never set the sports class (0 flips); cut is one file, a unit table, per-unit What/Magnitude/class; modelled 53 What changes, 1 class flip.

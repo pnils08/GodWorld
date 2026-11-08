@@ -1,0 +1,258 @@
+AIM = BENCH (script read the bench marker)
+== push stage 45
+bench pulled = stage 44
+stage 45 = stage 44 + engine.334 (1 file) at e15eb443f; manifest output/engine-sheet/stage45-e334.sha256
+└─ utilities/writeIntents.js
+Deployed AKfycbxxCwKERRGb3Gk6SYg6T2nrGKf8NrKQ-pY-BOG5sdaKclEkf2jGqS3IBhgrs5IDdlmC @197
+pull-back 167 js + manifest byte-identical to stage45-e334.sha256
+== sync from live
+  verify Story_Hook_Deck: bench 2132 rows vs live 2132 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+{"fireGuardMinutes":"0","cycleCountFormatted":"114","cycleCountIsNumber":true}
+door: {"target":"bench","http":200,"ok":true,"record":{"cycle":117,"startedMs":1794125668427,"state":"done","finishedMs":1794125854675},"raw":"{\"cycle\":117,\"startedMs\":1794125668427,\"state\":\"done\",\"finishedMs\":1794125854675}","valid":true,"expectOk":null}
+clearfire 117: {"ok":true,"cleared":{"cycle":117,"state":"done"}}
+clearcheckpoint: {"ok":true,"cleared":null,"triggersDeleted":0}
+== fire 1
+Edition_Coverage_Ratings C114: 2 rows (window 114,113,112,111,110,109,108,107), sandbox already has COMMUNITY,CULTURE,ECONOMIC,INFRASTRUCTURE,SPORTS
+Citizen_Media_Usage C114: 0 rows (sandbox already has a published or seeded week at C114)
+Oakland_Sports_Feed C115: 0 rows
+appended 2 to Edition_Coverage_Ratings; marked rows on the tab now 2
+bench cycleCount 114
+fire C115 rc=0 "verdict": "PASS" "wallS": 178
+{
+ "label": "e334-f1",
+ "N": 115,
+ "commit": "e15eb443f",
+ "at": "2026-11-08T18:29:58.500Z",
+ "cycleCount": "115",
+ "deckRows": 46,
+ "ripples": 77,
+ "candidateSeeds": 46,
+ "deckEqualsCandidate": "46/46 (1 by text: SeedID stored as a number)",
+ "mismatches": [],
+ "oldBuilderWouldDiffer": 15,
+ "oldDiffers": [
+  {
+   "domain": "SPORTS",
+   "hood": "Citywide",
+   "old": "sentiment +60.05 (5 related effects this cycle) | 60.05 | major",
+   "deck": "sentiment +0.05; game-night +22; game-night-household +1; game-night-texture +37 (5 related effects this cycle) | 0.05 | major"
+  },
+  {
+   "domain": "GENERAL",
+   "hood": "Citywide",
+   "old": "sentiment/communityEngagement/nightlife +2.6 (3 related effects this cycle) | 2.6 | major",
+   "deck": "sentiment/communityEngagement/nightlife +1; retail/nightlife/traffic/sentiment +0.8; sentiment/communityEngagement/retail +0.8 (3 related effects this cycle) | 1 | major"
+  },
+  {
+   "domain": "GENERAL",
+   "hood": "Citywide",
+   "old": "fold-applied/initiative-implementation +0.15 (2 related effects this cycle) | 0.15 | major",
+   "deck": "fold-applied/initiative-implementation +0.13; fold-applied/approval-shift +0.02 (2 related effects this cycle) | 0.13 | major"
+  },
+  {
+   "domain": "COMMUNITY",
+   "hood": "Citywide",
+   "old": "traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity +0.01 (2 related effects this cycle) | 0.01 | texture",
+   "deck": "traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity -0.03; sentiment +0.04 (2 related effects this cycle) | -0.03 | texture"
+  },
+  {
+   "domain": "COMMUNITY",
+   "hood": "East Oakland",
+   "old": "community_program +0.02 (2 related effects this cycle) | 0.02 | texture",
+   "deck": "community_program ×2 (2 related effects this cycle) | 0.01 | texture"
+  },
+  {
+   "domain": "COMMUNITY",
+   "hood": "Rockridge",
+   "old": "fame-permanent +0.15 (2 related effects this cycle) | 0.15 | major",
+   "deck": "fame-permanent +0.1; tier-climb +0.05 (2 related effects this cycle) | 0.1 | major"
+  },
+  {
+   "domain": "COMMUNITY",
+   "hood": "Lake Merritt",
+   "old": "tier-climb +0.1 (2 related effects this cycle) | 0.1 | major",
+   "deck": "tier-climb ×2 (2 related effects this cycle) | 0.05 | major"
+  },
+  {
+   "domain": "COMMUNITY",
+   "hood": "West Oakland",
+   "old": "tier-climb +0.15 (3 related effects this cycle) | 0.15 | major",
+   "deck": "tier-climb ×3 (3 related effects this cycle) | 0.05 | major"
+  },
+  {
+   "domain": "COMMUNITY",
+   "hood": "Fruitvale",
+   "old": "tier-climb +0.1 (2 related effects this cycle) | 0.1 | major",
+   "deck": "tier-climb ×2 (2 related effects this cycle) | 0.05 | major"
+  },
+  {
+   "domain": "GENERAL",
+   "hood": "Downtown",
+   "old": "NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | 14 | major",
+   "deck": "NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | 7 | major"
+  },
+  {
+   "domain": "GENERAL",
+   "hood": "Fruitvale",
+   "old": "NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | 14 | major",
+   "deck": "NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | 7 | major"
+  },
+  {
+   "domain": "GENERAL",
+   "hood": "Jack London",
+   "old": "NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | 14 | major",
+   "deck": "NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | 7 | major"
+  },
+  {
+   "domain": "GENERAL",
+   "hood": "Uptown",
+   "old": "NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | 14 | major",
+   "deck": "NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | 7 | major"
+  },
+  {
+   "domain": "COMMUNITY",
+   "hood": "West Oakland",
+   "old": "CITIZEN_RELOCATED +25 (5 related effects this cycle) | 25 | major",
+   "deck": "CITIZEN_RELOCATED ×5 (5 related effects this cycle) | 5 | major"
+  },
+  {
+   "domain": "COMMUNITY",
+   "hood": "Downtown",
+   "old": "CITIZEN_RELOCATED +17 (3 related effects this cycle) | 17 | major",
+   "deck": "CITIZEN_RELOCATED ×2; FORCED_MIGRATION +7 (3 related effects this cycle) | 5 | major"
+  }
+ ],
+ "sportsRows": [
+  "sentiment +0.05; game-night +22; game-night-household +1; game-night-texture +37 (5 related effects this cycle) | 0.05 | major"
+ ],
+ "engineErrorsAtN": []
+}
+== fire 2
+Edition_Coverage_Ratings C115: 7 rows (window 114,113,112,111,110,109,108,107)
+Citizen_Media_Usage C115: 35 rows from live C114
+Oakland_Sports_Feed C116: 2 rows
+appended 7 to Edition_Coverage_Ratings; marked rows on the tab now 9
+appended 35 to Citizen_Media_Usage; marked rows on the tab now 35
+appended 2 to Oakland_Sports_Feed; marked rows on the tab now 2
+bench cycleCount 115
+fire C116 rc=0 "verdict": "PASS" "wallS": 207
+{
+ "label": "e334-f2",
+ "N": 116,
+ "commit": "e15eb443f",
+ "at": "2026-11-08T18:33:55.915Z",
+ "cycleCount": "116",
+ "deckRows": 52,
+ "ripples": 83,
+ "candidateSeeds": 52,
+ "deckEqualsCandidate": "52/52 (1 by text: SeedID stored as a number)",
+ "mismatches": [],
+ "oldBuilderWouldDiffer": 16,
+ "oldDiffers": [
+  {
+   "domain": "SPORTS",
+   "hood": "Citywide",
+   "old": "sentiment +45.04 (4 related effects this cycle) | 45.04 | major",
+   "deck": "sentiment +0.04; game-night +2; game-night-texture +43 (4 related effects this cycle) | 0.04 | major"
+  },
+  {
+   "domain": "GENERAL",
+   "hood": "Citywide",
+   "old": "sentiment/communityEngagement/nightlife +2.6 (3 related effects this cycle) | 2.6 | major",
+   "deck": "sentiment/communityEngagement/nightlife +1; retail/nightlife/traffic/sentiment +0.8; sentiment/communityEngagement/retail +0.8 (3 related effects this cycle) | 1 | major"
+  },
+  {
+   "domain": "GENERAL",
+   "hood": "Citywide",
+   "old": "fold-applied/initiative-implementation +0.13 (2 related effects this cycle) | 0.13 | major",
+   "deck": "fold-applied/initiative-implementation +0.13; fold-applied/approval-shift -0.01 (2 related effects this cycle) | 0.13 | major"
+  },
+  {
+   "domain": "COMMUNITY",
+   "hood": "Citywide",
+   "old": "traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity +0.01 (2 related effects this cycle) | 0.01 | texture",
+   "deck": "traffic/retail/nightlife/publicSpaces/communityEngagement/culturalActivity -0.01; sentiment +0.02 (2 related effects this cycle) | -0.01 | texture"
+  },
+  {
+   "domain": "COMMUNITY",
+   "hood": "West Oakland",
+   "old": "fame-rise +0.3 (4 related effects this cycle) | 0.3 | major",
+   "deck": "fame-rise +0.05; fame-permanent ×2; tier-climb +0.05 (4 related effects this cycle) | 0.05 | major"
+  },
+  {
+   "domain": "COMMUNITY",
+   "hood": "Lake Merritt",
+   "old": "congregation-growth +0.02 (2 related effects this cycle) | 0.02 | texture",
+   "deck": "congregation-growth ×2 (2 related effects this cycle) | 0.01 | texture"
+  },
+  {
+   "domain": "GENERAL",
+   "hood": "Downtown",
+   "old": "NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | 14 | major",
+   "deck": "NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | 7 | major"
+  },
+  {
+   "domain": "GENERAL",
+   "hood": "Fruitvale",
+   "old": "NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | 14 | major",
+   "deck": "NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | 7 | major"
+  },
+  {
+   "domain": "GENERAL",
+   "hood": "Jack London",
+   "old": "NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | 14 | major",
+   "deck": "NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | 7 | major"
+  },
+  {
+   "domain": "GENERAL",
+   "hood": "Grand Lake",
+   "old": "NEIGHBORHOOD_RISING +12 (2 related effects this cycle) | 12 | major",
+   "deck": "NEIGHBORHOOD_RISING +5; NEIGHBORHOOD_BOOM +7 (2 related effects this cycle) | 5 | major"
+  },
+  {
+   "domain": "GENERAL",
+   "hood": "Uptown",
+   "old": "NEIGHBORHOOD_BOOM +14 (2 related effects this cycle) | 14 | major",
+   "deck": "NEIGHBORHOOD_BOOM +7; HOUSING_PRESSURE_HIGH +7 (2 related effects this cycle) | 7 | major"
+  },
+  {
+   "domain": "COMMUNITY",
+   "hood": "Piedmont Ave",
+   "old": "CITIZEN_RELOCATED +15 (3 related effects this cycle) | 15 | major",
+   "deck": "CITIZEN_RELOCATED ×3 (3 related effects this cycle) | 5 | major"
+  },
+  {
+   "domain": "COMMUNITY",
+   "hood": "Lake Merritt",
+   "old": "CITIZEN_RELOCATED +10 (2 related effects this cycle) | 10 | major",
+   "deck": "CITIZEN_RELOCATED ×2 (2 related effects this cycle) | 5 | major"
+  },
+  {
+   "domain": "COMMUNITY",
+   "hood": "West Oakland",
+   "old": "CITIZEN_RELOCATED +10 (2 related effects this cycle) | 10 | major",
+   "deck": "CITIZEN_RELOCATED ×2 (2 related effects this cycle) | 5 | major"
+  },
+  {
+   "domain": "COMMUNITY",
+   "hood": "Grand Lake",
+   "old": "CITIZEN_RELOCATED +10 (2 related effects this cycle) | 10 | major",
+   "deck": "CITIZEN_RELOCATED ×2 (2 related effects this cycle) | 5 | major"
+  },
+  {
+   "domain": "COMMUNITY",
+   "hood": "West Oakland",
+   "old": "city-event +0.04 (2 related effects this cycle) | 0.04 | texture",
+   "deck": "city-event ×2 (2 related effects this cycle) | 0.02 | texture"
+  }
+ ],
+ "sportsRows": [
+  "sentiment +0.04; game-night +2; game-night-texture +43 (4 related effects this cycle) | 0.04 | major"
+ ],
+ "engineErrorsAtN": []
+}
+== final sync from live
+  verify Story_Hook_Deck: bench 2132 rows vs live 2132 — OK
+Read-back verified. PropertiesService unchanged; verify the copied carry ring and any ghost recovery on the first fire.
+engine.334 bench done

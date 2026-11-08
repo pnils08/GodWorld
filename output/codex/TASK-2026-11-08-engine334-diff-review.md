@@ -1,0 +1,11 @@
+# REVIEW — engine.334 deploy candidate: story seeds add magnitudes only within one unit (engine-sheet 2026-11-08)
+
+Adversarial diff review of the exact deploy candidate, SHIP / SHIP-WITH-FIXES / HOLD, per AGENTS.md. Write to `docs/for-claude-review/2026-11-08-codex-engine334-diff-review.md`. Candidate: `e15eb443f`; diff `git diff c257efffa e15eb443f -- phase07-evening-media/buildContractSeeds.js phase07-evening-media/buildContractSeeds.test.js`. The only Apps Script file that changes is `phase07-evening-media/buildContractSeeds.js` (stage 45 = stage 44 + this file; push script `output/engine-sheet/2026-11-08-push-e334-bench.sh`). Plan: `docs/plans/2026-11-05-story-seed-mixed-magnitudes.md` §The cut (your two plan reviews are reconciled there).
+
+Hunt, with file:line and the failure it causes:
+1. `contractSeedUnitGroups_` / `contractSeedUnitText_`: does the lead's group always print first and carry the lead's effectType (engine.206 rule), including all-carryover clusters, a closure-led economic cluster, and a cluster whose lead group is not the first key seen? Any path where `byKey[leadKey]` is undefined?
+2. Class: `contractSeedIsMajor_(unitGroups[0].figure, group.length)` then the other groups with clusterSize 0 — any case where the old rule's answer for a single-unit cluster changes (it must not: one unit = old sum)? Rounding: class reads the unrounded figure, What / Magnitude the rounded one — same as before?
+3. `What` text: zero figure prints the label only (as before); `-0` rounding; a `level` group of one prints the signed value; `×N` for N>1 — any reader or test that breaks (`buildContractSeeds.test.js` 5b.a, 5b.d, §11, §12; scripts reading `What`).
+4. Apps Script globals: the new top-level `var`s and functions — any name collision across the clasped project (`grep -rn "CONTRACT_SEED_UNIT\|contractSeedUnit" phase* utilities lib`)? Any `Math.random`, sheet write, or ctx field added?
+5. Replay receipt `output/engine-sheet/2026-11-08-engine334-replay-c110-c114.txt` (command in plan Task 4) — does any listed change contradict the cut as written?
+Do not touch the sheet, the sandbox (a bench run is in progress on it), any cron, or engine code. Findings the code does not back are not findings.

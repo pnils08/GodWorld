@@ -1,20 +1,20 @@
 {
-  "ranAt": "2026-10-30T20:02:40.247Z",
+  "ranAt": "2026-11-08T08:54:36.019Z",
   "target": {
-    "popid": "POP-00025",
-    "name": "Arturo Ramos",
-    "tier": "1"
+    "popid": "POP-00033",
+    "name": "John Ellis",
+    "tier": "2"
   },
   "ok": true,
   "errorMessage": null,
   "newQuarantineFiles": [
-    "arturo_ramos_deep_dive.md"
+    "lore_c114_john-ellis-deep-dive.md"
   ],
   "driveUploads": [
     {
-      "file": "arturo_ramos_deep_dive.md",
+      "file": "lore_c114_john-ellis-deep-dive.md",
       "uploaded": true
     }
   ],
-  "nextStep": "Run /lore-ingest on arturo_ramos_deep_dive.md at next research-build session."
+  "nextStep": "Run /lore-ingest on lore_c114_john-ellis-deep-dive.md at next research-build session."
 }

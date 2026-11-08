@@ -91,7 +91,7 @@ function main() {
   const dryRun = process.argv.includes('--dry-run');
 
   const candidates = loadLedgerCandidates();
-  const lored = loadAlreadyLoredPopids();
+  const lored = loadAlreadyLoredPopids(candidates);
   const cursor = loadCursor();
   const target = pickNext(candidates, lored, cursor);
 

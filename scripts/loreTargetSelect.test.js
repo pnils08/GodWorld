@@ -41,4 +41,15 @@ assert.deepStrictEqual(
   candidates[1]
 );
 
+// pipeline.106: passed lore titled by file name counts by the subject's name, not only by POPID.
+const { loadAlreadyLoredPopids, loadLedgerCandidates } = require('./loreTargetSelect');
+const live = loadLedgerCandidates();
+const loredLive = loadAlreadyLoredPopids(live);
+const byName = (n) => (live.find((c) => c.name === n) || {}).popid;
+['Avery Santana', 'Danny Horn', 'Henry Rivas', 'Arturo Ramos', 'Martin Richards'].forEach((n) => {
+  const id = byName(n);
+  if (id) assert.ok(loredLive.has(id), n + ' (' + id + ') has passed lore titled by file name');
+});
+assert.ok(loadAlreadyLoredPopids().size <= loredLive.size, 'without candidates only POPID titles count');
+
 console.log('loreTargetSelect tests: PASS');

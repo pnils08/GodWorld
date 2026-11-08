@@ -35,14 +35,29 @@ function loadLedgerCandidates() {
     .sort((a, b) => (a.popid < b.popid ? -1 : a.popid > b.popid ? 1 : 0));
 }
 
-function loadAlreadyLoredPopids() {
+// A passed lore title names its subject by POPID ("POP-00001-Lore-...") or, for every piece
+// loreIngest.js titles from its file name ("Lore: avery_santana_deep_dive (Y3C10)"), only by
+// name. With `candidates`, a title whose words hold a candidate's first and last name marks
+// that candidate lored too (pipeline.106: the POPID-only match missed 9 of 13 passed pieces,
+// and the cron would have rewritten the mayor the Friday after her piece passed).
+function nameWords(text) {
+  return String(text || '').toLowerCase().split(/[^a-z0-9]+/).filter(Boolean);
+}
+function loadAlreadyLoredPopids(candidates) {
   const policy = JSON.parse(fs.readFileSync(POLICY_PATH, 'utf8'));
   const lored = new Set();
+  const titleWords = [];
   for (const id of policy.allowedLoreSourceIds || []) {
     const decision = policy.decisions[id];
     const title = decision && decision.title || '';
     const match = title.match(/POP-\d+/i);
     if (match) lored.add(match[0].toUpperCase());
+    titleWords.push(new Set(nameWords(title)));
+  }
+  for (const c of candidates || []) {
+    const words = nameWords(c.name);
+    if (words.length < 2) continue;
+    if (titleWords.some((t) => words.every((w) => t.has(w)))) lored.add(c.popid);
   }
   return lored;
 }
@@ -73,7 +88,7 @@ function pickNext(candidates, lored, cursor) {
 function main() {
   const peek = process.argv.includes('--peek');
   const candidates = loadLedgerCandidates();
-  const lored = loadAlreadyLoredPopids();
+  const lored = loadAlreadyLoredPopids(candidates);
   const cursor = loadCursor();
   const target = pickNext(candidates, lored, cursor);
 

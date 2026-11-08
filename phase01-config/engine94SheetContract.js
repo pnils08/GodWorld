@@ -443,6 +443,30 @@ function ensureEngine276Config_(ss) {
   return { configSeeded: plan.additions.length };
 }
 
+// engine.338 — a former player's money after the career (builder 2026-11-07: "hardcode retirement
+// income based on tier … the money paid out for events and appearances that dont show as a job").
+// The sports retirement flip (applyGameNightMoments sportsRetire_) sets Income from these by Tier;
+// Tier 3–4 are the hiring pools' and keep their pay. The figures are the builder's (Tier 1 250,000 ·
+// Tier 2 120,000, ruled on the ledger's anchors: Mason Miller 130,000, the MUBA rows 70–145,000).
+var ENGINE338_CONFIG_SEEDS = [
+  ['postCareerIncomeTier1', 250000, 'engine.338 Income a Tier 1 player takes at the sports retirement flip — appearances, events, the name; not a job. The playing salary ends here', 0, 10000000, false],
+  ['postCareerIncomeTier2', 120000, 'engine.338 Income a Tier 2 player takes at the sports retirement flip — appearances, events, the name; not a job. Tier 3–4 keep their pay (the pools re-price them)', 0, 10000000, false]
+];
+
+function ensureEngine338Config_(ss) {
+  if (!ss) throw new Error('engine.338 config: spreadsheet required');
+  var configSheet = ss.getSheetByName('World_Config');
+  if (!configSheet) throw new Error('engine.338 config: World_Config not found');
+  var plan = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE338_CONFIG_SEEDS);
+  if (plan.additions.length > 0) {
+    configSheet.getRange(configSheet.getLastRow() + 1, 1, plan.additions.length, 3).setValues(plan.additions);
+    var verified = inspectEngine94Config_(configSheet.getDataRange().getValues(), ENGINE338_CONFIG_SEEDS);
+    if (verified.additions.length > 0) throw new Error('engine.338 config: post-write verification failed');
+  }
+  Logger.log('engine.338 config ready: seeded ' + plan.additions.length + ' row(s)');
+  return { configSeeded: plan.additions.length };
+}
+
 // engine.271 — city revenue (builder rulings 2026-09-29 and 2026-10-02). Fines
 // are a share of the citizen's salary by level, capped below the grave level;
 // property tax is a share of the hood's home value, paid once a sim year on tax

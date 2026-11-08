@@ -269,6 +269,19 @@ function sportsBioNow_(existing, sentence, cycle) {
 // Who retires (codex engine-cut review F2): a row on the GAME clock with Status Active — the player's own row. A row already
 // off the clock is not flipped again whatever its key holds (live C114 has three ENGINE / SPORTS_OVERRIDE / Retired rows,
 // the MUBA Hall-of-Famers, gap G-RB8); a Retired, traded, detained or hospitalized row is not retired by a feed word.
+// engine.338 (builder 2026-11-07): the playing salary ends at the flip. A Tier 1–2 row takes the post-career figure
+// from World_Config (appearances, events, the name — not a job; the hiring pools never touch Tier 1–2, so nothing
+// else would ever re-price it). Tier 3–4 keep their pay: the pools re-price them when a job lands. The money loop
+// runs after this phase in the same Cycle, so the retirement week already saves off the new figure. A missing key
+// throws (ADR-0015: ensureEngine338Config_ self-arms at open, so absence means the contract did not run).
+var ENGINE338_KEYS = { 1: 'postCareerIncomeTier1', 2: 'postCareerIncomeTier2' };
+function postCareerIncome_(ctx, tier) {
+  var key = ENGINE338_KEYS[Number(tier)];
+  if (!key) return null; // Tier 3–4 (or blank): the pools' row, untouched
+  var v = ctx && ctx.config ? Number(ctx.config[key]) : NaN;
+  if (isNaN(v)) throw new Error('engine.338: World_Config ' + key + ' missing — ensureEngine338Config_ did not run (ADR-0015)');
+  return Math.round(v);
+}
 // Returns 'retired', or the reason the row was left alone.
 function sportsRetire_(ctx, row, cols, team, cycle, write, ri) {
   var clock = cols.iClock >= 0 ? String(row[cols.iClock] || '').trim().toUpperCase() : '';
@@ -281,7 +294,16 @@ function sportsRetire_(ctx, row, cols, team, cycle, write, ri) {
   var role = cols.iRole >= 0 ? String(row[cols.iRole] || '').trim() : '';
   if (cols.iRole >= 0 && role && !/^Former\b/i.test(role)) row[cols.iRole] = 'Former ' + role;
   var club = team === 'Oaks' ? 'the Oaks' : "the A's";
-  write(ri, 'Retirement', 'retired from ' + club + ', announced C' + cycle, 'Retirement');
+  // engine.338: the money after the career, by Tier — read before the line so the line can name it
+  var moneyClause = '';
+  if (cols.iTier >= 0 && cols.iIncome >= 0) {
+    var postPay = postCareerIncome_(ctx, row[cols.iTier]);
+    if (postPay !== null) {
+      row[cols.iIncome] = postPay;
+      moneyClause = ' — the playing salary ends; appearances and the name pay $' + postPay.toLocaleString('en-US') + ' a year';
+    }
+  }
+  write(ri, 'Retirement', 'retired from ' + club + ', announced C' + cycle + moneyClause, 'Retirement');
   if (cols.iBio >= 0) {
     var formerRole = cols.iRole >= 0 ? String(row[cols.iRole] || '').trim() : '';
     row[cols.iBio] = sportsBioNow_(row[cols.iBio], (formerRole || ('Former ' + club.replace(/^the /, '') + ' player')) + '; retired', cycle);
@@ -406,7 +428,8 @@ function applyGameNightMoments_(ctx) {
   var iLastU = (idx('LastUpdated') >= 0) ? idx('LastUpdated') : idx('Last Updated');
   // engine.333: the milestone cells
   var iEcon = idx('EconomicProfileKey'), iBio = idx('CitizenBio'), iStatusStart = idx('StatusStartCycle'), iHealthCause = idx('HealthCause');
-  var cols = { iStatus: iStatus, iClock: iClock, iEcon: iEcon, iRole: iRole, iBio: iBio, iStatusStart: iStatusStart, iHealthCause: iHealthCause, iNbhd: iNbhd };
+  var iTier = idx('Tier'), iIncome = idx('Income'); // engine.338: the flip prices the post-career Income by Tier
+  var cols = { iStatus: iStatus, iClock: iClock, iEcon: iEcon, iRole: iRole, iBio: iBio, iStatusStart: iStatusStart, iHealthCause: iHealthCause, iNbhd: iNbhd, iTier: iTier, iIncome: iIncome };
   if (iPop < 0 || iLife < 0) return;
   var logSheet = ctx.ss ? ctx.ss.getSheetByName('LifeHistory_Log') : null;
   // engine.208 Revision 1: the log is half the evidence — never write the ledger half alone

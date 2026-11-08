@@ -173,17 +173,18 @@ named6(moody6).forEach((x, i) => {
 // 7. engine.333 — the row's trigger word: a second received line, or a milestone that changes the row
 // (builder 2026-11-05/07: a sports retirement leaves the sports layer with Status Active; injury fills the bed;
 // the newest life-altering moment leads the bio). Fixture rows carry the milestone cells.
-const H7 = headers.concat(['EconomicProfileKey', 'CitizenBio', 'StatusStartCycle', 'HealthCause', 'Tier']);
+const H7 = headers.concat(['EconomicProfileKey', 'CitizenBio', 'StatusStartCycle', 'HealthCause', 'Tier', 'Income']);
 const c7 = (n) => H7.indexOf(n);
 const BIO = "DH from Boston playing his farewell 2041 season. 436 career homers, six rings.";
 function rows7() {
   return [
-    ['POP-00001', 'Vinnie', 'Keane', '', 'Active', 'Rockridge', '', 'GAME', 'BIZ-00005', "Designated Hitter, Oakland A's Legend", '', 'SPORTS_OVERRIDE', BIO, '', '', 1],
-    ['POP-00025', 'Arturo', 'Ramos', '', 'Active', 'Jack London', '', 'GAME', 'BIZ-00005', "Starting Pitcher, Oakland A's", '', 'SPORTS_OVERRIDE', '', '', '', 2],
-    ['POP-01024', 'AJ', 'Dybantsa', '', 'Active', 'Downtown', '', 'GAME', 'BIZ-00074', 'SF / The Oaks', '', 'SPORTS_OVERRIDE', '', '', '', 2],
-    ['POP-00022', 'Danny', 'Horn', '', 'injured', 'Jack London', '', 'GAME', 'BIZ-00005', "Center Fielder, Oakland A's", '', 'SPORTS_OVERRIDE', '', 110, 'hamstring, dashboard', 3],
-    ['POP-00019', 'Isley', 'Kelley', '', 'injured', 'Jack London', '', 'GAME', 'BIZ-00005', "Shortstop, Oakland A's Legend", '', 'SPORTS_OVERRIDE', '', 108, 'knee', 1],
-    ['POP-00527', 'Mike', 'Paulson', '', 'Active', 'Jack London', '', 'GAME', 'BIZ-00005', "General Manager, Oakland A's & The Oaks", '', 'SPORTS_OVERRIDE', '', '', '', 1]
+    ['POP-00001', 'Vinnie', 'Keane', '', 'Active', 'Rockridge', '', 'GAME', 'BIZ-00005', "Designated Hitter, Oakland A's Legend", '', 'SPORTS_OVERRIDE', BIO, '', '', 1, 1500000],
+    ['POP-00025', 'Arturo', 'Ramos', '', 'Active', 'Jack London', '', 'GAME', 'BIZ-00005', "Starting Pitcher, Oakland A's", '', 'SPORTS_OVERRIDE', '', '', '', 2, 900000],
+    ['POP-01024', 'AJ', 'Dybantsa', '', 'Active', 'Downtown', '', 'GAME', 'BIZ-00074', 'SF / The Oaks', '', 'SPORTS_OVERRIDE', '', '', '', 2, 4000000],
+    ['POP-00022', 'Danny', 'Horn', '', 'injured', 'Jack London', '', 'GAME', 'BIZ-00005', "Center Fielder, Oakland A's", '', 'SPORTS_OVERRIDE', '', 110, 'hamstring, dashboard', 3, 650000],
+    ['POP-00019', 'Isley', 'Kelley', '', 'injured', 'Jack London', '', 'GAME', 'BIZ-00005', "Shortstop, Oakland A's Legend", '', 'SPORTS_OVERRIDE', '', 108, 'knee', 1, 1200000],
+    ['POP-00527', 'Mike', 'Paulson', '', 'Active', 'Jack London', '', 'GAME', 'BIZ-00005', "General Manager, Oakland A's & The Oaks", '', 'SPORTS_OVERRIDE', '', '', '', 1, 2000000],
+    ['POP-00611', 'Teo', 'Vance', '', 'Active', 'Fruitvale', '', 'GAME', 'BIZ-00005', "Relief Pitcher, Oakland A's", '', 'SPORTS_OVERRIDE', '', '', '', 3, 400000]
   ];
 }
 let priorCalls = [];
@@ -199,7 +200,7 @@ function run7(entries, rows, weeks) {
     summary: { sportsFeedEntries: entries, sportsWeek: weeks || {}, cycleId: 110 },
     ledger: { headers: H7, rows, dirty: false },
     ss: { getSheetByName: (n) => (n === 'LifeHistory_Log' ? logSheet : null) },
-    config: { cycleCount: 110 }, now: 'NOW', cache: {},
+    config: Object.assign({ cycleCount: 110, postCareerIncomeTier1: 250000, postCareerIncomeTier2: 120000 }, (weeks && weeks.__config) || {}), now: 'NOW', cache: {},
     rng: () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; }
   };
   sandbox.applyGameNightMoments_(ctx);
@@ -234,7 +235,8 @@ assert.strictEqual(vin[c7('RoleType')], "Former Designated Hitter, Oakland A's L
 assert.strictEqual(vin[c7('Status')], 'Active', 'a sports retirement is not a senior retirement');
 assert.strictEqual(vin[c7('StatusStartCycle')], '', 'the health clock is not stamped');
 assert.strictEqual(vin[c7('EmployerBizId')], 'BIZ-00005', 'employer of record kept');
-assert.ok(/ — \[Retirement\] retired from the A's, announced C110$/m.test(vin[c7('LifeHistory')]), vin[c7('LifeHistory')]);
+assert.ok(/ — \[Retirement\] retired from the A's, announced C110 — the playing salary ends; appearances and the name pay \$250,000 a year$/m.test(vin[c7('LifeHistory')]), vin[c7('LifeHistory')]);
+assert.strictEqual(vin[c7('Income')], 250000, 'engine.338: a Tier 1 flip takes the Tier 1 post-career figure');
 assert.deepStrictEqual(r7.rawTags['POP-00001'], ['Sports-Sociability-Up-S|source:sports|feedNamed|event:press-conference|team:A\'s', 'Retirement'],
   'the type line, then the milestone with a BARE log tag the wake loop reads');
 assert.strictEqual(vin[c7('CitizenBio')], "Now: Former Designated Hitter, Oakland A's Legend; retired C110. " + BIO, 'the Now: sentence leads the authored bio');
@@ -257,8 +259,8 @@ assert.strictEqual(sandbox.sportsBioNow_('', 'Former Y; retired', 1), 'Now: Form
 
 // 7c2. who retires (codex F2): a row already off the GAME clock is left alone whatever its key; a GAME row not Active too
 const halfRows = rows7();
-halfRows.push(['POP-00508', 'Freddie', 'Silecki', 'C90 — [Retirement] hung it up', 'Retired', 'Downtown', '', 'ENGINE', '', 'Hall of Famer from old basketball league MUBA', '', 'SPORTS_OVERRIDE', 'Legend of the MUBA.', '', '', 2]);
-halfRows.push(['POP-00018', 'Benji', 'Dillon', '', 'Retired', 'Rockridge', '', 'GAME', 'BIZ-00005', "Starting Pitcher, Oakland A's", '', 'SPORTS_OVERRIDE', '', '', '', 1]);
+halfRows.push(['POP-00508', 'Freddie', 'Silecki', 'C90 — [Retirement] hung it up', 'Retired', 'Downtown', '', 'ENGINE', '', 'Hall of Famer from old basketball league MUBA', '', 'SPORTS_OVERRIDE', 'Legend of the MUBA.', '', '', 2, 70000]);
+halfRows.push(['POP-00018', 'Benji', 'Dillon', '', 'Retired', 'Rockridge', '', 'GAME', 'BIZ-00005', "Starting Pitcher, Oakland A's", '', 'SPORTS_OVERRIDE', '', '', '', 1, 1100000]);
 const r7x = run7([{ eventType: 'player-feature', teamsUsed: "A's", namesUsed: 'Freddie Silecki, Benji Dillon (SP)', eventTrigger: 'retirement' }], halfRows);
 const sil = rowOf(r7x, 'POP-00508'), dil = rowOf(r7x, 'POP-00018');
 assert.deepStrictEqual([sil[c7('ClockMode')], sil[c7('EconomicProfileKey')], sil[c7('RoleType')], sil[c7('CitizenBio')]], ['ENGINE', 'SPORTS_OVERRIDE', 'Hall of Famer from old basketball league MUBA', 'Legend of the MUBA.'], 'the half-state row is untouched');
@@ -266,6 +268,21 @@ assert.deepStrictEqual(r7x.tags['POP-00508'], ['Reputation'], 'the type line onl
 assert.deepStrictEqual([dil[c7('ClockMode')], dil[c7('Status')]], ['GAME', 'Retired'], 'a GAME row already Retired is not retired again');
 assert.deepStrictEqual(r7x.tags['POP-00018'], ['Reputation']);
 assert.ok(r7x.logs.some((m) => /retirement row on Freddie Silecki left alone \(off-clock\)/.test(m)) && r7x.logs.some((m) => /Benji Dillon left alone \(status:retired\)/.test(m)), r7x.logs.join(' / '));
+
+// 7c3. engine.338 — the money after the career: Tier 2 takes the Tier 2 figure; Tier 3 keeps its pay and its line
+// carries no money clause; a Retired/off-clock row's Income is never touched; a missing key throws (ADR-0015)
+assert.strictEqual(sil[c7('Income')], 70000, 'an untouched row keeps its Income');
+const r7m = run7([{ eventType: 'press-conference', teamsUsed: "A's", namesUsed: 'Arturo Ramos (SP), Teo Vance (RP)', eventTrigger: 'retirement' }], rows7());
+const ram = rowOf(r7m, 'POP-00025'), van = rowOf(r7m, 'POP-00611');
+assert.strictEqual(ram[c7('Income')], 120000, 'Tier 2 → postCareerIncomeTier2');
+assert.ok(/pay \$120,000 a year$/m.test(ram[c7('LifeHistory')]), ram[c7('LifeHistory')]);
+assert.strictEqual(van[c7('Income')], 400000, 'Tier 3: the pools\' row, pay untouched');
+assert.ok(/ — \[Retirement\] retired from the A's, announced C110$/m.test(van[c7('LifeHistory')]), 'Tier 3 line carries no money clause: ' + van[c7('LifeHistory')]);
+assert.strictEqual(van[c7('ClockMode')], 'ENGINE', 'the flip itself is the same at every Tier');
+assert.throws(() => run7([{ eventType: 'press-conference', teamsUsed: "A's", namesUsed: 'Vinnie Keane (DH)', eventTrigger: 'retirement' }], rows7(), { __config: { postCareerIncomeTier1: undefined } }),
+  /engine\.338: World_Config postCareerIncomeTier1 missing/, 'a missing key throws, never a silent 0');
+const seeds338 = require('fs').readFileSync(require('path').join(__dirname, '../phase01-config/engine94SheetContract.js'), 'utf8');
+assert.ok(/'postCareerIncomeTier1', 250000/.test(seeds338) && /'postCareerIncomeTier2', 120000/.test(seeds338), 'the seed list carries the builder\'s figures');
 
 // 7d. the gates: an NFL row's retirement retires no one (331's team gate); a typed hot-streak writes no streak line
 const r7c = run7([{ eventType: 'player-feature', teamsUsed: 'NFL', namesUsed: 'Arturo Ramos (SP)', eventTrigger: 'retirement' },

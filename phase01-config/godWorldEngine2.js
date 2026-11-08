@@ -502,6 +502,7 @@ function runWorldCycleLocked_(ss, fire) {
     ensureEngine209Config_(ss);  // engine.209 franchise-weight drift dials, same self-arm contract
     ensureEngine286Config_(ss);  // engine.286 civic role sign / weight odds, same self-arm contract
     ensureEngine276Config_(ss);  // engine.276 debt line, rise/fall rates, drag cap, default chance + mark, same self-arm contract
+    ensureEngine338Config_(ss);  // engine.338 post-career Income by Tier at the sports retirement flip, same self-arm contract
     ensureEngine271Config_(ss);  // engine.271 fine rates and caps, property and business tax rates, tax day, thin-hood floor, same self-arm contract
     ensureEngine290Config_(ss);  // engine.290 transit dials (ridership share, clocks, crew governor seeded 0, chaos train weight), same self-arm contract
     ensureEngine254Config_(ss);  // engine.254 Task 10 hospital talk-back window, band, gain, same self-arm contract

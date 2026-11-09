@@ -123,6 +123,7 @@ Modelled on the C110–C114 ripples (scratch replay, not the engine; no closure 
 
 ## Changelog
 
+- 2026-11-09 (engine-sheet) — C115 live read PASS (Acceptance 5): sports row "sentiment +0.05; game-night +22; game-night-household +1; game-night-texture +33", boom/housing rows per type, moves as ×count.
 - 2026-11-08 (engine-sheet) — Task 5 codex diff review SHIP (no finding); Task 7 PROD stage 45 @180 at 12:42 CST, pull-back byte-identical, live held C114 through the 16-minute watch. Row to live-observing; read at C115.
 - 2026-11-08 (engine-sheet) — Task 6 sandbox PASS: stage 45 @197, C115 + C116, 0 Engine_Errors, every deck row = the candidate's seed (98/98), 31 rows reworded vs the old builder, 0 class changes; bench data back to live C114.
 - 2026-11-08 (engine-sheet) — Tasks 3–4 built: unit table + groups in buildContractSeeds.js, tests §13; replay C110–C114 through the real builder = 53 What, 1 class flip (C114 edition-coverage), 0 transit-word moves. Codex diff review next.

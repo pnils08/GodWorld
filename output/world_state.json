@@ -1,13 +1,10 @@
 {
   "meta": {
     "cycle": 115,
-    "builtAt": "2026-11-09T07:47:14.502Z",
+    "builtAt": "2026-11-09T08:14:43.026Z",
     "sheetId": "1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk",
     "script": "buildWorldState.js v1.0",
-    "notes": [
-      "hoods locally re-folded from corrected C115 texture; normal builder OAuth read unavailable",
-      "removed generated texture footer from East Oakland wake input"
-    ]
+    "notes": []
   },
   "orientation": {
     "cycle": 115,
@@ -975,7 +972,26 @@
       }
     ],
     "statusAlerts": [],
-    "pendingVotes": [],
+    "pendingVotes": [
+      {
+        "name": "Ivy Hill Community Support Initiative",
+        "initiativeId": "INIT-014",
+        "type": "vote",
+        "status": "pending-vote",
+        "budget": "$2.5M",
+        "voteRequirement": "",
+        "voteCycle": "116",
+        "projection": "",
+        "leadFaction": "IND",
+        "oppositionFaction": "",
+        "swingVoter": "",
+        "swingVoter2": "",
+        "swingVoter2Lean": "",
+        "policyDomain": "safety",
+        "affectedNeighborhoods": "Ivy Hill",
+        "notes": "Ivy Hill is showing signs of decay momentum and increased crime index, requiring immediate community support and targeted investment."
+      }
+    ],
     "recentOutcomes": [
       {
         "name": "West Oakland Stabilization Fund",
@@ -989,9 +1005,9 @@
         "affectedNeighborhoods": "West Oakland",
         "policyDomain": "economic",
         "implementationPhase": "disbursement-active",
-        "milestoneNotes": "C107: Downtown canvass deployment authorized alongside a disbursement review.\nC108 conversion: passed C78 before the mayoral-action step existed; the mayor's own bill, recorded signed at C78.\nC108 conversion: Stage Standing — Stabilization Fund, disbursement-active since C78 (economic — not playable, no Delivering gate yet; the untended clock still runs). | C108 retag economic→housing (ruled C108 — the Fund is a household anti-displacement fund in canon; engine.255 wires it as the first budgeted disbursement).\nC108: scope recorded as chartered — stabilization grants for long-tenure West Oakland residents priced out as the flats built out (the remnant the charter named), not hood-wide relief; 47 checks (~$4.2M) disbursed under Deputy Mayor Okoro’s authority C84–C90; authorization $28M, ~$23.8M remaining.\nC108: retag reversed — housing→economic (the C108 retag was engine-sheet error; the Fund is not a housing fund).\nC109 scope correction: the Fund serves West Oakland businesses and residents. The C107 'Downtown canvass' line and the C108 'residents only' reading are superseded.\nC109: tranche $400,000 released in West Oakland (2 household grants, $81,188). Downtown is outside the Fund's area — that is INIT-008, proposed, not voted.\nC110: Disbursement $400K approved; 23-day avg processing time achieved\nC111: Disbursement $400K approved; 23-day processing standard maintained.\nC112: Disbursement $400K approved; 23-day processing standard maintained; cumulative $5M+ disbursed\nC113: C112 audit published; $400K approved with charter scope preservation directive\nC114: $400K executed under the 23-day standard; closeout publication and charter renewal drafting directed with West Oakland business-and-resident scope intact.",
-        "nextScheduledAction": "Publish C114 closeout and complete charter renewal draft",
-        "nextActionCycle": 115
+        "milestoneNotes": "C107: Downtown canvass deployment authorized alongside a disbursement review.\nC108 conversion: passed C78 before the mayoral-action step existed; the mayor's own bill, recorded signed at C78.\nC108 conversion: Stage Standing — Stabilization Fund, disbursement-active since C78 (economic — not playable, no Delivering gate yet; the untended clock still runs). | C108 retag economic→housing (ruled C108 — the Fund is a household anti-displacement fund in canon; engine.255 wires it as the first budgeted disbursement).\nC108: scope recorded as chartered — stabilization grants for long-tenure West Oakland residents priced out as the flats built out (the remnant the charter named), not hood-wide relief; 47 checks (~$4.2M) disbursed under Deputy Mayor Okoro’s authority C84–C90; authorization $28M, ~$23.8M remaining.\nC108: retag reversed — housing→economic (the C108 retag was engine-sheet error; the Fund is not a housing fund).\nC109 scope correction: the Fund serves West Oakland businesses and residents. The C107 'Downtown canvass' line and the C108 'residents only' reading are superseded.\nC109: tranche $400,000 released in West Oakland (2 household grants, $81,188). Downtown is outside the Fund's area — that is INIT-008, proposed, not voted.\nC110: Disbursement $400K approved; 23-day avg processing time achieved\nC111: Disbursement $400K approved; 23-day processing standard maintained.\nC112: Disbursement $400K approved; 23-day processing standard maintained; cumulative $5M+ disbursed\nC113: C112 audit published; $400K approved with charter scope preservation directive\nC114: $400K executed under the 23-day standard; closeout publication and charter renewal drafting directed with West Oakland business-and-resident scope intact.\nC115: C114 closeout publication ordered and charter renewal ordinance transmitted; business-and-resident scope and 23-day standard preserved pending council action.",
+        "nextScheduledAction": "Council consideration of the charter renewal ordinance",
+        "nextActionCycle": 116
       },
       {
         "name": "Oakland Alternative Response Initiative",
@@ -1005,9 +1021,9 @@
         "affectedNeighborhoods": "West Oakland, Fruitvale, East Oakland",
         "policyDomain": "safety",
         "implementationPhase": "dispatch-live",
-        "milestoneNotes": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.\nC108 conversion: Stage Standing — OARI, dispatch-live, signed C82 (safety — not playable until the safety lever lands; the untended clock still runs).\nC109: Expanded to District 1 with evaluation metrics\nC112: Progress report accepted; D3 condition added for district-level data breakdown and community briefing before expansion\nC113: Progress report published; D3 East Oakland briefing directed with Fruitvale data and Baylight feasibility review\nC114: D3 East Oakland briefing and D5 audit directed; Fruitvale data and Baylight feasibility review docketed, with expansion held until after briefing.",
-        "nextScheduledAction": "Execute and document D3 East Oakland community briefing",
-        "nextActionCycle": 115
+        "milestoneNotes": "C107: East Oakland dispatch protocol deployment authorized; District 1 evaluation continues.\nC108 conversion: Stage Standing — OARI, dispatch-live, signed C82 (safety — not playable until the safety lever lands; the untended clock still runs).\nC109: Expanded to District 1 with evaluation metrics\nC112: Progress report accepted; D3 condition added for district-level data breakdown and community briefing before expansion\nC113: Progress report published; D3 East Oakland briefing directed with Fruitvale data and Baylight feasibility review\nC114: D3 East Oakland briefing and D5 audit directed; Fruitvale data and Baylight feasibility review docketed, with expansion held until after briefing.\nC115: D3 East Oakland briefing execution and documentation required; expansion held, with D5 audit and Baylight feasibility review still incomplete.",
+        "nextScheduledAction": "Execute and publish the D3 briefing record with district-level and Fruitvale data",
+        "nextActionCycle": 116
       },
       {
         "name": "Fruitvale Transit Hub Phase II — Visioning",
@@ -1021,9 +1037,9 @@
         "affectedNeighborhoods": "Fruitvale",
         "policyDomain": "transit",
         "implementationPhase": "design-phase",
-        "milestoneNotes": "C107: Merchant covenants executed, design RFP published with community-informed requirements\nC108 conversion: no council passage on record (VoteCycle 94, Outcome COMPLETED, Status visioning-complete) — enters petition-pending; history above kept, VoteCycle cleared.\nC108 conversion: Stage Proposed — Fruitvale transit hub never had a council vote: petition-pending, history kept, vote via petition band or a call-vote move.\nC109: Mayer & Associates contracted with community oversight provisions\nC110: Preliminary schematics review authorized; Mayer & Associates contracted with community oversight\nC111: Advanced from visioning to design-phase; schematics delivery mandated Cycle 114.\nC111 correction: the council authorized Phase II at C86 ($230M budget, visioning framework binding, design consultant RFP to follow; projected 6-3). The C108 \"no council passage on record\" line was wrong. Vote restored at C86; no stage.\nC114: Preliminary schematics delivery and documented Fruitvale community review directed; further design advancement awaits a public comment-and-response record.",
-        "nextScheduledAction": "Deliver schematics and conduct documented Fruitvale community review",
-        "nextActionCycle": 115
+        "milestoneNotes": "C107: Merchant covenants executed, design RFP published with community-informed requirements\nC108 conversion: no council passage on record (VoteCycle 94, Outcome COMPLETED, Status visioning-complete) — enters petition-pending; history above kept, VoteCycle cleared.\nC108 conversion: Stage Proposed — Fruitvale transit hub never had a council vote: petition-pending, history kept, vote via petition band or a call-vote move.\nC109: Mayer & Associates contracted with community oversight provisions\nC110: Preliminary schematics review authorized; Mayer & Associates contracted with community oversight\nC111: Advanced from visioning to design-phase; schematics delivery mandated Cycle 114.\nC111 correction: the council authorized Phase II at C86 ($230M budget, visioning framework binding, design consultant RFP to follow; projected 6-3). The C108 \"no council passage on record\" line was wrong. Vote restored at C86; no stage.\nC114: Preliminary schematics delivery and documented Fruitvale community review directed; further design advancement awaits a public comment-and-response record.\nC115: Schematics delivery and documented Fruitvale review required; further design advancement awaits a public comment-and-response record.",
+        "nextScheduledAction": "Deliver schematics and publish the documented Fruitvale comment-and-response record",
+        "nextActionCycle": 116
       },
       {
         "name": "Temescal Community Health Center",
@@ -1037,8 +1053,8 @@
         "affectedNeighborhoods": "Temescal",
         "policyDomain": "health",
         "implementationPhase": "operational",
-        "milestoneNotes": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule\nC108 conversion: passed C80 before the mayoral-action step existed; the mayor's own bill, recorded signed at C80.\nC108 conversion: Stage Standing — Temescal health center, construction-active since C80 (health — playable; delivers once a treating phase moves hood Sick against its conversion baseline).\nC109: opened — construction complete, open to the public.\nC109: Opened ahead of schedule, $1.2M under budget\nC111: Implemented pre-opening clinical intake workflow audits and expenditure reconciliations per D7 directive\nC112: Adopted D7 utilization audit benchmarks as standing procedure; first reporting cycle scheduled with public-data commitment.\nC113: First utilization audit filed to D7 and public portal",
-        "nextScheduledAction": "Second utilization audit",
+        "milestoneNotes": "C107: MEP rough-ins completed, utility inspections certified ahead of schedule\nC108 conversion: passed C80 before the mayoral-action step existed; the mayor's own bill, recorded signed at C80.\nC108 conversion: Stage Standing — Temescal health center, construction-active since C80 (health — playable; delivers once a treating phase moves hood Sick against its conversion baseline).\nC109: opened — construction complete, open to the public.\nC109: Opened ahead of schedule, $1.2M under budget\nC111: Implemented pre-opening clinical intake workflow audits and expenditure reconciliations per D7 directive\nC112: Adopted D7 utilization audit benchmarks as standing procedure; first reporting cycle scheduled with public-data commitment.\nC113: First utilization audit filed to D7 and public portal\nC115: Q2 intake audit filed as standing schedule to HCAI + Council Clerk; merchant-clinic verification walkthrough at Telegraph & 47th institutionalized.",
+        "nextScheduledAction": "Q3 intake audit filing + recurring merchant verification walkthrough",
         "nextActionCycle": 116
       },
       {
@@ -1053,9 +1069,9 @@
         "affectedNeighborhoods": "Jack London, Downtown",
         "policyDomain": "sports",
         "implementationPhase": "construction-active",
-        "milestoneNotes": "C107: Construction contracts executed; site preparation mobilization begins\nC109: Phase II remediation commenced with independent oversight\nC110: Soil test verification complete; Phase II remediation proceeds with independent oversight\nC111: Construction milestone review scheduled for Cycle 115; remediation proceeds with oversight.\nC112: Independent oversight verified; remediation continues; construction milestone review held for C115\nC113: Phase II remediation on schedule with independent oversight; 48hr construction hotline live; dust control active on haul routes; Jack London workforce coordination meeting set pre-C115 review.\nC114: C115 evidence file assembled — independent remediation verification, hotline/dust records, Jack London workforce results; no milestone declared passed",
-        "nextScheduledAction": "C115 construction milestone review against the assembled evidence file",
-        "nextActionCycle": 115
+        "milestoneNotes": "C107: Construction contracts executed; site preparation mobilization begins\nC109: Phase II remediation commenced with independent oversight\nC110: Soil test verification complete; Phase II remediation proceeds with independent oversight\nC111: Construction milestone review scheduled for Cycle 115; remediation proceeds with oversight.\nC112: Independent oversight verified; remediation continues; construction milestone review held for C115\nC113: Phase II remediation on schedule with independent oversight; 48hr construction hotline live; dust control active on haul routes; Jack London workforce coordination meeting set pre-C115 review.\nC114: C115 evidence file assembled — independent remediation verification, hotline/dust records, Jack London workforce results; no milestone declared passed\nC115: Evidence-file milestone review ordered; no construction milestone pass declared, and remediation, hotline, dust-control, and workforce oversight continue.",
+        "nextScheduledAction": "Publish the C115 evidence review and milestone determination",
+        "nextActionCycle": 116
       },
       {
         "name": "Oakland Youth Apprenticeship Pipeline",
@@ -1069,9 +1085,9 @@
         "affectedNeighborhoods": "West Oakland, East Oakland, Fruitvale",
         "policyDomain": "workforce",
         "implementationPhase": "implementation-active",
-        "milestoneNotes": "C107: Public town hall enrollment event convened; applicant intake operational with cohort placement targets established.\nC111: First cohort placement report mandated for Cycle 112; implementation accountability enforced.\nC113: First cohort placement report published; accountability review directed\nC114: Placement-gap analysis and adjustment plan directed for publication, with explicit West Oakland and Fruitvale review.",
-        "nextScheduledAction": "Publish placement-gap analysis and program adjustment plan",
-        "nextActionCycle": 115
+        "milestoneNotes": "C107: Public town hall enrollment event convened; applicant intake operational with cohort placement targets established.\nC111: First cohort placement report mandated for Cycle 112; implementation accountability enforced.\nC113: First cohort placement report published; accountability review directed\nC114: Placement-gap analysis and adjustment plan directed for publication, with explicit West Oakland and Fruitvale review.\nC115: Placement-gap analysis and adjustment plan required for publication with explicit West Oakland and Fruitvale review; implementation continues.",
+        "nextScheduledAction": "Publish the placement-gap analysis and program adjustment plan",
+        "nextActionCycle": 116
       },
       {
         "name": "Downtown Economic Revitalization",
@@ -1096,14 +1112,14 @@
         "outcome": "FAILED",
         "budget": "$2.5M",
         "voteRequirement": "",
-        "voteCycle": "",
+        "voteCycle": "116",
         "voteBreakdown": "Proposed by Leonard Tran in C109 — neighborhood math-imbalance flag on Grand Lake retail.\nCycle 113: Rejected.",
         "affectedNeighborhoods": "Grand Lake",
         "policyDomain": "economic",
-        "implementationPhase": "vote-ready",
-        "milestoneNotes": "C111: Referred to Economic Development Committee with mandatory milestone reporting and audit criteria.\nC112: Advanced to Economic Development Committee with mandatory milestones and audit protocols per Chen/Vega conditions\nC113: Advanced to full council with Chen/Vega milestone and audit conditions\nC114: Mayor backed YES and requested a recorded full-council decision with all Chen-Vega milestone and audit conditions intact.",
-        "nextScheduledAction": "Recorded full-council decision",
-        "nextActionCycle": 115
+        "implementationPhase": "vote-scheduled",
+        "milestoneNotes": "C111: Referred to Economic Development Committee with mandatory milestone reporting and audit criteria.\nC112: Advanced to Economic Development Committee with mandatory milestones and audit protocols per Chen/Vega conditions\nC113: Advanced to full council with Chen/Vega milestone and audit conditions\nC114: Mayor backed YES and requested a recorded full-council decision with all Chen-Vega milestone and audit conditions intact.\nC115: Recorded full-council decision scheduled with Chen-Vega milestone and audit conditions intact; no vote outcome claimed.",
+        "nextScheduledAction": "Recorded full-council vote on INIT-009",
+        "nextActionCycle": 116
       },
       {
         "name": "West Oakland Tenant Defense Fund",
@@ -1116,10 +1132,10 @@
         "voteBreakdown": "Proposed by Denise Carter in C109 — eviction filings outpacing Stabilization Fund relief.\nCycle 112: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Leonard Tran voted yes. Ramon Vega voted yes.\nCycle 113: Rejected.",
         "affectedNeighborhoods": "West Oakland",
         "policyDomain": "economic",
-        "implementationPhase": "announced",
-        "milestoneNotes": "C111: Referred to Housing and Community Development Committee with legal support analysis.\nC114: Committee directed to publish its legal-support analysis and record a decision on the $4.2M tenant-defense proposal.",
-        "nextScheduledAction": "Published analysis and recorded committee decision",
-        "nextActionCycle": 115
+        "implementationPhase": "vote-scheduled",
+        "milestoneNotes": "C111: Referred to Housing and Community Development Committee with legal support analysis.\nC114: Committee directed to publish its legal-support analysis and record a decision on the $4.2M tenant-defense proposal.\nC115: Recorded committee decision scheduled; legal-support analysis must be published before the vote, with no outcome claimed in advance.",
+        "nextScheduledAction": "Publish the analysis and record the committee decision",
+        "nextActionCycle": 116
       },
       {
         "name": "Ivy Hill Revitalization Initiative",
@@ -1172,28 +1188,28 @@
     ]
   },
   "hoods": {
-    "Downtown": "The streets feel busier than ever, with new faces moving in from other parts of the city. Presti Accounting and the Oakland Alternative Response Initiative both had familiar visitors this week.",
-    "Temescal": "The Temescal Community Health Center is operating this week.",
-    "Laurel": "The neighborhood feels quieter lately, with fewer people walking the streets and storefronts less crowded than usual.",
-    "West Oakland": "The West Oakland Stabilization Fund is making an impact, with neighbors receiving support. New households are settling in from Uptown, Temescal, and Laurel.",
-    "Fruitvale": "Fruitvale Transit Hub Phase II remains in design. The Fruitvale Community Bloom Festival took place this week.",
-    "Jack London": "Papers were served at a shop counter in Jack London, bringing a lawsuit and legal costs for the shop.",
-    "Rockridge": "A local resident is gaining recognition, their name popping up in conversations around the city.",
-    "Adams Point": "The interfaith prayer breakfast drew leaders together, and Vernon Street Market had a familiar visitor.",
-    "Grand Lake": "Commercial Stabilization for Grand Lake reached the vote-ready phase this week.",
+    "Downtown": "A prison ministry team visits the facility, and more people are moving onto the block from other neighborhoods. Rowan Pierce and Vinnie Keane are spotted at local businesses.",
+    "Temescal": "The Temescal Community Health Center is now up and running, serving the neighborhood.",
+    "Laurel": "Foot traffic is down, and storefronts are quieter compared to the rest of the city. Someone from the neighborhood keeps coming up in conversations around town.",
+    "West Oakland": "The West Oakland Stabilization Fund is paying out to neighbors who applied, and new households are moving onto the block from various parts of the city.",
+    "Fruitvale": "The Fruitvale Transit Hub Phase II is in the design phase, and the Fruitvale Community Bloom Festival draws crowds to the neighborhood.",
+    "Jack London": "Papers are served at a local counter, signaling a lawsuit that the shop never budgeted for. The neighborhood remains a sought-after block.",
+    "Rockridge": "A neighbor is assumed to have some level of fame, and someone from the neighborhood keeps coming up in conversations around the city.",
+    "Adams Point": "An interfaith prayer breakfast brings leaders together, and Rico Valez is spotted at Vernon Street Market.",
+    "Grand Lake": "Commercial Stabilization for Grand Lake is headed for a council vote, and Port Grind remains a popular spot.",
     "Piedmont Ave": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "Chinatown": "A job training workshop began a new session in Chinatown.",
+    "Chinatown": "A new session of the job training workshop begins, and someone new moves onto the block from Uptown.",
     "Brooklyn": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "Eastlake": "Eastlake Kitchen is among the neighborhood's places to eat this week.",
-    "Glenview": "The Glenview Civic Response Meeting took place this week.",
+    "Eastlake": "Eastlake Kitchen continues to serve the neighborhood, maintaining its mixed character.",
+    "Glenview": "The Glenview Civic Response Meeting addresses public works issues, and the Civic Watch Patio remains a local gathering spot.",
     "Dimond": "A quiet week — nothing much out of the ordinary around the neighborhood.",
     "Ivy Hill": "A quiet week — nothing much out of the ordinary around the neighborhood.",
     "San Antonio": "A quiet week — nothing much out of the ordinary around the neighborhood.",
-    "KONO": "KONO's retail activity rose, events drew crowds, and more people moved into the neighborhood.",
-    "Lake Merritt": "An after-school tutoring program expanded in Lake Merritt. The Lake Merritt Blossom Walk took place this week.",
-    "Uptown": "The neighborhood remains a hotspot, with rents climbing and some residents considering a move for better affordability.",
-    "Baylight District": "Marine Systems is adjusting after losing two employees, a quiet shift in the bustling waterfront district.",
-    "East Oakland": "An East Oakland seniors lunch program marked a milestone this week."
+    "KONO": "Retail is busy, events are drawing crowds, and new households are moving into the neighborhood from various parts of the city.",
+    "Lake Merritt": "The after-school tutoring program expands, and the Lake Merritt Blossom Walk is a highlight of the week.",
+    "Uptown": "The Uptown boom continues, with rents climbing and households stretching to stay. Some residents are planning to leave for better income fits.",
+    "Baylight District": "Marine Systems loses two employees, marking a quiet week in the neighborhood.",
+    "East Oakland": "The seniors lunch program marks a milestone at Masjid An-Nur Oakland."
   },
   "pointers": {
     "worldSummary": "output/world_summary_c115.md",

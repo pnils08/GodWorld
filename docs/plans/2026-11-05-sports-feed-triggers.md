@@ -272,6 +272,7 @@ All sport-neutral (the Oaks ride these pools too), they/them only.
 
 ## Changelog
 
+- 2026-11-09 (engine-sheet) — C115 live read: Acceptance 14 PASS (3 SPORTS pitches = retirement, community-outreach, big-win; Oaks W4 under the bar, no hot pitch); P1 PASS (3 vs 2/2/2). P3 FAILS: 142 signed fan lines vs 37–74 — builder's call (G-EC45).
 - 2026-11-07 (engine-sheet) — Q5 shipped as engine.335, PROD @177 (stage 41); this row's C115 read unchanged (Acceptance 14, P1, P3).
 - 2026-11-07 (engine-sheet) — Bench 3 PASS on `f82f19c72`; PROD @174 = stage 38. Dashboard restarted; its sports page is down on a live roster header (G-ES6). Waiting: builder's validation re-run, C115 read.
 - 2026-11-07 (engine-sheet) — Codex re-review HOLD (round cap): wrong-team night (fans + households), Ripple repeats and the bench reader fixed in place (A19-A21); live volume to bench 3 + first fire (P3). Q5 to the builder.

@@ -1,6 +1,6 @@
 # /run-cycle Gap Log — Cycle 115
 
-**Generated:** 2026-11-09T07:39:29.157Z
+**Generated:** 2026-11-09T08:14:43.901Z
 **Script:** `scripts/engineCycleAudit.js` (mechanical V1)
 **Plan:** `docs/archive/plans/2026-05-03-run-cycle-gap-log-surface.md`
 
@@ -227,12 +227,6 @@
 ## LEG: /city-hall (G-R)
 
 - G-R (AUTO): 2 voice(s) pending this window: council_d3, council_d1
-
-
-## Judgment-layer entries (engine-sheet appends here)
-
-*Coder voice: terse, mechanical, commit-message style. Tag each entry `[judgment]`. Use G-EC{N+} numbering continuing from the mechanical pass.*
-
 ### G-EC37 — C115 content drafter wrote ten semantically unsupported lines [judgment] [content-ledger] [MED]
 
 - **Source:** `Event_Content_Ledger` rows 983–992 after `node scripts/draftContentRows.js --cycle 115 --apply`; `output/beats/Story_Seed_Deck.jsonl` C115.
@@ -265,3 +259,20 @@
 - **Diagnosis:** `split(/^### /m)` consumes the final hood section through end of file, including the generated `---` footer and metadata. `loadNeighborhoodTexture` can surface that metadata in a citizen wake.
 - **Repair:** Moved the C115 artifact provenance note into the preamble and removed the footer; locally re-folded all 22 hood blocks into `world_state.json`, readback `footerLeak=false`, canon current.
 - **Status:** CURRENT C115 ARTIFACT REPAIRED; parser code still needs a footer boundary.
+
+
+## Judgment-layer entries (engine-sheet appends here)
+
+*Coder voice: terse, mechanical, commit-message style. Tag each entry `[judgment]`. Use G-EC{N+} numbering continuing from the mechanical pass.*
+
+### G-EC42 — C115 chain re-run after the fire through the step runner [judgment] [process] [MED]
+Steps 5.5 → 6 re-run in order 2026-11-09 via scripts/runCycle.js (governance.59); 1–2.5 recorded from codex's pre-fire run, 3 confirmed on live, 3.5–5.56 verified from fire-time output and not re-run (a re-run reads the sheet after the civic chain wrote). Record: output/run-cycle/c115.json.
+
+### G-EC43 — Texture re-run still names a venue the world does not hold [judgment] [texture] [MED]
+Fresh script output replaced the hand-corrected file. 21/22 hood blocks trace to C115 seeds or identity; Glenview "Civic Watch Patio" is in no tab. Seed sightings carry citizen names into wake text (Rowan Pierce, Vinnie Keane, Rico Valez). pipeline.107.
+
+### G-EC44 — Drafter re-run: transit-hub construction again; one invented street detail [judgment] [content-ledger] [MED]
+10 rows written Active=yes. 8 trace to C115 facts. "a commuter glancing at the Fruitvale Transit Hub construction site" contradicts the design-phase initiative (same miss as the erased batch); "a pothole on Telegraph" is in no tab. Kill switch is the builder's. pipeline.107.
+
+### G-EC45 — Signed fan lines run at about twice the pre-engine.331 volume [judgment] [sports] [MED]
+LifeHistory_Log Sports-Fandom-Up-S: C112 84, C113 99, C114 127, C115 142; engine.331 P3 bar was C105–C110 37–74. Builder's call (engine.331 row to needs-info). Feed word "roster-decision" (A's catcher rumor) is on no pitch route — no pitch, as coded.

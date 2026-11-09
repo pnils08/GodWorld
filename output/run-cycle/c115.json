@@ -1,0 +1,114 @@
+{
+  "cycle": 115,
+  "note": "Recorded 2026-11-09 by engine-sheet. Steps 1-2.5 ran before the fire (codex, 00:54-00:56 CST). Steps 3.5-5.56 are the fire-time outputs, checked against their gates and not re-run: a re-run now would read the sheet after the city hall chain wrote to it and replace the fire-time picture (audit baseline, beat dump, world-data docs).",
+  "steps": {
+    "1": {
+      "ok": true,
+      "outcome": "verified",
+      "detail": "READY (with warnings), exit 0 — codex 00:54 CST, before the fire",
+      "at": "2026-11-09T08:11:44.175Z"
+    },
+    "2": {
+      "ok": true,
+      "outcome": "verified",
+      "detail": "SAFE TO RUN, exit 0 — codex 00:54 CST, before the fire",
+      "at": "2026-11-09T08:11:44.175Z"
+    },
+    "3": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "Neighborhood_Map max Cycle 115; Engine_Errors 4 rows",
+      "at": "2026-11-09T08:11:48.825Z"
+    },
+    "4": {
+      "ok": true,
+      "outcome": "verified",
+      "detail": "engine_audit_c115.json cycle 115, 11 patterns; baseline_briefs_c115.json present: true",
+      "at": "2026-11-09T08:11:44.175Z"
+    },
+    "5": {
+      "ok": true,
+      "outcome": "verified",
+      "detail": "world_summary_c115.md + desk_signal_c115.json present; world-data ids QsJqgfzUb59mnVXU6VnDep (wd-summary), yv3k7fVahiGQFdWDPwU3sq (wd-snapshot) — codex 01:12 CST",
+      "at": "2026-11-09T08:11:44.175Z"
+    },
+    "6": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "32 mechanical entries (0 HIGH / 17 MED / 14 LOW)",
+      "at": "2026-11-09T08:14:43.932Z"
+    },
+    "2.5": {
+      "ok": true,
+      "outcome": "verified",
+      "detail": "hand-write-check C114: CLEAN — codex 00:55 CST, before the fire",
+      "at": "2026-11-09T08:11:44.175Z"
+    },
+    "3.5": {
+      "ok": true,
+      "outcome": "verified",
+      "detail": "execution_log_c115.txt: Execution started … Cycle completed",
+      "at": "2026-11-09T08:11:44.175Z"
+    },
+    "4.1": {
+      "ok": true,
+      "outcome": "verified",
+      "detail": "engine_review_c115.md newer than the audit: true",
+      "at": "2026-11-09T08:11:44.175Z"
+    },
+    "5.56": {
+      "ok": true,
+      "outcome": "verified",
+      "detail": "ledger snapshot C115; beats C115 prev C114",
+      "at": "2026-11-09T08:11:44.176Z"
+    },
+    "5.5": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "neighborhood_texture_c115.md",
+      "at": "2026-11-09T08:12:39.564Z"
+    },
+    "5.55": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "4 files at c115",
+      "at": "2026-11-09T08:13:12.916Z"
+    },
+    "5.58": {
+      "ok": true,
+      "outcome": "journal",
+      "detail": "journal written, keys match",
+      "at": "2026-11-09T08:13:13.098Z"
+    },
+    "5.6": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "10 rows written + verified",
+      "at": "2026-11-09T08:14:04.474Z"
+    },
+    "5.7": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "initiative_tracker.json regenerated",
+      "at": "2026-11-09T08:14:37.603Z"
+    },
+    "5.8": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "baseContext.cycle 115",
+      "at": "2026-11-09T08:14:40.728Z"
+    },
+    "5.85": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "canon current",
+      "at": "2026-11-09T08:14:43.065Z"
+    },
+    "6.1": {
+      "ok": true,
+      "outcome": "pass",
+      "detail": "judgment entries in; 0 HIGH; 0 reads owed at C115",
+      "at": "2026-11-09T08:20:11.798Z"
+    }
+  }
+}

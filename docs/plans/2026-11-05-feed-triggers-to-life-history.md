@@ -199,6 +199,7 @@ Injury from the sports intake (the builder's input): the dashboard roster `injur
 
 ## Changelog
 
+- 2026-11-09 (engine-sheet) — Task 5 C115 live read: Vinnie ENGINE / Active / Tier 1 / Former Designated Hitter, Oakland A's Legend; Retirement log row; CitizenBio leads "Now: … retired C115"; "A's player retires" pitch. Owed wake not yet logged (next wake 07:30 CST) — read C116 Sun 2026-11-15.
 - 2026-11-07 (338 opened) — engine.338 has its own plan ([[2026-11-07-former-player-next-chapter]]); engine.337 folded there (key inert on a Retired row). This row to live-observing: Task 5 (C115 read) is all that is left.
 - 2026-11-07 (next row) — builder opened the former player's next chapter (UNI / ENGINE row, the key, career choices for the cron); code read: no engine path reaches an Active+ENGINE Tier-1 row; filed engine.338 `ready`, taken in a new session after the C115 read.
 - 2026-11-07 (rulings) — builder ruled engine.336's scope (a `Now:` line = a ledger cell changed: wedding, birth, job change, promotion; lines stack atop the minted prose) → row `ready`; C8 ruled: the dropdown word is the "current" switch, the follow-on withdrawn.

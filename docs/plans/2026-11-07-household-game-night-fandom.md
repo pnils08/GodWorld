@@ -94,6 +94,7 @@ pointers:
 
 ## Changelog
 
+- 2026-11-09 (engine-sheet) — C115 live read PASS (Acceptance 7): Cathy Skeet POP-00308 Household-GameNight-Win, her only fandom input; fandom mood 0.9 → ×0.9 = 0.81 + room-scaled 0.9838 = 1.7938, streak 1 → 2 — matches the ledger to 4 places.
 - 2026-11-07 (engine-sheet) — PROD @177 = stage 41 (`3184f9f50`), 16-minute watch clean. Live read: the first Cycle with a signed line, in DialState.
 - 2026-11-07 (engine-sheet) — Bench @191: C115 loss night `-Loss`, the citizen's only fandom input, mood 0 → −1; C116 win night `-Win`, settle + room-scaled +1 hardened a 3-streak, base fandom 50 → 51.03. Acceptance 1, 2, 6 met on the bench.
 - 2026-11-07 (engine-sheet) — Codex review SHIP-WITH-FIXES: Acceptance 7 reads the resolver input and the DialState transition, not a ±1 TraitProfile move; reader inventory corrected (A1–A4). Task 1 done `3184f9f50`.

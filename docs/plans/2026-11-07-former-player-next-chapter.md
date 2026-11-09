@@ -180,6 +180,7 @@ Categories are existing ones on purpose (agy F1): a new `Sports` category would 
 
 ## Changelog
 
+- 2026-11-09 (engine-sheet) — C115 live read, Acceptance 4: Income 1,500,000 → 250,000 (Tier 1), the Retirement line names it. Money step: NetWorth +4,858 across C114–C115; C114 alone is not on disk. Task 6 question path still waits on his first question row.
 - 2026-11-08 (research-build) — **LIVE PROD @179 = stage 44 (`e078c8b33`)**: Tasks 2b–2d + 3; two benches PASS; live catalog +6; dashboard restarted. Row → live-observing; C115 reads Acceptance 4; Task 6 waits on the builder's first `question` row.
 - 2026-11-08 (research-build) — codex re-review (round cap): F1 narrowed → academy gate 4; R1 → an answered question is not re-asked; R2 → the ledger line lands first, read back; F2 (dashboard) recorded. Node files only; stage 44 unchanged.
 - 2026-11-08 (research-build) — codex HOLD on `506ca6b28` folded (F1–F3, F5–F10; F4 recorded) + slashed-title aliases from the bench's dry wake. Bench on `506ca6b28`: fires 1–3 PASS, 25/25 door checks (DEPLOY_HISTORY §Current sandbox).

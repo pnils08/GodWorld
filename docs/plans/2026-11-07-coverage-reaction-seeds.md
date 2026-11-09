@@ -110,6 +110,7 @@ Correction given to the builder the same session: the questions said a rating is
 
 ## Changelog
 
+- 2026-11-09 (engine-sheet) — C115 live read PASS: Acceptance 1 (INFRASTRUCTURE −3 → civic major, COMMUNITY +3 → culture major, Magnitude = rating, Why names tone/count/reporter) and 4 (one coverage-reaction ripple each; edition-coverage rows still land).
 - 2026-11-07 (engine-sheet) — The C114 Saturday ratings hold two at ±3 (INFRASTRUCTURE −3, COMMUNITY +3): C115 is the live read. G-ES8 traced inert on live (Current state). engine.335 stacked on PROD @177 (no file overlap).
 - 2026-11-07 (engine-sheet) — Bench run 2 on the fold (@189) PASS, Acceptance 1-7; `npm test` 321/321; PROD @176 = stage 40. Live read (Acceptance 8) open.
 - 2026-11-07 (engine-sheet) — Bench run 1 (pre-fold, @188) PASS; codex re-review of the fold SHIP; S202 carry ceiling recorded (A6).

@@ -1,42 +1,42 @@
 # Neighborhood Texture — Cycle 115
 
-_Lived-particulars digest (research.19 T2). What a resident would notice this week. Wake-input only — perception, never published. No metrics, no real names. Quiet-week line = no engine signal for that hood (not invented absence). Generated from C115 sources; ten hood blocks were corrected against the source seeds after generation._
+_Lived-particulars digest (research.19 T2). What a resident would notice this week. Wake-input only — perception, never published. No metrics, no real names. Quiet-week line = no engine signal for that hood (not invented absence)._
 
 ### Downtown
 
-The streets feel busier than ever, with new faces moving in from other parts of the city. Presti Accounting and the Oakland Alternative Response Initiative both had familiar visitors this week.
+A prison ministry team visits the facility, and more people are moving onto the block from other neighborhoods. Rowan Pierce and Vinnie Keane are spotted at local businesses.
 
 ### Temescal
 
-The Temescal Community Health Center is operating this week.
+The Temescal Community Health Center is now up and running, serving the neighborhood.
 
 ### Laurel
 
-The neighborhood feels quieter lately, with fewer people walking the streets and storefronts less crowded than usual.
+Foot traffic is down, and storefronts are quieter compared to the rest of the city. Someone from the neighborhood keeps coming up in conversations around town.
 
 ### West Oakland
 
-The West Oakland Stabilization Fund is making an impact, with neighbors receiving support. New households are settling in from Uptown, Temescal, and Laurel.
+The West Oakland Stabilization Fund is paying out to neighbors who applied, and new households are moving onto the block from various parts of the city.
 
 ### Fruitvale
 
-Fruitvale Transit Hub Phase II remains in design. The Fruitvale Community Bloom Festival took place this week.
+The Fruitvale Transit Hub Phase II is in the design phase, and the Fruitvale Community Bloom Festival draws crowds to the neighborhood.
 
 ### Jack London
 
-Papers were served at a shop counter in Jack London, bringing a lawsuit and legal costs for the shop.
+Papers are served at a local counter, signaling a lawsuit that the shop never budgeted for. The neighborhood remains a sought-after block.
 
 ### Rockridge
 
-A local resident is gaining recognition, their name popping up in conversations around the city.
+A neighbor is assumed to have some level of fame, and someone from the neighborhood keeps coming up in conversations around the city.
 
 ### Adams Point
 
-The interfaith prayer breakfast drew leaders together, and Vernon Street Market had a familiar visitor.
+An interfaith prayer breakfast brings leaders together, and Rico Valez is spotted at Vernon Street Market.
 
 ### Grand Lake
 
-Commercial Stabilization for Grand Lake reached the vote-ready phase this week.
+Commercial Stabilization for Grand Lake is headed for a council vote, and Port Grind remains a popular spot.
 
 ### Piedmont Ave
 
@@ -44,7 +44,7 @@ A quiet week — nothing much out of the ordinary around the neighborhood.
 
 ### Chinatown
 
-A job training workshop began a new session in Chinatown.
+A new session of the job training workshop begins, and someone new moves onto the block from Uptown.
 
 ### Brooklyn
 
@@ -52,11 +52,11 @@ A quiet week — nothing much out of the ordinary around the neighborhood.
 
 ### Eastlake
 
-Eastlake Kitchen is among the neighborhood's places to eat this week.
+Eastlake Kitchen continues to serve the neighborhood, maintaining its mixed character.
 
 ### Glenview
 
-The Glenview Civic Response Meeting took place this week.
+The Glenview Civic Response Meeting addresses public works issues, and the Civic Watch Patio remains a local gathering spot.
 
 ### Dimond
 
@@ -72,20 +72,24 @@ A quiet week — nothing much out of the ordinary around the neighborhood.
 
 ### KONO
 
-KONO's retail activity rose, events drew crowds, and more people moved into the neighborhood.
+Retail is busy, events are drawing crowds, and new households are moving into the neighborhood from various parts of the city.
 
 ### Lake Merritt
 
-An after-school tutoring program expanded in Lake Merritt. The Lake Merritt Blossom Walk took place this week.
+The after-school tutoring program expands, and the Lake Merritt Blossom Walk is a highlight of the week.
 
 ### Uptown
 
-The neighborhood remains a hotspot, with rents climbing and some residents considering a move for better affordability.
+The Uptown boom continues, with rents climbing and households stretching to stay. Some residents are planning to leave for better income fits.
 
 ### Baylight District
 
-Marine Systems is adjusting after losing two employees, a quiet shift in the bustling waterfront district.
+Marine Systems loses two employees, marking a quiet week in the neighborhood.
 
 ### East Oakland
 
-An East Oakland seniors lunch program marked a milestone this week.
+The seniors lunch program marks a milestone at Masjid An-Nur Oakland.
+
+---
+
+_Generated by `scripts/buildNeighborhoodTexture.js` v1.2.0 from Riley_Digest + Neighborhood_Map + Story_Seed_Deck (cycle 115). One batched generation, frozen for the cycle. 17/22 hoods with engine signal; 5 quiet._

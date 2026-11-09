@@ -5,9 +5,11 @@
  * Sister: lib/citizenDerivation.js (Node — same per-field algorithms)
  *
  * Purpose: when a new citizen is created at intake, derive realistic values for
- * 8 demographic + lifecycle fields (RoleType, EducationLevel, Gender,
- * YearsInCareer, DebtLevel, NetWorth, MaritalStatus, NumChildren) instead of
- * leaving them blank or seeding hardcoded sentinels.
+ * 6 demographic + lifecycle fields (RoleType, EducationLevel, Gender,
+ * YearsInCareer, DebtLevel, NetWorth) instead of leaving them blank or seeding
+ * hardcoded sentinels. engine.339 (builder 11-08): marital status and child
+ * counts are NOT derived here — an arrival is single, no children; family comes
+ * from the lottery and the citizen's own words.
  *
  * Determinism: djb2 hash on (first|last|popId) seed. Same seed always gets
  * same values across runs. Apps Script-safe (no Math.random / crypto / Buffer).
@@ -356,47 +358,6 @@ function deriveNetWorth_(seed, age, income, careerStage) {
   return Math.round(raw / 1000) * 1000;
 }
 
-function deriveMaritalStatus_(seed, age) {
-  // engine.302 (builder 2026-10-19): five values only — married / divorced / widowed / single /
-  // youth (under 18). The old partnered band reads married (same cutoffs, same draw); a minor is
-  // youth before any bracket (ageBracket_ puts every age < 30 in '18-29').
-  if (age < 18) return 'youth';
-  var r = rand01_(seed, 'MaritalStatus');
-  var bracket = ageBracket_(age);
-
-  var CDF = {
-    '18-29': [['single', 0.60], ['married', 0.98], ['divorced', 1.00]],
-    '30-44': [['single', 0.24], ['married', 0.91], ['divorced', 1.00]],
-    '45-59': [['single', 0.12], ['married', 0.73], ['divorced', 0.96], ['widowed', 1.00]],
-    '60-74': [['single', 0.09], ['married', 0.61], ['divorced', 0.86], ['widowed', 1.00]],
-    '75+':   [['single', 0.06], ['married', 0.44], ['divorced', 0.64], ['widowed', 1.00]]
-  };
-  return pickFromCDF_(r, CDF[bracket]);
-}
-
-function deriveNumChildren_(seed, age, maritalStatus) {
-  if (age < 18) return 0; // engine.302: a minor has no children of their own
-  var r = rand01_(seed, 'NumChildren');
-  var ms = String(maritalStatus || '').toLowerCase();
-  var married = ms === 'married';
-  var bracket = ageBracket_(age);
-
-  var CDF = {
-    '18-29-single':    [[0, 0.85], [1, 0.96], [2, 1.00]],
-    '18-29-married':   [[0, 0.62], [1, 0.85], [2, 0.95], [3, 1.00]],
-    '30-44-single':    [[0, 0.65], [1, 0.84], [2, 0.94], [3, 1.00]],
-    '30-44-married':   [[0, 0.32], [1, 0.58], [2, 0.82], [3, 0.95], [4, 1.00]],
-    '45-59-single':    [[0, 0.45], [1, 0.70], [2, 0.88], [3, 0.97], [4, 1.00]],
-    '45-59-married':   [[0, 0.16], [1, 0.40], [2, 0.72], [3, 0.90], [4, 0.98], [5, 1.00]],
-    '60-74-single':    [[0, 0.35], [1, 0.60], [2, 0.82], [3, 0.94], [4, 1.00]],
-    '60-74-married':   [[0, 0.14], [1, 0.36], [2, 0.66], [3, 0.86], [4, 0.96], [5, 1.00]],
-    '75+-single':      [[0, 0.32], [1, 0.56], [2, 0.78], [3, 0.92], [4, 1.00]],
-    '75+-married':     [[0, 0.13], [1, 0.34], [2, 0.64], [3, 0.85], [4, 0.96], [5, 1.00]]
-  };
-  var key = bracket + '-' + (married ? 'married' : 'single');
-  return pickFromCDF_(r, CDF[key]);
-}
-
 function lookupNeighborhood_(provided, seed, ledgerFreq) {
   var trimmed = provided ? String(provided).trim() : '';
   if (trimmed && trimmed !== 'Engine' && trimmed !== 'Generational') {
@@ -436,7 +397,6 @@ function deriveCitizenProfile_(seed, age, neighborhood, ledgerFreq, options) {
   var roleType = options.roleTypeOverride || deriveRoleType_(seed, safeNbhd, ledgerFreq);
   var income = lookupIncome_(roleType);
   var careerStage = computeCareerStage_(seed, age, roleType);
-  var maritalStatus = deriveMaritalStatus_(seed, age);
 
   return {
     RoleType: roleType,
@@ -445,8 +405,6 @@ function deriveCitizenProfile_(seed, age, neighborhood, ledgerFreq, options) {
     YearsInCareer: deriveYearsInCareer_(seed, age, careerStage),
     DebtLevel: deriveDebtLevel_(seed, age, income),
     NetWorth: deriveNetWorth_(seed, age, income, careerStage),
-    MaritalStatus: maritalStatus,
-    NumChildren: deriveNumChildren_(seed, age, maritalStatus),
     _careerStage: careerStage,
     _income: income,
     _neighborhood: safeNbhd

@@ -73,8 +73,6 @@ async function main() {
     console.log('  YearsInCareer:  ' + p.YearsInCareer);
     console.log('  DebtLevel:      ' + p.DebtLevel);
     console.log('  NetWorth:       $' + p.NetWorth.toLocaleString());
-    console.log('  MaritalStatus:  ' + p.MaritalStatus);
-    console.log('  NumChildren:    ' + p.NumChildren);
   }
 
   // ── Acceptance gates ──────────────────────────────────────────────────────
@@ -85,7 +83,7 @@ async function main() {
     const seed = f.name.split(' ').join('|') + '|' + f.popId;
     const p = cd.deriveCitizenProfile(seed, f.age, f.nbhd, ledgerFreq);
     const required = ['RoleType', 'EducationLevel', 'Gender', 'YearsInCareer',
-                      'DebtLevel', 'NetWorth', 'MaritalStatus', 'NumChildren'];
+                      'DebtLevel', 'NetWorth'];
     for (const k of required) {
       if (p[k] == null || p[k] === '') failures.push('[Gate 1] ' + f.name + ' missing ' + k);
     }
@@ -111,17 +109,11 @@ async function main() {
   if (JSON.stringify(a) !== JSON.stringify(b)) failures.push('[Gate 3] determinism violated');
 
   // Gate 4: Distribution non-uniformity across the 200-citizen sweep.
-  const ms = {}; sweep.forEach(s => ms[s.profile.MaritalStatus] = (ms[s.profile.MaritalStatus] || 0) + 1);
-  const nc = {}; sweep.forEach(s => nc[s.profile.NumChildren] = (nc[s.profile.NumChildren] || 0) + 1);
   const gn = {}; sweep.forEach(s => gn[s.profile.Gender] = (gn[s.profile.Gender] || 0) + 1);
   const distinctRoles = new Set(sweep.map(s => s.profile.RoleType)).size;
-  if (Object.keys(ms).length < 4) failures.push('[Gate 4] MaritalStatus only ' + Object.keys(ms).length + ' distinct values (expect ≥4 across 200 draws)');
-  if (Object.keys(nc).length < 4) failures.push('[Gate 4] NumChildren only ' + Object.keys(nc).length + ' distinct values (expect ≥4)');
   if (distinctRoles < 15) failures.push('[Gate 4] only ' + distinctRoles + ' distinct RoleTypes across 200 draws (expect ≥15)');
 
   console.log('\n── Distribution sweep (200 synthetic citizens) ──');
-  console.log('  MaritalStatus: ' + JSON.stringify(ms));
-  console.log('  NumChildren:   ' + JSON.stringify(nc));
   console.log('  Gender:        ' + JSON.stringify(gn));
   console.log('  Distinct RoleTypes: ' + distinctRoles + ' / 200');
 

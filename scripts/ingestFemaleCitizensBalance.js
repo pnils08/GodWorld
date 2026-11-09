@@ -317,8 +317,8 @@ async function main() {
     set('Last Updated', nowIso);
     set('UsageCount', 0);
     set('Neighborhood', g.neighborhood);
-    set('MaritalStatus', g.profile.MaritalStatus);
-    set('NumChildren', g.profile.NumChildren);
+    set('MaritalStatus', 'single'); // engine.339: an arrival is single, no children — never the profile's dice
+    set('NumChildren', 0);
     set('Income', g.profile._income);
     set('NetWorth', g.profile.NetWorth);
     set('DebtLevel', g.profile.DebtLevel);
@@ -353,8 +353,8 @@ async function main() {
       yearsInCareer: g.profile.YearsInCareer,
       debtLevel: g.profile.DebtLevel,
       netWorth: g.profile.NetWorth,
-      maritalStatus: g.profile.MaritalStatus,
-      numChildren: g.profile.NumChildren,
+      maritalStatus: 'single',
+      numChildren: 0,
       careerStage: g.profile._careerStage,
       income: g.profile._income,
     })),
@@ -442,8 +442,6 @@ function buildDistribution(generated) {
     gender: {},
     neighborhood: {},
     ageBracket: {},
-    maritalStatus: {},
-    numChildren: {},
     roleType: {},
     educationLevel: {},
   };
@@ -452,9 +450,6 @@ function buildDistribution(generated) {
     dist.neighborhood[g.neighborhood] = (dist.neighborhood[g.neighborhood] || 0) + 1;
     const br = bracketOf(g.age);
     dist.ageBracket[br] = (dist.ageBracket[br] || 0) + 1;
-    dist.maritalStatus[g.profile.MaritalStatus] = (dist.maritalStatus[g.profile.MaritalStatus] || 0) + 1;
-    const nc = String(g.profile.NumChildren);
-    dist.numChildren[nc] = (dist.numChildren[nc] || 0) + 1;
     dist.roleType[g.profile.RoleType] = (dist.roleType[g.profile.RoleType] || 0) + 1;
     dist.educationLevel[g.profile.EducationLevel] = (dist.educationLevel[g.profile.EducationLevel] || 0) + 1;
   }
@@ -508,7 +503,7 @@ function runGates(audit, generated) {
   pass = pass && g1;
 
   // Gate 2: Field completeness
-  const requiredFields = ['RoleType', 'EducationLevel', 'Gender', 'YearsInCareer', 'DebtLevel', 'NetWorth', 'MaritalStatus', 'NumChildren'];
+  const requiredFields = ['RoleType', 'EducationLevel', 'Gender', 'YearsInCareer', 'DebtLevel', 'NetWorth'];
   let emptyCount = 0;
   let citizenLiteralCount = 0;
   for (const g of generated) {
@@ -529,8 +524,6 @@ function runGates(audit, generated) {
 
   // Gate 4: Distribution
   const dist = audit.distribution;
-  const maritalCount = Object.keys(dist.maritalStatus).length;
-  const childBuckets = Object.keys(dist.numChildren).length;
   const roleCount = Object.keys(dist.roleType).length;
 
   const expectedAgePct = { '18-29': 22, '30-44': 28, '45-59': 22, '60-74': 20, '75+': 8 };
@@ -558,9 +551,9 @@ function runGates(audit, generated) {
   // Neighborhood threshold stays ±5% (12 buckets, smaller per-bucket variance allowed).
   const AGE_DELTA_TOL = 7;
   const NBHD_DELTA_TOL = 5;
-  const g4 = maritalCount >= 5 && childBuckets >= 6 && roleCount >= 30 && maxAgeDelta <= AGE_DELTA_TOL && maxNbhdDelta <= NBHD_DELTA_TOL;
+  const g4 = roleCount >= 30 && maxAgeDelta <= AGE_DELTA_TOL && maxNbhdDelta <= NBHD_DELTA_TOL;
   console.log(`Gate 4 (distribution):         ${g4 ? 'PASS' : 'FAIL'}`);
-  console.log(`    marital statuses: ${maritalCount} (≥5)  child buckets: ${childBuckets} (≥6)  roleTypes: ${roleCount} (≥30)`);
+  console.log(`    roleTypes: ${roleCount} (≥30)`);
   console.log(`    max age-bracket Δ:    ${maxAgeDelta.toFixed(2)}% (≤${AGE_DELTA_TOL})`);
   console.log(`    max neighborhood Δ:   ${maxNbhdDelta.toFixed(2)}% (≤${NBHD_DELTA_TOL})`);
   pass = pass && g4;

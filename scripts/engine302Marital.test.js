@@ -47,42 +47,12 @@ const R = rel => fs.readFileSync(path.resolve(__dirname, rel), 'utf8');
 const CAL_SRC = R('../phase01-config/advanceSimulationCalendar.js');
 const load = (rel, names, extra, pre) => new Function(CAL_SRC + '\n' + (pre || []).map(R).join('\n') + '\n' + R(rel) + '\n' + (extra || '') + '\nreturn {' + names.join(',') + '};')();
 
-// ── D1 / D2 derivation ─────────────────────────────────────────────────────────
-const U = load('../utilities/citizenDerivation.js', ['deriveMaritalStatus_', 'deriveNumChildren_', 'rand01_', 'pickFromCDF_', 'ageBracket_']);
+// ── D1 / D2 derivation: engine.339 — the dice are gone from both libraries ─────
 const L = require('../lib/citizenDerivation.js');
-const OLD_MS = { // the pre-engine.302 table, frozen for the old -> new mapping
-  '18-29': [['single', 0.60], ['partnered', 0.78], ['married', 0.98], ['divorced', 1.00]],
-  '30-44': [['single', 0.24], ['partnered', 0.35], ['married', 0.91], ['divorced', 1.00]],
-  '45-59': [['single', 0.12], ['partnered', 0.17], ['married', 0.73], ['divorced', 0.96], ['widowed', 1.00]],
-  '60-74': [['single', 0.09], ['partnered', 0.12], ['married', 0.61], ['divorced', 0.86], ['widowed', 1.00]],
-  '75+':   [['single', 0.06], ['partnered', 0.08], ['married', 0.44], ['divorced', 0.64], ['widowed', 1.00]]
-};
-const oldMs = (seed, age) => U.pickFromCDF_(U.rand01_(seed, 'MaritalStatus'), OLD_MS[U.ageBracket_(age)]);
-const OLD_NC_COUPLED = { '18-29': [[0, 0.62], [1, 0.85], [2, 0.95], [3, 1.00]], '30-44': [[0, 0.32], [1, 0.58], [2, 0.82], [3, 0.95], [4, 1.00]],
-  '45-59': [[0, 0.16], [1, 0.40], [2, 0.72], [3, 0.90], [4, 0.98], [5, 1.00]], '60-74': [[0, 0.14], [1, 0.36], [2, 0.66], [3, 0.86], [4, 0.96], [5, 1.00]],
-  '75+': [[0, 0.13], [1, 0.34], [2, 0.64], [3, 0.85], [4, 0.96], [5, 1.00]] }; // the old '-partnered' rows (married and partnered both read them)
-const oldNcCoupled = (seed, age) => U.pickFromCDF_(U.rand01_(seed, 'NumChildren'), OLD_NC_COUPLED[U.ageBracket_(age)]);
-let minorBad = 0, partneredSeen = 0, adultMismatch = 0, kidsMismatch = 0, mirrorMismatch = 0, oldPartnered = 0, n = 0;
-for (let i = 0; i < 5000; i++) {
-  const seed = 'Seed' + i + '|Last|POP-' + i;
-  for (const age of [0, 5, 12, 17, 18, 22, 29, 30, 44, 45, 59, 60, 74, 75, 90]) {
-    n++;
-    const ms = U.deriveMaritalStatus_(seed, age), kids = U.deriveNumChildren_(seed, age, ms);
-    if (ms === 'partnered') partneredSeen++;
-    if (age < 18) { if (ms !== 'youth' || kids !== 0) minorBad++; }
-    else {
-      const o = oldMs(seed, age); if (o === 'partnered') oldPartnered++;
-      if (ms !== (o === 'partnered' ? 'married' : o)) adultMismatch++;
-      if (o === 'partnered' || o === 'married') { if (U.deriveNumChildren_(seed, age, 'married') !== oldNcCoupled(seed, age)) kidsMismatch++; }
-    }
-    if (L.deriveMaritalStatus(seed, age) !== ms || L.deriveNumChildren(seed, age, ms) !== kids) mirrorMismatch++;
-  }
-}
-assert('D1 every minor draws youth with 0 children', minorBad === 0, minorBad + ' bad');
-assert('D1 no draw reads partnered', partneredSeen === 0, partneredSeen + ' seen');
-assert('D1 adult draw = old draw with partnered → married (old table drew partnered ' + oldPartnered + 'x)', adultMismatch === 0 && oldPartnered > 0, adultMismatch + ' mismatches');
-assert('D1 a married draw has the children the old partnered/married row gave (frozen table)', kidsMismatch === 0, kidsMismatch + ' mismatches');
-assert('D2 lib/ mirror agrees with utilities/ on ' + n + ' draws', mirrorMismatch === 0, mirrorMismatch + ' mismatches');
+const srcU = R('../utilities/citizenDerivation.js');
+assert('D1 utilities/ has no marital or child-count dice', !/deriveMaritalStatus_|deriveNumChildren_/.test(srcU));
+assert('D2 lib/ mirror has none either', L.deriveMaritalStatus === undefined && L.deriveNumChildren === undefined);
+assert('D1 the engine profile builder writes no MaritalStatus or NumChildren', !/MaritalStatus:|NumChildren:/.test(srcU));
 
 // ── N1 / Y1 / W1 generational engine ───────────────────────────────────────────
 const G = load('../phase04-events/generationalEventsEngine.js', ['createChildRow_', 'youthComesOfAge_', 'widowSurvivingSpouse_']);

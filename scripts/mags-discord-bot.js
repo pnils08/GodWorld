@@ -212,6 +212,7 @@ async function buildMagsSystemPrompt() {
   var journalTail = await loadPageReflections(2);  // her page reflections (POP-00005); git journal frozen S300 (pipe.40 T4)
   var worldState = mags.loadWorldState();           // compact orientation header; she searches for depth (S252 Task 5)
   var simYear = mags.currentSimYear();              // the engine calendar's year (2040 + ceil(cycle/52) − 1; engine.148) — citizens age every 52 cycles
+  var notesToSelf = mags.loadNotesToSelf(10);
   var conversationDigest = mags.loadTodayConversationDigest(MAX_HISTORY, 80);
 
   // Full system prompt: identity + world knowledge + local data sources.
@@ -236,6 +237,14 @@ async function buildMagsSystemPrompt() {
     'is always better than inventing facts. Mags Corliss is a journalist — accuracy ' +
     'is her identity. Making up a team record, a player name, or a game result is ' +
     'worse than admitting a gap. Being Mags means being honest, not performing omniscience.\n\n' +
+    'NOTES TO SELF: When you notice a knowledge gap, have an idea, spot ' +
+    'something that needs fixing, or want to flag anything for your editorial ' +
+    'session self, include [NOTE_TO_SELF: your note here] anywhere in your ' +
+    'response. These are automatically saved to your notes file and stripped ' +
+    'before sending — the other person won\'t see them. Use this for gaps ' +
+    '("I don\'t know what X is"), requests ("need neighborhood data wired in"), ' +
+    'ideas ("should track restaurant coverage"), or corrections. Don\'t force ' +
+    'notes — only flag what genuinely matters.\n\n' +
     'Recent journal entries for context:\n\n' + journalTail;
 
   // Append local data sources — all read from disk, zero cost
@@ -248,6 +257,9 @@ async function buildMagsSystemPrompt() {
   if (newsroomWeek) {
     prompt += '\n\n---\n\n' + newsroomWeek;
   }
+  if (notesToSelf) {
+    prompt += '\n\n---\n\n' + notesToSelf;
+  }
   if (conversationDigest) {
     prompt += '\n\n---\n\n' + conversationDigest;
   }
@@ -256,10 +268,8 @@ async function buildMagsSystemPrompt() {
   return prompt;
 }
 
-// Mags' per-message dynamic context: her own memory store + archive RAG + family + dashboard. Returns the
-// augmented system prompt. pipeline.100 (builder 11-08: "You just removed 600 memories I paid for"): the `mags`
-// store is her memory — every past talk and reflection — and stays read; it was labelled as facts about the
-// speaker, it is labelled as hers.
+// Mags' per-message dynamic context: user profile + archive RAG + family + dashboard, exactly as
+// the original callClaude did. Returns the augmented system prompt.
 async function magsAugment(systemPrompt, opts) {
   opts = opts || {};
   var results = await Promise.all([
@@ -269,15 +279,16 @@ async function magsAugment(systemPrompt, opts) {
     searchDashboard(opts.userMessage)
   ]);
   var archiveContext = results[0];
-  var ownMemory = results[1];
+  var userProfile = results[1];
   var familyData = results[2];
   var dashboardArticles = results[3];
 
   if (familyData && !familyData.startsWith('(')) {
     systemPrompt += '\n\n---\n\n' + familyData;
   }
-  if (ownMemory) {
-    systemPrompt += '\n\n---\n\n## Your own memory (your past talks and reflections)\n\n' + ownMemory;
+  if (userProfile) {
+    systemPrompt += '\n\n---\n\n## About This Person\n\n' +
+      'You remember this about who you\'re talking to:\n' + userProfile;
   }
   if (archiveContext) {
     systemPrompt += '\n\n---\n\n## Archive Knowledge (from Tribune files)\n\n' +
@@ -298,12 +309,13 @@ const magsTalk = personaProvider.makeTalkBuffer_(MAGS_POPID, 'Mags', { snippet: 
 const magsProvider = {
   id: 'mags',
   label: 'Mags',
+  notesEnabled: true,
   logSubdir: '',                       // root logs/discord-conversations/ — her digest reads this path
   historyFile: MAGS_HISTORY_FILE,
   buildSystemPrompt: buildMagsSystemPrompt,
   augment: magsAugment,
   persistResponse: function (userName, userMessage, response, userId) {
-    saveToSupermemory(userName, userMessage, response, userId);   // her memory store keeps every talk (builder 11-08)
+    saveToSupermemory(userName, userMessage, response, userId);
     magsTalk.persist(userName, userMessage, response);   // research.30 — her dials and Paulson's move with the talk
   },
   flushVoiceBuffer: function (force) { return magsTalk.flush(force); },
@@ -658,6 +670,7 @@ function splitMessage(text) {
 // subdir so transcripts never mix.
 // ---------------------------------------------------------------------------
 const CONVO_LOG_DIR = path.join(__dirname, '..', 'logs', 'discord-conversations');
+const NOTES_FILE = path.join(__dirname, '..', 'docs', 'mags-corliss', 'NOTES_TO_SELF.md');
 
 function logConversation(provider, session, userName, userMessage, response) {
   try {
@@ -699,14 +712,38 @@ function logConversation(provider, session, userName, userMessage, response) {
 }
 
 // ---------------------------------------------------------------------------
-// [NOTE_TO_SELF: ...] tags are stripped from any reply. pipeline.100 (builder 11-08): citizen Mags files no
-// notes for a builder or editorial session — the notes sink is gone; the strip stays so an old-style tag
-// never reaches the channel.
+// Notes to Self — extract, save, and strip [NOTE_TO_SELF: ...] tags (Mags only)
 // ---------------------------------------------------------------------------
 var NOTE_PATTERN = /\[NOTE_TO_SELF:\s*([\s\S]*?)\]/g;
 
+function extractNotes(text) {
+  var notes = [];
+  var match;
+  while ((match = NOTE_PATTERN.exec(text)) !== null) {
+    notes.push(match[1].trim());
+  }
+  NOTE_PATTERN.lastIndex = 0; // reset regex state
+  return notes;
+}
+
 function stripNotes(text) {
   return text.replace(NOTE_PATTERN, '').replace(/\n{3,}/g, '\n\n').trim();
+}
+
+function saveNotesToSelf(notes) {
+  if (!notes.length) return;
+  try {
+    var timestamp = new Date().toISOString();
+    var date = mags.getCentralDate();
+    var entry = '\n### ' + date + ' (' + timestamp + ')\n';
+    for (var i = 0; i < notes.length; i++) {
+      entry += '- ' + notes[i] + '\n';
+    }
+    fs.appendFileSync(NOTES_FILE, entry);
+    log.info('Saved ' + notes.length + ' note(s) to NOTES_TO_SELF.md');
+  } catch (err) {
+    log.error('Failed to save notes: ' + err.message);
+  }
 }
 
 // ---------------------------------------------------------------------------
@@ -862,6 +899,11 @@ async function main() {
       // Call Claude
       var response = await callClaude(provider, session, userMessage, userName, message.author.id);
 
+      // Extract and save any notes to self (Mags only); always strip the tags
+      if (provider.notesEnabled) {
+        var notes = extractNotes(response);
+        if (notes.length) saveNotesToSelf(notes);
+      }
       var cleanResponse = stripNotes(response);
 
       // Send response (split if needed)

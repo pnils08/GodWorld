@@ -22,6 +22,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| governance.59 | Run-cycle step gate (builder 11-09): a step refuses until the one before passed; codex hook needs his trust. Read C116 Sun 2026-11-15 | live-observing | engine-sheet | [[../plans/2026-11-09-run-cycle-step-gate]] |
 | pipeline.106 | Lore writer: Gemini 3.8 thinking high, calendar, subject dossier (card, household, page), every canon source; Ellis passed. Read Fri 2026-11-13: Osei run | live-observing | engine-sheet | [[../plans/2026-08-15-lore-writer]] |
 | pipeline.104 | Saturday Drive drops (builder 11-08): edition to Y-003, audio to Weekly_News; built, C114 uploaded. Read Sat 2026-11-14: C115 edition + audio in their folders | live-observing | engine-sheet | [[../reference/NotebookLM]] §Change log |
 | engine.333 | Feed triggers to life history: retirement leaves the sports layer, Now: bio line, owed wake, injury bed. PROD @175. Task 5 = the C115 live read, Sun 2026-11-08 | live-observing | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] |
@@ -85,6 +86,7 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
+| pipeline.107 | C115 texture + drafter invented facts (codex handoff 11-09): ground both in the cycle's seeds; world-state fold leaked a footer. Plan at pickup | ready | engine-sheet | output/production_log_run_cycle_c115_gaps.md G-EC37–41 |
 | engine.340 | Seed class per kind (builder 11-08): one major bar read every kind of number; each multi-hood initiative its own seed; SeedID kept as text. After pipeline.100 | ready | engine-sheet | [[../plans/2026-11-08-seed-builder-class-per-kind]] |
 | engine.341 | Seed deck dead paths (builder 11-08): maps miss the deck's writer; two old-deck writers and the handoff menu tool retired. After engine.340 | ready | engine-sheet | [[../plans/2026-11-08-seed-deck-dead-readers-writers]] |
 | engine.336 | `Now:` bio lines for ledger-changing moments (builder 11-07: wedding, birth, job change, promotion); they stack atop the minted prose, newest first | ready | research-build | [[../plans/2026-11-05-feed-triggers-to-life-history]] §Builder's ruling (scope) |

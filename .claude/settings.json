@@ -167,6 +167,11 @@
             "type": "command",
             "command": "bash /root/GodWorld/.claude/hooks/rm-guard.sh",
             "timeout": 10
+          },
+          {
+            "type": "command",
+            "command": "node /root/GodWorld/scripts/runCycleGuard.js",
+            "timeout": 10
           }
         ]
       },

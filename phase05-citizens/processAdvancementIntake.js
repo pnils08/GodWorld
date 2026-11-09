@@ -1170,8 +1170,10 @@ function processAdvancementRowsBody_(ctx, now, cycle, log) {
         if (lDebtLevel >= 0) newRow[lDebtLevel] = 0;
         if (lNetWorth >= 0) newRow[lNetWorth] = 0;
       }
-      if (lMaritalStatus >= 0) newRow[lMaritalStatus] = profile.MaritalStatus;
-      if (lNumChildren >= 0) newRow[lNumChildren] = profile.NumChildren;
+      // engine.339: no arrival takes the profile's dice for marriage or children (builder 11-08). An arrival is
+      // single (youth under 18) with no children; the family lottery and the citizen's own words fill family from truth.
+      if (lMaritalStatus >= 0) newRow[lMaritalStatus] = age < 18 ? 'youth' : 'single';
+      if (lNumChildren >= 0) newRow[lNumChildren] = 0;
       if (householdKey) {
         // engine.109: a household row's marriage and children are the rows
         // queued beside it — never the profile's dice. Blank here; the spouse

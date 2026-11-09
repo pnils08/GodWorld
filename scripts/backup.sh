@@ -1,49 +1,47 @@
 #!/bin/bash
 # ============================================================
-# GodWorld Daily Backup
+# GodWorld Daily Backup — the whole server, minus logins
 # ============================================================
-# Backs up critical local-only files to:
-#   1. Local timestamped archive (keeps 7 days)
-#   2. Google Drive (via saveToDrive.js)
+# Purpose (builder 2026-11-09): if the server is wiped or expires, everything
+# can be rebuilt from Drive. Nothing is left out on the assumption that it
+# lives somewhere else.
 #
-# What's backed up:
-#   - Claude-Mem database (41MB, all auto-captured observations)
-#   - Discord conversation logs
-#   - .env (API keys, tokens)
-#   - .clasp.json (Apps Script project ID)
-#   - credentials/ (service account)
-#   - ~/.clasprc.json (clasp auth tokens)
-#   - settings.local.json (permission overrides)
-#   - .claude/agent-memory/ (persistent desk agent memory — civic, sports, culture, chicago, rhea)
+# Logins and keys are NOT archived: the builder keeps every key and password
+# on a ledger in Drive already (2026-11-09). Restore them from that ledger.
 #
-# What's NOT included in this archive (already durable):
-#   - Code/docs/output → GitHub
-#   - Simulation data → Google Sheets
-#   - Curated knowledge → Supermemory
-#   - Editions → Google Drive
-#   - output/ → versioned in Git for recovery, including generated artifacts
+# Each night it writes five archives to Google Drive (GodWorld_Backups folder):
+#   1-godworld-project      the repo, unpushed commits, uncommitted output, audio
+#   2-mags-memory           claude-mem database (+ wal) and its search index
+#   3-claude-chats          ~/.claude transcripts, memory, settings
+#   4-helper-lanes          codex, kimi, grok, gemini, aider, worktrees
+#   5-system-state          crontab, pm2 process names, pm2 service unit, versions, packages
+# Archives over 1.9 GB are split into numbered parts (join: cat X.part* > X).
+#
+# Left out: logins/keys (see above); node_modules and .venv (rebuilt by
+# install); GodWorld/backups and .claude-mem/backups (old archives).
+#
+# Staged in /var/tmp (outside /root, so it never archives itself); the
+# staging copy is replaced each night, so the server keeps one copy only.
 #
 # Usage:
 #   bash scripts/backup.sh           # Full backup + upload
-#   bash scripts/backup.sh --local   # Local only, no Drive upload
-#   bash scripts/backup.sh --test    # Dry run, show what would be backed up
+#   bash scripts/backup.sh --local   # Build archives, no Drive upload
+#   bash scripts/backup.sh --test    # Show what would be archived
 #
-# Cron (11 PM Central = 5 AM UTC):
+# Cron (5 AM UTC):
 #   0 5 * * * cd /root/GodWorld && bash scripts/backup.sh >> logs/backup.log 2>&1
+# Restore: docs/reference/DISASTER_RECOVERY.md
 # ============================================================
 
-set -e
+set -u
 
 GODWORLD="/root/GodWorld"
-BACKUP_DIR="$GODWORLD/backups"
+STAGE="/var/tmp/godworld-backup"
 TIMESTAMP=$(date +%Y-%m-%d_%H%M)
-ARCHIVE_NAME="godworld_backup_${TIMESTAMP}.tar.gz"
-ARCHIVE_PATH="$BACKUP_DIR/$ARCHIVE_NAME"
-KEEP_DAYS=7
+PART_BYTES=1900000000
 LOCAL_ONLY=false
 TEST_MODE=false
 
-# Parse args
 for arg in "$@"; do
   case $arg in
     --local) LOCAL_ONLY=true ;;
@@ -53,115 +51,86 @@ done
 
 echo "=== GodWorld Backup — $(date) ==="
 
-# Create backup directory
-mkdir -p "$BACKUP_DIR"
+# Keep only what exists, so a missing optional folder never fails the run
+existing() { for p in "$@"; do [ -e "/root/$p" ] && echo "$p"; done; }
 
-# Build list of files to back up
-BACKUP_FILES=()
+# Never archived, in any set
+NO_LOGINS=(--exclude='*.env' --exclude='.env*' --exclude='*/credentials' --exclude='.credentials.json'
+           --exclude='auth.json' --exclude='.clasprc.json' --exclude='*/.ssh' --exclude='*token*.json')
+NO_REBUILDABLE=(--exclude='*/node_modules' --exclude=GodWorld/.venv)
 
-# Claude-Mem database (the big one — 41MB of observations)
-if [ -f /root/.claude-mem/claude-mem.db ]; then
-  BACKUP_FILES+=("/root/.claude-mem/claude-mem.db")
-  echo "  + Claude-Mem DB ($(du -sh /root/.claude-mem/claude-mem.db | cut -f1))"
-fi
+SET_PROJECT=(--exclude=GodWorld/backups GodWorld)
+SET_MAGS=(--exclude=.claude-mem/backups .claude-mem)
+SET_CHATS=($(existing .claude))
+SET_HELPERS=($(existing .codex .kimi-code .grok .gemini .aider .agents .openclaw gemini gemini-writer work GodWorld-wake GodWorld-wt-packet))
 
-# Discord conversation logs
-if [ -d "$GODWORLD/logs/discord-conversations" ]; then
-  BACKUP_FILES+=("$GODWORLD/logs/discord-conversations")
-  COUNT=$(ls "$GODWORLD/logs/discord-conversations" 2>/dev/null | wc -l)
-  echo "  + Discord logs ($COUNT files)"
-fi
-
-# .env (API keys)
-if [ -f "$GODWORLD/.env" ]; then
-  BACKUP_FILES+=("$GODWORLD/.env")
-  echo "  + .env"
-fi
-
-# .clasp.json (Apps Script project ID)
-if [ -f "$GODWORLD/.clasp.json" ]; then
-  BACKUP_FILES+=("$GODWORLD/.clasp.json")
-  echo "  + .clasp.json"
-fi
-
-# credentials/ (service account)
-if [ -d "$GODWORLD/credentials" ]; then
-  BACKUP_FILES+=("$GODWORLD/credentials")
-  echo "  + credentials/"
-fi
-
-# clasp auth tokens (home directory)
-if [ -f /root/.clasprc.json ]; then
-  BACKUP_FILES+=("/root/.clasprc.json")
-  echo "  + ~/.clasprc.json"
-fi
-
-# settings.local.json
-if [ -f "$GODWORLD/.claude/settings.local.json" ]; then
-  BACKUP_FILES+=("$GODWORLD/.claude/settings.local.json")
-  echo "  + settings.local.json"
-fi
-
-# Agent memory directories (persistent desk agent memory)
-if [ -d "$GODWORLD/.claude/agent-memory" ]; then
-  BACKUP_FILES+=("$GODWORLD/.claude/agent-memory")
-  AGENT_COUNT=$(ls -d "$GODWORLD/.claude/agent-memory"/*/ 2>/dev/null | wc -l)
-  echo "  + agent-memory/ ($AGENT_COUNT agents)"
-fi
-
-if [ ${#BACKUP_FILES[@]} -eq 0 ]; then
-  echo "ERROR: No files found to back up!"
-  exit 1
-fi
-
-echo ""
-echo "Files to archive: ${#BACKUP_FILES[@]}"
-
-# Test mode — just show what would happen
 if [ "$TEST_MODE" = true ]; then
-  echo ""
-  echo "TEST MODE — no backup created."
-  echo "Would create: $ARCHIVE_PATH"
-  echo "Would keep $KEEP_DAYS days of local backups."
-  [ "$LOCAL_ONLY" = false ] && echo "Would upload to Google Drive."
+  echo "1-godworld-project: ${SET_PROJECT[*]}"
+  echo "2-mags-memory:      ${SET_MAGS[*]}"
+  echo "3-claude-chats:     ${SET_CHATS[*]}"
+  echo "4-helper-lanes:     ${SET_HELPERS[*]}"
+  echo "5-system-state:     crontab, pm2 names, pm2 unit, versions, packages"
+  echo "Excluded everywhere: ${NO_LOGINS[*]} ${NO_REBUILDABLE[*]}"
+  echo "Stage: $STAGE   Upload: $([ "$LOCAL_ONLY" = true ] && echo no || echo yes)"
   exit 0
 fi
 
-# Create tar.gz archive
-echo ""
-echo "Creating archive: $ARCHIVE_NAME"
-tar -czf "$ARCHIVE_PATH" "${BACKUP_FILES[@]}" 2>/dev/null
-ARCHIVE_SIZE=$(du -sh "$ARCHIVE_PATH" | cut -f1)
-echo "Archive size: $ARCHIVE_SIZE"
+# Replace last night's staging copy
+rm -rf "$STAGE"
+mkdir -p "$STAGE/system-state"
 
-# Upload to Google Drive (unless --local)
+# System state that lives outside the home folder
+crontab -l > "$STAGE/system-state/crontab.txt" 2>/dev/null
+pm2 jlist 2>/dev/null | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>{try{for(const p of JSON.parse(s))console.log(p.name+"\t"+p.pm2_env.pm_exec_path+"\t"+p.pm2_env.pm_cwd)}catch(e){}})' > "$STAGE/system-state/pm2-processes.tsv"
+cp -a /etc/systemd/system/pm2-root.service "$STAGE/system-state/" 2>/dev/null
+{ echo "node $(node -v)"; echo "npm $(npm -v)"; uname -a; } > "$STAGE/system-state/versions.txt"
+dpkg -l > "$STAGE/system-state/installed-packages.txt" 2>/dev/null
+
+FAILED=0
+make_archive() {
+  local name="$1"; shift
+  local out="$STAGE/${TIMESTAMP}_${name}.tar.gz"
+  echo "  + $name"
+  # tar exit 1 = a file changed while being read (live db/logs); still a usable archive
+  tar -czf "$out" "${NO_LOGINS[@]}" "${NO_REBUILDABLE[@]}" "$@" 2>>"$STAGE/tar-warnings.log"
+  local rc=$?
+  if [ $rc -gt 1 ]; then echo "    ERROR: tar exit $rc"; FAILED=$((FAILED + 1)); fi
+  echo "    $(du -h "$out" | cut -f1)"
+}
+
+cd /root
+make_archive 1-godworld-project "${SET_PROJECT[@]}"
+make_archive 2-mags-memory "${SET_MAGS[@]}"
+make_archive 3-claude-chats "${SET_CHATS[@]}"
+make_archive 4-helper-lanes "${SET_HELPERS[@]}"
+make_archive 5-system-state -C "$STAGE" system-state
+
+# Split big archives so each Drive upload stays a manageable size
+cd "$STAGE"
+for f in *.tar.gz; do
+  if [ "$(stat -c %s "$f")" -gt "$PART_BYTES" ]; then
+    split -b "$PART_BYTES" -d -a 2 "$f" "$f.part" && rm -f "$f"
+  fi
+done
+
+UPLOADED=0
+UPLOAD_FAILED=0
 if [ "$LOCAL_ONLY" = false ]; then
   echo ""
   echo "Uploading to Google Drive..."
-  # Upload to dedicated GodWorld_Backups folder on Drive
   cd "$GODWORLD"
-  if node scripts/saveToDrive.js "$ARCHIVE_PATH" backup 2>&1; then
-    echo "Drive upload complete."
-  else
-    echo "WARNING: Drive upload failed. Local backup preserved at: $ARCHIVE_PATH"
-  fi
+  for f in "$STAGE"/${TIMESTAMP}_*; do
+    if node scripts/saveToDrive.js "$f" backup >/dev/null 2>&1; then
+      UPLOADED=$((UPLOADED + 1)); echo "  uploaded $(basename "$f")"
+    else
+      UPLOAD_FAILED=$((UPLOAD_FAILED + 1)); echo "  WARNING: upload failed: $(basename "$f")"
+    fi
+  done
 fi
 
-# Rotate old local backups (keep KEEP_DAYS)
-echo ""
-echo "Rotating local backups (keeping $KEEP_DAYS days)..."
-DELETED=0
-for old_backup in $(ls -1t "$BACKUP_DIR"/godworld_backup_*.tar.gz 2>/dev/null | tail -n +$((KEEP_DAYS + 1))); do
-  rm -f "$old_backup"
-  DELETED=$((DELETED + 1))
-done
-echo "Deleted $DELETED old backup(s)."
-
-# Summary
-REMAINING=$(ls -1 "$BACKUP_DIR"/godworld_backup_*.tar.gz 2>/dev/null | wc -l)
 echo ""
 echo "=== Backup Complete ==="
-echo "Archive: $ARCHIVE_PATH ($ARCHIVE_SIZE)"
-echo "Local backups: $REMAINING"
-[ "$LOCAL_ONLY" = false ] && echo "Drive: uploaded"
+echo "Total: $(du -sh "$STAGE" | cut -f1) in $STAGE"
+echo "Archive errors: $FAILED   Uploaded: $UPLOADED   Upload failures: $UPLOAD_FAILED"
 echo "========================"
+[ $FAILED -eq 0 ] && [ $UPLOAD_FAILED -eq 0 ]

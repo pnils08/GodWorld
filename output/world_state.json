@@ -1,7 +1,7 @@
 {
   "meta": {
     "cycle": 115,
-    "builtAt": "2026-11-09T08:14:43.026Z",
+    "builtAt": "2026-11-09T08:49:34.155Z",
     "sheetId": "1-0GNeCzqrDmmOy1wOScryzdRd82syq0Z_wZ7dTH8Bjk",
     "script": "buildWorldState.js v1.0",
     "notes": []
@@ -1036,10 +1036,10 @@
         "voteBreakdown": "Cycle 86: Visioning phase concluded. Input documented.\nCycle 94: Vote scheduled C94 (visioning-complete + vote-ready phase transition; was VoteCycle=86).\nCycle 94: Visioning phase concluded. Input documented.",
         "affectedNeighborhoods": "Fruitvale",
         "policyDomain": "transit",
-        "implementationPhase": "design-phase",
-        "milestoneNotes": "C107: Merchant covenants executed, design RFP published with community-informed requirements\nC108 conversion: no council passage on record (VoteCycle 94, Outcome COMPLETED, Status visioning-complete) — enters petition-pending; history above kept, VoteCycle cleared.\nC108 conversion: Stage Proposed — Fruitvale transit hub never had a council vote: petition-pending, history kept, vote via petition band or a call-vote move.\nC109: Mayer & Associates contracted with community oversight provisions\nC110: Preliminary schematics review authorized; Mayer & Associates contracted with community oversight\nC111: Advanced from visioning to design-phase; schematics delivery mandated Cycle 114.\nC111 correction: the council authorized Phase II at C86 ($230M budget, visioning framework binding, design consultant RFP to follow; projected 6-3). The C108 \"no council passage on record\" line was wrong. Vote restored at C86; no stage.\nC114: Preliminary schematics delivery and documented Fruitvale community review directed; further design advancement awaits a public comment-and-response record.\nC115: Schematics delivery and documented Fruitvale review required; further design advancement awaits a public comment-and-response record.",
-        "nextScheduledAction": "Deliver schematics and publish the documented Fruitvale comment-and-response record",
-        "nextActionCycle": 116
+        "implementationPhase": "complete",
+        "milestoneNotes": "C107: Merchant covenants executed, design RFP published with community-informed requirements\nC108 conversion: no council passage on record (VoteCycle 94, Outcome COMPLETED, Status visioning-complete) — enters petition-pending; history above kept, VoteCycle cleared.\nC108 conversion: Stage Proposed — Fruitvale transit hub never had a council vote: petition-pending, history kept, vote via petition band or a call-vote move.\nC109: Mayer & Associates contracted with community oversight provisions\nC110: Preliminary schematics review authorized; Mayer & Associates contracted with community oversight\nC111: Advanced from visioning to design-phase; schematics delivery mandated Cycle 114.\nC111 correction: the council authorized Phase II at C86 ($230M budget, visioning framework binding, design consultant RFP to follow; projected 6-3). The C108 \"no council passage on record\" line was wrong. Vote restored at C86; no stage.\nC114: Preliminary schematics delivery and documented Fruitvale community review directed; further design advancement awaits a public comment-and-response record.\nC115: Schematics delivery and documented Fruitvale review required; further design advancement awaits a public comment-and-response record.\nC115: closed on the builder's word (2026-11-09: \"Fruitvale hub is built ... that's done ... Close them\")",
+        "nextScheduledAction": null,
+        "nextActionCycle": null
       },
       {
         "name": "Temescal Community Health Center",
@@ -1068,10 +1068,10 @@
         "voteBreakdown": "Cycle 83: Passed 6-3. Denise Carter voted yes. Rose Delgado voted yes. Janae Rivers voted yes. Terrence Mobley voted yes. Elliott Crane voted no. Warren Ashford voted no. Nina Chen voted no. Ramon Vega voted yes. Leonard Tran voted yes.",
         "affectedNeighborhoods": "Jack London, Downtown",
         "policyDomain": "sports",
-        "implementationPhase": "construction-active",
-        "milestoneNotes": "C107: Construction contracts executed; site preparation mobilization begins\nC109: Phase II remediation commenced with independent oversight\nC110: Soil test verification complete; Phase II remediation proceeds with independent oversight\nC111: Construction milestone review scheduled for Cycle 115; remediation proceeds with oversight.\nC112: Independent oversight verified; remediation continues; construction milestone review held for C115\nC113: Phase II remediation on schedule with independent oversight; 48hr construction hotline live; dust control active on haul routes; Jack London workforce coordination meeting set pre-C115 review.\nC114: C115 evidence file assembled — independent remediation verification, hotline/dust records, Jack London workforce results; no milestone declared passed\nC115: Evidence-file milestone review ordered; no construction milestone pass declared, and remediation, hotline, dust-control, and workforce oversight continue.",
-        "nextScheduledAction": "Publish the C115 evidence review and milestone determination",
-        "nextActionCycle": 116
+        "implementationPhase": "complete",
+        "milestoneNotes": "C107: Construction contracts executed; site preparation mobilization begins\nC109: Phase II remediation commenced with independent oversight\nC110: Soil test verification complete; Phase II remediation proceeds with independent oversight\nC111: Construction milestone review scheduled for Cycle 115; remediation proceeds with oversight.\nC112: Independent oversight verified; remediation continues; construction milestone review held for C115\nC113: Phase II remediation on schedule with independent oversight; 48hr construction hotline live; dust control active on haul routes; Jack London workforce coordination meeting set pre-C115 review.\nC114: C115 evidence file assembled — independent remediation verification, hotline/dust records, Jack London workforce results; no milestone declared passed\nC115: Evidence-file milestone review ordered; no construction milestone pass declared, and remediation, hotline, dust-control, and workforce oversight continue.\nC115: closed on the builder's word (2026-11-09: \"Baylight is done ... Close them\")",
+        "nextScheduledAction": null,
+        "nextActionCycle": null
       },
       {
         "name": "Oakland Youth Apprenticeship Pipeline",

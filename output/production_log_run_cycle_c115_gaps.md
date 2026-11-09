@@ -276,3 +276,6 @@ Fresh script output replaced the hand-corrected file. 21/22 hood blocks trace to
 
 ### G-EC45 — Signed fan lines run at about twice the pre-engine.331 volume [judgment] [sports] [MED]
 LifeHistory_Log Sports-Fandom-Up-S: C112 84, C113 99, C114 127, C115 142; engine.331 P3 bar was C105–C110 37–74. Builder's call (engine.331 row to needs-info). Feed word "roster-decision" (A's catcher rumor) is on no pitch route — no pitch, as coded.
+
+### G-EC46 — INIT-003 Fruitvale Transit Hub and INIT-006 Baylight closed by hand on the builder's word [judgment] [civic] [MED]
+Builder 2026-11-09: "Fruitvale hub is built , 4 rounds is 4 cycles and it's been 20 , I'm not waiting ont at anymore , that's done , Baylight is done" / "Close them". Live Initiative_Tracker rows 4 and 6 via lib/sheets: ImplementationPhase design-phase / construction-active → complete, NextScheduledAction + NextActionCycle blanked, LastStageChangeCycle 115, MilestoneNotes line added; read back. C116 Step 2.5 counts these as tracker moves (never rebased). The 4-round schedule did not advance either row for 20 Cycles — builder: "I changed it to 4 phases and it's still doing stupid shit".

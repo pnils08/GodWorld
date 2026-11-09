@@ -67,6 +67,8 @@ Steps with no script: 3 confirms the builder's fire on the live sheet; 4.1 check
 | # | Claim | Proof that settles it |
 |---|---|---|
 | N1 | codex's PreToolUse reaches commands run from code-mode `tools.exec_command` | a blocked codex call after the builder trusts the hook |
+| N2 | Step 2.5 can only run before the fire. If the builder fires before Steps 1–2.5 ran, the chain cannot pass 2.5 and stays open all week | builder's call: strict as built, or a recorded "fired before the check" arm for 2.5 only. A stuck chain's only exit today: delete `output/run-cycle/c<XX>.json` by hand |
+| N3 | The codex guard scans every tool's input, so a codex edit whose text contains `node scripts/<step>.js` (this plan's tests, SKILL.md) is blocked while a chain is open | accepted for now; narrow to codex's exec tools once N1 shows the tool names |
 
 ### New concepts
 

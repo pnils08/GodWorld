@@ -31,7 +31,7 @@ IDs live in `config/notebooklm.json` only — never copy them into scripts.
 | Notebook | Config key | Holds | Canon? |
 |---|---|---|---|
 | `GodWorld` (permanent) | `notebookId` | Published Editions (Saturday publish → `cron-saturday-run.js`, `/post-publish`), graded lore pieces (`loreIngest.js` → `notebooklmPush.js --kind lore`), TrueSource player cards | A reader over what was published and ingested. It reproduces; it promotes nothing |
-| `GodWorld — Daily Newsroom (clean)` (working) | `newsroomNotebookId` | One bounded source per day (today's pack) + the audio-direction guide; older daily sources pruned each run | **Never.** `canonStatus: NOT_CANON` on every manifest. Includes staged and sample drafts by design |
+| `GodWorld — Daily Newsroom (clean)` (working) | `newsroomNotebookId` | Today's sources only, each small and on its own: one per article, one per neighborhood of citizen reflections, the world record by section on a Cycle's first morning. Earlier days' sources pruned each run (pipeline.108) | **Never.** `canonStatus: NOT_CANON` on every manifest. Includes staged and sample drafts by design |
 
 Canon itself is whatever the ingest paths send; an ingest path's gate decides it (CLAUDE.md §Fact sources). NotebookLM is the slow, strong-prose way to ask it; Supermemory `search_canon` is the fast way and what crons use. Exact current values (POPID, initiative status, vote, metric) come from the live sheet, not NotebookLM.
 
@@ -41,7 +41,7 @@ Canon itself is whatever the ingest paths send; an ingest path's gate decides it
 |---|---|---|
 | in | `scripts/notebooklmPush.js` | Adds an artifact as a source to the permanent notebook (`--audio` also renders audio → Drive + Discord; `--kind lore` for lore). Non-blocking by contract: failure prints `NOTEBOOKLM PUSH FAILED (non-blocking)` and exits 0 |
 | in | `cron-saturday-run.js` (publish step), `/post-publish`, `loreIngest.js` | Callers of the push |
-| in | `scripts/notebooklmDailyNews.js` | Builds and adds the daily bounded source to the working notebook (cron 08:00, below) |
+| in | `scripts/notebooklmDailyNews.js` | Builds and adds the day's sources to the working notebook, one per article (cron 08:00, below) |
 | read | `scripts/notebooklmCanonSearch.js` | Read-only, fail-closed query wrapper over the permanent notebook. Scope = the live source list, fetched on every call (pipeline.103); a source not ready fails the call. Policy in `notebooklmCanonSources.json` is the audit (validated by `notebooklmCanonSourcesValidate.js`), not the scope. The `source-search` agent's `prior-published-arc` lane may call only this |
 | read | MCP server `notebooklm` (`mcp__notebooklm__*`) | Interactive queries, studio (audio/report) tools. Needs a reconnected session to appear; the CLI is the fallback |
 | read | Skills that name it | `deep-dispatch`, `sift`, `city-hall-prep`, `desk-review`, `post-publish`, `lore-writer`, `lore-ingest`, `run-cycle` |
@@ -51,11 +51,11 @@ Canon itself is whatever the ingest paths send; an ingest path's gate decides it
 
 `0 8 * * * node scripts/notebooklmDailyNews.js >> logs/notebooklm-daily-news.log`
 
-1. Latest `output/world_summary_c<N>.md` + the last 36 hours of staged/sample newsroom drafts for that Cycle (`hours: 36`) + the citizen day digest.
-2. Queries the permanent notebook for published continuity, scoped to the last two Editions (query timeout 420 s; one retry only for non-timeout failures; on failure it degrades to a no-continuity brief and the next run retries).
-3. Builds one bounded source (hash-named run folder `output/notebooklm/daily/c<N>/<hash>/`), adds it to the working notebook, prunes stale daily sources, queries only that source for the written brief (`daily-brief.md`).
-4. Renders the audio overview in the router's format, drops it to Drive and Discord, deletes the local audio. The ops-report step is non-blocking and has timed out at 15 minutes recently.
-5. Writes `manifest.json`: `routingShadow`, `newsroomPulse` counts, `audioPresentation`, source ids, `canonStatus`.
+1. Collects the last 36 hours of staged/sample newsroom articles (`hours: 36`) for the Cycle, plus the previous Cycle's still in the window; an article no delivered show has carried stays eligible for 72 hours, and one a delivered show carried on an earlier day is not carried again unless its file changed. Edition day adds the printed edition, the Civis journal and the UNDOCKED digest. `buildCitizenWeekDigest` returns every reflection of the last 24 hours by citizen.
+2. Builds the sources in the hash-named run folder `output/notebooklm/daily/c<N>/<hash>/sources/`: one per article (headline, `By <Reporter>, The Bay Tribune`, reader copy; the edition is split on its `====` rules), one per neighborhood of reflections (every citizen by name; `filed:` / `graded:` newsroom rows left out), and — first morning of a Cycle only — the world summary one source per `##` section, Sports cut to the current Cycle. Not sources: the world report on any other day, the permanent notebook's continuity answer (no longer queried), reporter chase notes and gathered quotes, gate-flagged drafts, any direction guide.
+3. Uploads each source on its own (`The Bay Tribune Daily C<N> — <Reporter>: <headline>`; one failed upload is logged and skipped, zero landed fails the run), prunes every earlier daily source, queries today's sources for the written brief (`daily-brief.md`).
+4. Renders the audio overview in the router's format with one short focus (stories by reporter, citizens by name, sources are the only truth), drops it to Drive and Discord, deletes the local audio. The ops report is non-blocking: flagged drafts and gate findings go up as one `gate desk file` source only after the audio is created; it has timed out at 15 minutes recently.
+5. Writes `manifest.json`: `sources` (kind, title, hash, id, file, path), `routingShadow`, `newsroomPulse` counts, `audioPresentation`, `canonStatus`.
 
 **It reports what the evening wake produced.** The 18:15 weekday write wake stages and gates the day's drafts; the 08:00 brief collects them about 14 hours later. If the 18:15 run writes nothing, the next morning has nothing reported.
 
@@ -87,6 +87,7 @@ A "brief" morning means the router saw zero passed filings and no first-morning 
 
 ## Change log
 
+- 2026-11-09 — Daily news v2.0 (pipeline.108, builder: "sources don't need to be on one document, no LLM reads that long of a document"). Through v1.9 the working notebook held two sources a day, one glued file of 12–29k words and the rulebook, and no article was ever its own source (Mon 11-09: 0 articles in 12,550 words). Now every article is its own source by reporter, the day's reflections are one source per neighborhood with every citizen named (was 5 citizens × 2), the world report rides only the first morning of a Cycle, and the rulebook (`config/audio_direction_daily.md`, deleted), the continuity query against the permanent notebook, reporter chase notes/quotes and gate-flagged drafts are out of the audio sources. Airs once: a piece a delivered show carried on an earlier day is skipped; an unaired piece stays eligible 72 h; the previous Cycle's late filings air on the first morning. `buildCitizenWeekDigest.buildDigest` returns `citizens`. Proof is the Tue 11-10 08:00 show.
 - 2026-11-08 — `Lore: lore_c114_john-ellis-deep-dive (Y3C10)` → `efc4fe31-…` ingested on the builder's word ("Go") after three one-line fixes: the first piece from the finished pipeline.106 writer through the real Friday path (calendar + team timeline + subject dossier with card, household and page entries); 40 claims verified on grade. Notebook 154.
 - 2026-11-08 — Two lore pieces by the upgraded writer (pipeline.106) passed after repair and ingested on the builder's word: `Lore: martin-richards-deep-dive (Y3C10)` → `10f17db1-…` (the builder chose the rerun over the repaired original, which is renamed `martin_richards.not-chosen.txt` so `buildArticleIndex.js` does not count it as passed lore) and `Lore: avery_santana_deep_dive (Y3C10)` → `f9225116-…`. Notebook 153.
 - 2026-11-08 — Two repaired lore pieces passed and ingested on the builder's word ("send to canon"): `Lore: deep_dive_henry_rivas (Y3C8)` → `e3949d83-…`, `Lore: arturo_ramos_deep_dive (Y3C10)` → `edea3f29-…` (`loreIngest.js`: notebook + bay-tribune + policy lore bucket + newsroom staging). Notebook 151. The A's team timeline (`TrueSource_Team_Timeline_v1.1.txt`, Drive `1Bo4ZELG…`) copied byte-exact to `archive/non-articles/data/` for the lore writer (pipeline.106).

@@ -149,6 +149,7 @@ async function buildDigest(options) {
       affect: String(r[ri.affect] || ''),
       cycle: ri.cycle >= 0 ? Number(r[ri.cycle]) : null,
       text,
+      full: clip(r[ri.text], 2000),
     });
   }
 
@@ -294,6 +295,24 @@ async function buildDigest(options) {
     vignettes: picked.length,
     lifeEvents: lifeEvents.length,
     reflections: reflections.length,
+    // pipeline.108: every citizen who wrote in the window with every reflection,
+    // uncapped — the daily news uploads these as sources, not the 5×2 vignettes.
+    // A reporter's `filed:` / `graded:` rows are the newsroom's filing record on
+    // their page, not something a citizen wrote; they stay out.
+    citizens: ranked.map(({ popid, rfs }) => {
+      const p = person(popid);
+      return {
+        popid,
+        name: p.name,
+        occ: p.occ || '',
+        hood: p.hood || '',
+        reflections: rfs.filter((rf) => !/^(filed|graded):/i.test(rf.full))
+          .sort((a, b) => a.ts - b.ts).map((rf) => {
+            const convoWith = rf.kind === 'CONVO' ? convoPartner.get(rf) : null;
+            return { text: rf.full, with: convoWith ? person(convoWith).name : '' };
+          }),
+      };
+    }).filter((citizen) => citizen.reflections.length),
   };
 }
 

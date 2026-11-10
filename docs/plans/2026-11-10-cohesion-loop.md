@@ -23,7 +23,7 @@ Not there: an auditor that runs by itself and drafts a fix; a standing wake for 
 
 ## Build
 
-1. **Auditor agent** `.claude/agents/engine-cohesion/` run by `runEngineAgent.js` on the Anthropic credits (Sonnet). Input: the day's staged pieces and their transcripts, `output/cron-feedback.md`, the research.33 map of engine figures. Job: find one cohesion defect, read the code that produces it, and write one file to `docs/for-claude-review/YYYY-MM-DD-cohesion-<topic>.md` holding the evidence (piece + file:line), what would make citizens produce the figure, and a drafted diff. It edits nothing else. Cron, three times a day. A per-run token cap, and the first week's spend read before the cap is raised.
+1. **Flagging agent** `.claude/agents/engine-cohesion/` run by `runEngineAgent.js` on the Anthropic credits. Builder 2026-11-10: "Maybe the agent drafting the fix is too much? If so it can just note what the media is flagging." It notes; it drafts no fix. Input: the day's staged pieces, the show transcript, `output/cron-feedback.md`, the research.33 map. Output: one file a day in `docs/for-claude-review/YYYY-MM-DD-media-flags.md`, one entry per place a reporter circles a figure or a record — the reporter's own sentence, the figure, and where the engine produces it (file:line off the research.33 map; "not on the map" when it is not). The terminal that picks it up reads the code and drafts the fix, with the sandbox and the stronger model. Cron, three times a day; a per-run token cap; first week's spend read before the cap moves.
 2. **Standing wake.** A crontab line three times a day runs a script that, for each terminal pane that is idle at its prompt, sends one line: check the inbox, check the peer for a stuck prompt (overnight doc §4), then continue the NEXT line. A busy pane is never typed into.
 3. **The gate, widened.** Overnight doc §1 becomes the standing rule and gains the builder's line: a cohesion defect is found, fixed through plan → test shell or sandbox → review → deploy, and reported, without asking. Sim behavior is still queued for him.
 4. **Pickup rule.** An inbox cohesion file is a claim: the terminal verifies it against the code, then either builds it as a row of its own or writes why not into the file. Engine substrate goes to engine-sheet with the sandbox proof and review the rules already require.
@@ -34,7 +34,7 @@ Not there: an auditor that runs by itself and drafts a fix; a standing wake for 
 | # | Task | Status |
 |---|---|---|
 | 1 | research.33 map of engine figures (first input) | running 2026-11-10 |
-| 2 | `engine-cohesion` agent + one hand run, file read by a terminal | open |
+| 2 | `engine-cohesion` flagging agent (notes, no fix) + one hand run, file read by a terminal | open |
 | 3 | Wake script + crontab, proven on an idle and a busy pane | open |
 | 4 | Gate text in the overnight doc and `.claude/TERMINAL.md` (control-plane commit) | open |
-| 5 | First defect carried end to end: found by the agent → built → sandbox → live | open |
+| 5 | First defect carried end to end: flagged by the agent → fix drafted and built by a terminal → sandbox → live | open |

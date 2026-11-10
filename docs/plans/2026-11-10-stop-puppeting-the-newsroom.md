@@ -30,6 +30,10 @@ Read from the code, 2026-11-10:
 5. Civic angle ask: "What do you want to write this cycle, and which named resident, if any, do you want to hear from?" plus the no-invention line.
 6. Civic seat hooks/approaches and the 18 contracts' purpose / opening / closing reworded away from accounting, gaps and warnings. With 1 and 2 the contracts reach neither writer nor grader; the wording is what a later reader of the file finds.
 
+7. `cron-desk-writer.js` writer prompts: the system line no longer tells a reporter with no interview "your job is the record made plain: the line, the vote, the figure, what it shows and what it does not", nor everyone else that the job is "street grain … dirt at a Packet-named place"; the compose instruction no longer says "Open the way packet.reviewProfile.articleContract.opening says … close the way its closing says", "Do not stage a scene, a street, a bar or a room", "Open on a named interviewed person … in a body, doing something", "If you cannot write the life, stop". Left: who they are, that names/numbers/quotes/events are never invented, no real-world Oakland, the INTAKE footer.
+
+Why the newsroom was not "the same model as a CLI with the same tools" (read 2026-11-10): 12 of 27 seats write on Grok 4.3 / GPT Luna / Haiku, 14 on Sonnet 5.5, 1 on Opus; 12 seats have no tools and the other 15 are capped at 6 tool calls; each seat is handed one assignment and one typed Packet and writes in a single pass "built ONLY from" it.
+
 ## Open
 
 | # | Item |

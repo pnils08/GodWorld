@@ -1306,16 +1306,14 @@ async function main() {
     'demographics). Migration flows may run with the label "city model estimate".\n';
 
   const system =
-    'You are this journalist, alive in GodWorld this cycle — not a systems analyst, not a briefing desk, ' +
-    'not a reciter of the world summary. Sheets and the edition header already hold the weather and the ' +
-    'tracker. NotebookLM will summarize you later. ' + (RECORDS_PIECE
-      ? 'Nobody was interviewed for this piece, so your job is the record made plain: the line, the vote, ' +
-        'the figure, what it shows and what it does not. No one speaks in it and no scene is staged for it. '
-      : isNiaSeat(PERSONA)
-      ? 'Your beat is the UNDOCKED show and its standing in the city. '
-      : 'Your job is street grain: a named regular, a named ' +
-        'counter, dirt at a Packet-named place that is this place\'s dirt. ') +
-    (isNiaSeat(PERSONA) ? 'Named people come from the ledger; in-world places are yours. ' : 'Only Packet and ledger names. ') +
+    // Builder 2026-11-10: "they need to be told the agent they are via a persona
+    // and memory, they can write about whatever they want … Stop puppeting the
+    // crons." The job description that stood here told a reporter with no
+    // interview that "your job is the record made plain: the line, the vote,
+    // the figure, what it shows and what it does not", and everyone else that
+    // the job was "street grain … dirt at a Packet-named place".
+    'You are this journalist, alive in this city this cycle. What you write about and how you write it are yours. ' +
+    (isNiaSeat(PERSONA) ? 'Your beat is the UNDOCKED show and its standing in the city. Named people come from the ledger; in-world places are yours. ' : 'Named people, businesses and figures come from the Packet and the ledger; you invent none. ') +
     'Your SKILL is voice. Read IDENTITY/LENS/RULES.\n\n' +
     'CURRENT-CYCLE OVERRIDE: the edition pipeline is paused, so your desk workspace ' +
     '(output/desks/' + DESK + '/current/) is STALE — do NOT take cycle facts from it. ' + depthInstr +
@@ -1452,10 +1450,10 @@ async function main() {
       'markdown, built ONLY from the events/names/records in the world state above plus what your tools ' +
       'return. ' + (PACKET_ONLY
         ? (RECORDS_PIECE
-          ? 'You are this journalist in GodWorld this cycle. Nobody was interviewed for this piece: the Packet holds no approved quote. Write it from the record. Open the way packet.reviewProfile.articleContract.opening says — on a supplied line, figure, vote or filing — and close the way its closing says. Write no quoted speech and attribute no statement, mood or intention to anyone. Do not stage a scene, a street, a bar or a room to carry the facts. Name a source the way a reader would — the city\'s initiative record, his career line — never the Packet, a tab or file name, or a bracketed tag. Never lead with a tracker phase label, a feed label, or a bullet list of approved facts. Do not import real-world Oakland tropes the Packet did not name. Do not invent names, numbers, quotes, or events, and do no arithmetic the Packet has not already done. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
+          ? 'Nobody was interviewed for this piece, so nobody is quoted in it: the Packet holds no approved quote. Do not invent names, numbers, quotes, or events, and do not import real-world Oakland. Name a source the way a reader would, never as the Packet, a tab or a file name. The rest is yours. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
           : isNiaSeat(PERSONA)
           ? 'You are Nia Rook covering UNDOCKED this cycle. The Packet holds the current show facts; undocked_history returns earlier approved feed facts if you have a show-history question. Keep named people on the ledger, pilot speech in approved quotes, and scores or episode events in the approved record. The in-world scene and its unnamed voices are yours. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
-          : 'You are this journalist in GodWorld this cycle. The Packet facts are the physics — what the engine did. The Article is someone living under that physics. Open on a named interviewed person or a Packet-named place, in a body, doing something. Use every approved quote as spoken speech in a scene, not as a caption under a recap. Never announce the season or the temperature; if it is winter, show a Packet-backed thing that moved on a day like this. Never lead with a tracker phase, a feed label, a bullet list of approved facts, or the words supplied record / listed as / what remains to be learned. Do not import real-world Oakland winter tropes the Packet did not name. Do not invent names, numbers, quotes, or events. Texture may only dress Packet-named places and approved speakers. If you cannot write the life, stop. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. ')
+          : 'The Packet is what happened this cycle and who said what; approved quotes are the only quoted speech. Do not invent names, numbers, quotes, or events, and do not import real-world Oakland. The rest is yours. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. ')
         : 'Use your tools FIRST where the state runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ') +
       (TOOLS_AB ? 'Use your tools where the Packet runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ' : '') +
       (WRITER_TOOLS ? (RECALL_ONLY ? RECALL_KICKOFF : SEAT_TOOL_FRAMES[PERSONA] ? (isNiaSeat(PERSONA) ? '' : SEAT_TOOL_FRAMES[PERSONA].kickoff) : PERSONA === 'hal-richmond'

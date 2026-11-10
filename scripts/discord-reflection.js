@@ -19,7 +19,6 @@
 require('/root/GodWorld/lib/env');
 const fs = require('fs');
 const path = require('path');
-const http = require('http');
 const Anthropic = require('@anthropic-ai/sdk');
 const mags = require('../lib/mags');
 const page = require('../lib/citizenPage');
@@ -38,7 +37,6 @@ const MOLTBOOK_LOG_DIR = path.join(__dirname, '..', 'logs', 'moltbook');
 const MOLTBOOK_REFLECTION_CURSOR = path.join(MOLTBOOK_LOG_DIR, '.reflection-cursor.json');
 const LOG_DIR = mags.LOG_DIR;
 const LOG_FILE = path.join(LOG_DIR, 'discord-reflection.log');
-const CLAUDE_MEM_URL = 'http://127.0.0.1:37777/api/memory/save';
 const INTAKE_LOCK = path.join(LOG_DIR, 'nightly-intake.lock');
 const INTAKE_SPOOL = path.join(LOG_DIR, 'nightly-intake');
 
@@ -418,53 +416,6 @@ async function queueNightlyIntake(reflection, cycle, clock, instant) {
 }
 
 // ---------------------------------------------------------------------------
-// Save to Claude-Mem
-// ---------------------------------------------------------------------------
-function saveToClaudeMem(reflection, conversationCount) {
-  return new Promise(function(resolve) {
-    var payload = JSON.stringify({
-      text: 'Discord reflection (' + conversationCount + ' conversations today): ' + reflection,
-      // Builder-side memory, not canon-facing: the real Central date belongs here (UTC read as tomorrow from 6 PM).
-      title: 'Nightly Discord Reflection — ' + mags.getCentralDate(),
-      project: 'claude-mem'
-    });
-
-    var url = new URL(CLAUDE_MEM_URL);
-    var options = {
-      hostname: url.hostname,
-      port: url.port,
-      path: url.pathname,
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Content-Length': Buffer.byteLength(payload)
-      }
-    };
-
-    var req = http.request(options, function(res) {
-      var data = '';
-      res.on('data', function(chunk) { data += chunk; });
-      res.on('end', function() {
-        if (res.statusCode === 200) {
-          log.info('Saved to Claude-Mem: ' + data);
-        } else {
-          log.warn('Claude-Mem returned ' + res.statusCode + ': ' + data);
-        }
-        resolve();
-      });
-    });
-
-    req.on('error', function(err) {
-      log.warn('Claude-Mem unavailable: ' + err.message);
-      resolve();
-    });
-
-    req.write(payload);
-    req.end();
-  });
-}
-
-// ---------------------------------------------------------------------------
 // Log the run
 // ---------------------------------------------------------------------------
 function logRun(status, details) {
@@ -572,10 +523,7 @@ async function main() {
     // Append to her citizen page (pipe.40 T1 — the journal's new home)
     await appendToPage(reflection, cycle);
 
-    // Save to Claude-Mem
-    var totalConversations = (entries ? entries.length : 0) + (moltbookEntries ? moltbookEntries.length : 0);
-    await saveToClaudeMem(reflection, totalConversations);
-
+    // pipeline.100 (builder 11-08): no claude-mem copy (builder-side). Her memory store keeps every reflection.
     // Save to Supermemory (her `mags` container is read back into her prompts: sim-clock label, no calendar date)
     var when = clockLabel || 'this cycle';
     mags.saveToSupermemory(

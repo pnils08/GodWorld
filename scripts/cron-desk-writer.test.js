@@ -144,7 +144,7 @@ console.log('cron-desk-writer pipeline.76 dossier_read tests: PASS');
 {
   const { rubricBlock, renderPacketIntake: rpi } = require('./cron-desk-writer');
   const block = rubricBlock({ reviewProfile: { purpose: 'TEST-ONLY purpose', articleContract: { opening: 'TEST-ONLY open', closing: 'TEST-ONLY close', targetWords: '400-700' } } });
-  assert.ok(block.includes('Purpose: TEST-ONLY purpose') && block.includes('Open on: TEST-ONLY open') && block.includes('Length: 400-700'));
+  assert.equal(block, '', 'builder 2026-11-10: the writer is handed no script — no purpose, no Open on, no Close on');
   assert.equal(rubricBlock({}), '');
   const pk = { known: [{ t: 'FACT', text: 'TEST-ONLY fact', src: 'TEST-ONLY src' }], exposure: { sources: [] } };
   assert.ok(rpi('# T\n\nBody.\n', pk).includes('SELF-SCORE'));

@@ -1,0 +1,356 @@
+[00:00] So imagine your city creates this, uh, this massive fund to save your neighborhood.
+[00:04] Right.
+[00:04] Right.
+[00:05] And they spend, um, $7 million on it.
+[00:08] But then when you actually ask to see the receipt, the official ledger
+[00:12] only accounts for about $80,000.
+[00:14] Which is just wild to think about.
+[00:16] It really is.
+[00:17] I mean, $6.9 million is essentially just vanished into thin air.
+[00:21] And the city's response is just this like bureaucratic shrug.
+[00:25] So today we are taking a deep dive into what happens when a city's
+[00:28] official data completely detaches from reality.
+[00:31] Yeah.
+[00:31] And we have an incredible stack of source material for this deep dive today.
+[00:35] We're looking at the cycle one 15 reporting from the Bay Tribune.
+[00:39] Oh yeah.
+[00:39] The Tribune stuff is fascinating.
+[00:40] It really is.
+[00:41] I mean, we've got daily news stories credited to reporters like Carmen
+[00:44] Delane, Dr.
+[00:45] Lila Murat, Jordan Velez, Ena Sorensen, Anthony reigns, Anthony reigns,
+[00:50] Trevor Shimizu and Tamsin Pruitt.
+[00:52] But, uh, beyond the formal journalism, we also have these amazing direct
+[00:57] diary style pages from citizens across Oakland's neighborhoods.
+[01:01] Which honestly gives such a different perspective.
+[01:03] Exactly.
+[01:04] Plus we're bringing in some specific historical context from the Tribune
+[01:07] archive, just to, you know, anchor our analysis and give it some depth.
+[01:11] We're using the archive strictly for background, not as today's news.
+[01:14] Right.
+[01:15] Because the overarching theme leaping out of all these sources is this profound,
+[01:19] almost dangerous disconnect between the city on paper and, uh, the city on the street.
+[01:26] Yeah.
+[01:26] The paper versus the pavement, basically.
+[01:28] Exactly.
+[01:29] So let's start with that $7 million disappearing act, because that is where
+[01:34] the city's paper trail is supposed to be ironclad, you know, the municipal budget.
+[01:38] Well, based on Carmen Delane's reporting, we are looking at the
+[01:41] West Oakland stabilization fund.
+[01:43] Now the original goal, which we actually know from the archive was proposed by
+[01:47] mayor Avery Santana was designed to stop the displacement of legacy residents.
+[01:52] Okay.
+[01:53] And it has a total budget of $28 million.
+[01:55] Okay.
+[01:56] Let's unpack this because 28 million is massive and the official tracker
+[02:00] says 7 million has already gone out the door.
+[02:02] Right.
+[02:03] So as a taxpayer, you look at the ledger and think, Oh great.
+[02:07] The system is working.
+[02:08] Except, uh, the record is completely missing the who.
+[02:12] According to Delane, the tracker only names two specific households receiving aid.
+[02:17] Wait, just two?
+[02:18] Just two combined.
+[02:19] They received $81,188.
+[02:22] So that's roughly 40,000 each.
+[02:24] Hold on.
+[02:25] You are telling me $7 million walked out the door and they only have receipts for 80 grand.
+[02:31] Yeah.
+[02:32] How does a modern city just shrug that off?
+[02:35] Like where did the other 6.9 million actually go?
+[02:38] Well, the tracker contains this, um, tiny note about a scope correction.
+[02:44] A what?
+[02:44] A scope correction.
+[02:46] It simply states that the fund serves businesses as well as residents.
+[02:50] Wait, a scope correction.
+[02:53] Is that just like bureaucratic speak for we changed the rules after the money left the building?
+[02:58] It certainly functions that way.
+[03:00] Yeah.
+[03:01] The implication is that the unexplained 6.9 million balance might be going to local businesses.
+[03:07] But do they list the businesses?
+[03:08] No, the tracker itself is entirely silent on who those businesses are.
+[03:13] So it gives you the arithmetic, but it absolutely refuses to give you the reality.
+[03:17] That is wild.
+[03:19] I mean, if you live in West Oakland and you want to know if this fund is actually keeping your neighbors from being evicted, you literally cannot find out.
+[03:26] Nope.
+[03:27] How are the people running this program even defending that kind of opacity?
+[03:31] Well, Deputy Mayor Brenda Okoro and the program director Marcus Webb, they have this very specific shield they use.
+[03:39] They lean heavily on what they call their 23 day processing standard.
+[03:43] Okay.
+[03:43] What does that mean?
+[03:44] They proudly state that files move from application to check in 23 days.
+[03:49] So they are just throwing process metrics at people and calling it transparency.
+[03:54] Pretty much.
+[03:55] What good is a 23 day processing standard if a citizen has to read some dense redacted closeout document just to guess if any one other block actually got help.
+[04:04] And what's fascinating here is that the archives show Webb privately noting that some household files were actually stalled awaiting vendor title searches.
+[04:13] Oh, wow.
+[04:13] Yeah, he pointed out to his colleagues that while their administrative spreadsheets look fantastic, those spreadsheets don't have to sit in a kitchen and explain delays to families facing eviction.
+[04:23] Right.
+[04:23] They are optimizing for speed, like getting the paper off the desk rather than the actual impact of keeping a family housed.
+[04:31] Exactly.
+[04:32] And citizens absolutely see through this.
+[04:34] Oh, for sure.
+[04:35] I was reading the diary page from Mags Corliss.
+[04:38] She's an editor in chief living in Lake Merritt.
+[04:41] And she pointed out a local council member who voted yes on a totally different funding initiative for Ivy Hill.
+[04:46] Oh, yeah.
+[04:47] The Ivy Hill vote.
+[04:48] The crucial detail Corliss noted there was that this council member actually kept the audit conditions attached to the vote.
+[04:55] Which Corliss highlights as incredibly rare because usually politicians just want the brave sounding soundbite on which he calls an invented emergency.
+[05:03] Right.
+[05:04] Yeah.
+[05:04] And the audit conditions are the very first things dropped.
+[05:07] Exactly.
+[05:08] Demanding proof over posturing is the exception of this city, not the rule.
+[05:12] So true.
+[05:13] And you know, if the city's ledgers can so easily lose track of the details on six point nine million dollars, we have to ask what else is falling off the radar.
+[05:22] Right.
+[05:22] What else is missing?
+[05:23] Well, the reporting from Dr.
+[05:25] Lila Mezrin reveals that the answer is human health.
+[05:29] Oh, man.
+[05:29] It is just chilling to think that a city's most vulnerable people are basically invisible to the data.
+[05:35] It really is.
+[05:36] According to the neighborhood sheets, Dr.
+[05:38] Mezrin analyzed Chinatown currently has 135 sick residents.
+[05:42] Wow.
+[05:43] 135.
+[05:44] Yeah, that is six point one percent of the neighborhood.
+[05:47] It represents the highest concentration of illness in the entire city of Oakland.
+[05:51] But and here's the crazy part.
+[05:53] If you look at the citywide hospital data, it only shows six Chinatown residents in hospital beds.
+[05:59] Right.
+[05:59] Just six.
+[06:01] And the few patients actually named in the hospital records like you as an or Deacon Seymour.
+[06:06] Who we know from the archives had severe workplace accidents.
+[06:09] Yeah.
+[06:09] Right.
+[06:10] None of them even live in Chinatown.
+[06:12] So how is that mathematically possible?
+[06:14] Where are the other 129 sick people?
+[06:18] This is where the historical context is vital.
+[06:20] If we look at the archives from previous cycles, civic reporters and health directors were sounding the alarm about severe emergency dispatch delays, specifically to Chinatown addresses.
+[06:31] So the ambulances were simply taking too long to arrive.
+[06:35] Exactly.
+[06:36] So if the ambulances aren't coming and the hospital bed, they're empty.
+[06:41] Who is carrying the load?
+[06:42] The families, the families and the neighbors.
+[06:45] It is a completely unrecorded shadow economy of care.
+[06:49] You know, think about this like this structural rebar inside concrete.
+[06:52] Oh, I like that.
+[06:53] You can't see it on the surface.
+[06:55] But if you take it out, the whole building just collapses under its own weight.
+[06:59] This shadow economy is the rebar.
+[07:01] That is a brilliant way to conceptualize it.
+[07:04] And the sources give us a perfect example of this in Akua Adeyemi.
+[07:08] The plumber, right?
+[07:09] Yes.
+[07:10] She is a plumber who works in Chinatown.
+[07:11] She says she doesn't need a medical dashboard.
+[07:14] She can read a sick house just by the quote quiet.
+[07:18] Yes.
+[07:19] I loved that part.
+[07:20] She mentions the TV being off in the middle of the day or seeing the medicine moved to the kitchen counter so the family doesn't forget it.
+[07:26] Yeah.
+[07:27] She literally learns to fix pipes without banging her wrench because she knows someone is sleeping in the next room.
+[07:33] A plumber is doing more to accommodate the public health reality, the neighborhood than the official municipal infrastructure.
+[07:39] It's incredible.
+[07:40] And the people working inside the official system, they know it's broken, too.
+[07:44] Oh, absolutely.
+[07:45] Take Patricia Nwosu, the downtown deputy health officer.
+[07:48] In her diary page, she writes about quietly dreading the phone ringing with another cluster report.
+[07:54] Because she knows there's no real help to send.
+[07:56] Exactly.
+[07:57] She just wants one ordinary day because she knows her official data is a fiction.
+[08:02] She doesn't even have honest answers for her own kids about who gets into local programs.
+[08:07] Jax Caldera, a journalist in Chinatown, put it perfectly.
+[08:10] The neighborhood doesn't wait for a ledger.
+[08:13] The lady at the herbal shop already knows who is missing.
+[08:16] Right.
+[08:17] They notice who stopped coming in for tea.
+[08:19] That network of observation and care is saving lives, but it will never show up on Patricia Nwosu's desk.
+[08:25] Which brings us to a really harsh realization about how the city values labor.
+[08:29] Yeah.
+[08:29] The failure to track who is sick actually mirrors a failure to track who provides essential but unglamorous value to the city.
+[08:37] And we see this vividly in Jordan Velez's reporting on the Baylight district.
+[08:41] Oh, let's talk about Baylight because this is a massive $2.1 billion waterfront redevelopment project.
+[08:47] It's huge.
+[08:48] You've got these tech companies like Anthropic and Digital Ocean generating hundreds of millions in revenue.
+[08:54] The Baylight Construction Authority has 451 employees actively building up the district.
+[08:59] It looks like an economic miracle on paper.
+[09:02] But amidst all that wealth, Velez reports on marine systems.
+[09:06] They are a sea level monitoring firm located right there in the district.
+[09:10] Right.
+[09:11] And they just cut their staff from five people down to three.
+[09:13] So they fired two people.
+[09:15] Yeah.
+[09:15] And one of the remaining technicians is Mina Linus.
+[09:18] That staff cut represents roughly $360,000 in payroll that has completely evaporated from the local economy.
+[09:26] So what does this all mean?
+[09:27] Imagine you are doing a massive luxury kitchen renovation in your house.
+[09:31] OK.
+[09:32] And to help pay for the imported Marvel countertops, you decide to unscrew and sell off your home smoke detectors.
+[09:37] Wow.
+[09:38] That is exactly what Oakland is doing here.
+[09:41] The mechanics of that analogy are spot on because the sea level monitor provides warning.
+[09:46] They watch the water that this entire multi-billion dollar district is being built beside.
+[09:51] Right.
+[09:51] But that safety value is completely invisible.
+[09:54] Exactly.
+[09:55] It doesn't show up on a balance sheet until a disaster hits.
+[09:58] The city values the scaffolding and values the tech revenue.
+[10:02] But it doesn't value the people measuring the water until the water is literally in the lobby.
+[10:06] And the human cost of that specific devaluation is immediate.
+[10:10] In the archives we see Keisha Ramos, the director of the Baylight Redevelopment Authority.
+[10:15] What was her take?
+[10:16] Well, previously she was lying awake at night worrying about soil tests and community accountability.
+[10:22] But now she looks at marine systems and notes that while dropping from five to three employees is just a rounding error on the city's ledger, that is two local families who just permanently lost their paychecks.
+[10:34] And you also have Brianna Lee, a historic preservation carpenter, offering her perspective from the scaffolding itself.
+[10:41] The people physically building the city see exactly who is being left behind by this boom.
+[10:45] Yeah.
+[10:46] And this extreme divergence between glossy downtown projects and neighborhood survival is perhaps most glaringly visible in how the city experiences its sports teams.
+[10:56] The Oakland A's.
+[10:57] Specifically the A's.
+[10:59] According to Inez Sorensen and Anthony Raines' reporting, the A's just had a historic run.
+[11:05] They won 127 games and captured their seventh World Series title.
+[11:09] Which is amazing.
+[11:10] And if you look at the broadcast, you would assume the entire city is vibrating on the exact same frequency, you know, like they're unified by wealth and victory.
+[11:18] But the citizens diary pages shatter that illusion entirely.
+[11:22] Oh, completely.
+[11:22] Alicia Hernandez is an uptown coffee roaster who just retired.
+[11:26] She is writing about waking up and learning to be a person instead of a schedule, smelling her own sleep instead of industrial coffee beans.
+[11:34] Right.
+[11:34] The A's success hasn't touched her life in the slightest.
+[11:37] And Pilar Ramirez, a Lake Merritt paramedic, she feels the exact same way.
+[11:41] She is entirely disconnected from the team's wealth.
+[11:44] She even notes that the civic workshops the city holds to promote unity never actually change her day to day reality.
+[11:50] Yeah.
+[11:51] And consider Mariana Kapoor a student in Chinatown.
+[11:54] She loved the championship parade.
+[11:56] She noted that for one second, everyone was laughing and it felt bigger than the block.
+[12:00] But the parade is fleeting.
+[12:01] Exactly.
+[12:02] Her real focus is the grown up talk she overhears at the cultural center about rent and jobs.
+[12:08] Because the parade is an event, but the rent is a permanent condition.
+[12:11] Such a good point.
+[12:12] Which makes the outlier in this sports narrative so absolutely fascinating to me.
+[12:16] We have to talk about John Ellis.
+[12:17] Oh, John Ellis.
+[12:19] He is a 25 year old elite pitcher for the A's.
+[12:21] Yep.
+[12:22] He throws a 99 grade fastball, makes $780,000 a year and just pitched a phenomenal World Series.
+[12:28] By every metric of professional sports, he should be living in a downtown glass penthouse, completely insulated from the city's friction.
+[12:35] But he actively refuses to.
+[12:37] He chooses to rent a two bedroom bungalow in the Laurel district for $2,150 a month.
+[12:42] It's so unusual.
+[12:43] From a landlord who won't even fix a sticky back door.
+[12:46] He just walks down MacArthur Boulevard to buy milk.
+[12:49] Why would a multimillionaire crave that kind of friction?
+[12:52] If we connect this to the bigger picture, it's because he understands what the ledger misses.
+[12:56] The reporting details a public clash Ellis had with Gordon Tate, a superior court liaison.
+[13:01] Oh, right over the rec center.
+[13:03] Yeah.
+[13:03] Ellis was furious about the rotted, dangerous plywood roofs at the local rec center.
+[13:07] He couldn't understand why downtown stadium amenities get limitless funding while the neighborhood centers just fall apart.
+[13:14] And Tate gave him this standard bureaucratic runaround, right?
+[13:16] Like citing jurisdictional boundaries and budgets.
+[13:18] Precisely.
+[13:19] And you know, to which Ellis basically responded that he knows what money smells like and he knows what excuses smell like.
+[13:25] He doesn't just complain either.
+[13:26] He bridges the gap between the two Oakland's by physically doing the work the city ignores.
+[13:31] Right.
+[13:31] He goes out and literally rolls gray primer over graffiti on the rec center wall alongside Rosalyn Young, a local smoke shop owner.
+[13:39] And that image of like a world series picture, like painting a wall with a smoke shop owner while talking about like B navigation tobacco taxes is just incredible.
+[13:48] It is.
+[13:49] And for Ellis, the respect of like the local like AC transit bus driver who sees him painting that wall is is worth more than his pitching stats.
+[13:56] He values like community buy in over kind of a luxury bubble.
+[14:01] Yeah.
+[14:01] And we can contrast, you know, Ellis's active engagement with the quiet reflection of Vinnie Keene.
+[14:07] The retired player.
+[14:08] Right.
+[14:09] Right.
+[14:09] Yeah.
+[14:09] Tamzin Pruitt's reporting covers Keene, a legendary A's designated hitter who just retired.
+[14:15] He is adjusting to life in the Grand Lake neighborhood.
+[14:18] And there is like this beautiful like I love that in the sources he was able to like overhear this conversation between Vinnie and his wife Amara.
+[14:26] And they were talking about like like getting coffee at Port Grind.
+[14:28] Yeah.
+[14:29] And it's you know Vinnie talking about waking up early without a bat in his hands.
+[14:33] He's kind of like you know catch himself looking at the box course still and stuff like that.
+[14:36] But he is realizing that like the neighborhood neighborhood's heart can't be bought or sold.
+[14:42] He says you know some things are worth more than than what's on paper.
+[14:45] And that realization that the reality of the city defies what is on paper brings us to the most perplexing phenomenon reported in cycle 115.
+[14:54] The transit data.
+[14:55] Yes.
+[14:55] Despite all these fractures you know they uncounted funds in West Oakland the invisible sick in Chinatown.
+[15:01] The city still manages to act as a single massive breathing organism.
+[15:05] Trevor Shimizu's reporting on the transit system blew my mind.
+[15:08] AC Transit and BART experienced a massive totally unexplained 58 percent spike in ridership on an ordinary Tuesday and Wednesday.
+[15:16] 58 percent.
+[15:17] We are talking 73,938 riders across eight stations.
+[15:23] 19th Street Station alone saw over 16000 riders.
+[15:27] Just think about your own commute for a second.
+[15:29] Normally if you overload a fragile public transit system by nearly 60 percent it collapses under the strain.
+[15:36] Right. There are delays breakdowns.
+[15:39] But the metrics show the exact opposite.
+[15:41] Which is wild. On time performance actually improved.
+[15:45] Fruitvale Station went up 15 points in on time performance.
+[15:48] The congestion metrics across the board dropped.
+[15:51] So weird.
+[15:52] How does a crowded machine run smoother.
+[15:55] Well the official explanations try to force a logical top down reason.
+[16:00] Jimena Meta the BART PR representative proposes what she calls a stacking theory.
+[16:05] What does stacking theory even mean in this context.
+[16:07] She argues that several isolated events simply stacked on top of each other on the same day like an Oaks basketball game downtown.
+[16:14] The Baylight district vote and various local events and that created an artificial surge.
+[16:19] But the people actually running the system reject that entirely don't they.
+[16:22] They do. Alaina Soria Dominguez transit hub planning lead and Cohen Cartier a bus operator completely dismiss the stacking theory.
+[16:30] Because they're the ones on the ground.
+[16:31] Right. Cartier couldn't pinpoint a specific cause from the driver's seat.
+[16:35] He just saw people moving.
+[16:37] They argue this is just the organic swell of the city.
+[16:40] Here's where it gets really interesting.
+[16:42] Let's dig into the mechanics of that organic swell.
+[16:45] If you increase the weight on the machine by 58 percent the machine runs smoother.
+[16:49] It means the machine was originally built to carry that heavier weight.
+[16:52] That makes sense.
+[16:53] Maybe the sheer volume of people forced the trains to pause longer at stations naturally regulating the pacing and preventing the usual erratic start stop
+[17:01] bottlenecks.
+[17:02] That is a really compelling way to look at it.
+[17:04] The schedule makers looking at the ledger completely miss this capacity.
+[17:09] They designed schedules for an idealized sterile version of Oakland.
+[17:13] The version that doesn't exist.
+[17:15] But the city itself the living organism is capable of syncing up and moving together in ways that defy those official metrics.
+[17:22] And to really understand that living organism we have to pull back from the macro level statistics of transit systems and municipal budgets.
+[17:29] The sources provide these deeply personal diary pages that show us the micro level reality of the citizens.
+[17:37] We hear from Elijah Brown an electrician in Rockridge.
+[17:40] He writes about walking home and noticing a porch light at the end of the block flicker twice.
+[17:45] Such a small detail.
+[17:47] It is a tiny seemingly insignificant detail but it made him stop in the quiet and he felt just for a second like the neighborhood itself was checking in on him.
+[17:57] Or consider Ella Lilo the harbor tugboat captain who just retired in Jack London.
+[18:02] She writes about the old habit of her alarm going off at 430 a.m.
+[18:06] Yeah that's early.
+[18:08] But now instead of the frantic rush of the harbor she actually gets to sit and enjoy her first cup of coffee in the stillness.
+[18:16] We also have a Marikine Vinnie's wife in Grand Lake who is a pianist.
+[18:20] She writes about spending a quiet afternoon playing a soft piano arrangement that feels exactly like the early morning light on the lake.
+[18:27] When you synthesize these voices you realize that these diary pages are the true ledgers of Oakland.
+[18:33] Absolutely.
+[18:34] The official records missed the sick hiding behind quiet doors in Chinatown.
+[18:39] The municipal tracker lost the names of the people the West Oakland stabilization payout was supposed to save.
+[18:46] But citizens never missed a beat in observing their own lives and their own reality.
+[18:52] It becomes incredibly clear that being well informed requires far more than knowing the data points on a municipal tracker.
+[19:00] Yeah.
+[19:01] You can memorize the 23 day processing standard or quote the two point one billion dollar Bay Light valuation but that is just reading the receipt.
+[19:10] Truly understanding this city means understanding the vast unrecorded shadow economy of care community and daily routine that actually keeps it functioning.
+[19:19] Exactly.
+[19:20] It is Rosalind Young painting a wall because the city won't.
+[19:24] It is Akua Adeyemi diagnosing a neighborhood's health with a wrench.
+[19:29] It is the invisible infrastructure of human connection that holds the concrete together.
+[19:34] Which leaves us with a final somewhat provocative thought for you to mull over.
+[19:39] Yeah.
+[19:39] We have seen how Oakland's survival relies so heavily on the undocumented unmeasured resilience of its people like the families caring for their sick without a hospital bed or the sea level monitors doing the work of five people with only three.
+[19:55] So does the publication of a clean official ledger actually hurt the city.
+[20:00] If the city's paperwork looks perfect because it conveniently ignores the messy uncounted reality why would those in power ever feel the urgency to fix the systems that are actually broken.
+[20:10] That's a great question to end on.
+[20:12] Thank you for joining us on this deep dive into the Bay Tribune sources.
+[20:15] Until next time keep looking past the receipt.

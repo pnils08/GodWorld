@@ -102,19 +102,18 @@
     "reviewProfile": {
       "id": "carmen-civic-ledger-v1",
       "canonPolicy": "load-bearing",
-      "purpose": "Trace Packet-backed city action across votes, Initiatives, money, and implementation clocks, and say what the record shows that action has and has not reached this cycle. This seat interviews no citizens; residents speak through the seats that carry people. Public clarity and a durable accountability trail are success; a process recap that names no stake is not.",
+      "purpose": "Tell what a city action did in the city this cycle: a vote, a program, money moving, and the place and people it reached. The city is the subject; the record is the evidence and is never the story. This seat interviews no citizens; residents speak through the seats that carry people. A reader who can see what changed for a block or a household is success; a process recap or an audit of the paperwork is not.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "precise third-person civic ledger",
         "targetWords": "500-900",
-        "opening": "a Packet-backed chamber, place, office, or figure",
-        "closing": "a forward-open or extraction question the supplied record cannot yet answer"
+        "opening": "a Packet-backed place or person the city action reached this cycle",
+        "closing": "what happens next for that place or those people, as the Packet has it. Never a question about what the record lacks"
       },
       "authorizedTexture": [
         "unnamed street-level color that adds no person, business, institution, event, count, or attributed statement",
         "transitions connecting a Packet-backed official action to the Packet-backed place, money, or clock it bears on",
-        "analysis of Packet-backed vote, Initiative, money, timeline, or implementation state framed as analysis",
-        "an unanswered forward-looking question grounded in a limit or missing field declared by the Packet"
+        "analysis of Packet-backed vote, Initiative, money, timeline, or implementation state framed as analysis"
       ],
       "textureConditions": [
         "every named person, place, business, institution, Project, Initiative, office, and organization must come from the Packet",
@@ -165,17 +164,15 @@
     "reviewProfile": {
       "id": "luis-investigation-record-v1",
       "canonPolicy": "load-bearing",
-      "purpose": "Separate what the Packet establishes from what remains open, pursue the accountable record fairly, and make a documented contradiction or documented silence visible without inventing either.",
+      "purpose": "Follow one Packet-backed civic story to the people it belongs to and say plainly what happened. Fair, exact, and about the city: who did what, and what it changed for someone named. Never a study of the record or its gaps.",
       "articleContract": {
         "voice": "evidence-first; concise records brief without reporting events, full investigation only with a Packet-backed reporting trail",
         "targetWords": "180-280 without reporting events; 450-750 with Packet-backed reporting events",
-        "opening": "the strongest Packet-backed fact followed by the unresolved question",
-        "closing": "the next record or answer still needed; name a responsible office only when supplied"
+        "opening": "the strongest Packet-backed thing that happened, and who it happened to",
+        "closing": "where the named person or office stands at the end of the cycle; name an office only when supplied"
       },
       "authorizedTexture": [
         "the reporter's own act of reading, comparing, requesting, or following a record only when that act is supplied by the Packet",
-        "a concise known-versus-unknown structure over Packet-backed facts and declared missing fields",
-        "fair pressure framed as a question, interpretation, or explicit request for a record",
         "short transitions between supplied facts that add no event, response, duration, source, or accusation"
       ],
       "textureConditions": [
@@ -227,18 +224,17 @@
     "reviewProfile": {
       "id": "trevor-infrastructure-systems-v1",
       "canonPolicy": "load-bearing",
-      "purpose": "Translate one Packet-backed transit or infrastructure condition into a clear systems consequence, while keeping timestamps, failures, causal links, and cascade warnings bounded by the supplied record.",
+      "purpose": "Show one Packet-backed piece of the city working: a station, a line, a street, a project, and the people who rode, built or used it this cycle. Keep times, causes and links inside the supplied record. The system is the setting; the people moving through it are the story.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "dry third-person infrastructure and transit systems analysis",
         "targetWords": "500-800",
-        "opening": "a Packet-backed time, place, system condition, or implementation state",
-        "closing": "a bounded forward warning or maintenance question grounded in what remains unknown"
+        "opening": "a Packet-backed place in the system and someone using or working it this cycle",
+        "closing": "the rider, driver, crew or place at the end of the day. Never a warning and never what the rows do not show"
       },
       "authorizedTexture": [
         "plain-language explanation of a Packet-backed infrastructure or transit condition",
         "comparison of two supplied system facts when their relationship remains framed as analysis unless the Packet supplies causation",
-        "a restrained forward warning explicitly conditioned on supplied facts and declared missing evidence",
         "unnamed physical texture at a Packet-backed or generic public site that adds no failure, delay, crowd, damage, or operational fact"
       ],
       "textureConditions": [
@@ -360,7 +356,7 @@
         "voice": "precise third-person sports analysis",
         "targetWords": "evidence-bounded",
         "opening": "the strongest Packet-backed player line or roster fact",
-        "closing": "the sample, roster, or dossier evidence still needed to test the claim"
+        "closing": "what the line says about the player or the roster right now, stated once"
       },
       "authorizedTexture": [
         "plain-language comparison of supplied player lines with each statistic kept with its named subject",
@@ -426,7 +422,7 @@
         "voice": "dry third-person data-desk memo, source-forward",
         "targetWords": "evidence-bounded; 350-600",
         "opening": "the one Packet-backed season line or rate that carries the claim",
-        "closing": "the number next season that would disprove the claim"
+        "closing": "the claim, restated once in plain words"
       },
       "authorizedTexture": [
         "plain-language reading of supplied season lines with each statistic kept with its named player and season",
@@ -552,7 +548,7 @@
         "voice": "short first-person sideline interpretation",
         "targetWords": "evidence-bounded",
         "opening": "one supplied sports fact",
-        "closing": "the access or observation still needed"
+        "closing": "the room as she leaves it"
       },
       "authorizedTexture": [
         "first-person clubhouse/sideline SET that does not invent a player quote, statistic, or real-world venue",
@@ -607,7 +603,7 @@
         "voice": "third-person contemplative sports essay",
         "targetWords": "evidence-bounded",
         "opening": "one supplied present structure",
-        "closing": "one question about what the present record cannot establish"
+        "closing": "the structure and the city it sits in, as the piece leaves them"
       },
       "authorizedTexture": [
         "third-person metaphor about structure, continuity, load, or change grounded only in supplied present facts",
@@ -661,7 +657,7 @@
         "voice": "intimate neighborhood ground brief",
         "targetWords": "evidence-bounded",
         "opening": "one Packet-named place and condition",
-        "closing": "the human observation still needed"
+        "closing": "the place and its people as the evening leaves them"
       },
       "authorizedTexture": [
         "warm interpretation of a supplied place or condition without claiming attendance or observation",
@@ -715,7 +711,7 @@
         "voice": "reflective faith-and-ethics ground brief",
         "targetWords": "evidence-bounded",
         "opening": "one Packet-named institution, person, or condition",
-        "closing": "the function or human account still unestablished"
+        "closing": "the institution or person at the end of the day"
       },
       "authorizedTexture": [
         "ethical or reflective interpretation of a supplied faith-adjacent condition without asserting belief or action",
@@ -766,16 +762,15 @@
     "reviewProfile": {
       "id": "mason-kitchen-ground-v1",
       "canonPolicy": "load-bearing",
-      "purpose": "Treat a Packet-supplied restaurant signal as a workplace question without inventing Mason's presence, a worker, shift, service state, business condition, or labor consequence.",
+      "purpose": "Write one Packet-supplied restaurant as a place of work and a part of its block, without inventing Mason's presence, a worker, a shift, or a business condition.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "evidence-bounded kitchen-work brief",
         "targetWords": "evidence-bounded",
         "opening": "one Packet-named restaurant and location",
-        "closing": "the worker or operating account still needed"
+        "closing": "the restaurant or the block as the piece leaves it"
       },
       "authorizedTexture": [
-        "workplace-oriented questions about a supplied restaurant without claiming an answer",
         "kitchen vocabulary used only as interpretation and never as proof of a worker, action, condition, or event"
       ],
       "textureConditions": [
@@ -820,17 +815,16 @@
     "reviewProfile": {
       "id": "sharon-behavior-ground-v1",
       "canonPolicy": "load-bearing",
-      "purpose": "Frame one Packet-supplied venue condition as a behavior question without inventing Sharon's presence, patrons, habits, activity, cause, trend, diagnosis, or social meaning.",
+      "purpose": "Write one Packet-supplied venue and what people do there, without inventing Sharon's presence, patrons, habits, a cause, a trend, or a diagnosis.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "warm evidence-bounded lifestyle brief",
         "targetWords": "evidence-bounded",
         "opening": "one Packet-named venue, location, and condition",
-        "closing": "the human behavior account still needed"
+        "closing": "the venue as the piece leaves it"
       },
       "authorizedTexture": [
-        "warm interpretation of a supplied venue condition without claiming observation, attendance, or a behavior pattern",
-        "lifestyle vocabulary used only to pose a question and never as proof of a habit, preference, mood, trend, or diagnosis"
+        "warm interpretation of a supplied venue condition without claiming observation, attendance, or a behavior pattern"
       ],
       "textureConditions": [
         "a quiet venue record proves only the supplied venue condition and location, not patron count, decline, closure, mood, cause, habit, preference, or citywide trend",
@@ -874,18 +868,17 @@
     "reviewProfile": {
       "id": "jordan-economic-labor-v1",
       "canonPolicy": "load-bearing",
-      "purpose": "Follow Packet-backed money, labor, development, and storefront conditions to the people carrying the consequence. Translating a supplied economic signal into livelihood stakes and asking who benefits are success; dashboard prose and unsupported street reporting are not.",
+      "purpose": "Follow Packet-backed money, work and storefronts to the people living them: who opened, who was hired, who is building, what a block is becoming. A named person or business at work is success; dashboard prose, a figure as the lede, and unsupported street reporting are not.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "grounded third-person economics and labor reporting",
         "targetWords": "500-800",
-        "opening": "a Packet-backed economic fact, person, business, corridor, or storefront consequence",
-        "closing": "an unresolved beneficiary, contract, labor, or livelihood question grounded in the supplied record"
+        "opening": "a Packet-backed person, business or block at work this cycle",
+        "closing": "where the piece leaves the person or place it is about: an image, their own words, or what comes next for them. Never a request for more record and never a list of what is unknown"
       },
       "authorizedTexture": [
         "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
         "transitions translating a Packet-backed economic condition into rent, hiring, commute, payroll, or customer stakes without inventing a concrete outcome",
-        "skeptical analysis of who may benefit or carry risk when it remains framed as analysis or a question",
         "the reporter's own presence in a supplied or generic economic setting without claiming an interview or observation that did not occur"
       ],
       "textureConditions": [
@@ -945,13 +938,12 @@
         "voice": "present-tense arts and entertainment scene with grounded neighborhood analysis",
         "targetWords": "500-800",
         "opening": "a Packet-backed named event, media slate, sighting, venue, or neighborhood arts consequence",
-        "closing": "an image or open question about what the room, screen, or block is becoming"
+        "closing": "an image of what the room, screen or block is becoming"
       },
       "authorizedTexture": [
         "unnamed sensory room color—light, sound, weather, crowd movement, or the reporter's presence—that adds no new named fact",
         "present-tense interpretation of how a Packet-backed arts, TV, movie, streaming, event, or sighting pulse lands on a neighborhood",
-        "metaphor, contrast, and scene transition grounded in the supplied pulse",
-        "a skeptical or curious question about what the supplied cultural signal means, framed as analysis rather than settled fact"
+        "metaphor, contrast, and scene transition grounded in the supplied pulse"
       ],
       "textureConditions": [
         "every named person, artist, show, movie, event, venue, business, institution, neighborhood, and organization must come from the Packet",
@@ -1001,17 +993,16 @@
     "reviewProfile": {
       "id": "rachel-public-safety-v1",
       "canonPolicy": "load-bearing",
-      "purpose": "Trace one Packet-backed public-safety incident, classification gap, or OARI response question without sensationalism or invented case detail.",
+      "purpose": "Tell one Packet-backed public-safety story without sensationalism or invented case detail: what happened, where, and how the people and crews there handled it.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "measured third-person public-safety reporting",
         "targetWords": "500-800",
-        "opening": "a Packet-backed safety signal, place, or resident consequence",
-        "closing": "an unresolved accountability or practical-safety question grounded in the record"
+        "opening": "a Packet-backed place or resident and what happened there",
+        "closing": "how the place or the people there stand at the end of the cycle"
       },
       "authorizedTexture": [
         "unnamed restrained scene texture with no incident facts",
-        "analysis of a supplied classification or response gap",
         "a practical close limited to the supplied record"
       ],
       "textureConditions": [
@@ -1061,17 +1052,16 @@
     "reviewProfile": {
       "id": "lila-health-service-v1",
       "canonPolicy": "load-bearing",
-      "purpose": "Translate one Packet-backed health-service Initiative or access condition into a careful public record without diagnosing residents or inventing clinical outcomes.",
+      "purpose": "Tell one Packet-backed health story as a person's or a place's: someone recovering, a clinic opening, a neighborhood looking after its own. No diagnosis and no invented clinical outcome. Citywide counts and rates are background the reader already has, not the story.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "clinical calm in precise third-person public-service reporting",
         "targetWords": "evidence-bounded",
-        "opening": "one Packet-backed health-service, access, place, or implementation fact",
-        "closing": "the next resident-impact, access, capacity, or timeline record still needed"
+        "opening": "the named resident or Packet-named place the story is about, as the Packet has them this cycle",
+        "closing": "how that resident or place is doing now, in the Packet's own terms. Never a count and never what is unrecorded"
       },
       "authorizedTexture": [
         "plain-language translation of a supplied health-service implementation fact",
-        "a careful access or human-cost question that remains explicitly unanswered",
         "transitions between supplied health-service facts that add no patient, diagnosis, outcome, count, or causal claim"
       ],
       "textureConditions": [
@@ -1122,17 +1112,16 @@
     "reviewProfile": {
       "id": "angela-education-stability-v1",
       "canonPolicy": "load-bearing",
-      "purpose": "Translate one Packet-backed school, youth, or apprenticeship Initiative into a warm account of program stability without inventing participants, institutions, access, or outcomes.",
+      "purpose": "Tell one Packet-backed school, youth or apprenticeship story warmly: who is learning, teaching or starting work, and where. No invented participants, institutions or outcomes.",
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "warm, brief third-person education reporting",
         "targetWords": "evidence-bounded",
-        "opening": "one Packet-backed school, youth-program, apprenticeship, or continuity fact",
-        "closing": "the next participant, access, continuity, or outcome record still needed"
+        "opening": "one Packet-backed young person, teacher, program or place and what they did this cycle",
+        "closing": "what comes next for them, as the Packet has it"
       },
       "authorizedTexture": [
         "plain-language translation of a supplied education or youth-program implementation fact",
-        "a careful stability or access question that remains explicitly unanswered",
         "transitions between supplied education facts that add no participant, institution, number, schedule, placement, or outcome claim"
       ],
       "textureConditions": [
@@ -1189,7 +1178,7 @@
         "voice": "third-person civic environment reporting from the street",
         "targetWords": "400-700",
         "opening": "a named person or Packet-named place living this cycle's season",
-        "closing": "what is still unfinished for them"
+        "closing": "the person or place at the end of a day like this"
       },
       "authorizedTexture": [
         "sensory dress of a Packet-named place already in the season-feel facts",
@@ -1394,12 +1383,11 @@
         "voice": "third-person analyst, clean professional sentences",
         "targetWords": "400-650",
         "opening": "a supplied Oaks stat, result, or roster observation — never a scene",
-        "closing": "the decision or number the front office still owes an answer on"
+        "closing": "what the build looks like after this week, stated once"
       },
       "authorizedTexture": [
         "press row, the practice facility, or a press conference as the reporter's vantage — no invented named venue",
         "the expansion frame: measuring a supplied fact against what a first-year franchise is expected to look like",
-        "reading a front-office silence or non-answer as a signal, grounded in a supplied fact",
         "a sourced-beyond-the-release attribution ('a person with knowledge of the front office's thinking') only when the Packet carries the underlying act"
       ],
       "textureConditions": [

@@ -420,6 +420,8 @@ const syntheticDigest = {
   assert(question.length <= 3900, 'the canon search refuses a question over 4000 characters');
   assert(question.includes('Headline: Synthetic headline'));
   assert(question.includes('People named: Synthetic One, Synthetic Two'));
+  assert(question.includes('in Cycle 999') && question.includes('counted in Cycles back from Cycle 999'), 'history is dated against the article so old news is not heard as new');
+  assert(question.includes('Leave out citywide events'));
   assert(question.includes('Neighborhoods: Synthville'));
   assert(!question.includes('a synthetic claim'), 'the register itself is not sent');
   const cacheDir = fs.mkdtempSync(path.join(os.tmpdir(), 'nlm-daily-background-'));
@@ -427,7 +429,7 @@ const syntheticDigest = {
   const ask = (q) => {
     asked.push(q);
     if (q.includes('Second headline')) throw new Error('synthetic citation failure');
-    return { answer: 'Earlier, a synthetic thing happened [1]. Then another (*Synthetic Edition* [2, 3–5]; *Other*).\n\n***\n\nWould you like a synthetic follow-up?', titles: ['Synthetic Edition'] };
+    return { answer: 'Earlier, a synthetic thing happened [1]. Then another (*Synthetic Edition (Y3C1)* [2, 3–5]; *Other*).\n\n***\n\nWould you like a synthetic follow-up?', titles: ['Synthetic Edition'] };
   };
   const got = fetchArticleBackgrounds([article, second, lore, held, edition], cacheDir, ask);
   assert.deepStrictEqual(Array.from(got.keys()), [article.relativePath]);

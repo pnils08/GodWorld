@@ -679,9 +679,15 @@ function backgroundQuestion(report) {
       .map((line) => line.replace(/^[A-Z]+:\s*/, '').split('|')[0].trim()).filter(Boolean)));
   const names = register('NAMES');
   const hoods = register('HOOD');
+  const now = Number(report.cycle) || cycleFromName(report.file || report.relativePath || '') || null;
   const head = [
-    'A Bay Tribune reporter has filed the article below. From what was published before it, give the history a listener needs to follow it:' +
-      ' what earlier coverage said about these people, places, institutions and storylines, what was promised or left unresolved, and how it led here.',
+    'A Bay Tribune reporter has filed the article below' + (now ? ' in Cycle ' + now : '') + '. From what was published before it, give the history a listener needs to follow it:' +
+      ' what earlier coverage said about the people and places this article names, what was promised or left unresolved, and how it led here.',
+    // 2026-11-10: the first show presented the Cycle-110 title as news and
+    // hung it on stories it had nothing to do with. The history is dated
+    // against the article's own Cycle and kept to the article's own subjects.
+    'Only history that bears directly on the people and places named in this article. Leave out citywide events (a championship, an election, a season) unless this article is about them.' +
+      (now ? ' Write in the past tense and say how long ago each thing was, counted in Cycles back from Cycle ' + now + ' ("five Cycles ago, in Cycle ' + (now - 5) + '"), so nothing old can be heard as new.' : ''),
     'Published fact only, earliest first, in plain paragraphs under 400 words: no headings, no lists. Do not restate the new article.' +
       ' Do not invent history, quotes or figures. Cite the source for every statement. Stop when the history ends: no closing offer, no question.',
     'Headline: ' + reportHeading(report),
@@ -700,7 +706,7 @@ function backgroundSource(report, background) {
     '',
     // citation markers and the notebook's closing "Would you like…" offer are not for listening
     String(background.answer).replace(/\s*\[\d+(?:\s*[-,–]\s*\d+)*\]/g, '')
-      .replace(/\s*\((?:\*[^*)]+\*[\s;,]*)+\)/g, '')
+      .replace(/\s*\((?:\*[^*]+\*[\s;,]*)+\)/g, '')
       .replace(/\n+(?:[*_-]{3,}\s*\n+)?(?:Would you like|Let me know|If you(?:'d| would) like)[^\n]*\s*$/i, '').trim(),
   ];
   return {

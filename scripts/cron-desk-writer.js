@@ -436,19 +436,17 @@ function intakeSlug(packet) {
 // pilot, discard any model footer and render INTAKE from the supplied evidence
 // plus names the Article actually printed. This is deterministic formatting,
 // not editorial rewriting.
-function rubricBlock(packet) {
-  const profile = packet && packet.reviewProfile;
-  const c = profile && profile.articleContract;
-  if (!c) return '';
-  return '\n\n=== WHAT A GOOD ONE LOOKS LIKE (your contract — the same rubric your piece is graded on) ===\n' +
-    (profile.purpose ? 'Purpose: ' + profile.purpose + '\n' : '') +
-    (c.voice ? 'Voice: ' + c.voice + '\n' : '') +
-    (c.opening ? 'Open on: ' + c.opening + '\n' : '') +
-    (c.closing ? 'Close on: ' + c.closing + '\n' : '') +
-    (c.targetWords ? 'Length: ' + c.targetWords + ' words — a floor, not a ceiling: too short fails, running long when the story needs it does not\n' : '') +
-    'Graded yes/no on four things: opened as contracted, closed as contracted, purpose met, long enough. ' +
-    'Sourcing is checked separately and the rubric never licenses a fact the Packet does not hold.\n' +
-    '=== END CONTRACT ===';
+// Builder 2026-11-10: "These are reasoning LLMs that don't need you to tell
+// them what to say, they need to be told the agent they are via a persona and
+// memory … give them space to be a journalist agent. Stop puppeting the crons."
+// Through that morning every writer was handed a block headed WHAT A GOOD ONE
+// LOOKS LIKE — purpose, voice, "Open on", "Close on", length, "graded yes/no on
+// four things" — and nearly every "Close on" was a form of "the record still
+// needed" or "an unanswered question". The whole paper closed on what was
+// missing. The writer is handed no script. The Packet's sourcing rules are
+// unchanged: nothing here ever licensed a fact, and nothing here now does.
+function rubricBlock() {
+  return '';
 }
 
 function renderPacketIntake(draftText, packet, opts) {

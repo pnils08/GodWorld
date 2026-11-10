@@ -523,14 +523,11 @@ async function main() {
     // Append to her citizen page (pipe.40 T1 — the journal's new home)
     await appendToPage(reflection, cycle);
 
-    // pipeline.100 (builder 11-08): no claude-mem copy (builder-side). Her memory store keeps every reflection.
-    // Save to Supermemory (her `mags` container is read back into her prompts: sim-clock label, no calendar date)
-    var when = clockLabel || 'this cycle';
-    mags.saveToSupermemory(
-      'Nightly Discord Reflection — ' + when,
-      'Mags Corliss nightly reflection (' + when + ', ' + discordCount + ' conversations):\n\n' + reflection
-    );
-    log.info('Nightly reflection saved to Supermemory');
+    // pipeline.100 (builder 11-08): no claude-mem copy (builder-side).
+    // pipeline.100 (builder 2026-11-10 left the call here): the reflection lives on her page only. Her store
+    // (`mags`) is her talks and her Pulses; three reflections a day were a third of it and crowded both out of
+    // every search, and each one came back twice (store + page). Her bot reads her page on every message, raw.
+    // The 271 reflections saved there before today stay.
 
     // engine.197 M2 — after every durable save above; its own failure never undoes them
     try { await queueNightlyIntake(reflection, cycle, runClock, runInstant); } catch (e) { log.warn('Reflection_Intake: ' + e.message + ' (a spooled row stays for the next run)'); }

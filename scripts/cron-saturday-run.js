@@ -1683,7 +1683,8 @@ async function stepCoverage(cycle) {
 // Step 4c — remember (pipeline.100, builder 2026-11-09: "add the saturday run to her brain").
 // The Pulse is Mags' own writing; her store is where her Discord talks and reflections already
 // live and what her bot and reflection read back. One document per Cycle, upserted on customId,
-// sim-clock labelled (the store reaches her prompts: no calendar date). Only a Pulse the canon
+// sim-clock labelled (the store reaches her prompts: no calendar date), written once (the store appends on a
+// repeated customId, so the step reads before it writes). Only a Pulse the canon
 // door published is hers to remember — the published record names the exact edition.
 // ---------------------------------------------------------------------------
 const MAGS_STORE_TAG = 'mags';
@@ -1718,6 +1719,11 @@ async function stepRemember(cycle) {
     return { remembered: false, customId: doc.customId };
   }
   if (!API_KEY) throw new Error('SUPERMEMORY_CC_API_KEY missing');
+  // The store APPENDS on a repeated customId (citizenPage.js pipeline.94: "old --- new" in one doc), so a
+  // recovery re-run would double the Pulse inside her memory. Read first; write only when it is not there.
+  const has = await require(path.join(ROOT, 'lib', 'personaProvider')).storeHasDoc_(doc.customId);
+  if (has === true) { console.log('already remembered: ' + doc.customId); return { remembered: true, customId: doc.customId, already: true }; }
+  if (has === null) throw new Error('could not read the store for ' + doc.customId + ' — not writing blind');
   await postDocument(doc);
   console.log('remembered: ' + doc.customId + ' → ' + MAGS_STORE_TAG);
   return { remembered: true, customId: doc.customId };

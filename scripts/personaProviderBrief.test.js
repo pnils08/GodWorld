@@ -54,9 +54,37 @@ tb.persist('Mike', 'first line from Mike', 'reply one');
 tb.persist('Dana', 'a stranger speaking', 'reply two');
 const buf = JSON.parse(fs.readFileSync(tfile, 'utf8'));
 assert(buf.replies.length === 2 && buf.builderLines.length === 1 && buf.builderLines[0] === 'first line from Mike', 'buffer keeps every reply and only Mike\'s lines');
-tb.flush(false).then(function (r) {
+// pipeline.100 — the buffer carries the whole exchange in order; the conversation is one doc in the voice's own store
+assert(buf.turns.length === 4 && buf.turns[0].who !== buf.turns[1].who && buf.firstTs > 0, 'buffer keeps every turn, both speakers, in order');
+const cdoc = pp.conversationDoc_('POP-90001', 'Vinnie Keane', pp.talkStoreTag_('POP-90001'),
+  [{ who: 'Mike', text: 'How is the academy?' }, { who: 'Vinnie Keane', text: 'Full gym tonight.' }, { who: 'Dana', text: 'And the knee?' }, { who: 'Vinnie Keane', text: 'Holding.' }], 1700000000000, 114);
+assert(cdoc.containerTags.join() === 'talk-POP-90001' && cdoc.customId === 'talk-POP-90001-conv-1700000000000', 'conversation: one doc, the voice\'s own talk store, never the page tag');
+assert(cdoc.metadata.title === 'Talk with Mike and Dana — Y3C10' && !/20\d\d-\d\d/.test(cdoc.content + cdoc.metadata.title), 'conversation: titled by who and the sim clock, no calendar date');
+assert(cdoc.content.indexOf('Mike: How is the academy?\n\nVinnie Keane: Full gym tonight.\n\nDana: And the knee?') !== -1, 'conversation: every turn, in order, with its speaker');
+assert(pp.talkStoreTag_('pop-00001') === 'talk-POP-00001' && pp.talkStoreTag_('POP-00001').indexOf('cp-') !== 0, 'talk store tag is not a page tag');
+
+async function storeCases() {
+  const realFetch = global.fetch, realKey = process.env.SUPERMEMORY_CC_API_KEY;
+  process.env.SUPERMEMORY_CC_API_KEY = 'test';
+  try {
+    const calls = [];
+    const turns = [{ who: 'Mike', text: 'hi' }, { who: 'Vinnie Keane', text: 'hey' }];
+    global.fetch = async (url, o) => { calls.push((o && o.method) + ' ' + url); return { ok: false, status: 404, json: async () => ({}), text: async () => '' }; };
+    // GET says not there, POST fails -> reported, nothing claimed
+    assert((await pp.saveConversation_('POP-90001', 'Vinnie Keane', 'talk-POP-90001', turns, 1)).indexOf('failed') === 0 && calls.length === 2, 'a failed save says so');
+    calls.length = 0;
+    global.fetch = async (url, o) => { calls.push(o.method); return { ok: true, status: 200, json: async () => ({}), text: async () => '' }; };
+    assert((await pp.saveConversation_('POP-90001', 'Vinnie Keane', 'talk-POP-90001', turns, 1)) === 'already saved' && calls.join() === 'GET', 'a conversation already in the store is not written again (the store appends)');
+    global.fetch = async () => ({ ok: false, status: 503, json: async () => ({}), text: async () => '' });
+    assert(/could not read the store/.test(await pp.saveConversation_('POP-90001', 'Vinnie Keane', 'talk-POP-90001', turns, 1)), 'an unreadable store is not written blind');
+    assert((await pp.storeHasDoc_('x')) === null, 'storeHasDoc_: a failed read is unknown, never absent');
+  } finally { global.fetch = realFetch; process.env.SUPERMEMORY_CC_API_KEY = realKey; }
+}
+
+tb.flush(false).then(async function (r) {
   assert(r.flushed === false && r.reason === 'active', 'a fresh session does not flush before the idle boundary');
   try { fs.unlinkSync(tfile); } catch (e) {}
+  await storeCases();
   if (failures) { console.error(failures + ' failure(s)'); process.exit(1); }
   console.log('all passed');
 });

@@ -263,19 +263,13 @@ async function buildMagsSystemPrompt() {
 async function magsAugment(systemPrompt, opts) {
   opts = opts || {};
   var results = await Promise.all([
-    searchSupermemory(opts.userMessage),
     fetchUserProfile(opts.userId),
     mags.loadFamilyData(),
-    searchDashboard(opts.userMessage),
-    searchOwnStoreHits(opts.userMessage, 4)
+    personaProvider.storeHits_(MAGS_STORE, opts.userMessage, 4)
   ]);
-  var archiveContext = results[0];
-  var ownMemory = results[1];
-  var familyData = results[2];
-  var dashboardArticles = results[3];
-  // her reflections live on her page AND in her store (builder 11-09: both): the page hits drop what the store gave
-  var ownOnThis = fenceOwnStore(results[4]);
-  var pageOnThis = await personaProvider.pageRecallText_(MAGS_POPID, opts.userMessage, 3, results[4]);
+  var ownMemory = results[0];
+  var familyData = results[1];
+  var storeHits = results[2];
 
   if (familyData && !familyData.startsWith('(')) {
     systemPrompt += '\n\n---\n\n' + familyData;
@@ -284,20 +278,15 @@ async function magsAugment(systemPrompt, opts) {
     systemPrompt += '\n\n---\n\n## Your own memory (your past talks and reflections)\n\n' + ownMemory;
   }
   // pipeline.100 (builder 2026-11-09): her store and her page searched on what was just said — the summary
-  // above is the same whatever the message; these are the talks, reflections and Pulses that match it.
+  // above is the same whatever the message; these are the talks, Pulses and reflections that match it.
+  // Her own page reads raw here, as her reflection cron reads it: this prompt is hers, not a citizen-side reader.
+  var ownOnThis = personaProvider.fenceStore_(storeHits, MAGS_STORE);
   if (ownOnThis) {
-    systemPrompt += '\n\n---\n\n## What you remember on this (your own talks, reflections and Pulses)\n\n' + ownOnThis;
+    systemPrompt += '\n\n---\n\n## What you remember on this (your own talks and Pulses)\n\n' + ownOnThis;
   }
+  var pageOnThis = await personaProvider.pageRecallText_(MAGS_POPID, opts.userMessage, 3, storeHits, { raw: true });
   if (pageOnThis) {
-    systemPrompt += '\n\n---\n\n## What your own page holds on this\n\n' + pageOnThis;
-  }
-  if (archiveContext) {
-    systemPrompt += '\n\n---\n\n## Archive Knowledge (from Tribune files)\n\n' +
-      'The following was found in your archives. Use it naturally — don\'t quote it ' +
-      'verbatim, just know it.\n\n' + archiveContext;
-  }
-  if (dashboardArticles) {
-    systemPrompt += '\n\n---\n\n## Published articles (dashboard index)\n\n' + dashboardArticles;
+    systemPrompt += '\n\n---\n\n## What your own page holds on this (your reflections)\n\n' + pageOnThis;
   }
   return systemPrompt;
 }
@@ -305,7 +294,8 @@ async function magsAugment(systemPrompt, opts) {
 // research.30 — Mags' talks drain like the citizen voices' (her replies -> POP-00005's intake row, Mike's lines ->
 // Paulson's row + the bond). No page line: her 07/12/19:00 reflection already writes her page. Neutral snippet:
 // her replies can speak of the build; the intake sheet and the digests that read it must not.
-const magsTalk = personaProvider.makeTalkBuffer_(MAGS_POPID, 'Mags', { snippet: 'a conversation in the morning room' });
+const MAGS_STORE = 'mags';   // her own store: her talks (whole conversations) and the Pulses she narrated
+const magsTalk = personaProvider.makeTalkBuffer_(MAGS_POPID, 'Mags', { snippet: 'a conversation in the morning room', talkStore: MAGS_STORE });
 
 const magsProvider = {
   id: 'mags',
@@ -316,15 +306,16 @@ const magsProvider = {
   augment: magsAugment,
   // The search_my_memory tool: her store (talks, reflections, Pulses) and her page, on a query she chooses.
   searchMemory: async function (query) {
-    var hits = await searchOwnStoreHits(query, 5);
-    var pageText = await personaProvider.pageRecallText_(MAGS_POPID, query, 4, hits);
+    var hits = await personaProvider.storeHits_(MAGS_STORE, query, 5);
+    var pageText = await personaProvider.pageRecallText_(MAGS_POPID, query, 4, hits, { raw: true });
     var out = [];
-    if (hits.length) out.push('## Your talks, reflections and Pulses\n' + fenceOwnStore(hits));
+    if (hits.length) out.push('## Your talks and Pulses\n' + personaProvider.fenceStore_(hits, MAGS_STORE));
     if (pageText) out.push('## Your page\n' + pageText);
     return out.join('\n\n') || '(nothing in your memory for that)';
   },
+  // Her store keeps every talk (builder 11-08) — as one document per conversation, saved when the talk goes
+  // quiet (builder 11-10), not one loose document per exchange. The buffer carries it; flush saves it.
   persistResponse: function (userName, userMessage, response, userId) {
-    saveToSupermemory(userName, userMessage, response, userId);   // her memory store keeps every talk (builder 11-08)
     magsTalk.persist(userName, userMessage, response);   // research.30 — her dials and Paulson's move with the talk
   },
   flushVoiceBuffer: function (force) { return magsTalk.flush(force); },
@@ -361,31 +352,9 @@ function searchSupermemory(query) {
 }
 
 // ---------------------------------------------------------------------------
-// Her own store searched on a query (pipeline.100): the `mags` container holds her Discord talks, her
-// reflections and the Pulses she narrated. Relevant chunks per hit under the hit's title, nightly-scrubbed
-// (older entries carry calendar dates), fenced. '' on a miss or a failure.
+// Her store-wide summary, cleaned (pipeline.100). Her store searched on a query: personaProvider.storeHits_.
 // ---------------------------------------------------------------------------
-// No nightly scrub here: that scrub is for citizen-side readers and drops every sentence naming the person she
-// talked with — in her own prompt it would gut her memory of her own talks. Calendar dates alone come out
-// (the sim has its own clock).
 var CAL_DATE_RE = /\[?\b20[1-3]\d-[01]?\d-[0-3]?\d\b\]?/g;
-function searchOwnStoreHits(query, limit) {
-  if (!USE_SUPERMEMORY || !String(query || '').trim()) return Promise.resolve([]);
-  return require('../lib/supermemory').search(String(query).slice(0, 400), {
-    containerTags: ['mags'], limit: limit || 4, timeoutMs: 8000, apiVersion: 'v3'
-  }).then(function (results) {
-    var hits = (results || []).map(function (r) {
-      var text = (r.chunks || []).filter(function (c) { return c && c.isRelevant && typeof c.content === 'string'; })
-        .map(function (c) { return c.content; }).join(' ').replace(CAL_DATE_RE, '').replace(/\s+/g, ' ').trim();
-      if (!text) return '';
-      var title = String((r.metadata && r.metadata.title) || '').replace(/\s+—\s+\d{4}-\d{2}-\d{2}$/, '');
-      return (title ? title + ': ' : '') + (text.length > 900 ? text.slice(0, 899) + '…' : text);
-    }).filter(Boolean);
-    if (hits.length) log.info('Own store returned ' + hits.length + ' hit(s)');
-    return hits;
-  }).catch(function (e) { log.warn('Own store search failed: ' + e.message); return []; });
-}
-function fenceOwnStore(hits) { return hits && hits.length ? memoryFence.wrap(hits.join('\n\n'), 'mags-store') : ''; }
 
 // The store-wide summary Supermemory builds is raw: every "recent" line is stamped with the calendar day it
 // was INGESTED (read 2026-11-09: twelve Pulses backfilled that night all read as "[Recent] [2026-11-10]"),
@@ -468,46 +437,6 @@ function fetchUserProfile(discordUserId) {
 }
 
 // ---------------------------------------------------------------------------
-// Save conversation to Supermemory for user profile building (Mags)
-// ---------------------------------------------------------------------------
-function saveToSupermemory(userName, userMessage, magsResponse, discordUserId) {
-  if (!USE_SUPERMEMORY) return;
-
-  var content = userName + ': ' + userMessage + '\nMags: ' + magsResponse;
-  var payload = JSON.stringify({
-    content: content,
-    containerTags: ['mags'],
-    metadata: { source: 'discord-talk', speaker: String(userName || '') }
-  });
-
-  var options = {
-    hostname: 'api.supermemory.ai',
-    path: '/v3/documents',
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + SUPERMEMORY_KEY,
-      'Content-Length': Buffer.byteLength(payload)
-    }
-  };
-
-  var req = require('https').request(options, function(res) {
-    var data = '';
-    res.on('data', function(c) { data += c; });
-    res.on('end', function() {
-      if (res.statusCode >= 200 && res.statusCode < 300) {
-        log.info('Talk saved to her store');
-      } else {
-        log.warn('Talk NOT saved to her store: HTTP ' + res.statusCode + ' ' + String(data).slice(0, 160));
-      }
-    });
-  });
-  req.on('error', function(e) { log.warn('Talk NOT saved to her store: ' + e.message); }); // never blocks the reply
-  req.write(payload);
-  req.end();
-}
-
-// ---------------------------------------------------------------------------
 // Dashboard articles shelf — the 4th search_everything source (published-article
 // index). HTTP GET to the local dashboard with basic auth. (S252)
 // ---------------------------------------------------------------------------
@@ -586,11 +515,29 @@ async function callClaude(provider, session, userMessage, userName, userId) {
   systemPrompt = await provider.augment(systemPrompt, { userMessage: userMessage, userId: userId });
   // research.30 — the lookup is the first move on every message, for every persona: the first
   // round is forced to search_world, so a confident character file can never skip the records.
-  systemPrompt += '\n\n---\n\n## First move\n\nYour first move on every message is one search_world lookup. ' +
-    'Pick 2-3 keywords from what was asked (a name, a place, a thing). If it is small talk with nothing ' +
-    'to look up, search your own name. The result comes back with the records for whatever the message named ' +
-    '(a person, a neighborhood, a team, a business) already attached. Then, before you answer, follow a lead ' +
-    'if the result points at one: lookup_citizen for a person, lookup_neighborhood for a hood, lookup_team for ' +
+  // pipeline.100 (read 2026-11-10: the "first move" search ran on 17 of 35 logged calls — Sonnet 5.5 cannot be
+  // forced to a tool — and Mags alone also carried a second, automatic canon search; a citizen voice that
+  // skipped the tool answered with no canon at all). One search now, in code, for every voice on every
+  // message: the published canon + world cards and the article index on what was said. The tool stays for
+  // a second, sharper look; an identical query inside one message is answered from the first result.
+  var searchCache = {};
+  try {
+    var pre = await Promise.all([
+      searchSupermemory(userMessage).catch(function () { return ''; }),
+      searchDashboard(userMessage).catch(function () { return ''; })
+    ]);
+    var preParts = [];
+    if (pre[0]) preParts.push('### Published canon and world cards\n' + pre[0]);
+    if (pre[1]) preParts.push('### Published article index\n' + pre[1]);
+    if (preParts.length) systemPrompt += '\n\n---\n\n## Already searched for this message\n\n' +
+      'The canon and the article index were searched on what was just said — use this naturally, never quote it ' +
+      'verbatim. It is done; do not repeat it.\n\n' + preParts.join('\n\n');
+    log.info('[' + provider.label + '] pre-search: canon ' + pre[0].length + ' chars, articles ' + pre[1].length + ' chars');
+  } catch (e) { log.warn('[' + provider.label + '] pre-search failed: ' + e.message); }
+  systemPrompt += '\n\n---\n\n## Looking things up\n\nThe canon search and the records for whatever this message names ' +
+    '(a person, a neighborhood, a team, a business) are already in front of you. Search again only for what they do not cover: ' +
+    'search_world with 2-3 keywords (a name, a place, a thing) reaches the city records on disk as well; ' +
+    'lookup_citizen for a person, lookup_neighborhood for a hood, lookup_team for ' +
     'the A\'s or the Oaks, lookup_business for a business. A number is read off the record, newest Cycle first; ' +
     'where two records differ, say what each says. search_my_memory is your own memory — your page, what you ' +
     'have said and written — for when the question is about you. Then answer from what you found plus what you already know.';
@@ -629,7 +576,7 @@ async function callClaude(provider, session, userMessage, userName, userId) {
     var opts = { model: BOT_MODEL, max_tokens: MAX_RESPONSE_TOKENS, system: systemPrompt, messages: messages, tools: [SEARCH_TOOL].concat(provider.searchMemory ? [MEMORY_TOOL] : [], lookups.TOOLS) };
     var shape = requestShapeFor(BOT_MODEL);
     if (shape.thinking) opts.thinking = shape.thinking;
-    if (round === 0) opts.tool_choice = shape.forcedTool ? { type: 'tool', name: 'search_world' } : { type: 'auto' };  // research.30 — search first, where the model still allows a forced call
+    if (round === 0) opts.tool_choice = { type: 'auto' };  // pipeline.100 — the search is run in code before this call, on every model; nothing left to force  // research.30 — search first, where the model still allows a forced call
     if (isFinal) opts.tool_choice = { type: 'none' };  // force a reply, never empty
     response = await claude.messages.create(opts);
     if (response.stop_reason && response.stop_reason !== 'end_turn' && response.stop_reason !== 'tool_use') {
@@ -649,7 +596,9 @@ async function callClaude(provider, session, userMessage, userName, userId) {
         var arg = tu.input && (tu.input.query || tu.input.name || tu.input.team) || '';
         try {
           if (tu.name === 'search_world') {
-            result = await searchEverything(tu.input && tu.input.query);
+            var sq = String(tu.input && tu.input.query || '').toLowerCase().replace(/\s+/g, ' ').trim();
+            if (searchCache[sq] == null) searchCache[sq] = await searchEverything(tu.input && tu.input.query);
+            result = searchCache[sq];
           } else if (tu.name === 'search_my_memory' && provider.searchMemory) {
             result = await provider.searchMemory(tu.input && tu.input.query);
           } else {

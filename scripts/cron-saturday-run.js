@@ -1616,7 +1616,7 @@ async function stepPublish(cycle) {
   else console.log('edition Drive drop: ' + ((dropOut.match(/Link: (\S+)/) || [])[1] || 'done'));
   if (config.saturdayAudio !== false) {
     try {
-      const { generateAndDeliverEditionAudio } = require(path.join(ROOT, 'scripts', 'notebooklmPush'));
+      const { generateAndDeliverEditionAudio, editionAudioFocus } = require(path.join(ROOT, 'scripts', 'notebooklmPush'));
       const audio = await generateAndDeliverEditionAudio({
         notebookId: config.notebookId,
         sourceId: sourceId,
@@ -1625,7 +1625,7 @@ async function stepPublish(cycle) {
         format: config.audioFormat || 'deep_dive',
         length: 'long',
         label: 'The Cycle Pulse — ' + simClock(cycle),
-        focus: 'The Cycle Pulse edition C' + cycle,
+        focus: editionAudioFocus('The Cycle Pulse — ' + simClock(cycle)),
         content: '🎧 **The Cycle Pulse — ' + simClock(cycle) + '**\nSaturday edition audio · deep_dive/long',
         driveDest: config.driveDest || 'audio',
       });

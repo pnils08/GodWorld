@@ -21,7 +21,8 @@ const {
   buildGateDeskFile,
   reflectionSources,
   worldRecordSources,
-  editionSources,
+  exchangeSources,
+  printedStems,
   airedReportTimes,
   latestUndeliveredRender,
   reusableSourceId,
@@ -533,7 +534,7 @@ const syntheticDigest = {
   assert(!prompt.includes('Civis Systems journal'), 'weekday prompt carries no edition-day clause');
   const editionPrompt = dailyPrompt(999, false, true);
   assert(editionPrompt.includes('run after The Cycle Pulse published'));
-  assert(editionPrompt.includes('UNDOCKED digest'));
+  assert(editionPrompt.includes('Civis Systems journal') && !editionPrompt.includes('UNDOCKED digest'));
   // First morning (2026-10-19): the cold read on the week that will be.
   assert(dailyPrompt(999, false, false, true).includes('first morning of the Cycle'));
   assert(!dailyPrompt(999, false, false).includes('first morning'));
@@ -650,45 +651,38 @@ const syntheticDigest = {
   fs.utimesSync(journal, old, old);
   fs.utimesSync(digest, old, old);
 
+  // Edition day (builder 2026-11-10: "No day should duplicate the same source"):
+  // the edition has its own weekly show, so the daily run carries neither the
+  // edition nor a piece printed in it — only the journal and what is new.
+  const printedDigest = path.join(staged, 'undocked-digest_c777_nia-rook-weekly_packet-v2_y.staged-0915.md');
+  fs.writeFileSync(printedDigest, '# UNDOCKED digest printed\n');
+  fs.writeFileSync(path.join(root, 'output', 'edition_published_c777.json'),
+    JSON.stringify({ cycle: '777', selected: ['undocked-digest_c777_nia-rook-weekly_packet-v2_y-0915'] }));
+  assert.deepStrictEqual(Array.from(printedStems(root, 777)), ['undocked-digest_c777_nia-rook-weekly_packet-v2_y-0915']);
   const onEditionDay = collectNewsroomArtifacts(777, hours, now, root);
   assert.strictEqual(onEditionDay.editionDay, true);
-  assert.strictEqual(onEditionDay.publishedExtras, 2, 'edition + journal count toward the bar');
+  assert.strictEqual(onEditionDay.publishedExtras, 1, 'the journal counts toward the bar; the edition is not carried');
   assert.deepStrictEqual(
-    onEditionDay.reports.map((r) => r.classification),
-    ['PUBLISHED_EDITION', 'CIVIS_JOURNAL', 'STAGED', 'STAGED'],
-    'edition first, journal second, stale digest rides, fresh staged follows'
+    onEditionDay.reports.map((r) => r.classification + ' ' + path.basename(r.file)),
+    ['CIVIS_JOURNAL civis_journal_c777.md', 'STAGED ' + path.basename(fresh)],
+    'journal first, then what is new; no edition, no printed piece, no out-of-window digest'
   );
-  assert(onEditionDay.reports[2].file === digest, 'the out-of-window digest is carried on edition day');
-  const pack = buildSourcePack(Object.assign({}, syntheticInput, {
-    reports: onEditionDay.reports, flagged: [],
-  }));
-  assert(pack.text.includes('PUBLISHED_EDITION — editions/cycle_pulse_c777.txt'));
-  assert(pack.text.includes('canon, the week\'s reported record'));
-  assert(pack.text.includes('not Tribune reporting'));
-  assert(pack.text.includes('Second synthetic article body survives.'), 'every article of the edition is carried');
-  assert(!pack.text.includes('NAMES: Synthetic'), 'INTAKE blocks are stripped per article');
+  assert(!buildDailySources({ cycle: 777, reports: onEditionDay.reports }).some((x) => /edition/.test(x.kind)));
+  fs.rmSync(printedDigest);
 
-  // Each article of the printed edition is its own source; the masthead is not.
-  const editionFile = [
-    'THE CYCLE PULSE — synthetic masthead', '',
-    '============================================================', '',
-    Array(60).fill('opening').join(' '), '',
-    '============================================================', '',
-    'By Synthetic Writer | Bay Tribune Synth Desk', '', '# Synthetic Edition Headline', '', Array(60).fill('body').join(' '), '',
-    '## INTAKE', 'NAMES: Synthetic Two | mentioned', '',
-    '============================================================', '',
-    'By Synthetic Columnist | Bay Tribune Sports', '', Array(60).fill('column').join(' '), '',
-    '## INTAKE', 'NAMES: Synthetic Three | mentioned', '',
-  ].join('\n');
-  const pieces = editionSources({ body: editionFile, relativePath: 'editions/cycle_pulse_c777.txt' });
-  assert.deepStrictEqual(pieces.map((x) => x.label), [
-    'The Cycle Pulse — the editor\'s opening column',
-    'Synthetic Writer: Synthetic Edition Headline',
-    'Synthetic Columnist: Bay Tribune Sports',
-  ]);
-  assert(!pieces[1].text.includes('NAMES: Synthetic Two'));
-  assert.strictEqual(buildDailySources({ cycle: 777, reports: onEditionDay.reports })
-    .filter((x) => x.kind === 'edition').length, 1, 'an edition with no article long enough rides whole');
+  // The day's citizen conversation is its own source, once.
+  const exchange = path.join(root, 'output', 'exchanges', 'exchange_c777_2026-01-01_conversation.md');
+  fs.mkdirSync(path.dirname(exchange), { recursive: true });
+  fs.writeFileSync(exchange, ['# Exchange — conversation (Cycle 777)', '', '- participants: POP-99991 Synthetic One | POP-99992 Synthetic Two',
+    '- trigger: ripple (POP-99991->POP-99992)', '', '---', '', '**Synthetic One:** ' + Array(20).fill('hello').join(' '), '',
+    '**Synthetic Two:** ' + Array(20).fill('there').join(' ')].join('\n'));
+  const talks = exchangeSources(root, now - 36 * 3600e3, new Map());
+  assert.strictEqual(talks.length, 1);
+  assert.strictEqual(talks[0].label, 'Overheard — Synthetic One and Synthetic Two');
+  assert(talks[0].text.includes('**Synthetic Two:** there') && !/POP-|trigger/.test(talks[0].text));
+  assert.strictEqual(exchangeSources(root, now - 36 * 3600e3, new Map([[talks[0].path, now]])).length, 0, 'a conversation a show carried is not carried again');
+  assert.strictEqual(exchangeSources(root, now + 1000, new Map()).length, 0);
+  assert.deepStrictEqual(buildDailySources({ cycle: 777, reports: [], exchanges: talks }).map((x) => x.kind), ['exchange']);
 
   // Airs once (pipeline.108): a piece a delivered show carried on an earlier
   // day is not carried again unless the file changed; a previous-Cycle piece

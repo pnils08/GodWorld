@@ -41,7 +41,6 @@ const CONFIG_PATH = path.join(ROOT, 'config/notebooklm.json');
 const AUDIO_RETRY_INTERVAL_MS = 30 * 1000;
 const AUDIO_RETRY_MAX = 24; // 12 minutes — audio overviews typically render in 2-6
 const DISCORD_ATTACH_CAP = 8 * 1024 * 1024; // webhook attachment limit; bigger files go link-only
-const DIRECTION_GUIDE_PATH = path.join(ROOT, 'config/audio_direction_weekly.md');
 
 function degrade(reason) {
   console.log('NOTEBOOKLM PUSH FAILED (non-blocking): ' + reason);
@@ -127,38 +126,16 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-// Reuse-or-add the audio-direction guide as an archive-notebook source
-// (pipeline.51). Title carries a content hash so guide edits re-upload and an
-// unchanged guide reuses the existing source. Non-blocking: any failure
-// returns null and the audio overview proceeds undirected.
-function ensureDirectionSource(notebookId) {
-  if (!fs.existsSync(DIRECTION_GUIDE_PATH)) return null;
-  try {
-    const hash = crypto.createHash('sha256')
-      .update(fs.readFileSync(DIRECTION_GUIDE_PATH, 'utf-8'))
-      .digest('hex');
-    const title = '00_AUDIO_DIRECTION_GUIDE — weekly — ' + hash.slice(0, 12);
-    const list = nlm(['source', 'list', notebookId, '--json']);
-    if (list.ok) {
-      try {
-        const sources = JSON.parse(list.out);
-        const found = (Array.isArray(sources) ? sources : []).find(
-          (s) => s && (s.title === title || s.name === title)
-        );
-        if (found && (found.id || found.source_id)) return found.id || found.source_id;
-      } catch (_) { /* fall through to add */ }
-    }
-    const add = nlm(['source', 'add', notebookId, '--file', DIRECTION_GUIDE_PATH, '--title', title, '--wait']);
-    if (!add.ok) {
-      console.log('AUDIO DIRECTION GUIDE SKIPPED (non-blocking): ' + add.out.slice(0, 200));
-      return null;
-    }
-    const m = add.out.match(/Source ID:\s*(\S+)/);
-    return m ? m[1] : null;
-  } catch (e) {
-    console.log('AUDIO DIRECTION GUIDE SKIPPED (non-blocking): ' + e.message);
-    return null;
-  }
+// The weekly show is made inside the permanent notebook, which is canon: what
+// the hosts are told goes in this one short focus and nowhere else. Through
+// 2026-11-09 a rulebook (config/audio_direction_weekly.md) was uploaded there as
+// a source on every Saturday run; a source is material the hosts discuss and,
+// since the canon search reads the whole live notebook (pipeline.103), material
+// every canon search could cite. It is not uploaded any more (builder 2026-11-10).
+function editionAudioFocus(editionTitle) {
+  return 'The Bay Tribune\'s weekly edition, ' + editionTitle + '.' +
+    ' Take its pieces one at a time, each credited to its reporter, and draw on the earlier editions for the history behind each story.' +
+    ' The sources are the only truth about this Oakland; use no outside knowledge of any other Oakland.';
 }
 
 // S429 — find a source that landed without an id in the add output. Matches the
@@ -271,7 +248,6 @@ async function main() {
       format: config.audioFormat || 'deep_dive',
       length: 'default',
       label: 'Audio overview — Edition C' + args.cycle,
-      focus: 'Edition C' + args.cycle,
     });
   }
 
@@ -308,18 +284,14 @@ async function generateAndDeliverEditionAudio(opts) {
     console.log('NOTEBOOKLM AUDIO SKIPPED (non-blocking): no source id');
     return null;
   }
-  const directionId = ensureDirectionSource(notebookId);
   const audioArgs = [
     'audio', 'create', notebookId,
     '--format', format,
     '--length', length,
     '--confirm',
   ];
-  const ids = [sourceId, directionId].filter(Boolean);
-  audioArgs.push('--source-ids', ids.join(','));
-  audioArgs.push('--focus', (opts.focus || ('Edition C' + cycle)) + (directionId
-    ? '. Follow the 00_AUDIO_DIRECTION_GUIDE source for host persona, tone, and thematic allocation.'
-    : ''));
+  audioArgs.push('--source-ids', sourceId);
+  audioArgs.push('--focus', opts.focus || editionAudioFocus('Edition C' + cycle));
   const create = nlm(audioArgs);
   if (!create.ok) {
     console.log('NOTEBOOKLM AUDIO SKIPPED (non-blocking): create failed: ' + String(create.out || '').slice(0, 300));
@@ -458,5 +430,6 @@ module.exports = {
   sleep,
   deliver,
   generateAndDeliverEditionAudio,
+  editionAudioFocus,
   sendDiscordText,
   sendDiscordFile, recordCanonSource };

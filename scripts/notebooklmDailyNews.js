@@ -193,7 +193,7 @@ function airedReportTimes(outputDir, nowMs) {
     // (a skipped upload, or a resumed show with no source record, airs it
     // later). Older manifests carried every collected report in one file.
     const carried = Array.isArray(manifest.sources) || parseFloat(manifest.sourceVersion) >= 2
-      ? (manifest.audioSources || manifest.sources || []).filter((entry) => entry && entry.id && entry.kind === 'article')
+      ? (manifest.audioSources || manifest.sources || []).filter((entry) => entry && entry.id && (entry.kind === 'article' || entry.kind === 'exchange'))
       : (manifest.reports || []);
     for (const report of carried) {
       if (!report || !report.path) continue;
@@ -201,6 +201,27 @@ function airedReportTimes(outputDir, nowMs) {
     }
   }
   return aired;
+}
+
+// Builder 2026-11-10: "No day should duplicate the same source". A piece the
+// Saturday run printed in The Cycle Pulse has its show, the weekly one, made
+// from the edition in the permanent notebook; the daily show does not carry
+// the edition or any piece printed in it. Stems come from the Saturday run's
+// own record (output/edition_published_c<N>.json `selected`).
+function printedStem(file) {
+  return path.basename(file).replace(/\.(?:staged|sample)(?:-(\d{3,4}))?\.md$/, (_, n) => (n ? '-' + n : ''));
+}
+
+function printedStems(root, cycle) {
+  const stems = new Set();
+  for (const n of [cycle, cycle - 1]) {
+    const file = path.join(root, 'output', 'edition_published_c' + n + '.json');
+    if (!fs.existsSync(file)) continue;
+    try {
+      for (const stem of readJson(file).selected || []) stems.add(String(stem));
+    } catch (_) { /* unreadable record: nothing is treated as printed */ }
+  }
+  return stems;
 }
 
 // The newest manifest that recorded an audio render and never delivered it.
@@ -240,6 +261,7 @@ function collectNewsroomArtifacts(cycle, hours, nowMs, root = ROOT, options = {}
   const aired = options.aired || null;
   const carryCutoff = aired && options.carryHours > hours ? nowMs - options.carryHours * 3600e3 : cutoff;
   const compareDir = path.join(root, 'output', 'cron-compare');
+  const printed = printedStems(root, cycle);
   const records = [];
   // cron-desk-run routes a passing article through uniqueDest(), which appends
   // an HHMM suffix when the destination name is already taken — so a re-run of
@@ -267,6 +289,7 @@ function collectNewsroomArtifacts(cycle, hours, nowMs, root = ROOT, options = {}
       if (stat.mtimeMs < (spec.classification === 'FLAGGED' ? cutoff : carryCutoff) || !cycleOk) continue;
       const rel = path.relative(root, file);
       if (aired && aired.has(rel) && stat.mtimeMs <= aired.get(rel)) continue;
+      if (spec.classification !== 'FLAGGED' && printed.has(printedStem(file))) continue;
       records.push(artifactRecord(file, spec.classification, fileCycle, root));
     }
   }
@@ -310,32 +333,18 @@ function collectNewsroomArtifacts(cycle, hours, nowMs, root = ROOT, options = {}
       record.flagSummary = data.summary || null;
     } catch (_) { /* unreadable sidecar; report the draft without findings */ }
   }
-  // Edition day (builder 2026-10-18: "put the cycle pulse, civis journal and the
-  // undocked summary into the Sunday daily news run"): the run after The Cycle
-  // Pulse publishes carries the edition itself, the Civis Systems journal, and
-  // the UNDOCKED digest as sources, not as continuity lookups. Gated on the
-  // edition file landing inside the window — Saturday's print sits inside Sunday
-  // 08:00's 36 h and outside Monday's — so it is the Sunday run by data, not by
-  // clock. The edition and journal are published work and count toward the
-  // router's reported-day bar (publishedExtras). The edition is editions/*.txt
-  // (the full print, what the canon notebook holds); output/cycle_pulse_c<N>.md
-  // is only the editor's column over it.
+  // Edition day: the edition file landed inside the window (Saturday's print
+  // sits inside Sunday 08:00's 36 h and outside Monday's). Through 2026-11-09
+  // this run also carried the edition and the UNDOCKED digest; the weekly show
+  // carries those (printedStems above), so what rides here is the Civis Systems
+  // journal, which is not in the edition and has no other show.
   const editionFile = path.join(root, 'editions', 'cycle_pulse_c' + cycle + '.txt');
   const editionDay = fs.existsSync(editionFile) && fs.statSync(editionFile).mtimeMs >= cutoff;
   const extras = [];
   if (editionDay) {
-    extras.push(artifactRecord(editionFile, 'PUBLISHED_EDITION', cycle, root));
-    // The journal is written at the Cycle fire, days before the edition prints:
-    // cycle-match only, no mtime cutoff.
+    // Written at the Cycle fire, days before the edition prints: cycle-match only.
     const journalFile = path.join(root, 'output', 'civis-journal', 'civis_journal_c' + cycle + '.md');
     if (fs.existsSync(journalFile)) extras.push(artifactRecord(journalFile, 'CIVIS_JOURNAL', cycle, root));
-    // The UNDOCKED digest is Saturday's staged piece; ride it even when it fell
-    // out of the window, unless the staged walk already took it.
-    const digestRe = new RegExp('^undocked-digest_c' + cycle + '_.*\\.staged(?:-\\d{3,4})?\\.md$');
-    const digest = walkFiles(path.join(compareDir, 'staged'))
-      .filter((file) => digestRe.test(path.basename(file)))
-      .sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs)[0];
-    if (digest && !records.some((r) => r.file === digest)) extras.push(artifactRecord(digest, 'STAGED', cycle, root));
   }
   // First morning (builder 2026-10-19: "if sunday is the week that was, monday is the
   // week that will be"): the run after the Cycle fire. The world summary is written
@@ -754,22 +763,30 @@ function fetchArticleBackgrounds(reports, cacheDir, ask = askCanon, nowFn = Date
   return backgrounds;
 }
 
-// The printed edition separates its articles with a rule of `=`; each article
-// opens `By <Reporter> | Bay Tribune <Desk>`, most then carry a `#` headline
-// (C114: the wire, P Slayer and UNDOCKED pieces carry none or a `##`). The
-// unsigned chunk is the editor's opening column; under 40 words is the masthead.
-function editionSources(report) {
+// The daily citizen exchange (citizen-exchange.js, 17:00): two citizens talking,
+// in full, written to output/exchanges/. Only each speaker's excerpt reached the
+// sheet and so the show; the conversation itself is carried once, as its own
+// source (builder 2026-11-10: citizen coverage fills the voice).
+function exchangeSources(root, cutoff, aired) {
+  const dir = path.join(root, 'output', 'exchanges');
+  if (!fs.existsSync(dir)) return [];
   const out = [];
-  for (const chunk of String(report.body).split(/^={20,}[ \t]*$/m)) {
-    const raw = chunk.trim();
-    const copy = readerCopy(raw).trim();
-    if (copy.split(/\s+/).filter(Boolean).length < 40) continue;
-    const head = copy.match(/^#{1,2}\s+(.+)$/m); // reader copy: the `## INTAKE` register is not a headline
-    const by = raw.match(/^By\s+(.+?)\s*\|\s*(.+)$/m);
-    const label = by
-      ? by[1].trim() + ': ' + (head ? head[1].trim() : by[2].trim())
-      : head ? head[1].trim() : 'The Cycle Pulse — the editor\'s opening column';
-    out.push({ kind: 'edition-article', label, text: copy, path: report.relativePath });
+  for (const name of fs.readdirSync(dir).filter((n) => /^exchange_c\d+_.*\.md$/.test(n)).sort()) {
+    const file = path.join(dir, name);
+    const rel = path.relative(root, file);
+    if (fs.statSync(file).mtimeMs < cutoff || (aired && aired.has(rel))) continue;
+    const raw = fs.readFileSync(file, 'utf8');
+    const who = ((raw.match(/^- participants:\s*(.+)$/m) || [])[1] || '')
+      .split('|').map((part) => part.replace(/\bPOP-\d+\b/g, '').trim()).filter(Boolean);
+    const talk = raw.slice(raw.indexOf('\n---') >= 0 ? raw.indexOf('\n---') + 4 : 0)
+      .replace(/\bPOP-\d+\b\s*/g, '').trim();
+    if (who.length < 2 || talk.split(/\s+/).length < 30) continue;
+    out.push({
+      kind: 'exchange',
+      label: 'Overheard — ' + who.join(' and '),
+      text: '# ' + who.join(' and ') + ', talking\n\nA conversation between two Oakland citizens, in their own words.\n\n' + talk,
+      path: rel,
+    });
   }
   return out;
 }
@@ -839,19 +856,6 @@ function buildDailySources(input) {
     // Drafts the gate held back are not news (builder 2026-10-17); they ride
     // the ops report's gate desk file, added after the audio is created.
     if (report.classification === 'FLAGGED') continue;
-    if (report.classification === 'PUBLISHED_EDITION') {
-      const split = editionSources(report);
-      if (split.length) drafts.push(...split);
-      else {
-        drafts.push({
-          kind: 'edition',
-          label: 'The Cycle Pulse',
-          text: String(report.body).trim(),
-          path: report.relativePath,
-        });
-      }
-      continue;
-    }
     if (report.classification === 'CIVIS_JOURNAL') {
       drafts.push({
         kind: 'journal',
@@ -865,6 +869,7 @@ function buildDailySources(input) {
     const background = input.backgrounds && input.backgrounds.get(report.relativePath);
     if (background) drafts.push(backgroundSource(report, background));
   }
+  drafts.push(...(input.exchanges || []));
   drafts.push(...reflectionSources(input.citizenDigest && input.citizenDigest.citizens));
   if (input.firstMorning) drafts.push(...worldRecordSources(input.worldSummary, input.cycle));
 
@@ -1072,8 +1077,8 @@ function stripDailyNoise(markdown) {
   return out.join('\n');
 }
 
-const EDITION_DAY_CLAUSE = ' This is the run after The Cycle Pulse published: carry the edition\'s stories by reporter,' +
-  ' the Civis Systems journal\'s reading of the week, and the UNDOCKED digest.';
+const EDITION_DAY_CLAUSE = ' This is the run after The Cycle Pulse published; the edition has its own weekly show.' +
+  ' Carry the Civis Systems journal\'s reading of the week and what has been written since the edition went to print.';
 
 const FIRST_MORNING_CLAUSE = ' This is the first morning of the Cycle — the cold read on the week that will be,' +
   ' before the desks have reported it; Sunday carried the week that was. Name the Cycle. Lead with who this Cycle' +
@@ -1343,6 +1348,7 @@ async function run(argv) {
   // neighborhood of reflections, and (first morning) per world-record section.
   const dailyInput = {
     cycle,
+    exchanges: exchangeSources(ROOT, Date.now() - hours * 3600e3, airedReportTimes(OUTPUT_DIR, Date.now())),
     reports: newsroom.reports,
     citizenDigest,
     worldSummary,
@@ -1644,7 +1650,8 @@ module.exports = {
   buildGateDeskFile,
   reflectionSources,
   worldRecordSources,
-  editionSources,
+  exchangeSources,
+  printedStems,
   airedReportTimes,
   latestUndeliveredRender,
   reusableSourceId,

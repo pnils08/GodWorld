@@ -39,7 +39,7 @@ Codex diff review of `ae8d72065`: [[../for-claude-review/2026-11-09-codex-pipeli
 |---|---|---|
 | F1 | A partial upload marked unheard articles aired | Aired = v2.0 manifest `sources` of kind `article` with an id; upload retried once |
 | F2 | Gate desk file could stay in the news notebook if next day's prune fails | Deleted when the ops step ends (`finally`) |
-| F3 | Resume delivered the notebook's latest audio unpinned (predates this job) | Pins `manifest.audioArtifactId` when recorded; a resumed manifest with no `sources` marks nothing aired. Not folded: verifying an unrecorded render's source set |
+| F3 | Resume delivered the notebook's latest audio unpinned (predates this job) | Recovery delivers only a recorded render: this run dir's, else the newest undelivered manifest's, whose `sources` become the delivered record; none on record → it refuses |
 | F4 | Same-run-dir re-run delivered twice (predates this job) | A delivered manifest is a no-op without its local audio |
 | F5 | Headline-less edition pieces titled `INTAKE` | Label read from reader copy |
 | F6 | Reflections clipped at 2,000 chars | Unclipped |
@@ -59,6 +59,6 @@ Codex diff review of `ae8d72065`: [[../for-claude-review/2026-11-09-codex-pipeli
 
 ## Not in this job
 
-- The ops report has not rendered in 15 minutes on any recent morning (log: `DAILY OPS REPORT SKIPPED`). Left as is; own row if wanted.
+- The ops report never arrived (log: `DAILY OPS REPORT SKIPPED`): fixed under pipeline.109.
 - Daily router (format/length) untouched.
-- **pipeline.109 (builder 11-09: "sounds like a good idea").** Nothing at boot or in the row tools reads what the crons say they lacked. Verified 2026-11-09: a write wake's grade (`gradeRecord` in `output/cron-compare/*.wake.json`, e.g. `graded: 4/4 — nothing fell short`; 1 of 5 C115 wakes noted a shortfall) goes to the reporter's own page; gate findings go to the daily ops report, which times out every morning; the Civis journal (`output/civis-journal/`) goes to Varek's page, Discord with the Pulse, the daily news once, and Mags's disk search; journals exist for C110–C112 and C115, none for C113/C114, cause unread. The cycle gap log is the only channel that feeds rows, hand-written by the run-cycle session. Job: one daily step that gathers shortfalls, gate findings and the journal's audit points into one short list, printed by the SessionStart hook beside the review inbox. No agent files rows; rows stay on the builder's word.
+- pipeline.109 (cron feedback to the builder, the ops report, Varek's journal): [[2026-11-10-cron-feedback-to-builder]].

@@ -402,6 +402,17 @@ function promptFor(frame, prior, root = ROOT) {
     '\nReply with the JSON object only: {"prose": "...", "findingIds": ["..."]}.';
   return { system, user };
 }
+const REPAIRS = 2;
+// The writer's own entry and the gate's exact objections, on top of the
+// original brief: a repair, not a second cold draft.
+function repairPrompt(user, attempt, failures) {
+  return user + '\n\n=== YOUR ENTRY WAS NOT ACCEPTED ===\n' +
+    'You wrote:\n' + JSON.stringify({ findingIds: attempt.findingIds, prose: attempt.prose }) + '\n\n' +
+    'The desk turned it back for exactly these reasons:\n' + failures.map(f => '- ' + f).join('\n') + '\n\n' +
+    'Rewrite the whole entry so none of these remain. Keep your voice, your lead and everything the desk did not object to. ' +
+    'Every rule in the brief above still holds. Reply with the same object and nothing else.';
+}
+
 async function run(cycle, opts = {}) {
   const root = opts.root || ROOT;
   const dry = Boolean(opts.dry);
@@ -428,23 +439,46 @@ async function run(cycle, opts = {}) {
   let answer = null;
   let assertion = null;
   let answered = false;
+  // C113 and C114 have no journal: each route wrote one entry, each entry
+  // failed one line of the gate ("Oaks/Paulson exceeds one line", "repeats a
+  // sentence from an earlier entry"), and both paid drafts were thrown away
+  // unread. The gate is unchanged; a writer whose entry fails is now shown its
+  // own entry and what failed and rewrites it, up to REPAIRS times, before the
+  // next route is tried. A reply that is not the object counts as a failure to
+  // repair, not as the route being down. Failed entries are kept on disk.
+  const failed = [];
   for (const [label, call] of routes) {
-    let attempt;
-    try { attempt = parseAnswer(await call(prompt.system, prompt.user)); }
-    catch (e) {
-      console.error('Civis ' + label + ' failed or returned invalid output: ' + e.message);
-      continue;
+    let user = prompt.user;
+    for (let round = 0; round <= REPAIRS; round++) {
+      const pass = label + (round ? ' repair ' + round : '');
+      let attempt;
+      try { attempt = parseAnswer(await call(prompt.system, user)); }
+      catch (e) {
+        console.error('Civis ' + pass + ' failed or returned invalid output: ' + e.message);
+        break;
+      }
+      answered = true;
+      answer = attempt;
+      assertion = assertEntry(attempt.prose, frame, attempt.findingIds, prior);
+      if (dry) {
+        console.log('--- ' + pass + ' entry ---\n' + attempt.prose.trim());
+        console.log('Civis assertion (' + pass + '): ' + (assertion.ok ? 'PASS' : 'FAIL — ' + assertion.failures.join('; ')) +
+          ' (' + assertion.words + ' words)');
+      }
+      if (assertion.ok) break;
+      console.error('Civis assertion failed C' + cycle + ' (' + pass + '): ' + assertion.failures.join('; '));
+      failed.push({ route: pass, failures: assertion.failures, words: assertion.words,
+        findingIds: attempt.findingIds, prose: attempt.prose });
+      user = repairPrompt(prompt.user, attempt, assertion.failures);
     }
-    answered = true;
-    answer = attempt;
-    assertion = assertEntry(attempt.prose, frame, attempt.findingIds, prior);
-    if (dry) {
-      console.log('--- ' + label + ' entry ---\n' + attempt.prose.trim());
-      console.log('Civis assertion (' + label + '): ' + (assertion.ok ? 'PASS' : 'FAIL — ' + assertion.failures.join('; ')) +
-        ' (' + assertion.words + ' words)');
-    }
-    if (assertion.ok) break;
-    console.error('Civis assertion failed C' + cycle + ' (' + label + '): ' + assertion.failures.join('; '));
+    if (assertion && assertion.ok) break;
+  }
+  if (!dry && failed.length) {
+    // Beside the journal folder, not in it: output/civis-journal is a shelf
+    // Mags's canon search reads (lib/mags.js SEARCH_SHELF_DIRS).
+    const failedPath = path.join(root, 'output', 'civis-journal-failed', stem + '.failed.json');
+    fs.mkdirSync(path.dirname(failedPath), { recursive: true });
+    fs.writeFileSync(failedPath, JSON.stringify({ cycle, passed: Boolean(assertion && assertion.ok), attempts: failed }, null, 2) + '\n');
   }
   if (!answered) {
     console.error('Civis Journal: no route answered; skipping C' + cycle);

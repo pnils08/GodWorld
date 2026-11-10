@@ -159,7 +159,7 @@ node scripts/runCycle.js step 5.58 {XX}    # civisJournal.js --cycle {XX}; the r
 
 Never pass `--dry-run` here — a dry run calls the model and writes neither the page nor the artifact.
 
-**Read the last stdout line and stderr, then the files. The exit code is not the gate** — `model-failure` and `assertion-failure` exit 0 and leave no files.
+**Read the last stdout line and stderr, then the files. The exit code is not the gate** — `model-failure` and `assertion-failure` exit 0 and leave no journal files. A writer whose entry fails the gate is shown the entry and the failure and rewrites it, twice at most, before the fallback is tried; every entry the gate turned back is kept in `output/civis-journal-failed/civis_journal_c{XX}.failed.json` (pipeline.109).
 
 | What it printed | Exit | Meaning | Do |
 |---|---|---|---|

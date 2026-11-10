@@ -156,13 +156,32 @@ console.log = () => {};
       reasoner: async () => bad, sonnet: async () => bad, page });
     assert.equal(neither.skipped, 'assertion-failure');
     assert.equal(calls, 0);
-    assert.equal(fs.existsSync(path.join(output, 'civis-journal')), false);
+    // No journal, and the entries the gate turned back are kept, not thrown away:
+    // each route's first entry and its two repairs.
+    const journalFile = path.join(output, 'civis-journal', 'civis_journal_c999.md');
+    assert.equal(fs.existsSync(path.join(output, 'civis-journal')), false, 'nothing lands on the shelf Mags searches');
+    const kept = JSON.parse(fs.readFileSync(path.join(output, 'civis-journal-failed', 'civis_journal_c999.failed.json')));
+    assert.equal(kept.passed, false);
+    assert.equal(kept.attempts.length, 6);
+    assert.match(kept.attempts[0].failures.join(';'), /machine term/);
+    // A writer shown its own entry and the gate's objection repairs it: the
+    // fallback is never called, and the repair brief carries both.
+    let sonnetCalls = 0;
+    let repairBrief = '';
+    const repaired = await journal.run(999, { root, dry: true, prior: [],
+      sonnet: async (_system, user) => { sonnetCalls++; if (sonnetCalls === 1) return bad; repairBrief = user; return answer; },
+      reasoner: async () => { throw new Error('the fallback must not be called'); }, page });
+    assert.equal(repaired.assertion.ok, true);
+    assert.equal(sonnetCalls, 2);
+    assert.match(repairBrief, /YOUR ENTRY WAS NOT ACCEPTED/);
+    assert.match(repairBrief, /machine term in prose/);
+    assert.ok(repairBrief.includes('a dial'), 'the writer sees its own entry');
     // Both routes down is a skipped week: nothing written, the page untouched.
     const down = async () => { throw new Error('TEST-ONLY route unavailable'); };
     const both = await journal.run(999, { root, prior: [], reasoner: down, sonnet: down, page });
     assert.equal(both.skipped, 'model-failure');
     assert.equal(calls, 0);
-    assert.equal(fs.existsSync(path.join(output, 'civis-journal')), false);
+    assert.equal(fs.existsSync(journalFile), false);
     const first = await journal.run(999, { root, prior: [],
       sonnet: async () => answer, page });
     assert.ok(first.path.endsWith('civis_journal_c999.md'));

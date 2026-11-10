@@ -163,6 +163,17 @@ EOF
     fi
   fi
 
+  # --- CRON FEEDBACK (pipeline.109, builder 2026-11-09) ---
+  # What the crons recorded about their own work in the last 7 days: what
+  # reporters were not given, where grades fall, what the gate held, Varek's
+  # audit points, what the daily news skipped. Digest only; the full list is
+  # output/cron-feedback.md. It files nothing: rows stay on the builder's word.
+  FEEDBACK_BLOCK=$(cd "$GODWORLD_ROOT" && timeout 5 node scripts/cronFeedback.js --boot 2>/dev/null)
+  if [ -n "$FEEDBACK_BLOCK" ]; then
+    echo ""
+    echo "$FEEDBACK_BLOCK"
+  fi
+
   # --- Supermemory recall patch (docs/SUPERMEMORY.md §Hooks) — a plugin update
   # overwrites it silently (0.1.8 -> 0.1.9 on 2026-10-04, 0.1.9 -> 0.1.11 on
   # 2026-10-12). Self-healing: re-apply scripts/supermemory-patch/*.patch; each

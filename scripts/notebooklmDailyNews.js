@@ -2,13 +2,13 @@
 /**
  * notebooklmDailyNews.js — grounded daily listening brief for GodWorld.
  *
- * Builds one bounded source pack from the latest world summary plus recent
- * newsroom output plus the daily citizen digest (pipeline.53 — verbatim
- * citizen reflections/life texture from buildCitizenWeekDigest.js --daily),
- * asks the permanent published-edition notebook for cited
- * continuity, and gives ONLY that combined source to the working daily-news
- * notebook. The written brief and audio overview are research/listening
- * artifacts, never canon and never an ingestion input.
+ * Puts the day's newsroom in front of the builder as sources the hosts can
+ * read one at a time (pipeline.108): every article its own source by
+ * reporter, each with its published history from the canon notebook beside
+ * it, every citizen reflection of the last day by name, and the world record
+ * by section on a Cycle's first morning. The working notebook holds only
+ * today. The written brief and audio overview are listening artifacts, never
+ * canon and never an ingestion input.
  *
  * Runtime failures are non-blocking by contract. This job may notify the
  * configured Discord webhook, but it never writes Sheets, canon, or editions.
@@ -42,8 +42,6 @@ const OUTPUT_DIR = path.join(ROOT, 'output', 'notebooklm', 'daily');
 const AUDIO_RETRY_INTERVAL_MS = 30 * 1000;
 const AUDIO_RETRY_MAX = 30;
 const AUDIO_CREATE_ATTEMPTS = 2;
-const CANON_POLICY_PATH = path.join(ROOT, 'scripts', 'notebooklmCanonSources.json');
-const CONTINUITY_EDITIONS = 2;
 const UNAIRED_CARRY_HOURS = 72;
 const SOURCE_VERSION = '2.0';
 const DEFAULT_AUDIO_LENGTH = 'default';
@@ -203,6 +201,31 @@ function airedReportTimes(outputDir, nowMs) {
     }
   }
   return aired;
+}
+
+// The newest manifest that recorded an audio render and never delivered it.
+function latestUndeliveredRender(outputDir) {
+  let best = null;
+  for (const file of walkFiles(outputDir)) {
+    if (path.basename(file) !== 'manifest.json') continue;
+    let manifest;
+    try {
+      manifest = readJson(file);
+    } catch (_) {
+      continue;
+    }
+    if (!manifest || !manifest.audioArtifactId || manifest.driveLink) continue;
+    const at = Date.parse(manifest.lastAttemptAt || manifest.generatedAt || '');
+    if (!Number.isFinite(at) || (best && best.at >= at)) continue;
+    best = {
+      at,
+      audioArtifactId: manifest.audioArtifactId,
+      sources: manifest.sources,
+      sourceIds: manifest.sourceIds,
+      manifestPath: path.relative(ROOT, file),
+    };
+  }
+  return best;
 }
 
 function collectNewsroomArtifacts(cycle, hours, nowMs, root = ROOT, options = {}) {
@@ -901,30 +924,6 @@ function queryAnswer(queryJson) {
   return String(queryJson.answer || queryJson.response || queryJson.text || '').trim();
 }
 
-function renderResearchBrief(cycle, queryJson, metadata) {
-  const answer = queryAnswer(queryJson);
-  const sources = queryJson.sources_used || queryJson.sources || [];
-  return [
-    '# Published-archive continuity — Cycle ' + cycle,
-    '',
-    'Artifact class: NLM_RESEARCH_BRIEF',
-    'Canon status: NOT CANON. NotebookLM is a reader over published sources; this synthesis does not alter canon.',
-    'Archive notebook: ' + metadata.archiveNotebookId,
-    'Prompt: ' + metadata.prompt,
-    '',
-    '## NotebookLM synthesis',
-    '',
-    answer || '_NotebookLM returned no answer text._',
-    '',
-    '## Reported source citations',
-    '',
-    '```json',
-    JSON.stringify(sources, null, 2),
-    '```',
-    '',
-  ].join('\n');
-}
-
 function sourceRecords(value) {
   if (!Array.isArray(value)) return [];
   return value.map((item) => ({
@@ -1047,45 +1046,6 @@ function ensureDailySources(notebookId, sources, sourceDir, existingSources, pre
   return landed;
 }
 
-// pipeline.108: run() no longer queries the permanent notebook; archivePrompt,
-// continuitySourceIds and renderResearchBrief are kept, unused, for a recall.
-function archivePrompt(cycle, reports) {
-  const reportHeads = reports.filter((report) =>
-    report.classification !== 'PUBLISHED_EDITION' && report.classification !== 'CIVIS_JOURNAL'
-  ).map((report) => {
-    const heading = report.body.match(/^#\s+(.+)$/m);
-    return '- ' + (heading ? heading[1] : path.basename(report.file));
-  }).join('\n');
-  return [
-    'Using only the selected published editions, prepare a cited continuity brief for Cycle ' + cycle + '.',
-    'Trace prior events, promises, named citizens, institutions, and unresolved storylines that bear on these current newsroom leads:',
-    reportHeads || '- No current report headlines; identify the most consequential unresolved published storylines entering this Cycle.',
-    'Separate direct published fact from inference. Do not invent missing history, quotes, figures, or current-cycle outcomes.',
-  ].join('\n');
-}
-
-// Continuity reads the last N published Cycle Pulse editions, not the whole
-// archive notebook (73 sources on 2026-09-07): the unscoped query grew past
-// 5 GB in the nlm CLI and was OOM-killed, and had come back "unavailable" on
-// 8 of the prior 16 mornings. Editions are picked off the fail-closed canon
-// policy (scripts/notebooklmCanonSources.json): allowedPublishedSourceIds
-// whose decision evidence names editions/cycle_pulse_c{N}.txt, highest N
-// first, one id per cycle. Returns { cycles: [N...], sourceIds: [id...] }.
-function continuitySourceIds(policy, count) {
-  const ids = (policy && Array.isArray(policy.allowedPublishedSourceIds)) ? policy.allowedPublishedSourceIds : [];
-  const decisions = (policy && policy.decisions) || {};
-  const byCycle = new Map();
-  ids.forEach((id) => {
-    const evidence = (decisions[id] && decisions[id].evidence) || [];
-    evidence.forEach((e) => {
-      const m = String(e).match(/cycle_pulse_c(\d+)\.txt$/);
-      if (m) byCycle.set(Number(m[1]), id); // later-listed id wins for a cycle
-    });
-  });
-  const cycles = Array.from(byCycle.keys()).sort((a, b) => b - a).slice(0, count || 2);
-  return { cycles, sourceIds: cycles.map((c) => byCycle.get(c)) };
-}
-
 // Builder 2026-10-17: the listening brief is citizens and the newsroom's reports,
 // not initiative plumbing. Drops the world-summary sections that are engine
 // diagnostics or civic mechanism (approval ledger, initiative/approval ripples,
@@ -1151,10 +1111,17 @@ async function createOpsReport(config, cycle, sourceIds, runDir, manifest, manif
   manifest.opsReportArtifactId = artifactId;
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
   const reportPath = path.join(runDir, 'ops-report-c' + cycle + '.md');
+  // `nlm download report` takes no --no-progress (0.15.5): with it every poll
+  // exited 2 on usage, so a report that had rendered in a minute was logged as
+  // "did not render within 15 minutes" on every run and never reached anyone.
+  let lastError = '';
   for (let i = 0; i < AUDIO_RETRY_MAX; i++) {
     await sleep(AUDIO_RETRY_INTERVAL_MS);
+    if (artifactStatus(config.newsroomNotebookId, artifactId) === 'failed') {
+      throw new Error('ops report render failed on NotebookLM');
+    }
     const downloaded = nlm(
-      ['download', 'report', config.newsroomNotebookId, '--id', artifactId, '--output', reportPath, '--no-progress'],
+      ['download', 'report', config.newsroomNotebookId, '--id', artifactId, '--output', reportPath],
       { timeoutMs: 120 * 1000 }
     );
     if (downloaded.ok && fs.existsSync(reportPath) && fs.statSync(reportPath).size > 0) {
@@ -1162,10 +1129,10 @@ async function createOpsReport(config, cycle, sourceIds, runDir, manifest, manif
       fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
       return reportPath;
     }
+    lastError = String(downloaded.out || '').replace(/\s+/g, ' ').slice(-200);
   }
-  throw new Error('ops report did not render within ' +
-    (AUDIO_RETRY_MAX * AUDIO_RETRY_INTERVAL_MS / 60000) +
-    ' minutes (nlm report create then 30×30s download poll)');
+  throw new Error('ops report did not download within ' +
+    (AUDIO_RETRY_MAX * AUDIO_RETRY_INTERVAL_MS / 60000) + ' minutes; last download said: ' + lastError);
 }
 
 // pipeline.108: one short instruction. Through v1.9 the focus ran ~900 chars
@@ -1401,10 +1368,20 @@ async function run(argv) {
 
   if (args.resumeLatestAudio) {
     const audioPath = path.join(runDir, 'godworld_daily_c' + cycle + '.m4a');
-    // This run dir's own render when its manifest recorded one; else the notebook's latest.
-    const downloaded = nlm(['download', 'audio', config.newsroomNotebookId]
-      .concat(manifest.audioArtifactId ? ['--id', manifest.audioArtifactId] : [])
-      .concat(['--output', audioPath, '--no-progress']), { timeoutMs: 300 * 1000 });
+    // Recovery delivers a render this pipeline recorded, never "whatever the
+    // notebook made last": this run dir's own, else the newest undelivered one
+    // on disk, whose sources (what that audio was made from) become this
+    // manifest's, so airs-once marks what was actually heard.
+    if (!manifest.audioArtifactId) {
+      const made = latestUndeliveredRender(OUTPUT_DIR);
+      if (!made) throw new Error('no undelivered audio render on record; run without --resume-latest-audio');
+      manifest.audioArtifactId = made.audioArtifactId;
+      manifest.sources = made.sources || [];
+      manifest.sourceIds = made.sourceIds || [];
+      manifest.resumedFrom = made.manifestPath;
+    }
+    const downloaded = nlm(['download', 'audio', config.newsroomNotebookId, '--id', manifest.audioArtifactId,
+      '--output', audioPath, '--no-progress'], { timeoutMs: 300 * 1000 });
     if (!downloaded.ok || !fs.existsSync(audioPath) || fs.statSync(audioPath).size === 0) {
       throw new Error('latest completed audio could not be downloaded: ' + downloaded.out.slice(0, 400));
     }
@@ -1576,8 +1553,7 @@ async function run(argv) {
         '📋 **Bay Tribune ops report — Cycle ' + cycle + '** (gate desk: every filing and every gate decision)');
     }
   } catch (e) {
-    console.log('DAILY OPS REPORT SKIPPED (non-blocking): ' + e.message +
-      ' — Studio report create/download poll is 30×30s (15 min) after nlm report create');
+    console.log('DAILY OPS REPORT SKIPPED (non-blocking): ' + e.message);
   } finally {
     // Held drafts never stay in the news notebook overnight: tomorrow's prune
     // is non-blocking, and a source left here is in reach of tomorrow's hosts.
@@ -1632,6 +1608,7 @@ module.exports = {
   worldRecordSources,
   editionSources,
   airedReportTimes,
+  latestUndeliveredRender,
   reusableSourceId,
   ensureDailySources,
   wantsBackground,
@@ -1640,14 +1617,11 @@ module.exports = {
   fetchArticleBackgrounds,
   parseJsonOutput,
   queryAnswer,
-  renderResearchBrief,
   findSourceId,
   parseAddedSourceId,
   parseCreatedArtifactId,
   findArtifactStatus,
   dailySourceTitle,
-  archivePrompt,
-  continuitySourceIds,
   dailyPrompt,
   dailyAudioFocus,
   SOURCE_VERSION,

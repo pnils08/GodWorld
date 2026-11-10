@@ -23,6 +23,7 @@ const {
   worldRecordSources,
   editionSources,
   airedReportTimes,
+  latestUndeliveredRender,
   reusableSourceId,
   ensureDailySources,
   wantsBackground,
@@ -31,14 +32,12 @@ const {
   fetchArticleBackgrounds,
   parseJsonOutput,
   queryAnswer,
-  renderResearchBrief,
   findSourceId,
   parseAddedSourceId,
   parseCreatedArtifactId,
   findArtifactStatus,
   dailySourceTitle,
   dailyPrompt,
-  continuitySourceIds,
   dailyAudioFocus,
   stripDailyNoise,
   staleDailySourceIds,
@@ -547,20 +546,6 @@ const syntheticDigest = {
 }
 
 {
-  const brief = renderResearchBrief(999, {
-    answer: 'Synthetic continuity.',
-    sources_used: [{ id: 's1', title: 'Synthetic source' }],
-  }, {
-    archiveNotebookId: 'synthetic-notebook',
-    prompt: 'Synthetic prompt',
-  });
-  assert(brief.includes('Artifact class: NLM_RESEARCH_BRIEF'));
-  assert(brief.includes('Canon status: NOT CANON'));
-  assert(brief.includes('Synthetic continuity.'));
-  assert(brief.includes('"id": "s1"'));
-}
-
-{
   const open = resolveAudioPresentation(
     { profile: 'CYCLE_OPEN', format: 'brief', length: 'short' },
     { audioFormat: 'deep_dive' },
@@ -600,29 +585,6 @@ const syntheticDigest = {
   assert(line.includes('CYCLE_OPEN'));
   assert(line.includes('brief/short'));
   assert(line.includes('W1_ACTIVE_6'));
-}
-
-{
-  // Continuity scope: latest N Cycle Pulse editions off the canon policy,
-  // one id per cycle (later-listed wins), non-edition published sources ignored.
-  const policy = {
-    allowedPublishedSourceIds: ['a', 'b', 'c', 'd', 'e'],
-    decisions: {
-      a: { evidence: ['editions/cycle_pulse_c103.txt'] },
-      b: { evidence: ['editions/cycle_pulse_c104.txt'] },
-      c: { evidence: ['editions/supplemental_tech_landscape_c84.txt'] },
-      d: { evidence: ['editions/cycle_pulse_c104.txt'] },
-      e: { evidence: ['editions/cycle_pulse_c105.txt'] },
-    },
-  };
-  assert.deepStrictEqual(continuitySourceIds(policy, 2), { cycles: [105, 104], sourceIds: ['e', 'd'] });
-  assert.deepStrictEqual(continuitySourceIds(policy, 5), { cycles: [105, 104, 103], sourceIds: ['e', 'd', 'a'] });
-  assert.deepStrictEqual(continuitySourceIds({}, 2), { cycles: [], sourceIds: [] });
-  assert.deepStrictEqual(continuitySourceIds(null, 2), { cycles: [], sourceIds: [] });
-  // Live policy resolves to real ids for the two newest editions.
-  const live = continuitySourceIds(require('./notebooklmCanonSources.json'), 2);
-  assert.strictEqual(live.sourceIds.length, 2);
-  assert(live.cycles[0] > live.cycles[1]);
 }
 
 {
@@ -744,6 +706,14 @@ const syntheticDigest = {
     driveLink: 'https://example.invalid/z', sourceVersion: '2.0', generatedAt: new Date(now + 3600e3).toISOString(),
     reports: [{ path: 'resumed-unproven.md' }],
   });
+  // Recovery picks the newest render that was made and never delivered.
+  assert.strictEqual(latestUndeliveredRender(outDir), null);
+  writeManifest('made-old', { audioArtifactId: 'art-old', generatedAt: new Date(now - 3600e3).toISOString(), sources: [{ kind: 'article', id: 'o', path: 'old.md' }] });
+  writeManifest('made-new', { audioArtifactId: 'art-new', generatedAt: new Date(now).toISOString(), sources: [{ kind: 'article', id: 'n', path: 'new.md' }], sourceIds: ['n'] });
+  writeManifest('made-delivered', { audioArtifactId: 'art-sent', driveLink: 'https://example.invalid/s', generatedAt: new Date(now + 60e3).toISOString() });
+  const made = latestUndeliveredRender(outDir);
+  assert.strictEqual(made.audioArtifactId, 'art-new');
+  assert.deepStrictEqual(made.sourceIds, ['n']);
   const later = now + 24 * 3600e3;
   const airedMap = airedReportTimes(outDir, later);
   assert.deepStrictEqual(Array.from(airedMap.keys()).sort(), [freshRel, 'landed.md'].sort(),

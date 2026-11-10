@@ -267,15 +267,15 @@ async function magsAugment(systemPrompt, opts) {
     fetchUserProfile(opts.userId),
     mags.loadFamilyData(),
     searchDashboard(opts.userMessage),
-    searchOwnStore(opts.userMessage, 4),
-    personaProvider.pageRecallText_(MAGS_POPID, opts.userMessage, 3, [])
+    searchOwnStoreHits(opts.userMessage, 4)
   ]);
   var archiveContext = results[0];
   var ownMemory = results[1];
   var familyData = results[2];
   var dashboardArticles = results[3];
-  var ownOnThis = results[4];
-  var pageOnThis = results[5];
+  // her reflections live on her page AND in her store (builder 11-09: both): the page hits drop what the store gave
+  var ownOnThis = fenceOwnStore(results[4]);
+  var pageOnThis = await personaProvider.pageRecallText_(MAGS_POPID, opts.userMessage, 3, results[4]);
 
   if (familyData && !familyData.startsWith('(')) {
     systemPrompt += '\n\n---\n\n' + familyData;
@@ -316,10 +316,11 @@ const magsProvider = {
   augment: magsAugment,
   // The search_my_memory tool: her store (talks, reflections, Pulses) and her page, on a query she chooses.
   searchMemory: async function (query) {
-    var parts = await Promise.all([searchOwnStore(query, 5), personaProvider.pageRecallText_(MAGS_POPID, query, 4, [])]);
+    var hits = await searchOwnStoreHits(query, 5);
+    var pageText = await personaProvider.pageRecallText_(MAGS_POPID, query, 4, hits);
     var out = [];
-    if (parts[0]) out.push('## Your talks, reflections and Pulses\n' + parts[0]);
-    if (parts[1]) out.push('## Your page\n' + parts[1]);
+    if (hits.length) out.push('## Your talks, reflections and Pulses\n' + fenceOwnStore(hits));
+    if (pageText) out.push('## Your page\n' + pageText);
     return out.join('\n\n') || '(nothing in your memory for that)';
   },
   persistResponse: function (userName, userMessage, response, userId) {
@@ -364,22 +365,49 @@ function searchSupermemory(query) {
 // reflections and the Pulses she narrated. Relevant chunks per hit under the hit's title, nightly-scrubbed
 // (older entries carry calendar dates), fenced. '' on a miss or a failure.
 // ---------------------------------------------------------------------------
-function searchOwnStore(query, limit) {
-  if (!USE_SUPERMEMORY || !String(query || '').trim()) return Promise.resolve('');
+// No nightly scrub here: that scrub is for citizen-side readers and drops every sentence naming the person she
+// talked with — in her own prompt it would gut her memory of her own talks. Calendar dates alone come out
+// (the sim has its own clock).
+var CAL_DATE_RE = /\[?\b20[1-3]\d-[01]?\d-[0-3]?\d\b\]?/g;
+function searchOwnStoreHits(query, limit) {
+  if (!USE_SUPERMEMORY || !String(query || '').trim()) return Promise.resolve([]);
   return require('../lib/supermemory').search(String(query).slice(0, 400), {
     containerTags: ['mags'], limit: limit || 4, timeoutMs: 8000, apiVersion: 'v3'
   }).then(function (results) {
     var hits = (results || []).map(function (r) {
-      var chunks = (r.chunks || []).filter(function (c) { return c && c.isRelevant && typeof c.content === 'string'; })
-        .map(function (c) { return c.content; }).join(' ');
-      var text = memoryFence.scrubNightly(chunks).replace(/\s+/g, ' ').trim();
+      var text = (r.chunks || []).filter(function (c) { return c && c.isRelevant && typeof c.content === 'string'; })
+        .map(function (c) { return c.content; }).join(' ').replace(CAL_DATE_RE, '').replace(/\s+/g, ' ').trim();
       if (!text) return '';
       var title = String((r.metadata && r.metadata.title) || '').replace(/\s+—\s+\d{4}-\d{2}-\d{2}$/, '');
       return (title ? title + ': ' : '') + (text.length > 900 ? text.slice(0, 899) + '…' : text);
     }).filter(Boolean);
     if (hits.length) log.info('Own store returned ' + hits.length + ' hit(s)');
-    return hits.length ? memoryFence.wrap(hits.join('\n\n'), 'mags-store') : '';
-  }).catch(function () { return ''; });
+    return hits;
+  }).catch(function (e) { log.warn('Own store search failed: ' + e.message); return []; });
+}
+function fenceOwnStore(hits) { return hits && hits.length ? memoryFence.wrap(hits.join('\n\n'), 'mags-store') : ''; }
+
+// The store-wide summary Supermemory builds is raw: every "recent" line is stamped with the calendar day it
+// was INGESTED (read 2026-11-09: twelve Pulses backfilled that night all read as "[Recent] [2026-11-10]"),
+// and the same fact repeats in several wordings (five lines saying she is Editor-in-Chief). Stamps come off,
+// a line still carrying a calendar year is dropped, and a line that mostly repeats a kept one is dropped.
+function profileLines(arr, max) {
+  var kept = [], keys = [];
+  (arr || []).forEach(function (raw) {
+    var line = String(raw || '').replace(/^\s*\[Recent\]\s*/i, '').replace(CAL_DATE_RE, '').replace(/\s+/g, ' ').trim().replace(/\.$/, '');
+    if (!line || /\b20[1-3]\d\b/.test(line)) return;
+    var words = line.toLowerCase().replace(/[^a-z0-9 ]/g, ' ').split(/\s+/).filter(function (w) { return w.length > 2 && !/^(the|and|margaret|mags|corliss)$/.test(w); });
+    var set = {}; words.forEach(function (w) { set[w] = 1; });
+    var n = Object.keys(set).length;
+    if (!n) return;
+    var dup = keys.some(function (k) {
+      var shared = Object.keys(set).filter(function (w) { return k[w]; }).length;
+      return shared / Math.min(n, Object.keys(k).length) >= 0.8;
+    });
+    if (dup) return;
+    keys.push(set); kept.push(line);
+  });
+  return kept.slice(0, max || 30);
 }
 
 // ---------------------------------------------------------------------------
@@ -415,12 +443,11 @@ function fetchUserProfile(discordUserId) {
           if (!profile) { resolve(''); return; }
 
           var lines = [];
-          if (profile.static && profile.static.length) {
-            lines.push('Known: ' + profile.static.join('. '));
-          }
-          if (profile.dynamic && profile.dynamic.length) {
-            lines.push('Recent: ' + profile.dynamic.join('. '));
-          }
+          var known = profileLines(profile.static, 20);
+          var lately = profileLines(profile.dynamic, 20);
+          if (known.length) lines.push('Known: ' + known.join('. ') + '.');
+          // not "Recent": the store dates a line by when it was saved, not when it happened
+          if (lately.length) lines.push('Also in your memory (not in order): ' + lately.join('. ') + '.');
 
           var result = lines.join('\n');
           if (result) {
@@ -449,7 +476,8 @@ function saveToSupermemory(userName, userMessage, magsResponse, discordUserId) {
   var content = userName + ': ' + userMessage + '\nMags: ' + magsResponse;
   var payload = JSON.stringify({
     content: content,
-    containerTags: ['mags']
+    containerTags: ['mags'],
+    metadata: { source: 'discord-talk', speaker: String(userName || '') }
   });
 
   var options = {
@@ -468,11 +496,13 @@ function saveToSupermemory(userName, userMessage, magsResponse, discordUserId) {
     res.on('data', function(c) { data += c; });
     res.on('end', function() {
       if (res.statusCode >= 200 && res.statusCode < 300) {
-        log.info('Conversation saved to Supermemory for profile building');
+        log.info('Talk saved to her store');
+      } else {
+        log.warn('Talk NOT saved to her store: HTTP ' + res.statusCode + ' ' + String(data).slice(0, 160));
       }
     });
   });
-  req.on('error', function() {}); // fire and forget
+  req.on('error', function(e) { log.warn('Talk NOT saved to her store: ' + e.message); }); // never blocks the reply
   req.write(payload);
   req.end();
 }

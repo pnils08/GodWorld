@@ -78,4 +78,5 @@ Steps with no script: 3 confirms the builder's fire on the live sheet; 4.1 check
 
 ## Changelog
 
+- 2026-11-10 (engine-sheet) — The six pipeline.100 files this row's `17e5405fb` carried by accident (a staged undo) were put back to the builder-approved version under pipeline.100 (`5caa1cb0e`). No change to the step gate.
 - 2026-11-09 — Plan written and built on the builder's order the night codex ran C115 out of order. Runner, guard, tests, Claude hook live; codex hook wired, awaiting trust.

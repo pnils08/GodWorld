@@ -421,4 +421,19 @@ testRetrievalStatusClassification();
 testRetrievalLogIsMetadataOnly();
 testValidResponseAndOutput();
 testResponseFailures();
+// --allow-uncited: only a wholly bare answer passes, marked; default stays fail-closed.
+{
+  const { validateQueryResponse: validate, parseArgs: parse } = require('./notebooklmCanonSearch');
+  const bare = { answer: 'Synthetic uncited history.', conversation_id: 'c1', citations: {}, sources_used: [], references: [] };
+  const empty = { allowedPublishedSourceIds: ['A'], allowedCanonReferenceSourceIds: [], decisions: { A: { title: 'A' } } };
+  assert.throws(() => validate(bare, ['A'], empty), /sources_used|citation/);
+  const out = validate(bare, ['A'], empty, { allowUncited: true });
+  assert.strictEqual(out.uncited, true);
+  assert.strictEqual(out.answer, 'Synthetic uncited history.');
+  assert.throws(() => validate(Object.assign({}, bare, { sources_used: ['OUTSIDE'] }), ['A'], empty, { allowUncited: true }),
+    /outside|citation/, 'a partial citation record is still checked');
+  assert.strictEqual(parse(['node', 's', '--question', 'q']).allowUncited, false);
+  assert.strictEqual(parse(['node', 's', '--question', 'q', '--allow-uncited']).allowUncited, true);
+}
+
 console.log('notebooklmCanonSearch tests: PASS');

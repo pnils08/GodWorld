@@ -684,7 +684,7 @@ function backgroundSource(report, background) {
 }
 
 function askCanon(question) {
-  const out = execFileSync('node', [CANON_SEARCH, '--question', question, '--timeout', '180'],
+  const out = execFileSync('node', [CANON_SEARCH, '--question', question, '--timeout', '180', '--allow-uncited'],
     { cwd: ROOT, encoding: 'utf-8', timeout: 240 * 1000, maxBuffer: 10 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] });
   const result = JSON.parse(out.slice(out.indexOf('{')));
   const answer = String(result.answer || '').trim();
@@ -693,10 +693,10 @@ function askCanon(question) {
   return { answer, titles };
 }
 
-// Map of article path → { answer, titles }. Three tries per article: the
-// wrapper fails closed when NotebookLM returns an answer with no citation list.
-// 2026-11-09: 2 of 6 articles landed on each of two live runs; the raw answers
-// that failed were on-topic but came back with `citations: {}` (open, plan §9); answers are kept in the run dir so a re-run asks nothing twice.
+// Map of article path → { answer, titles }. NotebookLM returned most answers
+// with no citation list (2026-11-09: 2 of 6 cited on each of two live runs),
+// so the daily show takes the uncited answer too (builder 2026-11-09: "citing
+// sources is not necessary for this, these don't write back into canon"); answers are kept in the run dir so a re-run asks nothing twice.
 function fetchArticleBackgrounds(reports, cacheDir, ask = askCanon, nowFn = Date.now) {
   const backgrounds = new Map();
   const startedAt = nowFn();

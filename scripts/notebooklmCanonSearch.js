@@ -20,6 +20,7 @@ const RESULT_STATUSES = new Set([
   'auth_failure',
   'citation_failure',
   'verified',
+  'uncited',
 ]);
 const RETRIEVAL_LANE = 'prior-published-arc';
 const DEFAULT_LOG_PATH = path.join('output', 'retrieval', 'notebooklm-canon-search.jsonl');
@@ -31,6 +32,7 @@ function parseArgs(argv) {
     sourceIds: null,
     timeoutSeconds: 180,
     logPath: DEFAULT_LOG_PATH,
+    allowUncited: false,
   };
   for (let index = 2; index < argv.length; index++) {
     const token = argv[index];
@@ -48,6 +50,8 @@ function parseArgs(argv) {
       if (token === '--source-class') args.sourceClass = value;
       if (token === '--timeout') args.timeoutSeconds = Number(value);
       if (token === '--log-path') args.logPath = value;
+    } else if (token === '--allow-uncited') {
+      args.allowUncited = true;
     } else {
       throw new Error('unknown argument: ' + token);
     }
@@ -220,7 +224,18 @@ function normalizeCitationMap(value) {
   return result;
 }
 
-function validateQueryResponse(raw, selectedSourceIds, policy) {
+// --allow-uncited (builder 2026-11-09, daily news only: "citing sources is not
+// necessary for this, these don't write back into canon"): NotebookLM often
+// returns a scoped answer with no citation list at all. With the flag that
+// bare answer is returned marked `uncited`, for a listening surface. A caller
+// that writes toward canon never passes it; a partial or inconsistent citation
+// list still fails with or without it.
+function isBareAnswer(raw) {
+  const empty = (value) => value == null || (Array.isArray(value) ? value.length === 0 : Object.keys(value).length === 0);
+  return empty(raw.citations) && empty(raw.sources_used) && empty(raw.references);
+}
+
+function validateQueryResponse(raw, selectedSourceIds, policy, options = {}) {
   if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
     throw new Error('NotebookLM response must be an object');
   }
@@ -228,6 +243,9 @@ function validateQueryResponse(raw, selectedSourceIds, policy) {
   if (!answer) throw new Error('NotebookLM response has no answer');
   const conversationId = String(raw.conversation_id || '').trim();
   if (!conversationId) throw new Error('NotebookLM response has no conversation ID');
+  if (options.allowUncited && isBareAnswer(raw)) {
+    return { answer, conversationId, sourcesUsed: [], citationMap: {}, sourceExcerpts: [], uncited: true };
+  }
 
   const selected = new Set(selectedSourceIds);
   const approved = new Set([
@@ -454,6 +472,7 @@ function buildOutput(args, config, policy, selectedSourceIds, validated) {
     sourcesUsed: validated.sourcesUsed,
     citationMap: validated.citationMap,
     sourceExcerpts: validated.sourceExcerpts,
+    uncited: validated.uncited === true,
   };
 }
 
@@ -492,7 +511,7 @@ function main(argv, deps = {}) {
     stage = 'query';
     const raw = query(queryArgs, args.timeoutSeconds);
     stage = 'response_validation';
-    validated = validateQueryResponse(raw, selectedSourceIds, policy);
+    validated = validateQueryResponse(raw, selectedSourceIds, policy, { allowUncited: args.allowUncited });
     output = buildOutput(args, config, policy, selectedSourceIds, validated);
   } catch (error) {
     const record = buildRetrievalRecord({
@@ -519,7 +538,7 @@ function main(argv, deps = {}) {
     questionHint,
     selectedSourceIds,
     validated,
-    resultStatus: 'verified',
+    resultStatus: validated.uncited ? 'uncited' : 'verified',
     startedAt,
     finishedAt: Date.now(),
   }));

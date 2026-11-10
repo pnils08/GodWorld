@@ -35,7 +35,7 @@ const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 // shared with scripts/citizenVoice.js (edition voicing) + the Task-6 conversation engine.
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
   loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory,
-  loadCardAnchor, loadVoiceTexture, renderStanding, renderOwnRecord,
+  loadCardAnchor, loadVoiceTexture, renderStanding, renderOwnRecord, loadOwnFeedLines, stationLine,
   loadLivedEvents, renderLivedLine, livedFor, recordLivedSpend, selectWakeCitizen, wakeSeedKey,
   lifeTailOf, OWED_RESERVE, chaosOutcomeIndex, owedFrom, owedCandidates, owedFor, owedLivedPrefer, owedShownSet, owedWakesUsed, owedStateFrom, owedJournalLine, owedPageKey, wakeAdmission, owedPageStep, loadOwedRecords, acquireFileLock,
   SHOW_RESERVE, owedFromShow, showCandidates, showWakesUsed, showMarkSpent } = require('/root/GodWorld/lib/wakePerception');
@@ -205,7 +205,12 @@ function buildVoicePrompts(c, neighbors, sportsLine, lifeArc, textureLine, bonds
   const record = recordLine ? `\n\n${recordLine}` : '';
   // pipeline.95 — a pilot's nights on UNDOCKED, fenced upstream (a captain's log is model-written text); continuity group.
   const show = showBlock ? `\n\nYour time on UNDOCKED:\n${showBlock}` : '';
-  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.${trajLine}${arcLine}${health}${anchor}${talk}${record}${show}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
+  // pipeline.110 — a citizen the sports feed names this Cycle wakes knowing it (his own rows, whole), and a citizen of
+  // station is not told he is ordinary. Local beats read; '' for everyone the feed does not name.
+  let ownFeed = '';
+  try { ownFeed = loadOwnFeedLines(c.name, cycle).block; } catch (e) { ownFeed = ''; }
+  const feedLine = ownFeed ? `\n\n${ownFeed}` : '';
+  const system = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. ${stationLine(c, !!ownFeed)} Your temperament: ${disp}.${trajLine}${arcLine}${health}${anchor}${talk}${record}${show}${feedLine}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${ripple}${opinions}${sports}${paper}${texture}${memory}${tensions}`;
   // T5 — varied-provocation question bank. The fixed "small things on your mind"
   // prompt becomes a deterministically-seeded pick latching a real signal this
   // citizen perceives, so two citizens woken the same cycle are prompted

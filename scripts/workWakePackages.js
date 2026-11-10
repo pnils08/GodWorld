@@ -22,6 +22,8 @@ const DATA_NODES = Object.freeze([
   'cycle-weather',
   'sports-player',
   'initiative-project',   // civic.38 Task 9 step 2 — project directors off the datawake rota
+  'office-week',          // pipeline.110 — an officeholder's own statements and acts of the Cycle, off their page
+  'own-company',          // pipeline.110 — the Business_Ledger rows that name this citizen as founder / owner
 ]);
 
 const DUTY_DAYS = Object.freeze(['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat']);

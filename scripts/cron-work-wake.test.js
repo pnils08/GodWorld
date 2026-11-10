@@ -80,9 +80,13 @@ var dir = fixtureBeats({ Hospital_Ledger: HOSPITAL, Oakland_Sports_Feed: FEED })
   ok(sp.indexOf('Other Player/6IP') < 0, 'sports-player does not render teammates\' stat lines');
 
   var prior = wake.NODE_BUILDERS['sports-player'](Object.assign({}, playerPkg, { playerName: 'Other Player' }), 107, dir);
-  ok(prior && prior.indexOf('cycle 107') >= 0, 'sports-player current-cycle hit wins for a teammate');
-  var fellBack = wake.NODE_BUILDERS['sports-player'](playerPkg, 999, dir);
-  ok(fellBack && fellBack.indexOf('cycle 107') >= 0, 'sports-player falls back to the most recent hit');
+  ok(prior && prior.indexOf('6IP/2ER') >= 0 && prior.indexOf('5IP/1ER') < 0, 'sports-player: this Cycle\'s line, not last Cycle\'s, for a teammate');
+  ok(prior && prior.indexOf('Named with you: Test Ballplayer') >= 0 && prior.indexOf('A game happened.') >= 0, 'sports-player: who he was named with, and the last time before this');
+  // pipeline.110 — a Cycle that does not name him hands him nothing: an old row is not this week's work
+  var quiet = wake.NODE_BUILDERS['sports-player'](playerPkg, 999, dir);
+  ok(quiet === null, 'sports-player: not named this Cycle -> no block (never an old row as this week\'s)');
+  var priv = fixtureBeats({ Oakland_Sports_Feed: [{ Cycle: '107', EventType: 'question', EventTrigger: 'question', NamesUsed: 'Test Ballplayer (1B)', Notes: 'What is next for you?' }] });
+  ok(wake.NODE_BUILDERS['sports-player'](playerPkg, 107, priv) === null, 'sports-player: a private question row never renders as feed news');
 
   var none = wake.NODE_BUILDERS['hospital-deaths'](SYNTH_PKG, 107, path.join(dir, 'missing'));
   ok(none === null, 'missing beats file -> null (skip, never fatal)');
@@ -97,6 +101,44 @@ console.log('=== buildWorkPack ===');
   ok(pack && pack.blocks.length === 1, 'one block per resolved node');
   var empty = wake.buildWorkPack(Object.assign({}, SYNTH_PKG, { dataNodes: ['crime-metrics'] }), 107, dir, namesPath);
   ok(empty === null, 'no resolvable nodes -> null pack');
+})();
+
+console.log('=== auto packs (pipeline.110) ===');
+(function () {
+  var agents = fs.mkdtempSync(path.join(os.tmpdir(), 'ww-agents-'));
+  fs.mkdirSync(path.join(agents, 'civic-office-test'));
+  fs.writeFileSync(path.join(agents, 'civic-office-test', 'IDENTITY.md'), '# Test Office\n\n## Who You Are\n\n**Mayor Test** — a careful builder. Backs it with numbers.\n\n**POP ID:** POP-99910\n\n## Traits\n\n**Decision signature:** Moves fast.\n\n## Your Voice\n\n- public line\n');
+  var ledger = [
+    { POPID: 'POP-99910', Name: 'Mayor Test', ClockMode: 'CIVIC', RoleType: 'Mayor', DialState: '' },
+    { POPID: 'POP-99911', Name: 'Test Ballplayer', ClockMode: 'GAME', RoleType: 'First Baseman, Oakland A\'s', DialState: '' },
+    { POPID: 'POP-99912', Name: 'Old Legend', ClockMode: 'ENGINE', RoleType: 'Former Catcher, Oakland A\'s Legend', DialState: '' },
+    { POPID: 'POP-99913', Name: 'Other Player', ClockMode: 'GAME', RoleType: 'Starting Pitcher, Oakland A\'s', DialState: '' },
+    { POPID: 'POP-99914', Name: 'Loud Fan', ClockMode: 'ENGINE', RoleType: 'Bartender', DialState: '' },
+    { POPID: 'POP-00527', Name: 'Mike Paulson', ClockMode: 'GAME', RoleType: 'General Manager', DialState: '' },
+  ];
+  var map = { offices: [{ officeId: 'MAYOR-T', title: 'Mayor', holder: 'Mayor Test', popid: 'POP-99910', district: 'citywide', agentDir: 'civic-office-test' },
+    { officeId: 'CLERK-T', title: 'Clerk', holder: 'No Agent', popid: 'POP-99915' }], projects: [] };
+  var named = new Set(['test ballplayer', 'old legend', 'loud fan', 'mike paulson']);
+  var reg = { 'player-other': { persona: 'player-other', active: true, popid: 'POP-99913' } };
+  var auto = wake.autoPackages(107, reg, { ledger: ledger, officeMap: map, named: named, agentsDir: agents });
+  var keys = Object.keys(auto).sort().join();
+  ok(keys === 'auto-office-civic-office-test,auto-player-POP-99911,auto-player-POP-99912', 'auto packs: the agented office, the named player, the named legend — and nobody else', keys);
+  ok(!auto['auto-player-POP-00527'], 'auto packs: Paulson speaks for himself');
+  var m = auto['auto-office-civic-office-test'];
+  ok(m.dataNodes.indexOf('office-week') === 0 && m.dutyDays.join() === 'thu' && /careful builder/.test(m.promptContract.voiceNotes) && /Moves fast/.test(m.promptContract.voiceNotes) && !/public line|POP-99910/.test(m.promptContract.voiceNotes),
+    'office pack: its own record, Thursday, who she is and how she decides from her own file');
+  ok(/not performing the job/.test(m.promptContract.frame) && !/ordinary person/.test(wake.buildWorkPrompts(m, { identity: 'x.', blocks: ['b'] }, '').system), 'office pack: private frame, never "an ordinary person at work"');
+  ok(wake.NODE_BUILDERS['office-week'](Object.assign({}, m, { _officeWeek: ['stated: one', 'datawake: two'] })).indexOf('- datawake: two') > 0 && wake.NODE_BUILDERS['office-week'](m) === null, 'office-week: the prefetched record, or nothing');
+  var due = wake.selectAutoDue(auto, 107, { wokenCycle: {} }, 'tue').map(function (p) { return p.key; }).sort().join();
+  ok(due === 'auto-player-POP-99911,auto-player-POP-99912', 'auto due Tuesday: the players; the office waits for Thursday', due);
+  var once = wake.selectAutoDue(auto, 107, { wokenCycle: { 'POP-99911:cycle': 107 } }, 'thu').map(function (p) { return p.key; }).sort().join();
+  ok(once === 'auto-office-civic-office-test,auto-player-POP-99912', 'auto packs wake once a Cycle', once);
+  var withFeed = wake.buildWorkPack(Object.assign({}, m, { _officeWeek: ['stated: one'], name: 'Other Player' }), 107, dir);
+  ok(withFeed && withFeed.nodes.indexOf('own-feed') !== -1, 'any pack whose holder the feed names this Cycle carries his own feed lines');
+  var co = fixtureBeats({ Business_Ledger: [{ BIZ_ID: 'BIZ-1', Name: 'Test Systems', Sector: 'Software', Neighborhood: 'West Oakland', Employee_Count: '41', Annual_Revenue: '60287787', Growth_Rate: '5.1', Key_Personnel: 'POP-99916 Test Founder (founder)' },
+    { BIZ_ID: 'BIZ-2', Name: 'Someone Else Co', Sector: 'Food', Neighborhood: 'Temescal', Employee_Count: '3', Annual_Revenue: '1', Growth_Rate: '1', Key_Personnel: '' }] });
+  var cb = wake.NODE_BUILDERS['own-company']({ popid: 'POP-99916' }, 107, co);
+  ok(cb && /Test Systems/.test(cb) && /\$60\.3M/.test(cb) && !/Someone Else/.test(cb), 'own-company: only the rows that name him, in money he would say', cb);
 })();
 
 console.log('=== selection ===');

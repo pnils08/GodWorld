@@ -47,7 +47,7 @@ const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
 const interviewContract = require('./newsroomInterviewContract');
 const { matchBondTargets_ } = require('./bondTargetMatch'); // engine.130 — PRESS rows carry BondTarget (col I) like the wake
 const { buildPool, coResidents, loadLifeArc, loadSportsSlice, loadNeighborhoodTexture,
-  loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory, renderStanding } = require('/root/GodWorld/lib/wakePerception'); // loadHealthState engine.101
+  loadBonds, loadFamily, loadHealthState, loadOwnPageReadback, dialTrajectory, renderStanding, loadOwnFeedLines, stationLine } = require('/root/GodWorld/lib/wakePerception'); // loadHealthState engine.101
 const showRecord = require('./undockedShowRecord'); // pipeline.95 — an UNDOCKED pilot knows they flew health slice; renderStanding engine.147
 
 const ARGV = process.argv.slice(2);
@@ -164,10 +164,28 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
   const sports = sportsLine ? `\n\nAround Oakland: ${sportsLine}` : '';
   const texture = textureLine ? `\n\nAround your neighborhood: ${textureLine}` : '';
   const memory = pageRead.block ? `\n\n---\n\nWhat's been on your mind lately, from your own private reflections:\n${pageRead.block}` : '';
-  const identity = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. You are an ordinary person, not a writer. Your temperament: ${disp}.`;
+  // pipeline.110 (builder 2026-11-10: "A player can't give a proper interview without knowing what the game event
+  // was") — what the record holds about the person being asked: his own feed rows of the Cycle, and, for an
+  // officeholder, the last positions the office put on its page. Facts of his own public life: they ride in
+  // BOTH branches below (the no-exposure branch keeps unrelated private history out, not his own record).
+  let ownFeed = '';
+  try { ownFeed = loadOwnFeedLines(c.name, cycle).block; } catch (e) { ownFeed = ''; }
+  let ownOffice = '';
+  try {
+    const officeWall = require('./officeWall');
+    const map = officeWall.loadOfficeMap();
+    const held = (map.offices || []).concat(map.projects || []).find((of) => String(of.popid || '').toUpperCase() === c.popId);
+    if (held) {
+      const wall = await officeWall.loadPositionWall(c.popId, 6);
+      const posts = (wall && wall.posts) || [];
+      if (posts.length) ownOffice = 'What your office (' + held.title + ') last put on the record, newest first:\n' + posts.map((p) => '- ' + String(p.content).slice(0, 320)).join('\n');
+    }
+  } catch (e) { ownOffice = ''; }
+  const ownRecord = [ownFeed, ownOffice].filter(Boolean).map((b) => '\n\n' + b).join('');
+  const identity = `You are ${c.name}, ${c.age ? c.age + ', ' : ''}a ${c.occ || 'resident'} living in ${c.nh}, Oakland. ${stationLine(c, !!ownFeed)} Your temperament: ${disp}.`;
   const system = interviewMode && !livedContextAllowed
-    ? identity + '\n\nThis interview has no story-linked personal exposure. Stay in your own voice, but do not project unrelated life history onto the story.'
-    : identity + `${trajLine}${arcLine}${health}${show}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${sports}${texture}${memory}`;
+    ? identity + ownRecord + '\n\nThis interview has no story-linked personal exposure. Stay in your own voice, but do not project unrelated life history onto the story.'
+    : identity + `${trajLine}${arcLine}${health}${show}${ownRecord}\n\nReal things from your life recently:\n${c.life}${family}${standing}${who}${bonds}${sports}${texture}${memory}`;
 
   // The ask arrives from the caller (letters desk, interview brief). Fence it — desk-authored
   // context is instructions TO the citizen, but anything quoted inside it must not be able to

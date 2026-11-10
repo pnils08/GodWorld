@@ -27,7 +27,8 @@ const sheets = require('/root/GodWorld/lib/sheets');
 const page = require('/root/GodWorld/lib/citizenPage');
 const classifier = require('/root/GodWorld/lib/reflectionClassifier');
 const getCurrentCycle = require('/root/GodWorld/lib/getCurrentCycle');
-const { loadOwnPageReadback } = require('/root/GodWorld/lib/wakePerception');
+const { loadOwnPageReadback, loadOwnFeedLines, feedNamedKeys, feedNameKey, loadVoiceTexture } = require('/root/GodWorld/lib/wakePerception');
+const dials = require('/root/GodWorld/lib/citizenDials');
 const registry = require('./workWakePackages');
 const { centralDate } = require('./centralDate');   // the Central day the crontab runs on; the UTC date is the next day at the 20:18 run
 
@@ -136,21 +137,37 @@ const NODE_BUILDERS = {
     const hot = mine.slice().sort((a, b) => (Number(b.ViolentCrimeIndex) || 0) - (Number(a.ViolentCrimeIndex) || 0)).slice(0, 5);
     return 'Crime picture this cycle:\n' + hot.map((r) => `${r.Neighborhood} — violent index ${r.ViolentCrimeIndex}, ${r.IncidentCount} incidents, clearance ${r.ClearanceRate}.`).join('\n');
   },
+  // pipeline.110 — every public feed row of the Cycle that names him, its note whole, his own stat segment
+  // (lib/wakePerception loadOwnFeedLines). It used to hand him ONE row cut to 220 characters, and when the Cycle
+  // did not name him it handed him the newest old row as if it were this week's. Not named this Cycle = no block.
   'sports-player': (pkg, cycle, beatsDir) => {
-    const rows = readBeats('Oakland_Sports_Feed', beatsDir);
+    const own = loadOwnFeedLines(pkg.playerName || pkg.name, cycle, { beatsDir });
+    return own.block || null;
+  },
+  // pipeline.110 — the officeholder's own record of the Cycle. Read off their page before the pack is built
+  // (wakeOne: loadOfficeWeek) because the builders are synchronous and local; a pack with nothing prefetched skips.
+  'office-week': (pkg) => {
+    const lines = Array.isArray(pkg._officeWeek) ? pkg._officeWeek : [];
+    if (!lines.length) return null;
+    return 'What your office put on the record this cycle — your own words and acts, in order:\n' + lines.map((l) => '- ' + l).join('\n');
+  },
+  // pipeline.110 — the companies the Business_Ledger names him founder or owner of, read the way he would read them.
+  'own-company': (pkg, cycle, beatsDir) => {
+    const rows = readBeats('Business_Ledger', beatsDir);
     if (!rows) return null;
-    const nameRe = new RegExp(String(pkg.playerName).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'i');
-    const hits = rows.filter((r) => nameRe.test(String(r.NamesUsed || '')) || nameRe.test(String(r.Stats || '')));
-    if (!hits.length) return null;
-    let row = cycle != null ? hits.filter((r) => Number(r.Cycle) === Number(cycle)).pop() : null;
-    if (!row) row = hits.sort((a, b) => (Number(b.Cycle) || 0) - (Number(a.Cycle) || 0))[0];
-    const statSeg = String(row.Stats || '').split(/,\s*/).find((s) => nameRe.test(s));
-    const lines = [`Your name is in the feed (cycle ${row.Cycle}, ${row.EventType || 'event'}).`];
-    if (statSeg && statSeg !== '-') lines.push(`Your line: ${statSeg.replace('/', ' — ')}.`);
-    if (row['Team Record'] && row['Team Record'] !== '-') lines.push(`The team is ${row['Team Record']}${row.Streak ? ' (' + row.Streak + ')' : ''}.`);
-    if (row.PlayerMood) lines.push(`The mood around the club: ${row.PlayerMood}.`);
-    if (row.Notes) lines.push(cap(row.Notes, 220));
-    return lines.join('\n');
+    const mine = rows.filter((r) => String(r.Key_Personnel || '').toUpperCase().indexOf(pkg.popid) !== -1);
+    if (!mine.length) return null;
+    const money = (v) => { const n = Number(String(v).replace(/[^0-9.-]/g, '')); return isFinite(n) && n ? '$' + (n >= 1e6 ? (n / 1e6).toFixed(1) + 'M' : Math.round(n).toLocaleString('en-US')) : null; };
+    const prev = readBeats('Business_Ledger', path.join(beatsDir || BEATS_DIR, 'prev')) || [];
+    return 'Your companies, off the city\'s business ledger this cycle:\n' + mine.map((r) => {
+      const was = prev.find((p) => p.BIZ_ID === r.BIZ_ID);
+      const bits = [`${r.Name} (${r.Sector}, ${r.Neighborhood})`, `${r.Employee_Count} people`];
+      if (money(r.Annual_Revenue)) bits.push('revenue ' + money(r.Annual_Revenue));
+      if (r.Growth_Rate !== '' && r.Growth_Rate != null) bits.push('growth ' + String(r.Growth_Rate).replace(/%$/, '') + '%');
+      if (was && String(was.Employee_Count) !== String(r.Employee_Count)) bits.push('headcount was ' + was.Employee_Count + ' last cycle');
+      if (was && money(was.Annual_Revenue) && money(was.Annual_Revenue) !== money(r.Annual_Revenue)) bits.push('revenue was ' + money(was.Annual_Revenue) + ' last cycle');
+      return '- ' + bits.join('; ') + '.';
+    }).join('\n');
   },
   'initiative-project': (pkg, cycle, beatsDir) => {
     // civic.38 Task 9 step 2 — a project director's operational read: their
@@ -187,6 +204,13 @@ function buildWorkPack(pkg, cycle, beatsDir, namesPath) {
     try { block = builder(pkg, cycle, beatsDir); } catch (e) { block = null; }
     if (block) { blocks.push(block); nodes.push(node); }
   }
+  // pipeline.110 — whoever the feed names this Cycle knows it at work, player or not (a chief at a club's
+  // community event, an owner in a franchise story). The player node above already carries it.
+  if (pkg.dataNodes.indexOf('sports-player') === -1) {
+    let own = null;
+    try { own = loadOwnFeedLines(pkg.name, cycle, { beatsDir }); } catch (e) { own = null; }
+    if (own && own.block) { blocks.push(own.block); nodes.push('own-feed'); }
+  }
   if (!blocks.length) return null;
   const idBits = [`You are ${pkg.name}`];
   const known = lookupNameTsv(pkg.popid, namesPath);
@@ -220,6 +244,151 @@ function workMoveLine(pkg, pack, cycle, date) {
   };
 }
 
+// ---- packs nobody hand-registered (pipeline.110, builder 2026-11-10) ---------------------------
+// The registry is ten people. The citizens this city turns on — the Mayor, the council, the players the feed
+// names — had no work wake, so their pages held what was said ABOUT them and nothing of their own week. Two
+// rules make a pack without a registry entry; a registry entry for the same citizen always wins:
+//   player  — a GAME-clock ledger citizen the sports feed names this Cycle wakes on his own feed lines, once.
+//   office  — every agented office and project in civic-office-map.json wakes on its own record of the Cycle, once.
+// Identity is read, never written here: the role off the ledger / the office map, the voice off the citizen's
+// own authored file where one exists, otherwise the temperament off his dials.
+const LEDGER_SNAPSHOT = path.join(__dirname, '..', 'output', 'simulation_ledger_snapshot.jsonl');
+const OFFICE_MAP = path.join(__dirname, 'civic-office-map.json');
+const AGENTS_DIR = path.join(__dirname, '..', '.claude', 'agents');
+const AUTO_MODEL = { provider: 'openrouter', model: 'deepseek/deepseek-v4-flash-0731' };   // the registry's own model
+// Mike Paulson speaks for himself: no cron writes his inner life.
+const SELF_SPEAKING = { 'POP-00527': true };
+const PRIVATE_FRAME = 'This is private — nobody reads it, and you are not performing the job here. You are not a writer.';
+
+function ledgerRows(file) {
+  try {
+    return fs.readFileSync(file || LEDGER_SNAPSHOT, 'utf8').split('\n').filter(Boolean).map((l) => { try { return JSON.parse(l); } catch (e) { return null; } }).filter(Boolean);
+  } catch (e) { return []; }
+}
+function dispositionOf(row) {
+  try { const cur = dials.currentDials(row && row.DialState); return cur ? dials.disposition(cur) : ''; } catch (e) { return ''; }
+}
+// The authored identity an office agent already carries: who they are, how they decide, how they sound.
+function agentIdentityNotes(agentDir, agentsDir) {
+  let md;
+  try { md = fs.readFileSync(path.join(agentsDir || AGENTS_DIR, agentDir, 'IDENTITY.md'), 'utf8'); } catch (e) { return ''; }
+  const section = (re) => { const m = md.split(re)[1]; return m ? m.split(/^## /m)[0] : ''; };
+  const plain = (t) => String(t || '').replace(/\*\*/g, '').replace(/\s+/g, ' ').trim();
+  const out = [];
+  const who = section(/^## Who You Are\s*$/m).split(/\n\s*\n/).map(plain).filter((x) => x && !/^(Faction|POP ID|Name|Role|Home|Age|Standing):/i.test(x) && !/POP-\d{5}/.test(x))[0];
+  if (who) out.push(who);
+  const sig = (md.match(/\*\*Decision signature:\*\*\s*([^\n]+)/) || [])[1];
+  if (sig) out.push('How you decide: ' + plain(sig));
+  const voice = section(/^## Voice\s*$/m).split(/\n\s*\n/).map(plain).filter(Boolean)[0];
+  if (voice && !/^Past commitment/i.test(voice)) out.push(voice);
+  return out.join(' ').slice(0, 700);
+}
+function voiceNotesFor(popid, agentDir, row, agentsDir) {
+  const bits = [];
+  const authored = agentDir ? agentIdentityNotes(agentDir, agentsDir) : '';
+  if (authored) bits.push(authored);
+  let texture = '';
+  try { texture = loadVoiceTexture(popid); } catch (e) { texture = ''; }
+  if (texture) bits.push('How you talk: ' + texture);
+  const disp = dispositionOf(row);
+  if (disp) bits.push('Your temperament: ' + disp + '.');
+  return bits.join(' ') || 'Plain, in your own words.';
+}
+
+function autoPackages(cycle, packages, opts) {
+  const o = opts || {};
+  const out = {};
+  const taken = new Set(Object.values(packages || {}).filter((v) => v && v.active).map((v) => String(v.popid).toUpperCase()));
+  const rows = o.ledger || ledgerRows(o.ledgerFile);
+  const byPop = {}; rows.forEach((r) => { byPop[String(r.POPID).toUpperCase()] = r; });
+  const add = (key, pkg) => { try { out[key] = registry.validatePackage(key, pkg); } catch (e) { logLine('auto pack refused: ' + e.message); } };
+  // offices and projects with an agent of their own
+  let map = o.officeMap;
+  if (!map) { try { map = JSON.parse(fs.readFileSync(OFFICE_MAP, 'utf8')); } catch (e) { map = { offices: [], projects: [] }; } }
+  const officePops = new Set();
+  (map.offices || []).concat(map.projects || []).forEach((of) => {
+    const popid = String(of.popid || '').toUpperCase();
+    if (!of.agentDir || !/^POP-\d{5}$/.test(popid)) return;
+    officePops.add(popid);
+    if (taken.has(popid) || SELF_SPEAKING[popid]) return;
+    const row = byPop[popid] || null;
+    const where = of.district && !/citywide/i.test(of.district) ? ', ' + of.district : '';
+    add('auto-office-' + of.agentDir, {
+      persona: 'auto-office-' + of.agentDir, active: true, auto: 'office', popid, name: of.holder,
+      office: of.officeId || of.projectId || of.title, agentDir: of.agentDir,
+      dataNodes: ['office-week', 'civic-office'], models: { reflect: AUTO_MODEL }, dutyDays: ['thu'],
+      promptContract: {
+        roleLine: `You are ${of.holder}, ${of.title}${where}.`,
+        voiceNotes: voiceNotesFor(popid, of.agentDir, row, o.agentsDir),
+        frame: PRIVATE_FRAME,
+        userFrame: 'The week\'s work is on the record now and the building has gone quiet',
+        targetSentences: '4-6',
+      },
+    });
+  });
+  // players and staff the feed names this Cycle
+  const named = o.named || feedNamedKeys(cycle, { beatsDir: o.beatsDir });
+  rows.forEach((r) => {
+    const popid = String(r.POPID || '').toUpperCase();
+    if (!/^POP-\d{5}$/.test(popid) || taken.has(popid) || officePops.has(popid) || SELF_SPEAKING[popid]) return;
+    // a club's own: on the GAME clock, or carrying a club in his role (a retired legend keeps his, off the clock)
+    if (String(r.ClockMode || '').toUpperCase() !== 'GAME' && !/\b(A's|Oaks|Aviators)\b/.test(String(r.RoleType || ''))) return;
+    if (!named.has(feedNameKey(r.Name))) return;
+    add('auto-player-' + popid, {
+      persona: 'auto-player-' + popid, active: true, auto: 'player', popid, name: r.Name, office: 'ATHLETE',
+      dataNodes: ['sports-player'], playerName: r.Name, models: { reflect: AUTO_MODEL }, dutyDays: ['tue', 'thu'],
+      promptContract: {
+        roleLine: `You are ${r.Name} — ${String(r.RoleType || 'a ballplayer').trim()}.`,
+        voiceNotes: voiceNotesFor(popid, null, r, o.agentsDir),
+        frame: PRIVATE_FRAME,
+        userFrame: 'The week is in the books and you are alone with it',
+        targetSentences: '4-6',
+      },
+    });
+  });
+  return out;
+}
+// auto packs due today: on a duty day, once a Cycle (the registry's packs wake every duty day)
+function selectAutoDue(auto, cycle, state, day) {
+  const woken = (state && state.wokenCycle) || {};
+  return Object.entries(auto || {}).filter(([, v]) => v.dutyDays.includes(day) && Number(woken[v.popid + ':cycle']) !== Number(cycle))
+    .map(([key, value]) => ({ key, value }));
+}
+
+// The officeholder's own record of the Cycle, off their page: every office-position doc stamped with this Cycle,
+// oldest first, each one clipped. [] when the page has none (the pack then has no office-week block).
+async function loadOfficeWeek(popid, cycle, opts) {
+  const o = opts || {};
+  const API = 'https://api.supermemory.ai';
+  const auth = { Authorization: 'Bearer ' + process.env.SUPERMEMORY_CC_API_KEY, 'Content-Type': 'application/json' };
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const call = async (url, init) => {
+    for (let t = 0; t < 5; t++) { const r = await fetch(url, init); if (r.status === 429) { await sleep(11000); continue; } return r; }
+    throw new Error('store rate-limited');
+  };
+  let docs = [];
+  for (let pageN = 1; pageN <= 6; pageN++) {
+    const lr = await call(API + '/v3/documents/list', { method: 'POST', headers: auth, body: JSON.stringify({ containerTags: [page.pageTagFor(popid)], limit: 100, page: pageN }) });
+    const lj = await lr.json();
+    if (!lr.ok || lj.error) throw new Error('page list failed');
+    const m = lj.memories || lj.documents || [];
+    docs = docs.concat(m);
+    if (m.length < 100) break;
+  }
+  const mine = docs.filter((d) => d.metadata && d.metadata.type === 'office-position' && Number(d.metadata.cycle) === Number(cycle))
+    .sort((a, b) => String(a.createdAt).localeCompare(String(b.createdAt))).slice(-(o.max || 24));
+  const lines = [];
+  for (const d of mine) {
+    try {
+      const g = await (await call(API + '/v3/documents/' + d.id, { method: 'GET', headers: auth })).json();
+      const t = String((g && g.content) || '').replace(/\s+/g, ' ').trim();
+      if (t) lines.push(cap(t, 340));
+    } catch (e) { /* one unread statement drops, the week still reads */ }
+    await sleep(80);
+  }
+  return lines;
+}
+
 // ---- selection -------------------------------------------------------------------------------
 function dayAbbrev(d) { return ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'][(d || new Date()).getDay()]; }
 
@@ -245,8 +414,12 @@ function selectDue(packages, cycle, state, opts) {
 function buildWorkPrompts(pkg, pack, pageMemory) {
   const pc = pkg.promptContract;
   const memory = pageMemory ? `\n\n---\n\nWhat's been on your mind lately, from your own private reflections:\n${pageMemory}` : '';
-  const system = `${pc.roleLine} ${pack.identity} You are an ordinary person at work, not a writer. ${pc.voiceNotes}${memory}\n\nReal things from your work recently:\n${pack.blocks.join('\n\n')}`;
-  const user = `The workday is done; you're sitting with it before the evening takes over. In ${pc.targetSentences || '4-5'} sentences, think on the page the way you actually would — private, honest, first person. Don't narrate events like a story; just sit with it.`;
+  // pipeline.110 — "an ordinary person at work" is right for a clerk and wrong for a mayor: a pack may carry its own frame
+  const frame = pc.frame || 'You are an ordinary person at work, not a writer.';
+  const system = `${pc.roleLine} ${pack.identity} ${frame} ${pc.voiceNotes}${memory}\n\nReal things from your work recently:\n${pack.blocks.join('\n\n')}`;
+  // pipeline.110 — the thought stays on what is in front of him: a wake that invents a game, a number or a name is
+  // the faked life the builder ruled out (2026-11-10: "If they are written to fake through it then it won't be interesting").
+  const user = `${pc.userFrame || 'The workday is done; you\'re sitting with it'} before the evening takes over. In ${pc.targetSentences || '4-5'} sentences, think on the page the way you actually would — private, honest, first person. Stay with what actually happened above: no game, number, name or event that is not in front of you. Don't narrate events like a story; just sit with it.`;
   return { system, user };
 }
 
@@ -255,7 +428,7 @@ async function generateVoice(model, system, user) {
     method: 'POST',
     headers: { Authorization: 'Bearer ' + process.env.OPENROUTER_API_KEY, 'Content-Type': 'application/json', 'HTTP-Referer': 'https://godworld.local' },
     // builder 2026-10-12: newer DeepSeek runs with its hidden reasoning off (it ate the 260-token budget)
-    body: JSON.stringify({ model, ...(/^deepseek\/deepseek-v4/.test(model) ? { reasoning: { enabled: false } } : {}), max_tokens: 260, temperature: 0.85, messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }),
+    body: JSON.stringify({ model, ...(/^deepseek\/deepseek-v4/.test(model) ? { reasoning: { enabled: false } } : {}), max_tokens: 340, temperature: 0.85, messages: [{ role: 'system', content: system }, { role: 'user', content: user }] }),
   });
   const j = await r.json();
   if (j.error) throw new Error('voice: ' + (j.error.message || JSON.stringify(j.error)));
@@ -263,6 +436,13 @@ async function generateVoice(model, system, user) {
 }
 
 async function wakeOne(pkg, cycle, state) {
+  // pipeline.110 — an office pack's own record is read off the page first (the pack builders are local and sync)
+  if (pkg.dataNodes.indexOf('office-week') !== -1 && !Array.isArray(pkg._officeWeek)) {
+    try { pkg._officeWeek = await loadOfficeWeek(pkg.popid, cycle); }
+    catch (e) { pkg._officeWeek = []; logLine(`${pkg.persona}: office record unread (${e.message}) — the wake runs without it`); }
+    // an office that put nothing on the record this Cycle has no week to sit with: its standing line alone is not a wake
+    if (pkg.auto === 'office' && !pkg._officeWeek.length) { logLine(`${pkg.persona}: nothing on the record this cycle — skipped`); return false; }
+  }
   const pack = buildWorkPack(pkg, cycle);
   if (!pack) { logLine(`${pkg.persona}: no pack data this cycle — skipped`); return false; }
 
@@ -317,17 +497,29 @@ async function main() {
   const cycle = Number(arg('cycle', null)) || (() => { try { return getCurrentCycle(); } catch (e) { return null; } })();
   const packages = registry.loadPackages();
   const state = loadState();
-  const { picks, note, day } = selectDue(packages, cycle, state, { forceKey: FORCE_PACK, limit: LIMIT });
-  if (!picks.length) { logLine(`nothing to wake (${note}, cycle=${cycle}, dry=${DRY})`); return; }
-  logLine(`work-wake: ${picks.length} pack(s) due (${note}, cycle=${cycle}, dry=${DRY})`);
+  // pipeline.110 — the packs nobody registered: offices off the office map, players off this Cycle's feed
+  const auto = autoPackages(cycle, packages);
+  const forcedAuto = FORCE_PACK && !packages[FORCE_PACK] && auto[FORCE_PACK];
+  const sel = forcedAuto ? { picks: [{ key: FORCE_PACK, value: auto[FORCE_PACK] }], note: 'forced', day: dayAbbrev() }
+    : selectDue(packages, cycle, state, { forceKey: FORCE_PACK, limit: LIMIT });
+  const day = sel.day;
+  const autoDue = FORCE_PACK ? [] : selectAutoDue(auto, cycle, state, day);
+  const picks = sel.picks.concat(Number.isFinite(LIMIT) ? autoDue.slice(0, Math.max(0, LIMIT - sel.picks.length)) : autoDue);
+  if (!picks.length) { logLine(`nothing to wake (${sel.note}, cycle=${cycle}, dry=${DRY})`); return; }
+  logLine(`work-wake: ${picks.length} pack(s) due (${sel.picks.length} registered, ${picks.length - sel.picks.length} from the ledger and office map; cycle=${cycle}, dry=${DRY})`);
+  let woke = 0;
   for (const { value: pkg } of picks) {
-    const okWake = await wakeOne(pkg, cycle, state);
+    let okWake = false;
+    // one citizen's failed wake never takes the rest of the run down
+    try { okWake = await wakeOne(pkg, cycle, state); } catch (e) { logLine(`${pkg.persona}: wake FAILED — ${e.message}`); }
+    if (okWake) woke++;
     if (okWake && !DRY) {
       state.recent = [pkg.popid, ...(state.recent || []).filter((p) => p !== pkg.popid)].slice(0, RECENT_MEMORY);
-      state.wokenCycle = Object.assign({}, state.wokenCycle, { [pkg.popid + ':' + day]: cycle });
+      state.wokenCycle = Object.assign({}, state.wokenCycle, { [pkg.popid + ':' + day]: cycle }, pkg.auto ? { [pkg.popid + ':cycle']: cycle } : {});
       saveState(state);
     }
   }
+  logLine(`work-wake: ${woke} of ${picks.length} woke (cycle=${cycle}, dry=${DRY})`);
 }
 
 if (require.main === module) {
@@ -337,4 +529,5 @@ if (require.main === module) {
 module.exports = {
   readBeats, lookupNameTsv, NODE_BUILDERS, buildWorkPack, buildWorkPrompts, workMoveLine,
   selectDue, dayAbbrev, DAYPART,
+  autoPackages, selectAutoDue, agentIdentityNotes, voiceNotesFor, loadOfficeWeek,
 };

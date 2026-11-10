@@ -614,13 +614,6 @@ function loadCycleCivicEntries(cycle, root = ROOT, profiles = null) {
 }
 
 function scoreEntryForSeat(entry, slug) {
-  // Builder 2026-11-10: "It's media not engine auditors". The engine's own
-  // audit of what looks stuck or off (kind `anomaly`, engine_audit_c<N>.json
-  // patterns) is not handed to a seat as its assignment; a reporter who finds
-  // the same thing with their own lookups found it themselves. OPEN: the
-  // investigation seat (luis-navarro) is built on this feed end to end and
-  // still takes it.
-  if (/anomaly/i.test(entry.kind) && slug !== 'luis-navarro') return 0;
   const text = entryText(entry);
   if (slug === 'carmen-delaine') {
     let score = 10;

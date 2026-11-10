@@ -2036,7 +2036,7 @@ async function runAngle(assign) {
         sceneBits.push('OTHER CANDIDATES:\n' + packet.candidates.slice(1, 4)
           .map(candidate => '  - ' + candidate.label + ' [' + candidate.ref + ']').join('\n'));
       }
-      ask = 'You\'re ' + asker.name + '. This is what the city did this cycle on your beat:\n' +
+      ask = 'You\'re ' + asker.name + '. This is the supplied civic-domain record for your solo beat:\n' +
         'SIGNAL: ' + (story.angle || story.label) +
         (story.hookLine ? '\nHOOK: ' + story.hookLine : '') +
         (brief.names.length ? '\nAFFECTED CITIZENS (packet only):\n' + brief.names.map(n => '  - ' + n).join('\n') : '') +
@@ -2044,12 +2044,8 @@ async function runAngle(assign) {
         '\nCIVIC DOMAIN PACK:\n' + sceneBits.join('\n') +
         (approach ? '\n\n' + approach : '') +
         (asker._wallSnippet ? '\n\n' + asker._wallSnippet : '') +
-        // 2026-11-10 (builder: "Stop puppeting the crons"): this ask told every
-        // civic seat to "state the one record-backed claim, identify what remains
-        // unestablished, and name the next record … to pursue". The reporter is
-        // asked what they want to write; only the no-invention line stays.
-        '\n\nWhat is your story this cycle, and who do you want to talk to? ' +
-        'Nothing invented: no official action, metric, vote or outcome the material above does not hold.';
+        '\n\nIn your own beat voice: state the one record-backed claim, identify what remains unestablished, ' +
+        'and name the next record or affected resident to pursue. No invented official action, metrics, votes, or outcomes. One civic domain story, not a desk roundup.';
     } else if (persona && beatSlice && !beatSlice.empty && story) {
       // pipeline.68 Task 4 — the journalist's own beat slice (legacy free-text ask;
       // under packet-v2 the typed packet below replaces it).

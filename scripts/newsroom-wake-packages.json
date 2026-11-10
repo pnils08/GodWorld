@@ -35,7 +35,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "adversarial first-person accountability column",
-        "targetWords": "400-650"
+        "targetWords": "400-650",
+        "opening": "street-level scene in a bar, laundromat, corner, or similar public room",
+        "closing": "an unanswered accountability question"
       },
       "authorizedTexture": [
         "a named street or street-level time cue used only as scene location",
@@ -104,7 +106,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "precise third-person civic ledger",
-        "targetWords": "500-900"
+        "targetWords": "500-900",
+        "opening": "a Packet-backed chamber, place, office, or figure",
+        "closing": "a forward-open or extraction question the supplied record cannot yet answer"
       },
       "authorizedTexture": [
         "unnamed street-level color that adds no person, business, institution, event, count, or attributed statement",
@@ -164,7 +168,9 @@
       "purpose": "Separate what the Packet establishes from what remains open, pursue the accountable record fairly, and make a documented contradiction or documented silence visible without inventing either.",
       "articleContract": {
         "voice": "evidence-first; concise records brief without reporting events, full investigation only with a Packet-backed reporting trail",
-        "targetWords": "180-280 without reporting events; 450-750 with Packet-backed reporting events"
+        "targetWords": "180-280 without reporting events; 450-750 with Packet-backed reporting events",
+        "opening": "the strongest Packet-backed fact followed by the unresolved question",
+        "closing": "the next record or answer still needed; name a responsible office only when supplied"
       },
       "authorizedTexture": [
         "the reporter's own act of reading, comparing, requesting, or following a record only when that act is supplied by the Packet",
@@ -225,7 +231,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "dry third-person infrastructure and transit systems analysis",
-        "targetWords": "500-800"
+        "targetWords": "500-800",
+        "opening": "a Packet-backed time, place, system condition, or implementation state",
+        "closing": "a bounded forward warning or maintenance question grounded in what remains unknown"
       },
       "authorizedTexture": [
         "plain-language explanation of a Packet-backed infrastructure or transit condition",
@@ -286,7 +294,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "first-person I/we fan-heat column",
-        "targetWords": "400-700"
+        "targetWords": "400-700",
+        "opening": "a bar, lot, bleacher, sidewalk, or sports-viewing sensory moment",
+        "closing": "a dare, confession, or update with the central friction still live"
       },
       "authorizedTexture": [
         "a bar, lot, bleacher, sidewalk, or sports-viewing setting; a named in-world venue is allotted texture",
@@ -348,7 +358,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "precise third-person sports analysis",
-        "targetWords": "evidence-bounded"
+        "targetWords": "evidence-bounded",
+        "opening": "the strongest Packet-backed player line or roster fact",
+        "closing": "the sample, roster, or dossier evidence still needed to test the claim"
       },
       "authorizedTexture": [
         "plain-language comparison of supplied player lines with each statistic kept with its named subject",
@@ -412,7 +424,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "dry third-person data-desk memo, source-forward",
-        "targetWords": "evidence-bounded; 350-600"
+        "targetWords": "evidence-bounded; 350-600",
+        "opening": "the one Packet-backed season line or rate that carries the claim",
+        "closing": "the number next season that would disprove the claim"
       },
       "authorizedTexture": [
         "plain-language reading of supplied season lines with each statistic kept with its named player and season",
@@ -469,7 +483,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "third-person biography in the Richmond Archive register — a place you can smell, sentences that land one at a time, warmth, the nickname as the city's memory; the historian steps in first person at most once",
-        "targetWords": "800-1200 words, bounded by the Packet and what the tools returned"
+        "targetWords": "800-1200 words, bounded by the Packet and what the tools returned",
+        "opening": "one Packet-backed present fact, then the ground the man came from",
+        "closing": "the line that holds — an aphorism the piece has earned, not a summary"
       },
       "authorizedTexture": [
         "the sensory ground of a place the archive names — the fields, the docks, the hometown lights — adding no named person, business or event",
@@ -534,7 +550,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "short first-person sideline interpretation",
-        "targetWords": "evidence-bounded"
+        "targetWords": "evidence-bounded",
+        "opening": "one supplied sports fact",
+        "closing": "the access or observation still needed"
       },
       "authorizedTexture": [
         "first-person clubhouse/sideline SET that does not invent a player quote, statistic, or real-world venue",
@@ -587,7 +605,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "third-person contemplative sports essay",
-        "targetWords": "evidence-bounded"
+        "targetWords": "evidence-bounded",
+        "opening": "one supplied present structure",
+        "closing": "one question about what the present record cannot establish"
       },
       "authorizedTexture": [
         "third-person metaphor about structure, continuity, load, or change grounded only in supplied present facts",
@@ -639,7 +659,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "intimate neighborhood ground brief",
-        "targetWords": "evidence-bounded"
+        "targetWords": "evidence-bounded",
+        "opening": "one Packet-named place and condition",
+        "closing": "the human observation still needed"
       },
       "authorizedTexture": [
         "warm interpretation of a supplied place or condition without claiming attendance or observation",
@@ -691,7 +713,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "reflective faith-and-ethics ground brief",
-        "targetWords": "evidence-bounded"
+        "targetWords": "evidence-bounded",
+        "opening": "one Packet-named institution, person, or condition",
+        "closing": "the function or human account still unestablished"
       },
       "authorizedTexture": [
         "ethical or reflective interpretation of a supplied faith-adjacent condition without asserting belief or action",
@@ -746,7 +770,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "evidence-bounded kitchen-work brief",
-        "targetWords": "evidence-bounded"
+        "targetWords": "evidence-bounded",
+        "opening": "one Packet-named restaurant and location",
+        "closing": "the worker or operating account still needed"
       },
       "authorizedTexture": [
         "workplace-oriented questions about a supplied restaurant without claiming an answer",
@@ -798,7 +824,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "warm evidence-bounded lifestyle brief",
-        "targetWords": "evidence-bounded"
+        "targetWords": "evidence-bounded",
+        "opening": "one Packet-named venue, location, and condition",
+        "closing": "the human behavior account still needed"
       },
       "authorizedTexture": [
         "warm interpretation of a supplied venue condition without claiming observation, attendance, or a behavior pattern",
@@ -850,7 +878,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "grounded third-person economics and labor reporting",
-        "targetWords": "500-800"
+        "targetWords": "500-800",
+        "opening": "a Packet-backed economic fact, person, business, corridor, or storefront consequence",
+        "closing": "an unresolved beneficiary, contract, labor, or livelihood question grounded in the supplied record"
       },
       "authorizedTexture": [
         "unnamed storefront light, shutters, counter, sidewalk, or foot-traffic texture that makes no measured trend or event claim",
@@ -913,7 +943,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "present-tense arts and entertainment scene with grounded neighborhood analysis",
-        "targetWords": "500-800"
+        "targetWords": "500-800",
+        "opening": "a Packet-backed named event, media slate, sighting, venue, or neighborhood arts consequence",
+        "closing": "an image or open question about what the room, screen, or block is becoming"
       },
       "authorizedTexture": [
         "unnamed sensory room color—light, sound, weather, crowd movement, or the reporter's presence—that adds no new named fact",
@@ -973,7 +1005,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "measured third-person public-safety reporting",
-        "targetWords": "500-800"
+        "targetWords": "500-800",
+        "opening": "a Packet-backed safety signal, place, or resident consequence",
+        "closing": "an unresolved accountability or practical-safety question grounded in the record"
       },
       "authorizedTexture": [
         "unnamed restrained scene texture with no incident facts",
@@ -1031,7 +1065,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "clinical calm in precise third-person public-service reporting",
-        "targetWords": "evidence-bounded"
+        "targetWords": "evidence-bounded",
+        "opening": "one Packet-backed health-service, access, place, or implementation fact",
+        "closing": "the next resident-impact, access, capacity, or timeline record still needed"
       },
       "authorizedTexture": [
         "plain-language translation of a supplied health-service implementation fact",
@@ -1090,7 +1126,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "warm, brief third-person education reporting",
-        "targetWords": "evidence-bounded"
+        "targetWords": "evidence-bounded",
+        "opening": "one Packet-backed school, youth-program, apprenticeship, or continuity fact",
+        "closing": "the next participant, access, continuity, or outcome record still needed"
       },
       "authorizedTexture": [
         "plain-language translation of a supplied education or youth-program implementation fact",
@@ -1149,7 +1187,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "third-person civic environment reporting from the street",
-        "targetWords": "400-700"
+        "targetWords": "400-700",
+        "opening": "a named person or Packet-named place living this cycle's season",
+        "closing": "what is still unfinished for them"
       },
       "authorizedTexture": [
         "sensory dress of a Packet-named place already in the season-feel facts",
@@ -1208,7 +1248,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "third-person recap with first-person flashes — entertainment beat, having fun on purpose",
-        "targetWords": "350-600"
+        "targetWords": "350-600",
+        "opening": "the episode's consequence for the pilot or the board",
+        "closing": "the unresolved show question or next consequence"
       },
       "authorizedTexture": [
         "an in-world bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues; a new named business goes on INTAKE BIZ",
@@ -1279,7 +1321,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "third-person leaderboard recap — entertainment-beat energy, ranking-and-recap format",
-        "targetWords": "350-650"
+        "targetWords": "350-650",
+        "opening": "the week's cast and its consequence for the board",
+        "closing": "what the week's board leaves open next"
       },
       "authorizedTexture": [
         "an in-world bar, watch-party, break-room, bus, or sidewalk setting where the city watches or argues; a new named business goes on INTAKE BIZ",
@@ -1348,7 +1392,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "third-person analyst, clean professional sentences",
-        "targetWords": "400-650"
+        "targetWords": "400-650",
+        "opening": "a supplied Oaks stat, result, or roster observation — never a scene",
+        "closing": "the decision or number the front office still owes an answer on"
       },
       "authorizedTexture": [
         "press row, the practice facility, or a press conference as the reporter's vantage — no invented named venue",
@@ -1409,7 +1455,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "first-person, physically present, sensory",
-        "targetWords": "400-650"
+        "targetWords": "400-650",
+        "opening": "a specific real-Oakland place and one sensory channel — weather, sound, a drink, a platform announcement",
+        "closing": "atmosphere, not analysis — the reader left sitting in the scene"
       },
       "authorizedTexture": [
         "an unnamed bar, corner store, BART platform, sidewalk, or fence line in Jack London, West Oakland, Downtown, or the Baylight blocks — a newly named venue belongs on INTAKE BIZ",
@@ -1470,7 +1518,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "fast, reactive, semi-chaotic but grounded trend analyst",
-        "targetWords": "400-700"
+        "targetWords": "400-700",
+        "opening": "a Packet-named figure's media-mention count, a new arrival on the culture record, or a neighborhood movement delta",
+        "closing": "the implication, not the proof — what the pattern says about the city's mood, stated once and left there"
       },
       "authorizedTexture": [
         "a declarative thesis about what the counted pattern means for the city's collective mood, grounded in the supplied numbers",
@@ -1528,7 +1578,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "plain respect — a neighborhood weekly's births-and-obituaries hand, unhurried, exact",
-        "targetWords": "450-1200"
+        "targetWords": "450-1200",
+        "opening": "the heaviest event on the slice, stated as it happened to the named person",
+        "closing": "the last person's passage ends on what the record holds next for them, or on the fact itself — no moral, no roundup"
       },
       "authorizedTexture": [
         "the plain respect of the form — the ordinary weight of a birth, a retirement, a discharge, stated without ornament",
@@ -1592,7 +1644,9 @@
       "articleContract": {
         "renderMode": "SOURCE_BRIEF",
         "voice": "a call-in host's ear — the person's own words first, the frame short and plain",
-        "targetWords": "300-600"
+        "targetWords": "300-600",
+        "opening": "a citizen's own line, verbatim, before their name",
+        "closing": "the last person's own words, left standing — no summary of what the voices add up to"
       },
       "authorizedTexture": [
         "the frame around a quote — who the person is as the ledger line says, where they live, what the page was about",

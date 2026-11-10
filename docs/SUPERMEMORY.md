@@ -1,7 +1,7 @@
 ---
 title: Supermemory Operations and Retrieval
 created: 2026-03-20
-updated: 2026-10-24
+updated: 2026-11-09
 type: reference
 tags: [infrastructure, memory, supermemory, active]
 sources:
@@ -112,8 +112,9 @@ capture was neutralized; it was not moved to another container.
 
 **Who reads:** the plugin's legacy-personal context/recall lane and the Discord
 bot.
-**Who writes:** deliberate `/save-to-mags` operations and explicitly
-speaker-attributed Discord/reflection writers.
+**Who writes:** the Discord bot (every talk) and the reflection cron. No builder
+session writes here — `/save-to-mags` retired 2026-11-09 (pipeline.100); the 61
+builder saves it had left are archived at `docs/archive/mags-store-build-saves_2026-11-09.jsonl`.
 **Plugin role:** `personalContainerTag` is a legacy read override in v0.0.12,
 not the repository write destination.
 
@@ -341,7 +342,7 @@ published provenance for canon searches.
 
 | Use case | Container/tag | Primary tool | CLI / API fallback | Notes |
 |---|---|---|---|---|
-| Deliberate decision (Mags' brain) | `mags` | skill `/save-to-mags` | `curl /v3/documents -d '{"containerTags":["mags"]...}'` | manual, intentional only — never session-end narration |
+| Builder session fact | `sl-godworld` | `npx supermemory add "<fact>" --namespace sl-godworld` | CLI | one hand-written fact per session. `mags` takes no builder write — `/save-to-mags` retired 2026-11-09 (pipeline.100) |
 | Published edition / canon | `bay-tribune` | skill `/save-to-bay-tribune` OR `node scripts/ingestEdition.js` | `curl /v3/documents -d '{"containerTags":["bay-tribune"]...}'` | published canon only — never session work, engine internals, or simulation-as-simulation content |
 | Citizen card | `world-data` + `wd-citizens` | `node scripts/buildCitizenCards.js --apply` | — | writer handles tag pair + POPID-content-scoped wipe |
 | Business card | `world-data` + `wd-business` | `node scripts/buildBusinessCards.js --apply` | — | BIZID-content-scoped wipe |
@@ -361,7 +362,7 @@ published provenance for canon searches.
 
 | Container | Role | Primary readers | Primary writers |
 |---|---|---|---|
-| `mags` | Deliberate personal/editorial memory | plugin legacy-personal recall, Discord bot | `/save-to-mags`, attributed Discord/reflection writers |
+| `mags` | Citizen Mags' own memory — her Discord talks and reflections | Discord bot, reflection cron | Discord bot (every talk), reflection cron. No builder session (`/save-to-mags` retired 2026-11-09) |
 | `bay-tribune` | Mixed archive; filtered published lane is paper-of-record retrieval | source-search, Discord bot, agents | `ingestEdition.js`, approved publication ingest |
 | `world-data` | Derived city-state retrieval, partitioned by `wd-*` | MCP domain tools | per-domain writers, approved post-publish summary |
 | `super-memory` | Project memory with mixed historical contents | plugin repo recall | explicit plugin saves/indexing, Moltbook heartbeat |
@@ -625,7 +626,7 @@ Historical `/super-save` and `/super-search` names are not current commands.
 | `/supermemory-search --repo "query"` | Search project memory | `super-memory` |
 | `/supermemory-search --both "query"` | Search both | `mags` + `super-memory` |
 | `/supermemory-save "content"` | Deliberate project save | `super-memory` |
-| `/save-to-mags "content"` | **Deliberate save** — decisions, reasoning, editorial thinking | `mags` |
+| ~~`/save-to-mags`~~ | RETIRED 2026-11-09 (pipeline.100) — builder saves go to `sl-godworld` | — |
 | `/save-to-bay-tribune "content"` | Published canon — editions, rosters, game results ONLY | `bay-tribune` |
 
 ---

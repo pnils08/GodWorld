@@ -52,7 +52,7 @@ All containers on P N org ($9/mo). GodWorld org ($19/mo) is legacy — canceling
 
 | Container | Who reads | Who writes | Purpose |
 |-----------|-----------|------------|---------|
-| `mags` | Mags (Claude Code + Discord bot) | Mags (`/save-to-mags` only) | The brain — identity, memory, editorial thinking, conversations |
+| `mags` | citizen Mags (Discord bot, reflection cron) | her bot (every talk) and her reflection cron only — no builder session (`/save-to-mags` retired 2026-11-09, pipeline.100) | Her own memory — her Discord talks and reflections |
 | `bay-tribune` | Mags (Claude Code + Discord bot) + Mike (claude.ai MCP) | Edition ingest scripts, reference file pushes | The canon — published editions, supplementals, rosters. Media content only. |
 | `world-data` | Mags (CLI/API) + Mike (claude.ai MCP) | Direct API ingest after cycle runs | City state — citizen registry (by neighborhood), businesses, faith orgs, employment, neighborhood map/demographics |
 | `super-memory` | Manual search (`/super-search --repo`) | Stop hook, `/super-save` | Junk drawer — auto-saves, session dumps |
@@ -123,7 +123,7 @@ Edition production: /write-edition, /write-supplemental, /podcast, /edition-prin
 Engine health: /pre-mortem, /tech-debt-audit, /stub-engine, /health, /ctx-map, /deploy, /doc-audit, /skill-audit, /skill-check, /engine-review, /build-world-summary
 Review lanes: /cycle-review, /capability-review, /adversarial-review
 Civic: /city-hall, /city-hall-prep
-Memory: /save-to-mags, /save-to-bay-tribune
+Memory: /save-to-bay-tribune (builder session saves: `npx supermemory add … --namespace sl-godworld`)
 Reporter desks (6): /business-desk, /civic-desk, /culture-desk, /letters-desk, /podcast-desk, /sports-desk (chicago-desk retired with Chicago canon, engine.116)
 Misc: /visual-qa
 Added since the groupings above (14): /context-budget, /deep-dispatch, /desk-review, /desk-slice, /diagnose, /disk-audit, /disk-rotate, /lore-ingest, /lore-writer, /make-citizen-voice, /md-audit, /save-to-profile, /self-debug, /using-git-worktrees

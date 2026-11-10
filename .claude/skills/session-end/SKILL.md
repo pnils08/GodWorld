@@ -67,8 +67,7 @@ Three sub-actions:
 
 **Optional model sub-actions:**
 
-- **`/save-to-mags`** — model judgment whether the session has anything architectural worth canonizing. Tag with terminal name (`[research/build]`, `[media]`, etc.). There is NO Stop-hook auto-save (neutralized S221, verified S283) — deliberate saves are the only Supermemory writes; claude-mem carries the automatic session record.
-- **Session save — REQUIRED, one per session, BEFORE Step 3.** Command and rules: `.claude/TERMINAL.md` §Boot and memory (the brain). Worth saving: rulings, landmines, a container/schema change, a frozen-vs-live distinction. A session with nothing to say still leaves one line on what it did. `/save-to-mags` writes to Mags' own `mags` container and does NOT reach sl-godworld — don't treat one as covering the other.
+- **Session save — REQUIRED, one per session, BEFORE Step 3.** Command and rules: `.claude/TERMINAL.md` §Boot and memory (the brain). Worth saving: rulings, landmines, a container/schema change, a frozen-vs-live distinction. A session with nothing to say still leaves one line on what it did. There is NO Stop-hook auto-save (neutralized S221, verified S283) — this deliberate save is the only Supermemory write; claude-mem carries the automatic session record. The `mags` container is citizen Mags' own memory (her Discord talks and reflections) — a builder session never writes there; `/save-to-mags` retired 2026-11-09 (pipeline.100).
 - **`/batch`** — submit heavy analysis work that wasn't urgent enough to run live. Results wait at 50% cost for next session.
 
 **Terminal-specific files** (RESEARCH.md for research-build, ENGINE_MAP / stub maps / DEPLOY.md pointers for engine-sheet) get updated alongside SESSION_CONTEXT/ROLLOUT per the audit tables in §Terminal-Specific Detail — no separate step.
@@ -137,7 +136,7 @@ Pulled out of the boot-loaded terminal files (2026-08-15, HOUSE-PROCESS GATE) �
 
 ### research-build
 
-**Skips on soft close:** journal entry (none exists — S249 governance.20), ROLLOUT sweep beyond rows touched this session, RESEARCH.md update, `/save-to-mags`, PM2 restart, write-verification reads.
+**Skips on soft close:** journal entry (none exists — S249 governance.20), ROLLOUT sweep beyond rows touched this session, RESEARCH.md update, PM2 restart, write-verification reads.
 
 **Terminal-Specific Audit** (hard close only):
 

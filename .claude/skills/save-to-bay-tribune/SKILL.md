@@ -24,7 +24,7 @@ Before saving, confirm:
 - [ ] No builder/user references (Mike, the user, the maker)
 - [ ] No session work (bug fixes, architecture notes, code decisions)
 
-If ANY check fails, use `/save-to-mags` instead.
+If ANY check fails, save it to the build brain instead (`npx supermemory add "<fact>" --namespace sl-godworld`); `/save-to-mags` retired 2026-11-09.
 
 ## Step 2: Format Content
 

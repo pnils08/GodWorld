@@ -54,6 +54,12 @@ Order of work, each step run in the test shell and the piece read before anythin
 | 2 | One seat's angle stage: persona + memory + "here is the cycle" + its lookups; no assignment, no hook, no approach line; it picks or passes |
 | 3 | Read that piece with the builder. Then seat by seat |
 
+## Standing word on who decides (builder 2026-11-10)
+
+"I'm providing all the tools for this to happen autonomously, sim behavior rests with me but sim cohesiveness doesn't and there are enough ways for agents to address this without waiting on a human."
+
+Behavior (what the world should do: rates, severity, what a seat or an initiative is) is the builder's. Cohesiveness (a number no citizen produces, a loop that feeds nothing back, a constant standing in for a system, two figures that contradict) is found, written down, fixed through the normal path and reported, without stopping to ask. research.33 runs on that word.
+
 ## Open
 
 | # | Item |

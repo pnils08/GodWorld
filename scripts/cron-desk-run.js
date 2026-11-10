@@ -3172,11 +3172,8 @@ async function runWrite(assign) {
     writePacket.reviewProfile.articleContract.targetWords || null;
   const thin = thinCheck(draftText, targetWords, ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.thinFloor);
   const verbatim = PACKET_ACTIVE ? verbatimSliceRuns(draftText, writePacket) : [];
-  // Builder 2026-11-10: Rhea gates names, engine data cited and canon
-  // conflicts — nothing else holds a piece. A short piece is logged, not held
-  // (Mason Ortega C114: 119 words, flagged on length alone).
-  const checkFlags = [];
-  if (thin.thin) log('short piece (not held): ' + thin.reason);
+  const checkFlags = thin.thin ? [thin.reason] : [];
+  if (checkFlags.length) log('deterministic check flags: ' + checkFlags.join('; '));
   if (verbatim.length) log('WARN verbatim slice text: ' + verbatim.map(h => '"' + h.run + '"').join('; '));
 
   // gate (skipped for --no-gate samples)

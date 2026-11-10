@@ -76,13 +76,7 @@ const ARTICLE_PACKET_FILE = arg('--article-packet', null);
 // pipeline.77 — the reward-loop group: score the draft's SHAPE against its seat's contract in a
 // separate call. Rhea's sourcing verdict is untouched (truth stays on the deterministic checks and
 // her canon review); this scores only opening, closing, purpose and length.
-// Builder 2026-11-10: "The only thing Rhea gates is names, engine data cited,
-// and canon conflicts, she has zero ability to gate a cron that I'm giving
-// autonomy." The contract score judged how a piece opened and closed, whether
-// it met a stated purpose and whether it was long enough, and its "what fell
-// short" line was written onto the reporter's own page every night. It is off;
-// the flag and --contract-only are accepted and do nothing.
-const CONTRACT_SCORE = false && (process.argv.includes('--contract-score'));
+const CONTRACT_SCORE = process.argv.includes('--contract-score');
 // pipeline.77: a draft the runner blocked before Rhea (contamination, assignment swap) is still
 // graded for shape — score only, to <base>.contract.json; no verdict is written or changed.
 const CONTRACT_ONLY = process.argv.includes('--contract-only');
@@ -575,7 +569,7 @@ async function main() {
   if (!DRAFT) throw new Error('--draft <path> is required');
   const draftAbs = path.resolve(ROOT, DRAFT);
   if (!fs.existsSync(draftAbs)) throw new Error('draft not found: ' + draftAbs);
-  if (CONTRACT_ONLY) { console.log('contract score retired 2026-11-10 (builder: Rhea gates names, engine data cited and canon conflicts only)'); process.exit(0); }
+  if (CONTRACT_ONLY) return contractOnly(draftAbs);
 
   // Cycle from the DRAFT filename first (e.g. sports_c101_...) — the draft's own
   // cycle, NOT the newest cycle (the sim may have advanced since the draft ran).

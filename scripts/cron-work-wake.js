@@ -320,7 +320,8 @@ function autoPackages(cycle, packages, opts) {
       promptContract: {
         roleLine: `You are ${of.holder}, ${of.title}${where}.`,
         voiceNotes: voiceNotesFor(popid, of.agentDir, row, o.agentsDir),
-        frame: PRIVATE_FRAME,
+        // dry run 2026-11-10: a seat's "Yes on Grand Lake" came back as "the vote got through" — a position is not an outcome
+        frame: PRIVATE_FRAME + ' What is listed below is what you said and filed. A vote, a result or a number that is not written there has not happened yet.',
         userFrame: 'The week\'s work is on the record now and the building has gone quiet',
         targetSentences: '4-6',
       },

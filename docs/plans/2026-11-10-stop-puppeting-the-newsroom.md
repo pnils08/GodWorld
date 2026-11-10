@@ -34,6 +34,10 @@ Read from the code, 2026-11-10:
 
 Why the newsroom was not "the same model as a CLI with the same tools" (read 2026-11-10): 12 of 27 seats write on Grok 4.3 / GPT Luna / Haiku, 14 on Sonnet 5.5, 1 on Opus; 12 seats have no tools and the other 15 are capped at 6 tool calls; each seat is handed one assignment and one typed Packet and writes in a single pass "built ONLY from" it.
 
+## Reverted the same day: my own instructions (builder 11-10)
+
+"They embody what I built and the instructions you force on them change what they boot as, like why should Lila get a beat on a person when her job is the health system?" Items 4 (Lila's citywide figures withheld) and 6 (seat hooks, approaches and 18 contracts reworded toward "a resident or a place") above were research-build replacing one forced script with another, against the persona files (`.claude/agents/lila-mezran/`: "health clusters, clinic human cost, public health"). Undone: `buildCivicDomainSlice.js` is back to its text before 2026-11-10 except that an engine-audit anomaly is not handed to a seat as its assignment (Luis excepted, open A); `newsroom-wake-packages.json` is back to what was built, with the `opening` and `closing` lines removed from every seat (54 lines) and nothing put in their place. Standing from Done: 1, 2, 3, 5, 7. Shell run after the revert (civic / lila-mezran, 1,078 words): she writes the health system again — the hood counts, the hospital ledger, the 6% watch bar her slice carries — on the angle she chose that morning.
+
 ## Test shell (builder 11-10: "make a test shell")
 
 `scripts/testReporterWrite.sh <desk> <persona> [cycle]` copies one reporter's stage files and the cycle's slices into `output/test-shell/<stamp>/` and runs the real write stage there with `--no-gate` (`GODWORLD_TEST_COMPARE_DIR`, honored by `cron-desk-run.js`, `cron-desk-writer.js`, `cron-rhea-gate.js`; no sheet row, no page line). One writer call.

@@ -165,8 +165,9 @@ try {
   assert.strictEqual(lila.prewrite.cityHealth.src,
     'output/world_summary_c103.md "## City State"');
   assert.deepStrictEqual(lila.prewrite.anchorFacts, [
-    'Test Clinic Patient took time to recover from the flu (Temescal).'
-  ], 'the citywide figure stays on the packet and out of what the writer is handed (builder 2026-11-10)');
+    'Test Clinic Patient took time to recover from the flu (Temescal).',
+    'The city illness rate stands at 6.4%, with 37 hospital admissions this cycle and 75 in care at the close.'
+  ], 'the citywide figure travels in the brief cron-desk-run.js renders');
   assert.strictEqual(slice.packets['angela-reyes'].seat.popid, 'POP-00156');
   assert.strictEqual(slice.packets['angela-reyes'].story.label,
     'Oakland Youth Apprenticeship Pipeline has an active pilot.');

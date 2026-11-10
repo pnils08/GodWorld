@@ -20,8 +20,8 @@ const CIVIC_SEATS = Object.freeze({
     name: 'Carmen Delaine',
     popid: 'POP-00011',
     domain: 'civic-ledger',
-    approach: 'Civic approach: say what the city action did this cycle and where it landed — the place, the money, the people it reached. One clear story about the city; the record is your evidence, never your subject. Not a press release, not an audit.',
-    hook: 'The city did something this cycle. Say what it changed and for whom.'
+    approach: 'Civic-ledger approach: follow the supplied initiative, vote, or decision through money, clocks, and responsible offices. One record-backed civic claim; not a press release or multi-voice roundup.',
+    hook: 'The civic record identifies a decision, initiative, or clock that needs a clear accounting.'
   },
   'luis-navarro': {
     name: 'Luis Navarro',
@@ -34,15 +34,15 @@ const CIVIC_SEATS = Object.freeze({
     name: 'Trevor Shimizu',
     popid: 'POP-00155',
     domain: 'infrastructure-transit',
-    approach: 'Systems approach: show one piece of the city working — a station, a line, a street, a project — through the people who rode, built or used it. Exact about place and time; the rows are your evidence, never your subject.',
-    hook: 'A part of the city carried people this cycle. Show it working.'
+    approach: 'Systems approach: trace the supplied infrastructure or transit fact through timeline, place, and implementation state. Dry, technical, and record-backed.',
+    hook: 'The supplied systems record shows an infrastructure or transit question with a visible clock.'
   },
   'lila-mezran': {
     name: 'Dr. Lila Mezran',
     popid: 'POP-00154',
     domain: 'health',
-    approach: 'Health approach: tell one resident\'s or one place\'s health story from the Packet, without diagnosis. Calm and humane. Citywide counts are background the reader already has.',
-    hook: 'A resident or a place in this city has a health story this cycle.'
+    approach: 'Health approach: use only packet-backed health facts and name the human consequence without diagnosis. Clinical calm, one record-backed claim.',
+    hook: 'The supplied civic record identifies a health-service question that needs careful accounting.'
   },
   'noah-tan': {
     name: 'Noah Tan',
@@ -55,8 +55,8 @@ const CIVIC_SEATS = Object.freeze({
     name: 'Angela Reyes',
     popid: 'POP-00156',
     domain: 'education-youth',
-    approach: 'Education approach: tell one Packet-backed story of someone learning, teaching or starting work. Warm, precise, and never invent scores, students, teachers, or outcomes.',
-    hook: 'Someone in this city is learning or starting out this cycle.'
+    approach: 'Education approach: use only the supplied youth, school, education, or apprenticeship record. Warm, precise, and never invent scores, students, teachers, or outcomes.',
+    hook: 'The supplied civic record identifies an education or youth question that needs a clear, humane account.'
   }
 });
 
@@ -614,13 +614,12 @@ function loadCycleCivicEntries(cycle, root = ROOT, profiles = null) {
 }
 
 function scoreEntryForSeat(entry, slug) {
-  // Builder 2026-11-10: "It's media not engine auditors … they supposed to be
-  // covering the 'city' not the engine output." The engine's audit of what
-  // looks stuck or off (kind `anomaly`, engine_audit_c<N>.json patterns) was
-  // the top-scored assignment for Trevor and Angela at C115. It is the
-  // builder's read, never a story. OPEN: the investigation seat (luis-navarro)
-  // is built on this feed end to end (INVESTIGATION-BRIEF-1, silenceClock,
-  // its tests) and still takes it; cutting it there is the next change.
+  // Builder 2026-11-10: "It's media not engine auditors". The engine's own
+  // audit of what looks stuck or off (kind `anomaly`, engine_audit_c<N>.json
+  // patterns) is not handed to a seat as its assignment; a reporter who finds
+  // the same thing with their own lookups found it themselves. OPEN: the
+  // investigation seat (luis-navarro) is built on this feed end to end and
+  // still takes it.
   if (/anomaly/i.test(entry.kind) && slug !== 'luis-navarro') return 0;
   const text = entryText(entry);
   if (slug === 'carmen-delaine') {
@@ -779,14 +778,10 @@ function prewriteForSeat(slug, top, candidateScope, cityHealth) {
     return {
       // cron-desk-run.js renders anchorFacts into the writer's brief, so the
       // standing citywide figure travels there as well as in cityHealth.
-      // 2026-11-10: the citywide rate and census are engine output the builder
-      // already has in the world summary; handed over as an anchor they became
-      // the story ("Counted by the Hundred and Named by No One", C115). They
-      // stay on the packet (cityHealth) and out of what the writer is handed.
-      anchorFacts: [fact],
+      anchorFacts: city ? [fact, city.fact] : [fact],
       forbidden: [
         'Do not add diagnoses, symptoms, treatment outcomes, patients, residents, clinicians, staffing, capacity, budgets, measurements, quotes, or access effects absent from the supplied entries.',
-        'Do not print the citywide illness rate, hospital census, or any impact score. The story is the resident or the place.'
+        'Do not restate the supplied illness rate, hospital census, or impact score more than once — the figure is the anchor, not the story.'
       ],
       schema: 'HEALTH-SERVICE-BRIEF-1',
       method: record ? 'ILLNESS_RECORD_HUMAN_COST' : 'ACCESS_TIMELINE_HUMAN_COST',

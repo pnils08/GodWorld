@@ -20,6 +20,8 @@
  *   4b coverage — rate the published edition into Edition_Coverage_Ratings
  *                (pipeline.62); non-fatal, pre-flight catches a miss next cycle
  *                runs ingestEdition + permanent-NotebookLM source add
+ *   4c remember — the Pulse she narrated lands in her own memory store (`mags`), one
+ *                document per Cycle, only after the canon door published it (pipeline.100)
  *   5 sweep    — per-article canon ingest (ALL staged, curated or not); then
  *                retracts canon-violations and any weekday-ingested id the
  *                canon set no longer holds
@@ -1677,6 +1679,50 @@ async function stepCoverage(cycle) {
 }
 
 // ---------------------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// Step 4c — remember (pipeline.100, builder 2026-11-09: "add the saturday run to her brain").
+// The Pulse is Mags' own writing; her store is where her Discord talks and reflections already
+// live and what her bot and reflection read back. One document per Cycle, upserted on customId,
+// sim-clock labelled (the store reaches her prompts: no calendar date). Only a Pulse the canon
+// door published is hers to remember — the published record names the exact edition.
+// ---------------------------------------------------------------------------
+const MAGS_STORE_TAG = 'mags';
+
+function magsPulseMemoryDoc(cycle, pulseText, pieceCount) {
+  const when = simClock(cycle);
+  return {
+    customId: 'mags-pulse-c' + cycle,
+    containerTags: [MAGS_STORE_TAG],
+    metadata: { title: 'Cycle Pulse — ' + when, source: 'saturday-run', cycle: String(cycle) },
+    content: 'Mags Corliss — the Cycle Pulse I wrote and published for ' + when +
+      (pieceCount ? ' (' + pieceCount + ' pieces from my staff ran under it)' : '') + ':\n\n' + String(pulseText).trim()
+  };
+}
+
+async function stepRemember(cycle) {
+  console.log('--- step 4c: remember (the Pulse → her own memory) ---');
+  const published = readJsonSafe(path.join(ROOT, 'output', 'edition_published_c' + cycle + '.json'));
+  if (!published) throw new Error('no edition_published_c' + cycle + '.json — the canon door has not published this Pulse');
+  const pulsePath = path.join(ROOT, 'output', 'cycle_pulse_c' + cycle + '.md');
+  const editionPath = path.join(ROOT, published.edition || '');
+  if (!fs.existsSync(pulsePath)) throw new Error('no cycle_pulse_c' + cycle + '.md');
+  const pulse = fs.readFileSync(pulsePath, 'utf8').trim();
+  if (!pulse) throw new Error('cycle_pulse_c' + cycle + '.md is empty');
+  // The narration on disk must be the one that printed: a re-narrated file after publish is not her published Pulse.
+  if (!fs.existsSync(editionPath) || fs.readFileSync(editionPath, 'utf8').indexOf(pulse) === -1) {
+    throw new Error('cycle_pulse_c' + cycle + '.md is not the narration inside ' + (published.edition || 'the published edition'));
+  }
+  const doc = magsPulseMemoryDoc(cycle, pulse, (published.selected || []).length);
+  if (!APPLY) {
+    console.log('(dry-run) would upsert ' + doc.customId + ' → ' + MAGS_STORE_TAG + ' (' + doc.content.split(/\s+/).length + ' words): ' + doc.content.slice(0, 160).replace(/\n+/g, ' ') + '…');
+    return { remembered: false, customId: doc.customId };
+  }
+  if (!API_KEY) throw new Error('SUPERMEMORY_CC_API_KEY missing');
+  await postDocument(doc);
+  console.log('remembered: ' + doc.customId + ' → ' + MAGS_STORE_TAG);
+  return { remembered: true, customId: doc.customId };
+}
+
 async function main() {
   // --cycle overrides; otherwise the single source of truth (engine.81 —
   // freshest world_summary; noArgv because this script parses its own flags
@@ -1689,13 +1735,13 @@ async function main() {
     index: () => stepIndex(),
     audit: () => stepAudit(cycle), curate: () => stepCurate(cycle),
     narrate: () => stepNarrate(cycle), publish: () => stepPublish(cycle),
-    coverage: () => stepCoverage(cycle),
+    coverage: () => stepCoverage(cycle), remember: () => stepRemember(cycle),
     sweep: () => stepSweep(cycle), sheets: () => stepSheets(cycle),
     signals: () => stepSignals(cycle), daily: () => stepDaily(cycle),
     attach: () => stepAttach(cycle)
   };
   if (step) {
-    if (!dispatch[step]) throw new Error('unknown --step "' + step + '" (want audit|curate|narrate|attach|publish|coverage|sweep|index|sheets|signals|daily)');
+    if (!dispatch[step]) throw new Error('unknown --step "' + step + '" (want audit|curate|narrate|attach|publish|remember|coverage|sweep|index|sheets|signals|daily)');
     const res = await dispatch[step]();
     if (res && res.retractFailed && res.retractFailed.length) throw new Error(res.retractFailed.length + ' retraction(s) failed — re-run --step sweep --apply');
   } else {
@@ -1752,6 +1798,18 @@ async function main() {
         console.error('[DISCORD PING FAILED] (non-blocking): ' + e2.message);
       }
     }
+    // pipeline.100: her own memory of the Pulse, only when the canon door completed. Loud, never
+    // blocks the steps below, still fails the run at the end.
+    let rememberErr = null;
+    if (!publishErr) {
+      try {
+        await stepRemember(cycle);
+      } catch (e) {
+        rememberErr = e;
+        console.error('[REMEMBER FAILED] ' + e.message);
+        console.error('  Recover: node scripts/cron-saturday-run.js --cycle ' + cycle + ' --step remember --apply');
+      }
+    }
     await stepCoverage(cycle);
     const sweep = await stepSweep(cycle);
     // pipeline.84 Task 3: the master article index rebuilds after the sweep. Context only (the dashboard
@@ -1770,6 +1828,7 @@ async function main() {
     if (publishErr) throw publishErr;
     if (attachErr) throw attachErr;
     if (indexErr) throw indexErr;
+    if (rememberErr) throw rememberErr;
     // A canon-violation still in the store fails the run loud, after the steps below it ran.
     if (sweep.retractFailed.length) {
       throw new Error(sweep.retractFailed.length + ' retraction(s) failed — recover: node scripts/cron-saturday-run.js --cycle ' +
@@ -1782,7 +1841,7 @@ if (require.main === module) {
   main().catch(err => { console.error('[saturday] Fatal: ' + err.message); process.exit(1); });
 }
 
-module.exports = { loadStagedSet, loadArcSeeds, excludeCanonViolations, stepSweep, stepDaily, dailyPending, retractionIds, articleCustomId, articleDoc, usageRowsFor, printedStems, printedOnly, citationSnippet, ROLE_TO_USAGE,
+module.exports = { magsPulseMemoryDoc, stepRemember, loadStagedSet, loadArcSeeds, excludeCanonViolations, stepSweep, stepDaily, dailyPending, retractionIds, articleCustomId, articleDoc, usageRowsFor, printedStems, printedOnly, citationSnippet, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS, verifyStagedProof,
   attachStorylines, storylineAttachNames, stepAttach, commitAttaches, loadStorylineRegistryStrict, checkStorylineRegistry, primarySlug,
   isCodeRenderedBrief, stagedGrade, bylinePublishedRows, bylineResolves,

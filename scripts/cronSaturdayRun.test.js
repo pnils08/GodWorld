@@ -7,7 +7,7 @@
  * Exits 0 on pass, 1 on failure.
  */
 
-const { articleCustomId, articleDoc, usageRowsFor, ROLE_TO_USAGE,
+const { magsPulseMemoryDoc, stepRemember, articleCustomId, articleDoc, usageRowsFor, ROLE_TO_USAGE,
   aggregateStorylineSignals, mergeStorylineLedger, STORYLINE_LEDGER_HEADERS,
   verifyStagedProof } = require('./cron-saturday-run');
 
@@ -542,6 +542,15 @@ console.log('Test 6: mergeStorylineLedger');
   let dthrew = null, dres = null;
   try { dres = await stepDaily(C); } catch (e) { dthrew = e; }
   assert('daily dry run on an empty Cycle posts nothing', !dthrew && dres && dres.ingested === 0, dthrew && dthrew.message);
+  // pipeline.100 — the Pulse lands in her own store: one doc a Cycle, sim-clock label, never the canon store
+  const mem = magsPulseMemoryDoc('114', '  Walk the week with me.\n', 9);
+  assert('Pulse memory: one upsert id per Cycle', mem.customId === 'mags-pulse-c114');
+  assert('Pulse memory: her store only', mem.containerTags.join() === 'mags');
+  assert('Pulse memory: sim clock, no calendar date', mem.metadata.title === 'Cycle Pulse — Y3C10' && !/20\d\d-\d\d/.test(mem.content));
+  assert('Pulse memory: carries the narration', /Y3C10 \(9 pieces from my staff ran under it\):\n\nWalk the week with me\.$/.test(mem.content), mem.content);
+  let rthrew = null;
+  try { await stepRemember(C); } catch (e) { rthrew = e; }
+  assert('an unpublished Cycle is not remembered', rthrew && /has not published/.test(rthrew.message), rthrew && rthrew.message);
   console.log(`\n${passed} passed, ${failed} failed`);
   process.exit(failed ? 1 : 0);
 })();

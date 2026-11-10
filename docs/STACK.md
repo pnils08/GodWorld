@@ -126,7 +126,7 @@ Civic: /city-hall, /city-hall-prep
 Memory: /save-to-bay-tribune (builder session saves: `npx supermemory add … --namespace sl-godworld`)
 Reporter desks (6): /business-desk, /civic-desk, /culture-desk, /letters-desk, /podcast-desk, /sports-desk (chicago-desk retired with Chicago canon, engine.116)
 Misc: /visual-qa
-Added since the groupings above (14): /context-budget, /deep-dispatch, /desk-review, /desk-slice, /diagnose, /disk-audit, /disk-rotate, /lore-ingest, /lore-writer, /make-citizen-voice, /md-audit, /save-to-profile, /self-debug, /using-git-worktrees
+Added since the groupings above (14): /context-budget, /deep-dispatch, /desk-review, /desk-slice, /diagnose, /disk-audit, /disk-rotate, /lore-ingest, /lore-writer, /make-citizen-voice, /md-audit, /self-debug, /using-git-worktrees
 
 Pipeline v2 (S134): 9 reporters, story-driven layout, world summary as input, civic separated to own terminal. See `docs/EDITION_PIPELINE.md`.
 

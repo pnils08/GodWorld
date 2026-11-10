@@ -119,7 +119,9 @@ function collect(root, days, nowMs) {
     points: (journals[0].findings || []).filter((f) => f.selected).map((f) => String(f.civisFinding || f.target || '').replace(/\s+/g, ' ').trim()),
   } : null;
   const unwritten = recent(path.join(root, 'output', 'civis-journal-failed'), /\.failed\.json$/, cutoff)
-    .map((entry) => readJson(entry.file)).filter((record) => record && !record.passed)
+    .map((entry) => readJson(entry.file))
+    // a week a later run wrote is not an unwritten week, whatever its failed file says
+    .filter((record) => record && !record.passed && !journals.some((written) => written.cycle === record.cycle))
     .map((record) => ({ cycle: record.cycle, failures: Array.from(new Set((record.attempts || []).flatMap((a) => a.failures || []))) }));
 
   // 5. The daily news: what the last run carried and what it skipped.
@@ -138,14 +140,14 @@ function collect(root, days, nowMs) {
   manifests.sort((a, b) => Date.parse(b.lastAttemptAt || b.generatedAt || 0) - Date.parse(a.lastAttemptAt || a.generatedAt || 0));
   const last = manifests[0];
   const kinds = {};
-  for (const source of (last && last.sources) || []) kinds[source.kind] = (kinds[source.kind] || 0) + 1;
+  for (const source of (last && (last.audioSources || last.sources)) || []) kinds[source.kind] = (kinds[source.kind] || 0) + 1;
   const logFile = path.join(root, 'logs', 'notebooklm-daily-news.log');
   const skipped = fs.existsSync(logFile)
     ? fs.readFileSync(logFile, 'utf8').split('\n').slice(-80)
-      .filter((line) => /SKIPPED|STOPPED|NOT REMOVED|background from the canon notebook|failed:/i.test(line))
+      .filter((line) => /SKIPPED|STOPPED|NOT REMOVED|NOT SENT|background from the canon notebook|failed:/i.test(line))
       .map((line) => line.replace(/\s+/g, ' ').trim().slice(0, 200))
     : [];
-  const show = last ? { at: last.lastAttemptAt || last.generatedAt, cycle: last.cycle, kinds, opsReport: Boolean(last.opsReportPath) } : null;
+  const show = last ? { at: last.lastAttemptAt || last.generatedAt, cycle: last.cycle, kinds, opsReport: last.opsReportDelivered === true ? 'delivered' : last.opsReportPath ? 'made, not sent' : 'not produced' } : null;
 
   return { days, wakes: wakes.length, packets: packets.length, lacked, parts, graded: graded.length, shortfalls, held, journal, unwritten, show, skipped };
 }
@@ -175,7 +177,7 @@ function render(feedback) {
   if (feedback.show) {
     lines.push('Last delivered show: ' + feedback.show.at + ' (Cycle ' + feedback.show.cycle + ') — ' +
       (Object.keys(feedback.show.kinds).map((kind) => feedback.show.kinds[kind] + ' ' + kind).join(', ') || 'no per-source record (before v2.0)') +
-      '; ops report ' + (feedback.show.opsReport ? 'delivered' : 'not produced') + '.', '');
+      '; ops report ' + feedback.show.opsReport + '.', '');
   }
   for (const line of feedback.skipped) lines.push('- ' + line);
   return lines.join('\n') + '\n';
@@ -192,7 +194,7 @@ function bootDigest(feedback) {
     (feedback.unwritten.length ? '; no entry passed for C' + feedback.unwritten.map((w) => w.cycle).join(', C') : ''));
   if (feedback.show) {
     lines.push('  daily news: last show ' + String(feedback.show.at).slice(0, 10) + ', ops report ' +
-      (feedback.show.opsReport ? 'delivered' : 'not produced') + ', ' + feedback.skipped.length + ' skip line(s) in the log');
+      feedback.show.opsReport + ', ' + feedback.skipped.length + ' skip line(s) in the log');
   }
   return lines.join('\n');
 }

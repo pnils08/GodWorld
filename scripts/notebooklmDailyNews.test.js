@@ -41,6 +41,7 @@ const {
   dailyAudioFocus,
   stripDailyNoise,
   staleDailySourceIds,
+  heldDraftSourceIds,
   SOURCE_VERSION,
   DEFAULT_AUDIO_LENGTH,
   DAILY_NEWS_IDENTITY,
@@ -613,6 +614,10 @@ const syntheticDigest = {
     { id: 'old-guide', title: '00_AUDIO_DIRECTION_GUIDE — daily — dddddddddddd' },
     { id: 'other', title: '109_As_Roster' },
   ];
+  assert.deepStrictEqual(heldDraftSourceIds(list.concat([
+    { id: 'held', title: 'The Bay Tribune Daily C998 — gate desk file' },
+    { id: 'story', title: 'The Bay Tribune Daily C998 — Someone: The gate desk file story' },
+  ])), ['held']);
   const stale = staleDailySourceIds(list, ['today-src', 'today-guide']);
   assert.deepStrictEqual(stale.sort(), ['old-guide', 'old-src']);
 }
@@ -713,10 +718,19 @@ const syntheticDigest = {
   writeManifest('made-delivered', { audioArtifactId: 'art-sent', driveLink: 'https://example.invalid/s', generatedAt: new Date(now + 60e3).toISOString() });
   const made = latestUndeliveredRender(outDir);
   assert.strictEqual(made.audioArtifactId, 'art-new');
-  assert.deepStrictEqual(made.sourceIds, ['n']);
+  assert.deepStrictEqual(made.sources, [{ kind: 'article', id: 'n', path: 'new.md' }]);
+  // A render keeps its own receipt: a later attempt's landed set does not replace it,
+  // and a render another run already recovered and delivered is not offered again.
+  writeManifest('made-newest', { audioArtifactId: 'art-newest', generatedAt: new Date(now + 30e3).toISOString(),
+    audioSources: [{ kind: 'article', id: 'a', path: 'heard.md' }], sources: [{ kind: 'article', id: 'b', path: 'later-attempt.md' }] });
+  assert.deepStrictEqual(latestUndeliveredRender(outDir).sources.map((x) => x.path), ['heard.md']);
+  writeManifest('made-newest', { audioArtifactId: 'art-newest', generatedAt: new Date(now + 30e3).toISOString(), recoveredInto: 'elsewhere' });
+  assert.strictEqual(latestUndeliveredRender(outDir).audioArtifactId, 'art-new');
+  writeManifest('heard', { driveLink: 'https://example.invalid/h', sourceVersion: '2.0', generatedAt: new Date(now + 3600e3).toISOString(),
+    audioSources: [{ kind: 'article', id: 'a', path: 'heard.md' }], sources: [{ kind: 'article', id: 'b', path: 'later-attempt.md' }] });
   const later = now + 24 * 3600e3;
   const airedMap = airedReportTimes(outDir, later);
-  assert.deepStrictEqual(Array.from(airedMap.keys()).sort(), [freshRel, 'landed.md'].sort(),
+  assert.deepStrictEqual(Array.from(airedMap.keys()).sort(), [freshRel, 'landed.md', 'heard.md'].sort(),
     'a piece whose upload failed, or a resumed show with no source record, has not aired');
   assert.strictEqual(airedReportTimes(outDir, now + 2 * 3600e3).size, 0, 'a same-day manifest does not count: a re-run keeps its sources');
   const prior = path.join(staged, 'culture_c776_someone_packet-v2_x.staged.md');

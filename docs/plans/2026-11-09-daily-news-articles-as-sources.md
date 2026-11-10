@@ -44,6 +44,17 @@ Codex diff review of `ae8d72065`: [[../for-claude-review/2026-11-09-codex-pipeli
 | F5 | Headline-less edition pieces titled `INTAKE` | Label read from reader copy |
 | F6 | Reflections clipped at 2,000 chars | Unclipped |
 
+Codex re-review of the fold and the later commits: [[../for-claude-review/2026-11-10-codex-pipeline108-109-rereview]] — HOLD, six findings, reproduced by codex through `run()` with stubs. Last round (TERMINAL.md §Review 4); settled in place:
+
+| # | Finding | Settled |
+|---|---|---|
+| R1 | A gate desk file left behind could still be in the notebook when the show is made | The notebook is listed after the prune; a remaining gate desk file is deleted, and if it cannot be the run stops: no show is made with held drafts in reach |
+| R2 | A retry in the same run dir replaced the sources of an older recorded render | Each render carries its own receipt (`manifest.audioSources`, written with `audioArtifactId`); airs-once and recovery read that |
+| R3 | Cross-run recovery relabeled old audio and could send it twice | Recovery labels the show with the Cycle it was made for, writes `recoveredInto` on the origin manifest, and is a no-op on a run already delivered unless `--force` |
+| R4 | A failed edition-piece upload, or a whole unaired edition, is not carried to the next day | **Recorded, not fixed.** The edition is collected only while its file is inside the 36 h window on edition day; pieces share one path. It is canon and airs in the weekly show regardless. A per-piece carry is its own change |
+| R5 | Boot said "ops report delivered" when it was only downloaded | `manifest.opsReportDelivered` is set from Discord's answer; the digest says delivered / made, not sent / not produced |
+| R6 | A later successful journal left a "no entry passed" receipt | A clean pass closes the earlier failed file, and the digest ignores a failed file for a week that has a journal |
+
 ## Tasks
 
 | # | Task | Status |

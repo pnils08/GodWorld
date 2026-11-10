@@ -193,7 +193,7 @@ function airedReportTimes(outputDir, nowMs) {
     // (a skipped upload, or a resumed show with no source record, airs it
     // later). Older manifests carried every collected report in one file.
     const carried = Array.isArray(manifest.sources) || parseFloat(manifest.sourceVersion) >= 2
-      ? (manifest.sources || []).filter((entry) => entry && entry.id && entry.kind === 'article')
+      ? (manifest.audioSources || manifest.sources || []).filter((entry) => entry && entry.id && entry.kind === 'article')
       : (manifest.reports || []);
     for (const report of carried) {
       if (!report || !report.path) continue;
@@ -214,14 +214,15 @@ function latestUndeliveredRender(outputDir) {
     } catch (_) {
       continue;
     }
-    if (!manifest || !manifest.audioArtifactId || manifest.driveLink) continue;
+    if (!manifest || !manifest.audioArtifactId || manifest.driveLink || manifest.recoveredInto) continue;
     const at = Date.parse(manifest.lastAttemptAt || manifest.generatedAt || '');
     if (!Number.isFinite(at) || (best && best.at >= at)) continue;
     best = {
       at,
       audioArtifactId: manifest.audioArtifactId,
-      sources: manifest.sources,
-      sourceIds: manifest.sourceIds,
+      cycle: manifest.cycle,
+      sources: manifest.audioSources || manifest.sources,
+      manifestFile: file,
       manifestPath: path.relative(ROOT, file),
     };
   }
@@ -980,6 +981,12 @@ function staleDailySourceIds(listJson, keepIds) {
     .map((source) => source.id);
 }
 
+function heldDraftSourceIds(listJson) {
+  return sourceRecords(listJson)
+    .filter((source) => /^The Bay Tribune Daily C\d+ — gate desk file/.test(source.title || ''))
+    .map((source) => source.id);
+}
+
 function pruneStaleDailySources(notebookId, listJson, keepIds) {
   const stale = staleDailySourceIds(listJson, keepIds);
   for (let i = 0; i < stale.length; i += 20) {
@@ -1372,14 +1379,23 @@ async function run(argv) {
     // notebook made last": this run dir's own, else the newest undelivered one
     // on disk, whose sources (what that audio was made from) become this
     // manifest's, so airs-once marks what was actually heard.
-    if (!manifest.audioArtifactId) {
-      const made = latestUndeliveredRender(OUTPUT_DIR);
-      if (!made) throw new Error('no undelivered audio render on record; run without --resume-latest-audio');
-      manifest.audioArtifactId = made.audioArtifactId;
-      manifest.sources = made.sources || [];
-      manifest.sourceIds = made.sourceIds || [];
-      manifest.resumedFrom = made.manifestPath;
+    // A recovered show is labeled with the Cycle it was made for, and its
+    // delivery is written back to the run that made it, so no later recovery
+    // sends it again.
+    if (manifest.driveLink && !args.force) {
+      console.log('NotebookLM daily news: this run\'s audio is already delivered; nothing to recover');
+      return { cycle, runDir, packHash: pack.hash, unchanged: true };
     }
+    let origin = null;
+    if (!manifest.audioArtifactId) {
+      origin = latestUndeliveredRender(OUTPUT_DIR);
+      if (!origin) throw new Error('no undelivered audio render on record; run without --resume-latest-audio');
+      manifest.audioArtifactId = origin.audioArtifactId;
+      manifest.audioSources = origin.sources || [];
+      manifest.resumedFrom = origin.manifestPath;
+      manifest.resumedCycle = origin.cycle;
+    }
+    const showCycle = (origin && origin.cycle) || cycle;
     const downloaded = nlm(['download', 'audio', config.newsroomNotebookId, '--id', manifest.audioArtifactId,
       '--output', audioPath, '--no-progress'], { timeoutMs: 300 * 1000 });
     if (!downloaded.ok || !fs.existsSync(audioPath) || fs.statSync(audioPath).size === 0) {
@@ -1392,12 +1408,17 @@ async function run(argv) {
     if (args.deliver) {
       const delivery = await deliver(audioPath, cycle, config, {
         driveDest: dailyConfig.driveDest || config.driveDest || 'edition',
-        label: 'GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + cycle,
-        content: '🎧 **GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + cycle + '**\n' +
+        label: 'GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + showCycle,
+        content: '🎧 **GodWorld Daily News v' + SOURCE_VERSION + ' — Cycle ' + showCycle + '**\n' +
           routingDiscordLine(routing, manifest.audioPresentation),
       });
       manifest.driveLink = delivery && delivery.driveLink ? delivery.driveLink : null;
       fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+      if (origin && manifest.driveLink) {
+        const made = readJson(origin.manifestFile);
+        made.recoveredInto = path.relative(ROOT, manifestPath);
+        fs.writeFileSync(origin.manifestFile, JSON.stringify(made, null, 2) + '\n');
+      }
       deleteLocalAudioIfDelivered(audioPath, manifest.driveLink);
     }
     console.log('NotebookLM daily news audio recovery complete for C' + cycle);
@@ -1441,6 +1462,16 @@ async function run(argv) {
     console.log('Working notebook: pruned ' + pruned + ' stale daily source(s)');
   } catch (e) {
     console.log('STALE SOURCE PRUNE SKIPPED (non-blocking): ' + e.message);
+  }
+  // A leftover day-old article is noise; a leftover gate desk file is held
+  // drafts in reach of the hosts (builder 2026-10-17: not news). The show is
+  // not made while one is in the notebook.
+  const afterPrune = nlm(['source', 'list', config.newsroomNotebookId, '--json']);
+  if (!afterPrune.ok) throw new Error('working-notebook source list failed after prune: ' + afterPrune.out.slice(0, 300));
+  const heldLeft = heldDraftSourceIds(parseJsonOutput(afterPrune.out, 'working-notebook source list'));
+  if (heldLeft.length) {
+    const del = nlm(['source', 'delete'].concat(heldLeft, ['--confirm']), { timeoutMs: 300 * 1000 });
+    if (!del.ok) throw new Error('a gate desk file (held drafts) is still in the news notebook and could not be removed; no show is made with it there');
   }
 
   const hasFlagged = newsroom.reports.some((r) => r.classification === 'FLAGGED');
@@ -1489,7 +1520,11 @@ async function run(argv) {
       ]);
       if (!create.ok) throw new Error('daily audio create failed: ' + create.out.slice(0, 400));
       const artifactId = parseCreatedArtifactId(create.out);
+      // The render's own receipt: what this audio was made from. A later
+      // attempt in the same run dir may land a different set in `sources`;
+      // airs-once and recovery read this, which only a new render replaces.
       manifest.audioArtifactId = artifactId;
+      manifest.audioSources = landed;
       fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
       const outcome = await downloadAudio(config.newsroomNotebookId, artifactId, audioPath);
       if (outcome === true) {
@@ -1549,8 +1584,10 @@ async function run(argv) {
     opsReportPath = await createOpsReport(config, cycle, opsSourceIds, runDir, manifest, manifestPath);
     console.log('Daily ops report: ' + path.relative(ROOT, opsReportPath));
     if (args.deliver) {
-      await sendDiscordFile(opsReportPath,
-        '📋 **Bay Tribune ops report — Cycle ' + cycle + '** (gate desk: every filing and every gate decision)');
+      manifest.opsReportDelivered = (await sendDiscordFile(opsReportPath,
+        '📋 **Bay Tribune ops report — Cycle ' + cycle + '** (gate desk: every filing and every gate decision)')) === true;
+      fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
+      if (!manifest.opsReportDelivered) console.log('DAILY OPS REPORT NOT SENT: Discord did not take the file');
     }
   } catch (e) {
     console.log('DAILY OPS REPORT SKIPPED (non-blocking): ' + e.message);
@@ -1602,6 +1639,7 @@ module.exports = {
   buildSourcePack,
   stripDailyNoise,
   staleDailySourceIds,
+  heldDraftSourceIds,
   buildDailySources,
   buildGateDeskFile,
   reflectionSources,

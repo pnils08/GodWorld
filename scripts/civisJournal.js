@@ -480,6 +480,14 @@ async function run(cycle, opts = {}) {
     fs.mkdirSync(path.dirname(failedPath), { recursive: true });
     fs.writeFileSync(failedPath, JSON.stringify({ cycle, passed: Boolean(assertion && assertion.ok), attempts: failed }, null, 2) + '\n');
   }
+  // An earlier run's failed file for this week is closed when a later run passes clean.
+  if (!dry && !failed.length && assertion && assertion.ok) {
+    const earlier = path.join(root, 'output', 'civis-journal-failed', stem + '.failed.json');
+    if (fs.existsSync(earlier)) {
+      const record = readJson(earlier);
+      if (!record.passed) fs.writeFileSync(earlier, JSON.stringify(Object.assign(record, { passed: true }), null, 2) + '\n');
+    }
+  }
   if (!answered) {
     console.error('Civis Journal: no route answered; skipping C' + cycle);
     return { skipped: 'model-failure' };

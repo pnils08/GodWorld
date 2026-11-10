@@ -35,6 +35,8 @@ The SessionStart hook printed the PIN, NEXT, due reads and the review inbox. No 
 | 4 | Journal repair round + kept failed entries + test | done — first live use is the next Cycle's Step 5.58 |
 | 5 | Read the digest at the next boot of either terminal | open |
 
+Review: codex re-review [[../for-claude-review/2026-11-10-codex-pipeline108-109-rereview]] R5 and R6 are this job's; both settled in place (table in [[2026-11-09-daily-news-articles-as-sources]] §Review).
+
 ## Not in this job
 
 - The digest ranks nothing and proposes nothing. Which lacks become rows is the builder's call.

@@ -21,6 +21,7 @@
 const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
+const { execFileSync } = require('child_process');
 const {
   ROOT,
   NLM,
@@ -187,10 +188,16 @@ function airedReportTimes(outputDir, nowMs) {
     } catch (_) {
       continue;
     }
-    if (!manifest || !manifest.driveLink || !Array.isArray(manifest.reports)) continue;
+    if (!manifest || !manifest.driveLink) continue;
     const at = Date.parse(manifest.lastAttemptAt || manifest.generatedAt || '');
     if (!Number.isFinite(at) || at > nowMs - 12 * 3600e3) continue;
-    for (const report of manifest.reports) {
+    // v2.0 on: only an article whose own source landed in the notebook aired
+    // (a skipped upload, or a resumed show with no source record, airs it
+    // later). Older manifests carried every collected report in one file.
+    const carried = Array.isArray(manifest.sources) || parseFloat(manifest.sourceVersion) >= 2
+      ? (manifest.sources || []).filter((entry) => entry && entry.id && entry.kind === 'article')
+      : (manifest.reports || []);
+    for (const report of carried) {
       if (!report || !report.path) continue;
       if (!aired.has(report.path) || aired.get(report.path) < at) aired.set(report.path, at);
     }
@@ -614,6 +621,115 @@ function articleSource(report) {
   };
 }
 
+// ── Deep canon, per story (builder 2026-11-09: "Yes") ───────────────────────
+// A show is made inside one notebook, and the working notebook holds only
+// today, so the hosts cannot reach the canon notebook. Each article gets one
+// question to it — what was published before about these people and places —
+// through the read-only wrapper (whole live notebook, 30–65 s a question in its
+// log), and the answer rides as a small source beside the article. A lore
+// piece is already canon and gets none. Non-blocking: a failed or empty answer
+// means that article airs without background.
+const BACKGROUND_QUESTION_MAX = 3900; // the wrapper refuses a question over 4000
+const BACKGROUND_BUDGET_MS = 15 * 60 * 1000;
+const BACKGROUND_TRIES = 3;
+const CANON_SEARCH = path.join(__dirname, 'notebooklmCanonSearch.js');
+
+function wantsBackground(report) {
+  return (report.classification === 'STAGED' || report.classification === 'UNGATED_SAMPLE') &&
+    !/^lore_/.test(path.basename(report.file || report.relativePath || ''));
+}
+
+function backgroundQuestion(report) {
+  const body = String(report.body || '');
+  const register = (key) => Array.from(new Set(
+    (body.match(new RegExp('^' + key + ':\\s*(.+)$', 'gm')) || [])
+      .map((line) => line.replace(/^[A-Z]+:\s*/, '').split('|')[0].trim()).filter(Boolean)));
+  const names = register('NAMES');
+  const hoods = register('HOOD');
+  const head = [
+    'A Bay Tribune reporter has filed the article below. From what was published before it, give the history a listener needs to follow it:' +
+      ' what earlier coverage said about these people, places, institutions and storylines, what was promised or left unresolved, and how it led here.',
+    'Published fact only, earliest first, in plain paragraphs under 400 words: no headings, no lists. Do not restate the new article.' +
+      ' Do not invent history, quotes or figures. Cite the source for every statement. Stop when the history ends: no closing offer, no question.',
+    'Headline: ' + reportHeading(report),
+    names.length ? 'People named: ' + names.join(', ') : '',
+    hoods.length ? 'Neighborhoods: ' + hoods.join(', ') : '',
+    'Article:',
+  ].filter(Boolean).join('\n');
+  const room = BACKGROUND_QUESTION_MAX - head.length - 1;
+  return head + '\n' + readerCopy(body).replace(/\s+/g, ' ').trim().slice(0, Math.max(0, room));
+}
+
+function backgroundSource(report, background) {
+  const headline = reportHeading(report);
+  const byline = reporterName(report);
+  const lines = [
+    '# From the Tribune archive: ' + headline,
+    '',
+    'What The Bay Tribune published before today about the people and places in ' +
+      (byline ? byline + '\'s' : 'the') + ' story "' + headline + '". Earlier coverage, not today\'s news.',
+    '',
+    // citation markers and the notebook's closing "Would you like…" offer are not for listening
+    String(background.answer).replace(/\s*\[\d+(?:\s*[-,–]\s*\d+)*\]/g, '')
+      .replace(/\s*\((?:\*[^*)]+\*[\s;,]*)+\)/g, '')
+      .replace(/\n+(?:[*_-]{3,}\s*\n+)?(?:Would you like|Let me know|If you(?:'d| would) like)[^\n]*\s*$/i, '').trim(),
+  ];
+  if ((background.titles || []).length) lines.push('', 'Drawn from: ' + background.titles.join('; ') + '.');
+  return {
+    kind: 'background',
+    label: 'From the archive — ' + headline,
+    text: lines.join('\n'),
+    path: report.relativePath,
+  };
+}
+
+function askCanon(question) {
+  const out = execFileSync('node', [CANON_SEARCH, '--question', question, '--timeout', '180'],
+    { cwd: ROOT, encoding: 'utf-8', timeout: 240 * 1000, maxBuffer: 10 * 1024 * 1024, stdio: ['ignore', 'pipe', 'pipe'] });
+  const result = JSON.parse(out.slice(out.indexOf('{')));
+  const answer = String(result.answer || '').trim();
+  if (!answer) throw new Error('empty answer');
+  const titles = Array.from(new Set((result.sourceExcerpts || []).map((e) => e && e.sourceTitle).filter(Boolean))).slice(0, 8);
+  return { answer, titles };
+}
+
+// Map of article path → { answer, titles }. Three tries per article: the
+// wrapper fails closed when NotebookLM returns an answer with no citation list.
+// 2026-11-09: 2 of 6 articles landed on each of two live runs; the raw answers
+// that failed were on-topic but came back with `citations: {}` (open, plan §9); answers are kept in the run dir so a re-run asks nothing twice.
+function fetchArticleBackgrounds(reports, cacheDir, ask = askCanon, nowFn = Date.now) {
+  const backgrounds = new Map();
+  const startedAt = nowFn();
+  fs.mkdirSync(cacheDir, { recursive: true });
+  for (const report of (reports || []).filter(wantsBackground)) {
+    const question = backgroundQuestion(report);
+    const cacheFile = path.join(cacheDir, sha256Text(question).slice(0, 16) + '.json');
+    if (fs.existsSync(cacheFile)) {
+      try {
+        backgrounds.set(report.relativePath, readJson(cacheFile));
+        continue;
+      } catch (_) { /* unreadable cache: ask again */ }
+    }
+    for (let attempt = 1; attempt <= BACKGROUND_TRIES; attempt++) {
+      if (nowFn() - startedAt > BACKGROUND_BUDGET_MS) {
+        console.log('DAILY BACKGROUND STOPPED (non-blocking): 15-minute budget spent; remaining articles air without it');
+        return backgrounds;
+      }
+      try {
+        const background = ask(question);
+        fs.writeFileSync(cacheFile, JSON.stringify(background, null, 2) + '\n');
+        backgrounds.set(report.relativePath, background);
+        break;
+      } catch (e) {
+        const why = String((e.stderr && String(e.stderr).trim()) || e.message).split('\n').pop().slice(0, 200);
+        console.log('DAILY BACKGROUND ' + (attempt < BACKGROUND_TRIES ? 'RETRY' : 'SKIPPED (non-blocking)') + ': ' +
+          reportHeading(report).slice(0, 80) + ' — ' + why);
+      }
+    }
+  }
+  return backgrounds;
+}
+
 // The printed edition separates its articles with a rule of `=`; each article
 // opens `By <Reporter> | Bay Tribune <Desk>`, most then carry a `#` headline
 // (C114: the wire, P Slayer and UNDOCKED pieces carry none or a `##`). The
@@ -624,7 +740,7 @@ function editionSources(report) {
     const raw = chunk.trim();
     const copy = readerCopy(raw).trim();
     if (copy.split(/\s+/).filter(Boolean).length < 40) continue;
-    const head = raw.match(/^#{1,2}\s+(.+)$/m);
+    const head = copy.match(/^#{1,2}\s+(.+)$/m); // reader copy: the `## INTAKE` register is not a headline
     const by = raw.match(/^By\s+(.+?)\s*\|\s*(.+)$/m);
     const label = by
       ? by[1].trim() + ': ' + (head ? head[1].trim() : by[2].trim())
@@ -722,6 +838,8 @@ function buildDailySources(input) {
       continue;
     }
     drafts.push(articleSource(report));
+    const background = input.backgrounds && input.backgrounds.get(report.relativePath);
+    if (background) drafts.push(backgroundSource(report, background));
   }
   drafts.push(...reflectionSources(input.citizenDigest && input.citizenDigest.citizens));
   if (input.firstMorning) drafts.push(...worldRecordSources(input.worldSummary, input.cycle));
@@ -900,7 +1018,7 @@ function writeDailySources(sourceDir, sources) {
   for (const source of sources) fs.writeFileSync(path.join(sourceDir, source.name), source.text);
 }
 
-function ensureDailySources(notebookId, sources, sourceDir, existingSources, previousSources) {
+function ensureDailySources(notebookId, sources, sourceDir, existingSources, previousSources, add = addSource) {
   const landed = [];
   for (const source of sources) {
     const file = path.join(sourceDir, source.name);
@@ -917,10 +1035,13 @@ function ensureDailySources(notebookId, sources, sourceDir, existingSources, pre
       landed.push(Object.assign(entry, { id: reused, reused: true }));
       continue;
     }
-    try {
-      landed.push(Object.assign(entry, { id: addSource(notebookId, file, source.title), reused: false }));
-    } catch (e) {
-      console.log('DAILY SOURCE SKIPPED (non-blocking): ' + e.message);
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        landed.push(Object.assign(entry, { id: add(notebookId, file, source.title), reused: false }));
+        break;
+      } catch (e) {
+        console.log('DAILY SOURCE ' + (attempt < 2 ? 'RETRY' : 'SKIPPED (non-blocking)') + ': ' + e.message);
+      }
     }
   }
   return landed;
@@ -1053,6 +1174,7 @@ async function createOpsReport(config, cycle, sourceIds, runDir, manifest, manif
 function dailyAudioFocus() {
   return DAILY_NEWS_IDENTITY +
     ' Take the stories one at a time, each credited to its reporter, then what citizens wrote today, each by name.' +
+    ' A source titled "From the archive" is the earlier published history of the story it names: use it for depth, never as today\'s news.' +
     ' The sources are the only truth about this Oakland; use no outside knowledge of any other Oakland.';
 }
 
@@ -1186,8 +1308,10 @@ async function run(argv) {
 
   if (!args.force && !args.dryRun && !args.resumeLatestAudio &&
       isCompletedManifest(previousManifest)) {
+    // Delivered is done: the local audio is deleted after the Drive drop, so
+    // its absence is not a reason to render and send the same show again.
     const priorAudioPath = path.join(ROOT, previousManifest.audioPath);
-    if (fs.existsSync(priorAudioPath) && fs.statSync(priorAudioPath).size > 0) {
+    {
       console.log(
         'NotebookLM daily news unchanged and already complete for C' + cycle +
         ' (' + pack.hash.slice(0, 12) + '); no-op'
@@ -1243,13 +1367,14 @@ async function run(argv) {
 
   // pipeline.108: what the hosts get — one small source per article, per
   // neighborhood of reflections, and (first morning) per world-record section.
-  const dailySources = buildDailySources({
+  const dailyInput = {
     cycle,
     reports: newsroom.reports,
     citizenDigest,
     worldSummary,
     firstMorning: newsroom.firstMorning === true,
-  });
+  };
+  let dailySources = buildDailySources(dailyInput);
   const sourceDir = path.join(runDir, 'sources');
   writeDailySources(sourceDir, dailySources);
   const kindCounts = {};
@@ -1276,11 +1401,10 @@ async function run(argv) {
 
   if (args.resumeLatestAudio) {
     const audioPath = path.join(runDir, 'godworld_daily_c' + cycle + '.m4a');
-    const downloaded = nlm([
-      'download', 'audio', config.newsroomNotebookId,
-      '--output', audioPath,
-      '--no-progress',
-    ], { timeoutMs: 300 * 1000 });
+    // This run dir's own render when its manifest recorded one; else the notebook's latest.
+    const downloaded = nlm(['download', 'audio', config.newsroomNotebookId]
+      .concat(manifest.audioArtifactId ? ['--id', manifest.audioArtifactId] : [])
+      .concat(['--output', audioPath, '--no-progress']), { timeoutMs: 300 * 1000 });
     if (!downloaded.ok || !fs.existsSync(audioPath) || fs.statSync(audioPath).size === 0) {
       throw new Error('latest completed audio could not be downloaded: ' + downloaded.out.slice(0, 400));
     }
@@ -1307,6 +1431,13 @@ async function run(argv) {
     throw new Error('nothing to air for Cycle ' + cycle +
       ': no article, no reflection and no first-morning record in the window');
   }
+  const backgrounds = fetchArticleBackgrounds(newsroom.reports, path.join(runDir, 'background'));
+  if (backgrounds.size) {
+    dailySources = buildDailySources(Object.assign({}, dailyInput, { backgrounds }));
+    writeDailySources(sourceDir, dailySources);
+  }
+  console.log('Daily background from the canon notebook: ' + backgrounds.size + ' of ' +
+    newsroom.reports.filter(wantsBackground).length + ' article(s)');
   const list = nlm(['source', 'list', config.newsroomNotebookId, '--json']);
   if (!list.ok) throw new Error('working-notebook source list failed: ' + list.out.slice(0, 400));
   const existingSources = parseJsonOutput(list.out, 'working-notebook source list');
@@ -1428,13 +1559,15 @@ async function run(argv) {
   // Ops report after the listening drop. Studio `report create` + 30×30s
   // download poll is the 15-minute skip — it must not delay audio.
   let opsReportPath = null;
+  let gateDeskId = null;
   try {
     const opsSourceIds = sourceIds.slice();
     const gateDesk = buildGateDeskFile(cycle, newsroom.reports);
     if (gateDesk) {
       const gateDeskPath = path.join(runDir, 'gate-desk-file.md');
       fs.writeFileSync(gateDeskPath, gateDesk);
-      opsSourceIds.push(addSource(config.newsroomNotebookId, gateDeskPath, dailySourceTitle(cycle, 'gate desk file')));
+      gateDeskId = addSource(config.newsroomNotebookId, gateDeskPath, dailySourceTitle(cycle, 'gate desk file'));
+      opsSourceIds.push(gateDeskId);
     }
     opsReportPath = await createOpsReport(config, cycle, opsSourceIds, runDir, manifest, manifestPath);
     console.log('Daily ops report: ' + path.relative(ROOT, opsReportPath));
@@ -1445,6 +1578,13 @@ async function run(argv) {
   } catch (e) {
     console.log('DAILY OPS REPORT SKIPPED (non-blocking): ' + e.message +
       ' — Studio report create/download poll is 30×30s (15 min) after nlm report create');
+  } finally {
+    // Held drafts never stay in the news notebook overnight: tomorrow's prune
+    // is non-blocking, and a source left here is in reach of tomorrow's hosts.
+    if (gateDeskId) {
+      const del = nlm(['source', 'delete', gateDeskId, '--confirm'], { timeoutMs: 300 * 1000 });
+      if (!del.ok) console.log('GATE DESK FILE NOT REMOVED: ' + del.out.slice(0, 200));
+    }
   }
 
   console.log('NotebookLM daily news complete for C' + cycle);
@@ -1493,6 +1633,11 @@ module.exports = {
   editionSources,
   airedReportTimes,
   reusableSourceId,
+  ensureDailySources,
+  wantsBackground,
+  backgroundQuestion,
+  backgroundSource,
+  fetchArticleBackgrounds,
   parseJsonOutput,
   queryAnswer,
   renderResearchBrief,

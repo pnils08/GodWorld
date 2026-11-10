@@ -23,11 +23,26 @@ Measured before the change (`scripts/notebooklmDailyNews.js` v1.9):
 1. **One source per article.** Every STAGED / UNGATED_SAMPLE article in the window is uploaded to the working notebook as its own source, titled `The Bay Tribune Daily C<N> — <Reporter>: <headline>`, body = byline + `readerCopy`. Edition day: `editions/cycle_pulse_c<N>.txt` is split on its `====` rules, one source per article; the Civis journal and the UNDOCKED digest are each a source.
 2. **Reflections as sources.** `buildCitizenWeekDigest.buildDigest({daily:true})` also returns every reflection in the 24 h window grouped by citizen (uncapped). The daily run writes one source per neighborhood: every citizen who wrote, by name, every reflection. A reporter's `filed:` / `graded:` rows are newsroom record, not a citizen's words, and stay out.
 3. **World report only when it is new.** First morning of a Cycle: the world summary is split by `##` section, one source each, Sports cut to the current Cycle's `### C<N>` block. Every other day: no world report.
-4. **Out of the audio sources:** the rulebook (no longer uploaded; `config/audio_direction_daily.md` deleted), the canon-notebook dossier (the continuity query is no longer run), reporter chase notes and assignment quotes, gate-flagged drafts (builder ruling 2026-10-17: not news).
+4. **Out of the audio sources:** the rulebook (no longer uploaded; `config/audio_direction_daily.md` deleted), the canon-notebook dossier (the two-edition continuity block; replaced by point 9), reporter chase notes and assignment quotes, gate-flagged drafts (builder ruling 2026-10-17: not news).
 5. **Focus** is one short instruction: stories by reporter, citizens by name, sources are the only truth about this Oakland.
 6. **Airs once.** A piece already carried by a delivered show on an earlier day (path in that manifest, file not modified since) is not carried again; a piece no delivered show carried stays eligible for 72 h (`UNAIRED_CARRY_HOURS`), so a failed morning does not lose its articles. With that in place the Cycle filter admits the previous Cycle's pieces still inside the window, so a Sunday-afternoon filing airs Monday.
 7. **Ops report** (non-blocking, after the audio): flagged drafts + gate findings go up as one `gate desk file` source only after the audio is created, since `--source-ids` is a hint.
 8. **Manifest:** `sources: [{kind,title,hash,id,file,path}]` replaces `boundedSource*` / `audioDirectionSourceId`. Re-run in the same run dir reuses a source when title+hash match and the id is still in the notebook. One failed upload is logged and skipped; the run fails only when no source lands. Prune pattern unchanged (`The Bay Tribune Daily C<N> — ` / old guide titles), so hand-added sources stay.
+
+9. **Deep canon per story (builder 11-09 "Yes").** Each staged/sample article that is not lore asks the permanent notebook one question through `scripts/notebooklmCanonSearch.js` (whole live notebook; its log shows 30–65 s a question, 3 in 10 uncited answers that pass on retry): the published history of the people, places and storylines in the piece, under 400 words. The answer is a `From the archive — <headline>` source placed beside its article. Three tries, 15-minute total budget, non-blocking, cached in `background/` in the run dir. **Open:** on both live runs of 2026-11-09 only 2 of 6 articles got background. The wrapper rejects an answer with no citation list; the rejected raw answers were on-topic (cycle-by-cycle history, source titles named in prose) but NotebookLM returned `citations: {}` and `sources_used: []`, and a repeat of the same question returned the same uncited answer. Wording changes (ask for citations; drop the format limits) did not move it in 4–6 tries each. Not loosened: the wrapper is fail-closed by rule. Read the 08:00 log line `Daily background from the canon notebook: N of M`.
+
+## Review
+
+Codex diff review of `ae8d72065`: [[../for-claude-review/2026-11-09-codex-pipeline108-diff-review]] — HOLD, six findings, each checked against the code and folded:
+
+| # | Finding | Fold |
+|---|---|---|
+| F1 | A partial upload marked unheard articles aired | Aired = v2.0 manifest `sources` of kind `article` with an id; upload retried once |
+| F2 | Gate desk file could stay in the news notebook if next day's prune fails | Deleted when the ops step ends (`finally`) |
+| F3 | Resume delivered the notebook's latest audio unpinned (predates this job) | Pins `manifest.audioArtifactId` when recorded; a resumed manifest with no `sources` marks nothing aired. Not folded: verifying an unrecorded render's source set |
+| F4 | Same-run-dir re-run delivered twice (predates this job) | A delivered manifest is a no-op without its local audio |
+| F5 | Headline-less edition pieces titled `INTAKE` | Label read from reader copy |
+| F6 | Reflections clipped at 2,000 chars | Unclipped |
 
 ## Tasks
 
@@ -37,11 +52,13 @@ Measured before the change (`scripts/notebooklmDailyNews.js` v1.9):
 | 2 | `buildCitizenWeekDigest.js`: return `citizens` (all reflections in window) | done |
 | 3 | `notebooklmDailyNews.js`: `buildDailySources`, per-source upload, focus, airs-once, prior-Cycle carry, ops source, manifest | done |
 | 4 | `notebooklmDailyNews.test.js` updated, green | done |
-| 5 | `--dry-run`, then live `--no-audio --no-deliver` (real uploads, no audio quota, no Discord) | open |
+| 5 | `--dry-run`, then live `--no-audio --no-deliver` (real uploads, no audio quota, no Discord) | done — 23/23 in, 2 stale pruned, list read back |
 | 6 | `docs/reference/NotebookLM.md`: two-notebooks row, daily steps, Change log | done |
+| 6b | Canon background per article + codex fold; tests green; live `--no-audio --no-deliver` | done |
 | 7 | Read the Tue 2026-11-10 08:00 show: the five C115 articles of 11-09 evening each heard by reporter; reflections by name | open |
 
 ## Not in this job
 
 - The ops report has not rendered in 15 minutes on any recent morning (log: `DAILY OPS REPORT SKIPPED`). Left as is; own row if wanted.
 - Daily router (format/length) untouched.
+- **pipeline.109 (builder 11-09: "sounds like a good idea").** Nothing at boot or in the row tools reads what the crons say they lacked. Verified 2026-11-09: a write wake's grade (`gradeRecord` in `output/cron-compare/*.wake.json`, e.g. `graded: 4/4 — nothing fell short`; 1 of 5 C115 wakes noted a shortfall) goes to the reporter's own page; gate findings go to the daily ops report, which times out every morning; the Civis journal (`output/civis-journal/`) goes to Varek's page, Discord with the Pulse, the daily news once, and Mags's disk search; journals exist for C110–C112 and C115, none for C113/C114, cause unread. The cycle gap log is the only channel that feeds rows, hand-written by the run-cycle session. Job: one daily step that gathers shortfalls, gate findings and the journal's audit points into one short list, printed by the SessionStart hook beside the review inbox. No agent files rows; rows stay on the builder's word.

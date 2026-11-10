@@ -149,7 +149,7 @@ async function buildDigest(options) {
       affect: String(r[ri.affect] || ''),
       cycle: ri.cycle >= 0 ? Number(r[ri.cycle]) : null,
       text,
-      full: clip(r[ri.text], 2000),
+      full: String(r[ri.text] || '').replace(/\s+/g, ' ').trim(),
     });
   }
 

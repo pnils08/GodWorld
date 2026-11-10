@@ -24,6 +24,11 @@ const {
   editionSources,
   airedReportTimes,
   reusableSourceId,
+  ensureDailySources,
+  wantsBackground,
+  backgroundQuestion,
+  backgroundSource,
+  fetchArticleBackgrounds,
   parseJsonOutput,
   queryAnswer,
   renderResearchBrief,
@@ -395,6 +400,83 @@ const syntheticDigest = {
   assert.deepStrictEqual(monday.map((x) => x.kind), ['reflections', 'reflections', 'world', 'world']);
 }
 
+// Deep canon per story: each article asks the canon notebook once; the answer
+// rides beside its article; lore, held drafts and the edition ask nothing; a
+// failed answer is retried once then skipped; a re-run asks nothing twice.
+{
+  const article = {
+    classification: 'STAGED', byline: 'Synthetic Reporter',
+    file: 'civic_c999_synthetic-reporter_packet-v2_x.staged.md',
+    relativePath: 'output/cron-compare/staged/civic_c999_synthetic-reporter_packet-v2_x.staged.md',
+    body: '# Synthetic headline\n\n' + Array(2000).fill('prose').join(' ') + '\n\n## INTAKE\nNAMES: Synthetic One | subject\nNAMES: Synthetic One | quoted-source\nNAMES: Synthetic Two | mentioned\nHOOD: Synthville\nCLAIM: a synthetic claim | cite',
+  };
+  const second = Object.assign({}, article, { relativePath: 'second.staged.md', file: 'civic_c999_second_packet-v2_x.staged.md', body: '# Second headline\n\nSecond body.' });
+  const lore = Object.assign({}, article, { file: 'lore_c999_someone-deep-dive.staged.md', relativePath: 'lore.staged.md' });
+  const held = Object.assign({}, article, { classification: 'FLAGGED', relativePath: 'held.md' });
+  const edition = { classification: 'PUBLISHED_EDITION', file: 'cycle_pulse_c999.txt', relativePath: 'edition.txt', body: 'x' };
+  assert.deepStrictEqual([article, lore, held, edition].map(wantsBackground), [true, false, false, false]);
+  const question = backgroundQuestion(article);
+  assert(question.length <= 3900, 'the canon search refuses a question over 4000 characters');
+  assert(question.includes('Headline: Synthetic headline'));
+  assert(question.includes('People named: Synthetic One, Synthetic Two'));
+  assert(question.includes('Neighborhoods: Synthville'));
+  assert(!question.includes('a synthetic claim'), 'the register itself is not sent');
+  const cacheDir = fs.mkdtempSync(path.join(os.tmpdir(), 'nlm-daily-background-'));
+  const asked = [];
+  const ask = (q) => {
+    asked.push(q);
+    if (q.includes('Second headline')) throw new Error('synthetic citation failure');
+    return { answer: 'Earlier, a synthetic thing happened [1]. Then another (*Synthetic Edition* [2, 3–5]; *Other*).\n\n***\n\nWould you like a synthetic follow-up?', titles: ['Synthetic Edition'] };
+  };
+  const got = fetchArticleBackgrounds([article, second, lore, held, edition], cacheDir, ask);
+  assert.deepStrictEqual(Array.from(got.keys()), [article.relativePath]);
+  assert.strictEqual(asked.length, 4, 'one ask for the first article, three for the failing one, none for lore/held/edition');
+  fetchArticleBackgrounds([article], cacheDir, () => { throw new Error('must come from the run dir'); });
+  let clock = 0;
+  assert.strictEqual(fetchArticleBackgrounds([second], cacheDir, ask, () => (clock += 16 * 60 * 1000)).size, 0, 'the budget stops the asking');
+  assert.strictEqual(asked.length, 4);
+  fs.rmSync(cacheDir, { recursive: true, force: true });
+  const source = backgroundSource(article, got.get(article.relativePath));
+  assert.strictEqual(source.kind, 'background');
+  assert(source.text.startsWith('# From the Tribune archive: Synthetic headline'));
+  assert(source.text.includes('Earlier, a synthetic thing happened. Then another.'));
+  assert(!source.text.includes('Would you like') && !source.text.includes('[1]') && !source.text.includes('***'));
+  assert(source.text.includes('Drawn from: Synthetic Edition.'));
+  assert(source.text.includes('Earlier coverage, not today\'s news.'));
+  const built = buildDailySources({ cycle: 999, reports: [article, second], backgrounds: got });
+  assert.deepStrictEqual(built.map((x) => x.kind), ['article', 'background', 'article']);
+  assert.strictEqual(built[1].title, 'The Bay Tribune Daily C999 — From the archive — Synthetic headline');
+  assert(dailyAudioFocus().includes('From the archive'));
+}
+
+// One failed upload is retried once, then skipped; the manifest records only
+// what landed, which is what the airs-once rule reads the next day.
+{
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'nlm-daily-upload-'));
+  const sources = buildDailySources({ cycle: 999, reports: [
+    { classification: 'STAGED', relativePath: 'a.staged.md', body: '# Lands\n\nBody.' },
+    { classification: 'STAGED', relativePath: 'b.staged.md', body: '# Fails\n\nBody.' },
+    { classification: 'STAGED', relativePath: 'c.staged.md', body: '# Lands on retry\n\nBody.' },
+  ] });
+  const tries = {};
+  const add = (notebookId, file, title) => {
+    tries[title] = (tries[title] || 0) + 1;
+    if (title.endsWith('Fails') || (title.endsWith('Lands on retry') && tries[title] === 1)) throw new Error('synthetic add failure');
+    return 'id-' + path.basename(file);
+  };
+  const quiet = console.log;
+  console.log = () => {};
+  let landed;
+  try {
+    landed = ensureDailySources('synthetic-notebook', sources, dir, [], undefined, add);
+  } finally {
+    console.log = quiet;
+  }
+  assert.deepStrictEqual(landed.map((entry) => entry.path), ['a.staged.md', 'c.staged.md']);
+  assert.strictEqual(tries['The Bay Tribune Daily C999 — Fails'], 2);
+  fs.rmSync(dir, { recursive: true, force: true });
+}
+
 // A source this run already uploaded is reused only while title, text and the
 // notebook copy all still match.
 {
@@ -461,7 +543,7 @@ const syntheticDigest = {
   assert(dailyAudioFocus().includes('each credited to its reporter'));
   assert(dailyAudioFocus().includes('each by name'));
   assert(!dailyAudioFocus().includes('00_AUDIO_DIRECTION_GUIDE'));
-  assert(dailyAudioFocus().length < 400);
+  assert(dailyAudioFocus().length < 500);
 }
 
 {
@@ -629,6 +711,7 @@ const syntheticDigest = {
     '## INTAKE', 'NAMES: Synthetic Two | mentioned', '',
     '============================================================', '',
     'By Synthetic Columnist | Bay Tribune Sports', '', Array(60).fill('column').join(' '), '',
+    '## INTAKE', 'NAMES: Synthetic Three | mentioned', '',
   ].join('\n');
   const pieces = editionSources({ body: editionFile, relativePath: 'editions/cycle_pulse_c777.txt' });
   assert.deepStrictEqual(pieces.map((x) => x.label), [
@@ -651,9 +734,20 @@ const syntheticDigest = {
   };
   writeManifest('delivered', { driveLink: 'https://example.invalid/x', generatedAt: new Date(now + 3600e3).toISOString(), reports: [{ path: freshRel }] });
   writeManifest('undelivered', { generatedAt: new Date(now + 3600e3).toISOString(), reports: [{ path: 'never/delivered.md' }] });
+  // v2.0 manifests: only an article whose own source landed counts as aired.
+  writeManifest('partial', {
+    driveLink: 'https://example.invalid/y', sourceVersion: '2.0', generatedAt: new Date(now + 3600e3).toISOString(),
+    reports: [{ path: 'landed.md' }, { path: 'upload-failed.md' }, { path: 'held.md' }],
+    sources: [{ kind: 'article', id: 's1', path: 'landed.md' }, { kind: 'background', id: 's2', path: 'upload-failed.md' }, { kind: 'reflections', id: 's3', path: null }],
+  });
+  writeManifest('resumed', {
+    driveLink: 'https://example.invalid/z', sourceVersion: '2.0', generatedAt: new Date(now + 3600e3).toISOString(),
+    reports: [{ path: 'resumed-unproven.md' }],
+  });
   const later = now + 24 * 3600e3;
   const airedMap = airedReportTimes(outDir, later);
-  assert.deepStrictEqual(Array.from(airedMap.keys()), [freshRel]);
+  assert.deepStrictEqual(Array.from(airedMap.keys()).sort(), [freshRel, 'landed.md'].sort(),
+    'a piece whose upload failed, or a resumed show with no source record, has not aired');
   assert.strictEqual(airedReportTimes(outDir, now + 2 * 3600e3).size, 0, 'a same-day manifest does not count: a re-run keeps its sources');
   const prior = path.join(staged, 'culture_c776_someone_packet-v2_x.staged.md');
   const priorOld = path.join(staged, 'civic_c776_someone_packet-v2_x.staged.md');

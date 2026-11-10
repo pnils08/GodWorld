@@ -40,12 +40,26 @@ Why the newsroom was not "the same model as a CLI with the same tools" (read 202
 
 **First run, 2026-11-10 12:18, civic / trevor-shimizu, new instructions:** 932 words, headline "Eight stations rose together on an ordinary weekday, and no single row explains it"; prints the tab name `Transit_Metrics`, an eight-row table of ridership and on-time figures, "the sheet shows the stack but does not weigh it", and closes "what changed in the city that no single station row can name?". **The script removal alone did not change this piece.** Two causes still standing: (1) the angle was chosen at 06:15 under the old ask ("…with no single cause on the record"), and the write follows the angle; (2) what the seat is handed is rows of figures, so rows are what it has to write about. The shell runs the write stage only; it does not yet run angle → report → write.
 
+## The build that is owed (builder 2026-11-10, verbatim)
+
+"Like Jax is literally the accountability journalist, why would they all be written that way? And they have their own persona so how does telling them what to write fit that? And I have PANDA and other sports data systems for them to cover athletes and they get stuck doing what you want them to do, let them decide if what is given is what they want to cover."
+
+Reading: (1) Jax keeps his charter; he is the one accountability seat. Open item B closes: untouched on purpose. (2) No other seat is an accountability or audit seat. The packages show why they read that way: Jax's was the first one built (2026-08-10, codex, "ship ADR-0017 Jax wake package"), and Carmen, P Slayer, Jordan, Kai, Rachel (same day), Luis and Trevor (08-12) and the rest were made from the same template. (3) A reporter is its persona plus its memory. The angle stage shows the reporter what the cycle holds and what it can look up (canon search, sheet read, player dossiers / PANDA / TrueSource, citizen pages), and the reporter decides what, if anything in it, is its story. Nothing is assigned.
+
+Order of work, each step run in the test shell and the piece read before anything goes live:
+
+| # | Step |
+|---|---|
+| 1 | Test shell runs a seat's whole day: angle → report → write (today it runs write only) |
+| 2 | One seat's angle stage: persona + memory + "here is the cycle" + its lookups; no assignment, no hook, no approach line; it picks or passes |
+| 3 | Read that piece with the builder. Then seat by seat |
+
 ## Open
 
 | # | Item |
 |---|---|
 | A | **Luis Navarro** still takes the audit anomalies: his seat is built on them end to end (`INVESTIGATION-BRIEF-1`, `silenceClock`, the slice tests). Benching him broke the packet-quote-pool test, so he is active and unchanged. |
-| B | **Jax Caldera** (freelance-firebrand) is an engine auditor by charter ("accountability pressure when the simulated record and the public story do not line up", `TWO_SIDED_DATA_AUDIT`, stink labels). Builder-authored seat; untouched pending his word. |
+| B | closed 2026-11-10: Jax is the accountability journalist by the builder's design and stays as he is. |
 | C | Civic assignments are still handed down (one top-scored tracker row per seat) with `HOOK:` / `APPROACH:` lines. "They can see what's active and write about whatever they want" means the seat sees the cycle and picks. Not built. |
 | D | Ines's C114 piece put an A's question to three citizens whose pages had nothing to do with it. The angle stage wrote those questions itself; no code told it to. Not changed. |
 | E | `articleContract` and the reward-loop fields are now dead weight in the package file and the wake records. Left in place; the 2026-10-15 "every journalist is graded" ruling is superseded only as far as the contract score. |

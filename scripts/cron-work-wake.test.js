@@ -141,6 +141,14 @@ console.log('=== auto packs (pipeline.110) ===');
   ok(cb && /Test Systems/.test(cb) && /\$60\.3M/.test(cb) && !/Someone Else/.test(cb), 'own-company: only the rows that name him, in money he would say', cb);
 })();
 
+(function () {
+  // pipeline.110 — a line the engine wrote because the feed named him is his week, not texture
+  var lifeTailOf = require('../lib/wakePerception').lifeTailOf;
+  var lines = ['Y3C9 — [Sports-Moved] spent the night on the phone', 'Y3C9 — [Reputation] got recognized twice', 'Y3C10 — [Daily] a', 'Y3C10 — [Neighborhood] b', 'Y3C10 — [Lifestyle] c', 'Y3C11 — [Daily] d', 'Y3C11 — [Background] e', 'Y3C11 — [Personal] f'];
+  var tail = lifeTailOf(lines, []);
+  ok(/Sports-Moved/.test(tail) && /Reputation/.test(tail) && tail.split('\n').length === 5, 'life tail: feed-named lines hold their slots against newer colour');
+})();
+
 console.log('=== selection ===');
 (function () {
   var pkgs = {

@@ -40,7 +40,8 @@ pointers:
 
 - `generateCitizensEvents.js` engine.208 C5 strips every `source:sports` spectator line from a GAME-clock citizen's pool. Built 2026-10-03. Horn's "porch radio" and "Oaks bullpen" lines are stamped Y3C5–Y3C6, before it; across all 58 GAME-clock citizens, the 115 `[Sports]` lines since Y3C8 are player lines (own name on the radio, the drive home after the win), none a fan's.
 - The wake frame was the generic part: every citizen told "You are an ordinary person" and fed neighbourhood texture. Fixed here.
-- Varek carries no flag (UNI no, MED no, CIV no) and the ENGINE clock, so the engine gives him a resident's week ("navigated the stroller traffic on College Avenue", a Heritage storefront named Varek Systems). What his row should carry is the builder's call.
+- Varek (builder 2026-11-10): "Elias is not one of the flags or engine modes outside of the general population, however he is on the heritage ledger. So the idea of his generic events tend to be less probable." He is general population by design; nothing about his row is wrong.
+- **What the generic events are for (builder 2026-11-10):** "the generic events are meant to be color that hits citizens randomly to move dials but really the genesis was to give a wake something to build on. So the generic color events start to lose value if 'catered' events are wired that ready to a citizens ledger line, and if wakes don't benefit from an abundance of vague events. Keep in mind there are a lot of crons that don't wake so 'random life events' may be all they get and the lottery of those build out the dials." Data, C115: 2,517 life lines on 1,004 citizens — Neighborhood 474, Civic Perception 379, Daily 315, Personal 220; 31 lines written because the feed named the citizen. The engine's colour stays as it is. On the wake side the feed-named lines (Sports-Played / -PlayedWin / -Injured / -Moved, Reputation) now hold a salient slot in the five-line life tail instead of competing with colour.
 - The ambient daily-texture layer goes to every tier and clock by an earlier decision (engine.38 A1, S277): Horn's "compared rent notes with a neighbor" and the Mayor's "counted cranes from the bus stop" come from it.
 
 ## Tasks
@@ -49,11 +50,11 @@ pointers:
 |---|------|-------|--------|
 | 1 | `lib/wakePerception.js` `loadOwnFeedLines` / `feedNamedKeys`: a citizen's own public feed rows of the Cycle, note whole, his stat segment, who he was named with; local beats only; private `question` rows never render | es | done |
 | 2 | `cron-work-wake.js`: player node uses Task 1 (no stale-row fallback); new nodes `office-week` (the holder's office-position docs of the Cycle, off the page) and `own-company` (Business_Ledger rows naming him); any pack whose holder the feed names carries his feed lines | es | done |
-| 3 | `cron-work-wake.js` `autoPackages`: packs with no registry entry — every agented office and project in the office map (Thursday, once a Cycle), every club citizen the feed names (Tue/Thu, once a Cycle); identity from the ledger role, the office agent's own IDENTITY file, the citizen's authored voice, his dials. Nobody carved out (the Paulson exclusion was an assumption, removed on the builder's word) | es | done — OFF pending cost approval |
-| 4 | Registry entry `founder-elias-varek` (`own-company`, Tue/Thu) | es | done — `active:false` pending cost approval |
+| 3 | `cron-work-wake.js` `autoPackages`: packs with no registry entry — every agented office and project in the office map (Thursday, once a Cycle), every club citizen the feed names (Tue/Thu, once a Cycle); identity from the ledger role, the office agent's own IDENTITY file, the citizen's authored voice, his dials. Nobody carved out (the Paulson exclusion was an assumption, removed on the builder's word) | es | done — on |
+| 4 | Registry entry `founder-elias-varek` (`own-company`, Tue/Thu) | es | done — active |
 | 5 | Daily wake and interviews: `stationLine` replaces "ordinary person" for citizens of station; own feed rows reach both; an interviewed officeholder gets the office's last six positions; office statements no longer returned as "private reflections" | es | done |
 | 6 | Tests (`cron-work-wake.test.js` 50, `wakePerception.test.js` 201); dry runs through the real scripts for Varek, the Mayor, Vinnie Keane, and the daily wake on the Mayor | es | done |
-| 7 | Read the first live runs after the builder approves the cost — log `logs/cron-work-wake.log`, pages, Reflection_Intake rows | es | blocked on approval |
+| 7 | Read the first live runs: Tue 2026-11-10 20:18 (club citizens, Varek), Thu 2026-11-12 20:18 (offices) — log `logs/cron-work-wake.log`, pages, Reflection_Intake rows | es | not started |
 
 ## Acceptance
 
@@ -63,10 +64,10 @@ pointers:
 
 ## Open
 
-- **Varek's flags and the ambient layer** — see the corrected cause above. No engine row is proposed; the builder decides.
+- **A feed line the engine routed by kind, not by what happened.** C115: the feed's `roster-move` row is Vinnie Keane's retirement ("Keane is not leaving Oakland"); the engine's Sports-Moved line on him reads "spent the night on the phone working out where the family would land" — the trade pool. Engine output stands; recorded for the builder.
 - **Ledger value.** Civis Systems' `Growth_Rate` reads `516%` beside a revenue move of $60.2M → $60.3M; a third company `Varek Systems` (Tech, West Oakland, 45 people) names him as well — the Heritage generator's storefront. Both are engine output and are shown to him as they stand.
 - **Unagented offices (21).** No agent, no office record, no pack. The EMS director and medical examiner have registry packs; the rest wake by lottery only.
-- **Cost — NOT approved (builder 2026-11-10: "Adding 25-30 calls is not approved without pricing").** Auto packs and Varek's pack are off (`--auto` / `WORK_WAKE_AUTO=1`, `active:false`). Measured: a wake is ~700–1,500 prompt tokens and ~130–200 reply tokens on `deepseek/deepseek-v4-flash-0731` ($0.043 / $0.30 per million, OpenRouter list 2026-11-10) plus one classifier call on `anthropic/claude-haiku-5.5` (~1,000 in, ~150 out; $0.10 / $0.50 per million) — about $0.0003 a wake, under one cent a Cycle for ~30.
+- **Cost — priced, then approved (builder 2026-11-10: "Adding 25-30 calls is not approved without pricing"; after the price: "Ok add your wakes").** Auto packs on by default (`--no-auto` / `WORK_WAKE_AUTO=0` holds them), Varek's pack active. At C115: 14 club citizens Tuesday, 12 offices Thursday, Varek twice — 28 wakes. Measured: a wake is ~700–1,500 prompt tokens and ~130–200 reply tokens on `deepseek/deepseek-v4-flash-0731` ($0.043 / $0.30 per million, OpenRouter list 2026-11-10) plus one classifier call on `anthropic/claude-haiku-5.5` (~1,000 in, ~150 out; $0.10 / $0.50 per million) — about $0.0003 a wake, under one cent a Cycle for ~30.
 
 ## Reviews reconciled
 
@@ -76,5 +77,6 @@ pointers:
 
 ## Changelog
 
+- 2026-11-10 (engine-sheet) — Builder approved the wakes on the measured price; auto packs on, Varek's pack active. His model of the generic events recorded verbatim; feed-named life lines made salient in the wake's life tail (test added).
 - 2026-11-10 (engine-sheet) — Builder corrected three things: Paulson is not excluded (carve-out removed); the engine does gate by flag and clock (cause section rewritten from the code — the Horn example was pre-gate history); the added calls are not approved without pricing (new wakes off, price measured and recorded under Open).
 - 2026-11-10 (engine-sheet) — Opened on the builder's word. Tasks 1–6 built and dry-run through the real entry points; Task 7 waits on the Tue/Thu crons.

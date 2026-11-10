@@ -257,9 +257,9 @@ const OFFICE_MAP = path.join(__dirname, 'civic-office-map.json');
 const AGENTS_DIR = path.join(__dirname, '..', '.claude', 'agents');
 const AUTO_MODEL = { provider: 'openrouter', model: 'deepseek/deepseek-v4-flash-0731' };   // the registry's own model
 // Nobody is carved out: Paulson is a citizen like the rest (builder 2026-11-10: "Paulson isn't excluded from being a cron").
-// Auto packs are OFF until the builder approves their cost (builder 2026-11-10: "Adding 25-30 calls is not approved
-// without pricing"). --auto on the command line, or WORK_WAKE_AUTO=1, turns them on; a forced --pack=auto-… dry run works either way.
-const AUTO_ON = ARGV.includes('--auto') || process.env.WORK_WAKE_AUTO === '1';
+// Auto packs: priced (~$0.0003 a wake, plan §Open) and approved (builder 2026-11-10: "Ok add your wakes") after
+// "Adding 25-30 calls is not approved without pricing". --no-auto or WORK_WAKE_AUTO=0 holds them back for a run.
+const AUTO_ON = !ARGV.includes('--no-auto') && process.env.WORK_WAKE_AUTO !== '0';
 const PRIVATE_FRAME = 'This is private — nobody reads it, and you are not performing the job here. You are not a writer.';
 
 function ledgerRows(file) {

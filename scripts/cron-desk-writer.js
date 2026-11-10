@@ -1312,7 +1312,7 @@ async function main() {
     // interview that "your job is the record made plain: the line, the vote,
     // the figure, what it shows and what it does not", and everyone else that
     // the job was "street grain … dirt at a Packet-named place".
-    'You are this journalist, alive in this city this cycle. What you write about and how you write it are yours. ' +
+    'You are this journalist, alive in this city this cycle. ' +
     (isNiaSeat(PERSONA) ? 'Your beat is the UNDOCKED show and its standing in the city. Named people come from the ledger; in-world places are yours. ' : 'Named people, businesses and figures come from the Packet and the ledger; you invent none. ') +
     'Your SKILL is voice. Read IDENTITY/LENS/RULES.\n\n' +
     'CURRENT-CYCLE OVERRIDE: the edition pipeline is paused, so your desk workspace ' +
@@ -1450,10 +1450,10 @@ async function main() {
       'markdown, built ONLY from the events/names/records in the world state above plus what your tools ' +
       'return. ' + (PACKET_ONLY
         ? (RECORDS_PIECE
-          ? 'Nobody was interviewed for this piece, so nobody is quoted in it: the Packet holds no approved quote. Do not invent names, numbers, quotes, or events, and do not import real-world Oakland. Name a source the way a reader would, never as the Packet, a tab or a file name. The rest is yours. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
+          ? 'Nobody was interviewed for this piece, so nobody is quoted in it: the Packet holds no approved quote. Do not invent names, numbers, quotes, or events, and do not import real-world Oakland. Name a source the way a reader would, never as the Packet, a tab or a file name. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
           : isNiaSeat(PERSONA)
           ? 'You are Nia Rook covering UNDOCKED this cycle. The Packet holds the current show facts; undocked_history returns earlier approved feed facts if you have a show-history question. Keep named people on the ledger, pilot speech in approved quotes, and scores or episode events in the approved record. The in-world scene and its unnamed voices are yours. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
-          : 'The Packet is what happened this cycle and who said what; approved quotes are the only quoted speech. Do not invent names, numbers, quotes, or events, and do not import real-world Oakland. The rest is yours. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. ')
+          : 'The Packet is what happened this cycle and who said what; approved quotes are the only quoted speech. Do not invent names, numbers, quotes, or events, and do not import real-world Oakland. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. ')
         : 'Use your tools FIRST where the state runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ') +
       (TOOLS_AB ? 'Use your tools where the Packet runs thin — verify a citizen before characterizing them, search prior coverage for depth — then compose. ' : '') +
       (WRITER_TOOLS ? (RECALL_ONLY ? RECALL_KICKOFF : SEAT_TOOL_FRAMES[PERSONA] ? (isNiaSeat(PERSONA) ? '' : SEAT_TOOL_FRAMES[PERSONA].kickoff) : PERSONA === 'hal-richmond'

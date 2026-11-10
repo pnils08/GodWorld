@@ -2048,7 +2048,7 @@ async function runAngle(assign) {
         // civic seat to "state the one record-backed claim, identify what remains
         // unestablished, and name the next record … to pursue". The reporter is
         // asked what they want to write; only the no-invention line stays.
-        '\n\nYou are the reporter. What do you want to write this cycle, and which named resident, if any, do you want to hear from? ' +
+        '\n\nWhat is your story this cycle, and who do you want to talk to? ' +
         'Nothing invented: no official action, metric, vote or outcome the material above does not hold.';
     } else if (persona && beatSlice && !beatSlice.empty && story) {
       // pipeline.68 Task 4 — the journalist's own beat slice (legacy free-text ask;

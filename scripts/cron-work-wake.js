@@ -256,8 +256,10 @@ const LEDGER_SNAPSHOT = path.join(__dirname, '..', 'output', 'simulation_ledger_
 const OFFICE_MAP = path.join(__dirname, 'civic-office-map.json');
 const AGENTS_DIR = path.join(__dirname, '..', '.claude', 'agents');
 const AUTO_MODEL = { provider: 'openrouter', model: 'deepseek/deepseek-v4-flash-0731' };   // the registry's own model
-// Mike Paulson speaks for himself: no cron writes his inner life.
-const SELF_SPEAKING = { 'POP-00527': true };
+// Nobody is carved out: Paulson is a citizen like the rest (builder 2026-11-10: "Paulson isn't excluded from being a cron").
+// Auto packs are OFF until the builder approves their cost (builder 2026-11-10: "Adding 25-30 calls is not approved
+// without pricing"). --auto on the command line, or WORK_WAKE_AUTO=1, turns them on; a forced --pack=auto-… dry run works either way.
+const AUTO_ON = ARGV.includes('--auto') || process.env.WORK_WAKE_AUTO === '1';
 const PRIVATE_FRAME = 'This is private — nobody reads it, and you are not performing the job here. You are not a writer.';
 
 function ledgerRows(file) {
@@ -310,7 +312,7 @@ function autoPackages(cycle, packages, opts) {
     const popid = String(of.popid || '').toUpperCase();
     if (!of.agentDir || !/^POP-\d{5}$/.test(popid)) return;
     officePops.add(popid);
-    if (taken.has(popid) || SELF_SPEAKING[popid]) return;
+    if (taken.has(popid)) return;
     const row = byPop[popid] || null;
     const where = of.district && !/citywide/i.test(of.district) ? ', ' + of.district : '';
     add('auto-office-' + of.agentDir, {
@@ -331,7 +333,7 @@ function autoPackages(cycle, packages, opts) {
   const named = o.named || feedNamedKeys(cycle, { beatsDir: o.beatsDir });
   rows.forEach((r) => {
     const popid = String(r.POPID || '').toUpperCase();
-    if (!/^POP-\d{5}$/.test(popid) || taken.has(popid) || officePops.has(popid) || SELF_SPEAKING[popid]) return;
+    if (!/^POP-\d{5}$/.test(popid) || taken.has(popid) || officePops.has(popid)) return;
     // a club's own: on the GAME clock, or carrying a club in his role (a retired legend keeps his, off the clock)
     if (String(r.ClockMode || '').toUpperCase() !== 'GAME' && !/\b(A's|Oaks|Aviators)\b/.test(String(r.RoleType || ''))) return;
     if (!named.has(feedNameKey(r.Name))) return;
@@ -504,7 +506,7 @@ async function main() {
   const sel = forcedAuto ? { picks: [{ key: FORCE_PACK, value: auto[FORCE_PACK] }], note: 'forced', day: dayAbbrev() }
     : selectDue(packages, cycle, state, { forceKey: FORCE_PACK, limit: LIMIT });
   const day = sel.day;
-  const autoDue = FORCE_PACK ? [] : selectAutoDue(auto, cycle, state, day);
+  const autoDue = (FORCE_PACK || !AUTO_ON) ? [] : selectAutoDue(auto, cycle, state, day);
   const picks = sel.picks.concat(Number.isFinite(LIMIT) ? autoDue.slice(0, Math.max(0, LIMIT - sel.picks.length)) : autoDue);
   if (!picks.length) { logLine(`nothing to wake (${sel.note}, cycle=${cycle}, dry=${DRY})`); return; }
   logLine(`work-wake: ${picks.length} pack(s) due (${sel.picks.length} registered, ${picks.length - sel.picks.length} from the ledger and office map; cycle=${cycle}, dry=${DRY})`);

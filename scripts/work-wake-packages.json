@@ -264,7 +264,7 @@
   },
   "founder-elias-varek": {
     "persona": "founder-elias-varek",
-    "active": true,
+    "active": false,
     "popid": "POP-00789",
     "name": "Elias Varek",
     "office": "FOUNDER-CIVIS",

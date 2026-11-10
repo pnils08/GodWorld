@@ -122,17 +122,17 @@ console.log('=== auto packs (pipeline.110) ===');
   var reg = { 'player-other': { persona: 'player-other', active: true, popid: 'POP-99913' } };
   var auto = wake.autoPackages(107, reg, { ledger: ledger, officeMap: map, named: named, agentsDir: agents });
   var keys = Object.keys(auto).sort().join();
-  ok(keys === 'auto-office-civic-office-test,auto-player-POP-99911,auto-player-POP-99912', 'auto packs: the agented office, the named player, the named legend — and nobody else', keys);
-  ok(!auto['auto-player-POP-00527'], 'auto packs: Paulson speaks for himself');
+  ok(keys === 'auto-office-civic-office-test,auto-player-POP-00527,auto-player-POP-99911,auto-player-POP-99912', 'auto packs: the agented office and the named club citizens — not the fan, not the registered player', keys);
+  ok(!!auto['auto-player-POP-00527'], 'auto packs: nobody is carved out — a named GM is a named club citizen');
   var m = auto['auto-office-civic-office-test'];
   ok(m.dataNodes.indexOf('office-week') === 0 && m.dutyDays.join() === 'thu' && /careful builder/.test(m.promptContract.voiceNotes) && /Moves fast/.test(m.promptContract.voiceNotes) && !/public line|POP-99910/.test(m.promptContract.voiceNotes),
     'office pack: its own record, Thursday, who she is and how she decides from her own file');
   ok(/not performing the job/.test(m.promptContract.frame) && !/ordinary person/.test(wake.buildWorkPrompts(m, { identity: 'x.', blocks: ['b'] }, '').system), 'office pack: private frame, never "an ordinary person at work"');
   ok(wake.NODE_BUILDERS['office-week'](Object.assign({}, m, { _officeWeek: ['stated: one', 'datawake: two'] })).indexOf('- datawake: two') > 0 && wake.NODE_BUILDERS['office-week'](m) === null, 'office-week: the prefetched record, or nothing');
   var due = wake.selectAutoDue(auto, 107, { wokenCycle: {} }, 'tue').map(function (p) { return p.key; }).sort().join();
-  ok(due === 'auto-player-POP-99911,auto-player-POP-99912', 'auto due Tuesday: the players; the office waits for Thursday', due);
+  ok(due === 'auto-player-POP-00527,auto-player-POP-99911,auto-player-POP-99912', 'auto due Tuesday: the players; the office waits for Thursday', due);
   var once = wake.selectAutoDue(auto, 107, { wokenCycle: { 'POP-99911:cycle': 107 } }, 'thu').map(function (p) { return p.key; }).sort().join();
-  ok(once === 'auto-office-civic-office-test,auto-player-POP-99912', 'auto packs wake once a Cycle', once);
+  ok(once === 'auto-office-civic-office-test,auto-player-POP-00527,auto-player-POP-99912', 'auto packs wake once a Cycle', once);
   var withFeed = wake.buildWorkPack(Object.assign({}, m, { _officeWeek: ['stated: one'], name: 'Other Player' }), 107, dir);
   ok(withFeed && withFeed.nodes.indexOf('own-feed') !== -1, 'any pack whose holder the feed names this Cycle carries his own feed lines');
   var co = fixtureBeats({ Business_Ledger: [{ BIZ_ID: 'BIZ-1', Name: 'Test Systems', Sector: 'Software', Neighborhood: 'West Oakland', Employee_Count: '41', Annual_Revenue: '60287787', Growth_Rate: '5.1', Key_Personnel: 'POP-99916 Test Founder (founder)' },

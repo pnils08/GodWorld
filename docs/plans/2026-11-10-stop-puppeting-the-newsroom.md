@@ -34,6 +34,12 @@ Read from the code, 2026-11-10:
 
 Why the newsroom was not "the same model as a CLI with the same tools" (read 2026-11-10): 12 of 27 seats write on Grok 4.3 / GPT Luna / Haiku, 14 on Sonnet 5.5, 1 on Opus; 12 seats have no tools and the other 15 are capped at 6 tool calls; each seat is handed one assignment and one typed Packet and writes in a single pass "built ONLY from" it.
 
+## Test shell (builder 11-10: "make a test shell")
+
+`scripts/testReporterWrite.sh <desk> <persona> [cycle]` copies one reporter's stage files and the cycle's slices into `output/test-shell/<stamp>/` and runs the real write stage there with `--no-gate` (`GODWORLD_TEST_COMPARE_DIR`, honored by `cron-desk-run.js`, `cron-desk-writer.js`, `cron-rhea-gate.js`; no sheet row, no page line). One writer call.
+
+**First run, 2026-11-10 12:18, civic / trevor-shimizu, new instructions:** 932 words, headline "Eight stations rose together on an ordinary weekday, and no single row explains it"; prints the tab name `Transit_Metrics`, an eight-row table of ridership and on-time figures, "the sheet shows the stack but does not weigh it", and closes "what changed in the city that no single station row can name?". **The script removal alone did not change this piece.** Two causes still standing: (1) the angle was chosen at 06:15 under the old ask ("…with no single cause on the record"), and the write follows the angle; (2) what the seat is handed is rows of figures, so rows are what it has to write about. The shell runs the write stage only; it does not yet run angle → report → write.
+
 ## Open
 
 | # | Item |

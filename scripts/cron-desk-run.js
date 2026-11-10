@@ -37,7 +37,12 @@ const articleContamination = require('./articleContamination');
 const { centralDate } = require('./centralDate');   // the newsroom's day is the Central date the crontab runs on, not the UTC date
 
 const ROOT = path.join(__dirname, '..');
-const COMPARE = path.join(ROOT, 'output', 'cron-compare');
+// Test shell (scripts/testReporterWrite.sh, builder 2026-11-10: "make a test
+// shell"): GODWORLD_TEST_COMPARE_DIR points the whole run at a scratch copy, so
+// one reporter's write can be run and read without touching the live folder,
+// the sheet or the reporter's page.
+const TEST_SHELL = process.env.GODWORLD_TEST_COMPARE_DIR || null;
+const COMPARE = TEST_SHELL || path.join(ROOT, 'output', 'cron-compare');
 const PUBLISHED = path.join(COMPARE, 'published');
 const FLAGGED = path.join(COMPARE, 'flagged');
 const STAGED = path.join(COMPARE, 'staged');   // Phase 2 probation wall (S332): M–F articles stage here, NOT canon-ingested
@@ -307,6 +312,7 @@ function validateWakeHandoff(angle, packet, expected) {
 // same wake never double-counts. Row is header-mapped, robust to column order.
 // A failed append NEVER blocks article routing — logged, reported in the record.
 async function recordBylineUsage(cycle, byline, context) {
+  if (TEST_SHELL) return { recorded: false, reason: 'test shell — no sheet write' };
   if (!byline || !byline.name) return { recorded: false, reason: 'no byline' };
   try {
     const sheets = require(path.join(ROOT, 'lib', 'sheets'));
@@ -3353,7 +3359,7 @@ async function runWrite(assign) {
 
   // reporter self-record (author-side; persona POPID when set)
   let selfRecord = null;
-  if (byline && pass) {
+  if (byline && pass && !TEST_SHELL) {
     const headline = (() => {
       const first = fs.readFileSync(draftPath, 'utf8').split('\n').find(l => l.trim());
       return String(first || '').replace(/^#+\s*/, '').replace(/[*_`]/g, '').slice(0, 100).trim() || (desk + ' filing c' + cycle);
@@ -3371,7 +3377,7 @@ async function runWrite(assign) {
   // (a flagged piece's shape is still feedback). Same --record-text path as "filed:".
   const contractScore = rewardLoop && (rhea && rhea.contractScore || blockedContractScore) || null;
   let gradeRecord = null;
-  if (rewardLoop && byline && contractScore && Number.isInteger(contractScore.score)) {
+  if (!TEST_SHELL && rewardLoop && byline && contractScore && Number.isInteger(contractScore.score)) {
     const gradeLine = gradedLine(contractScore);
     try {
       execFileSync('node', [path.join(ROOT, 'scripts', 'citizenVoice.js'),
@@ -3558,7 +3564,7 @@ async function runWake() {
 
   // 6. LAYER 5 — reporter records their own filing (page + gated intake, author-side)
   let selfRecord = null;
-  if (byline && pass) {
+  if (byline && pass && !TEST_SHELL) {
     const headline = (() => {
       const first = fs.readFileSync(draftPath, 'utf8').split('\n').find(l => l.trim());
       return String(first || '').replace(/^#+\s*/, '').replace(/[*_`]/g, '').slice(0, 100).trim() || (DESK + ' filing c' + cycle);

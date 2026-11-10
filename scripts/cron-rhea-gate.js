@@ -35,7 +35,7 @@ const {
 const { relevantFaithCanonCorrections } = require('./faithCanonForward');
 
 const ROOT = path.join(__dirname, '..');
-const COMPARE_DIR = path.join(ROOT, 'output', 'cron-compare');
+const COMPARE_DIR = process.env.GODWORLD_TEST_COMPARE_DIR || path.join(ROOT, 'output', 'cron-compare'); // test shell: scripts/testReporterWrite.sh
 const CLAUDE_BIN = process.env.CLAUDE_BIN || 'claude';
 
 function arg(flag, def) {

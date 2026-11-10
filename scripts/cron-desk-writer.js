@@ -49,7 +49,7 @@ const {
 } = require('./priorArcRequirement');
 
 const ROOT = path.join(__dirname, '..');
-const COMPARE_DIR = path.join(ROOT, 'output', 'cron-compare');
+const COMPARE_DIR = process.env.GODWORLD_TEST_COMPARE_DIR || path.join(ROOT, 'output', 'cron-compare'); // test shell: scripts/testReporterWrite.sh
 
 // ---------------------------------------------------------------------------
 // Args

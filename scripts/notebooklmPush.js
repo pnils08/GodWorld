@@ -133,9 +133,8 @@ function sleep(ms) {
 // since the canon search reads the whole live notebook (pipeline.103), material
 // every canon search could cite. It is not uploaded any more (builder 2026-11-10).
 function editionAudioFocus(editionTitle) {
-  return 'The Bay Tribune\'s weekly edition, ' + editionTitle + '.' +
-    ' Take its pieces one at a time, each credited to its reporter, and draw on the earlier editions for the history behind each story.' +
-    ' The sources are the only truth about this Oakland; use no outside knowledge of any other Oakland.';
+  // The show's name only: the daily hosts read a longer focus back on air (2026-11-10).
+  return 'The Bay Tribune\'s weekly edition, ' + editionTitle + '.';
 }
 
 // S429 — find a source that landed without an id in the add output. Matches the

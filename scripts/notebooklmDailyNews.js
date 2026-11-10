@@ -695,19 +695,14 @@ function backgroundQuestion(report) {
 
 function backgroundSource(report, background) {
   const headline = reportHeading(report);
-  const byline = reporterName(report);
   const lines = [
-    '# From the Tribune archive: ' + headline,
-    '',
-    'What The Bay Tribune published before today about the people and places in ' +
-      (byline ? byline + '\'s' : 'the') + ' story "' + headline + '". Earlier coverage, not today\'s news.',
+    '# Earlier in the Tribune: ' + headline,
     '',
     // citation markers and the notebook's closing "Would you like…" offer are not for listening
     String(background.answer).replace(/\s*\[\d+(?:\s*[-,–]\s*\d+)*\]/g, '')
       .replace(/\s*\((?:\*[^*)]+\*[\s;,]*)+\)/g, '')
       .replace(/\n+(?:[*_-]{3,}\s*\n+)?(?:Would you like|Let me know|If you(?:'d| would) like)[^\n]*\s*$/i, '').trim(),
   ];
-  if ((background.titles || []).length) lines.push('', 'Drawn from: ' + background.titles.join('; ') + '.');
   return {
     kind: 'background',
     label: 'From the archive — ' + headline,
@@ -784,7 +779,7 @@ function exchangeSources(root, cutoff, aired) {
     out.push({
       kind: 'exchange',
       label: 'Overheard — ' + who.join(' and '),
-      text: '# ' + who.join(' and ') + ', talking\n\nA conversation between two Oakland citizens, in their own words.\n\n' + talk,
+      text: '# ' + who.join(' and ') + ', talking\n\n' + talk,
       path: rel,
     });
   }
@@ -805,9 +800,7 @@ function reflectionSources(citizens) {
   return Array.from(byHood.keys()).sort().map((hood) => {
     const where = hood || 'Oakland';
     const lines = [
-      '# What people in ' + where + ' wrote today',
-      '',
-      'Written by the citizens themselves, on their own pages, in the last day.',
+      '# ' + where + ', in their own words',
       '',
     ];
     for (const citizen of byHood.get(hood)) {
@@ -1151,10 +1144,10 @@ async function createOpsReport(config, cycle, sourceIds, runDir, manifest, manif
 // and pointed the hosts at a rulebook uploaded as a source; NotebookLM treats
 // a source as material to discuss, and the Customize box as a focus hint.
 function dailyAudioFocus() {
-  return DAILY_NEWS_IDENTITY +
-    ' Take the stories one at a time, each credited to its reporter, then what citizens wrote today, each by name.' +
-    ' A source titled "From the archive" is the earlier published history of the story it names: use it for depth, never as today\'s news.' +
-    ' The sources are the only truth about this Oakland; use no outside knowledge of any other Oakland.';
+  // 2026-11-10: the builder heard the 08:00 show read its instructions back.
+  // Anything said to the hosts about sources, truth or archives is material
+  // they repeat on air; the focus is the show's name and nothing else.
+  return DAILY_NEWS_IDENTITY;
 }
 
 // Returns true (downloaded), 'failed' (NotebookLM marked the render failed —

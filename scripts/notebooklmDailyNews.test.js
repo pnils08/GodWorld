@@ -439,15 +439,13 @@ const syntheticDigest = {
   fs.rmSync(cacheDir, { recursive: true, force: true });
   const source = backgroundSource(article, got.get(article.relativePath));
   assert.strictEqual(source.kind, 'background');
-  assert(source.text.startsWith('# From the Tribune archive: Synthetic headline'));
+  assert(source.text.startsWith('# Earlier in the Tribune: Synthetic headline\n\nEarlier, a synthetic thing happened.'), 'history only: no framing line for the hosts to read out');
   assert(source.text.includes('Earlier, a synthetic thing happened. Then another.'));
   assert(!source.text.includes('Would you like') && !source.text.includes('[1]') && !source.text.includes('***'));
-  assert(source.text.includes('Drawn from: Synthetic Edition.'));
-  assert(source.text.includes('Earlier coverage, not today\'s news.'));
+  assert(!source.text.includes('Drawn from') && !source.text.includes('Synthetic Edition'), 'source file titles stay out');
   const built = buildDailySources({ cycle: 999, reports: [article, second], backgrounds: got });
   assert.deepStrictEqual(built.map((x) => x.kind), ['article', 'background', 'article']);
   assert.strictEqual(built[1].title, 'The Bay Tribune Daily C999 — From the archive — Synthetic headline');
-  assert(dailyAudioFocus().includes('From the archive'));
 }
 
 // One failed upload is retried once, then skipped; the manifest records only
@@ -539,12 +537,9 @@ const syntheticDigest = {
   assert(dailyPrompt(999, false, false, true).includes('first morning of the Cycle'));
   assert(!dailyPrompt(999, false, false).includes('first morning'));
   assert(!prompt.includes('GodWorld Oakland, 2042'));
-  // pipeline.108: one short focus, the same every day; no rulebook source.
-  assert(dailyAudioFocus().startsWith(DAILY_NEWS_IDENTITY));
-  assert(dailyAudioFocus().includes('each credited to its reporter'));
-  assert(dailyAudioFocus().includes('each by name'));
-  assert(!dailyAudioFocus().includes('00_AUDIO_DIRECTION_GUIDE'));
-  assert(dailyAudioFocus().length < 500);
+  // The focus is the show's name only: anything else said to the hosts was read back on air (2026-11-10).
+  assert.strictEqual(dailyAudioFocus(), DAILY_NEWS_IDENTITY);
+  assert(!/source|truth|archive|credit/i.test(dailyAudioFocus()));
 }
 
 {

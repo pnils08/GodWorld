@@ -266,18 +266,30 @@ async function magsAugment(systemPrompt, opts) {
     searchSupermemory(opts.userMessage),
     fetchUserProfile(opts.userId),
     mags.loadFamilyData(),
-    searchDashboard(opts.userMessage)
+    searchDashboard(opts.userMessage),
+    searchOwnStore(opts.userMessage, 4),
+    personaProvider.pageRecallText_(MAGS_POPID, opts.userMessage, 3, [])
   ]);
   var archiveContext = results[0];
   var ownMemory = results[1];
   var familyData = results[2];
   var dashboardArticles = results[3];
+  var ownOnThis = results[4];
+  var pageOnThis = results[5];
 
   if (familyData && !familyData.startsWith('(')) {
     systemPrompt += '\n\n---\n\n' + familyData;
   }
   if (ownMemory) {
     systemPrompt += '\n\n---\n\n## Your own memory (your past talks and reflections)\n\n' + ownMemory;
+  }
+  // pipeline.100 (builder 2026-11-09): her store and her page searched on what was just said — the summary
+  // above is the same whatever the message; these are the talks, reflections and Pulses that match it.
+  if (ownOnThis) {
+    systemPrompt += '\n\n---\n\n## What you remember on this (your own talks, reflections and Pulses)\n\n' + ownOnThis;
+  }
+  if (pageOnThis) {
+    systemPrompt += '\n\n---\n\n## What your own page holds on this\n\n' + pageOnThis;
   }
   if (archiveContext) {
     systemPrompt += '\n\n---\n\n## Archive Knowledge (from Tribune files)\n\n' +
@@ -302,6 +314,14 @@ const magsProvider = {
   historyFile: MAGS_HISTORY_FILE,
   buildSystemPrompt: buildMagsSystemPrompt,
   augment: magsAugment,
+  // The search_my_memory tool: her store (talks, reflections, Pulses) and her page, on a query she chooses.
+  searchMemory: async function (query) {
+    var parts = await Promise.all([searchOwnStore(query, 5), personaProvider.pageRecallText_(MAGS_POPID, query, 4, [])]);
+    var out = [];
+    if (parts[0]) out.push('## Your talks, reflections and Pulses\n' + parts[0]);
+    if (parts[1]) out.push('## Your page\n' + parts[1]);
+    return out.join('\n\n') || '(nothing in your memory for that)';
+  },
   persistResponse: function (userName, userMessage, response, userId) {
     saveToSupermemory(userName, userMessage, response, userId);   // her memory store keeps every talk (builder 11-08)
     magsTalk.persist(userName, userMessage, response);   // research.30 — her dials and Paulson's move with the talk
@@ -337,6 +357,29 @@ function searchSupermemory(query) {
     if (context) log.info('Supermemory returned context (' + context.length + ' chars)');
     return context;
   });
+}
+
+// ---------------------------------------------------------------------------
+// Her own store searched on a query (pipeline.100): the `mags` container holds her Discord talks, her
+// reflections and the Pulses she narrated. Relevant chunks per hit under the hit's title, nightly-scrubbed
+// (older entries carry calendar dates), fenced. '' on a miss or a failure.
+// ---------------------------------------------------------------------------
+function searchOwnStore(query, limit) {
+  if (!USE_SUPERMEMORY || !String(query || '').trim()) return Promise.resolve('');
+  return require('../lib/supermemory').search(String(query).slice(0, 400), {
+    containerTags: ['mags'], limit: limit || 4, timeoutMs: 8000, apiVersion: 'v3'
+  }).then(function (results) {
+    var hits = (results || []).map(function (r) {
+      var chunks = (r.chunks || []).filter(function (c) { return c && c.isRelevant && typeof c.content === 'string'; })
+        .map(function (c) { return c.content; }).join(' ');
+      var text = memoryFence.scrubNightly(chunks).replace(/\s+/g, ' ').trim();
+      if (!text) return '';
+      var title = String((r.metadata && r.metadata.title) || '').replace(/\s+—\s+\d{4}-\d{2}-\d{2}$/, '');
+      return (title ? title + ': ' : '') + (text.length > 900 ? text.slice(0, 899) + '…' : text);
+    }).filter(Boolean);
+    if (hits.length) log.info('Own store returned ' + hits.length + ' hit(s)');
+    return hits.length ? memoryFence.wrap(hits.join('\n\n'), 'mags-store') : '';
+  }).catch(function () { return ''; });
 }
 
 // ---------------------------------------------------------------------------
@@ -473,6 +516,17 @@ var SEARCH_TOOL = {
   }
 };
 
+// pipeline.100 (builder 2026-11-09): every voice can query its own memory — its page; for Mags, her store too.
+var MEMORY_TOOL = {
+  name: 'search_my_memory',
+  description: 'Search your OWN memory: your page (what you have reflected on, your past talks) and anything you wrote. Use it when someone asks what you thought, said, wrote or went through, or to check whether you already spoke on something. It holds your recollections, not city records — for facts about the city use search_world and the lookups.',
+  input_schema: {
+    type: 'object',
+    properties: { query: { type: 'string', description: 'A few words on what you are trying to remember (a person, a place, a moment, a topic).' } },
+    required: ['query']
+  }
+};
+
 // research.30 (builder 2026-10-19: "the search everything tool as their first call"): the persona's
 // search is the fan-out the MCP's search_everything does — disk, the published canon + world cards
 // in Supermemory, and the article index — not disk alone. A column that lives only in Supermemory
@@ -508,7 +562,8 @@ async function callClaude(provider, session, userMessage, userName, userId) {
     '(a person, a neighborhood, a team, a business) already attached. Then, before you answer, follow a lead ' +
     'if the result points at one: lookup_citizen for a person, lookup_neighborhood for a hood, lookup_team for ' +
     'the A\'s or the Oaks, lookup_business for a business. A number is read off the record, newest Cycle first; ' +
-    'where two records differ, say what each says. Then answer from what you found plus what you already know.';
+    'where two records differ, say what each says. search_my_memory is your own memory — your page, what you ' +
+    'have said and written — for when the question is about you. Then answer from what you found plus what you already know.';
 
   // research.32 — the records for whatever the message names (a person, a hood, a team, a business) are
   // attached before the first model call, on every route and model: the right record is in front of the
@@ -541,7 +596,7 @@ async function callClaude(provider, session, userMessage, userName, userId) {
     // (S252 flaw fix — a still-searching turn returned 0 chars).
     var isFinal = (round === MAX_TOOL_ROUNDS - 1);
     // research.32 — the four record lookups ride beside search_world (lib/discordLookups.js)
-    var opts = { model: BOT_MODEL, max_tokens: MAX_RESPONSE_TOKENS, system: systemPrompt, messages: messages, tools: [SEARCH_TOOL].concat(lookups.TOOLS) };
+    var opts = { model: BOT_MODEL, max_tokens: MAX_RESPONSE_TOKENS, system: systemPrompt, messages: messages, tools: [SEARCH_TOOL].concat(provider.searchMemory ? [MEMORY_TOOL] : [], lookups.TOOLS) };
     var shape = requestShapeFor(BOT_MODEL);
     if (shape.thinking) opts.thinking = shape.thinking;
     if (round === 0) opts.tool_choice = shape.forcedTool ? { type: 'tool', name: 'search_world' } : { type: 'auto' };  // research.30 — search first, where the model still allows a forced call
@@ -565,6 +620,8 @@ async function callClaude(provider, session, userMessage, userName, userId) {
         try {
           if (tu.name === 'search_world') {
             result = await searchEverything(tu.input && tu.input.query);
+          } else if (tu.name === 'search_my_memory' && provider.searchMemory) {
+            result = await provider.searchMemory(tu.input && tu.input.query);
           } else {
             result = await lookups.runTool(tu.name, tu.input, tables);  // dispatch by name; unknown -> explicit error
           }

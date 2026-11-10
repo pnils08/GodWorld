@@ -85,9 +85,6 @@ Every job, one line each: what it is and what it waits on or its next step. Hist
 
 | # | Item | State | Terminal | Pointer |
 |---|------|-------|----------|---------|
-| engine.332 | Coverage reaction seeds: C115 read PASS, INFRASTRUCTURE −3 and COMMUNITY +3 each one major lead on its desk | done-pending-archive | engine-sheet | [[../plans/2026-11-07-coverage-reaction-seeds]] |
-| engine.335 | Families at home move the fan dial: C115 read PASS, Cathy Skeet's win line moved fandom exactly as the fold computes | done-pending-archive | engine-sheet | [[../plans/2026-11-07-household-game-night-fandom]] |
-| engine.334 | Story seeds add only like units: C115 read PASS, sports, boom and move rows each in their own units | done-pending-archive | engine-sheet | [[../plans/2026-11-05-story-seed-mixed-magnitudes]] |
 | pipeline.107 | C115 texture + drafter invented facts (codex handoff 11-09): ground both in the cycle's seeds; world-state fold leaked a footer. Plan at pickup | ready | engine-sheet | output/production_log_run_cycle_c115_gaps.md G-EC37–41 |
 | engine.340 | Seed class per kind (builder 11-08): one major bar read every kind of number; each multi-hood initiative its own seed; SeedID kept as text. After pipeline.100 | ready | engine-sheet | [[../plans/2026-11-08-seed-builder-class-per-kind]] |
 | engine.341 | Seed deck dead paths (builder 11-08): maps miss the deck's writer; two old-deck writers and the handoff menu tool retired. After engine.340 | ready | engine-sheet | [[../plans/2026-11-08-seed-deck-dead-readers-writers]] |

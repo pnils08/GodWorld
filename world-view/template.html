@@ -608,7 +608,7 @@ function build(idx) {
   var label = new THREE.Sprite(nm); label.scale.set(12, 1.875, 1); label.position.set(0, 14.5 + gy, gz); root.add(label);
 
   scene.add(root);
-  return { H: H, ST: ST, root: root, L: L, gz: gz, yAt: yAt, people: people, parts: parts, halos: halos, diskMat: diskMat, glints: glints, ticks: ticks, beaconPts: beaconPts, gateName: label, places: LAY.places, z: 10, x: 0, t: 0 };
+  return { H: H, ST: ST, root: root, L: L, gz: gz, yAt: yAt, people: people, parts: parts, halos: halos, diskMat: diskMat, glints: glints, ticks: ticks, beaconPts: beaconPts, gateName: label, places: LAY.places, water: water, z: 10, x: 0, t: 0 };
 }
 
 // ---------- names and cards ----------
@@ -771,7 +771,9 @@ function step(dt) {
     W.x += (Math.sin(t * 0.21) * 0.45 * near - W.x) * Math.min(1, dt * 2 + (dt ? 0 : 1));
     camera.position.set(W.x, 3.7 + Math.sin(t * 0.37) * 0.15 + (1 - near) * 2.2 + W.yAt(z), z);
     var pull = 0; for (i = 0; i < W.places.length; i++) { var pl = W.places[i]; if (pl.half >= 20 && pl.s) { var f = Math.max(0, 1 - Math.abs(z - pl.z - 26) / 34); pull += pl.s * f * f * (3 - 2 * f); } }
-    W.look = (W.look || 0) + (pull * 17 - (W.look || 0)) * Math.min(1, dt * 1.5 + (dt ? 0 : 1));
+    // on a waterside street the flight leans toward the water, more on a tall narrow screen where it would otherwise be a sliver
+    var lean = W.water ? W.water * (window.innerWidth < window.innerHeight ? 9 : 5) * near * (0.75 + 0.25 * Math.sin(t * 0.09)) : 0;
+    W.look = (W.look || 0) + (pull * 17 + lean - (W.look || 0)) * Math.min(1, dt * 1.5 + (dt ? 0 : 1));
     camera.lookAt(Math.sin(t * 0.13 + 1) * 2.2 * near + W.look, 2.1 + (1 - near) * 3.8 + Math.abs(W.look) * 0.25 + W.yAt(z - 20), z - 20);
   }
   if (DBG && DBG.cam) { camera.position.set(DBG.cam[0], DBG.cam[1], DBG.cam[2]); camera.lookAt(DBG.look[0], DBG.look[1], DBG.look[2]); }

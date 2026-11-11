@@ -94,3 +94,26 @@ Write stage only, scratch folder only. `scripts/testReporterWrite.sh <desk> <per
 | Selena Grant | Hayward's 22 minutes; closes on a decision the staff still owes | same story, same close |
 
 Result: removing the instructions changed wording, not the story, the sources or the ending. All eight pieces close on what is still unknown. The seat's piece follows what the angle stage handed it (Lila's `assignment` = the health slice builder's "Chinatown carries the most sick residents (135)", its hookLine names Akua; her angleRead is the in-voice read the write continues). Caveat: the angle was chosen at 06:15 under the old ask, so this shows instructions are not the lever, not yet which part of the setup is (angle ask, slice builder, persona file). Test 2 = run the angle stage in the shell under a different ask. Pieces: `output/test-shell/20261110-23*/samples/`.
+
+## Builder rulings 2026-11-10 (after Test 1; answers to the three sim questions)
+
+1. **A cron may pass.** "Spend money on crons that have something to say no matter what role they are from the mayor to media to a citizen. Don't force juice out of a nut, let a ripe melon burst."
+2. **A seat is a purpose and tools, not a job file.** "Do you want me to give you a Md with your job or give you tools and tell you what your purpose is? That's the answer."
+3. **The dials make the voice.** "The money is spent on the dials, the events, the wakes all feed back into the dials, the dials should create who they are, they get their page of their memory and the dials of the person they are. Last of the issue are the dials move too slow or get stuck on 100 too easy in some cases, but those numbers are supposed to tell a sim its disposition."
+
+## Test 2 — what does a reporter pick when nothing is assigned? (engine-sheet, 23:40, read-only)
+
+Four reporters, C115, through `citizenVoice.js` (read-only: no page, no intake, no dials) on the seat's own angle model; one sample each, angle stage only, no tools, nothing written. Arms: **live** = the saved 06:15 angle (assigned story, typed packet, "plan one chase without choosing a new assignment"); **B** = the same beat facts with the assignment, hook and approach removed, pass allowed; **C** = the city's week (world summary minus the audit findings), no purpose line, pass allowed; **D** = the seat's own IDENTITY paragraph + the city's week, pass allowed. Raw output: `/tmp/claude-0/.../scratchpad/t2/` (scratch; not kept).
+
+| Seat | Live (assigned) | B beat facts, free | C city, no purpose | D purpose + city |
+|---|---|---|---|---|
+| Lila (health) | Chinatown 135 sick — 6.1%, "down just two" | wrote Chinatown again | **PASS** (quiet health week) | **PASS** |
+| Trevor (transit) | 19th St ridership +5,324 | Coliseum row (a different row) | Laurel cooling (off beat) | gridlock day, on beat, own pick |
+| Luis (investigations) | youth pipeline stalled 3 cycles | **PASS** (nothing decided yet) | festival / A's trade | the Mesa trade, as a pattern |
+| Selena (Oaks) | Hayward's minutes | Hayward | West Oakland fund (off beat) | the A's trade (her file says not A's; her angle model is llama-4-maverick) |
+
+Read: (1) A pass is natural and carries a reason — Lila's standing 135 is last week's number, so the live run was forcing a piece out of it; (2) with the beat facts but no assignment, the reporter either files a different piece or passes; (3) with no purpose line a reporter drifts off the beat, with the IDENTITY paragraph it stays on its lens (Trevor transit, Luis pattern-under-the-story); (4) the model matters: Selena's seat runs the cheapest angle model and ignored her own file; (5) every voice here is first-person and specific — the persona and dials carry. Not shown: report and write under a free pick; any name in these outputs checked against the record (nothing published).
+
+**Dials, read from the ledger (C115, 1,064 citizens):** 558 read "even-keeled, unremarkable" (all nine dials 40–60) — nothing for a voice to carry; integrity and outabout leave the neutral band for 30 citizens each and nobody reaches 80; warmth 104 (one at 80+); sociability / drive / family carry the spread (118 / 93 / 74 at 80+). Pinned at the top now: 5 at 99+, all sociability (engine.201 W1e already room-scales the push). Three of the four reporters above read as one phrase ("draws people in" / "magnetic"). This is the builder's behavior call (rates, severity); no row opened.
+
+**The build this points at** (not started; needs his go and the Opus model): angle stage = persona + page memory + dials + "the cycle" + its lookups; no assignment, hook or approach; output = a pick or PASS; `chaseReplacesAssignment` and the "without choosing a new assignment" goal come out of the angle packet; a PASS ends that seat's day (no report, no write, no spend); the same rule for the Mayor / offices / citizen wakes (the work wake already skips a pack with nothing — "no pack data this cycle — skipped").

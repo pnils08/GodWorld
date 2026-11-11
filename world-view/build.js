@@ -31,10 +31,44 @@ life.forEach(r => {
   const h = (byHood[r.Neighborhood] = byHood[r.Neighborhood] || { lines: 0, people: {} });
   h.lines++;
   const [k, pr] = kindOf(r.EventTag);
-  const p = (h.people[r.POPID] = h.people[r.POPID] || { n: r.Name, c: 0, pr: 99 });
+  const p = (h.people[r.POPID] = h.people[r.POPID] || { id: r.POPID, n: r.Name, c: 0, pr: 99 });
   p.c++;
   if (pr < p.pr) { p.pr = pr; p.k = k; p.x = r.EventText; }
 });
+
+// ---------- who each person is: sex, age band, role (ledger), and the last thing they said (reflections) ----------
+const ledger = new Map(fs.readFileSync(path.join(__dirname, '..', 'output', 'simulation_ledger_snapshot.jsonl'), 'utf8').trim().split('\n').filter(Boolean).map(l => { const o = JSON.parse(l); return [o.POPID, o]; }));
+// Same year and same bands the engine uses: simYearFromCycle_ (phase01-config/advanceSimulationCalendar.js)
+// and deriveLifeState_ (phase05-citizens/citizenContextBuilder.js). If either changes there, change it here.
+const SIM_YEAR = 2040 + (Math.ceil(Number(CYCLE) / 52) - 1);
+function band(birthYear) {
+  const by = Number(birthYear) || 0; if (!(by > 1900 && by < 2100)) return 'adult';
+  const age = SIM_YEAR - by;
+  return age <= 12 ? 'child' : age <= 17 ? 'teen' : age <= 22 ? 'youth' : age <= 35 ? 'youngAdult' : age <= 64 ? 'adult' : 'senior';
+}
+const SAID_HOW = { PRESS: 'to a reporter', CONVO: 'in conversation', DISCORD: 'in conversation', DEBATE: 'in debate', morning: 'in the morning', midday: 'at midday', afternoon: 'in the afternoon', evening: 'in the evening', night: 'at night', nightly: 'at night', work: 'at work' };
+function trimSaid(s) {
+  s = String(s || '').replace(/\s+/g, ' ').trim(); if (s.length <= 300) return s;
+  const cut = s.slice(0, 300), end = Math.max(cut.lastIndexOf('. '), cut.lastIndexOf('? '), cut.lastIndexOf('! '));
+  return end > 120 ? cut.slice(0, end + 1) : cut.slice(0, cut.lastIndexOf(' ')) + '…';
+}
+const said = new Map();
+rd('Reflection_Intake').forEach(r => {
+  if (!r.ReflectionExcerpt) return;
+  const key = [Number(r.Cycle) || 0, /^20/.test(r.Timestamp) ? r.Timestamp : ''];
+  const cur = said.get(r.POPID);
+  if (!cur || key[0] > cur.key[0] || (key[0] === cur.key[0] && key[1] > cur.key[1])) said.set(r.POPID, { key, r });
+});
+function who(id) {
+  const L = ledger.get(id), o = {};
+  if (L) {
+    const g = String(L.Gender || '').trim().toLowerCase(); o.g = /^m/.test(g) ? 'm' : /^f/.test(g) ? 'f' : '';
+    o.ab = band(L.BirthYear); if (L.RoleType) o.role = String(L.RoleType).trim();
+  }
+  const s = said.get(id);
+  if (s) o.said = { x: trimSaid(s.r.ReflectionExcerpt), c: Number(s.r.Cycle) || 0, how: SAID_HOW[s.r.Daypart] || '', mood: s.r.Affect || '' };
+  return o;
+}
 
 const CAP = 110;
 const hoods = Object.keys(byHood).map(name => {
@@ -46,7 +80,7 @@ const hoods = Object.keys(byHood).map(name => {
     name,
     lines: h.lines,
     total: all.length,
-    people: shown.map(p => ({ n: p.n, k: p.k, x: p.x, c: p.c, pr: p.pr })),
+    people: shown.map(p => Object.assign({ n: p.n, k: p.k, x: p.x, c: p.c, pr: p.pr }, who(p.id))),
     biz: biz.filter(b => b.Neighborhood === name).map(b => ({ id: b.BIZ_ID, n: b.Name, s: b.Sector, e: Number(b.Employee_Count) || 1 })),
     pop: d ? { a: +d.Adults, st: +d.Students, se: +d.Seniors } : null
   };
@@ -149,4 +183,6 @@ const dest = process.argv[2] || path.join(__dirname, 'oakland-week.html');
 fs.writeFileSync(dest, out);
 console.log('hoods', hoods.length, 'people shown', hoods.reduce((s, h) => s + h.people.length, 0), 'of', hoods.reduce((s, h) => s + h.total, 0),
   'lines', hoods.reduce((s, h) => s + h.lines, 0), 'parcels', hoods.reduce((s, h) => s + h.lay.parcels.length, 0), 'bytes', out.length);
+const everyone = hoods.reduce((a, h) => a.concat(h.people), []);
+console.log('sex known', everyone.filter(p => p.g).length, 'bands', JSON.stringify(everyone.reduce((a, p) => { a[p.ab] = (a[p.ab] || 0) + 1; return a; }, {})), 'with something said', everyone.filter(p => p.said).length, 'sim year', SIM_YEAR);
 console.log(hoods.map(h => h.name + ': ' + h.lay.places.map(p => p.type).join(',')).filter(s => !/: $/.test(s)).join('\n'));

@@ -43,6 +43,8 @@ A hands-off 3D flight through the 22 neighborhoods, drawn from one week of engin
 | A person's line and light colour | their highest-ranked `EventTag` that week (`kindOf` in `build.js`) |
 | Shop names, building height | `Business_Ledger.jsonl` Name, Employee_Count; sign colour from Sector |
 | Temperature, sky word | `Cycle_Weather.jsonl` |
+| Sex, age band, role on a card; figure size, grey hair | `output/simulation_ledger_snapshot.jsonl` Gender, BirthYear, RoleType. Bands and the sim year mirror the engine (`deriveLifeState_`, `simYearFromCycle_`); the card folds them to youth (22 and under) / adult / senior |
+| "Their words" on a card | `Reflection_Intake.jsonl`: the person's most recent row, trimmed to 300 characters, with its week, where it was said (Daypart) and Affect |
 | Street shape, colours, lit windows, unnamed buildings, where a person stands | drawn by code, seeded by the neighborhood name — not sim data |
 | How a neighborhood looks, its landmarks, water, hill | `hoods.js`, each entry tied to a phrase in `docs/canon/INSTITUTIONS.md` |
 
@@ -58,6 +60,8 @@ Cap: 110 people shown per neighborhood (`CAP`); labels show up to 4 at a time, s
 
 - Checked as still frames only: ten neighborhoods, desktop width, before the last round of fixes (shopfronts, trees, house windows, label collisions, sky). A full flight, a gate crossing, the train, and the twelve other neighborhoods were not watched.
 - In: walk-it-yourself steering (keys, drag, on-screen pad), names for everyone nearby, glow, shadows, weather from `Cycle_Weather` (`WX=rain node build.js` to look-test a kind the week did not have), quality that steps down on slow devices.
-- Not yet: pick-a-citizen, reflections, overview map.
+- In: sex, age band and role on every card; reflections on cards, and a "Their words" switch that leads with them.
+- Not yet: pick-a-citizen, overview map.
 - The sim holds no street address: a citizen has `Neighborhood` + `HouseholdId`; a household has `HousingType`, `MonthlyRent`.
-- `Reflection_Intake.jsonl` (citizens' own words, with `Affect`) is not used yet.
+- Reflections in the dump stop at the week before the fire (C115 dump: newest rows are week 114), so a card says which week the words are from. 455 of 980 shown people have any.
+- 36 of 980 shown people have no sex on the ledger; their card leaves it out.

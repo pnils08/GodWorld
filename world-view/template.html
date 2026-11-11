@@ -60,7 +60,15 @@ button[aria-pressed="true"] { background: var(--ink); color: var(--night); }
 .tag .who { font-weight: 800; font-size: 14px; letter-spacing: .01em; display: flex; align-items: center; gap: 7px; }
 .tag .who i, .chip i { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
 .tag .line { font: italic 400 16px/1.28 var(--story); margin-top: 2px; }
-.tag .more { font-size: 11px; color: var(--dim); margin-top: 3px; }
+.tag .meta { font-size: 11px; color: var(--dim); margin-top: 1px; }
+.tag .more, .tag .cap { font-size: 11px; color: var(--dim); margin-top: 3px; }
+.tag .said { margin-top: 7px; padding-top: 6px; border-top: 1px solid var(--edge); font: italic 400 14px/1.32 var(--story); display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+body.walk .tag .said, body.words .tag .said { -webkit-line-clamp: 9; }
+body.words .tag { max-width: min(340px, 62vw); }
+body.words .tag .said { font-size: 16px; border-top: 0; padding-top: 0; margin-top: 4px; }
+body.words .tag .line { font: 500 12px/1.3 var(--display); color: var(--dim); margin-top: 6px; }
+body.words .tag .card { display: flex; flex-direction: column; }
+body.words .tag .line, body.words .tag .more { order: 5; }
 .chip { font-weight: 500; font-size: 11px; background: rgba(11,13,26,.5); border-radius: 999px; padding: 2px 8px 2px 6px; display: flex; align-items: center; gap: 5px; white-space: nowrap; }
 .chip i { width: 6px; height: 6px; }
 
@@ -83,6 +91,7 @@ button[aria-pressed="true"] { background: var(--ink); color: var(--night); }
   <div id="where"><h1 id="hood">Oakland</h1><p id="canon"></p><p id="facts"></p></div>
   <div id="keys">
     <button id="bWalk" type="button" aria-pressed="false">Walk it yourself</button>
+    <button id="bWords" type="button" aria-pressed="false">Their words</button>
     <button id="bPlay" type="button">Pause</button>
     <button id="bNext" type="button">Next place</button>
     <button id="bPlaces" type="button">Places</button>
@@ -436,19 +445,22 @@ function build(idx) {
     armL: new THREE.InstancedMesh(new THREE.BoxGeometry(0.09, 0.62, 0.11).translate(0, -0.31, 0), white(), N1),
     armR: new THREE.InstancedMesh(new THREE.BoxGeometry(0.09, 0.62, 0.11).translate(0, -0.31, 0), white(), N1),
     head: new THREE.InstancedMesh(new THREE.SphereGeometry(0.14, 10, 8).translate(0, 1.66, 0), white(), N1),
-    hair: new THREE.InstancedMesh(new THREE.SphereGeometry(0.15, 10, 6, 0, Math.PI * 2, 0, Math.PI * 0.5).translate(0, 1.68, 0.015), white(), N1)
+    hair: new THREE.InstancedMesh(new THREE.SphereGeometry(0.15, 10, 6, 0, Math.PI * 2, 0, Math.PI * 0.5).translate(0, 1.68, 0.015), white(), N1),
+    hairLong: new THREE.InstancedMesh(new THREE.BoxGeometry(0.27, 0.36, 0.1).translate(0, 1.52, 0.115), white(), N1)
   };
+  var SIZE = { child: 0.6, teen: 0.84, youth: 0.95, senior: 0.94 };
   var hp = new Float32Array(n * 3), hc = new Float32Array(n * 3), people = [];
   var seq = H.people.map(function (_, k) { return k; }); for (i = seq.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)), tmp = seq[i]; seq[i] = seq[j]; seq[j] = tmp; }
   var span = L - 26;
   seq.forEach(function (pi, slot) {
     var p = H.people[pi], s = slot % 2 ? 1 : -1, still = r() < 0.22, amp = still ? 0 : 2 + r() * 5;
-    people.push({ d: p, s: s, x: s * (ROAD + 1.0 + r() * 2.4), z0: -6 - (slot + r() * 0.6) / Math.max(1, n) * span, ph: r() * 6.28, amp: amp, om: still ? 0 : (0.8 + r() * 0.6) / amp, sc: 0.95 + r() * 0.16, z: 0, face: still ? -s * Math.PI / 2 + (r() - 0.5) : 0 });
+    people.push({ d: p, s: s, x: s * (ROAD + 1.0 + r() * 2.4), z0: -6 - (slot + r() * 0.6) / Math.max(1, n) * span, ph: r() * 6.28, amp: amp, om: still ? 0 : (0.8 + r() * 0.6) / amp, sc: (SIZE[p.ab] || 1) * (0.95 + r() * 0.12) * (p.g === 'f' ? 0.96 : 1), z: 0, face: still ? -s * Math.PI / 2 + (r() - 0.5) : 0, long: p.g === 'f' && r() < 0.75 });
+    if (p.ab === 'senior') people[people.length - 1].om *= 0.65;
     var shirt = r(), dark = r() < 0.5;
     col.setHSL(shirt, 0.35, dark ? 0.2 + r() * 0.12 : 0.45 + r() * 0.2); parts.torso.setColorAt(slot, col); parts.armL.setColorAt(slot, col); parts.armR.setColorAt(slot, col);
     col.setHSL(0.6 + r() * 0.1, 0.2, 0.1 + r() * 0.14); parts.legL.setColorAt(slot, col); parts.legR.setColorAt(slot, col);
     col.setHSL(0.06 + r() * 0.04, 0.42, 0.26 + r() * 0.42); parts.head.setColorAt(slot, col);
-    col.setHSL(0.07, r() < 0.2 ? 0.05 : 0.4, r() < 0.2 ? 0.6 : 0.05 + r() * 0.12); parts.hair.setColorAt(slot, col);
+    var grey = p.ab === 'senior' ? r() < 0.85 : r() < 0.06; col.setHSL(0.07, grey ? 0.04 : 0.4, grey ? 0.62 + r() * 0.2 : 0.05 + r() * 0.12); parts.hair.setColorAt(slot, col); parts.hairLong.setColorAt(slot, col);
     col.set(KIND[p.k] || KIND.p); hc[slot * 3] = col.r; hc[slot * 3 + 1] = col.g; hc[slot * 3 + 2] = col.b;
   });
   Object.keys(parts).forEach(function (k) { parts[k].castShadow = true; parts[k].frustumCulled = false; root.add(parts[k]); });
@@ -476,7 +488,7 @@ function build(idx) {
 var CARDS = [], CHIPS = [], tagsEl = $('tags');
 for (var i = 0; i < 4; i++) {
   var el = document.createElement('div'); el.className = 'tag';
-  el.innerHTML = '<div class="card"><div class="who"><i></i><span></span></div><div class="line"></div><div class="more"></div></div>';
+  el.innerHTML = '<div class="card"><div class="who"><i></i><span></span></div><div class="meta"></div><div class="line"></div><div class="more"></div><div class="said"></div><div class="cap"></div></div>';
   tagsEl.appendChild(el); CARDS.push({ el: el, p: null });
 }
 for (i = 0; i < 9; i++) { var ce = document.createElement('div'); ce.className = 'chip'; ce.innerHTML = '<i></i><span></span>'; tagsEl.appendChild(ce); CHIPS.push({ el: ce, p: null }); }
@@ -487,6 +499,14 @@ function setCard(slot, p) {
   slot.el.querySelector('span').textContent = p.d.n;
   slot.el.querySelector('.line').textContent = p.d.x;
   slot.el.querySelector('.more').textContent = p.d.c > 1 ? (p.d.c - 1) + ' more this week' : '';
+  var d = p.d, minor = d.ab === 'child' || d.ab === 'teen', bits = [];
+  if (d.g) bits.push(d.g === 'f' ? (minor ? 'girl' : 'woman') : (minor ? 'boy' : 'man'));
+  if (d.ab) bits.push(d.ab === 'senior' ? 'senior' : (minor || d.ab === 'youth') ? 'youth' : 'adult');
+  if (d.role) bits.push(d.role);
+  slot.el.querySelector('.meta').textContent = bits.join(' \u00B7 ');
+  var sd = slot.el.querySelector('.said'), cp = slot.el.querySelector('.cap');
+  sd.hidden = cp.hidden = !d.said;
+  if (d.said) { sd.textContent = '\u201C' + d.said.x + '\u201D'; cp.textContent = 'Said in week ' + d.said.c + (d.said.how ? ', ' + d.said.how : '') + (d.said.mood ? '. ' + d.said.mood + '.' : '.'); }
 }
 function setChip(slot, p) {
   if (slot.p === p) return; slot.p = p; if (!p) { slot.el.style.opacity = 0; return; }
@@ -504,7 +524,7 @@ function pickNames() {
   if (free.length) {
     var c = walking
       ? world.people.filter(function (p) { return p.f > 1 && p.dist < 10 && taken.indexOf(p) < 0; }).sort(function (a, b) { return a.dist - b.dist; })
-      : world.people.filter(function (p) { return p.f > 7 && p.f < 24 && taken.indexOf(p) < 0 && !p.seen; }).sort(function (a, b) { return a.d.pr - b.d.pr || a.f - b.f; });
+      : world.people.filter(function (p) { return p.f > 7 && p.f < 24 && taken.indexOf(p) < 0 && !p.seen; }).sort(function (a, b) { return (words ? (b.d.said ? 1 : 0) - (a.d.said ? 1 : 0) : 0) || a.d.pr - b.d.pr || a.f - b.f; });
     for (var i = 0; i < c.length && free.length; i++) {
       var p = c[i]; if (!walking && taken.some(function (q) { return Math.abs(q.z - p.z) < (q.s === p.s ? 11 : 5); })) continue;
       p.seen = true; taken.push(p); setCard(free.shift(), p);
@@ -544,8 +564,8 @@ function placeNames() {
 
 // ---------- moving through it ----------
 var playing = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches), busy = false, frame = 0, last = performance.now();
-var walking = false, yaw = 0, pitch = 0, held = {}, clock0 = 0;
-var MB = new THREE.Matrix4(), MP = new THREE.Matrix4(), MO = new THREE.Matrix4(), SV = new THREE.Vector3();
+var words = false, walking = false, yaw = 0, pitch = 0, held = {}, clock0 = 0;
+var ZERO = new THREE.Matrix4().makeScale(0, 0, 0), MB = new THREE.Matrix4(), MP = new THREE.Matrix4(), MO = new THREE.Matrix4(), SV = new THREE.Vector3();
 function facts() {
   var H = world.H, w = DATA.weather, bits = [];
   bits.push('<b>' + H.total + '</b> tracked ' + (H.total === 1 ? 'person' : 'people') + ' and <b>' + H.lines + '</b> things that happened to them');
@@ -579,7 +599,7 @@ function step(dt) {
     p.z = p.z0 + p.amp * Math.sin(ang);
     var y = W.yAt(p.z), sw = p.amp ? Math.sin(p.z * 3.1 + p.ph) * 0.6 * Math.min(1, Math.abs(v) / 0.5) : 0, bob = Math.abs(sw) * 0.035;
     MB.makeRotationY(p.amp ? (v < 0 ? 0 : Math.PI) : p.face); MB.scale(SV.set(p.sc, p.sc, p.sc)); MB.setPosition(p.x, 0.16 + y + bob, p.z);
-    P.torso.setMatrixAt(i, MB); P.head.setMatrixAt(i, MB); P.hair.setMatrixAt(i, MB);
+    P.torso.setMatrixAt(i, MB); P.head.setMatrixAt(i, MB); P.hair.setMatrixAt(i, MB); P.hairLong.setMatrixAt(i, p.long ? MB : ZERO);
     part(P.legL, i, -0.09, 0.86, 0, sw); part(P.legR, i, 0.09, 0.86, 0, -sw);
     part(P.armL, i, -0.27, 1.46, 0, -sw * 0.8); part(P.armR, i, 0.27, 1.46, 0, sw * 0.8);
     a[i * 3] = p.x; a[i * 3 + 1] = 2.3 * p.sc + y; a[i * 3 + 2] = p.z;
@@ -634,12 +654,14 @@ function loop(now) {
 function setPlay(v) { playing = v; $('bPlay').textContent = v ? 'Pause' : 'Play'; }
 function setWalk(v) {
   if (v && !walking && world) { camera.getWorldDirection(FWD); yaw = Math.atan2(-FWD.x, -FWD.z); pitch = 0; }
+  document.body.classList.toggle('walk', v);
   walking = v; $('bWalk').setAttribute('aria-pressed', v ? 'true' : 'false'); $('bWalk').textContent = v ? 'Let it fly' : 'Walk it yourself';
   $('bPlay').hidden = v; $('pad').hidden = !v;
   $('hint').textContent = !v ? '' : (window.matchMedia && window.matchMedia('(pointer: coarse)').matches) ? 'Hold the arrows to walk and turn. Drag to look around. Walk up to anyone to read their week.' : 'Arrow keys or W A S D to walk and turn. Drag to look around. Walk up to anyone to read their week. Shift to hurry.';
   CARDS.forEach(function (s) { setCard(s, null); }); if (world) world.people.forEach(function (p) { p.seen = false; });
 }
 $('bWalk').addEventListener('click', function () { setWalk(!walking); });
+$('bWords').addEventListener('click', function () { words = !words; document.body.classList.toggle('words', words); $('bWords').setAttribute('aria-pressed', words ? 'true' : 'false'); CARDS.forEach(function (s) { setCard(s, null); }); if (world) world.people.forEach(function (p) { p.seen = false; }); });
 $('bPlay').addEventListener('click', function () { setPlay(!playing); });
 $('bNext').addEventListener('click', function () { go(cur + 1); });
 $('bPlaces').addEventListener('click', function () { var p = $('places'); p.hidden = !p.hidden; $('bPlaces').textContent = p.hidden ? 'Places' : 'Close'; });

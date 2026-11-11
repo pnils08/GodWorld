@@ -907,7 +907,7 @@ console.log('livedExperiencePacketV2.test.js: PASS');
   const recallHit = [{ text: '[C112 · daily · Dr. Lila Mezran] # Chinatown Holds the Most Sick. Chinatown carries 142 sick residents, 6.5% of the hood. "We help out," she said of 142 neighbors.',
     src: 'tool:canon_recall:Chinatown sick' }];
   const recallPacket = { manifest: { approvedFacts: [{ text: 'Chinatown carries 135 sick residents' }], approvedQuotes: [] } };
-  const named = p.selectUsedToolLines('The paper\'s cycle 112 coverage printed Chinatown at 142 sick; the sheet now reads 135.\n', recallHit, recallPacket);
+  const named = p.selectUsedToolLines('The paper\'s cycle 112 coverage printed Chinatown at 142 sick residents; the sheet now reads 135.\n', recallHit, recallPacket);
   assert.deepStrictEqual(named, [{ text: 'C112 published: Chinatown carries 142 sick residents, 6.5% of the hood.', src: 'tool:canon_recall:Chinatown sick' }]);
   assert.deepStrictEqual(p.selectUsedToolLines('Chinatown had 142 sick once.\n', recallHit, recallPacket), []);
   assert.deepStrictEqual(p.selectUsedToolLines('In C112 the count was 135.\n', recallHit, recallPacket), []);
@@ -923,6 +923,16 @@ console.log('livedExperiencePacketV2.test.js: PASS');
   // codex F3: a shared number on another subject, or the Cycle in a neighbouring sentence, approves nothing
   assert.deepStrictEqual(one('[C998 · daily] Test North counted 142 synthetic widgets.', 'In C998 Test South counted 142 synthetic permits.'), []);
   assert.deepStrictEqual(one('[C998 · daily] Test North counted 142 synthetic widgets.', 'That was C998. Test North counted 142 synthetic widgets.'), []);
+  // codex rereview R1: a hit cut inside a straight-quoted span is never auto-approved
+  assert.deepStrictEqual(one('[C998 · daily] Test North served 142 synthetic meals. That is all." Test Reporter checked the record.',
+    'In C998 Test North served 142 synthetic meals.'), []);
+  // codex rereview R2: another counted thing, or a longer name, approves nothing; same subject and metric does
+  assert.deepStrictEqual(one('[C998 · daily] Test North counted 142 synthetic widgets.', 'In C998 Test North counted 142 synthetic permits.'), []);
+  assert.deepStrictEqual(one('[C998 · daily] Test North counted 142 synthetic widgets.', 'In C998 Test Northside counted 142 synthetic widgets.'), []);
+  assert.deepStrictEqual(one('[C998 · daily] Test North counted 142 synthetic widgets.', 'In C998 Test North counted 142 synthetic widgets.'),
+    [{ text: 'C998 published: Test North counted 142 synthetic widgets.', src: 'tool:canon_recall:q' }]);
+  // a figure with nothing after it saying what it counts cannot be bound
+  assert.deepStrictEqual(one('[C998 · daily] Test North counted widgets: 142.', 'In C998 Test North counted widgets: 142.'), []);
 }
 // codex F1: the seat file's closing line never reaches the writer's packet
 {

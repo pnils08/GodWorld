@@ -626,6 +626,15 @@ function unquotedProse(text) {
 const NAME_LEAD_WORDS = new Set(['The', 'A', 'An', 'In', 'On', 'At', 'By', 'For', 'But', 'And', 'Or', 'Its', 'It', 'He', 'She',
   'They', 'We', 'I', 'This', 'That', 'These', 'Those', 'His', 'Her', 'Their', 'Our', 'When', 'What', 'Who', 'Where', 'Why',
   'How', 'Cycle', 'After', 'Before', 'Since', 'As', 'If', 'So', 'Then', 'There', 'Here']);
+function escapeRe(s) { return String(s).replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+function wholeWordRe(name) { return new RegExp('(?<![A-Za-z\'’])' + escapeRe(name) + '(?![A-Za-z\'’])'); }
+// The figure and the lowercase words that follow it up to punctuation (at most three): "142 sick residents".
+// null when nothing follows it that says what it counts — such a figure cannot be bound and is not approved.
+function figurePhraseRe(sentence, value) {
+  const m = String(sentence).toLowerCase().match(new RegExp('(?<![\\d.])' + escapeRe(value) + '%?\\s+([a-z][a-z\'’-]*(?:\\s+[a-z][a-z\'’-]*){0,2})'));
+  if (!m) return null;
+  return new RegExp('(?<![\\d.])' + escapeRe(value) + '%?\\s+' + m[1].split(/\s+/).map(escapeRe).join('\\s+') + '(?![a-z])', 'i');
+}
 function properNames(text) {
   return (String(text || '').match(/\b[A-Z][a-z'’]+(?:\s+[A-Z][a-z'’]+)*/g) || [])
     .map(seq => { const w = seq.split(/\s+/); while (w.length && NAME_LEAD_WORDS.has(w[0])) w.shift(); return w.join(' '); })
@@ -657,16 +666,21 @@ function selectUsedToolLines(draftText, candidates, packet) {
       if (!label) continue;
       const cycle = label[1];
       const cycleRe = new RegExp('\\b(?:c' + cycle + '|cycle\\s+' + cycle + ')\\b', 'i');
+      // An odd count of straight quote marks means a chunk cut a quote and which side is speech cannot be told:
+      // the hit stays recall context for the writer and is never auto-approved (codex rereview R1).
+      if (((text.match(/"/g) || []).length) % 2) continue;
       // Quoted speech is dropped BEFORE the split, so the inside of a multi-sentence quote is never read
       // as the paper's own sentence (codex F2).
       for (const sentence of unquotedProse(text.slice(label[0].length)).split(/(?<=[.!?])\s+/)) {
-        const nums = significantNumbers(sentence).filter(v => v !== cycle);
-        const names = properNames(sentence);
-        if (!nums.length || !names.length) continue;
-        // Bound to the same subject (codex F3): one Article sentence names that Cycle, prints one of this
-        // sentence's figures the Packet does not already hold, and carries one of its proper names whole.
-        const used = sentences.some((u, i) => cycleRe.test(u) && names.some(n => u.includes(n)) &&
-          nums.some(v => sentenceNums[i].has(v) && !allowed.has(v)));
+        const names = properNames(sentence).map(wholeWordRe);
+        // A figure binds only with what it counts: the lowercase words right after it in this sentence (codex R2).
+        const figures = significantNumbers(sentence).filter(v => v !== cycle)
+          .map(v => ({ v, re: figurePhraseRe(sentence, v) })).filter(f => f.re && !allowed.has(f.v));
+        if (!names.length || !figures.length) continue;
+        // One Article sentence names that Cycle, carries one of this sentence's proper names whole, and prints
+        // one of its figures with the same counted words. Anything less stays recall context, not an approved fact.
+        const used = sentences.some((u, i) => cycleRe.test(u) && names.some(re => re.test(u)) &&
+          figures.some(f => sentenceNums[i].has(f.v) && f.re.test(u)));
         const fact = clean('C' + cycle + ' published: ' + sentence, 500);
         if (used && !seen.has(fact)) { seen.add(fact); out.push({ text: fact, src }); }
       }

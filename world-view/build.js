@@ -116,6 +116,21 @@ loose.forEach((rows, id) => {
   else notShown.push({ n: name, role: L && L.RoleType ? String(L.RoleType).trim() : '', why: 'no neighborhood on this week\'s lines' });
 });
 
+// A business's own ledger figures, and the tracked citizens the ledger says work there (EmployerBizId).
+const staffOf = new Map();
+ledger.forEach((L, id) => { const e = L.EmployerBizId; if (!e || !bizById.has(e)) return; if (!staffOf.has(e)) staffOf.set(e, []); staffOf.get(e).push({ id, n: nameOf(id), role: String(L.RoleType || '').trim(), st: String(L.Status || '').trim() }); });
+function bizDetail(b) {
+  const o = {}, num = v => (v === '' || v == null || isNaN(Number(v)) ? null : Number(v));
+  if (num(b.Avg_Salary) != null) o.pay = num(b.Avg_Salary);
+  if (num(b.Annual_Revenue) != null) o.rev = num(b.Annual_Revenue);
+  if (num(b.Growth_Rate) != null) o.gr = num(b.Growth_Rate);
+  const kp = String(b.Key_Personnel || ''); const keyP = []; kp.replace(/(POP-\d+)\s+([^,;]+)/g, (m, id, label) => { keyP.push({ id, n: label.trim() }); return m; });
+  if (keyP.length) o.keyP = keyP; else { const key = kp.replace(/POP-\d+\s*/g, '').trim(); if (key) o.key = key; }
+  const st = (staffOf.get(b.BIZ_ID) || []).filter(x => x.n).sort((x, y) => (x.n < y.n ? -1 : 1));
+  if (st.length) o.staff = st.map(x => ({ id: x.id, n: x.n, role: x.role, st: x.st === 'Active' ? '' : x.st }));
+  return o;
+}
+
 const CAP = 140;
 const hoods = Object.keys(byHood).map(name => {
   const h = byHood[name];
@@ -128,7 +143,7 @@ const hoods = Object.keys(byHood).map(name => {
     lines: h.lines,
     total: all.length,
     people: shown.map(p => Object.assign({ id: p.id, n: p.n, k: p.k, x: p.x, c: p.c, pr: p.pr, all: p.all.map(a => [a[1], a[2]]) }, p.noPlace ? { noPlace: 1 } : {}, who(p.id))),
-    biz: biz.filter(b => b.Neighborhood === name).map(b => ({ id: b.BIZ_ID, n: b.Name, s: b.Sector, e: Number(b.Employee_Count) || 1 })),
+    biz: biz.filter(b => b.Neighborhood === name).map(b => Object.assign({ id: b.BIZ_ID, n: b.Name, s: b.Sector, e: Number(b.Employee_Count) || 1 }, bizDetail(b))),
     pop: d ? { a: +d.Adults, st: +d.Students, se: +d.Seniors } : null
   };
 }).sort((a, b) => (b.name === 'Grand Lake') - (a.name === 'Grand Lake') || b.lines - a.lines);

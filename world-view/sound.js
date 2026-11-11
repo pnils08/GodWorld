@@ -105,7 +105,7 @@ SOUND = (function () {
     var mix = gain(1, master);
     var comp = N(ctx.createDynamicsCompressor(), master);
     comp.threshold.value = -22; comp.knee.value = 12; comp.ratio.value = 5; comp.attack.value = 0.008; comp.release.value = 0.35;
-    var trim = gain(0.2, master);
+    var trim = gain(0.6, master);
     var fader = gain(0, master);
     var clip = N(ctx.createWaveShaper(), master);
     (function () { var n = 2048, c = new Float32Array(n); for (var i = 0; i < n; i++) { var x = (i / (n - 1)) * 2 - 1; c[i] = Math.tanh(x * 1.1) * 0.85 / Math.tanh(1.1); } clip.curve = c; })();
@@ -465,8 +465,17 @@ SOUND = (function () {
     try { eng.fade(0, dur); } catch (e) {}
     later(function () { if (then()) { try { ctx.suspend(); } catch (e) {} } }, dur * 1000 + 150);
   }
+  var keepEl = null;
+  function keepAwake(play) {
+    try {
+      if (typeof Audio === 'undefined') return;
+      if (!keepEl) { keepEl = new Audio('data:audio/wav;base64,UklGRkQDAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YSADAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgA=='); keepEl.loop = true; keepEl.setAttribute('playsinline', ''); keepEl.volume = 0.01; }
+      if (play) { var p = keepEl.play(); if (p && p['catch']) p['catch'](function () {}); } else keepEl.pause();
+    } catch (e) {}
+  }
   function start() {
     if (!AC) return;
+    keepAwake(true);
     try {
       if (!ctx) { try { ctx = new AC({ latencyHint: 'playback' }); } catch (e) { ctx = new AC(); } eng = Engine(ctx, ctx.destination); }
     } catch (e) { ctx = null; eng = null; return; }
@@ -475,7 +484,7 @@ SOUND = (function () {
     if (!hidden) wake();
   }
   function stop() {
-    on = false;
+    on = false; keepAwake(false);
     hush(1.2, function () { return !on; });
   }
   function enter(info) {
@@ -494,5 +503,5 @@ SOUND = (function () {
       if (hidden) hush(0.5, function () { return hidden || !on; }); else wake();
     });
   }
-  return { supported: supported, start: start, stop: stop, enter: enter, tick: tick, _Engine: Engine, _profile: profile, _stats: function () { return eng ? eng.stats() : null; }, _ctx: function () { return ctx; } };
+  return { supported: supported, start: start, stop: stop, enter: enter, tick: tick, state: function () { return !ctx ? 'failed' : ctx.state; }, _Engine: Engine, _profile: profile, _stats: function () { return eng ? eng.stats() : null; }, _ctx: function () { return ctx; } };
 })();

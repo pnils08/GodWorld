@@ -50,6 +50,7 @@ button[aria-pressed="true"] { background: var(--ink); color: var(--night); }
 #pad { display: flex; gap: 10px; justify-content: center; }
 #pad button { width: 64px; height: 52px; font-size: 20px; padding: 0; }
 #hint { font-size: 12px; color: var(--dim); text-shadow: 0 1px 8px rgba(0,0,0,.8); margin: 0; }
+#tip { font-size: 12px; color: var(--dim); text-shadow: 0 1px 8px rgba(0,0,0,.8); margin: 0; }
 #legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--dim); text-shadow: 0 1px 8px rgba(0,0,0,.8); }
 #legend i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; }
 #bar { height: 2px; background: var(--edge); }
@@ -102,11 +103,14 @@ body.words .tag .line, body.words .tag .more { order: 5; }
 #person li { display: flex; gap: 10px; align-items: baseline; font-size: 15px; line-height: 1.35; }
 #person li i { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; transform: translateY(-1px); }
 #person li span.when { color: var(--dim); font-size: 12px; flex-shrink: 0; min-width: 3.4em; font-variant-numeric: tabular-nums; }
+#person button.link { background: none; border: 0; border-radius: 4px; padding: 0; font: inherit; color: var(--ink); text-align: left; text-decoration: underline; text-decoration-color: var(--edge); text-underline-offset: 3px; backdrop-filter: none; -webkit-backdrop-filter: none; }
+#person span.quiet { color: var(--dim); }
 #person blockquote { margin: 0 0 14px; font: italic 400 17px/1.4 var(--story); }
 #person blockquote footer { font: 500 11px/1.3 var(--display); color: var(--dim); margin-top: 4px; font-style: normal; }
 @media (max-width: 720px) { #person { top: auto; left: 0; width: auto; max-height: 56%; border-left: 0; border-top: 1px solid var(--edge); border-radius: 16px 16px 0 0; padding-left: max(18px, env(safe-area-inset-left, 0px)); } }
 body.visit #bottom, body.visit #keys { display: none; }
 #note { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: 34ch; text-align: center; font: italic 400 18px/1.4 var(--story); }
+@media (max-width: 720px) { #top { flex-wrap: nowrap; flex-direction: column; } #keys { flex-wrap: nowrap; overflow-x: auto; max-width: 100%; padding-bottom: 6px; scrollbar-width: none; pointer-events: auto; -webkit-overflow-scrolling: touch; } #keys::-webkit-scrollbar { display: none; } #keys button { flex-shrink: 0; } }
 @media (max-width: 560px) { #keys button { padding: 8px 11px; font-size: 12px; } .tag .line { font-size: 14px; } #facts { font-size: 12px; } #legend { display: none; } }
 @media (max-height: 480px) { #hood { font-size: 26px; } #canon { font-size: 14px; margin-top: 4px; } #facts { display: none; } #top { padding-bottom: 10px; } }
 @media (hover: none) { button:hover { border-color: var(--edge); } }
@@ -120,6 +124,8 @@ body.visit #bottom, body.visit #keys { display: none; }
   <div id="keys">
     <button id="bWalk" type="button" aria-pressed="false">Walk it yourself</button>
     <button id="bWords" type="button" aria-pressed="false">Their words</button>
+    <button id="bLabels" type="button">Cards: on</button>
+    <button id="bPace" type="button">Pace: normal</button>
     <button id="bPlay" type="button">Pause</button>
     <button id="bNext" type="button">Next place</button>
     <button id="bPeople" type="button">People</button>
@@ -135,6 +141,7 @@ body.visit #bottom, body.visit #keys { display: none; }
     <button id="pR" type="button" aria-label="Turn right">&#8631;</button>
   </div>
   <p id="hint"></p>
+  <p id="tip">Tap a person or a shop sign to open it.</p>
   <div id="legend">
     <span><i style="background:var(--gold)"></i>a turning point</span>
     <span><i style="background:var(--move)"></i>moved</span>
@@ -178,6 +185,7 @@ var KIND = { m: '#ffc94d', v: '#6fd3ff', t: '#ff9ecb', h: '#ff6b5e', s: '#7be08a
 var ROAD = 6.4, WALK = 10.2, SPEED = 3.2, LANE = 2.4;
 var DBG = window.WV_DEBUG || null; // look-test hook: { cam: [x,y,z], look: [x,y,z], t0: seconds, hide: true }
 if (DBG && DBG.hide) document.body.classList.add('bare');
+if (DBG) window.__wv = { get world() { return world; }, get camera() { return camera; }, WALK: WALK };
 var DEF = { wall: 'stucco', tone: [30, 0.15, 0.5], h: [4, 9], w: [6, 11], gap: [0.6, 2.1], lit: 0.45, fill: 'box', trees: 0, slope: 0, neon: 0, set: [] };
 
 // ---------- seeded random ----------
@@ -583,7 +591,7 @@ function setChip(slot, p) {
 // how far ahead of the camera someone is (negative = behind), and how far away
 function ahead(p) { var dx = p.x - camera.position.x, dz = p.z - camera.position.z; p.f = dx * FWD.x + dz * FWD.z; p.dist = Math.sqrt(dx * dx + dz * dz); }
 function pickNames() {
-  var narrow = window.innerWidth < 600, max = visiting ? 0 : narrow ? 2 : walking ? 3 : 4;
+  var narrow = window.innerWidth < 600, max = (visiting || bizView || labels < 2) ? 0 : narrow ? 2 : walking ? 3 : 4;
   camera.getWorldDirection(FWD); FWD.y = 0; FWD.normalize();
   world.people.forEach(ahead);
   CARDS.forEach(function (s, i) { if (s.p && (i >= max || s.p.f < 0.8 || s.p.dist > (walking ? 13 : 34))) setCard(s, null); });
@@ -599,7 +607,7 @@ function pickNames() {
     }
   }
   // everyone else close by still gets their name
-  var near = world.people.filter(function (p) { return p.f > 1.5 && p.dist < 22 && taken.indexOf(p) < 0 && p !== visiting; }).sort(function (a, b) { return a.dist - b.dist; }).slice(0, narrow ? 4 : CHIPS.length);
+  var near = labels < 1 ? [] : world.people.filter(function (p) { return p.f > 1.5 && p.dist < 22 && taken.indexOf(p) < 0 && p !== visiting; }).sort(function (a, b) { return a.dist - b.dist; }).slice(0, narrow ? 4 : CHIPS.length);
   CHIPS.forEach(function (s) { if (s.p && near.indexOf(s.p) < 0) setChip(s, null); });
   near.forEach(function (p) { if (!CHIPS.some(function (s) { return s.p === p; })) { var f = CHIPS.filter(function (s) { return !s.p; })[0]; if (f) setChip(f, p); } });
 }
@@ -632,7 +640,8 @@ function placeNames() {
 
 // ---------- moving through it ----------
 var playing = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches), busy = false, frame = 0, last = performance.now();
-var visiting = null, words = false, walking = false, yaw = 0, pitch = 0, held = {}, clock0 = 0;
+var PACES = [['slow', 0.5], ['normal', 1], ['quick', 2], ['fast', 4]], paceI = 1, pace = 1, labels = 2; // labels: 2 cards + names, 1 names, 0 nothing
+var bizView = null, visiting = null, words = false, walking = false, yaw = 0, pitch = 0, held = {}, clock0 = 0;
 var CAM = { x: 0, y: 0, z: 0, walking: false };
 var ZERO = new THREE.Matrix4().makeScale(0, 0, 0), MB = new THREE.Matrix4(), MP = new THREE.Matrix4(), MO = new THREE.Matrix4(), SV = new THREE.Vector3();
 function facts() {
@@ -693,8 +702,12 @@ function step(dt) {
     W.x = vx + Math.sin(t * 0.22) * 0.35; W.z = vp.z + 3.3 + Math.cos(t * 0.17) * 0.4;
     camera.position.set(W.x, 1.6 + vy + Math.sin(t * 0.3) * 0.04, W.z);
     camera.lookAt(vp.x + (wide ? 1.15 : 0), (wide ? 1.3 : 0.5) * vp.sc + vy, vp.z);
+  } else if (bizView) {
+    var bv = bizView, by = W.yAt(bv.z);
+    W.x = bv.cx + Math.sin(t * 0.2) * 0.4; W.z = bv.cz + Math.cos(t * 0.17) * 0.5;
+    camera.position.set(W.x, bv.cy + by, W.z); camera.lookAt(bv.lx, bv.ly + by, bv.lz);
   } else if (walking) {
-    var turn = (held.left ? 1 : 0) - (held.right ? 1 : 0), mv = (held.fwd ? 1 : 0) - (held.back ? 1 : 0), sp = (held.fast ? 13 : 6.5) * dt;
+    var turn = (held.left ? 1 : 0) - (held.right ? 1 : 0), mv = (held.fwd ? 1 : 0) - (held.back ? 1 : 0), sp = (held.fast ? 13 : 6.5) * Math.max(0.6, Math.sqrt(pace)) * dt;
     yaw += turn * 1.9 * dt;
     W.x = Math.max(-(WALK - 0.7), Math.min(WALK - 0.7, W.x - Math.sin(yaw) * mv * sp));
     W.z = Math.min(13, W.z - Math.cos(yaw) * mv * sp);
@@ -702,7 +715,7 @@ function step(dt) {
     camera.position.set(W.x, ey, W.z);
     camera.lookAt(W.x - Math.sin(yaw) * 10, ey + Math.tan(pitch) * 10 + (W.yAt(W.z - Math.cos(yaw) * 10) - W.yAt(W.z)), W.z - Math.cos(yaw) * 10);
   } else {
-    if (playing) W.z -= SPEED * dt;
+    if (playing) W.z -= SPEED * pace * dt;
     var z = W.z, near = Math.max(0, Math.min(1, (z - W.gz) / 30));
     W.x += (Math.sin(t * 0.21) * 0.45 * near - W.x) * Math.min(1, dt * 2 + (dt ? 0 : 1));
     camera.position.set(W.x, 3.7 + Math.sin(t * 0.37) * 0.15 + (1 - near) * 2.2 + W.yAt(z), z);
@@ -717,7 +730,7 @@ function step(dt) {
   if (rain) { rain.position.set(camera.position.x, camera.position.y - 6 - ((t * 26) % 0.7), camera.position.z); var ra = rain.geometry.attributes.position.array; for (i = 0; i < ra.length; i += 6) { ra[i + 1] -= 26 * dt; ra[i + 4] -= 26 * dt; if (ra[i + 4] < 0) { ra[i + 1] += 22; ra[i + 4] += 22; } } rain.geometry.attributes.position.needsUpdate = true; rain.position.y = camera.position.y - 8; }
   $('bar').firstElementChild.style.width = (Math.max(0, Math.min(1, (10 - W.z) / (10 - W.gz))) * 100).toFixed(1) + '%';
   if (SOUND && SOUND.tick) SOUND.tick({ t: t, dt: dt, x: camera.position.x, z: camera.position.z, walking: walking, moving: walking ? !!(held.fwd || held.back) : playing, gate: W.z - W.gz, length: W.L });
-  if (visiting) { /* standing with someone */ }
+  if (visiting || bizView) { /* standing with someone, or in front of a business */ }
   else if (W.z < W.gz + 1.5 && Math.abs(W.x) < 6.6 && !busy) { queued = null; go(cur + 1); }
   else if (W.z < W.gz - 4) W.z = W.gz - 4;
 }
@@ -745,10 +758,17 @@ function setWalk(v) {
   CARDS.forEach(function (s) { setCard(s, null); }); if (world) world.people.forEach(function (p) { p.seen = false; });
 }
 $('bWalk').addEventListener('click', function () { setWalk(!walking); });
+function store(k, v) { try { localStorage.setItem('wv-' + k, String(v)); } catch (e) {} }
+function recall(k) { try { return localStorage.getItem('wv-' + k); } catch (e) { return null; } }
+function setPace(i) { paceI = (i + PACES.length) % PACES.length; pace = PACES[paceI][1]; $('bPace').textContent = 'Pace: ' + PACES[paceI][0]; store('pace', paceI); }
+function setLabels(v) { labels = v; $('bLabels').textContent = 'Cards: ' + ['off', 'names only', 'on'][v]; store('labels', v); if (v < 2) CARDS.forEach(function (s) { setCard(s, null); }); if (v < 1) CHIPS.forEach(function (s) { setChip(s, null); }); if (world) world.people.forEach(function (p) { p.seen = false; }); }
+$('bPace').addEventListener('click', function () { setPace(paceI + 1); });
+$('bLabels').addEventListener('click', function () { setLabels((labels + 2) % 3); });
+(function () { var a = recall('pace'), b = recall('labels'); if (a != null && PACES[+a]) setPace(+a); if (b != null && +b >= 0 && +b <= 2) setLabels(+b); })();
 $('bWords').addEventListener('click', function () { words = !words; document.body.classList.toggle('words', words); $('bWords').setAttribute('aria-pressed', words ? 'true' : 'false'); CARDS.forEach(function (s) { setCard(s, null); }); if (world) world.people.forEach(function (p) { p.seen = false; }); });
 $('bPlay').addEventListener('click', function () { setPlay(!playing); });
 $('bNext').addEventListener('click', function () { go(cur + 1); });
-if (SOUND && SOUND.supported && SOUND.supported()) { $('bSound').hidden = false; $('bSound').addEventListener('click', function () { var on = $('bSound').getAttribute('aria-pressed') !== 'true'; $('bSound').setAttribute('aria-pressed', on ? 'true' : 'false'); if (on) SOUND.start(); else SOUND.stop(); }); }
+if (SOUND && SOUND.supported && SOUND.supported()) { $('bSound').hidden = false; $('bSound').addEventListener('click', function () { var on = $('bSound').getAttribute('aria-pressed') !== 'true'; $('bSound').setAttribute('aria-pressed', on ? 'true' : 'false'); if (on) { SOUND.start(); setTimeout(function () { if ($('bSound').getAttribute('aria-pressed') === 'true' && SOUND.state && SOUND.state() !== 'running') $('hint').textContent = 'Sound is on but the browser is holding it. Check the volume and the ring/silent switch, then press Sound twice.'; }, 1800); } else { SOUND.stop(); if (!walking) $('hint').textContent = ''; } }); }
 $('bPlaces').addEventListener('click', function () { closePeople(); var p = $('places'); p.hidden = !p.hidden; $('bPlaces').textContent = p.hidden ? 'Places' : 'Close'; });
 DATA.hoods.forEach(function (H, i) {
   var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button';
@@ -761,7 +781,7 @@ window.addEventListener('keydown', function (e) {
   if (e.ctrlKey || e.metaKey || e.altKey) return;
   if (e.target && e.target.id === 'q') { if (e.code === 'Escape') closePeople(); return; }
   if (!$('people').hidden) { if (e.code === 'Escape') closePeople(); return; }
-  if (visiting) { if (e.code === 'Escape') endVisit(false); return; }
+  if (visiting || bizView) { if (e.code === 'Escape') endVisit(false); return; }
   if (!$('places').hidden) { if (e.code === 'Escape') { $('places').hidden = true; $('bPlaces').textContent = 'Places'; } return; }
   if (e.target && e.target.tagName === 'BUTTON' && (e.code === 'Space' || e.code === 'Enter')) return;
   if (KEYS[e.code]) { if (KEYS[e.code] !== 'fast' && !walking) setWalk(true); held[KEYS[e.code]] = true; if (e.code.indexOf('Arrow') === 0) e.preventDefault(); }
@@ -787,12 +807,14 @@ window.addEventListener('blur', function () { held = {}; });
     if (!drag.moved) { drag.moved = true; if (!walking) setWalk(true); }
     yaw += dx * 0.005; pitch = Math.max(-0.5, Math.min(0.9, pitch + dy * 0.004)); drag.x = e.clientX; drag.y = e.clientY;
   });
-  var end = function () { drag = null; }; st.addEventListener('pointerup', end); st.addEventListener('pointercancel', end);
+  st.addEventListener('pointerup', function (e) { var tap = drag && !drag.moved; drag = null; if (tap) pick(e.clientX, e.clientY); });
+  st.addEventListener('pointercancel', function () { drag = null; });
 })();
 Array.prototype.forEach.call(document.querySelectorAll('#keys button'), function (b) { b.addEventListener('click', function (e) { if (e.detail) b.blur(); }); });
 $('places').addEventListener('click', function (e) { if (e.target.id === 'places') { $('places').hidden = true; $('bPlaces').textContent = 'Places'; } });
 var ALLP = [];
 DATA.hoods.forEach(function (H, hi) { H.people.forEach(function (d) { ALLP.push({ h: hi, d: d, hood: H.name, key: (d.n + ' ' + (d.role || '') + ' ' + H.name).toLowerCase() }); }); });
+var BYID = {}; ALLP.forEach(function (e) { if (e.d.id) BYID[e.d.id] = e; });
 ALLP.sort(function (a, b) { return (a.d.tier || 9) - (b.d.tier || 9) || (b.d.fame || 0) - (a.d.fame || 0) || b.d.all.length - a.d.all.length || (a.d.n < b.d.n ? -1 : 1); });
 function listPeople() {
   var q = $('q').value.trim().toLowerCase(), ul = $('peopleList'), hits = q ? ALLP.filter(function (e) { return e.key.indexOf(q) >= 0; }) : ALLP;
@@ -808,6 +830,61 @@ function listPeople() {
   if (!hits.length && hidden.length) { $('pcount').textContent = hidden.length + ' recorded this week but not shown on a street.'; return; }
   $('pcount').textContent = hits.length ? (q ? hits.length + ' found' : ALLP.length + ' people had a week on record') + (hits.length > 60 ? ', showing 60. Type to narrow it.' : '.') : 'Nobody by that name had a week on record.';
 }
+// what is under a tap: the nearest person or business sign/front, judged on screen
+function pick(px, py) {
+  if (!world || busy) return;
+  var W = world, w = window.innerWidth, h = window.innerHeight, k = h / (2 * Math.tan(camera.fov * Math.PI / 360)), best = null, bestScore = 1;
+  function test(x, y, z, rad, far, minPx, weight, obj) {
+    V.set(x, y, z).project(camera); if (V.z > 1) return;
+    var dx = x - camera.position.x, dy = y - camera.position.y, dz = z - camera.position.z, dist = Math.sqrt(dx * dx + dy * dy + dz * dz); if (dist > far) return;
+    var sx = (V.x * 0.5 + 0.5) * w, sy = (-V.y * 0.5 + 0.5) * h, r = Math.max(minPx, rad * k / dist), sc = Math.sqrt((sx - px) * (sx - px) + (sy - py) * (sy - py)) / r * weight;
+    if (sc < bestScore) { bestScore = sc; best = obj; }
+  }
+  W.people.forEach(function (p) { test(p.x, 1.0 * p.sc + W.yAt(p.z), p.z, 1.0, 60, 26, 0.8, { p: p }); });
+  W.H.lay.parcels.forEach(function (q) { if (q.b == null) return; var y = W.yAt(q.z); test(q.s * WALK, 1.6 + y, q.z, q.w * 0.45, 80, 30, 1, { b: q.b }); test(q.s * (WALK - 1.7), 4.5 + y, q.z + q.w / 2 - 0.4, 1.9, 80, 26, 1, { b: q.b }); });
+  W.H.lay.places.forEach(function (q) {
+    if (q.b == null) return;
+    if (q.half > 0) test((q.s || 1) * (WALK + 4), 5, q.z, q.half, 160, 40, 1, { b: q.b });
+    else if (q.type === 'stadium') test(0, 22, W.gz - 105, 45, 900, 50, 1, { b: q.b });
+    else if (q.type === 'market') test(WALK - 2.3, 5.6, -W.L * 0.3 + 3, 2.4, 80, 28, 1, { b: q.b });
+  });
+  if (!best) return;
+  if (best.p) startVisit(best.p.d); else startBiz(best.b);
+}
+function money(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
+function startBiz(bi) {
+  var W = world, b = W.H.biz[bi]; if (!b) return;
+  endVisit(true); if (walking) setWalk(false);
+  var lot = W.H.lay.parcels.filter(function (q) { return q.b === bi; })[0], plc = W.H.lay.places.filter(function (q) { return q.b === bi; })[0], wide = window.innerWidth > 720, v;
+  if (lot) v = { s: lot.s, z: lot.z, cx: -lot.s * (ROAD + 1.4), cy: 2.2, cz: lot.z + 7, lx: lot.s * WALK, ly: Math.min(lot.h * 0.5, 6) - (wide ? 0 : 2.5), lz: lot.z + (wide ? lot.s * 3 : 0) };
+  else if (plc && plc.type === 'stadium') v = { s: 0, z: W.gz + 30, cx: 0, cy: 7, cz: W.gz + 34, lx: wide ? 22 : 0, ly: wide ? 18 : 8, lz: W.gz - 105 };
+  else if (plc && plc.half > 0) { var ps = plc.s || 1; v = { s: ps, z: plc.z, cx: -ps * (WALK - 1.2), cy: 3, cz: plc.z + plc.half + 6, lx: ps * (WALK + 10), ly: wide ? 7 : 3, lz: plc.z + (wide ? ps * 6 : 0) }; }
+  else v = { s: 1, z: -W.L * 0.3, cx: 0, cy: 3.2, cz: -W.L * 0.3 + 16, lx: wide ? 4 : 0, ly: wide ? 2.5 : 0.5, lz: -W.L * 0.3 - 10 };
+  bizView = v; document.body.classList.add('visit'); CARDS.forEach(function (s) { setCard(s, null); });
+  var body = $('pBody'), lines = [b.s + ' \u00B7 ' + W.H.name];
+  lines.push(b.e.toLocaleString('en-US') + (b.e === 1 ? ' person works' : ' people work') + ' here by the ledger\u2019s count.');
+  if (b.pay != null) lines.push('Average pay ' + money(b.pay) + ' a year.');
+  if (b.rev != null) lines.push('Revenue ' + money(b.rev) + ' a year' + (b.gr != null ? ', growing ' + b.gr + '%.' : '.'));
+  else if (b.gr != null) lines.push('Growing ' + b.gr + '%.');
+  if (b.key) lines.push('Key people: ' + b.key + '.');
+  $('pName').textContent = b.n; $('pMeta').textContent = ''; lines.forEach(function (l, i) { if (i) $('pMeta').appendChild(document.createElement('br')); $('pMeta').appendChild(document.createTextNode(l)); });
+  $('pBio').hidden = true; body.textContent = '';
+  if (b.keyP) { section(body, 'Key people'); var kl = mk('ul'); b.keyP.forEach(function (m) { var li = mk('li'), ent = BYID[m.id]; if (ent) { var bt = mk('button', m.n, 'link'); bt.type = 'button'; bt.addEventListener('click', function () { go(ent.h, 0, ent.d); }); li.appendChild(bt); } else li.appendChild(mk('span', m.n, 'quiet')); kl.appendChild(li); }); body.appendChild(kl); }
+  var staff = b.staff || [];
+  section(body, staff.length ? 'Tracked citizens who work here (' + staff.length + ')' : 'No tracked citizen works here');
+  if (staff.length) {
+    var ul = mk('ul');
+    staff.forEach(function (m) {
+      var li = mk('li'), ent = BYID[m.id], txt = m.n + (m.role ? ' \u00B7 ' + m.role : '') + (m.st ? ' (' + m.st.toLowerCase() + ')' : '');
+      if (ent) { var bt = mk('button', txt, 'link'); bt.type = 'button'; bt.addEventListener('click', function () { go(ent.h, 0, ent.d); }); li.appendChild(bt); }
+      else li.appendChild(mk('span', txt, 'quiet'));
+      ul.appendChild(li);
+    });
+    body.appendChild(ul);
+    if (staff.some(function (m) { return !BYID[m.id]; })) body.appendChild(mk('p', 'Greyed names had nothing on record this week, so they are not on a street.', 'pmeta'));
+  }
+  $('person').hidden = false; $('person').scrollTop = 0;
+}
 function closePeople() { $('people').hidden = true; $('bPeople').textContent = 'People'; }
 $('bPeople').addEventListener('click', function () { var p = $('people'); p.hidden = !p.hidden; $('bPeople').textContent = p.hidden ? 'People' : 'Close'; $('places').hidden = true; $('bPlaces').textContent = 'Places'; if (!p.hidden) { listPeople(); try { $('q').focus(); } catch (e) {} } });
 $('q').addEventListener('input', listPeople);
@@ -817,7 +894,7 @@ function section(body, title) { body.appendChild(mk('h3', title)); }
 function saidBlock(body, sd) { var bq = mk('blockquote', '“' + sd.x + '”'); bq.appendChild(mk('footer', 'Week ' + sd.c + (sd.how ? ', ' + sd.how : '') + (sd.mood ? '. ' + sd.mood + '.' : '.'))); body.appendChild(bq); }
 function startVisit(d) {
   var p = world.people.filter(function (o) { return o.d === d; })[0]; if (!p) return;
-  if (walking) setWalk(false);
+  endVisit(true); if (walking) setWalk(false);
   visiting = p; world.people.forEach(function (o) { o.hold = o === p || (d.hh && o.d.hh === d.hh); });
   document.body.classList.add('visit'); CARDS.forEach(function (s) { setCard(s, null); });
   var minor = d.ab === 'child' || d.ab === 'teen', bits = [], body = $('pBody');
@@ -836,6 +913,7 @@ function startVisit(d) {
   if (d.mods) lines.push((d.arch ? d.arch + ': ' : '') + d.mods + '.');
   $('pName').textContent = d.n; $('pMeta').textContent = ''; lines.forEach(function (l, i) { if (i) $('pMeta').appendChild(document.createElement('br')); $('pMeta').appendChild(document.createTextNode(l)); });
   $('pBio').textContent = d.bio || ''; $('pBio').hidden = !d.bio;
+  $('bBack').textContent = 'Back to the street';
   body.textContent = '';
   section(body, 'This week (' + DATA.cycle + ')'); var ul = mk('ul');
   d.all.forEach(function (a) { var li = mk('li'), dot = mk('i'); dot.style.background = KIND[a[0]] || KIND.p; li.appendChild(dot); li.appendChild(mk('span', a[1])); ul.appendChild(li); }); body.appendChild(ul);
@@ -844,7 +922,7 @@ function startVisit(d) {
   $('person').hidden = false; $('person').scrollTop = 0;
 }
 function endVisit(quiet) {
-  if (!visiting) return; var p = visiting; visiting = null;
+  if (!visiting && !bizView) return; var p = visiting || bizView; visiting = null; bizView = null;
   if (world) { world.people.forEach(function (o) { if (o.hold) { o.hold = false; o.z0 = o.z - o.amp * Math.sin(world.t * o.om + o.ph); } }); if (!quiet) { world.z = Math.min(10, p.z + 5); world.x = 0; } }
   document.body.classList.remove('visit'); $('person').hidden = true;
   if (!quiet && world) { try { history.replaceState(null, '', '#' + slug(world.H.name)); } catch (e) {} }
@@ -860,7 +938,7 @@ function fromHash() {
   return [0, 0];
 }
 function start() { var f = fromHash(); clock0 = performance.now(); go(f[0], f[1], f[2]); requestAnimationFrame(loop); }
-window.addEventListener('hashchange', function () { var f = fromHash(); if (f[2]) { if (!visiting || visiting.d !== f[2]) go(f[0], 0, f[2]); } else if (f[0] !== cur || f[1]) go(f[0], f[1]); else if (visiting) endVisit(false); });
+window.addEventListener('hashchange', function () { var f = fromHash(); if (f[2]) { if (!visiting || visiting.d !== f[2]) go(f[0], 0, f[2]); } else if (f[0] !== cur || f[1]) go(f[0], f[1]); else if (visiting || bizView) endVisit(false); });
 if (document.fonts && document.fonts.ready) { var done = false, kick = function () { if (!done) { done = true; start(); } }; document.fonts.ready.then(kick); setTimeout(kick, 1500); } else start();
 })();
 </script>

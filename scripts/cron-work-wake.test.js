@@ -222,5 +222,17 @@ console.log('=== workMoveLine — a director shift is a work move (civic.38 ruli
   fs.rmSync(dir2, { recursive: true, force: true });
 })();
 
-console.log('\n' + pass + ' passed, ' + fail + ' failed');
-process.exit(fail ? 1 : 0);
+// 2026-11-11 (codex F2): the office-week read has one budget, rate-limit waits included — a hung store ends it.
+// The keep-alive stands in for the open socket a real hung request holds (abort timers alone do not keep Node up).
+(async () => {
+  const realFetch = global.fetch;
+  const keepAlive = setInterval(() => {}, 50);
+  global.fetch = (url, init) => new Promise((_, reject) => init.signal.addEventListener('abort', () => reject(init.signal.reason)));
+  const t0 = Date.now();
+  let threw = null;
+  try { await wake.loadOfficeWeek('POP-00034', 115, { budgetMs: 100 }); } catch (e) { threw = e; }
+  finally { global.fetch = realFetch; clearInterval(keepAlive); }
+  ok(threw && Date.now() - t0 < 2000, 'a hung office-week read throws inside its budget (the wake runs without that block)');
+  console.log('\n' + pass + ' passed, ' + fail + ' failed');
+  process.exit(fail ? 1 : 0);
+})();

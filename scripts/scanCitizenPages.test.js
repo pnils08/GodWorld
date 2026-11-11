@@ -66,3 +66,18 @@ assert.ok(T('I am proud of transit improving now.', 'I am proud of transit impro
 assert.strictEqual(T('I love transit.', 'I love transit. --- The council met.'), null, 'own utterance removed, nothing else conflicts');
 assert.strictEqual(T('I love transit.', 'I hate transit.', { skipCustomIds: ['cp-POP-90009-c108-PRESS'] }), null, 'skip is honoured');
 console.log('scanCitizenPages.test.js (codex fold): PASS');
+
+// 2026-11-11 (codex F2): the refresh's store reads are bounded — a store that never answers ends inside the budget
+(async () => {
+  const assert = require('assert');
+  const scan = require('./scanCitizenPages');
+  const realFetch = global.fetch;
+  const keepAlive = setInterval(() => {}, 50);   // stands in for a hung request's open socket
+  global.fetch = (url, init) => new Promise((_, reject) => init.signal.addEventListener('abort', () => reject(init.signal.reason)));
+  const t0 = Date.now();
+  let threw = null;
+  try { await scan.listAll(AbortSignal.timeout(100)); } catch (e) { threw = e; } finally { global.fetch = realFetch; clearInterval(keepAlive); }
+  assert.ok(threw && Date.now() - t0 < 2000, 'a hung list throws inside its budget (the angle run then uses the index on disk)');
+  console.log('scanCitizenPages store-budget test: PASS');
+})();
+

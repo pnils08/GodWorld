@@ -1549,7 +1549,8 @@ function appendRewardLoopRead(cycle, row) {
 // index must not move between the two stages — the report stage never refreshes it.
 async function refreshCitizenPages(cycle) {
   if (cycle == null) return;
-  try { await require('./scanCitizenPages').dumpIndex({ quiet: true }); }
+  // Two minutes for the whole refresh (2026-11-11: the store hung and this awaited it before any reporter woke).
+  try { await require('./scanCitizenPages').dumpIndex({ quiet: true, budgetMs: 120000 }); }
   catch (e) { log('[pages] index refresh skipped (using the index on disk): ' + e.message); }
   try {
     const pulse = require('./buildPulseSlice');

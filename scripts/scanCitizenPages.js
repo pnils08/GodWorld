@@ -84,11 +84,16 @@ function admit(m, liveCycle) {
   return { popId: mm[1], cycle, slot, type, day: dm ? dm[2] : null, ref: dm && dm[3] ? dm[3] : null };
 }
 
-async function listAll() {
+// Store reads carry a 20s limit each, and dumpIndex can hand them one budget for the whole refresh (2026-11-11: the
+// store hung and the angle fan-out waits on this refresh before any reporter wakes). A read cut off throws into the
+// caller's catch — the angle run then uses the index on disk.
+const readSignal = (budget) => budget ? AbortSignal.any([budget, AbortSignal.timeout(20000)]) : AbortSignal.timeout(20000);
+
+async function listAll(budget) {
   const all = [];
   for (let page = 1; page <= 200; page++) {
     const r = await fetch(API + '/v3/documents/list', {
-      method: 'POST', headers: auth(),
+      method: 'POST', headers: auth(), signal: readSignal(budget),
       body: JSON.stringify({ containerTags: [CONTAINER], limit: 200, page })
     });
     const j = await r.json();
@@ -105,10 +110,11 @@ const sleep = (ms) => new Promise(r => setTimeout(r, ms));
 // The key is rate-limited ("API key rate limit exceeded" — first full dump 2026-10-03 lost 1,064 of
 // 1,558 GETs at concurrency 4). Back off and retry; a doc that still fails stays unfetched and the
 // next --dump picks it up (resumable by docId).
-async function getContent(id) {
+async function getContent(id, budget) {
   let wait = 1500;
   for (let attempt = 1; attempt <= 6; attempt++) {
-    const r = await fetch(API + '/v3/documents/' + id, { headers: auth() });
+    if (budget && budget.aborted) { const err = new Error('get ' + id + ': refresh budget spent'); err.status = 'budget'; throw err; }
+    const r = await fetch(API + '/v3/documents/' + id, { headers: auth(), signal: readSignal(budget) });
     const j = await r.json().catch(() => ({}));
     if (r.ok && !j.error) return { content: typeof j.content === 'string' ? j.content : '', metadata: j.metadata || null };
     const msg = JSON.stringify(j.error || r.status);
@@ -236,11 +242,12 @@ function loadLedger() {
   return m;
 }
 
-async function dumpIndex({ quiet = false, concurrency = 2, paceMs = 250 } = {}) {
+async function dumpIndex({ quiet = false, concurrency = 2, paceMs = 250, budgetMs = 0 } = {}) {
   const log = (s) => { if (!quiet) console.error('scanCitizenPages: ' + s); };
+  const budget = budgetMs > 0 ? AbortSignal.timeout(budgetMs) : null;   // whole-refresh budget; --dump runs without one
   const live = liveCycle();
   if (live == null) log('WARNING no live cycle on disk (world_summary) — no bench-cycle cap this run');
-  const docs = await listAll();
+  const docs = await listAll(budget);
   const existing = new Map(loadIndex().map(r => [r.docId, r]));
   const excluded = { id: 0, type: 0, slot: 0, cycle: 0, empty: 0 };
   const admitted = [];
@@ -256,9 +263,10 @@ async function dumpIndex({ quiet = false, concurrency = 2, paceMs = 250 } = {}) 
   let cursor = 0;
   async function worker() {
     while (cursor < todo.length) {
+      if (budget && budget.aborted) return;   // out of time: the rest is fetched by the next refresh (resumable by docId)
       const { m, a } = todo[cursor++];
       try {
-        const g = await getContent(m.id);
+        const g = await getContent(m.id, budget);
         const content = g.content.replace(/\r/g, '').trim();
         if (!content) { excluded.empty++; continue; }
         const md = Object.assign({}, m.metadata || {}, g.metadata || {});

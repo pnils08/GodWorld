@@ -196,7 +196,10 @@ So: every cron — a citizen, an office, a player, a reporter — is a life insi
 the sim. It reacts to what the engine does to it, from its own view, and what it
 sees and wants is the product. The builder reads the engine in the sheets; a
 cron built to report the engine back, audit it, or say what it was told to say
-is a build defect, whatever desk it sits on. The builder and a cron are the same
+is a build defect, whatever desk it sits on. "The agent is built": its identity,
+its page, its dials make it who it is, and it already knows how to be an AI — the
+harness hands it the sim and gets out of the way; it never teaches the agent to
+think or tells it what to write. The builder and a cron are the same
 kind of AI; the difference is the environment — a cron's harness, tools and
 memory are the sim's, not the build's.
 

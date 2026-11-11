@@ -79,6 +79,32 @@ body.words .tag .line, body.words .tag .more { order: 5; }
 #places ul { list-style: none; margin: 0 auto; padding: 0; max-width: 720px; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 8px; }
 #places li button { width: 100%; text-align: left; border-radius: 10px; padding: 12px 14px; font-size: 17px; font-weight: 800; }
 #places li small { display: block; font-weight: 500; font-size: 12px; color: var(--dim); margin-top: 3px; }
+#people { z-index: 2; position: fixed; inset: 0; background: var(--veil); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); overflow-y: auto;
+  padding-block: calc(70px + env(safe-area-inset-top, 0px)) 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+#people .in { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+#people label { font-size: 12px; color: var(--dim); letter-spacing: .08em; text-transform: uppercase; }
+#q { font: 500 18px var(--display); color: var(--ink); background: rgba(11,13,26,.7); border: 1px solid var(--edge); border-radius: 10px; padding: 12px 14px; width: 100%; box-sizing: border-box; }
+#q:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+#people ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }
+#people li button { width: 100%; text-align: left; border-radius: 10px; padding: 10px 14px; font-size: 16px; font-weight: 800; }
+#people li small { display: block; font-weight: 500; font-size: 12px; color: var(--dim); margin-top: 2px; }
+#pcount { font-size: 12px; color: var(--dim); margin: 0; }
+#person { z-index: 4; position: fixed; right: 0; top: 0; bottom: 0; width: min(430px, 100%); box-sizing: border-box; overflow-y: auto; background: rgba(11,13,26,.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-left: 1px solid var(--edge);
+  padding-block: calc(16px + env(safe-area-inset-top, 0px)) calc(28px + env(safe-area-inset-bottom, 0px));
+  padding-left: 20px; padding-right: max(20px, env(safe-area-inset-right, 0px)); }
+#person h2 { margin: 10px 0 0; font-weight: 800; font-size: clamp(28px, 5vw, 40px); line-height: 1; letter-spacing: -.02em; text-wrap: balance; }
+#person .pmeta { margin: 6px 0 0; font-size: 13px; color: var(--dim); line-height: 1.45; }
+#person h3 { margin: 22px 0 8px; font-size: 11px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); }
+#person p.bio { margin: 14px 0 0; font: italic 400 17px/1.42 var(--story); }
+#person ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+#person li { display: flex; gap: 10px; align-items: baseline; font-size: 15px; line-height: 1.35; }
+#person li i { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; transform: translateY(-1px); }
+#person li span.when { color: var(--dim); font-size: 12px; flex-shrink: 0; min-width: 3.4em; font-variant-numeric: tabular-nums; }
+#person blockquote { margin: 0 0 14px; font: italic 400 17px/1.4 var(--story); }
+#person blockquote footer { font: 500 11px/1.3 var(--display); color: var(--dim); margin-top: 4px; font-style: normal; }
+@media (max-width: 720px) { #person { top: auto; left: 0; width: auto; max-height: 56%; border-left: 0; border-top: 1px solid var(--edge); border-radius: 16px 16px 0 0; padding-left: max(18px, env(safe-area-inset-left, 0px)); } }
+body.visit #bottom, body.visit #keys { display: none; }
 #note { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); max-width: 34ch; text-align: center; font: italic 400 18px/1.4 var(--story); }
 @media (max-width: 560px) { #keys button { padding: 8px 11px; font-size: 12px; } .tag .line { font-size: 14px; } #facts { font-size: 12px; } #legend { display: none; } }
 @media (max-height: 480px) { #hood { font-size: 26px; } #canon { font-size: 14px; margin-top: 4px; } #facts { display: none; } #top { padding-bottom: 10px; } }
@@ -95,6 +121,7 @@ body.words .tag .line, body.words .tag .more { order: 5; }
     <button id="bWords" type="button" aria-pressed="false">Their words</button>
     <button id="bPlay" type="button">Pause</button>
     <button id="bNext" type="button">Next place</button>
+    <button id="bPeople" type="button">People</button>
     <button id="bPlaces" type="button">Places</button>
     <button id="bSound" type="button" aria-pressed="false" hidden>Sound</button>
   </div>
@@ -118,6 +145,17 @@ body.words .tag .line, body.words .tag .more { order: 5; }
   <div id="bar"><span></span></div>
 </div>
 <div id="places" hidden><ul id="placeList"></ul></div>
+<div id="people" hidden><div class="in">
+  <label for="q">Find someone by name, job or neighborhood</label>
+  <input id="q" type="search" autocomplete="off" spellcheck="false">
+  <p id="pcount"></p>
+  <ul id="peopleList"></ul>
+</div></div>
+<aside id="person" hidden aria-live="polite">
+  <button id="bBack" type="button">Back to the street</button>
+  <h2 id="pName"></h2><p class="pmeta" id="pMeta"></p><p class="bio" id="pBio"></p>
+  <div id="pBody"></div>
+</aside>
 <div id="fade"></div>
 <p id="note" hidden>This flight needs 3D graphics, and this browser has them turned off.</p>
 
@@ -211,6 +249,11 @@ var TEX_GLOW = canvasTex(64, 64, function (g) {
   var gr = g.createRadialGradient(32, 32, 0, 32, 32, 32);
   gr.addColorStop(0, 'rgba(255,255,255,1)'); gr.addColorStop(0.25, 'rgba(255,255,255,.55)'); gr.addColorStop(1, 'rgba(255,255,255,0)');
   g.fillStyle = gr; g.fillRect(0, 0, 64, 64);
+});
+var TEX_FACE = canvasTex(64, 64, function (g) {
+  g.clearRect(0, 0, 64, 64); g.fillStyle = 'rgba(20,14,10,.9)';
+  g.beginPath(); g.arc(21, 27, 3.6, 0, 7); g.arc(43, 27, 3.6, 0, 7); g.fill();
+  g.strokeStyle = 'rgba(20,14,10,.55)'; g.lineWidth = 2.2; g.lineCap = 'round'; g.beginPath(); g.arc(32, 38, 9, 0.25 * Math.PI, 0.75 * Math.PI); g.stroke();
 });
 var FONT = '"Bricolage Grotesque", "Trebuchet MS", sans-serif';
 function signTex(text, hue) {
@@ -460,6 +503,7 @@ function build(idx) {
     hair: new THREE.InstancedMesh(new THREE.SphereGeometry(0.15, 10, 6, 0, Math.PI * 2, 0, Math.PI * 0.5).translate(0, 1.68, 0.015), white(), N1),
     hairLong: new THREE.InstancedMesh(new THREE.BoxGeometry(0.27, 0.36, 0.1).translate(0, 1.52, 0.115), white(), N1)
   };
+  parts.face = new THREE.InstancedMesh(new THREE.PlaneGeometry(0.2, 0.2).rotateY(Math.PI).translate(0, 1.655, -0.142), new THREE.MeshBasicMaterial({ map: TEX_FACE, transparent: true, depthWrite: false }), N1);
   var SIZE = { child: 0.6, teen: 0.84, youth: 0.95, senior: 0.94 };
   var hp = new Float32Array(n * 3), hc = new Float32Array(n * 3), people = [];
   var seq = H.people.map(function (_, k) { return k; }); for (i = seq.length - 1; i > 0; i--) { var j = Math.floor(r() * (i + 1)), tmp = seq[i]; seq[i] = seq[j]; seq[j] = tmp; }
@@ -475,9 +519,20 @@ function build(idx) {
     var grey = p.ab === 'senior' ? r() < 0.85 : r() < 0.06; col.setHSL(0.07, grey ? 0.04 : 0.4, grey ? 0.62 + r() * 0.2 : 0.05 + r() * 0.12); parts.hair.setColorAt(slot, col); parts.hairLong.setColorAt(slot, col);
     col.set(KIND[p.k] || KIND.p); hc[slot * 3] = col.r; hc[slot * 3 + 1] = col.g; hc[slot * 3 + 2] = col.b;
   });
-  Object.keys(parts).forEach(function (k) { parts[k].castShadow = true; parts[k].frustumCulled = false; root.add(parts[k]); });
+  // someone who runs a business on this street stands outside it; a household on the same street walks together
+  var byHome = {};
+  people.forEach(function (o) {
+    var d = o.d;
+    if (d.at != null) {
+      var lot = LAY.parcels.filter(function (q) { return q.b === d.at; })[0], plc = LAY.places.filter(function (q) { return q.b === d.at && q.half > 0; })[0];
+      if (lot) { o.s = lot.s; o.x = lot.s * (WALK - 1.3); o.z0 = lot.z + 1.2; o.amp = 0; o.om = 0; o.face = -lot.s * Math.PI / 2; }
+      else if (plc) { o.s = plc.s || 1; o.x = o.s * (WALK - 1.3); o.z0 = plc.z + plc.half - 2; o.amp = 0; o.om = 0; o.face = -o.s * Math.PI / 2; }
+    }
+    if (d.hh) { var lead = byHome[d.hh]; if (!lead) byHome[d.hh] = o; else { o.s = lead.s; o.x = lead.x - lead.s * 0.75; o.z0 = lead.z0 + (lead.amp ? 0.5 : 0.9); o.ph = lead.ph; o.amp = lead.amp; o.om = lead.om; o.face = lead.face; } }
+  });
+  Object.keys(parts).forEach(function (k) { parts[k].castShadow = k !== 'face'; parts[k].frustumCulled = false; root.add(parts[k]); });
   var hg = new THREE.BufferGeometry(); hg.setAttribute('position', new THREE.BufferAttribute(hp, 3)); hg.setAttribute('color', new THREE.BufferAttribute(hc, 3));
-  var halos = new THREE.Points(hg, new THREE.PointsMaterial({ map: TEX_GLOW, vertexColors: true, size: 1.5, transparent: true, opacity: 0.95, blending: THREE.AdditiveBlending, depthWrite: false }));
+  var halos = new THREE.Points(hg, new THREE.PointsMaterial({ map: TEX_GLOW, vertexColors: true, size: 1.0, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending, depthWrite: false }));
   halos.frustumCulled = false; root.add(halos);
 
   // the way out: a gate onto the next place
@@ -527,7 +582,7 @@ function setChip(slot, p) {
 // how far ahead of the camera someone is (negative = behind), and how far away
 function ahead(p) { var dx = p.x - camera.position.x, dz = p.z - camera.position.z; p.f = dx * FWD.x + dz * FWD.z; p.dist = Math.sqrt(dx * dx + dz * dz); }
 function pickNames() {
-  var narrow = window.innerWidth < 600, max = narrow ? 2 : walking ? 3 : 4;
+  var narrow = window.innerWidth < 600, max = visiting ? 0 : narrow ? 2 : walking ? 3 : 4;
   camera.getWorldDirection(FWD); FWD.y = 0; FWD.normalize();
   world.people.forEach(ahead);
   CARDS.forEach(function (s, i) { if (s.p && (i >= max || s.p.f < 0.8 || s.p.dist > (walking ? 13 : 34))) setCard(s, null); });
@@ -543,7 +598,7 @@ function pickNames() {
     }
   }
   // everyone else close by still gets their name
-  var near = world.people.filter(function (p) { return p.f > 1.5 && p.dist < 22 && taken.indexOf(p) < 0; }).sort(function (a, b) { return a.dist - b.dist; }).slice(0, narrow ? 4 : CHIPS.length);
+  var near = world.people.filter(function (p) { return p.f > 1.5 && p.dist < 22 && taken.indexOf(p) < 0 && p !== visiting; }).sort(function (a, b) { return a.dist - b.dist; }).slice(0, narrow ? 4 : CHIPS.length);
   CHIPS.forEach(function (s) { if (s.p && near.indexOf(s.p) < 0) setChip(s, null); });
   near.forEach(function (p) { if (!CHIPS.some(function (s) { return s.p === p; })) { var f = CHIPS.filter(function (s) { return !s.p; })[0]; if (f) setChip(f, p); } });
 }
@@ -576,7 +631,7 @@ function placeNames() {
 
 // ---------- moving through it ----------
 var playing = !(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches), busy = false, frame = 0, last = performance.now();
-var words = false, walking = false, yaw = 0, pitch = 0, held = {}, clock0 = 0;
+var visiting = null, words = false, walking = false, yaw = 0, pitch = 0, held = {}, clock0 = 0;
 var CAM = { x: 0, y: 0, z: 0, walking: false };
 var ZERO = new THREE.Matrix4().makeScale(0, 0, 0), MB = new THREE.Matrix4(), MP = new THREE.Matrix4(), MO = new THREE.Matrix4(), SV = new THREE.Vector3();
 function facts() {
@@ -589,8 +644,8 @@ function facts() {
   $('facts').innerHTML = 'Week ' + DATA.cycle + '. ' + bits.join(' · ') + '.';
 }
 var queued = null;
-function go(idx, startAt) {
-  if (busy) { queued = [idx, startAt]; return; } busy = true; $('fade').classList.add('on');
+function go(idx, startAt, who) {
+  if (busy) { queued = [idx, startAt, who]; return; } busy = true; endVisit(true); $('fade').classList.add('on');
   setTimeout(function () {
     if (world) { scene.remove(world.root); dispose(world.root); }
     CARDS.forEach(function (s) { setCard(s, null); }); CHIPS.forEach(function (s) { setChip(s, null); });
@@ -600,9 +655,10 @@ function go(idx, startAt) {
     if (startAt) world.z = 10 - (10 - world.gz) * startAt;
     yaw = 0; pitch = 0; step(0); draw();
     last = performance.now(); clock0 = last; slow = 0;
-    try { history.replaceState(null, '', '#' + slug(world.H.name)); } catch (e) {}
+    try { history.replaceState(null, '', '#' + (who ? 'who-' + slug(who.n) : slug(world.H.name))); } catch (e) {}
     $('fade').classList.remove('on'); busy = false;
-    if (queued) { var q = queued; queued = null; go(q[0], q[1]); }
+    if (who) startVisit(who);
+    if (queued) { var q = queued; queued = null; go(q[0], q[1], q[2]); }
   }, world ? 400 : 0);
 }
 function part(mesh, i, x, y, z, rx) { MP.makeRotationX(rx); MP.setPosition(x, y, z); MO.multiplyMatrices(MB, MP); mesh.setMatrixAt(i, MO); }
@@ -610,14 +666,14 @@ function step(dt) {
   var W = world; W.t += dt;
   var t = W.t, a = W.halos.geometry.attributes.position.array, P = W.parts;
   for (var i = 0; i < W.people.length; i++) {
-    var p = W.people[i], ang = t * p.om + p.ph, v = p.amp * p.om * Math.cos(ang);
-    p.z = p.z0 + p.amp * Math.sin(ang);
-    var y = W.yAt(p.z), sw = p.amp ? Math.sin(p.z * 3.1 + p.ph) * 0.6 * Math.min(1, Math.abs(v) / 0.5) : 0, bob = Math.abs(sw) * 0.035;
-    MB.makeRotationY(p.amp ? (v < 0 ? 0 : Math.PI) : p.face); MB.scale(SV.set(p.sc, p.sc, p.sc)); MB.setPosition(p.x, 0.16 + y + bob, p.z);
-    P.torso.setMatrixAt(i, MB); P.head.setMatrixAt(i, MB); P.hair.setMatrixAt(i, MB); P.hairLong.setMatrixAt(i, p.long ? MB : ZERO);
+    var p = W.people[i], ang = t * p.om + p.ph, v = p.hold ? 0 : p.amp * p.om * Math.cos(ang);
+    if (!p.hold) p.z = p.z0 + p.amp * Math.sin(ang);
+    var y = W.yAt(p.z), sw = p.amp && !p.hold ? Math.sin(p.z * 3.1 + p.ph) * 0.6 * Math.min(1, Math.abs(v) / 0.5) : 0, bob = Math.abs(sw) * 0.035;
+    MB.makeRotationY(p.hold ? Math.atan2(camera.position.x - p.x, camera.position.z - p.z) + Math.PI : p.amp ? (v < 0 ? 0 : Math.PI) : p.face); MB.scale(SV.set(p.sc, p.sc, p.sc)); MB.setPosition(p.x, 0.16 + y + bob, p.z);
+    P.torso.setMatrixAt(i, MB); P.head.setMatrixAt(i, MB); P.face.setMatrixAt(i, MB); P.hair.setMatrixAt(i, MB); P.hairLong.setMatrixAt(i, p.long ? MB : ZERO);
     part(P.legL, i, -0.09, 0.86, 0, sw); part(P.legR, i, 0.09, 0.86, 0, -sw);
     part(P.armL, i, -0.27, 1.46, 0, -sw * 0.8); part(P.armR, i, 0.27, 1.46, 0, sw * 0.8);
-    a[i * 3] = p.x; a[i * 3 + 1] = 2.3 * p.sc + y; a[i * 3 + 2] = p.z;
+    a[i * 3] = p.x; a[i * 3 + 1] = 2.42 * p.sc + y; a[i * 3 + 2] = p.z;
   }
   for (var k in P) P[k].instanceMatrix.needsUpdate = true;
   W.halos.geometry.attributes.position.needsUpdate = true;
@@ -628,7 +684,13 @@ function step(dt) {
   CAM.x = camera.position.x; CAM.y = camera.position.y; CAM.z = camera.position.z; CAM.walking = walking;
   for (i = 0; i < W.ticks.length; i++) W.ticks[i](t, dt, CAM);
 
-  if (walking) {
+  if (visiting) {
+    var vp = visiting, wide = window.innerWidth > 720, vy = W.yAt(vp.z);
+    var vx = Math.max(ROAD + 0.9, Math.min(WALK - 0.9, Math.abs(vp.x) - 0.9)) * (vp.x < 0 ? -1 : 1);
+    W.x = vx + Math.sin(t * 0.22) * 0.35; W.z = vp.z + 3.3 + Math.cos(t * 0.17) * 0.4;
+    camera.position.set(W.x, 1.6 + vy + Math.sin(t * 0.3) * 0.04, W.z);
+    camera.lookAt(vp.x + (wide ? 1.15 : 0), (wide ? 1.3 : 0.5) * vp.sc + vy, vp.z);
+  } else if (walking) {
     var turn = (held.left ? 1 : 0) - (held.right ? 1 : 0), mv = (held.fwd ? 1 : 0) - (held.back ? 1 : 0), sp = (held.fast ? 13 : 6.5) * dt;
     yaw += turn * 1.9 * dt;
     W.x = Math.max(-(WALK - 0.7), Math.min(WALK - 0.7, W.x - Math.sin(yaw) * mv * sp));
@@ -652,7 +714,8 @@ function step(dt) {
   if (rain) { rain.position.set(camera.position.x, camera.position.y - 6 - ((t * 26) % 0.7), camera.position.z); var ra = rain.geometry.attributes.position.array; for (i = 0; i < ra.length; i += 6) { ra[i + 1] -= 26 * dt; ra[i + 4] -= 26 * dt; if (ra[i + 4] < 0) { ra[i + 1] += 22; ra[i + 4] += 22; } } rain.geometry.attributes.position.needsUpdate = true; rain.position.y = camera.position.y - 8; }
   $('bar').firstElementChild.style.width = (Math.max(0, Math.min(1, (10 - W.z) / (10 - W.gz))) * 100).toFixed(1) + '%';
   if (SOUND && SOUND.tick) SOUND.tick({ t: t, dt: dt, x: camera.position.x, z: camera.position.z, walking: walking, moving: walking ? !!(held.fwd || held.back) : playing, gate: W.z - W.gz, length: W.L });
-  if (W.z < W.gz + 1.5 && Math.abs(W.x) < 6.6 && !busy) { queued = null; go(cur + 1); }
+  if (visiting) { /* standing with someone */ }
+  else if (W.z < W.gz + 1.5 && Math.abs(W.x) < 6.6 && !busy) { queued = null; go(cur + 1); }
   else if (W.z < W.gz - 4) W.z = W.gz - 4;
 }
 function draw() { if (quality && composer) composer.render(); else renderer.render(scene, camera); }
@@ -683,7 +746,7 @@ $('bWords').addEventListener('click', function () { words = !words; document.bod
 $('bPlay').addEventListener('click', function () { setPlay(!playing); });
 $('bNext').addEventListener('click', function () { go(cur + 1); });
 if (SOUND && SOUND.supported && SOUND.supported()) { $('bSound').hidden = false; $('bSound').addEventListener('click', function () { var on = $('bSound').getAttribute('aria-pressed') !== 'true'; $('bSound').setAttribute('aria-pressed', on ? 'true' : 'false'); if (on) SOUND.start(); else SOUND.stop(); }); }
-$('bPlaces').addEventListener('click', function () { var p = $('places'); p.hidden = !p.hidden; $('bPlaces').textContent = p.hidden ? 'Places' : 'Close'; });
+$('bPlaces').addEventListener('click', function () { closePeople(); var p = $('places'); p.hidden = !p.hidden; $('bPlaces').textContent = p.hidden ? 'Places' : 'Close'; });
 DATA.hoods.forEach(function (H, i) {
   var li = document.createElement('li'), b = document.createElement('button'); b.type = 'button';
   b.textContent = H.name; var s = document.createElement('small'); s.textContent = H.total + ' people · ' + H.lines + ' things happened'; b.appendChild(s);
@@ -693,6 +756,9 @@ DATA.hoods.forEach(function (H, i) {
 var KEYS = { ArrowUp: 'fwd', KeyW: 'fwd', ArrowDown: 'back', KeyS: 'back', ArrowLeft: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right', ShiftLeft: 'fast', ShiftRight: 'fast' };
 window.addEventListener('keydown', function (e) {
   if (e.ctrlKey || e.metaKey || e.altKey) return;
+  if (e.target && e.target.id === 'q') { if (e.code === 'Escape') closePeople(); return; }
+  if (!$('people').hidden) { if (e.code === 'Escape') closePeople(); return; }
+  if (visiting) { if (e.code === 'Escape') endVisit(false); return; }
   if (!$('places').hidden) { if (e.code === 'Escape') { $('places').hidden = true; $('bPlaces').textContent = 'Places'; } return; }
   if (e.target && e.target.tagName === 'BUTTON' && (e.code === 'Space' || e.code === 'Enter')) return;
   if (KEYS[e.code]) { if (KEYS[e.code] !== 'fast' && !walking) setWalk(true); held[KEYS[e.code]] = true; if (e.code.indexOf('Arrow') === 0) e.preventDefault(); }
@@ -722,15 +788,71 @@ window.addEventListener('blur', function () { held = {}; });
 })();
 Array.prototype.forEach.call(document.querySelectorAll('#keys button'), function (b) { b.addEventListener('click', function (e) { if (e.detail) b.blur(); }); });
 $('places').addEventListener('click', function (e) { if (e.target.id === 'places') { $('places').hidden = true; $('bPlaces').textContent = 'Places'; } });
+var ALLP = [];
+DATA.hoods.forEach(function (H, hi) { H.people.forEach(function (d) { ALLP.push({ h: hi, d: d, hood: H.name, key: (d.n + ' ' + (d.role || '') + ' ' + H.name).toLowerCase() }); }); });
+ALLP.sort(function (a, b) { return (a.d.tier || 9) - (b.d.tier || 9) || (b.d.fame || 0) - (a.d.fame || 0) || b.d.all.length - a.d.all.length || (a.d.n < b.d.n ? -1 : 1); });
+function listPeople() {
+  var q = $('q').value.trim().toLowerCase(), ul = $('peopleList'), hits = q ? ALLP.filter(function (e) { return e.key.indexOf(q) >= 0; }) : ALLP;
+  ul.textContent = '';
+  hits.slice(0, 60).forEach(function (e) {
+    var li = document.createElement('li'), b = document.createElement('button'), sm = document.createElement('small'); b.type = 'button';
+    b.textContent = e.d.n; sm.textContent = (e.d.role ? e.d.role + ' · ' : '') + e.hood; b.appendChild(sm);
+    b.addEventListener('click', function () { closePeople(); go(e.h, 0, e.d); });
+    li.appendChild(b); ul.appendChild(li);
+  });
+  $('pcount').textContent = hits.length ? (q ? hits.length + ' found' : ALLP.length + ' people had a week on record') + (hits.length > 60 ? ', showing 60. Type to narrow it.' : '.') : 'Nobody by that name had a week on record.';
+}
+function closePeople() { $('people').hidden = true; $('bPeople').textContent = 'People'; }
+$('bPeople').addEventListener('click', function () { var p = $('people'); p.hidden = !p.hidden; $('bPeople').textContent = p.hidden ? 'People' : 'Close'; $('places').hidden = true; $('bPlaces').textContent = 'Places'; if (!p.hidden) { listPeople(); try { $('q').focus(); } catch (e) {} } });
+$('q').addEventListener('input', listPeople);
+$('people').addEventListener('click', function (e) { if (e.target.id === 'people') closePeople(); });
+function mk(tag, text, cls) { var n = document.createElement(tag); if (text != null) n.textContent = text; if (cls) n.className = cls; return n; }
+function section(body, title) { body.appendChild(mk('h3', title)); }
+function saidBlock(body, sd) { var bq = mk('blockquote', '“' + sd.x + '”'); bq.appendChild(mk('footer', 'Week ' + sd.c + (sd.how ? ', ' + sd.how : '') + (sd.mood ? '. ' + sd.mood + '.' : '.'))); body.appendChild(bq); }
+function startVisit(d) {
+  var p = world.people.filter(function (o) { return o.d === d; })[0]; if (!p) return;
+  if (walking) setWalk(false);
+  visiting = p; world.people.forEach(function (o) { o.hold = o === p || (d.hh && o.d.hh === d.hh); });
+  document.body.classList.add('visit'); CARDS.forEach(function (s) { setCard(s, null); });
+  var minor = d.ab === 'child' || d.ab === 'teen', bits = [], body = $('pBody');
+  if (d.g) bits.push(d.g === 'f' ? (minor ? 'girl' : 'woman') : (minor ? 'boy' : 'man'));
+  if (d.ab) bits.push(d.ab === 'senior' ? 'senior' : (minor || d.ab === 'youth') ? 'youth' : 'adult');
+  if (d.role) bits.push(d.role);
+  var lines = [bits.join(' · ')], home = [];
+  home.push('Lives in ' + world.H.name);
+  if (d.home) { if (d.home.housing) home.push(d.home.housing === 'owned' ? 'owns' : d.home.housing === 'rented' ? 'rents' : d.home.housing); if (d.home.with.length) home.push('with ' + d.home.with.join(', ')); else if (d.home.type) home.push(d.home.type); }
+  lines.push(home.join(', ') + '.');
+  if (d.from) lines.push('From ' + d.from + '.');
+  if (d.emp) lines.push('Works at ' + d.emp + '.');
+  if (d.runs) lines.push('Key person at ' + d.runs.map(function (x) { return x.n + ' (' + x.hood + ')'; }).join(', ') + '.');
+  if (d.mods) lines.push((d.arch ? d.arch + ': ' : '') + d.mods + '.');
+  $('pName').textContent = d.n; $('pMeta').textContent = ''; lines.forEach(function (l, i) { if (i) $('pMeta').appendChild(document.createElement('br')); $('pMeta').appendChild(document.createTextNode(l)); });
+  $('pBio').textContent = d.bio || ''; $('pBio').hidden = !d.bio;
+  body.textContent = '';
+  section(body, 'This week (' + DATA.cycle + ')'); var ul = mk('ul');
+  d.all.forEach(function (a) { var li = mk('li'), dot = mk('i'); dot.style.background = KIND[a[0]] || KIND.p; li.appendChild(dot); li.appendChild(mk('span', a[1])); ul.appendChild(li); }); body.appendChild(ul);
+  if (d.said) { section(body, 'In their words'); saidBlock(body, d.said); (d.saidMore || []).forEach(function (sd) { saidBlock(body, sd); }); }
+  if (d.hist) { section(body, 'Before this week'); var hl = mk('ul'); d.hist.forEach(function (hx) { var li = mk('li'); li.appendChild(mk('span', hx[0], 'when')); li.appendChild(mk('span', hx[1])); hl.appendChild(li); }); body.appendChild(hl); }
+  $('person').hidden = false; $('person').scrollTop = 0;
+}
+function endVisit(quiet) {
+  if (!visiting) return; var p = visiting; visiting = null;
+  if (world) { world.people.forEach(function (o) { if (o.hold) { o.hold = false; o.z0 = o.z - o.amp * Math.sin(world.t * o.om + o.ph); } }); if (!quiet) { world.z = Math.min(10, p.z + 5); world.x = 0; } }
+  document.body.classList.remove('visit'); $('person').hidden = true;
+  if (!quiet && world) { try { history.replaceState(null, '', '#' + slug(world.H.name)); } catch (e) {} }
+}
+$('bBack').addEventListener('click', function () { endVisit(false); });
 setPlay(playing);
 // a link can open on one place: #west-oakland, or #west-oakland-at-40 to start 40% of the way down its street
 function fromHash() {
-  var h = (location.hash || '').slice(1), m = h.match(/^(.*)-at-(\d+)$/), at = 0; if (m) { h = m[1]; at = Math.min(99, +m[2]) / 100; }
+  var h = (location.hash || '').slice(1), w = h.match(/^who-(.+)$/);
+  if (w) { for (var e = 0; e < ALLP.length; e++) if (slug(ALLP[e].d.n) === w[1]) return [ALLP[e].h, 0, ALLP[e].d]; }
+  var m = h.match(/^(.*)-at-(\d+)$/), at = 0; if (m) { h = m[1]; at = Math.min(99, +m[2]) / 100; }
   for (var k = 0; k < DATA.hoods.length; k++) if (slug(DATA.hoods[k].name) === h) return [k, at];
   return [0, 0];
 }
-function start() { var f = fromHash(); clock0 = performance.now(); go(f[0], f[1]); requestAnimationFrame(loop); }
-window.addEventListener('hashchange', function () { var f = fromHash(); if (f[0] !== cur || f[1]) go(f[0], f[1]); });
+function start() { var f = fromHash(); clock0 = performance.now(); go(f[0], f[1], f[2]); requestAnimationFrame(loop); }
+window.addEventListener('hashchange', function () { var f = fromHash(); if (f[2]) { if (!visiting || visiting.d !== f[2]) go(f[0], 0, f[2]); } else if (f[0] !== cur || f[1]) go(f[0], f[1]); });
 if (document.fonts && document.fonts.ready) { var done = false, kick = function () { if (!done) { done = true; start(); } }; document.fonts.ready.then(kick); setTimeout(kick, 1500); } else start();
 })();
 </script>

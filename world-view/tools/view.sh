@@ -12,10 +12,10 @@ HERE="$(cd "$(dirname "$0")/.." && pwd)"
 PLACE="$1"; OUT="$2"; shift 2
 CAM=""; LOOK=""; T0=""; MS=3000; SIZE="960x620"; WXV=""
 while [ $# -gt 0 ]; do case "$1" in --cam) CAM="$2";; --look) LOOK="$2";; --t0) T0="$2";; --ms) MS="$2";; --size) SIZE="$2";; --wx) WXV="$2";; esac; shift 2; done
-TMP="$(mktemp -d)"; trap 'rm -rf "$TMP"' EXIT
-WX="$WXV" node "$HERE/build.js" "$TMP/page.html" >/dev/null || exit 1
+TMP="${TMPDIR:-/tmp}/world-view-look"; mkdir -p "$TMP"; PG="$TMP/page-$$.html"; PW="$TMP/p-$$.html"; trap 'rm -f "$PG" "$PW"' EXIT
+WX="$WXV" node "$HERE/build.js" "$PG" >/dev/null || exit 1
 DBG="null"
 if [ -n "$CAM" ]; then DBG="{cam:[$CAM],look:[${LOOK:-0,2,-1000}],t0:${T0:-0},hide:true}"; elif [ -n "$T0" ]; then DBG="{t0:$T0}"; fi
-{ printf '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>[hidden]{display:none!important}body{margin:0}</style><script>window.WV_DEBUG=%s;</script></head><body>' "$DBG"; cat "$TMP/page.html"; printf '</body></html>'; } > "$TMP/p.html"
-timeout 150 /opt/google/chrome/chrome --headless=new --no-sandbox --enable-unsafe-swiftshader --use-angle=swiftshader --hide-scrollbars --user-data-dir="$TMP/prof" --window-size="${SIZE/x/,}" --virtual-time-budget="$MS" --enable-logging=stderr --screenshot="$OUT" "file://$TMP/p.html#$PLACE" 2>&1 | grep -E "CONSOLE" | grep -v -i favicon | grep -i -E "error|warn|uncaught|not defined|undefined" | cut -c1-400 | sort -u | head -8
+{ printf '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>[hidden]{display:none!important}body{margin:0}</style><script>window.WV_DEBUG=%s;</script></head><body>' "$DBG"; cat "$PG"; printf '</body></html>'; } > "$PW"
+timeout 150 /opt/google/chrome/chrome --headless=new --no-sandbox --enable-unsafe-swiftshader --use-angle=swiftshader --hide-scrollbars --window-size="${SIZE/x/,}" --virtual-time-budget="$MS" --enable-logging=stderr --screenshot="$OUT" "file://$PW#$PLACE" 2>&1 | grep -E "CONSOLE" | grep -v -i favicon | grep -i -E "error|warn|uncaught|not defined|undefined" | cut -c1-400 | sort -u | head -8
 [ -s "$OUT" ] || { echo "no screenshot written"; exit 1; }

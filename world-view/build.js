@@ -34,6 +34,7 @@ life.forEach(r => {
   const p = (h.people[r.POPID] = h.people[r.POPID] || { id: r.POPID, n: r.Name, c: 0, pr: 99 });
   p.c++;
   if (pr < p.pr) { p.pr = pr; p.k = k; p.x = r.EventText; }
+  (p.all = p.all || []).push([pr, k, r.EventText]);
 });
 
 // ---------- who each person is: sex, age band, role (ledger), and the last thing they said (reflections) ----------
@@ -56,19 +57,44 @@ const said = new Map();
 rd('Reflection_Intake').forEach(r => {
   if (!r.ReflectionExcerpt) return;
   const key = [Number(r.Cycle) || 0, /^20/.test(r.Timestamp) ? r.Timestamp : ''];
-  const cur = said.get(r.POPID);
-  if (!cur || key[0] > cur.key[0] || (key[0] === cur.key[0] && key[1] > cur.key[1])) said.set(r.POPID, { key, r });
+  if (!said.has(r.POPID)) said.set(r.POPID, []);
+  said.get(r.POPID).push({ key, r });
 });
+said.forEach(list => list.sort((a, b) => b.key[0] - a.key[0] || (a.key[1] < b.key[1] ? 1 : -1)));
+const saidOne = s => ({ x: trimSaid(s.r.ReflectionExcerpt), c: Number(s.r.Cycle) || 0, how: SAID_HOW[s.r.Daypart] || '', mood: s.r.Affect || '' });
+const households = new Map(rd('Household_Ledger').map(h => [h.HouseholdId, h]));
+const nameOf = id => { const L = ledger.get(id); return L ? (L.Name || ((L.First || '') + ' ' + (L.Last || '')).trim()) : ''; };
+const bizById = new Map(biz.map(x => [x.BIZ_ID, x]));
+const runs = new Map(); // POPID -> businesses that name them as key personnel
+biz.forEach(x => { (String(x.Key_Personnel || '').match(/POP-\d+/g) || []).forEach(id => { if (!runs.has(id)) runs.set(id, []); runs.get(id).push(x); }); });
+function history(text) {
+  return String(text || '').split('\n').map(l => /^(Y\d+C\d+)\s+—\s+\[([^\]]+)\]\s+(.+)$/.exec(l.trim())).filter(Boolean).slice(-6).reverse().map(m => [m[1], m[3]]);
+}
 function who(id) {
   const L = ledger.get(id), o = {};
   if (L) {
     const g = String(L.Gender || '').trim().toLowerCase(); o.g = /^m/.test(g) ? 'm' : /^f/.test(g) ? 'f' : '';
     o.ab = band(L.BirthYear); if (L.RoleType) o.role = String(L.RoleType).trim();
   }
+  if (L) {
+    o.tier = Number(L.Tier) || 4; if (L.Famous) o.fame = 1;
+    if (L.CitizenBio) o.bio = String(L.CitizenBio).trim();
+    const tp = /Archetype:([^|]+)\|Mods:([^|]+)/.exec(L.TraitProfile || ''); if (tp) { o.arch = tp[1]; o.mods = tp[2].split(',').join(', '); }
+    if (L.OrginCity) o.from = String(L.OrginCity).trim();
+    const sp = /POP-\d+\s+(.+)/.exec(L.SpouseId || ''); if (sp) o.spouse = sp[1].trim();
+    const H = households.get(L.HouseholdId);
+    if (H) { let mem = []; try { mem = JSON.parse(H.Members || '[]'); } catch (e) {} o.hh = L.HouseholdId; o.home = { type: H.HouseholdType || '', housing: H.HousingType || '', with: mem.filter(m => m !== id).map(nameOf).filter(Boolean) }; }
+    const emp = bizById.get(L.EmployerBizId); if (emp) o.emp = emp.Name;
+    const rn = runs.get(id); if (rn) o.runs = rn.map(x => ({ id: x.BIZ_ID, n: x.Name, hood: x.Neighborhood }));
+    const hist = history(L.LifeHistory); if (hist.length) o.hist = hist;
+  }
   const s = said.get(id);
-  if (s) o.said = { x: trimSaid(s.r.ReflectionExcerpt), c: Number(s.r.Cycle) || 0, how: SAID_HOW[s.r.Daypart] || '', mood: s.r.Affect || '' };
+  if (s) { o.said = saidOne(s[0]); if (s.length > 1) o.saidMore = s.slice(1, 4).map(saidOne); }
   return o;
 }
+
+const loose = new Map();
+rd('LifeHistory_Log').filter(r => String(r.Cycle) === CYCLE && !r.Neighborhood && r.EventText).forEach(r => { const [k, pr] = kindOf(r.EventTag); if (!loose.has(r.POPID)) loose.set(r.POPID, []); loose.get(r.POPID).push([pr, k, r.EventText]); });
 
 const CAP = 110;
 const hoods = Object.keys(byHood).map(name => {
@@ -80,7 +106,7 @@ const hoods = Object.keys(byHood).map(name => {
     name,
     lines: h.lines,
     total: all.length,
-    people: shown.map(p => Object.assign({ n: p.n, k: p.k, x: p.x, c: p.c, pr: p.pr }, who(p.id))),
+    people: shown.map(p => Object.assign({ n: p.n, k: p.k, x: p.x, c: p.c, pr: p.pr, all: p.all.concat(loose.get(p.id) || []).sort((a, b) => a[0] - b[0]).map(a => [a[1], a[2]]) }, who(p.id))),
     biz: biz.filter(b => b.Neighborhood === name).map(b => ({ id: b.BIZ_ID, n: b.Name, s: b.Sector, e: Number(b.Employee_Count) || 1 })),
     pop: d ? { a: +d.Adults, st: +d.Students, se: +d.Seniors } : null
   };
@@ -164,6 +190,7 @@ function layout(H) {
   return { L: r2(L), water, slope: water ? 0 : ST.slope, parcels: out, places: places.map(p => ({ b: p.i, type: p.type, half: p.half, s: p.s, z: p.z, end: p.end })) };
 }
 hoods.forEach(h => { h.lay = layout(h); });
+hoods.forEach(h => h.people.forEach(p => { if (p.runs) { const i = h.biz.findIndex(x => p.runs.some(rn => rn.id === x.id)); if (i >= 0) p.at = i; p.runs = p.runs.map(rn => ({ n: rn.n, hood: rn.hood })); } }));
 
 const wx = process.env.WX || '';
 const data = {
@@ -179,7 +206,8 @@ const tpl = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
 const places = fs.readFileSync(path.join(__dirname, 'places.js'), 'utf8');
 if (!tpl.includes('/*__PLACES__*/')) { console.error('template has no places marker'); process.exit(1); }
 const LIFE_FILES = ['life-traffic.js', 'life-nature.js', 'life-water.js', 'life-street.js', 'sound.js'];
-const lifeSrc = LIFE_FILES.map(f => '// ---- ' + f + ' ----\n' + fs.readFileSync(path.join(__dirname, f), 'utf8')).join('\n');
+// NOLIFE=1 builds without the ambient modules (to publish while one of them is mid-edit)
+const lifeSrc = process.env.NOLIFE ? '' : LIFE_FILES.map(f => '// ---- ' + f + ' ----\n' + fs.readFileSync(path.join(__dirname, f), 'utf8')).join('\n');
 if (!tpl.includes('/*__LIFE__*/')) { console.error('template has no life marker'); process.exit(1); }
 const out = tpl.replace('/*__LIFE__*/', () => lifeSrc).replace('/*__PLACES__*/', () => places).replace('/*__DATA__*/null', () => JSON.stringify(data).replace(/</g, '\\u003c'));
 const dest = process.argv[2] || path.join(__dirname, 'oakland-week.html');

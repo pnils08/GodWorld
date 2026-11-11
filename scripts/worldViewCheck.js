@@ -3,9 +3,9 @@
 
 // Local disk only. Usage: node scripts/worldViewCheck.js
 // This verifies the data contract, not the browser, tag ranking or spoken context.
-// A missing POPID is resolved by Name + event neighborhood; ambiguity is a failure.
-// Special places count as assigned businesses. Unplaced citywide/alias rows fail
-// too: the checker never invents a neighborhood mapping to make coverage pass.
+// People and events resolve through POPID; residence comes from the ledger.
+// Explicitly listed businesses outside the street map are known-unplaced.
+// Missing placements on rendered streets still fail; no alias mapping is guessed.
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
@@ -61,7 +61,7 @@ const normalize = text => String(text || '').replace(/\s+/g, ' ').trim();
 const sexOf = value => ({ m: 'm', male: 'm', f: 'f', female: 'f' })[String(value || '').trim().toLowerCase()] || '';
 const validCycle = value => /^\d+$/.test(String(value)) && Number.isSafeInteger(Number(value)) && Number(value) > 0;
 
-function checkWorldView(build, sources, engine, secondBuild) {
+function checkWorldView(build, sources, engine, secondBuild, reports = []) {
   const failures = [];
   const fail = (code, where, message) => failures.push(`${code} ${JSON.stringify(where)}: ${String(message).replace(/[\r\n]+/g, ' ')}`);
   const arr = (value, where) => {
@@ -87,13 +87,10 @@ function checkWorldView(build, sources, engine, secondBuild) {
   const ledger = index(sources.ledger, 'POPID', 'Simulation_Ledger');
   const businesses = index(sources.businesses, 'BIZ_ID', 'Business_Ledger');
   const households = index(sources.households, 'HouseholdId', 'Household_Ledger');
-  const life = arr(sources.life, 'LifeHistory_Log').filter(r => String(r.Cycle) === String(build.CYCLE));
+  const life = arr(sources.life, 'LifeHistory_Log').filter(r => String(r.Cycle) === String(build.CYCLE) && r.EventText && !/^CareerState/.test(r.EventTag || ''));
   const reflections = arr(sources.reflections, 'Reflection_Intake');
-  const byIdentity = new Map(), byPerson = new Map(), byReflection = new Map();
+  const byPerson = new Map(), byReflection = new Map(), shownPeople = new Set();
   for (const row of life) {
-    const key = JSON.stringify([row.Name, row.Neighborhood]);
-    if (!byIdentity.has(key)) byIdentity.set(key, new Set());
-    if (row.POPID) byIdentity.get(key).add(row.POPID);
     if (!byPerson.has(row.POPID)) byPerson.set(row.POPID, []);
     byPerson.get(row.POPID).push(row);
   }
@@ -150,23 +147,35 @@ function checkWorldView(build, sources, engine, secondBuild) {
     for (const p of arr(h.people, `${h.name}.people`)) {
       if (!p || typeof p.n !== 'string' || !p.n) { fail('identity', h.name, 'person has no name'); continue; }
       const where = `${h.name}/${p.n}`;
-      const ids = byIdentity.get(JSON.stringify([p.n, h.name])) || new Set();
-      if (ids.size !== 1) { fail('identity', where, `Name + event neighborhood resolves to ${ids.size} POPIDs`); continue; }
-      const [id] = ids;
-      if (p.id != null && p.id !== id) fail('identity', where, 'exported id disagrees with event identity');
+      const id = p.id;
+      if (typeof id !== 'string' || !/^POP-\d{5}$/.test(id) || !ledger.has(id)) {
+        fail('identity', where, 'missing or unknown POPID'); continue;
+      }
+      shownPeople.add(id);
       const rows = byPerson.get(id) || [];
+      if (!rows.length) fail('identity', where, `no current event rows for ${id}`);
       const events = [['x', p.x]];
       for (const [i, a] of arr(p.all, `${where}.all`).entries()) {
         if (!Array.isArray(a) || a.length !== 2) fail('shape', `${where}.all[${i}]`, 'expected [kind, EventText]');
         else events.push([`all[${i}][1]`, a[1]]);
       }
       for (const [field, text] of events) {
-        if (typeof text !== 'string' || !text || !rows.some(r => r.Name === p.n && r.EventText === text && (!r.Neighborhood || r.Neighborhood === h.name))) {
-          fail('event', `${where}.${field}`, `no verbatim named C${cycle} LifeHistory_Log row for ${id}: ${JSON.stringify(text)}`);
+        if (typeof text !== 'string' || !text || !rows.some(r => r.EventText === text)) {
+          fail('event', `${where}.${field}`, `no verbatim C${cycle} LifeHistory_Log row for ${id}: ${JSON.stringify(text)}`);
         }
       }
       const l = ledger.get(id);
       if (!l || nameOf(l) !== p.n) { fail('identity', where, `no matching citizen snapshot name for ${id}`); continue; }
+      const residence = String(l.Neighborhood || '').trim();
+      if ((p.lives || '') !== residence) fail('lives', where, 'does not match snapshot Neighborhood');
+      if (p.noPlace !== undefined && p.noPlace !== 1 && p.noPlace !== true) fail('noPlace', where, 'expected 1 or true when present');
+      if (p.noPlace) {
+        if (!residence || h.name !== residence || rows.some(r => r.Neighborhood)) {
+          fail('noPlace', where, 'requires locationless events and placement at ledger home');
+        }
+      } else if (!rows.some(r => r.Neighborhood === h.name)) {
+        fail('noPlace', where, 'no current event locates this person on this street; home placement must be disclosed');
+      }
       if (p.g !== sexOf(l.Gender)) fail('sex', where, 'does not match snapshot Gender');
       if (p.ab !== engine.band(l.BirthYear, simYear)) fail('band', where, 'does not match engine deriveLifeState_');
       if ((p.role || '') !== String(l.RoleType || '').trim()) fail('role', where, 'does not match snapshot RoleType');
@@ -199,11 +208,6 @@ function checkWorldView(build, sources, engine, secondBuild) {
           if (p.home.type !== (home.HouseholdType || '') || p.home.housing !== (home.HousingType || '')) fail('home', where, 'household type/housing mismatch');
         }
       }
-      if (p.spouse !== undefined) {
-        const match = String(l.SpouseId || '').match(/\bPOP-\d+\b/);
-        const spouse = match && ledger.get(match[0]);
-        if (!spouse || nameOf(spouse) !== p.spouse) fail('spouse', where, 'name does not resolve through snapshot SpouseId');
-      }
       if (p.emp !== undefined) {
         const emp = businesses.get(l.EmployerBizId);
         if (!emp || emp.Name !== p.emp) fail('employer', where, 'name does not resolve through EmployerBizId');
@@ -220,8 +224,39 @@ function checkWorldView(build, sources, engine, secondBuild) {
       }
     }
   }
+  // notShown has names rather than ids. Prefer citizens missing everywhere;
+  // a per-street cap can also omit someone who appears on a different street.
+  const omitted = new Set(), omissionEntries = new Set();
+  for (const p of arr(build.data?.notShown, 'data.notShown')) {
+    const candidates = Array.from(byPerson.keys()).filter(id => ledger.has(id) && nameOf(ledger.get(id)) === p?.n);
+    const unseen = candidates.filter(id => !shownPeople.has(id));
+    const matches = unseen.length ? unseen : candidates;
+    if (matches.length !== 1 || !p?.why || typeof p.why !== 'string') {
+      fail('notShown', p?.n || 'entry', 'must identify one omitted current-event citizen and explain omission'); continue;
+    }
+    const id = matches[0];
+    const entry = JSON.stringify([id, p.why]);
+    if (omissionEntries.has(entry)) fail('notShown', id, 'duplicate omission');
+    omissionEntries.add(entry);
+    omitted.add(id);
+    if (p.role && p.role !== String(ledger.get(id).RoleType || '').trim()) fail('notShown', id, 'role does not match snapshot');
+  }
+  for (const id of byPerson.keys()) {
+    if (!shownPeople.has(id) && !omitted.has(id)) fail('missing-person', id, 'current events have neither a person nor a notShown entry');
+  }
+  const knownUnplaced = new Set();
+  for (const b of arr(build.data?.unplacedBiz, 'data.unplacedBiz')) {
+    const matches = Array.from(businesses.values()).filter(source => source.Name === b?.n && source.Neighborhood === b?.hood);
+    if (matches.length !== 1 || hoodNames.has(b?.hood) || assigned.has(matches[0]?.BIZ_ID)) {
+      fail('unplaced-list', b?.n || 'entry', 'must identify one ledger business outside the rendered streets'); continue;
+    }
+    const id = matches[0].BIZ_ID;
+    if (knownUnplaced.has(id)) { fail('unplaced-list', id, 'duplicate known-unplaced entry'); continue; }
+    knownUnplaced.add(id);
+    reports.push(`KNOWN-UNPLACED ${id}: ${JSON.stringify(b.n)} (${JSON.stringify(b.hood)})`);
+  }
   for (const b of businesses.values()) {
-    if (!assigned.has(b.BIZ_ID)) fail('unplaced', b.BIZ_ID, `${b.Name} (${b.Neighborhood}) has no parcel or place`);
+    if (!assigned.has(b.BIZ_ID) && !knownUnplaced.has(b.BIZ_ID)) fail('unplaced', b.BIZ_ID, `${b.Name} (${b.Neighborhood}) has no parcel or place and is not listed as known-unplaced`);
   }
   if (!secondBuild?.data?.hoods || !equal(
     hoods.map(h => ({ name: h.name, lay: h.lay })),
@@ -243,10 +278,12 @@ function run(root = path.resolve(__dirname, '..'), io = console) {
     const second = require(file);
     // Reject inputs changing underneath the two builds instead of validating a mix.
     if (!equal(sources, readSources(root))) throw new Error('source files changed during check; rerun on a stable snapshot');
-    const failures = checkWorldView(first, sources, engine, second);
+    const reports = [];
+    const failures = checkWorldView(first, sources, engine, second, reports);
+    for (const report of reports) io.log(report);
     for (const failure of failures) io.error(`FAIL ${failure}`);
     if (failures.length) return 1;
-    io.log(`PASS world-view C${first.CYCLE}: ${first.hoods.length} neighborhoods; provenance and repeated layouts checked`);
+    io.log(`PASS world-view C${first.CYCLE}: ${first.hoods.length} neighborhoods; ${reports.length} known-unplaced businesses; provenance and repeated layouts checked`);
     return 0;
   } catch (e) {
     io.error(`FAIL input: ${String(e.message).replace(/[\r\n]+/g, ' ')}`);

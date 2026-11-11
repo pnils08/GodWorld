@@ -410,3 +410,63 @@ Job 2 delivered `scripts/worldViewCheck.js` and `scripts/worldViewCheck.test.js`
 Validation: `node scripts/worldViewCheck.test.js` passed **18/18** synthetic tests, including file-backed runner cases for independent module builds, invalid/missing JSONL and sources changing during a build. `node --check` passed for both changed scripts. `node --test scripts/worldViewCheck.test.js` also exited zero; the direct run supplied the individual-test receipts. No dependency installs, page generation, browser/CDN, Sheet, deployment or live-cycle checks were performed.
 
 Current-data receipt: `node scripts/worldViewCheck.js` exits **1**, prints no PASS, and reports **173** one-line failures: **140 event-name failures** (the attached source events have blank Name), **12 future reflections**, **1 stale spouse name**, **6 ambiguous person entries**, **14 unplaced businesses**. This is the intended strict result against the current build, not a failed synthetic test suite. The checker does not claim to disambiguate or fully verify the six ambiguous people. Event text is retained by POPID in the page, but the brief additionally requires a matching Name; changing that contract or adding explicit identity provenance belongs in the world-view follow-up.
+
+## 2026-11-11 (codex) — Re-review of 300b3b8c3 and checker contract update
+
+**Verdict: SHIP-WITH-FIXES.** The original current-data failures are repaired or explicitly scoped out, and the updated local checker passes. F1 retains a missing-home fallback defect; two additional edge cases remain below (F13–F14). This verdict covers source and isolated local execution, not browser performance or audio acceptance. The original HOLD and receipts above are historical; this section is the current assessment.
+
+Reviewed commit `300b3b8c3ea3e336e426831b524cbe03d20ac042`, including its committed `life-traffic.js`, `life-nature.js`, `life-water.js`, `life-street.js` and `sound.js` ancestors. All ten reviewed world-view source/README files remained byte-identical during this pass. Local C115 beat/snapshot files were already dirty and were read as the current inputs; they were not changed or treated as committed fixtures.
+
+### Reconciliation of F1–F12
+
+| Finding | Disposition and evidence at this commit |
+|---|---|
+| F1 — event location as home | **Current-data failure closed; missing-home edge remains.** `build.js:88` exports ledger residence; `template.html:828` uses it and `:832` separates event location. All 1,004 current people have a ledger-matching residence. See the residual case below. |
+| F2 — filed/graded receipts as speech | **Closed for the reported receipts.** `build.js:62` excludes those prefixes before reflection selection. No displayed quote has either prefix. This does not prove that every other excerpt is literal speech. |
+| F3 — future reflections | **Closed.** `build.js:62` rejects cycles after the page; no selected primary/secondary reflection exceeds C115. |
+| F4 — loose retirement buried | **Closed.** `build.js:104` sorts the combined event list and `:105` resets the lead. POP-00177 now leads with “stepped back from professional life.” `:13` ranks Career-Hired with turning points; `:14` distinguishes QoL-Down. |
+| F5 — silently omitted people | **Closed on current data.** `build.js:115` adds the loose-only people at ledger home, flagged `noPlace`; `:119` raises CAP to 140; `:124` records overflow. All 1,004 qualifying event POPIDs appear, including all 15 previously loose-only people; `notShown` is empty. The largest street now has **124**, not README's stale 119 (`README.md:90`), but remains below CAP. Finder consumes `notShown` at `template.html:806`. See F14 for a future-input distinction. |
+| F6 — missing business placements/theater | **Resolved under the requested placement contract.** `build.js:163` recognizes Theater sectors; Uptown Playhouse is a theater place. `:216–217` explicitly lists the 14 off-map ledger businesses. Current coverage: 244 ordinary assignments + 25 special places + 14 known-unplaced = all 283 businesses. The old inventory above is historical, including Uptown's former assignment. |
+| F7 — current history under earlier heading | **Closed.** `build.js:75` admits history only when `(year - 1) * 52 + cycle < CYCLE`. Every emitted history entry is earlier than C115. |
+| F8 — weather HTML injection | **Closed at the reported sink.** `template.html:645–647` creates text nodes. Executing `facts()` with a synthetic image/onerror string inserted it as text; an instrumented innerHTML setter was never invoked. |
+| F9 — same-neighborhood hash retains visit | **Closed.** `template.html:863` calls `endVisit(false)` for that transition; an isolated listener execution confirmed it. |
+| F10 — slow frames cannot downgrade | **Closed in the controller.** `template.html:734` counts 300 ms frames, and `:305` initializes shadow casting from quality. Executing the actual loop with 300 ms frame intervals reached quality 0 and disabled shadows. The newly reviewed water module does not fully follow that downgrade (F13). |
+| F11 — durable parcel identity | **Accepted limitation, not implemented durability.** `README.md:28–29` explicitly limits ids to deterministic identical inputs and reserves durable addresses for persisted assignment. The check still tests repeated identical-input layouts only. |
+| F12 — same-name links select wrong person | **Closed for generated links.** `build.js:130` preserves POPID; `template.html:661` emits name + digits and `:857` resolves that composite first. Actual `fromHash()` execution selected each of the six previously ambiguous POPIDs correctly. Legacy name-only links still choose the first match, as compatibility behavior. |
+
+### F1 residual — P2: a missing ledger home still becomes an asserted home
+
+`world-view/build.js:88` omits `lives` when the snapshot Neighborhood is blank. `world-view/template.html:828` then falls back to `world.H.name` inside the affirmative “Lives in” sentence. Input: an event with a location, but no ledger residence → output: that event location is asserted as home. A read-only VM run of the actual build with one residence blanked, followed by actual `startVisit()` with inert DOM nodes, reproduced “Lives in Jack London” for that missing-home fixture. No current displayed citizen has this missing field. Omit the residence sentence or say it is unrecorded when `lives` is missing. Ledger equality in the checker cannot certify this UI fallback.
+
+### F13 — P2: a runtime quality downgrade retains the expensive water surface
+
+`world-view/life-water.js:334–344` picks a basic material only when the street is initially built at quality 0. The page instead lowers its live quality without rebuilding (`world-view/template.html:734`). The water tick at `life-water.js:549–551` then only zeros `nL` and `detail`; it leaves `S.sea.material` as the shader. The fragment program still runs all six waves (`:46`), reflection math (`:62–67`), and rain rings when raining (`:53–60`). Input: enter water at quality 2, then degrade to 0 → output: the initial-quality-0 cheap surface is never selected until a later rebuild. That misses `README.md:59`'s expensive-work fallback precisely on a struggling device.
+
+Executed the actual tick closure with inert graphics stand-ins and quality 0: material identity remained the shader, `detail` became 0, and `rain` remained 1. This proves the transition logic, not a measured GPU cost. Swap to and own/dispose a basic material on the transition, or implement an equally cheap shader branch that also skips waves/reflections/rain; exercise 2→1→0 on the same street.
+
+### F14 — P2: a blank event Name is treated as a missing event place
+
+`world-view/build.js:28` requires both Name and Neighborhood for the placed-event path; `:101` sends the complement into `loose`; `:115` unconditionally marks a loose-only person `noPlace`. Name and location are independent fields. Input: valid POPID and ledger name, blank event Name, populated event Neighborhood → output: the person stands at ledger home and the caption says “Nothing in their week names a place” (`world-view/template.html:831`). That caption is false even if home happens to equal the event neighborhood.
+
+Reproduced by running the actual build in a VM with only POP-00177's C115 event Names blanked: source location remained Jack London and output became `noPlace: 1`. No source file was edited. The current snapshot does not exercise this combination. Resolve display name from POPID separately from location, and set `noPlace` only when the week's qualifying events actually lack locations. The updated checker intentionally rejects this false marker while accepting blank-Name event text through POPID.
+
+### Ambient scope and remaining verification limits
+
+Reviewed hook order, supplied kit fields, per-place ownership, dynamic quality checks and sound retirement across all five modules. Traffic precedes street so bus stops are available (`template.html:481`); nature and water run afterward (`:482–483`). Geometry/material disposal is rooted in retired scenes (`:319–323`, `:653`); owned traffic/street textures are marked, and sound stops retired sources before disconnecting their node lists (`sound.js:355–361`). No additional confirmed unbounded resource leak emerged from this source trace.
+
+Two observations are not promoted to proven runtime failures: nature still advances the full bird array before hiding alternate instances at quality 0 (`life-nature.js:387`, `:488`), so its CPU savings need profiling; Coliseum crowd/PA is selected by landmark type (`sound.js:259–265`, `:388–390`) with no game-state input (`template.html:657`), so it is ambient illustration rather than evidence of a current game. README explicitly authorizes landmark-based sound and records generic drawn fittings; this review does not override those drawing choices. No browser, WebGL shader compilation, real-device frame timing, human audio listening or keyboard walk-up was performed.
+
+### Checker delivery and validation
+
+Updated `scripts/worldViewCheck.js` to require exported POPID, bind every displayed event text to that POPID/current cycle, compare `lives` to the citizen snapshot's Neighborhood, and remove the obsolete spouse-name check. Blank event Names pass; wrong POPIDs, altered text and wrong cycles still fail. `noPlace` must describe genuinely locationless events placed at ledger home. Qualifying event POPIDs must be shown or accounted for in `data.notShown`; because that list has names only, ambiguous omitted names fail rather than being guessed.
+
+`data.unplacedBiz` is checked against exact ledger name/neighborhood and the absence of a rendered street. Each valid entry prints `KNOWN-UNPLACED <BIZ_ID>`, not FAIL. Invented, duplicate, already assigned or on-street exemptions fail, and unlisted missing businesses still fail. The count 14 is observed, not a hardcoded bypass. Repeated-layout, metadata, relationship and source-change checks remain.
+
+Validation receipts:
+
+- `node scripts/worldViewCheck.test.js`: **23/23 PASS**, with synthetic POPID collisions, blank Names, residence mismatch, `noPlace`, omitted-person accounting, unplaced-list forgery/duplicates/on-street misuse, and file-backed exit-code/report checks.
+- `node --check scripts/worldViewCheck.js` and `node --check scripts/worldViewCheck.test.js`: **PASS**.
+- `node scripts/worldViewCheck.js`: **exit 0**, **14 KNOWN-UNPLACED**, no FAIL lines; C115, 22 neighborhoods, 1,004 distinct displayed people. The 173-failure receipt above is superseded by this contract and fold.
+- Read-only local VM probes exercised current folded selections, all six POPID links, same-street visit exit, text-only weather, slow-frame downgrade and the residual cases above. They used in-memory input substitutions/inert DOM or graphics stand-ins, not a browser or altered repo fixtures.
+
+No world-view edits, dependency installs, generated page, network/CDN requests, model/API runs, Sheets, canon writes, deployment or live cycles. Engine calendar/life-state wiring remains the direct local VM invocation described in Job 2; no paid wiring-card run was made under the brief's no-model-API boundary.

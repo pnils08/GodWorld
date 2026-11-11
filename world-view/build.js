@@ -107,7 +107,7 @@ function layout(H) {
   const held = (s, a, b) => onStreet.some(p => (p.s === 0 || p.s === s) && a < p.z + p.half && b > p.z - p.half);
   const parcels = [];
   sides.forEach(s => {
-    const st = sideStyle(s); let z = 14, k = 0;
+    const st = sideStyle(s); let z = 42, k = 0;
     while (z > -L - 30) { const w = rr(st.w), g = rr(st.gap); if (!held(s, z - w, z)) parcels.push({ id: slug(H.name) + '-' + (s < 0 ? 'w' : 'e') + String(++k).padStart(2, '0'), s, z: z - w / 2, w, st }); z -= w + g; }
   });
   const cand = parcels.filter(p => p.z < 4 && p.z > -L + 6);

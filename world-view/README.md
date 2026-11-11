@@ -33,7 +33,7 @@ A hands-off 3D flight through the 22 neighborhoods, drawn from one week of engin
 - `build.js` exits non-zero if a neighborhood has no entry, or a phrase or painted landmark name is no longer in INSTITUTIONS.md.
 - Scenery in `hoods.js` `set` is only what is not a business: cranes, the Lake Merritt pergola. Landmark businesses come from the ledger (§Parcels).
 - These numbers are drawing choices off the cycle path. They are not a hood table for the engine and nothing in `phase*/` may read them.
-- Links: `#west-oakland` opens on a place; `#west-oakland-mid` opens partway down its street.
+- Links: `#west-oakland` opens on a place; `#west-oakland-at-40` opens 40% of the way down its street.
 
 ## What comes from the sim, what does not
 

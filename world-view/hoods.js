@@ -12,7 +12,7 @@
 //      Business_Ledger in build.js, each on its own parcel.
 module.exports = {
   'West Oakland': { q: 'brick and crane, not glass', wall: 'brick', tone: [12, 0.45, 0.42], h: [7, 14], w: [10, 16], lit: 0.45, set: ['cranes'], sky: 22 },
-  'Brooklyn': { q: 'residential rather than spectacle, no stadium, no anchor tenant', wall: 'glass', tone: [205, 0.2, 0.6], h: [14, 19], w: [9, 11], lit: 0.45, water: { side: -1, kind: 'estuary' }, sky: 205 },
+  'Brooklyn': { q: 'residential rather than spectacle, no stadium, no anchor tenant', wall: 'stucco', tone: [205, 0.14, 0.62], h: [9, 13], w: [9, 11], lit: 0.7, trees: 0.3, water: { side: -1, kind: 'estuary' }, sky: 205 },
   'Downtown': { q: 'Dense on weekdays, thinner after dark than Uptown or Jack London', wall: 'glass', tone: [215, 0.25, 0.5], h: [30, 75], w: [10, 15], gap: [0.3, 1], lit: 0.2, sky: 262 },
   'Chinatown': { q: 'Dense, culturally anchored, multigenerational', wall: 'stucco', tone: [18, 0.4, 0.5], h: [6, 11], w: [4.5, 6.5], gap: [0, 0.2], lit: 0.7, sky: 345 },
   'Jack London': { q: 'Restaurants, venues, converted brick', wall: 'brick', tone: [10, 0.4, 0.4], h: [6, 11], w: [8, 12], lit: 0.7, water: { side: -1, kind: 'estuary' }, neon: 0.6, sky: 285 },

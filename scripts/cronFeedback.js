@@ -97,8 +97,10 @@ function collect(root, days, nowMs) {
   // 2. Grades: which part of the contract fails, how often, and for whom.
   const graded = wakes.filter((wake) => wake.record.contractScore);
   const parts = GRADE_PARTS.map(([key, label]) => {
-    const failing = graded.filter((wake) => wake.record.contractScore[key] === false);
-    return { key, label, failed: failing.length, of: graded.length, seats: Array.from(new Set(failing.map((w) => seatOf(w.name)))).sort() };
+    // Each part over the pieces graded on it: the close left the grade 2026-11-11, so newer scores carry no `closed`.
+    const scored = graded.filter((wake) => typeof wake.record.contractScore[key] === 'boolean');
+    const failing = scored.filter((wake) => wake.record.contractScore[key] === false);
+    return { key, label, failed: failing.length, of: scored.length, seats: Array.from(new Set(failing.map((w) => seatOf(w.name)))).sort() };
   });
   const shortfalls = graded
     .filter((wake) => wake.record.contractScore.short)

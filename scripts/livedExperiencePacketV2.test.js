@@ -911,5 +911,22 @@ console.log('livedExperiencePacketV2.test.js: PASS');
   assert.deepStrictEqual(named, [{ text: 'C112 published: Chinatown carries 142 sick residents, 6.5% of the hood.', src: 'tool:canon_recall:Chinatown sick' }]);
   assert.deepStrictEqual(p.selectUsedToolLines('Chinatown had 142 sick once.\n', recallHit, recallPacket), []);
   assert.deepStrictEqual(p.selectUsedToolLines('In C112 the count was 135.\n', recallHit, recallPacket), []);
+  const one = (hit, draft) => p.selectUsedToolLines(draft + '\n', [{ text: hit, src: 'tool:canon_recall:q' }], recallPacket);
+  // codex F2: the inside of a multi-sentence quote is speech, never the paper's own sentence
+  assert.deepStrictEqual(one('[C998 · daily] Test Speaker said, “The hall is open. We served 142 synthetic meals. That is all.”',
+    'In C998 the test hall served 142 synthetic meals.'), []);
+  // a chunk boundary that cut a quote drops the cut speech, keeps the paper's sentence
+  assert.deepStrictEqual(one('[C998 · daily] served 142 meals. That is all.” Test North counted 143 widgets.', 'In C998 Test North counted 143 widgets and 142 meals.'),
+    [{ text: 'C998 published: Test North counted 143 widgets.', src: 'tool:canon_recall:q' }]);
+  assert.deepStrictEqual(one('[C998 · daily] Test North counted 143 widgets. She said “We served 142 meals', 'In C998 Test North counted 143 widgets and 142 meals.'),
+    [{ text: 'C998 published: Test North counted 143 widgets.', src: 'tool:canon_recall:q' }]);
+  // codex F3: a shared number on another subject, or the Cycle in a neighbouring sentence, approves nothing
+  assert.deepStrictEqual(one('[C998 · daily] Test North counted 142 synthetic widgets.', 'In C998 Test South counted 142 synthetic permits.'), []);
+  assert.deepStrictEqual(one('[C998 · daily] Test North counted 142 synthetic widgets.', 'That was C998. Test North counted 142 synthetic widgets.'), []);
+}
+// codex F1: the seat file's closing line never reaches the writer's packet
+{
+  const src = require('fs').readFileSync(require.resolve('./livedExperiencePacketV2'), 'utf8');
+  assert.ok(/delete reviewProfile\.articleContract\.closing/.test(src));
 }
 console.log('livedExperiencePacketV2 canon_recall manifest tests: PASS');

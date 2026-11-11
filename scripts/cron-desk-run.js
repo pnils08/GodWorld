@@ -727,7 +727,7 @@ function buildLaneState(desk, cycle, lane, byline, quotes, persona, angleRead, a
       L.push('HEAT: short, hot, first-person. Specific bar/street open. Lead with what does not line up.');
       L.push('Do the count in prose — no bullet inventory of numbers. Translate officialese into the street read.');
       L.push('If signals fight (decay vs recovery, money vs jobs, illness with no owner) — that fight IS the story.');
-      L.push('End on ONE unanswered question, then tipline. Never sand the contradiction into a process status piece.');
+      L.push('Sign off with the tipline. Never sand the contradiction into a process status piece.');   // no handed closing (2026-11-11)
       L.push('RoleType lines are immutable — soft side-work color must not replace someone\'s career.');
       // Inject Jax stink-slice scene pack when present (buildJaxSlice).
       try {
@@ -2176,7 +2176,7 @@ async function runAngle(assign) {
         lastAngleRaw = String(r.text);
         const plan = PACKET_ACTIVE ? livedPacket.validateAngleOutput(r.text, inputPacket) : null;
         // pipeline.77 (codex #4): the grade is feedback for planning, never plan text that rides to W3.
-        if (plan && /\bgraded:?\s*\d\s*\/\s*4\b/i.test(JSON.stringify(plan))) {
+        if (plan && /\bgraded:?\s*\d\s*\/\s*[34]\b/i.test(JSON.stringify(plan))) {   // out of 3 from 2026-11-11 (codex F5)
           throw new Error('W1 plan echoes the desk grade — resampling');
         }
         angleRead = { name: r.name, popid: r.popId,
@@ -3427,7 +3427,10 @@ async function runWrite(assign) {
   try {
     const gapsEntry = formatGapsEntry(cycle, desk, byline ? byline.name : 'desk', record.disposition,
       absenceLines(fs.readFileSync(draftPath, 'utf8')), thinToolCalls(traceArt ? traceArt.calls : []));
-    if (appendGapsEntry(cycle, gapsEntry)) log('gaps logged: ' + gapsEntry.split('\n').length + ' line(s) → production log');
+    // Test shell: the gap note stays in the shell's own log. Before 2026-11-11 it reached the live production log
+    // (14 "(ungated-sample)" entries in C114/C115, removed the same night).
+    const gapsFile = TEST_SHELL ? path.join(TEST_SHELL, 'production_log_c' + cycle + '.md') : undefined;
+    if (appendGapsEntry(cycle, gapsEntry, gapsFile)) log('gaps logged: ' + gapsEntry.split('\n').length + ' line(s) → ' + (TEST_SHELL ? 'test-shell log' : 'production log'));
   } catch (e) { log('gaps extract failed (non-fatal): ' + e.message); }
   SEAT_CHECKS = { stage: 'write', toolCalls: record.toolCalls, capHits: record.capHit, thin: thin.thin,
     verbatim, words: thin.words,
@@ -3436,7 +3439,7 @@ async function runWrite(assign) {
   if (rewardLoop) appendRewardLoopRead(cycle, {
     date: centralDate(), name: byline && byline.name, persona: personaSlug, model: route.model,
     contractScore: contractScore ? (contractScore.error ? { error: contractScore.error } : {
-      score: contractScore.score, opened: contractScore.opened, closed: contractScore.closed,
+      score: contractScore.score, max: contractScore.max || 4, opened: contractScore.opened,
       purposeMet: contractScore.purposeMet, inTarget: contractScore.inTarget, short: contractScore.short }) : null,
     rheaPass: rhea ? rhea.pass : null, disposition: record.disposition, words: thin.words,
     thin: thin.thin, verbatim: verbatim.length, toolCalls: record.toolCalls, capHit: record.capHit });

@@ -73,23 +73,27 @@ assert.ok(faithPrompt.user.includes('canon name on the right is not an invention
   assert.equal(g.contractWordCount('one two\n```\nfenced words here\n```\n<!-- c -->three'), 3, 'same body as thinCheck: no fences, no comments');
   assert.equal(g.contractWordFloor('evidence-bounded'), null);
   assert.equal(g.contractWordFloor('180-280 without; 450-750 with'), null, 'two ranges -> the judge reads it');
-  const long = g.parseContractScore('{"opened":true,"closed":true,"purposeMet":true,"inTarget":false,"short":""}',
+  // 2026-11-11: the close is not graded — three parts, max 3, no closing in either judge message (codex F6)
+  const long = g.parseContractScore('{"opened":true,"purposeMet":true,"inTarget":false,"short":""}',
     { purpose: 'p', articleContract: { targetWords: 'evidence-bounded; 350-600' } }, 793);
   assert.equal(long.inTarget, true, 'Marbury 793 over 350-600 is not a fault');
-  assert.equal(long.score, 4);
+  assert.equal(long.score, 3);
+  assert.equal(long.max, 3);
+  assert.ok(!('closed' in long), 'no graded closed field');
   const profile = { purpose: 'TEST-ONLY purpose', articleContract: { voice: 'dry', opening: 'TEST-ONLY open', closing: 'TEST-ONLY close', targetWords: '400-700' } };
   const cp = g.buildContractPrompt(profile, 'one two three');
   assert.equal(cp.words, 3);
-  assert.ok(cp.user.includes('TEST-ONLY open') && cp.user.includes('TEST-ONLY close') && cp.user.includes('this piece has 3 words'));
+  assert.ok(cp.user.includes('TEST-ONLY open') && cp.user.includes('this piece has 3 words'));
+  assert.ok(!cp.user.includes('TEST-ONLY close') && !/closing|closed/i.test(cp.user + cp.system), 'the seat file closing never reaches the judge');
   assert.ok(/do not check facts/i.test(cp.system));
-  const judged = g.parseContractScore('{"opened":true,"closed":false,"purposeMet":true,"inTarget":true,"short":"It closed on a recap."}', profile, 3);
+  const judged = g.parseContractScore('{"opened":false,"purposeMet":true,"inTarget":true,"short":"It opened on a recap."}', profile, 3);
   assert.equal(judged.inTarget, false, 'code overrides the judge on a single range');
-  assert.equal(judged.score, 2);
-  assert.equal(judged.short, 'It closed on a recap.');
-  const open = g.parseContractScore('{"opened":true,"closed":true,"purposeMet":true,"inTarget":true,"short":""}',
+  assert.equal(judged.score, 1);
+  assert.equal(judged.short, 'It opened on a recap.');
+  const open = g.parseContractScore('{"opened":true,"closed":false,"purposeMet":true,"inTarget":true,"short":""}',
     { purpose: 'p', articleContract: { targetWords: 'evidence-bounded' } }, 90);
   assert.equal(open.inTargetBy, 'judge');
-  assert.equal(open.score, 4);
+  assert.equal(open.score, 3, 'a judge that still answers closed=false costs nothing');
   assert.ok(g.parseContractScore('not json', profile, 3).error);
 }
 

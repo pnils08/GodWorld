@@ -925,8 +925,8 @@ async function toolCanonRecall(input, cycleNow) {
     // a hit hands the writer the article, never those lines as if they were prose (pipeline.89 cut 3 finding).
     const text = (chunks.length ? chunks : (x.chunks || []).slice(0, 1)).map(k => String(k.content || '')
       .replace(/<!--[\s\S]*?-->/g, ' ')
-      .replace(/^#{1,3}\s*INTAKE\b[\s\S]*$/m, ' ')
-      .replace(/^\s*(?:INTAKE|NAMES|HOODS?|CLAIMS?|STORYLINES?|BUSINESS(?:ES)?)\b\s*:?.*$/gm, ' ')).join(' ')
+      .replace(/^(?:#{1,3}[ \t]*)?INTAKE[ \t]*$[\s\S]*/m, ' ')                         // the footer, heading on its own line
+      .replace(/^[ \t]*(?:NAMES|HOODS?|CLAIMS?|STORYLINES?|BIZ|BUSINESS(?:ES)?)[ \t]*:.*$/gm, ' ')).join(' ')   // footer rows a chunk cut off (codex F4)
       .replace(/[#*_|>-]{2,}/g, ' ').replace(/\s+/g, ' ').trim();
     if ((text.match(/[A-Za-z]/g) || []).length < 80) continue;                 // skip rule-line and header-only chunks
     const low = text.toLowerCase();
@@ -1187,7 +1187,7 @@ async function main() {
     ? '\n\nFIREBRAND HEAT (hard): You are Jax Caldera — accountability of bullshit, not a tidy desk. ' +
       'Write SHORT and HOT (target 400–650 words). First-person. Open in a SPECIFIC in-world place and time (your bar, a laundromat, a BART stop) — not Frank Ogawa. If you name a new spot, it is now in this city: put it on INTAKE BIZ. ' +
       'Lead with the contradiction or the unowned crisis — not the official timeline. Do the raw count in prose (not a bullet inventory). ' +
-      'Translate officialese into what it actually means. Name who owes an answer. End on ONE unanswered question, then ' +
+      'Translate officialese into what it actually means. Name who owes an answer. Sign off with ' +   // no handed closing (2026-11-11)
       '`-- Jax Caldera | tipline: JAX-TIPS`. ' +
       'FORBIDDEN: process roundup voice, "stakeholders," "community leaders," "moving forward," engine/system jargon, ' +
       'bullet-led number dumps, sanding a metric fight into a calm initiative status piece. ' +

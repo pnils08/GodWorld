@@ -225,8 +225,11 @@ console.log('cron-desk-writer pipeline.89 seat-frame tests: PASS');
     doc('d4', 'TEST-ONLY Edition 80', 80, 'Nothing about the queried person at all, just a nearest neighbour.'),
     doc('d5', 'TEST-ONLY Edition 70', 70, '### ## ---'),
   ];
+  // 2026-11-11 (codex F4): the filing footer goes, an ordinary uppercase section heading and its paragraph stay.
+  const footerDocs = [{ documentId: 'f1', title: 'TEST-ONLY Edition 95', metadata: { title: 'TEST-ONLY Edition 95', cycle: 95, type: 'edition' },
+    chunks: [{ isRelevant: true, content: 'BUSINESS\nFooter Test owners in TESTBOROUGH counted 142 synthetic customers at the TEST-ONLY market, a long enough paragraph for the length threshold to hold.\n\n## INTAKE\nNAMES: Footer Test | quoted-source\nCLAIM: TEST-ONLY secret claim line | src\n<!-- SELF-SCORE: q -->' }] }];
   let seenOpts = null;
-  require.cache[smPath] = { id: smPath, filename: smPath, loaded: true, exports: { search: async (q, o) => { seenOpts = o; return q.includes('Nobody') ? [] : docs; } } };
+  require.cache[smPath] = { id: smPath, filename: smPath, loaded: true, exports: { search: async (q, o) => { seenOpts = o; return q.includes('Nobody') ? [] : q.includes('Footer') ? footerDocs : docs; } } };
   const prevKey = process.env.SUPERMEMORY_CC_API_KEY;
   process.env.SUPERMEMORY_CC_API_KEY = 'TEST-ONLY-key';
   try {
@@ -235,6 +238,9 @@ console.log('cron-desk-writer pipeline.89 seat-frame tests: PASS');
     assert.deepStrictEqual(seenOpts.containerTags, ['bay-tribune']);       // published pieces only — never world-data
     assert.strictEqual(out.split('\n').length, 1, 'one piece: dup, same-cycle, lore, off-topic and header-only chunks are dropped');
     assert.match(out, /^\[C90 · edition\] Quillon Marsh opened a stall/);
+    const footer = await toolCanonRecall({ query: 'Footer Test' }, 113);
+    assert.match(footer, /^\[C95 · edition\] BUSINESS Footer Test owners in TESTBOROUGH counted 142/);
+    assert.ok(!/NAMES:|secret claim|SELF-SCORE|INTAKE/.test(footer), 'the filing footer never reaches the writer');
     assert.match(await toolCanonRecall({ query: 'Nobody Atall' }, 113), /No published piece from before C113 .* not proof/);
     assert.match(await toolCanonRecall({ query: '  ' }, 113), /empty query/);
     delete process.env.SUPERMEMORY_CC_API_KEY;

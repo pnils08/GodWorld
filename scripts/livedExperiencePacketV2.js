@@ -239,6 +239,9 @@ function buildWritePacket(args) {
   const packet = clone(v1.buildWritePacket(args));
   packet.v = VERSION;
   const reviewProfile = args.reviewProfile ? clone(args.reviewProfile) : null;
+  // The writer reads this packet whole: the seat file's closing line stays in the file, never in the writer's
+  // material (builder 2026-11-11, "stop handing them a closing question"; codex F1).
+  if (reviewProfile && reviewProfile.articleContract) delete reviewProfile.articleContract.closing;
   const investigation = packet.task && packet.task.creativeBrief &&
     packet.task.creativeBrief.kind === 'civic-investigation';
   const reportingEvidence = investigation && packet.task.creativeBrief.reportingEvidence || {};
@@ -613,6 +616,21 @@ function historyFieldUsed(unit, field, value) {
   return new RegExp('(?:\\b' + field + '\\b\\s+(?:of\\s+)?' + escaped + '(?![\\d.])|' +
     '(?<![\\d.])' + escaped + '\\s+\\b' + field + '\\b)', 'i').test(unit);
 }
+// canon_recall helpers. unquotedProse drops every quoted span; an unmatched mark means a chunk boundary cut a
+// quote, so everything from an open mark to the end (or from the start to a stray closing mark) goes too.
+function unquotedProse(text) {
+  let s = String(text || '').replace(/“[^“”]*”/g, ' ').replace(/"[^"]*"/g, ' ');
+  s = s.replace(/^[^“]*”/, ' ');
+  return s.replace(/[“"][\s\S]*$/, ' ');
+}
+const NAME_LEAD_WORDS = new Set(['The', 'A', 'An', 'In', 'On', 'At', 'By', 'For', 'But', 'And', 'Or', 'Its', 'It', 'He', 'She',
+  'They', 'We', 'I', 'This', 'That', 'These', 'Those', 'His', 'Her', 'Their', 'Our', 'When', 'What', 'Who', 'Where', 'Why',
+  'How', 'Cycle', 'After', 'Before', 'Since', 'As', 'If', 'So', 'Then', 'There', 'Here']);
+function properNames(text) {
+  return (String(text || '').match(/\b[A-Z][a-z'’]+(?:\s+[A-Z][a-z'’]+)*/g) || [])
+    .map(seq => { const w = seq.split(/\s+/); while (w.length && NAME_LEAD_WORDS.has(w[0])) w.shift(); return w.join(' '); })
+    .filter(name => name.length >= 4);
+}
 function selectUsedToolLines(draftText, candidates, packet) {
   const body = String(draftText || '').split(/^##\s+INTAKE\s*$/im)[0];
   const allowed = new Set(numericTokens([
@@ -626,6 +644,8 @@ function selectUsedToolLines(draftText, candidates, packet) {
     for (const sent of line.split(/(?<=[.!?])\s+/)) if (sent !== line && sent.trim()) units.push(sent);
   }
   const unitNums = units.map(u => new Set(significantNumbers(u)));
+  const sentences = units.filter(u => !/(?<=[.!?])\s+\S/.test(u.trim()));   // one-sentence units only
+  const sentenceNums = sentences.map(u => new Set(significantNumbers(u)));
   const out = [];
   const seen = new Set();
   for (const c of candidates || []) {
@@ -637,11 +657,16 @@ function selectUsedToolLines(draftText, candidates, packet) {
       if (!label) continue;
       const cycle = label[1];
       const cycleRe = new RegExp('\\b(?:c' + cycle + '|cycle\\s+' + cycle + ')\\b', 'i');
-      for (const sentence of text.slice(label[0].length).split(/(?<=[.!?])\s+/)) {
-        if (/["“”]/.test(sentence)) continue;
+      // Quoted speech is dropped BEFORE the split, so the inside of a multi-sentence quote is never read
+      // as the paper's own sentence (codex F2).
+      for (const sentence of unquotedProse(text.slice(label[0].length)).split(/(?<=[.!?])\s+/)) {
         const nums = significantNumbers(sentence).filter(v => v !== cycle);
-        if (!nums.length) continue;
-        const used = units.some((u, i) => cycleRe.test(u) && nums.some(v => unitNums[i].has(v) && !allowed.has(v)));
+        const names = properNames(sentence);
+        if (!nums.length || !names.length) continue;
+        // Bound to the same subject (codex F3): one Article sentence names that Cycle, prints one of this
+        // sentence's figures the Packet does not already hold, and carries one of its proper names whole.
+        const used = sentences.some((u, i) => cycleRe.test(u) && names.some(n => u.includes(n)) &&
+          nums.some(v => sentenceNums[i].has(v) && !allowed.has(v)));
         const fact = clean('C' + cycle + ' published: ' + sentence, 500);
         if (used && !seen.has(fact)) { seen.add(fact); out.push({ text: fact, src }); }
       }

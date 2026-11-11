@@ -651,7 +651,7 @@ function go(idx, startAt, who) {
     CARDS.forEach(function (s) { setCard(s, null); }); CHIPS.forEach(function (s) { setChip(s, null); });
     cur = (idx + DATA.hoods.length) % DATA.hoods.length; world = build(cur); facts();
     if (DBG && DBG.t0) world.t = DBG.t0;
-    if (SOUND && SOUND.enter) SOUND.enter({ name: world.H.name, style: world.ST, water: world.H.lay.water, weather: WX, people: world.H.people.length, places: world.H.lay.places.map(function (p) { return p.type; }) });
+    if (SOUND && SOUND.enter) SOUND.enter({ name: world.H.name, style: world.ST, water: world.H.lay.water, weather: WX, people: world.H.people.length, places: world.H.lay.places.map(function (p) { return { type: p.type, s: p.s, z: p.z }; }) });
     if (startAt) world.z = 10 - (10 - world.gz) * startAt;
     yaw = 0; pitch = 0; step(0); draw();
     last = performance.now(); clock0 = last; slow = 0;

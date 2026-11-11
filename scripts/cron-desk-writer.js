@@ -237,6 +237,10 @@ const TOOLS_FORCED = TOOLS_AB && process.argv.includes('--tools-forced');
 // question-answered=no was hardcoded, never the writer's report; the score lives in the sidecar.
 const RUBRIC = process.argv.includes('--rubric');
 const WRITER_TOOLS = Math.max(0, Math.min(8, parseInt(arg('--writer-tools', '0'), 10) || 0));
+// Test shell only (builder 2026-11-10: "a couple tests safe off from saving into the sim"): the lightest
+// prompt — persona, packet, the no-invention line and the INTAKE footer, no rubric, no job description,
+// no opening or closing form. Needs GODWORLD_TEST_COMPARE_DIR, so a scheduled run can never take it.
+const TEST_LIGHT = !!process.env.GODWORLD_TEST_COMPARE_DIR && process.env.GODWORLD_TEST_PROMPT === 'light';
 
 // Approx USD per 1M tokens [input, output] — for the scorecard's apiCostUsd (estimate).
 // Live OpenRouter check 2026-08-10 (prompt/completion per 1M).
@@ -267,7 +271,7 @@ function costUsd(model, tin, tout) {
 // Task 2.5.5 memory tools: whose citizen page the loop may read/write. Passed
 // by cron-desk-run (the byline it resolved); persona runs fall back to the
 // persona map's own POPID. Absent -> memory tools stay out of the toolset.
-const BYLINE_POPID = PACKET_ONLY ? null : (arg('--byline-popid', null) || (() => {
+const BYLINE_POPID = (PACKET_ONLY || process.env.GODWORLD_TEST_COMPARE_DIR) ? null : (arg('--byline-popid', null) || (() => {
   if (!PERSONA) return null;
   try { return (JSON.parse(fs.readFileSync(path.join(__dirname, 'persona-map.json'), 'utf8'))[PERSONA] || {}).popid || null; }
   catch (_) { return null; }
@@ -437,6 +441,7 @@ function intakeSlug(packet) {
 // plus names the Article actually printed. This is deterministic formatting,
 // not editorial rewriting.
 function rubricBlock(packet) {
+  if (TEST_LIGHT) return '';
   const profile = packet && packet.reviewProfile;
   const c = profile && profile.articleContract;
   if (!c) return '';
@@ -1307,7 +1312,10 @@ async function main() {
     'appear only attributed to the layer that supports them (ledger counts, hospital census, neighborhood ' +
     'demographics). Migration flows may run with the label "city model estimate".\n';
 
-  const system =
+  const system = (TEST_LIGHT
+    ? 'You are this journalist, alive in this city this cycle. ' +
+      (isNiaSeat(PERSONA) ? 'Your beat is the UNDOCKED show and its standing in the city. Named people come from the ledger; in-world places are yours. ' : 'Named people, businesses and figures come from the Packet and the ledger; you invent none. ')
+    :
     'You are this journalist, alive in GodWorld this cycle — not a systems analyst, not a briefing desk, ' +
     'not a reciter of the world summary. Sheets and the edition header already hold the weather and the ' +
     'tracker. NotebookLM will summarize you later. ' + (RECORDS_PIECE
@@ -1317,7 +1325,7 @@ async function main() {
       ? 'Your beat is the UNDOCKED show and its standing in the city. '
       : 'Your job is street grain: a named regular, a named ' +
         'counter, dirt at a Packet-named place that is this place\'s dirt. ') +
-    (isNiaSeat(PERSONA) ? 'Named people come from the ledger; in-world places are yours. ' : 'Only Packet and ledger names. ') +
+    (isNiaSeat(PERSONA) ? 'Named people come from the ledger; in-world places are yours. ' : 'Only Packet and ledger names. ')) +
     'Your SKILL is voice. Read IDENTITY/LENS/RULES.\n\n' +
     'CURRENT-CYCLE OVERRIDE: the edition pipeline is paused, so your desk workspace ' +
     '(output/desks/' + DESK + '/current/) is STALE — do NOT take cycle facts from it. ' + depthInstr +
@@ -1453,7 +1461,11 @@ async function main() {
       '\n\nWRITE the full ' + DESK + ' section for cycle ' + cycle + ' — the complete, publish-ready ' +
       'markdown, built ONLY from the events/names/records in the world state above plus what your tools ' +
       'return. ' + (PACKET_ONLY
-        ? (RECORDS_PIECE
+        ? (TEST_LIGHT && !isNiaSeat(PERSONA)
+          ? (RECORDS_PIECE
+            ? 'Nobody was interviewed for this piece, so nobody is quoted in it: the Packet holds no approved quote. Do not invent names, numbers, quotes, or events, and do not import real-world Oakland. Name a source the way a reader would, never as the Packet, a tab or a file name. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
+            : 'The Packet is what happened this cycle and who said what; approved quotes are the only quoted speech. Do not invent names, numbers, quotes, or events, and do not import real-world Oakland. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. ')
+          : RECORDS_PIECE
           ? 'You are this journalist in GodWorld this cycle. Nobody was interviewed for this piece: the Packet holds no approved quote. Write it from the record. Open the way packet.reviewProfile.articleContract.opening says — on a supplied line, figure, vote or filing — and close the way its closing says. Write no quoted speech and attribute no statement, mood or intention to anyone. Do not stage a scene, a street, a bar or a room to carry the facts. Name a source the way a reader would — the city\'s initiative record, his career line — never the Packet, a tab or file name, or a bracketed tag. Never lead with a tracker phase label, a feed label, or a bullet list of approved facts. Do not import real-world Oakland tropes the Packet did not name. Do not invent names, numbers, quotes, or events, and do no arithmetic the Packet has not already done. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
           : isNiaSeat(PERSONA)
           ? 'You are Nia Rook covering UNDOCKED this cycle. The Packet holds the current show facts; undocked_history returns earlier approved feed facts if you have a show-history question. Keep named people on the ledger, pilot speech in approved quotes, and scores or episode events in the approved record. The in-world scene and its unnamed voices are yours. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '

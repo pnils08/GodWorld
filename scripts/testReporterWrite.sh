@@ -13,9 +13,11 @@
 # cron-rhea-gate.js). It spends one writer model call.
 #
 # Usage:
-#   scripts/testReporterWrite.sh <desk> <persona> [cycle]
+#   scripts/testReporterWrite.sh <desk> <persona> [cycle] [live|light]
 #   scripts/testReporterWrite.sh civic trevor-shimizu
-#   scripts/testReporterWrite.sh culture noah-tan 115
+#   scripts/testReporterWrite.sh culture noah-tan 115 light
+# "light" is the lightest prompt (persona, packet, no-invention line, INTAKE footer; no rubric, no job
+# description, no opening/closing form) — only the shell can ask for it; a scheduled run cannot.
 set -euo pipefail
 
 ROOT=/root/GodWorld
@@ -25,7 +27,9 @@ LIVE="$ROOT/output/cron-compare"
 CYCLE="${3:-$(ls "$LIVE" | sed -n "s/^${DESK}_c\([0-9]\+\)_${PERSONA}_.*/\1/p" | sort -n | tail -1)}"
 [ -n "$CYCLE" ] || { echo "no stage files for ${DESK}/${PERSONA} in output/cron-compare"; exit 1; }
 
-STAMP="$(date +%Y%m%d-%H%M%S)-${PERSONA}"
+VARIANT="${4:-live}"
+[ "$VARIANT" = live ] || [ "$VARIANT" = light ] || { echo "variant must be live or light"; exit 1; }
+STAMP="$(date +%Y%m%d-%H%M%S)-${PERSONA}-${VARIANT}"
 SHELL_DIR="$ROOT/output/test-shell/$STAMP"
 mkdir -p "$SHELL_DIR/samples" "$SHELL_DIR/staged" "$SHELL_DIR/flagged"
 
@@ -41,7 +45,7 @@ echo "test shell: $SHELL_DIR (cycle $CYCLE, $COPIED files copied)"
 
 cd "$ROOT"
 set +e
-GODWORLD_TEST_COMPARE_DIR="$SHELL_DIR" /usr/bin/node scripts/cron-desk-run.js \
+GODWORLD_TEST_COMPARE_DIR="$SHELL_DIR" GODWORLD_TEST_PROMPT="$VARIANT" /usr/bin/node scripts/cron-desk-run.js \
   --stage=write --desk "$DESK" --persona "$PERSONA" --no-gate > "$SHELL_DIR/run.log" 2>&1
 STATUS=$?
 set -e

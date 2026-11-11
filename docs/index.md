@@ -83,6 +83,7 @@ These files live at `/root/GodWorld/` and are catalogued here for completeness. 
 - **[[STACK]]** — full tech stack. Sheets, PM2, Supermemory, claude-mem, Discord bot, dashboard. *(reference, infrastructure, active)*
 - **[[OPERATIONS]]** — operational procedures. *(reference, infrastructure, active)*
 - **[[DASHBOARD]]** — Express + React dashboard, 40+ API endpoints, port 3001. *(reference, infrastructure, active)*
+- **[world-view](../world-view/README.md)** — hands-off 3D flight through the 22 neighborhoods built from one week of `output/beats/` (people, their lines, business names, weather); read-only, one self-contained page; no ROLLOUT row yet. *(reference, viewer, active)*
 - **[[DISCORD]]** — Discord bot architecture. *(reference, infrastructure, active)*
 - **[[CLAUDE-MEM]]** — claude-mem architecture, autodream, scheduled agents. *(reference, infrastructure, active)*
 - **[[SUPERMEMORY]]** — current eight-container role map, v0.0.12 plugin/hook posture, provenance-safe canon search, `wd-*` domain routing, and terminal/entity isolation rules. *(reference, infrastructure, memory, active)*

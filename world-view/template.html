@@ -955,7 +955,7 @@ function startVisit(d) {
   if (d.ab) bits.push(d.ab === 'senior' ? 'senior' : (minor || d.ab === 'youth') ? 'youth' : 'adult');
   if (d.role) bits.push(d.role);
   var lines = [bits.join(' · ')], home = [];
-  home.push('Lives in ' + (d.lives || world.H.name));
+  home.push(d.lives ? 'Lives in ' + d.lives : 'The ledger has no home for them');
   if (d.home) { if (d.home.housing) home.push(d.home.housing === 'owned' ? 'owns' : d.home.housing === 'rented' ? 'rents' : d.home.housing); if (d.home.with.length) home.push('with ' + d.home.with.join(', ')); else if (d.home.type) home.push(d.home.type); }
   lines.push(home.join(', ') + '.');
   if (d.noPlace) lines.push('Nothing in their week names a place, so they stand on their home street.');

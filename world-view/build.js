@@ -25,7 +25,7 @@ function kindOf(tag) {
 if (!(Number(CYCLE) > 0)) { throw new Error('world-view: output/beats/meta.json has no valid cycle'); }
 const isEvent = r => String(r.Cycle) === CYCLE && r.EventText && !/^CareerState/.test(r.EventTag || '');
 const lifeAll = rd('LifeHistory_Log').filter(isEvent);
-const life = lifeAll.filter(r => r.Neighborhood && r.Name);
+const life = lifeAll.filter(r => r.Neighborhood);
 const biz = rd('Business_Ledger');
 const demo = rd('Neighborhood_Demographics');
 const weather = rd('Cycle_Weather').filter(r => String(r.CycleID) === CYCLE)[0] || {};
@@ -35,7 +35,8 @@ life.forEach(r => {
   const h = (byHood[r.Neighborhood] = byHood[r.Neighborhood] || { lines: 0, people: {} });
   h.lines++;
   const [k, pr] = kindOf(r.EventTag);
-  const p = (h.people[r.POPID] = h.people[r.POPID] || { id: r.POPID, n: r.Name, c: 0, pr: 99 });
+  const p = (h.people[r.POPID] = h.people[r.POPID] || { id: r.POPID, n: r.Name || '', c: 0, pr: 99 });
+  if (!p.n && r.Name) p.n = r.Name;
   p.c++;
   if (pr < p.pr) { p.pr = pr; p.k = k; p.x = r.EventText; }
   (p.all = p.all || []).push([pr, k, r.EventText]);
@@ -97,9 +98,12 @@ function who(id) {
   return o;
 }
 
+const notShownEarly = [];
 const loose = new Map();
-lifeAll.filter(r => !(r.Neighborhood && r.Name)).forEach(r => { const [k, pr] = kindOf(r.EventTag); if (!loose.has(r.POPID)) loose.set(r.POPID, []); loose.get(r.POPID).push([pr, k, r.EventText]); });
+lifeAll.filter(r => !r.Neighborhood).forEach(r => { const [k, pr] = kindOf(r.EventTag); if (!loose.has(r.POPID)) loose.set(r.POPID, []); loose.get(r.POPID).push([pr, k, r.EventText]); });
 const placed = new Set();
+// a person whose rows carry no Name takes the ledger's; with no name anywhere they cannot be shown
+Object.keys(byHood).forEach(name => { const h = byHood[name]; Object.keys(h.people).forEach(id => { const p = h.people[id]; if (!p.n) p.n = nameOf(id); if (!p.n) { delete h.people[id]; notShownEarly.push(id); } }); });
 Object.keys(byHood).forEach(name => Object.values(byHood[name].people).forEach(p => {
   placed.add(p.id); p.all = p.all.concat(loose.get(p.id) || []).sort((a, b) => a[0] - b[0]);
   p.pr = p.all[0][0]; p.k = p.all[0][1]; p.x = p.all[0][2]; p.c = p.all.length;
@@ -107,6 +111,7 @@ Object.keys(byHood).forEach(name => Object.values(byHood[name].people).forEach(p
 // Someone whose lines this week carry no neighborhood stands on their home street (the ledger's), flagged as such.
 // If the ledger's home is not one of the streets, they are listed as recorded but not shown.
 const notShown = [];
+notShownEarly.forEach(id => notShown.push({ n: id, role: '', why: 'no name on the ledger or on their lines' }));
 loose.forEach((rows, id) => {
   if (placed.has(id)) return;
   const L = ledger.get(id), home = L && String(L.Neighborhood || '').trim(), name = nameOf(id);

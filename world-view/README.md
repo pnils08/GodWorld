@@ -96,7 +96,7 @@ Not verified for any module: motion at a real frame rate, a real phone, the qual
 | Street shape, colours, lit windows, unnamed buildings, where a person stands | drawn by code, seeded by the neighborhood name — not sim data |
 | How a neighborhood looks, its landmarks, water, hill | `hoods.js`, each entry tied to a phrase in `docs/canon/INSTITUTIONS.md` |
 
-Cap: 140 people per neighborhood (`CAP`; the busiest street has 119, so nobody is cut today). Anyone the page cannot show goes to `data.notShown` and the People finder says so; it never says nobody was recorded.
+Cap: 140 people per neighborhood (`CAP`; the busiest street has 124, so nobody is cut today). Anyone the page cannot show goes to `data.notShown` and the People finder says so; it never says nobody was recorded.
 
 ## Who a person is on the page
 

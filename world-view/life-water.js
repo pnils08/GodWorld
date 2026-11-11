@@ -654,7 +654,7 @@ LIFE.water = (function () {
       if (foam) { foam.mesh.visible = q > 0; if (q > 0) foam.update(t); }
       if (!S.mat) return;
       var u = S.mat.uniforms; u.t.value = t;
-      if (q === 0) { u.nL.value = 0; u.detail.value = 0; return; }
+      if (q === 0) { var flatMat = new T.MeshBasicMaterial({ color: u.deep.value.clone().lerp(u.low.value, 0.35) }); S.sea.material = flatMat; S.mat.dispose(); S.mat = null; return; }
       // boat lights follow their boats
       cands.forEach(function (c) { if (c.v) { var o = (c.v.i0[3] + c.j) * 3; c.x = lpArr[o]; c.y = lpArr[o + 1]; c.z = lpArr[o + 2]; } });
       if (frame++ % 8 === 0) {

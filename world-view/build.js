@@ -57,6 +57,20 @@ const data = {
   hoods
 };
 
+// Neighborhood character: every drawing choice hangs off a phrase in the canon file. Refuse to build if one has gone.
+const STYLE = require('./hoods.js');
+const canon = fs.readFileSync(path.join(__dirname, '..', 'docs', 'canon', 'INSTITUTIONS.md'), 'utf8');
+const missing = [];
+hoods.forEach(h => {
+  const st = STYLE[h.name];
+  if (!st) { missing.push('no drawing entry for neighborhood: ' + h.name); return; }
+  if (!canon.includes(st.q)) missing.push(h.name + ': phrase not in INSTITUTIONS.md: ' + st.q);
+  (st.set || []).forEach(k => { const n = STYLE.LANDMARKS[k]; if (n && !canon.includes(n)) missing.push(h.name + ': landmark not in INSTITUTIONS.md: ' + n); });
+});
+if (missing.length) { console.error(missing.join('\n')); process.exit(1); }
+data.style = {}; hoods.forEach(h => { data.style[h.name] = STYLE[h.name]; });
+data.landmarks = Object.assign({}, STYLE.LANDMARKS, { station: STYLE.STATION_SIGN });
+
 const tpl = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
 const out = tpl.replace('/*__DATA__*/null', JSON.stringify(data).replace(/</g, '\\u003c'));
 const dest = process.argv[2] || path.join(__dirname, 'oakland-week.html');

@@ -5,7 +5,9 @@ A hands-off 3D flight through the 22 neighborhoods, drawn from one week of engin
 ## What it is
 
 - `build.js` — reads `output/beats/` (read-only), writes one self-contained page `oakland-week.html` (gitignored; regenerate, don't commit).
-- `template.html` — the page: three.js r128 from cdnjs, everything else inline. No art files; all geometry and textures are drawn in the browser.
+- `template.html` — the page: three.js r128 from cdnjs plus its bloom add-on from jsdelivr, everything else inline. No art files; all geometry and textures are drawn in the browser.
+- `places.js` — the shapes of landmark businesses, inlined into the page.
+- `hoods.js` — how each neighborhood is drawn, tied to canon phrases.
 - Run: `node world-view/build.js [dest]`.
 - Published copy: https://claude.ai/artifact/RyjhthcNoP7JXGmmVYv8WK (private to the builder). Update it by publishing with that `url`.
 
@@ -14,11 +16,22 @@ A hands-off 3D flight through the 22 neighborhoods, drawn from one week of engin
 - Layout latitude: "The landmass doesn't need to be a 1 for 1 with real Oakland, who you set the hood parcel and where landmarks appear is your call based on fit." Where a street runs and where a set piece stands are drawing choices; names and character still come from canon.
 - Addresses (direction given, NOT built, needs its own ROLLOUT row — it adds ledger columns and a parcels tab, engine substrate): "we would just need to add these to the ledger and create the parcels that with server addresses we give out. We can preattach the parcel by size and price."
 
+- Authority: "This isn't a canon breaking build so you can take authority on the coding elements and the quality."
+- Baylight: "the As and the Oaks have stadiums going up in the Baylight." Both are drawn under construction. The ledger rows are `Civis Systems Field "The Town"` (sector `As Stadium`) and `Oakland Oaks`; INSTITUTIONS.md names only the A's stadium so far.
+- Parcels: "The building parcels would eventually be coded with addresses so the businesses occupy a parcel more deliberately than just the names on buildings randomly."
+
+## Parcels
+
+- `build.js` `layout()` lays every street out as parcels with stable ids (`west-oakland-e07`: neighborhood, side, number down the street) and decides which business sits on which, so the page draws a layout, it does not roll one.
+- A ledger business that is a place in its own right gets its own kind of parcel (`placeType()`): stadium, arena, coliseum, city hall, theater, cultural center, saloon, house of worship, farmers market, transit hub, port. Their names come from the ledger row; nothing is painted that the ledger does not hold.
+- Every other business takes an ordinary parcel: candidates spread evenly down the street, biggest employer on the widest lot.
+- When the ledger carries a parcel or address per business, read it in `layout()` and drop the choosing. Parcel ids are not shown on screen: they are not addresses.
+
 ## Neighborhood character
 
 - `hoods.js` — one entry per neighborhood: a phrase copied from `docs/canon/INSTITUTIONS.md` (`q`) and the drawing choices read off it (wall material, heights, density, lit windows, houses or blocks, trees, hill, water side, set pieces). The phrase is shown on screen under the name.
 - `build.js` exits non-zero if a neighborhood has no entry, or a phrase or painted landmark name is no longer in INSTITUTIONS.md.
-- Set pieces: cranes (West Oakland, East Oakland), City Hall (Downtown), Oakland Asian Cultural Center (Chinatown), Heinold's (Jack London), elevated station with a train (Fruitvale), Oakland Coliseum lit (East Oakland), market stalls (Grand Lake), Fox Theater Oakland (KONO), pergola on the lake (Lake Merritt), the Baylight stadium drawn under construction (canon: the A's have not moved yet).
+- Scenery in `hoods.js` `set` is only what is not a business: cranes, the Lake Merritt pergola. Landmark businesses come from the ledger (§Parcels).
 - These numbers are drawing choices off the cycle path. They are not a hood table for the engine and nothing in `phase*/` may read them.
 - Links: `#west-oakland` opens on a place; `#west-oakland-mid` opens partway down its street.
 
@@ -44,6 +57,7 @@ Cap: 110 people shown per neighborhood (`CAP`); labels show up to 4 at a time, s
 ## Known state (2026-11-10)
 
 - Checked as still frames only: ten neighborhoods, desktop width, before the last round of fixes (shopfronts, trees, house windows, label collisions, sky). A full flight, a gate crossing, the train, and the twelve other neighborhoods were not watched.
-- Not yet: steering by hand, pick-a-citizen, reflections, overview map.
+- In: walk-it-yourself steering (keys, drag, on-screen pad), names for everyone nearby, glow, shadows, weather from `Cycle_Weather` (`WX=rain node build.js` to look-test a kind the week did not have), quality that steps down on slow devices.
+- Not yet: pick-a-citizen, reflections, overview map.
 - The sim holds no street address: a citizen has `Neighborhood` + `HouseholdId`; a household has `HousingType`, `MonthlyRent`.
 - `Reflection_Intake.jsonl` (citizens' own words, with `Affect`) is not used yet.

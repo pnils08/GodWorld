@@ -17,7 +17,7 @@ What a cohesion defect is, from the day's evidence ([[2026-11-10-stop-puppeting-
 | The inbox | `docs/for-claude-review/` + the REVIEW INBOX line at boot | works; filled by codex/agy reviews only |
 | An agent runner on API keys, no CLI needed | `scripts/runEngineAgent.js --agent <name> [--provider anthropic --model …]` | used for `engine-validator`, `engine-wiring` |
 | What the crons said about their own work | `scripts/cronFeedback.js` (pipeline.109) | digest at boot; does not yet read a piece for a hollow figure |
-| A way to run one reporter without the live run | `scripts/testReporterWrite.sh` (pipeline.110) | write stage only |
+| A way to run one reporter without the live run | `scripts/testReporterWrite.sh` (pipeline.111) | write stage only |
 
 Not there: an auditor that runs by itself and drafts a fix; a standing wake for the two terminals; the cohesion rule in the gate.
 

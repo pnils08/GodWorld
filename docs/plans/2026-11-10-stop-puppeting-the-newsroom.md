@@ -1,6 +1,6 @@
-# Stop puppeting the newsroom (pipeline.110)
+# Stop puppeting the newsroom (pipeline.111)
 
-**Row:** pipeline.110 · **Owner:** research-build · **Opened:** 2026-11-10 · **State:** in-progress
+**Row:** pipeline.111 · **Owner:** research-build · **Opened:** 2026-11-10 · **State:** in-progress
 
 ## Why
 

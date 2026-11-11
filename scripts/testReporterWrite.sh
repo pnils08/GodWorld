@@ -46,7 +46,7 @@ echo "test shell: $SHELL_DIR (cycle $CYCLE, $COPIED files copied)"
 cd "$ROOT"
 set +e
 GODWORLD_TEST_COMPARE_DIR="$SHELL_DIR" GODWORLD_TEST_PROMPT="$VARIANT" /usr/bin/node scripts/cron-desk-run.js \
-  --stage=write --desk "$DESK" --persona "$PERSONA" --no-gate > "$SHELL_DIR/run.log" 2>&1
+  --stage=write --desk "$DESK" --persona "$PERSONA" --cycle "$CYCLE" --no-gate > "$SHELL_DIR/run.log" 2>&1
 STATUS=$?
 set -e
 echo "write stage exit: $STATUS (log: $SHELL_DIR/run.log)"

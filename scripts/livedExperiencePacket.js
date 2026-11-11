@@ -126,7 +126,8 @@ function creativeBriefFromSlice(slice) {
       },
       scopeHoods: uniq(prewrite.scopeHoods).slice(0, 8),
       missing: uniq(prewrite.missing).slice(0, 8),
-      closeQuestion: clean(prewrite.closeQuestion, 400) || null,
+      // No closeQuestion: the reporter is handed no closing (builder 2026-11-11, "Yes" to "stop handing
+      // them a closing question"). A slice may still compute one; it does not reach the writer.
       sceneRule: clean(slice.scene && slice.scene.colorRoom, 500) || null,
       sourcePointers: uniq(slice.pointers || []).slice(0, 8),
     };
@@ -451,7 +452,7 @@ function buildAnglePacket({ cycle, desk, reporter, story, approach, slice, lane,
         targets: hasTargetCandidates
           ? [{ pop: 'supplied non-empty candidate pop', question: 'string', basis: 'string' }]
           : [],
-        interpretation: 'string', unverifiedLead: ['string'], closeQuestion: 'string' },
+        interpretation: 'string', unverifiedLead: ['string'] },
       rule: (hasTargetCandidates
         ? 'Every target must use a supplied non-empty candidate pop. Do not invent people or identifiers. '
         : 'No target candidate was supplied. Return targets as an empty array; do not invent a person or identifier. ') +
@@ -574,7 +575,7 @@ function validateAngleOutput(value, input) {
       out.unverifiedLead = lead ? [lead] : [];
     }
   }
-  for (const k of ['focus', 'why', 'interpretation', 'closeQuestion']) if (!clean(out && out[k])) errs.push('missing ' + k);
+  for (const k of ['focus', 'why', 'interpretation']) if (!clean(out && out[k])) errs.push('missing ' + k);
   if (!clean(out && out.chase)) errs.push('missing chase');
   else if (chaseIsJsonShaped(out.chase)) errs.push('chase is JSON-shaped');
   else if (String(out.chase).trim().length < 40) errs.push('chase too short');
@@ -603,7 +604,6 @@ function validateAngleOutput(value, input) {
       : [],
     interpretation: clean(out.interpretation, 500),
     unverifiedLead: uniq(out.unverifiedLead).slice(0, 8),
-    closeQuestion: clean(out.closeQuestion, 400),
   };
 }
 
@@ -925,7 +925,7 @@ function buildWritePacket({ cycle, desk, reporter, story, approach, angleInput, 
       assignment: clean(story && (story.angle || story.label), 500),
       approach: clean(approach, 900).replace(/Scene color is yours\s*\([^)]*\)\s*so long as it contradicts nothing on this slice\.?/i, '').trim() || null,
       voice: /jax|caldera/i.test(reporter && reporter.name || '')
-        ? 'Short, hot, first-person accountability column. Open on the sourced contradiction, press the supplied accountable subject, and end on the plan closeQuestion. No generic revitalization plea.'
+        ? 'Short, hot, first-person accountability column. Open on the sourced contradiction, press the supplied accountable subject. No generic revitalization plea.'
         : null,
       ...(angleInput && angleInput.task && angleInput.task.creativeBrief
         ? { creativeBrief: angleInput.task.creativeBrief }
@@ -935,7 +935,7 @@ function buildWritePacket({ cycle, desk, reporter, story, approach, angleInput, 
       plan: anglePlan ? {
         // W1 is editorial reasoning, not evidence. Only its framing survives
         // into W3; checks, target rationales, and unverified leads do not.
-        focus: anglePlan.focus, closeQuestion: anglePlan.closeQuestion,
+        focus: anglePlan.focus,
       } : null },
     exposure: {
       subjects: (() => {

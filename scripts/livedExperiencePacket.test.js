@@ -244,7 +244,7 @@ assert.equal(w3.wake, 'W3');
 assert.equal(w3.exposure.sources.length, 1);
 assert.equal(w3.exposure.excludedLeads.length, 1);
 assert.equal(w3.exposure.excludedLeads[0].usable, false);
-assert.deepStrictEqual(Object.keys(w3.signal.plan), ['focus', 'closeQuestion']);
+assert.deepStrictEqual(Object.keys(w3.signal.plan), ['focus']);   // no handed closing (builder 2026-11-11)
 assert.equal(w3.signal.nearby, undefined);
 assert.equal(w3.exposure.subjects.some(s => s.name === 'Test Person One' && s.quotationEligible === false), true);
 assert.equal(w3.exposure.subjects.some(s => s.name === 'Test Person Two' && s.quotationEligible === true), true);

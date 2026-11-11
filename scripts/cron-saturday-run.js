@@ -140,9 +140,12 @@ function stagedGrade(side, fallbackVerdict, articleSha256) {
   for (const proof of [side && side.rhea, fallbackVerdict]) {
     if (!proof || proof.pass !== true || proof.draftSha256 !== articleSha256) continue;
     const cs = proof.contractScore;
-    // codex .79 #1: the score must be for these bytes (when it carries its own hash) and in 0-4.
+    // codex .79 #1: the score must be for these bytes (when it carries its own hash) and in range.
     if (cs && cs.draftSha256 && cs.draftSha256 !== articleSha256) continue;
-    if (cs && Number.isInteger(cs.score) && cs.score >= 0 && cs.score <= 4) return cs.score;
+    // From 2026-11-11 the close is not graded: a score carries max 3; older scores carry none and are out of 4.
+    // Both rank on the 0-4 scale so a week that straddles the change compares like with like.
+    const max = cs && cs.max === 3 ? 3 : 4;
+    if (cs && Number.isInteger(cs.score) && cs.score >= 0 && cs.score <= max) return max === 4 ? cs.score : Math.round(cs.score * 400 / max) / 100;
   }
   return null;
 }

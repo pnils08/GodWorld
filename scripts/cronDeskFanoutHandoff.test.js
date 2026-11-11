@@ -333,7 +333,7 @@ assert.throws(() => validateWakeHandoff(handoffAngle,
     { toolCalls: 0, capHits: 1, thin: true, verbatim: [] },
     { toolCalls: 2, capHits: 0, thin: false, verbatim: [{ run: 'x' }] },
     null]);
-  assert.deepStrictEqual(totals, { seats: 2, toolSeats: 1, capHits: 1, thin: 1, verbatim: 1, graded: 0, gradeSum: 0 });
+  assert.deepStrictEqual(totals, { seats: 2, toolSeats: 1, capHits: 1, thin: 1, verbatim: 1, graded: 0, gradeSum: 0, gradeMax: [] });
   assert.equal(cdr.formatCheckTotals(totals, 'write'), 'tools 1/2 · cap-hits 1 · thin 1 · verbatim 1 (warn)');
   assert.equal(cdr.formatCheckTotals(totals, 'angle'), 'cap-hits 1');
   // pipeline.77 — graded line round-trips; group totals show the average
@@ -346,6 +346,11 @@ assert.throws(() => validateWakeHandoff(handoffAngle,
     { customId: 'cp-POP-01076-c111-PRESS-graded-nia-rook', content: 'graded: 3/4 — daily.' }], 'nia-rook'), 'graded: 3/4 — daily.', 'a seat reads only its own package grade');
   const g = cdr.fanoutCheckTotals([{ contractScore: 3 }, { contractScore: 4 }, { contractScore: null }]);
   assert.match(cdr.formatCheckTotals(g, 'write'), /graded 2 avg 3\.5\/4$/);
+  // 2026-11-11: the close left the grade — a score carries max 3 and the page line says so; old /4 lines still read.
+  assert.equal(cdr.gradedLine({ score: 2, max: 3, short: 'The opening read as a recap.' }), 'graded: 2/3 — The opening read as a recap.');
+  assert.equal(cdr.lastGradedLine([{ content: 'graded: 3/3 — nothing fell short.' }, { content: 'graded: 1/4 — older' }]), 'graded: 3/3 — nothing fell short.');
+  const g3 = cdr.fanoutCheckTotals([{ contractScore: 3, contractMax: 3 }, { contractScore: 2, contractMax: 3 }]);
+  assert.match(cdr.formatCheckTotals(g3, 'write'), /graded 2 avg 2\.5\/3$/);
   // live read-backs when the C111 artifacts are on disk
   // the 10-14 58-word piece, superseded out of staged/ (builder 2026-10-14); its plain name now holds the rerun
   const tanya = path.join(__dirname, '..', 'output', 'cron-compare', 'flagged', 'history',

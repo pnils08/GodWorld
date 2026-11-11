@@ -319,17 +319,18 @@ function buildContractPrompt(profile, prose) {
   const c = profile.articleContract || {};
   const words = contractWordCount(prose);
   const system = 'You grade the SHAPE of one newspaper piece against its writer\'s contract. You do not check facts, ' +
-    'sourcing, or canon — another reviewer does that. Return ONLY JSON: {"opened": true|false, "closed": true|false, ' +
+    'sourcing, or canon — another reviewer does that. Return ONLY JSON: {"opened": true|false, ' +
     '"purposeMet": true|false, "inTarget": true|false, "short": "<one sentence: what fell short, or empty if nothing>"}';
+  // The close is not graded (builder 2026-11-11: stop handing reporters a closing). Graded, it would come back
+  // to them through the "graded:" line on their own page.
   const user = [
     'THE CONTRACT',
     'Purpose: ' + (profile.purpose || '(none)'),
     'Voice: ' + (c.voice || '(none)'),
     'Opening: ' + (c.opening || '(none)'),
-    'Closing: ' + (c.closing || '(none)'),
     'Target words: ' + (c.targetWords || '(none)') + ' — this piece has ' + words + ' words.',
     '',
-    'opened = the first paragraph does what "Opening" says. closed = the last paragraph does what "Closing" says. ' +
+    'opened = the first paragraph does what "Opening" says. ' +
     'purposeMet = the piece as a whole does what "Purpose" says. inTarget = the piece is NOT too short for "Target words" ' +
     '(running longer than the target is never a fault; only falling short of it is). Never name length as a shortfall unless the piece is too short.',
     '',
@@ -344,13 +345,14 @@ function parseContractScore(text, profile, words) {
   catch (_) { return { error: 'contract score parse failed', raw: String(text).slice(0, 300) }; }
   const floor = contractWordFloor(profile.articleContract && profile.articleContract.targetWords);
   const out = {
-    opened: j.opened === true, closed: j.closed === true, purposeMet: j.purposeMet === true,
+    opened: j.opened === true, purposeMet: j.purposeMet === true,
     inTarget: floor != null ? words >= floor : j.inTarget === true,
     inTargetBy: floor != null ? 'code floor ' + floor : 'judge',
     words,
     short: String(j.short || '').replace(/\s+/g, ' ').trim().slice(0, 240),
   };
-  out.score = [out.opened, out.closed, out.purposeMet, out.inTarget].filter(Boolean).length;
+  out.score = [out.opened, out.purposeMet, out.inTarget].filter(Boolean).length;
+  out.max = 3;   // scores before 2026-11-11 carry no max and were out of 4
   return out;
 }
 
@@ -371,7 +373,7 @@ async function contractOnly(draftAbs) {
   }
   const outPath = path.join(COMPARE_DIR, path.basename(draftAbs).replace(/\.md$/, '') + '.contract.json');
   fs.writeFileSync(outPath, JSON.stringify({ draft: path.relative(ROOT, draftAbs), contractScore, ranAt: new Date().toISOString() }, null, 2));
-  console.log('contract score (no Rhea): ' + (contractScore.error || contractScore.score + '/4 — ' + (contractScore.short || 'nothing short')));
+  console.log('contract score (no Rhea): ' + (contractScore.error || contractScore.score + '/' + (contractScore.max || 4) + ' — ' + (contractScore.short || 'nothing short')));
   process.exit(0);
 }
 
@@ -874,7 +876,7 @@ async function main() {
         out.contractScore = Object.assign(parseContractScore(cr.text, cprof, cp.words), { model: API_MODEL, draftSha256: out.draftSha256 });
         const rates = API_RATES[API_MODEL] || API_RATES._default;
         out.contractScore.costUsd = +(((cr.usageIn / 1e6) * rates[0]) + ((cr.usageOut / 1e6) * rates[1])).toFixed(4);
-        console.log('contract score: ' + (out.contractScore.error || out.contractScore.score + '/4 — ' + (out.contractScore.short || 'nothing short')));
+        console.log('contract score: ' + (out.contractScore.error || out.contractScore.score + '/' + (out.contractScore.max || 4) + ' — ' + (out.contractScore.short || 'nothing short')));
       } catch (e) { out.contractScore = { error: 'contract score call failed: ' + e.message }; }
     }
   }

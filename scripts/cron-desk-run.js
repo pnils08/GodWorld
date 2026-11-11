@@ -163,6 +163,8 @@ const PACKET_CONTRACT_FLAG = arg('--packet-contract', null);
 const ANGLE_MODEL_OVERRIDE = arg('--angle-model', null);
 const EVALUATION_TAG = arg('--evaluation-tag', null);
 const EVALUATE_PACKAGE = arg('--evaluate-package', null);
+// pipeline.89 cut 3: calls a seat with no tools of its own gets for canon_recall alone (the C113 test used 6).
+const RECALL_ONLY_CALLS = 4;
 const wakePackages = require('./newsroomWakePackages');
 const sourcingModes = require('./newsroomSourcing');
 const interviewContract = require('./newsroomInterviewContract');
@@ -1499,19 +1501,20 @@ function fanoutCheckTotals(seats) {
     verbatim: list.filter(x => x.verbatim && x.verbatim.length).length,
     graded: list.filter(x => Number.isInteger(x.contractScore)).length,
     gradeSum: list.reduce((a, x) => a + (Number.isInteger(x.contractScore) ? x.contractScore : 0), 0),
+    gradeMax: [...new Set(list.filter(x => Number.isInteger(x.contractScore)).map(x => x.contractMax || 4))].sort(),
   };
 }
 function formatCheckTotals(t, stage) {
   if (stage === 'angle') return 'cap-hits ' + t.capHits;
   return 'tools ' + t.toolSeats + '/' + t.seats + ' · cap-hits ' + t.capHits + ' · thin ' + t.thin +
     ' · verbatim ' + t.verbatim + ' (warn)' +
-    (t.graded ? ' · graded ' + t.graded + ' avg ' + (t.gradeSum / t.graded).toFixed(1) + '/4' : '');
+    (t.graded ? ' · graded ' + t.graded + ' avg ' + (t.gradeSum / t.graded).toFixed(1) + '/' + ((t.gradeMax || []).join('|') || 4) : '');   // out of 3 from 2026-11-11
 }
 let SEAT_CHECKS = null; // the current seat's checks; the fan-out loop collects it after each seat
 
 // pipeline.77 — reward-loop group helpers. The page line and the W1 read are one format.
 function gradedLine(cs) {
-  return 'graded: ' + cs.score + '/4 — ' + (cs.short || 'nothing fell short');
+  return 'graded: ' + cs.score + '/' + (cs.max || 4) + ' — ' + (cs.short || 'nothing fell short');
 }
 function lastGradedLine(posts, persona) {
   // pipeline.80: a rerun in the same Cycle upserts the same page key and Supermemory appends
@@ -1521,7 +1524,7 @@ function lastGradedLine(posts, persona) {
   for (const p of posts || []) {
     const id = String(p && p.customId || '');
     if (persona && id && !(id.endsWith('-graded-' + persona) || id.endsWith('-graded'))) continue;
-    const hits = String(p && p.content || '').match(/^graded: \d\/4\b.*$/gm);
+    const hits = String(p && p.content || '').match(/^graded: \d\/[34]\b.*$/gm);   // out of 3 from 2026-11-11, 4 before
     if (hits) return hits[hits.length - 1].trim().slice(0, 300);
   }
   return null;
@@ -3101,10 +3104,17 @@ async function runWrite(assign) {
   // Task 2.5.5: hand the writer the byline's POPID so the memory tool pair
   // (own citizen page, cp-<popid>) joins the tool loop.
   if (PACKET_ACTIVE) writerArgs.push('--strict-source-hygiene', '--packet-only');
-  // pipeline.76 — the one package exception to ADR-0017's zero writer tools.
-  const writerTools = PACKET_ACTIVE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.writerTools &&
+  // pipeline.76 — the package's own writer tools (its grant).
+  const ownTools = PACKET_ACTIVE && ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.writerTools &&
     ACTIVE_WAKE_PACKAGE.writerTools.maxToolCalls || 0;
-  if (writerTools) { writerArgs.push('--writer-tools', String(writerTools)); log('writer tools ON (package): max ' + writerTools + ' calls'); }
+  // pipeline.89 cut 3, live (builder 2026-11-11, "Yes" to the past-stories tool for every reporter): every
+  // packet writer can ask the paper what it already published (canon_recall). A seat with tools of its own
+  // keeps its cap and gets the tool added; a seat with none holds this one alone, at RECALL_ONLY_CALLS.
+  const writerTools = PACKET_ACTIVE ? (ownTools || RECALL_ONLY_CALLS) : 0;
+  if (writerTools) {
+    writerArgs.push('--writer-tools', String(writerTools), '--canon-recall');
+    log('writer tools ON: max ' + writerTools + ' calls' + (ownTools ? ' (package) + canon_recall' : ' (canon_recall only)'));
+  }
   // pipeline.77 — the reward-loop group: rubric at W3, contract score at the gate, grade carried.
   const rewardLoop = PACKET_ACTIVE && !!(ACTIVE_WAKE_PACKAGE && ACTIVE_WAKE_PACKAGE.rewardLoop);
   if (rewardLoop) { writerArgs.push('--rubric'); log('reward loop ON (package): rubric shown, contract scored, grade carried'); }
@@ -3421,7 +3431,8 @@ async function runWrite(assign) {
   } catch (e) { log('gaps extract failed (non-fatal): ' + e.message); }
   SEAT_CHECKS = { stage: 'write', toolCalls: record.toolCalls, capHits: record.capHit, thin: thin.thin,
     verbatim, words: thin.words,
-    contractScore: contractScore && Number.isInteger(contractScore.score) ? contractScore.score : null };
+    contractScore: contractScore && Number.isInteger(contractScore.score) ? contractScore.score : null,
+    contractMax: contractScore && Number.isInteger(contractScore.score) ? (contractScore.max || 4) : null };
   if (rewardLoop) appendRewardLoopRead(cycle, {
     date: centralDate(), name: byline && byline.name, persona: personaSlug, model: route.model,
     contractScore: contractScore ? (contractScore.error ? { error: contractScore.error } : {

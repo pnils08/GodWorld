@@ -449,9 +449,9 @@ function rubricBlock(packet) {
     (profile.purpose ? 'Purpose: ' + profile.purpose + '\n' : '') +
     (c.voice ? 'Voice: ' + c.voice + '\n' : '') +
     (c.opening ? 'Open on: ' + c.opening + '\n' : '') +
-    (c.closing ? 'Close on: ' + c.closing + '\n' : '') +
+    // No "Close on" (builder 2026-11-11: stop handing them a closing). The seat file's closing line stays as data.
     (c.targetWords ? 'Length: ' + c.targetWords + ' words — a floor, not a ceiling: too short fails, running long when the story needs it does not\n' : '') +
-    'Graded yes/no on four things: opened as contracted, closed as contracted, purpose met, long enough. ' +
+    'Graded yes/no on three things: opened as contracted, purpose met, long enough. ' +
     'Sourcing is checked separately and the rubric never licenses a fact the Packet does not hold.\n' +
     '=== END CONTRACT ===';
 }
@@ -886,8 +886,9 @@ async function toolMemoryNote(popId, input, cycle) {
 // pipeline.89 cut 3 — canon_recall (builder 2026-10-27: "the world doesn't know itself until they get access
 // to canon"). What the Tribune has already PUBLISHED on a person, place or topic, read from the bay-tribune
 // Supermemory container (editions, supplementals, gate-passed daily pieces). world-data is left out on
-// purpose: its old cards read as current when a query names no cycle. TEST-ONLY: the flag needs a
-// `sm-canon` artifact tag and --packet-only, so no scheduled run can switch it on until the builder accepts it.
+// purpose: its old cards read as current when a query names no cycle. Live for every packet writer
+// (builder 2026-11-11, "Yes" to turning it on for the reporters): cron-desk-run passes it with
+// --packet-only and --writer-tools; a seat with tools of its own keeps them and gets this one added.
 const CANON_RECALL = process.argv.includes('--canon-recall');
 const OWN_TOOL_SEATS = ['elliot-marbury', 'hal-richmond', 'anthony-raines'].concat(Object.keys(SEAT_TOOL_FRAMES));
 const RECALL_ONLY = CANON_RECALL && !OWN_TOOL_SEATS.includes(PERSONA);   // a seat with no tools of its own gets this one alone
@@ -920,7 +921,12 @@ async function toolCanonRecall(input, cycleNow) {
     if (c != null && now != null && c >= now) continue;                       // before the cycle being written, so a rerun never reads its own piece
     if (seen.has(x.documentId)) continue;
     const chunks = (x.chunks || []).filter(k => k.isRelevant);
-    const text = (chunks.length ? chunks : (x.chunks || []).slice(0, 1)).map(k => String(k.content || '')).join(' ')
+    // A stored piece can still carry its filing scaffolding (the INTAKE block, the SELF-SCORE comment);
+    // a hit hands the writer the article, never those lines as if they were prose (pipeline.89 cut 3 finding).
+    const text = (chunks.length ? chunks : (x.chunks || []).slice(0, 1)).map(k => String(k.content || '')
+      .replace(/<!--[\s\S]*?-->/g, ' ')
+      .replace(/^#{1,3}\s*INTAKE\b[\s\S]*$/m, ' ')
+      .replace(/^\s*(?:INTAKE|NAMES|HOODS?|CLAIMS?|STORYLINES?|BUSINESS(?:ES)?)\b\s*:?.*$/gm, ' ')).join(' ')
       .replace(/[#*_|>-]{2,}/g, ' ').replace(/\s+/g, ' ').trim();
     if ((text.match(/[A-Za-z]/g) || []).length < 80) continue;                 // skip rule-line and header-only chunks
     const low = text.toLowerCase();
@@ -1074,10 +1080,10 @@ async function main() {
   }
   // codex pipeline.76 #1: the exception is bound here too, not only in the runner — the persona's
   // own package must grant at least this many calls.
-  if (CANON_RECALL && (!PACKET_ONLY || !WRITER_TOOLS || !/^sm-canon(-[a-z0-9-]*)?$/.test(ARTIFACT_TAG || ''))) {
-    throw new Error('--canon-recall is the pipeline.89 test run: it requires --packet-only, --writer-tools and --artifact-tag sm-canon[-...]');
+  if (CANON_RECALL && (!PACKET_ONLY || !WRITER_TOOLS)) {
+    throw new Error('--canon-recall requires --packet-only and --writer-tools');
   }
-  if (WRITER_TOOLS && !CANON_RECALL) {   // the test run is tag-bound above and bypasses the package grant
+  if (WRITER_TOOLS && !RECALL_ONLY) {   // a recall-only seat holds the one read-only tool and no package grant
     const pkg = PERSONA ? require('./newsroomWakePackages').packageForAssignment({ persona: PERSONA }) : null;
     const granted = pkg && pkg.writerTools && pkg.writerTools.maxToolCalls || 0;
     if (granted < WRITER_TOOLS) throw new Error('--writer-tools ' + WRITER_TOOLS + ' not granted by the ' + (PERSONA || 'unnamed') + ' package');
@@ -1329,8 +1335,12 @@ async function main() {
     'Your SKILL is voice. Read IDENTITY/LENS/RULES.\n\n' +
     'CURRENT-CYCLE OVERRIDE: the edition pipeline is paused, so your desk workspace ' +
     '(output/desks/' + DESK + '/current/) is STALE — do NOT take cycle facts from it. ' + depthInstr +
-    ' When your section is finished, call write_file with the full markdown. Do not ' +
-    'stop until you have written the section.\n' +
+    // The OpenRouter loop has no write_file tool: its final text IS the section. Told to call one, a tool-holding
+    // GPT-5.6 Luna seat wrote the call out as text and filed three words (test shell 2026-11-11, Selena Grant).
+    (PROVIDER === 'openrouter'
+      ? ' Your final message is the section itself. Do not stop until you have written it.\n'
+      : ' When your section is finished, call write_file with the full markdown. Do not ' +
+        'stop until you have written the section.\n') +
     firebrandHeat +
     priorArcSystem +
     cascadeRateRule +
@@ -1466,7 +1476,7 @@ async function main() {
             ? 'Nobody was interviewed for this piece, so nobody is quoted in it: the Packet holds no approved quote. Do not invent names, numbers, quotes, or events, and do not import real-world Oakland. Name a source the way a reader would, never as the Packet, a tab or a file name. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
             : 'The Packet is what happened this cycle and who said what; approved quotes are the only quoted speech. Do not invent names, numbers, quotes, or events, and do not import real-world Oakland. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. ')
           : RECORDS_PIECE
-          ? 'You are this journalist in GodWorld this cycle. Nobody was interviewed for this piece: the Packet holds no approved quote. Write it from the record. Open the way packet.reviewProfile.articleContract.opening says — on a supplied line, figure, vote or filing — and close the way its closing says. Write no quoted speech and attribute no statement, mood or intention to anyone. Do not stage a scene, a street, a bar or a room to carry the facts. Name a source the way a reader would — the city\'s initiative record, his career line — never the Packet, a tab or file name, or a bracketed tag. Never lead with a tracker phase label, a feed label, or a bullet list of approved facts. Do not import real-world Oakland tropes the Packet did not name. Do not invent names, numbers, quotes, or events, and do no arithmetic the Packet has not already done. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
+          ? 'You are this journalist in GodWorld this cycle. Nobody was interviewed for this piece: the Packet holds no approved quote. Write it from the record. Open the way packet.reviewProfile.articleContract.opening says — on a supplied line, figure, vote or filing. Write no quoted speech and attribute no statement, mood or intention to anyone. Do not stage a scene, a street, a bar or a room to carry the facts. Name a source the way a reader would — the city\'s initiative record, his career line — never the Packet, a tab or file name, or a bracketed tag. Never lead with a tracker phase label, a feed label, or a bullet list of approved facts. Do not import real-world Oakland tropes the Packet did not name. Do not invent names, numbers, quotes, or events, and do no arithmetic the Packet has not already done. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
           : isNiaSeat(PERSONA)
           ? 'You are Nia Rook covering UNDOCKED this cycle. The Packet holds the current show facts; undocked_history returns earlier approved feed facts if you have a show-history question. Keep named people on the ledger, pilot speech in approved quotes, and scores or episode events in the approved record. The in-world scene and its unnamed voices are yours. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. '
           : 'You are this journalist in GodWorld this cycle. The Packet facts are the physics — what the engine did. The Article is someone living under that physics. Open on a named interviewed person or a Packet-named place, in a body, doing something. Use every approved quote as spoken speech in a scene, not as a caption under a recap. Never announce the season or the temperature; if it is winter, show a Packet-backed thing that moved on a day like this. Never lead with a tracker phase, a feed label, a bullet list of approved facts, or the words supplied record / listed as / what remains to be learned. Do not import real-world Oakland winter tropes the Packet did not name. Do not invent names, numbers, quotes, or events. Texture may only dress Packet-named places and approved speakers. If you cannot write the life, stop. End with ## INTAKE using one record per line, then the exact SELF-SCORE comment. ')

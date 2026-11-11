@@ -485,8 +485,8 @@ assert.equal(luisW3.task.writingMode, 'RECORDS_BRIEF');
 assert.equal(luisW3.reviewProfile.articleContract.targetWords, '400-700');
 assert.deepStrictEqual(luisW3.manifest.unverifiedLeads, []);
 assert.ok(luisW3.manifest.approvedSubjects.every(row => !/POP-\d+/.test(row.profile)));
-assert.equal(luisW3.signal.plan.closeQuestion,
-  'What is still unfinished for the people living this?');
+assert.deepStrictEqual(Object.keys(luisW3.signal.plan), ['focus']);   // no handed closing (builder 2026-11-11)
+assert.ok(!luisW3.manifest.permittedInterpretationSlots.some(s => s.id === 'P_CLOSE'));
 const luisOverreach = p.auditArticle(
   'I went looking. Two residents flagged it to me independently. Somebody owns the file.', luisW3);
 assert.equal(luisOverreach.ok, true, 'the audit never fails a draft (builder 2026-10-25)');
@@ -900,3 +900,16 @@ assert.throws(() => interviewContract.validateInterviewOutput(liveQuote, residen
 }
 
 console.log('livedExperiencePacketV2.test.js: PASS');
+
+// canon_recall live (2026-11-11): one unquoted sentence of a published hit is approved when the Article names
+// that Cycle and prints its figure; quoted speech never; an Article that does not name the Cycle approves nothing.
+{
+  const recallHit = [{ text: '[C112 · daily · Dr. Lila Mezran] # Chinatown Holds the Most Sick. Chinatown carries 142 sick residents, 6.5% of the hood. "We help out," she said of 142 neighbors.',
+    src: 'tool:canon_recall:Chinatown sick' }];
+  const recallPacket = { manifest: { approvedFacts: [{ text: 'Chinatown carries 135 sick residents' }], approvedQuotes: [] } };
+  const named = p.selectUsedToolLines('The paper\'s cycle 112 coverage printed Chinatown at 142 sick; the sheet now reads 135.\n', recallHit, recallPacket);
+  assert.deepStrictEqual(named, [{ text: 'C112 published: Chinatown carries 142 sick residents, 6.5% of the hood.', src: 'tool:canon_recall:Chinatown sick' }]);
+  assert.deepStrictEqual(p.selectUsedToolLines('Chinatown had 142 sick once.\n', recallHit, recallPacket), []);
+  assert.deepStrictEqual(p.selectUsedToolLines('In C112 the count was 135.\n', recallHit, recallPacket), []);
+}
+console.log('livedExperiencePacketV2 canon_recall manifest tests: PASS');

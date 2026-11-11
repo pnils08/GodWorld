@@ -254,15 +254,11 @@ function buildWritePacket(args) {
       const safeAssignment = clean(args && args.story && (args.story.angle || args.story.label) ||
         packet.task.assignment, 500).replace(/\s+—\s+remedy path \+ responsible office\s*$/i, '');
       packet.task.assignment = safeAssignment;
-      packet.signal.plan = {
-        focus: safeAssignment,
-        closeQuestion: 'What is still unfinished for the people living this?'
-      };
+      packet.signal.plan = { focus: safeAssignment };   // no handed closing (builder 2026-11-11)
       if (reviewProfile) {
         reviewProfile.articleContract = Object.assign({}, reviewProfile.articleContract, {
           targetWords: '400-700',
-          opening: 'a named person or Packet-named place living the condition',
-          closing: 'one unfinished human question, not a request for more record'
+          opening: 'a named person or Packet-named place living the condition'
         });
         reviewProfile.authorizedTexture = (reviewProfile.authorizedTexture || [])
           .filter(rule => !/reporter's own act/i.test(rule));
@@ -365,7 +361,6 @@ function buildWritePacket(args) {
     permittedInterpretationSlots: [
       { id: 'P_EMPHASIS', rule: 'Choose which approved fact deserves emphasis; add no new factual premise.' },
       { id: 'P_ACCOUNTABILITY', rule: 'Ask who should answer; do not assert an unsupplied duty, action, or absence.' },
-      { id: 'P_CLOSE', rule: 'Use the supplied closeQuestion as a question, never as proof.' },
     ],
     unverifiedLeads: (packet.exposure.excludedLeads || []).map(lead => ({
       from: lead.from, text: lead.text, publishable: false,
@@ -605,8 +600,10 @@ function renderSourceBrief(packet) {
 // line's season year; any other line's full two-word name. UNDOCKED history
 // requires the pilot, earlier Cycle, and one result detail in the same unit. canon_search results (prior
 // coverage, staged drafts) and any line holding quotation marks never become approved facts —
-// retrieved speech is never laundered into the manifest.
-const TOOL_FACT_SOURCES = /^tool:(dossier_read|sheet_read|citizen_lookup|undocked_history):/;
+// retrieved speech is never laundered into the manifest. canon_recall (live 2026-11-11: what the paper
+// already PUBLISHED, one hit per line, labeled [C<n> · kind]) approves one sentence of a hit at a time:
+// a sentence with no quotation marks whose figure the Article prints in a unit that names that Cycle.
+const TOOL_FACT_SOURCES = /^tool:(dossier_read|sheet_read|citizen_lookup|undocked_history|canon_recall):/;
 function significantNumbers(text) {
   return numericTokens(text).map(v => v.toLowerCase()).filter(v => /\d{2,}|\d*\.\d+/.test(v));
 }
@@ -634,7 +631,23 @@ function selectUsedToolLines(draftText, candidates, packet) {
   for (const c of candidates || []) {
     const text = clean(c && c.text, 500);
     const src = clean(c && c.src, 300);
-    if (!text || seen.has(text) || !TOOL_FACT_SOURCES.test(src) || /["“”]/.test(text)) continue;
+    if (!text || seen.has(text) || !TOOL_FACT_SOURCES.test(src)) continue;
+    if (/^tool:canon_recall:/.test(src)) {
+      const label = text.match(/^\[C(\d+) · [^\]]*\]\s*/);
+      if (!label) continue;
+      const cycle = label[1];
+      const cycleRe = new RegExp('\\b(?:c' + cycle + '|cycle\\s+' + cycle + ')\\b', 'i');
+      for (const sentence of text.slice(label[0].length).split(/(?<=[.!?])\s+/)) {
+        if (/["“”]/.test(sentence)) continue;
+        const nums = significantNumbers(sentence).filter(v => v !== cycle);
+        if (!nums.length) continue;
+        const used = units.some((u, i) => cycleRe.test(u) && nums.some(v => unitNums[i].has(v) && !allowed.has(v)));
+        const fact = clean('C' + cycle + ' published: ' + sentence, 500);
+        if (used && !seen.has(fact)) { seen.add(fact); out.push({ text: fact, src }); }
+      }
+      continue;
+    }
+    if (/["“”]/.test(text)) continue;
     if (/^tool:undocked_history:/.test(src)) {
       const cycle = (text.match(/^C(\d+)\s+UNDOCKED:/) || [])[1];
       const name = (text.match(/UNDOCKED:\s+([A-Z][^—;]+?)\s+—/) || [])[1];

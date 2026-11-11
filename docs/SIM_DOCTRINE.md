@@ -1,7 +1,7 @@
 ---
 title: Sim Doctrine — what makes GodWorld a sim, not a data system
 created: 2026-07-14
-updated: 2026-07-18
+updated: 2026-11-11
 type: doctrine
 tags: [doctrine, engine, canon, always-consult]
 pointers:
@@ -183,6 +183,22 @@ defect, not a simplification (engine.239b: ten hoods had no mood track). A child
 area is its parent (`resolveHoodOrChild_`), in every count and every read.
 Repairing hood data that encodes the real city is canon repair — targeted, like
 restoring a broken citizen row.
+
+## 18. The crons are the lives. (2026-11-11, Mike-direct — "the entire doctrine of the sim")
+
+"Here and a cron get a harness and have can have the same tools, you live in a
+build environment, they live in a sim environment, you have no clue what their
+view is." "The crons are the life's, I have no clue what they see or want. They
+can react to the engine but reporting on the engine does nothing for me. I can
+read the sheets."
+
+So: every cron — a citizen, an office, a player, a reporter — is a life inside
+the sim. It reacts to what the engine does to it, from its own view, and what it
+sees and wants is the product. The builder reads the engine in the sheets; a
+cron built to report the engine back, audit it, or say what it was told to say
+is a build defect, whatever desk it sits on. The builder and a cron are the same
+kind of AI; the difference is the environment — a cron's harness, tools and
+memory are the sim's, not the build's.
 
 ## The test
 Before shipping any mechanic, one question, Mike's phrasing: **does this make

@@ -61,6 +61,18 @@ Rules for every module: add meshes only under `k.root`; use `InstancedMesh` for 
 
 Looking at it: `tools/view.sh <place> <out.png> [--cam "x,y,z" --look "x,y,z"] [--t0 s] [--ms n] [--size WxH] [--wx rain]` (see its header). For key presses and clicks use puppeteer from `/root/GodWorld/node_modules` with Chrome at `/opt/google/chrome/chrome` and `--no-sandbox --enable-unsafe-swiftshader --use-angle=swiftshader`.
 
+### What each module draws (2026-11-11)
+
+- `life-traffic.js` — two lanes of car-following traffic, amount read off the place's `hoods.js` numbers and canon line; Downtown buses lettered from the ledger row `AC Transit` that pull in to two kerb stops (`k.busStops`). A bus needs a non-rail Public Transit row in `k.H.biz`; no other place has one.
+- `life-nature.js` — takes over tree drawing (six shapes, vertex-shader sway), adds back-garden trees on house lots and a shore row at Lake Merritt; one instanced bird mesh for pigeons, sparrows, gulls, ducks, geese; perched birds lift off when the viewer nears; a dusk flock; leaves. Its moths are off while `life-street.js` is loaded (that module circles its own).
+- `life-water.js` — the water surface (own shader, sky colours, light streaks, rain pocks) and its edge; Baylight marina, ferry terminal and a ferry on a 150 s loop; Jack London tug, barge, pilot boat; Brooklyn float and kayaks (ledger: Shoreline Kayak & Paddle); Lake Merritt sculls (ledger: Lakeside Rowing Club). Reads the page's sky material directly and leaves `k._water` for others — both outside the contract above.
+- `life-street.js` — live window quads registered over the baked wall textures (it carries a copy of the page's `hash`/`rng`/`WALLS` table: change `wallPair()` in the page and this must follow), house windows and doors, wordless neon, steam and smoke, aircraft and meteors, moths, rain ripples and gutters, porch lights and shop doors that react, a cat.
+- `sound.js` — a bed whose mode, register and density come from the place's `hoods.js` entry, plus layers picked from water, trees, weather, people count and the landmark types on the street. Measured for level, clicks, node count and silence; not yet listened to by a person.
+
+Drawn but not named in canon (generic fittings — cut on the builder's word): Baylight breakwater with entrance lights, a waiting room on the ferry pier, far-shore skylines, boat side lights.
+
+Not verified for any module: motion at a real frame rate, a real phone, the quality-0 path (headless never drops quality), the walk-up reactions with real key input.
+
 ## What comes from the sim, what does not
 
 | On screen | Source |
@@ -87,7 +99,8 @@ Cap: 110 people shown per neighborhood (`CAP`); labels show up to 4 at a time, s
 - Checked as still frames only: ten neighborhoods, desktop width, before the last round of fixes (shopfronts, trees, house windows, label collisions, sky). A full flight, a gate crossing, the train, and the twelve other neighborhoods were not watched.
 - In: walk-it-yourself steering (keys, drag, on-screen pad), names for everyone nearby, glow, shadows, weather from `Cycle_Weather` (`WX=rain node build.js` to look-test a kind the week did not have), quality that steps down on slow devices.
 - In: sex, age band and role on every card; reflections on cards, and a "Their words" switch that leads with them.
-- Not yet: pick-a-citizen, overview map.
+- In: People finder and the stand-with-someone view (`#who-<name>`), households on one street walking together, an owner standing outside their own business, five ambient modules.
+- Not yet: overview map; a citizen's own Supermemory page (`SMPageId`) in the person view.
 - The sim holds no street address: a citizen has `Neighborhood` + `HouseholdId`; a household has `HousingType`, `MonthlyRent`.
 - Reflections in the dump stop at the week before the fire (C115 dump: newest rows are week 114), so a card says which week the words are from. 455 of 980 shown people have any.
 - 36 of 980 shown people have no sex on the ledger; their card leaves it out.

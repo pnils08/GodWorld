@@ -122,7 +122,7 @@ hoods.forEach(h => {
   if (!canon.includes(st.q)) missing.push(h.name + ': phrase not in INSTITUTIONS.md: ' + st.q);
   (st.set || []).forEach(k => { const n = STYLE.LANDMARKS[k]; if (n && !canon.includes(n)) missing.push(h.name + ': landmark not in INSTITUTIONS.md: ' + n); });
 });
-if (missing.length) { console.error(missing.join('\n')); process.exit(1); }
+if (missing.length && require.main === module) { console.error(missing.join('\n')); process.exit(1); }
 
 // ---------- parcels ----------
 // A street is a row of parcels with stable ids. A business sits on one parcel, chosen here, not at random in the
@@ -202,6 +202,9 @@ const data = {
 };
 hoods.forEach(h => { data.style[h.name] = STYLE[h.name]; });
 
+// Required as a module (a check script, a test): the data and the pieces that made it, nothing written.
+module.exports = { data, hoods, canonProblems: missing, layout, placeType, kindOf, band, SIM_YEAR, CYCLE, STYLE };
+if (require.main === module) {
 const tpl = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
 const places = fs.readFileSync(path.join(__dirname, 'places.js'), 'utf8');
 if (!tpl.includes('/*__PLACES__*/')) { console.error('template has no places marker'); process.exit(1); }
@@ -217,3 +220,4 @@ console.log('hoods', hoods.length, 'people shown', hoods.reduce((s, h) => s + h.
 const everyone = hoods.reduce((a, h) => a.concat(h.people), []);
 console.log('sex known', everyone.filter(p => p.g).length, 'bands', JSON.stringify(everyone.reduce((a, p) => { a[p.ab] = (a[p.ab] || 0) + 1; return a; }, {})), 'with something said', everyone.filter(p => p.said).length, 'sim year', SIM_YEAR);
 console.log(hoods.map(h => h.name + ': ' + h.lay.places.map(p => p.type).join(',')).filter(s => !/: $/.test(s)).join('\n'));
+}

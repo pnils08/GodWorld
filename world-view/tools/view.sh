@@ -7,7 +7,8 @@
 #   --ms <virtual ms>              how long to let it run before the picture (default 3000)
 #   --size <W>x<H>                 window size (default 960x620; Chrome's minimum width is about 500)
 #   --wx rain|fog|overcast         look-test a kind of weather the week did not have
-# Safe to run several at once: every call uses its own files.
+# Safe to run several at once: every call uses its own files and its own Chrome profile folder
+# (left behind under the temp folder; this repo's sessions do not delete directories).
 HERE="$(cd "$(dirname "$0")/.." && pwd)"
 PLACE="$1"; OUT="$2"; shift 2
 CAM=""; LOOK=""; T0=""; MS=3000; SIZE="960x620"; WXV=""
@@ -17,5 +18,5 @@ WX="$WXV" node "$HERE/build.js" "$PG" >/dev/null || exit 1
 DBG="null"
 if [ -n "$CAM" ]; then DBG="{cam:[$CAM],look:[${LOOK:-0,2,-1000}],t0:${T0:-0},hide:true}"; elif [ -n "$T0" ]; then DBG="{t0:$T0}"; fi
 { printf '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>[hidden]{display:none!important}body{margin:0}</style><script>window.WV_DEBUG=%s;</script></head><body>' "$DBG"; cat "$PG"; printf '</body></html>'; } > "$PW"
-timeout 150 /opt/google/chrome/chrome --headless=new --no-sandbox --enable-unsafe-swiftshader --use-angle=swiftshader --hide-scrollbars --window-size="${SIZE/x/,}" --virtual-time-budget="$MS" --enable-logging=stderr --screenshot="$OUT" "file://$PW#$PLACE" 2>&1 | grep -E "CONSOLE" | grep -v -i favicon | grep -i -E "error|warn|uncaught|not defined|undefined" | cut -c1-400 | sort -u | head -8
+timeout 150 /opt/google/chrome/chrome --headless=new --no-sandbox --enable-unsafe-swiftshader --use-angle=swiftshader --hide-scrollbars --user-data-dir="$TMP/prof-$$" --window-size="${SIZE/x/,}" --virtual-time-budget="$MS" --enable-logging=stderr --screenshot="$OUT" "file://$PW#$PLACE" 2>&1 | grep -E "CONSOLE" | grep -v -i favicon | grep -i -E "error|warn|uncaught|not defined|undefined" | cut -c1-400 | sort -u | head -8
 [ -s "$OUT" ] || { echo "no screenshot written"; exit 1; }

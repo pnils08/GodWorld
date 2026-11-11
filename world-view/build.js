@@ -209,8 +209,8 @@ const tpl = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
 const places = fs.readFileSync(path.join(__dirname, 'places.js'), 'utf8');
 if (!tpl.includes('/*__PLACES__*/')) { console.error('template has no places marker'); process.exit(1); }
 const LIFE_FILES = ['life-traffic.js', 'life-nature.js', 'life-water.js', 'life-street.js', 'sound.js'];
-// NOLIFE=1 builds without the ambient modules (to publish while one of them is mid-edit)
-const lifeSrc = process.env.NOLIFE ? '' : LIFE_FILES.map(f => '// ---- ' + f + ' ----\n' + fs.readFileSync(path.join(__dirname, f), 'utf8')).join('\n');
+// NOLIFE=1 builds without the ambient modules; LIFE=life-water.js,sound.js builds with only those (to publish while another is mid-edit)
+const lifeSrc = process.env.NOLIFE ? '' : LIFE_FILES.filter(f => !process.env.LIFE || process.env.LIFE.split(',').includes(f)).map(f => '// ---- ' + f + ' ----\n' + fs.readFileSync(path.join(__dirname, f), 'utf8')).join('\n');
 if (!tpl.includes('/*__LIFE__*/')) { console.error('template has no life marker'); process.exit(1); }
 const out = tpl.replace('/*__LIFE__*/', () => lifeSrc).replace('/*__PLACES__*/', () => places).replace('/*__DATA__*/null', () => JSON.stringify(data).replace(/</g, '\\u003c'));
 const dest = process.argv[2] || path.join(__dirname, 'oakland-week.html');

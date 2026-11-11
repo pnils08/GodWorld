@@ -365,14 +365,15 @@ async function loadOfficeWeek(popid, cycle, opts) {
   const API = 'https://api.supermemory.ai';
   const auth = { Authorization: 'Bearer ' + process.env.SUPERMEMORY_CC_API_KEY, 'Content-Type': 'application/json' };
   const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-  // One minute for the whole office-week read, rate-limit waits included; 20s per request (2026-11-11 store hang,
-  // codex F2). Out of time, it throws into the wake's catch and the pack runs without its office-week block.
+  // One minute for the whole office-week read, 20s per request (2026-11-11 store hang, codex F2); a rate-limit wait
+  // ends when the budget does. Out of time, it throws into the wake's catch and the pack runs without that block.
   const budget = AbortSignal.timeout(o.budgetMs || 60000);
+  const wait = (ms) => new Promise((r) => { const t = setTimeout(r, ms); budget.addEventListener('abort', () => { clearTimeout(t); r(); }, { once: true }); });
   const call = async (url, init) => {
     for (let t = 0; t < 5; t++) {
       if (budget.aborted) throw new Error('office-week read out of time');
       const r = await fetch(url, Object.assign({}, init, { signal: AbortSignal.any([budget, AbortSignal.timeout(20000)]) }));
-      if (r.status === 429) { await sleep(11000); continue; }
+      if (r.status === 429) { await wait(11000); continue; }
       return r;
     }
     throw new Error('store rate-limited');
@@ -390,6 +391,7 @@ async function loadOfficeWeek(popid, cycle, opts) {
     .sort((a, b) => String(a.createdAt).localeCompare(String(b.createdAt))).slice(-(o.max || 24));
   const lines = [];
   for (const d of mine) {
+    if (budget.aborted) break;   // out of time: the statements read so far are the week
     try {
       const g = await (await call(API + '/v3/documents/' + d.id, { method: 'GET', headers: auth })).json();
       const t = String((g && g.content) || '').replace(/\s+/g, ' ').trim();

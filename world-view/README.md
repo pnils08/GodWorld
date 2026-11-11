@@ -24,7 +24,8 @@ A hands-off 3D flight through the 22 neighborhoods, drawn from one week of engin
 
 - `build.js` `layout()` lays every street out as parcels with stable ids (`west-oakland-e07`: neighborhood, side, number down the street) and decides which business sits on which, so the page draws a layout, it does not roll one.
 - A ledger business that is a place in its own right gets its own kind of parcel (`placeType()`): stadium, arena, coliseum, city hall, theater, cultural center, saloon, house of worship, farmers market, transit hub, port. Their names come from the ledger row; nothing is painted that the ledger does not hold.
-- Every other business takes an ordinary parcel: candidates spread evenly down the street, biggest employer on the widest lot.
+- Every other business whose `Neighborhood` is one of the 22 streets takes an ordinary parcel: candidates spread evenly down the street, biggest employer on the widest lot. 14 ledger businesses have no street (10 `City-wide`, and `Brooklyn Basin`, `Old Oakland`, `Coliseum`, `Telegraph corridor`); they are listed in `data.unplacedBiz` and the build log, not guessed onto a street.
+- Parcel ids are deterministic for the same inputs, not durable: street length follows the week's headcount and business count, so an id can move between weeks. Real addresses need a persisted lot table and a separate business-to-lot assignment (the addresses job), not this layout.
 - When the ledger carries a parcel or address per business, read it in `layout()` and drop the choosing. Parcel ids are not shown on screen: they are not addresses.
 
 ## Neighborhood character
@@ -86,7 +87,15 @@ Not verified for any module: motion at a real frame rate, a real phone, the qual
 | Street shape, colours, lit windows, unnamed buildings, where a person stands | drawn by code, seeded by the neighborhood name — not sim data |
 | How a neighborhood looks, its landmarks, water, hill | `hoods.js`, each entry tied to a phrase in `docs/canon/INSTITUTIONS.md` |
 
-Cap: 110 people shown per neighborhood (`CAP`); labels show up to 4 at a time, so busy streets under-label.
+Cap: 140 people per neighborhood (`CAP`; the busiest street has 119, so nobody is cut today). Anyone the page cannot show goes to `data.notShown` and the People finder says so; it never says nobody was recorded.
+
+## Who a person is on the page
+
+- Where they stand: the street their week's rows name (`LifeHistory_Log.Neighborhood`). Where they live: the ledger's `Neighborhood`. When the two differ the panel says both. A person whose rows name no neighborhood stands on their ledger home street and the panel says so.
+- Their lead line: the top-ranked line of their whole week (`kindOf`), rows with and without a neighborhood together. `CareerState` rows (a state stamp, `industry=…|level=…`) are left out as not an event.
+- "Before this week": `LifeHistory` cell lines older than the dumped cycle only.
+- People carry their POPID (`id`); a person link is `#who-<name>-<digits>`.
+- Check: `node scripts/worldViewCheck.js` (codex) fails loudly when a line, a quote, a business or a family tie on the page is not in the source files. Review that produced these rules: `docs/for-claude-review/2026-11-10-codex-world-view-review.md`.
 
 ## Rules for this folder
 
@@ -102,5 +111,5 @@ Cap: 110 people shown per neighborhood (`CAP`); labels show up to 4 at a time, s
 - In: People finder and the stand-with-someone view (`#who-<name>`), households on one street walking together, an owner standing outside their own business, five ambient modules.
 - Not yet: overview map; a citizen's own Supermemory page (`SMPageId`) in the person view.
 - The sim holds no street address: a citizen has `Neighborhood` + `HouseholdId`; a household has `HousingType`, `MonthlyRent`.
-- Reflections in the dump stop at the week before the fire (C115 dump: newest rows are week 114), so a card says which week the words are from. 455 of 980 shown people have any.
-- 36 of 980 shown people have no sex on the ledger; their card leaves it out.
+- Reflections: only rows with Cycle at or before the dumped cycle are used (the tab holds 12 rows stamped C119 — left out, not repaired), and a reporter's `filed:` / `graded:` receipts are not treated as something said. Newest usable rows are week 114; a card says which week the words are from.
+- 36 shown people have no sex on the ledger; their card leaves it out.

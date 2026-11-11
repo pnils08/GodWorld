@@ -88,6 +88,7 @@ body.words .tag .line, body.words .tag .more { order: 5; }
 #q:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 #people ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 8px; }
 #people li button { width: 100%; text-align: left; border-radius: 10px; padding: 10px 14px; font-size: 16px; font-weight: 800; }
+#people li button:disabled { opacity: .6; cursor: default; }
 #people li small { display: block; font-weight: 500; font-size: 12px; color: var(--dim); margin-top: 2px; }
 #pcount { font-size: 12px; color: var(--dim); margin: 0; }
 #person { z-index: 4; position: fixed; right: 0; top: 0; bottom: 0; width: min(430px, 100%); box-sizing: border-box; overflow-y: auto; background: rgba(11,13,26,.86); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-left: 1px solid var(--edge);
@@ -301,7 +302,7 @@ var sky = new THREE.Mesh(new THREE.SphereGeometry(600, 24, 16), skyMat); scene.a
 })();
 var hemi = new THREE.HemisphereLight(0x8899ff, 0x221a14, WX === 'clear' ? 0.95 : 0.8); scene.add(hemi);
 var sun = new THREE.DirectionalLight(0xffb27a, WX === 'clear' ? 0.75 : 0.25); scene.add(sun); scene.add(sun.target);
-sun.castShadow = true; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0006; sun.shadow.normalBias = 0.6;
+sun.castShadow = quality > 1; sun.shadow.mapSize.set(2048, 2048); sun.shadow.bias = -0.0006; sun.shadow.normalBias = 0.6;
 var sc = sun.shadow.camera; sc.left = -60; sc.right = 60; sc.top = 60; sc.bottom = -60; sc.near = 1; sc.far = 320; sc.updateProjectionMatrix();
 var SUN_DIR = new THREE.Vector3(-0.12, 0.4, -1).normalize();
 scene.fog = new THREE.FogExp2(0x000000, 0.0115);
@@ -565,7 +566,7 @@ function setCard(slot, p) {
   slot.el.querySelector('i').style.background = KIND[p.d.k] || KIND.p;
   slot.el.querySelector('span').textContent = p.d.n;
   slot.el.querySelector('.line').textContent = p.d.x;
-  slot.el.querySelector('.more').textContent = p.d.c > 1 ? (p.d.c - 1) + ' more this week' : '';
+  slot.el.querySelector('.more').textContent = p.d.all.length > 1 ? (p.d.all.length - 1) + ' more this week' : '';
   var d = p.d, minor = d.ab === 'child' || d.ab === 'teen', bits = [];
   if (d.g) bits.push(d.g === 'f' ? (minor ? 'girl' : 'woman') : (minor ? 'boy' : 'man'));
   if (d.ab) bits.push(d.ab === 'senior' ? 'senior' : (minor || d.ab === 'youth') ? 'youth' : 'adult');
@@ -636,12 +637,14 @@ var CAM = { x: 0, y: 0, z: 0, walking: false };
 var ZERO = new THREE.Matrix4().makeScale(0, 0, 0), MB = new THREE.Matrix4(), MP = new THREE.Matrix4(), MO = new THREE.Matrix4(), SV = new THREE.Vector3();
 function facts() {
   var H = world.H, w = DATA.weather, bits = [];
-  bits.push('<b>' + H.total + '</b> tracked ' + (H.total === 1 ? 'person' : 'people') + ' and <b>' + H.lines + '</b> things that happened to them');
-  if (H.biz.length) bits.push('<b>' + H.biz.length + '</b> businesses');
-  if (w.temp) bits.push(w.temp + '°, ' + (w.streakType || w.type));
+  bits.push([H.total, ' tracked ' + (H.total === 1 ? 'person' : 'people') + ' and ', H.lines, ' things that happened to them']);
+  if (H.biz.length) bits.push([H.biz.length, ' businesses']);
+  if (w.temp) bits.push(['', String(w.temp) + '\u00B0, ' + String(w.streakType || w.type)]);
   $('hood').textContent = H.name;
   $('canon').textContent = world.ST.q ? '“' + world.ST.q + '”' : '';
-  $('facts').innerHTML = 'Week ' + DATA.cycle + '. ' + bits.join(' · ') + '.';
+  var fx = $('facts'); fx.textContent = 'Week ' + DATA.cycle + '. ';
+  bits.forEach(function (bit, bi) { if (bi) fx.appendChild(document.createTextNode(' \u00B7 ')); bit.forEach(function (part, pi) { if (pi % 2 === 0 && part !== '') { var bEl = document.createElement('b'); bEl.textContent = String(part); fx.appendChild(bEl); } else if (part !== '') fx.appendChild(document.createTextNode(String(part))); }); });
+  fx.appendChild(document.createTextNode('.'));
 }
 var queued = null;
 function go(idx, startAt, who) {
@@ -655,7 +658,7 @@ function go(idx, startAt, who) {
     if (startAt) world.z = 10 - (10 - world.gz) * startAt;
     yaw = 0; pitch = 0; step(0); draw();
     last = performance.now(); clock0 = last; slow = 0;
-    try { history.replaceState(null, '', '#' + (who ? 'who-' + slug(who.n) : slug(world.H.name))); } catch (e) {}
+    try { history.replaceState(null, '', '#' + (who ? 'who-' + slug(who.n) + '-' + String(who.id || '').replace(/\D/g, '') : slug(world.H.name))); } catch (e) {}
     $('fade').classList.remove('on'); busy = false;
     if (who) startVisit(who);
     if (queued) { var q = queued; queued = null; go(q[0], q[1], q[2]); }
@@ -728,7 +731,7 @@ function loop(now) {
   placeNames();
   draw();
   // step quality down after two seconds of struggling
-  if (now - clock0 > 4000 && quality > 0 && !document.hidden && raw < 0.25) { slow = raw > 0.045 ? slow + raw : Math.max(0, slow - raw); if (slow > 2) { quality--; slow = 0; sun.castShadow = quality > 1; if (!quality) resize(); } }
+  if (now - clock0 > 4000 && quality > 0 && !document.hidden && raw < 3) { slow = raw > 0.045 ? slow + Math.min(raw, 0.3) : Math.max(0, slow - raw); if (slow > 2) { quality--; slow = 0; sun.castShadow = quality > 1; if (!quality) resize(); } }
 }
 
 // ---------- controls ----------
@@ -800,6 +803,9 @@ function listPeople() {
     b.addEventListener('click', function () { closePeople(); go(e.h, 0, e.d); });
     li.appendChild(b); ul.appendChild(li);
   });
+  var hidden = q ? (DATA.notShown || []).filter(function (e) { return (e.n + ' ' + (e.role || '')).toLowerCase().indexOf(q) >= 0; }) : [];
+  hidden.slice(0, 12).forEach(function (e) { var li = document.createElement('li'), b = document.createElement('button'), sm = document.createElement('small'); b.type = 'button'; b.disabled = true; b.textContent = e.n; sm.textContent = 'Had a week on record, not on a street: ' + e.why + '.'; b.appendChild(sm); li.appendChild(b); ul.appendChild(li); });
+  if (!hits.length && hidden.length) { $('pcount').textContent = hidden.length + ' recorded this week but not shown on a street.'; return; }
   $('pcount').textContent = hits.length ? (q ? hits.length + ' found' : ALLP.length + ' people had a week on record') + (hits.length > 60 ? ', showing 60. Type to narrow it.' : '.') : 'Nobody by that name had a week on record.';
 }
 function closePeople() { $('people').hidden = true; $('bPeople').textContent = 'People'; }
@@ -819,9 +825,11 @@ function startVisit(d) {
   if (d.ab) bits.push(d.ab === 'senior' ? 'senior' : (minor || d.ab === 'youth') ? 'youth' : 'adult');
   if (d.role) bits.push(d.role);
   var lines = [bits.join(' · ')], home = [];
-  home.push('Lives in ' + world.H.name);
+  home.push('Lives in ' + (d.lives || world.H.name));
   if (d.home) { if (d.home.housing) home.push(d.home.housing === 'owned' ? 'owns' : d.home.housing === 'rented' ? 'rents' : d.home.housing); if (d.home.with.length) home.push('with ' + d.home.with.join(', ')); else if (d.home.type) home.push(d.home.type); }
   lines.push(home.join(', ') + '.');
+  if (d.noPlace) lines.push('Nothing in their week names a place, so they stand on their home street.');
+  else if (d.lives && d.lives !== world.H.name) lines.push('Their week was recorded in ' + world.H.name + '.');
   if (d.from) lines.push('From ' + d.from + '.');
   if (d.emp) lines.push('Works at ' + d.emp + '.');
   if (d.runs) lines.push('Key person at ' + d.runs.map(function (x) { return x.n + ' (' + x.hood + ')'; }).join(', ') + '.');
@@ -846,13 +854,13 @@ setPlay(playing);
 // a link can open on one place: #west-oakland, or #west-oakland-at-40 to start 40% of the way down its street
 function fromHash() {
   var h = (location.hash || '').slice(1), w = h.match(/^who-(.+)$/);
-  if (w) { for (var e = 0; e < ALLP.length; e++) if (slug(ALLP[e].d.n) === w[1]) return [ALLP[e].h, 0, ALLP[e].d]; }
+  if (w) { for (var e = 0; e < ALLP.length; e++) if (slug(ALLP[e].d.n) + '-' + String(ALLP[e].d.id || '').replace(/\D/g, '') === w[1]) return [ALLP[e].h, 0, ALLP[e].d]; for (e = 0; e < ALLP.length; e++) if (slug(ALLP[e].d.n) === w[1]) return [ALLP[e].h, 0, ALLP[e].d]; }
   var m = h.match(/^(.*)-at-(\d+)$/), at = 0; if (m) { h = m[1]; at = Math.min(99, +m[2]) / 100; }
   for (var k = 0; k < DATA.hoods.length; k++) if (slug(DATA.hoods[k].name) === h) return [k, at];
   return [0, 0];
 }
 function start() { var f = fromHash(); clock0 = performance.now(); go(f[0], f[1], f[2]); requestAnimationFrame(loop); }
-window.addEventListener('hashchange', function () { var f = fromHash(); if (f[2]) { if (!visiting || visiting.d !== f[2]) go(f[0], 0, f[2]); } else if (f[0] !== cur || f[1]) go(f[0], f[1]); });
+window.addEventListener('hashchange', function () { var f = fromHash(); if (f[2]) { if (!visiting || visiting.d !== f[2]) go(f[0], 0, f[2]); } else if (f[0] !== cur || f[1]) go(f[0], f[1]); else if (visiting) endVisit(false); });
 if (document.fonts && document.fonts.ready) { var done = false, kick = function () { if (!done) { done = true; start(); } }; document.fonts.ready.then(kick); setTimeout(kick, 1500); } else start();
 })();
 </script>

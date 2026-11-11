@@ -10,18 +10,22 @@ const CYCLE = String(meta.cycle);
 
 function kindOf(tag) {
   const t = tag.split('|')[0];
-  if (/^(Retirement|Promotion|Graduation|PostCareer)/.test(t)) return ['m', 0];
+  if (/^(Retirement|Promotion|Graduation|PostCareer|Career-Hired)/.test(t)) return ['m', 0];
+  if (/^QoL/.test(t)) return /-Down-/.test(t) ? ['h', 6] : ['p', 6];
   if (/^(Relocation|Sports-Moved)/.test(t)) return ['v', 1];
   if (/^(Household|Relationship|Alliance)/.test(t)) return ['t', 2];
   if (/^(Strain|Friction|Rivalry|BoundaryCompromised|Recovering)/.test(t)) return ['h', 3];
   if (/^(Work|Faith|Education|Cultural|Community|BoundaryKept|Maneuver)/.test(t)) return ['p', 4];
-  if (/^(Advancement|Media|Undocked-Audience|Reputation|Business-Gain|QoL)/.test(t)) return ['p', 9];
+  if (/^(Advancement|Media|Undocked-Audience|Reputation|Business-Gain)/.test(t)) return ['p', 9];
   if (/^Sports/.test(t)) return ['s', 5];
   if (/-Down-/.test(t)) return ['h', 6];
   return ['p', 6];
 }
 
-const life = rd('LifeHistory_Log').filter(r => String(r.Cycle) === CYCLE && r.Neighborhood && r.Name && r.EventText);
+if (!(Number(CYCLE) > 0)) { throw new Error('world-view: output/beats/meta.json has no valid cycle'); }
+const isEvent = r => String(r.Cycle) === CYCLE && r.EventText && !/^CareerState/.test(r.EventTag || '');
+const lifeAll = rd('LifeHistory_Log').filter(isEvent);
+const life = lifeAll.filter(r => r.Neighborhood && r.Name);
 const biz = rd('Business_Ledger');
 const demo = rd('Neighborhood_Demographics');
 const weather = rd('Cycle_Weather').filter(r => String(r.CycleID) === CYCLE)[0] || {};
@@ -55,12 +59,12 @@ function trimSaid(s) {
 }
 const said = new Map();
 rd('Reflection_Intake').forEach(r => {
-  if (!r.ReflectionExcerpt) return;
+  if (!r.ReflectionExcerpt || !(Number(r.Cycle) <= Number(CYCLE)) || /^(filed|graded):/i.test(r.ReflectionExcerpt)) return;
   const key = [Number(r.Cycle) || 0, /^20/.test(r.Timestamp) ? r.Timestamp : ''];
   if (!said.has(r.POPID)) said.set(r.POPID, []);
   said.get(r.POPID).push({ key, r });
 });
-said.forEach(list => list.sort((a, b) => b.key[0] - a.key[0] || (a.key[1] < b.key[1] ? 1 : -1)));
+said.forEach(list => list.sort((a, b) => b.key[0] - a.key[0] || (a.key[1] < b.key[1] ? 1 : a.key[1] > b.key[1] ? -1 : 0)));
 const saidOne = s => ({ x: trimSaid(s.r.ReflectionExcerpt), c: Number(s.r.Cycle) || 0, how: SAID_HOW[s.r.Daypart] || '', mood: s.r.Affect || '' });
 const households = new Map(rd('Household_Ledger').map(h => [h.HouseholdId, h]));
 const nameOf = id => { const L = ledger.get(id); return L ? (L.Name || ((L.First || '') + ' ' + (L.Last || '')).trim()) : ''; };
@@ -68,7 +72,7 @@ const bizById = new Map(biz.map(x => [x.BIZ_ID, x]));
 const runs = new Map(); // POPID -> businesses that name them as key personnel
 biz.forEach(x => { (String(x.Key_Personnel || '').match(/POP-\d+/g) || []).forEach(id => { if (!runs.has(id)) runs.set(id, []); runs.get(id).push(x); }); });
 function history(text) {
-  return String(text || '').split('\n').map(l => /^(Y\d+C\d+)\s+—\s+\[([^\]]+)\]\s+(.+)$/.exec(l.trim())).filter(Boolean).slice(-6).reverse().map(m => [m[1], m[3]]);
+  return String(text || '').split('\n').map(l => /^(Y(\d+)C(\d+))\s+—\s+\[([^\]]+)\]\s+(.+)$/.exec(l.trim())).filter(m => m && (Number(m[2]) - 1) * 52 + Number(m[3]) < Number(CYCLE)).slice(-6).reverse().map(m => [m[1], m[5]]);
 }
 function who(id) {
   const L = ledger.get(id), o = {};
@@ -81,9 +85,9 @@ function who(id) {
     if (L.CitizenBio) o.bio = String(L.CitizenBio).trim();
     const tp = /Archetype:([^|]+)\|Mods:([^|]+)/.exec(L.TraitProfile || ''); if (tp) { o.arch = tp[1]; o.mods = tp[2].split(',').join(', '); }
     if (L.OrginCity) o.from = String(L.OrginCity).trim();
-    const sp = /POP-\d+\s+(.+)/.exec(L.SpouseId || ''); if (sp) o.spouse = sp[1].trim();
+    if (L.Neighborhood) o.lives = String(L.Neighborhood).trim();
     const H = households.get(L.HouseholdId);
-    if (H) { let mem = []; try { mem = JSON.parse(H.Members || '[]'); } catch (e) {} o.hh = L.HouseholdId; o.home = { type: H.HouseholdType || '', housing: H.HousingType || '', with: mem.filter(m => m !== id).map(nameOf).filter(Boolean) }; }
+    if (H) { let mem = null; try { mem = JSON.parse(H.Members || '[]'); } catch (e) { console.warn('household ' + L.HouseholdId + ': Members is not a list, left off the page'); } o.hh = L.HouseholdId; o.home = { type: H.HouseholdType || '', housing: H.HousingType || '', with: (mem || []).filter(m => m !== id).map(nameOf).filter(Boolean) }; }
     const emp = bizById.get(L.EmployerBizId); if (emp) o.emp = emp.Name;
     const rn = runs.get(id); if (rn) o.runs = rn.map(x => ({ id: x.BIZ_ID, n: x.Name, hood: x.Neighborhood }));
     const hist = history(L.LifeHistory); if (hist.length) o.hist = hist;
@@ -94,19 +98,36 @@ function who(id) {
 }
 
 const loose = new Map();
-rd('LifeHistory_Log').filter(r => String(r.Cycle) === CYCLE && !r.Neighborhood && r.EventText).forEach(r => { const [k, pr] = kindOf(r.EventTag); if (!loose.has(r.POPID)) loose.set(r.POPID, []); loose.get(r.POPID).push([pr, k, r.EventText]); });
+lifeAll.filter(r => !(r.Neighborhood && r.Name)).forEach(r => { const [k, pr] = kindOf(r.EventTag); if (!loose.has(r.POPID)) loose.set(r.POPID, []); loose.get(r.POPID).push([pr, k, r.EventText]); });
+const placed = new Set();
+Object.keys(byHood).forEach(name => Object.values(byHood[name].people).forEach(p => {
+  placed.add(p.id); p.all = p.all.concat(loose.get(p.id) || []).sort((a, b) => a[0] - b[0]);
+  p.pr = p.all[0][0]; p.k = p.all[0][1]; p.x = p.all[0][2]; p.c = p.all.length;
+}));
+// Someone whose lines this week carry no neighborhood stands on their home street (the ledger's), flagged as such.
+// If the ledger's home is not one of the streets, they are listed as recorded but not shown.
+const notShown = [];
+loose.forEach((rows, id) => {
+  if (placed.has(id)) return;
+  const L = ledger.get(id), home = L && String(L.Neighborhood || '').trim(), name = nameOf(id);
+  if (!name) return;
+  rows.sort((a, b) => a[0] - b[0]);
+  if (home && byHood[home]) byHood[home].people[id] = { id, n: name, c: rows.length, pr: rows[0][0], k: rows[0][1], x: rows[0][2], all: rows, noPlace: 1 };
+  else notShown.push({ n: name, role: L && L.RoleType ? String(L.RoleType).trim() : '', why: 'no neighborhood on this week\'s lines' });
+});
 
-const CAP = 110;
+const CAP = 140;
 const hoods = Object.keys(byHood).map(name => {
   const h = byHood[name];
   const all = Object.values(h.people);
   const shown = all.slice().sort((a, b) => a.pr - b.pr || b.c - a.c).slice(0, CAP);
+  all.slice().sort((a, b) => a.pr - b.pr || b.c - a.c).slice(CAP).forEach(p => notShown.push({ n: p.n, role: '', why: 'more people on ' + name + ' than the street shows' }));
   const d = demo.find(x => x.Neighborhood === name);
   return {
     name,
     lines: h.lines,
     total: all.length,
-    people: shown.map(p => Object.assign({ n: p.n, k: p.k, x: p.x, c: p.c, pr: p.pr, all: p.all.concat(loose.get(p.id) || []).sort((a, b) => a[0] - b[0]).map(a => [a[1], a[2]]) }, who(p.id))),
+    people: shown.map(p => Object.assign({ id: p.id, n: p.n, k: p.k, x: p.x, c: p.c, pr: p.pr, all: p.all.map(a => [a[1], a[2]]) }, p.noPlace ? { noPlace: 1 } : {}, who(p.id))),
     biz: biz.filter(b => b.Neighborhood === name).map(b => ({ id: b.BIZ_ID, n: b.Name, s: b.Sector, e: Number(b.Employee_Count) || 1 })),
     pop: d ? { a: +d.Adults, st: +d.Students, se: +d.Seniors } : null
   };
@@ -139,7 +160,7 @@ function placeType(b) {
   if (b.n === 'Oakland Oaks') return ['arena', 27];
   if (/^Stadium/i.test(b.s)) return ['coliseum', 30];
   if (/Municipal Government/i.test(b.s)) return ['cityhall', 11];
-  if (/Theater \/|Movie Theater/i.test(b.s)) return ['theater', 10];
+  if (/Theater/i.test(b.s)) return ['theater', 10];
   if (/Cultural Center/i.test(b.s)) return ['cultural', 10];
   if (/Saloon/i.test(b.s)) return ['saloon', 6];
   if (/Faith|Church|Synagogue/i.test(b.s)) return ['faith', 8];
@@ -192,13 +213,17 @@ function layout(H) {
 hoods.forEach(h => { h.lay = layout(h); });
 hoods.forEach(h => h.people.forEach(p => { if (p.runs) { const i = h.biz.findIndex(x => p.runs.some(rn => rn.id === x.id)); if (i >= 0) p.at = i; p.runs = p.runs.map(rn => ({ n: rn.n, hood: rn.hood })); } }));
 
+const onStreets = new Set(hoods.map(h => h.name));
+const unplacedBiz = biz.filter(x => !onStreets.has(x.Neighborhood)).map(x => ({ n: x.Name, hood: x.Neighborhood }));
 const wx = process.env.WX || '';
 const data = {
   cycle: +CYCLE,
   weather: { type: wx || weather.Type || '', temp: weather.Temp || '', streak: weather.Streak || '', streakType: wx || weather.StreakType || '' },
   hoods,
   style: {},
-  landmarks: STYLE.LANDMARKS
+  landmarks: STYLE.LANDMARKS,
+  notShown,
+  unplacedBiz
 };
 hoods.forEach(h => { data.style[h.name] = STYLE[h.name]; });
 
@@ -219,5 +244,6 @@ console.log('hoods', hoods.length, 'people shown', hoods.reduce((s, h) => s + h.
   'lines', hoods.reduce((s, h) => s + h.lines, 0), 'parcels', hoods.reduce((s, h) => s + h.lay.parcels.length, 0), 'bytes', out.length);
 const everyone = hoods.reduce((a, h) => a.concat(h.people), []);
 console.log('sex known', everyone.filter(p => p.g).length, 'bands', JSON.stringify(everyone.reduce((a, p) => { a[p.ab] = (a[p.ab] || 0) + 1; return a; }, {})), 'with something said', everyone.filter(p => p.said).length, 'sim year', SIM_YEAR);
+console.log('recorded but not shown:', notShown.length, '| businesses with no street:', unplacedBiz.length, unplacedBiz.map(x => x.n + ' (' + x.hood + ')').join('; '));
 console.log(hoods.map(h => h.name + ': ' + h.lay.places.map(p => p.type).join(',')).filter(s => !/: $/.test(s)).join('\n'));
 }

@@ -35,6 +35,32 @@ A hands-off 3D flight through the 22 neighborhoods, drawn from one week of engin
 - These numbers are drawing choices off the cycle path. They are not a hood table for the engine and nothing in `phase*/` may read them.
 - Links: `#west-oakland` opens on a place; `#west-oakland-at-40` opens 40% of the way down its street.
 
+## Ambient modules
+
+One file each, inlined by `build.js` after `places.js`. Each is plain browser JS (three.js r128 global `THREE`, no modules, ES5-style like the page) and may define only its own hook:
+
+| File | Hook | Called |
+|---|---|---|
+| `life-traffic.js` | `LIFE.traffic = function (k) {}` | once per place, after the street, cars and lamps exist |
+| `life-nature.js` | `LIFE.nature = { trees(k, list) -> true if it drew them, ambient(k) }` | `trees` where the page would draw trees (`list` = `[x, z, trunkHeight]`); `ambient` with the others |
+| `life-water.js` | `LIFE.water = { surface(k) -> true if it drew the water, life(k) }` | `surface` where the page would draw the water plane (only when `k.water` is -1 or 1); `life` with the others |
+| `life-street.js` | `LIFE.street = function (k) {}` | once per place |
+| `sound.js` | `SOUND = { supported(), start(), stop(), enter(info), tick(state) }` | `enter` on each place, `tick` every frame; nothing may sound before `start()` (the Sound button) |
+
+The kit `k` (one per place, rebuilt on every crossing — everything added under `k.root` is disposed with the place):
+
+- Scene: `k.THREE`, `k.root` (add everything here), `k.ground` (group that tilts with a hill; children use z relative to 10), `k.camera`.
+- The place: `k.H` (`name`, `people`, `biz`), `k.ST` (its `hoods.js` entry: `q`, `wall`, `trees`, `neon`, `water`, `set`…), `k.LAY` (`L`, `water`, `slope`, `parcels[{s,z,w,d,h,k,b}]`, `places[{type,s,z,half}]`), `k.L` street length, `k.gz` gate z (street runs from z≈40 behind the start, past the camera start at z=10, to `k.gz`), `k.water` (-1/0/1 side the water is on), `k.slope`, `k.WX` (`clear|rain|fog|overcast`), `k.warm` (sky hue).
+- Street geometry: road is |x| < `k.ROAD` (6.4); travel lanes are centred on x = ±`k.LANE` (2.4), parked cars sit at ±(ROAD-1.05), pavement runs from ROAD to `k.WALK` (10.2), buildings start at WALK. The flight camera rides the centre line about 2.5 high; a walking viewer is 1.7 high anywhere on road or pavement. `k.yAt(z)` is ground height (non-zero only on hill streets).
+- Already placed: `k.carSpots [[side, z]]`, `k.lampSpots [[x, z]]`, `k.signs [[side, z]]`, `k.trees [[x, z, trunkHeight]]`, `k.held(side, zA, zB)` true if a landmark holds that ground.
+- Drawing helpers: `k.box(w,h,d,x,y,z,[h,s,l],basic)`, `k.flat([h,s,l],basic)` cached material, `k.walled(...)`, `k.blade(text,hue,side,y,z,width)`, `k.glow(x,y,z,color,size)` a static additive light sprite (call during the hook, before it returns), `k.glowTex`, `k.canvasTex(w,h,draw)`, `k.crane(x,z,h)`, `k.beacons` (push x,y,z for a blinking red light).
+- Animation: `k.ticks.push(function (t, dt, cam) {})` — `t` seconds since the place was built, `cam = {x,y,z,walking}`. Keep per-frame work small.
+- `k.r()` seeded random for layout (same place looks the same every visit). `k.quality()` 2/1/0 — skip the expensive part at 0.
+
+Rules for every module: add meshes only under `k.root`; use `InstancedMesh` for anything repeated more than about 20 times and keep a module to roughly a dozen draw calls; mark textures you create with `material.userData.own = true`; paint no words except names that are on a ledger row in `k.H.biz`; nothing solid on the centre line of the road at camera height. Draw only what the place's canon line, its `hoods.js` entry, its ledger businesses, or the week's weather supports.
+
+Looking at it: `tools/view.sh <place> <out.png> [--cam "x,y,z" --look "x,y,z"] [--t0 s] [--ms n] [--size WxH] [--wx rain]` (see its header). For key presses and clicks use puppeteer from `/root/GodWorld/node_modules` with Chrome at `/opt/google/chrome/chrome` and `--no-sandbox --enable-unsafe-swiftshader --use-angle=swiftshader`.
+
 ## What comes from the sim, what does not
 
 | On screen | Source |

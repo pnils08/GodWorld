@@ -178,7 +178,10 @@ hoods.forEach(h => { data.style[h.name] = STYLE[h.name]; });
 const tpl = fs.readFileSync(path.join(__dirname, 'template.html'), 'utf8');
 const places = fs.readFileSync(path.join(__dirname, 'places.js'), 'utf8');
 if (!tpl.includes('/*__PLACES__*/')) { console.error('template has no places marker'); process.exit(1); }
-const out = tpl.replace('/*__PLACES__*/', () => places).replace('/*__DATA__*/null', () => JSON.stringify(data).replace(/</g, '\\u003c'));
+const LIFE_FILES = ['life-traffic.js', 'life-nature.js', 'life-water.js', 'life-street.js', 'sound.js'];
+const lifeSrc = LIFE_FILES.map(f => '// ---- ' + f + ' ----\n' + fs.readFileSync(path.join(__dirname, f), 'utf8')).join('\n');
+if (!tpl.includes('/*__LIFE__*/')) { console.error('template has no life marker'); process.exit(1); }
+const out = tpl.replace('/*__LIFE__*/', () => lifeSrc).replace('/*__PLACES__*/', () => places).replace('/*__DATA__*/null', () => JSON.stringify(data).replace(/</g, '\\u003c'));
 const dest = process.argv[2] || path.join(__dirname, 'oakland-week.html');
 fs.writeFileSync(dest, out);
 console.log('hoods', hoods.length, 'people shown', hoods.reduce((s, h) => s + h.people.length, 0), 'of', hoods.reduce((s, h) => s + h.total, 0),

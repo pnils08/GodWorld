@@ -74,6 +74,15 @@ Drawn but not named in canon (generic fittings — cut on the builder's word): B
 
 Not verified for any module: motion at a real frame rate, a real phone, the quality-0 path (headless never drops quality), the walk-up reactions with real key input.
 
+## Art
+
+- The sky is painted in code (`paintSky()` in `template.html`): one 1024x512 canvas per sky hue and weather, brushed in layers and wrapped on the dome. It is the slot for real art: a painted image with the same mapping (far end of the street at 3/4 across, horizon halfway down, edges that wrap) can replace the canvas. Builder 2026-11-11: "an painted sky seems like nice start".
+- Next candidates in the order discussed: painted building fronts for one neighborhood, portraits on person panels, modeled landmarks, a whole-frame style pass. What the art looks like is the builder's call.
+
+## Saved copies
+
+- The code is the saved version: everything in this folder is committed. `oakland-week.html` is the built page on disk (gitignored, rebuilt by `node world-view/build.js`); `COMMITTED=life-water.js node world-view/build.js` builds with a module as last committed while a helper is mid-edit on it.
+
 ## What comes from the sim, what does not
 
 | On screen | Source |

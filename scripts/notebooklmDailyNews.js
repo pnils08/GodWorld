@@ -75,6 +75,7 @@ function routingDiscordLine(routing, presentation) {
       ? '\nReasons: ' + routing.reasonCodes.join(', ')
       : '');
 }
+const DAILY_NEWS_IDENTITY = 'The Bay Tribune daily news for Oakland.';
 
 function parseArgs(argv) {
   const args = {
@@ -776,8 +777,8 @@ function exchangeSources(root, cutoff, aired) {
     const rel = path.relative(root, file);
     if (fs.statSync(file).mtimeMs < cutoff || (aired && aired.has(rel))) continue;
     const raw = fs.readFileSync(file, 'utf8');
-    const participants = (raw.match(/^- participants:\s*(.+)$/m) || [])[1] || '';
-    const who = participants.split('|').map((part) => part.replace(/\bPOP-\d+\b/g, '').trim()).filter(Boolean);
+    const who = ((raw.match(/^- participants:\s*(.+)$/m) || [])[1] || '')
+      .split('|').map((part) => part.replace(/\bPOP-\d+\b/g, '').trim()).filter(Boolean);
     const talk = raw.slice(raw.indexOf('\n---') >= 0 ? raw.indexOf('\n---') + 4 : 0)
       .replace(/\bPOP-\d+\b\s*/g, '').trim();
     if (who.length < 2 || talk.split(/\s+/).length < 30) continue;
@@ -786,58 +787,9 @@ function exchangeSources(root, cutoff, aired) {
       label: 'Overheard — ' + who.join(' and '),
       text: '# ' + who.join(' and ') + ', talking\n\n' + talk,
       path: rel,
-      pops: (participants.match(/\bPOP-\d+\b/g) || []).map((pop) => pop.toUpperCase()),
     });
   }
   return out;
-}
-
-// An interview answer or a line of the day's conversation reaches Reflection_Intake
-// as its first 180 characters (citizenVoice.js, citizen-exchange.js); everything the
-// citizen said is on their page, mirrored to output/citizen_pages/index.jsonl by the
-// 06:15 angle wake. Read of the Tue 2026-11-10 show: 15 of the 19 lines under
-// "Citizens in their own words" were that 180. The page's entry replaces the tab's
-// line when it opens with it word for word and says more; with no such entry the
-// tab's line stays and is counted. A speaker in a conversation this run carries as
-// its own source is not repeated here (no day carries the same source twice). The
-// operator's page (lib/citizenPage OPERATOR_POPIDS) is never opened here.
-const PAGE_MATCH_MIN = 60;
-const OPERATOR_PAGES = new Set(['POP-00005']);
-const TAB_CUT_KINDS = new Set(['PRESS', 'CONVO', 'DEBATE']);
-function oneLine(text) {
-  return String(text || '').replace(/\s+/g, ' ').trim();
-}
-function wholeReflections(citizens, pageRows, exchanges) {
-  const talking = new Set();
-  for (const exchange of exchanges || []) for (const pop of exchange.pops || []) talking.add(pop);
-  const pages = new Map();
-  for (const row of pageRows || []) {
-    if (!row || row.type !== 'reflection' || !row.popId || !row.content) continue;
-    const pop = String(row.popId).toUpperCase();
-    if (!pages.has(pop)) pages.set(pop, []);
-    // Two wakes under one page key share a doc, joined by a rule (pipeline.94).
-    for (const entry of String(row.content).split(/\n\n---\n\n/)) pages.get(pop).push(oneLine(entry));
-  }
-  const stats = { whole: 0, notOnIndex: 0, inConversation: 0 };
-  const out = [];
-  for (const citizen of citizens || []) {
-    const pop = String((citizen && citizen.popid) || '').toUpperCase();
-    const reflections = [];
-    for (const reflection of (citizen && citizen.reflections) || []) {
-      const spoken = reflection.kind === 'CONVO' || reflection.kind === 'DEBATE';
-      if (spoken && talking.has(pop)) { stats.inConversation++; continue; }
-      const line = oneLine(reflection.text);
-      // An answer under 180 characters is already whole on the tab: its page entry is the same line.
-      const looked = line.length >= PAGE_MATCH_MIN && !OPERATOR_PAGES.has(pop);
-      const entries = looked ? (pages.get(pop) || []).filter((text) => text.startsWith(line)) : [];
-      const entry = entries.find((text) => text.length > line.length) || null;
-      if (entry) stats.whole++;
-      else if (looked && !entries.length && TAB_CUT_KINDS.has(reflection.kind)) stats.notOnIndex++;
-      reflections.push(Object.assign({}, reflection, { text: entry || reflection.text }));
-    }
-    out.push(Object.assign({}, citizen, { reflections }));
-  }
-  return { citizens: out, stats };
 }
 
 // Every citizen who wrote in the last day, every reflection, one source per
@@ -1194,8 +1146,15 @@ async function createOpsReport(config, cycle, sourceIds, runDir, manifest, manif
     (AUDIO_RETRY_MAX * AUDIO_RETRY_INTERVAL_MS / 60000) + ' minutes; last download said: ' + lastError);
 }
 
-// Nothing is said to the hosts: they are given the day's sources and no focus
-// (builder 2026-11-11: "Give it sources not direction").
+// pipeline.108: one short instruction. Through v1.9 the focus ran ~900 chars
+// and pointed the hosts at a rulebook uploaded as a source; NotebookLM treats
+// a source as material to discuss, and the Customize box as a focus hint.
+function dailyAudioFocus() {
+  // 2026-11-10: the builder heard the 08:00 show read its instructions back.
+  // Anything said to the hosts about sources, truth or archives is material
+  // they repeat on air; the focus is the show's name and nothing else.
+  return DAILY_NEWS_IDENTITY;
+}
 
 // Returns true (downloaded), 'failed' (NotebookLM marked the render failed —
 // stop polling, the caller re-creates), or false (still not ready after the
@@ -1386,22 +1345,9 @@ async function run(argv) {
 
   // pipeline.108: what the hosts get — one small source per article, per
   // neighborhood of reflections, and (first morning) per world-record section.
-  const exchanges = exchangeSources(ROOT, Date.now() - hours * 3600e3, airedReportTimes(OUTPUT_DIR, Date.now()));
-  if (citizenDigest && citizenDigest.citizens) {
-    let pageRows = [];
-    try { pageRows = require('./scanCitizenPages').loadIndex(ROOT); }
-    catch (e) { console.log('CITIZEN PAGE INDEX UNREAD (the tab\'s lines stand): ' + e.message); }
-    const whole = wholeReflections(citizenDigest.citizens, pageRows, exchanges);
-    citizenDigest.citizens = whole.citizens;
-    console.log(
-      'Citizens\' own words: ' + whole.stats.whole + ' taken whole from their pages, ' +
-      whole.stats.notOnIndex + ' interview or conversation line(s) not on the page index (the tab\'s line stands), ' +
-      whole.stats.inConversation + ' left to the conversation\'s own source'
-    );
-  }
   const dailyInput = {
     cycle,
-    exchanges,
+    exchanges: exchangeSources(ROOT, Date.now() - hours * 3600e3, airedReportTimes(OUTPUT_DIR, Date.now())),
     reports: newsroom.reports,
     citizenDigest,
     worldSummary,
@@ -1488,9 +1434,6 @@ async function run(argv) {
     throw new Error('nothing to air for Cycle ' + cycle +
       ': no article, no reflection and no first-morning record in the window');
   }
-  // Canon behind each story (builder 2026-11-09 "Yes"; 2026-11-12 "So no canon ???"): the archive answer
-  // rides beside its article. It is still written to a question, not a source in its own right; the
-  // past pieces themselves as sources is the build that replaces it.
   const backgrounds = fetchArticleBackgrounds(newsroom.reports, path.join(runDir, 'background'));
   if (backgrounds.size) {
     dailySources = buildDailySources(Object.assign({}, dailyInput, { backgrounds }));
@@ -1577,6 +1520,7 @@ async function run(argv) {
         '--format', presentation.format,
         '--length', presentation.length,
         '--source-ids', sourceIds.join(','),
+        '--focus', dailyAudioFocus(),
         '--confirm',
       ]);
       if (!create.ok) throw new Error('daily audio create failed: ' + create.out.slice(0, 400));
@@ -1704,7 +1648,6 @@ module.exports = {
   buildDailySources,
   buildGateDeskFile,
   reflectionSources,
-  wholeReflections,
   worldRecordSources,
   exchangeSources,
   printedStems,
@@ -1724,9 +1667,11 @@ module.exports = {
   findArtifactStatus,
   dailySourceTitle,
   dailyPrompt,
+  dailyAudioFocus,
   SOURCE_VERSION,
   DEFAULT_AUDIO_LENGTH,
   DEFAULT_AUDIO_FORMAT,
+  DAILY_NEWS_IDENTITY,
   resolveAudioPresentation,
   routingDiscordLine,
   run,

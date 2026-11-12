@@ -4,4 +4,4 @@
 
 **NEXT[engine-sheet]:** pipeline.110 → read the Thu 11-12 20:18 office wakes. pipeline.100 → Task 3 narrator. Then engine.340, 341. No row yet: page-write receipt, gatherer/writer split.
 
-**NEXT[research-build]:** pipeline.108 → the builder's word on the first shows with nothing said to the hosts (plan §Review, 2026-11-12 entries); canon stays one lookup per article, about that article's own people and places. pipeline.109 → read the boot digest. Then engine.339: calls 1–4 OPEN. Then trace codex's five data findings.
+**NEXT[research-build]:** pipeline.108 → no daily-show code without a plan the builder has seen and approved (plan §Review, 2026-11-12 entries: his words, and what was built and deleted that night). pipeline.109 → read the boot digest. Then engine.339: calls 1–4 OPEN. Then trace codex's five data findings.

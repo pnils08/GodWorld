@@ -93,6 +93,8 @@ Codex re-review of the fold and the later commits: [[../for-claude-review/2026-1
 
 **2026-11-12 01:17, all of tonight's canon-lookup code deleted on the builder's word ("Didn't approve that either, delete it"):** point 9 is as written above again, its code line-for-line what it was before 2026-11-11. The bare-name lookup (every INTAKE name, then first sheet name) is not in the tree. His words on what the search should be stand recorded above ("the canon search would be this, Vinnie Keane", "that 1 name or phrase is the ask", "Who are the articles about"); no build of them is approved.
 
+**2026-11-12 01:18, the daily show's code is as it was before 2026-11-11 (builder: "Delete the code for daily, that's rejected").** Every 2026-11-11 and 2026-11-12 entry above that describes a change to `notebooklmDailyNews.js` or `buildCitizenWeekDigest.js` describes code that is not in the tree. His words on the shows stand as recorded; nothing is built from them.
+
 ## Tasks
 
 | # | Task | Status |
@@ -106,7 +108,7 @@ Codex re-review of the fold and the later commits: [[../for-claude-review/2026-1
 | 6b | Canon background per article + codex fold; tests green; live `--no-audio --no-deliver` | done |
 | 6c | Weekend: weekly rulebook out + focus; edition out of the daily; citizen conversation in | done — read the Sat 11-14 weekly and Sun 11-15 daily |
 | 7 | Read the Tue 2026-11-10 08:00 show: the five C115 articles of 11-09 evening each heard by reporter; reflections by name | done 2026-11-11 — point 12: five of five named, four told, Lives 2 of 15 people; reflections by name but 15 of 19 lines cut at 180 |
-| 8 | Citizens' words whole in the daily show: `wholeReflections` in `notebooklmDailyNews.js` (the page's entry from `output/citizen_pages/index.jsonl` in place of the tab's 180 characters; a speaker in the carried conversation not repeated; POP-00005's page not opened), `kind` from `buildCitizenWeekDigest.js`, test | **in effect** since 2026-11-12 00:20 (builder: "I already approved rhe 180'thing"; the plan's point 2 is "every reflection … uncapped"). Built `8153ec134`, taken out `a7b7892f1` on a misread of "Didn't approved anything" (builder: "I didn't approved reverts either"), put back byte-for-byte. Tests green; replay on the live tab: Tue window 13 of 13 answers whole, Wed 7 of 7 cut ones. First show on it: Thu 11-12 08:00 — read the `Citizens' own words:` line in the log. Limit: a morning the 06:15 page refresh fails leaves that day's answers at 180, counted in that line |
+| 8 | Citizens' words whole in the daily show | **rejected, not in the tree** (builder 2026-11-12 01:18: "Delete the code for daily, that's rejected"). The daily script is byte-for-byte what it was before 2026-11-11. The finding stands in point 12: the tab cell held 180 characters for interview answers and conversation lines; from 2026-11-12 the two writers store the whole text, so new rows reach the show whole without it |
 
 ## Not in this job
 

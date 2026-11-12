@@ -75,7 +75,6 @@ function routingDiscordLine(routing, presentation) {
       ? '\nReasons: ' + routing.reasonCodes.join(', ')
       : '');
 }
-const DAILY_NEWS_IDENTITY = 'The Bay Tribune daily news for Oakland.';
 
 function parseArgs(argv) {
   const args = {
@@ -1195,15 +1194,8 @@ async function createOpsReport(config, cycle, sourceIds, runDir, manifest, manif
     (AUDIO_RETRY_MAX * AUDIO_RETRY_INTERVAL_MS / 60000) + ' minutes; last download said: ' + lastError);
 }
 
-// pipeline.108: one short instruction. Through v1.9 the focus ran ~900 chars
-// and pointed the hosts at a rulebook uploaded as a source; NotebookLM treats
-// a source as material to discuss, and the Customize box as a focus hint.
-function dailyAudioFocus() {
-  // 2026-11-10: the builder heard the 08:00 show read its instructions back.
-  // Anything said to the hosts about sources, truth or archives is material
-  // they repeat on air; the focus is the show's name and nothing else.
-  return DAILY_NEWS_IDENTITY;
-}
+// Nothing is said to the hosts: they are given the day's sources and no focus
+// (builder 2026-11-11: "Give it sources not direction").
 
 // Returns true (downloaded), 'failed' (NotebookLM marked the render failed —
 // stop polling, the caller re-creates), or false (still not ready after the
@@ -1496,13 +1488,9 @@ async function run(argv) {
     throw new Error('nothing to air for Cycle ' + cycle +
       ': no article, no reflection and no first-morning record in the window');
   }
-  const backgrounds = fetchArticleBackgrounds(newsroom.reports, path.join(runDir, 'background'));
-  if (backgrounds.size) {
-    dailySources = buildDailySources(Object.assign({}, dailyInput, { backgrounds }));
-    writeDailySources(sourceDir, dailySources);
-  }
-  console.log('Daily background from the canon notebook: ' + backgrounds.size + ' of ' +
-    newsroom.reports.filter(wantsBackground).length + ' article(s)');
+  // No archive answer rides beside an article: it was written to a three-paragraph question, which is
+  // direction, not a source (builder 2026-11-11). fetchArticleBackgrounds is kept, uncalled, so the step
+  // is one line to bring back.
   const list = nlm(['source', 'list', config.newsroomNotebookId, '--json']);
   if (!list.ok) throw new Error('working-notebook source list failed: ' + list.out.slice(0, 400));
   const existingSources = parseJsonOutput(list.out, 'working-notebook source list');
@@ -1582,7 +1570,6 @@ async function run(argv) {
         '--format', presentation.format,
         '--length', presentation.length,
         '--source-ids', sourceIds.join(','),
-        '--focus', dailyAudioFocus(),
         '--confirm',
       ]);
       if (!create.ok) throw new Error('daily audio create failed: ' + create.out.slice(0, 400));
@@ -1730,11 +1717,9 @@ module.exports = {
   findArtifactStatus,
   dailySourceTitle,
   dailyPrompt,
-  dailyAudioFocus,
   SOURCE_VERSION,
   DEFAULT_AUDIO_LENGTH,
   DEFAULT_AUDIO_FORMAT,
-  DAILY_NEWS_IDENTITY,
   resolveAudioPresentation,
   routingDiscordLine,
   run,

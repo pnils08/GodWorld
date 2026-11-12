@@ -276,7 +276,7 @@ async function voiceOne(pool, popId, ask, { cycle, maxTokens, record, dry, preTe
     const bondTarget = bondHits.length ? bondHits[0].pop : '';
     if (cls.event || cls.affect) {
       await sheets.appendRows('Reflection_Intake', [[
-        new Date().toISOString(), c.popId, cycle, 'PRESS', cls.event || '', said.spoken.slice(0, 180).replace(/\n/g, ' '), 'no', cls.affect || '',
+        new Date().toISOString(), c.popId, cycle, 'PRESS', cls.event || '', said.spoken.replace(/\n/g, ' '), 'no', cls.affect || '',
         bondTarget, cls.tension || '', resolvedText,
       ]]);
       console.error(`[record] Reflection_Intake <- event=[${cls.event || '-'}] affect=[${cls.affect || '-'}]${bondTarget ? ' bondTarget=' + bondTarget : ''} (applied=no, gated)`);

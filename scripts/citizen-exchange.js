@@ -195,7 +195,7 @@ async function recordParticipant(c, ownText, daypart, cycle, tensionState, bondT
   }
   if (cls.event || cls.affect) {
     await sheets.appendRows('Reflection_Intake', [[
-      new Date().toISOString(), c.popId, cycle, daypart, cls.event || '', ownText.slice(0, 180).replace(/\n/g, ' '), 'no', cls.affect || '',
+      new Date().toISOString(), c.popId, cycle, daypart, cls.event || '', ownText.replace(/\n/g, ' '), 'no', cls.affect || '',
       bondTarget || '', cls.tension || '', resolvedText, // engine.101 cols I-K (positional back-compat A-H)
     ]]);
     logLine(`[record] ${c.popId} Reflection_Intake <- event=[${cls.event || '-'}] affect=[${cls.affect || '-'}]${bondTarget ? ' bondTarget=' + bondTarget : ''} (applied=no, gated)`);

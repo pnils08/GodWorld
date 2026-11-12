@@ -40,13 +40,11 @@ const {
   findArtifactStatus,
   dailySourceTitle,
   dailyPrompt,
-  dailyAudioFocus,
   stripDailyNoise,
   staleDailySourceIds,
   heldDraftSourceIds,
   SOURCE_VERSION,
   DEFAULT_AUDIO_LENGTH,
-  DAILY_NEWS_IDENTITY,
   resolveAudioPresentation,
   routingDiscordLine,
 } = require('./notebooklmDailyNews');
@@ -540,9 +538,6 @@ const syntheticDigest = {
   assert(dailyPrompt(999, false, false, true).includes('first morning of the Cycle'));
   assert(!dailyPrompt(999, false, false).includes('first morning'));
   assert(!prompt.includes('GodWorld Oakland, 2042'));
-  // The focus is the show's name only: anything else said to the hosts was read back on air (2026-11-10).
-  assert.strictEqual(dailyAudioFocus(), DAILY_NEWS_IDENTITY);
-  assert(!/source|truth|archive|credit/i.test(dailyAudioFocus()));
 }
 
 {

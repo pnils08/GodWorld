@@ -126,17 +126,6 @@ function sleep(ms) {
   return new Promise((r) => setTimeout(r, ms));
 }
 
-// The weekly show is made inside the permanent notebook, which is canon: what
-// the hosts are told goes in this one short focus and nowhere else. Through
-// 2026-11-09 a rulebook (config/audio_direction_weekly.md) was uploaded there as
-// a source on every Saturday run; a source is material the hosts discuss and,
-// since the canon search reads the whole live notebook (pipeline.103), material
-// every canon search could cite. It is not uploaded any more (builder 2026-11-10).
-function editionAudioFocus(editionTitle) {
-  // The show's name only: the daily hosts read a longer focus back on air (2026-11-10).
-  return 'The Bay Tribune\'s weekly edition, ' + editionTitle + '.';
-}
-
 // S429 — find a source that landed without an id in the add output. Matches the
 // expected title first, then the upload's basename (what the notebook shows when the
 // --title never applied, e.g. the CLI died during --wait). Renames on a basename hit.
@@ -290,7 +279,7 @@ async function generateAndDeliverEditionAudio(opts) {
     '--confirm',
   ];
   audioArgs.push('--source-ids', sourceId);
-  audioArgs.push('--focus', opts.focus || editionAudioFocus('Edition C' + cycle));
+  // No focus: the hosts get the edition and nothing said to them (builder 2026-11-11: "Give it sources not direction").
   const create = nlm(audioArgs);
   if (!create.ok) {
     console.log('NOTEBOOKLM AUDIO SKIPPED (non-blocking): create failed: ' + String(create.out || '').slice(0, 300));
@@ -429,6 +418,5 @@ module.exports = {
   sleep,
   deliver,
   generateAndDeliverEditionAudio,
-  editionAudioFocus,
   sendDiscordText,
   sendDiscordFile, recordCanonSource };
